@@ -1133,45 +1133,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		8BCC2A1A1B2757A0004F38E8 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				B3F15F1C472E4BCE5BB6677C /* AlertService.swift */,
-				B38A81F49605A4B73037040C /* AnimationService.swift */,
-				508789687FCEA77D470D83B9 /* CommunicationService.swift */,
-				A7D00BFEDF3D8C6A447B0309 /* DateTimeService.swift */,
-				9D1D6C43A949D2892164FCB0 /* FileService.swift */,
-				08A24C1550CDA1AEDEDAFF26 /* LocationService.swift */,
-				C9ED951B242B6140738F47AB /* NotificationService.swift */,
-				77F2C03ED7835A97FFDB1103 /* StorageService.swift */,
-				BB34B4D0A7AAE1C4BA0D5441 /* WebService.swift */,
-			);
-			name = Services;
-			sourceTree = "<group>";
-		};
-		8BCC2A1B1B2757AD004F38E8 /* WordPress */ = {
-			isa = PBXGroup;
-			children = (
-				8BCC2A1C1B2757B8004F38E8 /* Models */,
-				FEC7A8F214537EB4CA7AE7E7 /* WordPressContext.swift */,
-				AB0F0438444CDC4D3702541E /* WordPressManager.swift */,
-			);
-			name = WordPress;
-			sourceTree = "<group>";
-		};
-		8BCC2A1C1B2757B8004F38E8 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				0894D803DEF7CBF9BEC162BB /* AuthorEntity.swift */,
-				1DEB7EE849C92C6AEBB76EBD /* BlogPostEntity.swift */,
-				85FD21EF272A27BF8EFF5EC6 /* CommentEntity.swift */,
-				1F4BDCF3D85788714A2A870F /* ImageEntity.swift */,
-				162E97F1051EB8244E929D5A /* NotificationEntity.swift */,
-				ABDC53AFDD1F3492A42F1008 /* TermEntity.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
 		8CE183B8E58DB9D330C6843C /* AlecrimCoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -1277,8 +1238,23 @@
 		B96C89191F8A63EFC24E6CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8BCC2A1A1B2757A0004F38E8 /* Services */,
-				8BCC2A1B1B2757AD004F38E8 /* WordPress */,
+				B3F15F1C472E4BCE5BB6677C /* AlertService.swift */,
+				B38A81F49605A4B73037040C /* AnimationService.swift */,
+				508789687FCEA77D470D83B9 /* CommunicationService.swift */,
+				A7D00BFEDF3D8C6A447B0309 /* DateTimeService.swift */,
+				9D1D6C43A949D2892164FCB0 /* FileService.swift */,
+				08A24C1550CDA1AEDEDAFF26 /* LocationService.swift */,
+				C9ED951B242B6140738F47AB /* NotificationService.swift */,
+				77F2C03ED7835A97FFDB1103 /* StorageService.swift */,
+				BB34B4D0A7AAE1C4BA0D5441 /* WebService.swift */,
+				FEC7A8F214537EB4CA7AE7E7 /* WordPressContext.swift */,
+				AB0F0438444CDC4D3702541E /* WordPressManager.swift */,
+				0894D803DEF7CBF9BEC162BB /* AuthorEntity.swift */,
+				1DEB7EE849C92C6AEBB76EBD /* BlogPostEntity.swift */,
+				85FD21EF272A27BF8EFF5EC6 /* CommentEntity.swift */,
+				1F4BDCF3D85788714A2A870F /* ImageEntity.swift */,
+				162E97F1051EB8244E929D5A /* NotificationEntity.swift */,
+				ABDC53AFDD1F3492A42F1008 /* TermEntity.swift */,
 				1C3FC0A388BF73E2442E4FCF /* ZamzamConstants.swift */,
 				7CCAE2A3678EE447834A4845 /* ZamzamKit.h */,
 				B60B465882FC4BA0033D740B /* ZamzamManager.swift */,
