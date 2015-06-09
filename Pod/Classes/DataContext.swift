@@ -10,7 +10,7 @@
 import Foundation
 import AlecrimCoreData
 
-public class WordPressContext: AlecrimCoreData.Context {
+public class DataContext: AlecrimCoreData.Context {
 
     public var authors: AlecrimCoreData.Table<AuthorEntity> { return AlecrimCoreData.Table<AuthorEntity>(context: self) }
     public var blogPosts: AlecrimCoreData.Table<BlogPostEntity> { return AlecrimCoreData.Table<BlogPostEntity>(context: self) }

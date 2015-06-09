@@ -10,6 +10,10 @@ import Foundation
 
 public struct ZamzamConstants {
     
+    public struct Configuration {
+        static let ROOT_KEY = "ZamzamKit configurations"
+    }
+    
     public struct Path {
         static let DOCUMENTS = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first as! String
         static let TMP = NSTemporaryDirectory()
