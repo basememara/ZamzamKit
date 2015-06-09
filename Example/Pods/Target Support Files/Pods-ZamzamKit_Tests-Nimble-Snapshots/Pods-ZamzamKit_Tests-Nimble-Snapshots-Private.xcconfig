@@ -1,0 +1,10 @@
+#include "Pods-ZamzamKit_Tests-Nimble-Snapshots.xcconfig"
+CONFIGURATION_BUILD_DIR = $PODS_FRAMEWORK_BUILD_PATH
+FRAMEWORK_SEARCH_PATHS = "$PODS_FRAMEWORK_BUILD_PATH" ${PODS_ZAMZAMKIT_TESTS_NIMBLE_SNAPSHOTS_FRAMEWORK_SEARCH_PATHS}
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/Nimble-Snapshots" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Alamofire" "${PODS_ROOT}/Headers/Public/AlecrimCoreData" "${PODS_ROOT}/Headers/Public/FBSnapshotTestCase" "${PODS_ROOT}/Headers/Public/Nimble" "${PODS_ROOT}/Headers/Public/Nimble-Snapshots" "${PODS_ROOT}/Headers/Public/Quick" "${PODS_ROOT}/Headers/Public/SwiftyJSON" "${PODS_ROOT}/Headers/Public/Timepiece" "${PODS_ROOT}/Headers/Public/ZamzamKit"
+OTHER_LDFLAGS = ${PODS_ZAMZAMKIT_TESTS_NIMBLE_SNAPSHOTS_OTHER_LDFLAGS} -ObjC
+OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
+PODS_FRAMEWORK_BUILD_PATH = $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-ZamzamKit_Tests
+PODS_ROOT = ${SRCROOT}
+SKIP_INSTALL = YES
