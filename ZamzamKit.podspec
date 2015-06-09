@@ -8,31 +8,32 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = "ZamzamKit"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of ZamzamKit."
-  s.description      = <<-DESC
-                       An optional longer description of ZamzamKit
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+    s.name             = "ZamzamKit"
+    s.version          = "0.1.0"
+    s.summary          = "A Swift framework for rapidly developing iOS and WatchKit apps."
+    s.description      = <<-DESC
+                        ZamzamKit is a Swift framework for iOS and WatchKit to allow
+                        developers to code rapidly for building mobile applications.
+                        Focus on solutions by using our API that sits as an
+                        abstraction layer on top of iOS, WatchKit, and Swift.
+                        ZamzamKit provides you the latest patterns, techniques,
+                        and libraries so you can begin building for the future.
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/ZamzamKit"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
-  s.license          = 'MIT'
-  s.author           = { "Basem Emara" => "basememara@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/ZamzamKit.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
-  s.platform     = :ios, '8.0'
-  s.requires_arc = true
-
-  s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'ZamzamKit' => ['Pod/Assets/*.png']
-  }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+    s.homepage     = "https://github.com/ZamzamInc/ZamzamKit"
+    # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+    s.license      = { :type => "MIT", :file => "LICENSE" }
+    s.author             = { "Zamzam Inc." => "contact@zamzam.io" }
+    s.social_media_url   = "https://twitter.com/zamzaminc"
+    s.source           = { :git => "https://github.com/ZamzamInc/ZamzamKit.git", :tag => s.version }
+    s.platform     = :ios, '8.3'
+    s.requires_arc = true
+    s.source_files = 'Pod/Classes/**/*'
+    s.resource_bundles = {
+        'ZamzamKit' => ['Pod/Assets/*.png']
+    }
+    s.dependency 'Alamofire'
+    s.dependency 'SwiftyJSON'
+    s.dependency 'Timepiece'
+    s.dependency 'AlecrimCoreData'
+    s.frameworks = 'UIKit'
 end

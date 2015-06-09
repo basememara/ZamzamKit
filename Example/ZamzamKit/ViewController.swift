@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import ZamzamKit
 
 class ViewController: UIViewController {
 
+    let zamzamManager = ZamzamManager()
+    let wordPressManager = WordPressManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
