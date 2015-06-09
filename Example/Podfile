@@ -1,0 +1,15 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'ZamzamKit_Example', :exclusive => true do
+  pod "ZamzamKit", :path => "../"
+end
+
+target 'ZamzamKit_Tests', :exclusive => true do
+  pod "ZamzamKit", :path => "../"
+
+  pod 'Quick'
+  pod 'Nimble'
+  pod 'FBSnapshotTestCase'
+  pod 'Nimble-Snapshots'
+end
