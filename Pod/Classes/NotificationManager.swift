@@ -23,7 +23,7 @@ public class NotificationManager: NSObject {
         get {
             return //ZamzamManager.sharedInstance.configurationService.getValue("BaseUrl")
                 baseUrl
-                + "/wp-json/posts?type=z-notification&filter[post_status]=publish&filter[posts_per_page]=50&filter[orderby]=date&filter[order]=desc&page=1"
+                + "/wp-json/posts?type=z-notification&filter[posts_per_page]=50&filter[orderby]=date&filter[order]=desc&page=1"
         }
     }
     
@@ -49,7 +49,8 @@ public class NotificationManager: NSObject {
         
         if let data = data {
             for (key: String, item: JSON) in JSON(data: data) {
-                if let value = NotificationEntity.fromJSON(item) {
+                var hasChanges = false
+                if let entity = NotificationEntity.fromJSON(item, &hasChanges) where hasChanges {
                     updateCount++
                 }
             }

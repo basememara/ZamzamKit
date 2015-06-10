@@ -77,7 +77,7 @@ public class NotificationEntityAttribute<T>: AlecrimCoreData.SingleEntityAttribu
 
 extension NotificationEntity {
     
-    public static func fromJSON(json: JSON) -> NotificationEntity? {
+    public static func fromJSON(json: JSON, inout _ hasChanges: Bool) -> NotificationEntity? {
         if json.type != .Null {
             var entity = ZamzamManager.sharedInstance.dataContext.notifications.firstOrCreated({ $0.id == json["ID"].int32 })
             
@@ -105,12 +105,14 @@ extension NotificationEntity {
                         entity.link = metaJson["link"].string
                     }
                     
-                    if let value = AuthorEntity.fromJSON(json["author"]) {
+                    if let value = AuthorEntity.fromJSON(json["author"], &hasChanges) {
                         entity.author = value
                     }
                     
-                    return entity
+                    hasChanges = true
             }
+            
+            return entity
         }
         
         return nil

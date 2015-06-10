@@ -16,10 +16,10 @@ import AlecrimCoreData
 
 public class ImageEntity: NSManagedObject {
 
-    @NSManaged public var creation_date: NSDate?
+    @NSManaged public var creationDate: NSDate?
     @NSManaged public var height: Int32 // cannot mark as optional because Objective-C compatibility issues
     @NSManaged public var id: Int32 // cannot mark as optional because Objective-C compatibility issues
-    @NSManaged public var modified_date: NSDate?
+    @NSManaged public var modifiedDate: NSDate?
     @NSManaged public var slug: String?
     @NSManaged public var thumbnailHeight: Int32 // cannot mark as optional because Objective-C compatibility issues
     @NSManaged public var thumbnailUrl: String?
@@ -36,10 +36,10 @@ public class ImageEntity: NSManagedObject {
 
 extension ImageEntity {
 
-    public static let creation_date = AlecrimCoreData.Attribute<NSDate?>("creation_date")
+    public static let creationDate = AlecrimCoreData.Attribute<NSDate?>("creationDate")
     public static let height = AlecrimCoreData.Attribute<Int32?>("height")
     public static let id = AlecrimCoreData.Attribute<Int32?>("id")
-    public static let modified_date = AlecrimCoreData.Attribute<NSDate?>("modified_date")
+    public static let modifiedDate = AlecrimCoreData.Attribute<NSDate?>("modifiedDate")
     public static let slug = AlecrimCoreData.Attribute<String?>("slug")
     public static let thumbnailHeight = AlecrimCoreData.Attribute<Int32?>("thumbnailHeight")
     public static let thumbnailUrl = AlecrimCoreData.Attribute<String?>("thumbnailUrl")
@@ -56,10 +56,10 @@ public class ImageEntityAttribute<T>: AlecrimCoreData.SingleEntityAttribute<T> {
 
     public override init(_ name: String) { super.init(name) }
 
-    public lazy var creation_date: AlecrimCoreData.Attribute<NSDate?> = { AlecrimCoreData.Attribute<NSDate?>("\(self.___name).creation_date") }()
+    public lazy var creationDate: AlecrimCoreData.Attribute<NSDate?> = { AlecrimCoreData.Attribute<NSDate?>("\(self.___name).creationDate") }()
     public lazy var height: AlecrimCoreData.Attribute<Int32?> = { AlecrimCoreData.Attribute<Int32?>("\(self.___name).height") }()
     public lazy var id: AlecrimCoreData.Attribute<Int32?> = { AlecrimCoreData.Attribute<Int32?>("\(self.___name).id") }()
-    public lazy var modified_date: AlecrimCoreData.Attribute<NSDate?> = { AlecrimCoreData.Attribute<NSDate?>("\(self.___name).modified_date") }()
+    public lazy var modifiedDate: AlecrimCoreData.Attribute<NSDate?> = { AlecrimCoreData.Attribute<NSDate?>("\(self.___name).modifiedDate") }()
     public lazy var slug: AlecrimCoreData.Attribute<String?> = { AlecrimCoreData.Attribute<String?>("\(self.___name).slug") }()
     public lazy var thumbnailHeight: AlecrimCoreData.Attribute<Int32?> = { AlecrimCoreData.Attribute<Int32?>("\(self.___name).thumbnailHeight") }()
     public lazy var thumbnailUrl: AlecrimCoreData.Attribute<String?> = { AlecrimCoreData.Attribute<String?>("\(self.___name).thumbnailUrl") }()
@@ -74,32 +74,47 @@ public class ImageEntityAttribute<T>: AlecrimCoreData.SingleEntityAttribute<T> {
 
 extension ImageEntity {
     
-    public static func fromJSON(json: JSON) -> ImageEntity? {
+    public static func fromJSON(json: JSON, inout _ hasChanges: Bool) -> ImageEntity? {
         if json.type != .Null {
             var entity = ZamzamManager.sharedInstance.dataContext.images.firstOrCreated { $0.id == json["ID"].int32 }
-            entity.title = json["title"].string
-            entity.url = json["guid"].string
-            entity.slug = json["slug"].string
             
-            if let width = json["attachment_meta"]["width"].int32 {
-                entity.width = width
-            }
-            
-            if let height = json["attachment_meta"]["height"].int32 {
-                entity.height = height
-            }
-            
-            let thumbnail = json["attachment_meta"]["sizes"]["thumbnail"]
-            if thumbnail.type != .Null {
-                entity.thumbnailUrl = thumbnail["url"].string
-                
-                if let width = thumbnail["width"].int32 {
-                    entity.thumbnailWidth = width
-                }
-                
-                if let height = thumbnail["height"].int32 {
-                    entity.thumbnailHeight = height
-                }
+            // New or modified entity
+            if entity.modifiedDate == nil
+                || entity.modifiedDate! < json["modified"].string?.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT) {
+                    entity.title = json["title"].string
+                    entity.url = json["guid"].string
+                    entity.slug = json["slug"].string
+                    
+                    if let value = json["date"].string {
+                        entity.creationDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
+                    }
+                    
+                    if let value = json["modified"].string {
+                        entity.modifiedDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
+                    }
+                    
+                    if let width = json["attachment_meta"]["width"].int32 {
+                        entity.width = width
+                    }
+                    
+                    if let height = json["attachment_meta"]["height"].int32 {
+                        entity.height = height
+                    }
+                    
+                    let thumbnail = json["attachment_meta"]["sizes"]["thumbnail"]
+                    if thumbnail.type != .Null {
+                        entity.thumbnailUrl = thumbnail["url"].string
+                        
+                        if let width = thumbnail["width"].int32 {
+                            entity.thumbnailWidth = width
+                        }
+                        
+                        if let height = thumbnail["height"].int32 {
+                            entity.thumbnailHeight = height
+                        }
+                    }
+                    
+                    hasChanges = true
             }
             
             return entity

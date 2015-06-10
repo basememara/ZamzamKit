@@ -98,11 +98,11 @@ public class BlogPostEntityAttribute<T>: AlecrimCoreData.SingleEntityAttribute<T
 
 extension BlogPostEntity {
     
-    public static func fromJSON(json: JSON) -> BlogPostEntity? {
+    public static func fromJSON(json: JSON, inout _ hasChanges: Bool) -> BlogPostEntity? {
         if json.type != .Null {
             var entity = ZamzamManager.sharedInstance.dataContext.blogPosts.firstOrCreated { $0.id == json["ID"].int32 }
             
-            // Create or updated modified posts
+            // New or modified entity
             if entity.modifiedDate == nil
                 || entity.modifiedDate! < json["modified"].string?.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT) {
                     entity.title = json["title"].string
@@ -122,11 +122,11 @@ extension BlogPostEntity {
                         entity.modifiedDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
                     }
                     
-                    if let value = ImageEntity.fromJSON(json["featured_image"]) {
+                    if let value = ImageEntity.fromJSON(json["featured_image"], &hasChanges) {
                         entity.image = value
                     }
                     
-                    if let value = AuthorEntity.fromJSON(json["author"]) {
+                    if let value = AuthorEntity.fromJSON(json["author"], &hasChanges) {
                         entity.author = value
                     }
                     
@@ -146,8 +146,10 @@ extension BlogPostEntity {
                         }
                     }
                     
-                    return entity
+                    hasChanges = true
             }
+            
+            return entity
         }
         
         return nil

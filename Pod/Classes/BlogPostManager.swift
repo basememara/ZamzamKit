@@ -23,7 +23,7 @@ public class BlogPostManager: NSObject {
         get {
             return //ZamzamManager.sharedInstance.configurationService.getValue("BaseUrl")
                 baseUrl
-                + "/wp-json/posts?filter[post_status]=publish&filter[posts_per_page]=50&filter[orderby]=date&filter[order]=desc&page=1"
+                + "/wp-json/posts?filter[posts_per_page]=50&filter[orderby]=date&filter[order]=desc&page=1"
         }
     }
     
@@ -63,7 +63,8 @@ public class BlogPostManager: NSObject {
         
         if let data = data {
             for (key: String, item: JSON) in JSON(data: data) {
-                if let value = BlogPostEntity.fromJSON(item) {
+                var hasChanges = false
+                if let entity = BlogPostEntity.fromJSON(item, &hasChanges) where hasChanges {
                     updateCount++
                 }
             }
@@ -88,20 +89,20 @@ public class BlogPostManager: NSObject {
                     
                     for (key: String, item: JSON) in JSON(data: data) {
                         if let id = item["ID"].string?.toInt(),
-                            var post = ZamzamManager.sharedInstance.dataContext.blogPosts.first({ $0.id == Int32(id) }) {
+                            var entity = ZamzamManager.sharedInstance.dataContext.blogPosts.first({ $0.id == Int32(id) }) {
                                 let commentsCount = Int32(item["comments_count"].string?.toInt() ?? 0)
                                 let viewsCount = Int32(item["views_count"].string?.toInt() ?? 0)
                                 var updated = false
                                 
                                 // Updated comment count
-                                if post.commentsCount < commentsCount {
-                                    post.commentsCount = commentsCount
+                                if entity.commentsCount < commentsCount {
+                                    entity.commentsCount = commentsCount
                                     updated = true
                                 }
                                 
                                 // Updated comment count
-                                if post.viewsCount < viewsCount {
-                                    post.viewsCount = viewsCount
+                                if entity.viewsCount < viewsCount {
+                                    entity.viewsCount = viewsCount
                                     updated = true
                                 }
                                 

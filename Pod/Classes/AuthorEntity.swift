@@ -77,19 +77,26 @@ public class AuthorEntityAttribute<T>: AlecrimCoreData.SingleEntityAttribute<T> 
 
 extension AuthorEntity {
     
-    public static func fromJSON(json: JSON) -> AuthorEntity? {
+    public static func fromJSON(json: JSON, inout _ hasChanges: Bool) -> AuthorEntity? {
         if json.type != .Null {
             var entity = ZamzamManager.sharedInstance.dataContext.authors.firstOrCreated { $0.id == json["ID"].int32 }
-            entity.username = json["username"].string
-            entity.name = json["name"].string
-            entity.avatar = json["avatar"].string
-            entity.bio = json["description"].string
-            entity.url = json["URL"].string
-            entity.slug = json["slug"].string
             
-            if let value = json["registered"].string {
-                entity.creationDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
-                entity.registrationDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
+            // New or modified entity
+            if entity.modifiedDate == nil
+                || entity.modifiedDate! < json["modified"].string?.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT) {
+                    entity.username = json["username"].string
+                    entity.name = json["name"].string
+                    entity.avatar = json["avatar"].string
+                    entity.bio = json["description"].string
+                    entity.url = json["URL"].string
+                    entity.slug = json["slug"].string
+                    
+                    if let value = json["registered"].string {
+                        entity.creationDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
+                        entity.registrationDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
+                    }
+                    
+                    hasChanges = true
             }
             
             return entity
