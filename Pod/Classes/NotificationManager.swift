@@ -17,7 +17,6 @@ import ZamzamKit
 public class NotificationManager: NSObject {
     
     let baseUrl = "http://naturesnurtureblog.com"
-    let cacheParam = NSDate().stringFromFormat("yyyyMMdd")
     
     public var getAllUrl: String {
         get {
@@ -27,7 +26,9 @@ public class NotificationManager: NSObject {
         }
     }
     
-    public func populate(completion: (() -> Void)? = nil) {
+    public func populate(enableCache: Bool = true, completion: (() -> Void)? = nil) {
+        let cacheParam = enableCache ? NSDate().stringFromFormat("yyyyMMdd") : "\(NSDate().timeIntervalSince1970)"
+        
         // Get data from remote server for new updates beyond seed file
         Alamofire.request(.GET, getAllUrl + "&cache=\(cacheParam)")
             .response { (request, response, data, error) in

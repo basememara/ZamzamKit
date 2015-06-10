@@ -17,7 +17,6 @@ import ZamzamKit
 public class BlogPostManager: NSObject {
     
     let baseUrl = "http://naturesnurtureblog.com"
-    let cacheParam = NSDate().stringFromFormat("yyyyMMdd")
     
     public var getAllUrl: String {
         get {
@@ -35,7 +34,9 @@ public class BlogPostManager: NSObject {
         }
     }
     
-    public func populate(completion: (() -> Void)? = nil) {
+    public func populate(enableCache: Bool = true, completion: (() -> Void)? = nil) {
+        let cacheParam = enableCache ? NSDate().stringFromFormat("yyyyMMdd") : "\(NSDate().timeIntervalSince1970)"
+        
         // Retrieve seed file and store
         if let path = NSBundle.mainBundle().pathForResource("posts", ofType: "json"),
             let data = NSData(contentsOfFile: path) {
@@ -77,7 +78,9 @@ public class BlogPostManager: NSObject {
         return updateCount
     }
     
-    public func populatePopular(completion: (() -> Void)? = nil) {
+    public func populatePopular(enableCache: Bool = true, completion: (() -> Void)? = nil) {
+        let cacheParam = enableCache ? NSDate().stringFromFormat("yyyyMMdd") : "\(NSDate().timeIntervalSince1970)"
+        
         // Get data from remote server
         Alamofire.request(.GET, getPopularUrl + "?cache=\(cacheParam)")
             .response { (request, response, data, error) in
