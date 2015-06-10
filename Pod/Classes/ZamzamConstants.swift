@@ -10,6 +10,10 @@ import Foundation
 
 public struct ZamzamConstants {
     
+    public struct DateTime {
+        static let JSON_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"
+    }
+    
     public struct Configuration {
         static let ROOT_KEY = "ZamzamKit configurations"
     }

@@ -136,6 +136,7 @@
 		8A047CE52310E0AFB5B95CBE /* FBSnapshotTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2472A973894AA993060485 /* FBSnapshotTestCase.m */; };
 		8A5898134786BAD0876FBB55 /* Pods-ZamzamKit_Tests-FBSnapshotTestCase-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 703D8ED969CC4B3A228834FB /* Pods-ZamzamKit_Tests-FBSnapshotTestCase-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8AF691E23FF9C7DD68A61D9A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E91FA7C19E64C23FD5BCB5 /* UIKit.framework */; };
+		8B05FEB91B28000F00F4A1CD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B05FEB81B28000F00F4A1CD /* NotificationManager.swift */; };
 		8BCC2A841B277A95004F38E8 /* BlogPostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC2A831B277A95004F38E8 /* BlogPostManager.swift */; };
 		8BCC2A861B27800E004F38E8 /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC2A851B27800E004F38E8 /* ConfigurationService.swift */; };
 		8D2C63BBE4640ACD68671911 /* World+DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202A8FD80F7B8EB168F944A2 /* World+DSL.swift */; };
@@ -598,6 +599,7 @@
 		8651A66338076608BA954715 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
 		874D64E7C8DECD28215EB923 /* SourceLocation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SourceLocation.swift; path = Nimble/Utils/SourceLocation.swift; sourceTree = "<group>"; };
 		884BD9C3A08C1BFC4EE156DE /* AlecrimCoreData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlecrimCoreData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B05FEB81B28000F00F4A1CD /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		8BCC2A831B277A95004F38E8 /* BlogPostManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogPostManager.swift; sourceTree = "<group>"; };
 		8BCC2A851B27800E004F38E8 /* ConfigurationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationService.swift; sourceTree = "<group>"; };
 		8BE6539405617570695E19A5 /* EntitySetCollectionOperatorAttribute.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EntitySetCollectionOperatorAttribute.swift; path = Source/AlecrimCoreData/Classes/Attributes/EntitySetCollectionOperatorAttribute.swift; sourceTree = "<group>"; };
@@ -1168,6 +1170,7 @@
 			isa = PBXGroup;
 			children = (
 				8BCC2A831B277A95004F38E8 /* BlogPostManager.swift */,
+				8B05FEB81B28000F00F4A1CD /* NotificationManager.swift */,
 			);
 			name = Content;
 			sourceTree = "<group>";
@@ -2134,6 +2137,7 @@
 			files = (
 				9D1001DC11EA26C61308ABA2 /* Pods-ZamzamKit_Example-dummy.m in Sources */,
 				8BCC2A861B27800E004F38E8 /* ConfigurationService.swift in Sources */,
+				8B05FEB91B28000F00F4A1CD /* NotificationManager.swift in Sources */,
 				8BCC2A841B277A95004F38E8 /* BlogPostManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

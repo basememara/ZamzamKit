@@ -9,6 +9,8 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
+import Timepiece
 
 import AlecrimCoreData
 
@@ -62,4 +64,33 @@ public class TermEntityAttribute<T>: AlecrimCoreData.SingleEntityAttribute<T> {
 
     public lazy var posts: AlecrimCoreData.EntitySetAttribute<Set<BlogPostEntity>> = { AlecrimCoreData.EntitySetAttribute<Set<BlogPostEntity>>("\(self.___name).posts") }()
 
+}
+
+extension TermEntity {
+    
+    public static func fromJSON(json: JSON) -> TermEntity? {
+        if json.type != .Null {
+            var entity = ZamzamManager.sharedInstance.dataContext.terms.firstOrCreated { $0.id == json["ID"].int32 }
+            entity.title = json["name"].string
+            entity.content = json["description"].string
+            entity.url = json["link"].string
+            entity.slug = json["slug"].string
+            entity.taxonomy = json["taxonomy"].string
+            
+            if let count = json["count"].int32 {
+                entity.count = count
+            }
+            
+            if json["parent"].type != .Null {
+                entity.parent = ZamzamManager.sharedInstance.dataContext.terms.firstOrCreated {
+                    $0.id == json["parent"]["ID"].int32!
+                }
+            }
+            
+            return entity
+        }
+        
+        return nil
+    }
+    
 }

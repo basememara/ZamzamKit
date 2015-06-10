@@ -9,6 +9,8 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
+import Timepiece
 
 import AlecrimCoreData
 
@@ -71,4 +73,29 @@ public class AuthorEntityAttribute<T>: AlecrimCoreData.SingleEntityAttribute<T> 
     public lazy var notifications: AlecrimCoreData.EntitySetAttribute<Set<NotificationEntity>> = { AlecrimCoreData.EntitySetAttribute<Set<NotificationEntity>>("\(self.___name).notifications") }()
     public lazy var posts: AlecrimCoreData.EntitySetAttribute<Set<BlogPostEntity>> = { AlecrimCoreData.EntitySetAttribute<Set<BlogPostEntity>>("\(self.___name).posts") }()
 
+}
+
+extension AuthorEntity {
+    
+    public static func fromJSON(json: JSON) -> AuthorEntity? {
+        if json.type != .Null {
+            var entity = ZamzamManager.sharedInstance.dataContext.authors.firstOrCreated { $0.id == json["ID"].int32 }
+            entity.username = json["username"].string
+            entity.name = json["name"].string
+            entity.avatar = json["avatar"].string
+            entity.bio = json["description"].string
+            entity.url = json["URL"].string
+            entity.slug = json["slug"].string
+            
+            if let value = json["registered"].string {
+                entity.creationDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
+                entity.registrationDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
+            }
+            
+            return entity
+        }
+
+        return nil
+    }
+    
 }

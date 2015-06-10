@@ -9,6 +9,8 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
+import Timepiece
 
 import AlecrimCoreData
 
@@ -92,4 +94,62 @@ public class BlogPostEntityAttribute<T>: AlecrimCoreData.SingleEntityAttribute<T
     public lazy var comments: AlecrimCoreData.EntitySetAttribute<Set<CommentEntity>> = { AlecrimCoreData.EntitySetAttribute<Set<CommentEntity>>("\(self.___name).comments") }()
     public lazy var terms: AlecrimCoreData.EntitySetAttribute<Set<TermEntity>> = { AlecrimCoreData.EntitySetAttribute<Set<TermEntity>>("\(self.___name).terms") }()
 
+}
+
+extension BlogPostEntity {
+    
+    public static func fromJSON(json: JSON) -> BlogPostEntity? {
+        if json.type != .Null {
+            var entity = ZamzamManager.sharedInstance.dataContext.blogPosts.firstOrCreated { $0.id == json["ID"].int32 }
+            
+            // Create or updated modified posts
+            if entity.modifiedDate == nil
+                || entity.modifiedDate! < json["modified"].string?.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT) {
+                    entity.title = json["title"].string
+                    entity.summary = json["excerpt"].string
+                    entity.content = json["content"].string
+                    entity.url = json["link"].string
+                    entity.type = json["type"].string
+                    entity.slug = json["slug"].string
+                    entity.status = json["status"].string
+                    
+                    if let value = json["date"].string {
+                        entity.creationDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
+                        entity.publicationDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
+                    }
+                    
+                    if let value = json["modified"].string {
+                        entity.modifiedDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
+                    }
+                    
+                    if let value = ImageEntity.fromJSON(json["featured_image"]) {
+                        entity.image = value
+                    }
+                    
+                    if let value = AuthorEntity.fromJSON(json["author"]) {
+                        entity.author = value
+                    }
+                    
+                    if json["terms"]["category"].type != .Null {
+                        for (subKey: String, subJson: JSON) in json["terms"]["category"] {
+                            if let value = TermEntity.fromJSON(subJson) {
+                                entity.terms.insert(value)
+                            }
+                        }
+                    }
+                    
+                    if json["terms"]["post_tag"].type != .Null {
+                        for (subKey: String, subJson: JSON) in json["terms"]["post_tag"] {
+                            if let value = TermEntity.fromJSON(subJson) {
+                                entity.terms.insert(value)
+                            }
+                        }
+                    }
+                    
+                    return entity
+            }
+        }
+        
+        return nil
+    }
 }

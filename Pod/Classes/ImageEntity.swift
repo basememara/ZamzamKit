@@ -9,6 +9,8 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
+import Timepiece
 
 import AlecrimCoreData
 
@@ -68,4 +70,42 @@ public class ImageEntityAttribute<T>: AlecrimCoreData.SingleEntityAttribute<T> {
 
     public lazy var posts: AlecrimCoreData.EntitySetAttribute<Set<BlogPostEntity>> = { AlecrimCoreData.EntitySetAttribute<Set<BlogPostEntity>>("\(self.___name).posts") }()
 
+}
+
+extension ImageEntity {
+    
+    public static func fromJSON(json: JSON) -> ImageEntity? {
+        if json.type != .Null {
+            var entity = ZamzamManager.sharedInstance.dataContext.images.firstOrCreated { $0.id == json["ID"].int32 }
+            entity.title = json["title"].string
+            entity.url = json["guid"].string
+            entity.slug = json["slug"].string
+            
+            if let width = json["attachment_meta"]["width"].int32 {
+                entity.width = width
+            }
+            
+            if let height = json["attachment_meta"]["height"].int32 {
+                entity.height = height
+            }
+            
+            let thumbnail = json["attachment_meta"]["sizes"]["thumbnail"]
+            if thumbnail.type != .Null {
+                entity.thumbnailUrl = thumbnail["url"].string
+                
+                if let width = thumbnail["width"].int32 {
+                    entity.thumbnailWidth = width
+                }
+                
+                if let height = thumbnail["height"].int32 {
+                    entity.thumbnailHeight = height
+                }
+            }
+            
+            return entity
+        }
+        
+        return nil
+    }
+    
 }

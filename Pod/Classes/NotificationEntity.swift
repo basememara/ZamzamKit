@@ -9,6 +9,8 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
+import Timepiece
 
 import AlecrimCoreData
 
@@ -71,4 +73,47 @@ public class NotificationEntityAttribute<T>: AlecrimCoreData.SingleEntityAttribu
 
     public lazy var comments: AlecrimCoreData.EntitySetAttribute<Set<CommentEntity>> = { AlecrimCoreData.EntitySetAttribute<Set<CommentEntity>>("\(self.___name).comments") }()
 
+}
+
+extension NotificationEntity {
+    
+    public static func fromJSON(json: JSON) -> NotificationEntity? {
+        if json.type != .Null {
+            var entity = ZamzamManager.sharedInstance.dataContext.notifications.firstOrCreated({ $0.id == json["ID"].int32 })
+            
+            // Create or updated modified posts
+            if entity.modifiedDate == nil
+                || entity.modifiedDate! < json["modified"].string?.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT) {
+                    entity.title = json["title"].string
+                    entity.content = json["content"].string
+                    entity.type = json["type"].string
+                    entity.status = json["status"].string
+                    entity.slug = json["slug"].string
+                    
+                    if let value = json["date"].string {
+                        entity.creationDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
+                    }
+                    
+                    if let value = json["modified"].string {
+                        entity.modifiedDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
+                    }
+                    
+                    let metaJson = json["post_meta"]
+                    if metaJson.type != .Null {
+                        entity.type = metaJson["type"].string
+                        entity.file = metaJson["file"].string
+                        entity.link = metaJson["link"].string
+                    }
+                    
+                    if let value = AuthorEntity.fromJSON(json["author"]) {
+                        entity.author = value
+                    }
+                    
+                    return entity
+            }
+        }
+        
+        return nil
+    }
+    
 }
