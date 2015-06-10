@@ -27,7 +27,7 @@ public class NotificationManager: NSObject {
         }
     }
     
-    public func populate(completion: (() -> Void)?) {
+    public func populate(completion: (() -> Void)? = nil) {
         // Get data from remote server for new updates beyond seed file
         Alamofire.request(.GET, getAllUrl + "&cache=\(cacheParam)")
             .response { (request, response, data, error) in

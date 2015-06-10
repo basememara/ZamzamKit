@@ -35,7 +35,7 @@ public class BlogPostManager: NSObject {
         }
     }
     
-    public func populate(completion: (() -> Void)?) {
+    public func populate(completion: (() -> Void)? = nil) {
         // Retrieve seed file and store
         if let path = NSBundle.mainBundle().pathForResource("posts", ofType: "json"),
             let data = NSData(contentsOfFile: path) {
@@ -76,7 +76,7 @@ public class BlogPostManager: NSObject {
         return updateCount
     }
     
-    public func populatePopular(completion: (() -> Void)?) {
+    public func populatePopular(completion: (() -> Void)? = nil) {
         // Get data from remote server
         Alamofire.request(.GET, getPopularUrl + "?cache=\(cacheParam)")
             .response { (request, response, data, error) in
