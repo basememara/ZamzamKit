@@ -18,9 +18,7 @@ public class AuthorEntity: NSManagedObject {
 
     @NSManaged public var avatar: String?
     @NSManaged public var bio: String?
-    @NSManaged public var creationDate: NSDate?
     @NSManaged public var id: Int32 // cannot mark as optional because Objective-C compatibility issues
-    @NSManaged public var modifiedDate: NSDate?
     @NSManaged public var name: String?
     @NSManaged public var registrationDate: NSDate?
     @NSManaged public var slug: String?
@@ -39,9 +37,7 @@ extension AuthorEntity {
 
     public static let avatar = AlecrimCoreData.Attribute<String?>("avatar")
     public static let bio = AlecrimCoreData.Attribute<String?>("bio")
-    public static let creationDate = AlecrimCoreData.Attribute<NSDate?>("creationDate")
     public static let id = AlecrimCoreData.Attribute<Int32?>("id")
-    public static let modifiedDate = AlecrimCoreData.Attribute<NSDate?>("modifiedDate")
     public static let name = AlecrimCoreData.Attribute<String?>("name")
     public static let registrationDate = AlecrimCoreData.Attribute<NSDate?>("registrationDate")
     public static let slug = AlecrimCoreData.Attribute<String?>("slug")
@@ -60,9 +56,7 @@ public class AuthorEntityAttribute<T>: AlecrimCoreData.SingleEntityAttribute<T> 
 
     public lazy var avatar: AlecrimCoreData.Attribute<String?> = { AlecrimCoreData.Attribute<String?>("\(self.___name).avatar") }()
     public lazy var bio: AlecrimCoreData.Attribute<String?> = { AlecrimCoreData.Attribute<String?>("\(self.___name).bio") }()
-    public lazy var creationDate: AlecrimCoreData.Attribute<NSDate?> = { AlecrimCoreData.Attribute<NSDate?>("\(self.___name).creationDate") }()
     public lazy var id: AlecrimCoreData.Attribute<Int32?> = { AlecrimCoreData.Attribute<Int32?>("\(self.___name).id") }()
-    public lazy var modifiedDate: AlecrimCoreData.Attribute<NSDate?> = { AlecrimCoreData.Attribute<NSDate?>("\(self.___name).modifiedDate") }()
     public lazy var name: AlecrimCoreData.Attribute<String?> = { AlecrimCoreData.Attribute<String?>("\(self.___name).name") }()
     public lazy var registrationDate: AlecrimCoreData.Attribute<NSDate?> = { AlecrimCoreData.Attribute<NSDate?>("\(self.___name).registrationDate") }()
     public lazy var slug: AlecrimCoreData.Attribute<String?> = { AlecrimCoreData.Attribute<String?>("\(self.___name).slug") }()
@@ -77,26 +71,19 @@ public class AuthorEntityAttribute<T>: AlecrimCoreData.SingleEntityAttribute<T> 
 
 extension AuthorEntity {
     
-    public static func fromJSON(json: JSON, inout _ hasChanges: Bool) -> AuthorEntity? {
+    public static func fromJSON(json: JSON) -> AuthorEntity? {
         if json.type != .Null {
             var entity = ZamzamManager.sharedInstance.dataContext.authors.firstOrCreated { $0.id == json["ID"].int32 }
             
-            // New or modified entity
-            if entity.modifiedDate == nil
-                || entity.modifiedDate! < json["modified"].string?.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT) {
-                    entity.username = json["username"].string
-                    entity.name = json["name"].string
-                    entity.avatar = json["avatar"].string
-                    entity.bio = json["description"].string
-                    entity.url = json["URL"].string
-                    entity.slug = json["slug"].string
-                    
-                    if let value = json["registered"].string {
-                        entity.creationDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
-                        entity.registrationDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
-                    }
-                    
-                    hasChanges = true
+            entity.username = json["username"].string
+            entity.name = json["name"].string
+            entity.avatar = json["avatar"].string
+            entity.bio = json["description"].string
+            entity.url = json["URL"].string
+            entity.slug = json["slug"].string
+            
+            if let value = json["registered"].string {
+                entity.registrationDate = value.dateFromFormat("yyyy-MM-dd'T'HH:mm:ssZZZ")
             }
             
             return entity

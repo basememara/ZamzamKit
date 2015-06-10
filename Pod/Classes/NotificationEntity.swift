@@ -105,7 +105,7 @@ extension NotificationEntity {
                         entity.link = metaJson["link"].string
                     }
                     
-                    if let value = AuthorEntity.fromJSON(json["author"], &hasChanges) {
+                    if let value = AuthorEntity.fromJSON(json["author"]) {
                         entity.author = value
                     }
                     

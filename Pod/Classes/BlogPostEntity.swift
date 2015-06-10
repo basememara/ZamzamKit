@@ -114,8 +114,9 @@ extension BlogPostEntity {
                     entity.status = json["status"].string
                     
                     if let value = json["date"].string {
-                        entity.creationDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
-                        entity.publicationDate = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
+                        let date = value.dateFromFormat(ZamzamConstants.DateTime.JSON_FORMAT)
+                        entity.creationDate = date
+                        entity.publicationDate = date
                     }
                     
                     if let value = json["modified"].string {
@@ -126,7 +127,7 @@ extension BlogPostEntity {
                         entity.image = value
                     }
                     
-                    if let value = AuthorEntity.fromJSON(json["author"], &hasChanges) {
+                    if let value = AuthorEntity.fromJSON(json["author"]) {
                         entity.author = value
                     }
                     
