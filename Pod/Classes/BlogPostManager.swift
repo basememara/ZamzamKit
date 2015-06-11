@@ -76,11 +76,10 @@ public class BlogPostManager: NSObject {
                 // Handle errors if applicable
                 if(error != nil) {
                     NSLog("Error: \(error)")
+                    completion(count: 0)
                 } else {
                     completion(count: data?.toInt() ?? 0)
                 }
-                
-                completion(count: 0)
         }
     }
     
