@@ -22,6 +22,7 @@ public class NotificationEntity: NSManagedObject {
     @NSManaged public var id: Int32 // cannot mark as optional because Objective-C compatibility issues
     @NSManaged public var link: String?
     @NSManaged public var modifiedDate: NSDate?
+    @NSManaged public var read: Bool // cannot mark as optional because Objective-C compatibility issues
     @NSManaged public var slug: String?
     @NSManaged public var status: String?
     @NSManaged public var title: String?
@@ -43,6 +44,7 @@ extension NotificationEntity {
     public static let id = AlecrimCoreData.Attribute<Int32?>("id")
     public static let link = AlecrimCoreData.Attribute<String?>("link")
     public static let modifiedDate = AlecrimCoreData.Attribute<NSDate?>("modifiedDate")
+    public static let read = AlecrimCoreData.Attribute<Bool?>("read")
     public static let slug = AlecrimCoreData.Attribute<String?>("slug")
     public static let status = AlecrimCoreData.Attribute<String?>("status")
     public static let title = AlecrimCoreData.Attribute<String?>("title")
@@ -64,6 +66,7 @@ public class NotificationEntityAttribute<T>: AlecrimCoreData.SingleEntityAttribu
     public lazy var id: AlecrimCoreData.Attribute<Int32?> = { AlecrimCoreData.Attribute<Int32?>("\(self.___name).id") }()
     public lazy var link: AlecrimCoreData.Attribute<String?> = { AlecrimCoreData.Attribute<String?>("\(self.___name).link") }()
     public lazy var modifiedDate: AlecrimCoreData.Attribute<NSDate?> = { AlecrimCoreData.Attribute<NSDate?>("\(self.___name).modifiedDate") }()
+    public lazy var read: AlecrimCoreData.Attribute<Bool?> = { AlecrimCoreData.Attribute<Bool?>("\(self.___name).read") }()
     public lazy var slug: AlecrimCoreData.Attribute<String?> = { AlecrimCoreData.Attribute<String?>("\(self.___name).slug") }()
     public lazy var status: AlecrimCoreData.Attribute<String?> = { AlecrimCoreData.Attribute<String?>("\(self.___name).status") }()
     public lazy var title: AlecrimCoreData.Attribute<String?> = { AlecrimCoreData.Attribute<String?>("\(self.___name).title") }()

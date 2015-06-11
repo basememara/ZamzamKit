@@ -30,7 +30,15 @@ public class BlogPostManager: NSObject {
         get {
             return //ZamzamManager.sharedInstance.configurationService.getValue("BaseUrl")
                 baseUrl
-                + "/wp-json/popular_counts"
+                + "/wp-json/popular_count"
+        }
+    }
+    
+    public var getCommentsCountUrl: String {
+        get {
+            return //ZamzamManager.sharedInstance.configurationService.getValue("BaseUrl")
+                baseUrl
+                    + "/wp-json/comments_count/"
         }
     }
     
@@ -56,6 +64,23 @@ public class BlogPostManager: NSObject {
                 if completion != nil {
                     completion!()
                 }
+        }
+    }
+    
+    public func getCommentsCount(id: Int32, completion: (count: Int) -> Void) {
+        let cacheParam = NSDate().stringFromFormat("yyyyMMdd")
+        
+        // Get data from remote server for new updates beyond seed file
+        Alamofire.request(.GET, getCommentsCountUrl + "\(id)?cache=\(cacheParam)")
+            .response { (request, response, data, error) in
+                // Handle errors if applicable
+                if(error != nil) {
+                    NSLog("Error: \(error)")
+                } else {
+                    completion(count: (data as? Int) ?? 0)
+                }
+                
+                completion(count: 0)
         }
     }
     
