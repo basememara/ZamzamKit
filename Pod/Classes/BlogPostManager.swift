@@ -72,12 +72,12 @@ public class BlogPostManager: NSObject {
         
         // Get data from remote server for new updates beyond seed file
         Alamofire.request(.GET, getCommentsCountUrl + "\(id)?cache=\(cacheParam)")
-            .response { (request, response, data, error) in
+            .responseString { (request, response, data, error) in
                 // Handle errors if applicable
                 if(error != nil) {
                     NSLog("Error: \(error)")
                 } else {
-                    completion(count: (data as? Int) ?? 0)
+                    completion(count: data?.toInt() ?? 0)
                 }
                 
                 completion(count: 0)
