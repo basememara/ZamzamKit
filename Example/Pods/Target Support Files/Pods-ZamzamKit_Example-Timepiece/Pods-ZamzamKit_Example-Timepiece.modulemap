@@ -1,6 +1,0 @@
-framework module Timepiece {
-  umbrella header "Pods-ZamzamKit_Example-Timepiece-umbrella.h"
-
-  export *
-  module * { export * }
-}

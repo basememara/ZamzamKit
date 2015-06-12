@@ -6,18 +6,6 @@
 // project.
 
 
-// Alamofire
-#define COCOAPODS_POD_AVAILABLE_Alamofire
-#define COCOAPODS_VERSION_MAJOR_Alamofire 1
-#define COCOAPODS_VERSION_MINOR_Alamofire 2
-#define COCOAPODS_VERSION_PATCH_Alamofire 2
-
-// AlecrimCoreData
-#define COCOAPODS_POD_AVAILABLE_AlecrimCoreData
-#define COCOAPODS_VERSION_MAJOR_AlecrimCoreData 3
-#define COCOAPODS_VERSION_MINOR_AlecrimCoreData 1
-#define COCOAPODS_VERSION_PATCH_AlecrimCoreData 0
-
 // FBSnapshotTestCase
 #define COCOAPODS_POD_AVAILABLE_FBSnapshotTestCase
 #define COCOAPODS_VERSION_MAJOR_FBSnapshotTestCase 1
@@ -39,20 +27,8 @@
 // Quick
 #define COCOAPODS_POD_AVAILABLE_Quick
 #define COCOAPODS_VERSION_MAJOR_Quick 0
-#define COCOAPODS_VERSION_MINOR_Quick 3
-#define COCOAPODS_VERSION_PATCH_Quick 1
-
-// SwiftyJSON
-#define COCOAPODS_POD_AVAILABLE_SwiftyJSON
-#define COCOAPODS_VERSION_MAJOR_SwiftyJSON 2
-#define COCOAPODS_VERSION_MINOR_SwiftyJSON 2
-#define COCOAPODS_VERSION_PATCH_SwiftyJSON 0
-
-// Timepiece
-#define COCOAPODS_POD_AVAILABLE_Timepiece
-#define COCOAPODS_VERSION_MAJOR_Timepiece 0
-#define COCOAPODS_VERSION_MINOR_Timepiece 3
-#define COCOAPODS_VERSION_PATCH_Timepiece 4
+#define COCOAPODS_VERSION_MINOR_Quick 4
+#define COCOAPODS_VERSION_PATCH_Quick 0
 
 // ZamzamKit
 #define COCOAPODS_POD_AVAILABLE_ZamzamKit

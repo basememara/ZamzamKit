@@ -1,20 +1,12 @@
 PODS:
-  - Alamofire (1.2.2)
-  - AlecrimCoreData (3.1)
   - FBSnapshotTestCase (1.8.1)
   - Nimble (0.4.2)
   - Nimble-Snapshots (0.4.0):
     - FBSnapshotTestCase (~> 1.7)
     - Nimble (~> 0.4)
     - Quick (~> 0.3)
-  - Quick (0.3.1)
-  - SwiftyJSON (2.2.0)
-  - Timepiece (0.3.4)
-  - ZamzamKit (0.1.0):
-    - Alamofire
-    - AlecrimCoreData
-    - SwiftyJSON
-    - Timepiece
+  - Quick (0.4.0)
+  - ZamzamKit (0.1.0)
 
 DEPENDENCIES:
   - FBSnapshotTestCase
@@ -28,14 +20,10 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  Alamofire: 11a6022f5089887d92ffb5a3014c97a0a915ab98
-  AlecrimCoreData: cd9e0c6d8818099a98966323d410dd690a02980b
   FBSnapshotTestCase: 3dc3899168747a0319c5278f5b3445c13a6532dd
   Nimble: 49b7a7da8919f42823d37c6d68cc6d15a7009f32
   Nimble-Snapshots: 216ae8c0ea3f4105be1606749fe15d8b2138af40
-  Quick: 824572d3d198d51e52cf4aa722cebf7e59952a35
-  SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
-  Timepiece: bfe018a2754a7ae6b2b7ab683a90da45c28e32a0
-  ZamzamKit: 6e4a1f8bef6133be8c0abd4d091e1f1f031f6874
+  Quick: 2286bfff349102670c6d2dafd0d2cefab42f5f0b
+  ZamzamKit: cf9ec13438ae84e31bfd2d1a031cf54999c5ce86
 
 COCOAPODS: 0.37.2

@@ -1,6 +1,0 @@
-framework module AlecrimCoreData {
-  umbrella header "Pods-ZamzamKit_Example-AlecrimCoreData-umbrella.h"
-
-  export *
-  module * { export * }
-}

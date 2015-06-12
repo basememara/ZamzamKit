@@ -48,16 +48,8 @@ code_sign() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework 'Alamofire.framework'
-  install_framework 'AlecrimCoreData.framework'
-  install_framework 'SwiftyJSON.framework'
-  install_framework 'Timepiece.framework'
   install_framework 'ZamzamKit.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework 'Alamofire.framework'
-  install_framework 'AlecrimCoreData.framework'
-  install_framework 'SwiftyJSON.framework'
-  install_framework 'Timepiece.framework'
   install_framework 'ZamzamKit.framework'
 fi

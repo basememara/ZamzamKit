@@ -25,20 +25,5 @@
     "ZamzamKit": [
       "Pod/Assets/*.png"
     ]
-  },
-  "dependencies": {
-    "Alamofire": [
-
-    ],
-    "SwiftyJSON": [
-
-    ],
-    "Timepiece": [
-
-    ],
-    "AlecrimCoreData": [
-
-    ]
-  },
-  "frameworks": "UIKit"
+  }
 }

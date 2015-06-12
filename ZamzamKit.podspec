@@ -1,12 +1,3 @@
-#
-# Be sure to run `pod lib lint ZamzamKit.podspec' to ensure this is a
-# valid spec and remove all comments before submitting the spec.
-#
-# Any lines starting with a # are optional, but encouraged
-#
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
     s.name             = "ZamzamKit"
     s.version          = "0.1.0"
@@ -31,9 +22,4 @@ Pod::Spec.new do |s|
     s.resource_bundles = {
         'ZamzamKit' => ['Pod/Assets/*.png']
     }
-    s.dependency 'Alamofire'
-    s.dependency 'SwiftyJSON'
-    s.dependency 'Timepiece'
-    s.dependency 'AlecrimCoreData'
-    s.frameworks = 'UIKit'
 end

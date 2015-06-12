@@ -10,10 +10,6 @@ import Foundation
 
 public class ZamzamManager: NSObject {
     
-    public static let sharedInstance = ZamzamManager()
-
-    public let dataContext: DataContext!
-    
     public let storageService: StorageService!
     public let fileService: FileService!
     public let communicationService: CommunicationService!
@@ -26,8 +22,6 @@ public class ZamzamManager: NSObject {
     public let animationService: AnimationService!
     
     public override init() {
-        dataContext = DataContext()
-        
         // Inject service dependencies
         storageService = StorageService()
         fileService = FileService()

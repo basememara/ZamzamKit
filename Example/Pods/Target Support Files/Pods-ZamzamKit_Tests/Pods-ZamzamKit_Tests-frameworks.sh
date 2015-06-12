@@ -48,24 +48,16 @@ code_sign() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework 'Alamofire.framework'
-  install_framework 'AlecrimCoreData.framework'
   install_framework 'FBSnapshotTestCase.framework'
   install_framework 'Nimble.framework'
   install_framework 'Nimble_Snapshots.framework'
   install_framework 'Quick.framework'
-  install_framework 'SwiftyJSON.framework'
-  install_framework 'Timepiece.framework'
   install_framework 'ZamzamKit.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework 'Alamofire.framework'
-  install_framework 'AlecrimCoreData.framework'
   install_framework 'FBSnapshotTestCase.framework'
   install_framework 'Nimble.framework'
   install_framework 'Nimble_Snapshots.framework'
   install_framework 'Quick.framework'
-  install_framework 'SwiftyJSON.framework'
-  install_framework 'Timepiece.framework'
   install_framework 'ZamzamKit.framework'
 fi
