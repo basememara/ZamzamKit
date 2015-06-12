@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1AB0BB180D65888C5EAD17B2 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C26B8B0B1463230D6F6F518E /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2AA7D80B13C5C35543AC2DE9 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C26B8B0B1463230D6F6F518E /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2E57B3556B98D248F26B3681 /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EDA8B9BEB7C04D3802720D /* ConfigurationService.swift */; };
 		33C9B00DC4A37FEB79132D3A /* ZamzamKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1686959E16E3492AA3312197 /* ZamzamKit.bundle */; };
 		39F7DE3DBBD9BC33F387F0BA /* CommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CAF82237C6E05FDF916CCF /* CommunicationService.swift */; };
@@ -124,7 +122,6 @@
 		B6E53BD40D36A5CED1DAA4EA /* ZamzamConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ZamzamConstants.swift; sourceTree = "<group>"; };
 		BE1D7D5046D03BC5DD079E8B /* FileService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
 		C019D9609724D6957DE32FED /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		C26B8B0B1463230D6F6F518E /* ZamzamKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ZamzamKit.h; sourceTree = "<group>"; };
 		C7AC147FF8D001A293C3FB9E /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C821C9C0477592A9C3B1B11F /* Pods-ZamzamKit_Example-ZamzamKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ZamzamKit_Example-ZamzamKit-umbrella.h"; sourceTree = "<group>"; };
 		D006FB40E7085F142EA87134 /* LocationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
@@ -278,7 +275,6 @@
 				8B1C67C11B2B6D18006EB4FB /* Services */,
 				B6E53BD40D36A5CED1DAA4EA /* ZamzamConstants.swift */,
 				FC75DA654457F47385369999 /* ZamzamManager.swift */,
-				C26B8B0B1463230D6F6F518E /* ZamzamKit.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -377,7 +373,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1E548088C2DFA9A76920902 /* Pods-ZamzamKit_Example-ZamzamKit-umbrella.h in Headers */,
-				2AA7D80B13C5C35543AC2DE9 /* ZamzamKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +381,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				47AE1797700D84EE88F435CB /* Pods-ZamzamKit_Tests-ZamzamKit-umbrella.h in Headers */,
-				1AB0BB180D65888C5EAD17B2 /* ZamzamKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
