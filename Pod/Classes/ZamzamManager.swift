@@ -13,7 +13,7 @@ public class ZamzamManager: NSObject {
     public let storageService: StorageService!
     public let fileService: FileService!
     public let communicationService: CommunicationService!
-    //public let configurationService: ConfigurationService!
+    public let configurationService: ConfigurationService!
     public let locationService: LocationService!
     public let dateTimeService: DateTimeService!
     public let notificationService: NotificationService!
@@ -26,7 +26,7 @@ public class ZamzamManager: NSObject {
         storageService = StorageService()
         fileService = FileService()
         communicationService = CommunicationService()
-        //configurationService = ConfigurationService()
+        configurationService = ConfigurationService()
         locationService = LocationService()
         dateTimeService = DateTimeService()
         notificationService = NotificationService()
