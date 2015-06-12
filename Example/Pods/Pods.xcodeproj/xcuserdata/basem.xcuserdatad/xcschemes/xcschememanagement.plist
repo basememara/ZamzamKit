@@ -19,26 +19,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-ZamzamKit_Tests-FBSnapshotTestCase.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ZamzamKit_Tests-Nimble-Snapshots.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ZamzamKit_Tests-Nimble.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ZamzamKit_Tests-Quick.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-ZamzamKit_Tests-ZamzamKit-ZamzamKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,52 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1768C6051875460306A5EE09</key>
+		<key>05C4EFD421884606119F6580</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4908113364E18462A49122BF</key>
+		<key>2A9665C777C0C5FB69D17FCA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>791B31591078218DE83A4479</key>
+		<key>35C2B15FCCCE8E5E815C755C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9943168ACC2F9C4F6BEEBF81</key>
+		<key>4FEC3889ECCDBA70824EC867</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A06DF0A1BD07541B49BDD650</key>
+		<key>76CB6469E6FCC233345F1E45</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A36193DB92676B875BD5E2CB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B0184F896B202E9EC2CC9250</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B645F906C20427379AC5E149</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DEC9B270AE747F6F1EF3BA68</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F2ACEF22800CEDA90667947A</key>
+		<key>ADBBA5827F7E3C1786D54224</key>
 		<dict>
 			<key>primary</key>
 			<true/>

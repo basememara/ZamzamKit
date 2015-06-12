@@ -1,18 +1,7 @@
 PODS:
-  - FBSnapshotTestCase (1.8.1)
-  - Nimble (0.4.2)
-  - Nimble-Snapshots (0.4.0):
-    - FBSnapshotTestCase (~> 1.7)
-    - Nimble (~> 0.4)
-    - Quick (~> 0.3)
-  - Quick (0.4.0)
-  - ZamzamKit (0.1.0)
+  - ZamzamKit (0.1.1)
 
 DEPENDENCIES:
-  - FBSnapshotTestCase
-  - Nimble
-  - Nimble-Snapshots
-  - Quick
   - ZamzamKit (from `../`)
 
 EXTERNAL SOURCES:
@@ -20,10 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  FBSnapshotTestCase: 3dc3899168747a0319c5278f5b3445c13a6532dd
-  Nimble: 49b7a7da8919f42823d37c6d68cc6d15a7009f32
-  Nimble-Snapshots: 216ae8c0ea3f4105be1606749fe15d8b2138af40
-  Quick: 2286bfff349102670c6d2dafd0d2cefab42f5f0b
-  ZamzamKit: cf9ec13438ae84e31bfd2d1a031cf54999c5ce86
+  ZamzamKit: d1c4379c0b8a42e05a69895794d396485b29951f
 
 COCOAPODS: 0.37.2

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DEC9B270AE747F6F1EF3BA68"
+               BlueprintIdentifier = "2A9665C777C0C5FB69D17FCA"
                BuildableName = "ZamzamKit.bundle"
                BlueprintName = "Pods-ZamzamKit_Example-ZamzamKit-ZamzamKit"
                ReferencedContainer = "container:Pods.xcodeproj">

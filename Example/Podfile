@@ -7,9 +7,4 @@ end
 
 target 'ZamzamKit_Tests', :exclusive => true do
   pod "ZamzamKit", :path => "../"
-
-  pod 'Quick'
-  pod 'Nimble'
-  pod 'FBSnapshotTestCase'
-  pod 'Nimble-Snapshots'
 end
