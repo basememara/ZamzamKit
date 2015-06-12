@@ -27,7 +27,6 @@
 		7D62B3BC9DFFA296A0B62595 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D006FB40E7085F142EA87134 /* LocationService.swift */; };
 		87644353C91F948A6D9E31CE /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E416BD8D060A950FE2E63 /* AlertService.swift */; };
 		878C4DE4FC30B4B0C9E67CEB /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E53BD40D36A5CED1DAA4EA /* ZamzamConstants.swift */; };
-		8B19D9161B2B892B00886472 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B19D9151B2B892B00886472 /* ZamzamKit.h */; };
 		8FBF34BC9554B2E25DB482D8 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CF8EE238A8A9279A092EF /* NotificationService.swift */; };
 		915C0B1AE3DB0A554E83DFF0 /* Pods-ZamzamKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AD6FF2BA02B9513808B1B2A /* Pods-ZamzamKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AB72F526057CDB0B1AC6E79 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E53BD40D36A5CED1DAA4EA /* ZamzamConstants.swift */; };
@@ -113,7 +112,6 @@
 		861C2EA23288FBD95E5871F6 /* Pods-ZamzamKit_Example-ZamzamKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Example-ZamzamKit.xcconfig"; sourceTree = "<group>"; };
 		87AD5040758E8FEC3F2ED11D /* Pods-ZamzamKit_Tests-ZamzamKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-ZamzamKit_Tests-ZamzamKit-prefix.pch"; path = "../Pods-ZamzamKit_Tests-ZamzamKit/Pods-ZamzamKit_Tests-ZamzamKit-prefix.pch"; sourceTree = "<group>"; };
 		894E1F1CFC0CE1EA2D949CE0 /* Pods-ZamzamKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		8B19D9151B2B892B00886472 /* ZamzamKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZamzamKit.h; sourceTree = "<group>"; };
 		8B812C8352C1A5EFFACBB490 /* Pods_ZamzamKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZamzamKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D7EE67D024A11D4BE20908C /* Pods-ZamzamKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9D83B769F749A4FD7E63C599 /* Pods-ZamzamKit_Example-ZamzamKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ZamzamKit_Example-ZamzamKit.modulemap"; sourceTree = "<group>"; };
@@ -277,7 +275,6 @@
 				8B1C67C11B2B6D18006EB4FB /* Services */,
 				B6E53BD40D36A5CED1DAA4EA /* ZamzamConstants.swift */,
 				FC75DA654457F47385369999 /* ZamzamManager.swift */,
-				8B19D9151B2B892B00886472 /* ZamzamKit.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -360,7 +357,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				915C0B1AE3DB0A554E83DFF0 /* Pods-ZamzamKit_Example-umbrella.h in Headers */,
-				8B19D9161B2B892B00886472 /* ZamzamKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
