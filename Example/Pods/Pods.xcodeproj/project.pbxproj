@@ -494,19 +494,10 @@
 		0AA75C08AAE4CD7589335D96 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				946B8BFE1491F43049830D74 /* AlertService.swift */,
-				9FF7544791CF9D80F54573AB /* AnimationService.swift */,
-				2974D7203957028EFA4576DC /* CommunicationService.swift */,
-				8C8E7F954D669EF4CD0775E4 /* ConfigurationService.swift */,
-				59C57A68FACA227BE21B0480 /* DateTimeService.swift */,
-				5C1FE229AAB2327073F6BFF0 /* FileService.swift */,
-				B68FFEF1D3BF01A271C606CE /* LocationService.swift */,
-				EE9964214F01F80CC4BFB947 /* NotificationService.swift */,
-				8563062C65DD9A2C6FC592AC /* StorageService.swift */,
-				68ECA766850D84D503DEC99F /* WebService.swift */,
+				8B1C67C01B2B6C5D006EB4FB /* Services */,
 				DF3B8970216129F92F6AEC8C /* ZamzamConstants.swift */,
-				4EB87DB2281A541A98C020A0 /* ZamzamKit.h */,
 				70457F67DCAF31EFEDC328F6 /* ZamzamManager.swift */,
+				4EB87DB2281A541A98C020A0 /* ZamzamKit.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -703,6 +694,23 @@
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/Pods-ZamzamKit_Example-ZamzamKit";
+			sourceTree = "<group>";
+		};
+		8B1C67C01B2B6C5D006EB4FB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				946B8BFE1491F43049830D74 /* AlertService.swift */,
+				9FF7544791CF9D80F54573AB /* AnimationService.swift */,
+				2974D7203957028EFA4576DC /* CommunicationService.swift */,
+				8C8E7F954D669EF4CD0775E4 /* ConfigurationService.swift */,
+				59C57A68FACA227BE21B0480 /* DateTimeService.swift */,
+				5C1FE229AAB2327073F6BFF0 /* FileService.swift */,
+				B68FFEF1D3BF01A271C606CE /* LocationService.swift */,
+				EE9964214F01F80CC4BFB947 /* NotificationService.swift */,
+				8563062C65DD9A2C6FC592AC /* StorageService.swift */,
+				68ECA766850D84D503DEC99F /* WebService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 		B52BB10D0A4EDEDB1E2186CC /* Pods */ = {
