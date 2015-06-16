@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "ZamzamKit"
-    s.version          = "0.1.3"
+    s.version          = "0.1.4"
     s.summary          = "A Swift framework for rapidly developing iOS and WatchKit apps."
     s.description      = <<-DESC
                         ZamzamKit is a Swift framework for iOS and WatchKit to allow
@@ -22,4 +22,6 @@ Pod::Spec.new do |s|
     s.resource_bundles = {
         'ZamzamKit' => ['Pod/Assets/*.png']
     }
+    s.dependency 'Timepiece'
+    s.dependency 'SwiftyTimer'
 end

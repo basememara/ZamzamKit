@@ -46,28 +46,34 @@ public class NotificationService: NSObject {
         category: String = "mainCategory",
         badge: Int = 0,
         sound: String? = UILocalNotificationDefaultSoundName,
+        repeat: NSCalendarUnit? = nil,
+        incrementDayIfPast: Bool = true,
         removeDuplicates: Bool = false) {
+            // De-dup previous notifications if applicable
+            if let id = indentifier where removeDuplicates {
+                remove(application, id)
+            }
             
-        // De-dup previous notifications if applicable
-        if let id = indentifier where removeDuplicates {
-            remove(application, id)
-        }
+            // Initialize and configure notification
+            var notification = UILocalNotification()
+            notification.category = category
+            notification.alertTitle = title
+            notification.alertBody = body
+            notification.fireDate = incrementDayIfPast
+                ? dateTimeService.incrementDayIfPast(date) : date
+            notification.applicationIconBadgeNumber = badge
+            notification.soundName = sound
+            
+            if let r = repeat {
+                notification.repeatInterval = r
+            }
         
-        // Initialize and configure notification
-        var notification = UILocalNotification()
-        notification.category = category
-        notification.alertTitle = title
-        notification.alertBody = body
-        notification.fireDate = dateTimeService.incrementDayIfPast(date)
-        notification.applicationIconBadgeNumber = badge
-        notification.soundName = sound
-        
-        // Provide unique identifier for later use
-        if let id = indentifier {
-            notification.userInfo = ["indentifier": id]
-        }
-        
-        application.scheduleLocalNotification(notification)
+            // Provide unique identifier for later use
+            if let id = indentifier {
+                notification.userInfo = ["indentifier": id]
+            }
+            
+            application.scheduleLocalNotification(notification)
     }
     
     public func remove(application: UIApplication, _ indentifier: String) {
