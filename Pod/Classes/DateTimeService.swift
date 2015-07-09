@@ -49,11 +49,22 @@ public class DateTimeService: NSObject {
             ? incrementDay(date) : date
     }
     
-    public func getHijriDate(date: NSDate = NSDate(),
+    public func getHijriDate(var date: NSDate = NSDate(),
         unit: NSCalendarUnit? = nil,
-        format: String? = nil) -> String {
+        format: String? = nil,
+        offSet: Int = 0) -> String {
             var calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierIslamicCivil)
             var flags = unit ?? NSCalendarUnit(UInt.max)
+            
+            if offSet != 0 {
+                date = calendar!
+                    .dateByAddingUnit(.CalendarUnitDay,
+                        value: offSet,
+                        toDate: date,
+                        options: NSCalendarOptions(0)
+                    )!
+            }
+            
             var components = calendar?.components(flags, fromDate: date)
             
             let formatter = NSDateFormatter()
