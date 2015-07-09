@@ -19,6 +19,7 @@ public class ZamzamManager: NSObject {
     public let notificationService: NotificationService!
     public let alertService: AlertService!
     public let webService: WebService!
+    public let textService: TextService!
     public let animationService: AnimationService!
     
     public override init() {
@@ -32,6 +33,7 @@ public class ZamzamManager: NSObject {
         notificationService = NotificationService()
         alertService = AlertService()
         webService = WebService()
+        textService = TextService()
         animationService = AnimationService()
     }
     
