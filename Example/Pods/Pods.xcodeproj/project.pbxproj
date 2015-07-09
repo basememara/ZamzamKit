@@ -27,6 +27,7 @@
 		7D62B3BC9DFFA296A0B62595 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D006FB40E7085F142EA87134 /* LocationService.swift */; };
 		87644353C91F948A6D9E31CE /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E416BD8D060A950FE2E63 /* AlertService.swift */; };
 		878C4DE4FC30B4B0C9E67CEB /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E53BD40D36A5CED1DAA4EA /* ZamzamConstants.swift */; };
+		8B66656F1B4C331400F86C21 /* TextService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B66656E1B4C331400F86C21 /* TextService.swift */; };
 		8FBF34BC9554B2E25DB482D8 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CF8EE238A8A9279A092EF /* NotificationService.swift */; };
 		915C0B1AE3DB0A554E83DFF0 /* Pods-ZamzamKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AD6FF2BA02B9513808B1B2A /* Pods-ZamzamKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AB72F526057CDB0B1AC6E79 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E53BD40D36A5CED1DAA4EA /* ZamzamConstants.swift */; };
@@ -112,6 +113,7 @@
 		861C2EA23288FBD95E5871F6 /* Pods-ZamzamKit_Example-ZamzamKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Example-ZamzamKit.xcconfig"; sourceTree = "<group>"; };
 		87AD5040758E8FEC3F2ED11D /* Pods-ZamzamKit_Tests-ZamzamKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-ZamzamKit_Tests-ZamzamKit-prefix.pch"; path = "../Pods-ZamzamKit_Tests-ZamzamKit/Pods-ZamzamKit_Tests-ZamzamKit-prefix.pch"; sourceTree = "<group>"; };
 		894E1F1CFC0CE1EA2D949CE0 /* Pods-ZamzamKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		8B66656E1B4C331400F86C21 /* TextService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextService.swift; sourceTree = "<group>"; };
 		8B812C8352C1A5EFFACBB490 /* Pods_ZamzamKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZamzamKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D7EE67D024A11D4BE20908C /* Pods-ZamzamKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9D83B769F749A4FD7E63C599 /* Pods-ZamzamKit_Example-ZamzamKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ZamzamKit_Example-ZamzamKit.modulemap"; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				738CF8EE238A8A9279A092EF /* NotificationService.swift */,
 				330828CE04140A7658906FB8 /* StorageService.swift */,
 				60661903A951C3364103ECFD /* WebService.swift */,
+				8B66656E1B4C331400F86C21 /* TextService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				E35A4C554C1D2C7CFE738972 /* AnimationService.swift in Sources */,
 				39F7DE3DBBD9BC33F387F0BA /* CommunicationService.swift in Sources */,
 				A6F27347E3E7A43D644D68FD /* ConfigurationService.swift in Sources */,
+				8B66656F1B4C331400F86C21 /* TextService.swift in Sources */,
 				ED1FFB8251E60B9F96F50721 /* DateTimeService.swift in Sources */,
 				793DF20CBBF990842C643239 /* FileService.swift in Sources */,
 				DB8FC72D45A289AD7712DF98 /* LocationService.swift in Sources */,
@@ -836,8 +840,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 30F15101F334264D9AFE46E5 /* Pods-ZamzamKit_Example-ZamzamKit-Private.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-ZamzamKit_Example";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = ZamzamKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -904,11 +910,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 30F15101F334264D9AFE46E5 /* Pods-ZamzamKit_Example-ZamzamKit-Private.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-ZamzamKit_Example";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = ZamzamKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -957,6 +966,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9D7EE67D024A11D4BE20908C /* Pods-ZamzamKit_Example.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -986,6 +996,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 894E1F1CFC0CE1EA2D949CE0 /* Pods-ZamzamKit_Example.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
