@@ -90,4 +90,19 @@ public class NotificationService: NSObject {
         }
     }
     
+    public func exists(application: UIApplication, _ indentifier: String) -> Bool {
+        if let notifications = application.scheduledLocalNotifications {
+            for item in notifications {
+                // Find matching to delete
+                if let notification = item as? UILocalNotification,
+                    let userInfo = notification.userInfo as? [String: String]
+                    where userInfo["indentifier"] == indentifier {
+                        return true
+                }
+            }
+        }
+        
+        return false
+    }
+    
 }
