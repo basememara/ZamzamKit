@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "ZamzamKit"
-    s.version          = "0.1.6"
+    s.version          = "0.1.7"
     s.summary          = "A Swift framework for rapidly developing iOS and WatchKit apps."
     s.description      = <<-DESC
                         ZamzamKit is a Swift framework for iOS and WatchKit to allow
