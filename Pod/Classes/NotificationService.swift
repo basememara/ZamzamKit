@@ -79,11 +79,10 @@ public class NotificationService: NSObject {
     public func remove(application: UIApplication, _ indentifier: String) {
         if let notifications = application.scheduledLocalNotifications {
             for item in notifications {
-                var notification = item as! UILocalNotification
-                
                 // Find matching to delete
-                if let userInfo = notification.userInfo as? [String: String]
-                    where userInfo["indentifier"] == indentifier {
+                if let notification = item as? UILocalNotification,
+                    let userInfo = notification.userInfo as? [String: String]
+                        where userInfo["indentifier"] == indentifier {
                     // Cancel notification
                     application.cancelLocalNotification(notification)
                 }
