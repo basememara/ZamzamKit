@@ -28,6 +28,11 @@ public struct ZamzamConstants {
         public static let EARTH_RADIUS_IN_METERS = 6372797.560856
     }
     
+    public struct Notification {
+        public static let MAIN_CATEGORY = "mainCategory"
+        public static let IDENTIFIER_KEY = "identifier"
+    }
+    
     public struct Color {
         public static func lightOrange() -> UIColor {
             return UIColor(red: 255/255, green: 211/255, blue: 127/255, alpha: 1)

@@ -19,7 +19,7 @@ public class NotificationService: NSObject {
     
     public func register(application: UIApplication,
         _ notifications: [UIMutableUserNotificationAction],
-        category: String = "mainCategory",
+        category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         type: UIUserNotificationType = .Alert | .Badge | .Sound) {
             // Notification category
             var mainCategory = UIMutableUserNotificationCategory()
@@ -44,7 +44,7 @@ public class NotificationService: NSObject {
         body: String,
         title: String? = nil,
         identifier: String? = nil,
-        category: String = "mainCategory",
+        category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         badge: Int = 0,
         sound: String? = UILocalNotificationDefaultSoundName,
         repeat: NSCalendarUnit? = nil,
@@ -52,12 +52,17 @@ public class NotificationService: NSObject {
             // Initialize and configure notification
             var notification = UILocalNotification()
             notification.category = category
-            notification.alertTitle = title
             notification.alertBody = body
             notification.fireDate = incrementDayIfPast
                 ? dateTimeService.incrementDayIfPast(date) : date
-            notification.applicationIconBadgeNumber = badge
-            notification.soundName = sound
+            
+            if let t = title {
+                notification.alertTitle = t
+            }
+            
+            if let s = sound {
+                notification.soundName = s
+            }
             
             if let r = repeat {
                 notification.repeatInterval = r
@@ -65,7 +70,11 @@ public class NotificationService: NSObject {
             
             // Provide unique identifier for later use
             if let id = identifier {
-                notification.userInfo = ["identifier": id]
+                notification.userInfo = [ZamzamConstants.Notification.IDENTIFIER_KEY: id]
+            }
+            
+            if badge > 0 {
+                notification.applicationIconBadgeNumber = badge
             }
             
             return notification
@@ -74,7 +83,7 @@ public class NotificationService: NSObject {
     public func schedule(application: UIApplication, date: NSDate, body: String,
         title: String? = nil,
         identifier: String? = nil,
-        category: String = "mainCategory",
+        category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         badge: Int = 0,
         sound: String? = UILocalNotificationDefaultSoundName,
         repeat: NSCalendarUnit? = nil,
@@ -104,7 +113,7 @@ public class NotificationService: NSObject {
                 // Find matching to delete
                 if let notification = item as? UILocalNotification,
                     let userInfo = notification.userInfo as? [String: String]
-                    where userInfo["identifier"] == identifier {
+                    where userInfo[ZamzamConstants.Notification.IDENTIFIER_KEY] == identifier {
                         // Cancel notification
                         application.cancelLocalNotification(notification)
                 }
@@ -118,7 +127,7 @@ public class NotificationService: NSObject {
                 // Find matching to delete
                 if let notification = item as? UILocalNotification,
                     let userInfo = notification.userInfo as? [String: String]
-                    where userInfo["identifier"] == identifier {
+                    where userInfo[ZamzamConstants.Notification.IDENTIFIER_KEY] == identifier {
                         return true
                 }
             }
@@ -135,7 +144,7 @@ public class NotificationService: NSObject {
                 // Find matching to delete
                 if let notification = item as? UILocalNotification,
                     let userInfo = notification.userInfo as? [String: String]
-                    where userInfo["identifier"] == identifier {
+                    where userInfo[ZamzamConstants.Notification.IDENTIFIER_KEY] == identifier {
                         matchedNotifications.append(notification)
                 }
             }
