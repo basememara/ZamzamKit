@@ -56,11 +56,11 @@ public class NotificationService: NSObject {
             notification.fireDate = incrementDayIfPast
                 ? dateTimeService.incrementDayIfPast(date) : date
             
-            if let t = title {
+            if let t = title where t != "" {
                 notification.alertTitle = t
             }
             
-            if let s = sound {
+            if let s = sound where s != "" {
                 notification.soundName = s
             }
             
@@ -69,7 +69,7 @@ public class NotificationService: NSObject {
             }
             
             // Provide unique identifier for later use
-            if let id = identifier {
+            if let id = identifier where id != "" {
                 notification.userInfo = [ZamzamConstants.Notification.IDENTIFIER_KEY: id]
             }
             
