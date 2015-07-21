@@ -15,7 +15,8 @@ public struct ZamzamConstants {
     }
     
     public struct Configuration {
-        public static let ROOT_KEY = "ZamzamKit configurations"
+        public static let ROOT_KEY = "Zamzam"
+        public static let FILE_NAME = "Info"
     }
     
     public struct Path {
