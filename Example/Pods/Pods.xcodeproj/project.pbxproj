@@ -16,7 +16,7 @@
 		286EC627EFA2BEF07FAFC6D41393267E /* ZamzamKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E05E44BFC4EDD2D853194AE711773BC /* ZamzamKit-dummy.m */; };
 		3877D48B0CD54FF3AFD1E023E3F1766B /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033AE86B563520376EE270400B73747C /* FileService.swift */; };
 		3E5978BB2C572AAC4842D9512A582417 /* Int+Timepiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB88EFDA571A6F6B6FB076A8D2A995 /* Int+Timepiece.swift */; };
-		445418F0DB6F3BB72233748514CC692C /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2950524A1D2548047E142B1E6AFEF2 /* ConfigurationService.swift */; };
+		445418F0DB6F3BB72233748514CC692C /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2950524A1D2548047E142B1E6AFEF2 /* ZamzamConfig.swift */; };
 		4A4F18B1E3D9A6B43AD7790D036CA9A2 /* Pods-ZamzamKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C3DA30B6B6E20970DEB9EF8C10CDAD19 /* Pods-ZamzamKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AD83DAB6DB5883778063D9F50B56D6E /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1B1A60977B0EFC922319FACE01460E /* AlertService.swift */; };
 		4C44239C02CC8E8EE85FE6C3C89569DA /* NSDate+Timepiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058404394EF36BCB44AF0486F6F12381 /* NSDate+Timepiece.swift */; };
@@ -181,7 +181,7 @@
 		D92C7B27B145F99941D6FFA12505379C /* SwiftyTimer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyTimer-umbrella.h"; sourceTree = "<group>"; };
 		DA05F7B57FD2DF8A4F06DF89A0ED13BC /* NSCalendar+Timepiece.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSCalendar+Timepiece.swift"; path = "Sources/NSCalendar+Timepiece.swift"; sourceTree = "<group>"; };
 		DA837A949A79C7512A195E1A112034FF /* SwiftyTimer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyTimer.xcconfig; sourceTree = "<group>"; };
-		DE2950524A1D2548047E142B1E6AFEF2 /* ConfigurationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConfigurationService.swift; sourceTree = "<group>"; };
+		DE2950524A1D2548047E142B1E6AFEF2 /* ZamzamConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ZamzamConfig.swift; sourceTree = "<group>"; };
 		DEC411870AF348E20119B31A5BB23F0C /* ZamzamKit-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "ZamzamKit-Private.xcconfig"; sourceTree = "<group>"; };
 		EAA1A9923BDA06B3EEBF7A39B8A6727E /* Pods-ZamzamKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ZamzamKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		EE7F1B70C173D83531BE9AC30D7C7BE3 /* WebService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
@@ -274,7 +274,6 @@
 				0A1B1A60977B0EFC922319FACE01460E /* AlertService.swift */,
 				9EE2BC06974A41DD4B0BCFC5D54A5DD7 /* AnimationService.swift */,
 				79B8AD2A7A9D03BCFE10AF3BDE9C2DD0 /* CommunicationService.swift */,
-				DE2950524A1D2548047E142B1E6AFEF2 /* ConfigurationService.swift */,
 				C7EEB70A7B8EAEA5B84FBB6210E5812F /* DateTimeService.swift */,
 				033AE86B563520376EE270400B73747C /* FileService.swift */,
 				8F35F2434621B948BCDE2F392470B423 /* LocationService.swift */,
@@ -283,6 +282,7 @@
 				C49E69D86B58F29A5051870A7A9D9C28 /* TextService.swift */,
 				EE7F1B70C173D83531BE9AC30D7C7BE3 /* WebService.swift */,
 				2831057CBAAEF02077527CECB0DE3599 /* ZamzamConstants.swift */,
+				DE2950524A1D2548047E142B1E6AFEF2 /* ZamzamConfig.swift */,
 				FF51B5DBE90226B891BF499DE0FC903E /* ZamzamManager.swift */,
 			);
 			path = Classes;
@@ -680,7 +680,7 @@
 				4AD83DAB6DB5883778063D9F50B56D6E /* AlertService.swift in Sources */,
 				C3F2F453A5C0CA8C9778B9520B92794F /* AnimationService.swift in Sources */,
 				DC2D4FB6FFC47756364938009FE4E746 /* CommunicationService.swift in Sources */,
-				445418F0DB6F3BB72233748514CC692C /* ConfigurationService.swift in Sources */,
+				445418F0DB6F3BB72233748514CC692C /* ZamzamConfig.swift in Sources */,
 				ED872E3970F5F441065AF442D4B1E71A /* DateTimeService.swift in Sources */,
 				3877D48B0CD54FF3AFD1E023E3F1766B /* FileService.swift in Sources */,
 				8DEF19CDB2562AAA2AC143CAB3DCA03D /* LocationService.swift in Sources */,

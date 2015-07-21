@@ -9,7 +9,7 @@
 import Foundation
 import Timepiece
 
-public class ConfigurationService: NSObject {
+public class ZamzamConfig: NSObject {
     
     /**
     Get values from plist file
@@ -18,7 +18,7 @@ public class ConfigurationService: NSObject {
     
     :returns: collection of values
     */
-    public func getFile(fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> NSDictionary {
+    public static func getFile(fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> NSDictionary {
             // Read file and extract key/value
             if let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "plist"),
                 let file = NSDictionary(contentsOfFile: path) {
@@ -36,7 +36,7 @@ public class ConfigurationService: NSObject {
     
     :returns: collection of values
     */
-    public func getRootConfig(rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
+    public static func getRootConfig(rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> NSDictionary {
             let file = getFile(fileName: fileName)
             
@@ -57,7 +57,7 @@ public class ConfigurationService: NSObject {
     
     :returns: value of key
     */
-    public func getValue(key: String,
+    public static func getValue(key: String,
         rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> String {
             let config = getRootConfig(rootKey: rootKey, fileName: fileName)
@@ -75,7 +75,7 @@ public class ConfigurationService: NSObject {
     
     :returns: value of key
     */
-    public func getIntValue(key: String,
+    public static func getIntValue(key: String,
         rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> Int {
             if let value = getValue(key, rootKey: rootKey, fileName: fileName).toInt() {
@@ -94,7 +94,7 @@ public class ConfigurationService: NSObject {
     
     :returns: value of key
     */
-    public func getDoubleValue(key: String,
+    public static func getDoubleValue(key: String,
         rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> Double {
             let value = getValue(key, rootKey: rootKey, fileName: fileName)
@@ -110,7 +110,7 @@ public class ConfigurationService: NSObject {
     
     :returns: value of key
     */
-    public func getBoolValue(key: String,
+    public static func getBoolValue(key: String,
         rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> Bool {
             let value = getValue(key, rootKey: rootKey, fileName: fileName)
@@ -133,7 +133,7 @@ public class ConfigurationService: NSObject {
     
     :returns: value of key
     */
-    public func getDateValue(key: String,
+    public static func getDateValue(key: String,
         format: String = "yyyy-MM-dd",
         rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> NSDate? {
@@ -150,7 +150,7 @@ public class ConfigurationService: NSObject {
     
     :returns: value of key
     */
-    public func getArrayValue(key: String,
+    public static func getArrayValue(key: String,
         rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> [String] {
             let config = getRootConfig(rootKey: rootKey, fileName: fileName)
@@ -166,7 +166,7 @@ public class ConfigurationService: NSObject {
     
     :returns: value of key
     */
-    public func getDictionaryValue(key: String,
+    public static func getDictionaryValue(key: String,
         rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> [String: String] {
             let config = getRootConfig(rootKey: rootKey, fileName: fileName)
