@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func processTapped(sender: AnyObject) {
-        outputLabel.text = zamzamManager.configurationService.getValue(inputText.text)
+        outputLabel.text = zamzamManager.configurationService.getArrayValue(inputText.text)[2]
     }
     
 }

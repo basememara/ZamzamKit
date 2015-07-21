@@ -12,6 +12,43 @@ import Timepiece
 public class ConfigurationService: NSObject {
     
     /**
+    Get values from plist file
+    
+    :param: fileName file name of plist
+    
+    :returns: collection of values
+    */
+    public func getFile(fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> NSDictionary {
+            // Read file and extract key/value
+            if let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "plist"),
+                let file = NSDictionary(contentsOfFile: path) {
+                    return file
+            }
+            
+            return [:]
+    }
+    
+    /**
+    Get values from root node
+    
+    :param: rootKey  key of root node
+    :param: fileName file name of plist
+    
+    :returns: collection of values
+    */
+    public func getRootConfig(rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
+        fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> NSDictionary {
+            let file = getFile(fileName: fileName)
+            
+            // Read file and extract key/value
+            if let config = file.objectForKey(rootKey) as? NSDictionary {
+                return config
+            }
+            
+            return [:]
+    }
+    
+    /**
     Reads value from plist file
     
     :param: key      key of value
@@ -23,14 +60,10 @@ public class ConfigurationService: NSObject {
     public func getValue(key: String,
         rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> String {
-            // Read file and extract key/value
-            if let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "plist"),
-                let type = NSDictionary(contentsOfFile: path),
-                let config = type.objectForKey(rootKey) as? NSDictionary {
-                    return config.objectForKey(key) as? String ?? ""
-            }
+            let config = getRootConfig(rootKey: rootKey, fileName: fileName)
             
-            return ""
+            // Read file and extract key/value
+            return config.objectForKey(key) as? String ?? ""
     }
     
     /**
@@ -106,6 +139,38 @@ public class ConfigurationService: NSObject {
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> NSDate? {
             let value = getValue(key, rootKey: rootKey, fileName: fileName)
             return value.dateFromFormat(format)
+    }
+    
+    /**
+    Reads array from plist file
+    
+    :param: key      key of value
+    :param: rootKey  root node to read values from
+    :param: fileName file name of plist
+    
+    :returns: value of key
+    */
+    public func getArrayValue(key: String,
+        rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
+        fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> [String] {
+            let config = getRootConfig(rootKey: rootKey, fileName: fileName)
+            return config.objectForKey(key) as? [String] ?? []
+    }
+    
+    /**
+    Reads dictionary from plist file
+    
+    :param: key      key of value
+    :param: rootKey  root node to read values from
+    :param: fileName file name of plist
+    
+    :returns: value of key
+    */
+    public func getDictionaryValue(key: String,
+        rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
+        fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> [String: String] {
+            let config = getRootConfig(rootKey: rootKey, fileName: fileName)
+            return config.objectForKey(key) as? [String: String] ?? [:]
     }
     
 }
