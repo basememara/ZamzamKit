@@ -13,15 +13,26 @@ class ViewController: UIViewController {
 
     let zamzamManager = ZamzamManager()
     
+    @IBOutlet var inputText: UITextField!
+    @IBOutlet var outputLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
     }
 
+    @IBAction func processTapped(sender: AnyObject) {
+        outputLabel.text = zamzamManager.configurationService.getValue(inputText.text)
+    }
+    
 }
 

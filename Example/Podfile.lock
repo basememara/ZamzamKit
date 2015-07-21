@@ -1,5 +1,9 @@
 PODS:
-  - ZamzamKit (0.1.1)
+  - SwiftyTimer (1.1.0)
+  - Timepiece (0.4.0)
+  - ZamzamKit (0.2.1):
+    - SwiftyTimer
+    - Timepiece
 
 DEPENDENCIES:
   - ZamzamKit (from `../`)
@@ -9,6 +13,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  ZamzamKit: d1c4379c0b8a42e05a69895794d396485b29951f
+  SwiftyTimer: 3b1bf42c8b1bb09dff7107b12d3b73cbf700bbce
+  Timepiece: d38302bf6fce6146e9d8feb289e0837811ee1342
+  ZamzamKit: b052bf0850eaef79384d9e0e982222c51b2638a6
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.38.0

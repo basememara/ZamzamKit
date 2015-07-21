@@ -4,27 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-ZamzamKit_Example-ZamzamKit-ZamzamKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ZamzamKit_Example-ZamzamKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-ZamzamKit_Example.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ZamzamKit_Tests-ZamzamKit-ZamzamKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ZamzamKit_Tests-ZamzamKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -34,35 +14,55 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftyTimer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Timepiece.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ZamzamKit-ZamzamKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ZamzamKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>05C4EFD421884606119F6580</key>
+		<key>58A8F32143A7D55CEA1DBA92BECABE76</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2A9665C777C0C5FB69D17FCA</key>
+		<key>5ECED889A81A66BAA66A22815DFC0475</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>35C2B15FCCCE8E5E815C755C</key>
+		<key>A4AB6A3EBCD612F0A0127BEF6A8132B2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4FEC3889ECCDBA70824EC867</key>
+		<key>BA126DD9122964FD6940C3FD06151C52</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>76CB6469E6FCC233345F1E45</key>
+		<key>D018228D47BB62552C6A9FD824E8B36E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ADBBA5827F7E3C1786D54224</key>
+		<key>ECC404F64715BA7934DF6561F028E312</key>
 		<dict>
 			<key>primary</key>
 			<true/>

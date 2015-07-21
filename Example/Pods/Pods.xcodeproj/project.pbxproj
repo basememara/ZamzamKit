@@ -7,552 +7,655 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E57B3556B98D248F26B3681 /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EDA8B9BEB7C04D3802720D /* ConfigurationService.swift */; };
-		33C9B00DC4A37FEB79132D3A /* ZamzamKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1686959E16E3492AA3312197 /* ZamzamKit.bundle */; };
-		39F7DE3DBBD9BC33F387F0BA /* CommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CAF82237C6E05FDF916CCF /* CommunicationService.swift */; };
-		3B363C872DF6DCC758B263D4 /* ZamzamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75DA654457F47385369999 /* ZamzamManager.swift */; };
-		3D7E40B4FC4BC985AE7972A1 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330828CE04140A7658906FB8 /* StorageService.swift */; };
-		3DA136C0BA4DD8906A92D3F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D861C992A1AD758284CC9C /* Foundation.framework */; };
-		458352D8AF0F4A6EA9F373E5 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60661903A951C3364103ECFD /* WebService.swift */; };
-		47AE1797700D84EE88F435CB /* Pods-ZamzamKit_Tests-ZamzamKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E3B6AA973AB14EB699C76013 /* Pods-ZamzamKit_Tests-ZamzamKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		641AF0B2BF6242F945878212 /* ZamzamKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F9368F9799C127FE55480027 /* ZamzamKit.bundle */; };
-		6C1BA898927BD67505BF766A /* AnimationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A10711EAC36F60DA14981DF /* AnimationService.swift */; };
-		6D7C5CB66D0DDD19B6954D3B /* Pods-ZamzamKit_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 233339A300F6A7F929DFEDF9 /* Pods-ZamzamKit_Tests-dummy.m */; };
-		7249E4FD9143B8E393B25400 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D861C992A1AD758284CC9C /* Foundation.framework */; };
-		756D4C9676E167DC68D05D6D /* Pods-ZamzamKit_Example-ZamzamKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 34444A3BA048056FC9FB08F2 /* Pods-ZamzamKit_Example-ZamzamKit-dummy.m */; };
-		75C45CE55D1215D603C3A93E /* ZamzamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75DA654457F47385369999 /* ZamzamManager.swift */; };
-		77BD1DBFA0F73E709EC10636 /* Pods-ZamzamKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE708838738B1927FE93038 /* Pods-ZamzamKit_Example-dummy.m */; };
-		78C98E66B844520F0B49DC18 /* CommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CAF82237C6E05FDF916CCF /* CommunicationService.swift */; };
-		793DF20CBBF990842C643239 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1D7D5046D03BC5DD079E8B /* FileService.swift */; };
-		7D62B3BC9DFFA296A0B62595 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D006FB40E7085F142EA87134 /* LocationService.swift */; };
-		87644353C91F948A6D9E31CE /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E416BD8D060A950FE2E63 /* AlertService.swift */; };
-		878C4DE4FC30B4B0C9E67CEB /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E53BD40D36A5CED1DAA4EA /* ZamzamConstants.swift */; };
-		8B66656F1B4C331400F86C21 /* TextService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B66656E1B4C331400F86C21 /* TextService.swift */; };
-		8FBF34BC9554B2E25DB482D8 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CF8EE238A8A9279A092EF /* NotificationService.swift */; };
-		915C0B1AE3DB0A554E83DFF0 /* Pods-ZamzamKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AD6FF2BA02B9513808B1B2A /* Pods-ZamzamKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9AB72F526057CDB0B1AC6E79 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E53BD40D36A5CED1DAA4EA /* ZamzamConstants.swift */; };
-		A0D940B5BD9175571BEFAFBE /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CF8EE238A8A9279A092EF /* NotificationService.swift */; };
-		A14450923E61B1E6274A0B21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D861C992A1AD758284CC9C /* Foundation.framework */; };
-		A37FA01B897E3F172F7BE8BC /* DateTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239BDFAEE34094D351CDD3BF /* DateTimeService.swift */; };
-		A6F27347E3E7A43D644D68FD /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EDA8B9BEB7C04D3802720D /* ConfigurationService.swift */; };
-		B8AB1C5C834E03B841CDDA26 /* Pods-ZamzamKit_Tests-ZamzamKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E16254D4CDC9180F33E1DC23 /* Pods-ZamzamKit_Tests-ZamzamKit-dummy.m */; };
-		BA65A38E5268F0503ACDFBAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D861C992A1AD758284CC9C /* Foundation.framework */; };
-		BC328BF74981846E9837DB46 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E416BD8D060A950FE2E63 /* AlertService.swift */; };
-		D39230F748AD994EC94915BC /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60661903A951C3364103ECFD /* WebService.swift */; };
-		DB8FC72D45A289AD7712DF98 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D006FB40E7085F142EA87134 /* LocationService.swift */; };
-		E1E548088C2DFA9A76920902 /* Pods-ZamzamKit_Example-ZamzamKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C821C9C0477592A9C3B1B11F /* Pods-ZamzamKit_Example-ZamzamKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E35A4C554C1D2C7CFE738972 /* AnimationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A10711EAC36F60DA14981DF /* AnimationService.swift */; };
-		E7CA8D58C8CD66C6F50E3386 /* Pods-ZamzamKit_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B57C1F56AD6572F06EDFB181 /* Pods-ZamzamKit_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ED1FFB8251E60B9F96F50721 /* DateTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239BDFAEE34094D351CDD3BF /* DateTimeService.swift */; };
-		EF98D191DC53ECE8EC8A4C49 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330828CE04140A7658906FB8 /* StorageService.swift */; };
-		F72F7433794C2625D432C86F /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1D7D5046D03BC5DD079E8B /* FileService.swift */; };
+		006F2AC05EA04FB64A1A5B89F34F9339 /* String+Timepiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9959C74D177E1B3F12BA3B072EB6D374 /* String+Timepiece.swift */; };
+		05DC7C1E8010E36B9E05FCF12735ECC6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD740FD6C29C9ACA4C5D8330C903738A /* Foundation.framework */; };
+		0BC3BCA631E188BB93413463EC840BEE /* Timepiece.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 293631E44E19AF54E3FFB696C1025739 /* Timepiece.framework */; };
+		1CB45611B95BDDA81011C2FCFD2F251A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD740FD6C29C9ACA4C5D8330C903738A /* Foundation.framework */; };
+		1D6208ABC02F0664A691C3FDF508DD1C /* Pods-ZamzamKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A48AE29DE6228B1423ED82C7BAD8CD7 /* Pods-ZamzamKit_Example-dummy.m */; };
+		202B34E7701D7C33659FDD62E1C2A00C /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9893C4D2FA31D6B74843960FD453C1 /* StorageService.swift */; };
+		286EC627EFA2BEF07FAFC6D41393267E /* ZamzamKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E05E44BFC4EDD2D853194AE711773BC /* ZamzamKit-dummy.m */; };
+		3877D48B0CD54FF3AFD1E023E3F1766B /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033AE86B563520376EE270400B73747C /* FileService.swift */; };
+		3E5978BB2C572AAC4842D9512A582417 /* Int+Timepiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB88EFDA571A6F6B6FB076A8D2A995 /* Int+Timepiece.swift */; };
+		445418F0DB6F3BB72233748514CC692C /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2950524A1D2548047E142B1E6AFEF2 /* ConfigurationService.swift */; };
+		4A4F18B1E3D9A6B43AD7790D036CA9A2 /* Pods-ZamzamKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C3DA30B6B6E20970DEB9EF8C10CDAD19 /* Pods-ZamzamKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4AD83DAB6DB5883778063D9F50B56D6E /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1B1A60977B0EFC922319FACE01460E /* AlertService.swift */; };
+		4C44239C02CC8E8EE85FE6C3C89569DA /* NSDate+Timepiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058404394EF36BCB44AF0486F6F12381 /* NSDate+Timepiece.swift */; };
+		51AF2917DC216E46984B4927CD436B9C /* NSDateComponents+Timepiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31973F7C5378105DB2A7754DCCA58816 /* NSDateComponents+Timepiece.swift */; };
+		58E82305DD093A1EEE672E6210F9AB78 /* SwiftyTimer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 15745799040F1E48D507D94BBE2A270F /* SwiftyTimer-dummy.m */; };
+		5D62ED5E8A9AF533E1B183E7A2DE1E46 /* ZamzamKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3207DFB49A722B7DCE880EFAA3DD7766 /* ZamzamKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		62FF11BAC75DA5631B3CDE12B90F3F01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD740FD6C29C9ACA4C5D8330C903738A /* Foundation.framework */; };
+		6D8B481006A11F9956972E2AAD64C6F1 /* Timepiece-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7404DBD909D239A495E0D80A94837 /* Timepiece-dummy.m */; };
+		6F24DD057B47CD61E1F22836B87511E5 /* Pods-ZamzamKit_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 621F005F8221FE767AE747F0BE9C3D95 /* Pods-ZamzamKit_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		72AE8E23A690B7C0D08C3DFCF96F5867 /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034A3223166F068AB459E6DAB03EA135 /* Duration.swift */; };
+		742FB435F9A4E8D470D786B6A7D04EC9 /* NSCalendar+Timepiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05F7B57FD2DF8A4F06DF89A0ED13BC /* NSCalendar+Timepiece.swift */; };
+		80D14731A9DD837ED646CC7CF3301699 /* ZamzamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF51B5DBE90226B891BF499DE0FC903E /* ZamzamManager.swift */; };
+		86596F52AF5448831D096E4735D20C93 /* SwiftyTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FE13D9A2871322796A2C208B67E87D1 /* SwiftyTimer.framework */; };
+		8DEF19CDB2562AAA2AC143CAB3DCA03D /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F35F2434621B948BCDE2F392470B423 /* LocationService.swift */; };
+		92A899AD99B10B10E343ADF086CE93E6 /* SwiftyTimer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D92C7B27B145F99941D6FFA12505379C /* SwiftyTimer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		95F9F34A54B02404E304E915380A9706 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD740FD6C29C9ACA4C5D8330C903738A /* Foundation.framework */; };
+		9EC651BA591F3279B05F0B62F01BAC89 /* SwiftyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF16DE078F46B5B89FCF460E98C020B /* SwiftyTimer.swift */; };
+		9F0FF19EA6BE3C9BFC99E5492FDF0ED3 /* Timepiece-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 96A130EC1F4B36826188BA20E8C87CCD /* Timepiece-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A481693400E129AE81E6935430FC66C0 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2831057CBAAEF02077527CECB0DE3599 /* ZamzamConstants.swift */; };
+		A89D8186FF08671FC19D8CABF4283098 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7F1B70C173D83531BE9AC30D7C7BE3 /* WebService.swift */; };
+		A8E518DF62FFB18B7385F3A6F5329A01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD740FD6C29C9ACA4C5D8330C903738A /* Foundation.framework */; };
+		B4EA33E04D9AFE60F0CE1F678B26B1D8 /* Pods-ZamzamKit_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 761A4F94D99AA6407C3646E44336FB23 /* Pods-ZamzamKit_Tests-dummy.m */; };
+		B65896C4D36595AAAAD69ABF63E823EF /* TextService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E69D86B58F29A5051870A7A9D9C28 /* TextService.swift */; };
+		C3F2F453A5C0CA8C9778B9520B92794F /* AnimationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE2BC06974A41DD4B0BCFC5D54A5DD7 /* AnimationService.swift */; };
+		D520FE5DF7CF1644F41599474EDEE215 /* NSCalendarUnit+Timepiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125926D1D58AC59BF991D46BF588D8C2 /* NSCalendarUnit+Timepiece.swift */; };
+		DC2D4FB6FFC47756364938009FE4E746 /* CommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B8AD2A7A9D03BCFE10AF3BDE9C2DD0 /* CommunicationService.swift */; };
+		EA6EF3C6D1B8009F191568A5951E4D41 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A26245407AFA932C2EAC1C4F1C5AD /* NotificationService.swift */; };
+		ED872E3970F5F441065AF442D4B1E71A /* DateTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EEB70A7B8EAEA5B84FBB6210E5812F /* DateTimeService.swift */; };
+		F34941C62DDE1BE772E13534F9A44045 /* NSTimeInterval+Timepiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1A8D01576ED917239E58B4F4C23C9 /* NSTimeInterval+Timepiece.swift */; };
+		FDAAE3D6688E1D6DE62089B2E33318A9 /* ZamzamKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02668B0931540027CA4D82394E20B8D7 /* ZamzamKit.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3BFFBEDB7358D778E1180F7C /* PBXContainerItemProxy */ = {
+		024CCE6A9F2B8E14B8708BF854815D9B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 0651BC65BD6AB0E433C138B1 /* Project object */;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2A9665C777C0C5FB69D17FCA;
-			remoteInfo = "Pods-ZamzamKit_Example-ZamzamKit-ZamzamKit";
+			remoteGlobalIDString = ECC404F64715BA7934DF6561F028E312;
+			remoteInfo = Timepiece;
 		};
-		6B1A321377B55FC14C759E52 /* PBXContainerItemProxy */ = {
+		32D03517D24F9D1E03A492AFC9F69C25 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 0651BC65BD6AB0E433C138B1 /* Project object */;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = ADBBA5827F7E3C1786D54224;
-			remoteInfo = "Pods-ZamzamKit_Tests-ZamzamKit";
+			remoteGlobalIDString = ECC404F64715BA7934DF6561F028E312;
+			remoteInfo = Timepiece;
 		};
-		B481D6F4F6996AE929CD5CF8 /* PBXContainerItemProxy */ = {
+		5B4A2E146E634FE4FF63A58F40243370 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 0651BC65BD6AB0E433C138B1 /* Project object */;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4FEC3889ECCDBA70824EC867;
-			remoteInfo = "Pods-ZamzamKit_Tests-ZamzamKit-ZamzamKit";
+			remoteGlobalIDString = A4AB6A3EBCD612F0A0127BEF6A8132B2;
+			remoteInfo = ZamzamKit;
 		};
-		DA039612B0F3E9D4842E12F1 /* PBXContainerItemProxy */ = {
+		7FA4FCDC036C5289AF33F00FF3322B39 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 0651BC65BD6AB0E433C138B1 /* Project object */;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 05C4EFD421884606119F6580;
-			remoteInfo = "Pods-ZamzamKit_Example-ZamzamKit";
+			remoteGlobalIDString = ECC404F64715BA7934DF6561F028E312;
+			remoteInfo = Timepiece;
+		};
+		835D47E2A309AE42D9E3421FFE23D392 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A4AB6A3EBCD612F0A0127BEF6A8132B2;
+			remoteInfo = ZamzamKit;
+		};
+		9860A0DF62787A6E11083CFFDFC28966 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D018228D47BB62552C6A9FD824E8B36E;
+			remoteInfo = SwiftyTimer;
+		};
+		A4F53C9B9925C3C99234BD61C9B3DB4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D018228D47BB62552C6A9FD824E8B36E;
+			remoteInfo = SwiftyTimer;
+		};
+		CB7379139D5514273F0EA0EDF5326EE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5ECED889A81A66BAA66A22815DFC0475;
+			remoteInfo = "ZamzamKit-ZamzamKit";
+		};
+		F27C3CE93F7223DB2914896D49FC658D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D018228D47BB62552C6A9FD824E8B36E;
+			remoteInfo = SwiftyTimer;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01EDA8B9BEB7C04D3802720D /* ConfigurationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConfigurationService.swift; sourceTree = "<group>"; };
-		0D2DCB7FA5358BD1532C5115 /* Pods-ZamzamKit_Tests-ZamzamKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZamzamKit_Tests-ZamzamKit.xcconfig"; path = "../Pods-ZamzamKit_Tests-ZamzamKit/Pods-ZamzamKit_Tests-ZamzamKit.xcconfig"; sourceTree = "<group>"; };
-		139944C173E028204B524B24 /* Pods-ZamzamKit_Example-ZamzamKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ZamzamKit_Example-ZamzamKit-prefix.pch"; sourceTree = "<group>"; };
-		1686959E16E3492AA3312197 /* ZamzamKit.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZamzamKit.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		186EBF65C195CC183964B4D8 /* Pods-ZamzamKit_Tests-ZamzamKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; name = "Pods-ZamzamKit_Tests-ZamzamKit.modulemap"; path = "../Pods-ZamzamKit_Tests-ZamzamKit/Pods-ZamzamKit_Tests-ZamzamKit.modulemap"; sourceTree = "<group>"; };
-		1A22CC42D381E13629533327 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2221F81D6D5165B915E13BA1 /* Pods-ZamzamKit_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ZamzamKit_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		233339A300F6A7F929DFEDF9 /* Pods-ZamzamKit_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ZamzamKit_Tests-dummy.m"; sourceTree = "<group>"; };
-		239BDFAEE34094D351CDD3BF /* DateTimeService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DateTimeService.swift; sourceTree = "<group>"; };
-		244102BF404FF2A13DBBD1BF /* Pods-ZamzamKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ZamzamKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		24CAF82237C6E05FDF916CCF /* CommunicationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CommunicationService.swift; sourceTree = "<group>"; };
-		2C07F058B4EB336B1A0D1688 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../Pods-ZamzamKit_Tests-ZamzamKit/Info.plist"; sourceTree = "<group>"; };
-		30F15101F334264D9AFE46E5 /* Pods-ZamzamKit_Example-ZamzamKit-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Example-ZamzamKit-Private.xcconfig"; sourceTree = "<group>"; };
-		330828CE04140A7658906FB8 /* StorageService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
-		34444A3BA048056FC9FB08F2 /* Pods-ZamzamKit_Example-ZamzamKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ZamzamKit_Example-ZamzamKit-dummy.m"; sourceTree = "<group>"; };
-		34B5294C3BB757D46362277E /* Pods-ZamzamKit_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZamzamKit_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		35FB7B70B2ADEE540333A2FE /* Pods-ZamzamKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		43D861C992A1AD758284CC9C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		4A10711EAC36F60DA14981DF /* AnimationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnimationService.swift; sourceTree = "<group>"; };
-		4A6DD946DC65B0EF5E11E2B1 /* Pods-ZamzamKit_Example-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ZamzamKit_Example-environment.h"; sourceTree = "<group>"; };
-		542D119A3A0B932C265226CF /* Pods-ZamzamKit_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ZamzamKit_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		59E560AFDE2CECC3646108B5 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		60661903A951C3364103ECFD /* WebService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
-		65C9043DB65A8A749D59317B /* Pods_ZamzamKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZamzamKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		68F5066133AA03ABA514CD57 /* Pods-ZamzamKit_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZamzamKit_Tests-resources.sh"; sourceTree = "<group>"; };
-		71423A1CB24644A5C5374F34 /* Pods-ZamzamKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ZamzamKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		738CF8EE238A8A9279A092EF /* NotificationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		782B61F7216FD51EB88FF1B3 /* Pods-ZamzamKit_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZamzamKit_Example-resources.sh"; sourceTree = "<group>"; };
-		7AD6FF2BA02B9513808B1B2A /* Pods-ZamzamKit_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ZamzamKit_Example-umbrella.h"; sourceTree = "<group>"; };
-		7EE708838738B1927FE93038 /* Pods-ZamzamKit_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ZamzamKit_Example-dummy.m"; sourceTree = "<group>"; };
-		861C2EA23288FBD95E5871F6 /* Pods-ZamzamKit_Example-ZamzamKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Example-ZamzamKit.xcconfig"; sourceTree = "<group>"; };
-		87AD5040758E8FEC3F2ED11D /* Pods-ZamzamKit_Tests-ZamzamKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-ZamzamKit_Tests-ZamzamKit-prefix.pch"; path = "../Pods-ZamzamKit_Tests-ZamzamKit/Pods-ZamzamKit_Tests-ZamzamKit-prefix.pch"; sourceTree = "<group>"; };
-		894E1F1CFC0CE1EA2D949CE0 /* Pods-ZamzamKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		8B66656E1B4C331400F86C21 /* TextService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextService.swift; sourceTree = "<group>"; };
-		8B812C8352C1A5EFFACBB490 /* Pods_ZamzamKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZamzamKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D7EE67D024A11D4BE20908C /* Pods-ZamzamKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Example.release.xcconfig"; sourceTree = "<group>"; };
-		9D83B769F749A4FD7E63C599 /* Pods-ZamzamKit_Example-ZamzamKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ZamzamKit_Example-ZamzamKit.modulemap"; sourceTree = "<group>"; };
-		A43AC4904E1A03108D995E6F /* Pods-ZamzamKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		A4F979F6DDA864AD58358CE1 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3A0BE5E1F358D77DE731EE2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B57C1F56AD6572F06EDFB181 /* Pods-ZamzamKit_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ZamzamKit_Tests-umbrella.h"; sourceTree = "<group>"; };
-		B6E53BD40D36A5CED1DAA4EA /* ZamzamConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ZamzamConstants.swift; sourceTree = "<group>"; };
-		BE1D7D5046D03BC5DD079E8B /* FileService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
-		C019D9609724D6957DE32FED /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		C7AC147FF8D001A293C3FB9E /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C821C9C0477592A9C3B1B11F /* Pods-ZamzamKit_Example-ZamzamKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ZamzamKit_Example-ZamzamKit-umbrella.h"; sourceTree = "<group>"; };
-		D006FB40E7085F142EA87134 /* LocationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
-		D129FD636E8AE19C302F47E0 /* Pods-ZamzamKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZamzamKit_Example-frameworks.sh"; sourceTree = "<group>"; };
-		D5FBB0A31A4A57AF5EC44D7C /* Pods-ZamzamKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ZamzamKit_Example.modulemap"; sourceTree = "<group>"; };
-		D9213B741741BE435F62A0BA /* Pods-ZamzamKit_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ZamzamKit_Tests.modulemap"; sourceTree = "<group>"; };
-		E16254D4CDC9180F33E1DC23 /* Pods-ZamzamKit_Tests-ZamzamKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-ZamzamKit_Tests-ZamzamKit-dummy.m"; path = "../Pods-ZamzamKit_Tests-ZamzamKit/Pods-ZamzamKit_Tests-ZamzamKit-dummy.m"; sourceTree = "<group>"; };
-		E3B6AA973AB14EB699C76013 /* Pods-ZamzamKit_Tests-ZamzamKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-ZamzamKit_Tests-ZamzamKit-umbrella.h"; path = "../Pods-ZamzamKit_Tests-ZamzamKit/Pods-ZamzamKit_Tests-ZamzamKit-umbrella.h"; sourceTree = "<group>"; };
-		EB4C11D9ADB8DA4C44891B49 /* Pods-ZamzamKit_Tests-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ZamzamKit_Tests-environment.h"; sourceTree = "<group>"; };
-		F34E416BD8D060A950FE2E63 /* AlertService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
-		F8044C2D140E8CB4C567100C /* Pods-ZamzamKit_Tests-ZamzamKit-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZamzamKit_Tests-ZamzamKit-Private.xcconfig"; path = "../Pods-ZamzamKit_Tests-ZamzamKit/Pods-ZamzamKit_Tests-ZamzamKit-Private.xcconfig"; sourceTree = "<group>"; };
-		F9368F9799C127FE55480027 /* ZamzamKit.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZamzamKit.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC75DA654457F47385369999 /* ZamzamManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ZamzamManager.swift; sourceTree = "<group>"; };
+		02668B0931540027CA4D82394E20B8D7 /* ZamzamKit.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZamzamKit.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		033AE86B563520376EE270400B73747C /* FileService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
+		034A3223166F068AB459E6DAB03EA135 /* Duration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Duration.swift; path = Sources/Duration.swift; sourceTree = "<group>"; };
+		058404394EF36BCB44AF0486F6F12381 /* NSDate+Timepiece.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSDate+Timepiece.swift"; path = "Sources/NSDate+Timepiece.swift"; sourceTree = "<group>"; };
+		0A1B1A60977B0EFC922319FACE01460E /* AlertService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		0F703A60C9DB45DBE31B214093DAB60D /* Pods-ZamzamKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ZamzamKit_Example.modulemap"; sourceTree = "<group>"; };
+		125926D1D58AC59BF991D46BF588D8C2 /* NSCalendarUnit+Timepiece.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSCalendarUnit+Timepiece.swift"; path = "Sources/NSCalendarUnit+Timepiece.swift"; sourceTree = "<group>"; };
+		15745799040F1E48D507D94BBE2A270F /* SwiftyTimer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyTimer-dummy.m"; sourceTree = "<group>"; };
+		1A9893C4D2FA31D6B74843960FD453C1 /* StorageService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		1B636CBF4BC507F23DD3D5AA9C76BB5E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E45172512EB1EF77BC0F9B19C831DAF /* Pods-ZamzamKit_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ZamzamKit_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		2831057CBAAEF02077527CECB0DE3599 /* ZamzamConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ZamzamConstants.swift; sourceTree = "<group>"; };
+		293631E44E19AF54E3FFB696C1025739 /* Timepiece.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Timepiece.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B86EE0F05A07E028887988340DBA6A2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		31973F7C5378105DB2A7754DCCA58816 /* NSDateComponents+Timepiece.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSDateComponents+Timepiece.swift"; path = "Sources/NSDateComponents+Timepiece.swift"; sourceTree = "<group>"; };
+		3207DFB49A722B7DCE880EFAA3DD7766 /* ZamzamKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ZamzamKit-umbrella.h"; sourceTree = "<group>"; };
+		349007C2DF3B7BA8E5AEE58B6B68CED4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3B3BD4D8C399A63CC7F1857FA28A43EF /* Pods-ZamzamKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ZamzamKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		3C12AE81F7C2F42033927E6BB052745D /* ZamzamKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ZamzamKit.xcconfig; sourceTree = "<group>"; };
+		3F284EA6FBC7DCB53EA8A4EAA30CE923 /* ZamzamKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ZamzamKit-prefix.pch"; sourceTree = "<group>"; };
+		4174D0532BB5E0C989B28CE043EEBFEB /* Pods_ZamzamKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZamzamKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A48AE29DE6228B1423ED82C7BAD8CD7 /* Pods-ZamzamKit_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ZamzamKit_Example-dummy.m"; sourceTree = "<group>"; };
+		4D717602344394790A26955951F6A52F /* Pods-ZamzamKit_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZamzamKit_Example-resources.sh"; sourceTree = "<group>"; };
+		50136870BAA6A9E862F146E7E28FC540 /* Pods-ZamzamKit_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZamzamKit_Tests-resources.sh"; sourceTree = "<group>"; };
+		51AA31C4AD19FD5ED4E6BCEFDDEED369 /* Timepiece.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Timepiece.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		621F005F8221FE767AE747F0BE9C3D95 /* Pods-ZamzamKit_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ZamzamKit_Tests-umbrella.h"; sourceTree = "<group>"; };
+		65B1A8D01576ED917239E58B4F4C23C9 /* NSTimeInterval+Timepiece.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSTimeInterval+Timepiece.swift"; path = "Sources/NSTimeInterval+Timepiece.swift"; sourceTree = "<group>"; };
+		6E8BC572B6941B2D8A2A9A6211C37BD4 /* Pods-ZamzamKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		761A4F94D99AA6407C3646E44336FB23 /* Pods-ZamzamKit_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ZamzamKit_Tests-dummy.m"; sourceTree = "<group>"; };
+		79691C6929752AB489FE0E1809D0DA5A /* Pods-ZamzamKit_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ZamzamKit_Tests.modulemap"; sourceTree = "<group>"; };
+		79B8AD2A7A9D03BCFE10AF3BDE9C2DD0 /* CommunicationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CommunicationService.swift; sourceTree = "<group>"; };
+		7D6C46C73BBA78B27A7F9B1098349D1C /* ZamzamKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = ZamzamKit.modulemap; sourceTree = "<group>"; };
+		7FE13D9A2871322796A2C208B67E87D1 /* SwiftyTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		825679A41EA8A80E38FA7F7064645972 /* SwiftyTimer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyTimer-prefix.pch"; sourceTree = "<group>"; };
+		844A26245407AFA932C2EAC1C4F1C5AD /* NotificationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		8A187DCFA06CACCA5B55446BC7D40DAA /* Pods-ZamzamKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		8AA1E8493975CDDE9736741ED5E7D8B7 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BFB88EFDA571A6F6B6FB076A8D2A995 /* Int+Timepiece.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Int+Timepiece.swift"; path = "Sources/Int+Timepiece.swift"; sourceTree = "<group>"; };
+		8F35F2434621B948BCDE2F392470B423 /* LocationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		8FF16DE078F46B5B89FCF460E98C020B /* SwiftyTimer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyTimer.swift; path = Src/SwiftyTimer.swift; sourceTree = "<group>"; };
+		93DDA717B6470487B01159226DA2310A /* SwiftyTimer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SwiftyTimer.modulemap; sourceTree = "<group>"; };
+		964006AA4010F1A5F6A14D349F6B248D /* Pods-ZamzamKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZamzamKit_Example-frameworks.sh"; sourceTree = "<group>"; };
+		966CB91B725FC26C8969CAE3C17202D9 /* Timepiece.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Timepiece.modulemap; sourceTree = "<group>"; };
+		96A130EC1F4B36826188BA20E8C87CCD /* Timepiece-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Timepiece-umbrella.h"; sourceTree = "<group>"; };
+		9959C74D177E1B3F12BA3B072EB6D374 /* String+Timepiece.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Timepiece.swift"; path = "Sources/String+Timepiece.swift"; sourceTree = "<group>"; };
+		9E05E44BFC4EDD2D853194AE711773BC /* ZamzamKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ZamzamKit-dummy.m"; sourceTree = "<group>"; };
+		9EA511FC8C5BBE3308C39EAD90D718D0 /* Pods_ZamzamKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZamzamKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EE2BC06974A41DD4B0BCFC5D54A5DD7 /* AnimationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnimationService.swift; sourceTree = "<group>"; };
+		9F87C2C11409292BC2CFD1AA435BC428 /* Pods-ZamzamKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		A49EF8DEE0A5CA79C7C86336DAD917D2 /* Pods-ZamzamKit_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ZamzamKit_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		ACEAA64A108BF33721D566A2E716CE2D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B18C31E8169E3BF3C0B382AA8B62C510 /* SwiftyTimer-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "SwiftyTimer-Private.xcconfig"; sourceTree = "<group>"; };
+		B224D8F1B7ED9852741F79273CB2AB22 /* Pods-ZamzamKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZamzamKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		B2A7404DBD909D239A495E0D80A94837 /* Timepiece-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Timepiece-dummy.m"; sourceTree = "<group>"; };
+		B2AF9509B2CC7BEAAFDCD13018D7EE80 /* Timepiece-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Timepiece-Private.xcconfig"; sourceTree = "<group>"; };
+		B96DAA628332A376AF4B5FD223226F43 /* Timepiece-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Timepiece-prefix.pch"; sourceTree = "<group>"; };
+		C3DA30B6B6E20970DEB9EF8C10CDAD19 /* Pods-ZamzamKit_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ZamzamKit_Example-umbrella.h"; sourceTree = "<group>"; };
+		C49E69D86B58F29A5051870A7A9D9C28 /* TextService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TextService.swift; sourceTree = "<group>"; };
+		C7EEB70A7B8EAEA5B84FBB6210E5812F /* DateTimeService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DateTimeService.swift; sourceTree = "<group>"; };
+		C88113A79685B4EFEE7BAD12896829F7 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		CF9B0FCA52C637B555ED9636CECCDD72 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D84EB509791162AD8FBA9D0623B59EDD /* SwiftyTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D92C7B27B145F99941D6FFA12505379C /* SwiftyTimer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyTimer-umbrella.h"; sourceTree = "<group>"; };
+		DA05F7B57FD2DF8A4F06DF89A0ED13BC /* NSCalendar+Timepiece.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSCalendar+Timepiece.swift"; path = "Sources/NSCalendar+Timepiece.swift"; sourceTree = "<group>"; };
+		DA837A949A79C7512A195E1A112034FF /* SwiftyTimer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyTimer.xcconfig; sourceTree = "<group>"; };
+		DE2950524A1D2548047E142B1E6AFEF2 /* ConfigurationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConfigurationService.swift; sourceTree = "<group>"; };
+		DEC411870AF348E20119B31A5BB23F0C /* ZamzamKit-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "ZamzamKit-Private.xcconfig"; sourceTree = "<group>"; };
+		EAA1A9923BDA06B3EEBF7A39B8A6727E /* Pods-ZamzamKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ZamzamKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		EE7F1B70C173D83531BE9AC30D7C7BE3 /* WebService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		F1EDDFA747644A81EDC58D04E5E36AA3 /* Pods-ZamzamKit_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZamzamKit_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		F3989564BCBC86B8E11FFB32513391ED /* Timepiece.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Timepiece.xcconfig; sourceTree = "<group>"; };
+		FD740FD6C29C9ACA4C5D8330C903738A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		FF51B5DBE90226B891BF499DE0FC903E /* ZamzamManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ZamzamManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		046DA879A9F0F442509555F2 /* Frameworks */ = {
+		A7880B7A9E3212E03F3E5B44562B3444 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DA136C0BA4DD8906A92D3F6 /* Foundation.framework in Frameworks */,
+				1CB45611B95BDDA81011C2FCFD2F251A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		170DBF4584917AC7FD9414DC /* Frameworks */ = {
+		B6162089EA8CB03E43F598F1986072B4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA65A38E5268F0503ACDFBAC /* Foundation.framework in Frameworks */,
+				95F9F34A54B02404E304E915380A9706 /* Foundation.framework in Frameworks */,
+				86596F52AF5448831D096E4735D20C93 /* SwiftyTimer.framework in Frameworks */,
+				0BC3BCA631E188BB93413463EC840BEE /* Timepiece.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		20843C8A681159B9653D5527 /* Frameworks */ = {
+		C4D5F7E1717E44415948DA72FB121532 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7249E4FD9143B8E393B25400 /* Foundation.framework in Frameworks */,
+				62FF11BAC75DA5631B3CDE12B90F3F01 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		91ED00B13D2D676F3642BF8F /* Frameworks */ = {
+		CAA56436CEE12B41B46467A3EC28E1CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8E518DF62FFB18B7385F3A6F5329A01 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3331A7F497506C53C6B42FC7A553C65 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C5DCBD5535C71482296B0477 /* Frameworks */ = {
+		F94A6B3D28F4AB2FA104C9AA5FB8285E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D4FEFA653DA3262B4EE53BF6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A14450923E61B1E6274A0B21 /* Foundation.framework in Frameworks */,
+				05DC7C1E8010E36B9E05FCF12735ECC6 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		069DE0015B752C7043F87ABA /* Pods-ZamzamKit_Tests */ = {
+		0720760E6FAA87218C034E98CCD3509B /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1A22CC42D381E13629533327 /* Info.plist */,
-				D9213B741741BE435F62A0BA /* Pods-ZamzamKit_Tests.modulemap */,
-				542D119A3A0B932C265226CF /* Pods-ZamzamKit_Tests-acknowledgements.markdown */,
-				2221F81D6D5165B915E13BA1 /* Pods-ZamzamKit_Tests-acknowledgements.plist */,
-				233339A300F6A7F929DFEDF9 /* Pods-ZamzamKit_Tests-dummy.m */,
-				EB4C11D9ADB8DA4C44891B49 /* Pods-ZamzamKit_Tests-environment.h */,
-				34B5294C3BB757D46362277E /* Pods-ZamzamKit_Tests-frameworks.sh */,
-				68F5066133AA03ABA514CD57 /* Pods-ZamzamKit_Tests-resources.sh */,
-				B57C1F56AD6572F06EDFB181 /* Pods-ZamzamKit_Tests-umbrella.h */,
-				A43AC4904E1A03108D995E6F /* Pods-ZamzamKit_Tests.debug.xcconfig */,
-				35FB7B70B2ADEE540333A2FE /* Pods-ZamzamKit_Tests.release.xcconfig */,
+				36A4E134664523FEEAE27F37FAE40ED3 /* ZamzamKit */,
 			);
-			name = "Pods-ZamzamKit_Tests";
-			path = "Target Support Files/Pods-ZamzamKit_Tests";
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		30F78E83695BA2E705808B00 /* iOS */ = {
+		087F7469D7BE91791F96E48179B0A054 /* Timepiece */ = {
 			isa = PBXGroup;
 			children = (
-				43D861C992A1AD758284CC9C /* Foundation.framework */,
+				034A3223166F068AB459E6DAB03EA135 /* Duration.swift */,
+				8BFB88EFDA571A6F6B6FB076A8D2A995 /* Int+Timepiece.swift */,
+				DA05F7B57FD2DF8A4F06DF89A0ED13BC /* NSCalendar+Timepiece.swift */,
+				125926D1D58AC59BF991D46BF588D8C2 /* NSCalendarUnit+Timepiece.swift */,
+				058404394EF36BCB44AF0486F6F12381 /* NSDate+Timepiece.swift */,
+				31973F7C5378105DB2A7754DCCA58816 /* NSDateComponents+Timepiece.swift */,
+				65B1A8D01576ED917239E58B4F4C23C9 /* NSTimeInterval+Timepiece.swift */,
+				9959C74D177E1B3F12BA3B072EB6D374 /* String+Timepiece.swift */,
+				86972460ED8649709F77FF9FFE95C77B /* Support Files */,
 			);
-			name = iOS;
+			path = Timepiece;
 			sourceTree = "<group>";
 		};
-		4170573FE773D24F6420AD22 = {
+		09AA22058A5FDB6F43266C967E0D5C80 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				C019D9609724D6957DE32FED /* Podfile */,
-				F146ABC4F006E91F01E8BB5A /* Development Pods */,
-				A2C282BCBCB7E6B1A0E4058D /* Frameworks */,
-				9B736A4FE121B084CB537E9C /* Products */,
-				C1653CA6D759FC1AE4AA40C6 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		74C45B1E5A32F138713A28D0 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				99DE0F1800704B7DFF095795 /* Classes */,
-			);
-			path = Pod;
-			sourceTree = "<group>";
-		};
-		8B1C67C11B2B6D18006EB4FB /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				F34E416BD8D060A950FE2E63 /* AlertService.swift */,
-				4A10711EAC36F60DA14981DF /* AnimationService.swift */,
-				24CAF82237C6E05FDF916CCF /* CommunicationService.swift */,
-				01EDA8B9BEB7C04D3802720D /* ConfigurationService.swift */,
-				239BDFAEE34094D351CDD3BF /* DateTimeService.swift */,
-				BE1D7D5046D03BC5DD079E8B /* FileService.swift */,
-				D006FB40E7085F142EA87134 /* LocationService.swift */,
-				738CF8EE238A8A9279A092EF /* NotificationService.swift */,
-				330828CE04140A7658906FB8 /* StorageService.swift */,
-				60661903A951C3364103ECFD /* WebService.swift */,
-				8B66656E1B4C331400F86C21 /* TextService.swift */,
-			);
-			name = Services;
-			sourceTree = "<group>";
-		};
-		8D0396490195CBDD228A5C07 /* Pods-ZamzamKit_Example */ = {
-			isa = PBXGroup;
-			children = (
-				B3A0BE5E1F358D77DE731EE2 /* Info.plist */,
-				D5FBB0A31A4A57AF5EC44D7C /* Pods-ZamzamKit_Example.modulemap */,
-				244102BF404FF2A13DBBD1BF /* Pods-ZamzamKit_Example-acknowledgements.markdown */,
-				71423A1CB24644A5C5374F34 /* Pods-ZamzamKit_Example-acknowledgements.plist */,
-				7EE708838738B1927FE93038 /* Pods-ZamzamKit_Example-dummy.m */,
-				4A6DD946DC65B0EF5E11E2B1 /* Pods-ZamzamKit_Example-environment.h */,
-				D129FD636E8AE19C302F47E0 /* Pods-ZamzamKit_Example-frameworks.sh */,
-				782B61F7216FD51EB88FF1B3 /* Pods-ZamzamKit_Example-resources.sh */,
-				7AD6FF2BA02B9513808B1B2A /* Pods-ZamzamKit_Example-umbrella.h */,
-				894E1F1CFC0CE1EA2D949CE0 /* Pods-ZamzamKit_Example.debug.xcconfig */,
-				9D7EE67D024A11D4BE20908C /* Pods-ZamzamKit_Example.release.xcconfig */,
-			);
-			name = "Pods-ZamzamKit_Example";
-			path = "Target Support Files/Pods-ZamzamKit_Example";
-			sourceTree = "<group>";
-		};
-		99DE0F1800704B7DFF095795 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				8B1C67C11B2B6D18006EB4FB /* Services */,
-				B6E53BD40D36A5CED1DAA4EA /* ZamzamConstants.swift */,
-				FC75DA654457F47385369999 /* ZamzamManager.swift */,
+				0A1B1A60977B0EFC922319FACE01460E /* AlertService.swift */,
+				9EE2BC06974A41DD4B0BCFC5D54A5DD7 /* AnimationService.swift */,
+				79B8AD2A7A9D03BCFE10AF3BDE9C2DD0 /* CommunicationService.swift */,
+				DE2950524A1D2548047E142B1E6AFEF2 /* ConfigurationService.swift */,
+				C7EEB70A7B8EAEA5B84FBB6210E5812F /* DateTimeService.swift */,
+				033AE86B563520376EE270400B73747C /* FileService.swift */,
+				8F35F2434621B948BCDE2F392470B423 /* LocationService.swift */,
+				844A26245407AFA932C2EAC1C4F1C5AD /* NotificationService.swift */,
+				1A9893C4D2FA31D6B74843960FD453C1 /* StorageService.swift */,
+				C49E69D86B58F29A5051870A7A9D9C28 /* TextService.swift */,
+				EE7F1B70C173D83531BE9AC30D7C7BE3 /* WebService.swift */,
+				2831057CBAAEF02077527CECB0DE3599 /* ZamzamConstants.swift */,
+				FF51B5DBE90226B891BF499DE0FC903E /* ZamzamManager.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		9B736A4FE121B084CB537E9C /* Products */ = {
+		2F414954F87ED957BE121A1660094A49 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8B812C8352C1A5EFFACBB490 /* Pods_ZamzamKit_Example.framework */,
-				65C9043DB65A8A749D59317B /* Pods_ZamzamKit_Tests.framework */,
-				F9368F9799C127FE55480027 /* ZamzamKit.bundle */,
-				1686959E16E3492AA3312197 /* ZamzamKit.bundle */,
-				C7AC147FF8D001A293C3FB9E /* ZamzamKit.framework */,
-				A4F979F6DDA864AD58358CE1 /* ZamzamKit.framework */,
+				BB7536F029B9E9808EB05E38D3F55400 /* SwiftyTimer */,
+				087F7469D7BE91791F96E48179B0A054 /* Timepiece */,
 			);
-			name = Products;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		A2C282BCBCB7E6B1A0E4058D /* Frameworks */ = {
+		36A4E134664523FEEAE27F37FAE40ED3 /* ZamzamKit */ = {
 			isa = PBXGroup;
 			children = (
-				30F78E83695BA2E705808B00 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A9E42C28EB2DF86B714AAD49 /* ZamzamKit */ = {
-			isa = PBXGroup;
-			children = (
-				74C45B1E5A32F138713A28D0 /* Pod */,
-				D17F503A6E6957E0F2BEB529 /* Support Files */,
+				87CC4575349CC9BBBAE12F32F7469A5B /* Pod */,
+				CF7AEDCAD05A1E34B188712DF1D4A893 /* Support Files */,
 			);
 			name = ZamzamKit;
 			path = ../..;
 			sourceTree = "<group>";
 		};
-		C1653CA6D759FC1AE4AA40C6 /* Targets Support Files */ = {
+		4E693E4BC26FF32424A74778C55AD1A2 /* Pods-ZamzamKit_Example */ = {
 			isa = PBXGroup;
 			children = (
-				8D0396490195CBDD228A5C07 /* Pods-ZamzamKit_Example */,
-				069DE0015B752C7043F87ABA /* Pods-ZamzamKit_Tests */,
+				349007C2DF3B7BA8E5AEE58B6B68CED4 /* Info.plist */,
+				0F703A60C9DB45DBE31B214093DAB60D /* Pods-ZamzamKit_Example.modulemap */,
+				EAA1A9923BDA06B3EEBF7A39B8A6727E /* Pods-ZamzamKit_Example-acknowledgements.markdown */,
+				3B3BD4D8C399A63CC7F1857FA28A43EF /* Pods-ZamzamKit_Example-acknowledgements.plist */,
+				4A48AE29DE6228B1423ED82C7BAD8CD7 /* Pods-ZamzamKit_Example-dummy.m */,
+				964006AA4010F1A5F6A14D349F6B248D /* Pods-ZamzamKit_Example-frameworks.sh */,
+				4D717602344394790A26955951F6A52F /* Pods-ZamzamKit_Example-resources.sh */,
+				C3DA30B6B6E20970DEB9EF8C10CDAD19 /* Pods-ZamzamKit_Example-umbrella.h */,
+				8A187DCFA06CACCA5B55446BC7D40DAA /* Pods-ZamzamKit_Example.debug.xcconfig */,
+				6E8BC572B6941B2D8A2A9A6211C37BD4 /* Pods-ZamzamKit_Example.release.xcconfig */,
+			);
+			name = "Pods-ZamzamKit_Example";
+			path = "Target Support Files/Pods-ZamzamKit_Example";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				C88113A79685B4EFEE7BAD12896829F7 /* Podfile */,
+				0720760E6FAA87218C034E98CCD3509B /* Development Pods */,
+				AB79EFBCAA7BF7F573B6BCC8E6DA2B4D /* Frameworks */,
+				2F414954F87ED957BE121A1660094A49 /* Pods */,
+				CCA510CFBEA2D207524CDA0D73C3B561 /* Products */,
+				D871C749CBB672E76A502DD5E90F9842 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		86972460ED8649709F77FF9FFE95C77B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				2B86EE0F05A07E028887988340DBA6A2 /* Info.plist */,
+				966CB91B725FC26C8969CAE3C17202D9 /* Timepiece.modulemap */,
+				F3989564BCBC86B8E11FFB32513391ED /* Timepiece.xcconfig */,
+				B2AF9509B2CC7BEAAFDCD13018D7EE80 /* Timepiece-Private.xcconfig */,
+				B2A7404DBD909D239A495E0D80A94837 /* Timepiece-dummy.m */,
+				B96DAA628332A376AF4B5FD223226F43 /* Timepiece-prefix.pch */,
+				96A130EC1F4B36826188BA20E8C87CCD /* Timepiece-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Timepiece";
+			sourceTree = "<group>";
+		};
+		87CC4575349CC9BBBAE12F32F7469A5B /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				09AA22058A5FDB6F43266C967E0D5C80 /* Classes */,
+			);
+			path = Pod;
+			sourceTree = "<group>";
+		};
+		AB79EFBCAA7BF7F573B6BCC8E6DA2B4D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7FE13D9A2871322796A2C208B67E87D1 /* SwiftyTimer.framework */,
+				293631E44E19AF54E3FFB696C1025739 /* Timepiece.framework */,
+				EDBD1326509F157C12553FC2A2F99DE0 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B771B4116DA5AD1DB798B9E2409FA914 /* Pods-ZamzamKit_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				ACEAA64A108BF33721D566A2E716CE2D /* Info.plist */,
+				79691C6929752AB489FE0E1809D0DA5A /* Pods-ZamzamKit_Tests.modulemap */,
+				1E45172512EB1EF77BC0F9B19C831DAF /* Pods-ZamzamKit_Tests-acknowledgements.markdown */,
+				A49EF8DEE0A5CA79C7C86336DAD917D2 /* Pods-ZamzamKit_Tests-acknowledgements.plist */,
+				761A4F94D99AA6407C3646E44336FB23 /* Pods-ZamzamKit_Tests-dummy.m */,
+				F1EDDFA747644A81EDC58D04E5E36AA3 /* Pods-ZamzamKit_Tests-frameworks.sh */,
+				50136870BAA6A9E862F146E7E28FC540 /* Pods-ZamzamKit_Tests-resources.sh */,
+				621F005F8221FE767AE747F0BE9C3D95 /* Pods-ZamzamKit_Tests-umbrella.h */,
+				B224D8F1B7ED9852741F79273CB2AB22 /* Pods-ZamzamKit_Tests.debug.xcconfig */,
+				9F87C2C11409292BC2CFD1AA435BC428 /* Pods-ZamzamKit_Tests.release.xcconfig */,
+			);
+			name = "Pods-ZamzamKit_Tests";
+			path = "Target Support Files/Pods-ZamzamKit_Tests";
+			sourceTree = "<group>";
+		};
+		BB7536F029B9E9808EB05E38D3F55400 /* SwiftyTimer */ = {
+			isa = PBXGroup;
+			children = (
+				8FF16DE078F46B5B89FCF460E98C020B /* SwiftyTimer.swift */,
+				EC821D26B4A0B627A8E6FAB30430BB79 /* Support Files */,
+			);
+			path = SwiftyTimer;
+			sourceTree = "<group>";
+		};
+		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9EA511FC8C5BBE3308C39EAD90D718D0 /* Pods_ZamzamKit_Example.framework */,
+				4174D0532BB5E0C989B28CE043EEBFEB /* Pods_ZamzamKit_Tests.framework */,
+				D84EB509791162AD8FBA9D0623B59EDD /* SwiftyTimer.framework */,
+				51AA31C4AD19FD5ED4E6BCEFDDEED369 /* Timepiece.framework */,
+				02668B0931540027CA4D82394E20B8D7 /* ZamzamKit.bundle */,
+				8AA1E8493975CDDE9736741ED5E7D8B7 /* ZamzamKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF7AEDCAD05A1E34B188712DF1D4A893 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1B636CBF4BC507F23DD3D5AA9C76BB5E /* Info.plist */,
+				7D6C46C73BBA78B27A7F9B1098349D1C /* ZamzamKit.modulemap */,
+				3C12AE81F7C2F42033927E6BB052745D /* ZamzamKit.xcconfig */,
+				DEC411870AF348E20119B31A5BB23F0C /* ZamzamKit-Private.xcconfig */,
+				9E05E44BFC4EDD2D853194AE711773BC /* ZamzamKit-dummy.m */,
+				3F284EA6FBC7DCB53EA8A4EAA30CE923 /* ZamzamKit-prefix.pch */,
+				3207DFB49A722B7DCE880EFAA3DD7766 /* ZamzamKit-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/ZamzamKit";
+			sourceTree = "<group>";
+		};
+		D871C749CBB672E76A502DD5E90F9842 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4E693E4BC26FF32424A74778C55AD1A2 /* Pods-ZamzamKit_Example */,
+				B771B4116DA5AD1DB798B9E2409FA914 /* Pods-ZamzamKit_Tests */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		D17F503A6E6957E0F2BEB529 /* Support Files */ = {
+		EC821D26B4A0B627A8E6FAB30430BB79 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				59E560AFDE2CECC3646108B5 /* Info.plist */,
-				2C07F058B4EB336B1A0D1688 /* Info.plist */,
-				9D83B769F749A4FD7E63C599 /* Pods-ZamzamKit_Example-ZamzamKit.modulemap */,
-				861C2EA23288FBD95E5871F6 /* Pods-ZamzamKit_Example-ZamzamKit.xcconfig */,
-				30F15101F334264D9AFE46E5 /* Pods-ZamzamKit_Example-ZamzamKit-Private.xcconfig */,
-				34444A3BA048056FC9FB08F2 /* Pods-ZamzamKit_Example-ZamzamKit-dummy.m */,
-				139944C173E028204B524B24 /* Pods-ZamzamKit_Example-ZamzamKit-prefix.pch */,
-				C821C9C0477592A9C3B1B11F /* Pods-ZamzamKit_Example-ZamzamKit-umbrella.h */,
-				186EBF65C195CC183964B4D8 /* Pods-ZamzamKit_Tests-ZamzamKit.modulemap */,
-				0D2DCB7FA5358BD1532C5115 /* Pods-ZamzamKit_Tests-ZamzamKit.xcconfig */,
-				F8044C2D140E8CB4C567100C /* Pods-ZamzamKit_Tests-ZamzamKit-Private.xcconfig */,
-				E16254D4CDC9180F33E1DC23 /* Pods-ZamzamKit_Tests-ZamzamKit-dummy.m */,
-				87AD5040758E8FEC3F2ED11D /* Pods-ZamzamKit_Tests-ZamzamKit-prefix.pch */,
-				E3B6AA973AB14EB699C76013 /* Pods-ZamzamKit_Tests-ZamzamKit-umbrella.h */,
+				CF9B0FCA52C637B555ED9636CECCDD72 /* Info.plist */,
+				93DDA717B6470487B01159226DA2310A /* SwiftyTimer.modulemap */,
+				DA837A949A79C7512A195E1A112034FF /* SwiftyTimer.xcconfig */,
+				B18C31E8169E3BF3C0B382AA8B62C510 /* SwiftyTimer-Private.xcconfig */,
+				15745799040F1E48D507D94BBE2A270F /* SwiftyTimer-dummy.m */,
+				825679A41EA8A80E38FA7F7064645972 /* SwiftyTimer-prefix.pch */,
+				D92C7B27B145F99941D6FFA12505379C /* SwiftyTimer-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "Example/Pods/Target Support Files/Pods-ZamzamKit_Example-ZamzamKit";
+			path = "../Target Support Files/SwiftyTimer";
 			sourceTree = "<group>";
 		};
-		F146ABC4F006E91F01E8BB5A /* Development Pods */ = {
+		EDBD1326509F157C12553FC2A2F99DE0 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				A9E42C28EB2DF86B714AAD49 /* ZamzamKit */,
+				FD740FD6C29C9ACA4C5D8330C903738A /* Foundation.framework */,
 			);
-			name = "Development Pods";
+			name = iOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		9409CD31D891E9A0D1BC4E6A /* Headers */ = {
+		00851AF8AABF23D938CB550E114E9CAF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				915C0B1AE3DB0A554E83DFF0 /* Pods-ZamzamKit_Example-umbrella.h in Headers */,
+				5D62ED5E8A9AF533E1B183E7A2DE1E46 /* ZamzamKit-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A34CEF41A73FEB9C3D8841F6 /* Headers */ = {
+		0751AAA5AA83F59DFB674BC0891DD636 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7CA8D58C8CD66C6F50E3386 /* Pods-ZamzamKit_Tests-umbrella.h in Headers */,
+				4A4F18B1E3D9A6B43AD7790D036CA9A2 /* Pods-ZamzamKit_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BD376C3E1E2FA1FA498DA296 /* Headers */ = {
+		37BC2BF1FED74053EE6F83A8C6B84EE0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1E548088C2DFA9A76920902 /* Pods-ZamzamKit_Example-ZamzamKit-umbrella.h in Headers */,
+				9F0FF19EA6BE3C9BFC99E5492FDF0ED3 /* Timepiece-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DB336430DB27D1D1E44AD32F /* Headers */ = {
+		DAB54B6B0099D35E06540925F5867BE8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47AE1797700D84EE88F435CB /* Pods-ZamzamKit_Tests-ZamzamKit-umbrella.h in Headers */,
+				6F24DD057B47CD61E1F22836B87511E5 /* Pods-ZamzamKit_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F44ACE824F37055E25B2E16DE0B661C6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92A899AD99B10B10E343ADF086CE93E6 /* SwiftyTimer-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		05C4EFD421884606119F6580 /* Pods-ZamzamKit_Example-ZamzamKit */ = {
+		58A8F32143A7D55CEA1DBA92BECABE76 /* Pods-ZamzamKit_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 69E186FA26C6C64CA28D1C3F /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Example-ZamzamKit" */;
+			buildConfigurationList = 6C9251457C25EB41376F87D92D17AFEC /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Example" */;
 			buildPhases = (
-				E044DAF7626F626CD3C7466D /* Sources */,
-				D4FEFA653DA3262B4EE53BF6 /* Frameworks */,
-				C62F3B17164222E306354538 /* Resources */,
-				BD376C3E1E2FA1FA498DA296 /* Headers */,
+				21A06B2602A5CDF10943FA95C314A2D1 /* Sources */,
+				A7880B7A9E3212E03F3E5B44562B3444 /* Frameworks */,
+				0751AAA5AA83F59DFB674BC0891DD636 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E77B9A0033F054FE51BC1799 /* PBXTargetDependency */,
-			);
-			name = "Pods-ZamzamKit_Example-ZamzamKit";
-			productName = "Pods-ZamzamKit_Example-ZamzamKit";
-			productReference = A4F979F6DDA864AD58358CE1 /* ZamzamKit.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		2A9665C777C0C5FB69D17FCA /* Pods-ZamzamKit_Example-ZamzamKit-ZamzamKit */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 37CF418652E90F59DD5ED8FD /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Example-ZamzamKit-ZamzamKit" */;
-			buildPhases = (
-				A1B347299D478CDD952475BC /* Sources */,
-				91ED00B13D2D676F3642BF8F /* Frameworks */,
-				86C41C04EA9393617F915FB2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-ZamzamKit_Example-ZamzamKit-ZamzamKit";
-			productName = "Pods-ZamzamKit_Example-ZamzamKit-ZamzamKit";
-			productReference = F9368F9799C127FE55480027 /* ZamzamKit.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
-		35C2B15FCCCE8E5E815C755C /* Pods-ZamzamKit_Example */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 82BB705CF374C78E545B9E6F /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Example" */;
-			buildPhases = (
-				AEB4464C83BEA607AFD48B44 /* Sources */,
-				046DA879A9F0F442509555F2 /* Frameworks */,
-				9409CD31D891E9A0D1BC4E6A /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5DA9D5B990E607EB8D9A719B /* PBXTargetDependency */,
+				CB3FFB688E8507CBCAAFAECBFC4F15A8 /* PBXTargetDependency */,
+				36EAA3B6CE9251EC26E83230A908757D /* PBXTargetDependency */,
+				A78F041A3E4D03F1535F29DB5ED5F45B /* PBXTargetDependency */,
 			);
 			name = "Pods-ZamzamKit_Example";
 			productName = "Pods-ZamzamKit_Example";
-			productReference = 8B812C8352C1A5EFFACBB490 /* Pods_ZamzamKit_Example.framework */;
+			productReference = 9EA511FC8C5BBE3308C39EAD90D718D0 /* Pods_ZamzamKit_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		4FEC3889ECCDBA70824EC867 /* Pods-ZamzamKit_Tests-ZamzamKit-ZamzamKit */ = {
+		5ECED889A81A66BAA66A22815DFC0475 /* ZamzamKit-ZamzamKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A492707ECFC8F1BDEB7865EE /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Tests-ZamzamKit-ZamzamKit" */;
+			buildConfigurationList = 44BF59EB92CF8327E134E939CE9082F1 /* Build configuration list for PBXNativeTarget "ZamzamKit-ZamzamKit" */;
 			buildPhases = (
-				DE35932343FF2F49ADC69B0D /* Sources */,
-				C5DCBD5535C71482296B0477 /* Frameworks */,
-				F5513E715B62012FBE9372B5 /* Resources */,
+				42784C6FAF30F8ABB7CC3023444C4ED5 /* Sources */,
+				E3331A7F497506C53C6B42FC7A553C65 /* Frameworks */,
+				DC64413DD1D9DED16A9F08CF715B23B5 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-ZamzamKit_Tests-ZamzamKit-ZamzamKit";
-			productName = "Pods-ZamzamKit_Tests-ZamzamKit-ZamzamKit";
-			productReference = 1686959E16E3492AA3312197 /* ZamzamKit.bundle */;
+			name = "ZamzamKit-ZamzamKit";
+			productName = "ZamzamKit-ZamzamKit";
+			productReference = 02668B0931540027CA4D82394E20B8D7 /* ZamzamKit.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		76CB6469E6FCC233345F1E45 /* Pods-ZamzamKit_Tests */ = {
+		A4AB6A3EBCD612F0A0127BEF6A8132B2 /* ZamzamKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C6B9882C96B47B54B1462A85 /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Tests" */;
+			buildConfigurationList = D4C41A13122A23BA92109D02A60DDA40 /* Build configuration list for PBXNativeTarget "ZamzamKit" */;
 			buildPhases = (
-				BEA320FCF4FEF7FE9FA611B6 /* Sources */,
-				170DBF4584917AC7FD9414DC /* Frameworks */,
-				A34CEF41A73FEB9C3D8841F6 /* Headers */,
+				313B18E0B12D82A2E89E8795C2642F9E /* Sources */,
+				B6162089EA8CB03E43F598F1986072B4 /* Frameworks */,
+				9DB529C74F092D12F04B14373CE4C21A /* Resources */,
+				00851AF8AABF23D938CB550E114E9CAF /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1D0E1193CD70B2535A71548A /* PBXTargetDependency */,
+				EB6726A9418D7F42CEC683D14D0681CA /* PBXTargetDependency */,
+				B6B53E06C113E956BE09DF3C9B3DA658 /* PBXTargetDependency */,
+				F8FDB59D48134E7725045E747134D088 /* PBXTargetDependency */,
+			);
+			name = ZamzamKit;
+			productName = ZamzamKit;
+			productReference = 8AA1E8493975CDDE9736741ED5E7D8B7 /* ZamzamKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		BA126DD9122964FD6940C3FD06151C52 /* Pods-ZamzamKit_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F388B7DA53A2D1B341088232D0ED8C22 /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Tests" */;
+			buildPhases = (
+				C3789B2A3A393BA37CE28DD69C5ED1B1 /* Sources */,
+				CAA56436CEE12B41B46467A3EC28E1CF /* Frameworks */,
+				DAB54B6B0099D35E06540925F5867BE8 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				135E5C50F149E1F5E3EF955F1474A198 /* PBXTargetDependency */,
+				85EAB31CBC7CAA5961441816AEAFE72A /* PBXTargetDependency */,
+				54B3C1009F32456BA88949CEB7B200A5 /* PBXTargetDependency */,
 			);
 			name = "Pods-ZamzamKit_Tests";
 			productName = "Pods-ZamzamKit_Tests";
-			productReference = 65C9043DB65A8A749D59317B /* Pods_ZamzamKit_Tests.framework */;
+			productReference = 4174D0532BB5E0C989B28CE043EEBFEB /* Pods_ZamzamKit_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		ADBBA5827F7E3C1786D54224 /* Pods-ZamzamKit_Tests-ZamzamKit */ = {
+		D018228D47BB62552C6A9FD824E8B36E /* SwiftyTimer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EED87ACF6D15E3EABD322649 /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Tests-ZamzamKit" */;
+			buildConfigurationList = 1570F96F4E3DEB5BF28C017635671857 /* Build configuration list for PBXNativeTarget "SwiftyTimer" */;
 			buildPhases = (
-				949C2073AD6B9E0B6D1329DB /* Sources */,
-				20843C8A681159B9653D5527 /* Frameworks */,
-				E319544F4CBB7850952093DD /* Resources */,
-				DB336430DB27D1D1E44AD32F /* Headers */,
+				CB49100A5FDDF4EA4E10A1F51A96F656 /* Sources */,
+				C4D5F7E1717E44415948DA72FB121532 /* Frameworks */,
+				F44ACE824F37055E25B2E16DE0B661C6 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				78D8C7BA051FE2888724DA7D /* PBXTargetDependency */,
 			);
-			name = "Pods-ZamzamKit_Tests-ZamzamKit";
-			productName = "Pods-ZamzamKit_Tests-ZamzamKit";
-			productReference = C7AC147FF8D001A293C3FB9E /* ZamzamKit.framework */;
+			name = SwiftyTimer;
+			productName = SwiftyTimer;
+			productReference = D84EB509791162AD8FBA9D0623B59EDD /* SwiftyTimer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		ECC404F64715BA7934DF6561F028E312 /* Timepiece */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2668D9F43E8FEE8780256BBBF23C32C0 /* Build configuration list for PBXNativeTarget "Timepiece" */;
+			buildPhases = (
+				AFDA772FE5B5F09766975888955C4B45 /* Sources */,
+				F94A6B3D28F4AB2FA104C9AA5FB8285E /* Frameworks */,
+				37BC2BF1FED74053EE6F83A8C6B84EE0 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Timepiece;
+			productName = Timepiece;
+			productReference = 51AA31C4AD19FD5ED4E6BCEFDDEED369 /* Timepiece.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		0651BC65BD6AB0E433C138B1 /* Project object */ = {
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 			};
-			buildConfigurationList = 7B672D74F1EE2FF16A06D301 /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 4170573FE773D24F6420AD22;
-			productRefGroup = 9B736A4FE121B084CB537E9C /* Products */;
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = CCA510CFBEA2D207524CDA0D73C3B561 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				35C2B15FCCCE8E5E815C755C /* Pods-ZamzamKit_Example */,
-				05C4EFD421884606119F6580 /* Pods-ZamzamKit_Example-ZamzamKit */,
-				2A9665C777C0C5FB69D17FCA /* Pods-ZamzamKit_Example-ZamzamKit-ZamzamKit */,
-				76CB6469E6FCC233345F1E45 /* Pods-ZamzamKit_Tests */,
-				ADBBA5827F7E3C1786D54224 /* Pods-ZamzamKit_Tests-ZamzamKit */,
-				4FEC3889ECCDBA70824EC867 /* Pods-ZamzamKit_Tests-ZamzamKit-ZamzamKit */,
+				58A8F32143A7D55CEA1DBA92BECABE76 /* Pods-ZamzamKit_Example */,
+				BA126DD9122964FD6940C3FD06151C52 /* Pods-ZamzamKit_Tests */,
+				D018228D47BB62552C6A9FD824E8B36E /* SwiftyTimer */,
+				ECC404F64715BA7934DF6561F028E312 /* Timepiece */,
+				A4AB6A3EBCD612F0A0127BEF6A8132B2 /* ZamzamKit */,
+				5ECED889A81A66BAA66A22815DFC0475 /* ZamzamKit-ZamzamKit */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		86C41C04EA9393617F915FB2 /* Resources */ = {
+		9DB529C74F092D12F04B14373CE4C21A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDAAE3D6688E1D6DE62089B2E33318A9 /* ZamzamKit.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C62F3B17164222E306354538 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				641AF0B2BF6242F945878212 /* ZamzamKit.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E319544F4CBB7850952093DD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				33C9B00DC4A37FEB79132D3A /* ZamzamKit.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F5513E715B62012FBE9372B5 /* Resources */ = {
+		DC64413DD1D9DED16A9F08CF715B23B5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -562,108 +665,325 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		949C2073AD6B9E0B6D1329DB /* Sources */ = {
+		21A06B2602A5CDF10943FA95C314A2D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87644353C91F948A6D9E31CE /* AlertService.swift in Sources */,
-				6C1BA898927BD67505BF766A /* AnimationService.swift in Sources */,
-				78C98E66B844520F0B49DC18 /* CommunicationService.swift in Sources */,
-				2E57B3556B98D248F26B3681 /* ConfigurationService.swift in Sources */,
-				A37FA01B897E3F172F7BE8BC /* DateTimeService.swift in Sources */,
-				F72F7433794C2625D432C86F /* FileService.swift in Sources */,
-				7D62B3BC9DFFA296A0B62595 /* LocationService.swift in Sources */,
-				A0D940B5BD9175571BEFAFBE /* NotificationService.swift in Sources */,
-				B8AB1C5C834E03B841CDDA26 /* Pods-ZamzamKit_Tests-ZamzamKit-dummy.m in Sources */,
-				3D7E40B4FC4BC985AE7972A1 /* StorageService.swift in Sources */,
-				D39230F748AD994EC94915BC /* WebService.swift in Sources */,
-				9AB72F526057CDB0B1AC6E79 /* ZamzamConstants.swift in Sources */,
-				75C45CE55D1215D603C3A93E /* ZamzamManager.swift in Sources */,
+				1D6208ABC02F0664A691C3FDF508DD1C /* Pods-ZamzamKit_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A1B347299D478CDD952475BC /* Sources */ = {
+		313B18E0B12D82A2E89E8795C2642F9E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AD83DAB6DB5883778063D9F50B56D6E /* AlertService.swift in Sources */,
+				C3F2F453A5C0CA8C9778B9520B92794F /* AnimationService.swift in Sources */,
+				DC2D4FB6FFC47756364938009FE4E746 /* CommunicationService.swift in Sources */,
+				445418F0DB6F3BB72233748514CC692C /* ConfigurationService.swift in Sources */,
+				ED872E3970F5F441065AF442D4B1E71A /* DateTimeService.swift in Sources */,
+				3877D48B0CD54FF3AFD1E023E3F1766B /* FileService.swift in Sources */,
+				8DEF19CDB2562AAA2AC143CAB3DCA03D /* LocationService.swift in Sources */,
+				EA6EF3C6D1B8009F191568A5951E4D41 /* NotificationService.swift in Sources */,
+				202B34E7701D7C33659FDD62E1C2A00C /* StorageService.swift in Sources */,
+				B65896C4D36595AAAAD69ABF63E823EF /* TextService.swift in Sources */,
+				A89D8186FF08671FC19D8CABF4283098 /* WebService.swift in Sources */,
+				A481693400E129AE81E6935430FC66C0 /* ZamzamConstants.swift in Sources */,
+				286EC627EFA2BEF07FAFC6D41393267E /* ZamzamKit-dummy.m in Sources */,
+				80D14731A9DD837ED646CC7CF3301699 /* ZamzamManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AEB4464C83BEA607AFD48B44 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				77BD1DBFA0F73E709EC10636 /* Pods-ZamzamKit_Example-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BEA320FCF4FEF7FE9FA611B6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6D7C5CB66D0DDD19B6954D3B /* Pods-ZamzamKit_Tests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DE35932343FF2F49ADC69B0D /* Sources */ = {
+		42784C6FAF30F8ABB7CC3023444C4ED5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E044DAF7626F626CD3C7466D /* Sources */ = {
+		AFDA772FE5B5F09766975888955C4B45 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC328BF74981846E9837DB46 /* AlertService.swift in Sources */,
-				E35A4C554C1D2C7CFE738972 /* AnimationService.swift in Sources */,
-				39F7DE3DBBD9BC33F387F0BA /* CommunicationService.swift in Sources */,
-				A6F27347E3E7A43D644D68FD /* ConfigurationService.swift in Sources */,
-				8B66656F1B4C331400F86C21 /* TextService.swift in Sources */,
-				ED1FFB8251E60B9F96F50721 /* DateTimeService.swift in Sources */,
-				793DF20CBBF990842C643239 /* FileService.swift in Sources */,
-				DB8FC72D45A289AD7712DF98 /* LocationService.swift in Sources */,
-				8FBF34BC9554B2E25DB482D8 /* NotificationService.swift in Sources */,
-				756D4C9676E167DC68D05D6D /* Pods-ZamzamKit_Example-ZamzamKit-dummy.m in Sources */,
-				EF98D191DC53ECE8EC8A4C49 /* StorageService.swift in Sources */,
-				458352D8AF0F4A6EA9F373E5 /* WebService.swift in Sources */,
-				878C4DE4FC30B4B0C9E67CEB /* ZamzamConstants.swift in Sources */,
-				3B363C872DF6DCC758B263D4 /* ZamzamManager.swift in Sources */,
+				72AE8E23A690B7C0D08C3DFCF96F5867 /* Duration.swift in Sources */,
+				3E5978BB2C572AAC4842D9512A582417 /* Int+Timepiece.swift in Sources */,
+				742FB435F9A4E8D470D786B6A7D04EC9 /* NSCalendar+Timepiece.swift in Sources */,
+				D520FE5DF7CF1644F41599474EDEE215 /* NSCalendarUnit+Timepiece.swift in Sources */,
+				4C44239C02CC8E8EE85FE6C3C89569DA /* NSDate+Timepiece.swift in Sources */,
+				51AF2917DC216E46984B4927CD436B9C /* NSDateComponents+Timepiece.swift in Sources */,
+				F34941C62DDE1BE772E13534F9A44045 /* NSTimeInterval+Timepiece.swift in Sources */,
+				006F2AC05EA04FB64A1A5B89F34F9339 /* String+Timepiece.swift in Sources */,
+				6D8B481006A11F9956972E2AAD64C6F1 /* Timepiece-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3789B2A3A393BA37CE28DD69C5ED1B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4EA33E04D9AFE60F0CE1F678B26B1D8 /* Pods-ZamzamKit_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB49100A5FDDF4EA4E10A1F51A96F656 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58E82305DD093A1EEE672E6210F9AB78 /* SwiftyTimer-dummy.m in Sources */,
+				9EC651BA591F3279B05F0B62F01BAC89 /* SwiftyTimer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1D0E1193CD70B2535A71548A /* PBXTargetDependency */ = {
+		135E5C50F149E1F5E3EF955F1474A198 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-ZamzamKit_Tests-ZamzamKit";
-			target = ADBBA5827F7E3C1786D54224 /* Pods-ZamzamKit_Tests-ZamzamKit */;
-			targetProxy = 6B1A321377B55FC14C759E52 /* PBXContainerItemProxy */;
+			name = SwiftyTimer;
+			target = D018228D47BB62552C6A9FD824E8B36E /* SwiftyTimer */;
+			targetProxy = A4F53C9B9925C3C99234BD61C9B3DB4A /* PBXContainerItemProxy */;
 		};
-		5DA9D5B990E607EB8D9A719B /* PBXTargetDependency */ = {
+		36EAA3B6CE9251EC26E83230A908757D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-ZamzamKit_Example-ZamzamKit";
-			target = 05C4EFD421884606119F6580 /* Pods-ZamzamKit_Example-ZamzamKit */;
-			targetProxy = DA039612B0F3E9D4842E12F1 /* PBXContainerItemProxy */;
+			name = Timepiece;
+			target = ECC404F64715BA7934DF6561F028E312 /* Timepiece */;
+			targetProxy = 32D03517D24F9D1E03A492AFC9F69C25 /* PBXContainerItemProxy */;
 		};
-		78D8C7BA051FE2888724DA7D /* PBXTargetDependency */ = {
+		54B3C1009F32456BA88949CEB7B200A5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-ZamzamKit_Tests-ZamzamKit-ZamzamKit";
-			target = 4FEC3889ECCDBA70824EC867 /* Pods-ZamzamKit_Tests-ZamzamKit-ZamzamKit */;
-			targetProxy = B481D6F4F6996AE929CD5CF8 /* PBXContainerItemProxy */;
+			name = ZamzamKit;
+			target = A4AB6A3EBCD612F0A0127BEF6A8132B2 /* ZamzamKit */;
+			targetProxy = 835D47E2A309AE42D9E3421FFE23D392 /* PBXContainerItemProxy */;
 		};
-		E77B9A0033F054FE51BC1799 /* PBXTargetDependency */ = {
+		85EAB31CBC7CAA5961441816AEAFE72A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-ZamzamKit_Example-ZamzamKit-ZamzamKit";
-			target = 2A9665C777C0C5FB69D17FCA /* Pods-ZamzamKit_Example-ZamzamKit-ZamzamKit */;
-			targetProxy = 3BFFBEDB7358D778E1180F7C /* PBXContainerItemProxy */;
+			name = Timepiece;
+			target = ECC404F64715BA7934DF6561F028E312 /* Timepiece */;
+			targetProxy = 024CCE6A9F2B8E14B8708BF854815D9B /* PBXContainerItemProxy */;
+		};
+		A78F041A3E4D03F1535F29DB5ED5F45B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ZamzamKit;
+			target = A4AB6A3EBCD612F0A0127BEF6A8132B2 /* ZamzamKit */;
+			targetProxy = 5B4A2E146E634FE4FF63A58F40243370 /* PBXContainerItemProxy */;
+		};
+		B6B53E06C113E956BE09DF3C9B3DA658 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Timepiece;
+			target = ECC404F64715BA7934DF6561F028E312 /* Timepiece */;
+			targetProxy = 7FA4FCDC036C5289AF33F00FF3322B39 /* PBXContainerItemProxy */;
+		};
+		CB3FFB688E8507CBCAAFAECBFC4F15A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyTimer;
+			target = D018228D47BB62552C6A9FD824E8B36E /* SwiftyTimer */;
+			targetProxy = 9860A0DF62787A6E11083CFFDFC28966 /* PBXContainerItemProxy */;
+		};
+		EB6726A9418D7F42CEC683D14D0681CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyTimer;
+			target = D018228D47BB62552C6A9FD824E8B36E /* SwiftyTimer */;
+			targetProxy = F27C3CE93F7223DB2914896D49FC658D /* PBXContainerItemProxy */;
+		};
+		F8FDB59D48134E7725045E747134D088 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ZamzamKit-ZamzamKit";
+			target = 5ECED889A81A66BAA66A22815DFC0475 /* ZamzamKit-ZamzamKit */;
+			targetProxy = CB7379139D5514273F0EA0EDF5326EE3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1126951D9261D410F6E2AFCE /* Debug */ = {
+		0BCCFDB39AF50FFC324DD5607D984C5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F87C2C11409292BC2CFD1AA435BC428 /* Pods-ZamzamKit_Tests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-ZamzamKit_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-ZamzamKit_Tests/Pods-ZamzamKit_Tests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_ZamzamKit_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		1CDFBC0AD77ED4D6B90118898F5ACDF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E8BC572B6941B2D8A2A9A6211C37BD4 /* Pods-ZamzamKit_Example.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-ZamzamKit_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-ZamzamKit_Example/Pods-ZamzamKit_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_ZamzamKit_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		2E2FE3061BBF0178B73470F3A8AA31DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		31F8C9459FB17B6576A8FAC1A3D6C02D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B18C31E8169E3BF3C0B382AA8B62C510 /* SwiftyTimer-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyTimer/SwiftyTimer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyTimer/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyTimer/SwiftyTimer.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SwiftyTimer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5FEC9B58CEF61AE945C5A09164A19D79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DEC411870AF348E20119B31A5BB23F0C /* ZamzamKit-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/ZamzamKit/ZamzamKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ZamzamKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ZamzamKit/ZamzamKit.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = ZamzamKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		73AC1E0892A07F55F0B098FB6BA764E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A187DCFA06CACCA5B55446BC7D40DAA /* Pods-ZamzamKit_Example.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-ZamzamKit_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-ZamzamKit_Example/Pods-ZamzamKit_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_ZamzamKit_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7F6743F272BC11CA6666F288109E8844 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DEC411870AF348E20119B31A5BB23F0C /* ZamzamKit-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = ZamzamKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		8BD0950CC7213622BB48FEAFE5931E57 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -702,9 +1022,131 @@
 			};
 			name = Debug;
 		};
-		1DB8A8801263A47A5E370089 /* Release */ = {
+		9564CFD63C3FA3DA5AB8EA9D50EA269F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35FB7B70B2ADEE540333A2FE /* Pods-ZamzamKit_Tests.release.xcconfig */;
+			baseConfigurationReference = B2AF9509B2CC7BEAAFDCD13018D7EE80 /* Timepiece-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Timepiece/Timepiece-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Timepiece/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Timepiece/Timepiece.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = Timepiece;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		AE7BB021A05D4FC335F5F365B3F34723 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DEC411870AF348E20119B31A5BB23F0C /* ZamzamKit-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = ZamzamKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		B2962722886416E2E0B734F870DEDA77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B18C31E8169E3BF3C0B382AA8B62C510 /* SwiftyTimer-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyTimer/SwiftyTimer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyTimer/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyTimer/SwiftyTimer.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SwiftyTimer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		CDA055A34B835F5D7FF6379596AAE1BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DEC411870AF348E20119B31A5BB23F0C /* ZamzamKit-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/ZamzamKit/ZamzamKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ZamzamKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ZamzamKit/ZamzamKit.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = ZamzamKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D7215B9FFFA2D4B6CB5DFE9747D63FD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2AF9509B2CC7BEAAFDCD13018D7EE80 /* Timepiece-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Timepiece/Timepiece-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Timepiece/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Timepiece/Timepiece.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = Timepiece;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D8541CAC3618232987644C2261A0C4A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B224D8F1B7ED9852741F79273CB2AB22 /* Pods-ZamzamKit_Tests.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -718,302 +1160,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Pods-ZamzamKit_Tests/Pods-ZamzamKit_Tests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods_ZamzamKit_Tests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		1EC81F74F217E9ABF3490590 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F8044C2D140E8CB4C567100C /* Pods-ZamzamKit_Tests-ZamzamKit-Private.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-ZamzamKit_Tests-ZamzamKit/Pods-ZamzamKit_Tests-ZamzamKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pods-ZamzamKit_Tests-ZamzamKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-ZamzamKit_Tests-ZamzamKit/Pods-ZamzamKit_Tests-ZamzamKit.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = ZamzamKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		315819896282F82E0D7D1FD3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F8044C2D140E8CB4C567100C /* Pods-ZamzamKit_Tests-ZamzamKit-Private.xcconfig */;
-			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-ZamzamKit_Tests";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = ZamzamKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		317CA32331596A429D8005C5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A43AC4904E1A03108D995E6F /* Pods-ZamzamKit_Tests.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-ZamzamKit_Tests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-ZamzamKit_Tests/Pods-ZamzamKit_Tests.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = Pods_ZamzamKit_Tests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		558350E0E6C6AB3C597B5556 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		5B42536D9C0449BFC0A3EFD5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30F15101F334264D9AFE46E5 /* Pods-ZamzamKit_Example-ZamzamKit-Private.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-ZamzamKit_Example";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = ZamzamKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		6223592EC99737D872BAD896 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30F15101F334264D9AFE46E5 /* Pods-ZamzamKit_Example-ZamzamKit-Private.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-ZamzamKit_Example-ZamzamKit/Pods-ZamzamKit_Example-ZamzamKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pods-ZamzamKit_Example-ZamzamKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-ZamzamKit_Example-ZamzamKit/Pods-ZamzamKit_Example-ZamzamKit.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = ZamzamKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		8E4556CF3645221DCF6EB9DA /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F8044C2D140E8CB4C567100C /* Pods-ZamzamKit_Tests-ZamzamKit-Private.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-ZamzamKit_Tests-ZamzamKit/Pods-ZamzamKit_Tests-ZamzamKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pods-ZamzamKit_Tests-ZamzamKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-ZamzamKit_Tests-ZamzamKit/Pods-ZamzamKit_Tests-ZamzamKit.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = ZamzamKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		BD287934AFF69099A7787BED /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30F15101F334264D9AFE46E5 /* Pods-ZamzamKit_Example-ZamzamKit-Private.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-ZamzamKit_Example";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = ZamzamKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		D7EC2009F86B6FE87C222182 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F8044C2D140E8CB4C567100C /* Pods-ZamzamKit_Tests-ZamzamKit-Private.xcconfig */;
-			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-ZamzamKit_Tests";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = ZamzamKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		E86EC317052E9BBD7E049BA0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30F15101F334264D9AFE46E5 /* Pods-ZamzamKit_Example-ZamzamKit-Private.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-ZamzamKit_Example-ZamzamKit/Pods-ZamzamKit_Example-ZamzamKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pods-ZamzamKit_Example-ZamzamKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-ZamzamKit_Example-ZamzamKit/Pods-ZamzamKit_Example-ZamzamKit.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = ZamzamKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		F8492E029BF78AE4AA6C9942 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D7EE67D024A11D4BE20908C /* Pods-ZamzamKit_Example.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-ZamzamKit_Example/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-ZamzamKit_Example/Pods-ZamzamKit_Example.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods_ZamzamKit_Example;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		FE1332728EABC0ABDD1F930F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 894E1F1CFC0CE1EA2D949CE0 /* Pods-ZamzamKit_Example.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-ZamzamKit_Example/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-ZamzamKit_Example/Pods-ZamzamKit_Example.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods_ZamzamKit_Example;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1026,70 +1177,70 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		37CF418652E90F59DD5ED8FD /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Example-ZamzamKit-ZamzamKit" */ = {
+		1570F96F4E3DEB5BF28C017635671857 /* Build configuration list for PBXNativeTarget "SwiftyTimer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BD287934AFF69099A7787BED /* Debug */,
-				5B42536D9C0449BFC0A3EFD5 /* Release */,
+				B2962722886416E2E0B734F870DEDA77 /* Debug */,
+				31F8C9459FB17B6576A8FAC1A3D6C02D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		69E186FA26C6C64CA28D1C3F /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Example-ZamzamKit" */ = {
+		2668D9F43E8FEE8780256BBBF23C32C0 /* Build configuration list for PBXNativeTarget "Timepiece" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6223592EC99737D872BAD896 /* Debug */,
-				E86EC317052E9BBD7E049BA0 /* Release */,
+				D7215B9FFFA2D4B6CB5DFE9747D63FD7 /* Debug */,
+				9564CFD63C3FA3DA5AB8EA9D50EA269F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7B672D74F1EE2FF16A06D301 /* Build configuration list for PBXProject "Pods" */ = {
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1126951D9261D410F6E2AFCE /* Debug */,
-				558350E0E6C6AB3C597B5556 /* Release */,
+				8BD0950CC7213622BB48FEAFE5931E57 /* Debug */,
+				2E2FE3061BBF0178B73470F3A8AA31DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		82BB705CF374C78E545B9E6F /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Example" */ = {
+		44BF59EB92CF8327E134E939CE9082F1 /* Build configuration list for PBXNativeTarget "ZamzamKit-ZamzamKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FE1332728EABC0ABDD1F930F /* Debug */,
-				F8492E029BF78AE4AA6C9942 /* Release */,
+				AE7BB021A05D4FC335F5F365B3F34723 /* Debug */,
+				7F6743F272BC11CA6666F288109E8844 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A492707ECFC8F1BDEB7865EE /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Tests-ZamzamKit-ZamzamKit" */ = {
+		6C9251457C25EB41376F87D92D17AFEC /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D7EC2009F86B6FE87C222182 /* Debug */,
-				315819896282F82E0D7D1FD3 /* Release */,
+				73AC1E0892A07F55F0B098FB6BA764E4 /* Debug */,
+				1CDFBC0AD77ED4D6B90118898F5ACDF3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C6B9882C96B47B54B1462A85 /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Tests" */ = {
+		D4C41A13122A23BA92109D02A60DDA40 /* Build configuration list for PBXNativeTarget "ZamzamKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				317CA32331596A429D8005C5 /* Debug */,
-				1DB8A8801263A47A5E370089 /* Release */,
+				5FEC9B58CEF61AE945C5A09164A19D79 /* Debug */,
+				CDA055A34B835F5D7FF6379596AAE1BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EED87ACF6D15E3EABD322649 /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Tests-ZamzamKit" */ = {
+		F388B7DA53A2D1B341088232D0ED8C22 /* Build configuration list for PBXNativeTarget "Pods-ZamzamKit_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1EC81F74F217E9ABF3490590 /* Debug */,
-				8E4556CF3645221DCF6EB9DA /* Release */,
+				D8541CAC3618232987644C2261A0C4A8 /* Debug */,
+				0BCCFDB39AF50FFC324DD5607D984C5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 0651BC65BD6AB0E433C138B1 /* Project object */;
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 }

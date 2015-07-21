@@ -1,6 +1,0 @@
-framework module ZamzamKit {
-  umbrella header "Pods-ZamzamKit_Example-ZamzamKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

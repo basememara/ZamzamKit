@@ -35,7 +35,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 	</array>
-	<key>ZamzamKit configurations</key>
+	<key>Zamzam</key>
 	<dict>
 		<key>BaseUrl</key>
 		<string>http://naturesnurtureblog.com</string>

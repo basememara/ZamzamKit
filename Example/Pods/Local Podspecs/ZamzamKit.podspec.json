@@ -1,8 +1,8 @@
 {
   "name": "ZamzamKit",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "summary": "A Swift framework for rapidly developing iOS and WatchKit apps.",
-  "description": "                        ZamzamKit is a Swift framework for iOS and WatchKit to allow\n                        developers to code rapidly for building mobile applications.\n                        Focus on solutions by using our API that sits as an\n                        abstraction layer on top of iOS, WatchKit, and Swift.\n                        ZamzamKit provides you the latest patterns, techniques,\n                        and libraries so you can begin building for the future.\n",
+  "description": "ZamzamKit is a Swift framework for iOS and WatchKit to allow\ndevelopers to code rapidly for building mobile applications.\nFocus on solutions by using our API that sits as an\nabstraction layer on top of iOS, WatchKit, and Swift.\nZamzamKit provides you the latest patterns, techniques,\nand libraries so you can begin building for the future.",
   "homepage": "https://github.com/ZamzamInc/ZamzamKit",
   "license": {
     "type": "MIT",
@@ -14,7 +14,7 @@
   "social_media_url": "https://twitter.com/zamzaminc",
   "source": {
     "git": "https://github.com/ZamzamInc/ZamzamKit.git",
-    "tag": "0.1.1"
+    "tag": "0.2.1"
   },
   "platforms": {
     "ios": "8.3"
@@ -24,6 +24,14 @@
   "resource_bundles": {
     "ZamzamKit": [
       "Pod/Assets/*.png"
+    ]
+  },
+  "dependencies": {
+    "Timepiece": [
+
+    ],
+    "SwiftyTimer": [
+
     ]
   }
 }
