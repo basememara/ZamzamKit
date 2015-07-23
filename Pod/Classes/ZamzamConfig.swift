@@ -173,4 +173,20 @@ public class ZamzamConfig: NSObject {
             return config.objectForKey(key) as? [String: String] ?? [:]
     }
     
+    /**
+    Reads array of dictionary from plist file
+    
+    :param: key      key of value
+    :param: rootKey  root node to read values from
+    :param: fileName file name of plist
+    
+    :returns: value of key
+    */
+    public static func getArrayOfDictionary(key: String,
+        rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
+        fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> [[String: String]] {
+            let config = ZamzamConfig.getRootConfig(rootKey: rootKey, fileName: fileName)
+            return config.objectForKey(key) as? [[String: String]] ?? [[:]]
+    }
+    
 }
