@@ -18,31 +18,11 @@ public class ZamzamConfig: NSObject {
     
     :returns: collection of values
     */
-    public static func getFile(fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> NSDictionary {
+    public static func getRootConfig(fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> NSDictionary {
             // Read file and extract key/value
             if let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "plist"),
                 let file = NSDictionary(contentsOfFile: path) {
                     return file
-            }
-            
-            return [:]
-    }
-    
-    /**
-    Get values from root node
-    
-    :param: rootKey  key of root node
-    :param: fileName file name of plist
-    
-    :returns: collection of values
-    */
-    public static func getRootConfig(rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
-        fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> NSDictionary {
-            let file = getFile(fileName: fileName)
-            
-            // Read file and extract key/value
-            if let config = file.objectForKey(rootKey) as? NSDictionary {
-                return config
             }
             
             return [:]
@@ -58,9 +38,8 @@ public class ZamzamConfig: NSObject {
     :returns: value of key
     */
     public static func getValue(key: String,
-        rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> String {
-            let config = getRootConfig(rootKey: rootKey, fileName: fileName)
+            let config = getRootConfig(fileName: fileName)
             
             // Read file and extract key/value
             return config.objectForKey(key) as? String ?? ""
@@ -76,9 +55,8 @@ public class ZamzamConfig: NSObject {
     :returns: value of key
     */
     public static func getIntValue(key: String,
-        rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> Int {
-            if let value = getValue(key, rootKey: rootKey, fileName: fileName).toInt() {
+            if let value = getValue(key, fileName: fileName).toInt() {
                 return value
             }
             
@@ -95,9 +73,8 @@ public class ZamzamConfig: NSObject {
     :returns: value of key
     */
     public static func getDoubleValue(key: String,
-        rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> Double {
-            let value = getValue(key, rootKey: rootKey, fileName: fileName)
+            let value = getValue(key, fileName: fileName)
             return NSString(string: value).doubleValue
     }
     
@@ -111,9 +88,8 @@ public class ZamzamConfig: NSObject {
     :returns: value of key
     */
     public static func getBoolValue(key: String,
-        rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> Bool {
-            let value = getValue(key, rootKey: rootKey, fileName: fileName)
+            let value = getValue(key, fileName: fileName)
             switch value.lowercaseString {
             case "true", "yes", "1":
                 return true
@@ -135,9 +111,8 @@ public class ZamzamConfig: NSObject {
     */
     public static func getDateValue(key: String,
         format: String = "yyyy-MM-dd",
-        rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> NSDate? {
-            let value = getValue(key, rootKey: rootKey, fileName: fileName)
+            let value = getValue(key, fileName: fileName)
             return value.dateFromFormat(format)
     }
     
@@ -151,9 +126,8 @@ public class ZamzamConfig: NSObject {
     :returns: value of key
     */
     public static func getArrayValue(key: String,
-        rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> [String] {
-            let config = getRootConfig(rootKey: rootKey, fileName: fileName)
+            let config = getRootConfig(fileName: fileName)
             return config.objectForKey(key) as? [String] ?? []
     }
     
@@ -167,9 +141,8 @@ public class ZamzamConfig: NSObject {
     :returns: value of key
     */
     public static func getDictionaryValue(key: String,
-        rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> [String: String] {
-            let config = getRootConfig(rootKey: rootKey, fileName: fileName)
+            let config = getRootConfig(fileName: fileName)
             return config.objectForKey(key) as? [String: String] ?? [:]
     }
     
@@ -183,9 +156,8 @@ public class ZamzamConfig: NSObject {
     :returns: value of key
     */
     public static func getArrayOfDictionary(key: String,
-        rootKey: String = ZamzamConstants.Configuration.ROOT_KEY,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> [[String: String]] {
-            let config = ZamzamConfig.getRootConfig(rootKey: rootKey, fileName: fileName)
+            let config = ZamzamConfig.getRootConfig(fileName: fileName)
             return config.objectForKey(key) as? [[String: String]] ?? [[:]]
     }
     
