@@ -26,15 +26,15 @@ public class WebService: NSObject {
     }
     
     /**
-    Add, update, or remove a query string item from the URL
+    Add, update, or remove a query string parameter from the URL
     
     :param: url   the URL
-    :param: key   the key of the query string item
-    :param: value the value to replace the query string item, nil will remove item
+    :param: key   the key of the query string parameter
+    :param: value the value to replace the query string parameter, nil will remove item
     
     :returns: the URL with the mutated query string
     */
-    public func addOrUpdateQueryString(url: String, key: String, value: String?) -> String {
+    public func addOrUpdateQueryStringParameter(url: String, key: String, value: String?) -> String {
         if let components = NSURLComponents(string: url),
             var queryItems = (components.queryItems ?? []) as? [NSURLQueryItem] {
                 for (index, item) in enumerate(queryItems) {
@@ -64,15 +64,15 @@ public class WebService: NSObject {
     }
     
     /**
-    Removes a query string item from the URL
+    Removes a query string parameter from the URL
     
     :param: url   the URL
-    :param: key   the key of the query string item
+    :param: key   the key of the query string parameter
     
     :returns: the URL with the mutated query string
     */
-    public func removeQueryString(url: String, key: String) -> String {
-        return addOrUpdateQueryString(url, key: key, value: nil)
+    public func removeQueryStringParameter(url: String, key: String) -> String {
+        return addOrUpdateQueryStringParameter(url, key: key, value: nil)
     }
     
 }
