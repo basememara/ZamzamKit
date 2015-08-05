@@ -37,7 +37,6 @@ public class WebService: NSObject {
     public func addOrUpdateQueryString(url: String, key: String, value: String?) -> String {
         if let components = NSURLComponents(string: url),
             var queryItems = (components.queryItems ?? []) as? [NSURLQueryItem] {
-                println("sdvs")
                 for (index, item) in enumerate(queryItems) {
                     // Match query string key and update
                     if item.name == key {
