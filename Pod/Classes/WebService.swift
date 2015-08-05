@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class WebService: NSObject {
+public class WebService {
     
     public func decodeHTML(value: String) -> String {
         let encodedData = value.dataUsingEncoding(NSUTF8StringEncoding)!
@@ -61,6 +61,24 @@ public class WebService: NSObject {
         }
         
         return url
+    }
+    
+    /**
+    Add, update, or remove a query string parameters from the URL
+    
+    :param: url   the URL
+    :param: values the dictionary of query string parameters to replace
+    
+    :returns: the URL with the mutated query string
+    */
+    public func addOrUpdateQueryStringParameter(url: String, values: [String: String]) -> String {
+        var newUrl = url
+        
+        for item in values {
+            newUrl = addOrUpdateQueryStringParameter(newUrl, key: item.0, value: item.1)
+        }
+        
+        return newUrl
     }
     
     /**
