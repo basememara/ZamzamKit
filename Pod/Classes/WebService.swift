@@ -10,19 +10,79 @@ import Foundation
 
 public class WebService {
     
-    public func decodeHTML(value: String) -> String {
-        let encodedData = value.dataUsingEncoding(NSUTF8StringEncoding)!
-        let attributedOptions: [String: AnyObject] = [
-            NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-            NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding
-        ]
-        let attributedString = NSAttributedString(
-            data: encodedData,
-            options: attributedOptions,
-            documentAttributes: nil,
-            error: nil)!
+    // Mapping from XML/HTML character entity reference to character
+    // From http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references
+    private let characterEntities : [String : Character] = [
+        // XML predefined entities:
+        "&quot;": "\"",
+        "&amp;": "&",
+        "&apos;": "'",
+        "&lt;": "<",
+        "&gt;": ">",
         
-        return attributedString.string
+        // HTML character entity references:
+        "&nbsp;": "\u{00a0}"
+    ]
+    
+    //http://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
+    public func decodeHTML(value: String) -> String {
+        // ===== Utility functions =====
+        
+        // Convert the number in the string to the corresponding
+        // Unicode character, e.g.
+        //    decodeNumeric("64", 10)   --> "@"
+        //    decodeNumeric("20ac", 16) --> "€"
+        func decodeNumeric(string : String, base : Int32) -> Character? {
+            let code = UInt32(strtoul(string, nil, base))
+            return Character(UnicodeScalar(code))
+        }
+        
+        // Decode the HTML character entity to the corresponding
+        // Unicode character, return `nil` for invalid input.
+        //     decode("&#64;")    --> "@"
+        //     decode("&#x20ac;") --> "€"
+        //     decode("&lt;")     --> "<"
+        //     decode("&foo;")    --> nil
+        func decode(entity : String) -> Character? {
+            if entity.hasPrefix("&#x") || entity.hasPrefix("&#X"){
+                return decodeNumeric(entity.substringFromIndex(advance(entity.startIndex, 3)), 16)
+            } else if entity.hasPrefix("&#") {
+                return decodeNumeric(entity.substringFromIndex(advance(entity.startIndex, 2)), 10)
+            } else {
+                return characterEntities[entity]
+            }
+        }
+        
+        // ===== Method starts here =====
+        
+        var result = ""
+        var position = value.startIndex
+        
+        // Find the next '&' and copy the characters preceding it to `result`:
+        while let ampRange = value.rangeOfString("&", range: position ..< value.endIndex) {
+            result.extend(value[position ..< ampRange.startIndex])
+            position = ampRange.startIndex
+            
+            // Find the next ';' and copy everything from '&' to ';' into `entity`
+            if let semiRange = value.rangeOfString(";", range: position ..< value.endIndex) {
+                let entity = value[position ..< semiRange.endIndex]
+                position = semiRange.endIndex
+                
+                if let decoded = decode(entity) {
+                    // Replace by decoded character:
+                    result.append(decoded)
+                } else {
+                    // Invalid entity, copy verbatim:
+                    result.extend(entity)
+                }
+            } else {
+                // No matching ';'.
+                break
+            }
+        }
+        // Copy remaining characters to `result`:
+        result.extend(value[position ..< value.endIndex])
+        return result
     }
     
     /**
