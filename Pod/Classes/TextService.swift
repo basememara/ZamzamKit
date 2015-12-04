@@ -11,14 +11,12 @@ import Foundation
 public class TextService: NSObject {
     
     public func replaceRegEx(value: String, pattern: String, replaceValue: String) -> String {
-        var err: NSError?
-        var regex: NSRegularExpression = NSRegularExpression(
+        let regex: NSRegularExpression = try! NSRegularExpression(
             pattern: pattern,
-            options: NSRegularExpressionOptions.CaseInsensitive,
-            error: &err)!
-        var length = count(value)
+            options: NSRegularExpressionOptions.CaseInsensitive)
+        let length = value.characters.count
         
-        return regex.stringByReplacingMatchesInString(value, options: nil,
+        return regex.stringByReplacingMatchesInString(value, options: [],
             range: NSMakeRange(0, length),
             withTemplate: replaceValue)
     }

@@ -13,10 +13,10 @@ public class StorageService: NSObject {
     /**
     Get stored value from NSUserDefaults with optional default
     
-    :param: key          key for stored value
-    :param: defaultValue default value if no value stored
+    - parameter key:          key for stored value
+    - parameter defaultValue: default value if no value stored
     
-    :returns: stored value form NSUserDefaults
+    - returns: stored value form NSUserDefaults
     */
     public func getUserValue(key: String, _ storageKey: String, defaultValue: AnyObject? = nil) -> AnyObject? {
         let userStorage = NSUserDefaults(suiteName: storageKey)
@@ -33,8 +33,8 @@ public class StorageService: NSObject {
     /**
     Set stored value from NSUserDefaults
     
-    :param: key      key for stored value
-    :param: newValue value to set
+    - parameter key:      key for stored value
+    - parameter newValue: value to set
     */
     public func setUserValue(key: String, _ storageKey: String, newValue: AnyObject?) {
         let userStorage = NSUserDefaults(suiteName: storageKey)

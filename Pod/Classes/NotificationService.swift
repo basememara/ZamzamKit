@@ -20,9 +20,9 @@ public class NotificationService: NSObject {
     public func register(application: UIApplication,
         _ notifications: [UIMutableUserNotificationAction],
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
-        type: UIUserNotificationType = .Alert | .Badge | .Sound) {
+        type: UIUserNotificationType = [.Alert, .Badge, .Sound]) {
             // Notification category
-            var mainCategory = UIMutableUserNotificationCategory()
+            let mainCategory = UIMutableUserNotificationCategory()
             mainCategory.identifier = category
             
             let defaultActions = notifications
@@ -34,7 +34,7 @@ public class NotificationService: NSObject {
             // Configure notifications
             let notificationSettings = UIUserNotificationSettings(
                 forTypes: type,
-                categories: NSSet(objects: mainCategory) as Set<NSObject>)
+                categories: NSSet(objects: mainCategory) as? Set<UIUserNotificationCategory>)
             
             // Register notifications
             application.registerUserNotificationSettings(notificationSettings)
@@ -47,10 +47,10 @@ public class NotificationService: NSObject {
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         badge: Int = 0,
         sound: String? = UILocalNotificationDefaultSoundName,
-        repeat: NSCalendarUnit? = nil,
+        `repeat`: NSCalendarUnit? = nil,
         incrementDayIfPast: Bool = true) -> UILocalNotification {
             // Initialize and configure notification
-            var notification = UILocalNotification()
+            let notification = UILocalNotification()
             notification.category = category
             notification.alertBody = body
             notification.fireDate = incrementDayIfPast
@@ -64,7 +64,7 @@ public class NotificationService: NSObject {
                 notification.soundName = s
             }
             
-            if let r = repeat {
+            if let r = `repeat` {
                 notification.repeatInterval = r
             }
             
@@ -86,7 +86,7 @@ public class NotificationService: NSObject {
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         badge: Int = 0,
         sound: String? = UILocalNotificationDefaultSoundName,
-        repeat: NSCalendarUnit? = nil,
+        `repeat`: NSCalendarUnit? = nil,
         incrementDayIfPast: Bool = true,
         removeDuplicates: Bool = false) {
             // De-dup previous notifications if applicable
@@ -94,14 +94,14 @@ public class NotificationService: NSObject {
                 remove(application, id)
             }
             
-            var notification = create(date,
+            let notification = create(date,
                 body: body,
                 title: title,
                 identifier: identifier,
                 category: category,
                 badge: badge,
                 sound: sound,
-                repeat: repeat,
+                `repeat`: `repeat`,
                 incrementDayIfPast: incrementDayIfPast)
             
             application.scheduleLocalNotification(notification)
@@ -111,11 +111,10 @@ public class NotificationService: NSObject {
         if let notifications = application.scheduledLocalNotifications {
             for item in notifications {
                 // Find matching to delete
-                if let notification = item as? UILocalNotification,
-                    let userInfo = notification.userInfo as? [String: String]
+                if let userInfo = item.userInfo as? [String: String]
                     where userInfo[ZamzamConstants.Notification.IDENTIFIER_KEY] == identifier {
                         // Cancel notification
-                        application.cancelLocalNotification(notification)
+                        application.cancelLocalNotification(item)
                 }
             }
         }
@@ -125,8 +124,7 @@ public class NotificationService: NSObject {
         if let notifications = application.scheduledLocalNotifications {
             for item in notifications {
                 // Find matching to delete
-                if let notification = item as? UILocalNotification,
-                    let userInfo = notification.userInfo as? [String: String]
+                if let userInfo = item.userInfo as? [String: String]
                     where userInfo[ZamzamConstants.Notification.IDENTIFIER_KEY] == identifier {
                         return true
                 }
@@ -142,10 +140,9 @@ public class NotificationService: NSObject {
         if let notifications = application.scheduledLocalNotifications {
             for item in notifications {
                 // Find matching to delete
-                if let notification = item as? UILocalNotification,
-                    let userInfo = notification.userInfo as? [String: String]
+                if let userInfo = item.userInfo as? [String: String]
                     where userInfo[ZamzamConstants.Notification.IDENTIFIER_KEY] == identifier {
-                        matchedNotifications.append(notification)
+                        matchedNotifications.append(item)
                 }
             }
         }

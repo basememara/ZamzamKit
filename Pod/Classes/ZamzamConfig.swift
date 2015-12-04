@@ -14,9 +14,9 @@ public class ZamzamConfig: NSObject {
     /**
     Get values from plist file
     
-    :param: fileName file name of plist
+    - parameter fileName: file name of plist
     
-    :returns: collection of values
+    - returns: collection of values
     */
     public static func getRootConfig(fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> NSDictionary {
             // Read file and extract key/value
@@ -31,15 +31,15 @@ public class ZamzamConfig: NSObject {
     /**
     Reads value from plist file
     
-    :param: key      key of value
-    :param: rootKey  root node to read values from
-    :param: fileName file name of plist
+    - parameter key:      key of value
+    - parameter rootKey:  root node to read values from
+    - parameter fileName: file name of plist
     
-    :returns: value of key
+    - returns: value of key
     */
     public static func getValue(key: String,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> String {
-            let config = getRootConfig(fileName: fileName)
+            let config = getRootConfig(fileName)
             
             // Read file and extract key/value
             return config.objectForKey(key) as? String ?? ""
@@ -48,15 +48,15 @@ public class ZamzamConfig: NSObject {
     /**
     Reads integer from plist file
     
-    :param: key      key of value
-    :param: rootKey  root node to read values from
-    :param: fileName file name of plist
+    - parameter key:      key of value
+    - parameter rootKey:  root node to read values from
+    - parameter fileName: file name of plist
     
-    :returns: value of key
+    - returns: value of key
     */
     public static func getIntValue(key: String,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> Int {
-            if let value = getValue(key, fileName: fileName).toInt() {
+            if let value = Int(getValue(key, fileName: fileName)) {
                 return value
             }
             
@@ -66,11 +66,11 @@ public class ZamzamConfig: NSObject {
     /**
     Reads number from plist file
     
-    :param: key      key of value
-    :param: rootKey  root node to read values from
-    :param: fileName file name of plist
+    - parameter key:      key of value
+    - parameter rootKey:  root node to read values from
+    - parameter fileName: file name of plist
     
-    :returns: value of key
+    - returns: value of key
     */
     public static func getDoubleValue(key: String,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> Double {
@@ -81,11 +81,11 @@ public class ZamzamConfig: NSObject {
     /**
     Reads boolean from plist file
     
-    :param: key      key of value
-    :param: rootKey  root node to read values from
-    :param: fileName file name of plist
+    - parameter key:      key of value
+    - parameter rootKey:  root node to read values from
+    - parameter fileName: file name of plist
     
-    :returns: value of key
+    - returns: value of key
     */
     public static func getBoolValue(key: String,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> Bool {
@@ -103,11 +103,11 @@ public class ZamzamConfig: NSObject {
     /**
     Reads date from plist file
     
-    :param: key      key of value
-    :param: rootKey  root node to read values from
-    :param: fileName file name of plist
+    - parameter key:      key of value
+    - parameter rootKey:  root node to read values from
+    - parameter fileName: file name of plist
     
-    :returns: value of key
+    - returns: value of key
     */
     public static func getDateValue(key: String,
         format: String = "yyyy-MM-dd",
@@ -119,45 +119,45 @@ public class ZamzamConfig: NSObject {
     /**
     Reads array from plist file
     
-    :param: key      key of value
-    :param: rootKey  root node to read values from
-    :param: fileName file name of plist
+    - parameter key:      key of value
+    - parameter rootKey:  root node to read values from
+    - parameter fileName: file name of plist
     
-    :returns: value of key
+    - returns: value of key
     */
     public static func getArrayValue(key: String,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> [String] {
-            let config = getRootConfig(fileName: fileName)
+            let config = getRootConfig(fileName)
             return config.objectForKey(key) as? [String] ?? []
     }
     
     /**
     Reads dictionary from plist file
     
-    :param: key      key of value
-    :param: rootKey  root node to read values from
-    :param: fileName file name of plist
+    - parameter key:      key of value
+    - parameter rootKey:  root node to read values from
+    - parameter fileName: file name of plist
     
-    :returns: value of key
+    - returns: value of key
     */
     public static func getDictionaryValue(key: String,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> [String: String] {
-            let config = getRootConfig(fileName: fileName)
+            let config = getRootConfig(fileName)
             return config.objectForKey(key) as? [String: String] ?? [:]
     }
     
     /**
     Reads array of dictionary from plist file
     
-    :param: key      key of value
-    :param: rootKey  root node to read values from
-    :param: fileName file name of plist
+    - parameter key:      key of value
+    - parameter rootKey:  root node to read values from
+    - parameter fileName: file name of plist
     
-    :returns: value of key
+    - returns: value of key
     */
     public static func getArrayOfDictionary(key: String,
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> [[String: String]] {
-            let config = ZamzamConfig.getRootConfig(fileName: fileName)
+            let config = ZamzamConfig.getRootConfig(fileName)
             return config.objectForKey(key) as? [[String: String]] ?? [[:]]
     }
     

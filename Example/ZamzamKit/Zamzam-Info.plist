@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseUrl</key>
+	<string>http://naturesnurtureblog.com</string>
+	<key>Categories</key>
+	<array>
+		<string>11,Cleaning,housekeeping</string>
+		<string>4,Bath &amp; Body,towel</string>
+		<string>18,Food,vegan-food</string>
+		<string>244,Health,heart-monitor</string>
+		<string>7,Garden,flower</string>
+		<string>443,Herbalism,leaf</string>
+		<string>14,Kitchen Tips,fork</string>
+		<string>9,Green Living,tree</string>
+		<string>16,Mothering,baby-feet</string>
+	</array>
+	<key>SomeArray</key>
+	<array>
+		<string>11,Cleaning,housekeeping</string>
+		<string>4,Bath &amp; Body,towel</string>
+	</array>
+</dict>
+</plist>

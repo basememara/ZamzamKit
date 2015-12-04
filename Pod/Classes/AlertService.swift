@@ -11,7 +11,7 @@ import Foundation
 public class AlertService: NSObject {
     
     public func locationServiceDisabled(controller: UIViewController) {
-        var alertController = UIAlertController (
+        let alertController = UIAlertController (
             title: "Location Service Disabled",
             message: "To re-enable, please go to Settings and turn on Location Service for this app.",
             preferredStyle: .Alert
@@ -28,7 +28,7 @@ public class AlertService: NSObject {
         alertController.addAction(settingsAction)
         */
         
-        var okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertController.addAction(okAction)
         
         controller.presentViewController(alertController, animated: true, completion: nil)

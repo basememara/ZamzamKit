@@ -12,7 +12,7 @@ public class DateTimeService: NSObject {
     
     public func getCurrentTimeInDecimal(date: NSDate = NSDate()) -> Double {
         let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute,
+        let components = calendar.components([.Hour, .Minute],
             fromDate: date)
         let hour = components.hour
         let minutes = components.minute
@@ -21,30 +21,30 @@ public class DateTimeService: NSObject {
     
     public func getDayOfWeek(date: NSDate = NSDate()) -> Int? {
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let flags = NSCalendarUnit.CalendarUnitWeekday
+        let flags = NSCalendarUnit.Weekday
         let components = calendar?.components(flags, fromDate: date)
         return components?.weekday
     }
     
-    public func incrementDay(_ date: NSDate = NSDate(), numberOfDays: Int = 1) -> NSDate {
+    public func incrementDay(date: NSDate = NSDate(), numberOfDays: Int = 1) -> NSDate {
         return NSCalendar.currentCalendar()
-            .dateByAddingUnit(.CalendarUnitDay,
+            .dateByAddingUnit(.Day,
                 value: numberOfDays,
                 toDate: date,
-                options: NSCalendarOptions(0)
+                options: NSCalendarOptions(rawValue: 0)
             )!
     }
     
-    public func incrementMinutes(_ date: NSDate = NSDate(), numberOfMinutes: Int = 1) -> NSDate {
+    public func incrementMinutes(date: NSDate = NSDate(), numberOfMinutes: Int = 1) -> NSDate {
         return NSCalendar.currentCalendar()
-            .dateByAddingUnit(.CalendarUnitMinute,
+            .dateByAddingUnit(.Minute,
                 value: numberOfMinutes,
                 toDate: date,
-                options: NSCalendarOptions(0)
+                options: NSCalendarOptions(rawValue: 0)
             )!
     }
     
-    public func incrementDayIfPast(_ date: NSDate = NSDate()) -> NSDate {
+    public func incrementDayIfPast(date: NSDate = NSDate()) -> NSDate {
         return date.compare(NSDate()) == NSComparisonResult.OrderedAscending
             ? incrementDay(date) : date
     }
@@ -53,19 +53,19 @@ public class DateTimeService: NSObject {
         unit: NSCalendarUnit? = nil,
         format: String? = nil,
         offSet: Int = 0) -> String {
-            var calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierIslamicCivil)
-            var flags = unit ?? NSCalendarUnit(UInt.max)
+            let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierIslamicCivil)
+            let flags = unit ?? NSCalendarUnit(rawValue: UInt.max)
             
             if offSet != 0 {
                 date = calendar!
-                    .dateByAddingUnit(.CalendarUnitDay,
+                    .dateByAddingUnit(.Day,
                         value: offSet,
                         toDate: date,
-                        options: NSCalendarOptions(0)
+                        options: NSCalendarOptions(rawValue: 0)
                     )!
             }
             
-            var components = calendar?.components(flags, fromDate: date)
+            let components = calendar?.components(flags, fromDate: date)
             
             let formatter = NSDateFormatter()
             if let f = format {

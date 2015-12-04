@@ -19,7 +19,7 @@ public struct ZamzamConstants {
     }
     
     public struct Path {
-        public static let DOCUMENTS = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first as! String
+        public static let DOCUMENTS = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!
         public static let TMP = NSTemporaryDirectory()
     }
     

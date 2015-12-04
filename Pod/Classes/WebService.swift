@@ -45,9 +45,9 @@ public class WebService {
         //     decode("&foo;")    --> nil
         func decode(entity : String) -> Character? {
             if entity.hasPrefix("&#x") || entity.hasPrefix("&#X"){
-                return decodeNumeric(entity.substringFromIndex(advance(entity.startIndex, 3)), 16)
+                return decodeNumeric(entity.substringFromIndex(entity.startIndex.advancedBy(3)), base: 16)
             } else if entity.hasPrefix("&#") {
-                return decodeNumeric(entity.substringFromIndex(advance(entity.startIndex, 2)), 10)
+                return decodeNumeric(entity.substringFromIndex(entity.startIndex.advancedBy(2)), base: 10)
             } else {
                 return characterEntities[entity]
             }
@@ -60,7 +60,7 @@ public class WebService {
         
         // Find the next '&' and copy the characters preceding it to `result`:
         while let ampRange = value.rangeOfString("&", range: position ..< value.endIndex) {
-            result.extend(value[position ..< ampRange.startIndex])
+            result.appendContentsOf(value[position ..< ampRange.startIndex])
             position = ampRange.startIndex
             
             // Find the next ';' and copy everything from '&' to ';' into `entity`
@@ -73,7 +73,7 @@ public class WebService {
                     result.append(decoded)
                 } else {
                     // Invalid entity, copy verbatim:
-                    result.extend(entity)
+                    result.appendContentsOf(entity)
                 }
             } else {
                 // No matching ';'.
@@ -81,23 +81,23 @@ public class WebService {
             }
         }
         // Copy remaining characters to `result`:
-        result.extend(value[position ..< value.endIndex])
+        result.appendContentsOf(value[position ..< value.endIndex])
         return result
     }
     
     /**
     Add, update, or remove a query string parameter from the URL
     
-    :param: url   the URL
-    :param: key   the key of the query string parameter
-    :param: value the value to replace the query string parameter, nil will remove item
+    - parameter url:   the URL
+    - parameter key:   the key of the query string parameter
+    - parameter value: the value to replace the query string parameter, nil will remove item
     
-    :returns: the URL with the mutated query string
+    - returns: the URL with the mutated query string
     */
     public func addOrUpdateQueryStringParameter(url: String, key: String, value: String?) -> String {
         if let components = NSURLComponents(string: url),
-            var queryItems = (components.queryItems ?? []) as? [NSURLQueryItem] {
-                for (index, item) in enumerate(queryItems) {
+            var queryItems: [NSURLQueryItem] = (components.queryItems ?? []) {
+                for (index, item) in queryItems.enumerate() {
                     // Match query string key and update
                     if item.name == key {
                         if let v = value {
@@ -126,10 +126,10 @@ public class WebService {
     /**
     Add, update, or remove a query string parameters from the URL
     
-    :param: url   the URL
-    :param: values the dictionary of query string parameters to replace
+    - parameter url:   the URL
+    - parameter values: the dictionary of query string parameters to replace
     
-    :returns: the URL with the mutated query string
+    - returns: the URL with the mutated query string
     */
     public func addOrUpdateQueryStringParameter(url: String, values: [String: String]) -> String {
         var newUrl = url
@@ -144,10 +144,10 @@ public class WebService {
     /**
     Removes a query string parameter from the URL
     
-    :param: url   the URL
-    :param: key   the key of the query string parameter
+    - parameter url:   the URL
+    - parameter key:   the key of the query string parameter
     
-    :returns: the URL with the mutated query string
+    - returns: the URL with the mutated query string
     */
     public func removeQueryStringParameter(url: String, key: String) -> String {
         return addOrUpdateQueryStringParameter(url, key: key, value: nil)

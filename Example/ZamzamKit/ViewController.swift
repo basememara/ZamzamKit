@@ -26,12 +26,12 @@ class ViewController: UIViewController {
         return true
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
 
     @IBAction func processTapped(sender: AnyObject) {
-        outputLabel.text = ZamzamConfig.getArrayValue(inputText.text)[2]
+        outputLabel.text = ZamzamConfig.getArrayValue(inputText.text!)[2]
     }
     
 }

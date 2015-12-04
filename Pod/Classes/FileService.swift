@@ -11,7 +11,7 @@ import Foundation
 public class FileService: NSObject {
     
     public func fileInDocumentsDirectory(fileName: String) -> String {
-        return ZamzamConstants.Path.DOCUMENTS.stringByAppendingPathComponent(fileName)
+        return (ZamzamConstants.Path.DOCUMENTS as NSString).stringByAppendingPathComponent(fileName)
     }
     
 }
