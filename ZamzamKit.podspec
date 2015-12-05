@@ -25,5 +25,4 @@ Pod::Spec.new do |s|
         'ZamzamKit' => ['Pod/Assets/*.png']
     }
     s.dependency 'Timepiece'
-    s.dependency 'SwiftyTimer'
 end
