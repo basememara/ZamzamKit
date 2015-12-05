@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
     s.author             = { "Zamzam Inc." => "contact@zamzam.io" }
     s.social_media_url   = "https://twitter.com/zamzaminc"
     s.source           = { :git => "https://github.com/ZamzamInc/ZamzamKit.git", :tag => s.version }
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '8.3'
     s.watchos.deployment_target = '2.0'
     s.tvos.deployment_target = '9.0'
     s.requires_arc = true
