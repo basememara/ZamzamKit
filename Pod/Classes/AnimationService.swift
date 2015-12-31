@@ -11,6 +11,7 @@ import WatchKit
 
 public class AnimationService: NSObject {
     
+    @available (watchOS 2, *)
     public func setBackgroundAnimation(control: WKInterfaceGroup, imageName: String, totalImages: Int, percent: Double, duration: Double = 1.0) {
         let imageCount = Int(Double(totalImages) * percent)
         if imageCount > 0 {
@@ -24,6 +25,7 @@ public class AnimationService: NSObject {
         }
     }
     
+    @available (iOS 8.3, *)
     public func setProgressAnimation(imageView: UIImageView, imageName: String, totalImages: Int, percent: Double, duration: Double = 1.0) {
         let imageCount = Int(Double(totalImages) * percent)
         if imageCount > 0 {

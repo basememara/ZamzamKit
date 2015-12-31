@@ -17,6 +17,7 @@ public class NotificationService: NSObject {
         dateTimeService = DateTimeService()
     }
     
+    @available (iOS 8, *)
     public func register(application: UIApplication,
         _ notifications: [UIMutableUserNotificationAction],
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
@@ -40,6 +41,7 @@ public class NotificationService: NSObject {
             application.registerUserNotificationSettings(notificationSettings)
     }
     
+    @available (iOS 8, *)
     public func create(date: NSDate,
         body: String,
         title: String? = nil,
@@ -80,6 +82,7 @@ public class NotificationService: NSObject {
             return notification
     }
     
+    @available (iOS 8, *)
     public func schedule(application: UIApplication, date: NSDate, body: String,
         title: String? = nil,
         identifier: String? = nil,
@@ -107,6 +110,7 @@ public class NotificationService: NSObject {
             application.scheduleLocalNotification(notification)
     }
     
+    @available (iOS 8, *)
     public func remove(application: UIApplication, _ identifier: String) {
         if let notifications = application.scheduledLocalNotifications {
             for item in notifications {
@@ -120,6 +124,7 @@ public class NotificationService: NSObject {
         }
     }
     
+    @available (iOS 8, *)
     public func exists(application: UIApplication, _ identifier: String) -> Bool {
         if let notifications = application.scheduledLocalNotifications {
             for item in notifications {
@@ -134,6 +139,7 @@ public class NotificationService: NSObject {
         return false
     }
     
+    @available (iOS 8, *)
     public func getByIdentifier(application: UIApplication, _ identifier: String) -> [UILocalNotification] {
         var matchedNotifications: [UILocalNotification] = []
         
