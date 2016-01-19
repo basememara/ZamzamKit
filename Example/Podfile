@@ -1,12 +1,10 @@
-source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'ZamzamKit_Example', :exclusive => true do
-  pod "ZamzamKit", :path => "../"
-end
-
-target 'ZamzamKit_Tests', :exclusive => true do
+target 'ZamzamKit_Example' do
   pod "ZamzamKit", :path => "../"
 
-  
+  target 'ZamzamKit_Tests' do
+    inherit! :search_paths
+  end
+
 end
