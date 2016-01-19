@@ -1,0 +1,19 @@
+PODS:
+  - Timepiece (0.4.2)
+  - ZamzamKit (0.4.0):
+    - Timepiece
+
+DEPENDENCIES:
+  - ZamzamKit (from `../`)
+
+EXTERNAL SOURCES:
+  ZamzamKit:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
+  ZamzamKit: 3f28a11a00c38773519e749299748d0df6fadb96
+
+PODFILE CHECKSUM: bd12f1432f73d10fb6cec9841224b09443b58d0b
+
+COCOAPODS: 1.0.0.beta.2
