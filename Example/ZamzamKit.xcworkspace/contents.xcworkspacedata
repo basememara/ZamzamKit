@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../ZamzamKit.playground">
+   </FileRef>
+   <FileRef
       location = "group:ZamzamKit.xcodeproj">
    </FileRef>
    <FileRef
