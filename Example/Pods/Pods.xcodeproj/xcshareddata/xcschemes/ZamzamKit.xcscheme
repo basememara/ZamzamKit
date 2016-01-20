@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AB497EF3A938D6EE1257025B32C7B90E"
+               BlueprintIdentifier = "B6C4611F539EC9F50ABF22B91F4601FE"
                BuildableName = "ZamzamKit.framework"
                BlueprintName = "ZamzamKit"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AB497EF3A938D6EE1257025B32C7B90E"
+            BlueprintIdentifier = "B6C4611F539EC9F50ABF22B91F4601FE"
             BuildableName = "ZamzamKit.framework"
             BlueprintName = "ZamzamKit"
             ReferencedContainer = "container:Pods.xcodeproj">

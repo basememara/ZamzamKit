@@ -1,7 +1,5 @@
 PODS:
-  - Timepiece (0.4.2)
-  - ZamzamKit (0.4.0):
-    - Timepiece
+  - ZamzamKit (0.4.0)
 
 DEPENDENCIES:
   - ZamzamKit (from `../`)
@@ -11,8 +9,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
-  ZamzamKit: 3f28a11a00c38773519e749299748d0df6fadb96
+  ZamzamKit: 41fc59351c52dc67c94777ed9e53835ea475fdee
 
 PODFILE CHECKSUM: bd12f1432f73d10fb6cec9841224b09443b58d0b
 

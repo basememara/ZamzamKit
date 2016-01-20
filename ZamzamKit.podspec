@@ -28,7 +28,5 @@ Pod::Spec.new do |s|
   s.resource_bundles = {
     'ZamzamKit' => ['Pod/Assets/*.png']
   }
-
-  s.dependency 'Timepiece'
 end
 
