@@ -274,11 +274,11 @@
 		EFACA4E80E0ACB2A08C25F7AE8176333 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8ABE283AA064D19D1D481219F11BE6B0 /* Services */,
+				D488020384ECCA87A67E2033DEF91A2C /* Utilities */,
 				1881CE7C7420A781175A0747F1247E8F /* ZamzamConfig.swift */,
 				BC8287909160F4475B9FE2499438280E /* ZamzamConstants.swift */,
 				78B55CE49E9E225FDD2C9AAC69338E1E /* ZamzamManager.swift */,
-				8ABE283AA064D19D1D481219F11BE6B0 /* Services */,
-				D488020384ECCA87A67E2033DEF91A2C /* Utilities */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
