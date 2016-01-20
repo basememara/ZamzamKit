@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Timepiece
 
 public struct ZamzamConfig {
     
@@ -113,7 +112,11 @@ public struct ZamzamConfig {
         format: String = "yyyy-MM-dd",
         fileName: String = ZamzamConstants.Configuration.FILE_NAME) -> NSDate? {
             let value = getValue(key, fileName: fileName)
-            return value.dateFromFormat(format)
+            
+            // Parse string to date
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = format
+            return formatter.dateFromString(value)
     }
     
     /**

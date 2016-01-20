@@ -1,5 +1,5 @@
 PODS:
-  - ZamzamKit (0.4.0)
+  - ZamzamKit (0.4.2)
 
 DEPENDENCIES:
   - ZamzamKit (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  ZamzamKit: 41fc59351c52dc67c94777ed9e53835ea475fdee
+  ZamzamKit: 020213572c8879fc1614756c205f15678ef4c477
 
 PODFILE CHECKSUM: bd12f1432f73d10fb6cec9841224b09443b58d0b
 
