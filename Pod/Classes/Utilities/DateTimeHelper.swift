@@ -19,13 +19,6 @@ public struct DateTimeHelper {
         return Double(hour) + (Double(minutes) / 60.0)
     }
     
-    public func getDayOfWeek(date: NSDate = NSDate()) -> Int? {
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let flags = NSCalendarUnit.Weekday
-        let components = calendar?.components(flags, fromDate: date)
-        return components?.weekday
-    }
-    
     public func incrementDay(date: NSDate = NSDate(), numberOfDays: Int = 1) -> NSDate {
         return NSCalendar.currentCalendar()
             .dateByAddingUnit(.Day,
@@ -44,7 +37,7 @@ public struct DateTimeHelper {
             )!
     }
     
-    public func incrementDayIfPast(date: NSDate = NSDate()) -> NSDate {
+    public func incrementDayIfPast(date: NSDate) -> NSDate {
         return date.compare(NSDate()) == NSComparisonResult.OrderedAscending
             ? incrementDay(date) : date
     }

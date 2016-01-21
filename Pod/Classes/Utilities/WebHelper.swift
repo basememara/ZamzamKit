@@ -25,6 +25,15 @@ public struct WebHelper {
     ]
     
     //http://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
+    
+    /**
+    Decode an HTML string
+    http://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
+    
+    - parameter value: the encoded value of the HTML string
+    
+    - returns: the decoded string
+    */
     public func decodeHTML(value: String) -> String {
         // ===== Utility functions =====
         
@@ -99,7 +108,7 @@ public struct WebHelper {
             var queryItems: [NSURLQueryItem] = (components.queryItems ?? []) {
                 for (index, item) in queryItems.enumerate() {
                     // Match query string key and update
-                    if item.name == key {
+                    if item.name.lowercaseString == key.lowercaseString {
                         if let v = value {
                             queryItems[index] = NSURLQueryItem(name: key, value: v)
                         } else {
@@ -131,7 +140,7 @@ public struct WebHelper {
     
     - returns: the URL with the mutated query string
     */
-    public func addOrUpdateQueryStringParameter(url: String, values: [String: String]) -> String {
+    public func addOrUpdateQueryStringParameter(url: String, values: [String: String?]) -> String {
         var newUrl = url
         
         for item in values {

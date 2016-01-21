@@ -9,9 +9,16 @@
 import Foundation
 
 public class LocationService: NSObject {
-    
+  
+    /**
+     Calculates the distance between coordinates
+     
+     - parameter from: First [latitude, longitude] coordinates
+     - parameter to: Second [latitude, longitude] coordinates
+     
+     - returns: Distance in kilometers
+     */
     public func getDistanceBetweenCoordinates(from: [Double], _ to: [Double]) -> Double {
-        
         let latitudeArc  = (from[0] - to[0]) * ZamzamConstants.Location.DEG_TO_RAD
         let longitudeArc = (from[1] - to[1]) * ZamzamConstants.Location.DEG_TO_RAD
         
