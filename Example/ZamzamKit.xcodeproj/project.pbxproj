@@ -14,7 +14,12 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		6D606491A19AAF77284F31D1 /* Pods_ZamzamKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D6BEBE5298545563ACB422 /* Pods_ZamzamKit_Example.framework */; };
-		8B09C6CE1C4F6E0200C48EE7 /* DateTimeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B09C6CC1C4F6D7600C48EE7 /* DateTimeHelperTests.swift */; };
+		8B8B98131C5034B800FADD4C /* DateTimeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B98111C5034B800FADD4C /* DateTimeHelperTests.swift */; };
+		8B8B98141C5034B800FADD4C /* StringHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B98121C5034B800FADD4C /* StringHelperTests.swift */; };
+		8B8B98161C5038D400FADD4C /* WebHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B98151C5038D400FADD4C /* WebHelperTests.swift */; };
+		8B8B98181C5044A900FADD4C /* FileServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B98171C5044A900FADD4C /* FileServiceTests.swift */; };
+		8B8B981B1C50451300FADD4C /* LocationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B98191C50451300FADD4C /* LocationServiceTests.swift */; };
+		8B8B981C1C50451300FADD4C /* StorageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B981A1C50451300FADD4C /* StorageServiceTests.swift */; };
 		C2AAC40F2908348953DEF7DD /* Pods_ZamzamKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943A3F920D0E90B3AF799F69 /* Pods_ZamzamKit_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +48,12 @@
 		607FACE51AFB9204008FA782 /* ZamzamKit_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZamzamKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		8B09C6CC1C4F6D7600C48EE7 /* DateTimeHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeHelperTests.swift; sourceTree = "<group>"; };
+		8B8B98111C5034B800FADD4C /* DateTimeHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateTimeHelperTests.swift; path = Utilities/DateTimeHelperTests.swift; sourceTree = "<group>"; };
+		8B8B98121C5034B800FADD4C /* StringHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringHelperTests.swift; path = Utilities/StringHelperTests.swift; sourceTree = "<group>"; };
+		8B8B98151C5038D400FADD4C /* WebHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebHelperTests.swift; path = Utilities/WebHelperTests.swift; sourceTree = "<group>"; };
+		8B8B98171C5044A900FADD4C /* FileServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileServiceTests.swift; path = Services/FileServiceTests.swift; sourceTree = "<group>"; };
+		8B8B98191C50451300FADD4C /* LocationServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationServiceTests.swift; path = Services/LocationServiceTests.swift; sourceTree = "<group>"; };
+		8B8B981A1C50451300FADD4C /* StorageServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StorageServiceTests.swift; path = Services/StorageServiceTests.swift; sourceTree = "<group>"; };
 		943A3F920D0E90B3AF799F69 /* Pods_ZamzamKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZamzamKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1BD07755C831143D1181D57 /* Pods-ZamzamKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZamzamKit_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZamzamKit_Example/Pods-ZamzamKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		BB932C3E06BB7C9231AB1900 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -146,6 +156,9 @@
 		8B09C6CA1C4F6D0400C48EE7 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8B8B98191C50451300FADD4C /* LocationServiceTests.swift */,
+				8B8B981A1C50451300FADD4C /* StorageServiceTests.swift */,
+				8B8B98171C5044A900FADD4C /* FileServiceTests.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -153,7 +166,9 @@
 		8B09C6CB1C4F6D0C00C48EE7 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				8B09C6CC1C4F6D7600C48EE7 /* DateTimeHelperTests.swift */,
+				8B8B98111C5034B800FADD4C /* DateTimeHelperTests.swift */,
+				8B8B98121C5034B800FADD4C /* StringHelperTests.swift */,
+				8B8B98151C5038D400FADD4C /* WebHelperTests.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -387,8 +402,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B09C6CE1C4F6E0200C48EE7 /* DateTimeHelperTests.swift in Sources */,
+				8B8B98161C5038D400FADD4C /* WebHelperTests.swift in Sources */,
+				8B8B98141C5034B800FADD4C /* StringHelperTests.swift in Sources */,
+				8B8B981B1C50451300FADD4C /* LocationServiceTests.swift in Sources */,
+				8B8B98131C5034B800FADD4C /* DateTimeHelperTests.swift in Sources */,
+				8B8B98181C5044A900FADD4C /* FileServiceTests.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				8B8B981C1C50451300FADD4C /* StorageServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
