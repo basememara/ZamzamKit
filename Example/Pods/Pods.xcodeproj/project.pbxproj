@@ -355,11 +355,11 @@
 		EFACA4E80E0ACB2A08C25F7AE8176333 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8ABE283AA064D19D1D481219F11BE6B0 /* Services */,
-				D488020384ECCA87A67E2033DEF91A2C /* Utilities */,
 				1881CE7C7420A781175A0747F1247E8F /* ZamzamConfig.swift */,
 				BC8287909160F4475B9FE2499438280E /* ZamzamConstants.swift */,
 				78B55CE49E9E225FDD2C9AAC69338E1E /* ZamzamManager.swift */,
+				8ABE283AA064D19D1D481219F11BE6B0 /* Services */,
+				D488020384ECCA87A67E2033DEF91A2C /* Utilities */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -508,7 +508,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0720;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -634,6 +634,23 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0E0514C4B66831FF2D71951F05CA95A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D10EFD4FCF09DD988A1D0E67BB6BA45C /* ZamzamKit.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/ZamzamKit/ResourceBundle-ZamzamKit-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
+				PRODUCT_NAME = ZamzamKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		15D8B059B4DD4111995BCEF7D2720A15 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D6969489C8D188A1DFB050D48B846490 /* Pods-ZamzamKit_Tests.debug.xcconfig */;
@@ -725,6 +742,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/ZamzamKit/ZamzamKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = ZamzamKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -732,21 +750,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		5F3F558FC4B7610F4809FED19EC43096 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D10EFD4FCF09DD988A1D0E67BB6BA45C /* ZamzamKit.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/ZamzamKit/ResourceBundle-ZamzamKit-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				PRODUCT_NAME = ZamzamKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
 		};
@@ -857,6 +860,23 @@
 			};
 			name = Release;
 		};
+		8C690A47789AD5910293916B1A276BA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D10EFD4FCF09DD988A1D0E67BB6BA45C /* ZamzamKit.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/ZamzamKit/ResourceBundle-ZamzamKit-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
+				PRODUCT_NAME = ZamzamKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
 		B3B16CE5C4DAF5E079C031C9684F0B72 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 53006FC867BB37275CEB4336BC4E9911 /* Timepiece.xcconfig */;
@@ -877,6 +897,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Timepiece/Timepiece.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = Timepiece;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -940,6 +961,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/ZamzamKit/ZamzamKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = ZamzamKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -969,6 +991,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Timepiece/Timepiece.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = Timepiece;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -979,29 +1002,14 @@
 			};
 			name = Debug;
 		};
-		E97DEE6F6AE64230C7EA307319687F23 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D10EFD4FCF09DD988A1D0E67BB6BA45C /* ZamzamKit.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/ZamzamKit/ResourceBundle-ZamzamKit-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				PRODUCT_NAME = ZamzamKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
 		27E9C2160BF89501D4030C63D47D08A4 /* Build configuration list for PBXNativeTarget "ZamzamKit-ZamzamKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5F3F558FC4B7610F4809FED19EC43096 /* Debug */,
-				E97DEE6F6AE64230C7EA307319687F23 /* Release */,
+				8C690A47789AD5910293916B1A276BA9 /* Debug */,
+				0E0514C4B66831FF2D71951F05CA95A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
