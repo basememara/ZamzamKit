@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ZamzamManager: NSObject {
+public struct ZamzamManager {
     
     public let storageService: StorageService!
     public let fileService: FileService!
@@ -16,7 +16,7 @@ public class ZamzamManager: NSObject {
     public let locationService: LocationService!
     public let notificationService: NotificationService!
     
-    public override init() {
+    public init() {
         // Inject service dependencies
         storageService = StorageService()
         fileService = FileService()

@@ -8,11 +8,11 @@
 
 import Foundation
 
-public class NotificationService: NSObject {
+public struct NotificationService {
     
     public let dateTimeHelper: DateTimeHelper!
     
-    override init() {
+    public init() {
         // Inject service dependencies
         dateTimeHelper = DateTimeHelper()
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class CommunicationService: NSObject {
+public struct CommunicationService {
     
     
 }

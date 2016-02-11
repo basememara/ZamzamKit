@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class LocationService: NSObject {
+public struct LocationService {
   
     /**
      Calculates the distance between coordinates

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class AlertHelper: NSObject {
+public struct AlertHelper {
     
     
 }

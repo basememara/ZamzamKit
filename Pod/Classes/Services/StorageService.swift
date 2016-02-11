@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class StorageService: NSObject {
+public struct StorageService {
     
     /**
     Get stored value from NSUserDefaults with optional default

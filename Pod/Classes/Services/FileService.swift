@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class FileService: NSObject {
+public struct FileService {
     
     /**
      Get file system path for document file

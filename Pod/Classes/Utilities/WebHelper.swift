@@ -24,8 +24,6 @@ public struct WebHelper {
         "&nbsp;": "\u{00a0}"
     ]
     
-    //http://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
-    
     /**
     Decode an HTML string
     http://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
