@@ -1,0 +1,3 @@
+[submodule "Carthage/Checkouts/Timepiece"]
+	path = Carthage/Checkouts/Timepiece
+	url = https://github.com/naoty/Timepiece.git
