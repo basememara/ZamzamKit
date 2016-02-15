@@ -118,10 +118,10 @@
 		8B1447AB1C72508400043657 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		8B1447AD1C7250EF00043657 /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
 		8B1447B31C72539600043657 /* Timepiece.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Timepiece.framework; path = "Carthage/Checkouts/Timepiece/build/Debug-iphoneos/Timepiece.framework"; sourceTree = "<group>"; };
-		8B1447C81C72577900043657 /* ZamzamKit iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "ZamzamKit iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B1447D51C7257D600043657 /* ZamzamKit watchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "ZamzamKit watchOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B1447E21C7257F100043657 /* ZamzamKit tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "ZamzamKit tvOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B1447EF1C72580200043657 /* ZamzamKit OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "ZamzamKit OSX.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B1447C81C72577900043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B1447D51C7257D600043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B1447E21C7257F100043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B1447EF1C72580200043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1447F71C7258E500043657 /* ZamzamKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZamzamKit.h; sourceTree = "<group>"; };
 		8B1448341C725AC300043657 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		8B1448361C725AC300043657 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
@@ -189,10 +189,10 @@
 			isa = PBXGroup;
 			children = (
 				8B1447591C72237E00043657 /* ZamzamKitTests.xctest */,
-				8B1447C81C72577900043657 /* ZamzamKit iOS.framework */,
-				8B1447D51C7257D600043657 /* ZamzamKit watchOS.framework */,
-				8B1447E21C7257F100043657 /* ZamzamKit tvOS.framework */,
-				8B1447EF1C72580200043657 /* ZamzamKit OSX.framework */,
+				8B1447C81C72577900043657 /* ZamzamKit.framework */,
+				8B1447D51C7257D600043657 /* ZamzamKit.framework */,
+				8B1447E21C7257F100043657 /* ZamzamKit.framework */,
+				8B1447EF1C72580200043657 /* ZamzamKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -437,7 +437,7 @@
 			);
 			name = "ZamzamKit iOS";
 			productName = "ZamzamKit iOS";
-			productReference = 8B1447C81C72577900043657 /* ZamzamKit iOS.framework */;
+			productReference = 8B1447C81C72577900043657 /* ZamzamKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		8B1447D41C7257D600043657 /* ZamzamKit watchOS */ = {
@@ -455,7 +455,7 @@
 			);
 			name = "ZamzamKit watchOS";
 			productName = "ZamzamKit watchOS";
-			productReference = 8B1447D51C7257D600043657 /* ZamzamKit watchOS.framework */;
+			productReference = 8B1447D51C7257D600043657 /* ZamzamKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		8B1447E11C7257F100043657 /* ZamzamKit tvOS */ = {
@@ -473,7 +473,7 @@
 			);
 			name = "ZamzamKit tvOS";
 			productName = "ZamzamKit tvOS";
-			productReference = 8B1447E21C7257F100043657 /* ZamzamKit tvOS.framework */;
+			productReference = 8B1447E21C7257F100043657 /* ZamzamKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		8B1447EE1C72580200043657 /* ZamzamKit OSX */ = {
@@ -491,7 +491,7 @@
 			);
 			name = "ZamzamKit OSX";
 			productName = "ZamzamKit OSX";
-			productReference = 8B1447EF1C72580200043657 /* ZamzamKit OSX.framework */;
+			productReference = 8B1447EF1C72580200043657 /* ZamzamKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -816,7 +816,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ZamzamKit;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -833,7 +833,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ZamzamKit;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -850,7 +850,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-watchOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ZamzamKit;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -870,7 +870,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-watchOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ZamzamKit;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -889,7 +889,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-tvOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ZamzamKit;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -908,7 +908,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-tvOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ZamzamKit;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -931,7 +931,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-OSX";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ZamzamKit;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -952,7 +952,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-OSX";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ZamzamKit;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -986,6 +986,7 @@
 				8B1447CF1C72577900043657 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8B1447DA1C7257D600043657 /* Build configuration list for PBXNativeTarget "ZamzamKit watchOS" */ = {
 			isa = XCConfigurationList;
@@ -994,6 +995,7 @@
 				8B1447DC1C7257D600043657 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8B1447E71C7257F100043657 /* Build configuration list for PBXNativeTarget "ZamzamKit tvOS" */ = {
 			isa = XCConfigurationList;
@@ -1002,6 +1004,7 @@
 				8B1447E91C7257F100043657 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8B1447F41C72580300043657 /* Build configuration list for PBXNativeTarget "ZamzamKit OSX" */ = {
 			isa = XCConfigurationList;
@@ -1010,6 +1013,7 @@
 				8B1447F61C72580300043657 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
