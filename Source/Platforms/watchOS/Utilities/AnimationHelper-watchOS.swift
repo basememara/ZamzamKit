@@ -8,7 +8,6 @@
 
 import Foundation
 import WatchKit
-import ZamzamKit
 
 public extension AnimationHelper {
     

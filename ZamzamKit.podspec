@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "ZamzamKit"
-    s.version          = "0.5.3"
+    s.version          = "0.5.4"
     s.summary          = "A Swift framework for rapidly developing Apple mobile apps."
     s.description      = <<-DESC
                            ZamzamKit is a Swift framework for Apple devices to allow
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
     s.source           = { :git => "https://github.com/ZamzamInc/ZamzamKit.git", :tag => s.version }
     s.social_media_url = 'https://twitter.com/zamzaminc'
 
-    s.osx.deployment_target = "10.9"
+    s.osx.deployment_target = "10.11"
     s.ios.deployment_target = "8.4"
     s.watchos.deployment_target = "2.0"
     s.tvos.deployment_target = "9.0"
