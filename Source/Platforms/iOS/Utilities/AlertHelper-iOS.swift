@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ZamzamKit
 
 public extension AlertHelper {
     
@@ -29,19 +28,5 @@ public extension AlertHelper {
             alertController.addAction(okAction)
             
             controller.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
-    public func locationServiceDisabled(application: UIApplication, controller: UIViewController) {
-        let settingsAction = UIAlertAction(title: "Settings", style: .Default) {
-            (_) -> Void in
-            let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
-            if let url = settingsUrl {
-                application.openURL(url)
-            }
-        }
-        
-        open(controller, message: "Location Service Disabled",
-            title: "To re-enable, please go to Settings and turn on Location Service for this app.",
-            additionalAction: settingsAction)
     }
 }

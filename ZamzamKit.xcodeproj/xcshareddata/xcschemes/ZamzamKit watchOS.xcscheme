@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8B1447D41C7257D600043657"
-               BuildableName = "ZamzamKit watchOS.framework"
+               BuildableName = "ZamzamKit.framework"
                BlueprintName = "ZamzamKit watchOS"
                ReferencedContainer = "container:ZamzamKit.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B1447D41C7257D600043657"
-            BuildableName = "ZamzamKit watchOS.framework"
+            BuildableName = "ZamzamKit.framework"
             BlueprintName = "ZamzamKit watchOS"
             ReferencedContainer = "container:ZamzamKit.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B1447D41C7257D600043657"
-            BuildableName = "ZamzamKit watchOS.framework"
+            BuildableName = "ZamzamKit.framework"
             BlueprintName = "ZamzamKit watchOS"
             ReferencedContainer = "container:ZamzamKit.xcodeproj">
          </BuildableReference>

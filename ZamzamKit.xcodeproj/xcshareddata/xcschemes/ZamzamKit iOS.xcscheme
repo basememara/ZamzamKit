@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8B1447C71C72577900043657"
-               BuildableName = "ZamzamKit iOS.framework"
+               BuildableName = "ZamzamKit.framework"
                BlueprintName = "ZamzamKit iOS"
                ReferencedContainer = "container:ZamzamKit.xcodeproj">
             </BuildableReference>
@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8B1447581C72237E00043657"
+               BuildableName = "ZamzamKitTests.xctest"
+               BlueprintName = "ZamzamKitTests"
+               ReferencedContainer = "container:ZamzamKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8B1447C71C72577900043657"
+            BuildableName = "ZamzamKit.framework"
+            BlueprintName = "ZamzamKit iOS"
+            ReferencedContainer = "container:ZamzamKit.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -46,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B1447C71C72577900043657"
-            BuildableName = "ZamzamKit iOS.framework"
+            BuildableName = "ZamzamKit.framework"
             BlueprintName = "ZamzamKit iOS"
             ReferencedContainer = "container:ZamzamKit.xcodeproj">
          </BuildableReference>
@@ -64,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B1447C71C72577900043657"
-            BuildableName = "ZamzamKit iOS.framework"
+            BuildableName = "ZamzamKit.framework"
             BlueprintName = "ZamzamKit iOS"
             ReferencedContainer = "container:ZamzamKit.xcodeproj">
          </BuildableReference>
