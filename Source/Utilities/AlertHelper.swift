@@ -10,5 +10,8 @@ import Foundation
 
 public struct AlertHelper {
     
+    public init() {
+    
+    }
     
 }

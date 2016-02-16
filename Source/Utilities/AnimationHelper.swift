@@ -10,4 +10,8 @@ import Foundation
 
 public struct AnimationHelper {
     
+    public init() {
+        
+    }
+    
 }

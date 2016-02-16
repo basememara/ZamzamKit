@@ -10,6 +10,10 @@ import Foundation
 
 public struct StringHelper {
     
+    public init() {
+        
+    }
+    
     /**
      Replaces a string using a regular expression pattern
      

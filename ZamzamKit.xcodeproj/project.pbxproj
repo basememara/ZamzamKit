@@ -7,26 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B1447841C722F5E00043657 /* CommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447721C722F5E00043657 /* CommunicationService.swift */; };
-		8B1447861C722F5E00043657 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447731C722F5E00043657 /* FileService.swift */; };
-		8B1447881C722F5E00043657 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447741C722F5E00043657 /* LocationService.swift */; };
-		8B14478A1C722F5E00043657 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447751C722F5E00043657 /* NotificationService.swift */; };
-		8B14478C1C722F5E00043657 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447761C722F5E00043657 /* StorageService.swift */; };
-		8B14478E1C722F5E00043657 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447781C722F5E00043657 /* AlertHelper.swift */; };
-		8B1447901C722F5E00043657 /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447791C722F5E00043657 /* AnimationHelper.swift */; };
-		8B1447921C722F5E00043657 /* DateTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14477A1C722F5E00043657 /* DateTimeHelper.swift */; };
-		8B1447941C722F5E00043657 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14477B1C722F5E00043657 /* StringHelper.swift */; };
-		8B1447961C722F5E00043657 /* WebHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14477C1C722F5E00043657 /* WebHelper.swift */; };
-		8B1447981C722F5E00043657 /* ZamzamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14477D1C722F5E00043657 /* ZamzamManager.swift */; };
-		8B14479A1C722F5E00043657 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
-		8B14479C1C722F5E00043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
-		8B1447A51C722FD500043657 /* FileServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14479E1C722FD500043657 /* FileServiceTests.swift */; };
-		8B1447A61C722FD500043657 /* LocationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14479F1C722FD500043657 /* LocationServiceTests.swift */; };
-		8B1447A71C722FD500043657 /* StorageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447A01C722FD500043657 /* StorageServiceTests.swift */; };
-		8B1447A81C722FD500043657 /* DateTimeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447A21C722FD500043657 /* DateTimeHelperTests.swift */; };
-		8B1447A91C722FD500043657 /* StringHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447A31C722FD500043657 /* StringHelperTests.swift */; };
-		8B1447AA1C722FD500043657 /* WebHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447A41C722FD500043657 /* WebHelperTests.swift */; };
-		8B1447B41C72539600043657 /* Timepiece.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447B31C72539600043657 /* Timepiece.framework */; };
 		8B1447F81C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1447F91C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1447FA1C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -69,16 +49,102 @@
 		8B14482D1C72590500043657 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447741C722F5E00043657 /* LocationService.swift */; };
 		8B14482E1C72590500043657 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447751C722F5E00043657 /* NotificationService.swift */; };
 		8B14482F1C72590500043657 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447761C722F5E00043657 /* StorageService.swift */; };
-		8B1448391C725AC300043657 /* NotificationService-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1448341C725AC300043657 /* NotificationService-iOS.swift */; };
-		8B14483A1C725AC300043657 /* AlertHelper-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1448361C725AC300043657 /* AlertHelper-iOS.swift */; };
-		8B14483B1C725AC300043657 /* AnimationHelper-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1448371C725AC300043657 /* AnimationHelper-iOS.swift */; };
-		8B14483C1C725AC300043657 /* ZamzamConstants-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1448381C725AC300043657 /* ZamzamConstants-iOS.swift */; };
-		8B1448401C725AEF00043657 /* AnimationHelper-watchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14483F1C725AEF00043657 /* AnimationHelper-watchOS.swift */; };
+		8B1448391C725AC300043657 /* NotificationService.ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1448341C725AC300043657 /* NotificationService.ios.swift */; };
+		8B14483A1C725AC300043657 /* AlertHelper.ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1448361C725AC300043657 /* AlertHelper.ios.swift */; };
+		8B14483B1C725AC300043657 /* AnimationHelper.ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1448371C725AC300043657 /* AnimationHelper.ios.swift */; };
+		8B14483C1C725AC300043657 /* ZamzamConstants.ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1448381C725AC300043657 /* ZamzamConstants.ios.swift */; };
+		8B1448401C725AEF00043657 /* AnimationHelper.watchos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14483F1C725AEF00043657 /* AnimationHelper.watchos.swift */; };
+		8BE19B0D1C72D6DF00D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; };
+		8BE19B1A1C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B191C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift */; };
+		8BE19B1C1C72D6F200D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447E21C7257F100043657 /* ZamzamKit.framework */; };
+		8BE19B2A1C72D71F00D4D437 /* FileServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B231C72D71F00D4D437 /* FileServiceTests.swift */; };
+		8BE19B2B1C72D71F00D4D437 /* LocationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B241C72D71F00D4D437 /* LocationServiceTests.swift */; };
+		8BE19B2C1C72D71F00D4D437 /* StorageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B251C72D71F00D4D437 /* StorageServiceTests.swift */; };
+		8BE19B2D1C72D71F00D4D437 /* DateTimeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B271C72D71F00D4D437 /* DateTimeHelperTests.swift */; };
+		8BE19B2E1C72D71F00D4D437 /* StringHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B281C72D71F00D4D437 /* StringHelperTests.swift */; };
+		8BE19B2F1C72D71F00D4D437 /* WebHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B291C72D71F00D4D437 /* WebHelperTests.swift */; };
+		8BE19B301C72D83A00D4D437 /* CommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447721C722F5E00043657 /* CommunicationService.swift */; };
+		8BE19B311C72D83A00D4D437 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447731C722F5E00043657 /* FileService.swift */; };
+		8BE19B321C72D83A00D4D437 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447741C722F5E00043657 /* LocationService.swift */; };
+		8BE19B331C72D83A00D4D437 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447751C722F5E00043657 /* NotificationService.swift */; };
+		8BE19B341C72D83A00D4D437 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447761C722F5E00043657 /* StorageService.swift */; };
+		8BE19B351C72D83A00D4D437 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447781C722F5E00043657 /* AlertHelper.swift */; };
+		8BE19B361C72D83A00D4D437 /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447791C722F5E00043657 /* AnimationHelper.swift */; };
+		8BE19B371C72D83A00D4D437 /* DateTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14477A1C722F5E00043657 /* DateTimeHelper.swift */; };
+		8BE19B381C72D83A00D4D437 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14477B1C722F5E00043657 /* StringHelper.swift */; };
+		8BE19B391C72D83A00D4D437 /* WebHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14477C1C722F5E00043657 /* WebHelper.swift */; };
+		8BE19B3A1C72D83A00D4D437 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
+		8BE19B3B1C72D83A00D4D437 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
+		8BE19B3C1C72D83A00D4D437 /* ZamzamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14477D1C722F5E00043657 /* ZamzamManager.swift */; };
+		8BE19B3D1C72D83B00D4D437 /* CommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447721C722F5E00043657 /* CommunicationService.swift */; };
+		8BE19B3E1C72D83B00D4D437 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447731C722F5E00043657 /* FileService.swift */; };
+		8BE19B3F1C72D83B00D4D437 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447741C722F5E00043657 /* LocationService.swift */; };
+		8BE19B401C72D83B00D4D437 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447751C722F5E00043657 /* NotificationService.swift */; };
+		8BE19B411C72D83B00D4D437 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447761C722F5E00043657 /* StorageService.swift */; };
+		8BE19B421C72D83B00D4D437 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447781C722F5E00043657 /* AlertHelper.swift */; };
+		8BE19B431C72D83B00D4D437 /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447791C722F5E00043657 /* AnimationHelper.swift */; };
+		8BE19B441C72D83B00D4D437 /* DateTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14477A1C722F5E00043657 /* DateTimeHelper.swift */; };
+		8BE19B451C72D83B00D4D437 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14477B1C722F5E00043657 /* StringHelper.swift */; };
+		8BE19B461C72D83B00D4D437 /* WebHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14477C1C722F5E00043657 /* WebHelper.swift */; };
+		8BE19B471C72D83B00D4D437 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
+		8BE19B481C72D83B00D4D437 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
+		8BE19B491C72D83B00D4D437 /* ZamzamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14477D1C722F5E00043657 /* ZamzamManager.swift */; };
+		8BE19B6A1C72D90600D4D437 /* Timepiece.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE19B611C72D8FF00D4D437 /* Timepiece.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8BE19B0E1C72D6DF00D4D437 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B1447461C72237E00043657 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B1447C71C72577900043657;
+			remoteInfo = "ZamzamKit iOS";
+		};
+		8BE19B1D1C72D6F200D4D437 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B1447461C72237E00043657 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B1447E11C7257F100043657;
+			remoteInfo = "ZamzamKit tvOS";
+		};
+		8BE19B601C72D8FF00D4D437 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3DC6180F199E1F8400FB7AAC;
+			remoteInfo = "Timepiece iOS";
+		};
+		8BE19B621C72D8FF00D4D437 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3DE7CFB01B27126F00E0F331;
+			remoteInfo = "Timepiece OSX";
+		};
+		8BE19B641C72D8FF00D4D437 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8015E2121BB9B41400545DF5;
+			remoteInfo = "Timepiece watchOS";
+		};
+		8BE19B661C72D8FF00D4D437 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3DC6181A199E1F8400FB7AAC;
+			remoteInfo = "Timepiece iOS Tests";
+		};
+		8BE19B681C72D8FF00D4D437 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3DE7CFBA1B27126F00E0F331;
+			remoteInfo = "Timepiece OSX Tests";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		8B1447591C72237E00043657 /* ZamzamKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZamzamKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B1447601C72237E00043657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B14476B1C722D5700043657 /* ZamzamKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ZamzamKit.podspec; sourceTree = "<group>"; };
 		8B14476C1C722D5700043657 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8B14476D1C722D5700043657 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -95,12 +161,6 @@
 		8B14477D1C722F5E00043657 /* ZamzamManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamManager.swift; sourceTree = "<group>"; };
 		8B1447811C722F5E00043657 /* ZamzamConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamConfig.swift; sourceTree = "<group>"; };
 		8B1447821C722F5E00043657 /* ZamzamConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamConstants.swift; sourceTree = "<group>"; };
-		8B14479E1C722FD500043657 /* FileServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileServiceTests.swift; sourceTree = "<group>"; };
-		8B14479F1C722FD500043657 /* LocationServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServiceTests.swift; sourceTree = "<group>"; };
-		8B1447A01C722FD500043657 /* StorageServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageServiceTests.swift; sourceTree = "<group>"; };
-		8B1447A21C722FD500043657 /* DateTimeHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeHelperTests.swift; sourceTree = "<group>"; };
-		8B1447A31C722FD500043657 /* StringHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelperTests.swift; sourceTree = "<group>"; };
-		8B1447A41C722FD500043657 /* WebHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebHelperTests.swift; sourceTree = "<group>"; };
 		8B1447AB1C72508400043657 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		8B1447AD1C7250EF00043657 /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
 		8B1447B31C72539600043657 /* Timepiece.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Timepiece.framework; path = "Carthage/Checkouts/Timepiece/build/Debug-iphoneos/Timepiece.framework"; sourceTree = "<group>"; };
@@ -108,25 +168,29 @@
 		8B1447D51C7257D600043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1447E21C7257F100043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1447F71C7258E500043657 /* ZamzamKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZamzamKit.h; sourceTree = "<group>"; };
-		8B1448341C725AC300043657 /* NotificationService-iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NotificationService-iOS.swift"; sourceTree = "<group>"; };
-		8B1448361C725AC300043657 /* AlertHelper-iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlertHelper-iOS.swift"; sourceTree = "<group>"; };
-		8B1448371C725AC300043657 /* AnimationHelper-iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnimationHelper-iOS.swift"; sourceTree = "<group>"; };
-		8B1448381C725AC300043657 /* ZamzamConstants-iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ZamzamConstants-iOS.swift"; sourceTree = "<group>"; };
-		8B14483F1C725AEF00043657 /* AnimationHelper-watchOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnimationHelper-watchOS.swift"; sourceTree = "<group>"; };
+		8B1448341C725AC300043657 /* NotificationService.ios.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.ios.swift; sourceTree = "<group>"; };
+		8B1448361C725AC300043657 /* AlertHelper.ios.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.ios.swift; sourceTree = "<group>"; };
+		8B1448371C725AC300043657 /* AnimationHelper.ios.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationHelper.ios.swift; sourceTree = "<group>"; };
+		8B1448381C725AC300043657 /* ZamzamConstants.ios.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamConstants.ios.swift; sourceTree = "<group>"; };
+		8B14483F1C725AEF00043657 /* AnimationHelper.watchos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationHelper.watchos.swift; sourceTree = "<group>"; };
 		8B1448411C725BFE00043657 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		8B1448431C725BFE00043657 /* Info-tvOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
 		8B1448441C725BFE00043657 /* Info-watchOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
+		8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BE19B0C1C72D6DF00D4D437 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BE19B171C72D6F200D4D437 /* ZamzamKit tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BE19B191C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZamzamKit_tvOSTests.swift; sourceTree = "<group>"; };
+		8BE19B1B1C72D6F200D4D437 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BE19B231C72D71F00D4D437 /* FileServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileServiceTests.swift; sourceTree = "<group>"; };
+		8BE19B241C72D71F00D4D437 /* LocationServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServiceTests.swift; sourceTree = "<group>"; };
+		8BE19B251C72D71F00D4D437 /* StorageServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageServiceTests.swift; sourceTree = "<group>"; };
+		8BE19B271C72D71F00D4D437 /* DateTimeHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeHelperTests.swift; sourceTree = "<group>"; };
+		8BE19B281C72D71F00D4D437 /* StringHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelperTests.swift; sourceTree = "<group>"; };
+		8BE19B291C72D71F00D4D437 /* WebHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebHelperTests.swift; sourceTree = "<group>"; };
+		8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Timepiece.xcodeproj; path = Carthage/Checkouts/Timepiece/Timepiece.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8B1447561C72237E00043657 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8B1447B41C72539600043657 /* Timepiece.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8B1447C41C72577900043657 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -148,6 +212,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8BE19B051C72D6DF00D4D437 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BE19B6A1C72D90600D4D437 /* Timepiece.framework in Frameworks */,
+				8BE19B0D1C72D6DF00D4D437 /* ZamzamKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BE19B141C72D6F200D4D437 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BE19B1C1C72D6F200D4D437 /* ZamzamKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -156,7 +237,8 @@
 			children = (
 				8B14476A1C722D3900043657 /* Metadata */,
 				8B1447511C72237E00043657 /* Source */,
-				8B14475D1C72237E00043657 /* ZamzamKitTests */,
+				8BE19B091C72D6DF00D4D437 /* ZamzamKit iOSTests */,
+				8BE19B181C72D6F200D4D437 /* ZamzamKit tvOSTests */,
 				8B1447501C72237E00043657 /* Products */,
 				8B1447B51C7253B100043657 /* Frameworks */,
 			);
@@ -165,10 +247,11 @@
 		8B1447501C72237E00043657 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8B1447591C72237E00043657 /* ZamzamKitTests.xctest */,
 				8B1447C81C72577900043657 /* ZamzamKit.framework */,
 				8B1447D51C7257D600043657 /* ZamzamKit.framework */,
 				8B1447E21C7257F100043657 /* ZamzamKit.framework */,
+				8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */,
+				8BE19B171C72D6F200D4D437 /* ZamzamKit tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -176,28 +259,18 @@
 		8B1447511C72237E00043657 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				8B14477E1C722F5E00043657 /* Extensions */,
-				8B14477F1C722F5E00043657 /* Models */,
 				8B1448311C725A9400043657 /* Platforms */,
-				8B1447801C722F5E00043657 /* Protocols */,
 				8B1447711C722F5E00043657 /* Services */,
 				8B1447771C722F5E00043657 /* Utilities */,
 				8B1447811C722F5E00043657 /* ZamzamConfig.swift */,
 				8B1447821C722F5E00043657 /* ZamzamConstants.swift */,
 				8B14477D1C722F5E00043657 /* ZamzamManager.swift */,
 				8B1447F71C7258E500043657 /* ZamzamKit.h */,
+				8B1448411C725BFE00043657 /* Info-iOS.plist */,
+				8B1448441C725BFE00043657 /* Info-watchOS.plist */,
+				8B1448431C725BFE00043657 /* Info-tvOS.plist */,
 			);
 			path = Source;
-			sourceTree = "<group>";
-		};
-		8B14475D1C72237E00043657 /* ZamzamKitTests */ = {
-			isa = PBXGroup;
-			children = (
-				8B14479D1C722FD500043657 /* Services */,
-				8B1447A11C722FD500043657 /* Utilities */,
-				8B1447601C72237E00043657 /* Info.plist */,
-			);
-			path = ZamzamKitTests;
 			sourceTree = "<group>";
 		};
 		8B14476A1C722D3900043657 /* Metadata */ = {
@@ -206,9 +279,6 @@
 				8B14476B1C722D5700043657 /* ZamzamKit.podspec */,
 				8B1447AB1C72508400043657 /* Cartfile */,
 				8B1447AD1C7250EF00043657 /* Cartfile.private */,
-				8B1448411C725BFE00043657 /* Info-iOS.plist */,
-				8B1448441C725BFE00043657 /* Info-watchOS.plist */,
-				8B1448431C725BFE00043657 /* Info-tvOS.plist */,
 				8B14476C1C722D5700043657 /* LICENSE */,
 				8B14476D1C722D5700043657 /* README.md */,
 			);
@@ -239,50 +309,10 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		8B14477E1C722F5E00043657 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		8B14477F1C722F5E00043657 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		8B1447801C722F5E00043657 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		8B14479D1C722FD500043657 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				8B14479E1C722FD500043657 /* FileServiceTests.swift */,
-				8B14479F1C722FD500043657 /* LocationServiceTests.swift */,
-				8B1447A01C722FD500043657 /* StorageServiceTests.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		8B1447A11C722FD500043657 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				8B1447A21C722FD500043657 /* DateTimeHelperTests.swift */,
-				8B1447A31C722FD500043657 /* StringHelperTests.swift */,
-				8B1447A41C722FD500043657 /* WebHelperTests.swift */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
 		8B1447B51C7253B100043657 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */,
 				8B1447B31C72539600043657 /* Timepiece.framework */,
 			);
 			name = Frameworks;
@@ -302,7 +332,7 @@
 			children = (
 				8B1448331C725AC300043657 /* Services */,
 				8B1448351C725AC300043657 /* Utilities */,
-				8B1448381C725AC300043657 /* ZamzamConstants-iOS.swift */,
+				8B1448381C725AC300043657 /* ZamzamConstants.ios.swift */,
 			);
 			name = iOS;
 			path = Platforms/iOS;
@@ -311,7 +341,7 @@
 		8B1448331C725AC300043657 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8B1448341C725AC300043657 /* NotificationService-iOS.swift */,
+				8B1448341C725AC300043657 /* NotificationService.ios.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -319,8 +349,8 @@
 		8B1448351C725AC300043657 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				8B1448361C725AC300043657 /* AlertHelper-iOS.swift */,
-				8B1448371C725AC300043657 /* AnimationHelper-iOS.swift */,
+				8B1448361C725AC300043657 /* AlertHelper.ios.swift */,
+				8B1448371C725AC300043657 /* AnimationHelper.ios.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -337,9 +367,60 @@
 		8B14483E1C725AEF00043657 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				8B14483F1C725AEF00043657 /* AnimationHelper-watchOS.swift */,
+				8B14483F1C725AEF00043657 /* AnimationHelper.watchos.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		8BE19B091C72D6DF00D4D437 /* ZamzamKit iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				8BE19B221C72D71F00D4D437 /* Services */,
+				8BE19B261C72D71F00D4D437 /* Utilities */,
+				8BE19B0C1C72D6DF00D4D437 /* Info.plist */,
+			);
+			path = "ZamzamKit iOSTests";
+			sourceTree = "<group>";
+		};
+		8BE19B181C72D6F200D4D437 /* ZamzamKit tvOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				8BE19B191C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift */,
+				8BE19B1B1C72D6F200D4D437 /* Info.plist */,
+			);
+			path = "ZamzamKit tvOSTests";
+			sourceTree = "<group>";
+		};
+		8BE19B221C72D71F00D4D437 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8BE19B231C72D71F00D4D437 /* FileServiceTests.swift */,
+				8BE19B241C72D71F00D4D437 /* LocationServiceTests.swift */,
+				8BE19B251C72D71F00D4D437 /* StorageServiceTests.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8BE19B261C72D71F00D4D437 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8BE19B271C72D71F00D4D437 /* DateTimeHelperTests.swift */,
+				8BE19B281C72D71F00D4D437 /* StringHelperTests.swift */,
+				8BE19B291C72D71F00D4D437 /* WebHelperTests.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		8BE19B591C72D8FF00D4D437 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8BE19B611C72D8FF00D4D437 /* Timepiece.framework */,
+				8BE19B631C72D8FF00D4D437 /* Timepiece.framework */,
+				8BE19B651C72D8FF00D4D437 /* Timepiece.framework */,
+				8BE19B671C72D8FF00D4D437 /* Timepiece iOS Tests.xctest */,
+				8BE19B691C72D8FF00D4D437 /* Timepiece OSX Tests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,23 +453,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8B1447581C72237E00043657 /* ZamzamKitTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8B1447661C72237E00043657 /* Build configuration list for PBXNativeTarget "ZamzamKitTests" */;
-			buildPhases = (
-				8B1447551C72237E00043657 /* Sources */,
-				8B1447561C72237E00043657 /* Frameworks */,
-				8B1447571C72237E00043657 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ZamzamKitTests;
-			productName = ZamzamKitTests;
-			productReference = 8B1447591C72237E00043657 /* ZamzamKitTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		8B1447C71C72577900043657 /* ZamzamKit iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B1447CD1C72577900043657 /* Build configuration list for PBXNativeTarget "ZamzamKit iOS" */;
@@ -443,6 +507,42 @@
 			productReference = 8B1447E21C7257F100043657 /* ZamzamKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		8BE19B071C72D6DF00D4D437 /* ZamzamKit iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BE19B121C72D6DF00D4D437 /* Build configuration list for PBXNativeTarget "ZamzamKit iOSTests" */;
+			buildPhases = (
+				8BE19B041C72D6DF00D4D437 /* Sources */,
+				8BE19B051C72D6DF00D4D437 /* Frameworks */,
+				8BE19B061C72D6DF00D4D437 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8BE19B0F1C72D6DF00D4D437 /* PBXTargetDependency */,
+			);
+			name = "ZamzamKit iOSTests";
+			productName = "ZamzamKit iOSTests";
+			productReference = 8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8BE19B161C72D6F200D4D437 /* ZamzamKit tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BE19B1F1C72D6F200D4D437 /* Build configuration list for PBXNativeTarget "ZamzamKit tvOSTests" */;
+			buildPhases = (
+				8BE19B131C72D6F200D4D437 /* Sources */,
+				8BE19B141C72D6F200D4D437 /* Frameworks */,
+				8BE19B151C72D6F200D4D437 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8BE19B1E1C72D6F200D4D437 /* PBXTargetDependency */,
+			);
+			name = "ZamzamKit tvOSTests";
+			productName = "ZamzamKit tvOSTests";
+			productReference = 8BE19B171C72D6F200D4D437 /* ZamzamKit tvOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -453,9 +553,6 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Zamzam;
 				TargetAttributes = {
-					8B1447581C72237E00043657 = {
-						CreatedOnToolsVersion = 7.2.1;
-					};
 					8B1447C71C72577900043657 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
@@ -463,6 +560,12 @@
 						CreatedOnToolsVersion = 7.2.1;
 					};
 					8B1447E11C7257F100043657 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					8BE19B071C72D6DF00D4D437 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					8BE19B161C72D6F200D4D437 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
 				};
@@ -477,24 +580,62 @@
 			mainGroup = 8B1447451C72237E00043657;
 			productRefGroup = 8B1447501C72237E00043657 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8BE19B591C72D8FF00D4D437 /* Products */;
+					ProjectRef = 8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8B1447C71C72577900043657 /* ZamzamKit iOS */,
 				8B1447D41C7257D600043657 /* ZamzamKit watchOS */,
 				8B1447E11C7257F100043657 /* ZamzamKit tvOS */,
-				8B1447581C72237E00043657 /* ZamzamKitTests */,
+				8BE19B071C72D6DF00D4D437 /* ZamzamKit iOSTests */,
+				8BE19B161C72D6F200D4D437 /* ZamzamKit tvOSTests */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		8B1447571C72237E00043657 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
+/* Begin PBXReferenceProxy section */
+		8BE19B611C72D8FF00D4D437 /* Timepiece.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Timepiece.framework;
+			remoteRef = 8BE19B601C72D8FF00D4D437 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		8BE19B631C72D8FF00D4D437 /* Timepiece.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Timepiece.framework;
+			remoteRef = 8BE19B621C72D8FF00D4D437 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8BE19B651C72D8FF00D4D437 /* Timepiece.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Timepiece.framework;
+			remoteRef = 8BE19B641C72D8FF00D4D437 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8BE19B671C72D8FF00D4D437 /* Timepiece iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Timepiece iOS Tests.xctest";
+			remoteRef = 8BE19B661C72D8FF00D4D437 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8BE19B691C72D8FF00D4D437 /* Timepiece OSX Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Timepiece OSX Tests.xctest";
+			remoteRef = 8BE19B681C72D8FF00D4D437 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
 		8B1447C61C72577900043657 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -516,45 +657,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		8B1447551C72237E00043657 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+		8BE19B061C72D6DF00D4D437 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B1447961C722F5E00043657 /* WebHelper.swift in Sources */,
-				8B1447901C722F5E00043657 /* AnimationHelper.swift in Sources */,
-				8B1447A61C722FD500043657 /* LocationServiceTests.swift in Sources */,
-				8B1447841C722F5E00043657 /* CommunicationService.swift in Sources */,
-				8B14478C1C722F5E00043657 /* StorageService.swift in Sources */,
-				8B14479A1C722F5E00043657 /* ZamzamConfig.swift in Sources */,
-				8B1447A91C722FD500043657 /* StringHelperTests.swift in Sources */,
-				8B14479C1C722F5E00043657 /* ZamzamConstants.swift in Sources */,
-				8B1447921C722F5E00043657 /* DateTimeHelper.swift in Sources */,
-				8B1447A51C722FD500043657 /* FileServiceTests.swift in Sources */,
-				8B1447881C722F5E00043657 /* LocationService.swift in Sources */,
-				8B14478E1C722F5E00043657 /* AlertHelper.swift in Sources */,
-				8B14478A1C722F5E00043657 /* NotificationService.swift in Sources */,
-				8B1447981C722F5E00043657 /* ZamzamManager.swift in Sources */,
-				8B1447A81C722FD500043657 /* DateTimeHelperTests.swift in Sources */,
-				8B1447A71C722FD500043657 /* StorageServiceTests.swift in Sources */,
-				8B1447AA1C722FD500043657 /* WebHelperTests.swift in Sources */,
-				8B1447941C722F5E00043657 /* StringHelper.swift in Sources */,
-				8B1447861C722F5E00043657 /* FileService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8BE19B151C72D6F200D4D437 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
 		8B1447C31C72577900043657 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B14483C1C725AC300043657 /* ZamzamConstants-iOS.swift in Sources */,
-				8B14483B1C725AC300043657 /* AnimationHelper-iOS.swift in Sources */,
+				8B14483C1C725AC300043657 /* ZamzamConstants.ios.swift in Sources */,
+				8B14483B1C725AC300043657 /* AnimationHelper.ios.swift in Sources */,
 				8B14481B1C7258FE00043657 /* WebHelper.swift in Sources */,
 				8B1448171C7258FE00043657 /* AlertHelper.swift in Sources */,
-				8B1448391C725AC300043657 /* NotificationService-iOS.swift in Sources */,
-				8B14483A1C725AC300043657 /* AlertHelper-iOS.swift in Sources */,
+				8B1448391C725AC300043657 /* NotificationService.ios.swift in Sources */,
+				8B14483A1C725AC300043657 /* AlertHelper.ios.swift in Sources */,
 				8B1448071C7258F700043657 /* ZamzamManager.swift in Sources */,
 				8B14482C1C72590500043657 /* FileService.swift in Sources */,
 				8B14482E1C72590500043657 /* NotificationService.swift in Sources */,
@@ -581,7 +710,7 @@
 				8B1448131C7258FD00043657 /* AnimationHelper.swift in Sources */,
 				8B1448021C7258F600043657 /* ZamzamConfig.swift in Sources */,
 				8B14482A1C72590400043657 /* StorageService.swift in Sources */,
-				8B1448401C725AEF00043657 /* AnimationHelper-watchOS.swift in Sources */,
+				8B1448401C725AEF00043657 /* AnimationHelper.watchos.swift in Sources */,
 				8B1448281C72590400043657 /* LocationService.swift in Sources */,
 				8B1448151C7258FD00043657 /* StringHelper.swift in Sources */,
 				8B1448141C7258FD00043657 /* DateTimeHelper.swift in Sources */,
@@ -610,7 +739,67 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8BE19B041C72D6DF00D4D437 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BE19B3C1C72D83A00D4D437 /* ZamzamManager.swift in Sources */,
+				8BE19B351C72D83A00D4D437 /* AlertHelper.swift in Sources */,
+				8BE19B3B1C72D83A00D4D437 /* ZamzamConstants.swift in Sources */,
+				8BE19B2E1C72D71F00D4D437 /* StringHelperTests.swift in Sources */,
+				8BE19B2D1C72D71F00D4D437 /* DateTimeHelperTests.swift in Sources */,
+				8BE19B3A1C72D83A00D4D437 /* ZamzamConfig.swift in Sources */,
+				8BE19B381C72D83A00D4D437 /* StringHelper.swift in Sources */,
+				8BE19B2F1C72D71F00D4D437 /* WebHelperTests.swift in Sources */,
+				8BE19B301C72D83A00D4D437 /* CommunicationService.swift in Sources */,
+				8BE19B2C1C72D71F00D4D437 /* StorageServiceTests.swift in Sources */,
+				8BE19B311C72D83A00D4D437 /* FileService.swift in Sources */,
+				8BE19B391C72D83A00D4D437 /* WebHelper.swift in Sources */,
+				8BE19B2A1C72D71F00D4D437 /* FileServiceTests.swift in Sources */,
+				8BE19B321C72D83A00D4D437 /* LocationService.swift in Sources */,
+				8BE19B331C72D83A00D4D437 /* NotificationService.swift in Sources */,
+				8BE19B371C72D83A00D4D437 /* DateTimeHelper.swift in Sources */,
+				8BE19B341C72D83A00D4D437 /* StorageService.swift in Sources */,
+				8BE19B361C72D83A00D4D437 /* AnimationHelper.swift in Sources */,
+				8BE19B2B1C72D71F00D4D437 /* LocationServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BE19B131C72D6F200D4D437 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BE19B461C72D83B00D4D437 /* WebHelper.swift in Sources */,
+				8BE19B431C72D83B00D4D437 /* AnimationHelper.swift in Sources */,
+				8BE19B3D1C72D83B00D4D437 /* CommunicationService.swift in Sources */,
+				8BE19B491C72D83B00D4D437 /* ZamzamManager.swift in Sources */,
+				8BE19B471C72D83B00D4D437 /* ZamzamConfig.swift in Sources */,
+				8BE19B411C72D83B00D4D437 /* StorageService.swift in Sources */,
+				8BE19B1A1C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift in Sources */,
+				8BE19B441C72D83B00D4D437 /* DateTimeHelper.swift in Sources */,
+				8BE19B3F1C72D83B00D4D437 /* LocationService.swift in Sources */,
+				8BE19B421C72D83B00D4D437 /* AlertHelper.swift in Sources */,
+				8BE19B401C72D83B00D4D437 /* NotificationService.swift in Sources */,
+				8BE19B451C72D83B00D4D437 /* StringHelper.swift in Sources */,
+				8BE19B481C72D83B00D4D437 /* ZamzamConstants.swift in Sources */,
+				8BE19B3E1C72D83B00D4D437 /* FileService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8BE19B0F1C72D6DF00D4D437 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B1447C71C72577900043657 /* ZamzamKit iOS */;
+			targetProxy = 8BE19B0E1C72D6DF00D4D437 /* PBXContainerItemProxy */;
+		};
+		8BE19B1E1C72D6F200D4D437 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B1447E11C7257F100043657 /* ZamzamKit tvOS */;
+			targetProxy = 8BE19B1D1C72D6F200D4D437 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		8B1447611C72237E00043657 /* Debug */ = {
@@ -650,7 +839,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -692,35 +881,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		8B1447671C72237E00043657 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = ZamzamKitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.zamzam.ZamzamKitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		8B1447681C72237E00043657 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = ZamzamKitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.zamzam.ZamzamKitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -732,7 +899,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Info-iOS.plist";
+				INFOPLIST_FILE = "Source/Info-iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -750,7 +917,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Info-iOS.plist";
+				INFOPLIST_FILE = "Source/Info-iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -768,7 +935,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Info-watchOS.plist";
+				INFOPLIST_FILE = "Source/Info-watchOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -789,7 +956,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Info-watchOS.plist";
+				INFOPLIST_FILE = "Source/Info-watchOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -810,7 +977,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Info-tvOS.plist";
+				INFOPLIST_FILE = "Source/Info-tvOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -831,7 +998,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Info-tvOS.plist";
+				INFOPLIST_FILE = "Source/Info-tvOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -844,6 +1011,54 @@
 			};
 			name = Release;
 		};
+		8BE19B101C72D6DF00D4D437 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "ZamzamKit iOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8BE19B111C72D6DF00D4D437 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "ZamzamKit iOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8BE19B201C72D6F200D4D437 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "ZamzamKit tvOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		8BE19B211C72D6F200D4D437 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "ZamzamKit tvOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -852,15 +1067,6 @@
 			buildConfigurations = (
 				8B1447611C72237E00043657 /* Debug */,
 				8B1447621C72237E00043657 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8B1447661C72237E00043657 /* Build configuration list for PBXNativeTarget "ZamzamKitTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8B1447671C72237E00043657 /* Debug */,
-				8B1447681C72237E00043657 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -891,6 +1097,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		8BE19B121C72D6DF00D4D437 /* Build configuration list for PBXNativeTarget "ZamzamKit iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BE19B101C72D6DF00D4D437 /* Debug */,
+				8BE19B111C72D6DF00D4D437 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8BE19B1F1C72D6F200D4D437 /* Build configuration list for PBXNativeTarget "ZamzamKit tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BE19B201C72D6F200D4D437 /* Debug */,
+				8BE19B211C72D6F200D4D437 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

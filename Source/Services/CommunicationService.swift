@@ -10,5 +10,4 @@ import Foundation
 
 public struct CommunicationService {
     
-    
 }

@@ -5,9 +5,6 @@
       location = "container:ZamzamKit.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ZamzamKit.playground">
-   </FileRef>
-   <FileRef
       location = "group:Carthage/Checkouts/Timepiece/Timepiece.xcodeproj">
    </FileRef>
 </Workspace>

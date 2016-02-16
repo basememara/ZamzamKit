@@ -12,7 +12,7 @@ public struct NotificationService {
     
     public let dateTimeHelper: DateTimeHelper!
     
-    public init() {
+    init() {
         // Inject service dependencies
         dateTimeHelper = DateTimeHelper()
     }

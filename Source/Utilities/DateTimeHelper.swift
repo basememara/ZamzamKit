@@ -10,6 +10,10 @@ import Foundation
 
 public struct DateTimeHelper {
     
+    public init() {
+        
+    }
+    
     public func getCurrentTimeInDecimal(date: NSDate = NSDate()) -> Double {
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([.Hour, .Minute],
