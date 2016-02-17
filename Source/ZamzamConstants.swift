@@ -10,6 +10,9 @@ import Foundation
 
 public struct ZamzamConstants {
     
+    // Prevent others from initializing singleton
+    private init() { }
+    
     public struct DateTime {
         public static let JSON_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"
     }

@@ -10,6 +10,9 @@ import Foundation
 
 public struct ZamzamConfig {
     
+    // Prevent others from initializing singleton
+    private init() { }
+    
     /**
     Get values from plist file
     
