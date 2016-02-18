@@ -10,16 +10,13 @@ import UIKit
 import XCTest
 @testable import ZamzamKit
 
-class FileServiceTests: XCTestCase {
+class FileTests: XCTestCase {
     
     let fileName = "FileServiceTests.txt"
     let fileName2 = "FileServiceTests2.txt"
-    var manager: ZamzamManager!
     
     override func setUp() {
         super.setUp()
-        
-        manager = ZamzamManager()
         
         // Create blank files for testing
         do {
@@ -43,20 +40,20 @@ class FileServiceTests: XCTestCase {
     }
     
     func testGetDocumentPath() {
-        let value = manager.fileService.getDocumentPath(fileName)
+        let value = NSFileManager.getDocumentPath(fileName)
         
         XCTAssert(NSFileManager.defaultManager().fileExistsAtPath(value),
             "The file location path for \(fileName) seems incorrect (file doesn't exist)")
     }
     
     func testGetDocumentPaths() {
-        let value = manager.fileService.getDocumentPaths()
+        let value = NSFileManager.getDocumentPaths()
         let expectedValue = [
             fileInDocumentsDirectory(fileName),
             fileInDocumentsDirectory(fileName2)
         ]
         
-        XCTAssertEqual(value, expectedValue,
+        XCTAssert(value.contains(expectedValue[0]) && value.contains(expectedValue[1]),
             "The file paths for the document directory seems incorrect")
     }
     

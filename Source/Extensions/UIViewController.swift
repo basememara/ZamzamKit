@@ -1,20 +1,21 @@
 //
-//  AlertHelper.swift
-//  Pods
+//  UIViewControllerExtension.swift
+//  ZamzamKit
 //
-//  Created by Basem Emara on 1/20/16.
-//
+//  Created by Basem Emara on 2/17/16.
+//  Copyright © 2016 Zamzam. All rights reserved.
 //
 
 import Foundation
+import UIKit
 
-public extension AlertHelper {
+public extension UIViewController {
     
-    public func open(controller: UIViewController, message: String,
+    public func alert(message: String,
         title: String = "Alert",
         buttonTitle: String = "OK",
         additionalAction: UIAlertAction?) {
-            let alertController = UIAlertController (
+            let alertController = UIAlertController(
                 title: title,
                 message: message,
                 preferredStyle: .Alert
@@ -27,6 +28,7 @@ public extension AlertHelper {
             let okAction = UIAlertAction(title: buttonTitle, style: .Default, handler: nil)
             alertController.addAction(okAction)
             
-            controller.presentViewController(alertController, animated: true, completion: nil)
+            self.presentViewController(alertController, animated: true, completion: nil)
     }
+
 }

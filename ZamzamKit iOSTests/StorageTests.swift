@@ -10,14 +10,10 @@ import UIKit
 import XCTest
 @testable import ZamzamKit
 
-class StorageServiceTests: XCTestCase {
-    
-    var manager: ZamzamManager!
+class StorageTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        
-        manager = ZamzamManager()
         
         // Clear all user data
         NSUserDefaults.standardUserDefaults()
@@ -29,7 +25,7 @@ class StorageServiceTests: XCTestCase {
         let expectedValue = "\(NSDate().timeIntervalSinceReferenceDate)"
         
         NSUserDefaults.standardUserDefaults().removeObjectForKey(key)
-        manager.storageService.setUserValue(key, newValue: expectedValue)
+        NSUserDefaults.setUserValue(key, newValue: expectedValue)
         
         XCTAssertEqual(NSUserDefaults.standardUserDefaults().stringForKey(key), expectedValue,
             "NSUserDefaults for \(key) should be \(expectedValue)")
@@ -40,9 +36,9 @@ class StorageServiceTests: XCTestCase {
         let expectedValue = "\(NSDate().timeIntervalSinceReferenceDate)"
         
         NSUserDefaults.standardUserDefaults().removeObjectForKey(key)
-        manager.storageService.setUserValue(key, newValue: expectedValue)
+        NSUserDefaults.setUserValue(key, newValue: expectedValue)
         
-        let storedValue = manager.storageService.getUserValue(key)
+        let storedValue = NSUserDefaults.getUserValue(key)
         
         XCTAssertEqual("\(storedValue!)", expectedValue,
             "NSUserDefaults for \(key) should be \(expectedValue)")
@@ -53,7 +49,7 @@ class StorageServiceTests: XCTestCase {
         let expectedValue = "\(NSDate().timeIntervalSinceReferenceDate)"
         
         NSUserDefaults.standardUserDefaults().removeObjectForKey(key)
-        manager.storageService.getUserValue(key, defaultValue: expectedValue)
+        NSUserDefaults.getUserValue(key, defaultValue: expectedValue)
         
         XCTAssertEqual(NSUserDefaults.standardUserDefaults().stringForKey(key), expectedValue,
             "NSUserDefaults for \(key) should be \(expectedValue)")
@@ -63,7 +59,7 @@ class StorageServiceTests: XCTestCase {
         let key = "StorageServiceTests.testSaveNSUserDefaultsForDomain"
         let expectedValue = "\(NSDate().timeIntervalSinceReferenceDate)"
         
-        manager.storageService.setUserValue(key, "xctest", newValue: expectedValue)
+        NSUserDefaults.setUserValue(key, "xctest", newValue: expectedValue)
         
         XCTAssertEqual(NSUserDefaults(suiteName: "xctest")?.stringForKey(key), expectedValue,
             "NSUserDefaults for \(key) should be \(expectedValue)")
@@ -73,8 +69,8 @@ class StorageServiceTests: XCTestCase {
         let key = "StorageServiceTests.testRestoreNSUserDefaultsForDomain"
         let expectedValue = "\(NSDate().timeIntervalSinceReferenceDate)"
         
-        manager.storageService.setUserValue(key, "xctest", newValue: expectedValue)
-        let storedValue = manager.storageService.getUserValue(key, "xctest")
+        NSUserDefaults.setUserValue(key, "xctest", newValue: expectedValue)
+        let storedValue = NSUserDefaults.getUserValue(key, "xctest")
         
         XCTAssertEqual("\(storedValue!)", expectedValue,
             "NSUserDefaults for \(key) should be \(expectedValue)")
@@ -84,7 +80,7 @@ class StorageServiceTests: XCTestCase {
         let key = "StorageServiceTests.testDefaultAndRestoreNSUserDefaultsForDomain"
         let expectedValue = "\(NSDate().timeIntervalSinceReferenceDate)"
         
-        manager.storageService.getUserValue(key, "xctest", defaultValue: expectedValue)
+        NSUserDefaults.getUserValue(key, "xctest", defaultValue: expectedValue)
         
         XCTAssertEqual(NSUserDefaults(suiteName: "xctest")?.stringForKey(key), expectedValue,
             "NSUserDefaults for \(key) should be \(expectedValue)")

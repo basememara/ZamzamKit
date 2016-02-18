@@ -1,14 +1,14 @@
 //
-//  ZamzamManager.swift
+//  NSFileManagerExtension.swift
 //  ZamzamKit
 //
-//  Created by Basem Emara on 5/6/15.
-//  Copyright (c) 2015 Zamzam. All rights reserved.
+//  Created by Basem Emara on 2/17/16.
+//  Copyright © 2016 Zamzam. All rights reserved.
 //
 
 import Foundation
 
-public struct FileService {
+public extension NSFileManager {
     
     /**
      Get file system path for document file
@@ -17,7 +17,7 @@ public struct FileService {
      
      - returns: File path from document directory
      */
-    public func getDocumentPath(fileName: String) -> String {
+    public static func getDocumentPath(fileName: String) -> String {
         return NSURL(fileURLWithPath: ZamzamConstants.Path.DOCUMENTS)
             .URLByAppendingPathComponent(fileName)
             .path!
@@ -30,7 +30,7 @@ public struct FileService {
      
      - returns: List of file paths from document directory
      */
-    public func getDocumentPaths(filter: ((NSURL) -> Bool)? = nil) -> [String] {
+    public static func getDocumentPaths(filter: ((NSURL) -> Bool)? = nil) -> [String] {
         // Get the directory contents including folders
         guard var directoryUrls = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(
             ZamzamConstants.Path.DOCUMENTS_URL,

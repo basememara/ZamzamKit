@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if os(iOS)
+    import UIKit
+#endif
 
 public struct ZamzamConstants {
     
@@ -38,6 +41,14 @@ public struct ZamzamConstants {
     }
     
     public struct Color {
+        
+        #if os(iOS)
+        
+        public static func lightOrange() -> UIColor {
+            return UIColor(red: 255/255, green: 211/255, blue: 127/255, alpha: 1)
+        }
+        
+        #endif
         
     }
     
