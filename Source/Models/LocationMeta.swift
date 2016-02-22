@@ -10,10 +10,23 @@ import Foundation
 
 public struct LocationMeta {
     
+    public var coordinates: (latitude: Double, longitude: Double)?
     public var locality: String?
     public var country: String?
     public var countryCode: String?
     public var timezone: String?
     public var administrativeArea: String?
+    
+    public func toString() -> String {
+        if let l = locality, let c = countryCode {
+            return "\(l), \(c)"
+        } else if let l = locality {
+            return "\(l)"
+        } else if let c = country {
+            return "\(c)"
+        }
+        
+        return ""
+    }
     
 }

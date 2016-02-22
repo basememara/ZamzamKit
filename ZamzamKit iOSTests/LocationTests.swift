@@ -18,13 +18,13 @@ class LocationTests: XCTestCase {
         let value = CLLocation(latitude: 43.7, longitude: -79.4)
         let expected = "Toronto, CA"
     
-        value.getMeta { (location: LocationMeta?) in
+        value.getMeta { (locationMeta: LocationMeta?) in
             defer {
                 expectation.fulfill()
             }
             
-            guard let locality = location?.locality,
-                let countryCode = location?.countryCode else {
+            guard let locality = locationMeta?.locality,
+                let countryCode = locationMeta?.countryCode else {
                     XCTFail("Could not retrieve address meta data.")
                     return
             }

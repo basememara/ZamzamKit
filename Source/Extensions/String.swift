@@ -11,6 +11,13 @@ import Foundation
 public extension String {
     
     /**
+     NSLocalizedString shorthand
+     */
+    public var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+    
+    /**
      Replaces a string using a regular expression pattern
      
      - parameter value: the value of the string

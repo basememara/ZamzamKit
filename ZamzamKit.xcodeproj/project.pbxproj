@@ -16,6 +16,11 @@
 		8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
 		8B1448051C7258F700043657 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
 		8B1448061C7258F700043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
+		8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
+		8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
+		8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
+		8B7A402D1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
+		8B7A402E1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8BE19B0D1C72D6DF00D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; };
 		8BE19B1A1C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B191C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift */; };
 		8BE19B1C1C72D6F200D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447E21C7257F100043657 /* ZamzamKit.framework */; };
@@ -29,6 +34,13 @@
 		8BE19B471C72D83B00D4D437 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
 		8BE19B481C72D83B00D4D437 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
 		8BE19B6A1C72D90600D4D437 /* Timepiece.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE19B611C72D8FF00D4D437 /* Timepiece.framework */; };
+		8BE814F51C784233005F23CE /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* UIColor.swift */; };
+		8BE814F61C784233005F23CE /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* UIColor.swift */; };
+		8BE814FD1C7842DC005F23CE /* SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* SequenceType.swift */; };
+		8BE814FE1C7842DC005F23CE /* SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* SequenceType.swift */; };
+		8BE814FF1C7842DC005F23CE /* SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* SequenceType.swift */; };
+		8BE815001C7842DC005F23CE /* SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* SequenceType.swift */; };
+		8BE815011C7842DC005F23CE /* SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* SequenceType.swift */; };
 		8BFDB6571C75187200C94996 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6561C75187200C94996 /* NSDate.swift */; };
 		8BFDB6581C75187200C94996 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6561C75187200C94996 /* NSDate.swift */; };
 		8BFDB6591C75187200C94996 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6561C75187200C94996 /* NSDate.swift */; };
@@ -149,6 +161,7 @@
 		8B1448411C725BFE00043657 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		8B1448431C725BFE00043657 /* Info-tvOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
 		8B1448441C725BFE00043657 /* Info-watchOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
+		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
 		8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE19B0C1C72D6DF00D4D437 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BE19B171C72D6F200D4D437 /* ZamzamKit tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +173,8 @@
 		8BE19B281C72D71F00D4D437 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		8BE19B291C72D71F00D4D437 /* WebTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebTests.swift; sourceTree = "<group>"; };
 		8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Timepiece.xcodeproj; path = Carthage/Checkouts/Timepiece/Timepiece.xcodeproj; sourceTree = "<group>"; };
+		8BE814F41C784233005F23CE /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = Extensions/UIColor.swift; sourceTree = "<group>"; };
+		8BE814FC1C7842DC005F23CE /* SequenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SequenceType.swift; path = Extensions/SequenceType.swift; sourceTree = "<group>"; };
 		8BFDB6561C75187200C94996 /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDate.swift; path = Extensions/NSDate.swift; sourceTree = "<group>"; };
 		8BFDB65D1C7518F800C94996 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = Extensions/String.swift; sourceTree = "<group>"; };
 		8BFDB6631C751AE600C94996 /* NSURLComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSURLComponents.swift; path = Extensions/NSURLComponents.swift; sourceTree = "<group>"; };
@@ -316,11 +331,13 @@
 				8BFDB6751C751E9300C94996 /* watchOS */,
 				8BFDB6741C751E8E00C94996 /* iOS */,
 				8BFDB67C1C7525BD00C94996 /* CLLocation.swift */,
+				8B7A40291C76245200A0077D /* CLLocationManager.swift */,
 				8BFDB6561C75187200C94996 /* NSDate.swift */,
 				8BFDB68E1C75323900C94996 /* NSDateFormatter.swift */,
 				8BFDB6761C751F2300C94996 /* NSFileManager.swift */,
 				8BFDB6631C751AE600C94996 /* NSURLComponents.swift */,
 				8BFDB6821C7528A000C94996 /* NSUserDefaults.swift */,
+				8BE814FC1C7842DC005F23CE /* SequenceType.swift */,
 				8BFDB65D1C7518F800C94996 /* String.swift */,
 			);
 			name = Extensions;
@@ -333,6 +350,7 @@
 				8BFDB66F1C751DF600C94996 /* UIImageView.swift */,
 				8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */,
 				8BFDB68B1C752C5C00C94996 /* UIApplication.swift */,
+				8BE814F41C784233005F23CE /* UIColor.swift */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -626,14 +644,17 @@
 				8BFDB67D1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BFDB68F1C75323900C94996 /* NSDateFormatter.swift in Sources */,
+				8BE814F51C784233005F23CE /* UIColor.swift in Sources */,
 				8BFDB6571C75187200C94996 /* NSDate.swift in Sources */,
 				8BFDB6771C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8BFDB6891C7529AB00C94996 /* UILocalNotification.swift in Sources */,
 				8B1448051C7258F700043657 /* ZamzamConfig.swift in Sources */,
 				8BFDB6641C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8BFDB65E1C7518F800C94996 /* String.swift in Sources */,
+				8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB6831C7528A000C94996 /* NSUserDefaults.swift in Sources */,
 				8B1448061C7258F700043657 /* ZamzamConstants.swift in Sources */,
+				8BE814FD1C7842DC005F23CE /* SequenceType.swift in Sources */,
 				8BFDB66A1C751D3400C94996 /* UIViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -643,10 +664,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BFDB6581C75187200C94996 /* NSDate.swift in Sources */,
+				8BE814FE1C7842DC005F23CE /* SequenceType.swift in Sources */,
 				8BFDB67E1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8B1448021C7258F600043657 /* ZamzamConfig.swift in Sources */,
 				8BFDB6901C75323900C94996 /* NSDateFormatter.swift in Sources */,
 				8BFDB6651C751AE600C94996 /* NSURLComponents.swift in Sources */,
+				8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB6781C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8BFDB65F1C7518F800C94996 /* String.swift in Sources */,
 				8BFDB6A11C75B4A600C94996 /* LocationMeta.swift in Sources */,
@@ -668,6 +691,8 @@
 				8BFDB6911C75323900C94996 /* NSDateFormatter.swift in Sources */,
 				8BFDB6601C7518F800C94996 /* String.swift in Sources */,
 				8BFDB6A21C75B4A600C94996 /* LocationMeta.swift in Sources */,
+				8BE814FF1C7842DC005F23CE /* SequenceType.swift in Sources */,
+				8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB6791C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */,
 			);
@@ -684,7 +709,9 @@
 				8BFDB6801C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6921C75323900C94996 /* NSDateFormatter.swift in Sources */,
 				8BE19B2D1C72D71F00D4D437 /* DateTimeTests.swift in Sources */,
+				8BE814F61C784233005F23CE /* UIColor.swift in Sources */,
 				8BE19B3A1C72D83A00D4D437 /* ZamzamConfig.swift in Sources */,
+				8B7A402D1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB68D1C752C5C00C94996 /* UIApplication.swift in Sources */,
 				8BE19B2F1C72D71F00D4D437 /* WebTests.swift in Sources */,
 				8BFDB69D1C755A5300C94996 /* LocationTests.swift in Sources */,
@@ -692,6 +719,7 @@
 				8BFDB6611C7518F800C94996 /* String.swift in Sources */,
 				8BFDB66D1C751D3400C94996 /* UIViewController.swift in Sources */,
 				8BE19B2A1C72D71F00D4D437 /* FileTests.swift in Sources */,
+				8BE815001C7842DC005F23CE /* SequenceType.swift in Sources */,
 				8BFDB6861C7528A000C94996 /* NSUserDefaults.swift in Sources */,
 				8BFDB6711C751DF600C94996 /* UIImageView.swift in Sources */,
 				8BFDB6A31C75B4A600C94996 /* LocationMeta.swift in Sources */,
@@ -705,10 +733,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BFDB6621C7518F800C94996 /* String.swift in Sources */,
+				8BE815011C7842DC005F23CE /* SequenceType.swift in Sources */,
 				8BE19B471C72D83B00D4D437 /* ZamzamConfig.swift in Sources */,
 				8BFDB6811C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6931C75323900C94996 /* NSDateFormatter.swift in Sources */,
 				8BFDB65B1C75187200C94996 /* NSDate.swift in Sources */,
+				8B7A402E1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB67B1C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8BE19B1A1C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift in Sources */,
 				8BFDB6A41C75B4A600C94996 /* LocationMeta.swift in Sources */,

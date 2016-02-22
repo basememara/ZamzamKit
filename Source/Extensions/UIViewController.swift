@@ -14,7 +14,7 @@ public extension UIViewController {
     public func alert(message: String,
         title: String = "Alert",
         buttonTitle: String = "OK",
-        additionalAction: UIAlertAction?) {
+        additionalAction: UIAlertAction? = nil) {
             let alertController = UIAlertController(
                 title: title,
                 message: message,
