@@ -16,6 +16,14 @@
 		8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
 		8B1448051C7258F700043657 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
 		8B1448061C7258F700043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
+		8B2DE3E11C8A86B2008F1569 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
+		8B2DE3E21C8A86B2008F1569 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
+		8B2DE3E31C8A86B2008F1569 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
+		8B2DE3E41C8A86B2008F1569 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
+		8B2DE3E51C8A86B2008F1569 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
+		8B2DE3EC1C8A8F79008F1569 /* NSBundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EB1C8A8F79008F1569 /* NSBundleTests.swift */; };
+		8B2DE3EF1C8A90AF008F1569 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3ED1C8A90AF008F1569 /* Settings.bundle */; };
+		8B2DE3F01C8A90AF008F1569 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EE1C8A90AF008F1569 /* Settings.plist */; };
 		8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
@@ -161,6 +169,10 @@
 		8B1448411C725BFE00043657 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		8B1448431C725BFE00043657 /* Info-tvOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
 		8B1448441C725BFE00043657 /* Info-watchOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
+		8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSBundle.swift; path = Extensions/NSBundle.swift; sourceTree = "<group>"; };
+		8B2DE3EB1C8A8F79008F1569 /* NSBundleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBundleTests.swift; sourceTree = "<group>"; };
+		8B2DE3ED1C8A90AF008F1569 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		8B2DE3EE1C8A90AF008F1569 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
 		8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE19B0C1C72D6DF00D4D437 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -299,6 +311,8 @@
 			children = (
 				8BFDB69E1C75B16900C94996 /* ZamzamKit.playground */,
 				8BFDB6941C75388F00C94996 /* Extensions */,
+				8B2DE3ED1C8A90AF008F1569 /* Settings.bundle */,
+				8B2DE3EE1C8A90AF008F1569 /* Settings.plist */,
 				8BE19B0C1C72D6DF00D4D437 /* Info.plist */,
 			);
 			path = "ZamzamKit iOSTests";
@@ -332,6 +346,7 @@
 				8BFDB6741C751E8E00C94996 /* iOS */,
 				8BFDB67C1C7525BD00C94996 /* CLLocation.swift */,
 				8B7A40291C76245200A0077D /* CLLocationManager.swift */,
+				8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */,
 				8BFDB6561C75187200C94996 /* NSDate.swift */,
 				8BFDB68E1C75323900C94996 /* NSDateFormatter.swift */,
 				8BFDB6761C751F2300C94996 /* NSFileManager.swift */,
@@ -369,6 +384,7 @@
 				8BE19B271C72D71F00D4D437 /* DateTimeTests.swift */,
 				8BE19B231C72D71F00D4D437 /* FileTests.swift */,
 				8BFDB69C1C755A5300C94996 /* LocationTests.swift */,
+				8B2DE3EB1C8A8F79008F1569 /* NSBundleTests.swift */,
 				8BE19B251C72D71F00D4D437 /* StorageTests.swift */,
 				8BE19B281C72D71F00D4D437 /* StringTests.swift */,
 				8BE19B291C72D71F00D4D437 /* WebTests.swift */,
@@ -622,6 +638,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B2DE3EF1C8A90AF008F1569 /* Settings.bundle in Resources */,
+				8B2DE3F01C8A90AF008F1569 /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,6 +663,7 @@
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BFDB68F1C75323900C94996 /* NSDateFormatter.swift in Sources */,
 				8BE814F51C784233005F23CE /* UIColor.swift in Sources */,
+				8B2DE3E11C8A86B2008F1569 /* NSBundle.swift in Sources */,
 				8BFDB6571C75187200C94996 /* NSDate.swift in Sources */,
 				8BFDB6771C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8BFDB6891C7529AB00C94996 /* UILocalNotification.swift in Sources */,
@@ -671,6 +690,7 @@
 				8BFDB6651C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB6781C751F2300C94996 /* NSFileManager.swift in Sources */,
+				8B2DE3E21C8A86B2008F1569 /* NSBundle.swift in Sources */,
 				8BFDB65F1C7518F800C94996 /* String.swift in Sources */,
 				8BFDB6A11C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
@@ -683,6 +703,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B2DE3E31C8A86B2008F1569 /* NSBundle.swift in Sources */,
 				8BFDB6591C75187200C94996 /* NSDate.swift in Sources */,
 				8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6851C7528A000C94996 /* NSUserDefaults.swift in Sources */,
@@ -705,6 +726,7 @@
 				8BE19B3B1C72D83A00D4D437 /* ZamzamConstants.swift in Sources */,
 				8BE19B2E1C72D71F00D4D437 /* StringTests.swift in Sources */,
 				8BFDB6671C751AE600C94996 /* NSURLComponents.swift in Sources */,
+				8B2DE3EC1C8A8F79008F1569 /* NSBundleTests.swift in Sources */,
 				8BFDB67A1C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8BFDB6801C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6921C75323900C94996 /* NSDateFormatter.swift in Sources */,
@@ -714,6 +736,7 @@
 				8B7A402D1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB68D1C752C5C00C94996 /* UIApplication.swift in Sources */,
 				8BE19B2F1C72D71F00D4D437 /* WebTests.swift in Sources */,
+				8B2DE3E41C8A86B2008F1569 /* NSBundle.swift in Sources */,
 				8BFDB69D1C755A5300C94996 /* LocationTests.swift in Sources */,
 				8BE19B2C1C72D71F00D4D437 /* StorageTests.swift in Sources */,
 				8BFDB6611C7518F800C94996 /* String.swift in Sources */,
@@ -740,6 +763,7 @@
 				8BFDB65B1C75187200C94996 /* NSDate.swift in Sources */,
 				8B7A402E1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB67B1C751F2300C94996 /* NSFileManager.swift in Sources */,
+				8B2DE3E51C8A86B2008F1569 /* NSBundle.swift in Sources */,
 				8BE19B1A1C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift in Sources */,
 				8BFDB6A41C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BFDB6681C751AE600C94996 /* NSURLComponents.swift in Sources */,
