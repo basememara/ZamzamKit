@@ -79,11 +79,6 @@
 		8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB67C1C7525BD00C94996 /* CLLocation.swift */; };
 		8BFDB6801C7525BD00C94996 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB67C1C7525BD00C94996 /* CLLocation.swift */; };
 		8BFDB6811C7525BD00C94996 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB67C1C7525BD00C94996 /* CLLocation.swift */; };
-		8BFDB6831C7528A000C94996 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6821C7528A000C94996 /* NSUserDefaults.swift */; };
-		8BFDB6841C7528A000C94996 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6821C7528A000C94996 /* NSUserDefaults.swift */; };
-		8BFDB6851C7528A000C94996 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6821C7528A000C94996 /* NSUserDefaults.swift */; };
-		8BFDB6861C7528A000C94996 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6821C7528A000C94996 /* NSUserDefaults.swift */; };
-		8BFDB6871C7528A000C94996 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6821C7528A000C94996 /* NSUserDefaults.swift */; };
 		8BFDB6891C7529AB00C94996 /* UILocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */; };
 		8BFDB68A1C7529AB00C94996 /* UILocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */; };
 		8BFDB68C1C752C5C00C94996 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB68B1C752C5C00C94996 /* UIApplication.swift */; };
@@ -195,7 +190,6 @@
 		8BFDB6721C751E4F00C94996 /* WKInterfaceGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WKInterfaceGroup.swift; path = Extensions/WKInterfaceGroup.swift; sourceTree = "<group>"; };
 		8BFDB6761C751F2300C94996 /* NSFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSFileManager.swift; path = Extensions/NSFileManager.swift; sourceTree = "<group>"; };
 		8BFDB67C1C7525BD00C94996 /* CLLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocation.swift; path = Extensions/CLLocation.swift; sourceTree = "<group>"; };
-		8BFDB6821C7528A000C94996 /* NSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSUserDefaults.swift; path = Extensions/NSUserDefaults.swift; sourceTree = "<group>"; };
 		8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UILocalNotification.swift; path = Extensions/UILocalNotification.swift; sourceTree = "<group>"; };
 		8BFDB68B1C752C5C00C94996 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIApplication.swift; path = Extensions/UIApplication.swift; sourceTree = "<group>"; };
 		8BFDB68E1C75323900C94996 /* NSDateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateFormatter.swift; path = Extensions/NSDateFormatter.swift; sourceTree = "<group>"; };
@@ -351,7 +345,6 @@
 				8BFDB68E1C75323900C94996 /* NSDateFormatter.swift */,
 				8BFDB6761C751F2300C94996 /* NSFileManager.swift */,
 				8BFDB6631C751AE600C94996 /* NSURLComponents.swift */,
-				8BFDB6821C7528A000C94996 /* NSUserDefaults.swift */,
 				8BE814FC1C7842DC005F23CE /* SequenceType.swift */,
 				8BFDB65D1C7518F800C94996 /* String.swift */,
 			);
@@ -671,7 +664,6 @@
 				8BFDB6641C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8BFDB65E1C7518F800C94996 /* String.swift in Sources */,
 				8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */,
-				8BFDB6831C7528A000C94996 /* NSUserDefaults.swift in Sources */,
 				8B1448061C7258F700043657 /* ZamzamConstants.swift in Sources */,
 				8BE814FD1C7842DC005F23CE /* SequenceType.swift in Sources */,
 				8BFDB66A1C751D3400C94996 /* UIViewController.swift in Sources */,
@@ -695,7 +687,6 @@
 				8BFDB6A11C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
 				8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */,
-				8BFDB6841C7528A000C94996 /* NSUserDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,7 +697,6 @@
 				8B2DE3E31C8A86B2008F1569 /* NSBundle.swift in Sources */,
 				8BFDB6591C75187200C94996 /* NSDate.swift in Sources */,
 				8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */,
-				8BFDB6851C7528A000C94996 /* NSUserDefaults.swift in Sources */,
 				8B1447FF1C7258F500043657 /* ZamzamConfig.swift in Sources */,
 				8BFDB6661C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8BFDB6911C75323900C94996 /* NSDateFormatter.swift in Sources */,
@@ -743,7 +733,6 @@
 				8BFDB66D1C751D3400C94996 /* UIViewController.swift in Sources */,
 				8BE19B2A1C72D71F00D4D437 /* FileTests.swift in Sources */,
 				8BE815001C7842DC005F23CE /* SequenceType.swift in Sources */,
-				8BFDB6861C7528A000C94996 /* NSUserDefaults.swift in Sources */,
 				8BFDB6711C751DF600C94996 /* UIImageView.swift in Sources */,
 				8BFDB6A31C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BFDB68A1C7529AB00C94996 /* UILocalNotification.swift in Sources */,
@@ -768,7 +757,6 @@
 				8BFDB6A41C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BFDB6681C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8BE19B481C72D83B00D4D437 /* ZamzamConstants.swift in Sources */,
-				8BFDB6871C7528A000C94996 /* NSUserDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
