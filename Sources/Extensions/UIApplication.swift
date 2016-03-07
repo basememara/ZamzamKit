@@ -11,7 +11,7 @@ import UIKit
 
 public extension UIApplication {
     
-    public func registerUserNotifications(
+    public func registerUserNotificationSettings(
         actions: [UIMutableUserNotificationAction]? = nil,
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         type: UIUserNotificationType = [ .Alert, .Badge, .Sound ]) {
@@ -24,7 +24,7 @@ public extension UIApplication {
                 mainCategory = UIMutableUserNotificationCategory()
                 mainCategory!.identifier = category
                 mainCategory!.setActions(a, forContext: .Default)
-                mainCategory!.setActions(Array(a.prefix(2)), forContext: .Minimal)
+                mainCategory!.setActions(a, forContext: .Minimal) // TODO: add first 2
             }
             
             // Configure notifications
@@ -37,37 +37,6 @@ public extension UIApplication {
             // Register notifications
             self.registerUserNotificationSettings(notificationSettings)
     }
-    
-    /*public func register(application: UIApplication,
-    categoryActions: [String: [UIMutableUserNotificationAction]],
-    type: UIUserNotificationType = [.Alert, .Badge, .Sound]) {
-    let notificationSettings: UIUserNotificationSettings
-    
-    for category in categoryActions {
-    for action in category.1 {
-    
-    }
-    }
-    
-    // Setup actions if applicable
-    if let a = actions where a.count > 0 {
-    // Notification category
-    mainCategory = UIMutableUserNotificationCategory()
-    mainCategory!.identifier = category
-    mainCategory!.setActions(a, forContext: .Default)
-    mainCategory!.setActions(Array(a.prefix(2)), forContext: .Minimal)
-    }
-    
-    // Configure notifications
-    notificationSettings = UIUserNotificationSettings(
-    forTypes: type,
-    categories: mainCategory != nil
-    ? NSSet(objects: mainCategory!) as? Set<UIUserNotificationCategory>
-    : nil)
-    
-    // Register notifications
-    application.registerUserNotificationSettings(notificationSettings)
-    }*/
     
     public func scheduleLocalNotification(
         date: NSDate,
