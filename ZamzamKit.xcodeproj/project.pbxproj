@@ -29,6 +29,11 @@
 		8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402D1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402E1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
+		8B840E601C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */; };
+		8B840E611C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */; };
+		8B840E621C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */; };
+		8B840E631C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */; };
+		8B840E641C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */; };
 		8BE19B0D1C72D6DF00D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; };
 		8BE19B1A1C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B191C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift */; };
 		8BE19B1C1C72D6F200D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447E21C7257F100043657 /* ZamzamKit.framework */; };
@@ -169,6 +174,7 @@
 		8B2DE3ED1C8A90AF008F1569 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8B2DE3EE1C8A90AF008F1569 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
+		8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerLocatable.swift; sourceTree = "<group>"; };
 		8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE19B0C1C72D6DF00D4D437 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BE19B171C72D6F200D4D437 /* ZamzamKit tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -269,6 +275,7 @@
 			children = (
 				8BFDB65C1C75187800C94996 /* Extensions */,
 				8BFDB6A51C75B4B200C94996 /* Models */,
+				8B840E651C904F3300D85781 /* Protocols */,
 				8B1447811C722F5E00043657 /* ZamzamConfig.swift */,
 				8B1447821C722F5E00043657 /* ZamzamConstants.swift */,
 				8B1447F71C7258E500043657 /* ZamzamKit.h */,
@@ -298,6 +305,14 @@
 				8B1447B31C72539600043657 /* Timepiece.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8B840E651C904F3300D85781 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		8BE19B091C72D6DF00D4D437 /* ZamzamKit iOSTests */ = {
@@ -354,11 +369,11 @@
 		8BFDB6741C751E8E00C94996 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				8BFDB6691C751D3400C94996 /* UIViewController.swift */,
-				8BFDB66F1C751DF600C94996 /* UIImageView.swift */,
-				8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */,
 				8BFDB68B1C752C5C00C94996 /* UIApplication.swift */,
 				8BE814F41C784233005F23CE /* UIColor.swift */,
+				8BFDB66F1C751DF600C94996 /* UIImageView.swift */,
+				8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */,
+				8BFDB6691C751D3400C94996 /* UIViewController.swift */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -654,6 +669,7 @@
 				8BFDB6701C751DF600C94996 /* UIImageView.swift in Sources */,
 				8BFDB67D1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,
+				8B840E601C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */,
 				8BFDB68F1C75323900C94996 /* NSDateFormatter.swift in Sources */,
 				8BE814F51C784233005F23CE /* UIColor.swift in Sources */,
 				8B2DE3E11C8A86B2008F1569 /* NSBundle.swift in Sources */,
@@ -684,6 +700,7 @@
 				8BFDB6781C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8B2DE3E21C8A86B2008F1569 /* NSBundle.swift in Sources */,
 				8BFDB65F1C7518F800C94996 /* String.swift in Sources */,
+				8B840E611C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */,
 				8BFDB6A11C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
 				8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */,
@@ -705,6 +722,7 @@
 				8BE814FF1C7842DC005F23CE /* SequenceType.swift in Sources */,
 				8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB6791C751F2300C94996 /* NSFileManager.swift in Sources */,
+				8B840E621C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */,
 				8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -717,6 +735,7 @@
 				8BE19B2E1C72D71F00D4D437 /* StringTests.swift in Sources */,
 				8BFDB6671C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8B2DE3EC1C8A8F79008F1569 /* NSBundleTests.swift in Sources */,
+				8B840E631C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */,
 				8BFDB67A1C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8BFDB6801C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6921C75323900C94996 /* NSDateFormatter.swift in Sources */,
@@ -754,6 +773,7 @@
 				8BFDB67B1C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8B2DE3E51C8A86B2008F1569 /* NSBundle.swift in Sources */,
 				8BE19B1A1C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift in Sources */,
+				8B840E641C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */,
 				8BFDB6A41C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BFDB6681C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8BE19B481C72D83B00D4D437 /* ZamzamConstants.swift in Sources */,
