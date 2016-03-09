@@ -9,15 +9,15 @@
 import Foundation
 import CoreLocation
 
-protocol ViewControllerLocatable: CLLocationManagerDelegate {
-    var locationManager: CLLocationManager? { get set }
+public protocol ViewControllerLocatable: CLLocationManagerDelegate {
+    public var locationManager: CLLocationManager? { get set }
     
-    func updateLocation(locations: [CLLocation]?)
+    public func updateLocation(locations: [CLLocation]?)
 }
 
-extension ViewControllerLocatable {
+public extension ViewControllerLocatable {
     
-    func setupLocationManager(
+    public func setupLocationManager(
         desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyThreeKilometers,
         distanceFilter: Double = 1000.0) {
             // Start requesting GPS location
@@ -28,12 +28,12 @@ extension ViewControllerLocatable {
             }
     }
     
-    func updateLocation(location: CLLocation?) {
+    public func updateLocation(location: CLLocation?) {
         guard let location = location else { return }
         updateLocation([location])
     }
     
-    func updateLocation(latitude latitude: Double, longitude: Double) {
+    public func updateLocation(latitude latitude: Double, longitude: Double) {
         updateLocation([CLLocation(latitude: latitude, longitude: latitude)])
     }
     
