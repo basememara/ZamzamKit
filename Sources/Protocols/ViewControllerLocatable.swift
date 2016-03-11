@@ -34,7 +34,7 @@ public extension ViewControllerLocatable {
     }
     
     func updateLocation(latitude latitude: Double, longitude: Double) {
-        updateLocation([CLLocation(latitude: latitude, longitude: latitude)])
+        updateLocation([CLLocation(latitude: latitude, longitude: longitude)])
     }
     
 }
