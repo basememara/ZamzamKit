@@ -47,7 +47,7 @@ public extension UIApplication {
         badge: Int = 0,
         sound: String? = UILocalNotificationDefaultSoundName,
         occurrence: NSCalendarUnit? = nil,
-        incrementDayIfPast: Bool = true,
+        incrementDayIfPast: Bool = false,
         removeDuplicates: Bool = false) {
             // De-dup previous notifications if applicable
             if let id = identifier where removeDuplicates {
