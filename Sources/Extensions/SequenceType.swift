@@ -13,24 +13,34 @@ public extension SequenceType {
     /**
      Returns the first that satisfies the predicate includeElement, or nil. Similar to `filter` but stops when one element is found. Thanks to [bigonotetaking](https://bigonotetaking.wordpress.com/2015/08/22/using-higher-order-methods-everywhere/)
      
-     - parameter includeElement: Predicate that the Element must satisfy.
+     - parameter predicate: Predicate that the Element must satisfy.
      
      - returns: First element that satisfies the predicate, or nil.
      */
-    func first(@noescape includeElement: Generator.Element -> Bool) -> Generator.Element? {
-        for x in self where includeElement(x) { return x }
+    public func first(@noescape predicate: Generator.Element -> Bool) -> Generator.Element? {
+        for x in self where predicate(x) { return x }
         return nil
     }
     
     /**
      Returns true or false if the predicate includeElement
      
-     - parameter includeElement: Predicate that the Element must satisfy
+     - parameter predicate: Predicate that the Element must satisfy
      
      - returns: Does element exists that satisfies the predicate
      */
-    func any(@noescape includeElement: Generator.Element -> Bool) -> Bool {
-        for x in self where includeElement(x) { return true }
-        return false
+    public func any(@noescape predicate: Generator.Element -> Bool) -> Bool {
+        return contains(predicate)
+    }
+    
+    /**
+     Returns true or false if the predicate returns all elements
+     
+     - parameter predicate: Predicate that all elements must satisfy
+     
+     - returns: Does the sequence contain all elements that satisfy the predicate
+     */
+    public func all(@noescape predicate:(Generator.Element) -> Bool) -> Bool {
+        return !contains { !predicate($0) }
     }
 }
