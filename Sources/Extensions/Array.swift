@@ -14,8 +14,27 @@ public extension Array {
         return self.count > 0
     }
     
-    public func take(count: Int) -> ArraySlice<Element> {
-        return self[0 ..< count]
+    public func take(count: Int) -> [Element] {
+        var to: [Element] = []
+        var i = 0
+        while i < self.count && i < count {
+            to.append(self[i++])
+        }
+        return to
+    }
+    
+    public func drop(count: Int) -> [Element] {
+        var to: [Element] = []
+        var i = count
+        while i < self.count {
+            to.append(self[i++])
+        }
+        return to
+    }
+    
+    public func get(index: Int) -> Element? {
+        return self.indices.contains(index)
+            ? self[index] : nil
     }
 
 }
