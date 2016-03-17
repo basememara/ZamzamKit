@@ -16,14 +16,14 @@ public extension CLLocation {
      - parameter coordinates: Latitude and longitude] coordinates
      - parameter completion: Async callback with retrived data
      */
-    public func getMeta(completionHandler: (locationMeta: LocationMeta?) -> Void) {
+    public func getMeta(handler: (locationMeta: LocationMeta?) -> Void) {
         // Reverse geocode stored coordinates
         CLGeocoder().reverseGeocodeLocation(
             CLLocation(latitude: self.coordinate.latitude, longitude: self.coordinate.longitude)) {
                 placemarks, error in
                 // Validate values
                 guard let mark = placemarks?[0] where error == nil else {
-                    return completionHandler(locationMeta: nil)
+                    return handler(locationMeta: nil)
                 }
                 
                 // Get timezone if applicable
@@ -42,7 +42,7 @@ public extension CLLocation {
                 }
                 
                 // Process callback
-                completionHandler(locationMeta: LocationMeta(
+                handler(locationMeta: LocationMeta(
                     coordinates: (self.coordinate.latitude, self.coordinate.longitude),
                     locality: mark.locality,
                     country: mark.country,

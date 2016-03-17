@@ -11,22 +11,26 @@ import UIKit
 
 public extension UIViewController {
     
-    public func alert(message: String,
+    public func alert(
+        message: String? = nil,
         title: String = "Alert",
         buttonTitle: String = "OK",
-        additionalAction: UIAlertAction? = nil) {
+        additionalActions: [UIAlertAction]? = nil,
+        handler: ((action: UIAlertAction) -> Void)? = nil) {
             let alertController = UIAlertController(
                 title: title,
                 message: message,
                 preferredStyle: .Alert
             )
             
-            if let action = additionalAction {
-                alertController.addAction(action)
+            if let additionalActions = additionalActions {
+                additionalActions.forEach { item in
+                    alertController.addAction(item)
+                }
             }
             
-            let okAction = UIAlertAction(title: buttonTitle, style: .Default, handler: nil)
-            alertController.addAction(okAction)
+            alertController.addAction(UIAlertAction(
+                title: buttonTitle, style: .Default, handler: handler))
             
             self.presentViewController(alertController, animated: true, completion: nil)
     }

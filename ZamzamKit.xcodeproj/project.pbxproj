@@ -24,6 +24,60 @@
 		8B2DE3EC1C8A8F79008F1569 /* NSBundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EB1C8A8F79008F1569 /* NSBundleTests.swift */; };
 		8B2DE3EF1C8A90AF008F1569 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3ED1C8A90AF008F1569 /* Settings.bundle */; };
 		8B2DE3F01C8A90AF008F1569 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EE1C8A90AF008F1569 /* Settings.plist */; };
+		8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316071C9B22F50094A6C4 /* AppDelegate.swift */; };
+		8B53160A1C9B22F50094A6C4 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316091C9B22F50094A6C4 /* FirstViewController.swift */; };
+		8B53160C1C9B22F60094A6C4 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53160B1C9B22F60094A6C4 /* SecondViewController.swift */; };
+		8B53160F1C9B22F60094A6C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B53160D1C9B22F60094A6C4 /* Main.storyboard */; };
+		8B5316111C9B22F60094A6C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B5316101C9B22F60094A6C4 /* Assets.xcassets */; };
+		8B5316141C9B22F60094A6C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B5316121C9B22F60094A6C4 /* LaunchScreen.storyboard */; };
+		8B53161F1C9B23140094A6C4 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B53161D1C9B23140094A6C4 /* Interface.storyboard */; };
+		8B5316211C9B23140094A6C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B5316201C9B23140094A6C4 /* Assets.xcassets */; };
+		8B5316281C9B23140094A6C4 /* ZamzamKit Example Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8B5316271C9B23140094A6C4 /* ZamzamKit Example Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8B53162F1C9B23140094A6C4 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53162E1C9B23140094A6C4 /* InterfaceController.swift */; };
+		8B5316311C9B23140094A6C4 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316301C9B23140094A6C4 /* ExtensionDelegate.swift */; };
+		8B5316331C9B23140094A6C4 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316321C9B23140094A6C4 /* NotificationController.swift */; };
+		8B5316351C9B23140094A6C4 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316341C9B23140094A6C4 /* GlanceController.swift */; };
+		8B5316371C9B23140094A6C4 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316361C9B23140094A6C4 /* ComplicationController.swift */; };
+		8B5316391C9B23140094A6C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B5316381C9B23140094A6C4 /* Assets.xcassets */; };
+		8B53163D1C9B23140094A6C4 /* ZamzamKit Example Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8B53161B1C9B23140094A6C4 /* ZamzamKit Example Watch.app */; };
+		8B5316471C9B23BF0094A6C4 /* WKInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316461C9B23BF0094A6C4 /* WKInterfaceController.swift */; };
+		8B5316481C9B23BF0094A6C4 /* WKInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316461C9B23BF0094A6C4 /* WKInterfaceController.swift */; };
+		8B5316491C9B246F0094A6C4 /* WKInterfaceGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6721C751E4F00C94996 /* WKInterfaceGroup.swift */; };
+		8B53164A1C9B24770094A6C4 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5086A1C99DD1E00AE205E /* Array.swift */; };
+		8B53164B1C9B24790094A6C4 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5086A1C99DD1E00AE205E /* Array.swift */; };
+		8B53164C1C9B247C0094A6C4 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB67C1C7525BD00C94996 /* CLLocation.swift */; };
+		8B53164D1C9B247D0094A6C4 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB67C1C7525BD00C94996 /* CLLocation.swift */; };
+		8B53164E1C9B247F0094A6C4 /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
+		8B53164F1C9B24800094A6C4 /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
+		8B5316501C9B24820094A6C4 /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD508751C99E18500AE205E /* CollectionType.swift */; };
+		8B5316511C9B24830094A6C4 /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD508751C99E18500AE205E /* CollectionType.swift */; };
+		8B5316521C9B24870094A6C4 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
+		8B5316531C9B24870094A6C4 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
+		8B5316541C9B248A0094A6C4 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6561C75187200C94996 /* NSDate.swift */; };
+		8B5316551C9B248B0094A6C4 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6561C75187200C94996 /* NSDate.swift */; };
+		8B5316561C9B248D0094A6C4 /* NSDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB68E1C75323900C94996 /* NSDateFormatter.swift */; };
+		8B5316571C9B248E0094A6C4 /* NSDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB68E1C75323900C94996 /* NSDateFormatter.swift */; };
+		8B5316581C9B24910094A6C4 /* NSFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6761C751F2300C94996 /* NSFileManager.swift */; };
+		8B5316591C9B24910094A6C4 /* NSFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6761C751F2300C94996 /* NSFileManager.swift */; };
+		8B53165A1C9B24940094A6C4 /* NSURLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6631C751AE600C94996 /* NSURLComponents.swift */; };
+		8B53165B1C9B24950094A6C4 /* NSURLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6631C751AE600C94996 /* NSURLComponents.swift */; };
+		8B53165C1C9B24970094A6C4 /* SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* SequenceType.swift */; };
+		8B53165D1C9B24980094A6C4 /* SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* SequenceType.swift */; };
+		8B53165E1C9B249B0094A6C4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB65D1C7518F800C94996 /* String.swift */; };
+		8B53165F1C9B249C0094A6C4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB65D1C7518F800C94996 /* String.swift */; };
+		8B5316601C9B249E0094A6C4 /* LocationMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */; };
+		8B5316611C9B249F0094A6C4 /* LocationMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */; };
+		8B5316621C9B24A10094A6C4 /* ViewControllerLocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */; };
+		8B5316631C9B24A20094A6C4 /* ViewControllerLocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */; };
+		8B5316641C9B24A40094A6C4 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
+		8B5316651C9B24A50094A6C4 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
+		8B5316661C9B24A70094A6C4 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
+		8B5316671C9B24A80094A6C4 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
+		8B5316681C9B2D6C0094A6C4 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB68B1C752C5C00C94996 /* UIApplication.swift */; };
+		8B5316691C9B2D6F0094A6C4 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* UIColor.swift */; };
+		8B53166A1C9B2D720094A6C4 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB66F1C751DF600C94996 /* UIImageView.swift */; };
+		8B53166B1C9B2D750094A6C4 /* UILocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */; };
+		8B53166C1C9B2D790094A6C4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6691C751D3400C94996 /* UIViewController.swift */; };
 		8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
@@ -112,6 +166,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8B5316291C9B23140094A6C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B1447461C72237E00043657 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B5316261C9B23140094A6C4;
+			remoteInfo = "ZamzamKit Example Watch Extension";
+		};
+		8B53163B1C9B23140094A6C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B1447461C72237E00043657 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B53161A1C9B23140094A6C4;
+			remoteInfo = "ZamzamKit Example Watch";
+		};
 		8BE19B0E1C72D6DF00D4D437 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8B1447461C72237E00043657 /* Project object */;
@@ -163,6 +231,31 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8B5316411C9B23140094A6C4 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8B5316281C9B23140094A6C4 /* ZamzamKit Example Watch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B5316451C9B23140094A6C4 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				8B53163D1C9B23140094A6C4 /* ZamzamKit Example Watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8B14476B1C722D5700043657 /* ZamzamKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ZamzamKit.podspec; sourceTree = "<group>"; };
 		8B14476C1C722D5700043657 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -183,6 +276,28 @@
 		8B2DE3EB1C8A8F79008F1569 /* NSBundleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBundleTests.swift; sourceTree = "<group>"; };
 		8B2DE3ED1C8A90AF008F1569 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8B2DE3EE1C8A90AF008F1569 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		8B5316051C9B22F40094A6C4 /* ZamzamKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZamzamKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B5316071C9B22F50094A6C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8B5316091C9B22F50094A6C4 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		8B53160B1C9B22F60094A6C4 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		8B53160E1C9B22F60094A6C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8B5316101C9B22F60094A6C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8B5316131C9B22F60094A6C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8B5316151C9B22F60094A6C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B53161B1C9B23140094A6C4 /* ZamzamKit Example Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZamzamKit Example Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B53161E1C9B23140094A6C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		8B5316201C9B23140094A6C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8B5316221C9B23140094A6C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B5316271C9B23140094A6C4 /* ZamzamKit Example Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "ZamzamKit Example Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B53162D1C9B23140094A6C4 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		8B53162E1C9B23140094A6C4 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		8B5316301C9B23140094A6C4 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		8B5316321C9B23140094A6C4 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		8B5316341C9B23140094A6C4 /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
+		8B5316361C9B23140094A6C4 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		8B5316381C9B23140094A6C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8B53163A1C9B23140094A6C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B5316461C9B23BF0094A6C4 /* WKInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WKInterfaceController.swift; path = Extensions/WKInterfaceController.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
 		8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerLocatable.swift; sourceTree = "<group>"; };
 		8BD5086A1C99DD1E00AE205E /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Array.swift; path = Extensions/Array.swift; sourceTree = "<group>"; };
@@ -238,6 +353,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8B5316021C9B22F40094A6C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B5316241C9B23140094A6C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8BE19B051C72D6DF00D4D437 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -265,6 +394,9 @@
 				8B1447511C72237E00043657 /* Sources */,
 				8BE19B091C72D6DF00D4D437 /* ZamzamKit iOSTests */,
 				8BE19B181C72D6F200D4D437 /* ZamzamKit tvOSTests */,
+				8B5316061C9B22F40094A6C4 /* ZamzamKit Example */,
+				8B53161C1C9B23140094A6C4 /* ZamzamKit Example Watch */,
+				8B53162B1C9B23140094A6C4 /* ZamzamKit Example Watch Extension */,
 				8B1447501C72237E00043657 /* Products */,
 				8B1447B51C7253B100043657 /* Frameworks */,
 			);
@@ -278,6 +410,9 @@
 				8B1447E21C7257F100043657 /* ZamzamKit.framework */,
 				8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */,
 				8BE19B171C72D6F200D4D437 /* ZamzamKit tvOSTests.xctest */,
+				8B5316051C9B22F40094A6C4 /* ZamzamKit Example.app */,
+				8B53161B1C9B23140094A6C4 /* ZamzamKit Example Watch.app */,
+				8B5316271C9B23140094A6C4 /* ZamzamKit Example Watch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -317,6 +452,53 @@
 				8B1447B31C72539600043657 /* Timepiece.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8B5316061C9B22F40094A6C4 /* ZamzamKit Example */ = {
+			isa = PBXGroup;
+			children = (
+				8B5316071C9B22F50094A6C4 /* AppDelegate.swift */,
+				8B5316091C9B22F50094A6C4 /* FirstViewController.swift */,
+				8B53160B1C9B22F60094A6C4 /* SecondViewController.swift */,
+				8B53160D1C9B22F60094A6C4 /* Main.storyboard */,
+				8B5316101C9B22F60094A6C4 /* Assets.xcassets */,
+				8B5316121C9B22F60094A6C4 /* LaunchScreen.storyboard */,
+				8B5316151C9B22F60094A6C4 /* Info.plist */,
+			);
+			path = "ZamzamKit Example";
+			sourceTree = "<group>";
+		};
+		8B53161C1C9B23140094A6C4 /* ZamzamKit Example Watch */ = {
+			isa = PBXGroup;
+			children = (
+				8B53161D1C9B23140094A6C4 /* Interface.storyboard */,
+				8B5316201C9B23140094A6C4 /* Assets.xcassets */,
+				8B5316221C9B23140094A6C4 /* Info.plist */,
+			);
+			path = "ZamzamKit Example Watch";
+			sourceTree = "<group>";
+		};
+		8B53162B1C9B23140094A6C4 /* ZamzamKit Example Watch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8B53162E1C9B23140094A6C4 /* InterfaceController.swift */,
+				8B5316301C9B23140094A6C4 /* ExtensionDelegate.swift */,
+				8B5316321C9B23140094A6C4 /* NotificationController.swift */,
+				8B5316341C9B23140094A6C4 /* GlanceController.swift */,
+				8B5316361C9B23140094A6C4 /* ComplicationController.swift */,
+				8B5316381C9B23140094A6C4 /* Assets.xcassets */,
+				8B53163A1C9B23140094A6C4 /* Info.plist */,
+				8B53162C1C9B23140094A6C4 /* Supporting Files */,
+			);
+			path = "ZamzamKit Example Watch Extension";
+			sourceTree = "<group>";
+		};
+		8B53162C1C9B23140094A6C4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8B53162D1C9B23140094A6C4 /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		8B840E651C904F3300D85781 /* Protocols */ = {
@@ -396,6 +578,7 @@
 			isa = PBXGroup;
 			children = (
 				8BFDB6721C751E4F00C94996 /* WKInterfaceGroup.swift */,
+				8B5316461C9B23BF0094A6C4 /* WKInterfaceController.swift */,
 			);
 			name = watchOS;
 			sourceTree = "<group>";
@@ -506,6 +689,59 @@
 			productReference = 8B1447E21C7257F100043657 /* ZamzamKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		8B5316041C9B22F40094A6C4 /* ZamzamKit Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B5316161C9B22F60094A6C4 /* Build configuration list for PBXNativeTarget "ZamzamKit Example" */;
+			buildPhases = (
+				8B5316011C9B22F40094A6C4 /* Sources */,
+				8B5316021C9B22F40094A6C4 /* Frameworks */,
+				8B5316031C9B22F40094A6C4 /* Resources */,
+				8B5316451C9B23140094A6C4 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8B53163C1C9B23140094A6C4 /* PBXTargetDependency */,
+			);
+			name = "ZamzamKit Example";
+			productName = "ZamzamKit Example";
+			productReference = 8B5316051C9B22F40094A6C4 /* ZamzamKit Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8B53161A1C9B23140094A6C4 /* ZamzamKit Example Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B5316421C9B23140094A6C4 /* Build configuration list for PBXNativeTarget "ZamzamKit Example Watch" */;
+			buildPhases = (
+				8B5316191C9B23140094A6C4 /* Resources */,
+				8B5316411C9B23140094A6C4 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8B53162A1C9B23140094A6C4 /* PBXTargetDependency */,
+			);
+			name = "ZamzamKit Example Watch";
+			productName = "ZamzamKit Example Watch";
+			productReference = 8B53161B1C9B23140094A6C4 /* ZamzamKit Example Watch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		8B5316261C9B23140094A6C4 /* ZamzamKit Example Watch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B53163E1C9B23140094A6C4 /* Build configuration list for PBXNativeTarget "ZamzamKit Example Watch Extension" */;
+			buildPhases = (
+				8B5316231C9B23140094A6C4 /* Sources */,
+				8B5316241C9B23140094A6C4 /* Frameworks */,
+				8B5316251C9B23140094A6C4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ZamzamKit Example Watch Extension";
+			productName = "ZamzamKit Example Watch Extension";
+			productReference = 8B5316271C9B23140094A6C4 /* ZamzamKit Example Watch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		8BE19B071C72D6DF00D4D437 /* ZamzamKit iOSTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BE19B121C72D6DF00D4D437 /* Build configuration list for PBXNativeTarget "ZamzamKit iOSTests" */;
@@ -561,6 +797,15 @@
 					8B1447E11C7257F100043657 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
+					8B5316041C9B22F40094A6C4 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					8B53161A1C9B23140094A6C4 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					8B5316261C9B23140094A6C4 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 					8BE19B071C72D6DF00D4D437 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
@@ -575,6 +820,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 8B1447451C72237E00043657;
 			productRefGroup = 8B1447501C72237E00043657 /* Products */;
@@ -592,6 +838,9 @@
 				8B1447E11C7257F100043657 /* ZamzamKit tvOS */,
 				8BE19B071C72D6DF00D4D437 /* ZamzamKit iOSTests */,
 				8BE19B161C72D6F200D4D437 /* ZamzamKit tvOSTests */,
+				8B5316041C9B22F40094A6C4 /* ZamzamKit Example */,
+				8B53161A1C9B23140094A6C4 /* ZamzamKit Example Watch */,
+				8B5316261C9B23140094A6C4 /* ZamzamKit Example Watch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -656,6 +905,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8B5316031C9B22F40094A6C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B5316141C9B22F60094A6C4 /* LaunchScreen.storyboard in Resources */,
+				8B5316111C9B22F60094A6C4 /* Assets.xcassets in Resources */,
+				8B53160F1C9B22F60094A6C4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B5316191C9B23140094A6C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B5316211C9B23140094A6C4 /* Assets.xcassets in Resources */,
+				8B53161F1C9B23140094A6C4 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B5316251C9B23140094A6C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B5316391C9B23140094A6C4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8BE19B061C72D6DF00D4D437 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -712,6 +988,7 @@
 				8B1448021C7258F600043657 /* ZamzamConfig.swift in Sources */,
 				8BFDB6901C75323900C94996 /* NSDateFormatter.swift in Sources */,
 				8BFDB6651C751AE600C94996 /* NSURLComponents.swift in Sources */,
+				8B5316471C9B23BF0094A6C4 /* WKInterfaceController.swift in Sources */,
 				8BD5086C1C99DD1E00AE205E /* Array.swift in Sources */,
 				8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB6781C751F2300C94996 /* NSFileManager.swift in Sources */,
@@ -744,6 +1021,65 @@
 				8BFDB6791C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8B840E621C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */,
 				8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B5316011C9B22F40094A6C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B53164C1C9B247C0094A6C4 /* CLLocation.swift in Sources */,
+				8B5316661C9B24A70094A6C4 /* ZamzamConstants.swift in Sources */,
+				8B53165C1C9B24970094A6C4 /* SequenceType.swift in Sources */,
+				8B5316501C9B24820094A6C4 /* CollectionType.swift in Sources */,
+				8B5316641C9B24A40094A6C4 /* ZamzamConfig.swift in Sources */,
+				8B53160C1C9B22F60094A6C4 /* SecondViewController.swift in Sources */,
+				8B53166C1C9B2D790094A6C4 /* UIViewController.swift in Sources */,
+				8B53165E1C9B249B0094A6C4 /* String.swift in Sources */,
+				8B5316561C9B248D0094A6C4 /* NSDateFormatter.swift in Sources */,
+				8B5316681C9B2D6C0094A6C4 /* UIApplication.swift in Sources */,
+				8B5316691C9B2D6F0094A6C4 /* UIColor.swift in Sources */,
+				8B5316581C9B24910094A6C4 /* NSFileManager.swift in Sources */,
+				8B5316601C9B249E0094A6C4 /* LocationMeta.swift in Sources */,
+				8B53164A1C9B24770094A6C4 /* Array.swift in Sources */,
+				8B5316541C9B248A0094A6C4 /* NSDate.swift in Sources */,
+				8B5316521C9B24870094A6C4 /* NSBundle.swift in Sources */,
+				8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */,
+				8B53166A1C9B2D720094A6C4 /* UIImageView.swift in Sources */,
+				8B53160A1C9B22F50094A6C4 /* FirstViewController.swift in Sources */,
+				8B53165A1C9B24940094A6C4 /* NSURLComponents.swift in Sources */,
+				8B5316621C9B24A10094A6C4 /* ViewControllerLocatable.swift in Sources */,
+				8B53166B1C9B2D750094A6C4 /* UILocalNotification.swift in Sources */,
+				8B53164E1C9B247F0094A6C4 /* CLLocationManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B5316231C9B23140094A6C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B5316531C9B24870094A6C4 /* NSBundle.swift in Sources */,
+				8B53164D1C9B247D0094A6C4 /* CLLocation.swift in Sources */,
+				8B53164F1C9B24800094A6C4 /* CLLocationManager.swift in Sources */,
+				8B5316651C9B24A50094A6C4 /* ZamzamConfig.swift in Sources */,
+				8B5316491C9B246F0094A6C4 /* WKInterfaceGroup.swift in Sources */,
+				8B5316511C9B24830094A6C4 /* CollectionType.swift in Sources */,
+				8B5316331C9B23140094A6C4 /* NotificationController.swift in Sources */,
+				8B5316481C9B23BF0094A6C4 /* WKInterfaceController.swift in Sources */,
+				8B5316311C9B23140094A6C4 /* ExtensionDelegate.swift in Sources */,
+				8B5316371C9B23140094A6C4 /* ComplicationController.swift in Sources */,
+				8B5316591C9B24910094A6C4 /* NSFileManager.swift in Sources */,
+				8B53165B1C9B24950094A6C4 /* NSURLComponents.swift in Sources */,
+				8B5316571C9B248E0094A6C4 /* NSDateFormatter.swift in Sources */,
+				8B53165F1C9B249C0094A6C4 /* String.swift in Sources */,
+				8B53164B1C9B24790094A6C4 /* Array.swift in Sources */,
+				8B5316671C9B24A80094A6C4 /* ZamzamConstants.swift in Sources */,
+				8B5316631C9B24A20094A6C4 /* ViewControllerLocatable.swift in Sources */,
+				8B5316611C9B249F0094A6C4 /* LocationMeta.swift in Sources */,
+				8B5316551C9B248B0094A6C4 /* NSDate.swift in Sources */,
+				8B53162F1C9B23140094A6C4 /* InterfaceController.swift in Sources */,
+				8B53165D1C9B24980094A6C4 /* SequenceType.swift in Sources */,
+				8B5316351C9B23140094A6C4 /* GlanceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -807,6 +1143,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8B53162A1C9B23140094A6C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B5316261C9B23140094A6C4 /* ZamzamKit Example Watch Extension */;
+			targetProxy = 8B5316291C9B23140094A6C4 /* PBXContainerItemProxy */;
+		};
+		8B53163C1C9B23140094A6C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B53161A1C9B23140094A6C4 /* ZamzamKit Example Watch */;
+			targetProxy = 8B53163B1C9B23140094A6C4 /* PBXContainerItemProxy */;
+		};
 		8BE19B0F1C72D6DF00D4D437 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8B1447C71C72577900043657 /* ZamzamKit iOS */;
@@ -818,6 +1164,33 @@
 			targetProxy = 8BE19B1D1C72D6F200D4D437 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8B53160D1C9B22F60094A6C4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8B53160E1C9B22F60094A6C4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8B5316121C9B22F60094A6C4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8B5316131C9B22F60094A6C4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8B53161D1C9B23140094A6C4 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8B53161E1C9B23140094A6C4 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8B1447611C72237E00043657 /* Debug */ = {
@@ -1029,6 +1402,92 @@
 			};
 			name = Release;
 		};
+		8B5316171C9B22F60094A6C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "ZamzamKit Example/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8B5316181C9B22F60094A6C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "ZamzamKit Example/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8B53163F1C9B23140094A6C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				INFOPLIST_FILE = "ZamzamKit Example Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-Example.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Debug;
+		};
+		8B5316401C9B23140094A6C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				INFOPLIST_FILE = "ZamzamKit Example Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-Example.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Release;
+		};
+		8B5316431C9B23140094A6C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = ZamzamKit_Example_Watch_Extension;
+				INFOPLIST_FILE = "ZamzamKit Example Watch/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-Example.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Debug;
+		};
+		8B5316441C9B23140094A6C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = ZamzamKit_Example_Watch_Extension;
+				INFOPLIST_FILE = "ZamzamKit Example Watch/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-Example.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Release;
+		};
 		8BE19B101C72D6DF00D4D437 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1115,6 +1574,30 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		8B5316161C9B22F60094A6C4 /* Build configuration list for PBXNativeTarget "ZamzamKit Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B5316171C9B22F60094A6C4 /* Debug */,
+				8B5316181C9B22F60094A6C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8B53163E1C9B23140094A6C4 /* Build configuration list for PBXNativeTarget "ZamzamKit Example Watch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B53163F1C9B23140094A6C4 /* Debug */,
+				8B5316401C9B23140094A6C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8B5316421C9B23140094A6C4 /* Build configuration list for PBXNativeTarget "ZamzamKit Example Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B5316431C9B23140094A6C4 /* Debug */,
+				8B5316441C9B23140094A6C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		8BE19B121C72D6DF00D4D437 /* Build configuration list for PBXNativeTarget "ZamzamKit iOSTests" */ = {
 			isa = XCConfigurationList;
