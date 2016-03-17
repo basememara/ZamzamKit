@@ -1582,6 +1582,7 @@
 				8B5316181C9B22F60094A6C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8B53163E1C9B23140094A6C4 /* Build configuration list for PBXNativeTarget "ZamzamKit Example Watch Extension" */ = {
 			isa = XCConfigurationList;
@@ -1590,6 +1591,7 @@
 				8B5316401C9B23140094A6C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8B5316421C9B23140094A6C4 /* Build configuration list for PBXNativeTarget "ZamzamKit Example Watch" */ = {
 			isa = XCConfigurationList;
@@ -1598,6 +1600,7 @@
 				8B5316441C9B23140094A6C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8BE19B121C72D6DF00D4D437 /* Build configuration list for PBXNativeTarget "ZamzamKit iOSTests" */ = {
 			isa = XCConfigurationList;

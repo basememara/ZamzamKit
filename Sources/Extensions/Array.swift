@@ -36,5 +36,29 @@ public extension Array {
         return self.indices.contains(index)
             ? self[index] : nil
     }
+    
+    public func closestMatch(index: Int, predicate: (Element) -> Bool) -> (Int, Element)? {
+        if predicate(self[index]) {
+            return (index, self[index])
+        }
+        
+        var delta = 1
+        
+        while(true) {
+            guard index + delta < count || index - delta >= 0 else {
+                return nil
+            }
+            
+            if index + delta < count && predicate(self[index + delta]) {
+                return (index + delta, self[index + delta])
+            }
+            
+            if index - delta >= 0 && predicate(self[index - delta]) {
+                return (index - delta, self[index - delta])
+            }
+            
+            delta = delta + 1
+        }
+    }
 
 }
