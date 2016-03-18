@@ -78,6 +78,13 @@
 		8B53166A1C9B2D720094A6C4 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB66F1C751DF600C94996 /* UIImageView.swift */; };
 		8B53166B1C9B2D750094A6C4 /* UILocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */; };
 		8B53166C1C9B2D790094A6C4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6691C751D3400C94996 /* UIViewController.swift */; };
+		8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
+		8B5316AD1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
+		8B5316AE1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
+		8B5316AF1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
+		8B5316B01C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
+		8B5316B11C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
+		8B5316B21C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
 		8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
@@ -88,6 +95,16 @@
 		8B840E621C904F1D00D85781 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
 		8B840E631C904F1D00D85781 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
 		8B840E641C904F1D00D85781 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
+		8BB45FAB1C9BDA590070CE07 /* WatchConnectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */; };
+		8BB45FAC1C9BDA590070CE07 /* WatchConnectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */; };
+		8BB45FAD1C9BDA590070CE07 /* WatchConnectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */; };
+		8BB45FB51C9BDD180070CE07 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */; };
+		8BB45FB61C9BDD180070CE07 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */; };
+		8BB45FB71C9BDD180070CE07 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */; };
+		8BB45FB81C9BDD180070CE07 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */; };
+		8BB45FB91C9BDD180070CE07 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */; };
+		8BB45FBA1C9BDD180070CE07 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */; };
+		8BB45FBB1C9BDD180070CE07 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */; };
 		8BD5086B1C99DD1E00AE205E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5086A1C99DD1E00AE205E /* Array.swift */; };
 		8BD5086C1C99DD1E00AE205E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5086A1C99DD1E00AE205E /* Array.swift */; };
 		8BD5086D1C99DD1E00AE205E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5086A1C99DD1E00AE205E /* Array.swift */; };
@@ -298,8 +315,11 @@
 		8B5316381C9B23140094A6C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B53163A1C9B23140094A6C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B5316461C9B23BF0094A6C4 /* WKInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WKInterfaceController.swift; path = Extensions/WKInterfaceController.swift; sourceTree = "<group>"; };
+		8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dictionary.swift; path = Extensions/Dictionary.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
 		8B840E5F1C904F1D00D85781 /* Locatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locatable.swift; sourceTree = "<group>"; };
+		8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchConnectable.swift; sourceTree = "<group>"; };
+		8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSUserDefaults.swift; path = Extensions/NSUserDefaults.swift; sourceTree = "<group>"; };
 		8BD5086A1C99DD1E00AE205E /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Array.swift; path = Extensions/Array.swift; sourceTree = "<group>"; };
 		8BD508751C99E18500AE205E /* CollectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionType.swift; path = Extensions/CollectionType.swift; sourceTree = "<group>"; };
 		8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -505,6 +525,7 @@
 			isa = PBXGroup;
 			children = (
 				8B840E5F1C904F1D00D85781 /* Locatable.swift */,
+				8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -551,11 +572,13 @@
 				8BFDB67C1C7525BD00C94996 /* CLLocation.swift */,
 				8B7A40291C76245200A0077D /* CLLocationManager.swift */,
 				8BD508751C99E18500AE205E /* CollectionType.swift */,
+				8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */,
 				8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */,
 				8BFDB6561C75187200C94996 /* NSDate.swift */,
 				8BFDB68E1C75323900C94996 /* NSDateFormatter.swift */,
 				8BFDB6761C751F2300C94996 /* NSFileManager.swift */,
 				8BFDB6631C751AE600C94996 /* NSURLComponents.swift */,
+				8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */,
 				8BE814FC1C7842DC005F23CE /* SequenceType.swift */,
 				8BFDB65D1C7518F800C94996 /* String.swift */,
 			);
@@ -966,12 +989,15 @@
 				8B2DE3E11C8A86B2008F1569 /* NSBundle.swift in Sources */,
 				8BFDB6571C75187200C94996 /* NSDate.swift in Sources */,
 				8BD5086B1C99DD1E00AE205E /* Array.swift in Sources */,
+				8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
+				8BB45FB51C9BDD180070CE07 /* NSUserDefaults.swift in Sources */,
 				8BFDB6771C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8BFDB6891C7529AB00C94996 /* UILocalNotification.swift in Sources */,
 				8B1448051C7258F700043657 /* ZamzamConfig.swift in Sources */,
 				8BFDB6641C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8BFDB65E1C7518F800C94996 /* String.swift in Sources */,
 				8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */,
+				8BB45FAB1C9BDA590070CE07 /* WatchConnectable.swift in Sources */,
 				8B1448061C7258F700043657 /* ZamzamConstants.swift in Sources */,
 				8BE814FD1C7842DC005F23CE /* SequenceType.swift in Sources */,
 				8BFDB66A1C751D3400C94996 /* UIViewController.swift in Sources */,
@@ -987,6 +1013,7 @@
 				8BFDB67E1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8B1448021C7258F600043657 /* ZamzamConfig.swift in Sources */,
 				8BFDB6901C75323900C94996 /* NSDateFormatter.swift in Sources */,
+				8B5316AD1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8BFDB6651C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8B5316471C9B23BF0094A6C4 /* WKInterfaceController.swift in Sources */,
 				8BD5086C1C99DD1E00AE205E /* Array.swift in Sources */,
@@ -995,6 +1022,7 @@
 				8B2DE3E21C8A86B2008F1569 /* NSBundle.swift in Sources */,
 				8BFDB65F1C7518F800C94996 /* String.swift in Sources */,
 				8B840E611C904F1D00D85781 /* Locatable.swift in Sources */,
+				8BB45FB61C9BDD180070CE07 /* NSUserDefaults.swift in Sources */,
 				8BFDB6A11C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BD508771C99E18500AE205E /* CollectionType.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
@@ -1007,6 +1035,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B2DE3E31C8A86B2008F1569 /* NSBundle.swift in Sources */,
+				8B5316AE1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8BFDB6591C75187200C94996 /* NSDate.swift in Sources */,
 				8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8B1447FF1C7258F500043657 /* ZamzamConfig.swift in Sources */,
@@ -1015,6 +1044,7 @@
 				8BFDB6911C75323900C94996 /* NSDateFormatter.swift in Sources */,
 				8BFDB6601C7518F800C94996 /* String.swift in Sources */,
 				8BFDB6A21C75B4A600C94996 /* LocationMeta.swift in Sources */,
+				8BB45FB71C9BDD180070CE07 /* NSUserDefaults.swift in Sources */,
 				8BE814FF1C7842DC005F23CE /* SequenceType.swift in Sources */,
 				8BD5086D1C99DD1E00AE205E /* Array.swift in Sources */,
 				8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */,
@@ -1045,10 +1075,13 @@
 				8B5316541C9B248A0094A6C4 /* NSDate.swift in Sources */,
 				8B5316521C9B24870094A6C4 /* NSBundle.swift in Sources */,
 				8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */,
+				8B5316B11C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
+				8BB45FAD1C9BDA590070CE07 /* WatchConnectable.swift in Sources */,
 				8B53166A1C9B2D720094A6C4 /* UIImageView.swift in Sources */,
 				8B53160A1C9B22F50094A6C4 /* FirstViewController.swift in Sources */,
 				8B53165A1C9B24940094A6C4 /* NSURLComponents.swift in Sources */,
 				8B5316621C9B24A10094A6C4 /* Locatable.swift in Sources */,
+				8BB45FBA1C9BDD180070CE07 /* NSUserDefaults.swift in Sources */,
 				8B53166B1C9B2D750094A6C4 /* UILocalNotification.swift in Sources */,
 				8B53164E1C9B247F0094A6C4 /* CLLocationManager.swift in Sources */,
 			);
@@ -1070,6 +1103,7 @@
 				8B5316371C9B23140094A6C4 /* ComplicationController.swift in Sources */,
 				8B5316591C9B24910094A6C4 /* NSFileManager.swift in Sources */,
 				8B53165B1C9B24950094A6C4 /* NSURLComponents.swift in Sources */,
+				8B5316B21C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8B5316571C9B248E0094A6C4 /* NSDateFormatter.swift in Sources */,
 				8B53165F1C9B249C0094A6C4 /* String.swift in Sources */,
 				8B53164B1C9B24790094A6C4 /* Array.swift in Sources */,
@@ -1080,6 +1114,7 @@
 				8B53162F1C9B23140094A6C4 /* InterfaceController.swift in Sources */,
 				8B53165D1C9B24980094A6C4 /* SequenceType.swift in Sources */,
 				8B5316351C9B23140094A6C4 /* GlanceController.swift in Sources */,
+				8BB45FBB1C9BDD180070CE07 /* NSUserDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1092,6 +1127,7 @@
 				8BFDB6671C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8B2DE3EC1C8A8F79008F1569 /* NSBundleTests.swift in Sources */,
 				8B840E631C904F1D00D85781 /* Locatable.swift in Sources */,
+				8BB45FB81C9BDD180070CE07 /* NSUserDefaults.swift in Sources */,
 				8BFDB67A1C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8BFDB6801C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6921C75323900C94996 /* NSDateFormatter.swift in Sources */,
@@ -1101,6 +1137,7 @@
 				8BE19B3A1C72D83A00D4D437 /* ZamzamConfig.swift in Sources */,
 				8B7A402D1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB68D1C752C5C00C94996 /* UIApplication.swift in Sources */,
+				8BB45FAC1C9BDA590070CE07 /* WatchConnectable.swift in Sources */,
 				8BD508791C99E18500AE205E /* CollectionType.swift in Sources */,
 				8BE19B2F1C72D71F00D4D437 /* WebTests.swift in Sources */,
 				8B2DE3E41C8A86B2008F1569 /* NSBundle.swift in Sources */,
@@ -1112,6 +1149,7 @@
 				8BE815001C7842DC005F23CE /* SequenceType.swift in Sources */,
 				8BFDB6711C751DF600C94996 /* UIImageView.swift in Sources */,
 				8BFDB6A31C75B4A600C94996 /* LocationMeta.swift in Sources */,
+				8B5316AF1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8BFDB68A1C7529AB00C94996 /* UILocalNotification.swift in Sources */,
 				8BFDB65A1C75187200C94996 /* NSDate.swift in Sources */,
 			);
@@ -1135,8 +1173,10 @@
 				8B840E641C904F1D00D85781 /* Locatable.swift in Sources */,
 				8BFDB6A41C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BD5087A1C99E18500AE205E /* CollectionType.swift in Sources */,
+				8B5316B01C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8BFDB6681C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8BE19B481C72D83B00D4D437 /* ZamzamConstants.swift in Sources */,
+				8BB45FB91C9BDD180070CE07 /* NSUserDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
