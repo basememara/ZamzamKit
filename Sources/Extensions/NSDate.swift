@@ -82,6 +82,25 @@ public extension NSDate {
             return formatter.stringFromDate(calendar.dateFromComponents(components)!)
     }
     
+    public func getCountdown(date: NSDate)  -> (span: Double, remaining: Double, percent: Double) {
+        // Calculate span time
+        var timeSpan = date.timeToDecimal() - self.timeToDecimal()
+        if timeSpan < 0 {
+            timeSpan += 24
+        }
+        
+        // Calculate remaining times
+        var timeLeft = date.timeToDecimal() - NSDate().timeToDecimal()
+        if timeLeft < 0 {
+            timeLeft += 24
+        }
+        
+        // Calculate percentage
+        let percentComplete = 1.0 - (timeLeft / timeSpan)
+        
+        return (timeSpan, timeLeft, percentComplete)
+    }
+    
     public func yearsFrom(date: NSDate) -> Int {
         return NSCalendar.currentCalendar()
             .components(.Year, fromDate: date, toDate: self, options: [])
