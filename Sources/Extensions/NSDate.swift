@@ -82,7 +82,7 @@ public extension NSDate {
             return formatter.stringFromDate(calendar.dateFromComponents(components)!)
     }
     
-    public func getCountdown(date: NSDate)  -> (span: Double, remaining: Double, percent: Double) {
+    public func countdown(date: NSDate)  -> (span: Double, remaining: Double, percent: Double) {
         // Calculate span time
         var timeSpan = date.timeToDecimal() - self.timeToDecimal()
         if timeSpan < 0 {
