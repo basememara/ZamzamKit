@@ -95,6 +95,8 @@
 		8B840E621C904F1D00D85781 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
 		8B840E631C904F1D00D85781 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
 		8B840E641C904F1D00D85781 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
+		8B9A87951C9C20260087A251 /* Complicationable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A87941C9C20260087A251 /* Complicationable.swift */; };
+		8B9A87961C9C20260087A251 /* Complicationable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A87941C9C20260087A251 /* Complicationable.swift */; };
 		8BB45FAB1C9BDA590070CE07 /* WatchConnectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */; };
 		8BB45FAC1C9BDA590070CE07 /* WatchConnectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */; };
 		8BB45FAD1C9BDA590070CE07 /* WatchConnectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */; };
@@ -318,6 +320,7 @@
 		8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dictionary.swift; path = Extensions/Dictionary.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
 		8B840E5F1C904F1D00D85781 /* Locatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locatable.swift; sourceTree = "<group>"; };
+		8B9A87941C9C20260087A251 /* Complicationable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Complicationable.swift; sourceTree = "<group>"; };
 		8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchConnectable.swift; sourceTree = "<group>"; };
 		8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSUserDefaults.swift; path = Extensions/NSUserDefaults.swift; sourceTree = "<group>"; };
 		8BD5086A1C99DD1E00AE205E /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Array.swift; path = Extensions/Array.swift; sourceTree = "<group>"; };
@@ -524,6 +527,7 @@
 		8B840E651C904F3300D85781 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				8B9A87941C9C20260087A251 /* Complicationable.swift */,
 				8B840E5F1C904F1D00D85781 /* Locatable.swift */,
 				8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */,
 			);
@@ -1027,6 +1031,7 @@
 				8BD508771C99E18500AE205E /* CollectionType.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
 				8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */,
+				8B9A87951C9C20260087A251 /* Complicationable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1110,6 +1115,7 @@
 				8B5316671C9B24A80094A6C4 /* ZamzamConstants.swift in Sources */,
 				8B5316631C9B24A20094A6C4 /* Locatable.swift in Sources */,
 				8B5316611C9B249F0094A6C4 /* LocationMeta.swift in Sources */,
+				8B9A87961C9C20260087A251 /* Complicationable.swift in Sources */,
 				8B5316551C9B248B0094A6C4 /* NSDate.swift in Sources */,
 				8B53162F1C9B23140094A6C4 /* InterfaceController.swift in Sources */,
 				8B53165D1C9B24980094A6C4 /* SequenceType.swift in Sources */,
