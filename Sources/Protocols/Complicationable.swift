@@ -15,7 +15,7 @@ public protocol Complicationable: class {
     var complicationExpiryInterval: Int { get set }
 }
 
-@available(iOS 9, *)
+@available(watchOS 2, *)
 public extension Complicationable {
     
     var complicationExpiryInterval: Int {
