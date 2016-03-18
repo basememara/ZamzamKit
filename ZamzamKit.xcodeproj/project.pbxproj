@@ -67,8 +67,8 @@
 		8B53165F1C9B249C0094A6C4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB65D1C7518F800C94996 /* String.swift */; };
 		8B5316601C9B249E0094A6C4 /* LocationMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */; };
 		8B5316611C9B249F0094A6C4 /* LocationMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */; };
-		8B5316621C9B24A10094A6C4 /* ViewControllerLocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */; };
-		8B5316631C9B24A20094A6C4 /* ViewControllerLocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */; };
+		8B5316621C9B24A10094A6C4 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
+		8B5316631C9B24A20094A6C4 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
 		8B5316641C9B24A40094A6C4 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
 		8B5316651C9B24A50094A6C4 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
 		8B5316661C9B24A70094A6C4 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
@@ -83,11 +83,11 @@
 		8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402D1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402E1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
-		8B840E601C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */; };
-		8B840E611C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */; };
-		8B840E621C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */; };
-		8B840E631C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */; };
-		8B840E641C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */; };
+		8B840E601C904F1D00D85781 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
+		8B840E611C904F1D00D85781 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
+		8B840E621C904F1D00D85781 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
+		8B840E631C904F1D00D85781 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
+		8B840E641C904F1D00D85781 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
 		8BD5086B1C99DD1E00AE205E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5086A1C99DD1E00AE205E /* Array.swift */; };
 		8BD5086C1C99DD1E00AE205E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5086A1C99DD1E00AE205E /* Array.swift */; };
 		8BD5086D1C99DD1E00AE205E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5086A1C99DD1E00AE205E /* Array.swift */; };
@@ -299,7 +299,7 @@
 		8B53163A1C9B23140094A6C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B5316461C9B23BF0094A6C4 /* WKInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WKInterfaceController.swift; path = Extensions/WKInterfaceController.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
-		8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerLocatable.swift; sourceTree = "<group>"; };
+		8B840E5F1C904F1D00D85781 /* Locatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locatable.swift; sourceTree = "<group>"; };
 		8BD5086A1C99DD1E00AE205E /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Array.swift; path = Extensions/Array.swift; sourceTree = "<group>"; };
 		8BD508751C99E18500AE205E /* CollectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionType.swift; path = Extensions/CollectionType.swift; sourceTree = "<group>"; };
 		8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -504,7 +504,7 @@
 		8B840E651C904F3300D85781 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				8B840E5F1C904F1D00D85781 /* ViewControllerLocatable.swift */,
+				8B840E5F1C904F1D00D85781 /* Locatable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -959,7 +959,7 @@
 				8BFDB6701C751DF600C94996 /* UIImageView.swift in Sources */,
 				8BFDB67D1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,
-				8B840E601C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */,
+				8B840E601C904F1D00D85781 /* Locatable.swift in Sources */,
 				8BD508761C99E18500AE205E /* CollectionType.swift in Sources */,
 				8BFDB68F1C75323900C94996 /* NSDateFormatter.swift in Sources */,
 				8BE814F51C784233005F23CE /* UIColor.swift in Sources */,
@@ -994,7 +994,7 @@
 				8BFDB6781C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8B2DE3E21C8A86B2008F1569 /* NSBundle.swift in Sources */,
 				8BFDB65F1C7518F800C94996 /* String.swift in Sources */,
-				8B840E611C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */,
+				8B840E611C904F1D00D85781 /* Locatable.swift in Sources */,
 				8BFDB6A11C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BD508771C99E18500AE205E /* CollectionType.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
@@ -1019,7 +1019,7 @@
 				8BD5086D1C99DD1E00AE205E /* Array.swift in Sources */,
 				8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB6791C751F2300C94996 /* NSFileManager.swift in Sources */,
-				8B840E621C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */,
+				8B840E621C904F1D00D85781 /* Locatable.swift in Sources */,
 				8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1048,7 +1048,7 @@
 				8B53166A1C9B2D720094A6C4 /* UIImageView.swift in Sources */,
 				8B53160A1C9B22F50094A6C4 /* FirstViewController.swift in Sources */,
 				8B53165A1C9B24940094A6C4 /* NSURLComponents.swift in Sources */,
-				8B5316621C9B24A10094A6C4 /* ViewControllerLocatable.swift in Sources */,
+				8B5316621C9B24A10094A6C4 /* Locatable.swift in Sources */,
 				8B53166B1C9B2D750094A6C4 /* UILocalNotification.swift in Sources */,
 				8B53164E1C9B247F0094A6C4 /* CLLocationManager.swift in Sources */,
 			);
@@ -1074,7 +1074,7 @@
 				8B53165F1C9B249C0094A6C4 /* String.swift in Sources */,
 				8B53164B1C9B24790094A6C4 /* Array.swift in Sources */,
 				8B5316671C9B24A80094A6C4 /* ZamzamConstants.swift in Sources */,
-				8B5316631C9B24A20094A6C4 /* ViewControllerLocatable.swift in Sources */,
+				8B5316631C9B24A20094A6C4 /* Locatable.swift in Sources */,
 				8B5316611C9B249F0094A6C4 /* LocationMeta.swift in Sources */,
 				8B5316551C9B248B0094A6C4 /* NSDate.swift in Sources */,
 				8B53162F1C9B23140094A6C4 /* InterfaceController.swift in Sources */,
@@ -1091,7 +1091,7 @@
 				8BE19B2E1C72D71F00D4D437 /* StringTests.swift in Sources */,
 				8BFDB6671C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8B2DE3EC1C8A8F79008F1569 /* NSBundleTests.swift in Sources */,
-				8B840E631C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */,
+				8B840E631C904F1D00D85781 /* Locatable.swift in Sources */,
 				8BFDB67A1C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8BFDB6801C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6921C75323900C94996 /* NSDateFormatter.swift in Sources */,
@@ -1132,7 +1132,7 @@
 				8BFDB67B1C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8B2DE3E51C8A86B2008F1569 /* NSBundle.swift in Sources */,
 				8BE19B1A1C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift in Sources */,
-				8B840E641C904F1D00D85781 /* ViewControllerLocatable.swift in Sources */,
+				8B840E641C904F1D00D85781 /* Locatable.swift in Sources */,
 				8BFDB6A41C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BD5087A1C99E18500AE205E /* CollectionType.swift in Sources */,
 				8BFDB6681C751AE600C94996 /* NSURLComponents.swift in Sources */,

@@ -9,13 +9,13 @@
 import Foundation
 import CoreLocation
 
-public protocol ViewControllerLocatable: CLLocationManagerDelegate {
+public protocol Locatable: CLLocationManagerDelegate {
     var locationManager: CLLocationManager? { get set }
     
     func updateLocation(locations: [CLLocation]?)
 }
 
-public extension ViewControllerLocatable {
+public extension Locatable {
     
     func setupLocationManager(
         desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyThreeKilometers,
