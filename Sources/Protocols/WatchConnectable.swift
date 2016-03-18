@@ -13,6 +13,7 @@ public protocol WatchConnectable {
     
 }
 
+@available(iOS 9, *)
 public extension WatchConnectable {
     
     /**
