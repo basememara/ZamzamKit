@@ -12,7 +12,6 @@ import ClockKit
 
 public protocol Complicationable: class {
     var lastComplicationReload: NSDate? { get set }
-    var complicationExpiryInterval: Int { get set }
 }
 
 @available(watchOS 2, *)
@@ -24,8 +23,8 @@ public extension Complicationable {
     
     func reloadComplications() {
         if let server = CLKComplicationServer.sharedInstance()
-            where lastComplicationReload == nil || NSDate()
-                .timeIntervalSinceDate(lastComplicationReload!)
+            where lastComplicationReload == nil
+                || NSDate().timeIntervalSinceDate(lastComplicationReload!)
                 > NSTimeInterval(complicationExpiryInterval) {
                     for complication in server.activeComplications {
                         server.reloadTimelineForComplication(complication)
