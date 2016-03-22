@@ -18,7 +18,8 @@ public extension Array {
         var to: [Element] = []
         var i = 0
         while i < self.count && i < count {
-            to.append(self[i++])
+            i += 1
+            to.append(self[i])
         }
         return to
     }
@@ -27,7 +28,8 @@ public extension Array {
         var to: [Element] = []
         var i = count
         while i < self.count {
-            to.append(self[i++])
+            i += 1
+            to.append(self[i])
         }
         return to
     }

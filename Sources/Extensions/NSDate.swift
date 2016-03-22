@@ -101,46 +101,8 @@ public extension NSDate {
         return (timeSpan, timeLeft, percentComplete)
     }
     
-    public func yearsFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar()
-            .components(.Year, fromDate: date, toDate: self, options: [])
-            .year
-    }
-    
-    public func monthsFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar()
-            .components(.Month, fromDate: date, toDate: self, options: [])
-            .month
-    }
-    
-    public func weeksFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar()
-            .components(.WeekOfYear, fromDate: date, toDate: self, options: [])
-            .weekOfYear
-    }
-    
-    public func daysFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar()
-            .components(.Day, fromDate: date, toDate: self, options: [])
-            .day
-    }
-    
-    public func hoursFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar()
-            .components(.Hour, fromDate: date, toDate: self, options: [])
-            .hour
-    }
-    
-    public func minutesFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar()
-            .components(.Minute, fromDate: date, toDate: self, options: [])
-            .minute
-    }
-    
-    public func secondsFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar()
-            .components(.Second, fromDate: date, toDate: self, options: [])
-            .second
+    public func hasElapsed(seconds: Int, fromDate: NSDate = NSDate()) -> Bool {
+        return fromDate.timeIntervalSinceDate(self).seconds > seconds
     }
     
 }

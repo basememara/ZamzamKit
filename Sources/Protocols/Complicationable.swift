@@ -22,15 +22,9 @@ public extension Complicationable {
     }
     
     func reloadComplications() {
-        if let server = CLKComplicationServer.sharedInstance()
-            where lastComplicationReload == nil
-                || NSDate().timeIntervalSinceDate(lastComplicationReload!)
-                > NSTimeInterval(complicationExpiryInterval) {
-                    for complication in server.activeComplications {
-                        server.reloadTimelineForComplication(complication)
-                    }
-                    
-                    lastComplicationReload = NSDate()
+        if lastComplicationReload?.hasElapsed(complicationExpiryInterval) ?? true {
+            CLKComplicationServer.sharedInstance().reloadTimelineForComplications()
+            lastComplicationReload = NSDate()
         }
     }
     

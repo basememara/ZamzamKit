@@ -130,4 +130,11 @@ class DateTimeTests: XCTestCase {
             "Incremented date by minute should be \(expectedDate)")
     }
     
+    func testHasElapsed() {
+        let date = NSDate(fromString: "2016/03/22 09:30")!
+        
+        XCTAssert(date.hasElapsed(300, fromDate: NSDate(fromString: "2016/03/22 09:40")!),
+            "Date has elapsed.")
+    }
+    
 }
