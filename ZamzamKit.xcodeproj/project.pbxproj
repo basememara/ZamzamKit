@@ -117,9 +117,6 @@
 		8BE19B2E1C72D71F00D4D437 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B281C72D71F00D4D437 /* StringTests.swift */; };
 		8BE19B2F1C72D71F00D4D437 /* WebTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B291C72D71F00D4D437 /* WebTests.swift */; };
 		8BE19B6A1C72D90600D4D437 /* Timepiece.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE19B611C72D8FF00D4D437 /* Timepiece.framework */; };
-		8BE7235F1CA1867700CF7BB8 /* Info-iOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B1448411C725BFE00043657 /* Info-iOS.plist */; };
-		8BE723601CA1867B00CF7BB8 /* Info-watchOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B1448441C725BFE00043657 /* Info-watchOS.plist */; };
-		8BE723611CA1867D00CF7BB8 /* Info-tvOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B1448431C725BFE00043657 /* Info-tvOS.plist */; };
 		8BE814F51C784233005F23CE /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* UIColor.swift */; };
 		8BE814FD1C7842DC005F23CE /* SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* SequenceType.swift */; };
 		8BE814FE1C7842DC005F23CE /* SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* SequenceType.swift */; };
@@ -884,7 +881,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BE7235F1CA1867700CF7BB8 /* Info-iOS.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -892,7 +888,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BE723601CA1867B00CF7BB8 /* Info-watchOS.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -900,7 +895,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BE723611CA1867D00CF7BB8 /* Info-tvOS.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
