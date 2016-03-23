@@ -10,10 +10,6 @@ import Foundation
 
 public extension Array {
     
-    public func any() -> Bool {
-        return self.count > 0
-    }
-    
     public func take(count: Int) -> [Element] {
         var to: [Element] = []
         var i = 0

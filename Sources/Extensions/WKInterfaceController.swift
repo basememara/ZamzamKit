@@ -40,7 +40,7 @@ public extension WKInterfaceController {
             
             // Add additional actions if applicable
             if let additionalActions = additionalActions
-                where additionalActions.any() {
+                where !additionalActions.isEmpty {
                     if alertControllerStyle != .SideBySideButtonsAlert {
                         actions += additionalActions
                     } else if actions.count < 2 {

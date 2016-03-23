@@ -11,9 +11,12 @@ import ClockKit
 
 public extension CLKComplicationServer {
     
+    /**
+     Invalidates and reloads all timeline data
+     */
     public func reloadTimelineForComplications() {
         if let complications = self.activeComplications
-            where complications.any() {
+            where !complications.isEmpty {
                 for complication in complications {
                     self.reloadTimelineForComplication(complication)
                 }
