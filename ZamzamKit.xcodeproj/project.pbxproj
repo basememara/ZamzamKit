@@ -103,6 +103,7 @@
 		8BB45FB71C9BDD180070CE07 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */; };
 		8BB45FBA1C9BDD180070CE07 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */; };
 		8BB45FBB1C9BDD180070CE07 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */; };
+		8BD2D1961CA581890018AC2B /* Audible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD2D1951CA581890018AC2B /* Audible.swift */; };
 		8BD5086B1C99DD1E00AE205E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5086A1C99DD1E00AE205E /* Array.swift */; };
 		8BD5086C1C99DD1E00AE205E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5086A1C99DD1E00AE205E /* Array.swift */; };
 		8BD5086D1C99DD1E00AE205E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5086A1C99DD1E00AE205E /* Array.swift */; };
@@ -291,6 +292,7 @@
 		8B9A87941C9C20260087A251 /* Complicationable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Complicationable.swift; sourceTree = "<group>"; };
 		8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchConnectable.swift; sourceTree = "<group>"; };
 		8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSUserDefaults.swift; path = Extensions/NSUserDefaults.swift; sourceTree = "<group>"; };
+		8BD2D1951CA581890018AC2B /* Audible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Audible.swift; sourceTree = "<group>"; };
 		8BD5086A1C99DD1E00AE205E /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Array.swift; path = Extensions/Array.swift; sourceTree = "<group>"; };
 		8BD508751C99E18500AE205E /* CollectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionType.swift; path = Extensions/CollectionType.swift; sourceTree = "<group>"; };
 		8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -493,6 +495,7 @@
 		8B840E651C904F3300D85781 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				8BD2D1951CA581890018AC2B /* Audible.swift */,
 				8B9A87941C9C20260087A251 /* Complicationable.swift */,
 				8B840E5F1C904F1D00D85781 /* Locatable.swift */,
 				8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */,
@@ -959,6 +962,7 @@
 				8B2DE3E11C8A86B2008F1569 /* NSBundle.swift in Sources */,
 				8BFDB6571C75187200C94996 /* NSDate.swift in Sources */,
 				8BD5086B1C99DD1E00AE205E /* Array.swift in Sources */,
+				8BD2D1961CA581890018AC2B /* Audible.swift in Sources */,
 				8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8B82154A1CA1613500C9FCC9 /* NSTimeInterval.swift in Sources */,
 				8BB45FB51C9BDD180070CE07 /* NSUserDefaults.swift in Sources */,

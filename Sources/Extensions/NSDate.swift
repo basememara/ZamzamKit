@@ -101,6 +101,14 @@ public extension NSDate {
         return (timeSpan, timeLeft, percentComplete)
     }
     
+    /**
+     Specifies if the date is beyond the time window.
+     
+     - parameter seconds:  Time window the date is considered valid.
+     - parameter fromDate: Date to use as a reference.
+     
+     - returns: Has the time elapsed the time window.
+     */
     public func hasElapsed(seconds: Int, fromDate: NSDate = NSDate()) -> Bool {
         return fromDate.timeIntervalSinceDate(self).seconds > seconds
     }
