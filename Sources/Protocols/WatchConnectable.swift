@@ -16,6 +16,17 @@ public protocol WatchConnectable {
 @available(iOS 9, *)
 public extension WatchConnectable {
     
+    var isWatchAvailable: Bool {
+        let watchSession = WCSession.defaultSession()
+        var activationState = true
+        
+        if #available(iOS 9.3, *) {
+            activationState = watchSession.activationState == .Activated
+        }
+        
+        return watchSession.paired && watchSession.watchAppInstalled && activationState
+    }
+    
     /**
      Transfers the values to the watch and overwrite older requests.
      
@@ -23,7 +34,7 @@ public extension WatchConnectable {
      */
     func transferContextToWatch(values: [String: AnyObject]) {
         let watchSession = WCSession.defaultSession()
-        if watchSession.paired && watchSession.watchAppInstalled {
+        if isWatchAvailable {
             var values = values
             do {
                 values.removeAllNulls()
@@ -41,7 +52,7 @@ public extension WatchConnectable {
      */
     func transferUserInfoToWatch(values: [String: AnyObject]) {
         let watchSession = WCSession.defaultSession()
-        if watchSession.paired && watchSession.watchAppInstalled {
+        if isWatchAvailable {
             var values = values
             values.removeAllNulls()
             watchSession.transferUserInfo(values)
@@ -55,11 +66,11 @@ public extension WatchConnectable {
      */
     func transferComplicationUserInfoToWatch(values: [String: AnyObject]) {
         let watchSession = WCSession.defaultSession()
-        if watchSession.paired && watchSession.watchAppInstalled {
+        
+        if isWatchAvailable {
             var values = values
             values.removeAllNulls()
             watchSession.transferCurrentComplicationUserInfo(values)
         }
     }
-    
 }
