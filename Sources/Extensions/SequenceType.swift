@@ -23,17 +23,6 @@ public extension SequenceType {
     }
     
     /**
-     Returns true or false if the predicate includeElement
-     
-     - parameter predicate: Predicate that the Element must satisfy
-     
-     - returns: Does element exists that satisfies the predicate
-     */
-    public func any(@noescape predicate: Generator.Element -> Bool) -> Bool {
-        return contains(predicate)
-    }
-    
-    /**
      Returns true or false if the predicate returns all elements
      
      - parameter predicate: Predicate that all elements must satisfy
