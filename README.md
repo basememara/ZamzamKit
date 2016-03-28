@@ -17,7 +17,7 @@ ZamzamKit is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "ZamzamKit"
+pod "ZamzamKit", :git => 'https://github.com/ZamzamInc/ZamzamKit'
 ```
 
 ####Carthage
