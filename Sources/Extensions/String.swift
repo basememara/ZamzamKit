@@ -41,6 +41,18 @@ public extension String {
     }
     
     /**
+    Takes the current String struct and strips out HTML using regular expression. All tags get stripped out.
+
+    :returns: String html text as plain text
+    */
+    func stripHTML() -> String {
+        return self.stringByReplacingOccurrencesOfString("<[^>]+>",
+            withString: "",
+            options: .RegularExpressionSearch,
+            range: nil)
+    }
+    
+    /**
      Decode an HTML string
      http://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
      

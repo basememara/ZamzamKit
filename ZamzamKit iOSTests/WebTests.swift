@@ -11,6 +11,14 @@ import XCTest
 @testable import ZamzamKit
 
 class WebTests: XCTestCase {
+
+    func testStripHTML() {
+        let value = "<html><head><title>Test</title></head><body></body></html>"
+        let expectedValue = "Test"
+        
+        XCTAssertEqual(value.stripHTML(), expectedValue,
+            "String should be \(expectedValue)")
+    }
     
     func testDecodeHTML() {
         let value = "<strong> 4 &lt; 5 &amp; 3 &gt; 2 .</strong> Price: 12 &#x20ac;.  &#64;"

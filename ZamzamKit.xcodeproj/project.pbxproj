@@ -22,6 +22,8 @@
 		8B2DE3EC1C8A8F79008F1569 /* NSBundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EB1C8A8F79008F1569 /* NSBundleTests.swift */; };
 		8B2DE3EF1C8A90AF008F1569 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3ED1C8A90AF008F1569 /* Settings.bundle */; };
 		8B2DE3F01C8A90AF008F1569 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EE1C8A90AF008F1569 /* Settings.plist */; };
+		8B4CFAE91CABEF0800D2B1D7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* UIColor.swift */; };
+		8B4CFAEF1CABEF0900D2B1D7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* UIColor.swift */; };
 		8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316071C9B22F50094A6C4 /* AppDelegate.swift */; };
 		8B53160A1C9B22F50094A6C4 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316091C9B22F50094A6C4 /* FirstViewController.swift */; };
 		8B53160C1C9B22F60094A6C4 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53160B1C9B22F60094A6C4 /* SecondViewController.swift */; };
@@ -556,6 +558,7 @@
 				8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */,
 				8BE814FC1C7842DC005F23CE /* SequenceType.swift */,
 				8BFDB65D1C7518F800C94996 /* String.swift */,
+				8BE814F41C784233005F23CE /* UIColor.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -565,7 +568,6 @@
 			children = (
 				8BFDB68B1C752C5C00C94996 /* UIApplication.swift */,
 				8BD2D19D1CA583110018AC2B /* UIAlertAction.swift */,
-				8BE814F41C784233005F23CE /* UIColor.swift */,
 				8BFDB66F1C751DF600C94996 /* UIImageView.swift */,
 				8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */,
 				8BFDB6691C751D3400C94996 /* UIViewController.swift */,
@@ -997,6 +999,7 @@
 				8B5316AD1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8BFDB6651C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8B5316471C9B23BF0094A6C4 /* WKInterfaceController.swift in Sources */,
+				8B4CFAE91CABEF0800D2B1D7 /* UIColor.swift in Sources */,
 				8BD5086C1C99DD1E00AE205E /* Array.swift in Sources */,
 				8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB6781C751F2300C94996 /* NSFileManager.swift in Sources */,
@@ -1024,6 +1027,7 @@
 				8B1447FF1C7258F500043657 /* ZamzamConfig.swift in Sources */,
 				8BFDB6661C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8BD508781C99E18500AE205E /* CollectionType.swift in Sources */,
+				8B4CFAEF1CABEF0900D2B1D7 /* UIColor.swift in Sources */,
 				8BFDB6911C75323900C94996 /* NSDateFormatter.swift in Sources */,
 				8BFDB6601C7518F800C94996 /* String.swift in Sources */,
 				8BFDB6A21C75B4A600C94996 /* LocationMeta.swift in Sources */,
