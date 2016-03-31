@@ -137,4 +137,15 @@ public extension String {
         return result
     }
     
+    /**
+     Specifies if the string is contained within the array of values.
+
+     - parameter values: Array of strings to check.
+     
+     - returns: Returns true if the string equals to one of the values in the array.
+     */
+    public func within(values: [String]) -> Bool {
+        return values.contains(self)
+    }
+    
 }

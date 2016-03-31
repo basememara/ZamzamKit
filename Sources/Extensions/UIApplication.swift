@@ -31,7 +31,7 @@ public extension UIApplication {
             notificationSettings = UIUserNotificationSettings(
                 forTypes: type,
                 categories: mainCategory != nil
-                    ? NSSet(objects: mainCategory!) as? Set<UIUserNotificationCategory>
+                    ? [mainCategory!]
                     : nil)
             
             // Register notifications
