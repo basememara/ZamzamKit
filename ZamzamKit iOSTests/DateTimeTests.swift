@@ -16,7 +16,7 @@ class DateTimeTests: XCTestCase {
     func testStringToDate() {
         let date = NSDate(fromString: "1970/01/03 00:00")!
         let expected = NSDate(timeIntervalSince1970:
-            NSTimeInterval(172800 - Int(NSTimeZone.localTimeZone().secondsFromGMT)))
+            NSTimeInterval(176400 - Int(NSTimeZone.localTimeZone().secondsFromGMT)))
         
         XCTAssertEqual(date, expected,
             "Day of week should be \(expected)")
