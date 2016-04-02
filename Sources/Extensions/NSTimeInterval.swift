@@ -30,4 +30,18 @@ public extension NSTimeInterval {
         return self / 604800.0
     }
     
+    /**
+     Delays a process via GCD based after the time interval value.
+
+     - parameter handler: Process to execute after the time interval seconds.
+     */
+    public func delay(handler: () -> ()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(self * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), handler)
+    }
+    
 }
