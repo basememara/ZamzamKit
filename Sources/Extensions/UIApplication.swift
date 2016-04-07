@@ -78,8 +78,8 @@ public extension UIApplication {
         
         for item in notifications {
             // Find matching to delete
-            if let identifier = item.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String
-                where identifier == identifier {
+            if let id = item.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String
+                where id == identifier {
                     // Cancel notification
                     self.cancelLocalNotification(item)
             }
@@ -94,8 +94,8 @@ public extension UIApplication {
         
         for item in notifications {
             // Find matching to delete
-            if let identifier = item.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String
-                where identifier == identifier {
+            if let id = item.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String
+                where id == identifier {
                     return true
             }
         }
@@ -113,8 +113,8 @@ public extension UIApplication {
         
         for item in notifications {
             // Find matching to delete
-            if let identifier = item.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String
-                where identifier == identifier {
+            if let id = item.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String
+                where id == identifier {
                     matchedNotifications.append(item)
             }
         }
