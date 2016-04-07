@@ -19,6 +19,14 @@ public extension NSDate {
         self.init(timeInterval: 0, sinceDate: date)
     }
     
+    public func isPast() -> Bool {
+        return self.compare(NSDate()) == .OrderedAscending
+    }
+    
+    public func isFuture() -> Bool {
+        return !self.isPast()
+    }
+    
     public func incrementDay(numberOfDays: Int = 1) -> NSDate {
         return NSCalendar.currentCalendar()
             .dateByAddingUnit(.Day,
@@ -38,7 +46,7 @@ public extension NSDate {
     }
     
     public func incrementDayIfPast() -> NSDate {
-        return self.compare(NSDate()) == .OrderedAscending
+        return self.isPast()
             ? self.incrementDay() : self
     }
     

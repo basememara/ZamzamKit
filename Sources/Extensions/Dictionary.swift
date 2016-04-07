@@ -36,3 +36,21 @@ public extension Dictionary where Value: AnyObject {
     }
     
 }
+
+// http://stackoverflow.com/a/34527546/235334
+func + <K,V> (left: Dictionary<K,V>, right: Dictionary<K,V>?) -> Dictionary<K,V> {
+    guard let right = right else { return left }
+    return left.reduce(right) {
+        var new = $0 as [K:V]
+        new.updateValue($1.1, forKey: $1.0)
+        return new
+    }
+}
+
+// http://stackoverflow.com/a/34527546/235334
+func += <K,V> (inout left: Dictionary<K,V>, right: Dictionary<K,V>?) {
+    guard let right = right else { return }
+    right.forEach { key, value in
+        left.updateValue(value, forKey: key)
+    }
+}

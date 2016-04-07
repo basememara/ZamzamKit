@@ -11,6 +11,15 @@ import UIKit
 
 public extension UIViewController {
     
+    /**
+     Display an alert action in a convenient way.
+
+     - parameter message:           Body of the alert.
+     - parameter title:             Title of the alert.
+     - parameter buttonTitle:       Text for the button.
+     - parameter additionalActions: Array of alert actions.
+     - parameter handler:           Call back handler when main action tapped.
+     */
     public func alert(
         message: String? = nil,
         title: String = "Alert",

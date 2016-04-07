@@ -137,4 +137,14 @@ public extension String {
         return result
     }
     
+    /**
+     Converts string to inferred Enum.
+     https://gist.github.com/jckarter/53fcd4046e2857bd315b
+
+     - returns: Returns typed Enum.
+     */
+    public func toEnum<Enum: RawRepresentable where Enum.RawValue == String>() -> Enum? {
+        return Enum(rawValue: self)
+    }
+    
 }

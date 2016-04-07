@@ -20,7 +20,8 @@ public extension UILocalNotification {
         badge: Int = 0,
         sound: String? = UILocalNotificationDefaultSoundName,
         occurrence: NSCalendarUnit? = nil,
-        incrementDayIfPast: Bool = true) {
+        incrementDayIfPast: Bool = true,
+        userInfo: [String: AnyObject]? = nil) {
             self.init()
             
             // Initialize and configure notification
@@ -44,6 +45,18 @@ public extension UILocalNotification {
             // Provide unique identifier for later use
             if let id = identifier where id != "" {
                 self.userInfo = [ZamzamConstants.Notification.IDENTIFIER_KEY: id]
+            }
+        
+            // Add arbitrary info
+            if let userInfo = userInfo {
+                // Initialize dictionary if applicable
+                if self.userInfo == nil {
+                    self.userInfo = [:]
+                }
+                
+                for item in userInfo {
+                    self.userInfo?.updateValue(item.1, forKey: item.0)
+                }
             }
             
             if badge > 0 {
