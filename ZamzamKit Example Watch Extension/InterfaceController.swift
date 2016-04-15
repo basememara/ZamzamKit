@@ -8,7 +8,7 @@
 
 import WatchKit
 import Foundation
-
+import ZamzamKit
 
 class InterfaceController: WKInterfaceController {
 

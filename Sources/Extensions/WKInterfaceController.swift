@@ -23,18 +23,14 @@ public extension WKInterfaceController {
             var actions = [WKAlertAction(
                 title: buttonTitle,
                 style: .Default) {
-                    if let handler = handler {
-                        handler()
-                    }
+                    handler?()
                 }]
             
             if includeCancelAction {
                 actions.append(WKAlertAction(
                     title: "Cancel",
                     style: .Cancel) {
-                        if let cancelHandler = cancelHandler {
-                            cancelHandler()
-                        }
+                        cancelHandler?()
                     })
             }
             

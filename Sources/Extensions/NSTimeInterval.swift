@@ -33,15 +33,17 @@ public extension NSTimeInterval {
     /**
      Delays a process via GCD based after the time interval value.
 
+     - parameter thread:  Thread to execute the delay on.
      - parameter handler: Process to execute after the time interval seconds.
      */
-    public func delay(handler: () -> ()) {
+    public func delay(thread: dispatch_queue_t =
+        dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), handler: () -> ()) {
         dispatch_after(
             dispatch_time(
                 DISPATCH_TIME_NOW,
                 Int64(self * Double(NSEC_PER_SEC))
             ),
-            dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), handler)
+            thread, handler)
     }
     
 }

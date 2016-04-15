@@ -22,6 +22,8 @@
 		8B2DE3EC1C8A8F79008F1569 /* NSBundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EB1C8A8F79008F1569 /* NSBundleTests.swift */; };
 		8B2DE3EF1C8A90AF008F1569 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3ED1C8A90AF008F1569 /* Settings.bundle */; };
 		8B2DE3F01C8A90AF008F1569 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EE1C8A90AF008F1569 /* Settings.plist */; };
+		8B40C2B61CC0A84C00BEC9E0 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; };
+		8B40C2B71CC0A85F00BEC9E0 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447D51C7257D600043657 /* ZamzamKit.framework */; };
 		8B4CFAE91CABEF0800D2B1D7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* UIColor.swift */; };
 		8B4CFAEF1CABEF0900D2B1D7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* UIColor.swift */; };
 		8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316071C9B22F50094A6C4 /* AppDelegate.swift */; };
@@ -69,6 +71,7 @@
 		8BB45FB51C9BDD180070CE07 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */; };
 		8BB45FB61C9BDD180070CE07 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */; };
 		8BB45FB71C9BDD180070CE07 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */; };
+		8BBA692D1CB6FCE000AD9759 /* UITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */; };
 		8BCB73CE1CAD660D00E20096 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73CD1CAD660D00E20096 /* Equatable.swift */; };
 		8BCB73CF1CAD660D00E20096 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73CD1CAD660D00E20096 /* Equatable.swift */; };
 		8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73CD1CAD660D00E20096 /* Equatable.swift */; };
@@ -235,6 +238,7 @@
 		8B2DE3EB1C8A8F79008F1569 /* NSBundleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBundleTests.swift; sourceTree = "<group>"; };
 		8B2DE3ED1C8A90AF008F1569 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8B2DE3EE1C8A90AF008F1569 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		8B40C2B41CC0A6F400BEC9E0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8B5316051C9B22F40094A6C4 /* ZamzamKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZamzamKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5316071C9B22F50094A6C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B5316091C9B22F50094A6C4 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +269,7 @@
 		8B9A87941C9C20260087A251 /* Complicationable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Complicationable.swift; sourceTree = "<group>"; };
 		8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchConnectable.swift; sourceTree = "<group>"; };
 		8BB45FB41C9BDD180070CE07 /* NSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSUserDefaults.swift; path = Extensions/NSUserDefaults.swift; sourceTree = "<group>"; };
+		8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableViewController.swift; path = Extensions/UITableViewController.swift; sourceTree = "<group>"; };
 		8BCB73CD1CAD660D00E20096 /* Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Equatable.swift; path = Extensions/Equatable.swift; sourceTree = "<group>"; };
 		8BCB73D61CAD666900E20096 /* ExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTest.swift; sourceTree = "<group>"; };
 		8BCB73D91CAD69BF00E20096 /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableView.swift; path = Extensions/UITableView.swift; sourceTree = "<group>"; };
@@ -326,6 +331,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B40C2B61CC0A84C00BEC9E0 /* ZamzamKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +339,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B40C2B71CC0A85F00BEC9E0 /* ZamzamKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +424,7 @@
 		8B1447B51C7253B100043657 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8B40C2B41CC0A6F400BEC9E0 /* AVFoundation.framework */,
 				8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */,
 				8B1447B31C72539600043657 /* Timepiece.framework */,
 			);
@@ -547,6 +555,7 @@
 				8BFDB66F1C751DF600C94996 /* UIImageView.swift */,
 				8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */,
 				8BCB73D91CAD69BF00E20096 /* UITableView.swift */,
+				8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */,
 				8BFDB6691C751D3400C94996 /* UIViewController.swift */,
 			);
 			name = iOS;
@@ -778,12 +787,15 @@
 					};
 					8B5316041C9B22F40094A6C4 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = ZYJTUJP7C7;
 					};
 					8B53161A1C9B23140094A6C4 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = ZYJTUJP7C7;
 					};
 					8B5316261C9B23140094A6C4 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = ZYJTUJP7C7;
 					};
 					8BE19B071C72D6DF00D4D437 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -937,6 +949,7 @@
 				8BFDB68C1C752C5C00C94996 /* UIApplication.swift in Sources */,
 				8BFDB6701C751DF600C94996 /* UIImageView.swift in Sources */,
 				8BFDB67D1C7525BD00C94996 /* CLLocation.swift in Sources */,
+				8BBA692D1CB6FCE000AD9759 /* UITableViewController.swift in Sources */,
 				8BCB73CE1CAD660D00E20096 /* Equatable.swift in Sources */,
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8B840E601C904F1D00D85781 /* Locatable.swift in Sources */,
@@ -1342,8 +1355,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "ZamzamKit Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1354,8 +1368,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "ZamzamKit Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1366,14 +1381,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "ZamzamKit Example Watch Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-Example.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Debug;
 		};
@@ -1381,14 +1398,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "ZamzamKit Example Watch Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-Example.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Release;
 		};
@@ -1396,15 +1415,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = ZamzamKit_Example_Watch_Extension;
 				INFOPLIST_FILE = "ZamzamKit Example Watch/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-Example.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Debug;
 		};
@@ -1412,15 +1433,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = ZamzamKit_Example_Watch_Extension;
 				INFOPLIST_FILE = "ZamzamKit Example Watch/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-Example.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Release;
 		};

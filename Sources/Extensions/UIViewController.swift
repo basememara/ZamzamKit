@@ -25,12 +25,18 @@ public extension UIViewController {
         title: String = "Alert",
         buttonTitle: String = "OK",
         additionalActions: [UIAlertAction]? = nil,
-        handler: ((action: UIAlertAction) -> Void)? = nil) {
+        preferredStyle: UIAlertControllerStyle = .Alert,
+        enableCancel: Bool = false,
+        handler: (() -> Void)? = nil) {
             let alertController = UIAlertController(
                 title: title,
                 message: message,
-                preferredStyle: .Alert
+                preferredStyle: preferredStyle
             )
+        
+            if enableCancel {
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            }
             
             if let additionalActions = additionalActions {
                 additionalActions.forEach { item in
@@ -38,8 +44,7 @@ public extension UIViewController {
                 }
             }
             
-            alertController.addAction(UIAlertAction(
-                title: buttonTitle, style: .Default, handler: handler))
+            alertController.addAction(UIAlertAction(title: buttonTitle) { handler?() })
             
             self.presentViewController(alertController, animated: true, completion: nil)
     }

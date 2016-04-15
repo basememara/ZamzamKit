@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ZamzamKit
 
 class FirstViewController: UIViewController {
 
@@ -21,7 +22,7 @@ class FirstViewController: UIViewController {
     }
 
     @IBAction func buttonTapped(sender: AnyObject) {
-        alert { action in
+        alert {
             print("Test")
         }
     }
