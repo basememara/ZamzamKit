@@ -22,7 +22,7 @@ class FirstViewController: UIViewController {
     }
 
     @IBAction func buttonTapped(sender: AnyObject) {
-        alert {
+        alert("Test") {
             print("Test")
         }
     }

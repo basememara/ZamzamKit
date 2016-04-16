@@ -20,9 +20,8 @@ public extension UIViewController {
      - parameter additionalActions: Array of alert actions.
      - parameter handler:           Call back handler when main action tapped.
      */
-    public func alert(
+    public func alert(title: String,
         message: String? = nil,
-        title: String = "Alert",
         buttonTitle: String = "OK",
         additionalActions: [UIAlertAction]? = nil,
         preferredStyle: UIAlertControllerStyle = .Alert,
