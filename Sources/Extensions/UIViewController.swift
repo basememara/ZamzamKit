@@ -25,7 +25,7 @@ public extension UIViewController {
         buttonTitle: String = "OK",
         additionalActions: [UIAlertAction]? = nil,
         preferredStyle: UIAlertControllerStyle = .Alert,
-        enableCancel: Bool = false,
+        includeCancelAction: Bool = false,
         handler: (() -> Void)? = nil) {
             let alertController = UIAlertController(
                 title: title,
@@ -33,7 +33,7 @@ public extension UIViewController {
                 preferredStyle: preferredStyle
             )
         
-            if enableCancel {
+            if includeCancelAction {
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
             }
             
@@ -45,7 +45,7 @@ public extension UIViewController {
             
             alertController.addAction(UIAlertAction(title: buttonTitle) { handler?() })
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            presentViewController(alertController, animated: true, completion: nil)
     }
 
 }
