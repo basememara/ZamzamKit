@@ -10,6 +10,13 @@ import Foundation
 
 public extension Array {
     
+    /**
+     Take a specified amount of elements.
+
+     - parameter count: Number of elements to retrieve.
+
+     - returns: Elements that specify the count number.
+     */
     public func take(count: Int) -> [Element] {
         var to: [Element] = []
         var i = 0
@@ -19,7 +26,14 @@ public extension Array {
         }
         return to
     }
-    
+
+    /**
+     Drop a specified amount of elements.
+
+     - parameter count: Number of elements to drop.
+
+     - returns: Elements that are left over.
+     */
     public func drop(count: Int) -> [Element] {
         var to: [Element] = []
         var i = count
@@ -30,6 +44,13 @@ public extension Array {
         return to
     }
     
+    /**
+     Optional element by indice.
+
+     - parameter index: Indice of the array element.
+
+     - returns: An optional element.
+     */
     public func get(index: Int) -> Element? {
         return self.indices.contains(index)
             ? self[index] : nil
@@ -56,6 +77,17 @@ public extension Array {
             }
             
             delta = delta + 1
+        }
+    }
+    
+    /**
+     Remove array items in a thread-safe manner.
+
+     - parameter handler: Handler with array item that was popped.
+     */
+    public mutating func removeEach(handler: Element -> Void) -> Void {
+        self.enumerate().reverse().forEach { item in
+            handler(self.removeAtIndex(item.index))
         }
     }
 
