@@ -37,7 +37,6 @@ public extension UICollectionView {
      */
     public subscript(indexPath: NSIndexPath) -> UICollectionViewCell {
         return self.dequeueReusableCellWithReuseIdentifier(UICollectionView.defaultCellIdentifier, forIndexPath: indexPath)
-    
     }
 
     /**

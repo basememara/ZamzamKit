@@ -90,6 +90,25 @@ public extension NSDate {
             return formatter.stringFromDate(calendar.dateFromComponents(components)!)
     }
     
+    public func toHijri(
+        offSet: Int = 0) -> NSDateComponents {
+            let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierIslamicCivil)!
+            var date = self.copy() as! NSDate
+            
+            // Handle offset if applicable
+            if offSet != 0 {
+                date = calendar
+                    .dateByAddingUnit(.Day,
+                        value: offSet,
+                        toDate: date,
+                        options: NSCalendarOptions(rawValue: 0)
+                    )!
+            }
+            
+            return calendar.components(NSCalendarUnit(rawValue: UInt.max),
+                fromDate: date)
+    }
+    
     public func countdown(date: NSDate)  -> (span: Double, remaining: Double, percent: Double) {
         // Calculate span time
         var timeSpan = date.timeToDecimal() - self.timeToDecimal()
