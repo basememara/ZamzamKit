@@ -122,4 +122,20 @@ public extension UIApplication {
         return matchedNotifications
     }
     
+    /**
+     Update existing home short cut.
+
+     - parameter type:    Indentifier of shortcut item.
+     - parameter handler: Handler which to modify the shortcut item.
+     */
+    @available(iOSApplicationExtension 9.0, *)
+    public func updateShortcutItem(type: String, handler: UIMutableApplicationShortcutItem -> UIMutableApplicationShortcutItem) {
+        guard let index = shortcutItems?.indexOf({ $0.type == type }),
+            let item = shortcutItems?[index].mutableCopy() as? UIMutableApplicationShortcutItem else {
+                return
+        }
+        
+        shortcutItems?[index] = handler(item)
+    }
+    
 }
