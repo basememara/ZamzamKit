@@ -54,6 +54,7 @@
 		8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
 		8B5316AD1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
 		8B5316AE1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
+		8B5966131CD5E24A00738A12 /* UICollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5966121CD5E24A00738A12 /* UICollectionViewController.swift */; };
 		8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
@@ -262,6 +263,7 @@
 		8B53163A1C9B23140094A6C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B5316461C9B23BF0094A6C4 /* WKInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WKInterfaceController.swift; path = Extensions/WKInterfaceController.swift; sourceTree = "<group>"; };
 		8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dictionary.swift; path = Extensions/Dictionary.swift; sourceTree = "<group>"; };
+		8B5966121CD5E24A00738A12 /* UICollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UICollectionViewController.swift; path = Extensions/UICollectionViewController.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
 		8B8215411CA15E0D00C9FCC9 /* CLKComplicationServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLKComplicationServer.swift; sourceTree = "<group>"; };
 		8B8215491CA1613400C9FCC9 /* NSTimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSTimeInterval.swift; path = Extensions/NSTimeInterval.swift; sourceTree = "<group>"; };
@@ -549,9 +551,10 @@
 		8BFDB6741C751E8E00C94996 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				8BFDB68B1C752C5C00C94996 /* UIApplication.swift */,
 				8BD2D19D1CA583110018AC2B /* UIAlertAction.swift */,
+				8BFDB68B1C752C5C00C94996 /* UIApplication.swift */,
 				8BCB73DB1CAD6BD700E20096 /* UICollectionView.swift */,
+				8B5966121CD5E24A00738A12 /* UICollectionViewController.swift */,
 				8BFDB66F1C751DF600C94996 /* UIImageView.swift */,
 				8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */,
 				8BCB73D91CAD69BF00E20096 /* UITableView.swift */,
@@ -962,6 +965,7 @@
 				8BD2D1961CA581890018AC2B /* Audible.swift in Sources */,
 				8BCB73DA1CAD69BF00E20096 /* UITableView.swift in Sources */,
 				8BCB73DC1CAD6BD700E20096 /* UICollectionView.swift in Sources */,
+				8B5966131CD5E24A00738A12 /* UICollectionViewController.swift in Sources */,
 				8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8B82154A1CA1613500C9FCC9 /* NSTimeInterval.swift in Sources */,
 				8BB45FB51C9BDD180070CE07 /* NSUserDefaults.swift in Sources */,
