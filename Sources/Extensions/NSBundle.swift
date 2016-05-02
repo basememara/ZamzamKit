@@ -11,6 +11,22 @@ import Foundation
 public extension NSBundle {
     
     /**
+     Gets the contents of the specified file.
+     
+     - parameter fileName: Name of file to retrieve contents from.
+     - parameter bundle: Bundle where defaults reside.
+     - parameter encoding: Encoding of string from file.
+     
+     - returns: Contents of file.
+     */
+    public static func stringOfFile(fileName: String, bundle: NSBundle? = nil, encoding: NSStringEncoding = NSUTF8StringEncoding) -> String? {
+        guard let resourcePath = (bundle ?? NSBundle.mainBundle()).pathForResource(fileName, ofType: nil)
+            else { return nil }
+        
+        return try? String(contentsOfFile: resourcePath, encoding: encoding)
+    }
+    
+    /**
      Gets the contents of the specified plist file.
      
      - parameter plistName: property list where defaults are declared
@@ -19,10 +35,7 @@ public extension NSBundle {
      - returns: dictionary of values
      */
     public static func contentsOfFile(plistName: String, bundle: NSBundle? = nil) -> [String : AnyObject] {
-        let fileParts = plistName.componentsSeparatedByString(".")
-        
-        guard fileParts.count == 2,
-            let resourcePath = (bundle ?? NSBundle.mainBundle()).pathForResource(fileParts[0], ofType: fileParts[1]),
+        guard let resourcePath = (bundle ?? NSBundle.mainBundle()).pathForResource(plistName, ofType: nil),
             let contents = NSDictionary(contentsOfFile: resourcePath) as? [String : AnyObject]
             else { return [:] }
         
