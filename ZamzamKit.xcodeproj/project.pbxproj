@@ -55,6 +55,7 @@
 		8B5316AD1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
 		8B5316AE1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
 		8B5966131CD5E24A00738A12 /* UICollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5966121CD5E24A00738A12 /* UICollectionViewController.swift */; };
+		8B63B2C61CD959BC000F2B5F /* UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B63B2C51CD959BC000F2B5F /* UIBarButtonItem.swift */; };
 		8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
@@ -264,6 +265,7 @@
 		8B5316461C9B23BF0094A6C4 /* WKInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WKInterfaceController.swift; path = Extensions/WKInterfaceController.swift; sourceTree = "<group>"; };
 		8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dictionary.swift; path = Extensions/Dictionary.swift; sourceTree = "<group>"; };
 		8B5966121CD5E24A00738A12 /* UICollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UICollectionViewController.swift; path = Extensions/UICollectionViewController.swift; sourceTree = "<group>"; };
+		8B63B2C51CD959BC000F2B5F /* UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItem.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
 		8B8215411CA15E0D00C9FCC9 /* CLKComplicationServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLKComplicationServer.swift; sourceTree = "<group>"; };
 		8B8215491CA1613400C9FCC9 /* NSTimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSTimeInterval.swift; path = Extensions/NSTimeInterval.swift; sourceTree = "<group>"; };
@@ -560,6 +562,7 @@
 				8BCB73D91CAD69BF00E20096 /* UITableView.swift */,
 				8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */,
 				8BFDB6691C751D3400C94996 /* UIViewController.swift */,
+				8B63B2C51CD959BC000F2B5F /* UIBarButtonItem.swift */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -963,6 +966,7 @@
 				8BFDB6571C75187200C94996 /* NSDate.swift in Sources */,
 				8BD5086B1C99DD1E00AE205E /* Array.swift in Sources */,
 				8BD2D1961CA581890018AC2B /* Audible.swift in Sources */,
+				8B63B2C61CD959BC000F2B5F /* UIBarButtonItem.swift in Sources */,
 				8BCB73DA1CAD69BF00E20096 /* UITableView.swift in Sources */,
 				8BCB73DC1CAD6BD700E20096 /* UICollectionView.swift in Sources */,
 				8B5966131CD5E24A00738A12 /* UICollectionViewController.swift in Sources */,

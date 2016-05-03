@@ -6,8 +6,8 @@
 //  Copyright © 2016 Zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import SafariServices
 
 public extension UIViewController {
     
@@ -46,6 +46,22 @@ public extension UIViewController {
             alertController.addAction(UIAlertAction(title: buttonTitle) { handler?() })
             
             presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    /**
+     Open Safari view controller overlay.
+
+     - parameter url: URL to display in the browser.
+     - parameter modalPresentationStyle: The presentation style of the model view controller.
+     */
+    @available(iOSApplicationExtension 9.0, *)
+    func presentSafariController(url: String, modalPresentationStyle: UIModalPresentationStyle = .OverFullScreen) {
+        let safariController = SFSafariViewController(URL: NSURL(string: url)!)
+        safariController.modalPresentationStyle = .OverFullScreen
+        
+        safariController.delegate = self as? SFSafariViewControllerDelegate
+        
+        presentViewController(safariController, animated: true, completion: nil)
     }
 
 }
