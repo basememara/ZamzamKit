@@ -19,8 +19,8 @@ public extension NSBundle {
      
      - returns: Contents of file.
      */
-    public static func stringOfFile(fileName: String, bundle: NSBundle? = nil, encoding: NSStringEncoding = NSUTF8StringEncoding) -> String? {
-        guard let resourcePath = (bundle ?? NSBundle.mainBundle()).pathForResource(fileName, ofType: nil)
+    public static func stringOfFile(fileName: String, inDirectory: String? = nil, bundle: NSBundle? = nil, encoding: NSStringEncoding = NSUTF8StringEncoding) -> String? {
+        guard let resourcePath = (bundle ?? NSBundle.mainBundle()).pathForResource(fileName, ofType: nil, inDirectory: inDirectory)
             else { return nil }
         
         return try? String(contentsOfFile: resourcePath, encoding: encoding)
@@ -34,8 +34,8 @@ public extension NSBundle {
      
      - returns: dictionary of values
      */
-    public static func contentsOfFile(plistName: String, bundle: NSBundle? = nil) -> [String : AnyObject] {
-        guard let resourcePath = (bundle ?? NSBundle.mainBundle()).pathForResource(plistName, ofType: nil),
+    public static func contentsOfFile(plistName: String, inDirectory: String? = nil, bundle: NSBundle? = nil) -> [String : AnyObject] {
+        guard let resourcePath = (bundle ?? NSBundle.mainBundle()).pathForResource(plistName, ofType: nil, inDirectory: inDirectory),
             let contents = NSDictionary(contentsOfFile: resourcePath) as? [String : AnyObject]
             else { return [:] }
         
