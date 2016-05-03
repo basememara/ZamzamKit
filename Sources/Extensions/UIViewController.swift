@@ -55,7 +55,7 @@ public extension UIViewController {
      - parameter modalPresentationStyle: The presentation style of the model view controller.
      */
     @available(iOSApplicationExtension 9.0, *)
-    func presentSafariController(url: String, modalPresentationStyle: UIModalPresentationStyle = .OverFullScreen) {
+    public func presentSafariController(url: String, modalPresentationStyle: UIModalPresentationStyle = .OverFullScreen) {
         let safariController = SFSafariViewController(URL: NSURL(string: url)!)
         safariController.modalPresentationStyle = .OverFullScreen
         
