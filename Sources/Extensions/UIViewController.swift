@@ -63,5 +63,18 @@ public extension UIViewController {
         
         presentViewController(safariController, animated: true, completion: nil)
     }
+    
+    /**
+     Adds status bar background with color instead of being transparent.
+
+     - parameter backgroundColor: Background color of status bar.
+     */
+    public func addStatusBar(backgroundColor: UIColor) -> UIView {
+        let statusBar = UIView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 20))
+        statusBar.backgroundColor = backgroundColor
+        self.view.addSubview(statusBar)
+        
+        return statusBar
+    }
 
 }

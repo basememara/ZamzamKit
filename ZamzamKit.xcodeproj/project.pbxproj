@@ -560,12 +560,12 @@
 				8B63B2C51CD959BC000F2B5F /* UIBarButtonItem.swift */,
 				8BCB73DB1CAD6BD700E20096 /* UICollectionView.swift */,
 				8B5966121CD5E24A00738A12 /* UICollectionViewController.swift */,
+				8B63E4261CDB8DB00053C060 /* UIImage.swift */,
 				8BFDB66F1C751DF600C94996 /* UIImageView.swift */,
 				8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */,
 				8BCB73D91CAD69BF00E20096 /* UITableView.swift */,
 				8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */,
 				8BFDB6691C751D3400C94996 /* UIViewController.swift */,
-				8B63E4261CDB8DB00053C060 /* UIImage.swift */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
