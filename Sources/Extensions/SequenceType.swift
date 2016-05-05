@@ -11,7 +11,8 @@ import Foundation
 public extension SequenceType {
     
     /**
-     Returns the first that satisfies the predicate includeElement, or nil. Similar to `filter` but stops when one element is found. Thanks to [bigonotetaking](https://bigonotetaking.wordpress.com/2015/08/22/using-higher-order-methods-everywhere/)
+     Returns the first that satisfies the predicate includeElement, or nil. Similar to `filter` but stops when one element is found.
+     Thanks to [bigonotetaking](https://bigonotetaking.wordpress.com/2015/08/22/using-higher-order-methods-everywhere/)
      
      - parameter predicate: Predicate that the Element must satisfy.
      
@@ -19,6 +20,19 @@ public extension SequenceType {
      */
     public func first(@noescape predicate: Generator.Element -> Bool) -> Generator.Element? {
         for x in self where predicate(x) { return x }
+        return nil
+    }
+    
+    /**
+     Returns the last that satisfies the predicate includeElement, or nil. Similar to `filter` but stops when last element is found.
+     Thanks to [bigonotetaking](https://bigonotetaking.wordpress.com/2015/08/22/using-higher-order-methods-everywhere/)
+     
+     - parameter predicate: Predicate that the Element must satisfy.
+     
+     - returns: Last element that satisfies the predicate, or nil.
+     */
+    public func last(@noescape pred: Generator.Element -> Bool) -> Generator.Element? {
+        for x in reverse() where pred(x) { return x }
         return nil
     }
     

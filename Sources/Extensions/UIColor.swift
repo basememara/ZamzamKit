@@ -13,17 +13,55 @@ public extension UIColor {
     /**
     An additional convenience initializer function that allows to init a UIColor object using a hex color value.
 
-    :param: rgb UInt color hex value (f.e.: 0x990000 for a hex color code like #990000)
-    :param: alpha Double Optional value that sets the alpha range 0=invisible / 1=totally visible
+    - param: RGB UInt color hex value (f.e.: 0x990000 for a hex color code like #990000)
+    - param: Alpha Double Optional value that sets the alpha range 0=invisible / 1=totally visible.
 
     */
-    convenience init(rgb: Int, alpha: Double = 1.0) {
+    convenience init(hex: UInt32, alpha: Double = 1.0) {
         self.init(
-            red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgb & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat( rgb & 0x0000FF) / 255.0,
+            red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((hex & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(hex & 0x0000FF) / 255.0,
             alpha: CGFloat(alpha)
         )
+    }
+    
+    /**
+     An additional convenience initializer function that allows to init a UIColor object using integers.
+
+     - parameter rgb: A tuple of integers representing the RGB colors.
+     - parameter alpha: Alpha Double Optional value that sets the alpha range 0=invisible / 1=totally visible.
+     
+     */
+    convenience init(rgb: (Int, Int, Int), alpha: Double = 1.0) {
+        self.init(
+            red: CGFloat(rgb.0) / 255.0,
+            green: CGFloat(rgb.1) / 255.0,
+            blue: CGFloat(rgb.2) / 255.0,
+            alpha: CGFloat(alpha)
+        )
+    }
+    
+    /**
+     An additional convenience initializer function that allows to init a UIColor object using a RGB string.
+
+     - parameter rgb: A string of integers representing the RGB colors.
+     - parameter alpha: Alpha Double Optional value that sets the alpha range 0=invisible / 1=totally visible.
+     
+     */
+    convenience init(rgb: String?, alpha: Double = 1.0) {
+        // Validate correct number of colors supplied
+        guard let rgbSplit = rgb?.characters.split(",")
+            .map(String.init).flatMap({ Int($0.stringByTrimmingCharactersInSet(
+                NSCharacterSet.whitespaceAndNewlineCharacterSet())) })
+                    where rgbSplit.count == 3
+                        else {
+                            // Return black color if failed
+                            self.init(white: 0, alpha: 1)
+                            return
+                        }
+        
+        self.init(rgb: (rgbSplit[0], rgbSplit[1], rgbSplit[2]))
     }
     
     /**
