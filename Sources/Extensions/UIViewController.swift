@@ -76,5 +76,16 @@ public extension UIViewController {
         
         return statusBar
     }
+    
+    /**
+     Adds status bar background with light or dark mode.
+
+     - parameter darkMode: Light or dark mode color of status bar.
+     */
+    public func addStatusBar(darkMode darkMode: Bool) -> UIView {
+        return addStatusBar(darkMode
+            ? UIColor(white: 0, alpha: 0.8)
+            : UIColor(rgb: (239, 239, 244), alpha: 0.8))
+    }
 
 }
