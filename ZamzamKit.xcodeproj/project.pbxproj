@@ -82,8 +82,6 @@
 		8BCB73DA1CAD69BF00E20096 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73D91CAD69BF00E20096 /* UITableView.swift */; };
 		8BCB73DC1CAD6BD700E20096 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73DB1CAD6BD700E20096 /* UICollectionView.swift */; };
 		8BD08EB51CE28ACA0051080A /* SCNetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */; };
-		8BD08EB61CE28ACA0051080A /* SCNetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */; };
-		8BD08EB71CE28ACA0051080A /* SCNetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */; };
 		8BD2D1961CA581890018AC2B /* Audible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD2D1951CA581890018AC2B /* Audible.swift */; };
 		8BD2D19E1CA583110018AC2B /* UIAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD2D19D1CA583110018AC2B /* UIAlertAction.swift */; };
 		8BD5086B1C99DD1E00AE205E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5086A1C99DD1E00AE205E /* Array.swift */; };
@@ -1004,7 +1002,6 @@
 				8BFDB6581C75187200C94996 /* NSDate.swift in Sources */,
 				8BE814FE1C7842DC005F23CE /* SequenceType.swift in Sources */,
 				8B8215421CA15E0D00C9FCC9 /* CLKComplicationServer.swift in Sources */,
-				8BD08EB61CE28ACA0051080A /* SCNetworkReachability.swift in Sources */,
 				8BFDB67E1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8B82154B1CA1613500C9FCC9 /* NSTimeInterval.swift in Sources */,
 				8B1448021C7258F600043657 /* ZamzamConfig.swift in Sources */,
@@ -1039,7 +1036,6 @@
 				8BFDB6591C75187200C94996 /* NSDate.swift in Sources */,
 				8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8B1447FF1C7258F500043657 /* ZamzamConfig.swift in Sources */,
-				8BD08EB71CE28ACA0051080A /* SCNetworkReachability.swift in Sources */,
 				8BFDB6661C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8BD508781C99E18500AE205E /* CollectionType.swift in Sources */,
 				8B4CFAEF1CABEF0900D2B1D7 /* UIColor.swift in Sources */,
