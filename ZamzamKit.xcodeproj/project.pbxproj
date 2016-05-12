@@ -10,11 +10,8 @@
 		8B1447F81C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1447F91C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1447FA1C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8B1447FF1C7258F500043657 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
 		8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
-		8B1448021C7258F600043657 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
 		8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
-		8B1448051C7258F700043657 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
 		8B1448061C7258F700043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
 		8B2DE3E11C8A86B2008F1569 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
 		8B2DE3E21C8A86B2008F1569 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
@@ -47,8 +44,6 @@
 		8B5316611C9B249F0094A6C4 /* LocationMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */; };
 		8B5316621C9B24A10094A6C4 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
 		8B5316631C9B24A20094A6C4 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
-		8B5316641C9B24A40094A6C4 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
-		8B5316651C9B24A50094A6C4 /* ZamzamConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447811C722F5E00043657 /* ZamzamConfig.swift */; };
 		8B5316661C9B24A70094A6C4 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
 		8B5316671C9B24A80094A6C4 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
 		8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
@@ -226,7 +221,6 @@
 		8B14476B1C722D5700043657 /* ZamzamKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ZamzamKit.podspec; sourceTree = "<group>"; };
 		8B14476C1C722D5700043657 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8B14476D1C722D5700043657 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		8B1447811C722F5E00043657 /* ZamzamConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamConfig.swift; sourceTree = "<group>"; };
 		8B1447821C722F5E00043657 /* ZamzamConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamConstants.swift; sourceTree = "<group>"; };
 		8B1447AB1C72508400043657 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		8B1447AD1C7250EF00043657 /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
@@ -407,7 +401,6 @@
 				8BFDB65C1C75187800C94996 /* Extensions */,
 				8BFDB6A51C75B4B200C94996 /* Models */,
 				8B840E651C904F3300D85781 /* Protocols */,
-				8B1447811C722F5E00043657 /* ZamzamConfig.swift */,
 				8B1447821C722F5E00043657 /* ZamzamConstants.swift */,
 				8B1447F71C7258E500043657 /* ZamzamKit.h */,
 				8B1448411C725BFE00043657 /* Info-iOS.plist */,
@@ -983,7 +976,6 @@
 				8BB45FB51C9BDD180070CE07 /* NSUserDefaults.swift in Sources */,
 				8BFDB6771C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8BFDB6891C7529AB00C94996 /* UILocalNotification.swift in Sources */,
-				8B1448051C7258F700043657 /* ZamzamConfig.swift in Sources */,
 				8BFDB6641C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8BFDB65E1C7518F800C94996 /* String.swift in Sources */,
 				8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */,
@@ -1004,7 +996,6 @@
 				8B8215421CA15E0D00C9FCC9 /* CLKComplicationServer.swift in Sources */,
 				8BFDB67E1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8B82154B1CA1613500C9FCC9 /* NSTimeInterval.swift in Sources */,
-				8B1448021C7258F600043657 /* ZamzamConfig.swift in Sources */,
 				8BCB73CF1CAD660D00E20096 /* Equatable.swift in Sources */,
 				8BFDB6901C75323900C94996 /* NSDateFormatter.swift in Sources */,
 				8B5316AD1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
@@ -1035,7 +1026,6 @@
 				8B5316AE1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8BFDB6591C75187200C94996 /* NSDate.swift in Sources */,
 				8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */,
-				8B1447FF1C7258F500043657 /* ZamzamConfig.swift in Sources */,
 				8BFDB6661C751AE600C94996 /* NSURLComponents.swift in Sources */,
 				8BD508781C99E18500AE205E /* CollectionType.swift in Sources */,
 				8B4CFAEF1CABEF0900D2B1D7 /* UIColor.swift in Sources */,
@@ -1058,7 +1048,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B5316661C9B24A70094A6C4 /* ZamzamConstants.swift in Sources */,
-				8B5316641C9B24A40094A6C4 /* ZamzamConfig.swift in Sources */,
 				8B53160C1C9B22F60094A6C4 /* SecondViewController.swift in Sources */,
 				8B5316601C9B249E0094A6C4 /* LocationMeta.swift in Sources */,
 				8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */,
@@ -1072,7 +1061,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B5316651C9B24A50094A6C4 /* ZamzamConfig.swift in Sources */,
 				8B5316331C9B23140094A6C4 /* NotificationController.swift in Sources */,
 				8B5316311C9B23140094A6C4 /* ExtensionDelegate.swift in Sources */,
 				8B5316371C9B23140094A6C4 /* ComplicationController.swift in Sources */,
