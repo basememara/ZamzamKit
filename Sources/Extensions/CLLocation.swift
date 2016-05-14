@@ -20,7 +20,7 @@ public extension CLLocation {
         // Reverse geocode stored coordinates
         CLGeocoder().reverseGeocodeLocation(
             CLLocation(latitude: self.coordinate.latitude, longitude: self.coordinate.longitude)) {
-                placemarks, error in
+                [weak self] placemarks, error in
                 // Validate values
                 guard let mark = placemarks?[0] where error == nil else {
                     return handler(locationMeta: nil)
@@ -41,14 +41,20 @@ public extension CLLocation {
                     }
                 }
                 
+                // COnstruct meta if reference still available
+                var locationMeta: LocationMeta? = nil
+                if self != nil {
+                    locationMeta = LocationMeta(
+                        coordinates: (self!.coordinate.latitude, self!.coordinate.longitude),
+                        locality: mark.locality,
+                        country: mark.country,
+                        countryCode: mark.ISOcountryCode,
+                        timezone: timezone,
+                        administrativeArea: mark.administrativeArea)
+                }
+                
                 // Process callback
-                handler(locationMeta: LocationMeta(
-                    coordinates: (self.coordinate.latitude, self.coordinate.longitude),
-                    locality: mark.locality,
-                    country: mark.country,
-                    countryCode: mark.ISOcountryCode,
-                    timezone: timezone,
-                    administrativeArea: mark.administrativeArea))
+                handler(locationMeta: locationMeta)
         }
     }
     
