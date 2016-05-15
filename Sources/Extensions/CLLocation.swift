@@ -18,43 +18,35 @@ public extension CLLocation {
      */
     public func getMeta(handler: (locationMeta: LocationMeta?) -> Void) {
         // Reverse geocode stored coordinates
-        CLGeocoder().reverseGeocodeLocation(
-            CLLocation(latitude: self.coordinate.latitude, longitude: self.coordinate.longitude)) {
-                [weak self] placemarks, error in
-                // Validate values
-                guard let mark = placemarks?[0] where error == nil else {
-                    return handler(locationMeta: nil)
-                }
+        CLGeocoder().reverseGeocodeLocation(self) { placemarks, error in
+            // Validate values
+            guard let mark = placemarks?[0] where error == nil else {
+                return handler(locationMeta: nil)
+            }
+            
+            // Get timezone if applicable
+            var timezone: String?
+            if mark.description != "" {
+                let desc = mark.description
                 
-                // Get timezone if applicable
-                var timezone: String?
-                if mark.description != "" {
-                    let desc = mark.description
-                    
-                    // Extract timezone description
-                    if let regex = try? NSRegularExpression(
-                        pattern: "identifier = \"([a-z]*\\/[a-z]*_*[a-z]*)\"",
-                        options: .CaseInsensitive),
-                        let result = regex.firstMatchInString(desc, options: [], range: NSMakeRange(0, desc.characters.count)) {
-                            let tz = (desc as NSString).substringWithRange(result.rangeAtIndex(1))
-                            timezone = tz.stringByReplacingOccurrencesOfString("_", withString: " ")
-                    }
+                // Extract timezone description
+                if let regex = try? NSRegularExpression(
+                    pattern: "identifier = \"([a-z]*\\/[a-z]*_*[a-z]*)\"",
+                    options: .CaseInsensitive),
+                    let result = regex.firstMatchInString(desc, options: [], range: NSMakeRange(0, desc.characters.count)) {
+                        let tz = (desc as NSString).substringWithRange(result.rangeAtIndex(1))
+                        timezone = tz.stringByReplacingOccurrencesOfString("_", withString: " ")
                 }
-                
-                // COnstruct meta if reference still available
-                var locationMeta: LocationMeta? = nil
-                if self != nil {
-                    locationMeta = LocationMeta(
-                        coordinates: (self!.coordinate.latitude, self!.coordinate.longitude),
-                        locality: mark.locality,
-                        country: mark.country,
-                        countryCode: mark.ISOcountryCode,
-                        timezone: timezone,
-                        administrativeArea: mark.administrativeArea)
-                }
-                
-                // Process callback
-                handler(locationMeta: locationMeta)
+            }
+            
+            // Process callback
+            handler(locationMeta: LocationMeta(
+                coordinates: (self.coordinate.latitude, self.coordinate.longitude),
+                locality: mark.locality,
+                country: mark.country,
+                countryCode: mark.ISOcountryCode,
+                timezone: timezone,
+                administrativeArea: mark.administrativeArea))
         }
     }
     
