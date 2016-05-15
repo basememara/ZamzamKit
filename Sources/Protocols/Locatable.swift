@@ -19,12 +19,15 @@ public extension Locatable {
     
     func setupLocationManager(
         desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyThreeKilometers,
-        distanceFilter: Double = 1000.0) {
+        distanceFilter: Double = 1000.0,
+        monitorSignificantLocationChanges: Bool = false) {
             // Start requesting GPS location
             if locationManager == nil {
-                locationManager = CLLocationManager(self)
+                locationManager = CLLocationManager(self,
+                    monitorSignificantLocationChanges: monitorSignificantLocationChanges)
             } else {
-                locationManager?.tryStartUpdating()
+                locationManager?.tryStartUpdating(
+                    monitorSignificantLocationChanges: monitorSignificantLocationChanges)
             }
     }
     

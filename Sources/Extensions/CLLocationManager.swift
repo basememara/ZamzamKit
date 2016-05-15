@@ -14,13 +14,15 @@ public extension CLLocationManager {
     public convenience init(_ delegate: CLLocationManagerDelegate,
         desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyThreeKilometers,
         distanceFilter: Double = 1000.0,
-        forceInitialRequest: Bool = false) {
+        forceInitialRequest: Bool = false,
+        monitorSignificantLocationChanges: Bool = false) {
         self.init()
         
         self.delegate = delegate
         self.desiredAccuracy = desiredAccuracy
         self.distanceFilter = distanceFilter
-        self.tryStartUpdating(forceInitialRequest)
+        self.tryStartUpdating(forceInitialRequest,
+            monitorSignificantLocationChanges: monitorSignificantLocationChanges)
     }
     
     /**
@@ -28,23 +30,29 @@ public extension CLLocationManager {
      Calls startUpdatingLocation for iOS
      Calls requestLocation for watchOS
      */
-    public func tryStartUpdating(forceInitialRequest: Bool = false) -> Bool {
-        if CLLocationManager.isAuthorized() {
-            #if os(iOS)
-                if forceInitialRequest {
-                    if #available(iOS 9.0, *) {
-                        requestLocation()
+    public func tryStartUpdating(forceInitialRequest: Bool = false,
+        monitorSignificantLocationChanges: Bool = false) -> Bool {
+            if CLLocationManager.isAuthorized() {
+                #if os(iOS)
+                    if forceInitialRequest {
+                        if #available(iOS 9.0, *) {
+                            requestLocation()
+                        }
                     }
-                }
-                startUpdatingLocation()
-            #elseif os(watchOS)
-                requestLocation()
-            #endif
+                    
+                    if monitorSignificantLocationChanges {
+                        startMonitoringSignificantLocationChanges()
+                    } else {
+                        startUpdatingLocation()
+                    }
+                #elseif os(watchOS)
+                    requestLocation()
+                #endif
+                
+                return true
+            }
             
-            return true
-        }
-        
-        return false
+            return false
     }
     
     public static func isAuthorized() -> Bool {
