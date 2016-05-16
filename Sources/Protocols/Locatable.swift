@@ -20,15 +20,24 @@ public extension Locatable {
     func setupLocationManager(
         desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyThreeKilometers,
         distanceFilter: Double = 1000.0,
-        monitorSignificantLocationChanges: Bool = false) {
+        monitorSignificantLocationChanges: Bool = false,
+        allowsBackgroundLocationUpdates: Bool = false) {
             // Start requesting GPS location
             if locationManager == nil {
                 locationManager = CLLocationManager(self,
-                    monitorSignificantLocationChanges: monitorSignificantLocationChanges)
+                    monitorSignificantLocationChanges: monitorSignificantLocationChanges
+                        || allowsBackgroundLocationUpdates)
             } else {
                 locationManager?.tryStartUpdating(
-                    monitorSignificantLocationChanges: monitorSignificantLocationChanges)
+                    monitorSignificantLocationChanges: monitorSignificantLocationChanges
+                        || allowsBackgroundLocationUpdates)
             }
+                
+            #if os(iOS)
+                if #available(iOS 9.0, *) {
+                    locationManager?.allowsBackgroundLocationUpdates = allowsBackgroundLocationUpdates
+                }
+            #endif
     }
     
     func updateLocation(location: CLLocation?) {
