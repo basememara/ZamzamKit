@@ -11,20 +11,15 @@ import ZamzamKit
 
 class FirstViewController: UIViewController {
 
+    @IBOutlet weak var someButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    @IBAction func buttonTapped(sender: AnyObject) {
-        alert("Test") {
-            print("Test")
-        }
+    @IBAction func buttonTapped(sender: UIButton) {
+        presentActivityViewController(["Some title", "Some link"], sourceView: sender)
     }
 
 }

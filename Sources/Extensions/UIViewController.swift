@@ -87,5 +87,25 @@ public extension UIViewController {
             ? UIColor(white: 0, alpha: 0.8)
             : UIColor(rgb: (239, 239, 244), alpha: 0.8))
     }
+    
+    /**
+     Presents an activity view controller modally that you can use to offer various services from your application.
+
+     - parameter activityItems: The array of data objects on which to perform the activity. The type of objects in the array is variable and dependent on the data your application manages.
+     - parameter sourceView: The view containing the anchor rectangle for the popover for supporting iPad device.
+     - parameter applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
+     */
+    public func presentActivityViewController(activityItems: [AnyObject],
+        sourceView: UIView, applicationActivities: [UIActivity]? = nil) {
+            let activity = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+            
+            if let popOver = activity.popoverPresentationController {
+                popOver.sourceView  = sourceView
+                popOver.sourceRect = sourceView.bounds
+                popOver.permittedArrowDirections = .Any
+            }
+
+            presentViewController(activity, animated: true, completion: nil)
+    }
 
 }
