@@ -107,5 +107,24 @@ public extension UIViewController {
 
             presentViewController(activity, animated: true, completion: nil)
     }
+    
+    /**
+     Presents an activity view controller modally that you can use to offer various services from your application.
+
+     - parameter activityItems: The array of data objects on which to perform the activity. The type of objects in the array is variable and dependent on the data your application manages.
+     - parameter barButtonItem: The bar button item containing the anchor rectangle for the popover for supporting iPad device.
+     - parameter applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
+     */
+    public func presentActivityViewController(activityItems: [AnyObject],
+        barButtonItem: UIBarButtonItem, applicationActivities: [UIActivity]? = nil) {
+            let activity = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+            
+            if let popOver = activity.popoverPresentationController {
+                popOver.barButtonItem  = barButtonItem
+                popOver.permittedArrowDirections = .Any
+            }
+
+            presentViewController(activity, animated: true, completion: nil)
+    }
 
 }

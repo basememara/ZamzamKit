@@ -22,5 +22,9 @@ class FirstViewController: UIViewController {
         presentActivityViewController(["Some title", "Some link"], sourceView: sender)
     }
 
+    @IBAction func barButtonTapped(sender: UIBarButtonItem) {
+        presentActivityViewController(["Some title", "Some link"], barButtonItem: sender)
+    }
+    
 }
 
