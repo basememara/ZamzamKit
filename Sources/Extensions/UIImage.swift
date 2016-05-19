@@ -11,7 +11,7 @@ import Foundation
 public extension UIImage {
 
     /**
-     COnvenience initializer to handle default parameter value
+     Convenience initializer to handle default parameter value
 
      - parameter named:    The name of the image.
      - parameter inBundle: The bundle containing the image file or asset catalog. Specify nil to search the app's main bundle.
