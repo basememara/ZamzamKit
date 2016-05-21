@@ -9,6 +9,15 @@
 import Foundation
 
 public extension SequenceType {
+
+    /// Converts collection of objects to JSON string
+    var jsonString: String? {
+        guard let data = self as? [[String: AnyObject]],
+            let stringData = try? NSJSONSerialization.dataWithJSONObject(data, options: [])
+                else { return nil }
+        
+        return NSString(data: stringData, encoding: NSUTF8StringEncoding) as? String
+    }
     
     /**
      Returns the first that satisfies the predicate includeElement, or nil. Similar to `filter` but stops when one element is found.
