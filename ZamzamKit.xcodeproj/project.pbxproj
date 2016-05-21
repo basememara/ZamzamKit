@@ -97,6 +97,10 @@
 		8BE814FD1C7842DC005F23CE /* SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* SequenceType.swift */; };
 		8BE814FE1C7842DC005F23CE /* SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* SequenceType.swift */; };
 		8BE814FF1C7842DC005F23CE /* SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* SequenceType.swift */; };
+		8BF307C11CF0D44200BBA933 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BF307C01CF0D44200BBA933 /* Media.xcassets */; };
+		8BF307C21CF0D44200BBA933 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BF307C01CF0D44200BBA933 /* Media.xcassets */; };
+		8BF307C31CF0D44200BBA933 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BF307C01CF0D44200BBA933 /* Media.xcassets */; };
+		8BF307D01CF0E3C600BBA933 /* UIActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF307CF1CF0E3C600BBA933 /* UIActivity.swift */; };
 		8BFDB6571C75187200C94996 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6561C75187200C94996 /* NSDate.swift */; };
 		8BFDB6581C75187200C94996 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6561C75187200C94996 /* NSDate.swift */; };
 		8BFDB6591C75187200C94996 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6561C75187200C94996 /* NSDate.swift */; };
@@ -292,6 +296,8 @@
 		8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Timepiece.xcodeproj; path = Carthage/Checkouts/Timepiece/Timepiece.xcodeproj; sourceTree = "<group>"; };
 		8BE814F41C784233005F23CE /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = Extensions/UIColor.swift; sourceTree = "<group>"; };
 		8BE814FC1C7842DC005F23CE /* SequenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SequenceType.swift; path = Extensions/SequenceType.swift; sourceTree = "<group>"; };
+		8BF307C01CF0D44200BBA933 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		8BF307CF1CF0E3C600BBA933 /* UIActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIActivity.swift; path = Extensions/UIActivity.swift; sourceTree = "<group>"; };
 		8BFDB6561C75187200C94996 /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDate.swift; path = Extensions/NSDate.swift; sourceTree = "<group>"; };
 		8BFDB65D1C7518F800C94996 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = Extensions/String.swift; sourceTree = "<group>"; };
 		8BFDB6631C751AE600C94996 /* NSURLComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSURLComponents.swift; path = Extensions/NSURLComponents.swift; sourceTree = "<group>"; };
@@ -398,11 +404,13 @@
 		8B1447511C72237E00043657 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				8BF307C91CF0DBA400BBA933 /* Classes */,
 				8BFDB65C1C75187800C94996 /* Extensions */,
 				8BFDB6A51C75B4B200C94996 /* Models */,
 				8B840E651C904F3300D85781 /* Protocols */,
 				8B1447821C722F5E00043657 /* ZamzamConstants.swift */,
 				8B1447F71C7258E500043657 /* ZamzamKit.h */,
+				8BF307C01CF0D44200BBA933 /* Media.xcassets */,
 				8B1448411C725BFE00043657 /* Info-iOS.plist */,
 				8B1448441C725BFE00043657 /* Info-watchOS.plist */,
 				8B1448431C725BFE00043657 /* Info-tvOS.plist */,
@@ -522,6 +530,37 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8BF307C91CF0DBA400BBA933 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8BF307CB1CF0DBAF00BBA933 /* iOS */,
+				8BF307CA1CF0DBA900BBA933 /* watchOS */,
+				8BF307CC1CF0DBB400BBA933 /* tvOS */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		8BF307CA1CF0DBA900BBA933 /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = watchOS;
+			sourceTree = "<group>";
+		};
+		8BF307CB1CF0DBAF00BBA933 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		8BF307CC1CF0DBB400BBA933 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = tvOS;
+			sourceTree = "<group>";
+		};
 		8BFDB65C1C75187800C94996 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -551,6 +590,7 @@
 		8BFDB6741C751E8E00C94996 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				8BF307CF1CF0E3C600BBA933 /* UIActivity.swift */,
 				8BD2D19D1CA583110018AC2B /* UIAlertAction.swift */,
 				8BFDB68B1C752C5C00C94996 /* UIApplication.swift */,
 				8B63B2C51CD959BC000F2B5F /* UIBarButtonItem.swift */,
@@ -884,6 +924,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BF307C11CF0D44200BBA933 /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -891,6 +932,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BF307C21CF0D44200BBA933 /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,6 +940,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BF307C31CF0D44200BBA933 /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -955,6 +998,7 @@
 				8BFDB6701C751DF600C94996 /* UIImageView.swift in Sources */,
 				8BFDB67D1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BBA692D1CB6FCE000AD9759 /* UITableViewController.swift in Sources */,
+				8BF307D01CF0E3C600BBA933 /* UIActivity.swift in Sources */,
 				8BCB73CE1CAD660D00E20096 /* Equatable.swift in Sources */,
 				8BD08EB51CE28ACA0051080A /* SCNetworkReachability.swift in Sources */,
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,

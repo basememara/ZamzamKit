@@ -16,6 +16,17 @@ public struct ZamzamConstants {
     // Prevent others from initializing singleton
     private init() { }
     
+    /// Declare bundle depending on platform
+    #if os(iOS)
+        public static let bundleIdentifier = "io.zamzam.ZamzamKit-iOS"
+    #elseif os(watchOS)
+        public static let bundleIdentifier = "io.zamzam.ZamzamKit-watchOS"
+    #elseif os(tvOS)
+        public static let bundleIdentifier = "io.zamzam.ZamzamKit-tvOS"
+    #endif
+    
+    public static let bundle = NSBundle(identifier: bundleIdentifier)!
+    
     public struct DateTime {
         public static let JSON_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"
     }
