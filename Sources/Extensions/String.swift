@@ -40,16 +40,56 @@ public extension String {
             withTemplate: replaceValue)
     }
     
+    public func match(pattern: String) -> Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: pattern, options: [.CaseInsensitive])
+            return regex.firstMatchInString(self, options: NSMatchingOptions(rawValue: 0), range: NSMakeRange(0, characters.count)) != nil
+        } catch {
+            return false
+        }
+    }
+    
+    public func isEmail() -> Bool {
+        return match(ZamzamConstants.RegEx.EMAIL)
+    }
+
+    public func isNumber() -> Bool {
+        return match(ZamzamConstants.RegEx.NUMBER)
+    }
+    
     /**
     Takes the current String struct and strips out HTML using regular expression. All tags get stripped out.
 
     :returns: String html text as plain text
     */
-    func stripHTML() -> String {
+    public func stripHTML() -> String {
         return self.stringByReplacingOccurrencesOfString("<[^>]+>",
             withString: "",
             options: .RegularExpressionSearch,
             range: nil)
+    }
+    
+    public func replace(string: String, with: String) -> String {
+        return stringByReplacingOccurrencesOfString(string, withString: with)
+    }
+
+    public func truncate(length: Int, suffix: String = "...") -> String {
+        return self.characters.count > length
+            ? substringToIndex(startIndex.advancedBy(length)) + suffix
+            : self
+    }
+
+    public func split(delimiter: String) -> [String] {
+        let components = componentsSeparatedByString(delimiter)
+        return components != [""] ? components : []
+    }
+
+    public func contains(find: String) -> Bool {
+        return rangeOfString(find) != nil
+    }
+
+    public func trim() -> String {
+        return stringByTrimmingCharactersInSet(.whitespaceCharacterSet())
     }
     
     /**

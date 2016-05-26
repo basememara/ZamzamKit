@@ -13,6 +13,7 @@
 		8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
 		8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
 		8B1448061C7258F700043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
+		8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */; };
 		8B2DE3E11C8A86B2008F1569 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
 		8B2DE3E21C8A86B2008F1569 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
 		8B2DE3E31C8A86B2008F1569 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
@@ -236,6 +237,7 @@
 		8B1448411C725BFE00043657 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		8B1448431C725BFE00043657 /* Info-tvOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
 		8B1448441C725BFE00043657 /* Info-watchOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
+		8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIView.swift; path = Extensions/UIView.swift; sourceTree = "<group>"; };
 		8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSBundle.swift; path = Extensions/NSBundle.swift; sourceTree = "<group>"; };
 		8B2DE3EB1C8A8F79008F1569 /* NSBundleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBundleTests.swift; sourceTree = "<group>"; };
 		8B2DE3ED1C8A90AF008F1569 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				8BF307C91CF0DBA400BBA933 /* Classes */,
+				8B1EEC641CF6AE5100AE054B /* Enums */,
 				8BFDB65C1C75187800C94996 /* Extensions */,
 				8BFDB6A51C75B4B200C94996 /* Models */,
 				8B840E651C904F3300D85781 /* Protocols */,
@@ -438,6 +441,13 @@
 				8B1447B31C72539600043657 /* Timepiece.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8B1EEC641CF6AE5100AE054B /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		8B5316061C9B22F40094A6C4 /* ZamzamKit Example */ = {
@@ -601,6 +611,7 @@
 				8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */,
 				8BCB73D91CAD69BF00E20096 /* UITableView.swift */,
 				8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */,
+				8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */,
 				8BFDB6691C751D3400C94996 /* UIViewController.swift */,
 			);
 			name = iOS;
@@ -1004,6 +1015,7 @@
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8B840E601C904F1D00D85781 /* Locatable.swift in Sources */,
 				8BD508761C99E18500AE205E /* CollectionType.swift in Sources */,
+				8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */,
 				8BFDB68F1C75323900C94996 /* NSDateFormatter.swift in Sources */,
 				8BE814F51C784233005F23CE /* UIColor.swift in Sources */,
 				8B2DE3E11C8A86B2008F1569 /* NSBundle.swift in Sources */,

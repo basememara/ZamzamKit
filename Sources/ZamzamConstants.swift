@@ -31,8 +31,9 @@ public struct ZamzamConstants {
         public static let JSON_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"
     }
     
-    public struct Configuration {
-        public static let FILE_NAME = "Zamzam-Info"
+    public struct RegEx {
+        public static let EMAIL = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+        public static let NUMBER = "^[0-9]*?$"
     }
     
     public struct Path {
