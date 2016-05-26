@@ -17,6 +17,7 @@
 		8B1EEC791CF71D7100AE054B /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EEC781CF71D7100AE054B /* Then.swift */; };
 		8B1EEC7A1CF71D7100AE054B /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EEC781CF71D7100AE054B /* Then.swift */; };
 		8B1EEC7B1CF71D7100AE054B /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EEC781CF71D7100AE054B /* Then.swift */; };
+		8B1EEC881CF7588600AE054B /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EEC871CF7588600AE054B /* UIStoryboard.swift */; };
 		8B2DE3E11C8A86B2008F1569 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
 		8B2DE3E21C8A86B2008F1569 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
 		8B2DE3E31C8A86B2008F1569 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */; };
@@ -242,6 +243,7 @@
 		8B1448441C725BFE00043657 /* Info-watchOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
 		8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIView.swift; path = Extensions/UIView.swift; sourceTree = "<group>"; };
 		8B1EEC781CF71D7100AE054B /* Then.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
+		8B1EEC871CF7588600AE054B /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboard.swift; path = Extensions/UIStoryboard.swift; sourceTree = "<group>"; };
 		8B2DE3E01C8A86B2008F1569 /* NSBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSBundle.swift; path = Extensions/NSBundle.swift; sourceTree = "<group>"; };
 		8B2DE3EB1C8A8F79008F1569 /* NSBundleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBundleTests.swift; sourceTree = "<group>"; };
 		8B2DE3ED1C8A90AF008F1569 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -614,6 +616,7 @@
 				8B63E4261CDB8DB00053C060 /* UIImage.swift */,
 				8BFDB66F1C751DF600C94996 /* UIImageView.swift */,
 				8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */,
+				8B1EEC871CF7588600AE054B /* UIStoryboard.swift */,
 				8BCB73D91CAD69BF00E20096 /* UITableView.swift */,
 				8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */,
 				8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */,
@@ -1038,6 +1041,7 @@
 				8BFDB6771C751F2300C94996 /* NSFileManager.swift in Sources */,
 				8BFDB6891C7529AB00C94996 /* UILocalNotification.swift in Sources */,
 				8BFDB6641C751AE600C94996 /* NSURLComponents.swift in Sources */,
+				8B1EEC881CF7588600AE054B /* UIStoryboard.swift in Sources */,
 				8B1EEC791CF71D7100AE054B /* Then.swift in Sources */,
 				8BFDB65E1C7518F800C94996 /* String.swift in Sources */,
 				8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */,
