@@ -57,11 +57,11 @@ public extension UIColor {
                     where rgbSplit.count == 3
                         else {
                             // Return black color if failed
-                            self.init(white: 0, alpha: 1)
+                            self.init(white: 0, alpha: CGFloat(alpha))
                             return
                         }
         
-        self.init(rgb: (rgbSplit[0], rgbSplit[1], rgbSplit[2]))
+        self.init(rgb: (rgbSplit[0], rgbSplit[1], rgbSplit[2]), alpha: alpha)
     }
     
     /**
