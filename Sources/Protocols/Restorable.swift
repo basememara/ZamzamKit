@@ -9,20 +9,20 @@
 import Foundation
 
 /// Queue handlers to process on view appear.
-protocol Restorable: class {
+public protocol Restorable: class {
     var restorationHandlers: [() -> Void] { get set }
 }
 
-extension Restorable where Self: UIViewController {
+public extension Restorable where Self: UIViewController {
 
-    func willRestorableAppear() {
+    public func willRestorableAppear() {
         // Execute any awaiting tasks
         restorationHandlers.removeEach {
             handler in handler()
         }
     }
     
-    func performRestoration(handler: () -> Void) {
+    public func performRestoration(handler: () -> Void) {
         // Execute process in the right lifecycle
         if isViewLoaded() {
             handler()
