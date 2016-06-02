@@ -1,0 +1,5 @@
+jazzy \
+  --clean \
+  --author ZamzamKit \
+  --author_url https://zamzam.io \
+  --github_url https://github.com/ZamzamInc/ZamzamKit
