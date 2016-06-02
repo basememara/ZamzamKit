@@ -6,25 +6,16 @@
 [![License](https://img.shields.io/cocoapods/l/ZamzamKit.svg?style=flat)](http://cocoapods.org/pods/ZamzamKit)
 [![Platform](https://img.shields.io/cocoapods/p/ZamzamKit.svg?style=flat)](http://cocoapods.org/pods/ZamzamKit)
 
-## Usage
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
 ## Installation
-
-####CocoaPods
-ZamzamKit is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod "ZamzamKit", :git => 'https://github.com/ZamzamInc/ZamzamKit'
-```
 
 ####Carthage
 You can use [Carthage](https://github.com/Carthage/Carthage) to install `ZamzamKit` by adding it to your `Cartfile`:
 ```
 github "ZamzamInc/ZamzamKit"
 ```
+
+## Documentation
+See the [documentation here](https://cdn.rawgit.com/ZamzamInc/ZamzamKit/master/docs/index.html).
 
 ## Author
 
