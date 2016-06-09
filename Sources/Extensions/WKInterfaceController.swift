@@ -13,14 +13,14 @@ public extension WKInterfaceController {
     
     public func alert(title: String,
         message: String? = nil,
-        buttonTitle: String = "OK",
+        buttonText: String = "OK",
         alertControllerStyle: WKAlertControllerStyle = .Alert,
         additionalActions: [WKAlertAction]? = nil,
         includeCancelAction: Bool = false,
         cancelHandler: (() -> Void)? = nil,
         handler: (() -> Void)? = nil) {
             var actions = [WKAlertAction(
-                title: buttonTitle,
+                title: buttonText,
                 style: .Default) {
                     handler?()
                 }]

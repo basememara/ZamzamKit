@@ -22,7 +22,7 @@ public extension UIViewController {
      */
     public func alert(title: String,
         message: String? = nil,
-        buttonTitle: String = "OK",
+        buttonText: String = "OK",
         additionalActions: [UIAlertAction]? = nil,
         preferredStyle: UIAlertControllerStyle = .Alert,
         includeCancelAction: Bool = false,
@@ -43,7 +43,7 @@ public extension UIViewController {
                 }
             }
             
-            alertController.addAction(UIAlertAction(title: buttonTitle) { handler?() })
+            alertController.addAction(UIAlertAction(title: buttonText) { handler?() })
             
             presentViewController(alertController, animated: true, completion: nil)
     }
