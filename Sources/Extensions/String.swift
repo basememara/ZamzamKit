@@ -56,6 +56,14 @@ public extension String {
     public func isNumber() -> Bool {
         return match(ZamzamConstants.RegEx.NUMBER)
     }
+
+    public func isAlpha() -> Bool {
+        return match(ZamzamConstants.RegEx.ALPHA)
+    }
+
+    public func isAlphaNumeric() -> Bool {
+        return match(ZamzamConstants.RegEx.ALPHANUMERIC)
+    }
     
     /**
     Takes the current String struct and strips out HTML using regular expression. All tags get stripped out.

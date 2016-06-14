@@ -33,7 +33,9 @@ public struct ZamzamConstants {
     
     public struct RegEx {
         public static let EMAIL = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
-        public static let NUMBER = "^[0-9]*?$"
+        public static let NUMBER = "^[0-9]+?$"
+        public static let ALPHA = "^[A-Za-z]+$"
+        public static let ALPHANUMERIC = "^[A-Za-z0-9]+$"
     }
     
     public struct Path {
