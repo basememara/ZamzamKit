@@ -10,6 +10,14 @@ import Foundation
 
 public extension NSDate {
     
+    public var isPast: Bool {
+        return self.compare(NSDate()) == .OrderedAscending
+    }
+    
+    public var isFuture: Bool {
+        return !self.isPast
+    }
+    
     public convenience init?(fromString: String, dateFormat: String = "yyyy/MM/dd HH:mm") {
         guard let date = NSDateFormatter(dateFormat: dateFormat).dateFromString(fromString)
             where !fromString.isEmpty else {
@@ -17,14 +25,6 @@ public extension NSDate {
         }
         
         self.init(timeInterval: 0, sinceDate: date)
-    }
-    
-    public func isPast() -> Bool {
-        return self.compare(NSDate()) == .OrderedAscending
-    }
-    
-    public func isFuture() -> Bool {
-        return !self.isPast()
     }
     
     public func incrementDay(numberOfDays: Int = 1) -> NSDate {
@@ -46,7 +46,7 @@ public extension NSDate {
     }
     
     public func incrementDayIfPast() -> NSDate {
-        return self.isPast()
+        return self.isPast
             ? self.incrementDay() : self
     }
     

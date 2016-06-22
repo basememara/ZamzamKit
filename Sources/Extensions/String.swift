@@ -17,6 +17,26 @@ public extension String {
         return NSLocalizedString(self, comment: "")
     }
     
+    public var isEmail: Bool {
+        return match(ZamzamConstants.RegEx.EMAIL)
+    }
+
+    public var isNumber: Bool {
+        return match(ZamzamConstants.RegEx.NUMBER)
+    }
+
+    public var isAlpha: Bool {
+        return match(ZamzamConstants.RegEx.ALPHA)
+    }
+
+    public var isAlphaNumeric: Bool {
+        return match(ZamzamConstants.RegEx.ALPHANUMERIC)
+    }
+
+    public var trim: String {
+        return stringByTrimmingCharactersInSet(.whitespaceCharacterSet())
+    }
+    
     /**
      Replaces a string using a regular expression pattern
      
@@ -49,22 +69,6 @@ public extension String {
         }
     }
     
-    public func isEmail() -> Bool {
-        return match(ZamzamConstants.RegEx.EMAIL)
-    }
-
-    public func isNumber() -> Bool {
-        return match(ZamzamConstants.RegEx.NUMBER)
-    }
-
-    public func isAlpha() -> Bool {
-        return match(ZamzamConstants.RegEx.ALPHA)
-    }
-
-    public func isAlphaNumeric() -> Bool {
-        return match(ZamzamConstants.RegEx.ALPHANUMERIC)
-    }
-    
     /**
     Takes the current String struct and strips out HTML using regular expression. All tags get stripped out.
 
@@ -94,10 +98,6 @@ public extension String {
 
     public func contains(find: String) -> Bool {
         return rangeOfString(find) != nil
-    }
-
-    public func trim() -> String {
-        return stringByTrimmingCharactersInSet(.whitespaceCharacterSet())
     }
     
     /**
