@@ -1,10 +1,120 @@
 # ZamzamKit
 
-[![CI Status](http://img.shields.io/travis/Basem Emara/ZamzamKit.svg?style=flat)](https://travis-ci.org/Basem Emara/ZamzamKit)
-[![Version](https://img.shields.io/cocoapods/v/ZamzamKit.svg?style=flat)](http://cocoapods.org/pods/ZamzamKit)
 [![Carthage](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/cocoapods/l/ZamzamKit.svg?style=flat)](http://cocoapods.org/pods/ZamzamKit)
 [![Platform](https://img.shields.io/cocoapods/p/ZamzamKit.svg?style=flat)](http://cocoapods.org/pods/ZamzamKit)
+
+ZamzamKit is a collection of small utility extensions for NSFoundation and UIKit classes and protocols.
+
+## Usage
+
+###NSFoundation
+####Array + get
+```
+// Before
+guard let item = tabBarController.tabBar.items?[2] else { return }
+item.selectedImage = UIImage("my-image")
+
+// After
+tabBarController.tabBar.items?.get(2)?.selectedImage = UIImage("my-image")
+```
+####SCNetworkReachability + online
+```
+// Before
+var zeroAddress = sockaddr_in()
+zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+zeroAddress.sin_family = sa_family_t(AF_INET)
+
+guard let defaultRouteReachability = withUnsafePointer(&zeroAddress, {
+    SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+}) else { return false }
+
+var flags : SCNetworkReachabilityFlags = []
+if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
+    return false
+}
+
+let isReachable = flags.contains(.Reachable)
+let needsConnection = flags.contains(.ConnectionRequired)
+let isOnline = isReachable && !needsConnection
+
+// After
+let isOnline = SCNetworkReachability.isOnline
+```
+####NSBundle + contents
+```
+// Before
+guard let contents = NSDictionary(contentsOfURL: bundleURL.URLByAppendingPathComponent("Settings.plist"))
+    else { return [:] }
+        
+guard let preferences = contents.valueForKey("PreferenceSpecifiers") as? [String: AnyObject]
+    else { return [:] }
+        
+let values: [String : AnyObject] = preferences
+
+// After
+let values = NSBundle.contentsOfFile("Settings.plist")
+
+###UIKit
+####UIViewController + alert
+```
+// Before
+class MyViewController: UIViewController {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let alert = UIAlertController(title: "My Title", message: "This is my message.", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .Default) { alert in
+            print("OK tapped")
+        }
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+}
+
+// After
+class MyViewController: UIViewController {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        alert("My Title", message: "This is my message.") {
+            print("OK tapped")
+        }
+    }
+}
+```
+####UIViewController + Safari
+```
+// Before
+class MyViewController: UIViewController {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let safariController = SFSafariViewController(URL: NSURL(string: url)!)
+        safariController.modalPresentationStyle = .OverFullScreen
+        safariController.delegate = self as? SFSafariViewControllerDelegate
+        presentViewController(safariController, animated: true, completion: nil)
+    }
+}
+
+// After
+class MyViewController: UIViewController {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        presentSafariController(url)
+    }
+}
+```
+####UITableView/UICollectionView+ subscript
+```
+// Before
+let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+
+// After
+let cell = tableView[indexPath]
+```
+
+See the [API documentation here](https://cdn.rawgit.com/ZamzamInc/ZamzamKit/master/docs/index.html).
 
 ## Installation
 
@@ -13,9 +123,6 @@ You can use [Carthage](https://github.com/Carthage/Carthage) to install `ZamzamK
 ```
 github "ZamzamInc/ZamzamKit"
 ```
-
-## Documentation
-See the [documentation here](https://cdn.rawgit.com/ZamzamInc/ZamzamKit/master/docs/index.html).
 
 ## Author
 
