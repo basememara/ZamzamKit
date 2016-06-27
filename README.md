@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/cocoapods/l/ZamzamKit.svg?style=flat)](http://cocoapods.org/pods/ZamzamKit)
 [![Platform](https://img.shields.io/cocoapods/p/ZamzamKit.svg?style=flat)](http://cocoapods.org/pods/ZamzamKit)
 
-ZamzamKit a Swift framework for rapidly developing using a collection of small utility extensions for NSFoundation and UIKit classes and protocols.
+ZamzamKit a Swift framework for rapid development using a collection of small utility extensions for NSFoundation and UIKit classes and protocols.
 
 ## Usage
 
@@ -120,7 +120,7 @@ let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: ind
 let cell = tableView[indexPath]
 ```
 
-See the [API documentation here](https://cdn.rawgit.com/ZamzamInc/ZamzamKit/master/docs/index.html).
+And more! See the [API documentation here](https://cdn.rawgit.com/ZamzamInc/ZamzamKit/master/docs/index.html).
 
 ## Installation
 
