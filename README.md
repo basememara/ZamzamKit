@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/cocoapods/l/ZamzamKit.svg?style=flat)](http://cocoapods.org/pods/ZamzamKit)
 [![Platform](https://img.shields.io/cocoapods/p/ZamzamKit.svg?style=flat)](http://cocoapods.org/pods/ZamzamKit)
 
-ZamzamKit is a collection of small utility extensions for NSFoundation and UIKit classes and protocols.
+ZamzamKit a Swift framework for rapidly developing using a collection of small utility extensions for NSFoundation and UIKit classes and protocols.
 
 ## Usage
 
@@ -14,7 +14,8 @@ ZamzamKit is a collection of small utility extensions for NSFoundation and UIKit
 // Before
 guard let item = tabBarController.tabBar.items?[2] else { return }
 item.selectedImage = UIImage("my-image")
-
+```
+```
 // After
 tabBarController.tabBar.items?.get(2)?.selectedImage = UIImage("my-image")
 ```
@@ -37,7 +38,8 @@ if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
 let isReachable = flags.contains(.Reachable)
 let needsConnection = flags.contains(.ConnectionRequired)
 let isOnline = isReachable && !needsConnection
-
+```
+```
 // After
 let isOnline = SCNetworkReachability.isOnline
 ```
@@ -51,10 +53,11 @@ guard let preferences = contents.valueForKey("PreferenceSpecifiers") as? [String
     else { return [:] }
         
 let values: [String : AnyObject] = preferences
-
+```
+```
 // After
 let values = NSBundle.contentsOfFile("Settings.plist")
-
+```
 ###UIKit
 ####UIViewController + alert
 ```
@@ -70,7 +73,8 @@ class MyViewController: UIViewController {
         self.presentViewController(alert, animated: true, completion: nil)
     }
 }
-
+```
+```
 // After
 class MyViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
@@ -95,7 +99,8 @@ class MyViewController: UIViewController {
         presentViewController(safariController, animated: true, completion: nil)
     }
 }
-
+```
+```
 // After
 class MyViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
@@ -109,7 +114,8 @@ class MyViewController: UIViewController {
 ```
 // Before
 let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-
+```
+```
 // After
 let cell = tableView[indexPath]
 ```
