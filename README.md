@@ -12,12 +12,13 @@ ZamzamKit a Swift framework for rapid development using a collection of small ut
 ####Array + get
 ```
 // Before
-guard let item = tabBarController.tabBar.items?[2] else { return }
-item.selectedImage = UIImage("my-image")
+if let items = tabBarController.tabBar.items where items.count > 4 {
+    items[5].selectedImage = UIImage("my-image")
+}
 ```
 ```
 // After
-tabBarController.tabBar.items?.get(2)?.selectedImage = UIImage("my-image")
+tabBarController.tabBar.items?.get(5)?.selectedImage = UIImage("my-image")
 ```
 ####SCNetworkReachability + online
 ```
