@@ -164,7 +164,7 @@ let newValue = regex.stringByReplacingMatchesInString(self, options: [],
 ```
 ```
 // After
-myString.replaceRegEx("([A-HK-PRSVWY][A-HJ-PR-Y])\\s?([0][2-9]|[1-9][0-9])\\s?[A-HJ-PR-Z]{3}", replaceValue: "XYZ")
+myString.replaceRegEx("([0][2-9]|[1-9][0-9])", replaceValue: "AAA")
 ```
 ####Validation
 ```
@@ -183,7 +183,7 @@ myString.isNumber
 myString.isAlpha
 myString.isAlphaNumeric
 ```
-####Strings + html
+####HTML
 ```
 // Before
 myDiv.stringByReplacingOccurrencesOfString("<[^>]+>",
