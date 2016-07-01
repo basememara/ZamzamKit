@@ -146,7 +146,8 @@ let rgbColor = UIColor(
 // After
 let rgbColor = UIColor(rgb: (255, 128, 102))
 ```
-####Strings + regex
+###Strings
+####Regular Expressions
 ```
 // Before
 guard let regex: NSRegularExpression = try? NSRegularExpression(
@@ -165,7 +166,7 @@ let newValue = regex.stringByReplacingMatchesInString(self, options: [],
 // After
 myString.replaceRegEx("([A-HK-PRSVWY][A-HJ-PR-Y])\\s?([0][2-9]|[1-9][0-9])\\s?[A-HJ-PR-Z]{3}", replaceValue: "XYZ")
 ```
-####Strings + validation
+####Validation
 ```
 // Before
 do {
