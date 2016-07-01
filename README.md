@@ -111,7 +111,7 @@ class MyViewController: UIViewController {
     }
 }
 ```
-####UITableView/UICollectionView+ subscript
+####UITableView/UICollectionView + subscript
 ```
 // Before
 let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
@@ -120,7 +120,80 @@ let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: ind
 // After
 let cell = tableView[indexPath]
 ```
+####UIColors + hex
+```
+// Before
+let hexColor = UIColor(
+    red: CGFloat((0x990000 & 0xFF0000) >> 16) / 255.0,
+    green: CGFloat((0x990000 & 0x00FF00) >> 8) / 255.0,
+    blue: CGFloat(0x990000 & 0x0000FF) / 255.0,
+    alpha: CGFloat(1)
+```
+```
+// After
+let hexColor = UIColor(hex: 0x990000)
+```
+####UIColors + rgb
+```
+// Before
+let rgbColor = UIColor(
+    red: CGFloat(255) / 255.0,
+    green: CGFloat(128) / 255.0,
+    blue: CGFloat(102) / 255.0,
+    alpha: CGFloat(1)
+```
+```
+// After
+let rgbColor = UIColor(rgb: (255, 128, 102))
+```
+####Strings + regex
+```
+// Before
+guard let regex: NSRegularExpression = try? NSRegularExpression(
+    pattern: pattern,
+    options: .CaseInsensitive) where self != "" else {
+        return self
+}
+    
+let length = self.characters.count
 
+let newValue = regex.stringByReplacingMatchesInString(self, options: [],
+    range: NSMakeRange(0, length),
+    withTemplate: replaceValue)
+```
+```
+// After
+myString.replaceRegEx("([A-HK-PRSVWY][A-HJ-PR-Y])\\s?([0][2-9]|[1-9][0-9])\\s?[A-HJ-PR-Z]{3}", replaceValue: "XYZ")
+```
+####Strings + validation
+```
+// Before
+do {
+    let regex = try NSRegularExpression(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}", options: [.CaseInsensitive])
+    let isEmail = regex.firstMatchInString(myString, options: NSMatchingOptions(rawValue: 0), range: NSMakeRange(0, characters.count)) != nil
+} catch {
+    return false
+}
+```
+```
+// After
+myString.isEmail
+myString.isNumber
+myString.isAlpha
+myString.isAlphaNumeric
+```
+####Strings + html
+```
+// Before
+myDiv.stringByReplacingOccurrencesOfString("<[^>]+>",
+    withString: "",
+    options: .RegularExpressionSearch,
+    range: nil)
+```
+```
+// After
+myDiv.stripHTML()
+```
 And more! See the [API documentation here](https://cdn.rawgit.com/ZamzamInc/ZamzamKit/master/docs/index.html).
 
 ## Installation
