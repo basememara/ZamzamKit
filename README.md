@@ -13,12 +13,12 @@ ZamzamKit a Swift framework for rapid development using a collection of small ut
 ```
 // Before
 if let items = tabBarController.tabBar.items where items.count > 4 {
-    items[5].selectedImage = UIImage("my-image")
+    items[3].selectedImage = UIImage("my-image")
 }
 ```
 ```
 // After
-tabBarController.tabBar.items?.get(5)?.selectedImage = UIImage("my-image")
+tabBarController.tabBar.items?.get(3)?.selectedImage = UIImage("my-image")
 ```
 ####SCNetworkReachability + online
 ```
@@ -44,6 +44,22 @@ let isOnline = isReachable && !needsConnection
 // After
 let isOnline = SCNetworkReachability.isOnline
 ```
+####SequenceType + json
+```
+// Before
+guard let data = myModel as? [[String: AnyObject]],
+    let stringData = try? NSJSONSerialization.dataWithJSONObject(data, options: [])
+        else { return nil }
+
+let json = NSString(data: stringData, encoding: NSUTF8StringEncoding) as? String
+
+webView.evaluateJavaScript("eventStream.next(\(json))", completionHandler: nil)
+```
+```
+// After
+let json = myModel.jsonString
+webView.evaluateJavaScript("eventStream.next(\(json))", completionHandler: nil)
+```
 ####NSBundle + contents
 ```
 // Before
@@ -57,16 +73,26 @@ let values: [String : AnyObject] = preferences
 ```
 ```
 // After
-let values = NSBundle.contentsOfFile("Settings.plist")
+let values = NSBundle.contentsOfFile(plistName: "Settings.plist")
+```
+####NSBundle + string
+```
+// Before
+guard let resourcePath = (bundle ?? NSBundle.mainBundle()).pathForResource(fileName, ofType: nil, inDirectory: inDirectory)
+    else { return nil }
+
+let value = try? String(contentsOfFile: resourcePath, encoding: encoding)
+```
+```
+// After
+let value = NSBundle.stringOfFile(fileName: "my-test-file.txt")
 ```
 ###UIKit
 ####UIViewController + alert
 ```
 // Before
 class MyViewController: UIViewController {
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    func something() {
         let alert = UIAlertController(title: "My Title", message: "This is my message.", preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default) { alert in
             print("OK tapped")
@@ -78,9 +104,7 @@ class MyViewController: UIViewController {
 ```
 // After
 class MyViewController: UIViewController {
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    func something() {
         alert("My Title", message: "This is my message.") {
             print("OK tapped")
         }
@@ -91,9 +115,7 @@ class MyViewController: UIViewController {
 ```
 // Before
 class MyViewController: UIViewController {
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    func something() {
         let safariController = SFSafariViewController(URL: NSURL(string: url)!)
         safariController.modalPresentationStyle = .OverFullScreen
         safariController.delegate = self as? SFSafariViewControllerDelegate
@@ -104,9 +126,7 @@ class MyViewController: UIViewController {
 ```
 // After
 class MyViewController: UIViewController {
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    func something() {
         presentSafariController(url)
     }
 }
@@ -146,19 +166,71 @@ let rgbColor = UIColor(
 // After
 let rgbColor = UIColor(rgb: (255, 128, 102))
 ```
+####CLLocation + meta
+```
+// Before
+CLGeocoder().reverseGeocodeLocation(myLocation) { placemarks, error in
+    // Validate values
+    guard let mark = placemarks?[0] where error == nil else {
+        return handler(locationMeta: nil)
+    }
+    
+    // Get timezone if applicable
+    var timezone: String?
+    if mark.description != "" {
+        let desc = mark.description
+        
+        // Extract timezone description
+        if let regex = try? NSRegularExpression(
+            pattern: "identifier = \"([a-z]*\\/[a-z]*_*[a-z]*)\"",
+            options: .CaseInsensitive),
+            let result = regex.firstMatchInString(desc, options: [], range: NSMakeRange(0, desc.characters.count)) {
+                let tz = (desc as NSString).substringWithRange(result.rangeAtIndex(1))
+                timezone = tz.stringByReplacingOccurrencesOfString("_", withString: " ")
+        }
+    }
+    
+    print("coordinates: \(myLocation.coordinate.latitude), \(myLocation.coordinate.longitude)")
+    print("locality: \(mark.locality)")
+    print("country: \(mark.country)")
+    print("countryCode: \(mark.ISOcountryCode)")
+    print("timezone: \(timezone)")
+    print("administrativeArea: \(mark.administrativeArea)")
+}
+```
+```
+// After
+myLocation.getMeta { locationMeta in
+    print("coordinates: \(locationMeta.coordinates.latitude), \(locationMeta.coordinates.longitude)")
+    print("locality: \(locationMeta.locality)")
+    print("country: \(locationMeta.country)")
+    print("countryCode: \(locationMeta.countryCode)")
+    print("timezone: \(locationMeta.timezone)")
+    print("administrativeArea: \(locationMeta.administrativeArea)")
+}
+```
 ###Strings
+####Localization
+```
+// Before
+NSLocalizedString(myString, comment: "")
+```
+```
+// After
+myString.localized
+```
 ####Regular Expressions
 ```
 // Before
 guard let regex: NSRegularExpression = try? NSRegularExpression(
     pattern: pattern,
-    options: .CaseInsensitive) where self != "" else {
-        return self
+    options: .CaseInsensitive) where myString != "" else {
+        return myString
 }
     
-let length = self.characters.count
+let length = myString.characters.count
 
-let newValue = regex.stringByReplacingMatchesInString(self, options: [],
+let newValue = regex.stringByReplacingMatchesInString(myString, options: [],
     range: NSMakeRange(0, length),
     withTemplate: replaceValue)
 ```
