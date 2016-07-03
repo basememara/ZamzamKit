@@ -279,7 +279,7 @@ github "ZamzamInc/ZamzamKit"
 
 ## Author
 
-Zamzam Inc., contact@zamzam.io
+http://zamzam.io
 
 ## License
 
