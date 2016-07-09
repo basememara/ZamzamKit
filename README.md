@@ -52,13 +52,10 @@ guard let data = myModel as? [[String: AnyObject]],
         else { return nil }
 
 let json = NSString(data: stringData, encoding: NSUTF8StringEncoding) as? String
-
-webView.evaluateJavaScript("eventStream.next(\(json))", completionHandler: nil)
 ```
 ```
 // After
 let json = myModel.jsonString
-webView.evaluateJavaScript("eventStream.next(\(json))", completionHandler: nil)
 ```
 ####NSBundle + contents
 ```
@@ -105,7 +102,7 @@ class MyViewController: UIViewController {
 // After
 class MyViewController: UIViewController {
     func something() {
-        alert("My Title", message: "This is my message.") {
+        presentAlert("My Title", message: "This is my message.") {
             print("OK tapped")
         }
     }
