@@ -11,7 +11,7 @@ import WatchKit
 
 public extension WKInterfaceController {
     
-    public func alert(title: String,
+    public func presentAlert(title: String,
         message: String? = nil,
         buttonText: String = "OK",
         alertControllerStyle: WKAlertControllerStyle = .Alert,

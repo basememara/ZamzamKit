@@ -30,6 +30,6 @@ class InterfaceController: WKInterfaceController {
     }
 
     @IBAction func buttonTapped() {
-        alert("Test")
+        presentAlert("Test")
     }
 }
