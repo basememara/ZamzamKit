@@ -122,6 +122,12 @@ public extension UIApplication {
         return matchedNotifications
     }
     
+    public func clearNotificationTray() {
+        // No native API so work around
+        self.applicationIconBadgeNumber = 1
+        self.applicationIconBadgeNumber = 0
+    }
+    
     /**
      Update existing home short cut.
 
