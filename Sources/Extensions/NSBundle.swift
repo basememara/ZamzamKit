@@ -52,7 +52,7 @@ public extension NSBundle {
      */
     public static func contentsOfFile(bundleURL bundleURL: NSURL, plistName: String = "Root.plist") -> [String : AnyObject] {
         // Extract plist file from bundle
-        guard let contents = NSDictionary(contentsOfURL: bundleURL.URLByAppendingPathComponent(plistName))
+        guard let contents = NSDictionary(contentsOfURL: bundleURL.URLByAppendingPathComponent(plistName)!)
             else { return [:] }
         
         // Collect default values

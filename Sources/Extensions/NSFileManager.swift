@@ -19,7 +19,7 @@ public extension NSFileManager {
      */
     public static func getDocumentPath(fileName: String) -> String {
         return NSURL(fileURLWithPath: ZamzamConstants.Path.DOCUMENTS)
-            .URLByAppendingPathComponent(fileName)
+            .URLByAppendingPathComponent(fileName)!
             .path!
     }
     
