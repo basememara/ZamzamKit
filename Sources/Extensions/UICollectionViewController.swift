@@ -17,9 +17,9 @@ public extension UICollectionViewController {
      - returns: Returns an instance of the activity indicator that is centered.
      */
     public func setupActivityIndicator(
-        viewStyle: UIActivityIndicatorViewStyle = .WhiteLarge,
-        color: UIColor = .grayColor()) -> UIActivityIndicatorView {
-            let activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 40, 40))
+        _ viewStyle: UIActivityIndicatorViewStyle = .whiteLarge,
+        color: UIColor = .gray()) -> UIActivityIndicatorView {
+            let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
             activityIndicator.activityIndicatorViewStyle = viewStyle
             activityIndicator.color = color
             activityIndicator.hidesWhenStopped = true

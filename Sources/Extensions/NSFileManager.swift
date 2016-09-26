@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension NSFileManager {
+public extension FileManager {
     
     /**
      Get file system path for document file
@@ -17,10 +17,10 @@ public extension NSFileManager {
      
      - returns: File path from document directory
      */
-    public static func getDocumentPath(fileName: String) -> String {
-        return NSURL(fileURLWithPath: ZamzamConstants.Path.DOCUMENTS)
-            .URLByAppendingPathComponent(fileName)!
-            .path!
+    public static func getDocumentPath(_ fileName: String) -> String {
+        return URL(fileURLWithPath: ZamzamConstants.Path.DOCUMENTS)
+            .appendingPathComponent(fileName)
+            .path
     }
     
     /**
@@ -30,12 +30,12 @@ public extension NSFileManager {
      
      - returns: List of file paths from document directory
      */
-    public static func getDocumentPaths(filter: ((NSURL) -> Bool)? = nil) -> [String] {
+    public static func getDocumentPaths(_ filter: ((URL) -> Bool)? = nil) -> [String] {
         // Get the directory contents including folders
-        guard var directoryUrls = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(
-            ZamzamConstants.Path.DOCUMENTS_URL,
+        guard var directoryUrls = try? FileManager.default.contentsOfDirectory(
+            at: ZamzamConstants.Path.DOCUMENTS_URL,
             includingPropertiesForKeys: nil,
-            options: NSDirectoryEnumerationOptions()) else {
+            options: FileManager.DirectoryEnumerationOptions()) else {
                 // Failed so return empty list
                 return [String]()
         }

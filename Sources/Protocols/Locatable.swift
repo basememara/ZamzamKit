@@ -12,13 +12,13 @@ import CoreLocation
 public protocol Locatable: CLLocationManagerDelegate {
     var locationManager: CLLocationManager? { get set }
     
-    func updateLocation(locations: [CLLocation]?)
+    func updateLocation(_ locations: [CLLocation]?)
 }
 
 public extension Locatable {
     
     func setupLocationManager(
-        desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyThreeKilometers,
+        _ desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyThreeKilometers,
         distanceFilter: Double = 1000.0,
         monitorSignificantLocationChanges: Bool = false,
         allowsBackgroundLocationUpdates: Bool = false) {
@@ -40,12 +40,12 @@ public extension Locatable {
             #endif
     }
     
-    func updateLocation(location: CLLocation?) {
+    func updateLocation(_ location: CLLocation?) {
         guard let location = location else { return }
         updateLocation([location])
     }
     
-    func updateLocation(latitude latitude: Double, longitude: Double) {
+    func updateLocation(latitude: Double, longitude: Double) {
         updateLocation([CLLocation(latitude: latitude, longitude: longitude)])
     }
     

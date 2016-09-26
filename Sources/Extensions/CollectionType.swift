@@ -8,21 +8,21 @@
 
 import Foundation
 
-public extension CollectionType {
+public extension Collection {
     
-    public func toArray() -> [Self.Generator.Element] {
+    public func toArray() -> [Self.Iterator.Element] {
         return self.map { $0 }
     }
 }
 
-extension CollectionType where Generator.Element == (String, AnyObject) {
+extension Collection where Iterator.Element == (String, AnyObject) {
     
     /// Converts collection of objects to JSON string
     var jsonString: String? {
         guard let data = self as? NSDictionary,
-            let stringData = try? NSJSONSerialization.dataWithJSONObject(data, options: [])
+            let stringData = try? JSONSerialization.data(withJSONObject: data, options: [])
             else { return nil }
         
-        return NSString(data: stringData, encoding: NSUTF8StringEncoding) as? String
+        return NSString(data: stringData, encoding: String.Encoding.utf8.rawValue) as? String
     }
 }

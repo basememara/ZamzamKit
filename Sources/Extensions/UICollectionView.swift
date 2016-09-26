@@ -22,9 +22,9 @@ public extension UICollectionView {
      - parameter cellIdentifier: Name of the reusable cell identifier.
      - parameter bundleIdentifier: Name of the bundle identifier if not local.
      */
-    public func registerNib(nibName: String, cellIdentifier: String = defaultCellIdentifier, bundleIdentifier: String? = nil) {
-        self.registerNib(UINib(nibName: nibName,
-            bundle: bundleIdentifier != nil ? NSBundle(identifier: bundleIdentifier!) : nil),
+    public func registerNib(_ nibName: String, cellIdentifier: String = defaultCellIdentifier, bundleIdentifier: String? = nil) {
+        self.register(UINib(nibName: nibName,
+            bundle: bundleIdentifier != nil ? Bundle(identifier: bundleIdentifier!) : nil),
             forCellWithReuseIdentifier: cellIdentifier)
     }
 
@@ -35,8 +35,8 @@ public extension UICollectionView {
 
      - returns: Returns the collection view cell.
      */
-    public subscript(indexPath: NSIndexPath) -> UICollectionViewCell {
-        return self.dequeueReusableCellWithReuseIdentifier(UICollectionView.defaultCellIdentifier, forIndexPath: indexPath)
+    public subscript(indexPath: IndexPath) -> UICollectionViewCell {
+        return self.dequeueReusableCell(withReuseIdentifier: UICollectionView.defaultCellIdentifier, for: indexPath)
     }
 
     /**
@@ -47,8 +47,8 @@ public extension UICollectionView {
 
      - returns: Returns the collection view cell.
      */
-    public subscript(indexPath: NSIndexPath, identifier: String) -> UICollectionViewCell {
-        return self.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
+    public subscript(indexPath: IndexPath, identifier: String) -> UICollectionViewCell {
+        return self.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
 
 }

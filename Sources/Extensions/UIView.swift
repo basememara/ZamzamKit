@@ -11,22 +11,22 @@ import Foundation
 public extension UIView {
 
   public var height: CGFloat {
-    get { return CGRectGetHeight(frame) }
+    get { return frame.height }
     set { frame.size.height = newValue }
   }
 
   public var width: CGFloat {
-    get { return CGRectGetWidth(frame) }
+    get { return frame.width }
     set { frame.size.width = newValue }
   }
 
   public var x: CGFloat {
-    get { return CGRectGetMinX(frame) }
+    get { return frame.minX }
     set { frame.origin.x = newValue }
   }
 
   public var y: CGFloat {
-    get { return CGRectGetMinY(frame) }
+    get { return frame.minY }
     set { frame.origin.y = newValue }
   }
 }

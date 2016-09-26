@@ -8,15 +8,15 @@
 
 import Foundation
 
-public extension SequenceType {
+public extension Sequence {
 
     /// Converts collection of objects to JSON string
     var jsonString: String? {
         guard let data = self as? [[String: AnyObject]],
-            let stringData = try? NSJSONSerialization.dataWithJSONObject(data, options: [])
+            let stringData = try? JSONSerialization.data(withJSONObject: data, options: [])
                 else { return nil }
         
-        return NSString(data: stringData, encoding: NSUTF8StringEncoding) as? String
+        return NSString(data: stringData, encoding: String.Encoding.utf8.rawValue) as? String
     }
     
     /**
@@ -27,7 +27,7 @@ public extension SequenceType {
      
      - returns: First element that satisfies the predicate, or nil.
      */
-    public func first(@noescape predicate: Generator.Element -> Bool) -> Generator.Element? {
+    public func first(_ predicate: (Iterator.Element) -> Bool) -> Iterator.Element? {
         for x in self where predicate(x) { return x }
         return nil
     }
@@ -40,8 +40,8 @@ public extension SequenceType {
      
      - returns: Last element that satisfies the predicate, or nil.
      */
-    public func last(@noescape pred: Generator.Element -> Bool) -> Generator.Element? {
-        for x in reverse() where pred(x) { return x }
+    public func last(_ pred: (Iterator.Element) -> Bool) -> Iterator.Element? {
+        for x in reversed() where pred(x) { return x }
         return nil
     }
     
@@ -52,7 +52,7 @@ public extension SequenceType {
      
      - returns: Does the sequence contain all elements that satisfy the predicate
      */
-    public func all(@noescape predicate:(Generator.Element) -> Bool) -> Bool {
+    public func all(_ predicate: (Iterator.Element) -> Bool) -> Bool {
         return !contains { !predicate($0) }
     }
 }

@@ -14,7 +14,7 @@ import XCTest
 class LocationTests: XCTestCase {
     
     func testMetaData() {
-        let expectation = self.expectationWithDescription("fetch location")
+        let expectation = self.expectation(description: "fetch location")
         let value = CLLocation(latitude: 43.7, longitude: -79.4)
         let expected = "Toronto, CA"
     
@@ -33,7 +33,7 @@ class LocationTests: XCTestCase {
                 "The location should be \(expected)")
         }
         
-        self.waitForExpectationsWithTimeout(5.0, handler: nil)
+        self.waitForExpectations(timeout: 5.0, handler: nil)
     }
 
     

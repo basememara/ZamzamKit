@@ -12,24 +12,24 @@ import UIKit
 public extension UIApplication {
     
     public func registerUserNotificationSettings(
-        actions: [UIMutableUserNotificationAction]? = nil,
+        _ actions: [UIMutableUserNotificationAction]? = nil,
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
-        type: UIUserNotificationType = [ .Alert, .Badge, .Sound ]) {
+        type: UIUserNotificationType = [ .alert, .badge, .sound ]) {
             let notificationSettings: UIUserNotificationSettings
             var mainCategory: UIMutableUserNotificationCategory? = nil
             
             // Setup actions if applicable
-            if let a = actions where a.count > 0 {
+            if let a = actions, a.count > 0 {
                 // Notification category
                 mainCategory = UIMutableUserNotificationCategory()
                 mainCategory!.identifier = category
-                mainCategory!.setActions(a, forContext: .Default)
-                mainCategory!.setActions(a, forContext: .Minimal) // TODO: add first 2
+                mainCategory!.setActions(a, for: .default)
+                mainCategory!.setActions(a, for: .minimal) // TODO: add first 2
             }
             
             // Configure notifications
             notificationSettings = UIUserNotificationSettings(
-                forTypes: type,
+                types: type,
                 categories: mainCategory != nil
                     ? [mainCategory!]
                     : nil)
@@ -39,7 +39,7 @@ public extension UIApplication {
     }
     
     public func scheduleLocalNotification(
-        date: NSDate,
+        _ date: Date,
         body: String,
         title: String? = nil,
         identifier: String? = nil,
@@ -47,11 +47,11 @@ public extension UIApplication {
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         badge: Int = 0,
         sound: String? = UILocalNotificationDefaultSoundName,
-        occurrence: NSCalendarUnit? = nil,
+        occurrence: NSCalendar.Unit? = nil,
         incrementDayIfPast: Bool = false,
         removeDuplicates: Bool = false) {
             // De-dup previous notifications if applicable
-            if let id = identifier where removeDuplicates {
+            if let id = identifier , removeDuplicates {
                 self.removeLocalNotification(id)
             }
             
@@ -70,32 +70,32 @@ public extension UIApplication {
             self.scheduleLocalNotification(notification)
     }
     
-    public func removeLocalNotification(identifier: String) {
+    public func removeLocalNotification(_ identifier: String) {
         guard let notifications = self.scheduledLocalNotifications
-            where notifications.count > 0 else {
+            , notifications.count > 0 else {
                 return
         }
         
         for item in notifications {
             // Find matching to delete
             if let id = item.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String
-                where id == identifier {
+                , id == identifier {
                     // Cancel notification
                     self.cancelLocalNotification(item)
             }
         }
     }
     
-    public func hasLocalNotification(identifier: String) -> Bool {
+    public func hasLocalNotification(_ identifier: String) -> Bool {
         guard let notifications = self.scheduledLocalNotifications
-            where notifications.count > 0 else {
+            , notifications.count > 0 else {
                 return false
         }
         
         for item in notifications {
             // Find matching to delete
             if let id = item.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String
-                where id == identifier {
+                , id == identifier {
                     return true
             }
         }
@@ -103,18 +103,18 @@ public extension UIApplication {
         return false
     }
     
-    public func getLocalNotifications(identifier: String) -> [UILocalNotification] {
+    public func getLocalNotifications(_ identifier: String) -> [UILocalNotification] {
         var matchedNotifications: [UILocalNotification] = []
         
         guard let notifications = self.scheduledLocalNotifications
-            where notifications.count > 0 else {
+            , notifications.count > 0 else {
                 return matchedNotifications
         }
         
         for item in notifications {
             // Find matching to delete
             if let id = item.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String
-                where id == identifier {
+                , id == identifier {
                     matchedNotifications.append(item)
             }
         }
@@ -135,8 +135,8 @@ public extension UIApplication {
      - parameter handler: Handler which to modify the shortcut item.
      */
     @available(iOSApplicationExtension 9.0, *)
-    public func updateShortcutItem(type: String, handler: UIMutableApplicationShortcutItem -> UIMutableApplicationShortcutItem) {
-        guard let index = shortcutItems?.indexOf({ $0.type == type }),
+    public func updateShortcutItem(_ type: String, handler: (UIMutableApplicationShortcutItem) -> UIMutableApplicationShortcutItem) {
+        guard let index = shortcutItems?.index(where: { $0.type == type }),
             let item = shortcutItems?[index].mutableCopy() as? UIMutableApplicationShortcutItem else {
                 return
         }

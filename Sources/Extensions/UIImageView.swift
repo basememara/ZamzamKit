@@ -11,7 +11,7 @@ import UIKit
 
 public extension UIImageView {
     
-    public func setProgressAnimation(imageName: String, totalImages: Int, percent: Double, duration: Double = 1.0) {
+    public func setProgressAnimation(_ imageName: String, totalImages: Int, percent: Double, duration: Double = 1.0) {
         let imageCount = Int(Double(totalImages) * percent)
         
         if imageCount > 0 {

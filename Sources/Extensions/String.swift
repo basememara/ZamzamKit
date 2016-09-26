@@ -34,7 +34,7 @@ public extension String {
     }
 
     public var trim: String {
-        return stringByTrimmingCharactersInSet(.whitespaceCharacterSet())
+        return trimmingCharacters(in: .whitespaces())
     }
     
     /**
@@ -46,24 +46,24 @@ public extension String {
      
      - returns: the value with the replaced string
      */
-    public func replaceRegEx(pattern: String, replaceValue: String) -> String {
+    public func replaceRegEx(_ pattern: String, replaceValue: String) -> String {
         guard let regex: NSRegularExpression = try? NSRegularExpression(
             pattern: pattern,
-            options: .CaseInsensitive) where self != "" else {
+            options: .caseInsensitive), self != "" else {
                 return self
         }
         
         let length = self.characters.count
     
-        return regex.stringByReplacingMatchesInString(self, options: [],
+        return regex.stringByReplacingMatches(in: self, options: [],
             range: NSMakeRange(0, length),
             withTemplate: replaceValue)
     }
     
-    public func match(pattern: String) -> Bool {
+    public func match(_ pattern: String) -> Bool {
         do {
-            let regex = try NSRegularExpression(pattern: pattern, options: [.CaseInsensitive])
-            return regex.firstMatchInString(self, options: NSMatchingOptions(rawValue: 0), range: NSMakeRange(0, characters.count)) != nil
+            let regex = try NSRegularExpression(pattern: pattern, options: [.caseInsensitive])
+            return regex.firstMatch(in: self, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, characters.count)) != nil
         } catch {
             return false
         }
@@ -75,29 +75,29 @@ public extension String {
     :returns: String html text as plain text
     */
     public func stripHTML() -> String {
-        return self.stringByReplacingOccurrencesOfString("<[^>]+>",
-            withString: "",
-            options: .RegularExpressionSearch,
+        return self.replacingOccurrences(of: "<[^>]+>",
+            with: "",
+            options: .regularExpression,
             range: nil)
     }
     
-    public func replace(string: String, with: String) -> String {
-        return stringByReplacingOccurrencesOfString(string, withString: with)
+    public func replace(_ string: String, with: String) -> String {
+        return replacingOccurrences(of: string, with: with)
     }
 
-    public func truncate(length: Int, suffix: String = "...") -> String {
+    public func truncate(_ length: Int, suffix: String = "...") -> String {
         return self.characters.count > length
-            ? substringToIndex(startIndex.advancedBy(length)) + suffix
+            ? substring(to: characters.index(startIndex, offsetBy: length)) + suffix
             : self
     }
 
-    public func split(delimiter: String) -> [String] {
-        let components = componentsSeparatedByString(delimiter)
+    public func split(_ delimiter: String) -> [String] {
+        let components = self.components(separatedBy: delimiter)
         return components != [""] ? components : []
     }
 
-    public func contains(find: String) -> Bool {
-        return rangeOfString(find) != nil
+    public func contains(_ find: String) -> Bool {
+        return range(of: find) != nil
     }
     
     /**
@@ -136,9 +136,9 @@ public extension String {
         // Unicode character, e.g.
         //    decodeNumeric("64", 10)   --> "@"
         //    decodeNumeric("20ac", 16) --> "€"
-        func decodeNumeric(string: String, base : Int32) -> Character? {
+        func decodeNumeric(_ string: String, base : Int32) -> Character? {
             let code = UInt32(strtoul(string, nil, base))
-            return Character(UnicodeScalar(code))
+            return Character(UnicodeScalar(code)!)
         }
         
         // Decode the HTML character entity to the corresponding
@@ -147,32 +147,32 @@ public extension String {
         //     decode("&#x20ac;") --> "€"
         //     decode("&lt;")     --> "<"
         //     decode("&foo;")    --> nil
-        func decode(entity: String) -> Character? {
+        func decode(_ entity: String) -> Character? {
             if entity.hasPrefix("&#x") || entity.hasPrefix("&#X"){
-                return decodeNumeric(entity.substringFromIndex(entity.startIndex.advancedBy(3)), base: 16)
+                return decodeNumeric(entity.substring(from: entity.characters.index(entity.startIndex, offsetBy: 3)), base: 16)
             } else if entity.hasPrefix("&#") {
-                return decodeNumeric(entity.substringFromIndex(entity.startIndex.advancedBy(2)), base: 10)
+                return decodeNumeric(entity.substring(from: entity.characters.index(entity.startIndex, offsetBy: 2)), base: 10)
             } else {
                 return characterEntities[entity]
             }
         }
         
         // Find the next '&' and copy the characters preceding it to `result`:
-        while let ampRange = self.rangeOfString("&", range: position ..< self.endIndex) {
-            result.appendContentsOf(self[position ..< ampRange.startIndex])
-            position = ampRange.startIndex
+        while let ampRange = self.range(of: "&", range: position ..< self.endIndex) {
+            result.append(self[position ..< ampRange.lowerBound])
+            position = ampRange.lowerBound
             
             // Find the next ';' and copy everything from '&' to ';' into `entity`
-            if let semiRange = self.rangeOfString(";", range: position ..< self.endIndex) {
-                let entity = self[position ..< semiRange.endIndex]
-                position = semiRange.endIndex
+            if let semiRange = self.range(of: ";", range: position ..< self.endIndex) {
+                let entity = self[position ..< semiRange.upperBound]
+                position = semiRange.upperBound
                 
                 if let decoded = decode(entity) {
                     // Replace by decoded character:
                     result.append(decoded)
                 } else {
                     // Invalid entity, copy verbatim:
-                    result.appendContentsOf(entity)
+                    result.append(entity)
                 }
             } else {
                 // No matching ';'.
@@ -181,7 +181,7 @@ public extension String {
         }
         
         // Copy remaining characters to result
-        result.appendContentsOf(self[position ..< self.endIndex])
+        result.append(self[position ..< self.endIndex])
         return result
     }
     
@@ -191,7 +191,7 @@ public extension String {
 
      - returns: Returns typed Enum.
      */
-    public func toEnum<Enum: RawRepresentable where Enum.RawValue == String>() -> Enum? {
+    public func toEnum<Enum: RawRepresentable>() -> Enum? where Enum.RawValue == String {
         return Enum(rawValue: self)
     }
     

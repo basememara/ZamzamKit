@@ -33,7 +33,7 @@ class WebTests: XCTestCase {
     func testAddOrUpdateQueryStringParameter() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = NSURLComponents(string: value)!.addOrUpdateQueryStringParameter("aBc", value: "555")
+        let newValue = URLComponents(string: value)!.addOrUpdateQueryStringParameter("aBc", value: "555")
         let expectedValue = "https://example.com?aBc=555&lmn=tuv&xyz=987"
         
         XCTAssertEqual(newValue, expectedValue,
@@ -43,7 +43,7 @@ class WebTests: XCTestCase {
     func testRemoveQueryStringParameter() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = NSURLComponents(string: value)!.removeQueryStringParameter("xyz")
+        let newValue = URLComponents(string: value)!.removeQueryStringParameter("xyz")
         let expectedValue = "https://example.com?abc=123&lmn=tuv"
         
         XCTAssertEqual(newValue, expectedValue,
@@ -53,7 +53,7 @@ class WebTests: XCTestCase {
     func testAddOrUpdateQueryStringParameterForAdd() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = NSURLComponents(string: value)!.addOrUpdateQueryStringParameter("def", value: "456")
+        let newValue = URLComponents(string: value)!.addOrUpdateQueryStringParameter("def", value: "456")
         let expectedValue = "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
         
         XCTAssertEqual(newValue, expectedValue,
@@ -63,7 +63,7 @@ class WebTests: XCTestCase {
     func testAddOrUpdateQueryStringParameterForList() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = NSURLComponents(string: value)!.addOrUpdateQueryStringParameter([
+        let newValue = URLComponents(string: value)!.addOrUpdateQueryStringParameter([
             "def": "456",
             "jkl": "777",
             "abc": "333",

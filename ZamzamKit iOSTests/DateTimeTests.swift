@@ -14,16 +14,16 @@ import Timepiece
 class DateTimeTests: XCTestCase {
     
     func testStringToDate() {
-        let date = NSDate(fromString: "1970/01/03 00:00")!
-        let expected = NSDate(timeIntervalSince1970:
-            NSTimeInterval(176400 - Int(NSTimeZone.localTimeZone().secondsFromGMT)))
+        let date = Date(fromString: "1970/01/03 00:00")!
+        let expected = Date(timeIntervalSince1970:
+            TimeInterval(176400 - Int(NSTimeZone.local.secondsFromGMT())))
         
         XCTAssertEqual(date, expected,
             "Day of week should be \(expected)")
     }
     
     func testGetCurrentTimeInDecimal() {
-        let time = NSDate(fromString: "2012/10/23 18:15")!.timeToDecimal()
+        let time = Date(fromString: "2012/10/23 18:15")!.timeToDecimal()
         let expectedTime = 18.25
         
         XCTAssertEqual(time, expectedTime,
@@ -31,9 +31,9 @@ class DateTimeTests: XCTestCase {
     }
     
     func testIncrementToday() {
-        let incrementedDate = NSDate().incrementDay()
-        let tomorrow = NSDate.tomorrow()
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let incrementedDate = Date().incrementDay()
+        let tomorrow = Date.tomorrow()
+        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         
         XCTAssertEqual(
             calendar.startOfDayForDate(incrementedDate),
@@ -42,7 +42,7 @@ class DateTimeTests: XCTestCase {
     }
     
     func testIncrementZeroDay() {
-        let fromDate = NSDate(fromString: "2015/10/26 18:31")!
+        let fromDate = Date(fromString: "2015/10/26 18:31")!
         let incrementedDate = fromDate.incrementDay(0)
         
         XCTAssertEqual(incrementedDate, fromDate,
@@ -50,79 +50,79 @@ class DateTimeTests: XCTestCase {
     }
     
     func testIncrementOneDay() {
-        let fromDate = NSDate(fromString: "2050/02/15 05:06")!
+        let fromDate = Date(fromString: "2050/02/15 05:06")!
         let incrementedDate = fromDate.incrementDay(1)
-        let expectedDate = NSDate(fromString: "2050/02/16 05:06")
+        let expectedDate = Date(fromString: "2050/02/16 05:06")
         
         XCTAssertEqual(incrementedDate, expectedDate,
             "Incremented date by one should be \(expectedDate)")
     }
     
     func testIncrementTwoDay() {
-        let fromDate = NSDate(fromString: "1990/01/31 22:12")!
+        let fromDate = Date(fromString: "1990/01/31 22:12")!
         let incrementedDate = fromDate.incrementDay(2)
-        let expectedDate = NSDate(fromString: "1990/02/02 22:12")
+        let expectedDate = Date(fromString: "1990/02/02 22:12")
         
         XCTAssertEqual(incrementedDate, expectedDate,
             "Incremented date by two should be \(expectedDate)")
     }
     
     func testIncrementLeapYearDay() {
-        let fromDate = NSDate(fromString: "2016/02/20 13:12")!
+        let fromDate = Date(fromString: "2016/02/20 13:12")!
         let incrementedDate = fromDate.incrementDay(10)
-        let expectedDate = NSDate(fromString: "2016/03/01 13:12")
+        let expectedDate = Date(fromString: "2016/03/01 13:12")
         
         XCTAssertEqual(incrementedDate, expectedDate,
             "Incremented date by two should be \(expectedDate)")
     }
     
     func testIncrementDayIfPast() {
-        let fromDate = NSDate(fromString: "1999/01/15 10:15")!
+        let fromDate = Date(fromString: "1999/01/15 10:15")!
         let incrementedDate = fromDate.incrementDayIfPast()
-        let expectedDate = NSDate(fromString: "1999/01/16 10:15")
+        let expectedDate = Date(fromString: "1999/01/16 10:15")
         
         XCTAssertEqual(incrementedDate, expectedDate,
             "Incremented date if past should be \(expectedDate)")
     }
     
     func testIncrementDayIfPastForFuture() {
-        let fromDate = NSDate(fromString: "2050/01/15 10:15")!
+        let fromDate = Date(fromString: "2050/01/15 10:15")!
         let incrementedDate = fromDate.incrementDayIfPast()
-        let expectedDate = NSDate(fromString: "2050/01/15 10:15")
+        let expectedDate = Date(fromString: "2050/01/15 10:15")
         
         XCTAssertEqual(incrementedDate, expectedDate,
             "Incremented date if past should be \(expectedDate)")
     }
     
     func testIncrementMinute() {
-        let fromDate = NSDate(fromString: "2015/09/18 18:31")!
+        let fromDate = Date(fromString: "2015/09/18 18:31")!
         let incrementedDate = fromDate.incrementMinutes()
-        let expectedDate = NSDate(fromString: "2015/09/18 18:32")
+        let expectedDate = Date(fromString: "2015/09/18 18:32")
         
         XCTAssertEqual(incrementedDate, expectedDate,
             "Incremented date by minute should be \(expectedDate)")
     }
     
     func testIncrementNintyFiveMinutes() {
-        let fromDate = NSDate(fromString: "2015/12/14 07:04")!
+        let fromDate = Date(fromString: "2015/12/14 07:04")!
         let incrementedDate = fromDate.incrementMinutes(95)
-        let expectedDate = NSDate(fromString: "2015/12/14 08:39")
+        let expectedDate = Date(fromString: "2015/12/14 08:39")
         
         XCTAssertEqual(incrementedDate, expectedDate,
             "Incremented date by 95 minutes should be \(expectedDate)")
     }
     
     func testIncrementDayByMinutes() {
-        let fromDate = NSDate(fromString: "2015/04/02 13:15")!
+        let fromDate = Date(fromString: "2015/04/02 13:15")!
         let incrementedDate = fromDate.incrementMinutes(1445)
-        let expectedDate = NSDate(fromString: "2015/04/03 13:20")
+        let expectedDate = Date(fromString: "2015/04/03 13:20")
         
         XCTAssertEqual(incrementedDate, expectedDate,
             "Incremented date by day's worth of minutes should be \(expectedDate)")
     }
     
     func testGetHijriDate() {
-        let gregorianDate = NSDate(fromString: "2015/09/23 12:30")!
+        let gregorianDate = Date(fromString: "2015/09/23 12:30")!
         let hijriDate = gregorianDate.toHijriString()
         let expectedDate = "Dhuʻl-Hijjah 9, 1436 AH"
         
@@ -131,9 +131,9 @@ class DateTimeTests: XCTestCase {
     }
     
     func testHasElapsed() {
-        let date = NSDate(fromString: "2016/03/22 09:30")!
+        let date = Date(fromString: "2016/03/22 09:30")!
         
-        XCTAssert(date.hasElapsed(300, fromDate: NSDate(fromString: "2016/03/22 09:40")!),
+        XCTAssert(date.hasElapsed(300, fromDate: Date(fromString: "2016/03/22 09:40")!),
             "Date has elapsed.")
     }
     

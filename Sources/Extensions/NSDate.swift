@@ -8,10 +8,10 @@
 
 import Foundation
 
-public extension NSDate {
+public extension Date {
     
     public var isPast: Bool {
-        return self.compare(NSDate()) == .OrderedAscending
+        return self.compare(Date()) == .orderedAscending
     }
     
     public var isFuture: Bool {
@@ -19,97 +19,95 @@ public extension NSDate {
     }
     
     public convenience init?(fromString: String, dateFormat: String = "yyyy/MM/dd HH:mm") {
-        guard let date = NSDateFormatter(dateFormat: dateFormat).dateFromString(fromString)
-            where !fromString.isEmpty else {
-                return nil
-        }
+        guard let date = DateFormatter(coder: dateFormat).date(from: fromString),
+            !fromString.isEmpty else { return nil }
         
-        self.init(timeInterval: 0, sinceDate: date)
+        self.init(timeInterval: 0, since: date)
     }
     
-    public func incrementDay(numberOfDays: Int = 1) -> NSDate {
-        return NSCalendar.currentCalendar()
-            .dateByAddingUnit(.Day,
+    public func incrementDay(_ numberOfDays: Int = 1) -> Date {
+        return Calendar.current
+            .date(byAdding: .day,
                 value: numberOfDays,
-                toDate: self,
-                options: NSCalendarOptions(rawValue: 0)
+                to: self,
+                options: NSCalendar.Options(rawValue: 0)
             )!
     }
     
-    public func incrementMinutes(numberOfMinutes: Int = 1) -> NSDate {
-        return NSCalendar.currentCalendar()
-            .dateByAddingUnit(.Minute,
+    public func incrementMinutes(_ numberOfMinutes: Int = 1) -> Date {
+        return Calendar.current
+            .date(byAdding: .minute,
                 value: numberOfMinutes,
-                toDate: self,
-                options: NSCalendarOptions(rawValue: 0)
+                to: self,
+                options: NSCalendar.Options(rawValue: 0)
             )!
     }
     
-    public func incrementDayIfPast() -> NSDate {
+    public func incrementDayIfPast() -> Date {
         return self.isPast
             ? self.incrementDay() : self
     }
     
     public func timeToDecimal() -> Double {
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Hour, .Minute],
-            fromDate: self)
+        let calendar = Calendar.current
+        let components = calendar.components([.hour, .minute],
+            from: self)
         let hour = components.hour
         let minutes = components.minute
-        return Double(hour) + (Double(minutes) / 60.0)
+        return Double(hour!) + (Double(minutes!) / 60.0)
     }
     
     public func toHijriString(
-        unit: NSCalendarUnit? = nil,
+        _ unit: NSCalendar.Unit? = nil,
         format: String? = nil,
         offSet: Int = 0) -> String {
-            let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierIslamicCivil)!
-            let flags = unit ?? NSCalendarUnit(rawValue: UInt.max)
-            var date = self.copy() as! NSDate
+            let calendar = Calendar(identifier: Calendar.Identifier.islamicCivil)
+            let flags = unit ?? NSCalendar.Unit(rawValue: UInt.max)
+            var date = self.copy() as! Date
             
             // Handle offset if applicable
             if offSet != 0 {
                 date = calendar
-                    .dateByAddingUnit(.Day,
+                    .date(byAdding: .day,
                         value: offSet,
-                        toDate: date,
-                        options: NSCalendarOptions(rawValue: 0)
+                        to: date,
+                        options: NSCalendar.Options(rawValue: 0)
                     )!
             }
             
-            let components = calendar.components(flags, fromDate: date)
+            let components = calendar.components(flags, from: date)
             
-            let formatter = NSDateFormatter()
+            let formatter = DateFormatter()
             if let f = format {
                 formatter.dateFormat = f
             } else {
-                formatter.dateStyle = .LongStyle
+                formatter.dateStyle = .long
             }
             formatter.calendar = calendar
             
-            return formatter.stringFromDate(calendar.dateFromComponents(components)!)
+            return formatter.string(from: calendar.date(from: components)!)
     }
     
     public func toHijri(
-        offSet: Int = 0) -> NSDateComponents {
-            let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierIslamicCivil)!
-            var date = self.copy() as! NSDate
+        _ offSet: Int = 0) -> DateComponents {
+            let calendar = Calendar(identifier: Calendar.Identifier.islamicCivil)
+            var date = self.copy() as! Date
             
             // Handle offset if applicable
             if offSet != 0 {
                 date = calendar
-                    .dateByAddingUnit(.Day,
+                    .date(byAdding: .day,
                         value: offSet,
-                        toDate: date,
-                        options: NSCalendarOptions(rawValue: 0)
+                        to: date,
+                        options: NSCalendar.Options(rawValue: 0)
                     )!
             }
             
-            return calendar.components(NSCalendarUnit(rawValue: UInt.max),
-                fromDate: date)
+            return calendar.components(NSCalendar.Unit(rawValue: UInt.max),
+                from: date)
     }
     
-    public func countdown(date: NSDate)  -> (span: Double, remaining: Double, percent: Double) {
+    public func countdown(_ date: Date)  -> (span: Double, remaining: Double, percent: Double) {
         // Calculate span time
         var timeSpan = date.timeToDecimal() - self.timeToDecimal()
         if timeSpan < 0 {
@@ -117,7 +115,7 @@ public extension NSDate {
         }
         
         // Calculate remaining times
-        var timeLeft = date.timeToDecimal() - NSDate().timeToDecimal()
+        var timeLeft = date.timeToDecimal() - Date().timeToDecimal()
         if timeLeft < 0 {
             timeLeft += 24
         }
@@ -136,8 +134,8 @@ public extension NSDate {
      
      - returns: Has the time elapsed the time window.
      */
-    public func hasElapsed(seconds: Int, fromDate: NSDate = NSDate()) -> Bool {
-        return fromDate.timeIntervalSinceDate(self).seconds > seconds
+    public func hasElapsed(_ seconds: Int, fromDate: Date = Date()) -> Bool {
+        return fromDate.timeIntervalSince(self).seconds > seconds
     }
     
 }

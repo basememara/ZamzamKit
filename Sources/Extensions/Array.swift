@@ -17,7 +17,7 @@ public extension Array {
 
      - returns: Elements that specify the count number.
      */
-    public func take(count: Int) -> [Element] {
+    public func take(_ count: Int) -> [Element] {
         var to: [Element] = []
         var i = 0
         while i < self.count && i < count {
@@ -34,7 +34,7 @@ public extension Array {
 
      - returns: Elements that are left over.
      */
-    public func drop(count: Int) -> [Element] {
+    public func drop(_ count: Int) -> [Element] {
         var to: [Element] = []
         var i = count
         while i < self.count {
@@ -51,12 +51,12 @@ public extension Array {
 
      - returns: An optional element.
      */
-    public func get(index: Int) -> Element? {
+    public func get(_ index: Int) -> Element? {
         return self.indices.contains(index)
             ? self[index] : nil
     }
     
-    public func closestMatch(index: Int, predicate: (Element) -> Bool) -> (Int, Element)? {
+    public func closestMatch(_ index: Int, predicate: (Element) -> Bool) -> (Int, Element)? {
         if predicate(self[index]) {
             return (index, self[index])
         }
@@ -85,9 +85,9 @@ public extension Array {
 
      - parameter handler: Handler with array item that was popped.
      */
-    public mutating func removeEach(handler: Element -> Void) -> Void {
-        self.enumerate().reverse().forEach { item in
-            handler(self.removeAtIndex(item.index))
+    public mutating func removeEach(_ handler: @escaping (Element) -> Void) -> Void {
+        self.enumerated().reversed().forEach { item in
+            handler(self.remove(at: item.index))
         }
     }
 

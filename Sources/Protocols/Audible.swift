@@ -17,8 +17,8 @@ public protocol Audible: class {
 
 public extension Audible {
     
-    func setupAudioPlayer(application: UIApplication, fileName: String) {
-        let sound = NSBundle.mainBundle().URLForResource(fileName, withExtension: nil)
+    func setupAudioPlayer(_ application: UIApplication, fileName: String) {
+        let sound = Bundle.main.url(forResource: fileName, withExtension: nil)
         
         if audioPlayer == nil || audioPlayer?.url != sound {
             do {
@@ -27,7 +27,7 @@ public extension Audible {
                 
                 application.beginReceivingRemoteControlEvents()
                 
-                audioPlayer = try AVAudioPlayer(contentsOfURL: sound!)
+                audioPlayer = try AVAudioPlayer(contentsOf: sound!)
                 audioPlayer?.prepareToPlay()
             } catch { }
         }

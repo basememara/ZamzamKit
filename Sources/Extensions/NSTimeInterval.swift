@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension NSTimeInterval {
+public extension TimeInterval {
     
     public var seconds: Int {
         return Int(self)
@@ -36,14 +36,10 @@ public extension NSTimeInterval {
      - parameter thread:  Thread to execute the delay on.
      - parameter handler: Process to execute after the time interval seconds.
      */
-    public func delay(thread: dispatch_queue_t =
-        dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), handler: () -> ()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(self * Double(NSEC_PER_SEC))
-            ),
-            thread, handler)
+    public func delay(_ thread: DispatchQueue =
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.background), handler: @escaping () -> ()) {
+        thread.asyncAfter(
+            deadline: DispatchTime.now() + Double(Int64(self * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: handler)
     }
     
 }

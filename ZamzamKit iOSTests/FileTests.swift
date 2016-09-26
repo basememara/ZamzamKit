@@ -20,8 +20,8 @@ class FileTests: XCTestCase {
         
         // Create blank files for testing
         do {
-            try "Some text".writeToFile(fileInDocumentsDirectory(fileName), atomically: true, encoding: NSUTF8StringEncoding)
-            try "Some text 2".writeToFile(fileInDocumentsDirectory(fileName2), atomically: true, encoding: NSUTF8StringEncoding)
+            try "Some text".write(toFile: fileInDocumentsDirectory(fileName), atomically: true, encoding: String.Encoding.utf8)
+            try "Some text 2".write(toFile: fileInDocumentsDirectory(fileName2), atomically: true, encoding: String.Encoding.utf8)
         } catch {
             print("Could not create files!")
         }
@@ -32,22 +32,22 @@ class FileTests: XCTestCase {
         
         // Delete blank files after testing
         do {
-            try NSFileManager.defaultManager().removeItemAtPath(fileInDocumentsDirectory(fileName))
-            try NSFileManager.defaultManager().removeItemAtPath(fileInDocumentsDirectory(fileName2))
+            try FileManager.default.removeItem(atPath: fileInDocumentsDirectory(fileName))
+            try FileManager.default.removeItem(atPath: fileInDocumentsDirectory(fileName2))
         } catch {
             print("Could not delete files!")
         }
     }
     
     func testGetDocumentPath() {
-        let value = NSFileManager.getDocumentPath(fileName)
+        let value = FileManager.getDocumentPath(fileName)
         
-        XCTAssert(NSFileManager.defaultManager().fileExistsAtPath(value),
+        XCTAssert(FileManager.default.fileExists(atPath: value),
             "The file location path for \(fileName) seems incorrect (file doesn't exist)")
     }
     
     func testGetDocumentPaths() {
-        let value = NSFileManager.getDocumentPaths()
+        let value = FileManager.getDocumentPaths()
         let expectedValue = [
             fileInDocumentsDirectory(fileName),
             fileInDocumentsDirectory(fileName2)
@@ -57,14 +57,14 @@ class FileTests: XCTestCase {
             "The file paths for the document directory seems incorrect")
     }
     
-    func getDocumentsURL() -> NSURL {
-        let documentsURL = NSFileManager.defaultManager().URLsForDirectory(
-            .DocumentDirectory, inDomains: .UserDomainMask)[0]
+    func getDocumentsURL() -> URL {
+        let documentsURL = FileManager.default.urls(
+            for: .documentDirectory, in: .userDomainMask)[0]
         return documentsURL
     }
     
-    func fileInDocumentsDirectory(filename: String) -> String {
-        let fileURL = getDocumentsURL().URLByAppendingPathComponent(filename)
-        return fileURL!.path!
+    func fileInDocumentsDirectory(_ filename: String) -> String {
+        let fileURL = getDocumentsURL().appendingPathComponent(filename)
+        return fileURL.path
     }
 }

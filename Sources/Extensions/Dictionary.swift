@@ -15,7 +15,7 @@ public extension Dictionary where Value: AnyObject {
      
      - returns: Dictionary from tuple.
      */
-    public init<S: SequenceType where S.Generator.Element == (Key, Value)>(_ seq: S) {
+    public init<S: Sequence>(_ seq: S) where S.Iterator.Element == (Key, Value) {
         self.init()
         for (k, v) in seq { self[k] = v }
     }
@@ -29,7 +29,7 @@ public extension Dictionary where Value: AnyObject {
         let keysWithNull = self.keys.filter { self[$0] is NSNull }
         
         for key in keysWithNull {
-            removeValueForKey(key)
+            removeValue(forKey: key)
         }
         
         return Array(keysWithNull)
@@ -48,7 +48,7 @@ func + <K,V> (left: Dictionary<K,V>, right: Dictionary<K,V>?) -> Dictionary<K,V>
 }
 
 // http://stackoverflow.com/a/34527546/235334
-func += <K,V> (inout left: Dictionary<K,V>, right: Dictionary<K,V>?) {
+func += <K,V> (left: inout Dictionary<K,V>, right: Dictionary<K,V>?) {
     guard let right = right else { return }
     right.forEach { key, value in
         left.updateValue(value, forKey: key)

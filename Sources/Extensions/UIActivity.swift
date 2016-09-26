@@ -19,9 +19,9 @@ public extension UIActivity {
 
      - returns: The custom activity
      */
-    public static func create(title: String, imageName: String, imageBundle: NSBundle? = nil,
+    public static func create(_ title: String, imageName: String, imageBundle: Bundle? = nil,
         canPerform: (([AnyObject]) -> Bool)? = nil,
-        handler: () -> Void) -> UIActivity {
+        handler: @escaping () -> Void) -> UIActivity {
             return CustomActivity(
                 title: title,
                 imageName: imageName,
@@ -33,11 +33,11 @@ public extension UIActivity {
 private class CustomActivity: UIActivity {
     let title: String
     let imageName: String
-    let imageBundle: NSBundle?
+    let imageBundle: Bundle?
     let canPerform: (([AnyObject]) -> Bool)?
     let handler: () -> Void
 
-    init(title: String, imageName: String, imageBundle: NSBundle? = nil, canPerform: (([AnyObject]) -> Bool)? = nil, handler: () -> Void) {
+    init(title: String, imageName: String, imageBundle: Bundle? = nil, canPerform: (([AnyObject]) -> Bool)? = nil, handler: @escaping () -> Void) {
         self.title = title
         self.imageName = imageName
         self.imageBundle = imageBundle
@@ -45,24 +45,24 @@ private class CustomActivity: UIActivity {
         self.handler = handler
     }
     
-    override func activityTitle() -> String? {
+    override var activityTitle : String? {
         return title
     }
     
-    override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {
-        return canPerform?(activityItems) ?? true
+    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
+        return canPerform?(activityItems as [AnyObject]) ?? true
     }
     
-    override func activityViewController() -> UIViewController? {
+    override var activityViewController : UIViewController? {
         return nil
     }
     
-    override func performActivity() {
+    override func perform() {
         handler()
         activityDidFinish(true)
     }
     
-    override func activityImage() -> UIImage? {
-        return UIImage(named: imageName, inBundle: imageBundle)
+    override var activityImage : UIImage? {
+        return UIImage(data: imageName, scale: imageBundle)
     }
 }

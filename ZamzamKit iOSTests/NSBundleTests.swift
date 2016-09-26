@@ -13,7 +13,7 @@ import XCTest
 class NSBundleTests: XCTestCase {
     
     func testValuesFromPlist() {
-        let values = NSBundle.contentsOfFile("Settings.plist", bundle: NSBundle(forClass: self.dynamicType))
+        let values = Bundle.contentsOfFile("Settings.plist", bundle: Bundle(for: type(of: self)))
         
         XCTAssert(values["MyString1"] as? String == "My string value 1.")
         XCTAssert(values["MyNumber1"] as? Int == 123)
@@ -21,19 +21,19 @@ class NSBundleTests: XCTestCase {
         
         // Calculate date and account for machine time zone
         // 2016-03-03 14:50:00 UTC
-        let expectedDate = NSDate(timeIntervalSince1970:
-            NSTimeInterval(1457002200 - Int(NSTimeZone.localTimeZone().secondsFromGMT)))
+        let expectedDate = Date(timeIntervalSince1970:
+            TimeInterval(1457002200 - Int(NSTimeZone.local.secondsFromGMT())))
         
-        XCTAssert(values["MyDate1"] as? NSDate == expectedDate)
+        XCTAssert(values["MyDate1"] as? Date == expectedDate)
     }
     
     func testArrayFromPlist() {
-        let values = NSBundle.contentsOfFile("Settings.plist", bundle: NSBundle(forClass: self.dynamicType))
+        let values = Bundle.contentsOfFile("Settings.plist", bundle: Bundle(for: type(of: self)))
         let array = values["MyArray1"] as! [AnyObject]
         let expected: [AnyObject] = [
-            "My string for array value.",
-            999,
-            true
+            "My string for array value." as AnyObject,
+            999 as AnyObject,
+            true as AnyObject
         ]
         
         XCTAssert(array[0] as! String == expected[0] as! String)
@@ -42,12 +42,12 @@ class NSBundleTests: XCTestCase {
     }
     
     func testDictFromPlist() {
-        let values = NSBundle.contentsOfFile("Settings.plist", bundle: NSBundle(forClass: self.dynamicType))
+        let values = Bundle.contentsOfFile("Settings.plist", bundle: Bundle(for: type(of: self)))
         let dict = values["MyDictionary1"] as! [String: AnyObject]
         let expected: [String: AnyObject] = [
-            "id": 7,
-            "title": "Garden",
-            "active": true
+            "id": 7 as AnyObject,
+            "title": "Garden" as AnyObject,
+            "active": true as AnyObject
         ]
         
         XCTAssert(dict["id"] as! Int == expected["id"] as! Int)
@@ -56,7 +56,7 @@ class NSBundleTests: XCTestCase {
     }
     
     func testValuesFromBundle() {
-        let values = NSBundle.contentsOfFile(bundle: NSBundle(forClass: self.dynamicType))
+        let values = Bundle.contentsOfFile(bundle: Bundle(for: type(of: self)))
         
         XCTAssert(values["SomeString1"] as? String == "My string value 1.")
         XCTAssert(values["SomeNumber1"] as? Int == 123)
@@ -64,19 +64,19 @@ class NSBundleTests: XCTestCase {
         
         // Calculate date and account for machine time zone
         // 2016-03-03 14:50:00 UTC
-        let expectedDate = NSDate(timeIntervalSince1970:
-            NSTimeInterval(1457002200 - Int(NSTimeZone.localTimeZone().secondsFromGMT)))
+        let expectedDate = Date(timeIntervalSince1970:
+            TimeInterval(1457002200 - Int(NSTimeZone.local.secondsFromGMT())))
         
-        XCTAssert(values["SomeDate1"] as? NSDate == expectedDate)
+        XCTAssert(values["SomeDate1"] as? Date == expectedDate)
     }
     
     func testArrayFromBundle() {
-        let values = NSBundle.contentsOfFile(bundle: NSBundle(forClass: self.dynamicType))
+        let values = Bundle.contentsOfFile(bundle: Bundle(for: type(of: self)))
         let array = values["SomeArray1"] as! [AnyObject]
         let expected: [AnyObject] = [
-            "My string for array value.",
-            999,
-            true
+            "My string for array value." as AnyObject,
+            999 as AnyObject,
+            true as AnyObject
         ]
         
         XCTAssert(array[0] as! String == expected[0] as! String)
@@ -85,12 +85,12 @@ class NSBundleTests: XCTestCase {
     }
     
     func testDictFromBundle() {
-        let values = NSBundle.contentsOfFile(bundle: NSBundle(forClass: self.dynamicType))
+        let values = Bundle.contentsOfFile(bundle: Bundle(for: type(of: self)))
         let dict = values["SomeDictionary1"] as! [String: AnyObject]
         let expected: [String: AnyObject] = [
-            "id": 7,
-            "title": "Garden",
-            "active": true
+            "id": 7 as AnyObject,
+            "title": "Garden" as AnyObject,
+            "active": true as AnyObject
         ]
         
         XCTAssert(dict["id"] as! Int == expected["id"] as! Int)

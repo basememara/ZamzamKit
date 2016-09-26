@@ -17,14 +17,14 @@ public protocol WatchConnectable {
 public extension WatchConnectable {
     
     var isWatchAvailable: Bool {
-        let watchSession = WCSession.defaultSession()
+        let watchSession = WCSession.default()
         var activationState = true
         
         if #available(iOS 9.3, *) {
-            activationState = watchSession.activationState == .Activated
+            activationState = watchSession.activationState == .activated
         }
         
-        return watchSession.paired && watchSession.watchAppInstalled && activationState
+        return watchSession.isPaired && watchSession.isWatchAppInstalled && activationState
     }
     
     /**
@@ -32,8 +32,8 @@ public extension WatchConnectable {
      
      - parameter values: The dictionary of values.
      */
-    func transferContextToWatch(values: [String: AnyObject]) {
-        let watchSession = WCSession.defaultSession()
+    func transferContextToWatch(_ values: [String: AnyObject]) {
+        let watchSession = WCSession.default()
         if isWatchAvailable {
             var values = values
             do {
@@ -50,8 +50,8 @@ public extension WatchConnectable {
      
      - parameter values: The dictionary of values.
      */
-    func transferUserInfoToWatch(values: [String: AnyObject]) {
-        let watchSession = WCSession.defaultSession()
+    func transferUserInfoToWatch(_ values: [String: AnyObject]) {
+        let watchSession = WCSession.default()
         if isWatchAvailable {
             var values = values
             values.removeAllNulls()
@@ -64,8 +64,8 @@ public extension WatchConnectable {
      
      - parameter values: The dictionary of values.
      */
-    func transferComplicationUserInfoToWatch(values: [String: AnyObject]) {
-        let watchSession = WCSession.defaultSession()
+    func transferComplicationUserInfoToWatch(_ values: [String: AnyObject]) {
+        let watchSession = WCSession.default()
         
         if isWatchAvailable {
             var values = values

@@ -30,7 +30,7 @@ public extension CLLocationManager {
      Calls startUpdatingLocation for iOS
      Calls requestLocation for watchOS
      */
-    public func tryStartUpdating(forceInitialRequest: Bool = false,
+    public func tryStartUpdating(_ forceInitialRequest: Bool = false,
         monitorSignificantLocationChanges: Bool = false) -> Bool {
             if CLLocationManager.isAuthorized() {
                 #if os(iOS)
@@ -62,7 +62,7 @@ public extension CLLocationManager {
         }
         
         let status = CLLocationManager.authorizationStatus()
-        return status == .AuthorizedAlways || status == .AuthorizedWhenInUse
+        return status == .authorizedAlways || status == .authorizedWhenInUse
     }
 
 }

@@ -8,14 +8,14 @@
 
 import Foundation
 
-public extension NSUserDefaults {
+public extension UserDefaults {
     
     /**
      Stores the updated values from the dictionary to the user defaults.
      
      - parameter values: The user default keys and values.
      */
-    public func update(values: [String: AnyObject]) {
+    public func update(_ values: [String: AnyObject]) {
         for item in values {
             self.setValue(item.1, forKey: item.0)
         }
@@ -26,7 +26,7 @@ public extension NSUserDefaults {
      
      - parameter values: The user default keys and values.
      */
-    public func update(values: [(String, AnyObject)]) {
+    public func update(_ values: [(String, AnyObject)]) {
         update(Dictionary(values))
     }
     
@@ -37,9 +37,9 @@ public extension NSUserDefaults {
      - parameter plistName: property list where defaults are declared
      - parameter bundle: bundle where defaults reside
      */
-    public func registerDefaults(plistName: String, inDirectory: String? = nil, bundle: NSBundle? = nil) {
-        let settings = NSBundle.contentsOfFile(plistName, inDirectory: inDirectory, bundle: bundle)
-        self.registerDefaults(settings)
+    public func registerDefaults(_ plistName: String, inDirectory: String? = nil, bundle: Bundle? = nil) {
+        let settings = Bundle.contentsOfFile(plistName, inDirectory: inDirectory, bundle: bundle)
+        self.register(defaults: settings)
     }
     
 }

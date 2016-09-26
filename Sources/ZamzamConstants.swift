@@ -14,7 +14,7 @@ import Foundation
 public struct ZamzamConstants {
     
     // Prevent others from initializing singleton
-    private init() { }
+    fileprivate init() { }
     
     /// Declare bundle depending on platform
     #if os(iOS)
@@ -25,7 +25,7 @@ public struct ZamzamConstants {
         public static let bundleIdentifier = "io.zamzam.ZamzamKit-tvOS"
     #endif
     
-    public static let bundle = NSBundle(identifier: bundleIdentifier)!
+    public static let bundle = Bundle(identifier: bundleIdentifier)!
     
     public struct DateTime {
         public static let JSON_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"
@@ -39,8 +39,8 @@ public struct ZamzamConstants {
     }
     
     public struct Path {
-        public static let DOCUMENTS = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!
-        public static let DOCUMENTS_URL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+        public static let DOCUMENTS = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        public static let DOCUMENTS_URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         public static let TMP = NSTemporaryDirectory()
     }
     

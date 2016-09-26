@@ -51,10 +51,10 @@ public extension UIColor {
      */
     convenience init(rgb: String?, alpha: Double = 1.0) {
         // Validate correct number of colors supplied
-        guard let rgbSplit = rgb?.characters.split(",")
-            .map(String.init).flatMap({ Int($0.stringByTrimmingCharactersInSet(
-                NSCharacterSet.whitespaceAndNewlineCharacterSet())) })
-                    where rgbSplit.count == 3
+        guard let rgbSplit = rgb?.characters.split(separator: ",")
+            .map(String.init).flatMap({ Int($0.trimmingCharacters(
+                in: CharacterSet.whitespacesAndNewlines)) }),
+                    rgbSplit.count == 3
                         else {
                             // Return black color if failed
                             self.init(white: 0, alpha: CGFloat(alpha))

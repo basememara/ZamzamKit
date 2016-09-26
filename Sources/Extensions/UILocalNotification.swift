@@ -12,7 +12,7 @@ import UIKit
 public extension UILocalNotification {
     
     public convenience init(
-        date: NSDate,
+        date: Date,
         body: String,
         title: String? = nil,
         identifier: String? = nil,
@@ -20,7 +20,7 @@ public extension UILocalNotification {
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         badge: Int = 0,
         sound: String? = UILocalNotificationDefaultSoundName,
-        occurrence: NSCalendarUnit? = nil,
+        occurrence: NSCalendar.Unit? = nil,
         incrementDayIfPast: Bool = true) {
             self.init()
             
@@ -30,11 +30,11 @@ public extension UILocalNotification {
             self.fireDate = incrementDayIfPast
                 ? date.incrementDayIfPast() : date
             
-            if let t = title where t != "" {
+            if let t = title, t != "" {
                 self.alertTitle = t
             }
             
-            if let s = sound where s != "" {
+            if let s = sound, s != "" {
                 self.soundName = s
             }
             
@@ -43,7 +43,7 @@ public extension UILocalNotification {
             }
             
             // Provide unique identifier for later use
-            if let id = identifier where id != "" {
+            if let id = identifier, id != "" {
                 self.userInfo = [ZamzamConstants.Notification.IDENTIFIER_KEY: id]
             }
         

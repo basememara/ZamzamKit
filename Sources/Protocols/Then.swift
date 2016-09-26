@@ -23,7 +23,7 @@ extension Then {
     ///         $0.textColor = UIColor.blackColor()
     ///         $0.text = "Hello, World!"
     ///     }
-    public func then(@noescape block: inout Self -> Void) -> Self {
+    public func then(@noescape _ block: inout (Self) -> Void) -> Self {
         var copy = self
         block(&copy)
         return copy

@@ -20,11 +20,11 @@ public extension UIViewController {
      - parameter additionalActions: Array of alert actions.
      - parameter handler:           Call back handler when main action tapped.
      */
-    public func presentAlert(title: String,
+    public func presentAlert(_ title: String,
         message: String? = nil,
         buttonText: String = "OK",
         additionalActions: [UIAlertAction]? = nil,
-        preferredStyle: UIAlertControllerStyle = .Alert,
+        preferredStyle: UIAlertControllerStyle = .alert,
         includeCancelAction: Bool = false,
         handler: (() -> Void)? = nil) {
             let alertController = UIAlertController(
@@ -34,7 +34,7 @@ public extension UIViewController {
             )
         
             if includeCancelAction {
-                alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             }
             
             if let additionalActions = additionalActions {
@@ -45,7 +45,7 @@ public extension UIViewController {
             
             alertController.addAction(UIAlertAction(title: buttonText) { handler?() })
             
-            presentViewController(alertController, animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
     }
     
     /**
@@ -55,13 +55,13 @@ public extension UIViewController {
      - parameter modalPresentationStyle: The presentation style of the model view controller.
      */
     @available(iOSApplicationExtension 9.0, *)
-    public func presentSafariController(url: String, modalPresentationStyle: UIModalPresentationStyle = .OverFullScreen) {
-        let safariController = SFSafariViewController(URL: NSURL(string: url)!)
-        safariController.modalPresentationStyle = .OverFullScreen
+    public func presentSafariController(_ url: String, modalPresentationStyle: UIModalPresentationStyle = .overFullScreen) {
+        let safariController = SFSafariViewController(url: URL(string: url)!)
+        safariController.modalPresentationStyle = .overFullScreen
         
         safariController.delegate = self as? SFSafariViewControllerDelegate
         
-        presentViewController(safariController, animated: true, completion: nil)
+        present(safariController, animated: true, completion: nil)
     }
     
     /**
@@ -69,8 +69,8 @@ public extension UIViewController {
 
      - parameter backgroundColor: Background color of status bar.
      */
-    public func addStatusBar(backgroundColor: UIColor) -> UIView {
-        let statusBar = UIView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 20))
+    public func addStatusBar(_ backgroundColor: UIColor) -> UIView {
+        let statusBar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 20))
         statusBar.backgroundColor = backgroundColor
         self.view.addSubview(statusBar)
         
@@ -82,7 +82,7 @@ public extension UIViewController {
 
      - parameter darkMode: Light or dark mode color of status bar.
      */
-    public func addStatusBar(darkMode darkMode: Bool) -> UIView {
+    public func addStatusBar(darkMode: Bool) -> UIView {
         return addStatusBar(darkMode
             ? UIColor(white: 0, alpha: 0.8)
             : UIColor(rgb: (239, 239, 244), alpha: 0.8))
@@ -95,17 +95,17 @@ public extension UIViewController {
      - parameter sourceView: The view containing the anchor rectangle for the popover for supporting iPad device.
      - parameter applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
      */
-    public func presentActivityViewController(activityItems: [AnyObject],
+    public func presentActivityViewController(_ activityItems: [AnyObject],
         sourceView: UIView, applicationActivities: [UIActivity]? = nil) {
             let activity = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
             
             if let popOver = activity.popoverPresentationController {
                 popOver.sourceView = sourceView
                 popOver.sourceRect = sourceView.bounds
-                popOver.permittedArrowDirections = .Any
+                popOver.permittedArrowDirections = .any
             }
 
-            presentViewController(activity, animated: true, completion: nil)
+            present(activity, animated: true, completion: nil)
     }
     
     /**
@@ -115,16 +115,16 @@ public extension UIViewController {
      - parameter barButtonItem: The bar button item containing the anchor rectangle for the popover for supporting iPad device.
      - parameter applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
      */
-    public func presentActivityViewController(activityItems: [AnyObject],
+    public func presentActivityViewController(_ activityItems: [AnyObject],
         barButtonItem: UIBarButtonItem, applicationActivities: [UIActivity]? = nil) {
             let activity = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
             
             if let popOver = activity.popoverPresentationController {
                 popOver.barButtonItem  = barButtonItem
-                popOver.permittedArrowDirections = .Any
+                popOver.permittedArrowDirections = .any
             }
 
-            presentViewController(activity, animated: true, completion: nil)
+            present(activity, animated: true, completion: nil)
     }
 
 }

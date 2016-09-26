@@ -22,9 +22,9 @@ public extension Restorable where Self: UIViewController {
         }
     }
     
-    public func performRestoration(handler: () -> Void) {
+    public func performRestoration(_ handler: @escaping () -> Void) {
         // Execute process in the right lifecycle
-        if isViewLoaded() {
+        if isViewLoaded {
             handler()
         } else {
             // Delay execution until view ready

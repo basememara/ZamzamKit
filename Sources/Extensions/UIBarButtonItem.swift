@@ -22,9 +22,9 @@ public extension UIBarButtonItem {
      */
     public convenience init(imageName: String, target: AnyObject?, action: Selector, bundleIdentifier: String? = nil) {
         self.init(image: UIImage(named: imageName,
-            inBundle: bundleIdentifier != nil ? NSBundle(identifier: bundleIdentifier!) : nil,
-            compatibleWithTraitCollection: nil),
-            style: .Plain,
+            in: bundleIdentifier != nil ? Bundle(identifier: bundleIdentifier!) : nil,
+            compatibleWith: nil),
+            style: .plain,
             target: target,
             action: action)
     }

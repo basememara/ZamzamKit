@@ -16,12 +16,12 @@ public extension CLLocation {
      - parameter coordinates: Latitude and longitude] coordinates
      - parameter completion: Async callback with retrived data
      */
-    public func getMeta(handler: (locationMeta: LocationMeta?) -> Void) {
+    public func getMeta(_ handler: @escaping (_ locationMeta: LocationMeta?) -> Void) {
         // Reverse geocode stored coordinates
         CLGeocoder().reverseGeocodeLocation(self) { placemarks, error in
             // Validate values
-            guard let mark = placemarks?[0] where error == nil else {
-                return handler(locationMeta: nil)
+            guard let mark = placemarks?[0], error == nil else {
+                return handler(nil)
             }
             
             // Get timezone if applicable
@@ -32,19 +32,19 @@ public extension CLLocation {
                 // Extract timezone description
                 if let regex = try? NSRegularExpression(
                     pattern: "identifier = \"([a-z]*\\/[a-z]*_*[a-z]*)\"",
-                    options: .CaseInsensitive),
-                    let result = regex.firstMatchInString(desc, options: [], range: NSMakeRange(0, desc.characters.count)) {
-                        let tz = (desc as NSString).substringWithRange(result.rangeAtIndex(1))
-                        timezone = tz.stringByReplacingOccurrencesOfString("_", withString: " ")
+                    options: .caseInsensitive),
+                    let result = regex.firstMatch(in: desc, options: [], range: NSMakeRange(0, desc.characters.count)) {
+                        let tz = (desc as NSString).substring(with: result.rangeAt(1))
+                        timezone = tz.replacingOccurrences(of: "_", with: " ")
                 }
             }
             
             // Process callback
-            handler(locationMeta: LocationMeta(
+            handler(LocationMeta(
                 coordinates: (self.coordinate.latitude, self.coordinate.longitude),
                 locality: mark.locality,
                 country: mark.country,
-                countryCode: mark.ISOcountryCode,
+                countryCode: mark.isoCountryCode,
                 timezone: timezone,
                 administrativeArea: mark.administrativeArea))
         }

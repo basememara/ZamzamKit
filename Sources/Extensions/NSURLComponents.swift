@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension NSURLComponents {
+public extension URLComponents {
     
     /**
      Add, update, or remove a query string parameter from the URL
@@ -19,15 +19,15 @@ public extension NSURLComponents {
      
      - returns: the URL with the mutated query string
      */
-    public func addOrUpdateQueryStringParameter(key: String, value: String?) -> String {
-        if var queryItems: [NSURLQueryItem] = (self.queryItems ?? []) {
-            for (index, item) in queryItems.enumerate() {
+    public func addOrUpdateQueryStringParameter(_ key: String, value: String?) -> String {
+        if var queryItems: [URLQueryItem] = (self.queryItems ?? []) {
+            for (index, item) in queryItems.enumerated() {
                 // Match query string key and update
-                if item.name.lowercaseString == key.lowercaseString {
+                if item.name.lowercased() == key.lowercased() {
                     if let v = value {
-                        queryItems[index] = NSURLQueryItem(name: key, value: v)
+                        queryItems[index] = URLQueryItem(name: key, value: v)
                     } else {
-                        queryItems.removeAtIndex(index)
+                        queryItems.remove(at: index)
                     }
                     self.queryItems = queryItems.count > 0
                         ? queryItems : nil
@@ -38,7 +38,7 @@ public extension NSURLComponents {
             // Key doesn't exist if reaches here
             if let v = value {
                 // Add key to URL query string
-                queryItems.append(NSURLQueryItem(name: key, value: v))
+                queryItems.append(URLQueryItem(name: key, value: v))
                 self.queryItems = queryItems
                 return self.string!
             }
@@ -55,7 +55,7 @@ public extension NSURLComponents {
      
      - returns: the URL with the mutated query string
      */
-    public func addOrUpdateQueryStringParameter(values: [String: String?]) -> String {
+    public func addOrUpdateQueryStringParameter(_ values: [String: String?]) -> String {
         var newUrl = self.string ?? ""
         
         for item in values {
@@ -73,7 +73,7 @@ public extension NSURLComponents {
      
      - returns: the URL with the mutated query string
      */
-    public func removeQueryStringParameter(key: String) -> String {
+    public func removeQueryStringParameter(_ key: String) -> String {
         return self.addOrUpdateQueryStringParameter(key, value: nil)
     }
     
