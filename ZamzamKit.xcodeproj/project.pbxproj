@@ -247,7 +247,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8B14476B1C722D5700043657 /* ZamzamKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ZamzamKit.podspec; sourceTree = "<group>"; };
 		8B14476C1C722D5700043657 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8B14476D1C722D5700043657 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8B1447821C722F5E00043657 /* ZamzamConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamConstants.swift; sourceTree = "<group>"; };
@@ -457,7 +456,6 @@
 		8B14476A1C722D3900043657 /* Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				8B14476B1C722D5700043657 /* ZamzamKit.podspec */,
 				8B1447AB1C72508400043657 /* Cartfile */,
 				8B1447AD1C7250EF00043657 /* Cartfile.private */,
 				8B14476C1C722D5700043657 /* LICENSE */,
