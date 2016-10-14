@@ -28,15 +28,13 @@ public extension Locatable {
                     monitorSignificantLocationChanges: monitorSignificantLocationChanges
                         || allowsBackgroundLocationUpdates)
             } else {
-                locationManager?.tryStartUpdating(
+                _ = locationManager?.tryStartUpdating(
                     monitorSignificantLocationChanges: monitorSignificantLocationChanges
                         || allowsBackgroundLocationUpdates)
             }
                 
             #if os(iOS)
-                if #available(iOS 9.0, *) {
-                    locationManager?.allowsBackgroundLocationUpdates = allowsBackgroundLocationUpdates
-                }
+                locationManager?.allowsBackgroundLocationUpdates = allowsBackgroundLocationUpdates
             #endif
     }
     

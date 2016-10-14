@@ -11,11 +11,11 @@ import Foundation
 public extension Collection {
     
     public func toArray() -> [Self.Iterator.Element] {
-        return self.map { $0 }
+        return Array(self)
     }
 }
 
-extension Collection where Iterator.Element == (String, AnyObject) {
+extension Collection where Iterator.Element == (String, Any) {
     
     /// Converts collection of objects to JSON string
     var jsonString: String? {

@@ -18,7 +18,7 @@ public extension UICollectionViewController {
      */
     public func setupActivityIndicator(
         _ viewStyle: UIActivityIndicatorViewStyle = .whiteLarge,
-        color: UIColor = .gray()) -> UIActivityIndicatorView {
+        color: UIColor = .gray) -> UIActivityIndicatorView {
             let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
             activityIndicator.activityIndicatorViewStyle = viewStyle
             activityIndicator.color = color

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension Dictionary where Value: AnyObject {
+public extension Dictionary where Value: Any {
     
     /**
      Convert tuple to dictionary.
@@ -26,7 +26,9 @@ public extension Dictionary where Value: AnyObject {
      - returns: Keys removed due to being null.
      */
     public mutating func removeAllNulls() -> [Key] {
-        let keysWithNull = self.keys.filter { self[$0] is NSNull }
+        let keysWithNull = self
+            .filter { $0.value is NSNull }
+            .map { $0.key }
         
         for key in keysWithNull {
             removeValue(forKey: key)

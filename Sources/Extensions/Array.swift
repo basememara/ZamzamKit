@@ -26,23 +26,6 @@ public extension Array {
         }
         return to
     }
-
-    /**
-     Drop a specified amount of elements.
-
-     - parameter count: Number of elements to drop.
-
-     - returns: Elements that are left over.
-     */
-    public func drop(_ count: Int) -> [Element] {
-        var to: [Element] = []
-        var i = count
-        while i < self.count {
-            to.append(self[i])
-            i += 1
-        }
-        return to
-    }
     
     /**
      Optional element by indice.
@@ -56,7 +39,14 @@ public extension Array {
             ? self[index] : nil
     }
     
-    public func closestMatch(_ index: Int, predicate: (Element) -> Bool) -> (Int, Element)? {
+    
+    /// Finds the closest element that matches the criteria forwards or backwards.
+    ///
+    /// - parameter index:     Index to start from.
+    /// - parameter predicate: Criteria to match.
+    ///
+    /// - returns: Closest element that matches the criteria.
+    public func closestMatch(from index: Int, where predicate: (Element) -> Bool) -> (Int, Element)? {
         if predicate(self[index]) {
             return (index, self[index])
         }
@@ -86,9 +76,7 @@ public extension Array {
      - parameter handler: Handler with array item that was popped.
      */
     public mutating func removeEach(_ handler: @escaping (Element) -> Void) -> Void {
-        self.enumerated().reversed().forEach { item in
-            handler(self.remove(at: item.index))
-        }
+        enumerated().reversed().forEach { handler(remove(at: $0.offset)) }
     }
 
 }

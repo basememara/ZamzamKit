@@ -20,7 +20,7 @@ public extension UIBarButtonItem {
 
      - returns: An initialized UIBarButtonItem.
      */
-    public convenience init(imageName: String, target: AnyObject?, action: Selector, bundleIdentifier: String? = nil) {
+    public convenience init(imageName: String, target: Any?, action: Selector, bundleIdentifier: String? = nil) {
         self.init(image: UIImage(named: imageName,
             in: bundleIdentifier != nil ? Bundle(identifier: bundleIdentifier!) : nil,
             compatibleWith: nil),

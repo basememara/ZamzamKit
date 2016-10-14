@@ -34,7 +34,7 @@ public extension String {
     }
 
     public var trim: String {
-        return trimmingCharacters(in: .whitespaces())
+        return trimmingCharacters(in: .whitespaces)
     }
     
     /**

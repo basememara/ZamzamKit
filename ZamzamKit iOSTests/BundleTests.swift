@@ -10,7 +10,7 @@ import UIKit
 import XCTest
 @testable import ZamzamKit
 
-class NSBundleTests: XCTestCase {
+class BundleTests: XCTestCase {
     
     func testValuesFromPlist() {
         let values = Bundle.contentsOfFile("Settings.plist", bundle: Bundle(for: type(of: self)))
@@ -29,11 +29,11 @@ class NSBundleTests: XCTestCase {
     
     func testArrayFromPlist() {
         let values = Bundle.contentsOfFile("Settings.plist", bundle: Bundle(for: type(of: self)))
-        let array = values["MyArray1"] as! [AnyObject]
-        let expected: [AnyObject] = [
-            "My string for array value." as AnyObject,
-            999 as AnyObject,
-            true as AnyObject
+        let array = values["MyArray1"] as! [Any]
+        let expected: [Any] = [
+            "My string for array value." as Any,
+            999 as Any,
+            true as Any
         ]
         
         XCTAssert(array[0] as! String == expected[0] as! String)
@@ -43,11 +43,11 @@ class NSBundleTests: XCTestCase {
     
     func testDictFromPlist() {
         let values = Bundle.contentsOfFile("Settings.plist", bundle: Bundle(for: type(of: self)))
-        let dict = values["MyDictionary1"] as! [String: AnyObject]
-        let expected: [String: AnyObject] = [
-            "id": 7 as AnyObject,
-            "title": "Garden" as AnyObject,
-            "active": true as AnyObject
+        let dict = values["MyDictionary1"] as! [String: Any]
+        let expected: [String: Any] = [
+            "id": 7 as Any,
+            "title": "Garden" as Any,
+            "active": true as Any
         ]
         
         XCTAssert(dict["id"] as! Int == expected["id"] as! Int)
@@ -72,11 +72,11 @@ class NSBundleTests: XCTestCase {
     
     func testArrayFromBundle() {
         let values = Bundle.contentsOfFile(bundle: Bundle(for: type(of: self)))
-        let array = values["SomeArray1"] as! [AnyObject]
-        let expected: [AnyObject] = [
-            "My string for array value." as AnyObject,
-            999 as AnyObject,
-            true as AnyObject
+        let array = values["SomeArray1"] as! [Any]
+        let expected: [Any] = [
+            "My string for array value." as Any,
+            999 as Any,
+            true as Any
         ]
         
         XCTAssert(array[0] as! String == expected[0] as! String)
@@ -86,11 +86,11 @@ class NSBundleTests: XCTestCase {
     
     func testDictFromBundle() {
         let values = Bundle.contentsOfFile(bundle: Bundle(for: type(of: self)))
-        let dict = values["SomeDictionary1"] as! [String: AnyObject]
-        let expected: [String: AnyObject] = [
-            "id": 7 as AnyObject,
-            "title": "Garden" as AnyObject,
-            "active": true as AnyObject
+        let dict = values["SomeDictionary1"] as! [String: Any]
+        let expected: [String: Any] = [
+            "id": 7 as Any,
+            "title": "Garden" as Any,
+            "active": true as Any
         ]
         
         XCTAssert(dict["id"] as! Int == expected["id"] as! Int)

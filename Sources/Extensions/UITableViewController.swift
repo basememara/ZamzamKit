@@ -18,7 +18,7 @@ public extension UITableViewController {
      */
     public func setupActivityIndicator(
         _ viewStyle: UIActivityIndicatorViewStyle = .whiteLarge,
-        color: UIColor = .gray()) -> UIActivityIndicatorView {
+        color: UIColor = .gray) -> UIActivityIndicatorView {
             let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
             activityIndicator.activityIndicatorViewStyle = viewStyle
             activityIndicator.color = color
@@ -41,7 +41,7 @@ public extension UITableViewController {
     public func setupRefreshControl(_ action: Selector,
         title: String = "Pull to refresh",
         font: UIFont = UIFont(name: "AvenirNext-Medium", size: 18.0)!,
-        color: UIColor = .lightGray()) {
+        color: UIColor = .lightGray) {
             let control = UIRefreshControl()
             control.attributedTitle = NSAttributedString(string: title, attributes: [
                 NSFontAttributeName: font,

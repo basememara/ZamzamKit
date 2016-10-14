@@ -12,24 +12,11 @@ public extension Sequence {
 
     /// Converts collection of objects to JSON string
     var jsonString: String? {
-        guard let data = self as? [[String: AnyObject]],
+        guard let data = self as? [[String: Any]],
             let stringData = try? JSONSerialization.data(withJSONObject: data, options: [])
                 else { return nil }
         
         return NSString(data: stringData, encoding: String.Encoding.utf8.rawValue) as? String
-    }
-    
-    /**
-     Returns the first that satisfies the predicate includeElement, or nil. Similar to `filter` but stops when one element is found.
-     Thanks to [bigonotetaking](https://bigonotetaking.wordpress.com/2015/08/22/using-higher-order-methods-everywhere/)
-     
-     - parameter predicate: Predicate that the Element must satisfy.
-     
-     - returns: First element that satisfies the predicate, or nil.
-     */
-    public func first(_ predicate: (Iterator.Element) -> Bool) -> Iterator.Element? {
-        for x in self where predicate(x) { return x }
-        return nil
     }
     
     /**

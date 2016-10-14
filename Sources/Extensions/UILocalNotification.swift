@@ -16,7 +16,7 @@ public extension UILocalNotification {
         body: String,
         title: String? = nil,
         identifier: String? = nil,
-        userInfo: [String: AnyObject]? = nil,
+        userInfo: [String: Any]? = nil,
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         badge: Int = 0,
         sound: String? = UILocalNotificationDefaultSoundName,
@@ -55,7 +55,7 @@ public extension UILocalNotification {
                 }
                 
                 for item in userInfo {
-                    self.userInfo?.updateValue(item.1, forKey: item.0)
+                    _ = self.userInfo?.updateValue(item.value, forKey: item.key)
                 }
             }
             

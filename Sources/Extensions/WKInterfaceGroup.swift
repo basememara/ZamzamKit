@@ -16,8 +16,8 @@ public extension WKInterfaceGroup {
         
         if imageCount > 0 {
             self.setBackgroundImageNamed(imageName)
-            self.startAnimatingWithImagesInRange(
-                NSMakeRange(0, imageCount),
+            self.startAnimatingWithImages(
+                in: NSMakeRange(0, imageCount),
                 duration: duration,
                 repeatCount: 1)
         } else {

@@ -21,7 +21,7 @@ public extension CLLocationManager {
         self.delegate = delegate
         self.desiredAccuracy = desiredAccuracy
         self.distanceFilter = distanceFilter
-        self.tryStartUpdating(forceInitialRequest,
+        _ = self.tryStartUpdating(forceInitialRequest,
             monitorSignificantLocationChanges: monitorSignificantLocationChanges)
     }
     

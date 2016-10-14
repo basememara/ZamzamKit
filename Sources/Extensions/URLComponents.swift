@@ -20,7 +20,9 @@ public extension URLComponents {
      - returns: the URL with the mutated query string
      */
     public func addOrUpdateQueryStringParameter(_ key: String, value: String?) -> String {
-        if var queryItems: [URLQueryItem] = (self.queryItems ?? []) {
+        if var queryItems = queryItems {
+            var urlComponent = self
+            
             for (index, item) in queryItems.enumerated() {
                 // Match query string key and update
                 if item.name.lowercased() == key.lowercased() {
@@ -29,9 +31,8 @@ public extension URLComponents {
                     } else {
                         queryItems.remove(at: index)
                     }
-                    self.queryItems = queryItems.count > 0
-                        ? queryItems : nil
-                    return self.string!
+                    urlComponent.queryItems = queryItems.count > 0 ? queryItems : nil
+                    return urlComponent.string ?? ""
                 }
             }
             
@@ -39,12 +40,12 @@ public extension URLComponents {
             if let v = value {
                 // Add key to URL query string
                 queryItems.append(URLQueryItem(name: key, value: v))
-                self.queryItems = queryItems
-                return self.string!
+                urlComponent.queryItems = queryItems
+                return urlComponent.string ?? ""
             }
         }
         
-        return self.string ?? ""
+        return string ?? ""
     }
     
     /**
@@ -56,13 +57,13 @@ public extension URLComponents {
      - returns: the URL with the mutated query string
      */
     public func addOrUpdateQueryStringParameter(_ values: [String: String?]) -> String {
-        var newUrl = self.string ?? ""
+        var urlComponent = self
         
-        for item in values {
-            newUrl = self.addOrUpdateQueryStringParameter(item.0, value: item.1)
+        values.forEach {
+            urlComponent = URLComponents(string: urlComponent.addOrUpdateQueryStringParameter($0.key, value: $0.value)) ?? urlComponent
         }
         
-        return newUrl
+        return urlComponent.string ?? ""
     }
     
     /**
@@ -74,7 +75,7 @@ public extension URLComponents {
      - returns: the URL with the mutated query string
      */
     public func removeQueryStringParameter(_ key: String) -> String {
-        return self.addOrUpdateQueryStringParameter(key, value: nil)
+        return addOrUpdateQueryStringParameter(key, value: nil)
     }
     
 }

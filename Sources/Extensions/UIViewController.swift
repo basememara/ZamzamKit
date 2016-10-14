@@ -95,7 +95,7 @@ public extension UIViewController {
      - parameter sourceView: The view containing the anchor rectangle for the popover for supporting iPad device.
      - parameter applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
      */
-    public func presentActivityViewController(_ activityItems: [AnyObject],
+    public func presentActivityViewController(_ activityItems: [Any],
         sourceView: UIView, applicationActivities: [UIActivity]? = nil) {
             let activity = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
             
@@ -115,7 +115,7 @@ public extension UIViewController {
      - parameter barButtonItem: The bar button item containing the anchor rectangle for the popover for supporting iPad device.
      - parameter applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
      */
-    public func presentActivityViewController(_ activityItems: [AnyObject],
+    public func presentActivityViewController(_ activityItems: [Any],
         barButtonItem: UIBarButtonItem, applicationActivities: [UIActivity]? = nil) {
             let activity = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
             

@@ -36,8 +36,8 @@ class DateTimeTests: XCTestCase {
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         
         XCTAssertEqual(
-            calendar.startOfDayForDate(incrementedDate),
-            calendar.startOfDayForDate(tomorrow),
+            calendar.startOfDay(for: incrementedDate),
+            calendar.startOfDay(for: tomorrow),
             "Incremented date by today should be \(tomorrow)")
     }
     

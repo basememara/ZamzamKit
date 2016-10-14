@@ -17,19 +17,19 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         
     }
-
-    @IBAction func buttonTapped(sender: UIButton) {
+    
+    @IBAction func buttonTapped(_ sender: UIButton) {
         let safariActivity = UIActivity.create("Open in Safari",
             imageName: "safari-share",
             imageBundle: ZamzamConstants.bundle) {
-                UIApplication.sharedApplication().openURL(NSURL(string: "http://apple.com")!)
+                UIApplication.shared.open(NSURL(string: "http://apple.com")! as URL)
             }
         
         presentActivityViewController(["Some title", "Some link"], sourceView: sender,
             applicationActivities: [safariActivity])
     }
 
-    @IBAction func barButtonTapped(sender: UIBarButtonItem) {
+    @IBAction func barButtonTapped(_ sender: UIBarButtonItem) {
         presentActivityViewController(["Some title", "Some link"], barButtonItem: sender)
     }
     

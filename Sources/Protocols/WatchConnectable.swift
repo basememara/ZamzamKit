@@ -32,12 +32,12 @@ public extension WatchConnectable {
      
      - parameter values: The dictionary of values.
      */
-    func transferContextToWatch(_ values: [String: AnyObject]) {
+    func transferContextToWatch(_ values: [String: Any]) {
         let watchSession = WCSession.default()
         if isWatchAvailable {
             var values = values
             do {
-                values.removeAllNulls()
+                _ = values.removeAllNulls()
                 try watchSession.updateApplicationContext(values)
             } catch {
                 // TODO: Log error
@@ -50,11 +50,11 @@ public extension WatchConnectable {
      
      - parameter values: The dictionary of values.
      */
-    func transferUserInfoToWatch(_ values: [String: AnyObject]) {
+    func transferUserInfoToWatch(_ values: [String: Any]) {
         let watchSession = WCSession.default()
         if isWatchAvailable {
             var values = values
-            values.removeAllNulls()
+            _ = values.removeAllNulls()
             watchSession.transferUserInfo(values)
         }
     }
@@ -64,12 +64,12 @@ public extension WatchConnectable {
      
      - parameter values: The dictionary of values.
      */
-    func transferComplicationUserInfoToWatch(_ values: [String: AnyObject]) {
+    func transferComplicationUserInfoToWatch(_ values: [String: Any]) {
         let watchSession = WCSession.default()
         
         if isWatchAvailable {
             var values = values
-            values.removeAllNulls()
+            _ = values.removeAllNulls()
             watchSession.transferCurrentComplicationUserInfo(values)
         }
     }

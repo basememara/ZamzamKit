@@ -18,8 +18,8 @@ public extension Date {
         return !self.isPast
     }
     
-    public convenience init?(fromString: String, dateFormat: String = "yyyy/MM/dd HH:mm") {
-        guard let date = DateFormatter(coder: dateFormat).date(from: fromString),
+    public init?(fromString: String, dateFormat: String = "yyyy/MM/dd HH:mm") {
+        guard let date = DateFormatter(dateFormat: dateFormat).date(from: fromString),
             !fromString.isEmpty else { return nil }
         
         self.init(timeInterval: 0, since: date)
@@ -29,8 +29,7 @@ public extension Date {
         return Calendar.current
             .date(byAdding: .day,
                 value: numberOfDays,
-                to: self,
-                options: NSCalendar.Options(rawValue: 0)
+                to: self
             )!
     }
     
@@ -38,8 +37,7 @@ public extension Date {
         return Calendar.current
             .date(byAdding: .minute,
                 value: numberOfMinutes,
-                to: self,
-                options: NSCalendar.Options(rawValue: 0)
+                to: self
             )!
     }
     
@@ -50,7 +48,7 @@ public extension Date {
     
     public func timeToDecimal() -> Double {
         let calendar = Calendar.current
-        let components = calendar.components([.hour, .minute],
+        let components = calendar.dateComponents([.hour, .minute],
             from: self)
         let hour = components.hour
         let minutes = components.minute
@@ -58,24 +56,23 @@ public extension Date {
     }
     
     public func toHijriString(
-        _ unit: NSCalendar.Unit? = nil,
+        _ unit: Set<Calendar.Component>? = nil,
         format: String? = nil,
         offSet: Int = 0) -> String {
-            let calendar = Calendar(identifier: Calendar.Identifier.islamicCivil)
-            let flags = unit ?? NSCalendar.Unit(rawValue: UInt.max)
-            var date = self.copy() as! Date
+            let calendar = Calendar(identifier: .islamicCivil)
+            let flags = unit ?? [.year, .month, .day, .hour, .minute, .second]
+            var date = self
             
             // Handle offset if applicable
             if offSet != 0 {
                 date = calendar
                     .date(byAdding: .day,
                         value: offSet,
-                        to: date,
-                        options: NSCalendar.Options(rawValue: 0)
+                        to: date
                     )!
             }
             
-            let components = calendar.components(flags, from: date)
+            let components = calendar.dateComponents(flags, from: date)
             
             let formatter = DateFormatter()
             if let f = format {
@@ -90,20 +87,19 @@ public extension Date {
     
     public func toHijri(
         _ offSet: Int = 0) -> DateComponents {
-            let calendar = Calendar(identifier: Calendar.Identifier.islamicCivil)
-            var date = self.copy() as! Date
+            let calendar = Calendar(identifier: .islamicCivil)
+            var date = self
             
             // Handle offset if applicable
             if offSet != 0 {
                 date = calendar
                     .date(byAdding: .day,
                         value: offSet,
-                        to: date,
-                        options: NSCalendar.Options(rawValue: 0)
+                        to: date
                     )!
             }
             
-            return calendar.components(NSCalendar.Unit(rawValue: UInt.max),
+            return calendar.dateComponents([.year, .month, .day, .hour, .minute, .second],
                 from: date)
     }
     

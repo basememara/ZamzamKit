@@ -43,7 +43,7 @@ public extension UIApplication {
         body: String,
         title: String? = nil,
         identifier: String? = nil,
-        userInfo: [String: AnyObject]? = nil,
+        userInfo: [String: Any]? = nil,
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         badge: Int = 0,
         sound: String? = UILocalNotificationDefaultSoundName,
@@ -134,7 +134,6 @@ public extension UIApplication {
      - parameter type:    Indentifier of shortcut item.
      - parameter handler: Handler which to modify the shortcut item.
      */
-    @available(iOSApplicationExtension 9.0, *)
     public func updateShortcutItem(_ type: String, handler: (UIMutableApplicationShortcutItem) -> UIMutableApplicationShortcutItem) {
         guard let index = shortcutItems?.index(where: { $0.type == type }),
             let item = shortcutItems?[index].mutableCopy() as? UIMutableApplicationShortcutItem else {

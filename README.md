@@ -47,7 +47,7 @@ let isOnline = SCNetworkReachability.isOnline
 ####SequenceType + json
 ```
 // Before
-guard let data = myModel as? [[String: AnyObject]],
+guard let data = myModel as? [[String: Any]],
     let stringData = try? NSJSONSerialization.dataWithJSONObject(data, options: [])
         else { return nil }
 
@@ -63,10 +63,10 @@ let json = myModel.jsonString
 guard let contents = NSDictionary(contentsOfURL: bundleURL.URLByAppendingPathComponent("Settings.plist"))
     else { return [:] }
         
-guard let preferences = contents.valueForKey("PreferenceSpecifiers") as? [String: AnyObject]
+guard let preferences = contents.valueForKey("PreferenceSpecifiers") as? [String: Any]
     else { return [:] }
         
-let values: [String : AnyObject] = preferences
+let values: [String : Any] = preferences
 ```
 ```
 // After
