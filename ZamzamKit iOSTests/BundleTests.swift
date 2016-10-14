@@ -29,7 +29,7 @@ class BundleTests: XCTestCase {
     
     func testArrayFromPlist() {
         let values = Bundle.contentsOfFile("Settings.plist", bundle: Bundle(for: type(of: self)))
-        let array = values["MyArray1"] as! [Any]
+        let array = values["MyArray1"] as! [AnyObject]
         let expected: [Any] = [
             "My string for array value." as Any,
             999 as Any,
@@ -72,7 +72,7 @@ class BundleTests: XCTestCase {
     
     func testArrayFromBundle() {
         let values = Bundle.contentsOfFile(bundle: Bundle(for: type(of: self)))
-        let array = values["SomeArray1"] as! [Any]
+        let array = values["SomeArray1"] as! [AnyObject]
         let expected: [Any] = [
             "My string for array value." as Any,
             999 as Any,
