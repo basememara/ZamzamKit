@@ -13,16 +13,13 @@ public protocol WatchConnectable {
     
 }
 
-@available(iOS 9, *)
+@available(iOS 9.3, *)
 public extension WatchConnectable {
     
     var isWatchAvailable: Bool {
         let watchSession = WCSession.default()
         var activationState = true
-        
-        if #available(iOS 9.3, *) {
-            activationState = watchSession.activationState == .activated
-        }
+        activationState = watchSession.activationState == .activated
         
         return watchSession.isPaired && watchSession.isWatchAppInstalled && activationState
     }
