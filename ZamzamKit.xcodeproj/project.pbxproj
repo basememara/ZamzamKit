@@ -82,6 +82,13 @@
 		8BB45FB61C9BDD180070CE07 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */; };
 		8BB45FB71C9BDD180070CE07 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */; };
 		8BBA692D1CB6FCE000AD9759 /* UITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */; };
+		8BC4F8CD1E3B29800015BD31 /* UIApplication_iOS9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC4F8CC1E3B29800015BD31 /* UIApplication_iOS9.swift */; };
+		8BC4F8CF1E3B2FA00015BD31 /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC4F8CE1E3B2FA00015BD31 /* UNUserNotificationCenter.swift */; };
+		8BC4F8D01E3B2FA00015BD31 /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC4F8CE1E3B2FA00015BD31 /* UNUserNotificationCenter.swift */; };
+		8BC4F8D11E3B2FA00015BD31 /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC4F8CE1E3B2FA00015BD31 /* UNUserNotificationCenter.swift */; };
+		8BC4F8D31E3B335E0015BD31 /* UNNotificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC4F8D21E3B335E0015BD31 /* UNNotificationRequest.swift */; };
+		8BC4F8D41E3B335E0015BD31 /* UNNotificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC4F8D21E3B335E0015BD31 /* UNNotificationRequest.swift */; };
+		8BC4F8D51E3B335E0015BD31 /* UNNotificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC4F8D21E3B335E0015BD31 /* UNNotificationRequest.swift */; };
 		8BCB73CE1CAD660D00E20096 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73CD1CAD660D00E20096 /* Equatable.swift */; };
 		8BCB73CF1CAD660D00E20096 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73CD1CAD660D00E20096 /* Equatable.swift */; };
 		8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73CD1CAD660D00E20096 /* Equatable.swift */; };
@@ -130,7 +137,7 @@
 		8BFDB67D1C7525BD00C94996 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB67C1C7525BD00C94996 /* CLLocation.swift */; };
 		8BFDB67E1C7525BD00C94996 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB67C1C7525BD00C94996 /* CLLocation.swift */; };
 		8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB67C1C7525BD00C94996 /* CLLocation.swift */; };
-		8BFDB6891C7529AB00C94996 /* UILocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */; };
+		8BFDB6891C7529AB00C94996 /* UILocalNotification_iOS9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6881C7529AB00C94996 /* UILocalNotification_iOS9.swift */; };
 		8BFDB68C1C752C5C00C94996 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB68B1C752C5C00C94996 /* UIApplication.swift */; };
 		8BFDB68F1C75323900C94996 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB68E1C75323900C94996 /* DateFormatter.swift */; };
 		8BFDB6901C75323900C94996 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB68E1C75323900C94996 /* DateFormatter.swift */; };
@@ -309,6 +316,9 @@
 		8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchConnectable.swift; sourceTree = "<group>"; };
 		8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaults.swift; path = Extensions/UserDefaults.swift; sourceTree = "<group>"; };
 		8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableViewController.swift; path = Extensions/UITableViewController.swift; sourceTree = "<group>"; };
+		8BC4F8CC1E3B29800015BD31 /* UIApplication_iOS9.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIApplication_iOS9.swift; path = Extensions/UIApplication_iOS9.swift; sourceTree = "<group>"; };
+		8BC4F8CE1E3B2FA00015BD31 /* UNUserNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNUserNotificationCenter.swift; path = Extensions/UNUserNotificationCenter.swift; sourceTree = "<group>"; };
+		8BC4F8D21E3B335E0015BD31 /* UNNotificationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNNotificationRequest.swift; path = Extensions/UNNotificationRequest.swift; sourceTree = "<group>"; };
 		8BCB73CD1CAD660D00E20096 /* Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Equatable.swift; path = Extensions/Equatable.swift; sourceTree = "<group>"; };
 		8BCB73D61CAD666900E20096 /* ExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTest.swift; sourceTree = "<group>"; };
 		8BCB73D91CAD69BF00E20096 /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableView.swift; path = Extensions/UITableView.swift; sourceTree = "<group>"; };
@@ -340,7 +350,7 @@
 		8BFDB6721C751E4F00C94996 /* WKInterfaceGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WKInterfaceGroup.swift; path = Extensions/WKInterfaceGroup.swift; sourceTree = "<group>"; };
 		8BFDB6761C751F2300C94996 /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileManager.swift; path = Extensions/FileManager.swift; sourceTree = "<group>"; };
 		8BFDB67C1C7525BD00C94996 /* CLLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocation.swift; path = Extensions/CLLocation.swift; sourceTree = "<group>"; };
-		8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UILocalNotification.swift; path = Extensions/UILocalNotification.swift; sourceTree = "<group>"; };
+		8BFDB6881C7529AB00C94996 /* UILocalNotification_iOS9.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UILocalNotification_iOS9.swift; path = Extensions/UILocalNotification_iOS9.swift; sourceTree = "<group>"; };
 		8BFDB68B1C752C5C00C94996 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIApplication.swift; path = Extensions/UIApplication.swift; sourceTree = "<group>"; };
 		8BFDB68E1C75323900C94996 /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateFormatter.swift; path = Extensions/DateFormatter.swift; sourceTree = "<group>"; };
 		8BFDB69C1C755A5300C94996 /* LocationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
@@ -542,6 +552,15 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		8BC4F8C41E3B295D0015BD31 /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				8BC4F8CC1E3B29800015BD31 /* UIApplication_iOS9.swift */,
+				8BFDB6881C7529AB00C94996 /* UILocalNotification_iOS9.swift */,
+			);
+			name = Deprecated;
+			sourceTree = "<group>";
+		};
 		8BE19B091C72D6DF00D4D437 /* ZamzamKit iOSTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -627,6 +646,8 @@
 				8BE814FC1C7842DC005F23CE /* Sequence.swift */,
 				8BFDB65D1C7518F800C94996 /* String.swift */,
 				8B8215491CA1613400C9FCC9 /* TimeInterval.swift */,
+				8BC4F8CE1E3B2FA00015BD31 /* UNUserNotificationCenter.swift */,
+				8BC4F8D21E3B335E0015BD31 /* UNNotificationRequest.swift */,
 				8BFDB6631C751AE600C94996 /* URLComponents.swift */,
 				8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */,
 			);
@@ -636,6 +657,7 @@
 		8BFDB6741C751E8E00C94996 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				8BC4F8C41E3B295D0015BD31 /* Deprecated */,
 				8BF307CF1CF0E3C600BBA933 /* UIActivity.swift */,
 				8BD2D19D1CA583110018AC2B /* UIAlertAction.swift */,
 				8BFDB68B1C752C5C00C94996 /* UIApplication.swift */,
@@ -644,7 +666,6 @@
 				8B5966121CD5E24A00738A12 /* UICollectionViewController.swift */,
 				8B63E4261CDB8DB00053C060 /* UIImage.swift */,
 				8BFDB66F1C751DF600C94996 /* UIImageView.swift */,
-				8BFDB6881C7529AB00C94996 /* UILocalNotification.swift */,
 				8B1EEC871CF7588600AE054B /* UIStoryboard.swift */,
 				8BCB73D91CAD69BF00E20096 /* UITableView.swift */,
 				8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */,
@@ -1072,14 +1093,17 @@
 			files = (
 				8BFDB68C1C752C5C00C94996 /* UIApplication.swift in Sources */,
 				8BFDB6701C751DF600C94996 /* UIImageView.swift in Sources */,
+				8BC4F8CD1E3B29800015BD31 /* UIApplication_iOS9.swift in Sources */,
 				8BFDB67D1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BBA692D1CB6FCE000AD9759 /* UITableViewController.swift in Sources */,
 				8BF307D01CF0E3C600BBA933 /* UIActivity.swift in Sources */,
 				8BCB73CE1CAD660D00E20096 /* Equatable.swift in Sources */,
 				8BD08EB51CE28ACA0051080A /* SCNetworkReachability.swift in Sources */,
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,
+				8BC4F8D31E3B335E0015BD31 /* UNNotificationRequest.swift in Sources */,
 				8B840E601C904F1D00D85781 /* Locatable.swift in Sources */,
 				8BD508761C99E18500AE205E /* Collection.swift in Sources */,
+				8BC4F8CF1E3B2FA00015BD31 /* UNUserNotificationCenter.swift in Sources */,
 				8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */,
 				8BFDB68F1C75323900C94996 /* DateFormatter.swift in Sources */,
 				8BE814F51C784233005F23CE /* Color.swift in Sources */,
@@ -1097,7 +1121,7 @@
 				8B82154A1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8BB45FB51C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8BFDB6771C751F2300C94996 /* FileManager.swift in Sources */,
-				8BFDB6891C7529AB00C94996 /* UILocalNotification.swift in Sources */,
+				8BFDB6891C7529AB00C94996 /* UILocalNotification_iOS9.swift in Sources */,
 				8BFDB6641C751AE600C94996 /* URLComponents.swift in Sources */,
 				8B1EEC881CF7588600AE054B /* UIStoryboard.swift in Sources */,
 				8B1EEC791CF71D7100AE054B /* Then.swift in Sources */,
@@ -1116,6 +1140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BFDB6581C75187200C94996 /* Date.swift in Sources */,
+				8BC4F8D41E3B335E0015BD31 /* UNNotificationRequest.swift in Sources */,
 				8BE814FE1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8B8215421CA15E0D00C9FCC9 /* CLKComplicationServer.swift in Sources */,
 				8BFDB67E1C7525BD00C94996 /* CLLocation.swift in Sources */,
@@ -1126,6 +1151,7 @@
 				8B5316AD1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8BFDB6651C751AE600C94996 /* URLComponents.swift in Sources */,
 				8B5316471C9B23BF0094A6C4 /* WKInterfaceController.swift in Sources */,
+				8BC4F8D01E3B2FA00015BD31 /* UNUserNotificationCenter.swift in Sources */,
 				8B4CFAE91CABEF0800D2B1D7 /* Color.swift in Sources */,
 				8BD5086C1C99DD1E00AE205E /* Array.swift in Sources */,
 				8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */,
@@ -1161,11 +1187,13 @@
 				8BB45FB71C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8BE814FF1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8BD5086D1C99DD1E00AE205E /* Array.swift in Sources */,
+				8BC4F8D51E3B335E0015BD31 /* UNNotificationRequest.swift in Sources */,
 				8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB6791C751F2300C94996 /* FileManager.swift in Sources */,
 				8B840E621C904F1D00D85781 /* Locatable.swift in Sources */,
 				8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */,
 				8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */,
+				8BC4F8D11E3B2FA00015BD31 /* UNUserNotificationCenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

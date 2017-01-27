@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
+@available(iOS 9.3, *)
 public extension UILocalNotification {
     
-    public convenience init(
+    convenience init(
         date: Date,
         body: String,
         title: String? = nil,
