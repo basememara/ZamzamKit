@@ -19,7 +19,7 @@ public extension URLComponents {
      
      - returns: the URL with the mutated query string
      */
-    public func addOrUpdateQueryStringParameter(_ key: String, value: String?) -> String {
+    func addOrUpdateQueryStringParameter(_ key: String, value: String?) -> String {
         if var queryItems = queryItems {
             var urlComponent = self
             
@@ -56,7 +56,7 @@ public extension URLComponents {
      
      - returns: the URL with the mutated query string
      */
-    public func addOrUpdateQueryStringParameter(_ values: [String: String?]) -> String {
+    func addOrUpdateQueryStringParameter(_ values: [String: String?]) -> String {
         var urlComponent = self
         
         values.forEach {
@@ -74,7 +74,7 @@ public extension URLComponents {
      
      - returns: the URL with the mutated query string
      */
-    public func removeQueryStringParameter(_ key: String) -> String {
+    func removeQueryStringParameter(_ key: String) -> String {
         return addOrUpdateQueryStringParameter(key, value: nil)
     }
     

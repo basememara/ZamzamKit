@@ -11,7 +11,7 @@ import Foundation
 public extension Sequence {
 
     /// Converts collection of objects to JSON string
-    public var jsonString: String? {
+    var jsonString: String? {
         guard let data = self as? [[String: Any]],
             let stringData = try? JSONSerialization.data(withJSONObject: data, options: [])
                 else { return nil }
@@ -27,7 +27,7 @@ public extension Sequence {
      
      - returns: Last element that satisfies the predicate, or nil.
      */
-    public func last(_ pred: (Iterator.Element) -> Bool) -> Iterator.Element? {
+    func last(_ pred: (Iterator.Element) -> Bool) -> Iterator.Element? {
         for x in reversed() where pred(x) { return x }
         return nil
     }
@@ -39,7 +39,7 @@ public extension Sequence {
      
      - returns: Does the sequence contain all elements that satisfy the predicate
      */
-    public func all(_ predicate: (Iterator.Element) -> Bool) -> Bool {
+    func all(_ predicate: (Iterator.Element) -> Bool) -> Bool {
         return !contains { !predicate($0) }
     }
 }

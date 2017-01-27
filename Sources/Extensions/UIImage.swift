@@ -18,17 +18,17 @@ public extension UIImage {
 
      - returns: The image object.
      */
-    public convenience init?(named: String, inBundle: Bundle?) {
+    convenience init?(named: String, inBundle: Bundle?) {
         self.init(named: named, in: inBundle, compatibleWith: nil)
     }
 
     /// Shorthand for always draw the original image, without treating it as a template.
-    public var original: UIImage {
+    var original: UIImage {
         return withRenderingMode(.alwaysOriginal)
     }
 
     /// Shorthand for always draw the image as a template image, ignoring its color information.
-    public var template: UIImage {
+    var template: UIImage {
         return withRenderingMode(.alwaysTemplate)
     }
 }

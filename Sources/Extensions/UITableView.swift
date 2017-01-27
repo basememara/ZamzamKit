@@ -11,7 +11,7 @@ import UIKit
 
 public extension UITableView {
 
-    public static var defaultCellIdentifier: String {
+    static var defaultCellIdentifier: String {
         return "Cell"
     }
     
@@ -22,7 +22,7 @@ public extension UITableView {
      - parameter cellIdentifier: Name of the reusable cell identifier.
      - parameter bundleIdentifier: Name of the bundle identifier if not local.
      */
-    public func registerNib(_ nibName: String, cellIdentifier: String = defaultCellIdentifier, bundleIdentifier: String? = nil) {
+    func registerNib(_ nibName: String, cellIdentifier: String = defaultCellIdentifier, bundleIdentifier: String? = nil) {
         self.register(UINib(nibName: nibName,
             bundle: bundleIdentifier != nil ? Bundle(identifier: bundleIdentifier!) : nil),
             forCellReuseIdentifier: cellIdentifier)
@@ -35,7 +35,7 @@ public extension UITableView {
 
      - returns: Returns the table view cell.
      */
-    public subscript(indexPath: IndexPath) -> UITableViewCell {
+    subscript(indexPath: IndexPath) -> UITableViewCell {
         return self.dequeueReusableCell(withIdentifier: UITableView.defaultCellIdentifier, for: indexPath)
     }
 
@@ -47,7 +47,7 @@ public extension UITableView {
 
      - returns: Returns the table view cell.
      */
-    public subscript(indexPath: IndexPath, identifier: String) -> UITableViewCell {
+    subscript(indexPath: IndexPath, identifier: String) -> UITableViewCell {
         return self.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
 

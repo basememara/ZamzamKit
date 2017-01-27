@@ -16,7 +16,7 @@ public extension SCNetworkReachability {
 
      - returns: True if connected to network.
      */
-    public static var isOnline: Bool {
+    static var isOnline: Bool {
         var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
         zeroAddress.sin_family = sa_family_t(AF_INET)

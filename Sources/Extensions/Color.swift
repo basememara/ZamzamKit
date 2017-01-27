@@ -67,7 +67,7 @@ public extension UIColor {
     /**
      Returns the inverse color
      */
-    public var inverseColor: UIColor {
+    var inverseColor: UIColor {
         var r: CGFloat = 0.0
         var g: CGFloat = 0.0
         var b: CGFloat = 0.0

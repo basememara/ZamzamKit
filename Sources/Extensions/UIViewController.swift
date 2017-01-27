@@ -20,7 +20,7 @@ public extension UIViewController {
      - parameter additionalActions: Array of alert actions.
      - parameter handler:           Call back handler when main action tapped.
      */
-    public func presentAlert(_ title: String,
+    func presentAlert(_ title: String,
         message: String? = nil,
         buttonText: String = "OK",
         additionalActions: [UIAlertAction]? = nil,
@@ -55,7 +55,7 @@ public extension UIViewController {
      - parameter modalPresentationStyle: The presentation style of the model view controller.
      */
     @available(iOSApplicationExtension 9.0, *)
-    public func presentSafariController(_ url: String, modalPresentationStyle: UIModalPresentationStyle = .overFullScreen) {
+    func presentSafariController(_ url: String, modalPresentationStyle: UIModalPresentationStyle = .overFullScreen) {
         let safariController = SFSafariViewController(url: URL(string: url)!)
         safariController.modalPresentationStyle = .overFullScreen
         
@@ -69,7 +69,7 @@ public extension UIViewController {
 
      - parameter backgroundColor: Background color of status bar.
      */
-    public func addStatusBar(_ backgroundColor: UIColor) -> UIView {
+    func addStatusBar(_ backgroundColor: UIColor) -> UIView {
         let statusBar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 20))
         statusBar.backgroundColor = backgroundColor
         self.view.addSubview(statusBar)
@@ -82,7 +82,7 @@ public extension UIViewController {
 
      - parameter darkMode: Light or dark mode color of status bar.
      */
-    public func addStatusBar(darkMode: Bool) -> UIView {
+    func addStatusBar(darkMode: Bool) -> UIView {
         return addStatusBar(darkMode
             ? UIColor(white: 0, alpha: 0.8)
             : UIColor(rgb: (239, 239, 244), alpha: 0.8))
@@ -95,7 +95,7 @@ public extension UIViewController {
      - parameter sourceView: The view containing the anchor rectangle for the popover for supporting iPad device.
      - parameter applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
      */
-    public func presentActivityViewController(_ activityItems: [Any],
+    func presentActivityViewController(_ activityItems: [Any],
         sourceView: UIView, applicationActivities: [UIActivity]? = nil) {
             let activity = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
             
@@ -115,7 +115,7 @@ public extension UIViewController {
      - parameter barButtonItem: The bar button item containing the anchor rectangle for the popover for supporting iPad device.
      - parameter applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
      */
-    public func presentActivityViewController(_ activityItems: [Any],
+    func presentActivityViewController(_ activityItems: [Any],
         barButtonItem: UIBarButtonItem, applicationActivities: [UIActivity]? = nil) {
             let activity = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
             

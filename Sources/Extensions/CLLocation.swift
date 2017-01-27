@@ -16,7 +16,7 @@ public extension CLLocation {
      - parameter coordinates: Latitude and longitude] coordinates
      - parameter completion: Async callback with retrived data
      */
-    public func getMeta(_ handler: @escaping (_ locationMeta: LocationMeta?) -> Void) {
+    func getMeta(_ handler: @escaping (_ locationMeta: LocationMeta?) -> Void) {
         // Reverse geocode stored coordinates
         CLGeocoder().reverseGeocodeLocation(self) { placemarks, error in
             // Validate values

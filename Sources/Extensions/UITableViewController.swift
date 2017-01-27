@@ -16,7 +16,7 @@ public extension UITableViewController {
 
      - returns: Returns an instance of the activity indicator that is centered.
      */
-    public func setupActivityIndicator(
+    func setupActivityIndicator(
         _ viewStyle: UIActivityIndicatorViewStyle = .whiteLarge,
         color: UIColor = .gray) -> UIActivityIndicatorView {
             let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -38,7 +38,7 @@ public extension UITableViewController {
      - parameter font:   Font of the title.
      - parameter color:  Color of the title.
      */
-    public func setupRefreshControl(_ action: Selector,
+    func setupRefreshControl(_ action: Selector,
         title: String = "Pull to refresh",
         font: UIFont = UIFont(name: "AvenirNext-Medium", size: 18.0)!,
         color: UIColor = .lightGray) {

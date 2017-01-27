@@ -19,7 +19,7 @@ public extension UIActivity {
 
      - returns: The custom activity
      */
-    public static func create(_ title: String, imageName: String, imageBundle: Bundle? = nil,
+    static func create(_ title: String, imageName: String, imageBundle: Bundle? = nil,
         canPerform: (([Any]) -> Bool)? = nil,
         handler: @escaping () -> Void) -> UIActivity {
             return CustomActivity(

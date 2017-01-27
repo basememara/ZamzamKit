@@ -17,7 +17,7 @@ public extension UIStoryboard {
 
      - returns: A storyboard object for the specified file. If no storyboard resource file matching name exists, an exception is thrown.
      */
-    public convenience init(name: String) {
+    convenience init(name: String) {
         self.init(name: name, bundle: nil)
     }
     
@@ -26,7 +26,7 @@ public extension UIStoryboard {
 
      - returns: Instantiated controller from storyboard, or nil if non existent.
      */
-    public func instantiateViewController<T: UIViewController>() -> T? {
+    func instantiateViewController<T: UIViewController>() -> T? {
         return self.instantiateViewController(withIdentifier: String(describing: T.self)) as? T
     }
 }

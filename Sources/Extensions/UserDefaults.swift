@@ -15,7 +15,7 @@ public extension UserDefaults {
      
      - parameter values: The user default keys and values.
      */
-    public func update(_ values: [String: Any]) {
+    func update(_ values: [String: Any]) {
         for item in values {
             self.setValue(item.1, forKey: item.0)
         }
@@ -26,7 +26,7 @@ public extension UserDefaults {
      
      - parameter values: The user default keys and values.
      */
-    public func update(_ values: [(String, Any)]) {
+    func update(_ values: [(String, Any)]) {
         update(Dictionary(values))
     }
     
@@ -37,7 +37,7 @@ public extension UserDefaults {
      - parameter plistName: property list where defaults are declared
      - parameter bundle: bundle where defaults reside
      */
-    public func registerDefaults(_ plistName: String, inDirectory: String? = nil, bundle: Bundle? = nil) {
+    func registerDefaults(_ plistName: String, inDirectory: String? = nil, bundle: Bundle? = nil) {
         let settings = Bundle.contentsOfFile(plistName, inDirectory: inDirectory, bundle: bundle)
         self.register(defaults: settings)
     }

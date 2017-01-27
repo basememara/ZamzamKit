@@ -13,27 +13,27 @@ public extension String {
     /**
      NSLocalizedString shorthand
      */
-    public var localized: String {
+    var localized: String {
         return NSLocalizedString(self, comment: "")
     }
     
-    public var isEmail: Bool {
+    var isEmail: Bool {
         return match(ZamzamConstants.RegEx.EMAIL)
     }
 
-    public var isNumber: Bool {
+    var isNumber: Bool {
         return match(ZamzamConstants.RegEx.NUMBER)
     }
 
-    public var isAlpha: Bool {
+    var isAlpha: Bool {
         return match(ZamzamConstants.RegEx.ALPHA)
     }
 
-    public var isAlphaNumeric: Bool {
+    var isAlphaNumeric: Bool {
         return match(ZamzamConstants.RegEx.ALPHANUMERIC)
     }
 
-    public var trim: String {
+    var trim: String {
         return trimmingCharacters(in: .whitespaces)
     }
     
@@ -46,7 +46,7 @@ public extension String {
      
      - returns: the value with the replaced string
      */
-    public func replaceRegEx(_ pattern: String, replaceValue: String) -> String {
+    func replaceRegEx(_ pattern: String, replaceValue: String) -> String {
         guard let regex: NSRegularExpression = try? NSRegularExpression(
             pattern: pattern,
             options: .caseInsensitive), self != "" else {
@@ -60,7 +60,7 @@ public extension String {
             withTemplate: replaceValue)
     }
     
-    public func match(_ pattern: String) -> Bool {
+    func match(_ pattern: String) -> Bool {
         do {
             let regex = try NSRegularExpression(pattern: pattern, options: [.caseInsensitive])
             return regex.firstMatch(in: self, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, characters.count)) != nil
@@ -74,29 +74,29 @@ public extension String {
 
     :returns: String html text as plain text
     */
-    public func stripHTML() -> String {
+    func stripHTML() -> String {
         return self.replacingOccurrences(of: "<[^>]+>",
             with: "",
             options: .regularExpression,
             range: nil)
     }
     
-    public func replace(_ string: String, with: String) -> String {
+    func replace(_ string: String, with: String) -> String {
         return replacingOccurrences(of: string, with: with)
     }
 
-    public func truncate(_ length: Int, suffix: String = "...") -> String {
+    func truncate(_ length: Int, suffix: String = "...") -> String {
         return self.characters.count > length
             ? substring(to: characters.index(startIndex, offsetBy: length)) + suffix
             : self
     }
 
-    public func split(_ delimiter: String) -> [String] {
+    func split(_ delimiter: String) -> [String] {
         let components = self.components(separatedBy: delimiter)
         return components != [""] ? components : []
     }
 
-    public func contains(_ find: String) -> Bool {
+    func contains(_ find: String) -> Bool {
         return range(of: find) != nil
     }
     
@@ -108,7 +108,7 @@ public extension String {
      
      - returns: the decoded string
      */
-    public func decodeHTML() -> String {
+    func decodeHTML() -> String {
         if self == "" {
             return self
         }
@@ -191,7 +191,7 @@ public extension String {
 
      - returns: Returns typed Enum.
      */
-    public func toEnum<Enum: RawRepresentable>() -> Enum? where Enum.RawValue == String {
+    func toEnum<Enum: RawRepresentable>() -> Enum? where Enum.RawValue == String {
         return Enum(rawValue: self)
     }
     

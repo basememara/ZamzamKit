@@ -15,7 +15,7 @@ public extension Dictionary where Value: Any {
      
      - returns: Dictionary from tuple.
      */
-    public init<S: Sequence>(_ seq: S) where S.Iterator.Element == (Key, Value) {
+    init<S: Sequence>(_ seq: S) where S.Iterator.Element == (Key, Value) {
         self.init()
         for (k, v) in seq { self[k] = v }
     }
@@ -25,7 +25,7 @@ public extension Dictionary where Value: Any {
      
      - returns: Keys removed due to being null.
      */
-    public mutating func removeAllNulls() -> [Key] {
+    mutating func removeAllNulls() -> [Key] {
         let keysWithNull = self
             .filter { $0.value is NSNull }
             .map { $0.key }

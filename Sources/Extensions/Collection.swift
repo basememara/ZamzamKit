@@ -10,15 +10,15 @@ import Foundation
 
 public extension Collection {
     
-    public func toArray() -> [Self.Iterator.Element] {
+    func toArray() -> [Self.Iterator.Element] {
         return Array(self)
     }
 }
 
-extension Collection where Iterator.Element == (String, Any) {
+public extension Collection where Iterator.Element == (String, Any) {
     
     /// Converts collection of objects to JSON string
-    public var jsonString: String? {
+    var jsonString: String? {
         guard let data = self as? NSDictionary,
             let stringData = try? JSONSerialization.data(withJSONObject: data, options: [])
             else { return nil }
