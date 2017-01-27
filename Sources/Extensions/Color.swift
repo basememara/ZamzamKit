@@ -53,7 +53,7 @@ public extension UIColor {
         // Validate correct number of colors supplied
         guard let rgbSplit = rgb?.characters.split(separator: ",")
             .map(String.init).flatMap({ Int($0.trimmingCharacters(
-                in: CharacterSet.whitespacesAndNewlines)) }),
+                in: .whitespacesAndNewlines)) }),
                     rgbSplit.count == 3
                         else {
                             // Return black color if failed
