@@ -35,9 +35,7 @@ public extension CLLocationManager {
             if CLLocationManager.isAuthorized() {
                 #if os(iOS)
                     if forceInitialRequest {
-                        if #available(iOS 9.0, *) {
-                            requestLocation()
-                        }
+                        requestLocation()
                     }
                     
                     if monitorSignificantLocationChanges {
@@ -55,12 +53,8 @@ public extension CLLocationManager {
             return false
     }
     
-    public static func isAuthorized() -> Bool {
-        // Globally disabled
-        if !CLLocationManager.locationServicesEnabled() {
-            return false
-        }
-        
+    static func isAuthorized() -> Bool {
+        guard CLLocationManager.locationServicesEnabled() else { return false }
         let status = CLLocationManager.authorizationStatus()
         return status == .authorizedAlways || status == .authorizedWhenInUse
     }

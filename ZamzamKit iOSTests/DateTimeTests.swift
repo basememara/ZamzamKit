@@ -33,7 +33,7 @@ class DateTimeTests: XCTestCase {
     func testIncrementToday() {
         let incrementedDate = Date().incrementDay()
         let tomorrow = Date.tomorrow()
-        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        let calendar = Calendar(identifier: .gregorian)
         
         XCTAssertEqual(
             calendar.startOfDay(for: incrementedDate),
