@@ -10,36 +10,28 @@ import Foundation
 
 public extension Array {
     
-    /**
-     Take a specified amount of elements.
-
-     - parameter count: Number of elements to retrieve.
-
-     - returns: Elements that specify the count number.
-     */
-    func take(_ count: Int) -> [Element] {
-        var to: [Element] = []
-        var i = 0
-        while i < self.count && i < count {
-            to.append(self[i])
-            i += 1
-        }
-        return to
-    }
-    
-    /**
-     Optional element by indice.
-
-     - parameter index: Indice of the array element.
-
-     - returns: An optional element.
-     */
+    /// Element at the given index if it exists.
+	///
+	/// - Parameter index: index of element.
+	/// - Returns: optional element (if exists).
     func get(_ index: Int) -> Element? {
-        return self.indices.contains(index)
-            ? self[index] : nil
+		guard 0..<count ~= index else { return nil }
+		return self[index]
     }
     
-    
+    /**
+     Remove array items in a thread-safe manner.
+
+     - parameter handler: Handler with array item that was popped.
+     */
+    mutating func removeEach(_ handler: @escaping (Element) -> Void) -> Void {
+        enumerated().reversed().forEach { handler(remove(at: $0.offset)) }
+    }
+
+}
+
+public extension Array {
+
     /// Finds the closest element that matches the criteria forwards or backwards.
     ///
     /// - parameter index:     Index to start from.
@@ -69,14 +61,22 @@ public extension Array {
             delta = delta + 1
         }
     }
-    
-    /**
-     Remove array items in a thread-safe manner.
+}
 
-     - parameter handler: Handler with array item that was popped.
-     */
-    mutating func removeEach(_ handler: @escaping (Element) -> Void) -> Void {
-        enumerated().reversed().forEach { handler(remove(at: $0.offset)) }
-    }
-
+// MARK: - Equatables
+public extension Array where Element: Equatable {
+	
+	/// Array with all duplicates removed from it.
+    /// https://github.com/SwifterSwift/SwifterSwift
+	public var withoutDuplicates: [Element] {
+		// Thanks to https://github.com/sairamkotha for improving the preperty
+		return reduce([]) { ($0 as [Element]).contains($1) ? $0 : $0 + [$1] }
+	}
+	
+	/// Remove all duplicates from array.
+	public mutating func removeDuplicates() {
+		// Thanks to https://github.com/sairamkotha for improving the method
+		self = reduce([]) { $0.contains($1) ? $0 : $0 + [$1] }
+	}
+	
 }

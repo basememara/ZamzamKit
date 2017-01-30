@@ -22,7 +22,7 @@ class BundleTests: XCTestCase {
         // Calculate date and account for machine time zone
         // 2016-03-03 14:50:00 UTC
         let expectedDate = Date(timeIntervalSince1970:
-            TimeInterval(1457002200 - Int(NSTimeZone.local.secondsFromGMT())))
+            TimeInterval(1456998600 - Int(NSTimeZone.local.secondsFromGMT())))
         
         XCTAssert(values["MyDate1"] as? Date == expectedDate)
     }
@@ -65,7 +65,7 @@ class BundleTests: XCTestCase {
         // Calculate date and account for machine time zone
         // 2016-03-03 14:50:00 UTC
         let expectedDate = Date(timeIntervalSince1970:
-            TimeInterval(1457002200 - Int(NSTimeZone.local.secondsFromGMT())))
+            TimeInterval(1456998600 - Int(NSTimeZone.local.secondsFromGMT())))
         
         XCTAssert(values["SomeDate1"] as? Date == expectedDate)
     }

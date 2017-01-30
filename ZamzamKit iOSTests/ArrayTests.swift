@@ -40,14 +40,6 @@ class ArrayTests: XCTestCase {
         (a: "Item 24", b: "I", c: 13)
     ]
 
-    func testTake() {
-        let result = sample1.take(5)
-        let expected = [1, 3, 5, 7, 9]
-        
-        XCTAssertEqual(result, expected,
-            "Take should be \(expected)")
-    }
-
     func testGet() {
         let result = sample1.get(5)
         let expected = 11

@@ -10,6 +10,43 @@ import UIKit
 import SafariServices
 
 public extension UIViewController {
+	
+	/// Check if ViewController is onscreen and not hidden.
+	var isVisible: Bool {
+		// http://stackoverflow.com/questions/2777438/how-to-tell-if-uiviewcontrollers-view-is-visible
+		return self.isViewLoaded && view.window != nil
+	}
+}
+
+public extension UIViewController {
+
+    /**
+     Adds status bar background with color instead of being transparent.
+
+     - parameter backgroundColor: Background color of status bar.
+     */
+    func addStatusBar(_ backgroundColor: UIColor) -> UIView {
+        let statusBar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 20))
+        statusBar.backgroundColor = backgroundColor
+        self.view.addSubview(statusBar)
+        
+        return statusBar
+    }
+    
+    /**
+     Adds status bar background with light or dark mode.
+
+     - parameter darkMode: Light or dark mode color of status bar.
+     */
+    func addStatusBar(darkMode: Bool) -> UIView {
+        return addStatusBar(darkMode
+            ? UIColor(white: 0, alpha: 0.8)
+            : UIColor(rgb: (239, 239, 244), alpha: 0.8))
+    }
+}
+
+// MARK: - Presenters
+public extension UIViewController {
     
     /**
      Display an alert action in a convenient way.
@@ -61,30 +98,6 @@ public extension UIViewController {
         safariController.delegate = self as? SFSafariViewControllerDelegate
         
         present(safariController, animated: true, completion: nil)
-    }
-    
-    /**
-     Adds status bar background with color instead of being transparent.
-
-     - parameter backgroundColor: Background color of status bar.
-     */
-    func addStatusBar(_ backgroundColor: UIColor) -> UIView {
-        let statusBar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 20))
-        statusBar.backgroundColor = backgroundColor
-        self.view.addSubview(statusBar)
-        
-        return statusBar
-    }
-    
-    /**
-     Adds status bar background with light or dark mode.
-
-     - parameter darkMode: Light or dark mode color of status bar.
-     */
-    func addStatusBar(darkMode: Bool) -> UIView {
-        return addStatusBar(darkMode
-            ? UIColor(white: 0, alpha: 0.8)
-            : UIColor(rgb: (239, 239, 244), alpha: 0.8))
     }
     
     /**

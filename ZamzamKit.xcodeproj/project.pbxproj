@@ -14,9 +14,6 @@
 		8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
 		8B1448061C7258F700043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
 		8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */; };
-		8B1EEC791CF71D7100AE054B /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EEC781CF71D7100AE054B /* Then.swift */; };
-		8B1EEC7A1CF71D7100AE054B /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EEC781CF71D7100AE054B /* Then.swift */; };
-		8B1EEC7B1CF71D7100AE054B /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EEC781CF71D7100AE054B /* Then.swift */; };
 		8B1EEC881CF7588600AE054B /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EEC871CF7588600AE054B /* UIStoryboard.swift */; };
 		8B2DE3E11C8A86B2008F1569 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* Bundle.swift */; };
 		8B2DE3E21C8A86B2008F1569 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* Bundle.swift */; };
@@ -104,6 +101,10 @@
 		8BD508761C99E18500AE205E /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD508751C99E18500AE205E /* Collection.swift */; };
 		8BD508771C99E18500AE205E /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD508751C99E18500AE205E /* Collection.swift */; };
 		8BD508781C99E18500AE205E /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD508751C99E18500AE205E /* Collection.swift */; };
+		8BD61B361E3EFDF1009B537E /* ZamzamKitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD61B351E3EFDF1009B537E /* ZamzamKitable.swift */; };
+		8BD61B371E3EFDF1009B537E /* ZamzamKitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD61B351E3EFDF1009B537E /* ZamzamKitable.swift */; };
+		8BD61B381E3EFDF1009B537E /* ZamzamKitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD61B351E3EFDF1009B537E /* ZamzamKitable.swift */; };
+		8BD61B3A1E3F04D0009B537E /* UISwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD61B391E3F04D0009B537E /* UISwitch.swift */; };
 		8BE19B0D1C72D6DF00D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; };
 		8BE19B1A1C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B191C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift */; };
 		8BE19B1C1C72D6F200D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447E21C7257F100043657 /* ZamzamKit.framework */; };
@@ -268,7 +269,6 @@
 		8B1448431C725BFE00043657 /* Info-tvOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
 		8B1448441C725BFE00043657 /* Info-watchOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
 		8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIView.swift; path = Extensions/UIView.swift; sourceTree = "<group>"; };
-		8B1EEC781CF71D7100AE054B /* Then.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		8B1EEC871CF7588600AE054B /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboard.swift; path = Extensions/UIStoryboard.swift; sourceTree = "<group>"; };
 		8B2DE3E01C8A86B2008F1569 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bundle.swift; path = Extensions/Bundle.swift; sourceTree = "<group>"; };
 		8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleTests.swift; sourceTree = "<group>"; };
@@ -328,6 +328,8 @@
 		8BD2D19D1CA583110018AC2B /* UIAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIAlertAction.swift; path = Extensions/UIAlertAction.swift; sourceTree = "<group>"; };
 		8BD5086A1C99DD1E00AE205E /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Array.swift; path = Extensions/Array.swift; sourceTree = "<group>"; };
 		8BD508751C99E18500AE205E /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = Extensions/Collection.swift; sourceTree = "<group>"; };
+		8BD61B351E3EFDF1009B537E /* ZamzamKitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamKitable.swift; sourceTree = "<group>"; };
+		8BD61B391E3F04D0009B537E /* UISwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UISwitch.swift; path = Extensions/UISwitch.swift; sourceTree = "<group>"; };
 		8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE19B0C1C72D6DF00D4D437 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BE19B171C72D6F200D4D437 /* ZamzamKit tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -448,7 +450,6 @@
 		8B1447511C72237E00043657 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8BF307C91CF0DBA400BBA933 /* Classes */,
 				8B1EEC641CF6AE5100AE054B /* Enums */,
 				8BFDB65C1C75187800C94996 /* Extensions */,
 				8BFDB6A51C75B4B200C94996 /* Models */,
@@ -546,8 +547,8 @@
 				8B9A87941C9C20260087A251 /* Complicationable.swift */,
 				8B840E5F1C904F1D00D85781 /* Locatable.swift */,
 				8BB376111CF8B8D6005E7F67 /* Restorable.swift */,
-				8B1EEC781CF71D7100AE054B /* Then.swift */,
 				8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */,
+				8BD61B351E3EFDF1009B537E /* ZamzamKitable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -595,37 +596,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8BF307C91CF0DBA400BBA933 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				8BF307CB1CF0DBAF00BBA933 /* iOS */,
-				8BF307CA1CF0DBA900BBA933 /* watchOS */,
-				8BF307CC1CF0DBB400BBA933 /* tvOS */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		8BF307CA1CF0DBA900BBA933 /* watchOS */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = watchOS;
-			sourceTree = "<group>";
-		};
-		8BF307CB1CF0DBAF00BBA933 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		8BF307CC1CF0DBB400BBA933 /* tvOS */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = tvOS;
-			sourceTree = "<group>";
-		};
 		8BFDB65C1C75187800C94996 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,6 +637,7 @@
 				8B63E4261CDB8DB00053C060 /* UIImage.swift */,
 				8BFDB66F1C751DF600C94996 /* UIImageView.swift */,
 				8B1EEC871CF7588600AE054B /* UIStoryboard.swift */,
+				8BD61B391E3F04D0009B537E /* UISwitch.swift */,
 				8BCB73D91CAD69BF00E20096 /* UITableView.swift */,
 				8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */,
 				8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */,
@@ -1099,6 +1070,7 @@
 				8BF307D01CF0E3C600BBA933 /* UIActivity.swift in Sources */,
 				8BCB73CE1CAD660D00E20096 /* Equatable.swift in Sources */,
 				8BD08EB51CE28ACA0051080A /* SCNetworkReachability.swift in Sources */,
+				8BD61B361E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BC4F8D31E3B335E0015BD31 /* UNNotificationRequest.swift in Sources */,
 				8B840E601C904F1D00D85781 /* Locatable.swift in Sources */,
@@ -1111,6 +1083,7 @@
 				8BFDB6571C75187200C94996 /* Date.swift in Sources */,
 				8B63E4271CDB8DB00053C060 /* UIImage.swift in Sources */,
 				8BD5086B1C99DD1E00AE205E /* Array.swift in Sources */,
+				8BD61B3A1E3F04D0009B537E /* UISwitch.swift in Sources */,
 				8BD2D1961CA581890018AC2B /* Audible.swift in Sources */,
 				8B63B2C61CD959BC000F2B5F /* UIBarButtonItem.swift in Sources */,
 				8BCB73DA1CAD69BF00E20096 /* UITableView.swift in Sources */,
@@ -1124,7 +1097,6 @@
 				8BFDB6891C7529AB00C94996 /* UILocalNotification_iOS9.swift in Sources */,
 				8BFDB6641C751AE600C94996 /* URLComponents.swift in Sources */,
 				8B1EEC881CF7588600AE054B /* UIStoryboard.swift in Sources */,
-				8B1EEC791CF71D7100AE054B /* Then.swift in Sources */,
 				8BFDB65E1C7518F800C94996 /* String.swift in Sources */,
 				8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BB45FAB1C9BDA590070CE07 /* WatchConnectable.swift in Sources */,
@@ -1144,7 +1116,7 @@
 				8BE814FE1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8B8215421CA15E0D00C9FCC9 /* CLKComplicationServer.swift in Sources */,
 				8BFDB67E1C7525BD00C94996 /* CLLocation.swift in Sources */,
-				8B1EEC7A1CF71D7100AE054B /* Then.swift in Sources */,
+				8BD61B371E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
 				8B82154B1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8BCB73CF1CAD660D00E20096 /* Equatable.swift in Sources */,
 				8BFDB6901C75323900C94996 /* DateFormatter.swift in Sources */,
@@ -1178,9 +1150,9 @@
 				8BFDB6591C75187200C94996 /* Date.swift in Sources */,
 				8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6661C751AE600C94996 /* URLComponents.swift in Sources */,
+				8BD61B381E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
 				8BD508781C99E18500AE205E /* Collection.swift in Sources */,
 				8B4CFAEF1CABEF0900D2B1D7 /* Color.swift in Sources */,
-				8B1EEC7B1CF71D7100AE054B /* Then.swift in Sources */,
 				8BFDB6911C75323900C94996 /* DateFormatter.swift in Sources */,
 				8BFDB6601C7518F800C94996 /* String.swift in Sources */,
 				8BFDB6A21C75B4A600C94996 /* LocationMeta.swift in Sources */,

@@ -20,9 +20,7 @@ public extension Bundle {
      - returns: Contents of file.
      */
     static func stringOfFile(_ fileName: String, inDirectory: String? = nil, bundle: Bundle? = nil, encoding: String.Encoding = String.Encoding.utf8) -> String? {
-        guard let resourcePath = (bundle ?? Bundle.main).path(forResource: fileName, ofType: nil, inDirectory: inDirectory)
-            else { return nil }
-        
+        guard let resourcePath = (bundle ?? Bundle.main).path(forResource: fileName, ofType: nil, inDirectory: inDirectory) else { return nil }
         return try? String(contentsOfFile: resourcePath, encoding: encoding)
     }
     
@@ -37,7 +35,7 @@ public extension Bundle {
     static func contentsOfFile(_ plistName: String, inDirectory: String? = nil, bundle: Bundle? = nil) -> [String : Any] {
         guard let resourcePath = (bundle ?? Bundle.main).path(forResource: plistName, ofType: nil, inDirectory: inDirectory),
             let contents = NSDictionary(contentsOfFile: resourcePath) as? [String : Any]
-            else { return [:] }
+                else { return [:] }
         
         return contents
     }
@@ -52,12 +50,10 @@ public extension Bundle {
      */
     static func contentsOfFile(bundleURL: URL, plistName: String = "Root.plist") -> [String : Any] {
         // Extract plist file from bundle
-        guard let contents = NSDictionary(contentsOf: bundleURL.appendingPathComponent(plistName))
-            else { return [:] }
+        guard let contents = NSDictionary(contentsOf: bundleURL.appendingPathComponent(plistName)) else { return [:] }
         
         // Collect default values
-        guard let preferences = contents.value(forKey: "PreferenceSpecifiers") as? [String: Any]
-            else { return [:] }
+        guard let preferences = contents.value(forKey: "PreferenceSpecifiers") as? [String: Any] else { return [:] }
         
         return preferences
     }
@@ -71,9 +67,7 @@ public extension Bundle {
      - returns: dictionary of values
      */
     static func contentsOfFile(bundleName: String, plistName: String = "Root.plist") -> [String : Any] {
-        guard let bundleURL = Bundle.main.url(forResource: bundleName, withExtension: "bundle")
-            else { return [:] }
-        
+        guard let bundleURL = Bundle.main.url(forResource: bundleName, withExtension: "bundle") else { return [:] }
         return contentsOfFile(bundleURL: bundleURL, plistName: plistName)
     }
     
@@ -87,9 +81,7 @@ public extension Bundle {
      - returns: dictionary of values
      */
     static func contentsOfFile(bundle: Bundle, bundleName: String = "Settings", plistName: String = "Root.plist") -> [String : Any] {
-        guard let bundleURL = bundle.url(forResource: bundleName, withExtension: "bundle")
-            else { return [:] }
-        
+        guard let bundleURL = bundle.url(forResource: bundleName, withExtension: "bundle") else { return [:] }
         return contentsOfFile(bundleURL: bundleURL, plistName: plistName)
     }
     

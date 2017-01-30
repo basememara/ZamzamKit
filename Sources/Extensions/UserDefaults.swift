@@ -16,9 +16,7 @@ public extension UserDefaults {
      - parameter values: The user default keys and values.
      */
     func update(_ values: [String: Any]) {
-        for item in values {
-            self.setValue(item.1, forKey: item.0)
-        }
+        values.forEach { setValue($0.value, forKey: $0.key) }
     }
     
     /**

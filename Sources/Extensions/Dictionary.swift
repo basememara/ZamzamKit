@@ -26,20 +26,21 @@ public extension Dictionary where Value: Any {
      - returns: Keys removed due to being null.
      */
     mutating func removeAllNulls() -> [Key] {
-        let keysWithNull = self
-            .filter { $0.value is NSNull }
-            .map { $0.key }
-        
-        for key in keysWithNull {
-            removeValue(forKey: key)
+        let keysWithNull: [Key] = self.flatMap {
+            guard $0.value is NSNull else { return nil }
+            return $0.key
         }
         
-        return Array(keysWithNull)
+        guard !keysWithNull.isEmpty else { return [] }
+        keysWithNull.forEach { removeValue(forKey: $0) }
+        
+        return keysWithNull
     }
     
 }
 
-// http://stackoverflow.com/a/34527546/235334
+/// Combine dictionaries.
+/// http://stackoverflow.com/a/34527546/235334
 func + <K,V> (left: Dictionary<K,V>, right: Dictionary<K,V>?) -> Dictionary<K,V> {
     guard let right = right else { return left }
     return left.reduce(right) {
@@ -49,10 +50,9 @@ func + <K,V> (left: Dictionary<K,V>, right: Dictionary<K,V>?) -> Dictionary<K,V>
     }
 }
 
-// http://stackoverflow.com/a/34527546/235334
+/// Append dictionary.
+/// http://stackoverflow.com/a/34527546/235334
 func += <K,V> (left: inout Dictionary<K,V>, right: Dictionary<K,V>?) {
     guard let right = right else { return }
-    right.forEach { key, value in
-        left.updateValue(value, forKey: key)
-    }
+    right.forEach { left.updateValue($0.value, forKey: $0.key) }
 }

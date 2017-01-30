@@ -10,33 +10,40 @@ import Foundation
 
 public extension String {
     
-    /**
-     NSLocalizedString shorthand
-     */
+    /// NSLocalizedString shorthand
     var localized: String {
         return NSLocalizedString(self, comment: "")
     }
     
+	/// Check if string is valid email format.
     var isEmail: Bool {
         return match(ZamzamConstants.RegEx.EMAIL)
     }
 
+	/// Check if string contains only numbers.
     var isNumber: Bool {
         return match(ZamzamConstants.RegEx.NUMBER)
     }
 
+	/// Check if string contains only letters.
     var isAlpha: Bool {
         return match(ZamzamConstants.RegEx.ALPHA)
     }
 
+	/// Check if string contains at least one letter and one number.
     var isAlphaNumeric: Bool {
         return match(ZamzamConstants.RegEx.ALPHANUMERIC)
     }
 
-    var trim: String {
+    /// String with no spaces or new lines in beginning and end.
+    var trimmed: String {
         return trimmingCharacters(in: .whitespaces)
     }
-    
+}
+
+
+// MARK: - Regular Expression
+public extension String {
     /**
      Replaces a string using a regular expression pattern
      
@@ -68,50 +75,47 @@ public extension String {
             return false
         }
     }
-    
-    /**
-    Takes the current String struct and strips out HTML using regular expression. All tags get stripped out.
 
-    :returns: String html text as plain text
-    */
-    func stripHTML() -> String {
+}
+
+public extension String {
+
+    /// Truncated string (limited to a given number of characters).
+	///
+	/// - Parameters:
+	///   - toLength: maximum number of characters before cutting.
+	///   - trailing: string to add at the end of truncated string.
+	/// - Returns: truncated string (this is an extr...).
+	public func truncated(_ length: Int, trailing: String = "...") -> String {
+        guard 1..<self.characters.count ~= length else { return self }
+		return self.substring(to: self.index(startIndex, offsetBy: length)) + trailing
+	}
+
+
+    /// Determines if the given value is contained in the string.
+    ///
+    /// - Parameter find: The value to search for.
+    /// - Returns: True if the value exists in the string, false otherwise.
+    func contains(_ find: String) -> Bool {
+        return range(of: find) != nil
+    }
+}
+
+// MARK: - Web utilities
+public extension String {
+    
+    /// Stripped out HTML to plain text.
+    var strippedHTML: String {
         return self.replacingOccurrences(of: "<[^>]+>",
             with: "",
             options: .regularExpression,
             range: nil)
     }
     
-    func replace(_ string: String, with: String) -> String {
-        return replacingOccurrences(of: string, with: with)
-    }
-
-    func truncate(_ length: Int, suffix: String = "...") -> String {
-        return self.characters.count > length
-            ? substring(to: characters.index(startIndex, offsetBy: length)) + suffix
-            : self
-    }
-
-    func split(_ delimiter: String) -> [String] {
-        let components = self.components(separatedBy: delimiter)
-        return components != [""] ? components : []
-    }
-
-    func contains(_ find: String) -> Bool {
-        return range(of: find) != nil
-    }
-    
-    /**
-     Decode an HTML string
-     http://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
-     
-     - parameter value: the encoded value of the HTML string
-     
-     - returns: the decoded string
-     */
-    func decodeHTML() -> String {
-        if self == "" {
-            return self
-        }
+    /// Decode an HTML string
+    /// http://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
+    var decodedHTML: String {
+        guard !isEmpty else { return self }
         
         var position = self.startIndex
         var result = ""
@@ -184,15 +188,4 @@ public extension String {
         result.append(self[position ..< self.endIndex])
         return result
     }
-    
-    /**
-     Converts string to inferred Enum.
-     https://gist.github.com/jckarter/53fcd4046e2857bd315b
-
-     - returns: Returns typed Enum.
-     */
-    func toEnum<Enum: RawRepresentable>() -> Enum? where Enum.RawValue == String {
-        return Enum(rawValue: self)
-    }
-    
 }

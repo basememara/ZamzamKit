@@ -16,7 +16,7 @@ public extension Sequence {
             let stringData = try? JSONSerialization.data(withJSONObject: data, options: [])
                 else { return nil }
         
-        return NSString(data: stringData, encoding: String.Encoding.utf8.rawValue) as? String
+        return String(data: stringData, encoding: .utf8)
     }
     
     /**
