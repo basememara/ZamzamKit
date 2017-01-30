@@ -19,7 +19,7 @@ public extension UIApplication {
             var mainCategory: UIMutableUserNotificationCategory? = nil
             
             // Setup actions if applicable
-            if let a = actions, a.count > 0 {
+            if let a = actions, !a.isEmpty {
                 // Notification category
                 mainCategory = UIMutableUserNotificationCategory()
                 mainCategory!.identifier = category
@@ -51,7 +51,7 @@ public extension UIApplication {
         incrementDayIfPast: Bool = false,
         removeDuplicates: Bool = false) {
             // De-dup previous notifications if applicable
-            if let id = identifier , removeDuplicates {
+            if let id = identifier, removeDuplicates {
                 self.removeLocalNotification(id)
             }
             
@@ -71,55 +71,24 @@ public extension UIApplication {
     }
     
     func removeLocalNotification(_ identifier: String) {
-        guard let notifications = self.scheduledLocalNotifications
-            , notifications.count > 0 else {
-                return
-        }
-        
-        for item in notifications {
+        self.scheduledLocalNotifications?.forEach {
             // Find matching to delete
-            if let id = item.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String
-                , id == identifier {
-                    // Cancel notification
-                    self.cancelLocalNotification(item)
-            }
+            guard let id = $0.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String, id == identifier else { return }
+            self.cancelLocalNotification($0)
         }
     }
     
     func hasLocalNotification(_ identifier: String) -> Bool {
-        guard let notifications = self.scheduledLocalNotifications
-            , notifications.count > 0 else {
-                return false
-        }
-        
-        for item in notifications {
-            // Find matching to delete
-            if let id = item.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String
-                , id == identifier {
-                    return true
-            }
-        }
-        
-        return false
+        return self.scheduledLocalNotifications?.contains {
+            ($0.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String) == identifier
+        } == true
     }
     
     func getLocalNotifications(_ identifier: String) -> [UILocalNotification] {
-        var matchedNotifications: [UILocalNotification] = []
-        
-        guard let notifications = self.scheduledLocalNotifications
-            , notifications.count > 0 else {
-                return matchedNotifications
-        }
-        
-        for item in notifications {
-            // Find matching to delete
-            if let id = item.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String
-                , id == identifier {
-                    matchedNotifications.append(item)
-            }
-        }
-        
-        return matchedNotifications
+        return self.scheduledLocalNotifications?.filter {
+            guard let id = $0.userInfo?[ZamzamConstants.Notification.IDENTIFIER_KEY] as? String, id == identifier else { return false }
+            return true
+        } ?? []
     }
     
     public func clearNotificationTray() {
