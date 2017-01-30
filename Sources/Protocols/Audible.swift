@@ -10,24 +10,22 @@ import UIKit
 import AVFoundation
 
 public protocol Audible: class {
-    
     var audioPlayer: AVAudioPlayer? { get set }
-    
 }
 
 public extension Audible {
     
-    func setupAudioPlayer(_ application: UIApplication, fileName: String) {
-        let sound = Bundle.main.url(forResource: fileName, withExtension: nil)
+    func setupAudioPlayer(_ application: UIApplication, fileName: String, bundle: Bundle = Bundle.main) {
+        guard let sound = bundle.url(forResource: fileName, withExtension: nil),
+            (audioPlayer == nil || audioPlayer?.url != sound) else { return }
         
-        guard audioPlayer == nil || audioPlayer?.url != sound else { return }
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
             try AVAudioSession.sharedInstance().setActive(true)
             
             application.beginReceivingRemoteControlEvents()
             
-            audioPlayer = try AVAudioPlayer(contentsOf: sound!)
+            audioPlayer = try AVAudioPlayer(contentsOf: sound)
             audioPlayer?.prepareToPlay()
         } catch { }
         
