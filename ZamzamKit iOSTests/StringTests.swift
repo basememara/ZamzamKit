@@ -13,13 +13,18 @@ import XCTest
 class StringTests: XCTestCase {
     
     func testReplaceRegEx() {
-        let value = "my car reg 1 - DD11 AAA  my car reg 2 - AA22 BBB"
+        let value = "my car reg 1 - dD11 AAA  my car reg 2 - AA22 BbB"
         let pattern = "([A-HK-PRSVWY][A-HJ-PR-Y])\\s?([0][2-9]|[1-9][0-9])\\s?[A-HJ-PR-Z]{3}"
         
-        let newValue = value.replaceRegEx(pattern, replaceValue: "XX")
+        // Case insensitive
+        let newValue = value.replace(regex: pattern, with: "XX", caseSensitive: false)
         let expectedValue = "my car reg 1 - XX  my car reg 2 - XX"
-        
         XCTAssertEqual(newValue, expectedValue,
+            "String should be \(expectedValue)")
+        
+        // Case sensitive
+        let newValue2 = value.replace(regex: pattern, with: "XX", caseSensitive: true)
+        XCTAssertEqual(newValue2, value,
             "String should be \(expectedValue)")
     }
     

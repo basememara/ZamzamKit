@@ -23,7 +23,7 @@ class DateTimeTests: XCTestCase {
     }
     
     func testGetCurrentTimeInDecimal() {
-        let time = Date(fromString: "2012/10/23 18:15")!.timeToDecimal()
+        let time = Date(fromString: "2012/10/23 18:15")!.timeToDecimal
         let expectedTime = 18.25
         
         XCTAssertEqual(time, expectedTime,
