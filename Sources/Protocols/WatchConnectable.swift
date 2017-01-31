@@ -13,15 +13,14 @@ public protocol WatchConnectable {
     
 }
 
-@available(iOS 9.3, *)
 public extension WatchConnectable {
     
+    /// Determines if the watch is available.
     var isWatchAvailable: Bool {
         let watchSession = WCSession.default()
-        var activationState = true
-        activationState = watchSession.activationState == .activated
-        
-        return watchSession.isPaired && watchSession.isWatchAppInstalled && activationState
+        return watchSession.isPaired
+            && watchSession.isWatchAppInstalled
+            && watchSession.activationState == .activated
     }
     
     /**
@@ -29,17 +28,17 @@ public extension WatchConnectable {
      
      - parameter values: The dictionary of values.
      */
-    func transferContextToWatch(_ values: [String: Any]) {
+    func transferContextToWatch(_ values: [String: Any]) -> Bool {
+        guard !values.isEmpty, isWatchAvailable else { return false }
         let watchSession = WCSession.default()
-        if isWatchAvailable {
-            var values = values
-            do {
-                _ = values.removeAllNulls()
-                try watchSession.updateApplicationContext(values)
-            } catch {
-                // TODO: Log error
-            }
-        }
+        
+        var values = values
+        values.removeAllNulls()
+        
+        do { try watchSession.updateApplicationContext(values) }
+        catch { return false }
+        
+        return true
     }
     
     /**
@@ -47,13 +46,14 @@ public extension WatchConnectable {
      
      - parameter values: The dictionary of values.
      */
-    func transferUserInfoToWatch(_ values: [String: Any]) {
+    func transferUserInfoToWatch(_ values: [String: Any]) -> WCSessionUserInfoTransfer? {
+        guard !values.isEmpty, isWatchAvailable else { return nil }
         let watchSession = WCSession.default()
-        if isWatchAvailable {
-            var values = values
-            _ = values.removeAllNulls()
-            watchSession.transferUserInfo(values)
-        }
+        
+        var values = values
+        values.removeAllNulls()
+        
+        return watchSession.transferUserInfo(values)
     }
     
     /**
@@ -61,13 +61,13 @@ public extension WatchConnectable {
      
      - parameter values: The dictionary of values.
      */
-    func transferComplicationUserInfoToWatch(_ values: [String: Any]) {
+    func transferComplicationUserInfoToWatch(_ values: [String: Any]) -> WCSessionUserInfoTransfer? {
+        guard !values.isEmpty, isWatchAvailable else { return nil }
         let watchSession = WCSession.default()
         
-        if isWatchAvailable {
-            var values = values
-            _ = values.removeAllNulls()
-            watchSession.transferCurrentComplicationUserInfo(values)
-        }
+        var values = values
+        values.removeAllNulls()
+        
+        return watchSession.transferCurrentComplicationUserInfo(values)
     }
 }

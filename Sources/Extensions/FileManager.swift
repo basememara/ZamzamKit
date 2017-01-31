@@ -34,15 +34,12 @@ public extension FileManager {
         // Get the directory contents including folders
         guard var directoryUrls = try? FileManager.default.contentsOfDirectory(
             at: ZamzamConstants.Path.DOCUMENTS_URL,
-            includingPropertiesForKeys: nil,
-            options: FileManager.DirectoryEnumerationOptions()) else {
-                // Failed so return empty list
-                return [String]()
-        }
+            includingPropertiesForKeys: nil)
+                else { return [String]() }
         
         // Filter the directory contents if applicable
-        if let f = filter {
-            directoryUrls = directoryUrls.filter(f)
+        if let filter = filter {
+            directoryUrls = directoryUrls.filter(filter)
         }
         
         return directoryUrls.map { $0.path }

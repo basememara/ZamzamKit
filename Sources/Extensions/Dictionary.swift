@@ -25,6 +25,7 @@ public extension Dictionary where Value: Any {
      
      - returns: Keys removed due to being null.
      */
+    @discardableResult
     mutating func removeAllNulls() -> [Key] {
         let keysWithNull: [Key] = self.flatMap {
             guard $0.value is NSNull else { return nil }

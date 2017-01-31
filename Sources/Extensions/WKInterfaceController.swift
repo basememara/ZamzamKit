@@ -11,7 +11,9 @@ import WatchKit
 
 public extension WKInterfaceController {
     
-    public func presentAlert(title: String,
+    /// Presents an alert or action sheet over the current interface controller.
+    func presentAlert(
+        title: String,
         message: String? = nil,
         buttonText: String = "OK",
         alertControllerStyle: WKAlertControllerStyle = .alert,
@@ -19,18 +21,14 @@ public extension WKInterfaceController {
         includeCancelAction: Bool = false,
         cancelHandler: (() -> Void)? = nil,
         handler: (() -> Void)? = nil) {
-            var actions = [WKAlertAction(
-                title: buttonText,
-                style: .default) {
-                    handler?()
-                }]
+            var actions = [WKAlertAction(title: buttonText, style: .default) {
+                handler?()
+            }]
             
             if includeCancelAction {
-                actions.append(WKAlertAction(
-                    title: "Cancel",
-                    style: .cancel) {
-                        cancelHandler?()
-                    })
+                actions.append(WKAlertAction(title: "Cancel", style: .cancel) {
+                    cancelHandler?()
+                })
             }
             
             // Add additional actions if applicable

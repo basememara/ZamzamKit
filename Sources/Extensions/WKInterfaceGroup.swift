@@ -11,18 +11,16 @@ import WatchKit
 
 public extension WKInterfaceGroup {
     
-    public func setBackgroundAnimation(imageName: String, totalImages: Int, percent: Double, duration: Double = 1.0) {
+    func setBackgroundAnimation(imageName: String, totalImages: Int, percent: Double, duration: Double = 1.0) {
         let imageCount = Int(Double(totalImages) * percent)
         
-        if imageCount > 0 {
-            self.setBackgroundImageNamed(imageName)
-            self.startAnimatingWithImages(
-                in: NSMakeRange(0, imageCount),
-                duration: duration,
-                repeatCount: 1)
-        } else {
-            self.setBackgroundImageNamed(imageName + "0")
-        }
+        guard imageCount > 0 else { return setBackgroundImageNamed(imageName + "0") }
+        
+        setBackgroundImageNamed(imageName)
+        startAnimatingWithImages(
+            in: NSMakeRange(0, imageCount),
+            duration: duration,
+            repeatCount: 1)
     }
     
 }

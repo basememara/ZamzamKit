@@ -14,12 +14,9 @@ public extension CLKComplicationServer {
     /**
      Invalidates and reloads all timeline data
      */
-    public func reloadTimelineForComplications() {
-        if let complications = activeComplications, !complications.isEmpty {
-            for complication in complications {
-                reloadTimeline(for: complication)
-            }
-        }
+    func reloadTimelineForComplications() {
+        guard let complications = activeComplications, !complications.isEmpty else { return }
+        complications.forEach { reloadTimeline(for: $0) }
     }
     
 }

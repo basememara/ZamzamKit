@@ -44,36 +44,42 @@ public extension String {
 
 // MARK: - Regular Expression
 public extension String {
+
     /**
-     Replaces a string using a regular expression pattern
+     Replaces a string using a regular expression pattern.
      
      - parameter value: the value of the string
      - parameter pattern: the regular expression value
-     - parameter replaceValue: the value to replace with
+     - parameter replacement: the value to replace with
      
      - returns: the value with the replaced string
      */
-    func replaceRegEx(_ pattern: String, replaceValue: String) -> String {
-        guard let regex: NSRegularExpression = try? NSRegularExpression(
-            pattern: pattern,
-            options: .caseInsensitive), self != "" else {
-                return self
+    func replace(regex: String, with replacement: String, caseSensitive: Bool = false) -> String {
+        guard !self.isEmpty else { return self }
+        
+        // Determine options
+        var options: CompareOptions = [.regularExpression]
+        if !caseSensitive {
+            options.insert(.caseInsensitive)
         }
         
-        let length = self.characters.count
-    
-        return regex.stringByReplacingMatches(in: self, options: [],
-            range: NSMakeRange(0, length),
-            withTemplate: replaceValue)
+        return replacingOccurrences(of: regex, with: replacement, options: options)
     }
     
-    func match(_ pattern: String) -> Bool {
-        do {
-            let regex = try NSRegularExpression(pattern: pattern, options: [.caseInsensitive])
-            return regex.firstMatch(in: self, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, characters.count)) != nil
-        } catch {
-            return false
+    /// Matches a string using a regular expression pattern.
+    ///
+    /// - Parameters:
+    ///   - pattern: the regular expression value
+    ///   - caseSensitive: case-sensitive search
+    /// - Returns: whether the regex matches in the string
+    func match(_ pattern: String, caseSensitive: Bool = false) -> Bool {
+        // Determine options
+        var options: CompareOptions = [.regularExpression]
+        if !caseSensitive {
+            options.insert(.caseInsensitive)
         }
+        
+        return self.range(of: pattern, options: options) != nil
     }
 
 }
@@ -87,8 +93,8 @@ public extension String {
 	///   - trailing: string to add at the end of truncated string.
 	/// - Returns: truncated string (this is an extr...).
 	public func truncated(_ length: Int, trailing: String = "...") -> String {
-        guard 1..<self.characters.count ~= length else { return self }
-		return self.substring(to: self.index(startIndex, offsetBy: length)) + trailing
+        guard 1..<characters.count ~= length else { return self }
+		return substring(to: index(startIndex, offsetBy: length)) + trailing
 	}
 
 
@@ -103,18 +109,25 @@ public extension String {
 
 // MARK: - Web utilities
 public extension String {
+	
+	/// Readable string from a URL string.
+	var urlDecoded: String {
+		return removingPercentEncoding ?? self
+	}
+	
+	/// URL escaped string.
+	var urlEncoded: String {
+		return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? self
+	}
     
     /// Stripped out HTML to plain text.
-    var strippedHTML: String {
-        return self.replacingOccurrences(of: "<[^>]+>",
-            with: "",
-            options: .regularExpression,
-            range: nil)
+    var htmlStripped: String {
+        return replace(regex: "<[^>]+>", with: "")
     }
     
     /// Decode an HTML string
     /// http://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
-    var decodedHTML: String {
+    var htmlDecoded: String {
         guard !isEmpty else { return self }
         
         var position = self.startIndex
