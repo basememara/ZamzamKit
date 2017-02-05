@@ -8,7 +8,7 @@
 
 import Foundation
 
-@available(iOS 9.3, *)
+@available(iOS, deprecated: 9.3)
 public extension UIApplication {
     
     func registerUserNotificationSettings(

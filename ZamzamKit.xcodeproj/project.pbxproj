@@ -454,6 +454,7 @@
 		8B1447511C72237E00043657 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				8BC4F8C41E3B295D0015BD31 /* Deprecated */,
 				8B1EEC641CF6AE5100AE054B /* Enums */,
 				8BFDB65C1C75187800C94996 /* Extensions */,
 				8BFDB6A51C75B4B200C94996 /* Models */,
@@ -633,7 +634,6 @@
 		8BFDB6741C751E8E00C94996 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				8BC4F8C41E3B295D0015BD31 /* Deprecated */,
 				8BF307CF1CF0E3C600BBA933 /* UIActivity.swift */,
 				8BD2D19D1CA583110018AC2B /* UIAlertAction.swift */,
 				8BFDB68B1C752C5C00C94996 /* UIApplication.swift */,
