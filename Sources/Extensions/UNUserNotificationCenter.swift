@@ -19,10 +19,11 @@ public extension UNUserNotificationCenter {
     ///   - actions: The actions for the category.
     ///   - authorizations: The authorization options.
     func register(
+        delegate: UNUserNotificationCenterDelegate? = nil,
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         actions: [UNNotificationAction]? = nil,
         authorizations: UNAuthorizationOptions? = [.alert, .badge, .sound]) {
-            register(categories: [category: actions], authorizations: authorizations)
+            register(delegate: delegate, categories: [category: actions], authorizations: authorizations)
     }
     
     /// Registers your app’s notification types and the custom actions that they support.
@@ -32,9 +33,10 @@ public extension UNUserNotificationCenter {
     ///   - actions: The actions for the category.
     ///   - authorizations: The authorization options.
     func register(
+        delegate: UNUserNotificationCenterDelegate? = nil,
         categories: [String: [UNNotificationAction]?],
         authorizations: UNAuthorizationOptions? = [.alert, .badge, .sound]) {
-            delegate = self as? UNUserNotificationCenterDelegate
+            self.delegate = delegate
 
             let categorySet = Set(categories.map {
                 UNNotificationCategory(identifier: $0.key, actions: $0.value ?? [], intentIdentifiers: [])
