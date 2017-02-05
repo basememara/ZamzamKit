@@ -10,12 +10,7 @@ import Foundation
 
 public extension String {
     
-    /// NSLocalizedString shorthand
-    var localized: String {
-        return NSLocalizedString(self, comment: "")
-    }
-    
-	/// Check if string is valid email format.
+    /// Check if string is valid email format.
     var isEmail: Bool {
         return match(ZamzamConstants.RegEx.EMAIL)
     }
@@ -38,6 +33,15 @@ public extension String {
     /// String with no spaces or new lines in beginning and end.
     var trimmed: String {
         return trimmingCharacters(in: .whitespaces)
+    }
+}
+
+// MARK: - Localization
+public extension String {
+    
+    /// NSLocalizedString shorthand
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
     }
 }
 
