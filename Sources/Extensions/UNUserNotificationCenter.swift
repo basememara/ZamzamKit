@@ -104,6 +104,35 @@ public extension UNUserNotificationCenter {
 
 @available(iOS 10, *)
 public extension UNUserNotificationCenter {
+
+    /// Schedules a local notification for immediate delivery.
+    func add(
+        body: String,
+        title: String? = nil,
+        subtitle: String? = nil,
+        badge: NSNumber? = nil,
+        sound: UNNotificationSound? = UNNotificationSound.default(),
+        attachments: [UNNotificationAttachment]? = nil,
+        repeats: Bool = false,
+        identifier: String = UUID().uuidString,
+        category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
+        userInfo: [String: Any]? = nil,
+        completion: ((Error?) -> Void)? = nil) {
+            add(
+                timeInterval: 0,
+                body: body,
+                title: title,
+                subtitle: subtitle,
+                badge: badge,
+                sound: sound,
+                attachments: attachments,
+                repeats: repeats,
+                identifier: identifier,
+                category: category,
+                userInfo: userInfo,
+                completion: completion
+            )
+    }
     
     /// Schedules a local notification for delivery.
     ///
