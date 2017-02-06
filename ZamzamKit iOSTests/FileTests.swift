@@ -40,14 +40,14 @@ class FileTests: XCTestCase {
     }
     
     func testGetDocumentPath() {
-        let value = FileManager.getDocumentPath(fileName)
+        let value = FileManager.default.getDocumentPath(fileName)
         
         XCTAssert(FileManager.default.fileExists(atPath: value),
             "The file location path for \(fileName) seems incorrect (file doesn't exist)")
     }
     
     func testGetDocumentPaths() {
-        let value = FileManager.getDocumentPaths()
+        let value = FileManager.default.getDocumentPaths()
         let expectedValue = [
             fileInDocumentsDirectory(fileName),
             fileInDocumentsDirectory(fileName2)
