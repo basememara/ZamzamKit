@@ -83,7 +83,7 @@ public extension String {
             options.insert(.caseInsensitive)
         }
         
-        return self.range(of: pattern, options: options) != nil
+        return range(of: pattern, options: options) != nil
     }
 
 }

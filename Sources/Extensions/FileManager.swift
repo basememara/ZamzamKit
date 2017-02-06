@@ -17,7 +17,7 @@ public extension FileManager {
      
      - returns: File path from document directory
      */
-    static func getDocumentPath(_ fileName: String) -> String {
+    func getDocumentPath(_ fileName: String) -> String {
         return URL(fileURLWithPath: ZamzamConstants.Path.DOCUMENTS)
             .appendingPathComponent(fileName)
             .path
@@ -30,9 +30,9 @@ public extension FileManager {
      
      - returns: List of file paths from document directory
      */
-    static func getDocumentPaths(_ filter: ((URL) -> Bool)? = nil) -> [String] {
+    func getDocumentPaths(_ filter: ((URL) -> Bool)? = nil) -> [String] {
         // Get the directory contents including folders
-        guard var directoryUrls = try? FileManager.default.contentsOfDirectory(
+        guard var directoryUrls = try? contentsOfDirectory(
             at: ZamzamConstants.Path.DOCUMENTS_URL,
             includingPropertiesForKeys: nil)
                 else { return [String]() }
