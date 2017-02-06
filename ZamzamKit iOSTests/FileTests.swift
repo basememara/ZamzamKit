@@ -57,6 +57,18 @@ class FileTests: XCTestCase {
             "The file paths for the document directory seems incorrect")
     }
     
+    func testDownloadFile() {
+        let expectation = self.expectation(description: "Download remote file")
+        let url = "http://basememara.com/wp-content/uploads/2017/01/CapturFiles_125-150x150.png"
+        
+        FileManager.default.download(from: url) {
+            XCTAssert($0.0 != nil)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5.0, handler: nil)
+    }
+    
     func getDocumentsURL() -> URL {
         let documentsURL = FileManager.default.urls(
             for: .documentDirectory, in: .userDomainMask)[0]

@@ -31,4 +31,19 @@ public extension UIImage {
     var template: UIImage {
         return withRenderingMode(.alwaysTemplate)
     }
+    
+    /// Save image to disk as PNG.
+    var pngToDisk: URL? {
+        let data = UIImagePNGRepresentation(self)
+        let folder = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        
+        do {
+            let name = String(random: 6, prefix: "img_")
+            let url = folder.appendingPathComponent("\(name).png")
+            _ = try data?.write(to: url)
+            return url
+        } catch {
+            return nil
+        }
+    }
 }

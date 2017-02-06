@@ -46,3 +46,35 @@ public extension FileManager {
     }
     
 }
+
+
+public extension FileManager {
+
+    /// Retrieve a file remotely and persist to local disk.
+    ///
+    /// - Parameters:
+    ///   - url: The HTTP URL to retrieve the file.
+    ///   - complete: The completion handler to call when the load request is complete.
+    func download(from url: String, complete: @escaping (URL?, URLResponse?, Error?) -> Void) {
+        guard let nsURL = URL(string: url) else { return complete(nil, nil, ZamzamError.invalidData) }
+        
+        URLSession.shared.downloadTask(with: nsURL) {
+            var location: URL?
+            let response = $0.1
+            let error = $0.2
+            
+            defer { complete(location, response, error) }
+            guard error == nil, let source = $0.0 else { return }
+            
+            // Construct file destination
+            let folder = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+            let destination = folder.appendingPathComponent(nsURL.lastPathComponent)
+            _ = try? FileManager.default.removeItem(at: destination)
+            
+            // Store remote file locally
+            guard let _ = try? FileManager.default.moveItem(at: source, to: destination) else { return }
+            
+            location = destination
+        }.resume()
+    }
+}
