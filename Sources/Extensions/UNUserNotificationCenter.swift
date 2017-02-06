@@ -141,7 +141,7 @@ public extension UNUserNotificationCenter {
             }(UNMutableNotificationContent())
         
             // Construct request with trigger
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: repeats)
+            let trigger = timeInterval > 0 ? UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: repeats) : nil
             let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
             add(request, withCompletionHandler: completion)
