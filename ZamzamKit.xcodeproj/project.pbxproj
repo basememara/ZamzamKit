@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B0B6DAB1E40748B00C6173A /* UNNotificationAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0B6DAA1E40748B00C6173A /* UNNotificationAction.swift */; };
 		8B1447F81C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1447F91C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1447FA1C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -260,7 +259,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8B0B6DAA1E40748B00C6173A /* UNNotificationAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNNotificationAction.swift; path = Extensions/UNNotificationAction.swift; sourceTree = "<group>"; };
 		8B14476C1C722D5700043657 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8B14476D1C722D5700043657 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8B1447821C722F5E00043657 /* ZamzamConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamConstants.swift; sourceTree = "<group>"; };
@@ -629,7 +627,6 @@
 				8B6A95601E46FBB9003F333D /* Thread.swift */,
 				8B8215491CA1613400C9FCC9 /* TimeInterval.swift */,
 				8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */,
-				8B0B6DAA1E40748B00C6173A /* UNNotificationAction.swift */,
 				8BFDB6631C751AE600C94996 /* URLComponents.swift */,
 				8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */,
 			);
@@ -1098,7 +1095,6 @@
 				8BD61B3A1E3F04D0009B537E /* UISwitch.swift in Sources */,
 				8BD2D1961CA581890018AC2B /* Audible.swift in Sources */,
 				8B63B2C61CD959BC000F2B5F /* UIBarButtonItem.swift in Sources */,
-				8B0B6DAB1E40748B00C6173A /* UNNotificationAction.swift in Sources */,
 				8BCB73DA1CAD69BF00E20096 /* UITableView.swift in Sources */,
 				8BB376121CF8B8D6005E7F67 /* Restorable.swift in Sources */,
 				8BCB73DC1CAD6BD700E20096 /* UICollectionView.swift in Sources */,
