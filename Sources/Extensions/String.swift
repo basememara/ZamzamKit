@@ -224,3 +224,38 @@ public extension String {
         return result
     }
 }
+
+// MARK: - Subscript for ranges
+// https://github.com/SwifterSwift/SwifterSwift
+public extension String {
+	
+	/// Safely subscript string with index.
+	///
+	/// - Parameter i: index.
+	subscript(i: Int) -> String? {
+        guard 0..<characters.count ~= i else { return nil }
+		return String(self[index(startIndex, offsetBy: i)])
+	}
+	
+	/// Safely subscript string within a half-open range.
+	///
+	/// - Parameter range: Half-open range.
+	subscript(range: CountableRange<Int>) -> String? {
+		guard let lowerIndex = index(startIndex, offsetBy: max(0,range.lowerBound), limitedBy: endIndex),
+            let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex)
+                else { return nil }
+        
+		return self[lowerIndex..<upperIndex]
+	}
+	
+	/// Safely subscript string within a closed range.
+	///
+	/// - Parameter range: Closed range.
+	subscript(range: ClosedRange<Int>) -> String? {
+		guard let lowerIndex = index(startIndex, offsetBy: max(0,range.lowerBound), limitedBy: endIndex),
+            let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound + 1, limitedBy: endIndex)
+                else { return nil }
+        
+		return self[lowerIndex..<upperIndex]
+	}
+}
