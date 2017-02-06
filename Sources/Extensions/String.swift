@@ -10,6 +10,24 @@ import Foundation
 
 public extension String {
     
+    /// Create a new random string of given length.
+    /// https://github.com/SwifterSwift/SwifterSwift
+	///
+	/// - Parameter random: Number of characters in string.
+	/// - Parameter prefix: Prepend to string.
+	public init(random: Int, prefix: String = "") {
+		guard random > 0 else { self = prefix; return }
+		let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        
+		self = (0..<random).reduce(prefix) {
+			let randomIndex = arc4random_uniform(UInt32(base.characters.count))
+            return $0.0 + "\(base[base.index(base.startIndex, offsetBy: IndexDistance(randomIndex))])"
+        }
+	}
+}
+
+public extension String {
+    
     /// Check if string is valid email format.
     var isEmail: Bool {
         return match(ZamzamConstants.RegEx.EMAIL)

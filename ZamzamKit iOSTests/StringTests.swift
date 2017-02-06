@@ -59,4 +59,8 @@ class StringTests: XCTestCase {
         XCTAssertTrue(value.isAlphaNumeric, "Alphanumberic \(value) should be valid.")
         XCTAssertFalse(wrong.isAlphaNumeric, "Alphanumberic \(value) should not be valid.")
     }
+	
+	func testRandom() {
+		XCTAssertEqual(String(random: 10).characters.count, 10)
+	}
 }
