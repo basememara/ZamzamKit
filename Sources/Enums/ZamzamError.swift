@@ -8,6 +8,7 @@
 
 import Foundation
 
-enum ZamzamError: Error {
+public enum ZamzamError: Error {
+    case general
     case invalidData
 }
