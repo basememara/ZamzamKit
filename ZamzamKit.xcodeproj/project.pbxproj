@@ -123,6 +123,9 @@
 		8BF2106B1E48D52F0026B802 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2106A1E48D52F0026B802 /* Result.swift */; };
 		8BF2106C1E48D52F0026B802 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2106A1E48D52F0026B802 /* Result.swift */; };
 		8BF2106D1E48D52F0026B802 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2106A1E48D52F0026B802 /* Result.swift */; };
+		8BF210921E4A22460026B802 /* UNNotificationAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */; };
+		8BF210931E4A22460026B802 /* UNNotificationAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */; };
+		8BF210941E4A22460026B802 /* UNNotificationAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */; };
 		8BF307C11CF0D44200BBA933 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BF307C01CF0D44200BBA933 /* Media.xcassets */; };
 		8BF307C21CF0D44200BBA933 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BF307C01CF0D44200BBA933 /* Media.xcassets */; };
 		8BF307C31CF0D44200BBA933 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BF307C01CF0D44200BBA933 /* Media.xcassets */; };
@@ -352,6 +355,7 @@
 		8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNUserNotificationCenter.swift; path = Extensions/UNUserNotificationCenter.swift; sourceTree = "<group>"; };
 		8BEFE4781E4515D900100744 /* ScheduleInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleInterval.swift; sourceTree = "<group>"; };
 		8BF2106A1E48D52F0026B802 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNNotificationAttachment.swift; path = Extensions/UNNotificationAttachment.swift; sourceTree = "<group>"; };
 		8BF307C01CF0D44200BBA933 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		8BF307CF1CF0E3C600BBA933 /* UIActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIActivity.swift; path = Extensions/UIActivity.swift; sourceTree = "<group>"; };
 		8BFDB6561C75187200C94996 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = Extensions/Date.swift; sourceTree = "<group>"; };
@@ -631,6 +635,7 @@
 				8BFDB65D1C7518F800C94996 /* String.swift */,
 				8B6A95601E46FBB9003F333D /* Thread.swift */,
 				8B8215491CA1613400C9FCC9 /* TimeInterval.swift */,
+				8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */,
 				8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */,
 				8BFDB6631C751AE600C94996 /* URLComponents.swift */,
 				8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */,
@@ -1075,6 +1080,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BF210921E4A22460026B802 /* UNNotificationAttachment.swift in Sources */,
 				8BFDB68C1C752C5C00C94996 /* UIApplication.swift in Sources */,
 				8BEFE4791E4515D900100744 /* ScheduleInterval.swift in Sources */,
 				8BFDB6701C751DF600C94996 /* UIImageView.swift in Sources */,
@@ -1151,6 +1157,7 @@
 				8B840E611C904F1D00D85781 /* Locatable.swift in Sources */,
 				8BB45FB61C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8BFDB6A11C75B4A600C94996 /* LocationMeta.swift in Sources */,
+				8BF210931E4A22460026B802 /* UNNotificationAttachment.swift in Sources */,
 				8BD508771C99E18500AE205E /* Collection.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
 				8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */,
@@ -1184,6 +1191,7 @@
 				8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */,
 				8B840E621C904F1D00D85781 /* Locatable.swift in Sources */,
 				8BEFE47B1E4515D900100744 /* ScheduleInterval.swift in Sources */,
+				8BF210941E4A22460026B802 /* UNNotificationAttachment.swift in Sources */,
 				8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */,
 				8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */,
 			);
