@@ -112,13 +112,13 @@ public extension UNUserNotificationCenter {
     /// - Parameters:
     ///   - timeInterval: The time interval of when to fire the notification.
     func add(
-        timeInterval: TimeInterval,
         body: String,
         title: String? = nil,
         subtitle: String? = nil,
         badge: NSNumber? = nil,
         sound: UNNotificationSound? = UNNotificationSound.default(),
         attachments: [UNNotificationAttachment]? = nil,
+        timeInterval: TimeInterval = 0,
         repeats: Bool = false,
         identifier: String = UUID().uuidString,
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
