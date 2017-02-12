@@ -22,8 +22,9 @@ public extension UNUserNotificationCenter {
         delegate: UNUserNotificationCenterDelegate? = nil,
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         actions: [UNNotificationAction]? = nil,
-        authorizations: UNAuthorizationOptions? = [.alert, .badge, .sound]) {
-            register(delegate: delegate, categories: [category: actions], authorizations: authorizations)
+        authorizations: UNAuthorizationOptions? = [.alert, .badge, .sound],
+        completion: ((Bool) -> Void)? = nil) {
+            register(delegate: delegate, categories: [category: actions], authorizations: authorizations, completion: completion)
     }
     
     /// Registers your app’s notification types and the custom actions that they support.
@@ -32,36 +33,32 @@ public extension UNUserNotificationCenter {
     ///   - category: The category identifier.
     ///   - actions: The actions for the category.
     ///   - authorizations: The authorization options.
+    ///   - completion: The callback to process with the granted flag provided.
     func register(
         delegate: UNUserNotificationCenterDelegate? = nil,
         categories: [String: [UNNotificationAction]?],
-        authorizations: UNAuthorizationOptions? = [.alert, .badge, .sound]) {
+        authorizations: UNAuthorizationOptions? = [.alert, .badge, .sound],
+        completion: ((Bool) -> Void)? = nil) {
             self.delegate = delegate
-
-            let categorySet = Set(categories.map {
-                UNNotificationCategory(identifier: $0.key, actions: $0.value ?? [], intentIdentifiers: [])
-            })
         
-            // Request or skip authorization request
-            guard let authorizations = authorizations else {
-                return getNotificationCategories {
-                    guard categorySet != $0 else { return }
-                    self.setNotificationCategories(categorySet)
-                }
-            }
-        
-            getNotificationSettings {
-                guard $0.authorizationStatus == .notDetermined else {
+            getNotificationSettings { settings in
+                let categorySet = Set(categories.map {
+                    UNNotificationCategory(identifier: $0.key, actions: $0.value ?? [], intentIdentifiers: [])
+                })
+                
+                guard let authorizations = authorizations, settings.authorizationStatus == .notDetermined else {
                     // Register category if applicable
                     return self.getNotificationCategories {
+                        defer { completion?(settings.authorizationStatus == .authorized) }
                         guard categorySet != $0 else { return }
                         self.setNotificationCategories(categorySet)
                     }
                 }
                 
                 // Request permission before registering if applicable
-                return self.requestAuthorization(options: authorizations) {
-                    guard $0.0 else { return }
+                self.requestAuthorization(options: authorizations) { granted, error in
+                    defer { completion?(granted) }
+                    guard granted else { return }
                     self.setNotificationCategories(categorySet)
                 }
             }
