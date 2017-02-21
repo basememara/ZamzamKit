@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UINavigationBar {
+public extension UINavigationBar {
 
     /// Set transparent navigation bar
     // http://stackoverflow.com/questions/2315862/make-uinavigationbar-transparent
