@@ -15,7 +15,7 @@ public extension Array {
 	/// - Parameter index: index of element.
 	/// - Returns: optional element (if exists).
     func get(_ index: Int) -> Element? {
-		guard 0..<count ~= index else { return nil }
+		guard startIndex..<endIndex ~= index else { return nil }
 		return self[index]
     }
     
