@@ -140,3 +140,29 @@ public extension UIViewController {
     }
 
 }
+
+public extension UIViewController {
+    
+    /**
+     Calculate points from a percentage of the width of the view.
+     
+     - parameter value: Percentage of the width.
+     
+     - returns: Points calculated from percentage of width.
+     */
+    func percentX(_ value: CGFloat) -> CGFloat {
+        return view.frame.width  * value
+    }
+    
+    /**
+     Calculate points from a percentage of the height of the view.
+     
+     - parameter value: Percentage of the height.
+     
+     - returns: Points calculated from percentage of height.
+     */
+    func percentY(_ value: CGFloat) -> CGFloat {
+        return view.frame.height * value
+    }
+}
+
