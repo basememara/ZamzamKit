@@ -24,10 +24,9 @@ public extension Array {
 
      - parameter handler: Handler with array item that was popped.
      */
-    mutating func removeEach(_ handler: @escaping (Element) -> Void) -> Void {
+    mutating func removeEach(handler: @escaping (Element) -> Void) {
         enumerated().reversed().forEach { handler(remove(at: $0.offset)) }
     }
-
 }
 
 public extension Array {
@@ -68,15 +67,20 @@ public extension Array where Element: Equatable {
 	
 	/// Array with all duplicates removed from it.
     /// https://github.com/SwifterSwift/SwifterSwift
-	public var withoutDuplicates: [Element] {
-		// Thanks to https://github.com/sairamkotha for improving the preperty
-		return reduce([]) { ($0 as [Element]).contains($1) ? $0 : $0 + [$1] }
+	var withoutDuplicates: [Element] {
+		return reduce([]) { $0.contains($1) ? $0 : $0 + [$1] }
 	}
 	
 	/// Remove all duplicates from array.
-	public mutating func removeDuplicates() {
-		// Thanks to https://github.com/sairamkotha for improving the method
+	mutating func removeDuplicates() {
 		self = reduce([]) { $0.contains($1) ? $0 : $0 + [$1] }
 	}
-	
+
+    /// Removes and the specified element.
+    ///
+    /// - Parameter element: An element to search for in the collection.
+    mutating func remove(of element: Element) {
+        guard let index = index(of: element) else { return }
+        remove(at: index)
+    }
 }
