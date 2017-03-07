@@ -53,8 +53,6 @@
 		8B5316471C9B23BF0094A6C4 /* WKInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316461C9B23BF0094A6C4 /* WKInterfaceController.swift */; };
 		8B5316601C9B249E0094A6C4 /* LocationMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */; };
 		8B5316611C9B249F0094A6C4 /* LocationMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */; };
-		8B5316621C9B24A10094A6C4 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
-		8B5316631C9B24A20094A6C4 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
 		8B5316661C9B24A70094A6C4 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
 		8B5316671C9B24A80094A6C4 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
 		8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
@@ -70,6 +68,9 @@
 		8B6A956D1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
 		8B6A956E1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
 		8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
+		8B6C99971E6E031800D523CC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationManager.swift */; };
+		8B6C99981E6E031800D523CC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationManager.swift */; };
+		8B6C99991E6E031800D523CC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationManager.swift */; };
 		8B756EF81E5C025A00DE4B02 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */; };
 		8B756F151E5CF16D00DE4B02 /* BaseNibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756F141E5CF16D00DE4B02 /* BaseNibView.swift */; };
 		8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
@@ -79,9 +80,6 @@
 		8B82154A1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
 		8B82154B1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
 		8B82154C1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
-		8B840E601C904F1D00D85781 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
-		8B840E611C904F1D00D85781 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
-		8B840E621C904F1D00D85781 /* Locatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B840E5F1C904F1D00D85781 /* Locatable.swift */; };
 		8B9A87951C9C20260087A251 /* Complicationable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A87941C9C20260087A251 /* Complicationable.swift */; };
 		8B9A87961C9C20260087A251 /* Complicationable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A87941C9C20260087A251 /* Complicationable.swift */; };
 		8BB376121CF8B8D6005E7F67 /* Restorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB376111CF8B8D6005E7F67 /* Restorable.swift */; };
@@ -327,12 +325,12 @@
 		8B63E4261CDB8DB00053C060 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImage.swift; path = Extensions/UIImage.swift; sourceTree = "<group>"; };
 		8B6A95601E46FBB9003F333D /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Thread.swift; path = Extensions/Thread.swift; sourceTree = "<group>"; };
 		8B6A956C1E484D5A003F333D /* ZamzamError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamError.swift; sourceTree = "<group>"; };
+		8B6C99961E6E031800D523CC /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Models/LocationManager.swift; sourceTree = "<group>"; };
 		8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UINavigationBar.swift; path = Extensions/UINavigationBar.swift; sourceTree = "<group>"; };
 		8B756F141E5CF16D00DE4B02 /* BaseNibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseNibView.swift; path = Models/BaseNibView.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
 		8B8215411CA15E0D00C9FCC9 /* CLKComplicationServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLKComplicationServer.swift; path = Extensions/CLKComplicationServer.swift; sourceTree = "<group>"; };
 		8B8215491CA1613400C9FCC9 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeInterval.swift; path = Extensions/TimeInterval.swift; sourceTree = "<group>"; };
-		8B840E5F1C904F1D00D85781 /* Locatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locatable.swift; sourceTree = "<group>"; };
 		8B9A87941C9C20260087A251 /* Complicationable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Complicationable.swift; sourceTree = "<group>"; };
 		8BB376111CF8B8D6005E7F67 /* Restorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restorable.swift; sourceTree = "<group>"; };
 		8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchConnectable.swift; sourceTree = "<group>"; };
@@ -573,7 +571,6 @@
 			children = (
 				8BD2D1951CA581890018AC2B /* Audible.swift */,
 				8B9A87941C9C20260087A251 /* Complicationable.swift */,
-				8B840E5F1C904F1D00D85781 /* Locatable.swift */,
 				8BB376111CF8B8D6005E7F67 /* Restorable.swift */,
 				8B5455DE1E5E3287000CB26A /* Segueable.swift */,
 				8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */,
@@ -709,6 +706,7 @@
 			isa = PBXGroup;
 			children = (
 				8B756F141E5CF16D00DE4B02 /* BaseNibView.swift */,
+				8B6C99961E6E031800D523CC /* LocationManager.swift */,
 				8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */,
 				8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */,
 			);
@@ -1107,7 +1105,6 @@
 				8BD08EB51CE28ACA0051080A /* SCNetworkReachability.swift in Sources */,
 				8BD61B361E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,
-				8B840E601C904F1D00D85781 /* Locatable.swift in Sources */,
 				8BD508761C99E18500AE205E /* Collection.swift in Sources */,
 				8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */,
 				8BFDB68F1C75323900C94996 /* DateFormatter.swift in Sources */,
@@ -1129,6 +1126,7 @@
 				8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8B82154A1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8BB45FB51C9BDD180070CE07 /* UserDefaults.swift in Sources */,
+				8B6C99971E6E031800D523CC /* LocationManager.swift in Sources */,
 				8BFDB6771C751F2300C94996 /* FileManager.swift in Sources */,
 				8BFDB6891C7529AB00C94996 /* UILocalNotification_iOS9.swift in Sources */,
 				8BFDB6641C751AE600C94996 /* URLComponents.swift in Sources */,
@@ -1158,6 +1156,7 @@
 				8B8215421CA15E0D00C9FCC9 /* CLKComplicationServer.swift in Sources */,
 				8BFDB67E1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BD61B371E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
+				8B6C99981E6E031800D523CC /* LocationManager.swift in Sources */,
 				8B6A956E1E484D5A003F333D /* ZamzamError.swift in Sources */,
 				8B82154B1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8BCB73CF1CAD660D00E20096 /* Equatable.swift in Sources */,
@@ -1173,7 +1172,6 @@
 				8B0C71601E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B2DE3E21C8A86B2008F1569 /* Bundle.swift in Sources */,
 				8BFDB65F1C7518F800C94996 /* String.swift in Sources */,
-				8B840E611C904F1D00D85781 /* Locatable.swift in Sources */,
 				8BB45FB61C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8BFDB6A11C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BF210931E4A22460026B802 /* UNNotificationAttachment.swift in Sources */,
@@ -1209,11 +1207,11 @@
 				8BFDB6791C751F2300C94996 /* FileManager.swift in Sources */,
 				8B0C71611E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */,
-				8B840E621C904F1D00D85781 /* Locatable.swift in Sources */,
 				8BEFE47B1E4515D900100744 /* ScheduleInterval.swift in Sources */,
 				8BF210941E4A22460026B802 /* UNNotificationAttachment.swift in Sources */,
 				8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */,
 				8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */,
+				8B6C99991E6E031800D523CC /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1227,7 +1225,6 @@
 				8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */,
 				8BB45FAD1C9BDA590070CE07 /* WatchConnectable.swift in Sources */,
 				8B53160A1C9B22F50094A6C4 /* FirstViewController.swift in Sources */,
-				8B5316621C9B24A10094A6C4 /* Locatable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1239,7 +1236,6 @@
 				8B5316311C9B23140094A6C4 /* ExtensionDelegate.swift in Sources */,
 				8B5316371C9B23140094A6C4 /* ComplicationController.swift in Sources */,
 				8B5316671C9B24A80094A6C4 /* ZamzamConstants.swift in Sources */,
-				8B5316631C9B24A20094A6C4 /* Locatable.swift in Sources */,
 				8B5316611C9B249F0094A6C4 /* LocationMeta.swift in Sources */,
 				8B9A87961C9C20260087A251 /* Complicationable.swift in Sources */,
 				8B53162F1C9B23140094A6C4 /* InterfaceController.swift in Sources */,
