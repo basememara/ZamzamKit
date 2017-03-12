@@ -38,21 +38,31 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     /// Subscribes to receive new location data when available.
-    public var didUpdateLocations = SynchronizedArray<LocationHandler>()
+    public var didUpdateLocations = SynchronizedArray<LocationObserver>()
     fileprivate var didUpdateLocationsSingle = SynchronizedArray<LocationHandler>()
     
     /// Subscribes to receive new authorization data when available.
-    public var didChangeAuthorization = SynchronizedArray<AuthorizationHandler>()
+    public var didChangeAuthorization = SynchronizedArray<AuthorizationObserver>()
     fileprivate var didChangeAuthorizationSingle = SynchronizedArray<AuthorizationHandler>()
+    
+    deinit {
+        // Empty task queues of references
+        didUpdateLocations.removeAll()
+        didUpdateLocationsSingle.removeAll()
+        didChangeAuthorization.removeAll()
+        didChangeAuthorizationSingle.removeAll()
+    }
 }
 
 // MARK: - Nested types
 public extension LocationManager {
 
     /// Location handler queue type.
+    typealias LocationObserver = Observer<LocationHandler>
     typealias LocationHandler = (CLLocation) -> Void
     
     // Authorization handler queue type.
+    typealias AuthorizationObserver = Observer<AuthorizationHandler>
     typealias AuthorizationHandler = (Bool) -> Void
     
     /// Permission types to use location services.
@@ -71,7 +81,7 @@ public extension LocationManager {
         guard let location = locations.last else { return }
         
         // Trigger and empty queues
-        didUpdateLocations.forEach { $0(location) }
+        didUpdateLocations.forEach { $0.handler(location) }
         didUpdateLocationsSingle.removeAll { $0.forEach { $0(location) } }
     }
     
@@ -79,7 +89,7 @@ public extension LocationManager {
         guard status != .notDetermined else { return }
         
         // Trigger and empty queues
-        didChangeAuthorization.forEach { $0(isAuthorized) }
+        didChangeAuthorization.forEach { $0.handler(isAuthorized) }
         didChangeAuthorizationSingle.removeAll { $0.forEach { $0(self.isAuthorized) } }
     }
     

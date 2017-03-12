@@ -71,6 +71,9 @@
 		8B6C99971E6E031800D523CC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationManager.swift */; };
 		8B6C99981E6E031800D523CC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationManager.swift */; };
 		8B6C99991E6E031800D523CC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationManager.swift */; };
+		8B75286C1E759F2A0035A742 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75286B1E759F2A0035A742 /* Observer.swift */; };
+		8B75286D1E759F2A0035A742 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75286B1E759F2A0035A742 /* Observer.swift */; };
+		8B75286E1E759F2A0035A742 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75286B1E759F2A0035A742 /* Observer.swift */; };
 		8B756EF81E5C025A00DE4B02 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */; };
 		8B756F151E5CF16D00DE4B02 /* BaseNibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756F141E5CF16D00DE4B02 /* BaseNibView.swift */; };
 		8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
@@ -326,6 +329,7 @@
 		8B6A95601E46FBB9003F333D /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Thread.swift; path = Extensions/Thread.swift; sourceTree = "<group>"; };
 		8B6A956C1E484D5A003F333D /* ZamzamError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamError.swift; sourceTree = "<group>"; };
 		8B6C99961E6E031800D523CC /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Models/LocationManager.swift; sourceTree = "<group>"; };
+		8B75286B1E759F2A0035A742 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Observer.swift; path = Models/Observer.swift; sourceTree = "<group>"; };
 		8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UINavigationBar.swift; path = Extensions/UINavigationBar.swift; sourceTree = "<group>"; };
 		8B756F141E5CF16D00DE4B02 /* BaseNibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseNibView.swift; path = Models/BaseNibView.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
@@ -708,6 +712,7 @@
 				8B756F141E5CF16D00DE4B02 /* BaseNibView.swift */,
 				8B6C99961E6E031800D523CC /* LocationManager.swift */,
 				8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */,
+				8B75286B1E759F2A0035A742 /* Observer.swift */,
 				8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */,
 			);
 			name = Models;
@@ -1138,6 +1143,7 @@
 				8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BB45FAB1C9BDA590070CE07 /* WatchConnectable.swift in Sources */,
 				8B756F151E5CF16D00DE4B02 /* BaseNibView.swift in Sources */,
+				8B75286C1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BD2D19E1CA583110018AC2B /* UIAlertAction.swift in Sources */,
 				8B1448061C7258F700043657 /* ZamzamConstants.swift in Sources */,
 				8BE814FD1C7842DC005F23CE /* Sequence.swift in Sources */,
@@ -1176,6 +1182,7 @@
 				8BFDB6A11C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BF210931E4A22460026B802 /* UNNotificationAttachment.swift in Sources */,
 				8BD508771C99E18500AE205E /* Collection.swift in Sources */,
+				8B75286D1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
 				8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */,
 				8B9A87951C9C20260087A251 /* Complicationable.swift in Sources */,
@@ -1199,6 +1206,7 @@
 				8BFDB6911C75323900C94996 /* DateFormatter.swift in Sources */,
 				8BFDB6601C7518F800C94996 /* String.swift in Sources */,
 				8BFDB6A21C75B4A600C94996 /* LocationMeta.swift in Sources */,
+				8B75286E1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BB45FB71C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8B6A95631E46FBB9003F333D /* Thread.swift in Sources */,
 				8BE814FF1C7842DC005F23CE /* Sequence.swift in Sources */,

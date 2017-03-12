@@ -242,6 +242,15 @@ public extension SynchronizedArray where Element: Equatable {
             DispatchQueue.main.async { completion?() }
         }
     }
+    
+    /// Removes the specified element.
+    ///
+    /// - Parameters:
+    ///   - left: The collection to remove from.
+    ///   - right: An element to search for in the collection.
+    static func -=(left: inout SynchronizedArray, right: Element) {
+        left.remove(right)
+    }
 }
 
 // MARK: - Infix operators
