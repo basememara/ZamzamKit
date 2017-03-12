@@ -135,9 +135,9 @@ public extension SynchronizedArray {
         }
     }
 
-    /// Adds a new element at the end of the array.
+    /// Adds new elements at the end of the array.
     ///
-    /// - Parameter element: The element to append to the array.
+    /// - Parameter element: The elements to append to the array.
     func append( _ elements: [Element]) {
         queue.async(flags: .barrier) {
             self.array += elements
@@ -233,7 +233,7 @@ public extension SynchronizedArray where Element: Equatable {
         return result
     }
     
-    /// Removes and the specified element.
+    /// Removes the specified element.
     ///
     /// - Parameter element: An element to search for in the collection.
     func remove(_ element: Element, completion: (() -> Void)? = nil) {
@@ -256,10 +256,20 @@ public extension SynchronizedArray where Element: Equatable {
 // MARK: - Infix operators
 public extension SynchronizedArray {
 
+    /// Adds a new element at the end of the array.
+    ///
+    /// - Parameters:
+    ///   - left: The collection to append to.
+    ///   - right: The element to append to the array.
     static func +=(left: inout SynchronizedArray, right: Element) {
         left.append(right)
     }
 
+    /// Adds new elements at the end of the array.
+    ///
+    /// - Parameters:
+    ///   - left: The collection to append to.
+    ///   - right: The elements to append to the array.
     static func +=(left: inout SynchronizedArray, right: [Element]) {
         left.append(right)
     }
