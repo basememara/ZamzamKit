@@ -41,24 +41,24 @@ public class WatchSession: NSObject, WCSessionDelegate {
     
     /// Subscription queues for firing within delegates
     fileprivate var activationDidCompleteSingle = SynchronizedArray<ActivationHandler>()
-    fileprivate var didBecomeInactive = SynchronizedArray<Observer<EmptyHandler>>()
-    fileprivate var didDeactivate = SynchronizedArray<Observer<EmptyHandler>>()
-    fileprivate var stateDidChange = SynchronizedArray<Observer<EmptyHandler>>()
-    fileprivate var reachabilityDidChange = SynchronizedArray<Observer<ReachabilityChangeHandler>>()
-    fileprivate var didReceiveApplicationContext = SynchronizedArray<Observer<DictionaryHandler>>()
-    fileprivate var didReceiveUserInfo = SynchronizedArray<Observer<DictionaryHandler>>()
-    fileprivate var didReceiveMessage = SynchronizedArray<Observer<DidReceiveMessageHandler>>()
+    fileprivate var didBecomeInactive = SynchronizedArray<EmptyObserver>()
+    fileprivate var didDeactivate = SynchronizedArray<EmptyObserver>()
+    fileprivate var stateDidChange = SynchronizedArray<EmptyObserver>()
+    fileprivate var reachabilityDidChange = SynchronizedArray<ReachabilityChangeObserver>()
+    fileprivate var didReceiveApplicationContext = SynchronizedArray<DictionaryObserver>()
+    fileprivate var didReceiveUserInfo = SynchronizedArray<DictionaryObserver>()
+    fileprivate var didReceiveMessage = SynchronizedArray<DidReceiveMessageObserver>()
 }
 
 // MARK: - Nested types
 public extension WatchSession {
 
     /// Handler queue types
-    typealias EmptyHandler = () -> Void
-    typealias DictionaryHandler = ([String: Any]) -> Void
     typealias ActivationHandler = (Bool) -> Void
-    typealias ReachabilityChangeHandler = (Bool) -> Void
-    typealias DidReceiveMessageHandler = ([String: Any], ([String: Any]) -> Void) -> Void
+    typealias EmptyObserver = Observer<() -> Void>
+    typealias DictionaryObserver = Observer<([String: Any]) -> Void>
+    typealias ReachabilityChangeObserver = Observer<(Bool) -> Void>
+    typealias DidReceiveMessageObserver = Observer<([String: Any], ([String: Any]) -> Void) -> Void>
 }
 
 public extension WatchSession {
