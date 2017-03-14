@@ -46,7 +46,6 @@
 		8B53162F1C9B23140094A6C4 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53162E1C9B23140094A6C4 /* InterfaceController.swift */; };
 		8B5316311C9B23140094A6C4 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316301C9B23140094A6C4 /* ExtensionDelegate.swift */; };
 		8B5316331C9B23140094A6C4 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316321C9B23140094A6C4 /* NotificationController.swift */; };
-		8B5316351C9B23140094A6C4 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316341C9B23140094A6C4 /* GlanceController.swift */; };
 		8B5316371C9B23140094A6C4 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316361C9B23140094A6C4 /* ComplicationController.swift */; };
 		8B5316391C9B23140094A6C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B5316381C9B23140094A6C4 /* Assets.xcassets */; };
 		8B53163D1C9B23140094A6C4 /* ZamzamKit Example Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8B53161B1C9B23140094A6C4 /* ZamzamKit Example Watch.app */; };
@@ -316,7 +315,6 @@
 		8B53162E1C9B23140094A6C4 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
 		8B5316301C9B23140094A6C4 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		8B5316321C9B23140094A6C4 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		8B5316341C9B23140094A6C4 /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
 		8B5316361C9B23140094A6C4 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		8B5316381C9B23140094A6C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B53163A1C9B23140094A6C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -553,7 +551,6 @@
 				8B53162E1C9B23140094A6C4 /* InterfaceController.swift */,
 				8B5316301C9B23140094A6C4 /* ExtensionDelegate.swift */,
 				8B5316321C9B23140094A6C4 /* NotificationController.swift */,
-				8B5316341C9B23140094A6C4 /* GlanceController.swift */,
 				8B5316361C9B23140094A6C4 /* ComplicationController.swift */,
 				8B5316381C9B23140094A6C4 /* Assets.xcassets */,
 				8B53163A1C9B23140094A6C4 /* Info.plist */,
@@ -1247,7 +1244,6 @@
 				8B5316611C9B249F0094A6C4 /* LocationMeta.swift in Sources */,
 				8B9A87961C9C20260087A251 /* Complicationable.swift in Sources */,
 				8B53162F1C9B23140094A6C4 /* InterfaceController.swift in Sources */,
-				8B5316351C9B23140094A6C4 /* GlanceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
