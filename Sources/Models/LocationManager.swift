@@ -15,7 +15,10 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
         $0.delegate = self
         if let value = self.desiredAccuracy { $0.desiredAccuracy = value }
         if let value = self.distanceFilter { $0.distanceFilter = value }
+        
+        #if os(iOS)
         if let value = self.activityType { $0.activityType = value }
+        #endif
         
         return $0
     }(CLLocationManager())
@@ -102,11 +105,13 @@ public extension LocationManager {
 // MARK: - CLLocationManager wrappers
 public extension LocationManager {
 
+    #if os(iOS)
     /// A Boolean value indicating whether the app wants to receive location updates when suspended.
     var allowsBackgroundLocationUpdates: Bool {
         get { return manager.allowsBackgroundLocationUpdates }
         set { manager.allowsBackgroundLocationUpdates = newValue }
     }
+    #endif
     
     /// Determines if location services is enabled and authorized for always or when in use.
     var isAuthorized: Bool {
@@ -122,13 +127,19 @@ public extension LocationManager {
     
     /// Starts the generation of updates that report the user’s current location.
     func startUpdating(enableBackground: Bool = false) {
+        #if os(iOS)
         manager.allowsBackgroundLocationUpdates = enableBackground
+        #endif
+        
         manager.startUpdatingLocation()
     }
     
     /// Stops the generation of location updates.
     func stopUpdating() {
+        #if os(iOS)
         manager.allowsBackgroundLocationUpdates = false
+        #endif
+        
         manager.stopUpdatingLocation()
     }
 }
