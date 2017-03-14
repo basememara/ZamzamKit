@@ -86,8 +86,6 @@
 		8B9A87951C9C20260087A251 /* Complicationable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A87941C9C20260087A251 /* Complicationable.swift */; };
 		8B9A87961C9C20260087A251 /* Complicationable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A87941C9C20260087A251 /* Complicationable.swift */; };
 		8BB376121CF8B8D6005E7F67 /* Restorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB376111CF8B8D6005E7F67 /* Restorable.swift */; };
-		8BB45FAB1C9BDA590070CE07 /* WatchConnectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */; };
-		8BB45FAD1C9BDA590070CE07 /* WatchConnectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */; };
 		8BB45FB51C9BDD180070CE07 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */; };
 		8BB45FB61C9BDD180070CE07 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */; };
 		8BB45FB71C9BDD180070CE07 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */; };
@@ -99,6 +97,8 @@
 		8BCB73D71CAD666900E20096 /* ExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73D61CAD666900E20096 /* ExtensionsTest.swift */; };
 		8BCB73DA1CAD69BF00E20096 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73D91CAD69BF00E20096 /* UITableView.swift */; };
 		8BCB73DC1CAD6BD700E20096 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73DB1CAD6BD700E20096 /* UICollectionView.swift */; };
+		8BD016841E77371A008F306E /* WatchSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD016831E77371A008F306E /* WatchSession.swift */; };
+		8BD016851E77371A008F306E /* WatchSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD016831E77371A008F306E /* WatchSession.swift */; };
 		8BD08EB51CE28ACA0051080A /* SCNetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */; };
 		8BD2D1961CA581890018AC2B /* Audible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD2D1951CA581890018AC2B /* Audible.swift */; };
 		8BD2D19E1CA583110018AC2B /* UIAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD2D19D1CA583110018AC2B /* UIAlertAction.swift */; };
@@ -337,7 +337,6 @@
 		8B8215491CA1613400C9FCC9 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeInterval.swift; path = Extensions/TimeInterval.swift; sourceTree = "<group>"; };
 		8B9A87941C9C20260087A251 /* Complicationable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Complicationable.swift; sourceTree = "<group>"; };
 		8BB376111CF8B8D6005E7F67 /* Restorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restorable.swift; sourceTree = "<group>"; };
-		8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchConnectable.swift; sourceTree = "<group>"; };
 		8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaults.swift; path = Extensions/UserDefaults.swift; sourceTree = "<group>"; };
 		8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableViewController.swift; path = Extensions/UITableViewController.swift; sourceTree = "<group>"; };
 		8BC4F8CC1E3B29800015BD31 /* UIApplication_iOS9.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIApplication_iOS9.swift; path = Extensions/UIApplication_iOS9.swift; sourceTree = "<group>"; };
@@ -345,6 +344,7 @@
 		8BCB73D61CAD666900E20096 /* ExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTest.swift; sourceTree = "<group>"; };
 		8BCB73D91CAD69BF00E20096 /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableView.swift; path = Extensions/UITableView.swift; sourceTree = "<group>"; };
 		8BCB73DB1CAD6BD700E20096 /* UICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UICollectionView.swift; path = Extensions/UICollectionView.swift; sourceTree = "<group>"; };
+		8BD016831E77371A008F306E /* WatchSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WatchSession.swift; path = Models/WatchSession.swift; sourceTree = "<group>"; };
 		8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCNetworkReachability.swift; path = Extensions/SCNetworkReachability.swift; sourceTree = "<group>"; };
 		8BD2D1951CA581890018AC2B /* Audible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Audible.swift; sourceTree = "<group>"; };
 		8BD2D19D1CA583110018AC2B /* UIAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIAlertAction.swift; path = Extensions/UIAlertAction.swift; sourceTree = "<group>"; };
@@ -577,7 +577,6 @@
 				8B9A87941C9C20260087A251 /* Complicationable.swift */,
 				8BB376111CF8B8D6005E7F67 /* Restorable.swift */,
 				8B5455DE1E5E3287000CB26A /* Segueable.swift */,
-				8BB45FAA1C9BDA590070CE07 /* WatchConnectable.swift */,
 				8BD61B351E3EFDF1009B537E /* ZamzamKitable.swift */,
 			);
 			path = Protocols;
@@ -714,6 +713,7 @@
 				8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */,
 				8B75286B1E759F2A0035A742 /* Observer.swift */,
 				8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */,
+				8BD016831E77371A008F306E /* WatchSession.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1141,7 +1141,7 @@
 				8B1EEC881CF7588600AE054B /* UIStoryboard.swift in Sources */,
 				8BFDB65E1C7518F800C94996 /* String.swift in Sources */,
 				8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */,
-				8BB45FAB1C9BDA590070CE07 /* WatchConnectable.swift in Sources */,
+				8BD016841E77371A008F306E /* WatchSession.swift in Sources */,
 				8B756F151E5CF16D00DE4B02 /* BaseNibView.swift in Sources */,
 				8B75286C1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BD2D19E1CA583110018AC2B /* UIAlertAction.swift in Sources */,
@@ -1172,6 +1172,7 @@
 				8B5316471C9B23BF0094A6C4 /* WKInterfaceController.swift in Sources */,
 				8B4CFAE91CABEF0800D2B1D7 /* Color.swift in Sources */,
 				8BD5086C1C99DD1E00AE205E /* Array.swift in Sources */,
+				8BD016851E77371A008F306E /* WatchSession.swift in Sources */,
 				8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8BFDB6781C751F2300C94996 /* FileManager.swift in Sources */,
 				8BF2106C1E48D52F0026B802 /* Result.swift in Sources */,
@@ -1231,7 +1232,6 @@
 				8B53160C1C9B22F60094A6C4 /* SecondViewController.swift in Sources */,
 				8B5316601C9B249E0094A6C4 /* LocationMeta.swift in Sources */,
 				8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */,
-				8BB45FAD1C9BDA590070CE07 /* WatchConnectable.swift in Sources */,
 				8B53160A1C9B22F50094A6C4 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
