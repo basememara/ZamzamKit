@@ -1,5 +1,5 @@
 //
-//  WatchConnector.swift
+//  WatchSession.swift
 //  ZamzamKit
 //
 //  Created by Basem Emara on 3/13/17.
@@ -10,21 +10,21 @@ import WatchConnectivity
 
 public class WatchSession: NSObject, WCSessionDelegate {
 
-    /// Returns the singleton session object for the current device.
     fileprivate var sessionDefault: WCSession? {
         guard WCSession.isSupported() else { return nil }
+        return WCSession.default()
+    }
+    
+    public override init() {
+        super.init()
         
-        let session = WCSession.default()
+        guard WCSession.isSupported() else { return }
         
-        if session.delegate?.isEqual(self) != true {
-            session.delegate = self
+        WCSession.default().delegate = self
+        
+        if WCSession.default().activationState != .activated {
+            WCSession.default().activate()
         }
-        
-        if session.activationState != .activated {
-            session.activate()
-        }
-        
-        return session
     }
     
     deinit {
@@ -41,13 +41,13 @@ public class WatchSession: NSObject, WCSessionDelegate {
     
     /// Subscription queues for firing within delegates
     fileprivate var activationDidCompleteSingle = SynchronizedArray<ActivationHandler>()
-    fileprivate var didBecomeInactive = SynchronizedArray<EmptyObserver>()
-    fileprivate var didDeactivate = SynchronizedArray<EmptyObserver>()
-    fileprivate var stateDidChange = SynchronizedArray<EmptyObserver>()
-    fileprivate var reachabilityDidChange = SynchronizedArray<ReachabilityChangeObserver>()
-    fileprivate var didReceiveApplicationContext = SynchronizedArray<DictionaryObserver>()
-    fileprivate var didReceiveUserInfo = SynchronizedArray<DictionaryObserver>()
-    fileprivate var didReceiveMessage = SynchronizedArray<DidReceiveMessageObserver>()
+    public var didBecomeInactive = SynchronizedArray<EmptyObserver>()
+    public var didDeactivate = SynchronizedArray<EmptyObserver>()
+    public var stateDidChange = SynchronizedArray<EmptyObserver>()
+    public var reachabilityDidChange = SynchronizedArray<ReachabilityChangeObserver>()
+    public var didReceiveApplicationContext = SynchronizedArray<DictionaryObserver>()
+    public var didReceiveUserInfo = SynchronizedArray<DictionaryObserver>()
+    public var didReceiveMessage = SynchronizedArray<DidReceiveMessageObserver>()
 }
 
 // MARK: - Nested types
@@ -129,10 +129,12 @@ public extension WatchSession {
     /// Request the one-time delivery of the user’s current location.
     ///
     /// - Parameter completion: The completion with the location object.
-    func activate(completion: @escaping ActivationHandler) {
-        guard let session = sessionDefault else { return completion(false) }
-        guard session.activationState != .activated else { return completion(true) }
-        activationDidCompleteSingle += completion
+    func activate(completion: ActivationHandler? = nil) {
+        guard let session = sessionDefault else { completion?(false); return }
+        guard session.activationState != .activated else { completion?(true); return }
+        if let completion = completion {
+            activationDidCompleteSingle += completion
+        }
         session.activate()
     }
 }
