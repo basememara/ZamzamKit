@@ -129,7 +129,7 @@ public extension SynchronizedArray {
     /// Adds a new element at the end of the array.
     ///
     /// - Parameter element: The element to append to the array.
-    func append( _ element: Element) {
+    func append(_ element: Element) {
         queue.async(flags: .barrier) {
             self.array.append(element)
         }
@@ -138,7 +138,7 @@ public extension SynchronizedArray {
     /// Adds new elements at the end of the array.
     ///
     /// - Parameter element: The elements to append to the array.
-    func append( _ elements: [Element]) {
+    func append(_ elements: [Element]) {
         queue.async(flags: .barrier) {
             self.array += elements
         }
@@ -149,7 +149,7 @@ public extension SynchronizedArray {
     /// - Parameters:
     ///   - element: The new element to insert into the array.
     ///   - index: The position at which to insert the new element.
-    func insert( _ element: Element, at index: Int) {
+    func insert(_ element: Element, at index: Int) {
         queue.async(flags: .barrier) {
             self.array.insert(element, at: index)
         }
