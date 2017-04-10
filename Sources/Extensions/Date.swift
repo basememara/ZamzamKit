@@ -38,6 +38,16 @@ public extension Date {
 // MARK: - Methods
 public extension Date {
 
+    /// Returns a string representation of a given date formatted using the receiver’s current settings.
+    ///
+    /// - Parameter format: The date format string used by the receiver.
+    /// - Returns: The string representation of the given date.
+    func string(format: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: self)
+    }
+
     func incrementDay(_ numberOfDays: Int = 1) -> Date {
         return Calendar.current.date(
             byAdding: .day,

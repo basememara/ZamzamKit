@@ -19,7 +19,15 @@ class DateTimeTests: XCTestCase {
             TimeInterval(172800 - Int(NSTimeZone.local.secondsFromGMT())))
         
         XCTAssertEqual(date, expected,
-            "Day of week should be \(expected)")
+            "Date should be \(expected)")
+    }
+    
+    func testDateToString() {
+        let date = Date(fromString: "1970/01/03 20:43")!
+        let expected = date.string(format: "MMM d, h:mm a")
+        
+        XCTAssertEqual("Jan 3, 8:43 PM", expected,
+            "Date string should be \(expected)")
     }
     
     func testGetCurrentTimeInDecimal() {
@@ -27,7 +35,7 @@ class DateTimeTests: XCTestCase {
         let expectedTime = 18.25
         
         XCTAssertEqual(time, expectedTime,
-            "Day of week should be \(expectedTime)")
+            "Time should be \(expectedTime)")
     }
     
     func testIncrementToday() {
@@ -55,7 +63,7 @@ class DateTimeTests: XCTestCase {
         let expectedDate = Date(fromString: "2050/02/16 05:06")
         
         XCTAssertEqual(incrementedDate, expectedDate,
-            "Incremented date by one should be \(expectedDate)")
+            "Incremented date by one should be \(String(describing: expectedDate))")
     }
     
     func testIncrementTwoDay() {
@@ -64,7 +72,7 @@ class DateTimeTests: XCTestCase {
         let expectedDate = Date(fromString: "1990/02/02 22:12")
         
         XCTAssertEqual(incrementedDate, expectedDate,
-            "Incremented date by two should be \(expectedDate)")
+            "Incremented date by two should be \(String(describing: expectedDate))")
     }
     
     func testIncrementLeapYearDay() {
@@ -73,7 +81,7 @@ class DateTimeTests: XCTestCase {
         let expectedDate = Date(fromString: "2016/03/01 13:12")
         
         XCTAssertEqual(incrementedDate, expectedDate,
-            "Incremented date by two should be \(expectedDate)")
+            "Incremented date by two should be \(String(describing: expectedDate))")
     }
     
     func testIncrementDayIfPast() {
@@ -82,7 +90,7 @@ class DateTimeTests: XCTestCase {
         let expectedDate = Date(fromString: "1999/01/16 10:15")
         
         XCTAssertEqual(incrementedDate, expectedDate,
-            "Incremented date if past should be \(expectedDate)")
+            "Incremented date if past should be \(String(describing: expectedDate))")
     }
     
     func testIncrementDayIfPastForFuture() {
@@ -91,7 +99,7 @@ class DateTimeTests: XCTestCase {
         let expectedDate = Date(fromString: "2050/01/15 10:15")
         
         XCTAssertEqual(incrementedDate, expectedDate,
-            "Incremented date if past should be \(expectedDate)")
+            "Incremented date if past should be \(String(describing: expectedDate))")
     }
     
     func testIncrementMinute() {
@@ -100,7 +108,7 @@ class DateTimeTests: XCTestCase {
         let expectedDate = Date(fromString: "2015/09/18 18:32")
         
         XCTAssertEqual(incrementedDate, expectedDate,
-            "Incremented date by minute should be \(expectedDate)")
+            "Incremented date by minute should be \(String(describing: expectedDate))")
     }
     
     func testIncrementNintyFiveMinutes() {
@@ -109,7 +117,7 @@ class DateTimeTests: XCTestCase {
         let expectedDate = Date(fromString: "2015/12/14 08:39")
         
         XCTAssertEqual(incrementedDate, expectedDate,
-            "Incremented date by 95 minutes should be \(expectedDate)")
+            "Incremented date by 95 minutes should be \(String(describing: expectedDate))")
     }
     
     func testIncrementDayByMinutes() {
@@ -118,7 +126,7 @@ class DateTimeTests: XCTestCase {
         let expectedDate = Date(fromString: "2015/04/03 13:20")
         
         XCTAssertEqual(incrementedDate, expectedDate,
-            "Incremented date by day's worth of minutes should be \(expectedDate)")
+            "Incremented date by day's worth of minutes should be \(String(describing: expectedDate))")
     }
     
     func testGetHijriDate() {

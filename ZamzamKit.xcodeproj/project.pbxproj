@@ -72,6 +72,9 @@
 		8B75286E1E759F2A0035A742 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75286B1E759F2A0035A742 /* Observer.swift */; };
 		8B756EF81E5C025A00DE4B02 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */; };
 		8B756F151E5CF16D00DE4B02 /* BaseNibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756F141E5CF16D00DE4B02 /* BaseNibView.swift */; };
+		8B79A4751E9C1ED800C8A5A4 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79A4741E9C1ED800C8A5A4 /* Locale.swift */; };
+		8B79A4761E9C1ED800C8A5A4 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79A4741E9C1ED800C8A5A4 /* Locale.swift */; };
+		8B79A4771E9C1ED800C8A5A4 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79A4741E9C1ED800C8A5A4 /* Locale.swift */; };
 		8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
@@ -328,6 +331,7 @@
 		8B75286B1E759F2A0035A742 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Observer.swift; path = Models/Observer.swift; sourceTree = "<group>"; };
 		8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UINavigationBar.swift; path = Extensions/UINavigationBar.swift; sourceTree = "<group>"; };
 		8B756F141E5CF16D00DE4B02 /* BaseNibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseNibView.swift; path = Models/BaseNibView.swift; sourceTree = "<group>"; };
+		8B79A4741E9C1ED800C8A5A4 /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Locale.swift; path = Extensions/Locale.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
 		8B8215411CA15E0D00C9FCC9 /* CLKComplicationServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLKComplicationServer.swift; path = Extensions/CLKComplicationServer.swift; sourceTree = "<group>"; };
 		8B8215491CA1613400C9FCC9 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeInterval.swift; path = Extensions/TimeInterval.swift; sourceTree = "<group>"; };
@@ -646,6 +650,7 @@
 				8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */,
 				8BFDB6631C751AE600C94996 /* URLComponents.swift */,
 				8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */,
+				8B79A4741E9C1ED800C8A5A4 /* Locale.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1126,6 +1131,7 @@
 				8BB376121CF8B8D6005E7F67 /* Restorable.swift in Sources */,
 				8BCB73DC1CAD6BD700E20096 /* UICollectionView.swift in Sources */,
 				8B5966131CD5E24A00738A12 /* UICollectionViewController.swift in Sources */,
+				8B79A4751E9C1ED800C8A5A4 /* Locale.swift in Sources */,
 				8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8B82154A1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8BB45FB51C9BDD180070CE07 /* UserDefaults.swift in Sources */,
@@ -1186,6 +1192,7 @@
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
 				8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */,
 				8B9A87951C9C20260087A251 /* Complicationable.swift in Sources */,
+				8B79A4761E9C1ED800C8A5A4 /* Locale.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1200,6 +1207,7 @@
 				8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6661C751AE600C94996 /* URLComponents.swift in Sources */,
 				8BF2106D1E48D52F0026B802 /* Result.swift in Sources */,
+				8B79A4771E9C1ED800C8A5A4 /* Locale.swift in Sources */,
 				8BD61B381E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
 				8BD508781C99E18500AE205E /* Collection.swift in Sources */,
 				8B4CFAEF1CABEF0900D2B1D7 /* Color.swift in Sources */,
