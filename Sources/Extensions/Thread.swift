@@ -8,9 +8,8 @@
 
 import Foundation
 
-extension Thread {
-
-    private typealias Block = @convention(block) () -> Void
+public extension Thread {
+    typealias Block = @convention(block) () -> Void
     
     /**
      Execute block, used internally for async/sync functions.

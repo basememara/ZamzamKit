@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 import ZamzamKit
 
 class FirstViewController: UIViewController {
@@ -15,18 +16,37 @@ class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
+        UNUserNotificationCenter.current().register(
+            actions: [UNNotificationAction(identifier: "show", title: "Tell me morezz…")],
+            completion: {
+                guard !$0, let settings = URL(string: UIApplicationOpenSettingsURLString) else { return }
+                self.presentAlert("Notification authorization not granted.",
+                    buttonText: "Settings",
+                    includeCancelAction: true) {
+                        UIApplication.shared.open(settings)
+                    }
+            }
+        )
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
-        let safariActivity = UIActivity.create("Open in Safari",
-            imageName: "safari-share",
-            imageBundle: ZamzamConstants.bundle) {
-                UIApplication.shared.open(NSURL(string: "http://apple.com")! as URL)
-            }
+        UNUserNotificationCenter.current().add(body: "This is the body for time intervale")
         
-        presentActivityViewController(["Some title", "Some link"], sourceView: sender,
-            applicationActivities: [safariActivity])
+        UNUserNotificationCenter.current().add(
+            body: "This is the body for time intervale",
+            title: "This is the title",
+            identifier: "abc123"
+        )
+        
+        UNUserNotificationCenter.current().add(date: Date(timeIntervalSinceNow: 5),
+            body: "This is the body for date",
+            repeats: .minute
+        )
     }
 
     @IBAction func barButtonTapped(_ sender: UIBarButtonItem) {

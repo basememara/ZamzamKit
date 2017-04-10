@@ -195,7 +195,13 @@ public extension UNUserNotificationCenter {
         
             add(request, withCompletionHandler: completion)
     }
+
+}
+
+@available(iOS 10, *)
+public extension UNUserNotificationCenter {
     
+    #if os(iOS)
     /// Schedules a local notification for delivery.
     ///
     /// - Parameters:
@@ -234,11 +240,7 @@ public extension UNUserNotificationCenter {
         
             add(request, withCompletionHandler: completion)
     }
-
-}
-
-@available(iOS 10, *)
-public extension UNUserNotificationCenter {
+    #endif
     
     /// Remove pending or delivered user notifications.
     ///

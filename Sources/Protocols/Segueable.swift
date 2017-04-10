@@ -21,7 +21,7 @@ public extension Segueable where Self: UIViewController, SegueIdentifier.RawValu
     
     func segueIdentifier(for segue: UIStoryboardSegue) -> SegueIdentifier {
         guard let identifier = segue.identifier, let segueIdentifier = SegueIdentifier(rawValue: identifier)
-            else { fatalError("Invalid segue identifier \(segue.identifier).") }
+            else { fatalError("Invalid segue identifier \(String(describing: segue.identifier)).") }
         
         return segueIdentifier
     }

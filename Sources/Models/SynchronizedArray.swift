@@ -12,6 +12,11 @@ import Foundation
 public class SynchronizedArray<Element> {
     fileprivate let queue = DispatchQueue(label: "io.zamzam.ZamzamKit.SynchronizedArray", attributes: .concurrent)
     fileprivate var array = [Element]()
+    
+    convenience init(_ array: [Element]) {
+        self.init()
+        self.array = array
+    }
 }
 
 // MARK: - Properties
@@ -69,10 +74,10 @@ public extension SynchronizedArray {
     ///
     /// - Parameter isIncluded: A closure that takes an element of the sequence as its argument and returns a Boolean value indicating whether the element should be included in the returned array.
     /// - Returns: An array of the elements that includeElement allowed.
-    func filter(_ isIncluded: (Element) -> Bool) -> [Element] {
-        var result = [Element]()
-        queue.sync { result = self.array.filter(isIncluded) }
-        return result
+    func filter(_ isIncluded: @escaping (Element) -> Bool) -> SynchronizedArray {
+        var result: SynchronizedArray?
+        queue.sync { result = SynchronizedArray(self.array.filter(isIncluded)) }
+        return result!
     }
     
     /// Returns the first index in which an element of the collection satisfies the given predicate.
@@ -89,10 +94,10 @@ public extension SynchronizedArray {
     ///
     /// - Parameter areInIncreasingOrder: A predicate that returns true if its first argument should be ordered before its second argument; otherwise, false.
     /// - Returns: A sorted array of the collection’s elements.
-    func sorted(by areInIncreasingOrder: (Element, Element) -> Bool) -> [Element] {
-        var result = [Element]()
-        queue.sync { result = self.array.sorted(by: areInIncreasingOrder) }
-        return result
+    func sorted(by areInIncreasingOrder: (Element, Element) -> Bool) -> SynchronizedArray {
+        var result: SynchronizedArray?
+        queue.sync { result = SynchronizedArray(self.array.sorted(by: areInIncreasingOrder)) }
+        return result!
     }
     
     /// Returns an array containing the non-nil results of calling the given transformation with each element of this sequence.
@@ -102,6 +107,16 @@ public extension SynchronizedArray {
     func flatMap<ElementOfResult>(_ transform: (Element) -> ElementOfResult?) -> [ElementOfResult] {
         var result = [ElementOfResult]()
         queue.sync { result = self.array.flatMap(transform) }
+        return result
+    }
+    
+    /// Returns an array containing the results of mapping the given closure over the sequence’s elements.
+    ///
+    /// - Parameter transform: A closure that accepts an element of this sequence as its argument and returns an optional value.
+    /// - Returns: An array of the non-nil results of calling transform with each element of the sequence.
+    func map<ElementOfResult>(_ transform: @escaping (Element) -> ElementOfResult) -> [ElementOfResult] {
+        var result = [ElementOfResult]()
+        queue.sync { result = self.array.map(transform) }
         return result
     }
 
@@ -167,17 +182,20 @@ public extension SynchronizedArray {
         }
     }
     
-    /// Removes and returns the element at the specified position.
+    /// Removes and returns the elements that meet the criteria.
     ///
     /// - Parameters:
     ///   - predicate: A closure that takes an element of the sequence as its argument and returns a Boolean value indicating whether the element is a match.
-    ///   - completion: The handler with the removed element.
-    func remove(where predicate: @escaping (Element) -> Bool, completion: ((Element?) -> Void)? = nil) {
+    ///   - completion: The handler with the removed elements.
+    func remove(where predicate: @escaping (Element) -> Bool, completion: (([Element]) -> Void)? = nil) {
         queue.async(flags: .barrier) {
-            var element: Element? = nil
-            defer { DispatchQueue.main.async { completion?(element) } }
-            guard let index = self.array.index(where: predicate) else { return }
-            element = self.array.remove(at: index)
+            var elements = [Element]()
+            
+            while let index = self.array.index(where: predicate) {
+                elements.append(self.array.remove(at: index))
+            }
+            
+            DispatchQueue.main.async { completion?(elements) }
         }
     }
 
