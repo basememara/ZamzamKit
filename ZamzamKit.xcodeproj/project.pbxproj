@@ -57,6 +57,8 @@
 		8B5316AE1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
 		8B5455DF1E5E3287000CB26A /* Segueable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5455DE1E5E3287000CB26A /* Segueable.swift */; };
 		8B5966131CD5E24A00738A12 /* UICollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5966121CD5E24A00738A12 /* UICollectionViewController.swift */; };
+		8B5D8A971E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */; };
+		8B5D8A981E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */; };
 		8B63B2C61CD959BC000F2B5F /* UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B63B2C51CD959BC000F2B5F /* UIBarButtonItem.swift */; };
 		8B63E4271CDB8DB00053C060 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B63E4261CDB8DB00053C060 /* UIImage.swift */; };
 		8B6A95611E46FBB9003F333D /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A95601E46FBB9003F333D /* Thread.swift */; };
@@ -323,6 +325,7 @@
 		8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dictionary.swift; path = Extensions/Dictionary.swift; sourceTree = "<group>"; };
 		8B5455DE1E5E3287000CB26A /* Segueable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segueable.swift; sourceTree = "<group>"; };
 		8B5966121CD5E24A00738A12 /* UICollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UICollectionViewController.swift; path = Extensions/UICollectionViewController.swift; sourceTree = "<group>"; };
+		8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationType.swift; sourceTree = "<group>"; };
 		8B63B2C51CD959BC000F2B5F /* UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIBarButtonItem.swift; path = Extensions/UIBarButtonItem.swift; sourceTree = "<group>"; };
 		8B63E4261CDB8DB00053C060 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImage.swift; path = Extensions/UIImage.swift; sourceTree = "<group>"; };
 		8B6A95601E46FBB9003F333D /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Thread.swift; path = Extensions/Thread.swift; sourceTree = "<group>"; };
@@ -517,6 +520,7 @@
 		8B1EEC641CF6AE5100AE054B /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */,
 				8BF2106A1E48D52F0026B802 /* Result.swift */,
 				8BEFE4781E4515D900100744 /* ScheduleInterval.swift */,
 				8B6A956C1E484D5A003F333D /* ZamzamError.swift */,
@@ -1145,6 +1149,7 @@
 				8B1EEC881CF7588600AE054B /* UIStoryboard.swift in Sources */,
 				8BFDB65E1C7518F800C94996 /* String.swift in Sources */,
 				8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */,
+				8B5D8A971E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */,
 				8BD016841E77371A008F306E /* WatchSession.swift in Sources */,
 				8B756F151E5CF16D00DE4B02 /* BaseNibView.swift in Sources */,
 				8B75286C1E759F2A0035A742 /* Observer.swift in Sources */,
@@ -1183,6 +1188,7 @@
 				8B0C71601E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B2DE3E21C8A86B2008F1569 /* Bundle.swift in Sources */,
 				8BFDB65F1C7518F800C94996 /* String.swift in Sources */,
+				8B5D8A981E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */,
 				8BB45FB61C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8BFDB6A11C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BBB66E21E9C000900AB1973 /* UNUserNotificationCenter.swift in Sources */,

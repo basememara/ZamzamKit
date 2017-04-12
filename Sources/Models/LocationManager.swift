@@ -8,7 +8,25 @@
 
 import CoreLocation
 
-public class LocationManager: NSObject, CLLocationManagerDelegate {
+public protocol LocationManagable {
+    typealias LocationObserver = Observer<LocationHandler>
+    typealias LocationHandler = (CLLocation) -> Void
+    typealias AuthorizationObserver = Observer<AuthorizationHandler>
+    typealias AuthorizationHandler = (Bool) -> Void
+    
+    var isAuthorized: Bool { get }
+    var didUpdateLocations: SynchronizedArray<LocationObserver> { get set }
+    var didChangeAuthorization: SynchronizedArray<AuthorizationObserver> { get set }
+    
+    init(desiredAccuracy: CLLocationAccuracy?, distanceFilter: Double?, activityType: CLActivityType?)
+    
+    func isAuthorized(for type: LocationAuthorizationType) -> Bool
+    func startUpdating(enableBackground: Bool)
+    func requestAuthorization(for type: LocationAuthorizationType, startUpdating: Bool, completion: AuthorizationHandler?)
+    func requestLocation(completion: @escaping LocationHandler)
+}
+
+public class LocationManager: NSObject, LocationManagable, CLLocationManagerDelegate {
 
     /// Internal Core Location manager
     fileprivate lazy var manager: CLLocationManager = {
@@ -28,7 +46,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     fileprivate let distanceFilter: Double?
     fileprivate let activityType: CLActivityType?
     
-    public init(
+    public required init(
         desiredAccuracy: CLLocationAccuracy? = nil,
         distanceFilter: Double? = nil,
         activityType: CLActivityType? = nil) {
@@ -54,26 +72,6 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
         didUpdateLocationsSingle.removeAll()
         didChangeAuthorization.removeAll()
         didChangeAuthorizationSingle.removeAll()
-    }
-}
-
-// MARK: - Nested types
-public extension LocationManager {
-
-    /// Location handler queue type.
-    typealias LocationObserver = Observer<LocationHandler>
-    typealias LocationHandler = (CLLocation) -> Void
-    
-    // Authorization handler queue type.
-    typealias AuthorizationObserver = Observer<AuthorizationHandler>
-    typealias AuthorizationHandler = (Bool) -> Void
-    
-    /// Permission types to use location services.
-    ///
-    /// - whenInUse: While the app is in the foreground.
-    /// - always: Whenever the app is running.
-    enum AuthorizationType {
-        case whenInUse, always
     }
 }
 
@@ -119,7 +117,7 @@ public extension LocationManager {
     }
     
     /// Determines if location services is enabled and authorized for the specified authorization type.
-    func isAuthorized(for type: AuthorizationType) -> Bool {
+    func isAuthorized(for type: LocationAuthorizationType) -> Bool {
         guard CLLocationManager.locationServicesEnabled() else { return false }
         return (type == .whenInUse && CLLocationManager.authorizationStatus() == .authorizedWhenInUse)
             || (type == .always && CLLocationManager.authorizationStatus() == .authorizedAlways)
@@ -153,7 +151,7 @@ public extension LocationManager {
     ///   - type: Type of permission required, whether in the foreground (.whenInUse) or while running (.always).
     ///   - startUpdating: Starts the generation of updates that report the user’s current location.
     ///   - completion: True if the authorization succeeded for the authorization type, false otherwise.
-    func requestAuthorization(for type: AuthorizationType = .whenInUse, startUpdating: Bool = false, completion: AuthorizationHandler? = nil) {
+    func requestAuthorization(for type: LocationAuthorizationType = .whenInUse, startUpdating: Bool = false, completion: AuthorizationHandler? = nil) {
         // Handle authorized and exit
         guard !isAuthorized(for: type) else {
             if startUpdating { self.startUpdating() }
