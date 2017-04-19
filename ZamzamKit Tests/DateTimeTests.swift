@@ -6,7 +6,6 @@
 //  Copyright © 2016 CocoaPods. All rights reserved.
 //
 
-import UIKit
 import XCTest
 @testable import ZamzamKit
 
@@ -147,6 +146,16 @@ class DateTimeTests: XCTestCase {
         
         XCTAssert(date.hasElapsed(seconds: 300, from: Date(fromString: "2016/03/22 09:40")!),
             "Date has elapsed.")
+    }
+	
+	func testIsWeekend() {
+		let date = Date()
+		XCTAssertEqual(date.isWeekend, Calendar.current.isDateInWeekend(date))
+	}
+    
+    func testIsWeekday() {
+        let date = Date()
+        XCTAssertEqual(date.isWeekday, !Calendar.current.isDateInWeekend(date))
     }
     
 }

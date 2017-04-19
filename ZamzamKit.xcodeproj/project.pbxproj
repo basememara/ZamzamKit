@@ -32,6 +32,21 @@
 		8B48E6251DAFFDA900087328 /* DictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6241DAFFDA900087328 /* DictionaryTests.swift */; };
 		8B48E6271DAFFDCD00087328 /* SequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6261DAFFDCD00087328 /* SequenceTests.swift */; };
 		8B48E6291DAFFDDA00087328 /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6281DAFFDDA00087328 /* ColorTests.swift */; };
+		8B4967B31EA7FFF700091A7D /* LocaleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4967B21EA7FFF700091A7D /* LocaleTests.swift */; };
+		8B4967B41EA8016D00091A7D /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6201DAFFD4100087328 /* ArrayTests.swift */; };
+		8B4967B51EA8017000091A7D /* BundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */; };
+		8B4967B61EA8017300091A7D /* CollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6221DAFFD8900087328 /* CollectionTests.swift */; };
+		8B4967B71EA8017500091A7D /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6281DAFFDDA00087328 /* ColorTests.swift */; };
+		8B4967B81EA8017600091A7D /* DateTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B271C72D71F00D4D437 /* DateTimeTests.swift */; };
+		8B4967B91EA8018100091A7D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3ED1C8A90AF008F1569 /* Settings.bundle */; };
+		8B4967BA1EA8018400091A7D /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EE1C8A90AF008F1569 /* Settings.plist */; };
+		8B4967BB1EA8018A00091A7D /* DictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6241DAFFDA900087328 /* DictionaryTests.swift */; };
+		8B4967BC1EA8018C00091A7D /* ExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73D61CAD666900E20096 /* ExtensionsTest.swift */; };
+		8B4967BE1EA8018F00091A7D /* LocaleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4967B21EA7FFF700091A7D /* LocaleTests.swift */; };
+		8B4967BF1EA8019100091A7D /* LocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB69C1C755A5300C94996 /* LocationTests.swift */; };
+		8B4967C01EA8019300091A7D /* SequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6261DAFFDCD00087328 /* SequenceTests.swift */; };
+		8B4967C11EA8019500091A7D /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B281C72D71F00D4D437 /* StringTests.swift */; };
+		8B4967C21EA8019700091A7D /* WebTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B291C72D71F00D4D437 /* WebTests.swift */; };
 		8B4CFAE91CABEF0800D2B1D7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
 		8B4CFAEF1CABEF0900D2B1D7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
 		8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316071C9B22F50094A6C4 /* AppDelegate.swift */; };
@@ -117,7 +132,6 @@
 		8BD61B3A1E3F04D0009B537E /* UISwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD61B391E3F04D0009B537E /* UISwitch.swift */; };
 		8BDA5E311E795DE300429F78 /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDA5E301E795DE300429F78 /* BackgroundTask.swift */; };
 		8BE19B0D1C72D6DF00D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; };
-		8BE19B1A1C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B191C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift */; };
 		8BE19B1C1C72D6F200D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447E21C7257F100043657 /* ZamzamKit.framework */; };
 		8BE19B2A1C72D71F00D4D437 /* FileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B231C72D71F00D4D437 /* FileTests.swift */; };
 		8BE19B2D1C72D71F00D4D437 /* DateTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B271C72D71F00D4D437 /* DateTimeTests.swift */; };
@@ -154,7 +168,6 @@
 		8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6721C751E4F00C94996 /* WKInterfaceGroup.swift */; };
 		8BFDB6771C751F2300C94996 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6761C751F2300C94996 /* FileManager.swift */; };
 		8BFDB6781C751F2300C94996 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6761C751F2300C94996 /* FileManager.swift */; };
-		8BFDB6791C751F2300C94996 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6761C751F2300C94996 /* FileManager.swift */; };
 		8BFDB67D1C7525BD00C94996 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB67C1C7525BD00C94996 /* CLLocation.swift */; };
 		8BFDB67E1C7525BD00C94996 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB67C1C7525BD00C94996 /* CLLocation.swift */; };
 		8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB67C1C7525BD00C94996 /* CLLocation.swift */; };
@@ -299,6 +312,7 @@
 		8B48E6241DAFFDA900087328 /* DictionaryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryTests.swift; sourceTree = "<group>"; };
 		8B48E6261DAFFDCD00087328 /* SequenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceTests.swift; sourceTree = "<group>"; };
 		8B48E6281DAFFDDA00087328 /* ColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorTests.swift; sourceTree = "<group>"; };
+		8B4967B21EA7FFF700091A7D /* LocaleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaleTests.swift; sourceTree = "<group>"; };
 		8B5316051C9B22F40094A6C4 /* ZamzamKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZamzamKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5316071C9B22F50094A6C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B5316091C9B22F50094A6C4 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -357,8 +371,6 @@
 		8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE19B0C1C72D6DF00D4D437 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BE19B171C72D6F200D4D437 /* ZamzamKit tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BE19B191C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZamzamKit_tvOSTests.swift; sourceTree = "<group>"; };
-		8BE19B1B1C72D6F200D4D437 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BE19B231C72D71F00D4D437 /* FileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTests.swift; sourceTree = "<group>"; };
 		8BE19B271C72D71F00D4D437 /* DateTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeTests.swift; sourceTree = "<group>"; };
 		8BE19B281C72D71F00D4D437 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
@@ -450,8 +462,7 @@
 			children = (
 				8B14476A1C722D3900043657 /* Metadata */,
 				8B1447511C72237E00043657 /* Sources */,
-				8BE19B091C72D6DF00D4D437 /* ZamzamKit iOSTests */,
-				8BE19B181C72D6F200D4D437 /* ZamzamKit tvOSTests */,
+				8BE19B091C72D6DF00D4D437 /* ZamzamKit Tests */,
 				8B5316061C9B22F40094A6C4 /* ZamzamKit Example */,
 				8B53161C1C9B23140094A6C4 /* ZamzamKit Example Watch */,
 				8B53162B1C9B23140094A6C4 /* ZamzamKit Example Watch Extension */,
@@ -591,24 +602,27 @@
 			name = Deprecated;
 			sourceTree = "<group>";
 		};
-		8BE19B091C72D6DF00D4D437 /* ZamzamKit iOSTests */ = {
+		8BE19B091C72D6DF00D4D437 /* ZamzamKit Tests */ = {
 			isa = PBXGroup;
 			children = (
-				8BFDB6941C75388F00C94996 /* Extensions */,
+				8B48E6201DAFFD4100087328 /* ArrayTests.swift */,
+				8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */,
+				8B48E6221DAFFD8900087328 /* CollectionTests.swift */,
+				8B48E6281DAFFDDA00087328 /* ColorTests.swift */,
+				8BE19B271C72D71F00D4D437 /* DateTimeTests.swift */,
+				8B48E6241DAFFDA900087328 /* DictionaryTests.swift */,
+				8BCB73D61CAD666900E20096 /* ExtensionsTest.swift */,
+				8BE19B231C72D71F00D4D437 /* FileTests.swift */,
+				8B4967B21EA7FFF700091A7D /* LocaleTests.swift */,
+				8BFDB69C1C755A5300C94996 /* LocationTests.swift */,
+				8B48E6261DAFFDCD00087328 /* SequenceTests.swift */,
+				8BE19B281C72D71F00D4D437 /* StringTests.swift */,
+				8BE19B291C72D71F00D4D437 /* WebTests.swift */,
 				8B2DE3ED1C8A90AF008F1569 /* Settings.bundle */,
 				8B2DE3EE1C8A90AF008F1569 /* Settings.plist */,
 				8BE19B0C1C72D6DF00D4D437 /* Info.plist */,
 			);
-			path = "ZamzamKit iOSTests";
-			sourceTree = "<group>";
-		};
-		8BE19B181C72D6F200D4D437 /* ZamzamKit tvOSTests */ = {
-			isa = PBXGroup;
-			children = (
-				8BE19B191C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift */,
-				8BE19B1B1C72D6F200D4D437 /* Info.plist */,
-			);
-			path = "ZamzamKit tvOSTests";
+			path = "ZamzamKit Tests";
 			sourceTree = "<group>";
 		};
 		8BE19B591C72D8FF00D4D437 /* Products */ = {
@@ -628,8 +642,8 @@
 		8BFDB65C1C75187800C94996 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				8BFDB6751C751E9300C94996 /* watchOS */,
 				8BFDB6741C751E8E00C94996 /* iOS */,
+				8BFDB6751C751E9300C94996 /* watchOS */,
 				8BD5086A1C99DD1E00AE205E /* Array.swift */,
 				8B2DE3E01C8A86B2008F1569 /* Bundle.swift */,
 				8BFDB67C1C7525BD00C94996 /* CLLocation.swift */,
@@ -641,6 +655,7 @@
 				8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */,
 				8BCB73CD1CAD660D00E20096 /* Equatable.swift */,
 				8BFDB6761C751F2300C94996 /* FileManager.swift */,
+				8B79A4741E9C1ED800C8A5A4 /* Locale.swift */,
 				8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */,
 				8BE814FC1C7842DC005F23CE /* Sequence.swift */,
 				8BFDB65D1C7518F800C94996 /* String.swift */,
@@ -650,7 +665,6 @@
 				8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */,
 				8BFDB6631C751AE600C94996 /* URLComponents.swift */,
 				8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */,
-				8B79A4741E9C1ED800C8A5A4 /* Locale.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -685,25 +699,6 @@
 				8B5316461C9B23BF0094A6C4 /* WKInterfaceController.swift */,
 			);
 			name = watchOS;
-			sourceTree = "<group>";
-		};
-		8BFDB6941C75388F00C94996 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				8B48E6201DAFFD4100087328 /* ArrayTests.swift */,
-				8B48E6221DAFFD8900087328 /* CollectionTests.swift */,
-				8B48E6281DAFFDDA00087328 /* ColorTests.swift */,
-				8BE19B271C72D71F00D4D437 /* DateTimeTests.swift */,
-				8B48E6241DAFFDA900087328 /* DictionaryTests.swift */,
-				8BCB73D61CAD666900E20096 /* ExtensionsTest.swift */,
-				8BE19B231C72D71F00D4D437 /* FileTests.swift */,
-				8BFDB69C1C755A5300C94996 /* LocationTests.swift */,
-				8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */,
-				8B48E6261DAFFDCD00087328 /* SequenceTests.swift */,
-				8BE19B281C72D71F00D4D437 /* StringTests.swift */,
-				8BE19B291C72D71F00D4D437 /* WebTests.swift */,
-			);
-			name = Extensions;
 			sourceTree = "<group>";
 		};
 		8BFDB6A51C75B4B200C94996 /* Models */ = {
@@ -1089,6 +1084,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B4967B91EA8018100091A7D /* Settings.bundle in Resources */,
+				8B4967BA1EA8018400091A7D /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1222,7 +1219,6 @@
 				8BE814FF1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8BD5086D1C99DD1E00AE205E /* Array.swift in Sources */,
 				8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */,
-				8BFDB6791C751F2300C94996 /* FileManager.swift in Sources */,
 				8B0C71611E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */,
 				8BEFE47B1E4515D900100744 /* ScheduleInterval.swift in Sources */,
@@ -1270,6 +1266,7 @@
 				8BE19B2F1C72D71F00D4D437 /* WebTests.swift in Sources */,
 				8B48E6211DAFFD4100087328 /* ArrayTests.swift in Sources */,
 				8BFDB69D1C755A5300C94996 /* LocationTests.swift in Sources */,
+				8B4967B31EA7FFF700091A7D /* LocaleTests.swift in Sources */,
 				8BE19B2A1C72D71F00D4D437 /* FileTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1278,7 +1275,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BE19B1A1C72D6F200D4D437 /* ZamzamKit_tvOSTests.swift in Sources */,
+				8B4967BF1EA8019100091A7D /* LocationTests.swift in Sources */,
+				8B4967C01EA8019300091A7D /* SequenceTests.swift in Sources */,
+				8B4967B41EA8016D00091A7D /* ArrayTests.swift in Sources */,
+				8B4967B71EA8017500091A7D /* ColorTests.swift in Sources */,
+				8B4967BC1EA8018C00091A7D /* ExtensionsTest.swift in Sources */,
+				8B4967B61EA8017300091A7D /* CollectionTests.swift in Sources */,
+				8B4967B51EA8017000091A7D /* BundleTests.swift in Sources */,
+				8B4967C21EA8019700091A7D /* WebTests.swift in Sources */,
+				8B4967B81EA8017600091A7D /* DateTimeTests.swift in Sources */,
+				8B4967BB1EA8018A00091A7D /* DictionaryTests.swift in Sources */,
+				8B4967C11EA8019500091A7D /* StringTests.swift in Sources */,
+				8B4967BE1EA8018F00091A7D /* LocaleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1665,7 +1673,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "ZamzamKit iOSTests/Info.plist";
+				INFOPLIST_FILE = "ZamzamKit Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1677,7 +1685,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "ZamzamKit iOSTests/Info.plist";
+				INFOPLIST_FILE = "ZamzamKit Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1689,7 +1697,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "ZamzamKit tvOSTests/Info.plist";
+				INFOPLIST_FILE = "ZamzamKit Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1702,7 +1710,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "ZamzamKit tvOSTests/Info.plist";
+				INFOPLIST_FILE = "ZamzamKit Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

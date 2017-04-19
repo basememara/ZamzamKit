@@ -6,7 +6,6 @@
 //  Copyright © 2016 CocoaPods. All rights reserved.
 //
 
-import UIKit
 import XCTest
 @testable import ZamzamKit
 

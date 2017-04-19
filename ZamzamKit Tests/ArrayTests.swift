@@ -6,7 +6,6 @@
 //  Copyright © 2016 Zamzam. All rights reserved.
 //
 
-import Foundation
 import XCTest
 @testable import ZamzamKit
 

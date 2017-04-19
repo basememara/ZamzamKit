@@ -1,15 +1,14 @@
 //
-//  ColorTests.swift
+//  SequenceTests.swift
 //  ZamzamKit
 //
 //  Created by Basem Emara on 10/13/16.
 //  Copyright © 2016 Zamzam. All rights reserved.
 //
 
-import UIKit
 import XCTest
 @testable import ZamzamKit
 
-class ColorTests: XCTestCase {
+class SequenceTests: XCTestCase {
 
 }

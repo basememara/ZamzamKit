@@ -6,9 +6,8 @@
 //  Copyright © 2016 Zamzam. All rights reserved.
 //
 
-import UIKit
-import CoreLocation
 import XCTest
+import CoreLocation
 @testable import ZamzamKit
 
 class LocationTests: XCTestCase {

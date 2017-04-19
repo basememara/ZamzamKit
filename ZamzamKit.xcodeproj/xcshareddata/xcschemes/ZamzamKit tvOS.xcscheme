@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8BE19B161C72D6F200D4D437"
+               BuildableName = "ZamzamKit tvOSTests.xctest"
+               BlueprintName = "ZamzamKit tvOSTests"
+               ReferencedContainer = "container:ZamzamKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8B1447E11C7257F100043657"
+            BuildableName = "ZamzamKit.framework"
+            BlueprintName = "ZamzamKit tvOS"
+            ReferencedContainer = "container:ZamzamKit.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
