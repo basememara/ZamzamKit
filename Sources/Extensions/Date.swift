@@ -24,6 +24,16 @@ public extension Date {
     var isToday: Bool {
         return Calendar.current.isDateInToday(self)
     }
+	
+	/// Determines if date is within a weekend period.
+	var isWeekend: Bool {
+		return Calendar.current.isDateInWeekend(self)
+	}
+    
+    /// Determines if date is within a weekday period.
+    var isWeekday: Bool {
+        return !Calendar.current.isDateInWeekend(self)
+    }
     
     /// Gets the beginning of the day.
     var startOfDay: Date {
