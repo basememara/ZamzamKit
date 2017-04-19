@@ -259,3 +259,11 @@ public extension String {
 		return self[lowerIndex..<upperIndex]
 	}
 }
+
+public extension Optional where Wrapped == String {
+
+    /// A Boolean value indicating whether a string is `nil` or has no characters.
+    var isNilOrEmpty: Bool {
+        return self?.isEmpty ?? true
+    }
+}

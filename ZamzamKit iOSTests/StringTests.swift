@@ -63,4 +63,19 @@ class StringTests: XCTestCase {
 	func testRandom() {
 		XCTAssertEqual(String(random: 10).characters.count, 10)
 	}
+	
+	func testIsNilOrEmpty() {
+        var test: String?
+        
+		XCTAssertTrue(test.isNilOrEmpty)
+        XCTAssertFalse(!test.isNilOrEmpty)
+        
+        test = ""
+		XCTAssertTrue(test.isNilOrEmpty)
+        XCTAssertFalse(!test.isNilOrEmpty)
+        
+        test = "abc"
+		XCTAssertFalse(test.isNilOrEmpty)
+        XCTAssertTrue(!test.isNilOrEmpty)
+	}
 }
