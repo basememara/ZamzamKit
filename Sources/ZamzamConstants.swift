@@ -38,12 +38,6 @@ public struct ZamzamConstants {
         public static let ALPHANUMERIC = "^[A-Za-z0-9]+$"
     }
     
-    public struct Path {
-        public static let DOCUMENTS = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        public static let DOCUMENTS_URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        public static let TMP = NSTemporaryDirectory()
-    }
-    
     public struct Location {
         public static let DEG_TO_RAD = 0.017453292519943295769236907684886
         public static let EARTH_RADIUS_IN_METERS = 6372797.560856

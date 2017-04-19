@@ -23,7 +23,7 @@ public extension UITableView {
      - parameter bundleIdentifier: Name of the bundle identifier if not local.
      */
     func registerNib(_ nibName: String, cellIdentifier: String = defaultCellIdentifier, bundleIdentifier: String? = nil) {
-        self.register(UINib(nibName: nibName,
+        register(UINib(nibName: nibName,
             bundle: bundleIdentifier != nil ? Bundle(identifier: bundleIdentifier!) : nil),
             forCellReuseIdentifier: cellIdentifier)
     }
@@ -36,7 +36,7 @@ public extension UITableView {
      - returns: Returns the table view cell.
      */
     subscript(indexPath: IndexPath) -> UITableViewCell {
-        return self.dequeueReusableCell(withIdentifier: UITableView.defaultCellIdentifier, for: indexPath)
+        return dequeueReusableCell(withIdentifier: UITableView.defaultCellIdentifier, for: indexPath)
     }
 
     /**
@@ -48,7 +48,7 @@ public extension UITableView {
      - returns: Returns the table view cell.
      */
     subscript(indexPath: IndexPath, identifier: String) -> UITableViewCell {
-        return self.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        return dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
 
 }

@@ -10,22 +10,38 @@ import Foundation
 
 public extension Date {
     
+    /// Determines if date is in the past.
     var isPast: Bool {
-        return self.compare(Date()) == .orderedAscending
+        return compare(Date()) == .orderedAscending
     }
     
+    /// Determines if date is in the future.
     var isFuture: Bool {
-        return !self.isPast
+        return !isPast
     }
     
+    /// Determines if date is in today's date.
+    var isToday: Bool {
+        return Calendar.current.isDateInToday(self)
+    }
+    
+    /// Gets the beginning of the day.
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+    
+    /// Gets the decimal representation of the time.
     var timeToDecimal: Double {
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.hour, .minute],
-            from: self)
+        let components = calendar.dateComponents([.hour, .minute], from: self)
         let hour = components.hour
         let minutes = components.minute
         return Double(hour!) + (Double(minutes!) / 60.0)
     }
+}
+
+// MARK: - String helpers
+public extension Date {
     
     init?(fromString: String, dateFormat: String = "yyyy/MM/dd HH:mm") {
         guard let date = DateFormatter(dateFormat: dateFormat).date(from: fromString),
@@ -33,45 +49,64 @@ public extension Date {
         
         self.init(timeInterval: 0, since: date)
     }
-}
-
-// MARK: - Methods
-public extension Date {
 
     /// Returns a string representation of a given date formatted using the receiver’s current settings.
     ///
     /// - Parameter format: The date format string used by the receiver.
     /// - Returns: The string representation of the given date.
-    func string(format: String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
+    func string(format: String, timeZone: TimeZone? = nil) -> String {
+        let formatter = DateFormatter(dateFormat: format)
+        
+        if let timeZone = timeZone {
+            formatter.timeZone = timeZone
+        }
+        
         return formatter.string(from: self)
     }
+}
 
-    func incrementDay(_ numberOfDays: Int = 1) -> Date {
+// MARK: - Calculation helpers
+public extension Date {
+
+    func increment(years: Int) -> Date {
+        return Calendar.current.date(
+            byAdding: .year,
+            value: years,
+            to: self
+        )!
+    }
+
+    func increment(months: Int) -> Date {
+        return Calendar.current.date(
+            byAdding: .month,
+            value: months,
+            to: self
+        )!
+    }
+
+    func increment(days: Int) -> Date {
         return Calendar.current.date(
             byAdding: .day,
-            value: numberOfDays,
+            value: days,
             to: self
         )!
     }
     
-    func incrementMinutes(_ numberOfMinutes: Int = 1) -> Date {
+    func increment(minutes: Int) -> Date {
         return Calendar.current.date(
             byAdding: .minute,
-            value: numberOfMinutes,
+            value: minutes,
             to: self
         )!
     }
     
     func incrementDayIfPast() -> Date {
-        return self.isPast
-            ? self.incrementDay() : self
+        return self.isPast ? self.increment(days: 1) : self
     }
     
-    func countdown(_ date: Date)  -> (span: Double, remaining: Double, percent: Double) {
+    func countdown(from date: Date)  -> (span: Double, remaining: Double, percent: Double) {
         // Calculate span time
-        var timeSpan = date.timeToDecimal - self.timeToDecimal
+        var timeSpan = date.timeToDecimal - timeToDecimal
         if timeSpan < 0 {
             timeSpan += 24
         }
@@ -96,61 +131,50 @@ public extension Date {
      
      - returns: Has the time elapsed the time window.
      */
-    func hasElapsed(_ seconds: Int, fromDate: Date = Date()) -> Bool {
-        return fromDate.timeIntervalSince(self).seconds > seconds
+    func hasElapsed(seconds: Int, from date: Date = Date()) -> Bool {
+        return date.timeIntervalSince(self).seconds > seconds
     }
 }
-
 
 // MARK: - Islamic calendar
 public extension Date {
 
-    func toHijriString(
-        _ unit: Set<Calendar.Component>? = nil,
-        format: String? = nil,
-        offSet: Int = 0) -> String {
+    func hijriString(unit: Set<Calendar.Component>? = nil, format: String? = nil, offSet: Int = 0) -> String {
             let calendar = Calendar(identifier: .islamicCivil)
             let flags = unit ?? [.year, .month, .day, .hour, .minute, .second]
             var date = self
             
             // Handle offset if applicable
             if offSet != 0 {
-                date = calendar
-                    .date(byAdding: .day,
-                        value: offSet,
-                        to: date
-                    )!
+                date = calendar.date(byAdding: .day,
+                    value: offSet,
+                    to: date
+                )!
             }
             
             let components = calendar.dateComponents(flags, from: date)
-            
             let formatter = DateFormatter()
-            if let f = format {
-                formatter.dateFormat = f
-            } else {
-                formatter.dateStyle = .long
-            }
+        
             formatter.calendar = calendar
+            
+            if let f = format { formatter.dateFormat = f }
+            else { formatter.dateStyle = .long }
             
             return formatter.string(from: calendar.date(from: components)!)
     }
     
-    func toHijri(
-        _ offSet: Int = 0) -> DateComponents {
-            let calendar = Calendar(identifier: .islamicCivil)
-            var date = self
-            
-            // Handle offset if applicable
-            if offSet != 0 {
-                date = calendar
-                    .date(byAdding: .day,
-                        value: offSet,
-                        to: date
-                    )!
-            }
-            
-            return calendar.dateComponents([.year, .month, .day, .hour, .minute, .second],
-                from: date)
+    func hijri(offSet: Int = 0) -> DateComponents {
+        let calendar = Calendar(identifier: .islamicCivil)
+        var date = self
+        
+        // Handle offset if applicable
+        if offSet != 0 {
+            date = calendar.date(byAdding: .day,
+                value: offSet,
+                to: date
+            )!
+        }
+        
+        return calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
     }
-    
 }

@@ -25,7 +25,7 @@ class FirstViewController: UIViewController {
             actions: [UNNotificationAction(identifier: "show", title: "Tell me morezz…")],
             completion: {
                 guard !$0, let settings = URL(string: UIApplicationOpenSettingsURLString) else { return }
-                self.presentAlert("Notification authorization not granted.",
+                self.present(alert: "Notification authorization not granted.",
                     buttonText: "Settings",
                     includeCancelAction: true) {
                         UIApplication.shared.open(settings)
@@ -50,7 +50,7 @@ class FirstViewController: UIViewController {
     }
 
     @IBAction func barButtonTapped(_ sender: UIBarButtonItem) {
-        presentActivityViewController(["Some title", "Some link"], barButtonItem: sender)
+        present(activities: ["Some title", "Some link"], barButtonItem: sender)
     }
     
 }

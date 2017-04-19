@@ -16,11 +16,11 @@ public extension CLLocation {
      - parameter coordinates: Latitude and longitude] coordinates
      - parameter completion: Async callback with retrived data
      */
-    func getMeta(_ complete: @escaping (_ locationMeta: LocationMeta?) -> Void) {
+    func getMeta(completion: @escaping (LocationMeta?) -> Void) {
         // Reverse geocode stored coordinates
         CLGeocoder().reverseGeocodeLocation(self) { placemarks, error in
             // Validate values
-            guard let mark = placemarks?[0], error == nil else { return complete(nil) }
+            guard let mark = placemarks?[0], error == nil else { return completion(nil) }
             
             // Get timezone if applicable
             var timezone: String?
@@ -38,7 +38,7 @@ public extension CLLocation {
             }
             
             // Process callback
-            complete(LocationMeta(
+            completion(LocationMeta(
                 coordinates: (self.coordinate.latitude, self.coordinate.longitude),
                 locality: mark.locality,
                 country: mark.country,

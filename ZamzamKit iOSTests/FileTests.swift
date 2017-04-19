@@ -20,8 +20,8 @@ class FileTests: XCTestCase {
         
         // Create blank files for testing
         do {
-            try "Some text".write(toFile: fileInDocumentsDirectory(fileName), atomically: true, encoding: String.Encoding.utf8)
-            try "Some text 2".write(toFile: fileInDocumentsDirectory(fileName2), atomically: true, encoding: String.Encoding.utf8)
+            try "Some text".write(toFile: fileInDocumentsDirectory(fileName), atomically: true, encoding: .utf8)
+            try "Some text 2".write(toFile: fileInDocumentsDirectory(fileName2), atomically: true, encoding: .utf8)
         } catch {
             print("Could not create files!")
         }
@@ -40,14 +40,14 @@ class FileTests: XCTestCase {
     }
     
     func testGetDocumentPath() {
-        let value = FileManager.default.getDocumentPath(fileName)
+        let value = FileManager.default.path(of: fileName)
         
         XCTAssert(FileManager.default.fileExists(atPath: value),
             "The file location path for \(fileName) seems incorrect (file doesn't exist)")
     }
     
     func testGetDocumentPaths() {
-        let value = FileManager.default.getDocumentPaths()
+        let value = FileManager.default.paths()
         let expectedValue = [
             fileInDocumentsDirectory(fileName),
             fileInDocumentsDirectory(fileName2)
@@ -70,8 +70,7 @@ class FileTests: XCTestCase {
     }
     
     func getDocumentsURL() -> URL {
-        let documentsURL = FileManager.default.urls(
-            for: .documentDirectory, in: .userDomainMask)[0]
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return documentsURL
     }
     

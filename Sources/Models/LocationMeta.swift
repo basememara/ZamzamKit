@@ -8,8 +8,7 @@
 
 import Foundation
 
-public struct LocationMeta {
-    
+public struct LocationMeta: CustomStringConvertible {
     public var coordinates: (latitude: Double, longitude: Double)?
     public var locality: String?
     public var country: String?
@@ -17,7 +16,7 @@ public struct LocationMeta {
     public var timezone: String?
     public var administrativeArea: String?
     
-    public func toString() -> String {
+    public var description: String {
         if let l = locality, let c = countryCode {
             return "\(l), \(c)"
         } else if let l = locality {
@@ -28,5 +27,4 @@ public struct LocationMeta {
         
         return ""
     }
-    
 }

@@ -12,8 +12,8 @@ import WatchKit
 public extension WKInterfaceController {
     
     /// Presents an alert or action sheet over the current interface controller.
-    func presentAlert(
-        title: String,
+    func present(
+        alert title: String,
         message: String? = nil,
         buttonText: String = "OK",
         alertControllerStyle: WKAlertControllerStyle = .alert,

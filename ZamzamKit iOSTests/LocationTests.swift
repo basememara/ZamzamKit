@@ -14,26 +14,27 @@ import XCTest
 class LocationTests: XCTestCase {
     
     func testMetaData() {
-        let expectation = self.expectation(description: "fetch location")
+        let asyncExpect = expectation(description: "fetch location")
         let value = CLLocation(latitude: 43.7, longitude: -79.4)
         let expected = "Toronto, CA"
     
-        value.getMeta { (locationMeta: LocationMeta?) in
-            defer {
-                expectation.fulfill()
-            }
+        value.getMeta {
+            defer { asyncExpect.fulfill() }
             
-            guard let locality = locationMeta?.locality,
-                let countryCode = locationMeta?.countryCode else {
+            guard let locality = $0?.locality,
+                let countryCode = $0?.countryCode else {
                     XCTFail("Could not retrieve address meta data.")
                     return
             }
             
             XCTAssertEqual("\(locality), \(countryCode)", expected,
                 "The location should be \(expected)")
+            
+            XCTAssertEqual($0?.description, expected,
+                "The location should be \(expected)")
         }
         
-        self.waitForExpectations(timeout: 5.0, handler: nil)
+        waitForExpectations(timeout: 5.0)
     }
 
     
