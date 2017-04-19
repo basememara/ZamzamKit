@@ -1,15 +1,18 @@
 # ZamzamKit
 
-[![Carthage](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![License](https://img.shields.io/cocoapods/l/ZamzamKit.svg?style=flat)](http://cocoapods.org/pods/ZamzamKit)
-[![Platform](https://img.shields.io/cocoapods/p/ZamzamKit.svg?style=flat)](http://cocoapods.org/pods/ZamzamKit)
+[![Build Status](https://api.travis-ci.org/ZamzamInc/ZamzamKit.svg?branch=master)](https://travis-ci.org/ZamzamInc/ZamzamKit)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-Compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Platform](https://img.shields.io/cocoapods/p/ZamzamKit.svg?style=flat)](https://github.com/ZamzamInc/ZamzamKit)
+[![Swift](https://img.shields.io/badge/Swift-3.1-orange.svg)](https://swift.org)
+[![Xcode](https://img.shields.io/badge/Xcode-8.3-blue.svg)](https://developer.apple.com/xcode)
+[![MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
 ZamzamKit a Swift framework for rapid development using a collection of small utility extensions for NSFoundation and UIKit classes and protocols.
 
 ## Usage
 
-###NSFoundation
-####Array + get
+### Foundation
+#### Array + get
 ```
 // Before
 if let items = tabBarController.tabBar.items where items.count > 4 {
@@ -20,7 +23,7 @@ if let items = tabBarController.tabBar.items where items.count > 4 {
 // After
 tabBarController.tabBar.items?.get(3)?.selectedImage = UIImage("my-image")
 ```
-####SCNetworkReachability + online
+#### SCNetworkReachability + online
 ```
 // Before
 var zeroAddress = sockaddr_in()
@@ -44,7 +47,7 @@ let isOnline = isReachable && !needsConnection
 // After
 let isOnline = SCNetworkReachability.isOnline
 ```
-####SequenceType + json
+#### SequenceType + json
 ```
 // Before
 guard let data = myModel as? [[String: Any]],
@@ -57,7 +60,7 @@ let json = NSString(data: stringData, encoding: NSUTF8StringEncoding) as? String
 // After
 let json = myModel.jsonString
 ```
-####NSBundle + contents
+#### Bundle + contents
 ```
 // Before
 guard let contents = NSDictionary(contentsOfURL: bundleURL.URLByAppendingPathComponent("Settings.plist"))
@@ -72,7 +75,7 @@ let values: [String : Any] = preferences
 // After
 let values = NSBundle.contentsOfFile(plistName: "Settings.plist")
 ```
-####NSBundle + string
+#### Bundle + string
 ```
 // Before
 guard let resourcePath = (bundle ?? NSBundle.mainBundle()).pathForResource(fileName, ofType: nil, inDirectory: inDirectory)
@@ -84,8 +87,8 @@ let value = try? String(contentsOfFile: resourcePath, encoding: encoding)
 // After
 let value = NSBundle.stringOfFile(fileName: "my-test-file.txt")
 ```
-###UIKit
-####UIViewController + alert
+### UIKit
+#### UIViewController + alert
 ```
 // Before
 class MyViewController: UIViewController {
@@ -108,7 +111,7 @@ class MyViewController: UIViewController {
     }
 }
 ```
-####UIViewController + Safari
+#### UIViewController + Safari
 ```
 // Before
 class MyViewController: UIViewController {
@@ -128,7 +131,7 @@ class MyViewController: UIViewController {
     }
 }
 ```
-####UITableView/UICollectionView + subscript
+#### UITableView/UICollectionView + subscript
 ```
 // Before
 let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
@@ -137,7 +140,7 @@ let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: ind
 // After
 let cell = tableView[indexPath]
 ```
-####UIColors + hex
+#### UIColors + hex
 ```
 // Before
 let hexColor = UIColor(
@@ -150,7 +153,7 @@ let hexColor = UIColor(
 // After
 let hexColor = UIColor(hex: 0x990000)
 ```
-####UIColors + rgb
+#### UIColors + rgb
 ```
 // Before
 let rgbColor = UIColor(
@@ -163,7 +166,7 @@ let rgbColor = UIColor(
 // After
 let rgbColor = UIColor(rgb: (255, 128, 102))
 ```
-####CLLocation + meta
+#### CLLocation + meta
 ```
 // Before
 CLGeocoder().reverseGeocodeLocation(myLocation) { placemarks, error in
@@ -206,8 +209,8 @@ myLocation.getMeta { locationMeta in
     print("administrativeArea: \(locationMeta.administrativeArea)")
 }
 ```
-###Strings
-####Localization
+### Strings
+#### Localization
 ```
 // Before
 NSLocalizedString(myString, comment: "")
@@ -216,7 +219,7 @@ NSLocalizedString(myString, comment: "")
 // After
 myString.localized
 ```
-####Regular Expressions
+#### Regular Expressions
 ```
 // Before
 guard let regex: NSRegularExpression = try? NSRegularExpression(
@@ -235,7 +238,7 @@ let newValue = regex.stringByReplacingMatchesInString(myString, options: [],
 // After
 myString.replaceRegEx("([0][2-9]|[1-9][0-9])", replaceValue: "AAA")
 ```
-####Validation
+#### Validation
 ```
 // Before
 do {
@@ -252,7 +255,7 @@ myString.isNumber
 myString.isAlpha
 myString.isAlphaNumeric
 ```
-####HTML
+#### HTML
 ```
 // Before
 myDiv.stringByReplacingOccurrencesOfString("<[^>]+>",
@@ -268,7 +271,7 @@ And more! See the [API documentation here](https://cdn.rawgit.com/ZamzamInc/Zamz
 
 ## Installation
 
-####Carthage
+#### Carthage
 You can use [Carthage](https://github.com/Carthage/Carthage) to install `ZamzamKit` by adding it to your `Cartfile`:
 ```
 github "ZamzamInc/ZamzamKit"
