@@ -10,8 +10,8 @@ import Foundation
 
 public extension Locale {
 
-    /// Unix representation of locale usually used for normalizing for data storage.
-    @nonobjc public static var posix: Locale = {
+    /// Unix representation of locale usually used for normalizing.
+    static var posix: Locale = {
         return Locale(identifier: "en_US_POSIX")
     }()
 }
