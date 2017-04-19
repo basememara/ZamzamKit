@@ -278,8 +278,6 @@
 		8B14476C1C722D5700043657 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8B14476D1C722D5700043657 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8B1447821C722F5E00043657 /* ZamzamConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamConstants.swift; sourceTree = "<group>"; };
-		8B1447AB1C72508400043657 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		8B1447AD1C7250EF00043657 /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
 		8B1447B31C72539600043657 /* Timepiece.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Timepiece.framework; path = "Carthage/Checkouts/Timepiece/build/Debug-iphoneos/Timepiece.framework"; sourceTree = "<group>"; };
 		8B1447C81C72577900043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1447D51C7257D600043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -498,8 +496,6 @@
 		8B14476A1C722D3900043657 /* Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				8B1447AB1C72508400043657 /* Cartfile */,
-				8B1447AD1C7250EF00043657 /* Cartfile.private */,
 				8B14476C1C722D5700043657 /* LICENSE */,
 				8B14476D1C722D5700043657 /* README.md */,
 			);
@@ -1669,10 +1665,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "ZamzamKit iOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-iOSTests";
@@ -1685,10 +1677,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "ZamzamKit iOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.zamzam.ZamzamKit-iOSTests";

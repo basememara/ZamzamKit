@@ -8,7 +8,6 @@
 
 import UIKit
 import XCTest
-import Timepiece
 @testable import ZamzamKit
 
 class DateTimeTests: XCTestCase {
@@ -42,6 +41,11 @@ class DateTimeTests: XCTestCase {
         let incrementedDate = Date().incrementDay()
         let tomorrow = Date.tomorrow()
         let calendar = Calendar(identifier: .gregorian)
+        let tomorrow = calendar.date(
+            byAdding: .day,
+            value: 1,
+            to: Date()
+        )!
         
         XCTAssertEqual(
             calendar.startOfDay(for: incrementedDate),
