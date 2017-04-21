@@ -78,32 +78,36 @@ public extension Date {
 // MARK: - Calculation helpers
 public extension Date {
 
-    func increment(years: Int) -> Date {
-        return Calendar.current.date(
+    func increment(years: Int, calendar: Calendar = Calendar.current) -> Date {
+        guard years != 0 else { return self }
+        return calendar.date(
             byAdding: .year,
             value: years,
             to: self
         )!
     }
 
-    func increment(months: Int) -> Date {
-        return Calendar.current.date(
+    func increment(months: Int, calendar: Calendar = Calendar.current) -> Date {
+        guard months != 0 else { return self }
+        return calendar.date(
             byAdding: .month,
             value: months,
             to: self
         )!
     }
 
-    func increment(days: Int) -> Date {
-        return Calendar.current.date(
+    func increment(days: Int, calendar: Calendar = Calendar.current) -> Date {
+        guard days != 0 else { return self }
+        return calendar.date(
             byAdding: .day,
             value: days,
             to: self
         )!
     }
     
-    func increment(minutes: Int) -> Date {
-        return Calendar.current.date(
+    func increment(minutes: Int, calendar: Calendar = Calendar.current) -> Date {
+        guard minutes != 0 else { return self }
+        return calendar.date(
             byAdding: .minute,
             value: minutes,
             to: self
@@ -149,42 +153,38 @@ public extension Date {
 // MARK: - Islamic calendar
 public extension Date {
 
-    func hijriString(unit: Set<Calendar.Component>? = nil, format: String? = nil, offSet: Int = 0) -> String {
-            let calendar = Calendar(identifier: .islamicCivil)
-            let flags = unit ?? [.year, .month, .day, .hour, .minute, .second]
-            var date = self
-            
-            // Handle offset if applicable
-            if offSet != 0 {
-                date = calendar.date(byAdding: .day,
-                    value: offSet,
-                    to: date
-                )!
-            }
-            
-            let components = calendar.dateComponents(flags, from: date)
-            let formatter = DateFormatter()
+    // Cache Islamic calendar for reuse
+    private static let islamicCalendar: Calendar = { return Calendar(identifier: .islamicCivil) }()
+
+    func hijriString(components: Set<Calendar.Component> = Calendar.Component.date, format: String? = nil, offSet: Int = 0) -> String {
+        let calendar = Date.islamicCalendar
+        let date = increment(days: offSet, calendar: calendar)
+        let dateComponents = calendar.dateComponents(components, from: date)
+        let formatter = DateFormatter()
+    
+        formatter.calendar = calendar
         
-            formatter.calendar = calendar
-            
-            if let f = format { formatter.dateFormat = f }
-            else { formatter.dateStyle = .long }
-            
-            return formatter.string(from: calendar.date(from: components)!)
+        if let f = format { formatter.dateFormat = f }
+        else { formatter.dateStyle = .long }
+        
+        return formatter.string(from: calendar.date(from: dateComponents)!)
     }
     
     func hijri(offSet: Int = 0) -> DateComponents {
-        let calendar = Calendar(identifier: .islamicCivil)
-        var date = self
-        
-        // Handle offset if applicable
-        if offSet != 0 {
-            date = calendar.date(byAdding: .day,
-                value: offSet,
-                to: date
-            )!
-        }
-        
-        return calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        let calendar = Date.islamicCalendar
+        let date = increment(days: offSet, calendar: calendar)
+        return calendar.dateComponents(Calendar.Component.date, from: date)
     }
+    
+    func isRamadan(offSet: Int = 0) -> Bool {
+        return hijri(offSet: offSet).month == 9
+    }
+    
+    var isJumuah: Bool {
+        return Calendar.current.dateComponents([.weekday], from: self).weekday == 6
+    }
+}
+
+public extension Calendar.Component {
+    static var date: Set<Calendar.Component> = { return [.year, .month, .day, .hour, .minute, .second] }()
 }

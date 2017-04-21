@@ -10,6 +10,35 @@ import XCTest
 @testable import ZamzamKit
 
 class DateTimeTests: XCTestCase {
+	
+	func testIsWeekend() {
+		let date = Date()
+		XCTAssertEqual(date.isWeekend, Calendar.current.isDateInWeekend(date))
+	}
+    
+    func testIsWeekday() {
+        let date = Date()
+        XCTAssertEqual(date.isWeekday, !Calendar.current.isDateInWeekend(date))
+    }
+    
+    func testCurrentTimeInDecimal() {
+        let time = Date(fromString: "2012/10/23 18:15")!.timeToDecimal
+        let expectedTime = 18.25
+        
+        XCTAssertEqual(time, expectedTime,
+            "Time should be \(expectedTime)")
+    }
+    
+    func testHasElapsed() {
+        let date = Date(fromString: "2016/03/22 09:30")!
+        
+        XCTAssert(date.hasElapsed(seconds: 300, from: Date(fromString: "2016/03/22 09:40")!),
+            "Date has elapsed.")
+    }
+}
+
+// MARK: - String
+extension DateTimeTests {
     
     func testStringToDate() {
         let date = Date(fromString: "1970/01/03 00:00")!
@@ -28,14 +57,10 @@ class DateTimeTests: XCTestCase {
         XCTAssertEqual("Jan 3, 8:43 PM", expected,
             "Date string should be \(expected)")
     }
-    
-    func testGetCurrentTimeInDecimal() {
-        let time = Date(fromString: "2012/10/23 18:15")!.timeToDecimal
-        let expectedTime = 18.25
-        
-        XCTAssertEqual(time, expectedTime,
-            "Time should be \(expectedTime)")
-    }
+}
+
+// MARK: - Increments
+extension DateTimeTests {
     
     func testIncrementToday() {
         let incrementedDate = Date().increment(days: 1)
@@ -131,8 +156,11 @@ class DateTimeTests: XCTestCase {
         XCTAssertEqual(incrementedDate, expectedDate,
             "Incremented date by day's worth of minutes should be \(String(describing: expectedDate))")
     }
+}
+
+extension DateTimeTests {
     
-    func testGetHijriDate() {
+    func testHijriDate() {
         let gregorianDate = Date(fromString: "2015/09/23 12:30")!
         let hijriDate = gregorianDate.hijriString()
         let expectedDate = "Dhuʻl-Hijjah 9, 1436 AH"
@@ -141,21 +169,13 @@ class DateTimeTests: XCTestCase {
             "Incremented date by minute should be \(expectedDate)")
     }
     
-    func testHasElapsed() {
-        let date = Date(fromString: "2016/03/22 09:30")!
-        
-        XCTAssert(date.hasElapsed(seconds: 300, from: Date(fromString: "2016/03/22 09:40")!),
-            "Date has elapsed.")
-    }
-	
-	func testIsWeekend() {
-		let date = Date()
-		XCTAssertEqual(date.isWeekend, Calendar.current.isDateInWeekend(date))
-	}
-    
-    func testIsWeekday() {
-        let date = Date()
-        XCTAssertEqual(date.isWeekday, !Calendar.current.isDateInWeekend(date))
+    func testRamadan() {
+        XCTAssertTrue(Date(fromString: "2015/07/01 12:30")!.isRamadan())
+        XCTAssertFalse(Date(fromString: "2017/01/01 12:30")!.isRamadan())
     }
     
+    func testJumuah() {
+        XCTAssertTrue(Date(fromString: "2017/04/21 12:30")!.isJumuah)
+        XCTAssertFalse(Date(fromString: "2017/01/01 12:30")!.isJumuah)
+    }
 }
