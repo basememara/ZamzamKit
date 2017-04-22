@@ -118,25 +118,6 @@ public extension Date {
         return self.isPast ? self.increment(days: 1) : self
     }
     
-    func countdown(from date: Date)  -> (span: Double, remaining: Double, percent: Double) {
-        // Calculate span time
-        var timeSpan = date.timeToDecimal - timeToDecimal
-        if timeSpan < 0 {
-            timeSpan += 24
-        }
-        
-        // Calculate remaining times
-        var timeLeft = date.timeToDecimal - Date().timeToDecimal
-        if timeLeft < 0 {
-            timeLeft += 24
-        }
-        
-        // Calculate percentage
-        let percentComplete = 1.0 - (timeLeft / timeSpan)
-        
-        return (timeSpan, timeLeft, percentComplete)
-    }
-    
     /**
      Specifies if the date is beyond the time window.
      
