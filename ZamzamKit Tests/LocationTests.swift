@@ -32,7 +32,7 @@ class LocationTests: XCTestCase {
             XCTAssertEqual($0?.description, expected,
                 "The location should be \(expected)")
             
-            XCTAssertEqual($0?.timezone?.identifier, "America/Toronto")
+            XCTAssertEqual($0?.timeZone?.identifier, "America/Toronto")
         }
         
         waitForExpectations(timeout: 5.0)
