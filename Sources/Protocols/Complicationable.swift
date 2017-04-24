@@ -21,7 +21,7 @@ public extension Complicationable {
     }
     
     func reloadComplications() {
-        if lastComplicationReload?.hasElapsed(complicationExpiryInterval) ?? true {
+        if lastComplicationReload?.hasElapsed(seconds: complicationExpiryInterval) ?? true {
             CLKComplicationServer.sharedInstance().reloadTimelineForComplications()
             lastComplicationReload = Date()
         }
