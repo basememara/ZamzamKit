@@ -8,7 +8,7 @@
 
 import CoreLocation
 
-public protocol LocationManagable {
+public protocol LocationManagerType {
     typealias LocationObserver = Observer<LocationHandler>
     typealias LocationHandler = (CLLocation) -> Void
     typealias AuthorizationObserver = Observer<AuthorizationHandler>
@@ -22,24 +22,40 @@ public protocol LocationManagable {
     
     func isAuthorized(for type: LocationAuthorizationType) -> Bool
     func startUpdating(enableBackground: Bool)
+    
+    func requestAuthorization()
+    func requestAuthorization(startUpdating: Bool)
     func requestAuthorization(for type: LocationAuthorizationType, startUpdating: Bool, completion: AuthorizationHandler?)
+    
     func requestLocation(completion: @escaping LocationHandler)
 }
 
-public class LocationManager: NSObject, LocationManagable, CLLocationManagerDelegate {
+// Handle optional parameters
+public extension LocationManagerType {
+    func requestAuthorization() {
+        requestAuthorization(for: .whenInUse, startUpdating: false, completion: nil)
+    }
+    
+    func requestAuthorization(startUpdating: Bool) {
+        requestAuthorization(for: .whenInUse, startUpdating: startUpdating, completion: nil)
+    }
+}
+
+public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDelegate {
 
     /// Internal Core Location manager
     fileprivate lazy var manager: CLLocationManager = {
-        $0.delegate = self
-        if let value = self.desiredAccuracy { $0.desiredAccuracy = value }
-        if let value = self.distanceFilter { $0.distanceFilter = value }
+        let bleManager = CLLocationManager()
+        bleManager.desiredAccuracy ?= self.desiredAccuracy
+        bleManager.distanceFilter ?= self.distanceFilter
         
         #if os(iOS)
-        if let value = self.activityType { $0.activityType = value }
+        bleManager.activityType ?= self.activityType
         #endif
         
-        return $0
-    }(CLLocationManager())
+        bleManager.delegate = self
+        return bleManager
+    }()
     
     /// Default location manager options
     fileprivate let desiredAccuracy: CLLocationAccuracy?
