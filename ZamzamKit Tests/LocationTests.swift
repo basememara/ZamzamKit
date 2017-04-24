@@ -17,7 +17,7 @@ class LocationTests: XCTestCase {
         let value = CLLocation(latitude: 43.7, longitude: -79.4)
         let expected = "Toronto, CA"
     
-        value.getMeta {
+        value.geocoder {
             defer { asyncExpect.fulfill() }
             
             guard let locality = $0?.locality,
@@ -31,6 +31,8 @@ class LocationTests: XCTestCase {
             
             XCTAssertEqual($0?.description, expected,
                 "The location should be \(expected)")
+            
+            XCTAssertEqual($0?.timezone?.identifier, "America/Toronto")
         }
         
         waitForExpectations(timeout: 5.0)

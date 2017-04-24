@@ -13,7 +13,7 @@ public struct LocationMeta: CustomStringConvertible {
     public var locality: String?
     public var country: String?
     public var countryCode: String?
-    public var timezone: String?
+    public var timezone: TimeZone?
     public var administrativeArea: String?
     
     public var description: String {
