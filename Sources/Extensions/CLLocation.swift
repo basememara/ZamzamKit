@@ -25,7 +25,7 @@ public extension CLLocation {
                 locality: mark.locality,
                 country: mark.country,
                 countryCode: mark.isoCountryCode,
-                timezone: mark.timeZone,
+                timeZone: mark.timeZone,
                 administrativeArea: mark.administrativeArea)
             )
         }
