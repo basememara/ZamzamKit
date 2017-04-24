@@ -677,6 +677,7 @@
 				8BCB73CD1CAD660D00E20096 /* Equatable.swift */,
 				8BFDB6761C751F2300C94996 /* FileManager.swift */,
 				8B79A4741E9C1ED800C8A5A4 /* Locale.swift */,
+				8B55F37B1EAD8E42008800F0 /* NotificationCenter.swift */,
 				8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */,
 				8BE814FC1C7842DC005F23CE /* Sequence.swift */,
 				8BFDB65D1C7518F800C94996 /* String.swift */,
@@ -686,7 +687,6 @@
 				8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */,
 				8BFDB6631C751AE600C94996 /* URLComponents.swift */,
 				8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */,
-				8B55F37B1EAD8E42008800F0 /* NotificationCenter.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
