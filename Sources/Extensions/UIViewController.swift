@@ -25,6 +25,7 @@ public extension UIViewController {
 
      - parameter backgroundColor: Background color of status bar.
      */
+    @discardableResult
     func addStatusBar(background color: UIColor) -> UIView {
         let statusBar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 20))
         statusBar.backgroundColor = color
@@ -38,6 +39,7 @@ public extension UIViewController {
 
      - parameter darkMode: Light or dark mode color of status bar.
      */
+    @discardableResult
     func addStatusBar(darkMode: Bool) -> UIView {
         return addStatusBar(background: darkMode
             ? UIColor(white: 0, alpha: 0.8)
