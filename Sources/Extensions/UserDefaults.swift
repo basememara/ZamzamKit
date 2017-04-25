@@ -35,8 +35,8 @@ public extension UserDefaults {
      - parameter plistName: property list where defaults are declared
      - parameter bundle: bundle where defaults reside
      */
-    func registerDefaults(_ plistName: String, inDirectory: String? = nil, bundle: Bundle? = nil) {
-        let settings = Bundle.contentsOfFile(plistName, inDirectory: inDirectory, bundle: bundle)
+    func register(plist: String, inDirectory: String? = nil, bundle: Bundle? = nil) {
+        let settings = Bundle.contents(plist: plist, inDirectory: inDirectory, bundle: bundle)
         self.register(defaults: settings)
     }
     
