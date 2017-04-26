@@ -14,9 +14,7 @@ public protocol Segueable {
 
 public extension Segueable where Self: UIViewController, SegueIdentifier.RawValue == String {
     func performSegue(withIdentifier identifier: SegueIdentifier, sender: Any? = nil) {
-        DispatchQueue.main.async { [weak self] in
-            self?.performSegue(withIdentifier: identifier.rawValue, sender: sender)
-        }
+        performSegue(withIdentifier: identifier.rawValue, sender: sender)
     }
     
     func segueIdentifier(for segue: UIStoryboardSegue) -> SegueIdentifier {
