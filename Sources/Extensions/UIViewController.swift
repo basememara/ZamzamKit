@@ -16,6 +16,11 @@ public extension UIViewController {
 		// http://stackoverflow.com/questions/2777438/how-to-tell-if-uiviewcontrollers-view-is-visible
 		return isViewLoaded && view.window != nil
 	}
+
+    /// Causes the view to resign the first responder status.
+    func endEditing() {
+        view.endEditing(true)
+    }
 }
 
 public extension UIViewController {
