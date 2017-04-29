@@ -21,7 +21,7 @@ public extension CellIdentifiable where Self: UITableViewController, CellIdentif
 
      - returns: Returns the table view cell.
      */
-    func tableView(cell identifier: CellIdentifier) -> UITableViewCell? {
+    func tableViewCell(at identifier: CellIdentifier) -> UITableViewCell? {
         return tableView.visibleCells.first { $0.reuseIdentifier == identifier.rawValue }
     }
 }
