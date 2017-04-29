@@ -10,6 +10,9 @@ import UIKit
 
 public protocol Segueable {
     associatedtype SegueIdentifier: RawRepresentable
+    
+    func performSegue(withIdentifier identifier: SegueIdentifier, sender: Any?)
+    func segueIdentifier(for segue: UIStoryboardSegue) -> SegueIdentifier
 }
 
 public extension Segueable where Self: UIViewController, SegueIdentifier.RawValue == String {
