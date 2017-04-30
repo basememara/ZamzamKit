@@ -143,7 +143,23 @@ public extension UIViewController {
 
         present(activity, animated: true, completion: nil)
     }
-
+    
+    /// Presents a alert controller modally.
+    ///
+    /// - Parameters:
+    ///   - alertControllerToPresent: The view controller to display over the current view controller’s content.
+    ///   - sourceView: The view containing the anchor rectangle for the popover.
+    ///   - animated: Pass true to animate the presentation; otherwise, pass false.
+    ///   - completion: The block to execute after the presentation finishes.
+    func present(_ alertControllerToPresent: UIAlertController, popoverFrom sourceView: UIView, animated: Bool = true, completion: (() -> Void)? = nil) {
+        if let popover = alertControllerToPresent.popoverPresentationController {
+            popover.sourceView  = sourceView
+            popover.sourceRect = sourceView.bounds
+            popover.permittedArrowDirections = .any
+        }
+        
+        present(alertControllerToPresent, animated: animated, completion: completion)
+    }
 }
 
 public extension UIViewController {
