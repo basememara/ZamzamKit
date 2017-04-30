@@ -25,3 +25,11 @@ public extension CellIdentifiable where Self: UITableViewController, CellIdentif
         return tableView.visibleCells.first { $0.reuseIdentifier == identifier.rawValue }
     }
 }
+
+public extension RawRepresentable where Self.RawValue == String {
+    
+    init?(from cell: UITableViewCell) {
+        guard let identifier = cell.reuseIdentifier else { return nil }
+        self.init(rawValue: identifier)
+    }
+}
