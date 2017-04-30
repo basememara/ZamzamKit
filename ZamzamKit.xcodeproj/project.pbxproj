@@ -120,7 +120,6 @@
 		8BBA692D1CB6FCE000AD9759 /* UITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */; };
 		8BBB66E21E9C000900AB1973 /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */; };
 		8BBB66E31E9C010600AB1973 /* LocationMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */; };
-		8BC4F8CD1E3B29800015BD31 /* UIApplication_iOS9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC4F8CC1E3B29800015BD31 /* UIApplication_iOS9.swift */; };
 		8BCB73CE1CAD660D00E20096 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73CD1CAD660D00E20096 /* Equatable.swift */; };
 		8BCB73CF1CAD660D00E20096 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73CD1CAD660D00E20096 /* Equatable.swift */; };
 		8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73CD1CAD660D00E20096 /* Equatable.swift */; };
@@ -183,7 +182,6 @@
 		8BFDB67D1C7525BD00C94996 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB67C1C7525BD00C94996 /* CLLocation.swift */; };
 		8BFDB67E1C7525BD00C94996 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB67C1C7525BD00C94996 /* CLLocation.swift */; };
 		8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB67C1C7525BD00C94996 /* CLLocation.swift */; };
-		8BFDB6891C7529AB00C94996 /* UILocalNotification_iOS9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6881C7529AB00C94996 /* UILocalNotification_iOS9.swift */; };
 		8BFDB68C1C752C5C00C94996 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB68B1C752C5C00C94996 /* UIApplication.swift */; };
 		8BFDB68F1C75323900C94996 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB68E1C75323900C94996 /* DateFormatter.swift */; };
 		8BFDB6901C75323900C94996 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB68E1C75323900C94996 /* DateFormatter.swift */; };
@@ -372,7 +370,6 @@
 		8BB376111CF8B8D6005E7F67 /* Restorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restorable.swift; sourceTree = "<group>"; };
 		8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaults.swift; path = Extensions/UserDefaults.swift; sourceTree = "<group>"; };
 		8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableViewController.swift; path = Extensions/UITableViewController.swift; sourceTree = "<group>"; };
-		8BC4F8CC1E3B29800015BD31 /* UIApplication_iOS9.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIApplication_iOS9.swift; path = Extensions/UIApplication_iOS9.swift; sourceTree = "<group>"; };
 		8BCB73CD1CAD660D00E20096 /* Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Equatable.swift; path = Extensions/Equatable.swift; sourceTree = "<group>"; };
 		8BCB73D61CAD666900E20096 /* ExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTest.swift; sourceTree = "<group>"; };
 		8BCB73D91CAD69BF00E20096 /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableView.swift; path = Extensions/UITableView.swift; sourceTree = "<group>"; };
@@ -410,7 +407,6 @@
 		8BFDB6721C751E4F00C94996 /* WKInterfaceGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WKInterfaceGroup.swift; path = Extensions/WKInterfaceGroup.swift; sourceTree = "<group>"; };
 		8BFDB6761C751F2300C94996 /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileManager.swift; path = Extensions/FileManager.swift; sourceTree = "<group>"; };
 		8BFDB67C1C7525BD00C94996 /* CLLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocation.swift; path = Extensions/CLLocation.swift; sourceTree = "<group>"; };
-		8BFDB6881C7529AB00C94996 /* UILocalNotification_iOS9.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UILocalNotification_iOS9.swift; path = Extensions/UILocalNotification_iOS9.swift; sourceTree = "<group>"; };
 		8BFDB68B1C752C5C00C94996 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIApplication.swift; path = Extensions/UIApplication.swift; sourceTree = "<group>"; };
 		8BFDB68E1C75323900C94996 /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateFormatter.swift; path = Extensions/DateFormatter.swift; sourceTree = "<group>"; };
 		8BFDB69C1C755A5300C94996 /* LocationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
@@ -507,7 +503,6 @@
 		8B1447511C72237E00043657 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8BC4F8C41E3B295D0015BD31 /* Deprecated */,
 				8B1EEC641CF6AE5100AE054B /* Enums */,
 				8BFDB65C1C75187800C94996 /* Extensions */,
 				8B729C731EAB9D56004A6BF1 /* Infixes */,
@@ -637,15 +632,6 @@
 				8B9A87941C9C20260087A251 /* Complicationable.swift */,
 			);
 			name = watchOS;
-			sourceTree = "<group>";
-		};
-		8BC4F8C41E3B295D0015BD31 /* Deprecated */ = {
-			isa = PBXGroup;
-			children = (
-				8BC4F8CC1E3B29800015BD31 /* UIApplication_iOS9.swift */,
-				8BFDB6881C7529AB00C94996 /* UILocalNotification_iOS9.swift */,
-			);
-			name = Deprecated;
 			sourceTree = "<group>";
 		};
 		8BE19B091C72D6DF00D4D437 /* ZamzamKit Tests */ = {
@@ -1149,7 +1135,6 @@
 				8BFDB68C1C752C5C00C94996 /* UIApplication.swift in Sources */,
 				8BEFE4791E4515D900100744 /* ScheduleInterval.swift in Sources */,
 				8BFDB6701C751DF600C94996 /* UIImageView.swift in Sources */,
-				8BC4F8CD1E3B29800015BD31 /* UIApplication_iOS9.swift in Sources */,
 				8BFDB67D1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BBA692D1CB6FCE000AD9759 /* UITableViewController.swift in Sources */,
 				8B756EF81E5C025A00DE4B02 /* UINavigationBar.swift in Sources */,
@@ -1184,7 +1169,6 @@
 				8BB45FB51C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8B6C99971E6E031800D523CC /* LocationManager.swift in Sources */,
 				8BFDB6771C751F2300C94996 /* FileManager.swift in Sources */,
-				8BFDB6891C7529AB00C94996 /* UILocalNotification_iOS9.swift in Sources */,
 				8B9E98111EB144540067ACB7 /* Routable.swift in Sources */,
 				8BFDB6641C751AE600C94996 /* URLComponents.swift in Sources */,
 				8B6A95611E46FBB9003F333D /* Thread.swift in Sources */,
