@@ -114,7 +114,7 @@ public extension UIViewController {
      - parameter sourceView: The view containing the anchor rectangle for the popover for supporting iPad device.
      - parameter applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
      */
-    func present(activities: [Any], sourceView: UIView, applicationActivities: [UIActivity]? = nil) {
+    func present(activities: [Any], popoverFrom sourceView: UIView, applicationActivities: [UIActivity]? = nil) {
         let activity = UIActivityViewController(activityItems: activities, applicationActivities: applicationActivities)
         
         if let popOver = activity.popoverPresentationController {
