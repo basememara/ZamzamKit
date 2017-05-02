@@ -73,6 +73,22 @@ public extension Date {
         
         return formatter.string(from: self)
     }
+    
+    /// Formats time interval for display timer.
+    ///
+    /// - Parameter date: The date to countdown from.
+    /// - Returns: The formatted timer as hh:mm:ss.
+    func timerString(from date: Date = Date()) -> String {
+        let seconds = Int(timeIntervalSince(date))
+        let prefix = seconds < 0 ? "+" : ""
+        
+        return String(format:"%@%02i:%02i:%02i",
+            prefix,
+            abs(seconds / 3600),
+            abs(seconds / 60 % 60),
+            abs(seconds % 60)
+        )
+    }
 }
 
 // MARK: - Calculation helpers
