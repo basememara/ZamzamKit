@@ -70,9 +70,6 @@
 		8B5316AD1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
 		8B5316AE1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
 		8B5455DF1E5E3287000CB26A /* Segueable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5455DE1E5E3287000CB26A /* Segueable.swift */; };
-		8B55F37C1EAD8E42008800F0 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B55F37B1EAD8E42008800F0 /* NotificationCenter.swift */; };
-		8B55F37D1EAD8E42008800F0 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B55F37B1EAD8E42008800F0 /* NotificationCenter.swift */; };
-		8B55F37E1EAD8E42008800F0 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B55F37B1EAD8E42008800F0 /* NotificationCenter.swift */; };
 		8B5966131CD5E24A00738A12 /* UICollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5966121CD5E24A00738A12 /* UICollectionViewController.swift */; };
 		8B5D8A971E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */; };
 		8B5D8A981E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */; };
@@ -347,7 +344,6 @@
 		8B5316461C9B23BF0094A6C4 /* WKInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WKInterfaceController.swift; path = Extensions/WKInterfaceController.swift; sourceTree = "<group>"; };
 		8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dictionary.swift; path = Extensions/Dictionary.swift; sourceTree = "<group>"; };
 		8B5455DE1E5E3287000CB26A /* Segueable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segueable.swift; sourceTree = "<group>"; };
-		8B55F37B1EAD8E42008800F0 /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationCenter.swift; path = Extensions/NotificationCenter.swift; sourceTree = "<group>"; };
 		8B5966121CD5E24A00738A12 /* UICollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UICollectionViewController.swift; path = Extensions/UICollectionViewController.swift; sourceTree = "<group>"; };
 		8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationType.swift; sourceTree = "<group>"; };
 		8B63B2C51CD959BC000F2B5F /* UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIBarButtonItem.swift; path = Extensions/UIBarButtonItem.swift; sourceTree = "<group>"; };
@@ -691,7 +687,6 @@
 				8BCB73CD1CAD660D00E20096 /* Equatable.swift */,
 				8BFDB6761C751F2300C94996 /* FileManager.swift */,
 				8B79A4741E9C1ED800C8A5A4 /* Locale.swift */,
-				8B55F37B1EAD8E42008800F0 /* NotificationCenter.swift */,
 				8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */,
 				8BE814FC1C7842DC005F23CE /* Sequence.swift */,
 				8BFDB65D1C7518F800C94996 /* String.swift */,
@@ -1186,7 +1181,6 @@
 				8BD016841E77371A008F306E /* WatchSession.swift in Sources */,
 				8B756F151E5CF16D00DE4B02 /* BaseNibView.swift in Sources */,
 				8B75286C1E759F2A0035A742 /* Observer.swift in Sources */,
-				8B55F37C1EAD8E42008800F0 /* NotificationCenter.swift in Sources */,
 				8BD2D19E1CA583110018AC2B /* UIAlertAction.swift in Sources */,
 				8B1448061C7258F700043657 /* ZamzamConstants.swift in Sources */,
 				8BE814FD1C7842DC005F23CE /* Sequence.swift in Sources */,
@@ -1235,7 +1229,6 @@
 				8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */,
 				8B9A87951C9C20260087A251 /* Complicationable.swift in Sources */,
 				8B79A4761E9C1ED800C8A5A4 /* Locale.swift in Sources */,
-				8B55F37D1EAD8E42008800F0 /* NotificationCenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1250,7 +1243,6 @@
 				8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6661C751AE600C94996 /* URLComponents.swift in Sources */,
 				8BF2106D1E48D52F0026B802 /* Result.swift in Sources */,
-				8B55F37E1EAD8E42008800F0 /* NotificationCenter.swift in Sources */,
 				8B79A4771E9C1ED800C8A5A4 /* Locale.swift in Sources */,
 				8BD61B381E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
 				8BD508781C99E18500AE205E /* Collection.swift in Sources */,
