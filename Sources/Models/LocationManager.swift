@@ -173,7 +173,7 @@ public extension LocationManager {
             if startUpdating { self.startUpdating() }
             
             // Process callback in case authorization dialog not launched by OS
-            // since user will be notified first time only and inored subsequently
+            // since user will be notified first time only and ignored subsequently
             completion?(false)
             return
         }
