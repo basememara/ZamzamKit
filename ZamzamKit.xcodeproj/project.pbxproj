@@ -103,6 +103,12 @@
 		8B82154A1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
 		8B82154B1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
 		8B82154C1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
+		8B9434561EBCDA4400C779EB /* NotificationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434551EBCDA4400C779EB /* NotificationObservable.swift */; };
+		8B9434571EBCDA4400C779EB /* NotificationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434551EBCDA4400C779EB /* NotificationObservable.swift */; };
+		8B9434581EBCDA4400C779EB /* NotificationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434551EBCDA4400C779EB /* NotificationObservable.swift */; };
+		8B94345A1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */; };
+		8B94345B1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */; };
+		8B94345C1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */; };
 		8B9A87951C9C20260087A251 /* Complicationable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A87941C9C20260087A251 /* Complicationable.swift */; };
 		8B9E97A71EAFA4980067ACB7 /* Test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E97A61EAFA4980067ACB7 /* Test.txt */; };
 		8B9E97A81EAFA4980067ACB7 /* Test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E97A61EAFA4980067ACB7 /* Test.txt */; };
@@ -360,6 +366,8 @@
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
 		8B8215411CA15E0D00C9FCC9 /* CLKComplicationServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLKComplicationServer.swift; path = Extensions/CLKComplicationServer.swift; sourceTree = "<group>"; };
 		8B8215491CA1613400C9FCC9 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeInterval.swift; path = Extensions/TimeInterval.swift; sourceTree = "<group>"; };
+		8B9434551EBCDA4400C779EB /* NotificationObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationObservable.swift; sourceTree = "<group>"; };
+		8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationCenter.swift; path = Extensions/NotificationCenter.swift; sourceTree = "<group>"; };
 		8B9A87941C9C20260087A251 /* Complicationable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Complicationable.swift; sourceTree = "<group>"; };
 		8B9E97A61EAFA4980067ACB7 /* Test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Test.txt; sourceTree = "<group>"; };
 		8B9E98101EB144540067ACB7 /* Routable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
@@ -607,6 +615,7 @@
 				8B9E98611EB3986B0067ACB7 /* iOS */,
 				8B9E98621EB398770067ACB7 /* watchOS */,
 				8B9E986E1EB500790067ACB7 /* Then.swift */,
+				8B9434551EBCDA4400C779EB /* NotificationObservable.swift */,
 				8BD61B351E3EFDF1009B537E /* ZamzamKitable.swift */,
 			);
 			path = Protocols;
@@ -687,6 +696,7 @@
 				8BCB73CD1CAD660D00E20096 /* Equatable.swift */,
 				8BFDB6761C751F2300C94996 /* FileManager.swift */,
 				8B79A4741E9C1ED800C8A5A4 /* Locale.swift */,
+				8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */,
 				8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */,
 				8BE814FC1C7842DC005F23CE /* Sequence.swift */,
 				8BFDB65D1C7518F800C94996 /* String.swift */,
@@ -1129,6 +1139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BF210921E4A22460026B802 /* UNNotificationAttachment.swift in Sources */,
+				8B9434561EBCDA4400C779EB /* NotificationObservable.swift in Sources */,
 				8B9E98601EB396D20067ACB7 /* CellIdentifiable.swift in Sources */,
 				8BFDB68C1C752C5C00C94996 /* UIApplication.swift in Sources */,
 				8BEFE4791E4515D900100744 /* ScheduleInterval.swift in Sources */,
@@ -1142,6 +1153,7 @@
 				8BD61B361E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BD508761C99E18500AE205E /* Collection.swift in Sources */,
+				8B94345A1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */,
 				8BFDB68F1C75323900C94996 /* DateFormatter.swift in Sources */,
 				8BEFE46E1E4506B500100744 /* UNUserNotificationCenter.swift in Sources */,
@@ -1211,8 +1223,10 @@
 				8BD5086C1C99DD1E00AE205E /* Array.swift in Sources */,
 				8BD016851E77371A008F306E /* WatchSession.swift in Sources */,
 				8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */,
+				8B9434571EBCDA4400C779EB /* NotificationObservable.swift in Sources */,
 				8BFDB6781C751F2300C94996 /* FileManager.swift in Sources */,
 				8BF2106C1E48D52F0026B802 /* Result.swift in Sources */,
+				8B94345B1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B0C71601E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B2DE3E21C8A86B2008F1569 /* Bundle.swift in Sources */,
 				8BFDB65F1C7518F800C94996 /* String.swift in Sources */,
@@ -1252,6 +1266,7 @@
 				8BBB66E31E9C010600AB1973 /* LocationMeta.swift in Sources */,
 				8B75286E1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BB45FB71C9BDD180070CE07 /* UserDefaults.swift in Sources */,
+				8B94345C1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B6A95631E46FBB9003F333D /* Thread.swift in Sources */,
 				8BE814FF1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8BD5086D1C99DD1E00AE205E /* Array.swift in Sources */,
@@ -1259,6 +1274,7 @@
 				8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8B0C71611E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */,
+				8B9434581EBCDA4400C779EB /* NotificationObservable.swift in Sources */,
 				8BEFE47B1E4515D900100744 /* ScheduleInterval.swift in Sources */,
 				8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */,
 				8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */,
