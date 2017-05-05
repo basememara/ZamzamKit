@@ -22,23 +22,8 @@ public protocol LocationManagerType {
     
     func isAuthorized(for type: LocationAuthorizationType) -> Bool
     func startUpdating(enableBackground: Bool)
-    
-    func requestAuthorization()
-    func requestAuthorization(startUpdating: Bool)
     func requestAuthorization(for type: LocationAuthorizationType, startUpdating: Bool, completion: AuthorizationHandler?)
-    
     func requestLocation(completion: @escaping LocationHandler)
-}
-
-// Handle optional parameters
-public extension LocationManagerType {
-    func requestAuthorization() {
-        requestAuthorization(for: .whenInUse, startUpdating: false, completion: nil)
-    }
-    
-    func requestAuthorization(startUpdating: Bool) {
-        requestAuthorization(for: .whenInUse, startUpdating: startUpdating, completion: nil)
-    }
 }
 
 public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDelegate {
