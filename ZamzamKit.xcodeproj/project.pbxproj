@@ -109,6 +109,12 @@
 		8B94345A1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */; };
 		8B94345B1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */; };
 		8B94345C1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */; };
+		8B9434611EBDEA8200C779EB /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434601EBDEA8200C779EB /* TimeZone.swift */; };
+		8B9434621EBDEA8200C779EB /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434601EBDEA8200C779EB /* TimeZone.swift */; };
+		8B9434631EBDEA8200C779EB /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434601EBDEA8200C779EB /* TimeZone.swift */; };
+		8B9434651EBDEAA200C779EB /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434641EBDEAA200C779EB /* Calendar.swift */; };
+		8B9434661EBDEAA200C779EB /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434641EBDEAA200C779EB /* Calendar.swift */; };
+		8B9434671EBDEAA200C779EB /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434641EBDEAA200C779EB /* Calendar.swift */; };
 		8B9A87951C9C20260087A251 /* Complicationable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A87941C9C20260087A251 /* Complicationable.swift */; };
 		8B9E97A71EAFA4980067ACB7 /* Test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E97A61EAFA4980067ACB7 /* Test.txt */; };
 		8B9E97A81EAFA4980067ACB7 /* Test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E97A61EAFA4980067ACB7 /* Test.txt */; };
@@ -368,6 +374,8 @@
 		8B8215491CA1613400C9FCC9 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeInterval.swift; path = Extensions/TimeInterval.swift; sourceTree = "<group>"; };
 		8B9434551EBCDA4400C779EB /* NotificationObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationObservable.swift; sourceTree = "<group>"; };
 		8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationCenter.swift; path = Extensions/NotificationCenter.swift; sourceTree = "<group>"; };
+		8B9434601EBDEA8200C779EB /* TimeZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeZone.swift; path = Extensions/TimeZone.swift; sourceTree = "<group>"; };
+		8B9434641EBDEAA200C779EB /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Calendar.swift; path = Extensions/Calendar.swift; sourceTree = "<group>"; };
 		8B9A87941C9C20260087A251 /* Complicationable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Complicationable.swift; sourceTree = "<group>"; };
 		8B9E97A61EAFA4980067ACB7 /* Test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Test.txt; sourceTree = "<group>"; };
 		8B9E98101EB144540067ACB7 /* Routable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
@@ -686,6 +694,7 @@
 				8BFDB6751C751E9300C94996 /* watchOS */,
 				8BD5086A1C99DD1E00AE205E /* Array.swift */,
 				8B2DE3E01C8A86B2008F1569 /* Bundle.swift */,
+				8B9434641EBDEAA200C779EB /* Calendar.swift */,
 				8BFDB67C1C7525BD00C94996 /* CLLocation.swift */,
 				8B7A40291C76245200A0077D /* CLLocationManager.swift */,
 				8BD508751C99E18500AE205E /* Collection.swift */,
@@ -702,6 +711,7 @@
 				8BFDB65D1C7518F800C94996 /* String.swift */,
 				8B6A95601E46FBB9003F333D /* Thread.swift */,
 				8B8215491CA1613400C9FCC9 /* TimeInterval.swift */,
+				8B9434601EBDEA8200C779EB /* TimeZone.swift */,
 				8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */,
 				8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */,
 				8BFDB6631C751AE600C94996 /* URLComponents.swift */,
@@ -1150,6 +1160,7 @@
 				8BF307D01CF0E3C600BBA933 /* UIActivity.swift in Sources */,
 				8BCB73CE1CAD660D00E20096 /* Equatable.swift in Sources */,
 				8BD08EB51CE28ACA0051080A /* SCNetworkReachability.swift in Sources */,
+				8B9434611EBDEA8200C779EB /* TimeZone.swift in Sources */,
 				8BD61B361E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BD508761C99E18500AE205E /* Collection.swift in Sources */,
@@ -1194,6 +1205,7 @@
 				8B756F151E5CF16D00DE4B02 /* BaseNibView.swift in Sources */,
 				8B75286C1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BD2D19E1CA583110018AC2B /* UIAlertAction.swift in Sources */,
+				8B9434651EBDEAA200C779EB /* Calendar.swift in Sources */,
 				8B1448061C7258F700043657 /* ZamzamConstants.swift in Sources */,
 				8BE814FD1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8BFDB66A1C751D3400C94996 /* UIViewController.swift in Sources */,
@@ -1216,9 +1228,11 @@
 				8B82154B1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8BCB73CF1CAD660D00E20096 /* Equatable.swift in Sources */,
 				8BFDB6901C75323900C94996 /* DateFormatter.swift in Sources */,
+				8B9434621EBDEA8200C779EB /* TimeZone.swift in Sources */,
 				8B5316AD1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8BFDB6651C751AE600C94996 /* URLComponents.swift in Sources */,
 				8B5316471C9B23BF0094A6C4 /* WKInterfaceController.swift in Sources */,
+				8B9434661EBDEAA200C779EB /* Calendar.swift in Sources */,
 				8B4CFAE91CABEF0800D2B1D7 /* Color.swift in Sources */,
 				8BD5086C1C99DD1E00AE205E /* Array.swift in Sources */,
 				8BD016851E77371A008F306E /* WatchSession.swift in Sources */,
@@ -1262,6 +1276,8 @@
 				8BD508781C99E18500AE205E /* Collection.swift in Sources */,
 				8B4CFAEF1CABEF0900D2B1D7 /* Color.swift in Sources */,
 				8BFDB6911C75323900C94996 /* DateFormatter.swift in Sources */,
+				8B9434671EBDEAA200C779EB /* Calendar.swift in Sources */,
+				8B9434631EBDEA8200C779EB /* TimeZone.swift in Sources */,
 				8BFDB6601C7518F800C94996 /* String.swift in Sources */,
 				8BBB66E31E9C010600AB1973 /* LocationMeta.swift in Sources */,
 				8B75286E1E759F2A0035A742 /* Observer.swift in Sources */,

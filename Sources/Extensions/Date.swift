@@ -147,6 +147,30 @@ public extension Date {
     }
 }
 
+// MARK: - Time zone helpers
+public extension Date {
+
+    /// Moves the date to the specified time zone.
+    ///
+    /// - Parameter timeZone: The target time zone.
+    /// - Returns: The shifted date using the time zone.
+    func shift(to timeZone: TimeZone) -> Date {
+        return timeZone.isCurrent ? self : {
+            let calendar = Calendar.current
+            
+            var dateComponents = calendar.dateComponents(
+                [.year, .month, .day, .hour, .minute, .second],
+                from: self
+            )
+            
+            // Shift from GMT using difference of current and specified time zone
+            dateComponents.second = -timeZone.offsetFromCurrent
+
+            return calendar.date(from: dateComponents) ?? self
+        }()
+    }
+}
+
 // MARK: - Islamic calendar
 public extension Date {
 
@@ -180,19 +204,4 @@ public extension Date {
     var isJumuah: Bool {
         return Calendar.current.dateComponents([.weekday], from: self).weekday == 6
     }
-}
-
-public extension Calendar {
-    
-    /// Normalize date calculations using gregorian calendar with UTC timezone and POSIX.
-    static let gregorianUTC: Calendar = {
-        var calendar = Calendar(identifier: .gregorian)
-        calendar.timeZone = TimeZone(identifier: "UTC")!
-        calendar.locale = .posix
-        return calendar
-    }()
-}
-
-public extension Calendar.Component {
-    static var date: Set<Calendar.Component> = { return [.year, .month, .day, .hour, .minute, .second] }()
 }
