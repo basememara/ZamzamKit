@@ -200,8 +200,8 @@ public extension Date {
         return calendar.dateComponents(components, from: date)
     }
     
-    func isRamadan(offSet: Int = 0) -> Bool {
-        return hijri(offSet: offSet).month == 9
+    func isRamadan(offSet: Int = 0, timeZone: TimeZone? = nil) -> Bool {
+        return hijri(offSet: offSet, timeZone: timeZone).month == 9
     }
     
     var isJumuah: Bool {
