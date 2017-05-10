@@ -28,6 +28,7 @@ public protocol LocationManagerType {
     
     #if os(iOS)
     typealias HeadingObserver = Observer<(CLHeading) -> Void>
+    var heading: CLHeading? { get }
     var didUpdateHeading: SynchronizedArray<HeadingObserver> { get set }
     func startUpdatingHeading()
     func stopUpdatingHeading()
@@ -215,6 +216,11 @@ public extension LocationManager {
     var allowsBackgroundLocationUpdates: Bool {
         get { return manager.allowsBackgroundLocationUpdates }
         set { manager.allowsBackgroundLocationUpdates = newValue }
+    }
+    
+    /// The most recently reported heading.
+    var heading: CLHeading? {
+        return manager.heading
     }
     
     /// Starts the generation of updates that report the user’s current heading.
