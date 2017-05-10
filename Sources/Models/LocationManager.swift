@@ -15,6 +15,7 @@ public protocol LocationManagerType {
     typealias AuthorizationHandler = (Bool) -> Void
     
     var isAuthorized: Bool { get }
+    var location: CLLocation? { get }
     var didUpdateLocations: SynchronizedArray<LocationObserver> { get set }
     var didChangeAuthorization: SynchronizedArray<AuthorizationObserver> { get set }
     
@@ -131,6 +132,11 @@ public extension LocationManager {
         guard CLLocationManager.locationServicesEnabled() else { return false }
         return (type == .whenInUse && CLLocationManager.authorizationStatus() == .authorizedWhenInUse)
             || (type == .always && CLLocationManager.authorizationStatus() == .authorizedAlways)
+    }
+    
+    /// The most recently retrieved user location.
+    var location: CLLocation? {
+        return manager.location
     }
     
     /// Starts the generation of updates that report the user’s current location.
