@@ -21,14 +21,6 @@ class SecondViewController: UIViewController {
         )
     }()
     
-    lazy var locationObserver: LocationManager.LocationObserver = Observer { [weak self] in
-        print($0.description)
-    }
-    
-    lazy var headingObserver: LocationManager.HeadingObserver = Observer { [weak self] in
-        print($0.description)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,6 +50,20 @@ class SecondViewController: UIViewController {
     deinit {
         locationManager.didUpdateLocations.remove(locationObserver)
         locationManager.didUpdateHeading.remove(headingObserver)
+    }
+}
+
+extension SecondViewController {
+    var locationObserver: LocationManager.LocationObserver {
+        return Observer {
+            print($0.description)
+        }
+    }
+    
+    var headingObserver: LocationManager.HeadingObserver {
+        return Observer {
+            print($0.description)
+        }
     }
 }
 

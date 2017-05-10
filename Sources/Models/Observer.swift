@@ -10,12 +10,16 @@ import Foundation
 
 /// Type for creating observable properties
 public struct Observer<T> {
-    let id: UUID
+    let id: String
     let handler: T
     
-    public init(_ id: UUID = UUID(), handler: T) {
+    public init(id: String, handler: T) {
         self.id = id
         self.handler = handler
+    }
+    
+    public init(file: String = #file, function: String = #function, handler: T) {
+        self.init(id: "\(file).\(function)", handler: handler)
     }
 }
 
