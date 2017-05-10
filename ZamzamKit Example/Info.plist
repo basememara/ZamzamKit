@@ -45,6 +45,11 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location updates needed for demo.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location updates needed for demo.</string>
 </dict>
 </plist>

@@ -7,19 +7,57 @@
 //
 
 import UIKit
+import CoreLocation
+import ZamzamKit
 
 class SecondViewController: UIViewController {
 
+    @IBOutlet weak var outputLabel: UILabel!
+    
+    var locationManager: LocationManager = {
+        return LocationManager(
+            desiredAccuracy: kCLLocationAccuracyThreeKilometers,
+            distanceFilter: 1000
+        )
+    }()
+    
+    lazy var locationObserver: LocationManager.LocationObserver = Observer { [weak self] in
+        print($0.description)
+    }
+    
+    lazy var headingObserver: LocationManager.HeadingObserver = Observer { [weak self] in
+        print($0.description)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        locationManager.didUpdateLocations.append(locationObserver)
+        locationManager.didUpdateHeading.append(headingObserver)
+        
+        locationManager.requestAuthorization(
+            for: .whenInUse,
+            startUpdatingLocation: true) {
+                guard $0 else {
+                    return self.present(
+                        alert: "Allow “My App” to Access Your Current Location?".localized,
+                        message: "Coordinates needed to calculate your location.".localized,
+                        buttonText: "Allow".localized,
+                        includeCancelAction: true,
+                        handler: {
+                            guard let settings = URL(string: UIApplicationOpenSettingsURLString) else { return }
+                            UIApplication.shared.open(settings)
+                        }
+                    )
+                }
+                
+                self.locationManager.startUpdatingHeading()
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    deinit {
+        locationManager.didUpdateLocations.remove(locationObserver)
+        locationManager.didUpdateHeading.remove(headingObserver)
     }
-
-
 }
 
