@@ -21,9 +21,17 @@ public protocol LocationManagerType {
     init(desiredAccuracy: CLLocationAccuracy?, distanceFilter: Double?, activityType: CLActivityType?)
     
     func isAuthorized(for type: LocationAuthorizationType) -> Bool
-    func startUpdating(enableBackground: Bool)
-    func requestAuthorization(for type: LocationAuthorizationType, startUpdating: Bool, completion: AuthorizationHandler?)
+    func startUpdatingLocation(enableBackground: Bool)
+    func stopUpdatingLocation()
+    func requestAuthorization(for type: LocationAuthorizationType, startUpdatingLocation: Bool, completion: AuthorizationHandler?)
     func requestLocation(completion: @escaping LocationHandler)
+    
+    #if os(iOS)
+    typealias HeadingObserver = Observer<(CLHeading) -> Void>
+    var didUpdateHeading: SynchronizedArray<HeadingObserver> { get set }
+    func startUpdatingHeading()
+    func stopUpdatingHeading()
+    #endif
 }
 
 public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDelegate {
@@ -59,24 +67,31 @@ public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDe
             super.init()
     }
     
-    /// Subscribes to receive new location data when available.
-    public var didUpdateLocations = SynchronizedArray<LocationObserver>()
+    /// Subscribes to receive new data when available
     fileprivate var didUpdateLocationsSingle = SynchronizedArray<LocationHandler>()
-    
-    /// Subscribes to receive new authorization data when available.
-    public var didChangeAuthorization = SynchronizedArray<AuthorizationObserver>()
     fileprivate var didChangeAuthorizationSingle = SynchronizedArray<AuthorizationHandler>()
+    public var didUpdateLocations = SynchronizedArray<LocationObserver>()
+    public var didChangeAuthorization = SynchronizedArray<AuthorizationObserver>()
+    
+    #if os(iOS)
+    public var didUpdateHeading = SynchronizedArray<HeadingObserver>()
+    #endif
     
     deinit {
         // Empty task queues of references
-        didUpdateLocations.removeAll()
         didUpdateLocationsSingle.removeAll()
-        didChangeAuthorization.removeAll()
         didChangeAuthorizationSingle.removeAll()
+        didUpdateLocations.removeAll()
+        didChangeAuthorization.removeAll()
+        
+        #if os(iOS)
+        didUpdateHeading.removeAll()
+        #endif
     }
 }
 
-// CLLocationManagerDelegate functions
+// MARK: - CLLocationManagerDelegate functions
+
 public extension LocationManager {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -102,15 +117,8 @@ public extension LocationManager {
 }
 
 // MARK: - CLLocationManager wrappers
-public extension LocationManager {
 
-    #if os(iOS)
-    /// A Boolean value indicating whether the app wants to receive location updates when suspended.
-    var allowsBackgroundLocationUpdates: Bool {
-        get { return manager.allowsBackgroundLocationUpdates }
-        set { manager.allowsBackgroundLocationUpdates = newValue }
-    }
-    #endif
+public extension LocationManager {
     
     /// Determines if location services is enabled and authorized for always or when in use.
     var isAuthorized: Bool {
@@ -125,7 +133,7 @@ public extension LocationManager {
     }
     
     /// Starts the generation of updates that report the user’s current location.
-    func startUpdating(enableBackground: Bool = false) {
+    func startUpdatingLocation(enableBackground: Bool = false) {
         #if os(iOS)
         manager.allowsBackgroundLocationUpdates = enableBackground
         #endif
@@ -134,7 +142,7 @@ public extension LocationManager {
     }
     
     /// Stops the generation of location updates.
-    func stopUpdating() {
+    func stopUpdatingLocation() {
         #if os(iOS)
         manager.allowsBackgroundLocationUpdates = false
         #endif
@@ -144,18 +152,19 @@ public extension LocationManager {
 }
 
 // MARK: - Single requests
+
 public extension LocationManager {
 
     /// Requests permission to use location services.
     ///
     /// - Parameters:
     ///   - type: Type of permission required, whether in the foreground (.whenInUse) or while running (.always).
-    ///   - startUpdating: Starts the generation of updates that report the user’s current location.
+    ///   - startUpdatingLocation: Starts the generation of updates that report the user’s current location.
     ///   - completion: True if the authorization succeeded for the authorization type, false otherwise.
-    func requestAuthorization(for type: LocationAuthorizationType = .whenInUse, startUpdating: Bool = false, completion: AuthorizationHandler? = nil) {
+    func requestAuthorization(for type: LocationAuthorizationType = .whenInUse, startUpdatingLocation: Bool = false, completion: AuthorizationHandler? = nil) {
         // Handle authorized and exit
         guard !isAuthorized(for: type) else {
-            if startUpdating { self.startUpdating() }
+            if startUpdatingLocation { self.startUpdatingLocation() }
             completion?(true)
             return
         }
@@ -170,7 +179,7 @@ public extension LocationManager {
         
         // Handle mismatched allowed and exit
         guard !isAuthorized else {
-            if startUpdating { self.startUpdating() }
+            if startUpdatingLocation { self.startUpdatingLocation() }
             
             // Process callback in case authorization dialog not launched by OS
             // since user will be notified first time only and ignored subsequently
@@ -178,8 +187,8 @@ public extension LocationManager {
             return
         }
         
-        if startUpdating {
-            didChangeAuthorizationSingle += { _ in self.startUpdating() }
+        if startUpdatingLocation {
+            didChangeAuthorizationSingle += { _ in self.startUpdatingLocation() }
         }
         
         // Handle denied and exit
@@ -199,3 +208,27 @@ public extension LocationManager {
         manager.requestLocation()
     }
 }
+
+#if os(iOS)
+public extension LocationManager {
+    /// A Boolean value indicating whether the app wants to receive location updates when suspended.
+    var allowsBackgroundLocationUpdates: Bool {
+        get { return manager.allowsBackgroundLocationUpdates }
+        set { manager.allowsBackgroundLocationUpdates = newValue }
+    }
+    
+    /// Starts the generation of updates that report the user’s current heading.
+    func startUpdatingHeading() {
+        manager.startUpdatingHeading()
+    }
+    
+    /// Stops the generation of heading updates.
+    func stopUpdatingHeading() {
+        manager.stopUpdatingHeading()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        didUpdateHeading.forEach { $0.handler(newHeading) }
+    }
+}
+#endif
