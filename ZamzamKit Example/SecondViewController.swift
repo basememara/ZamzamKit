@@ -21,8 +21,12 @@ class SecondViewController: UIViewController {
         )
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var locationObserver: LocationManager.LocationObserver = Observer {
+        print($0.description)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         locationManager.didUpdateLocations.append(locationObserver)
         locationManager.didUpdateHeading.append(headingObserver)
@@ -47,6 +51,12 @@ class SecondViewController: UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        locationManager.didUpdateLocations.remove(locationObserver)
+        locationManager.didUpdateHeading.remove(headingObserver)
+    }
+    
     deinit {
         locationManager.didUpdateLocations.remove(locationObserver)
         locationManager.didUpdateHeading.remove(headingObserver)
@@ -54,11 +64,6 @@ class SecondViewController: UIViewController {
 }
 
 extension SecondViewController {
-    var locationObserver: LocationManager.LocationObserver {
-        return Observer {
-            print($0.description)
-        }
-    }
     
     var headingObserver: LocationManager.HeadingObserver {
         return Observer {

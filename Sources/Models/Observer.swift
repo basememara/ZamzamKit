@@ -18,8 +18,8 @@ public struct Observer<T> {
         self.handler = handler
     }
     
-    public init(file: String = #file, function: String = #function, handler: T) {
-        self.init(id: "\(file).\(function)", handler: handler)
+    public init(file: String = #file, line: Int = #line, handler: T) {
+        self.init(id: "\(file).\(line)", handler: handler)
     }
 }
 
