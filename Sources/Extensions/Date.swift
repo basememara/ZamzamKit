@@ -177,24 +177,27 @@ public extension Date {
     // Cache Islamic calendar for reuse
     private static let islamicCalendar: Calendar = { return Calendar(identifier: .islamicCivil) }()
 
-    func hijriString(components: Set<Calendar.Component> = Calendar.Component.date, format: String? = nil, offSet: Int = 0) -> String {
-        let calendar = Date.islamicCalendar
-        let date = increment(days: offSet, calendar: calendar)
-        let dateComponents = calendar.dateComponents(components, from: date)
-        let formatter = DateFormatter()
-    
-        formatter.calendar = calendar
+    func hijriString(components: Set<Calendar.Component> = Calendar.Component.date, format: String? = nil, offSet: Int = 0, timeZone: TimeZone? = nil) -> String {
+        var calendar = Date.islamicCalendar
+        if let timeZone = timeZone { calendar.timeZone = timeZone }
         
-        if let f = format { formatter.dateFormat = f }
-        else { formatter.dateStyle = .long }
+        let formatter = DateFormatter().then {
+            $0.calendar = calendar
+            $0.timeZone = calendar.timeZone
+            if let f = format { $0.dateFormat = f }
+            else { $0.dateStyle = .long }
+        }
         
-        return formatter.string(from: calendar.date(from: dateComponents)!)
+        let date = calendar.date(from: hijri(components: components, offSet: offSet, timeZone: timeZone))!
+        return formatter.string(from: date)
     }
     
-    func hijri(offSet: Int = 0) -> DateComponents {
-        let calendar = Date.islamicCalendar
+    func hijri(components: Set<Calendar.Component> = Calendar.Component.date, offSet: Int = 0, timeZone: TimeZone? = nil) -> DateComponents {
+        var calendar = Date.islamicCalendar
+        if let timeZone = timeZone { calendar.timeZone = timeZone }
+        
         let date = increment(days: offSet, calendar: calendar)
-        return calendar.dateComponents(Calendar.Component.date, from: date)
+        return calendar.dateComponents(components, from: date)
     }
     
     func isRamadan(offSet: Int = 0) -> Bool {
