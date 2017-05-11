@@ -27,17 +27,22 @@ public protocol LocationManagerType {
     func addObserver(_ observer: Observer<AuthorizationHandler>)
     func removeObserver(_ observer: Observer<LocationHandler>)
     func removeObserver(_ observer: Observer<AuthorizationHandler>)
-    func removeObservers(prefixID: String)
+    func removeObservers(with prefix: String)
     
     #if os(iOS)
     typealias HeadingHandler = (CLHeading) -> Void
     var heading: CLHeading? { get }
-    var didUpdateHeading: SynchronizedArray<Observer<HeadingHandler>> { get set }
     func startUpdatingHeading()
     func stopUpdatingHeading()
     func addObserver(_ observer: Observer<HeadingHandler>)
     func removeObserver(_ observer: Observer<HeadingHandler>)
     #endif
+}
+
+public extension LocationManagerType {
+    func removeObservers(from file: String = #file) {
+        removeObservers(with: file)
+    }
 }
 
 public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDelegate {
@@ -80,7 +85,7 @@ public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDe
     fileprivate var didChangeAuthorization = SynchronizedArray<Observer<AuthorizationHandler>>()
     
     #if os(iOS)
-    public var didUpdateHeading = SynchronizedArray<Observer<HeadingHandler>>()
+    fileprivate var didUpdateHeading = SynchronizedArray<Observer<HeadingHandler>>()
     #endif
     
     deinit {
@@ -126,14 +131,14 @@ public extension LocationManager {
     }
     #endif
     
-    func removeObservers(prefixID: String = #file) {
-        let prefixID = prefixID + "."
+    func removeObservers(with prefix: String) {
+        let prefix = prefix + "."
     
-        didUpdateLocations.remove(where: { $0.id.hasPrefix(prefixID) })
-        didChangeAuthorization.remove(where: { $0.id.hasPrefix(prefixID) })
+        didUpdateLocations.remove(where: { $0.id.hasPrefix(prefix) })
+        didChangeAuthorization.remove(where: { $0.id.hasPrefix(prefix) })
         
         #if os(iOS)
-        didUpdateHeading.remove(where: { $0.id.hasPrefix(prefixID) })
+        didUpdateHeading.remove(where: { $0.id.hasPrefix(prefix) })
         #endif
     }
 
