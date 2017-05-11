@@ -23,12 +23,20 @@ public protocol LocationManagerType {
     func requestAuthorization(for type: LocationAuthorizationType, startUpdatingLocation: Bool, completion: AuthorizationHandler?)
     func requestLocation(completion: @escaping LocationHandler)
     
+    func addObserver(_ observer: Observer<LocationHandler>)
+    func addObserver(_ observer: Observer<AuthorizationHandler>)
+    func removeObserver(_ observer: Observer<LocationHandler>)
+    func removeObserver(_ observer: Observer<AuthorizationHandler>)
+    func removeObservers(prefixID: String)
+    
     #if os(iOS)
     typealias HeadingHandler = (CLHeading) -> Void
     var heading: CLHeading? { get }
     var didUpdateHeading: SynchronizedArray<Observer<HeadingHandler>> { get set }
     func startUpdatingHeading()
     func stopUpdatingHeading()
+    func addObserver(_ observer: Observer<HeadingHandler>)
+    func removeObserver(_ observer: Observer<HeadingHandler>)
     #endif
 }
 
