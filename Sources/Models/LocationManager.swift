@@ -40,6 +40,14 @@ public protocol LocationManagerType {
 }
 
 public extension LocationManagerType {
+    func startUpdatingLocation() {
+        startUpdatingLocation(enableBackground: false)
+    }
+    
+    func requestAuthorization(for type: LocationAuthorizationType = .whenInUse, startUpdatingLocation: Bool = false, completion: AuthorizationHandler?) {
+        requestAuthorization(for: type, startUpdatingLocation: startUpdatingLocation, completion: completion)
+    }
+
     func removeObservers(from file: String = #file) {
         removeObservers(with: file)
     }
@@ -192,7 +200,7 @@ public extension LocationManager {
     }
     
     /// Starts the generation of updates that report the user’s current location.
-    func startUpdatingLocation(enableBackground: Bool = false) {
+    func startUpdatingLocation(enableBackground: Bool) {
         #if os(iOS)
         manager.allowsBackgroundLocationUpdates = enableBackground
         #endif
@@ -220,7 +228,7 @@ public extension LocationManager {
     ///   - type: Type of permission required, whether in the foreground (.whenInUse) or while running (.always).
     ///   - startUpdatingLocation: Starts the generation of updates that report the user’s current location.
     ///   - completion: True if the authorization succeeded for the authorization type, false otherwise.
-    func requestAuthorization(for type: LocationAuthorizationType = .whenInUse, startUpdatingLocation: Bool = false, completion: AuthorizationHandler? = nil) {
+    func requestAuthorization(for type: LocationAuthorizationType, startUpdatingLocation: Bool, completion: AuthorizationHandler?) {
         // Handle authorized and exit
         guard !isAuthorized(for: type) else {
             if startUpdatingLocation { self.startUpdatingLocation() }
