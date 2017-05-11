@@ -9,15 +9,11 @@
 import CoreLocation
 
 public protocol LocationManagerType {
-    typealias LocationObserver = Observer<LocationHandler>
     typealias LocationHandler = (CLLocation) -> Void
-    typealias AuthorizationObserver = Observer<AuthorizationHandler>
     typealias AuthorizationHandler = (Bool) -> Void
     
     var isAuthorized: Bool { get }
     var location: CLLocation? { get }
-    var didUpdateLocations: SynchronizedArray<LocationObserver> { get set }
-    var didChangeAuthorization: SynchronizedArray<AuthorizationObserver> { get set }
     
     init(desiredAccuracy: CLLocationAccuracy?, distanceFilter: Double?, activityType: CLActivityType?)
     
@@ -28,9 +24,9 @@ public protocol LocationManagerType {
     func requestLocation(completion: @escaping LocationHandler)
     
     #if os(iOS)
-    typealias HeadingObserver = Observer<(CLHeading) -> Void>
+    typealias HeadingHandler = (CLHeading) -> Void
     var heading: CLHeading? { get }
-    var didUpdateHeading: SynchronizedArray<HeadingObserver> { get set }
+    var didUpdateHeading: SynchronizedArray<Observer<HeadingHandler>> { get set }
     func startUpdatingHeading()
     func stopUpdatingHeading()
     #endif
@@ -72,11 +68,11 @@ public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDe
     /// Subscribes to receive new data when available
     fileprivate var didUpdateLocationsSingle = SynchronizedArray<LocationHandler>()
     fileprivate var didChangeAuthorizationSingle = SynchronizedArray<AuthorizationHandler>()
-    public var didUpdateLocations = SynchronizedArray<LocationObserver>()
-    public var didChangeAuthorization = SynchronizedArray<AuthorizationObserver>()
+    fileprivate var didUpdateLocations = SynchronizedArray<Observer<LocationHandler>>()
+    fileprivate var didChangeAuthorization = SynchronizedArray<Observer<AuthorizationHandler>>()
     
     #if os(iOS)
-    public var didUpdateHeading = SynchronizedArray<HeadingObserver>()
+    public var didUpdateHeading = SynchronizedArray<Observer<HeadingHandler>>()
     #endif
     
     deinit {
@@ -90,6 +86,49 @@ public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDe
         didUpdateHeading.removeAll()
         #endif
     }
+}
+
+// MARK: - Location manager observers
+
+public extension LocationManager {
+
+    func addObserver(_ observer: Observer<LocationHandler>) {
+        didUpdateLocations += observer
+    }
+
+    func removeObserver(_ observer: Observer<LocationHandler>) {
+        didUpdateLocations -= observer
+    }
+
+    func addObserver(_ observer: Observer<AuthorizationHandler>) {
+        didChangeAuthorization += observer
+    }
+
+    func removeObserver(_ observer: Observer<AuthorizationHandler>) {
+        didChangeAuthorization -= observer
+    }
+
+    #if os(iOS)
+    func addObserver(_ observer: Observer<HeadingHandler>) {
+        didUpdateHeading += observer
+    }
+    
+    func removeObserver(_ observer: Observer<HeadingHandler>) {
+        didUpdateHeading -= observer
+    }
+    #endif
+    
+    func removeObservers(prefixID: String = #file) {
+        let prefixID = prefixID + "."
+    
+        didUpdateLocations.remove(where: { $0.id.hasPrefix(prefixID) })
+        didChangeAuthorization.remove(where: { $0.id.hasPrefix(prefixID) })
+        
+        #if os(iOS)
+        didUpdateHeading.remove(where: { $0.id.hasPrefix(prefixID) })
+        #endif
+    }
+
 }
 
 // MARK: - CLLocationManagerDelegate functions

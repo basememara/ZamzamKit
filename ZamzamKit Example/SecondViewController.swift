@@ -21,15 +21,15 @@ class SecondViewController: UIViewController {
         )
     }()
     
-    var locationObserver: LocationManager.LocationObserver = Observer {
+    var locationObserver = Observer<LocationManager.LocationHandler> {
         print($0.description)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        locationManager.didUpdateLocations.append(locationObserver)
-        locationManager.didUpdateHeading.append(headingObserver)
+        locationManager.addObserver(locationObserver)
+        locationManager.addObserver(headingObserver)
         
         locationManager.requestAuthorization(
             for: .whenInUse,
@@ -53,19 +53,17 @@ class SecondViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        locationManager.didUpdateLocations.remove(locationObserver)
-        locationManager.didUpdateHeading.remove(headingObserver)
+        locationManager.removeObservers()
     }
     
     deinit {
-        locationManager.didUpdateLocations.remove(locationObserver)
-        locationManager.didUpdateHeading.remove(headingObserver)
+        locationManager.removeObservers()
     }
 }
 
 extension SecondViewController {
     
-    var headingObserver: LocationManager.HeadingObserver {
+    var headingObserver: Observer<LocationManager.HeadingHandler> {
         return Observer {
             print($0.description)
         }
