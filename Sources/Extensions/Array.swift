@@ -66,8 +66,8 @@ public extension Array {
 public extension Array where Element: Equatable {
 	
 	/// Array with all duplicates removed from it.
-    /// https://github.com/SwifterSwift/SwifterSwift
 	var withoutDuplicates: [Element] {
+        // https://github.com/SwifterSwift/SwifterSwift
 		return reduce([]) { $0.contains($1) ? $0 : $0 + [$1] }
 	}
 	

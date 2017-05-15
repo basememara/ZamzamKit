@@ -13,7 +13,6 @@ public protocol Then {}
 public extension Then where Self: Any {
 
     /// Makes it available to set properties with closures just after initializing.
-    /// https://github.com/devxoul/Then
     ///
     ///     let label = UILabel().then {
     ///       $0.textAlignment = .center
@@ -21,6 +20,7 @@ public extension Then where Self: Any {
     ///       $0.text = "Hello, World!"
     ///     }
     func then(_ block: (Self) -> Void) -> Self {
+        // https://github.com/devxoul/Then
         block(self)
         return self
     }

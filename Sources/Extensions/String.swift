@@ -11,11 +11,11 @@ import Foundation
 public extension String {
     
     /// Create a new random string of given length.
-    /// https://github.com/SwifterSwift/SwifterSwift
 	///
 	/// - Parameter random: Number of characters in string.
 	/// - Parameter prefix: Prepend to string.
 	public init(random: Int, prefix: String = "") {
+        // https://github.com/SwifterSwift/SwifterSwift
 		guard random > 0 else { self = prefix; return }
 		let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         
@@ -148,8 +148,8 @@ public extension String {
     }
     
     /// Decode an HTML string
-    /// http://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
     var htmlDecoded: String {
+        // http://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
         guard !isEmpty else { return self }
         
         var position = self.startIndex

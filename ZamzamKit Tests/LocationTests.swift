@@ -13,12 +13,12 @@ import CoreLocation
 class LocationTests: XCTestCase {
     
     func testMetaData() {
-        let asyncExpect = expectation(description: "fetch location")
+        let promise = expectation(description: "fetch location")
         let value = CLLocation(latitude: 43.7, longitude: -79.4)
         let expected = "Toronto, CA"
     
         value.geocoder {
-            defer { asyncExpect.fulfill() }
+            defer { promise.fulfill() }
             
             guard let locality = $0?.locality,
                 let countryCode = $0?.countryCode else {

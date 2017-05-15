@@ -41,8 +41,8 @@ public extension Dictionary where Value: Any {
 }
 
 /// Combine dictionaries.
-/// http://stackoverflow.com/a/34527546/235334
 func + <K,V> (left: Dictionary<K,V>, right: Dictionary<K,V>?) -> Dictionary<K,V> {
+    // http://stackoverflow.com/a/34527546/235334
     guard let right = right else { return left }
     return left.reduce(right) {
         var new = $0 as [K:V]
@@ -52,8 +52,8 @@ func + <K,V> (left: Dictionary<K,V>, right: Dictionary<K,V>?) -> Dictionary<K,V>
 }
 
 /// Append dictionary.
-/// http://stackoverflow.com/a/34527546/235334
 func += <K,V> (left: inout Dictionary<K,V>, right: Dictionary<K,V>?) {
+    // http://stackoverflow.com/a/34527546/235334
     guard let right = right else { return }
     right.forEach { left.updateValue($0.value, forKey: $0.key) }
 }

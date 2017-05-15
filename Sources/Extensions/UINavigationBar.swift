@@ -11,8 +11,9 @@ import UIKit
 public extension UINavigationBar {
 
     /// Set transparent navigation bar
-    // http://stackoverflow.com/questions/2315862/make-uinavigationbar-transparent
     var transparent: Bool {
+        // http://stackoverflow.com/questions/2315862/make-uinavigationbar-transparent
+        
         get {
             return backgroundColor == .clear
         }
