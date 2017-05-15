@@ -38,6 +38,16 @@
                ReferencedContainer = "container:ZamzamKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8BE19B071C72D6DF00D4D437"
+               BuildableName = "ZamzamKit iOSTests.xctest"
+               BlueprintName = "ZamzamKit iOSTests"
+               ReferencedContainer = "container:ZamzamKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

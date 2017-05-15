@@ -27,7 +27,6 @@
 		8B2DE3EC1C8A8F79008F1569 /* BundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */; };
 		8B2DE3F01C8A90AF008F1569 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EE1C8A90AF008F1569 /* Settings.plist */; };
 		8B40C2B71CC0A85F00BEC9E0 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447D51C7257D600043657 /* ZamzamKit.framework */; };
-		8B48E61F1DAFF46600087328 /* Timepiece.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B48E61E1DAFF46600087328 /* Timepiece.framework */; };
 		8B48E6211DAFFD4100087328 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6201DAFFD4100087328 /* ArrayTests.swift */; };
 		8B48E6231DAFFD8900087328 /* CollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6221DAFFD8900087328 /* CollectionTests.swift */; };
 		8B48E6251DAFFDA900087328 /* DictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6241DAFFDA900087328 /* DictionaryTests.swift */; };
@@ -495,7 +494,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B48E61F1DAFF46600087328 /* Timepiece.framework in Frameworks */,
 				8BE19B0D1C72D6DF00D4D437 /* ZamzamKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
