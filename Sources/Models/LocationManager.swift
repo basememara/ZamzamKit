@@ -114,7 +114,6 @@ public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDe
 public extension LocationManager {
 
     func addObserver(_ observer: Observer<LocationHandler>) {
-        guard !didUpdateLocations.contains(observer) else { return }
         didUpdateLocations += observer
     }
 
@@ -123,7 +122,6 @@ public extension LocationManager {
     }
 
     func addObserver(_ observer: Observer<AuthorizationHandler>) {
-        guard !didChangeAuthorization.contains(observer) else { return }
         didChangeAuthorization += observer
     }
 
@@ -133,7 +131,6 @@ public extension LocationManager {
 
     #if os(iOS)
     func addObserver(_ observer: Observer<HeadingHandler>) {
-        guard !didUpdateHeading.contains(observer) else { return }
         didUpdateHeading += observer
     }
     
