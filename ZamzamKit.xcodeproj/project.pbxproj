@@ -47,6 +47,11 @@
 		8B4967C01EA8019300091A7D /* SequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6261DAFFDCD00087328 /* SequenceTests.swift */; };
 		8B4967C11EA8019500091A7D /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B281C72D71F00D4D437 /* StringTests.swift */; };
 		8B4967C21EA8019700091A7D /* WebTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B291C72D71F00D4D437 /* WebTests.swift */; };
+		8B4C08AC1EC9422E002A317D /* BinaryFloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4C08AB1EC9422E002A317D /* BinaryFloatingPoint.swift */; };
+		8B4C08B41EC94496002A317D /* NumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4C08AF1EC94489002A317D /* NumberTests.swift */; };
+		8B4C08B51EC94497002A317D /* NumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4C08AF1EC94489002A317D /* NumberTests.swift */; };
+		8B4C08B61EC94608002A317D /* BinaryFloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4C08AB1EC9422E002A317D /* BinaryFloatingPoint.swift */; };
+		8B4C08B71EC94608002A317D /* BinaryFloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4C08AB1EC9422E002A317D /* BinaryFloatingPoint.swift */; };
 		8B4CFAE91CABEF0800D2B1D7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
 		8B4CFAEF1CABEF0900D2B1D7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
 		8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316071C9B22F50094A6C4 /* AppDelegate.swift */; };
@@ -352,6 +357,8 @@
 		8B48E6261DAFFDCD00087328 /* SequenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceTests.swift; sourceTree = "<group>"; };
 		8B48E6281DAFFDDA00087328 /* ColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorTests.swift; sourceTree = "<group>"; };
 		8B4967B21EA7FFF700091A7D /* LocaleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaleTests.swift; sourceTree = "<group>"; };
+		8B4C08AB1EC9422E002A317D /* BinaryFloatingPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BinaryFloatingPoint.swift; path = Extensions/BinaryFloatingPoint.swift; sourceTree = "<group>"; };
+		8B4C08AF1EC94489002A317D /* NumberTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberTests.swift; sourceTree = "<group>"; };
 		8B5316051C9B22F40094A6C4 /* ZamzamKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZamzamKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5316071C9B22F50094A6C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B5316091C9B22F50094A6C4 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -682,6 +689,7 @@
 				8B729C781EAB9DBA004A6BF1 /* InfixTests.swift */,
 				8B4967B21EA7FFF700091A7D /* LocaleTests.swift */,
 				8BFDB69C1C755A5300C94996 /* LocationTests.swift */,
+				8B4C08AF1EC94489002A317D /* NumberTests.swift */,
 				8B48E6261DAFFDCD00087328 /* SequenceTests.swift */,
 				8BE19B281C72D71F00D4D437 /* StringTests.swift */,
 				8BE19B291C72D71F00D4D437 /* WebTests.swift */,
@@ -712,6 +720,7 @@
 				8BFDB6741C751E8E00C94996 /* iOS */,
 				8BFDB6751C751E9300C94996 /* watchOS */,
 				8BD5086A1C99DD1E00AE205E /* Array.swift */,
+				8B4C08AB1EC9422E002A317D /* BinaryFloatingPoint.swift */,
 				8B2DE3E01C8A86B2008F1569 /* Bundle.swift */,
 				8B9434641EBDEAA200C779EB /* Calendar.swift */,
 				8BFDB67C1C7525BD00C94996 /* CLLocation.swift */,
@@ -1170,6 +1179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BF210921E4A22460026B802 /* UNNotificationAttachment.swift in Sources */,
+				8B4C08AC1EC9422E002A317D /* BinaryFloatingPoint.swift in Sources */,
 				8B9434561EBCDA4400C779EB /* NotificationObservable.swift in Sources */,
 				8B9E98601EB396D20067ACB7 /* CellIdentifiable.swift in Sources */,
 				8BFDB68C1C752C5C00C94996 /* UIApplication.swift in Sources */,
@@ -1264,6 +1274,7 @@
 				8B94345B1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B0C71601E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B2DE3E21C8A86B2008F1569 /* Bundle.swift in Sources */,
+				8B4C08B61EC94608002A317D /* BinaryFloatingPoint.swift in Sources */,
 				8BFDB65F1C7518F800C94996 /* String.swift in Sources */,
 				8B5D8A981E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */,
 				8BB45FB61C9BDD180070CE07 /* UserDefaults.swift in Sources */,
@@ -1308,6 +1319,7 @@
 				8BE814FF1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8BD5086D1C99DD1E00AE205E /* Array.swift in Sources */,
 				8B9E98711EB500790067ACB7 /* Then.swift in Sources */,
+				8B4C08B71EC94608002A317D /* BinaryFloatingPoint.swift in Sources */,
 				8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8B0C71611E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */,
@@ -1358,6 +1370,7 @@
 				8BE19B2F1C72D71F00D4D437 /* WebTests.swift in Sources */,
 				8B48E6211DAFFD4100087328 /* ArrayTests.swift in Sources */,
 				8BFDB69D1C755A5300C94996 /* LocationTests.swift in Sources */,
+				8B4C08B41EC94496002A317D /* NumberTests.swift in Sources */,
 				8B4967B31EA7FFF700091A7D /* LocaleTests.swift in Sources */,
 				8BE19B2A1C72D71F00D4D437 /* FileTests.swift in Sources */,
 			);
@@ -1375,6 +1388,7 @@
 				8B4967B61EA8017300091A7D /* CollectionTests.swift in Sources */,
 				8B4967B51EA8017000091A7D /* BundleTests.swift in Sources */,
 				8B4967C21EA8019700091A7D /* WebTests.swift in Sources */,
+				8B4C08B51EC94497002A317D /* NumberTests.swift in Sources */,
 				8B4967B81EA8017600091A7D /* DateTimeTests.swift in Sources */,
 				8B4967BB1EA8018A00091A7D /* DictionaryTests.swift in Sources */,
 				8B4967C11EA8019500091A7D /* StringTests.swift in Sources */,
