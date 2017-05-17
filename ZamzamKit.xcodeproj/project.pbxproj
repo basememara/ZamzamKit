@@ -677,6 +677,18 @@
 			name = watchOS;
 			sourceTree = "<group>";
 		};
+		8BC8115E1ECCE72200F455CC /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				8B4C08AB1EC9422E002A317D /* BinaryFloatingPoint.swift */,
+				8BD508751C99E18500AE205E /* Collection.swift */,
+				8BCB73CD1CAD660D00E20096 /* Equatable.swift */,
+				8BC8115F1ECCE75300F455CC /* Hashable.swift */,
+				8BE814FC1C7842DC005F23CE /* Sequence.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		8BE19B091C72D6DF00D4D437 /* ZamzamKit Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -721,23 +733,20 @@
 			children = (
 				8BFDB6741C751E8E00C94996 /* iOS */,
 				8BFDB6751C751E9300C94996 /* watchOS */,
+				8BC8115E1ECCE72200F455CC /* Protocols */,
 				8BD5086A1C99DD1E00AE205E /* Array.swift */,
-				8B4C08AB1EC9422E002A317D /* BinaryFloatingPoint.swift */,
 				8B2DE3E01C8A86B2008F1569 /* Bundle.swift */,
 				8B9434641EBDEAA200C779EB /* Calendar.swift */,
 				8BFDB67C1C7525BD00C94996 /* CLLocation.swift */,
 				8B7A40291C76245200A0077D /* CLLocationManager.swift */,
-				8BD508751C99E18500AE205E /* Collection.swift */,
 				8BE814F41C784233005F23CE /* Color.swift */,
 				8BFDB6561C75187200C94996 /* Date.swift */,
 				8BFDB68E1C75323900C94996 /* DateFormatter.swift */,
 				8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */,
-				8BCB73CD1CAD660D00E20096 /* Equatable.swift */,
 				8BFDB6761C751F2300C94996 /* FileManager.swift */,
 				8B79A4741E9C1ED800C8A5A4 /* Locale.swift */,
 				8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */,
 				8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */,
-				8BE814FC1C7842DC005F23CE /* Sequence.swift */,
 				8BFDB65D1C7518F800C94996 /* String.swift */,
 				8B6A95601E46FBB9003F333D /* Thread.swift */,
 				8B8215491CA1613400C9FCC9 /* TimeInterval.swift */,
