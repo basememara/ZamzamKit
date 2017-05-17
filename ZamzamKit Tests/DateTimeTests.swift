@@ -71,6 +71,11 @@ extension DateTimeTests {
         XCTAssertEqual(Date(fromString: "2017/04/15 12:32:46", dateFormat: "yyyy/MM/dd HH:mm:ss")!.timerString(
             from: Date(fromString: "2016/09/29 20:12:03", dateFormat: "yyyy/MM/dd HH:mm:ss")!), "4744:20:43")
     }
+    
+    func testShortString() {
+        let date = Date(fromString: "2017/05/14 13:32")!
+        XCTAssertEqual("2017-05-14", date.shortString())
+    }
 }
 
 // MARK: - Increments

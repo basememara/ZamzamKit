@@ -74,6 +74,20 @@ public extension Date {
         return formatter.string(from: self)
     }
     
+    /// Fixed-format for the date without time, i.e. 2017-05-15.
+    ///
+    /// - Parameter timeZone: Time zone to determine day boundries of the date.
+    /// - Returns: The formatted date string.
+    func shortString(with timeZone: TimeZone? = nil) -> String {
+        return DateFormatter().then {
+            $0.locale = .posix
+            $0.dateFormat = "yyyy-MM-dd"
+            if let timeZone = timeZone {
+                $0.timeZone = timeZone
+            }
+        }.string(from: self)
+    }
+    
     /// Formats time interval for display timer.
     ///
     /// - Parameter date: The date to countdown from.
