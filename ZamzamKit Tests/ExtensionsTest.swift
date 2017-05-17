@@ -32,4 +32,29 @@ class ExtensionsTest: XCTestCase {
         attributes += moreAttributes
         XCTAssertEqual(attributes, ["File": "Auth.swift", "Function": "authenticate"])
     }
+    
+    func testCombineHash() {
+        // https://codereview.stackexchange.com/questions/148763/extending-cgpoint-to-conform-to-hashable
+        var hv = Set<Int>()
+        var count = 0
+        for i in -200..<200 {
+            for j in -200..<200 {
+                count += 1
+                let p = CGPoint(x: CGFloat(i)/20, y: CGFloat(j)/20)
+                hv.insert(p.hashValue)
+            }
+        }
+
+        // Accurracy threshold since hashable not 100% unique
+        XCTAssertTrue(abs(count - hv.count) <= 40)
+    }
+}
+
+extension CGPoint: Hashable {
+    public var hashValue: Int {
+        return combineHashes([
+            x.hashValue,
+            y.hashValue
+        ])
+    }
 }

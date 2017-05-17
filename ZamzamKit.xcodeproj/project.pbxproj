@@ -135,6 +135,9 @@
 		8BBA692D1CB6FCE000AD9759 /* UITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */; };
 		8BBB66E21E9C000900AB1973 /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */; };
 		8BBB66E31E9C010600AB1973 /* LocationMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */; };
+		8BC811601ECCE75300F455CC /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8115F1ECCE75300F455CC /* Hashable.swift */; };
+		8BC811611ECCE75300F455CC /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8115F1ECCE75300F455CC /* Hashable.swift */; };
+		8BC811621ECCE75300F455CC /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8115F1ECCE75300F455CC /* Hashable.swift */; };
 		8BCB73CE1CAD660D00E20096 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73CD1CAD660D00E20096 /* Equatable.swift */; };
 		8BCB73CF1CAD660D00E20096 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73CD1CAD660D00E20096 /* Equatable.swift */; };
 		8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73CD1CAD660D00E20096 /* Equatable.swift */; };
@@ -409,6 +412,7 @@
 		8BB376111CF8B8D6005E7F67 /* Restorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restorable.swift; sourceTree = "<group>"; };
 		8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaults.swift; path = Extensions/UserDefaults.swift; sourceTree = "<group>"; };
 		8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableViewController.swift; path = Extensions/UITableViewController.swift; sourceTree = "<group>"; };
+		8BC8115F1ECCE75300F455CC /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Hashable.swift; path = Extensions/Hashable.swift; sourceTree = "<group>"; };
 		8BCB73CD1CAD660D00E20096 /* Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Equatable.swift; path = Extensions/Equatable.swift; sourceTree = "<group>"; };
 		8BCB73D61CAD666900E20096 /* ExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTest.swift; sourceTree = "<group>"; };
 		8BCB73D91CAD69BF00E20096 /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableView.swift; path = Extensions/UITableView.swift; sourceTree = "<group>"; };
@@ -1186,6 +1190,7 @@
 				8BFDB67D1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BBA692D1CB6FCE000AD9759 /* UITableViewController.swift in Sources */,
 				8B756EF81E5C025A00DE4B02 /* UINavigationBar.swift in Sources */,
+				8BC811601ECCE75300F455CC /* Hashable.swift in Sources */,
 				8BF307D01CF0E3C600BBA933 /* UIActivity.swift in Sources */,
 				8BCB73CE1CAD660D00E20096 /* Equatable.swift in Sources */,
 				8BD08EB51CE28ACA0051080A /* SCNetworkReachability.swift in Sources */,
@@ -1274,6 +1279,7 @@
 				8B2DE3E21C8A86B2008F1569 /* Bundle.swift in Sources */,
 				8B4C08B61EC94608002A317D /* BinaryFloatingPoint.swift in Sources */,
 				8BFDB65F1C7518F800C94996 /* String.swift in Sources */,
+				8BC811611ECCE75300F455CC /* Hashable.swift in Sources */,
 				8B5D8A981E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */,
 				8BB45FB61C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8B9E98701EB500790067ACB7 /* Then.swift in Sources */,
@@ -1298,6 +1304,7 @@
 				8B2DE3E31C8A86B2008F1569 /* Bundle.swift in Sources */,
 				8B5316AE1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8BFDB6591C75187200C94996 /* Date.swift in Sources */,
+				8BC811621ECCE75300F455CC /* Hashable.swift in Sources */,
 				8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6661C751AE600C94996 /* URLComponents.swift in Sources */,
 				8BF2106D1E48D52F0026B802 /* Result.swift in Sources */,
