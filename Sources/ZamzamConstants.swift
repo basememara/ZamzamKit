@@ -45,7 +45,6 @@ public struct ZamzamConstants {
     
     public struct Notification {
         public static let MAIN_CATEGORY = "mainCategory"
-        public static let IDENTIFIER_KEY = "identifier"
     }
     
     public struct Color {
