@@ -108,6 +108,11 @@
 		8B82154A1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
 		8B82154B1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
 		8B82154C1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
+		8B89746E1EDE17AC004FA853 /* MigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B89746D1EDE17AC004FA853 /* MigrationTests.swift */; };
+		8B89746F1EDE17AC004FA853 /* MigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B89746D1EDE17AC004FA853 /* MigrationTests.swift */; };
+		8B8974711EDF555C004FA853 /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8974701EDF555C004FA853 /* Migration.swift */; };
+		8B8974721EDF555C004FA853 /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8974701EDF555C004FA853 /* Migration.swift */; };
+		8B8974731EDF555C004FA853 /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8974701EDF555C004FA853 /* Migration.swift */; };
 		8B9434561EBCDA4400C779EB /* NotificationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434551EBCDA4400C779EB /* NotificationObservable.swift */; };
 		8B9434571EBCDA4400C779EB /* NotificationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434551EBCDA4400C779EB /* NotificationObservable.swift */; };
 		8B9434581EBCDA4400C779EB /* NotificationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434551EBCDA4400C779EB /* NotificationObservable.swift */; };
@@ -400,6 +405,8 @@
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
 		8B8215411CA15E0D00C9FCC9 /* CLKComplicationServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLKComplicationServer.swift; path = Extensions/CLKComplicationServer.swift; sourceTree = "<group>"; };
 		8B8215491CA1613400C9FCC9 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeInterval.swift; path = Extensions/TimeInterval.swift; sourceTree = "<group>"; };
+		8B89746D1EDE17AC004FA853 /* MigrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationTests.swift; sourceTree = "<group>"; };
+		8B8974701EDF555C004FA853 /* Migration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Migration.swift; path = Models/Migration.swift; sourceTree = "<group>"; };
 		8B9434551EBCDA4400C779EB /* NotificationObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationObservable.swift; sourceTree = "<group>"; };
 		8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationCenter.swift; path = Extensions/NotificationCenter.swift; sourceTree = "<group>"; };
 		8B9434601EBDEA8200C779EB /* TimeZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeZone.swift; path = Extensions/TimeZone.swift; sourceTree = "<group>"; };
@@ -594,9 +601,9 @@
 		8B5316061C9B22F40094A6C4 /* ZamzamKit Example */ = {
 			isa = PBXGroup;
 			children = (
-				8B5316071C9B22F50094A6C4 /* AppDelegate.swift */,
 				8B5316091C9B22F50094A6C4 /* FirstViewController.swift */,
 				8B53160B1C9B22F60094A6C4 /* SecondViewController.swift */,
+				8B5316071C9B22F50094A6C4 /* AppDelegate.swift */,
 				8B53160D1C9B22F60094A6C4 /* Main.storyboard */,
 				8B5316121C9B22F60094A6C4 /* LaunchScreen.storyboard */,
 				8B5316101C9B22F60094A6C4 /* Assets.xcassets */,
@@ -704,6 +711,7 @@
 				8B4967B21EA7FFF700091A7D /* LocaleTests.swift */,
 				8BFDB69C1C755A5300C94996 /* LocationTests.swift */,
 				8B4C08AF1EC94489002A317D /* NumberTests.swift */,
+				8B89746D1EDE17AC004FA853 /* MigrationTests.swift */,
 				8B48E6261DAFFDCD00087328 /* SequenceTests.swift */,
 				8BE19B281C72D71F00D4D437 /* StringTests.swift */,
 				8BE19B291C72D71F00D4D437 /* WebTests.swift */,
@@ -799,6 +807,7 @@
 				8B756F141E5CF16D00DE4B02 /* BaseNibView.swift */,
 				8B6C99961E6E031800D523CC /* LocationManager.swift */,
 				8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */,
+				8B8974701EDF555C004FA853 /* Migration.swift */,
 				8B75286B1E759F2A0035A742 /* Observer.swift */,
 				8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */,
 				8BD016831E77371A008F306E /* WatchSession.swift */,
@@ -1209,6 +1218,7 @@
 				8BD508761C99E18500AE205E /* Collection.swift in Sources */,
 				8B94345A1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */,
+				8B8974711EDF555C004FA853 /* Migration.swift in Sources */,
 				8BFDB68F1C75323900C94996 /* DateFormatter.swift in Sources */,
 				8BEFE46E1E4506B500100744 /* UNUserNotificationCenter.swift in Sources */,
 				8B6A956D1E484D5A003F333D /* ZamzamError.swift in Sources */,
@@ -1279,6 +1289,7 @@
 				8B4CFAE91CABEF0800D2B1D7 /* Color.swift in Sources */,
 				8BD5086C1C99DD1E00AE205E /* Array.swift in Sources */,
 				8BD016851E77371A008F306E /* WatchSession.swift in Sources */,
+				8B8974721EDF555C004FA853 /* Migration.swift in Sources */,
 				8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8B9434571EBCDA4400C779EB /* NotificationObservable.swift in Sources */,
 				8BFDB6781C751F2300C94996 /* FileManager.swift in Sources */,
@@ -1331,6 +1342,7 @@
 				8B94345C1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B6A95631E46FBB9003F333D /* Thread.swift in Sources */,
 				8BE814FF1C7842DC005F23CE /* Sequence.swift in Sources */,
+				8B8974731EDF555C004FA853 /* Migration.swift in Sources */,
 				8BD5086D1C99DD1E00AE205E /* Array.swift in Sources */,
 				8B9E98711EB500790067ACB7 /* Then.swift in Sources */,
 				8B4C08B71EC94608002A317D /* BinaryFloatingPoint.swift in Sources */,
@@ -1384,6 +1396,7 @@
 				8BE19B2F1C72D71F00D4D437 /* WebTests.swift in Sources */,
 				8B48E6211DAFFD4100087328 /* ArrayTests.swift in Sources */,
 				8BFDB69D1C755A5300C94996 /* LocationTests.swift in Sources */,
+				8B89746E1EDE17AC004FA853 /* MigrationTests.swift in Sources */,
 				8B4C08B41EC94496002A317D /* NumberTests.swift in Sources */,
 				8B4967B31EA7FFF700091A7D /* LocaleTests.swift in Sources */,
 				8BE19B2A1C72D71F00D4D437 /* FileTests.swift in Sources */,
@@ -1407,6 +1420,7 @@
 				8B4967BB1EA8018A00091A7D /* DictionaryTests.swift in Sources */,
 				8B4967C11EA8019500091A7D /* StringTests.swift in Sources */,
 				8B4967BE1EA8018F00091A7D /* LocaleTests.swift in Sources */,
+				8B89746F1EDE17AC004FA853 /* MigrationTests.swift in Sources */,
 				8B729C7D1EAB9E43004A6BF1 /* InfixTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
