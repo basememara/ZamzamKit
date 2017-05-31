@@ -122,20 +122,18 @@ public extension UNUserNotificationCenter {
         userInfo: [String: Any]? = nil,
         completion: ((Error?) -> Void)? = nil) {
             // Constuct content
-            let content: UNMutableNotificationContent = {
+            let content = UNMutableNotificationContent().then {
                 $0.body = body
                 $0.categoryIdentifier = category
             
                 // Assign optional values to content
-                if let title = title { $0.title = title }
-                if let subtitle = subtitle { $0.subtitle = subtitle }
-                if let badge = badge { $0.badge = badge }
-                if let sound = sound { $0.sound = sound }
+                $0.title ?= title
+                $0.subtitle ?= subtitle
+                $0.badge ?= badge
+                $0.sound ?= sound
                 if let userInfo = userInfo { $0.userInfo = userInfo }
                 if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
-                
-                return $0
-            }(UNMutableNotificationContent())
+            }
         
             // Construct request with trigger
             let trigger = timeInterval > 0 ? UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: repeats) : nil
@@ -161,20 +159,18 @@ public extension UNUserNotificationCenter {
         userInfo: [String: Any]? = nil,
         completion: ((Error?) -> Void)? = nil) {
             // Constuct content
-            let content: UNMutableNotificationContent = {
+            let content = UNMutableNotificationContent().then {
                 $0.body = body
                 $0.categoryIdentifier = category
             
                 // Assign optional values to content
-                if let title = title { $0.title = title }
-                if let subtitle = subtitle { $0.subtitle = subtitle }
-                if let badge = badge { $0.badge = badge }
-                if let sound = sound { $0.sound = sound }
+                $0.title ?= title
+                $0.subtitle ?= subtitle
+                $0.badge ?= badge
+                $0.sound ?= sound
                 if let userInfo = userInfo { $0.userInfo = userInfo }
                 if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
-                
-                return $0
-            }(UNMutableNotificationContent())
+            }
         
             // Constuct date components for trigger
             // https://github.com/d7laungani/DLLocalNotifications/blob/master/DLLocalNotifications/DLLocalNotifications.swift#L31
@@ -219,20 +215,18 @@ public extension UNUserNotificationCenter {
         userInfo: [String: Any]? = nil,
         completion: ((Error?) -> Void)? = nil) {
             // Constuct content
-            let content: UNMutableNotificationContent = {
+            let content = UNMutableNotificationContent().then {
                 $0.body = body
                 $0.categoryIdentifier = category
             
                 // Assign optional values to content
-                if let title = title { $0.title = title }
-                if let subtitle = subtitle { $0.subtitle = subtitle }
-                if let badge = badge { $0.badge = badge }
-                if let sound = sound { $0.sound = sound }
+                $0.title ?= title
+                $0.subtitle ?= subtitle
+                $0.badge ?= badge
+                $0.sound ?= sound
                 if let userInfo = userInfo { $0.userInfo = userInfo }
                 if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
-                
-                return $0
-            }(UNMutableNotificationContent())
+            }
         
             // Construct request with trigger
             let trigger = UNLocationNotificationTrigger(region: region, repeats: repeats)
