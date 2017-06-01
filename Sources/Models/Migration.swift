@@ -36,11 +36,13 @@ public extension Migration {
     /// If they don't match the completion block gets called, and passed in the current app verson.
     ///
     /// - Parameter completion: Will be called when the app is updated. Will always be called once.
-    func appUpdate(completion: () -> Void) {
-        guard lastAppVersion != appVersion || lastAppBuild != appBuild else { return }
+    @discardableResult
+    func appUpdate(completion: () -> Void) -> Self {
+        guard lastAppVersion != appVersion || lastAppBuild != appBuild else { return self }
         completion()
         lastAppVersion = appVersion
         lastAppBuild = appBuild
+        return self
     }
     
     /// Checks the current version and build of the app against the pervious saved version and build.
@@ -50,7 +52,8 @@ public extension Migration {
     ///   - version: Version to update.
     ///   - build: Build to update.
     ///   - completion: Will be called when the app is updated. Will always be called once.
-    func appUpdate(toVersion version: String, toBuild build: String? = nil, completion: () -> Void) {
+    @discardableResult
+    func appUpdate(toVersion version: String, toBuild build: String? = nil, completion: () -> Void) -> Self {
         let hasVersionUpdate = version.compare(lastMigrationVersion ?? "", options: .numeric) == .orderedDescending
             && version.compare(appVersion, options: .numeric) != .orderedDescending
         
@@ -60,11 +63,12 @@ public extension Migration {
                     && build?.compare(lastMigrationBuild ?? "", options: .numeric) == .orderedDescending
                     && build?.compare(appBuild, options: .numeric) != .orderedDescending))
         
-        guard hasVersionUpdate || hasBuildUpdate else { return }
+        guard hasVersionUpdate || hasBuildUpdate else { return self }
         
         completion()
         lastMigrationVersion = version
         lastMigrationBuild = build
+        return self
     }
     
     /// Wipe saved values when last migrated so next update will occur.

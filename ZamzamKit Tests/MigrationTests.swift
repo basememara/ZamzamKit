@@ -60,6 +60,36 @@ class MigrationTests: XCTestCase {
         waitForAllExpectations()
     }
     
+    func testMigrationChained() {
+        let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
+        let expectation2 = self.expectation(description: "Expecting block to be run for version 0.9 (1)")
+        let expectation3 = self.expectation(description: "Expecting block to be run for version 1.0")
+        let expectation4 = self.expectation(description: "Expecting block to be run for version 1.0 (0.1)")
+        let expectation5 = self.expectation(description: "Expecting block to be run for version 1.0 (1)")
+        
+        migration
+            .appUpdate(toVersion: "0.9") {
+                expectation1.fulfill()
+            }
+            .appUpdate(toVersion: "0.9", toBuild: "1") {
+                expectation2.fulfill()
+            }
+            .appUpdate(toVersion: "1.0") {
+                expectation3.fulfill()
+            }
+            .appUpdate(toVersion: "1.0", toBuild: "0.1") {
+                expectation4.fulfill()
+            }
+            .appUpdate(toVersion: "1.0", toBuild: "1") {
+                expectation5.fulfill()
+            }
+            .appUpdate(toVersion: "1.0", toBuild: "1") {
+                XCTFail("Should not execute a block for the same version twice")
+            }
+        
+        waitForAllExpectations()
+    }
+    
     func testMigrationBuild() {
         let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
         migration.appUpdate(toVersion: "0.9") {
