@@ -37,7 +37,7 @@ public extension Migration {
     ///
     /// - Parameter completion: Will be called when the app is updated. Will always be called once.
     @discardableResult
-    func appUpdate(completion: () -> Void) -> Self {
+    func performUpdate(completion: () -> Void) -> Self {
         guard lastAppVersion != appVersion || lastAppBuild != appBuild else { return self }
         completion()
         lastAppVersion = appVersion
@@ -53,7 +53,7 @@ public extension Migration {
     ///   - build: Build to update.
     ///   - completion: Will be called when the app is updated. Will always be called once.
     @discardableResult
-    func appUpdate(toVersion version: String, toBuild build: String? = nil, completion: () -> Void) -> Self {
+    func perform(forVersion version: String, withBuild build: String? = nil, completion: () -> Void) -> Self {
         let hasVersionUpdate = version.compare(lastMigrationVersion ?? "", options: .numeric) == .orderedDescending
             && version.compare(appVersion, options: .numeric) != .orderedDescending
         

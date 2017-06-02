@@ -17,16 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         migration
-            .appUpdate {
+            .performUpdate {
                 print("Migrate update occurred.")
             }
-            .appUpdate(toVersion: "1.0") {
+            .perform(forVersion: "1.0") {
                 print("Migrate to 1.0 occurred.")
             }
-            .appUpdate(toVersion: "1.0", toBuild: "1") {
+            .perform(forVersion: "1.0", withBuild: "1") {
                 print("Migrate to 1.0 (1) occurred.")
             }
-            .appUpdate(toVersion: "1.0", toBuild: "2") {
+            .perform(forVersion: "1.0", withBuild: "2") {
                 print("Migrate to 1.0 (2) occurred.")
             }
         
