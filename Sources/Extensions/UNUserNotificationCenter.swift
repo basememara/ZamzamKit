@@ -247,7 +247,7 @@ public extension UNUserNotificationCenter {
     ///
     /// - Parameter withIdentifiers: The identifiers of the user notifications to remove.
     func remove(withIdentifiers ids: [String]) {
-        guard !ids.isEmpty else { return removeAll() }
+        guard !ids.isEmpty else { return }
         removePendingNotificationRequests(withIdentifiers: ids)
         removeDeliveredNotifications(withIdentifiers: ids)
     }
@@ -264,10 +264,10 @@ public extension UNUserNotificationCenter {
     /// - Parameter withCategory: The categories of the user notification to remove.
     func remove(withCategories categories: [String], completion: (() -> Void)? = nil) {
         getPendingNotificationRequests {
-            $0.forEach {
-                guard categories.contains($0.content.categoryIdentifier) else { return }
-                self.remove(withIdentifier: $0.identifier)
-            }
+            self.remove(withIdentifiers: $0.flatMap {
+                categories.contains($0.content.categoryIdentifier) ? $0.identifier : nil
+            })
+            
             completion?()
         }
     }
