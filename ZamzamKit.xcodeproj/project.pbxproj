@@ -22,6 +22,7 @@
 		8B25F6B91EC38F0200B4406D /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; };
 		8B25F6BA1EC38F0200B4406D /* ZamzamKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8B2D90E81EE430BF0019F063 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D90E71EE430BF0019F063 /* NotificationsViewController.swift */; };
+		8B2D90EB1EE47ED80019F063 /* UNNotificationTriggerDateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D90EA1EE47ED80019F063 /* UNNotificationTriggerDateType.swift */; };
 		8B2DE3E11C8A86B2008F1569 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* Bundle.swift */; };
 		8B2DE3E21C8A86B2008F1569 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* Bundle.swift */; };
 		8B2DE3E31C8A86B2008F1569 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* Bundle.swift */; };
@@ -355,6 +356,7 @@
 		8B1EEC871CF7588600AE054B /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboard.swift; path = Extensions/UIStoryboard.swift; sourceTree = "<group>"; };
 		8B2285241EB6863600425B5A /* UITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableViewCell.swift; path = Extensions/UITableViewCell.swift; sourceTree = "<group>"; };
 		8B2D90E71EE430BF0019F063 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		8B2D90EA1EE47ED80019F063 /* UNNotificationTriggerDateType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNNotificationTriggerDateType.swift; sourceTree = "<group>"; };
 		8B2DE3E01C8A86B2008F1569 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bundle.swift; path = Extensions/Bundle.swift; sourceTree = "<group>"; };
 		8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleTests.swift; sourceTree = "<group>"; };
 		8B2DE3EE1C8A90AF008F1569 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
@@ -670,6 +672,7 @@
 				8B9E98621EB398770067ACB7 /* watchOS */,
 				8B9E986E1EB500790067ACB7 /* Then.swift */,
 				8B9434551EBCDA4400C779EB /* NotificationObservable.swift */,
+				8B2D90EA1EE47ED80019F063 /* UNNotificationTriggerDateType.swift */,
 				8BD61B351E3EFDF1009B537E /* ZamzamKitable.swift */,
 			);
 			path = Protocols;
@@ -1237,6 +1240,7 @@
 				8B2DE3E11C8A86B2008F1569 /* Bundle.swift in Sources */,
 				8B729C751EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,
 				8BFDB6571C75187200C94996 /* Date.swift in Sources */,
+				8B2D90EB1EE47ED80019F063 /* UNNotificationTriggerDateType.swift in Sources */,
 				8B63E4271CDB8DB00053C060 /* UIImage.swift in Sources */,
 				8BDA5E311E795DE300429F78 /* BackgroundTask.swift in Sources */,
 				8BD5086B1C99DD1E00AE205E /* Array.swift in Sources */,
