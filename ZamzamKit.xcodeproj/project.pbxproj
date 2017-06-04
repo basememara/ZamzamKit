@@ -21,6 +21,7 @@
 		8B2285251EB6863600425B5A /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2285241EB6863600425B5A /* UITableViewCell.swift */; };
 		8B25F6B91EC38F0200B4406D /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; };
 		8B25F6BA1EC38F0200B4406D /* ZamzamKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8B2D90E81EE430BF0019F063 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D90E71EE430BF0019F063 /* NotificationsViewController.swift */; };
 		8B2DE3E11C8A86B2008F1569 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* Bundle.swift */; };
 		8B2DE3E21C8A86B2008F1569 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* Bundle.swift */; };
 		8B2DE3E31C8A86B2008F1569 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* Bundle.swift */; };
@@ -353,6 +354,7 @@
 		8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIView.swift; path = Extensions/UIView.swift; sourceTree = "<group>"; };
 		8B1EEC871CF7588600AE054B /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboard.swift; path = Extensions/UIStoryboard.swift; sourceTree = "<group>"; };
 		8B2285241EB6863600425B5A /* UITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableViewCell.swift; path = Extensions/UITableViewCell.swift; sourceTree = "<group>"; };
+		8B2D90E71EE430BF0019F063 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		8B2DE3E01C8A86B2008F1569 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bundle.swift; path = Extensions/Bundle.swift; sourceTree = "<group>"; };
 		8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleTests.swift; sourceTree = "<group>"; };
 		8B2DE3EE1C8A90AF008F1569 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
@@ -598,11 +600,20 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		8B5316061C9B22F40094A6C4 /* ZamzamKit Example */ = {
+		8B2D90E91EE430CA0019F063 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				8B5316091C9B22F50094A6C4 /* FirstViewController.swift */,
+				8B2D90E71EE430BF0019F063 /* NotificationsViewController.swift */,
 				8B53160B1C9B22F60094A6C4 /* SecondViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		8B5316061C9B22F40094A6C4 /* ZamzamKit Example */ = {
+			isa = PBXGroup;
+			children = (
+				8B2D90E91EE430CA0019F063 /* Controllers */,
 				8B5316071C9B22F50094A6C4 /* AppDelegate.swift */,
 				8B53160D1C9B22F60094A6C4 /* Main.storyboard */,
 				8B5316121C9B22F60094A6C4 /* LaunchScreen.storyboard */,
@@ -1361,6 +1372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B2D90E81EE430BF0019F063 /* NotificationsViewController.swift in Sources */,
 				8B5316661C9B24A70094A6C4 /* ZamzamConstants.swift in Sources */,
 				8B53160C1C9B22F60094A6C4 /* SecondViewController.swift in Sources */,
 				8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */,

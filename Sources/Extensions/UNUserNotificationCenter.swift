@@ -239,23 +239,36 @@ public extension UNUserNotificationCenter {
     /// Remove pending or delivered user notifications.
     ///
     /// - Parameter withIdentifier: The identifier of the user notification to remove.
-    func remove(withIdentifier: String) {
-        remove(withIdentifiers: [withIdentifier])
+    func remove(withIdentifier id: String) {
+        remove(withIdentifiers: [id])
     }
     
     /// Remove pending and delivered user notifications.
     ///
     /// - Parameter withIdentifiers: The identifiers of the user notifications to remove.
     ///     If identifiers is nil, all user notifications will be removed.
-    func remove(withIdentifiers: [String]? = nil) {
-        guard let ids = withIdentifiers, !ids.isEmpty else {
-            removeAllPendingNotificationRequests()
-            removeAllDeliveredNotifications()
-            return
-        }
-        
+    func remove(withIdentifiers ids: [String]) {
+        guard !ids.isEmpty else { return removeAll() }
         removePendingNotificationRequests(withIdentifiers: ids)
         removeDeliveredNotifications(withIdentifiers: ids)
     }
-
+    
+    /// Remove pending or delivered user notifications.
+    ///
+    /// - Parameter withCategory: The category of the user notification to remove.
+    func remove(withCategory category: String, completion: (() -> Void)? = nil) {
+        getPendingNotificationRequests {
+            $0.forEach {
+                guard $0.content.categoryIdentifier == category else { return }
+                self.remove(withIdentifier: $0.identifier)
+            }
+            completion?()
+        }
+    }
+    
+    /// Remove all pending or delivered user notifications.
+    func removeAll() {
+        removeAllPendingNotificationRequests()
+        removeAllDeliveredNotifications()
+    }
 }
