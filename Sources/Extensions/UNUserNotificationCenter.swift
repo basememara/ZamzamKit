@@ -39,7 +39,7 @@ public extension UNUserNotificationCenter {
         categories: [String: [UNNotificationAction]?],
         authorizations: UNAuthorizationOptions? = [.alert, .badge, .sound],
         completion: ((Bool) -> Void)? = nil) {
-            self.delegate = delegate
+            self.delegate ?= delegate
         
             getNotificationSettings { settings in
                 let categorySet = Set(categories.map {
