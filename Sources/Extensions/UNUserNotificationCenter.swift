@@ -130,7 +130,7 @@ public extension UNUserNotificationCenter {
                 $0.title ?= title
                 $0.subtitle ?= subtitle
                 $0.badge ?= badge
-                $0.sound ?= sound
+                $0.sound = sound
                 if let userInfo = userInfo { $0.userInfo = userInfo }
                 if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
             }
@@ -167,7 +167,7 @@ public extension UNUserNotificationCenter {
                 $0.title ?= title
                 $0.subtitle ?= subtitle
                 $0.badge ?= badge
-                $0.sound ?= sound
+                $0.sound = sound
                 if let userInfo = userInfo { $0.userInfo = userInfo }
                 if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
             }
@@ -223,7 +223,7 @@ public extension UNUserNotificationCenter {
                 $0.title ?= title
                 $0.subtitle ?= subtitle
                 $0.badge ?= badge
-                $0.sound ?= sound
+                $0.sound = sound
                 if let userInfo = userInfo { $0.userInfo = userInfo }
                 if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
             }
