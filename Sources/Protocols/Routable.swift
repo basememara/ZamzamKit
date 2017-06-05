@@ -11,11 +11,32 @@ import UIKit
 public protocol Routable {
     associatedtype StoryboardIdentifier: RawRepresentable
     
+    func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String?, animated: Bool, configure: ((T) -> Void)?)
     func show<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String?, configure: ((T) -> Void)?)
     func showDetailViewController<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String?, configure: ((T) -> Void)?)
 }
 
 public extension Routable where Self: UIViewController, StoryboardIdentifier.RawValue == String {
+
+    /**
+     Presents the intial view controller of the specified storyboard modally.
+
+     - parameter storyboard: Storyboard name.
+     - parameter identifier: View controller name.
+     - parameter configure: Configure the view controller before it is loaded.
+     */
+    func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, animated: Bool = true, configure: ((T) -> Void)? = nil) {
+        let storyboard = UIStoryboard(name: storyboard.rawValue)
+        
+        guard let controller = (identifier != nil
+            ? storyboard.instantiateViewController(withIdentifier: identifier!)
+            : storyboard.instantiateInitialViewController()) as? T
+            else { return assertionFailure("Invalid controller for storyboard \(storyboard).") }
+        
+        present(controller, animated: animated) {
+            configure?(controller)
+        }
+    }
     
     /**
      Present the intial view controller of the specified storyboard in the primary context.
