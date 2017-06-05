@@ -43,7 +43,12 @@ public extension UNUserNotificationCenter {
         
             getNotificationSettings { settings in
                 let categorySet = Set(categories.map {
-                    UNNotificationCategory(identifier: $0.key, actions: $0.value ?? [], intentIdentifiers: [])
+                    UNNotificationCategory(
+                        identifier: $0.key,
+                        actions: $0.value ?? [],
+                        intentIdentifiers: [],
+                        options: .customDismissAction
+                    )
                 })
                 
                 guard let authorizations = authorizations, settings.authorizationStatus == .notDetermined else {
