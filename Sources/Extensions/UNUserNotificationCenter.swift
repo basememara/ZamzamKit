@@ -54,7 +54,11 @@ public extension UNUserNotificationCenter {
                 guard let authorizations = authorizations, settings.authorizationStatus == .notDetermined else {
                     // Register category if applicable
                     return self.getNotificationCategories {
-                        defer { completion?(settings.authorizationStatus == .authorized) }
+                        defer {
+                            let granted = settings.authorizationStatus == .authorized
+                            DispatchQueue.main.async { completion?(granted) }
+                        }
+                        
                         guard categorySet != $0 else { return }
                         self.setNotificationCategories(categorySet)
                     }
@@ -62,7 +66,7 @@ public extension UNUserNotificationCenter {
                 
                 // Request permission before registering if applicable
                 self.requestAuthorization(options: authorizations) { granted, error in
-                    defer { completion?(granted) }
+                    defer { DispatchQueue.main.async { completion?(granted) } }
                     guard granted else { return }
                     self.setNotificationCategories(categorySet)
                 }
@@ -80,7 +84,10 @@ public extension UNUserNotificationCenter {
     ///   - complete: The completion block that will return the request with the identifier.
     func get(withIdentifier: String, complete: @escaping (UNNotificationRequest?) -> Void) {
         getPendingNotificationRequests {
-            complete($0.first { $0.identifier == withIdentifier })
+            let requests = $0.first { $0.identifier == withIdentifier }
+            DispatchQueue.main.async {
+                complete(requests)
+            }
         }
     }
     
@@ -91,7 +98,10 @@ public extension UNUserNotificationCenter {
     ///   - complete: The completion block that will return the requests with the identifiers.
     func get(withIdentifiers: [String], complete: @escaping ([UNNotificationRequest]) -> Void) {
         getPendingNotificationRequests {
-            complete($0.filter { withIdentifiers.contains($0.identifier) })
+            let requests = $0.filter { withIdentifiers.contains($0.identifier) }
+            DispatchQueue.main.async {
+                complete(requests)
+            }
         }
     }
     
@@ -273,7 +283,7 @@ public extension UNUserNotificationCenter {
                 categories.contains($0.content.categoryIdentifier) ? $0.identifier : nil
             })
             
-            completion?()
+            DispatchQueue.main.async { completion?() }
         }
     }
     
