@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import UserNotifications
 import ZamzamKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    static let watchSession = WatchSession()
 
     var window: UIWindow?
     let migration = Migration()
@@ -29,6 +32,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .perform(forVersion: "1.0", withBuild: "2") {
                 print("Migrate to 1.0 (2) occurred.")
             }
+        
+        AppDelegate.watchSession.activate()
+        
+        AppDelegate.watchSession.addObserver(forApplicationContext: Observer {
+            UNUserNotificationCenter.current().add(
+                body: $0["value"] as? String ?? "",
+                title: "Watch Transfer: Application Context",
+                timeInterval: 5
+            )
+        })
+        
+        AppDelegate.watchSession.addObserver(forUserInfo: Observer {
+            UNUserNotificationCenter.current().add(
+                body: $0["value"] as? String ?? "",
+                title: "Watch Transfer: User Info",
+                timeInterval: 5
+            )
+        })
         
         return true
     }

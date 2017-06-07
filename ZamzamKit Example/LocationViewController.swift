@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import ZamzamKit
 
-class SecondViewController: UIViewController {
+class LocationViewController: UIViewController {
 
     @IBOutlet weak var outputLabel: UILabel!
     
@@ -29,7 +29,7 @@ class SecondViewController: UIViewController {
         super.viewDidAppear(animated)
         
         locationManager.addObserver(locationObserver)
-        locationManager.addObserver(headingObserver)
+        locationManager.addObserver(locationObserver)
         
         locationManager.requestAuthorization(
             for: .whenInUse,
@@ -61,7 +61,7 @@ class SecondViewController: UIViewController {
     }
 }
 
-extension SecondViewController {
+extension LocationViewController {
     
     var headingObserver: Observer<LocationManager.HeadingHandler> {
         return Observer {

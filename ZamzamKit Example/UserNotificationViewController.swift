@@ -10,7 +10,7 @@ import UIKit
 import UserNotifications
 import ZamzamKit
 
-class FirstViewController: UIViewController {
+class UserNotificationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +34,7 @@ class FirstViewController: UIViewController {
                     }
             }
         )
+        
     }
     
     @IBAction func scheduleTapped() {

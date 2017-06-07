@@ -17,15 +17,18 @@ public class WatchSession: NSObject, WCSessionDelegate {
     
     public override init() {
         super.init()
-        
-        guard WCSession.isSupported() else { return }
-        
-        WCSession.default().delegate = self
-        
-        if WCSession.default().activationState != .activated {
-            WCSession.default().activate()
-        }
+        sessionDefault?.delegate = self
     }
+    
+    /// Subscription queues for firing within delegates
+    fileprivate var activationDidCompleteSingle = SynchronizedArray<ActivationHandler>()
+    fileprivate var didBecomeInactive = SynchronizedArray<Observer<() -> Void>>()
+    fileprivate var didDeactivate = SynchronizedArray<Observer<() -> Void>>()
+    fileprivate var stateDidChange = SynchronizedArray<Observer<() -> Void>>()
+    fileprivate var reachabilityDidChange = SynchronizedArray<ReachabilityChangeObserver>()
+    fileprivate var didReceiveApplicationContext = SynchronizedArray<ReceiveApplicationContextObserver>()
+    fileprivate var didReceiveUserInfo = SynchronizedArray<ReceiveUserInfoObserver>()
+    fileprivate var didReceiveMessage = SynchronizedArray<ReceiveMessageObserver>()
     
     deinit {
         // Empty task queues of references
@@ -38,16 +41,83 @@ public class WatchSession: NSObject, WCSessionDelegate {
         didReceiveUserInfo.removeAll()
         didReceiveMessage.removeAll()
     }
+}
+
+// MARK: - Location manager observers
+
+public extension WatchSession {
+
+    func addObserver(forInactive observer: Observer<() -> Void>) {
+        didBecomeInactive += observer
+    }
+
+    func removeObserver(forInactive observer: Observer<() -> Void>) {
+        didBecomeInactive -= observer
+    }
+
+    func addObserver(forDeactivate observer: Observer<() -> Void>) {
+        didDeactivate += observer
+    }
+
+    func removeObserver(forDeactivate observer: Observer<() -> Void>) {
+        didDeactivate -= observer
+    }
+
+    func addObserver(forStateChange observer: Observer<() -> Void>) {
+        stateDidChange += observer
+    }
+
+    func removeObserver(forStateChange observer: Observer<() -> Void>) {
+        stateDidChange -= observer
+    }
+
+    func addObserver(_ observer: ReachabilityChangeObserver) {
+        reachabilityDidChange += observer
+    }
+
+    func removeObserver(_ observer: ReachabilityChangeObserver) {
+        reachabilityDidChange -= observer
+    }
+
+    func addObserver(forApplicationContext observer: ReceiveApplicationContextObserver) {
+        didReceiveApplicationContext += observer
+    }
+
+    func removeObserver(forApplicationContext observer: ReceiveApplicationContextObserver) {
+        didReceiveApplicationContext -= observer
+    }
+
+    func addObserver(forUserInfo observer: ReceiveUserInfoObserver) {
+        didReceiveUserInfo += observer
+    }
+
+    func removeObserver(forUserInfo observer: ReceiveUserInfoObserver) {
+        didReceiveUserInfo -= observer
+    }
+
+    func addObserver(forMessage observer: ReceiveMessageObserver) {
+        didReceiveMessage += observer
+    }
+
+    func removeObserver(forMessage observer: ReceiveMessageObserver) {
+        didReceiveMessage -= observer
+    }
     
-    /// Subscription queues for firing within delegates
-    fileprivate var activationDidCompleteSingle = SynchronizedArray<ActivationHandler>()
-    public var didBecomeInactive = SynchronizedArray<EmptyObserver>()
-    public var didDeactivate = SynchronizedArray<EmptyObserver>()
-    public var stateDidChange = SynchronizedArray<EmptyObserver>()
-    public var reachabilityDidChange = SynchronizedArray<ReachabilityChangeObserver>()
-    public var didReceiveApplicationContext = SynchronizedArray<DictionaryObserver>()
-    public var didReceiveUserInfo = SynchronizedArray<DictionaryObserver>()
-    public var didReceiveMessage = SynchronizedArray<DidReceiveMessageObserver>()
+    func removeObservers(with prefix: String) {
+        let prefix = prefix + "."
+    
+        didBecomeInactive.remove(where: { $0.id.hasPrefix(prefix) })
+        didDeactivate.remove(where: { $0.id.hasPrefix(prefix) })
+        stateDidChange.remove(where: { $0.id.hasPrefix(prefix) })
+        reachabilityDidChange.remove(where: { $0.id.hasPrefix(prefix) })
+        didReceiveApplicationContext.remove(where: { $0.id.hasPrefix(prefix) })
+        didReceiveUserInfo.remove(where: { $0.id.hasPrefix(prefix) })
+        didReceiveMessage.remove(where: { $0.id.hasPrefix(prefix) })
+    }
+
+    func removeObservers(from file: String = #file) {
+        removeObservers(with: file)
+    }
 }
 
 // MARK: - Nested types
@@ -55,10 +125,10 @@ public extension WatchSession {
 
     /// Handler queue types
     typealias ActivationHandler = (Bool) -> Void
-    typealias EmptyObserver = Observer<() -> Void>
-    typealias DictionaryObserver = Observer<([String: Any]) -> Void>
     typealias ReachabilityChangeObserver = Observer<(Bool) -> Void>
-    typealias DidReceiveMessageObserver = Observer<([String: Any], ([String: Any]) -> Void) -> Void>
+    typealias ReceiveApplicationContextObserver = Observer<([String: Any]) -> Void>
+    typealias ReceiveUserInfoObserver = Observer<([String: Any]) -> Void>
+    typealias ReceiveMessageObserver = Observer<([String: Any], ([String: Any]) -> Void) -> Void>
 }
 
 public extension WatchSession {
@@ -87,15 +157,21 @@ public extension WatchSession {
 public extension WatchSession {
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        didReceiveApplicationContext.forEach { $0.handler(applicationContext) }
+        didReceiveApplicationContext.forEach { observer in
+            DispatchQueue.main.async { observer.handler(applicationContext) }
+        }
     }
     
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
-        didReceiveUserInfo.forEach { $0.handler(userInfo) }
+        didReceiveUserInfo.forEach { observer in
+            DispatchQueue.main.async { observer.handler(userInfo) }
+        }
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
-        didReceiveMessage.forEach { $0.handler(message, replyHandler) }
+        didReceiveMessage.forEach { observer in
+            DispatchQueue.main.async { observer.handler(message, replyHandler) }
+        }
     }
 }
 

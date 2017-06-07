@@ -7,11 +7,14 @@
 //
 
 import WatchKit
+import ZamzamKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
+    static let watchSession = WatchSession()
+    
     func applicationDidFinishLaunching() {
-        // Perform any final initialization of your application.
+        ExtensionDelegate.watchSession.activate()
     }
 
     func applicationDidBecomeActive() {

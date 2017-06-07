@@ -28,7 +28,6 @@
 		8B2DE3E31C8A86B2008F1569 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* Bundle.swift */; };
 		8B2DE3EC1C8A8F79008F1569 /* BundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */; };
 		8B2DE3F01C8A90AF008F1569 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EE1C8A90AF008F1569 /* Settings.plist */; };
-		8B40C2B71CC0A85F00BEC9E0 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447D51C7257D600043657 /* ZamzamKit.framework */; };
 		8B48E6211DAFFD4100087328 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6201DAFFD4100087328 /* ArrayTests.swift */; };
 		8B48E6231DAFFD8900087328 /* CollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6221DAFFD8900087328 /* CollectionTests.swift */; };
 		8B48E6251DAFFDA900087328 /* DictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6241DAFFDA900087328 /* DictionaryTests.swift */; };
@@ -56,8 +55,8 @@
 		8B4CFAE91CABEF0800D2B1D7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
 		8B4CFAEF1CABEF0900D2B1D7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
 		8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316071C9B22F50094A6C4 /* AppDelegate.swift */; };
-		8B53160A1C9B22F50094A6C4 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316091C9B22F50094A6C4 /* FirstViewController.swift */; };
-		8B53160C1C9B22F60094A6C4 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53160B1C9B22F60094A6C4 /* SecondViewController.swift */; };
+		8B53160A1C9B22F50094A6C4 /* UserNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316091C9B22F50094A6C4 /* UserNotificationViewController.swift */; };
+		8B53160C1C9B22F60094A6C4 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53160B1C9B22F60094A6C4 /* LocationViewController.swift */; };
 		8B53160F1C9B22F60094A6C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B53160D1C9B22F60094A6C4 /* Main.storyboard */; };
 		8B5316111C9B22F60094A6C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B5316101C9B22F60094A6C4 /* Assets.xcassets */; };
 		8B5316141C9B22F60094A6C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B5316121C9B22F60094A6C4 /* LaunchScreen.storyboard */; };
@@ -127,7 +126,6 @@
 		8B9434651EBDEAA200C779EB /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434641EBDEAA200C779EB /* Calendar.swift */; };
 		8B9434661EBDEAA200C779EB /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434641EBDEAA200C779EB /* Calendar.swift */; };
 		8B9434671EBDEAA200C779EB /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434641EBDEAA200C779EB /* Calendar.swift */; };
-		8B9A87951C9C20260087A251 /* Complicationable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A87941C9C20260087A251 /* Complicationable.swift */; };
 		8B9E97A71EAFA4980067ACB7 /* Test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E97A61EAFA4980067ACB7 /* Test.txt */; };
 		8B9E97A81EAFA4980067ACB7 /* Test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E97A61EAFA4980067ACB7 /* Test.txt */; };
 		8B9E98111EB144540067ACB7 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E98101EB144540067ACB7 /* Routable.swift */; };
@@ -177,6 +175,9 @@
 		8BE814FD1C7842DC005F23CE /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* Sequence.swift */; };
 		8BE814FE1C7842DC005F23CE /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* Sequence.swift */; };
 		8BE814FF1C7842DC005F23CE /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* Sequence.swift */; };
+		8BEC1BAE1EE76CA8002FA271 /* WatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEC1BAD1EE76CA8002FA271 /* WatchViewController.swift */; };
+		8BEC1BB11EE78552002FA271 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447D51C7257D600043657 /* ZamzamKit.framework */; };
+		8BEC1BB21EE78552002FA271 /* ZamzamKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447D51C7257D600043657 /* ZamzamKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8BEFE46E1E4506B500100744 /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */; };
 		8BEFE4791E4515D900100744 /* ScheduleInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE4781E4515D900100744 /* ScheduleInterval.swift */; };
 		8BEFE47A1E4515D900100744 /* ScheduleInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE4781E4515D900100744 /* ScheduleInterval.swift */; };
@@ -224,20 +225,6 @@
 			remoteGlobalIDString = 8B1447C71C72577900043657;
 			remoteInfo = "ZamzamKit iOS";
 		};
-		8B48E6181DAFF3B000087328 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8061C29A1BB9B62200F0494D;
-			remoteInfo = "Timepiece tvOS";
-		};
-		8B48E61A1DAFF3B000087328 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8061C2A31BB9B62200F0494D;
-			remoteInfo = "Timepiece tvOS Tests";
-		};
 		8B5316291C9B23140094A6C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8B1447461C72237E00043657 /* Project object */;
@@ -266,40 +253,12 @@
 			remoteGlobalIDString = 8B1447E11C7257F100043657;
 			remoteInfo = "ZamzamKit tvOS";
 		};
-		8BE19B601C72D8FF00D4D437 /* PBXContainerItemProxy */ = {
+		8BEC1BB31EE78552002FA271 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3DC6180F199E1F8400FB7AAC;
-			remoteInfo = "Timepiece iOS";
-		};
-		8BE19B621C72D8FF00D4D437 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3DE7CFB01B27126F00E0F331;
-			remoteInfo = "Timepiece OSX";
-		};
-		8BE19B641C72D8FF00D4D437 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8015E2121BB9B41400545DF5;
-			remoteInfo = "Timepiece watchOS";
-		};
-		8BE19B661C72D8FF00D4D437 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3DC6181A199E1F8400FB7AAC;
-			remoteInfo = "Timepiece iOS Tests";
-		};
-		8BE19B681C72D8FF00D4D437 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3DE7CFBA1B27126F00E0F331;
-			remoteInfo = "Timepiece OSX Tests";
+			containerPortal = 8B1447461C72237E00043657 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B1447D41C7257D600043657;
+			remoteInfo = "ZamzamKit watchOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -337,6 +296,17 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8BEC1BB51EE78552002FA271 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8BEC1BB21EE78552002FA271 /* ZamzamKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -344,7 +314,6 @@
 		8B14476C1C722D5700043657 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8B14476D1C722D5700043657 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8B1447821C722F5E00043657 /* ZamzamConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamConstants.swift; sourceTree = "<group>"; };
-		8B1447B31C72539600043657 /* Timepiece.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Timepiece.framework; path = "Carthage/Checkouts/Timepiece/build/Debug-iphoneos/Timepiece.framework"; sourceTree = "<group>"; };
 		8B1447C81C72577900043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1447D51C7257D600043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1447E21C7257F100043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -361,7 +330,6 @@
 		8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleTests.swift; sourceTree = "<group>"; };
 		8B2DE3EE1C8A90AF008F1569 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		8B40C2B41CC0A6F400BEC9E0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		8B48E61E1DAFF46600087328 /* Timepiece.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Timepiece.framework; path = Carthage/Build/iOS/Timepiece.framework; sourceTree = "<group>"; };
 		8B48E6201DAFFD4100087328 /* ArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
 		8B48E6221DAFFD8900087328 /* CollectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTests.swift; sourceTree = "<group>"; };
 		8B48E6241DAFFDA900087328 /* DictionaryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryTests.swift; sourceTree = "<group>"; };
@@ -372,8 +340,8 @@
 		8B4C08AF1EC94489002A317D /* NumberTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberTests.swift; sourceTree = "<group>"; };
 		8B5316051C9B22F40094A6C4 /* ZamzamKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZamzamKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5316071C9B22F50094A6C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8B5316091C9B22F50094A6C4 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		8B53160B1C9B22F60094A6C4 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		8B5316091C9B22F50094A6C4 /* UserNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationViewController.swift; sourceTree = "<group>"; };
+		8B53160B1C9B22F60094A6C4 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		8B53160E1C9B22F60094A6C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B5316101C9B22F60094A6C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B5316131C9B22F60094A6C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -415,7 +383,6 @@
 		8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationCenter.swift; path = Extensions/NotificationCenter.swift; sourceTree = "<group>"; };
 		8B9434601EBDEA8200C779EB /* TimeZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeZone.swift; path = Extensions/TimeZone.swift; sourceTree = "<group>"; };
 		8B9434641EBDEAA200C779EB /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Calendar.swift; path = Extensions/Calendar.swift; sourceTree = "<group>"; };
-		8B9A87941C9C20260087A251 /* Complicationable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Complicationable.swift; sourceTree = "<group>"; };
 		8B9E97A61EAFA4980067ACB7 /* Test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Test.txt; sourceTree = "<group>"; };
 		8B9E98101EB144540067ACB7 /* Routable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
 		8B9E985F1EB396D20067ACB7 /* CellIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellIdentifiable.swift; sourceTree = "<group>"; };
@@ -444,9 +411,9 @@
 		8BE19B271C72D71F00D4D437 /* DateTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeTests.swift; sourceTree = "<group>"; };
 		8BE19B281C72D71F00D4D437 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		8BE19B291C72D71F00D4D437 /* WebTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebTests.swift; sourceTree = "<group>"; };
-		8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Timepiece.xcodeproj; path = Carthage/Checkouts/Timepiece/Timepiece.xcodeproj; sourceTree = "<group>"; };
 		8BE814F41C784233005F23CE /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = Extensions/Color.swift; sourceTree = "<group>"; };
 		8BE814FC1C7842DC005F23CE /* Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Sequence.swift; path = Extensions/Sequence.swift; sourceTree = "<group>"; };
+		8BEC1BAD1EE76CA8002FA271 /* WatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchViewController.swift; sourceTree = "<group>"; };
 		8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNUserNotificationCenter.swift; path = Extensions/UNUserNotificationCenter.swift; sourceTree = "<group>"; };
 		8BEFE4781E4515D900100744 /* ScheduleInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleInterval.swift; sourceTree = "<group>"; };
 		8BF2106A1E48D52F0026B802 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -501,7 +468,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B40C2B71CC0A85F00BEC9E0 /* ZamzamKit.framework in Frameworks */,
+				8BEC1BB11EE78552002FA271 /* ZamzamKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,8 +500,8 @@
 				8B5316061C9B22F40094A6C4 /* ZamzamKit Example */,
 				8B53161C1C9B23140094A6C4 /* ZamzamKit Example Watch */,
 				8B53162B1C9B23140094A6C4 /* ZamzamKit Example Watch Extension */,
-				8B1447501C72237E00043657 /* Products */,
 				8B1447B51C7253B100043657 /* Frameworks */,
+				8B1447501C72237E00043657 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -562,11 +529,8 @@
 				8BFDB6A51C75B4B200C94996 /* Models */,
 				8B840E651C904F3300D85781 /* Protocols */,
 				8B1447821C722F5E00043657 /* ZamzamConstants.swift */,
-				8B1447F71C7258E500043657 /* ZamzamKit.h */,
 				8BF307C01CF0D44200BBA933 /* Media.xcassets */,
-				8B1448411C725BFE00043657 /* Info-iOS.plist */,
-				8B1448441C725BFE00043657 /* Info-watchOS.plist */,
-				8B1448431C725BFE00043657 /* Info-tvOS.plist */,
+				8BEC1BB71EE81CD3002FA271 /* Supporting Files */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -583,10 +547,7 @@
 		8B1447B51C7253B100043657 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8B48E61E1DAFF46600087328 /* Timepiece.framework */,
 				8B40C2B41CC0A6F400BEC9E0 /* AVFoundation.framework */,
-				8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */,
-				8B1447B31C72539600043657 /* Timepiece.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -605,9 +566,10 @@
 		8B2D90E91EE430CA0019F063 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8B5316091C9B22F50094A6C4 /* FirstViewController.swift */,
+				8B5316091C9B22F50094A6C4 /* UserNotificationViewController.swift */,
 				8B2D90E71EE430BF0019F063 /* NotificationsViewController.swift */,
-				8B53160B1C9B22F60094A6C4 /* SecondViewController.swift */,
+				8B53160B1C9B22F60094A6C4 /* LocationViewController.swift */,
+				8BEC1BAD1EE76CA8002FA271 /* WatchViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -639,11 +601,10 @@
 			isa = PBXGroup;
 			children = (
 				8B53162E1C9B23140094A6C4 /* InterfaceController.swift */,
-				8B5316301C9B23140094A6C4 /* ExtensionDelegate.swift */,
 				8B5316321C9B23140094A6C4 /* NotificationController.swift */,
 				8B5316361C9B23140094A6C4 /* ComplicationController.swift */,
+				8B5316301C9B23140094A6C4 /* ExtensionDelegate.swift */,
 				8B5316381C9B23140094A6C4 /* Assets.xcassets */,
-				8B53163A1C9B23140094A6C4 /* Info.plist */,
 				8B53162C1C9B23140094A6C4 /* Supporting Files */,
 			);
 			path = "ZamzamKit Example Watch Extension";
@@ -652,6 +613,7 @@
 		8B53162C1C9B23140094A6C4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8B53163A1C9B23140094A6C4 /* Info.plist */,
 				8B53162D1C9B23140094A6C4 /* PushNotificationPayload.apns */,
 			);
 			name = "Supporting Files";
@@ -669,7 +631,6 @@
 			isa = PBXGroup;
 			children = (
 				8B9E98611EB3986B0067ACB7 /* iOS */,
-				8B9E98621EB398770067ACB7 /* watchOS */,
 				8B9E986E1EB500790067ACB7 /* Then.swift */,
 				8B9434551EBCDA4400C779EB /* NotificationObservable.swift */,
 				8B2D90EA1EE47ED80019F063 /* UNNotificationTriggerDateType.swift */,
@@ -688,14 +649,6 @@
 				8B5455DE1E5E3287000CB26A /* Segueable.swift */,
 			);
 			name = iOS;
-			sourceTree = "<group>";
-		};
-		8B9E98621EB398770067ACB7 /* watchOS */ = {
-			isa = PBXGroup;
-			children = (
-				8B9A87941C9C20260087A251 /* Complicationable.swift */,
-			);
-			name = watchOS;
 			sourceTree = "<group>";
 		};
 		8BC8115E1ECCE72200F455CC /* Protocols */ = {
@@ -736,18 +689,15 @@
 			path = "ZamzamKit Tests";
 			sourceTree = "<group>";
 		};
-		8BE19B591C72D8FF00D4D437 /* Products */ = {
+		8BEC1BB71EE81CD3002FA271 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8BE19B611C72D8FF00D4D437 /* Timepiece.framework */,
-				8BE19B631C72D8FF00D4D437 /* Timepiece.framework */,
-				8BE19B651C72D8FF00D4D437 /* Timepiece.framework */,
-				8B48E6191DAFF3B000087328 /* Timepiece.framework */,
-				8BE19B671C72D8FF00D4D437 /* Timepiece iOS Tests.xctest */,
-				8BE19B691C72D8FF00D4D437 /* Timepiece OSX Tests.xctest */,
-				8B48E61B1DAFF3B000087328 /* Timepiece tvOS Tests.xctest */,
+				8B1447F71C7258E500043657 /* ZamzamKit.h */,
+				8B1448411C725BFE00043657 /* Info-iOS.plist */,
+				8B1448441C725BFE00043657 /* Info-watchOS.plist */,
+				8B1448431C725BFE00043657 /* Info-tvOS.plist */,
 			);
-			name = Products;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		8BFDB65C1C75187800C94996 /* Extensions */ = {
@@ -958,10 +908,12 @@
 				8B5316231C9B23140094A6C4 /* Sources */,
 				8B5316241C9B23140094A6C4 /* Frameworks */,
 				8B5316251C9B23140094A6C4 /* Resources */,
+				8BEC1BB51EE78552002FA271 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8BEC1BB41EE78552002FA271 /* PBXTargetDependency */,
 			);
 			name = "ZamzamKit Example Watch Extension";
 			productName = "ZamzamKit Example Watch Extension";
@@ -1063,12 +1015,6 @@
 			mainGroup = 8B1447451C72237E00043657;
 			productRefGroup = 8B1447501C72237E00043657 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 8BE19B591C72D8FF00D4D437 /* Products */;
-					ProjectRef = 8BE19B581C72D8FF00D4D437 /* Timepiece.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				8B1447C71C72577900043657 /* ZamzamKit iOS */,
@@ -1082,58 +1028,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		8B48E6191DAFF3B000087328 /* Timepiece.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Timepiece.framework;
-			remoteRef = 8B48E6181DAFF3B000087328 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8B48E61B1DAFF3B000087328 /* Timepiece tvOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Timepiece tvOS Tests.xctest";
-			remoteRef = 8B48E61A1DAFF3B000087328 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8BE19B611C72D8FF00D4D437 /* Timepiece.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Timepiece.framework;
-			remoteRef = 8BE19B601C72D8FF00D4D437 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8BE19B631C72D8FF00D4D437 /* Timepiece.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Timepiece.framework;
-			remoteRef = 8BE19B621C72D8FF00D4D437 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8BE19B651C72D8FF00D4D437 /* Timepiece.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Timepiece.framework;
-			remoteRef = 8BE19B641C72D8FF00D4D437 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8BE19B671C72D8FF00D4D437 /* Timepiece iOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Timepiece iOS Tests.xctest";
-			remoteRef = 8BE19B661C72D8FF00D4D437 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8BE19B691C72D8FF00D4D437 /* Timepiece OSX Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Timepiece OSX Tests.xctest";
-			remoteRef = 8BE19B681C72D8FF00D4D437 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8B1447C61C72577900043657 /* Resources */ = {
@@ -1326,7 +1220,6 @@
 				8B729C761EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
 				8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */,
-				8B9A87951C9C20260087A251 /* Complicationable.swift in Sources */,
 				8B79A4761E9C1ED800C8A5A4 /* Locale.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1377,10 +1270,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B2D90E81EE430BF0019F063 /* NotificationsViewController.swift in Sources */,
+				8BEC1BAE1EE76CA8002FA271 /* WatchViewController.swift in Sources */,
 				8B5316661C9B24A70094A6C4 /* ZamzamConstants.swift in Sources */,
-				8B53160C1C9B22F60094A6C4 /* SecondViewController.swift in Sources */,
+				8B53160C1C9B22F60094A6C4 /* LocationViewController.swift in Sources */,
 				8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */,
-				8B53160A1C9B22F50094A6C4 /* FirstViewController.swift in Sources */,
+				8B53160A1C9B22F50094A6C4 /* UserNotificationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1468,6 +1362,11 @@
 			isa = PBXTargetDependency;
 			target = 8B1447E11C7257F100043657 /* ZamzamKit tvOS */;
 			targetProxy = 8BE19B1D1C72D6F200D4D437 /* PBXContainerItemProxy */;
+		};
+		8BEC1BB41EE78552002FA271 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B1447D41C7257D600043657 /* ZamzamKit watchOS */;
+			targetProxy = 8BEC1BB31EE78552002FA271 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

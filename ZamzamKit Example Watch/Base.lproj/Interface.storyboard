@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="12029"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
@@ -14,12 +14,44 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="ZamzamKit_Example_Watch" customModuleProvider="target">
                     <items>
-                        <button width="1" alignment="left" title="Button" id="BHZ-mJ-b0H">
+                        <label alignment="left" text="Label" minimumScaleFactor="0.5" id="9U3-hO-iLO"/>
+                        <label alignment="left" text="Label" minimumScaleFactor="0.5" id="X7y-dV-IPB"/>
+                        <button width="1" alignment="left" title="Context" id="7Dg-aT-5bj">
                             <connections>
-                                <action selector="buttonTapped" destination="AgC-eL-Hgc" id="J5n-l3-53f"/>
+                                <action selector="sendContextTapped" destination="AgC-eL-Hgc" id="EZ9-wa-bwj"/>
+                            </connections>
+                        </button>
+                        <separator alignment="left" id="J6Y-mL-TpE"/>
+                        <label alignment="left" text="Label" minimumScaleFactor="0.5" id="d1E-SK-aP4"/>
+                        <label alignment="left" text="Label" minimumScaleFactor="0.5" id="KxZ-gm-FaA"/>
+                        <button width="1" alignment="left" title="User Info" id="ie1-Rm-iRi">
+                            <connections>
+                                <action selector="sendUserInfoTapped" destination="AgC-eL-Hgc" id="v7O-1H-sDz"/>
+                            </connections>
+                        </button>
+                        <separator alignment="left" id="bmF-gI-1cr"/>
+                        <label alignment="left" text="Label" minimumScaleFactor="0.5" id="O0D-0s-arC"/>
+                        <label alignment="left" text="Label" minimumScaleFactor="0.5" id="40s-Iv-ojO"/>
+                        <button width="1" alignment="left" title="Message" id="QHU-EH-Loe">
+                            <connections>
+                                <action selector="sendMessageTapped" destination="AgC-eL-Hgc" id="nTO-9K-ZYU"/>
+                            </connections>
+                        </button>
+                        <separator alignment="left" id="oxL-sa-bLd"/>
+                        <button width="1" alignment="left" title="Alert" id="BHZ-mJ-b0H">
+                            <connections>
+                                <action selector="alertTapped" destination="AgC-eL-Hgc" id="CSe-4z-XMM"/>
                             </connections>
                         </button>
                     </items>
+                    <connections>
+                        <outlet property="receivedContextLabel" destination="9U3-hO-iLO" id="7yz-Sg-BXm"/>
+                        <outlet property="receivedMessageLabel" destination="O0D-0s-arC" id="bjp-TU-rzZ"/>
+                        <outlet property="receivedUserInfoLabel" destination="d1E-SK-aP4" id="oTX-pa-S2G"/>
+                        <outlet property="sentContextLabel" destination="X7y-dV-IPB" id="oM7-ZW-cqx"/>
+                        <outlet property="sentMessageLabel" destination="40s-Iv-ojO" id="vAp-Ym-r1F"/>
+                        <outlet property="sentUserInfoLabel" destination="KxZ-gm-FaA" id="rk0-Wz-j7l"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="235" y="347"/>
