@@ -29,39 +29,6 @@ public extension Array {
     }
 }
 
-public extension Array {
-
-    /// Finds the closest element that matches the criteria forwards or backwards.
-    ///
-    /// - parameter index:     Index to start from.
-    /// - parameter predicate: Criteria to match.
-    ///
-    /// - returns: Closest element that matches the criteria.
-    func closestMatch(from index: Int, where predicate: (Element) -> Bool) -> (Int, Element)? {
-        if predicate(self[index]) {
-            return (index, self[index])
-        }
-        
-        var delta = 1
-        
-        while(true) {
-            guard index + delta < count || index - delta >= 0 else {
-                return nil
-            }
-            
-            if index + delta < count && predicate(self[index + delta]) {
-                return (index + delta, self[index + delta])
-            }
-            
-            if index - delta >= 0 && predicate(self[index - delta]) {
-                return (index - delta, self[index - delta])
-            }
-            
-            delta = delta + 1
-        }
-    }
-}
-
 // MARK: - Equatables
 public extension Array where Element: Equatable {
 	
@@ -82,5 +49,18 @@ public extension Array where Element: Equatable {
     mutating func remove(of element: Element) {
         guard let index = index(of: element) else { return }
         remove(at: index)
+    }
+}
+
+
+public extension ArraySlice {
+    
+    /// Element at the given index if it exists.
+	///
+	/// - Parameter index: index of element.
+	/// - Returns: optional element (if exists).
+    func get(_ index: Int) -> Element? {
+		guard startIndex..<endIndex ~= index else { return nil }
+		return self[index]
     }
 }
