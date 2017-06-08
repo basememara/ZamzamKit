@@ -50,19 +50,6 @@ class ArrayTests: XCTestCase {
             "Get should be nil")
     }
 
-    func testClosestMatch() {
-        guard let result = sample2.closestMatch(from: 9, where: { $0.b == "F" })
-            else { return XCTFail() }
-        
-        let expected = (a: "Item 13", b: "F", c: 15)
-        
-        XCTAssert(result.0 == 12
-            && result.1.a == expected.a
-            && result.1.b == expected.b
-            && result.1.c == expected.c,
-                "Closest match should be \(expected)")
-    }
-
     func testRemoveEach() {
         var result = sample2
         
