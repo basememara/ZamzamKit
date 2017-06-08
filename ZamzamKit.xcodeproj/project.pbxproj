@@ -28,6 +28,9 @@
 		8B2DE3E31C8A86B2008F1569 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* Bundle.swift */; };
 		8B2DE3EC1C8A8F79008F1569 /* BundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */; };
 		8B2DE3F01C8A90AF008F1569 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EE1C8A90AF008F1569 /* Settings.plist */; };
+		8B3CD4701EE9CC0100E0BAFE /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3CD46F1EE9CC0100E0BAFE /* Int.swift */; };
+		8B3CD4711EE9CC0100E0BAFE /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3CD46F1EE9CC0100E0BAFE /* Int.swift */; };
+		8B3CD4721EE9CC0100E0BAFE /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3CD46F1EE9CC0100E0BAFE /* Int.swift */; };
 		8B48E6211DAFFD4100087328 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6201DAFFD4100087328 /* ArrayTests.swift */; };
 		8B48E6231DAFFD8900087328 /* CollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6221DAFFD8900087328 /* CollectionTests.swift */; };
 		8B48E6251DAFFDA900087328 /* DictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6241DAFFDA900087328 /* DictionaryTests.swift */; };
@@ -329,6 +332,7 @@
 		8B2DE3E01C8A86B2008F1569 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bundle.swift; path = Extensions/Bundle.swift; sourceTree = "<group>"; };
 		8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleTests.swift; sourceTree = "<group>"; };
 		8B2DE3EE1C8A90AF008F1569 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		8B3CD46F1EE9CC0100E0BAFE /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Int.swift; path = Extensions/Int.swift; sourceTree = "<group>"; };
 		8B40C2B41CC0A6F400BEC9E0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8B48E6201DAFFD4100087328 /* ArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
 		8B48E6221DAFFD8900087328 /* CollectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTests.swift; sourceTree = "<group>"; };
@@ -716,6 +720,7 @@
 				8BFDB68E1C75323900C94996 /* DateFormatter.swift */,
 				8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */,
 				8BFDB6761C751F2300C94996 /* FileManager.swift */,
+				8B3CD46F1EE9CC0100E0BAFE /* Int.swift */,
 				8B79A4741E9C1ED800C8A5A4 /* Locale.swift */,
 				8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */,
 				8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */,
@@ -1157,6 +1162,7 @@
 				8BFDB6641C751AE600C94996 /* URLComponents.swift in Sources */,
 				8B6A95611E46FBB9003F333D /* Thread.swift in Sources */,
 				8B0C715F1E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
+				8B3CD4701EE9CC0100E0BAFE /* Int.swift in Sources */,
 				8BF2106B1E48D52F0026B802 /* Result.swift in Sources */,
 				8B9E986F1EB500790067ACB7 /* Then.swift in Sources */,
 				8B1EEC881CF7588600AE054B /* UIStoryboard.swift in Sources */,
@@ -1185,6 +1191,7 @@
 				8B8215421CA15E0D00C9FCC9 /* CLKComplicationServer.swift in Sources */,
 				8BFDB67E1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BD61B371E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
+				8B3CD4711EE9CC0100E0BAFE /* Int.swift in Sources */,
 				8B6C99981E6E031800D523CC /* LocationManager.swift in Sources */,
 				8B6A956E1E484D5A003F333D /* ZamzamError.swift in Sources */,
 				8B82154B1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
@@ -1245,6 +1252,7 @@
 				8B9434631EBDEA8200C779EB /* TimeZone.swift in Sources */,
 				8BFDB6601C7518F800C94996 /* String.swift in Sources */,
 				8BBB66E31E9C010600AB1973 /* LocationMeta.swift in Sources */,
+				8B3CD4721EE9CC0100E0BAFE /* Int.swift in Sources */,
 				8B75286E1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BB45FB71C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8B94345C1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,

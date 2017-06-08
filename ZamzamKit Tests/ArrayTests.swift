@@ -71,4 +71,9 @@ class ArrayTests: XCTestCase {
         XCTAssert(result.isEmpty,
             "Result should be empty")
     }
+
+    func testRandom() {
+        let result = sample1.random
+        XCTAssert(sample1.contains(result))
+    }
 }

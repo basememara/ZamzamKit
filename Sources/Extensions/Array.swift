@@ -9,6 +9,11 @@
 import Foundation
 
 public extension Array {
+
+    // Get a random element from the collection
+    var random: Element {
+        return self[Int.random(in: 0...count - 1)]
+    }
     
     /// Element at the given index if it exists.
 	///

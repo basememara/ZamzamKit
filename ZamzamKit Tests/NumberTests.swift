@@ -32,4 +32,11 @@ class NumberTests: XCTestCase {
 
         XCTAssertEqual(Double.pi.rounded(toPlaces: 2), 3.14)
     }
+    
+    func testRandom() {
+        XCTAssert(-23...947 ~= Int.random(in: -23...947))
+        XCTAssert(24...678 ~= Int.random(in: 24...678))
+        XCTAssert(-4363...4678 ~= Int.random(in: -4363...4678))
+        XCTAssert(-345...68 ~= Int.random(in: -345...68))
+    }
 }
