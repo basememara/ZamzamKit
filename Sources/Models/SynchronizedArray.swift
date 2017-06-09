@@ -13,7 +13,9 @@ public class SynchronizedArray<Element> {
     fileprivate let queue = DispatchQueue(label: "io.zamzam.ZamzamKit.SynchronizedArray", attributes: .concurrent)
     fileprivate var array = [Element]()
     
-    convenience init(_ array: [Element]) {
+    public init() { }
+    
+    public convenience init(_ array: [Element]) {
         self.init()
         self.array = array
     }
