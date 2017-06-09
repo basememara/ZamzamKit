@@ -10,8 +10,8 @@ import Foundation
 
 /// Type for creating observable properties
 public struct Observer<T> {
-    let id: String
-    let handler: T
+    public let id: String
+    public let handler: T
     
     public init(id: String, handler: T) {
         self.id = id
