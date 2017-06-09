@@ -18,6 +18,8 @@ public class WatchSession: NSObject, WCSessionDelegate {
     public override init() {
         super.init()
         sessionDefault?.delegate = self
+        guard activationState == .notActivated else { return }
+        sessionDefault?.activate()
     }
     
     /// Subscription queues for firing within delegates
@@ -157,21 +159,15 @@ public extension WatchSession {
 public extension WatchSession {
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        didReceiveApplicationContext.forEach { observer in
-            DispatchQueue.main.async { observer.handler(applicationContext) }
-        }
+        didReceiveApplicationContext.forEach { $0.handler(applicationContext) }
     }
     
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
-        didReceiveUserInfo.forEach { observer in
-            DispatchQueue.main.async { observer.handler(userInfo) }
-        }
+        didReceiveUserInfo.forEach { $0.handler(userInfo) }
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
-        didReceiveMessage.forEach { observer in
-            DispatchQueue.main.async { observer.handler(message, replyHandler) }
-        }
+        didReceiveMessage.forEach { $0.handler(message, replyHandler) }
     }
 }
 
@@ -207,10 +203,14 @@ public extension WatchSession {
     /// - Parameter completion: The completion with the location object.
     func activate(completion: ActivationHandler? = nil) {
         guard let session = sessionDefault else { completion?(false); return }
-        guard session.activationState != .activated else { completion?(true); return }
+        
+        guard session.activationState == .notActivated
+            else { completion?(session.activationState == .activated); return }
+        
         if let completion = completion {
             activationDidCompleteSingle += completion
         }
+        
         session.activate()
     }
 }
@@ -226,7 +226,7 @@ public extension WatchSession {
         guard !values.isEmpty else { completion?(.success(true)); return }
     
         activate {
-            guard $0, self.isAvailable, let session = self.sessionDefault
+            guard $0, let session = self.sessionDefault, self.isAvailable
                 else { completion?(.failure(ZamzamError.notReachable)); return }
             
             var values = values
@@ -248,7 +248,7 @@ public extension WatchSession {
         guard !values.isEmpty else { completion?(.success(nil)); return }
     
         activate {
-            guard $0, self.isAvailable, let session = self.sessionDefault
+            guard $0, let session = self.sessionDefault, self.isAvailable
                 else { completion?(.failure(ZamzamError.notReachable)); return }
             
             var values = values
@@ -269,7 +269,7 @@ public extension WatchSession {
         guard !values.isEmpty else { completion?(.success([:])); return }
     
         activate {
-            guard $0, self.isAvailable, let session = self.sessionDefault
+            guard $0, let session = self.sessionDefault, self.isAvailable
                 else { completion?(.failure(ZamzamError.notReachable)); return }
             
             guard session.isReachable else { completion?(.failure(ZamzamError.general)); return }
@@ -310,7 +310,7 @@ public extension WatchSession {
         guard !values.isEmpty else { completion?(.success(nil)); return }
     
         activate {
-            guard $0, self.isAvailable, let session = self.sessionDefault
+            guard $0, let session = self.sessionDefault, self.isAvailable
                 else { completion?(.failure(ZamzamError.notReachable)); return }
             
             guard session.isComplicationEnabled else { completion?(.failure(ZamzamError.general)); return }

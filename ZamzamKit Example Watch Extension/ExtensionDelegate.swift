@@ -14,7 +14,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     static let watchSession = WatchSession()
     
     func applicationDidFinishLaunching() {
-        ExtensionDelegate.watchSession.activate()
+    
     }
 
     func applicationDidBecomeActive() {

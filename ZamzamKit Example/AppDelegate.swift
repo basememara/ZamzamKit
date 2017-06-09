@@ -33,8 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Migrate to 1.0 (2) occurred.")
             }
         
-        AppDelegate.watchSession.activate()
-        
         AppDelegate.watchSession.addObserver(forApplicationContext: Observer {
             UNUserNotificationCenter.current().add(
                 body: $0["value"] as? String ?? "",

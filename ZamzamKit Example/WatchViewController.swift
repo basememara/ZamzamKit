@@ -24,8 +24,10 @@ class WatchViewController: UIViewController {
     
     /// Another way to add observer
     var userInfoObserver: WatchSession.ReceiveUserInfoObserver {
-        return Observer { [weak self] in
-            self?.receivedUserInfoLabel.text = $0["value"] as? String ?? ""
+        return Observer { [weak self] result in
+            DispatchQueue.main.async {
+                self?.receivedUserInfoLabel.text = result["value"] as? String ?? ""
+            }
         }
     }
     
@@ -33,8 +35,10 @@ class WatchViewController: UIViewController {
         super.viewDidLoad()
         
         /// One way to add observer
-        watchSession.addObserver(forApplicationContext: Observer { [weak self] in
-            self?.receivedContextLabel.text = $0["value"] as? String ?? ""
+        watchSession.addObserver(forApplicationContext: Observer { [weak self] result in
+            DispatchQueue.main.async {
+                self?.receivedContextLabel.text = result["value"] as? String ?? ""
+            }
         })
         
         watchSession.addObserver(forUserInfo: userInfoObserver)
@@ -44,19 +48,19 @@ class WatchViewController: UIViewController {
     @IBAction func sendContextTapped() {
         let value = ["value": "\(Date())"]
         watchSession.transfer(context: value)
-        self.sentContextLabel.text = value["value"] ?? ""
+        sentContextLabel.text = value["value"] ?? ""
     }
     
     @IBAction func sendUserInfoTapped() {
         let value = ["value": "\(Date())"]
         watchSession.transfer(userInfo: value)
-        self.sentUserInfoLabel.text = value["value"] ?? ""
+        sentUserInfoLabel.text = value["value"] ?? ""
     }
     
     @IBAction func sendMessageTapped() {
         let value = ["value": "\(Date())"]
         watchSession.transfer(message: value)
-        self.sentMessageLabel.text = value["value"] ?? ""
+        sentMessageLabel.text = value["value"] ?? ""
     }
     
     deinit {
@@ -68,8 +72,10 @@ extension WatchViewController {
     
     /// Another way to add observer
     var messageObserver: WatchSession.ReceiveMessageObserver {
-        return Observer { [weak self] in
-            self?.receivedMessageLabel.text = $0.0["value"] as? String ?? ""
+        return Observer { [weak self] result in
+            DispatchQueue.main.async {
+                self?.receivedMessageLabel.text = result.0["value"] as? String ?? ""
+            }
         }
     }
 }
