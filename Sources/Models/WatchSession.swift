@@ -178,9 +178,9 @@ public extension WatchSession {
         guard let session = sessionDefault else { return false }
         
         #if os(iOS)
-        return session.isPaired
+        return session.activationState == .activated
+            && session.isPaired
             && session.isWatchAppInstalled
-            && session.activationState == .activated
         #else
         return session.activationState == .activated
         #endif
