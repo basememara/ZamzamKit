@@ -203,6 +203,11 @@ public extension LocationManager {
     func startUpdatingLocation(enableBackground: Bool) {
         #if os(iOS)
         manager.allowsBackgroundLocationUpdates = enableBackground
+        
+        // From Apple docs: a pause to location updates ends access to location changes
+        // until the app is launched again and able to restart those updates. If you do not
+        // wish location updates to stop entirely, consider disabling this property.
+        manager.pausesLocationUpdatesAutomatically = false
         #endif
         
         manager.startUpdatingLocation()
@@ -212,6 +217,7 @@ public extension LocationManager {
     func stopUpdatingLocation() {
         #if os(iOS)
         manager.allowsBackgroundLocationUpdates = false
+        manager.pausesLocationUpdatesAutomatically = true
         #endif
         
         manager.stopUpdatingLocation()
@@ -287,6 +293,19 @@ public extension LocationManager {
     /// The most recently reported heading.
     var heading: CLHeading? {
         return manager.heading
+    }
+    
+    /// Starts the generation of updates based on significant location changes.
+    func startMonitoringSignificantLocationChanges() {
+        manager.allowsBackgroundLocationUpdates = true
+        manager.pausesLocationUpdatesAutomatically = true
+        manager.startMonitoringSignificantLocationChanges()
+    }
+    
+    /// Stops the delivery of location events based on significant location changes.
+    func stopMonitoringSignificantLocationChanges() {
+        manager.allowsBackgroundLocationUpdates = false
+        manager.stopMonitoringSignificantLocationChanges()
     }
     
     /// Starts the generation of updates that report the user’s current heading.
