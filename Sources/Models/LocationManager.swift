@@ -32,6 +32,8 @@ public protocol LocationManagerType {
     #if os(iOS)
     typealias HeadingHandler = (CLHeading) -> Void
     var heading: CLHeading? { get }
+    func startMonitoringSignificantLocationChanges()
+    func stopMonitoringSignificantLocationChanges()
     func startUpdatingHeading()
     func stopUpdatingHeading()
     func addObserver(_ observer: Observer<HeadingHandler>)
