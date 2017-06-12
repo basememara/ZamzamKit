@@ -294,6 +294,13 @@ public extension WatchSession {
         guard let session = sessionDefault else { return 0 }
         return session.remainingComplicationUserInfoTransfers
     }
+
+    /// A Boolean value indicating whether the Watch app’s complication is in use on the currently paired and active Apple Watch.
+    @available(iOS 10.0, *)
+    var isComplicationEnabled: Bool {
+        guard let session = sessionDefault else { return false }
+        return session.isComplicationEnabled
+    }
     
     /// A directory for storing information specific to the currently paired and active Apple Watch.
     var directoryURL: URL? {
