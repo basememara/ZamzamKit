@@ -49,6 +49,10 @@ public extension LocationManagerType {
     func requestAuthorization(for type: LocationAuthorizationType = .whenInUse, startUpdatingLocation: Bool = false, completion: AuthorizationHandler?) {
         requestAuthorization(for: type, startUpdatingLocation: startUpdatingLocation, completion: completion)
     }
+    
+    func requestAuthorization(for type: LocationAuthorizationType) {
+        requestAuthorization(for: type, startUpdatingLocation: false, completion: nil)
+    }
 
     func removeObservers(from file: String = #file) {
         removeObservers(with: file)
