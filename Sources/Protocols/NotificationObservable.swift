@@ -19,7 +19,7 @@ public extension NotificationObservable {
     ///   - selector: Selector that specifies the message the receiver sends observer to notify it of the notification posting.
     ///   - observer: Object registering as an observer. This value will use `self` if nil.
     ///   - object: The object whose notifications the observer wants to receive; that is, only notifications sent by this sender are delivered to the observer.
-    func addObserver(for name: NSNotification.Name, selector: Selector, observer: Any? = nil, object: Any? = nil) {
+    func addObserver(for name: NSNotification.Name, selector: Selector, from observer: Any? = nil, object: Any? = nil) {
         NotificationCenter.default.addObserver(observer ?? self,
             selector: selector,
             name: name,
