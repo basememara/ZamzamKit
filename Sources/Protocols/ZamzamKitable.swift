@@ -42,14 +42,6 @@ public extension ZamzamKitable {
 
 // MARK: - Environment
 public extension ZamzamKitable {
-
-    /// Check if app is running in debug mode.
-	var isInDebuggingMode: Bool {
-		// https://stackoverflow.com/questions/24003291/ifdef-replacement-in-the-swift-language/34532569#34532569
-        // Not using preprocessor macro because framework will have already been built
-        // by the time the host app consumes it, so runtime solution needed
-		return _isDebugAssertConfiguration()
-	}
 	
 	/// Check if app is running in TestFlight mode.
 	var isInTestFlight: Bool {
