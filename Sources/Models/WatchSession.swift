@@ -17,6 +17,7 @@ public class WatchSession: NSObject, WCSessionDelegate {
     
     public override init() {
         super.init()
+        guard WCSession.isSupported() else { return }
         sessionDefault?.delegate = self
         guard activationState == .notActivated else { return }
         sessionDefault?.activate()
