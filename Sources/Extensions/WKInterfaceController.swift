@@ -11,6 +11,15 @@ import WatchKit
 
 public extension WKInterfaceController {
     
+    /// Presents a single interface controller modally.
+    ///
+    /// - Parameters:
+    ///   - type: The type of the interface controller you want to display.
+    ///   - context: An object to pass to the new interface controller.
+    func present<T: WKInterfaceController>(controller type: T.Type, context: Any? = nil) {
+        presentController(withName: String(describing: type.self), context: context)
+    }
+    
     /// Presents an alert or action sheet over the current interface controller.
     func present(
         alert title: String,
