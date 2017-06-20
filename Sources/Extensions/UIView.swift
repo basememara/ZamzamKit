@@ -115,3 +115,11 @@ public extension UIView {
 		}, completion: completion)
 	}
 }
+
+public extension UIView {
+
+    /// Returns the user interface direction.
+    var userInterfaceLayoutDirection: UIUserInterfaceLayoutDirection {
+        return UIView.userInterfaceLayoutDirection(for: semanticContentAttribute)
+    }
+}

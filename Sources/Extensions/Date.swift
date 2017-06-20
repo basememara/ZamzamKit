@@ -96,7 +96,7 @@ public extension Date {
         let seconds = Int(timeIntervalSince(date))
         let prefix = seconds < 0 ? "+" : ""
         
-        return String(format:"%@%02i:%02i:%02i",
+        return String.localizedStringWithFormat("%@%02i:%02i:%02i",
             prefix,
             abs(seconds / 3600),
             abs(seconds / 60 % 60),
