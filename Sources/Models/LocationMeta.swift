@@ -17,7 +17,7 @@ public struct LocationMeta: CustomStringConvertible {
     public var administrativeArea: String?
     
     public var description: String {
-        if let l = locality, let c = countryCode {
+        if let l = locality, let c = (Locale.current.languageCode == "en" ? countryCode : country) {
             return "\(l), \(c)"
         } else if let l = locality {
             return "\(l)"
