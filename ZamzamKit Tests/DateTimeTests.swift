@@ -69,7 +69,7 @@ extension DateTimeTests {
             from: Date(fromString: "2017/04/15 15:30")!), "00:00:00")
             
         XCTAssertEqual(Date(fromString: "2017/04/15 12:32:46", dateFormat: "yyyy/MM/dd HH:mm:ss")!.timerString(
-            from: Date(fromString: "2016/09/29 20:12:03", dateFormat: "yyyy/MM/dd HH:mm:ss")!), "4744:20:43")
+            from: Date(fromString: "2016/09/29 20:12:03", dateFormat: "yyyy/MM/dd HH:mm:ss")!), "4,744:20:43")
     }
     
     func testShortString() {
