@@ -79,7 +79,7 @@ public extension Date {
     /// - Parameter timeZone: Time zone to determine day boundries of the date.
     /// - Returns: The formatted date string.
     func shortString(with timeZone: TimeZone? = nil) -> String {
-        return DateFormatter().then {
+        return DateFormatter().with {
             $0.locale = .posix
             $0.dateFormat = "yyyy-MM-dd"
             if let timeZone = timeZone {
@@ -195,7 +195,7 @@ public extension Date {
         var calendar = Date.islamicCalendar
         if let timeZone = timeZone { calendar.timeZone = timeZone }
         
-        let formatter = DateFormatter().then {
+        let formatter = DateFormatter().with {
             $0.calendar = calendar
             $0.timeZone = calendar.timeZone
             if let f = format { $0.dateFormat = f }

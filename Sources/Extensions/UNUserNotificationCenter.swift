@@ -137,7 +137,7 @@ public extension UNUserNotificationCenter {
         userInfo: [String: Any]? = nil,
         completion: ((Error?) -> Void)? = nil) {
             // Constuct content
-            let content = UNMutableNotificationContent().then {
+            let content = UNMutableNotificationContent().with {
                 $0.body = body
                 $0.categoryIdentifier = category
             
@@ -174,7 +174,7 @@ public extension UNUserNotificationCenter {
         userInfo: [String: Any]? = nil,
         completion: ((Error?) -> Void)? = nil) {
             // Constuct content
-            let content = UNMutableNotificationContent().then {
+            let content = UNMutableNotificationContent().with {
                 $0.body = body
                 $0.categoryIdentifier = category
             
@@ -230,7 +230,7 @@ public extension UNUserNotificationCenter {
         userInfo: [String: Any]? = nil,
         completion: ((Error?) -> Void)? = nil) {
             // Constuct content
-            let content = UNMutableNotificationContent().then {
+            let content = UNMutableNotificationContent().with {
                 $0.body = body
                 $0.categoryIdentifier = category
             
