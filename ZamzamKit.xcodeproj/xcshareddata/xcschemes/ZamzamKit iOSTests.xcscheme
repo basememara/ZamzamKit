@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8B1447C71C72577900043657"
-               BuildableName = "ZamzamKit.framework"
-               BlueprintName = "ZamzamKit iOS"
+               BlueprintIdentifier = "8BE19B071C72D6DF00D4D437"
+               BuildableName = "ZamzamKit iOSTests.xctest"
+               BlueprintName = "ZamzamKit iOSTests"
                ReferencedContainer = "container:ZamzamKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,8 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -40,15 +39,6 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8B1447C71C72577900043657"
-            BuildableName = "ZamzamKit.framework"
-            BlueprintName = "ZamzamKit iOS"
-            ReferencedContainer = "container:ZamzamKit.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -65,9 +55,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8B1447C71C72577900043657"
-            BuildableName = "ZamzamKit.framework"
-            BlueprintName = "ZamzamKit iOS"
+            BlueprintIdentifier = "8BE19B071C72D6DF00D4D437"
+            BuildableName = "ZamzamKit iOSTests.xctest"
+            BlueprintName = "ZamzamKit iOSTests"
             ReferencedContainer = "container:ZamzamKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -80,15 +70,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8B1447C71C72577900043657"
-            BuildableName = "ZamzamKit.framework"
-            BlueprintName = "ZamzamKit iOS"
-            ReferencedContainer = "container:ZamzamKit.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -26,7 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -35,16 +36,6 @@
                BlueprintIdentifier = "8BE19B161C72D6F200D4D437"
                BuildableName = "ZamzamKit tvOSTests.xctest"
                BlueprintName = "ZamzamKit tvOSTests"
-               ReferencedContainer = "container:ZamzamKit.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8BE19B071C72D6DF00D4D437"
-               BuildableName = "ZamzamKit iOSTests.xctest"
-               BlueprintName = "ZamzamKit iOSTests"
                ReferencedContainer = "container:ZamzamKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
