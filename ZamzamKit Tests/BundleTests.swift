@@ -23,14 +23,7 @@ class BundleTests: XCTestCase {
         XCTAssert(values["MyString1"] as? String == "My string value 1.")
         XCTAssert(values["MyNumber1"] as? Int == 123)
         XCTAssert(values["MyBool1"] as? Bool == false)
-        
-        // Calculate date and account for machine time zone
-        // 2016-03-03 14:50:00 UTC
-        let expectedDate = Date(timeIntervalSince1970: TimeInterval(1456998600)
-            - TimeInterval(TimeZone.current.secondsFromGMT())
-            + TimeZone.current.daylightSavingTimeOffset())
-        
-        XCTAssert(values["MyDate1"] as? Date == expectedDate)
+        XCTAssert(values["MyDate1"] as? Date == Date(fromString: "2016/03/03 09:50")!)
     }
     
     func testArrayFromPlist() {
