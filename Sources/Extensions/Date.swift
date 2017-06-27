@@ -191,8 +191,8 @@ public extension Date {
     // Cache Islamic calendar for reuse
     private static let islamicCalendar: Calendar = { return Calendar(identifier: .islamicCivil) }()
 
-    func hijriString(components: Set<Calendar.Component> = Calendar.Component.date, format: String? = nil, offSet: Int = 0, timeZone: TimeZone? = nil) -> String {
-        var calendar = Date.islamicCalendar
+    func hijriString(components: Set<Calendar.Component> = Calendar.Component.date, format: String? = nil, offSet: Int = 0, timeZone: TimeZone? = nil, calendar: Calendar = Date.islamicCalendar) -> String {
+        var calendar = calendar
         if let timeZone = timeZone { calendar.timeZone = timeZone }
         
         let formatter = DateFormatter().with {
@@ -202,20 +202,20 @@ public extension Date {
             else { $0.dateStyle = .long }
         }
         
-        let date = calendar.date(from: hijri(components: components, offSet: offSet, timeZone: timeZone))!
+        let date = calendar.date(from: hijri(components: components, offSet: offSet, timeZone: timeZone, calendar: calendar))!
         return formatter.string(from: date)
     }
     
-    func hijri(components: Set<Calendar.Component> = Calendar.Component.date, offSet: Int = 0, timeZone: TimeZone? = nil) -> DateComponents {
-        var calendar = Date.islamicCalendar
+    func hijri(components: Set<Calendar.Component> = Calendar.Component.date, offSet: Int = 0, timeZone: TimeZone? = nil, calendar: Calendar = Date.islamicCalendar) -> DateComponents {
+        var calendar = calendar
         if let timeZone = timeZone { calendar.timeZone = timeZone }
         
         let date = increment(days: offSet, calendar: calendar)
         return calendar.dateComponents(components, from: date)
     }
     
-    func isRamadan(offSet: Int = 0, timeZone: TimeZone? = nil) -> Bool {
-        return hijri(offSet: offSet, timeZone: timeZone).month == 9
+    func isRamadan(offSet: Int = 0, timeZone: TimeZone? = nil, calendar: Calendar = Date.islamicCalendar) -> Bool {
+        return hijri(offSet: offSet, timeZone: timeZone, calendar: calendar).month == 9
     }
     
     var isJumuah: Bool {
