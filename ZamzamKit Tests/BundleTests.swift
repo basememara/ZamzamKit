@@ -23,10 +23,10 @@ class BundleTests: XCTestCase {
         XCTAssert(values["MyString1"] as? String == "My string value 1.")
         XCTAssert(values["MyNumber1"] as? Int == 123)
         XCTAssert(values["MyBool1"] as? Bool == false)
-        
-        XCTAssert(values["MyDate1"] as? Date == Date(fromString: "2016/03/03 09:50")!,
-            "Expected date is value is \(Date(fromString: "2016/03/03 09:50")!), "
-                + "but result is \(String(describing: values["MyDate1"] as? Date))")
+        XCTAssert(values["MyDate1"] as? Date == Date(
+            fromString: "2016/03/03 9:50",
+            timeZone: TimeZone(identifier: "America/Toronto")
+        )!)
     }
     
     func testArrayFromPlist() {

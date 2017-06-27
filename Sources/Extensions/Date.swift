@@ -53,9 +53,10 @@ public extension Date {
 // MARK: - String helpers
 public extension Date {
     
-    init?(fromString: String, dateFormat: String = "yyyy/MM/dd HH:mm") {
-        guard let date = DateFormatter(dateFormat: dateFormat).date(from: fromString),
-            !fromString.isEmpty else { return nil }
+    init?(fromString: String, dateFormat: String = "yyyy/MM/dd HH:mm", timeZone: TimeZone? = nil) {
+        guard !fromString.isEmpty,
+            let date = DateFormatter(dateFormat: dateFormat, timeZone: timeZone).date(from: fromString)
+            else { return nil }
         
         self.init(timeInterval: 0, since: date)
     }
@@ -65,13 +66,7 @@ public extension Date {
     /// - Parameter format: The date format string used by the receiver.
     /// - Returns: The string representation of the given date.
     func string(format: String, timeZone: TimeZone? = nil) -> String {
-        let formatter = DateFormatter(dateFormat: format)
-        
-        if let timeZone = timeZone {
-            formatter.timeZone = timeZone
-        }
-        
-        return formatter.string(from: self)
+        return DateFormatter(dateFormat: format, timeZone: timeZone).string(from: self)
     }
     
     /// Fixed-format for the date without time, i.e. 2017-05-15.
@@ -79,12 +74,8 @@ public extension Date {
     /// - Parameter timeZone: Time zone to determine day boundries of the date.
     /// - Returns: The formatted date string.
     func shortString(with timeZone: TimeZone? = nil) -> String {
-        return DateFormatter().with {
+        return DateFormatter(dateFormat: "yyyy-MM-dd", timeZone: timeZone).with {
             $0.locale = .posix
-            $0.dateFormat = "yyyy-MM-dd"
-            if let timeZone = timeZone {
-                $0.timeZone = timeZone
-            }
         }.string(from: self)
     }
     
