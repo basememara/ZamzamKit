@@ -171,11 +171,21 @@ extension DateTimeTests {
 extension DateTimeTests {
     
     func testHijriDate() {
-        let gregorianDate = Date(fromString: "2015/09/23 12:30")!
-        let hijriDate = gregorianDate.hijriString()
-        let expectedDate = "Dhuʻl-Hijjah 9, 1436 AH"
+        do {
+            let gregorianDate = Date(fromString: "2015/09/23 12:30")!
+            let hijriDate = gregorianDate.hijriString()
+            let expectedDate = "Dhuʻl-Hijjah 10, 1436 AH"
+            
+            XCTAssertEqual("\(hijriDate)", expectedDate)
+        }
         
-        XCTAssertEqual("\(hijriDate)", expectedDate)
+        do {
+            let gregorianDate = Date(fromString: "2017/06/26 00:00")!
+            let hijriDate = gregorianDate.hijriString()
+            let expectedDate = "Shawwal 2, 1438 AH"
+            
+            XCTAssertEqual("\(hijriDate)", expectedDate)
+        }
     }
     
     func testRamadan() {
