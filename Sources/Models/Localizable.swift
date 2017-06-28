@@ -11,7 +11,7 @@ import Foundation
 public struct Localizable {
     fileprivate let contents: String
     
-    fileprivate init(_ value: String) {
+    public init(_ value: String) {
         self.contents = value
     }
 }
