@@ -39,7 +39,7 @@ public extension UITableViewController {
      - parameter color:  Color of the title.
      */
     func setupRefreshControl(_ action: Selector,
-        title: String = "Pull to refresh".localized,
+        title: String = .localized(.pullToRefresh),
         font: UIFont = UIFont(name: "AvenirNext-Medium", size: 18.0)!,
         color: UIColor = .lightGray) {
             let control = UIRefreshControl()

@@ -174,6 +174,9 @@
 		8BE19B2D1C72D71F00D4D437 /* DateTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B271C72D71F00D4D437 /* DateTimeTests.swift */; };
 		8BE19B2E1C72D71F00D4D437 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B281C72D71F00D4D437 /* StringTests.swift */; };
 		8BE19B2F1C72D71F00D4D437 /* WebTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B291C72D71F00D4D437 /* WebTests.swift */; };
+		8BE2BB401F03259C00877447 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE2BB3F1F03259C00877447 /* Localizable.swift */; };
+		8BE2BB411F03259C00877447 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE2BB3F1F03259C00877447 /* Localizable.swift */; };
+		8BE2BB421F03259C00877447 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE2BB3F1F03259C00877447 /* Localizable.swift */; };
 		8BE814F51C784233005F23CE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
 		8BE814FD1C7842DC005F23CE /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* Sequence.swift */; };
 		8BE814FE1C7842DC005F23CE /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* Sequence.swift */; };
@@ -415,6 +418,7 @@
 		8BE19B271C72D71F00D4D437 /* DateTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeTests.swift; sourceTree = "<group>"; };
 		8BE19B281C72D71F00D4D437 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		8BE19B291C72D71F00D4D437 /* WebTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebTests.swift; sourceTree = "<group>"; };
+		8BE2BB3F1F03259C00877447 /* Localizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Localizable.swift; path = Models/Localizable.swift; sourceTree = "<group>"; };
 		8BE814F41C784233005F23CE /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = Extensions/Color.swift; sourceTree = "<group>"; };
 		8BE814FC1C7842DC005F23CE /* Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Sequence.swift; path = Extensions/Sequence.swift; sourceTree = "<group>"; };
 		8BEC1BAD1EE76CA8002FA271 /* WatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchViewController.swift; sourceTree = "<group>"; };
@@ -774,6 +778,7 @@
 			children = (
 				8BDA5E301E795DE300429F78 /* BackgroundTask.swift */,
 				8B756F141E5CF16D00DE4B02 /* BaseNibView.swift */,
+				8BE2BB3F1F03259C00877447 /* Localizable.swift */,
 				8B6C99961E6E031800D523CC /* LocationManager.swift */,
 				8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */,
 				8B8974701EDF555C004FA853 /* Migration.swift */,
@@ -1156,6 +1161,7 @@
 				8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8B82154A1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8BB45FB51C9BDD180070CE07 /* UserDefaults.swift in Sources */,
+				8BE2BB401F03259C00877447 /* Localizable.swift in Sources */,
 				8B6C99971E6E031800D523CC /* LocationManager.swift in Sources */,
 				8BFDB6771C751F2300C94996 /* FileManager.swift in Sources */,
 				8B9E98111EB144540067ACB7 /* Routable.swift in Sources */,
@@ -1191,6 +1197,7 @@
 				8B8215421CA15E0D00C9FCC9 /* CLKComplicationServer.swift in Sources */,
 				8BFDB67E1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BD61B371E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
+				8BE2BB411F03259C00877447 /* Localizable.swift in Sources */,
 				8B3CD4711EE9CC0100E0BAFE /* Int.swift in Sources */,
 				8B6C99981E6E031800D523CC /* LocationManager.swift in Sources */,
 				8B6A956E1E484D5A003F333D /* ZamzamError.swift in Sources */,
@@ -1269,6 +1276,7 @@
 				8BEFE47B1E4515D900100744 /* ScheduleInterval.swift in Sources */,
 				8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */,
 				8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */,
+				8BE2BB421F03259C00877447 /* Localizable.swift in Sources */,
 				8B729C771EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

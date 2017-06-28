@@ -66,7 +66,7 @@ public extension UIViewController {
      */
     func present(alert title: String,
         message: String? = nil,
-        buttonText: String = "OK".localized,
+        buttonText: String = .localized(.ok),
         additionalActions: [UIAlertAction]? = nil,
         preferredStyle: UIAlertControllerStyle = .alert,
         includeCancelAction: Bool = false,
@@ -80,7 +80,7 @@ public extension UIViewController {
         
             if includeCancelAction {
                 alertController.addAction(
-                    UIAlertAction(title: "Cancel".localized, style: .cancel) { _ in cancelHandler?() }
+                    UIAlertAction(title: .localized(.cancel), style: .cancel) { _ in cancelHandler?() }
                 )
             }
             

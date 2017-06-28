@@ -54,16 +54,6 @@ public extension String {
     }
 }
 
-// MARK: - Localization
-public extension String {
-    
-    /// NSLocalizedString shorthand
-    var localized: String {
-        return NSLocalizedString(self, comment: "")
-    }
-}
-
-
 // MARK: - Regular Expression
 public extension String {
 
