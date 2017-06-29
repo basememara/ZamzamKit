@@ -250,6 +250,35 @@ public extension String {
 	}
 }
 
+public extension String {
+    
+    /// Returns a new string with removing all grouping separators using the current locale.
+    private func removeGroupingSeparator() -> String {
+        guard let groupingSeparator = Locale.current.groupingSeparator else { return self }
+        return self.replacingOccurrences(of: groupingSeparator, with: "")
+    }
+
+    /// Returns an integer created by parsing a given string with locale consideration.
+    var intValue: Int? {
+        return NumberFormatter().number(from: self.removeGroupingSeparator())?.intValue
+    }
+
+    /// Returns a double created by parsing a given string with locale consideration.
+    var doubleValue: Double? {
+        return NumberFormatter().number(from: self.removeGroupingSeparator())?.doubleValue
+    }
+
+    /// Returns an float created by parsing a given string with locale consideration.
+    var floatValue: Float? {
+        return NumberFormatter().number(from: self.removeGroupingSeparator())?.floatValue
+    }
+
+    /// Returns an bool created by parsing a given string with locale consideration.
+    var boolValue: Bool? {
+        return NumberFormatter().number(from: self)?.boolValue
+    }
+}
+
 public extension Optional where Wrapped == String {
 
     /// A Boolean value indicating whether a string is `nil` or has no characters.
