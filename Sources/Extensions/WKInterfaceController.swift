@@ -24,10 +24,11 @@ public extension WKInterfaceController {
     func present(
         alert title: String,
         message: String? = nil,
-        buttonText: String = "OK",
+        buttonText: String = .localized(.ok),
         alertControllerStyle: WKAlertControllerStyle = .alert,
         additionalActions: [WKAlertAction]? = nil,
         includeCancelAction: Bool = false,
+        cancelText: String = .localized(.cancel),
         cancelHandler: (() -> Void)? = nil,
         handler: (() -> Void)? = nil) {
             var actions = [WKAlertAction(title: buttonText, style: .default) {
@@ -35,7 +36,7 @@ public extension WKInterfaceController {
             }]
             
             if includeCancelAction {
-                actions.append(WKAlertAction(title: "Cancel", style: .cancel) {
+                actions.append(WKAlertAction(title: cancelText, style: .cancel) {
                     cancelHandler?()
                 })
             }

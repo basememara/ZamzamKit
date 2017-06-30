@@ -70,6 +70,7 @@ public extension UIViewController {
         additionalActions: [UIAlertAction]? = nil,
         preferredStyle: UIAlertControllerStyle = .alert,
         includeCancelAction: Bool = false,
+        cancelText: String = .localized(.cancel),
         cancelHandler: (() -> Void)? = nil,
         handler: (() -> Void)? = nil) {
             let alertController = UIAlertController(
@@ -80,7 +81,7 @@ public extension UIViewController {
         
             if includeCancelAction {
                 alertController.addAction(
-                    UIAlertAction(title: .localized(.cancel), style: .cancel) { _ in cancelHandler?() }
+                    UIAlertAction(title: cancelText, style: .cancel) { _ in cancelHandler?() }
                 )
             }
             
