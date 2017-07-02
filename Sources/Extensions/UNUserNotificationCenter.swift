@@ -169,6 +169,7 @@ public extension UNUserNotificationCenter {
         sound: UNNotificationSound? = UNNotificationSound.default(),
         attachments: [UNNotificationAttachment]? = nil,
         repeats: ScheduleInterval = .once,
+        calendar: Calendar = .current,
         identifier: String = UUID().uuidString,
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         userInfo: [String: Any]? = nil,
@@ -191,13 +192,13 @@ public extension UNUserNotificationCenter {
             // https://github.com/d7laungani/DLLocalNotifications/blob/master/DLLocalNotifications/DLLocalNotifications.swift#L31
             let components: DateComponents
             switch repeats {
-            case .once: components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
-            case .minute: components = Calendar.current.dateComponents([.second], from: date)
-            case .hour: components = Calendar.current.dateComponents([.minute], from: date)
-            case .day: components = Calendar.current.dateComponents([.hour, .minute], from: date)
-            case .week: components = Calendar.current.dateComponents([.hour, .minute, .weekday], from: date)
-            case .month: components = Calendar.current.dateComponents([.hour, .minute, .day], from: date)
-            case .year: components = Calendar.current.dateComponents([.hour, .minute, .day, .month], from: date)
+            case .once: components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+            case .minute: components = calendar.dateComponents([.second], from: date)
+            case .hour: components = calendar.dateComponents([.minute], from: date)
+            case .day: components = calendar.dateComponents([.hour, .minute], from: date)
+            case .week: components = calendar.dateComponents([.hour, .minute, .weekday], from: date)
+            case .month: components = calendar.dateComponents([.hour, .minute, .day], from: date)
+            case .year: components = calendar.dateComponents([.hour, .minute, .day, .month], from: date)
             }
         
             // Construct request with trigger
