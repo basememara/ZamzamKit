@@ -24,8 +24,9 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
      - parameter storyboard: Storyboard name.
      - parameter identifier: View controller name.
      - parameter configure: Configure the view controller before it is loaded.
+     - parameter completion: Completion the view controller after it is loaded.
      */
-    func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, animated: Bool = true, configure: ((T) -> Void)? = nil) {
+    func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, animated: Bool = true, configure: ((T) -> Void)? = nil, completion: ((T) -> Void)? = nil) {
         let storyboard = UIStoryboard(name: storyboard.rawValue)
         
         guard let controller = (identifier != nil
@@ -33,8 +34,10 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
             : storyboard.instantiateInitialViewController()) as? T
             else { return assertionFailure("Invalid controller for storyboard \(storyboard).") }
         
+        configure?(controller)
+        
         present(controller, animated: animated) {
-            configure?(controller)
+            completion?(controller)
         }
     }
     
