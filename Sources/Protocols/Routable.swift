@@ -11,7 +11,7 @@ import UIKit
 public protocol Routable {
     associatedtype StoryboardIdentifier: RawRepresentable
     
-    func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String?, animated: Bool, configure: ((T) -> Void)?)
+    func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String?, animated: Bool, modalPresentationStyle: UIModalPresentationStyle?, configure: ((T) -> Void)?, completion: ((T) -> Void)?)
     func show<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String?, configure: ((T) -> Void)?)
     func showDetailViewController<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String?, configure: ((T) -> Void)?)
 }
@@ -26,13 +26,17 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
      - parameter configure: Configure the view controller before it is loaded.
      - parameter completion: Completion the view controller after it is loaded.
      */
-    func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, animated: Bool = true, configure: ((T) -> Void)? = nil, completion: ((T) -> Void)? = nil) {
+    func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, animated: Bool = true, modalPresentationStyle: UIModalPresentationStyle? = nil, configure: ((T) -> Void)? = nil, completion: ((T) -> Void)? = nil) {
         let storyboard = UIStoryboard(name: storyboard.rawValue)
         
         guard let controller = (identifier != nil
             ? storyboard.instantiateViewController(withIdentifier: identifier!)
             : storyboard.instantiateInitialViewController()) as? T
             else { return assertionFailure("Invalid controller for storyboard \(storyboard).") }
+        
+        if let modalPresentationStyle = modalPresentationStyle {
+            controller.modalPresentationStyle = modalPresentationStyle
+        }
         
         configure?(controller)
         
