@@ -252,6 +252,8 @@ public extension String {
 
 public extension String {
     
+    private static let numberFormatter = NumberFormatter()
+    
     /// Returns a new string with removing all grouping separators using the current locale.
     private func removeGroupingSeparator() -> String {
         guard let groupingSeparator = Locale.current.groupingSeparator else { return self }
@@ -260,12 +262,12 @@ public extension String {
 
     /// Returns an integer created by parsing a given string with locale consideration.
     var intValue: Int? {
-        return NumberFormatter().number(from: self.removeGroupingSeparator())?.intValue
+        return String.numberFormatter.number(from: self.removeGroupingSeparator())?.intValue
     }
 
     /// Returns a double created by parsing a given string with locale consideration.
     var doubleValue: Double? {
-        return NumberFormatter().number(from: self.removeGroupingSeparator())?.doubleValue
+        return String.numberFormatter.number(from: self.removeGroupingSeparator())?.doubleValue
     }
 
     /// Returns an float created by parsing a given string with locale consideration.
@@ -275,7 +277,7 @@ public extension String {
 
     /// Returns an bool created by parsing a given string with locale consideration.
     var boolValue: Bool? {
-        return NumberFormatter().number(from: self)?.boolValue
+        return String.numberFormatter.number(from: self)?.boolValue
     }
 }
 

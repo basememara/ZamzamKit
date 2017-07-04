@@ -24,10 +24,17 @@ class LocaleTests: XCTestCase {
 	}
 	
 	func testDoubleConversion() {
-        let expectedValue = 123456789.987
+        let expectedValue: Double = 123456789.987
         let localizedString: String = .localizedStringWithFormat("%.3f", expectedValue)
         XCTAssertNil(Double(localizedString)) //Could not convert
         XCTAssertEqual(localizedString.doubleValue, expectedValue)
+	}
+	
+	func testFloatConversion() {
+        let expectedValue: Float = 123456789.987
+        let localizedString: String = .localizedStringWithFormat("%.3f", expectedValue)
+        XCTAssertNil(Float(localizedString)) //Could not convert
+        XCTAssertEqual(localizedString.floatValue, expectedValue)
 	}
 	
 	func testBoolConversion() {
