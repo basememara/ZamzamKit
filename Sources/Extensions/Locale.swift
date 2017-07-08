@@ -20,4 +20,10 @@ public extension Locale {
         guard let code = languageCode else { return nil }
         return localizedString(forLanguageCode: code)
     }
+    
+    /// Returns the character direction for the current language code.
+    var characterDirection: LanguageDirection {
+        guard let code = languageCode else { return .unknown }
+        return Locale.characterDirection(forLanguage: code)
+    }
 }

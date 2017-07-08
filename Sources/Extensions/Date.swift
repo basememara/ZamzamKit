@@ -86,13 +86,13 @@ public extension Date {
     func timerString(from date: Date = Date()) -> String {
         let seconds = Int(timeIntervalSince(date))
         let prefix = seconds < 0 ? "+" : ""
+        let hr = abs(seconds / 3600)
+        let min = abs(seconds / 60 % 60)
+        let sec = abs(seconds % 60)
         
-        return String.localizedStringWithFormat("%@%02i:%02i:%02i",
-            prefix,
-            abs(seconds / 3600),
-            abs(seconds / 60 % 60),
-            abs(seconds % 60)
-        )
+        return Locale.current.characterDirection == .rightToLeft
+            ? String.localizedStringWithFormat("%02i:%02i:%02i%@", sec, min, hr, prefix)
+            : String.localizedStringWithFormat("%@%02i:%02i:%02i", prefix, hr, min, sec)
     }
 }
 
