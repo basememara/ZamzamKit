@@ -91,7 +91,7 @@ public extension Date {
         let sec = abs(seconds % 60)
         
         return Locale.current.characterDirection == .rightToLeft
-            ? String.localizedStringWithFormat("%02i:%02i:%02i%@", sec, min, hr, prefix)
+            ? String.localizedStringWithFormat("%i:%i:%i%@", sec, min, hr, prefix)
             : String.localizedStringWithFormat("%@%02i:%02i:%02i", prefix, hr, min, sec)
     }
 }
