@@ -89,10 +89,7 @@ public extension Date {
         let hr = abs(seconds / 3600)
         let min = abs(seconds / 60 % 60)
         let sec = abs(seconds % 60)
-        
-        return Locale.current.characterDirection == .rightToLeft
-            ? String.localizedStringWithFormat("%i:%i:%i%@", sec, min, hr, prefix)
-            : String.localizedStringWithFormat("%@%02i:%02i:%02i", prefix, hr, min, sec)
+        return .localizedStringWithFormat("%@%02i:%02i:%02i", prefix, hr, min, sec)
     }
 }
 
