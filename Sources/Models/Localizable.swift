@@ -3,16 +3,17 @@
 //  ZamzamKit
 //
 //  Created by Basem Emara on 6/27/17.
+//  http://basememara.com/swifty-localization-xcode-support/
 //  Copyright © 2017 Zamzam. All rights reserved.
 //
 
 import Foundation
 
 public struct Localizable {
-    fileprivate let contents: String
+    fileprivate let rawValue: String
     
-    public init(_ value: String) {
-        self.contents = value
+    public init(_ rawValue: String) {
+        self.rawValue = rawValue
     }
 }
 
@@ -32,17 +33,17 @@ public extension String {
 
     /// Returns a localized string.
     static func localized(_ key: Localizable) -> String {
-        return key.contents
+        return key.rawValue
     }
 
     /// Returns a string created by using a given format string as a template into which the remaining argument values are substituted.
     static func localizedFormat(_ key: Localizable, _ arguments: CVarArg...) -> String {
-        return withVaList(arguments) { vaListHandler(key.contents, $0, nil) } as String
+        return withVaList(arguments) { vaListHandler(key.rawValue, $0, nil) } as String
     }
 
     /// Returns a string created by using a given format string as a template into which the
     /// remaining argument values are substituted according to the user’s default locale.
     static func localizedLocale(_ key: Localizable, _ arguments: CVarArg...) -> String {
-        return withVaList(arguments) { vaListHandler(key.contents, $0, .current) } as String
+        return withVaList(arguments) { vaListHandler(key.rawValue, $0, .current) } as String
     }
 }
