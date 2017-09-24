@@ -15,7 +15,7 @@ public extension NotificationCenter {
     /// - Parameters:
     ///   - name: The name of the notification.
     ///   - userInfo: Information about the the notification. May be nil.
-    func post(name: NSNotification.Name, userInfo: [AnyHashable : Any]? = nil) {
+    func post(name: NSNotification.Name, userInfo: [AnyHashable: Any]? = nil) {
         post(name: name, object: nil, userInfo: userInfo)
     }
 }
