@@ -17,7 +17,7 @@ public extension BinaryFloatingPoint {
     func rounded(toPlaces places: Int) -> Self {
         // https://codereview.stackexchange.com/questions/142748/swift-floatingpoint-rounded-to-places
         guard places >= 0 else { return self }
-        let divisor = Self((0..<places).reduce(1.0) { $0.0 * 10.0 })
+        let divisor = Self((0..<places).reduce(1.0) { (result, _) in result * 10.0 })
         return (self * divisor).rounded() / divisor
     }
 }

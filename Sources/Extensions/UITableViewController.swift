@@ -44,8 +44,8 @@ public extension UITableViewController {
         color: UIColor = .lightGray) {
             let control = UIRefreshControl()
             control.attributedTitle = NSAttributedString(string: title, attributes: [
-                NSFontAttributeName: font,
-                NSForegroundColorAttributeName: color
+                NSAttributedStringKey.font: font,
+                NSAttributedStringKey.foregroundColor: color
             ])
             control.addTarget(self, action: action, for: .valueChanged)
         

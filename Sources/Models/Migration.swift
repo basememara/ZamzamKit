@@ -11,7 +11,7 @@
 import Foundation
 
 public class Migration {
-    private static let suiteName = "io.zamzam.ZamzamKit.Migration"
+    public static let suiteName = "io.zamzam.ZamzamKit.Migration"
     
     fileprivate let defaults: UserDefaults
     fileprivate let bundle: Bundle

@@ -60,7 +60,7 @@ class StringTests: XCTestCase {
     }
 	
 	func testRandom() {
-		XCTAssertEqual(String(random: 10).characters.count, 10)
+		XCTAssertEqual(String(random: 10).count, 10)
 	}
 	
 	func testIsNilOrEmpty() {
@@ -77,4 +77,24 @@ class StringTests: XCTestCase {
 		XCTAssertFalse(test.isNilOrEmpty)
         XCTAssertTrue(!test.isNilOrEmpty)
 	}
+	
+	func testTruncated() {
+        let test = "Abcdef123456"
+        let expected = "Abc..."
+        XCTAssertEqual(test.truncated(3), expected)
+    }
+    
+    func testSubscript() {
+        let test = "Abcdef123456"
+        let expected = "d"
+        XCTAssertEqual(test[3]!, expected)
+    }
+    
+    func testSubscriptRange() {
+        let test = "Abcdef123456"
+        
+        XCTAssertEqual(test[3..<6]!, "def")
+        XCTAssertEqual(test[3...6]!, "def1")
+        XCTAssertEqual(test[3...]!, "def123456")
+    }
 }

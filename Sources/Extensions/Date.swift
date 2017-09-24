@@ -179,7 +179,7 @@ public extension Date {
     // Cache Islamic calendar for reuse
     // https://www.staff.science.uu.nl/~gent0113/islam/ummalqura.htm
     // http://tabsir.net/?p=621#more-621
-    private static let islamicCalendar: Calendar = { return Calendar(identifier: .islamicUmmAlQura) }()
+    static let islamicCalendar: Calendar = { return Calendar(identifier: .islamicUmmAlQura) }()
 
     func hijriString(components: Set<Calendar.Component> = Calendar.Component.date, format: String? = nil, offSet: Int = 0, timeZone: TimeZone? = nil, calendar: Calendar = Date.islamicCalendar) -> String {
         var calendar = calendar

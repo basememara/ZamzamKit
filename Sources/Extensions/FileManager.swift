@@ -78,10 +78,10 @@ public extension FileManager {
         guard let nsURL = URL(string: url) else { return complete(nil, nil, ZamzamError.invalidData) }
         
         URLSession.shared.downloadTask(with: nsURL) {
-            let response = $0.1
-            let error = $0.2
+            let response = $1
+            let error = $2
             
-            guard error == nil, let location = $0.0 else { return complete(nil, nil, error) }
+            guard error == nil, let location = $0 else { return complete(nil, nil, error) }
             
             // Construct file destination and prepare location
             let destination = self.url(of: nsURL.lastPathComponent, from: .cachesDirectory)

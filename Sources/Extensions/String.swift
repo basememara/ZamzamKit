@@ -19,9 +19,9 @@ public extension String {
 		guard random > 0 else { self = prefix; return }
 		let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         
-		self = (0..<random).reduce(prefix) {
-			let randomIndex = arc4random_uniform(UInt32(base.characters.count))
-            return $0.0 + "\(base[base.index(base.startIndex, offsetBy: IndexDistance(randomIndex))])"
+		self = (0..<random).reduce(prefix) { (result: String, _) in
+			let randomIndex = arc4random_uniform(UInt32(base.count))
+            return result + "\(base[base.index(base.startIndex, offsetBy: IndexDistance(randomIndex))])"
         }
 	}
 }
@@ -67,7 +67,7 @@ public extension String {
      - returns: the value with the replaced string
      */
     func replace(regex: String, with replacement: String, caseSensitive: Bool = false) -> String {
-        guard !self.isEmpty else { return self }
+        guard !isEmpty else { return self }
         
         // Determine options
         var options: CompareOptions = [.regularExpression]
@@ -105,8 +105,8 @@ public extension String {
 	///   - trailing: string to add at the end of truncated string.
 	/// - Returns: truncated string (this is an extr...).
 	public func truncated(_ length: Int, trailing: String = "...") -> String {
-        guard 1..<characters.count ~= length else { return self }
-		return substring(to: index(startIndex, offsetBy: length)) + trailing
+        guard 1..<count ~= length else { return self }
+		return prefix(length) + trailing
 	}
 
 
@@ -142,7 +142,7 @@ public extension String {
         // http://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
         guard !isEmpty else { return self }
         
-        var position = self.startIndex
+        var position = startIndex
         var result = ""
         
         // Mapping from XML/HTML character entity reference to character
@@ -178,30 +178,30 @@ public extension String {
         //     decode("&foo;")    --> nil
         func decode(_ entity: String) -> Character? {
             if entity.hasPrefix("&#x") || entity.hasPrefix("&#X"){
-                return decodeNumeric(entity.substring(from: entity.characters.index(entity.startIndex, offsetBy: 3)), base: 16)
+                return decodeNumeric(entity[3...]!, base: 16)
             } else if entity.hasPrefix("&#") {
-                return decodeNumeric(entity.substring(from: entity.characters.index(entity.startIndex, offsetBy: 2)), base: 10)
+                return decodeNumeric(entity[2...]!, base: 10)
             } else {
                 return characterEntities[entity]
             }
         }
         
         // Find the next '&' and copy the characters preceding it to `result`:
-        while let ampRange = self.range(of: "&", range: position ..< self.endIndex) {
-            result.append(self[position ..< ampRange.lowerBound])
+        while let ampRange = range(of: "&", range: position..<endIndex) {
+            result.append(String(self[position..<ampRange.lowerBound]))
             position = ampRange.lowerBound
             
             // Find the next ';' and copy everything from '&' to ';' into `entity`
-            if let semiRange = self.range(of: ";", range: position ..< self.endIndex) {
-                let entity = self[position ..< semiRange.upperBound]
+            if let semiRange = range(of: ";", range: position..<endIndex) {
+                let entity = self[position..<semiRange.upperBound]
                 position = semiRange.upperBound
                 
-                if let decoded = decode(entity) {
+                if let decoded = decode(String(entity)) {
                     // Replace by decoded character:
                     result.append(decoded)
                 } else {
                     // Invalid entity, copy verbatim:
-                    result.append(entity)
+                    result.append(String(entity))
                 }
             } else {
                 // No matching ';'.
@@ -210,7 +210,7 @@ public extension String {
         }
         
         // Copy remaining characters to result
-        result.append(self[position ..< self.endIndex])
+        result.append(String(self[position..<endIndex]))
         return result
     }
 }
@@ -223,31 +223,41 @@ public extension String {
 	///
 	/// - Parameter i: index.
 	subscript(i: Int) -> String? {
-        guard 0..<characters.count ~= i else { return nil }
-		return String(self[index(startIndex, offsetBy: i)])
+        guard 0..<count ~= i else { return nil }
+        return String(self[index(startIndex, offsetBy: i)])
 	}
 	
 	/// Safely subscript string within a half-open range.
 	///
 	/// - Parameter range: Half-open range.
 	subscript(range: CountableRange<Int>) -> String? {
-		guard let lowerIndex = index(startIndex, offsetBy: max(0,range.lowerBound), limitedBy: endIndex),
+		guard let lowerIndex = index(startIndex, offsetBy: max(0, range.lowerBound), limitedBy: endIndex),
             let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex)
-                else { return nil }
+            else { return nil }
         
-		return self[lowerIndex..<upperIndex]
+		return String(self[lowerIndex..<upperIndex])
 	}
 	
 	/// Safely subscript string within a closed range.
 	///
 	/// - Parameter range: Closed range.
 	subscript(range: ClosedRange<Int>) -> String? {
-		guard let lowerIndex = index(startIndex, offsetBy: max(0,range.lowerBound), limitedBy: endIndex),
+		guard let lowerIndex = index(startIndex, offsetBy: max(0, range.lowerBound), limitedBy: endIndex),
             let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound + 1, limitedBy: endIndex)
-                else { return nil }
+            else { return nil }
         
-		return self[lowerIndex..<upperIndex]
+		return String(self[lowerIndex..<upperIndex])
 	}
+    
+    /// Safely subscript string from the lower range to the end of the string.
+    ///
+    /// - Parameter range: A partial interval extending upward from a lower bound that forms a sequence of increasing values..
+    subscript(range: CountablePartialRangeFrom<Int>) -> String? {
+        guard let lowerIndex = index(startIndex, offsetBy: max(0, range.lowerBound), limitedBy: endIndex)
+            else { return nil }
+        
+        return String(self[lowerIndex..<endIndex])
+    }
 }
 
 public extension String {
@@ -257,22 +267,22 @@ public extension String {
     /// Returns a new string with removing all grouping separators using the current locale.
     private func removeGroupingSeparator() -> String {
         guard let groupingSeparator = Locale.current.groupingSeparator else { return self }
-        return self.replacingOccurrences(of: groupingSeparator, with: "")
+        return replacingOccurrences(of: groupingSeparator, with: "")
     }
 
     /// Returns an integer created by parsing a given string with locale consideration.
     var intValue: Int? {
-        return String.numberFormatter.number(from: self.removeGroupingSeparator())?.intValue
+        return String.numberFormatter.number(from: removeGroupingSeparator())?.intValue
     }
 
     /// Returns a double created by parsing a given string with locale consideration.
     var doubleValue: Double? {
-        return String.numberFormatter.number(from: self.removeGroupingSeparator())?.doubleValue
+        return String.numberFormatter.number(from: removeGroupingSeparator())?.doubleValue
     }
 
     /// Returns an float created by parsing a given string with locale consideration.
     var floatValue: Float? {
-        return NumberFormatter().number(from: self.removeGroupingSeparator())?.floatValue
+        return NumberFormatter().number(from: removeGroupingSeparator())?.floatValue
     }
 
     /// Returns an bool created by parsing a given string with locale consideration.

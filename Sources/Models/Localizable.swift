@@ -28,7 +28,7 @@ public extension String {
     /// A string initialized by using format as a template into which values in argList are substituted according the current locale information.
     private static var vaListHandler: (_ key: String, _ arguments: CVaListPointer, _ locale: Locale?) -> String {
         // https://stackoverflow.com/questions/42428504/swift-3-issue-with-cvararg-being-passed-multiple-times
-        return { return NSString(format: $0.0, locale: $0.2, arguments: $0.1) as String }
+        return { return NSString(format: $0, locale: $2, arguments: $1) as String }
     }
 
     /// Returns a localized string.

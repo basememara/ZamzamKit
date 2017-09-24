@@ -46,7 +46,7 @@ class NotificationsViewController: UITableViewController, ViewControllerDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let element = viewModel.elements[indexPath.row]
     
-        let cell = tableView[indexPath].then {
+        let cell = tableView[indexPath].with {
             $0.textLabel?.text = element.content.body
             $0.detailTextLabel?.text = viewModel.detailDisplay(for: element)
         }
@@ -72,8 +72,8 @@ class NotificationsViewModel {
     func update() {
         userNotification.getPendingNotificationRequests {
             self.elements = $0.sorted {
-                guard let date1 = ($0.0.trigger as? UNCalendarNotificationTrigger)?.nextTriggerDate(),
-                    let date2 = ($0.1.trigger as? UNCalendarNotificationTrigger)?.nextTriggerDate()
+                guard let date1 = ($0.trigger as? UNCalendarNotificationTrigger)?.nextTriggerDate(),
+                    let date2 = ($1.trigger as? UNCalendarNotificationTrigger)?.nextTriggerDate()
                     else { return false }
                 
                 return date1 < date2

@@ -60,8 +60,8 @@ class FileTests: XCTestCase {
         let expectation = self.expectation(description: "Download remote file")
         let url = "http://basememara.com/wp-content/uploads/2017/01/CapturFiles_125-150x150.png"
         
-        FileManager.default.download(from: url) {
-            XCTAssert($0.0 != nil)
+        FileManager.default.download(from: url) { url, _, _ in
+            XCTAssert(url != nil)
             expectation.fulfill()
         }
         
