@@ -38,9 +38,9 @@ class InterfaceController: WKInterfaceController {
             }
         })
         
-        watchSession.addObserver(forMessage: Observer { [weak self] result in
+        watchSession.addObserver(forMessage: Observer { [weak self] message, replyHandler in
             DispatchQueue.main.async {
-                self?.receivedMessageLabel.setText(result.0["value"] as? String ?? "")
+                self?.receivedMessageLabel.setText(message["value"] as? String ?? "")
             }
         })
     }

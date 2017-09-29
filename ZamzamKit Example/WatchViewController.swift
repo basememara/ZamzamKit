@@ -72,9 +72,9 @@ extension WatchViewController {
     
     /// Another way to add observer
     var messageObserver: WatchSession.ReceiveMessageObserver {
-        return Observer { [weak self] result in
+        return Observer { [weak self] message, replyHandler in
             DispatchQueue.main.async {
-                self?.receivedMessageLabel.text = result.0["value"] as? String ?? ""
+                self?.receivedMessageLabel.text = message["value"] as? String ?? ""
             }
         }
     }
