@@ -19,7 +19,7 @@ public extension String {
 		guard random > 0 else { self = prefix; return }
 		let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         
-		self = (0..<random).reduce(prefix) { (result: String, _) in
+		self = (0..<random).reduce(prefix) { (result, _) in
 			let randomIndex = arc4random_uniform(UInt32(base.count))
             return result + "\(base[base.index(base.startIndex, offsetBy: IndexDistance(randomIndex))])"
         }
