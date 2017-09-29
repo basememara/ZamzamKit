@@ -13,14 +13,14 @@ import Foundation
 public class Migration {
     public static let suiteName = "io.zamzam.ZamzamKit.Migration"
     
-    fileprivate let defaults: UserDefaults
-    fileprivate let bundle: Bundle
+    private let defaults: UserDefaults
+    private let bundle: Bundle
 
-    fileprivate lazy var appVersion: String = {
+    private lazy var appVersion: String = {
         return self.bundle.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     }()
     
-    fileprivate lazy var appBuild: String = {
+    private lazy var appBuild: String = {
         return self.bundle.infoDictionary?[kCFBundleVersionKey as String] as? String ?? ""
     }()
 

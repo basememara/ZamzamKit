@@ -10,7 +10,7 @@ import WatchConnectivity
 
 public class WatchSession: NSObject, WCSessionDelegate {
 
-    fileprivate var sessionDefault: WCSession? {
+    private var sessionDefault: WCSession? {
         guard WCSession.isSupported() else { return nil }
         return WCSession.default
     }
@@ -24,14 +24,14 @@ public class WatchSession: NSObject, WCSessionDelegate {
     }
     
     /// Subscription queues for firing within delegates
-    fileprivate var activationDidCompleteSingle = SynchronizedArray<ActivationHandler>()
-    fileprivate var didBecomeInactive = SynchronizedArray<Observer<() -> Void>>()
-    fileprivate var didDeactivate = SynchronizedArray<Observer<() -> Void>>()
-    fileprivate var stateDidChange = SynchronizedArray<Observer<() -> Void>>()
-    fileprivate var reachabilityDidChange = SynchronizedArray<ReachabilityChangeObserver>()
-    fileprivate var didReceiveApplicationContext = SynchronizedArray<ReceiveApplicationContextObserver>()
-    fileprivate var didReceiveUserInfo = SynchronizedArray<ReceiveUserInfoObserver>()
-    fileprivate var didReceiveMessage = SynchronizedArray<ReceiveMessageObserver>()
+    private var activationDidCompleteSingle = SynchronizedArray<ActivationHandler>()
+    private var didBecomeInactive = SynchronizedArray<Observer<() -> Void>>()
+    private var didDeactivate = SynchronizedArray<Observer<() -> Void>>()
+    private var stateDidChange = SynchronizedArray<Observer<() -> Void>>()
+    private var reachabilityDidChange = SynchronizedArray<ReachabilityChangeObserver>()
+    private var didReceiveApplicationContext = SynchronizedArray<ReceiveApplicationContextObserver>()
+    private var didReceiveUserInfo = SynchronizedArray<ReceiveUserInfoObserver>()
+    private var didReceiveMessage = SynchronizedArray<ReceiveMessageObserver>()
     
     deinit {
         // Empty task queues of references

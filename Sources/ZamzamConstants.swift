@@ -14,7 +14,7 @@ import Foundation
 public struct ZamzamConstants {
     
     // Prevent others from initializing singleton
-    fileprivate init() { }
+    private init() { }
     
     /// Declare bundle depending on platform
     #if os(iOS)

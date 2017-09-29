@@ -60,7 +60,7 @@ class NotificationsViewController: UITableViewController, ViewControllerDelegate
 }
 
 class NotificationsViewModel {
-    fileprivate let userNotification = UNUserNotificationCenter.current()
+    private let userNotification = UNUserNotificationCenter.current()
     
     var elements = [UNNotificationRequest]()
     weak var delegate: ViewControllerDelegate?

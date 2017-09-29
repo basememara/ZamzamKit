@@ -62,7 +62,7 @@ public extension LocationManagerType {
 public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDelegate {
 
     /// Internal Core Location manager
-    fileprivate lazy var manager: CLLocationManager = {
+    private lazy var manager: CLLocationManager = {
         let bleManager = CLLocationManager()
         bleManager.desiredAccuracy ?= self.desiredAccuracy
         bleManager.distanceFilter ?= self.distanceFilter
@@ -76,9 +76,9 @@ public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDe
     }()
     
     /// Default location manager options
-    fileprivate let desiredAccuracy: CLLocationAccuracy?
-    fileprivate let distanceFilter: Double?
-    fileprivate let activityType: CLActivityType?
+    private let desiredAccuracy: CLLocationAccuracy?
+    private let distanceFilter: Double?
+    private let activityType: CLActivityType?
     
     public required init(
         desiredAccuracy: CLLocationAccuracy? = nil,
@@ -93,13 +93,13 @@ public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDe
     }
     
     /// Subscribes to receive new data when available
-    fileprivate var didUpdateLocationsSingle = SynchronizedArray<LocationHandler>()
-    fileprivate var didChangeAuthorizationSingle = SynchronizedArray<AuthorizationHandler>()
-    fileprivate var didUpdateLocations = SynchronizedArray<Observer<LocationHandler>>()
-    fileprivate var didChangeAuthorization = SynchronizedArray<Observer<AuthorizationHandler>>()
+    private var didUpdateLocationsSingle = SynchronizedArray<LocationHandler>()
+    private var didChangeAuthorizationSingle = SynchronizedArray<AuthorizationHandler>()
+    private var didUpdateLocations = SynchronizedArray<Observer<LocationHandler>>()
+    private var didChangeAuthorization = SynchronizedArray<Observer<AuthorizationHandler>>()
     
     #if os(iOS)
-    fileprivate var didUpdateHeading = SynchronizedArray<Observer<HeadingHandler>>()
+    private var didUpdateHeading = SynchronizedArray<Observer<HeadingHandler>>()
     #endif
     
     deinit {

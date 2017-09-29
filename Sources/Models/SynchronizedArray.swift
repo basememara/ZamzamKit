@@ -10,8 +10,8 @@ import Foundation
 
 /// A thread-safe array.
 public class SynchronizedArray<Element> {
-    fileprivate let queue = DispatchQueue(label: "io.zamzam.ZamzamKit.SynchronizedArray", attributes: .concurrent)
-    fileprivate var array = [Element]()
+    private let queue = DispatchQueue(label: "io.zamzam.ZamzamKit.SynchronizedArray", attributes: .concurrent)
+    private var array = [Element]()
     
     public init() { }
     
@@ -222,12 +222,7 @@ public extension SynchronizedArray {
     subscript(index: Int) -> Element? {
         get {
             var result: Element?
-            
-            queue.sync {
-                guard self.array.startIndex..<self.array.endIndex ~= index else { return }
-                result = self.array[index]
-            }
-            
+            queue.sync { result = self.array.get(index) }
             return result
         }
         set {
