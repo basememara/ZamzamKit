@@ -18,7 +18,7 @@ public extension UIViewController {
 	}
 
     /// Causes the view to resign the first responder status.
-    func endEditing() {
+    @objc func endEditing() {
         view.endEditing(true)
     }
 }
