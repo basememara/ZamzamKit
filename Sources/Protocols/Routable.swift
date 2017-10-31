@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol Routable {
+public protocol Routable: class {
     associatedtype StoryboardIdentifier: RawRepresentable
     
     func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String?, animated: Bool, modalPresentationStyle: UIModalPresentationStyle?, configure: ((T) -> Void)?, completion: ((T) -> Void)?)
