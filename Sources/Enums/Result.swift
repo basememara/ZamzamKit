@@ -16,9 +16,9 @@ import Foundation
     - Failure: The request encountered an error resulting in a failure. The associated values are the original data 
                provided by the destination as well as the error that caused the failure.
 */
-public enum Result<Value> {
+public enum Result<Value, ErrorType: Error> {
     case success(Value)
-    case failure(Error)
+    case failure(ErrorType)
 
     /// Returns `true` if the result is a success, `false` otherwise.
     public var isSuccess: Bool {
@@ -46,7 +46,7 @@ public enum Result<Value> {
     }
 
     /// Returns the associated error value if the result is a failure, `nil` otherwise.
-    public var error: Error? {
+    public var error: ErrorType? {
         switch self {
         case .success:
             return nil
