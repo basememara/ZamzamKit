@@ -13,16 +13,16 @@ open class BaseNibView: UIView {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
+        setUp()
     }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        commonInit()
+        setUp()
     }
 
     /// Process common code on initialization.
-    public func commonInit() {
+    public func setUp() {
         loadFromNib()
     }
 }
