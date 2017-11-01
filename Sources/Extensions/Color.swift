@@ -51,7 +51,7 @@ public extension UIColor {
      */
     convenience init(rgb: String?, alpha: Double = 1.0) {
         // Validate correct number of colors supplied
-        guard let rgbSplit = rgb?.characters
+        guard let rgbSplit = rgb?
             .split(separator: ",")
             .map(String.init)
             .flatMap({ Int($0.trimmingCharacters(in: .whitespacesAndNewlines)) }),
