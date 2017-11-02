@@ -35,7 +35,7 @@ public extension Bundle {
     func contents(plist: String, inDirectory: String? = nil) -> [String : Any] {
         guard let resourcePath = path(forResource: plist, ofType: nil, inDirectory: inDirectory),
             let contents = NSDictionary(contentsOfFile: resourcePath) as? [String : Any]
-                else { return [:] }
+            else { return [:] }
         
         return contents
     }
