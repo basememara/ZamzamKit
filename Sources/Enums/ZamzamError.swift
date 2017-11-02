@@ -12,5 +12,5 @@ public enum ZamzamError: Error {
     case general
     case invalidData
     case notReachable
-    case other(Error)
+    case other(Error?)
 }
