@@ -19,8 +19,8 @@ public extension Bundle {
      
      - returns: Contents of file.
      */
-    static func string(file: String, inDirectory: String? = nil, bundle: Bundle? = nil, encoding: String.Encoding = String.Encoding.utf8) -> String? {
-        guard let resourcePath = (bundle ?? Bundle.main).path(forResource: file, ofType: nil, inDirectory: inDirectory) else { return nil }
+    func string(file: String, inDirectory: String? = nil, encoding: String.Encoding = String.Encoding.utf8) -> String? {
+        guard let resourcePath = path(forResource: file, ofType: nil, inDirectory: inDirectory) else { return nil }
         return try? String(contentsOfFile: resourcePath, encoding: encoding)
     }
     
@@ -32,8 +32,8 @@ public extension Bundle {
      
      - returns: dictionary of values
      */
-    static func contents(plist: String, inDirectory: String? = nil, bundle: Bundle? = nil) -> [String : Any] {
-        guard let resourcePath = (bundle ?? Bundle.main).path(forResource: plist, ofType: nil, inDirectory: inDirectory),
+    func contents(plist: String, inDirectory: String? = nil) -> [String : Any] {
+        guard let resourcePath = path(forResource: plist, ofType: nil, inDirectory: inDirectory),
             let contents = NSDictionary(contentsOfFile: resourcePath) as? [String : Any]
                 else { return [:] }
         

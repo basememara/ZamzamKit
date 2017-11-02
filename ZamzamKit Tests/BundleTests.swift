@@ -11,14 +11,18 @@ import XCTest
 
 class BundleTests: XCTestCase {
     
+    lazy var bundle: Bundle = {
+        return Bundle(for: type(of: self))
+    }()
+    
     func testValuesFromText() {
-        let values = Bundle.string(file: "Test.txt", bundle: Bundle(for: type(of: self)))
+        let values = bundle.string(file: "Test.txt")
         
         XCTAssert(values == "This is a test. Abc 123.\n")
     }
     
     func testValuesFromPlist() {
-        let values = Bundle.contents(plist: "Settings.plist", bundle: Bundle(for: type(of: self)))
+        let values = bundle.contents(plist: "Settings.plist")
         
         XCTAssert(values["MyString1"] as? String == "My string value 1.")
         XCTAssert(values["MyNumber1"] as? Int == 123)
@@ -30,7 +34,7 @@ class BundleTests: XCTestCase {
     }
     
     func testArrayFromPlist() {
-        let values = Bundle.contents(plist: "Settings.plist", bundle: Bundle(for: type(of: self)))
+        let values = bundle.contents(plist: "Settings.plist")
         let array = values["MyArray1"] as! [AnyObject]
         let expected: [Any] = [
             "My string for array value." as Any,
@@ -44,7 +48,7 @@ class BundleTests: XCTestCase {
     }
     
     func testDictFromPlist() {
-        let values = Bundle.contents(plist: "Settings.plist", bundle: Bundle(for: type(of: self)))
+        let values = bundle.contents(plist: "Settings.plist")
         let dict = values["MyDictionary1"] as! [String: Any]
         let expected: [String: Any] = [
             "id": 7 as Any,
