@@ -17,6 +17,7 @@ class UserNotificationViewController: UIViewController, StatusBarable, Notificat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        addObserver(for: .UIDeviceOrientationDidChange, selector: #selector(deviceOrientationDidChange))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -24,7 +25,6 @@ class UserNotificationViewController: UIViewController, StatusBarable, Notificat
         
         // Handle status bar background if applicable
         showStatusBar(background: .red)
-        addObserver(for: .UIDeviceOrientationDidChange, selector: #selector(deviceOrientationDidChange))
     }
     
     @objc func deviceOrientationDidChange() {
