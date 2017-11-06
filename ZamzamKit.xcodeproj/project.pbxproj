@@ -138,6 +138,7 @@
 		8B9E98701EB500790067ACB7 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E986E1EB500790067ACB7 /* With.swift */; };
 		8B9E98711EB500790067ACB7 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E986E1EB500790067ACB7 /* With.swift */; };
 		8BB376121CF8B8D6005E7F67 /* Restorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB376111CF8B8D6005E7F67 /* Restorable.swift */; };
+		8BB415E61FB0DFFF0002C86C /* StatusBarable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB415E51FB0DFFF0002C86C /* StatusBarable.swift */; };
 		8BB45FB51C9BDD180070CE07 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */; };
 		8BB45FB61C9BDD180070CE07 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */; };
 		8BB45FB71C9BDD180070CE07 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */; };
@@ -397,6 +398,7 @@
 		8B9E985F1EB396D20067ACB7 /* CellIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellIdentifiable.swift; sourceTree = "<group>"; };
 		8B9E986E1EB500790067ACB7 /* With.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = With.swift; sourceTree = "<group>"; };
 		8BB376111CF8B8D6005E7F67 /* Restorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restorable.swift; sourceTree = "<group>"; };
+		8BB415E51FB0DFFF0002C86C /* StatusBarable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarable.swift; sourceTree = "<group>"; };
 		8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaults.swift; path = Extensions/UserDefaults.swift; sourceTree = "<group>"; };
 		8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableViewController.swift; path = Extensions/UITableViewController.swift; sourceTree = "<group>"; };
 		8BC8115F1ECCE75300F455CC /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Hashable.swift; path = Extensions/Hashable.swift; sourceTree = "<group>"; };
@@ -657,6 +659,7 @@
 				8BB376111CF8B8D6005E7F67 /* Restorable.swift */,
 				8B9E98101EB144540067ACB7 /* Routable.swift */,
 				8B5455DE1E5E3287000CB26A /* Segueable.swift */,
+				8BB415E51FB0DFFF0002C86C /* StatusBarable.swift */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -1132,6 +1135,7 @@
 				8BC811601ECCE75300F455CC /* Hashable.swift in Sources */,
 				8BF307D01CF0E3C600BBA933 /* UIActivity.swift in Sources */,
 				8BCB73CE1CAD660D00E20096 /* Equatable.swift in Sources */,
+				8BB415E61FB0DFFF0002C86C /* StatusBarable.swift in Sources */,
 				8BD08EB51CE28ACA0051080A /* SCNetworkReachability.swift in Sources */,
 				8B9434611EBDEA8200C779EB /* TimeZone.swift in Sources */,
 				8BD61B361E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,

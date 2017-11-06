@@ -10,11 +10,28 @@ import UIKit
 import UserNotifications
 import ZamzamKit
 
-class UserNotificationViewController: UIViewController {
+class UserNotificationViewController: UIViewController, StatusBarable, NotificationObservable {
+    
+    let sharedApplication = UIApplication.shared
+    var statusBar: UIView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Handle status bar background if applicable
+        showStatusBar(background: .red)
+        addObserver(for: .UIDeviceOrientationDidChange, selector: #selector(deviceOrientationDidChange))
+    }
+    
+    @objc func deviceOrientationDidChange() {
+        removeStatusBar()
+        showStatusBar(background: .red)
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -34,7 +51,6 @@ class UserNotificationViewController: UIViewController {
                     }
             }
         )
-        
     }
     
     @IBAction func scheduleTapped() {

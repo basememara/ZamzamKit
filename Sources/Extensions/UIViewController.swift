@@ -23,35 +23,6 @@ public extension UIViewController {
     }
 }
 
-public extension UIViewController {
-
-    /**
-     Adds status bar background with color instead of being transparent.
-
-     - parameter backgroundColor: Background color of status bar.
-     */
-    @discardableResult
-    func addStatusBar(background color: UIColor) -> UIView {
-        let statusBar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 20))
-        statusBar.backgroundColor = color
-        self.view.addSubview(statusBar)
-        
-        return statusBar
-    }
-    
-    /**
-     Adds status bar background with light or dark mode.
-
-     - parameter darkMode: Light or dark mode color of status bar.
-     */
-    @discardableResult
-    func addStatusBar(darkMode: Bool) -> UIView {
-        return addStatusBar(background: darkMode
-            ? UIColor(white: 0, alpha: 0.8)
-            : UIColor(rgb: (239, 239, 244), alpha: 0.8))
-    }
-}
-
 // MARK: - Presenters
 public extension UIViewController {
     
