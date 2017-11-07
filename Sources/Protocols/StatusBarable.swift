@@ -15,7 +15,7 @@ public protocol StatusBarable: class {
 
 public extension StatusBarable where Self: UIViewController {
     
-    /// Determine dynamic status bar height
+    /// Determine dynamic status bar size
     var statusBarSize: CGSize {
         let size = sharedApplication.statusBarFrame.size
         
