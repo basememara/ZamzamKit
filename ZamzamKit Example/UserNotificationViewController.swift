@@ -24,12 +24,12 @@ class UserNotificationViewController: UIViewController, StatusBarable, Notificat
         super.viewWillAppear(animated)
         
         // Handle status bar background if applicable
-        showStatusBar(background: .red)
+        showStatusBar()
     }
     
     @objc func deviceOrientationDidChange() {
         removeStatusBar()
-        showStatusBar(background: .red)
+        showStatusBar()
     }
     
     

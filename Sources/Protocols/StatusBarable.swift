@@ -28,52 +28,36 @@ public extension StatusBarable where Self: UIViewController {
     }
 
     /**
-     Adds status bar background with color instead of being transparent.
+     Adds status bar with blur background instead of being transparent.
      
      - parameter backgroundColor: Background color of status bar.
      */
     @discardableResult
-    func addStatusBar(background color: UIColor) -> UIView? {
+    func addStatusBar(style: UIBlurEffectStyle = .regular) -> UIView? {
         guard !sharedApplication.isStatusBarHidden else { return nil }
         
-        let statusBar = UIView(frame: CGRect(
-            x: 0,
-            y: 0,
-            width: statusBarSize.width,
-            height: statusBarSize.height
-        ))
+        let statusBar = UIVisualEffectView().with {
+            $0.effect = UIBlurEffect(style: style)
+            $0.frame = CGRect(
+                x: 0,
+                y: 0,
+                width: statusBarSize.width,
+                height: statusBarSize.height
+            )
+        }
         
-        statusBar.backgroundColor = color
         view.addSubview(statusBar)
         
         return statusBar
-    }
-    
-    /**
-     Adds status bar background with light or dark mode.
-     
-     - parameter darkMode: Light or dark mode color of status bar.
-     */
-    @discardableResult
-    func addStatusBar(darkMode: Bool) -> UIView? {
-        return addStatusBar(background: darkMode
-            ? UIColor(white: 0, alpha: 0.8)
-            : UIColor(rgb: (239, 239, 244), alpha: 0.8))
     }
 }
 
 public extension StatusBarable where Self: UIViewController {
     
     /// Add visible status bar since transparent by default with scrolling
-    func showStatusBar() {
-        let color = view.backgroundColor ?? .white
-        showStatusBar(background: color.withAlphaComponent(0.8))
-    }
-    
-    /// Add visible status bar since transparent by default with scrolling
-    func showStatusBar(background color: UIColor) {
+    func showStatusBar(style: UIBlurEffectStyle = .regular) {
         guard let statusBar = statusBar else {
-            self.statusBar = addStatusBar(background: color)
+            self.statusBar = addStatusBar(style: style)
             return
         }
         
