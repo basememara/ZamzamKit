@@ -9,7 +9,6 @@
 import UserNotifications
 import CoreLocation
 
-@available(iOS 10, *)
 public extension UNUserNotificationCenter {
     
     /// Registers your app’s notification types and the custom actions that they support.
@@ -74,7 +73,6 @@ public extension UNUserNotificationCenter {
     }
 }
 
-@available(iOS 10, *)
 public extension UNUserNotificationCenter {
     
     /// Retrieve the pending notification request.
@@ -116,7 +114,6 @@ public extension UNUserNotificationCenter {
 
 }
 
-@available(iOS 10, *)
 public extension UNUserNotificationCenter {
 
     /// Schedules a local notification for delivery.
@@ -210,7 +207,6 @@ public extension UNUserNotificationCenter {
 
 }
 
-@available(iOS 10, *)
 public extension UNUserNotificationCenter {
     
     #if os(iOS)

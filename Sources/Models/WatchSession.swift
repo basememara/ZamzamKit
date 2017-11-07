@@ -290,14 +290,12 @@ public extension WatchSession {
 public extension WatchSession {
 
     /// The number of remaining times you can send complication data from the iOS app to the WatchKit extension
-    @available(iOS 10.0, *)
     var remainingComplicationTransfers: Int {
         guard let session = sessionDefault else { return 0 }
         return session.remainingComplicationUserInfoTransfers
     }
 
     /// A Boolean value indicating whether the Watch app’s complication is in use on the currently paired and active Apple Watch.
-    @available(iOS 10.0, *)
     var isComplicationEnabled: Bool {
         guard let session = sessionDefault else { return false }
         return session.isComplicationEnabled

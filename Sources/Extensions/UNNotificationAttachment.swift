@@ -8,7 +8,6 @@
 
 import UserNotifications
 
-@available(iOS 10.0, *)
 public extension UNNotificationAttachment {
 
     /// Converts a resource from the Internet to a user notification attachment.
