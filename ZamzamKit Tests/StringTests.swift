@@ -58,6 +58,9 @@ class StringTests: XCTestCase {
         XCTAssertTrue(value.isAlphaNumeric, "Alphanumberic \(value) should be valid.")
         XCTAssertFalse(wrong.isAlphaNumeric, "Alphanumberic \(value) should not be valid.")
     }
+}
+
+extension StringTests {
 	
 	func testRandom() {
 		XCTAssertEqual(String(random: 10).count, 10)
@@ -83,6 +86,9 @@ class StringTests: XCTestCase {
         let expected = "Abc..."
         XCTAssertEqual(test.truncated(3), expected)
     }
+}
+
+extension StringTests {
     
     func testSubscript() {
         let test = "Abcdef123456"
@@ -96,5 +102,20 @@ class StringTests: XCTestCase {
         XCTAssertEqual(test[3..<6]!, "def")
         XCTAssertEqual(test[3...6]!, "def1")
         XCTAssertEqual(test[3...]!, "def123456")
+    }
+}
+
+extension StringTests {
+    
+    func testBase64Encoded() {
+        let test = "Abcdef123456"
+        let expected = "QWJjZGVmMTIzNDU2"
+        XCTAssertEqual(test.base64Encoded, expected)
+    }
+    
+    func testBase64Decoded() {
+        let test = "NjU0MzIxRmVkY2Jh"
+        let expected = "654321Fedcba"
+        XCTAssertEqual(test.base64Decoded, expected)
     }
 }

@@ -291,6 +291,20 @@ public extension String {
     }
 }
 
+public extension String {
+    
+    /// Encode a string to Base64
+    var base64Encoded: String {
+        return Data(self.utf8).base64EncodedString()
+    }
+    
+    /// Decode a string from Base64
+    var base64Decoded: String? {
+        guard let data = Data(base64Encoded: self) else { return nil }
+        return String(data: data, encoding: .utf8)
+    }
+}
+
 public extension Optional where Wrapped == String {
 
     /// A Boolean value indicating whether a string is `nil` or has no characters.
