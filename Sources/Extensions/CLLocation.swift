@@ -18,16 +18,18 @@ public extension CLLocation {
     func geocoder(completion: @escaping (LocationMeta?) -> Void) {
         // Reverse geocode stored coordinates
         CLGeocoder().reverseGeocodeLocation(self) { placemarks, error in
-            guard let mark = placemarks?.first, error == nil else { return completion(nil) }
-            
-            completion(LocationMeta(
-                coordinates: (self.coordinate.latitude, self.coordinate.longitude),
-                locality: mark.locality,
-                country: mark.country,
-                countryCode: mark.isoCountryCode,
-                timeZone: mark.timeZone,
-                administrativeArea: mark.administrativeArea)
-            )
+            DispatchQueue.main.async {
+                guard let mark = placemarks?.first, error == nil else { return completion(nil) }
+                
+                completion(LocationMeta(
+                    coordinates: (self.coordinate.latitude, self.coordinate.longitude),
+                    locality: mark.locality,
+                    country: mark.country,
+                    countryCode: mark.isoCountryCode,
+                    timeZone: mark.timeZone,
+                    administrativeArea: mark.administrativeArea)
+                )
+            }
         }
     }
 }
