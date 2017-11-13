@@ -16,23 +16,6 @@ class ExtensionsTest: XCTestCase {
         XCTAssert(!"xyz".within(["abc", "def", "ghi"]))
     }
     
-    func testDictionaryUnion() {
-        let moreAttributes: [String: String] = ["Function": "authenticate"]
-        var attributes: [String: String] = ["File": "Auth.swift"]
-
-        // Immutable
-        XCTAssertEqual(attributes + moreAttributes + nil, ["Function": "authenticate", "File": "Auth.swift"])
-        XCTAssertEqual(attributes + moreAttributes, ["Function": "authenticate", "File": "Auth.swift"])
-        XCTAssertEqual(attributes + nil, ["File": "Auth.swift"])
-        
-        // Mutable
-        attributes += nil
-        XCTAssertEqual(attributes, ["File": "Auth.swift"])
-        
-        attributes += moreAttributes
-        XCTAssertEqual(attributes, ["File": "Auth.swift", "Function": "authenticate"])
-    }
-    
     func testCombineHash() {
         // https://codereview.stackexchange.com/questions/148763/extending-cgpoint-to-conform-to-hashable
         var hv = Set<Int>()
