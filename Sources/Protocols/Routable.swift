@@ -11,7 +11,7 @@ import UIKit
 public protocol Routable: class {
     associatedtype StoryboardIdentifier: RawRepresentable
     
-    func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String?, animated: Bool, modalPresentationStyle: UIModalPresentationStyle?, configure: ((T) -> Void)?, completion: ((T) -> Void)?)
+    func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String?, animated: Bool, modalPresentationStyle: UIModalPresentationStyle?, modalTransitionStyle: UIModalTransitionStyle?, configure: ((T) -> Void)?, completion: ((T) -> Void)?)
     func show<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String?, configure: ((T) -> Void)?)
     func showDetailViewController<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String?, configure: ((T) -> Void)?)
 }
@@ -26,7 +26,7 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
      - parameter configure: Configure the view controller before it is loaded.
      - parameter completion: Completion the view controller after it is loaded.
      */
-    func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, animated: Bool = true, modalPresentationStyle: UIModalPresentationStyle? = nil, configure: ((T) -> Void)? = nil, completion: ((T) -> Void)? = nil) {
+    func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, animated: Bool = true, modalPresentationStyle: UIModalPresentationStyle? = nil, modalTransitionStyle: UIModalTransitionStyle? = nil, configure: ((T) -> Void)? = nil, completion: ((T) -> Void)? = nil) {
         let storyboard = UIStoryboard(name: storyboard.rawValue)
         
         guard let controller = (identifier != nil
@@ -36,6 +36,10 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
         
         if let modalPresentationStyle = modalPresentationStyle {
             controller.modalPresentationStyle = modalPresentationStyle
+        }
+        
+        if let modalTransitionStyle = modalTransitionStyle {
+            controller.modalTransitionStyle = modalTransitionStyle
         }
         
         configure?(controller)
