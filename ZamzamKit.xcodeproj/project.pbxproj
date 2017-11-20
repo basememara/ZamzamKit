@@ -417,7 +417,7 @@
 		8BD508751C99E18500AE205E /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = Extensions/Collection.swift; sourceTree = "<group>"; };
 		8BD61B351E3EFDF1009B537E /* ZamzamKitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamKitable.swift; sourceTree = "<group>"; };
 		8BD61B391E3F04D0009B537E /* UISwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UISwitch.swift; path = Extensions/UISwitch.swift; sourceTree = "<group>"; };
-		8BD98D641FC33B4600E74A8C /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		8BD98D641FC33B4600E74A8C /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Font.swift; path = Extensions/Font.swift; sourceTree = "<group>"; };
 		8BDA5E301E795DE300429F78 /* BackgroundTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundTask.swift; path = Models/BackgroundTask.swift; sourceTree = "<group>"; };
 		8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE19B0C1C72D6DF00D4D437 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
