@@ -172,6 +172,7 @@
 		8BD98D651FC33B4600E74A8C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD98D641FC33B4600E74A8C /* Font.swift */; };
 		8BD98D661FC33B4600E74A8C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD98D641FC33B4600E74A8C /* Font.swift */; };
 		8BD98D671FC33B4600E74A8C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD98D641FC33B4600E74A8C /* Font.swift */; };
+		8BD98D6F1FC35B3700E74A8C /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD98D6E1FC35B3700E74A8C /* UIWindow.swift */; };
 		8BDA5E311E795DE300429F78 /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDA5E301E795DE300429F78 /* BackgroundTask.swift */; };
 		8BE19B0D1C72D6DF00D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; };
 		8BE19B1C1C72D6F200D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447E21C7257F100043657 /* ZamzamKit.framework */; };
@@ -418,6 +419,7 @@
 		8BD61B351E3EFDF1009B537E /* ZamzamKitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamKitable.swift; sourceTree = "<group>"; };
 		8BD61B391E3F04D0009B537E /* UISwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UISwitch.swift; path = Extensions/UISwitch.swift; sourceTree = "<group>"; };
 		8BD98D641FC33B4600E74A8C /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Font.swift; path = Extensions/Font.swift; sourceTree = "<group>"; };
+		8BD98D6E1FC35B3700E74A8C /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
 		8BDA5E301E795DE300429F78 /* BackgroundTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundTask.swift; path = Models/BackgroundTask.swift; sourceTree = "<group>"; };
 		8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE19B0C1C72D6DF00D4D437 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -769,6 +771,7 @@
 				8BBA692C1CB6FCE000AD9759 /* UITableViewController.swift */,
 				8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */,
 				8BFDB6691C751D3400C94996 /* UIViewController.swift */,
+				8BD98D6E1FC35B3700E74A8C /* UIWindow.swift */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -1191,6 +1194,7 @@
 				8B5D8A971E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */,
 				8BD016841E77371A008F306E /* WatchSession.swift in Sources */,
 				8B756F151E5CF16D00DE4B02 /* BaseNibView.swift in Sources */,
+				8BD98D6F1FC35B3700E74A8C /* UIWindow.swift in Sources */,
 				8B75286C1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BD2D19E1CA583110018AC2B /* UIAlertAction.swift in Sources */,
 				8B9434651EBDEAA200C779EB /* Calendar.swift in Sources */,
