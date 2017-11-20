@@ -169,6 +169,9 @@
 		8BD61B371E3EFDF1009B537E /* ZamzamKitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD61B351E3EFDF1009B537E /* ZamzamKitable.swift */; };
 		8BD61B381E3EFDF1009B537E /* ZamzamKitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD61B351E3EFDF1009B537E /* ZamzamKitable.swift */; };
 		8BD61B3A1E3F04D0009B537E /* UISwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD61B391E3F04D0009B537E /* UISwitch.swift */; };
+		8BD98D651FC33B4600E74A8C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD98D641FC33B4600E74A8C /* Font.swift */; };
+		8BD98D661FC33B4600E74A8C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD98D641FC33B4600E74A8C /* Font.swift */; };
+		8BD98D671FC33B4600E74A8C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD98D641FC33B4600E74A8C /* Font.swift */; };
 		8BDA5E311E795DE300429F78 /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDA5E301E795DE300429F78 /* BackgroundTask.swift */; };
 		8BE19B0D1C72D6DF00D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; };
 		8BE19B1C1C72D6F200D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447E21C7257F100043657 /* ZamzamKit.framework */; };
@@ -414,6 +417,7 @@
 		8BD508751C99E18500AE205E /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = Extensions/Collection.swift; sourceTree = "<group>"; };
 		8BD61B351E3EFDF1009B537E /* ZamzamKitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamKitable.swift; sourceTree = "<group>"; };
 		8BD61B391E3F04D0009B537E /* UISwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UISwitch.swift; path = Extensions/UISwitch.swift; sourceTree = "<group>"; };
+		8BD98D641FC33B4600E74A8C /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		8BDA5E301E795DE300429F78 /* BackgroundTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundTask.swift; path = Models/BackgroundTask.swift; sourceTree = "<group>"; };
 		8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE19B0C1C72D6DF00D4D437 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -729,6 +733,7 @@
 				8BFDB68E1C75323900C94996 /* DateFormatter.swift */,
 				8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */,
 				8BFDB6761C751F2300C94996 /* FileManager.swift */,
+				8BD98D641FC33B4600E74A8C /* Font.swift */,
 				8B3CD46F1EE9CC0100E0BAFE /* Int.swift */,
 				8B79A4741E9C1ED800C8A5A4 /* Locale.swift */,
 				8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */,
@@ -1124,6 +1129,7 @@
 			files = (
 				8BF210921E4A22460026B802 /* UNNotificationAttachment.swift in Sources */,
 				8B4C08AC1EC9422E002A317D /* BinaryFloatingPoint.swift in Sources */,
+				8BD98D651FC33B4600E74A8C /* Font.swift in Sources */,
 				8B9434561EBCDA4400C779EB /* NotificationObservable.swift in Sources */,
 				8B9E98601EB396D20067ACB7 /* CellIdentifiable.swift in Sources */,
 				8BFDB68C1C752C5C00C94996 /* UIApplication.swift in Sources */,
@@ -1224,6 +1230,7 @@
 				8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8B9434571EBCDA4400C779EB /* NotificationObservable.swift in Sources */,
 				8BFDB6781C751F2300C94996 /* FileManager.swift in Sources */,
+				8BD98D661FC33B4600E74A8C /* Font.swift in Sources */,
 				8BF2106C1E48D52F0026B802 /* Result.swift in Sources */,
 				8B94345B1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B0C71601E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
@@ -1284,6 +1291,7 @@
 				8BEFE47B1E4515D900100744 /* ScheduleInterval.swift in Sources */,
 				8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */,
 				8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */,
+				8BD98D671FC33B4600E74A8C /* Font.swift in Sources */,
 				8BE2BB421F03259C00877447 /* Localizable.swift in Sources */,
 				8B729C771EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,
 			);
