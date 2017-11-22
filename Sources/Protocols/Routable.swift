@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol Routable: class {
+public protocol Routable {
     associatedtype StoryboardIdentifier: RawRepresentable
     
     func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String?, animated: Bool, modalPresentationStyle: UIModalPresentationStyle?, modalTransitionStyle: UIModalTransitionStyle?, configure: ((T) -> Void)?, completion: ((T) -> Void)?)
@@ -17,17 +17,96 @@ public protocol Routable: class {
 }
 
 public extension Routable where Self: UIViewController, StoryboardIdentifier.RawValue == String {
-
+    
     /**
      Presents the intial view controller of the specified storyboard modally.
-
+     
      - parameter storyboard: Storyboard name.
      - parameter identifier: View controller name.
      - parameter configure: Configure the view controller before it is loaded.
      - parameter completion: Completion the view controller after it is loaded.
      */
     func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, animated: Bool = true, modalPresentationStyle: UIModalPresentationStyle? = nil, modalTransitionStyle: UIModalTransitionStyle? = nil, configure: ((T) -> Void)? = nil, completion: ((T) -> Void)? = nil) {
-        let storyboard = UIStoryboard(name: storyboard.rawValue)
+        RoutingLogic.present(delegate: self, storyboardIdentifier: storyboard.rawValue, identifier: identifier, animated: animated, modalPresentationStyle: modalPresentationStyle, modalTransitionStyle: modalTransitionStyle, configure: configure, completion: completion)
+    }
+    
+    /**
+     Present the intial view controller of the specified storyboard in the primary context.
+     Set the initial view controller in the target storyboard or specify the identifier.
+     
+     - parameter storyboard: Storyboard name.
+     - parameter identifier: View controller name.
+     - parameter configure: Configure the view controller before it is loaded.
+     */
+    func show<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, configure: ((T) -> Void)? = nil) {
+        RoutingLogic.show(delegate: self, storyboardIdentifier: storyboard.rawValue, identifier: identifier, configure: configure)
+    }
+    
+    /**
+     Present the intial view controller of the specified storyboard in the secondary (or detail) context.
+     Set the initial view controller in the target storyboard or specify the identifier.
+     
+     - parameter storyboard: Storyboard name.
+     - parameter identifier: View controller name.
+     - parameter configure: Configure the view controller before it is loaded.
+     */
+    func showDetailViewController<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, configure: ((T) -> Void)? = nil) {
+        RoutingLogic.showDetailViewController(delegate: self, storyboardIdentifier: storyboard.rawValue, identifier: identifier, configure: configure)
+    }
+}
+
+public protocol Router: Routable {
+    weak var viewController: UIViewController? { get set }
+}
+
+public extension Router where StoryboardIdentifier.RawValue == String {
+    
+    /**
+     Presents the intial view controller of the specified storyboard modally.
+     
+     - parameter storyboard: Storyboard name.
+     - parameter identifier: View controller name.
+     - parameter configure: Configure the view controller before it is loaded.
+     - parameter completion: Completion the view controller after it is loaded.
+     */
+    func present<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, animated: Bool = true, modalPresentationStyle: UIModalPresentationStyle? = nil, modalTransitionStyle: UIModalTransitionStyle? = nil, configure: ((T) -> Void)? = nil, completion: ((T) -> Void)? = nil) {
+        guard let viewController = viewController else { return }
+        RoutingLogic.present(delegate: viewController, storyboardIdentifier: storyboard.rawValue, identifier: identifier, animated: animated, modalPresentationStyle: modalPresentationStyle, modalTransitionStyle: modalTransitionStyle, configure: configure, completion: completion)
+    }
+    
+    /**
+     Present the intial view controller of the specified storyboard in the primary context.
+     Set the initial view controller in the target storyboard or specify the identifier.
+     
+     - parameter storyboard: Storyboard name.
+     - parameter identifier: View controller name.
+     - parameter configure: Configure the view controller before it is loaded.
+     */
+    func show<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, configure: ((T) -> Void)? = nil) {
+        guard let viewController = viewController else { return }
+        RoutingLogic.show(delegate: viewController, storyboardIdentifier: storyboard.rawValue, identifier: identifier, configure: configure)
+    }
+    
+    /**
+     Present the intial view controller of the specified storyboard in the secondary (or detail) context.
+     Set the initial view controller in the target storyboard or specify the identifier.
+     
+     - parameter storyboard: Storyboard name.
+     - parameter identifier: View controller name.
+     - parameter configure: Configure the view controller before it is loaded.
+     */
+    func showDetailViewController<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, configure: ((T) -> Void)? = nil) {
+        guard let viewController = viewController else { return }
+        RoutingLogic.showDetailViewController(delegate: viewController, storyboardIdentifier: storyboard.rawValue, identifier: identifier, configure: configure)
+    }
+}
+
+// MARK: - Private functions
+
+fileprivate enum RoutingLogic {
+    
+    static func present<T: UIViewController>(delegate: UIViewController, storyboardIdentifier: String, identifier: String? = nil, animated: Bool = true, modalPresentationStyle: UIModalPresentationStyle? = nil, modalTransitionStyle: UIModalTransitionStyle? = nil, configure: ((T) -> Void)? = nil, completion: ((T) -> Void)? = nil) {
+        let storyboard = UIStoryboard(name: storyboardIdentifier)
         
         guard let controller = (identifier != nil
             ? storyboard.instantiateViewController(withIdentifier: identifier!)
@@ -44,21 +123,13 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
         
         configure?(controller)
         
-        present(controller, animated: animated) {
+        delegate.present(controller, animated: animated) {
             completion?(controller)
         }
     }
-    
-    /**
-     Present the intial view controller of the specified storyboard in the primary context.
-     Set the initial view controller in the target storyboard or specify the identifier.
 
-     - parameter storyboard: Storyboard name.
-     - parameter identifier: View controller name.
-     - parameter configure: Configure the view controller before it is loaded.
-     */
-    func show<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, configure: ((T) -> Void)? = nil) {
-        let storyboard = UIStoryboard(name: storyboard.rawValue)
+    static func show<T: UIViewController>(delegate: UIViewController, storyboardIdentifier: String, identifier: String? = nil, configure: ((T) -> Void)? = nil) {
+        let storyboard = UIStoryboard(name: storyboardIdentifier)
         
         guard let controller = (identifier != nil
             ? storyboard.instantiateViewController(withIdentifier: identifier!)
@@ -67,19 +138,11 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
         
         configure?(controller)
         
-        show(controller, sender: self)
+        delegate.show(controller, sender: delegate)
     }
-    
-    /**
-     Present the intial view controller of the specified storyboard in the secondary (or detail) context.
-     Set the initial view controller in the target storyboard or specify the identifier.
 
-     - parameter storyboard: Storyboard name.
-     - parameter identifier: View controller name.
-     - parameter configure: Configure the view controller before it is loaded.
-     */
-    func showDetailViewController<T: UIViewController>(storyboard: StoryboardIdentifier, identifier: String? = nil, configure: ((T) -> Void)? = nil) {
-        let storyboard = UIStoryboard(name: storyboard.rawValue)
+    static func showDetailViewController<T: UIViewController>(delegate: UIViewController, storyboardIdentifier: String, identifier: String? = nil, configure: ((T) -> Void)? = nil) {
+        let storyboard = UIStoryboard(name: storyboardIdentifier)
         
         guard let controller = (identifier != nil
             ? storyboard.instantiateViewController(withIdentifier: identifier!)
@@ -88,6 +151,6 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
         
         configure?(controller)
         
-        showDetailViewController(controller, sender: self)
+        delegate.showDetailViewController(controller, sender: delegate)
     }
 }
