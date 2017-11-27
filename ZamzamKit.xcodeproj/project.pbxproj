@@ -80,6 +80,8 @@
 		8B5316AD1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
 		8B5316AE1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
 		8B5455DF1E5E3287000CB26A /* Segueable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5455DE1E5E3287000CB26A /* Segueable.swift */; };
+		8B54B9DB1FCC6B8F00ED571F /* UserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B54B9D71FCC6B6A00ED571F /* UserDefaultsTests.swift */; };
+		8B54B9DC1FCC6B9000ED571F /* UserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B54B9D71FCC6B6A00ED571F /* UserDefaultsTests.swift */; };
 		8B5966131CD5E24A00738A12 /* UICollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5966121CD5E24A00738A12 /* UICollectionViewController.swift */; };
 		8B5D8A971E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */; };
 		8B5D8A981E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */; };
@@ -375,6 +377,7 @@
 		8B5316461C9B23BF0094A6C4 /* WKInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WKInterfaceController.swift; path = Extensions/WKInterfaceController.swift; sourceTree = "<group>"; };
 		8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dictionary.swift; path = Extensions/Dictionary.swift; sourceTree = "<group>"; };
 		8B5455DE1E5E3287000CB26A /* Segueable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segueable.swift; sourceTree = "<group>"; };
+		8B54B9D71FCC6B6A00ED571F /* UserDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsTests.swift; sourceTree = "<group>"; };
 		8B5966121CD5E24A00738A12 /* UICollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UICollectionViewController.swift; path = Extensions/UICollectionViewController.swift; sourceTree = "<group>"; };
 		8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationType.swift; sourceTree = "<group>"; };
 		8B63B2C51CD959BC000F2B5F /* UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIBarButtonItem.swift; path = Extensions/UIBarButtonItem.swift; sourceTree = "<group>"; };
@@ -700,6 +703,7 @@
 				8B89746D1EDE17AC004FA853 /* MigrationTests.swift */,
 				8B48E6261DAFFDCD00087328 /* SequenceTests.swift */,
 				8BE19B281C72D71F00D4D437 /* StringTests.swift */,
+				8B54B9D71FCC6B6A00ED571F /* UserDefaultsTests.swift */,
 				8BE19B291C72D71F00D4D437 /* WebTests.swift */,
 				8B2DE3EE1C8A90AF008F1569 /* Settings.plist */,
 				8B9E97A61EAFA4980067ACB7 /* Test.txt */,
@@ -1334,6 +1338,7 @@
 				8B48E6291DAFFDDA00087328 /* ColorTests.swift in Sources */,
 				8B48E6271DAFFDCD00087328 /* SequenceTests.swift in Sources */,
 				8B48E6231DAFFD8900087328 /* CollectionTests.swift in Sources */,
+				8B54B9DB1FCC6B8F00ED571F /* UserDefaultsTests.swift in Sources */,
 				8B729C7C1EAB9E42004A6BF1 /* InfixTests.swift in Sources */,
 				8B2DE3EC1C8A8F79008F1569 /* BundleTests.swift in Sources */,
 				8BCB73D71CAD666900E20096 /* ExtensionsTest.swift in Sources */,
@@ -1365,6 +1370,7 @@
 				8B4967B81EA8017600091A7D /* DateTimeTests.swift in Sources */,
 				8B4967BB1EA8018A00091A7D /* DictionaryTests.swift in Sources */,
 				8B4967C11EA8019500091A7D /* StringTests.swift in Sources */,
+				8B54B9DC1FCC6B9000ED571F /* UserDefaultsTests.swift in Sources */,
 				8B4967BE1EA8018F00091A7D /* LocaleTests.swift in Sources */,
 				8B89746F1EDE17AC004FA853 /* MigrationTests.swift in Sources */,
 				8B729C7D1EAB9E43004A6BF1 /* InfixTests.swift in Sources */,
