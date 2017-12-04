@@ -303,6 +303,14 @@ public extension String {
         guard let data = Data(base64Encoded: self) else { return nil }
         return String(data: data, encoding: .utf8)
     }
+    
+    /// URL safe encode a string to Base64
+    var base64URLEncoded: String {
+        return base64Encoded
+            .replacingOccurrences(of: "/", with: "_")
+            .replacingOccurrences(of: "+", with: "-")
+            .replacingOccurrences(of: "=", with: "")
+    }
 }
 
 public extension Optional where Wrapped == String {
