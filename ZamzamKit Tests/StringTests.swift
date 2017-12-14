@@ -97,6 +97,7 @@ extension StringTests {
         XCTAssertEqual("Abcdef123456".separate(every: 1, with: "-"), "A-b-c-d-e-f-1-2-3-4-5-6")
         XCTAssertEqual("Abcdef123456".separate(every: 12, with: "-"), "Abcdef123456")
         XCTAssertEqual("Abcdef123456".separate(every: 11, with: "-"), "Abcdef12345-6")
+        XCTAssertEqual("".separate(every: 6, with: ":"), "")
     }
 }
 

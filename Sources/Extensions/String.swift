@@ -125,7 +125,7 @@ public extension String {
     ///   - separator: The separator to inject.
     /// - Returns: The string with the injected separator.
     func separate(every: Int, with separator: String) -> String {
-        guard 1...count ~= every else { return self }
+        guard !isEmpty, 1...count ~= every else { return self }
         
         //https://stackoverflow.com/a/47566321/235334
         return String(
