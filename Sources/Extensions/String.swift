@@ -194,13 +194,11 @@ public extension String {
         //     decode("&lt;")     --> "<"
         //     decode("&foo;")    --> nil
         func decode(_ entity: String) -> Character? {
-            if entity.hasPrefix("&#x") || entity.hasPrefix("&#X"){
-                return decodeNumeric(entity[3...]!, base: 16)
-            } else if entity.hasPrefix("&#") {
-                return decodeNumeric(entity[2...]!, base: 10)
-            } else {
-                return characterEntities[entity]
-            }
+            return entity.hasPrefix("&#x") || entity.hasPrefix("&#X")
+                ? decodeNumeric(entity[3...]!, base: 16)
+                : entity.hasPrefix("&#")
+                    ? decodeNumeric(entity[2...]!, base: 10)
+                : characterEntities[entity]
         }
         
         // Find the next '&' and copy the characters preceding it to `result`:
@@ -209,20 +207,17 @@ public extension String {
             position = ampRange.lowerBound
             
             // Find the next ';' and copy everything from '&' to ';' into `entity`
-            if let semiRange = range(of: ";", range: position..<endIndex) {
-                let entity = self[position..<semiRange.upperBound]
-                position = semiRange.upperBound
-                
-                if let decoded = decode(String(entity)) {
-                    // Replace by decoded character:
-                    result.append(decoded)
-                } else {
-                    // Invalid entity, copy verbatim:
-                    result.append(String(entity))
-                }
+            guard let semiRange = range(of: ";", range: position..<endIndex) else { break }
+            
+            let entity = self[position..<semiRange.upperBound]
+            position = semiRange.upperBound
+            
+            if let decoded = decode(String(entity)) {
+                // Replace by decoded character:
+                result.append(decoded)
             } else {
-                // No matching ';'.
-                break
+                // Invalid entity, copy verbatim:
+                result.append(String(entity))
             }
         }
         
