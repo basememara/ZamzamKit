@@ -90,6 +90,18 @@ extension StringTests {
 
 extension StringTests {
     
+    func testSeparator() {
+        XCTAssertEqual("Abcdef123456".separate(every: 3, with: "-"), "Abc-def-123-456")
+        XCTAssertEqual("Abcd".separate(every: 6, with: ":"), "Abcd")
+        XCTAssertEqual("Abcdef123456".separate(every: 0, with: "-"), "Abcdef123456")
+        XCTAssertEqual("Abcdef123456".separate(every: 1, with: "-"), "A-b-c-d-e-f-1-2-3-4-5-6")
+        XCTAssertEqual("Abcdef123456".separate(every: 12, with: "-"), "Abcdef123456")
+        XCTAssertEqual("Abcdef123456".separate(every: 11, with: "-"), "Abcdef12345-6")
+    }
+}
+
+extension StringTests {
+    
     func testSubscript() {
         let test = "Abcdef123456"
         let expected = "d"
