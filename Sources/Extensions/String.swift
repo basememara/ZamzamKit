@@ -325,6 +325,13 @@ public extension String {
     }
 }
 
+public extension Substring {
+    
+    var string: String {
+        return String(self)
+    }
+}
+
 public extension Optional where Wrapped == String {
 
     /// A Boolean value indicating whether a string is `nil` or has no characters.
