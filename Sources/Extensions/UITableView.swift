@@ -55,9 +55,25 @@ public extension UITableView {
             forHeaderFooterViewReuseIdentifier: headerFooterIdentifier
         )
     }
+    
+    /// Gets the reusable header with default identifier name.
+    func header<T: UITableViewHeaderFooterView>(withIdentifier identifier: String = UITableView.defaultHeaderFooterIdentifier) -> T? {
+        return dequeueReusableHeaderFooterView(withIdentifier: identifier) as? T
+    }
 }
 
 public extension UITableView {
+    
+    /**
+     Gets the reusable cell with default identifier name.
+     
+     - parameter indexPath: The index path of the cell from the table.
+     
+     - returns: Returns the table view cell.
+     */
+    subscript(indexPath: IndexPath) -> UITableViewCell {
+        return dequeueReusableCell(withIdentifier: UITableView.defaultCellIdentifier, for: indexPath)
+    }
 
     /**
      Gets the reusable cell with default identifier name.
@@ -66,8 +82,8 @@ public extension UITableView {
 
      - returns: Returns the table view cell.
      */
-    subscript(indexPath: IndexPath) -> UITableViewCell {
-        return dequeueReusableCell(withIdentifier: UITableView.defaultCellIdentifier, for: indexPath)
+    subscript<T: UITableViewCell>(indexPath: IndexPath) -> T {
+        return dequeueReusableCell(withIdentifier: UITableView.defaultCellIdentifier, for: indexPath) as! T
     }
 
     /**
