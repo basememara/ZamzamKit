@@ -57,8 +57,8 @@ public extension UITableView {
     }
     
     /// Gets the reusable header with default identifier name.
-    func header<T: UITableViewHeaderFooterView>(withIdentifier identifier: String = UITableView.defaultHeaderFooterIdentifier) -> T? {
-        return dequeueReusableHeaderFooterView(withIdentifier: identifier) as? T
+    func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>() -> T? {
+        return dequeueReusableHeaderFooterView(withIdentifier: UITableView.defaultHeaderFooterIdentifier) as? T
     }
 }
 
