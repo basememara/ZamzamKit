@@ -22,10 +22,10 @@ public extension UITableView {
      - parameter cellIdentifier: Name of the reusable cell identifier.
      - parameter bundleIdentifier: Name of the bundle identifier if not local.
      */
-    func registerNib<T: UITableViewCell>(_ nibType: T.Type, cellIdentifier: String = defaultCellIdentifier, bundleIdentifier: String? = nil) {
+    func register<T: UITableViewCell>(nib type: T.Type, cellIdentifier: String = defaultCellIdentifier, bundleIdentifier: String? = nil) {
         register(
             UINib(
-                nibName: String(describing: nibType),
+                nibName: String(describing: type),
                 bundle: bundleIdentifier != nil ? Bundle(identifier: bundleIdentifier!) : nil
             ),
             forCellReuseIdentifier: cellIdentifier
@@ -46,10 +46,10 @@ public extension UITableView {
      - parameter headerFooterIdentifier: Name of the reusable header/footer identifier.
      - parameter bundleIdentifier: Name of the bundle identifier if not local.
      */
-    func registerNib<T: UITableViewHeaderFooterView>(_ nibType: T.Type, headerFooterIdentifier: String = defaultHeaderFooterIdentifier, bundleIdentifier: String? = nil) {
+    func register<T: UITableViewHeaderFooterView>(nib type: T.Type, headerFooterIdentifier: String = defaultHeaderFooterIdentifier, bundleIdentifier: String? = nil) {
         register(
             UINib(
-                nibName: String(describing: nibType),
+                nibName: String(describing: type),
                 bundle: bundleIdentifier != nil ? Bundle(identifier: bundleIdentifier!) : nil
             ),
             forHeaderFooterViewReuseIdentifier: headerFooterIdentifier
