@@ -16,17 +16,48 @@ public extension UITableView {
     }
     
     /**
-     Register NIB to table view. NIB name and cell reuse identifier can match for convenience.
-
-     - parameter nibName: Name of the NIB.
+     Register NIB to table view. NIB type and cell reuse identifier can match for convenience.
+     
+     - parameter nibName: Type of the NIB.
      - parameter cellIdentifier: Name of the reusable cell identifier.
      - parameter bundleIdentifier: Name of the bundle identifier if not local.
      */
-    func registerNib(_ nibName: String, cellIdentifier: String = defaultCellIdentifier, bundleIdentifier: String? = nil) {
-        register(UINib(nibName: nibName,
-            bundle: bundleIdentifier != nil ? Bundle(identifier: bundleIdentifier!) : nil),
-            forCellReuseIdentifier: cellIdentifier)
+    func registerNib<T: UITableViewCell>(_ nibType: T.Type, cellIdentifier: String = defaultCellIdentifier, bundleIdentifier: String? = nil) {
+        register(
+            UINib(
+                nibName: String(describing: nibType),
+                bundle: bundleIdentifier != nil ? Bundle(identifier: bundleIdentifier!) : nil
+            ),
+            forCellReuseIdentifier: cellIdentifier
+        )
     }
+}
+
+public extension UITableView {
+    
+    static var defaultHeaderFooterIdentifier: String {
+        return "Header"
+    }
+    
+    /**
+     Register NIB to table view. NIB type and header/footer reuse identifier can match for convenience.
+     
+     - parameter nibName: Type of the NIB.
+     - parameter headerFooterIdentifier: Name of the reusable header/footer identifier.
+     - parameter bundleIdentifier: Name of the bundle identifier if not local.
+     */
+    func registerNib<T: UITableViewHeaderFooterView>(_ nibType: T.Type, headerFooterIdentifier: String = defaultHeaderFooterIdentifier, bundleIdentifier: String? = nil) {
+        register(
+            UINib(
+                nibName: String(describing: nibType),
+                bundle: bundleIdentifier != nil ? Bundle(identifier: bundleIdentifier!) : nil
+            ),
+            forHeaderFooterViewReuseIdentifier: headerFooterIdentifier
+        )
+    }
+}
+
+public extension UITableView {
 
     /**
      Gets the reusable cell with default identifier name.
