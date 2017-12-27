@@ -47,3 +47,26 @@ public extension UIImage {
         }
     }
 }
+
+public extension UIImage {
+    
+    /**
+     Convenience initializer to convert a color to image
+     
+     - parameter color: The target color of the image.
+     - parameter size: The size of the image.
+     
+     - returns: The image object.
+     */
+    convenience init?(from color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+        // https://stackoverflow.com/q/6496441/235334
+        UIGraphicsBeginImageContext(size)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        context.setFillColor(color.cgColor)
+        context.fill(CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let colorImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        guard let cgImage = colorImage?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
+    }
+}
