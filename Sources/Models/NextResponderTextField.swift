@@ -70,7 +70,8 @@ open class NextResponderTextField: UITextField {
      
      :param: sender The sender of the action parameter.
      */
-    @objc private func actionKeyboardButtonTapped(sender: UITextField) {
+    @objc
+    private func actionKeyboardButtonTapped(sender: UITextField) {
         switch nextResponderField {
         case let button as UIButton where button.isEnabled:
             button.sendActions(for: .touchUpInside)
