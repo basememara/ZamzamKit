@@ -9,7 +9,7 @@
 import UIKit
 
 /// The UIView class with a .xib file by the same name wired up.
-open class BaseNibView: UIView {
+open class XIBView: UIView {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,3 +26,7 @@ open class BaseNibView: UIView {
         loadFromNib()
     }
 }
+
+// Deprecation notice, will be removed future version
+@available(*, unavailable, renamed: "XIBView")
+typealias BaseNibView = XIBView
