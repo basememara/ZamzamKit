@@ -104,7 +104,7 @@
 		8B75286D1E759F2A0035A742 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75286B1E759F2A0035A742 /* Observer.swift */; };
 		8B75286E1E759F2A0035A742 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75286B1E759F2A0035A742 /* Observer.swift */; };
 		8B756EF81E5C025A00DE4B02 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */; };
-		8B756F151E5CF16D00DE4B02 /* BaseNibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756F141E5CF16D00DE4B02 /* BaseNibView.swift */; };
+		8B756F151E5CF16D00DE4B02 /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756F141E5CF16D00DE4B02 /* XIBView.swift */; };
 		8B79A4751E9C1ED800C8A5A4 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79A4741E9C1ED800C8A5A4 /* Locale.swift */; };
 		8B79A4761E9C1ED800C8A5A4 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79A4741E9C1ED800C8A5A4 /* Locale.swift */; };
 		8B79A4771E9C1ED800C8A5A4 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79A4741E9C1ED800C8A5A4 /* Locale.swift */; };
@@ -389,7 +389,7 @@
 		8B729C781EAB9DBA004A6BF1 /* InfixTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfixTests.swift; sourceTree = "<group>"; };
 		8B75286B1E759F2A0035A742 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Observer.swift; path = Models/Observer.swift; sourceTree = "<group>"; };
 		8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UINavigationBar.swift; path = Extensions/UINavigationBar.swift; sourceTree = "<group>"; };
-		8B756F141E5CF16D00DE4B02 /* BaseNibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseNibView.swift; path = Models/BaseNibView.swift; sourceTree = "<group>"; };
+		8B756F141E5CF16D00DE4B02 /* XIBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XIBView.swift; path = Models/XIBView.swift; sourceTree = "<group>"; };
 		8B79A4741E9C1ED800C8A5A4 /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Locale.swift; path = Extensions/Locale.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
 		8B8215411CA15E0D00C9FCC9 /* CLKComplicationServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLKComplicationServer.swift; path = Extensions/CLKComplicationServer.swift; sourceTree = "<group>"; };
@@ -794,7 +794,6 @@
 			isa = PBXGroup;
 			children = (
 				8BDA5E301E795DE300429F78 /* BackgroundTask.swift */,
-				8B756F141E5CF16D00DE4B02 /* BaseNibView.swift */,
 				8BE2BB3F1F03259C00877447 /* Localizable.swift */,
 				8B6C99961E6E031800D523CC /* LocationManager.swift */,
 				8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */,
@@ -803,6 +802,7 @@
 				8B75286B1E759F2A0035A742 /* Observer.swift */,
 				8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */,
 				8BD016831E77371A008F306E /* WatchSession.swift */,
+				8B756F141E5CF16D00DE4B02 /* XIBView.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1197,7 +1197,7 @@
 				8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8B5D8A971E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */,
 				8BD016841E77371A008F306E /* WatchSession.swift in Sources */,
-				8B756F151E5CF16D00DE4B02 /* BaseNibView.swift in Sources */,
+				8B756F151E5CF16D00DE4B02 /* XIBView.swift in Sources */,
 				8BD98D6F1FC35B3700E74A8C /* UIWindow.swift in Sources */,
 				8B75286C1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BD2D19E1CA583110018AC2B /* UIAlertAction.swift in Sources */,
