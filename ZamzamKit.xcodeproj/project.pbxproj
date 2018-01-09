@@ -29,6 +29,7 @@
 		8B2DE3E31C8A86B2008F1569 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* Bundle.swift */; };
 		8B2DE3EC1C8A8F79008F1569 /* BundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */; };
 		8B2DE3F01C8A90AF008F1569 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EE1C8A90AF008F1569 /* Settings.plist */; };
+		8B37B8D5200549040052E9B1 /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B37B8D4200549040052E9B1 /* UIStackView.swift */; };
 		8B3CD4701EE9CC0100E0BAFE /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3CD46F1EE9CC0100E0BAFE /* Int.swift */; };
 		8B3CD4711EE9CC0100E0BAFE /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3CD46F1EE9CC0100E0BAFE /* Int.swift */; };
 		8B3CD4721EE9CC0100E0BAFE /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3CD46F1EE9CC0100E0BAFE /* Int.swift */; };
@@ -344,6 +345,7 @@
 		8B2DE3E01C8A86B2008F1569 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bundle.swift; path = Extensions/Bundle.swift; sourceTree = "<group>"; };
 		8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleTests.swift; sourceTree = "<group>"; };
 		8B2DE3EE1C8A90AF008F1569 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		8B37B8D4200549040052E9B1 /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
 		8B3CD46F1EE9CC0100E0BAFE /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Int.swift; path = Extensions/Int.swift; sourceTree = "<group>"; };
 		8B40C2B41CC0A6F400BEC9E0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8B48E6201DAFFD4100087328 /* ArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
@@ -768,6 +770,7 @@
 				8B63E4261CDB8DB00053C060 /* UIImage.swift */,
 				8BFDB66F1C751DF600C94996 /* UIImageView.swift */,
 				8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */,
+				8B37B8D4200549040052E9B1 /* UIStackView.swift */,
 				8B1EEC871CF7588600AE054B /* UIStoryboard.swift */,
 				8BD61B391E3F04D0009B537E /* UISwitch.swift */,
 				8BCB73D91CAD69BF00E20096 /* UITableView.swift */,
@@ -1153,6 +1156,7 @@
 				8B9434611EBDEA8200C779EB /* TimeZone.swift in Sources */,
 				8BD61B361E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,
+				8B37B8D5200549040052E9B1 /* UIStackView.swift in Sources */,
 				8BD508761C99E18500AE205E /* Collection.swift in Sources */,
 				8B94345A1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */,
