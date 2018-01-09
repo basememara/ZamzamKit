@@ -29,27 +29,4 @@ public extension UITableViewController {
         
             return activityIndicator
     }
-    
-        /**
-     Adds refresh control for pull to refresh functionality.
-
-     - parameter action: Action to trigger for reload.
-     - parameter title:  Title of the refresh title.
-     - parameter font:   Font of the title.
-     - parameter color:  Color of the title.
-     */
-    func setupRefreshControl(_ action: Selector,
-        title: String = .localized(.pullToRefresh),
-        font: UIFont = UIFont(name: "AvenirNext-Medium", size: 18.0)!,
-        color: UIColor = .lightGray) {
-            let control = UIRefreshControl()
-            control.attributedTitle = NSAttributedString(string: title, attributes: [
-                NSAttributedStringKey.font: font,
-                NSAttributedStringKey.foregroundColor: color
-            ])
-            control.addTarget(self, action: action, for: .valueChanged)
-        
-            refreshControl = control
-    }
-
 }
