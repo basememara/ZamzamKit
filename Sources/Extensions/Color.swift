@@ -80,5 +80,23 @@ public extension UIColor {
         
         return self
     }
+}
+
+public extension UIColor {
     
+    /// Determines if the color is on the light or dark spectrum.
+    var isLight: Bool {
+        // https://stackoverflow.com/q/2509443/235334
+        guard let colorSpace = cgColor.colorSpace else { return false }
+        
+        guard colorSpace.model == .rgb else {
+            var white: CGFloat = 0.0
+            getWhite(&white, alpha: nil)
+            return white >= 0.5
+        }
+        
+        guard let components = cgColor.components, components.count > 2 else { return false }
+        let brightness = ((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000
+        return brightness > 0.5
+    }
 }
