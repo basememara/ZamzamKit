@@ -43,6 +43,7 @@ public extension UIViewController {
         includeCancelAction: Bool = false,
         cancelText: String = .localized(.cancel),
         cancelHandler: (() -> Void)? = nil,
+        configure: ((UIAlertController) -> Void)? = nil,
         handler: (() -> Void)? = nil) {
             let alertController = UIAlertController(
                 title: title,
@@ -63,6 +64,9 @@ public extension UIViewController {
             }
             
             alertController.addAction(UIAlertAction(title: buttonText) { handler?() })
+        
+            // Handle any last configurations before presenting alert
+            configure?(alertController)
             
             present(alertController, animated: true, completion: nil)
     }
