@@ -129,3 +129,27 @@ public extension UIView {
         return UIView.userInterfaceLayoutDirection(for: semanticContentAttribute)
     }
 }
+
+public extension UIView {
+    
+    /**
+     Adds activity indicator to the center of the view.
+     
+     - returns: Returns an instance of the activity indicator.
+     */
+    func makeActivityIndicator(
+        style: UIActivityIndicatorViewStyle = .whiteLarge,
+        color: UIColor = .gray,
+        size: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40)) -> UIActivityIndicatorView {
+            let activityIndicator = UIActivityIndicatorView(frame: size).with {
+                $0.activityIndicatorViewStyle = style
+                $0.color = color
+                $0.hidesWhenStopped = true
+                $0.center = center
+            }
+            
+            addSubview(activityIndicator)
+            
+            return activityIndicator
+    }
+}
