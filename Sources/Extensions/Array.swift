@@ -37,16 +37,16 @@ public extension Array {
 // MARK: - Equatables
 public extension Array where Element: Equatable {
 	
-	/// Array with all duplicates removed from it.
-	var withoutDuplicates: [Element] {
+    /// Array with all duplicates removed from it.
+    var distinct: [Element] {
         // https://github.com/SwifterSwift/SwifterSwift
-		return reduce([]) { $0.contains($1) ? $0 : $0 + [$1] }
-	}
-	
-	/// Remove all duplicates from array.
-	mutating func removeDuplicates() {
-		self = reduce([]) { $0.contains($1) ? $0 : $0 + [$1] }
-	}
+        return reduce([]) { $0.contains($1) ? $0 : $0 + [$1] }
+    }
+
+    /// Remove all duplicates from array.
+    mutating func removeDuplicates() {
+        self = reduce([]) { $0.contains($1) ? $0 : $0 + [$1] }
+    }
 
     /// Removes and the specified element.
     ///
