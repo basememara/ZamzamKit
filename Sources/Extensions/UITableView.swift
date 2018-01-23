@@ -122,5 +122,20 @@ public extension UITableView {
                 ])
                 $0.addTarget(target, action: action, for: .valueChanged)
             }
+    /// Scrolls to the bottom of table view.
+    ///
+    /// - Parameter animated: `true` if you want to animate the change in position; `false` if it should be immediate.
+    func scrollToBottom(animated: Bool = true) {
+        guard numberOfSections > 0 else { return }
+        let lastSection = numberOfSections - 1
+        
+        let lastRow = numberOfRows(inSection: lastSection) - 1
+        guard lastRow > 0 else { return }
+        
+        scrollToRow(
+            at: IndexPath(row: lastRow, section: lastSection),
+            at: .bottom,
+            animated: animated
+        )
     }
 }
