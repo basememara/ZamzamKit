@@ -101,27 +101,6 @@ public extension UITableView {
 
 public extension UITableView {
     
-    /**
-     Adds refresh control for pull to refresh functionality.
-     
-     - parameter action: Action to trigger for reload.
-     - parameter title:  Title of the refresh title.
-     - parameter font:   Font of the title.
-     - parameter color:  Color of the title.
-     */
-    func setupRefreshControl(
-        _ target: Any?,
-        action: Selector,
-        title: String = .localized(.pullToRefresh),
-        font: UIFont = .boldSystemFont(ofSize: 18),
-        color: UIColor = .lightGray) {
-            refreshControl = UIRefreshControl().with {
-                $0.attributedTitle = NSAttributedString(string: title, attributes: [
-                    NSAttributedStringKey.font: font,
-                    NSAttributedStringKey.foregroundColor: color
-                ])
-                $0.addTarget(target, action: action, for: .valueChanged)
-            }
     /// Scrolls to the bottom of table view.
     ///
     /// - Parameter animated: `true` if you want to animate the change in position; `false` if it should be immediate.
