@@ -103,6 +103,7 @@
 		8B75286C1E759F2A0035A742 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75286B1E759F2A0035A742 /* Observer.swift */; };
 		8B75286D1E759F2A0035A742 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75286B1E759F2A0035A742 /* Observer.swift */; };
 		8B75286E1E759F2A0035A742 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75286B1E759F2A0035A742 /* Observer.swift */; };
+		8B752F52201E2E16007DA40C /* PluggableApplicationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B752F51201E2E16007DA40C /* PluggableApplicationDelegate.swift */; };
 		8B756EF81E5C025A00DE4B02 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */; };
 		8B756F151E5CF16D00DE4B02 /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756F141E5CF16D00DE4B02 /* XIBView.swift */; };
 		8B79A4751E9C1ED800C8A5A4 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79A4741E9C1ED800C8A5A4 /* Locale.swift */; };
@@ -387,6 +388,7 @@
 		8B729C741EAB9D56004A6BF1 /* ConditionalAssignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditionalAssignment.swift; sourceTree = "<group>"; };
 		8B729C781EAB9DBA004A6BF1 /* InfixTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfixTests.swift; sourceTree = "<group>"; };
 		8B75286B1E759F2A0035A742 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Observer.swift; path = Models/Observer.swift; sourceTree = "<group>"; };
+		8B752F51201E2E16007DA40C /* PluggableApplicationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PluggableApplicationDelegate.swift; path = Models/PluggableApplicationDelegate.swift; sourceTree = "<group>"; };
 		8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UINavigationBar.swift; path = Extensions/UINavigationBar.swift; sourceTree = "<group>"; };
 		8B756F141E5CF16D00DE4B02 /* XIBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XIBView.swift; path = Models/XIBView.swift; sourceTree = "<group>"; };
 		8B79A4741E9C1ED800C8A5A4 /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Locale.swift; path = Extensions/Locale.swift; sourceTree = "<group>"; };
@@ -646,6 +648,17 @@
 			path = Infixes;
 			sourceTree = "<group>";
 		};
+		8B752F50201E2DEB007DA40C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				8BDA5E301E795DE300429F78 /* BackgroundTask.swift */,
+				8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */,
+				8B752F51201E2E16007DA40C /* PluggableApplicationDelegate.swift */,
+				8B756F141E5CF16D00DE4B02 /* XIBView.swift */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		8B840E651C904F3300D85781 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -790,16 +803,14 @@
 		8BFDB6A51C75B4B200C94996 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8BDA5E301E795DE300429F78 /* BackgroundTask.swift */,
+				8B752F50201E2DEB007DA40C /* iOS */,
 				8BE2BB3F1F03259C00877447 /* Localizable.swift */,
 				8B6C99961E6E031800D523CC /* LocationManager.swift */,
 				8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */,
 				8B8974701EDF555C004FA853 /* Migration.swift */,
-				8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */,
 				8B75286B1E759F2A0035A742 /* Observer.swift */,
 				8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */,
 				8BD016831E77371A008F306E /* WatchSession.swift */,
-				8B756F141E5CF16D00DE4B02 /* XIBView.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1188,6 +1199,7 @@
 				8B3CD4701EE9CC0100E0BAFE /* Int.swift in Sources */,
 				8BF2106B1E48D52F0026B802 /* Result.swift in Sources */,
 				8B9E986F1EB500790067ACB7 /* With.swift in Sources */,
+				8B752F52201E2E16007DA40C /* PluggableApplicationDelegate.swift in Sources */,
 				8B1EEC881CF7588600AE054B /* UIStoryboard.swift in Sources */,
 				8BFDB65E1C7518F800C94996 /* String.swift in Sources */,
 				8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */,
