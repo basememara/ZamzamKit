@@ -53,7 +53,7 @@ open class PluggableApplicationDelegate: UIResponder, UIApplicationDelegate {
     
     public var window: UIWindow?
     
-    private(set) public lazy var services: [ApplicationService] = {
+    private(set) open lazy var services: [ApplicationService] = {
         return [ /* Populated from sub-class */ ]
     }()
 }
