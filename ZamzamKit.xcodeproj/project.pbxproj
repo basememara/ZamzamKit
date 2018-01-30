@@ -104,6 +104,7 @@
 		8B75286D1E759F2A0035A742 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75286B1E759F2A0035A742 /* Observer.swift */; };
 		8B75286E1E759F2A0035A742 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75286B1E759F2A0035A742 /* Observer.swift */; };
 		8B752F52201E2E16007DA40C /* PluggableApplicationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B752F51201E2E16007DA40C /* PluggableApplicationDelegate.swift */; };
+		8B752F7E2020EA30007DA40C /* BadgeBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B752F7D2020EA30007DA40C /* BadgeBarButtonItem.swift */; };
 		8B756EF81E5C025A00DE4B02 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */; };
 		8B756F151E5CF16D00DE4B02 /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756F141E5CF16D00DE4B02 /* XIBView.swift */; };
 		8B79A4751E9C1ED800C8A5A4 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79A4741E9C1ED800C8A5A4 /* Locale.swift */; };
@@ -389,6 +390,7 @@
 		8B729C781EAB9DBA004A6BF1 /* InfixTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfixTests.swift; sourceTree = "<group>"; };
 		8B75286B1E759F2A0035A742 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Observer.swift; path = Models/Observer.swift; sourceTree = "<group>"; };
 		8B752F51201E2E16007DA40C /* PluggableApplicationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PluggableApplicationDelegate.swift; path = Models/PluggableApplicationDelegate.swift; sourceTree = "<group>"; };
+		8B752F7D2020EA30007DA40C /* BadgeBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BadgeBarButtonItem.swift; path = Models/BadgeBarButtonItem.swift; sourceTree = "<group>"; };
 		8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UINavigationBar.swift; path = Extensions/UINavigationBar.swift; sourceTree = "<group>"; };
 		8B756F141E5CF16D00DE4B02 /* XIBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XIBView.swift; path = Models/XIBView.swift; sourceTree = "<group>"; };
 		8B79A4741E9C1ED800C8A5A4 /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Locale.swift; path = Extensions/Locale.swift; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 			isa = PBXGroup;
 			children = (
 				8BDA5E301E795DE300429F78 /* BackgroundTask.swift */,
+				8B752F7D2020EA30007DA40C /* BadgeBarButtonItem.swift */,
 				8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */,
 				8B752F51201E2E16007DA40C /* PluggableApplicationDelegate.swift */,
 				8B756F141E5CF16D00DE4B02 /* XIBView.swift */,
@@ -1164,6 +1167,7 @@
 				8BD508761C99E18500AE205E /* Collection.swift in Sources */,
 				8B94345A1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */,
+				8B752F7E2020EA30007DA40C /* BadgeBarButtonItem.swift in Sources */,
 				8B8974711EDF555C004FA853 /* Migration.swift in Sources */,
 				8BFDB68F1C75323900C94996 /* DateFormatter.swift in Sources */,
 				8BEFE46E1E4506B500100744 /* UNUserNotificationCenter.swift in Sources */,
