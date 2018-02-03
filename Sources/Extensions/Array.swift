@@ -60,6 +60,11 @@ public extension Array where Element: Equatable {
 
 public extension ArraySlice {
     
+    /// Returns the array of the slice
+    var array: Array<Element> {
+        return Array(self)
+    }
+    
     /// Element at the given index if it exists.
 	///
 	/// - Parameter index: index of element.
