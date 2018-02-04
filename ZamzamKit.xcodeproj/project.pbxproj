@@ -95,6 +95,7 @@
 		8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
 		8B6C99971E6E031800D523CC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationManager.swift */; };
 		8B6C99981E6E031800D523CC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationManager.swift */; };
+		8B6FB9B6202777DE00FE7BEB /* DataViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FB9B5202777DE00FE7BEB /* DataViewable.swift */; };
 		8B729C751EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B729C741EAB9D56004A6BF1 /* ConditionalAssignment.swift */; };
 		8B729C761EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B729C741EAB9D56004A6BF1 /* ConditionalAssignment.swift */; };
 		8B729C771EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B729C741EAB9D56004A6BF1 /* ConditionalAssignment.swift */; };
@@ -386,6 +387,7 @@
 		8B6A95601E46FBB9003F333D /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Thread.swift; path = Extensions/Thread.swift; sourceTree = "<group>"; };
 		8B6A956C1E484D5A003F333D /* ZamzamError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamError.swift; sourceTree = "<group>"; };
 		8B6C99961E6E031800D523CC /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Models/LocationManager.swift; sourceTree = "<group>"; };
+		8B6FB9B5202777DE00FE7BEB /* DataViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewable.swift; sourceTree = "<group>"; };
 		8B729C741EAB9D56004A6BF1 /* ConditionalAssignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditionalAssignment.swift; sourceTree = "<group>"; };
 		8B729C781EAB9DBA004A6BF1 /* InfixTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfixTests.swift; sourceTree = "<group>"; };
 		8B75286B1E759F2A0035A742 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Observer.swift; path = Models/Observer.swift; sourceTree = "<group>"; };
@@ -679,6 +681,7 @@
 			children = (
 				8BD2D1951CA581890018AC2B /* Audible.swift */,
 				8B9E985F1EB396D20067ACB7 /* CellIdentifiable.swift */,
+				8B6FB9B5202777DE00FE7BEB /* DataViewable.swift */,
 				8BB376111CF8B8D6005E7F67 /* Restorable.swift */,
 				8B9E98101EB144540067ACB7 /* Routable.swift */,
 				8B5455DE1E5E3287000CB26A /* Segueable.swift */,
@@ -1147,6 +1150,7 @@
 			files = (
 				8BF210921E4A22460026B802 /* UNNotificationAttachment.swift in Sources */,
 				8B4C08AC1EC9422E002A317D /* BinaryFloatingPoint.swift in Sources */,
+				8B6FB9B6202777DE00FE7BEB /* DataViewable.swift in Sources */,
 				8BD98D651FC33B4600E74A8C /* Font.swift in Sources */,
 				8B9434561EBCDA4400C779EB /* NotificationObservable.swift in Sources */,
 				8B9E98601EB396D20067ACB7 /* CellIdentifiable.swift in Sources */,
