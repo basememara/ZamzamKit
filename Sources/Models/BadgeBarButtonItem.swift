@@ -22,6 +22,7 @@ public class BadgeBarButtonItem: UIBarButtonItem {
         label.font = .systemFont(ofSize: badgeFontSize)
         label.layer.cornerRadius = badgeFontSize * CGFloat(0.6)
         label.clipsToBounds = true
+        label.isUserInteractionEnabled = true
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.addConstraint(
@@ -78,6 +79,10 @@ public extension BadgeBarButtonItem {
         button.addTarget(target, action: action, for: .touchUpInside)
         button.sizeToFit()
         button.addSubview(badgeLabel)
+        
+        badgeLabel.addGestureRecognizer(
+            UITapGestureRecognizer(target: target, action: action)
+        )
         
         button.addConstraint(
             NSLayoutConstraint(
