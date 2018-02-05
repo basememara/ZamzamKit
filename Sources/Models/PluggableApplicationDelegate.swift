@@ -54,7 +54,7 @@ open class PluggableApplicationDelegate: UIResponder, UIApplicationDelegate {
     public var window: UIWindow?
     
     private(set) open lazy var services: [ApplicationService] = {
-        return [ /* Populated from sub-class */ ]
+        [ /* Populated from sub-class */ ]
     }()
 }
 

@@ -12,7 +12,7 @@ public extension Locale {
 
     /// Unix representation of locale usually used for normalizing.
     static var posix: Locale = {
-        return Locale(identifier: "en_US_POSIX")
+        Locale(identifier: "en_US_POSIX")
     }()
     
     /// Returns the language name of the locale, or nil if has none.

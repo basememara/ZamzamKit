@@ -20,5 +20,5 @@ public extension Calendar {
 }
 
 public extension Calendar.Component {
-    static var date: Set<Calendar.Component> = { return [.year, .month, .day, .hour, .minute, .second] }()
+    static var date: Set<Calendar.Component> = { [.year, .month, .day, .hour, .minute, .second] }()
 }

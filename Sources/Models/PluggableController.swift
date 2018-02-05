@@ -37,7 +37,7 @@ public extension ControllerService {
 open class PluggableController: UIViewController {
     
     private(set) open lazy var services: [ControllerService] = {
-        return [ /* Populated from sub-class */ ]
+        [ /* Populated from sub-class */ ]
     }()
     
     open override func viewDidLoad() {

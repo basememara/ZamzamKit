@@ -17,11 +17,11 @@ protocol ViewControllerDelegate: class {
 class NotificationsViewController: UITableViewController, ViewControllerDelegate {
 
     lazy var viewModel: NotificationsViewModel = {
-        return NotificationsViewModel(delegate: self)
+        NotificationsViewModel(delegate: self)
     }()
     
     lazy var activityIndicator: UIActivityIndicatorView = {
-        return self.setupActivityIndicator()
+        setupActivityIndicator()
     }()
     
     override func viewDidLoad() {

@@ -12,7 +12,7 @@ import XCTest
 class BundleTests: XCTestCase {
     
     lazy var bundle: Bundle = {
-        return Bundle(for: type(of: self))
+        Bundle(for: type(of: self))
     }()
     
     func testValuesFromText() {

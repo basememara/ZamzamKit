@@ -15,7 +15,7 @@ class LocationViewController: UIViewController {
     @IBOutlet weak var outputLabel: UILabel!
     
     var locationManager: LocationManager = {
-        return LocationManager(
+        LocationManager(
             desiredAccuracy: kCLLocationAccuracyThreeKilometers,
             distanceFilter: 1000
         )

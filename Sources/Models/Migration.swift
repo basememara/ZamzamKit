@@ -17,11 +17,11 @@ public class Migration {
     private let bundle: Bundle
 
     private lazy var appVersion: String = {
-        return self.bundle.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        bundle.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     }()
     
     private lazy var appBuild: String = {
-        return self.bundle.infoDictionary?[kCFBundleVersionKey as String] as? String ?? ""
+        bundle.infoDictionary?[kCFBundleVersionKey as String] as? String ?? ""
     }()
 
     public init(userDefaults: UserDefaults = UserDefaults(suiteName: suiteName)!, bundle: Bundle = Bundle.main) {

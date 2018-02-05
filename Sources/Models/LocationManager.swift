@@ -63,16 +63,16 @@ public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDe
 
     /// Internal Core Location manager
     private lazy var manager: CLLocationManager = {
-        let bleManager = CLLocationManager()
-        bleManager.desiredAccuracy ?= self.desiredAccuracy
-        bleManager.distanceFilter ?= self.distanceFilter
+        CLLocationManager().with {
+            $0.desiredAccuracy ?= self.desiredAccuracy
+            $0.distanceFilter ?= self.distanceFilter
         
-        #if os(iOS)
-        bleManager.activityType ?= self.activityType
-        #endif
+            #if os(iOS)
+            $0.activityType ?= self.activityType
+            #endif
         
-        bleManager.delegate = self
-        return bleManager
+            $0.delegate = self
+        }
     }()
     
     /// Default location manager options
