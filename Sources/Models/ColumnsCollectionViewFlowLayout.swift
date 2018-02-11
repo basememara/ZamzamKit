@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class CollectionViewColumnFlowLayout: UICollectionViewFlowLayout {
+open class ColumnsCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     /// Number of columns in portrait orientation
     @IBInspectable
@@ -59,6 +59,6 @@ open class CollectionViewColumnFlowLayout: UICollectionViewFlowLayout {
     }
     
     open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        return newBounds.width != collectionView?.bounds.width
+        return newBounds != collectionView?.bounds
     }
 }
