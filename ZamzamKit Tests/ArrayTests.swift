@@ -60,7 +60,7 @@ class ArrayTests: XCTestCase {
     }
 
     func testRandom() {
-        let result = sample1.random
+        let result = sample1.random()
         XCTAssert(sample1.contains(result))
     }
 }

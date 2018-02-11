@@ -11,8 +11,8 @@ import Foundation
 public extension Array {
 
     // Get a random element from the collection
-    var random: Element {
-        return self[Int.random(in: 0..<count)]
+    func random() -> Element {
+        return self[Int(arc4random_uniform(UInt32(count)))]
     }
     
     /// Element at the given index if it exists.
