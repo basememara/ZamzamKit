@@ -150,6 +150,7 @@
 		8BB45FB71C9BDD180070CE07 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */; };
 		8BBB66E21E9C000900AB1973 /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */; };
 		8BBB66E31E9C010600AB1973 /* LocationMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */; };
+		8BBEA5E220309764009B7E90 /* CollectionViewColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBEA5E120309764009B7E90 /* CollectionViewColumnFlowLayout.swift */; };
 		8BC811601ECCE75300F455CC /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8115F1ECCE75300F455CC /* Hashable.swift */; };
 		8BC811611ECCE75300F455CC /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8115F1ECCE75300F455CC /* Hashable.swift */; };
 		8BC811621ECCE75300F455CC /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8115F1ECCE75300F455CC /* Hashable.swift */; };
@@ -414,6 +415,7 @@
 		8BB376111CF8B8D6005E7F67 /* Restorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restorable.swift; sourceTree = "<group>"; };
 		8BB415E51FB0DFFF0002C86C /* StatusBarable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarable.swift; sourceTree = "<group>"; };
 		8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaults.swift; path = Extensions/UserDefaults.swift; sourceTree = "<group>"; };
+		8BBEA5E120309764009B7E90 /* CollectionViewColumnFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewColumnFlowLayout.swift; sourceTree = "<group>"; };
 		8BC8115F1ECCE75300F455CC /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Hashable.swift; path = Extensions/Hashable.swift; sourceTree = "<group>"; };
 		8BCB73CD1CAD660D00E20096 /* Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Equatable.swift; path = Extensions/Equatable.swift; sourceTree = "<group>"; };
 		8BCB73D61CAD666900E20096 /* ExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTest.swift; sourceTree = "<group>"; };
@@ -659,6 +661,7 @@
 			children = (
 				8BDA5E301E795DE300429F78 /* BackgroundTask.swift */,
 				8B752F7D2020EA30007DA40C /* BadgeBarButtonItem.swift */,
+				8BBEA5E120309764009B7E90 /* CollectionViewColumnFlowLayout.swift */,
 				8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */,
 				8B752F51201E2E16007DA40C /* PluggableApplicationDelegate.swift */,
 				8B6FB9BD2027CF9900FE7BEB /* PluggableController.swift */,
@@ -1170,6 +1173,7 @@
 				8B9434611EBDEA8200C779EB /* TimeZone.swift in Sources */,
 				8BD61B361E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,
+				8BBEA5E220309764009B7E90 /* CollectionViewColumnFlowLayout.swift in Sources */,
 				8B37B8D5200549040052E9B1 /* UIStackView.swift in Sources */,
 				8BD508761C99E18500AE205E /* Collection.swift in Sources */,
 				8B94345A1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
