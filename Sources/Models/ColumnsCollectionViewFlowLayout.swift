@@ -26,36 +26,33 @@ open class ColumnsCollectionViewFlowLayout: UICollectionViewFlowLayout {
     @IBInspectable
     open var aspectRatio: CGFloat = 1
     
-    open override var itemSize: CGSize {
-        get {
-            var cellsPerRow = UIDevice.current.orientation.isPortrait ? portraitColumns
-                : landscapeColumns > 0 ? landscapeColumns : portraitColumns
+    open override func prepare() {
+        super.prepare()
+        
+        var cellsPerRow = UIDevice.current.orientation.isPortrait ? portraitColumns
+            : landscapeColumns > 0 ? landscapeColumns : portraitColumns
+        
+        if UIScreen.main.traitCollection.horizontalSizeClass == .regular && multiplierForRegularTrait > 1 {
+            cellsPerRow = Int(round(CGFloat(cellsPerRow) * multiplierForRegularTrait))
+        }
+        
+        guard let collectionView = collectionView, cellsPerRow > 0 else { return }
+        
+        let marginsAndInsets: CGFloat = {
+            var output = sectionInset.left + sectionInset.right
             
-            if UIScreen.main.traitCollection.horizontalSizeClass == .regular && multiplierForRegularTrait > 1 {
-                cellsPerRow = Int(round(CGFloat(cellsPerRow) * multiplierForRegularTrait))
+            if #available(iOS 11.0, *) {
+                output += collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right
             }
             
-            guard let collectionView = collectionView, cellsPerRow > 0 else { return super.itemSize }
-            
-            let marginsAndInsets: CGFloat = {
-                var output = sectionInset.left + sectionInset.right
-                
-                if #available(iOS 11.0, *) {
-                    output += collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right
-                }
-                
-                output += minimumInteritemSpacing * CGFloat(cellsPerRow - 1)
-                return output
-            }()
-            
-            let itemWidth = ((collectionView.bounds.size.width - marginsAndInsets) / CGFloat(cellsPerRow)).rounded(.down)
-            let itemHeight = itemWidth / aspectRatio
-            
-            return CGSize(width: itemWidth, height: itemHeight)
-        }
-        set {
-            super.itemSize = newValue
-        }
+            output += minimumInteritemSpacing * CGFloat(cellsPerRow - 1)
+            return output
+        }()
+        
+        let itemWidth = ((collectionView.bounds.size.width - marginsAndInsets) / CGFloat(cellsPerRow)).rounded(.down)
+        let itemHeight = itemWidth / aspectRatio
+        
+        itemSize = CGSize(width: itemWidth, height: itemHeight)
     }
     
     open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
