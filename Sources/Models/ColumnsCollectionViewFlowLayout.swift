@@ -29,8 +29,8 @@ open class ColumnsCollectionViewFlowLayout: UICollectionViewFlowLayout {
     open override func prepare() {
         super.prepare()
         
-        var cellsPerRow = UIDevice.current.orientation.isPortrait ? portraitColumns
-            : landscapeColumns > 0 ? landscapeColumns : portraitColumns
+        var cellsPerRow = UIDevice.current.orientation.isLandscape && landscapeColumns > 0
+            ? landscapeColumns : portraitColumns
         
         if UIScreen.main.traitCollection.horizontalSizeClass == .regular && multiplierForRegularTrait > 1 {
             cellsPerRow = Int(round(CGFloat(cellsPerRow) * multiplierForRegularTrait))
