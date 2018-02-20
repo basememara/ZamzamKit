@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B021E40203CA72E00A0386F /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B021E3F203CA72E00A0386F /* UIScrollView.swift */; };
 		8B0BA2241FAA6DFC0042BFF0 /* NextResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */; };
 		8B0C715F1E64CEF9006148CD /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */; };
 		8B0C71601E64CEF9006148CD /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */; };
@@ -328,6 +329,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8B021E3F203CA72E00A0386F /* UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIScrollView.swift; path = Extensions/UIScrollView.swift; sourceTree = "<group>"; };
 		8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NextResponderTextField.swift; path = Models/NextResponderTextField.swift; sourceTree = "<group>"; };
 		8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SynchronizedArray.swift; path = Models/SynchronizedArray.swift; sourceTree = "<group>"; };
 		8B14476C1C722D5700043657 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -790,6 +792,7 @@
 				8B63E4261CDB8DB00053C060 /* UIImage.swift */,
 				8BFDB66F1C751DF600C94996 /* UIImageView.swift */,
 				8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */,
+				8B021E3F203CA72E00A0386F /* UIScrollView.swift */,
 				8B37B8D4200549040052E9B1 /* UIStackView.swift */,
 				8B1EEC871CF7588600AE054B /* UIStoryboard.swift */,
 				8BD61B391E3F04D0009B537E /* UISwitch.swift */,
@@ -1179,6 +1182,7 @@
 				8B94345A1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */,
 				8B752F7E2020EA30007DA40C /* BadgeBarButtonItem.swift in Sources */,
+				8B021E40203CA72E00A0386F /* UIScrollView.swift in Sources */,
 				8B8974711EDF555C004FA853 /* Migration.swift in Sources */,
 				8BFDB68F1C75323900C94996 /* DateFormatter.swift in Sources */,
 				8BEFE46E1E4506B500100744 /* UNUserNotificationCenter.swift in Sources */,
