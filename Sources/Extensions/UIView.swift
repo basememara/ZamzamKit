@@ -104,6 +104,10 @@ public extension UIView {
     public func fadeIn(duration: TimeInterval = 0.35, completion: ((Bool) -> Void)? = nil) {
         guard isHidden || alpha < 1 else { completion?(true); return }
         
+        if isHidden {
+            alpha = 0
+        }
+        
         UIView.animate(
             withDuration: duration,
             animations: {
