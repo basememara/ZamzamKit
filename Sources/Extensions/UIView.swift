@@ -6,7 +6,7 @@
 //  Copyright © 2016 Zamzam. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public extension UIView {
 
@@ -92,34 +92,41 @@ public extension UIView {
             layer.shadowOpacity = opacity
             layer.masksToBounds = true
 	}
-	
-	/// Fade in view.
-	///
-	/// - Parameters:
-	///   - duration: animation duration in seconds (default is 1 second).
-	///   - completion: optional completion handler to run with animation finishes (default is nil)
-	func fadeIn(duration: TimeInterval = 1, completion:((Bool) -> Void)? = nil) {
-		if self.isHidden {
-			self.isHidden = false
-		}
-		UIView.animate(withDuration: duration, animations: {
-			self.alpha = 1
-		}, completion: completion)
-	}
-	
-	/// Fade out view.
-	///
-	/// - Parameters:
-	///   - duration: animation duration in seconds (default is 1 second).
-	///   - completion: optional completion handler to run with animation finishes (default is nil)
-	func fadeOut(duration: TimeInterval = 1, completion:((Bool) -> Void)? = nil) {
-		if self.isHidden {
-			self.isHidden = false
-		}
-		UIView.animate(withDuration: duration, animations: {
-			self.alpha = 0
-		}, completion: completion)
-	}
+}
+
+public extension UIView {
+    
+    /// Fade in view.
+    ///
+    /// - Parameters:
+    ///   - duration: animation duration in seconds (default is 0.35 second).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil)
+    public func fadeIn(duration: TimeInterval = 0.35, completion: ((Bool) -> Void)? = nil) {
+        UIView.animate(
+            withDuration: duration,
+            animations: {
+                self.isHidden = false
+                self.alpha = 1
+        },
+            completion: completion
+        )
+    }
+    
+    /// Fade out view.
+    ///
+    /// - Parameters:
+    ///   - duration: animation duration in seconds (default is 0.35 second).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil)
+    public func fadeOut(duration: TimeInterval = 0.35, completion: ((Bool) -> Void)? = nil) {
+        UIView.animate(
+            withDuration: duration,
+            animations: {
+                self.isHidden = true
+                self.alpha = 0
+        },
+            completion: completion
+        )
+    }
 }
 
 public extension UIView {
