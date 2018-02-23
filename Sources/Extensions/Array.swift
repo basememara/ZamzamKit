@@ -9,11 +9,6 @@
 import Foundation
 
 public extension Array {
-
-    // Get a random element from the collection
-    func random() -> Element {
-        return self[Int(arc4random_uniform(UInt32(count)))]
-    }
     
     /// Element at the given index if it exists.
 	///
@@ -31,6 +26,30 @@ public extension Array {
      */
     mutating func removeEach(handler: @escaping (Element) -> Void) {
         enumerated().reversed().forEach { handler(remove(at: $0.offset)) }
+    }
+}
+
+public extension Array {
+    
+    /// Get a random element from the collection
+    func random() -> Element {
+        return self[Int(arc4random_uniform(UInt32(count)))]
+    }
+    
+    /// Return array in shuffled order.
+    func shuffled() -> Array {
+        // http://stackoverflow.com/questions/37843647/shuffle-array-swift-3
+        guard count > 1 else { return self }
+        
+        var elements = self
+        
+        for i in elements.indices.dropLast() {
+            let diff = elements.distance(from: i, to: elements.endIndex)
+            let j = elements.index(i, offsetBy: numericCast(arc4random_uniform(numericCast(diff))))
+            elements.swapAt(i, j)
+        }
+        
+        return elements
     }
 }
 

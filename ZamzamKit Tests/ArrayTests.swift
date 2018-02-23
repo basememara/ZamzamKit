@@ -58,9 +58,23 @@ class ArrayTests: XCTestCase {
         XCTAssert(result.isEmpty,
             "Result should be empty")
     }
+}
+
+extension ArrayTests {
 
     func testRandom() {
         let result = sample1.random()
         XCTAssert(sample1.contains(result))
+    }
+    
+    func testShuffled() {
+        let original = [1, 2, 3, 4, 5]
+        var array = original
+        
+        while original == array {
+            array = array.shuffled()
+        }
+        XCTAssertEqual(array.count, 5)
+        XCTAssertNotEqual(original, array)
     }
 }
