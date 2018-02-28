@@ -101,7 +101,7 @@ public extension UIView {
     /// - Parameters:
     ///   - duration: animation duration in seconds (default is 0.35 second).
     ///   - completion: optional completion handler to run with animation finishes (default is nil)
-    public func fadeIn(duration: TimeInterval = 0.35, completion: ((Bool) -> Void)? = nil) {
+    func fadeIn(duration: TimeInterval = 0.35, completion: ((Bool) -> Void)? = nil) {
         guard isHidden || alpha < 1 else { completion?(true); return }
         
         if isHidden {
@@ -123,16 +123,18 @@ public extension UIView {
     /// - Parameters:
     ///   - duration: animation duration in seconds (default is 0.35 second).
     ///   - completion: optional completion handler to run with animation finishes (default is nil)
-    public func fadeOut(duration: TimeInterval = 0.35, completion: ((Bool) -> Void)? = nil) {
+    func fadeOut(duration: TimeInterval = 0.35, completion: ((Bool) -> Void)? = nil) {
         guard !isHidden || alpha > 0 else { completion?(true); return }
         
         UIView.animate(
             withDuration: duration,
             animations: {
-                self.isHidden = true
                 self.alpha = 0
             },
-            completion: completion
+            completion:  {
+                self.isHidden = true
+                completion?($0)
+            }
         )
     }
 }
