@@ -21,7 +21,7 @@ class NotificationsViewController: UITableViewController, ViewControllerDelegate
     }()
     
     lazy var activityIndicator: UIActivityIndicatorView = {
-        setupActivityIndicator()
+        tableView.makeActivityIndicator()
     }()
     
     override func viewDidLoad() {
