@@ -33,3 +33,20 @@ public extension CLLocation {
         }
     }
 }
+
+public extension CLLocationCoordinate2D {
+    // About 100 meters accuracy
+    // https://gis.stackexchange.com/a/8674
+    private static let decimalPrecision = 3
+    
+    /// Approximate comparison of coordinates rounded to 2 decimal places
+    static func ~~(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        return lhs.latitude.rounded(toPlaces: CLLocationCoordinate2D.decimalPrecision) == rhs.latitude.rounded(toPlaces: CLLocationCoordinate2D.decimalPrecision)
+            && lhs.longitude.rounded(toPlaces: CLLocationCoordinate2D.decimalPrecision) == rhs.longitude.rounded(toPlaces: CLLocationCoordinate2D.decimalPrecision)
+    }
+    
+    /// Approximate comparison of coordinates rounded to 2 decimal places
+    static func !~(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        return !(lhs ~~ rhs)
+    }
+}

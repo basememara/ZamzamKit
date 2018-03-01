@@ -110,6 +110,9 @@
 		8B752F7E2020EA30007DA40C /* BadgeBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B752F7D2020EA30007DA40C /* BadgeBarButtonItem.swift */; };
 		8B756EF81E5C025A00DE4B02 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */; };
 		8B756F151E5CF16D00DE4B02 /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756F141E5CF16D00DE4B02 /* XIBView.swift */; };
+		8B7729F120486D6500C15B56 /* ApproximateComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7729F020486D6500C15B56 /* ApproximateComparison.swift */; };
+		8B7729F220486D6500C15B56 /* ApproximateComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7729F020486D6500C15B56 /* ApproximateComparison.swift */; };
+		8B7729F320486D6500C15B56 /* ApproximateComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7729F020486D6500C15B56 /* ApproximateComparison.swift */; };
 		8B79A4751E9C1ED800C8A5A4 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79A4741E9C1ED800C8A5A4 /* Locale.swift */; };
 		8B79A4761E9C1ED800C8A5A4 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79A4741E9C1ED800C8A5A4 /* Locale.swift */; };
 		8B79A4771E9C1ED800C8A5A4 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79A4741E9C1ED800C8A5A4 /* Locale.swift */; };
@@ -403,6 +406,7 @@
 		8B752F7D2020EA30007DA40C /* BadgeBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BadgeBarButtonItem.swift; path = Models/BadgeBarButtonItem.swift; sourceTree = "<group>"; };
 		8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UINavigationBar.swift; path = Extensions/UINavigationBar.swift; sourceTree = "<group>"; };
 		8B756F141E5CF16D00DE4B02 /* XIBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XIBView.swift; path = Models/XIBView.swift; sourceTree = "<group>"; };
+		8B7729F020486D6500C15B56 /* ApproximateComparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximateComparison.swift; sourceTree = "<group>"; };
 		8B79A4741E9C1ED800C8A5A4 /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Locale.swift; path = Extensions/Locale.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
 		8B8215411CA15E0D00C9FCC9 /* CLKComplicationServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLKComplicationServer.swift; path = Extensions/CLKComplicationServer.swift; sourceTree = "<group>"; };
@@ -657,6 +661,7 @@
 		8B729C731EAB9D56004A6BF1 /* Infixes */ = {
 			isa = PBXGroup;
 			children = (
+				8B7729F020486D6500C15B56 /* ApproximateComparison.swift */,
 				8B729C741EAB9D56004A6BF1 /* ConditionalAssignment.swift */,
 			);
 			path = Infixes;
@@ -1215,6 +1220,7 @@
 				8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8B82154A1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8BB45FB51C9BDD180070CE07 /* UserDefaults.swift in Sources */,
+				8B7729F120486D6500C15B56 /* ApproximateComparison.swift in Sources */,
 				8BE2BB401F03259C00877447 /* Localizable.swift in Sources */,
 				8B6C99971E6E031800D523CC /* LocationManager.swift in Sources */,
 				8BFDB6771C751F2300C94996 /* FileManager.swift in Sources */,
@@ -1257,6 +1263,7 @@
 				8B3CD4711EE9CC0100E0BAFE /* Int.swift in Sources */,
 				8B6C99981E6E031800D523CC /* LocationManager.swift in Sources */,
 				8B6A956E1E484D5A003F333D /* ZamzamError.swift in Sources */,
+				8B7729F220486D6500C15B56 /* ApproximateComparison.swift in Sources */,
 				8B82154B1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8BCB73CF1CAD660D00E20096 /* Equatable.swift in Sources */,
 				8BFDB6901C75323900C94996 /* DateFormatter.swift in Sources */,
@@ -1314,6 +1321,7 @@
 				8B4CFAEF1CABEF0900D2B1D7 /* Color.swift in Sources */,
 				8BFDB6911C75323900C94996 /* DateFormatter.swift in Sources */,
 				8B9434671EBDEAA200C779EB /* Calendar.swift in Sources */,
+				8B7729F320486D6500C15B56 /* ApproximateComparison.swift in Sources */,
 				8B9434631EBDEA8200C779EB /* TimeZone.swift in Sources */,
 				8BFDB6601C7518F800C94996 /* String.swift in Sources */,
 				8BBB66E31E9C010600AB1973 /* LocationMeta.swift in Sources */,
