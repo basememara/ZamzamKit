@@ -9,6 +9,7 @@
 import UIKit
 
 public protocol DataViewable {
+    var backgroundView: UIView? { get set }
     func reloadData()
 }
 
