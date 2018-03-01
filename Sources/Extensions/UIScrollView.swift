@@ -8,7 +8,11 @@
 
 import UIKit
 
-public extension UIScrollView {
+extension UIScrollView: Scrollable { }
+
+// MARK: - Scrollable default implementation
+
+public extension Scrollable where Self: UIScrollView {
     
     /// Sets the offset from the content view’s origin to the top.
     ///
@@ -17,5 +21,17 @@ public extension UIScrollView {
     func scrollToTop(animated: Bool = true) {
         let topOffset = CGPoint(x: 0, y: -contentInset.top)
         setContentOffset(topOffset, animated: animated)
+    }
+    
+    /// Sets the offset from the content view’s origin to the bottom.
+    ///
+    /// - Parameter animated: `true` to animate the transition at a constant
+    ///     velocity to the new offset, `false` to make the transition immediate.
+    func scrollToBottom(animated: Bool = true) {
+        // https://stackoverflow.com/q/952412/235334
+        setContentOffset(
+            CGPoint(x: 0, y: max(contentSize.height - bounds.size.height, 0)),
+            animated: animated
+        )
     }
 }

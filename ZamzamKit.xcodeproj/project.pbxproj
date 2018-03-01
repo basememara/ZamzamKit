@@ -152,6 +152,9 @@
 		8BBB66E21E9C000900AB1973 /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */; };
 		8BBB66E31E9C010600AB1973 /* LocationMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */; };
 		8BBEA5E220309764009B7E90 /* ColumnsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBEA5E120309764009B7E90 /* ColumnsCollectionViewFlowLayout.swift */; };
+		8BC6D99A2047908900242DAE /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC6D9992047908900242DAE /* Scrollable.swift */; };
+		8BC6D99B204790B600242DAE /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC6D9992047908900242DAE /* Scrollable.swift */; };
+		8BC6D99C204790B700242DAE /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC6D9992047908900242DAE /* Scrollable.swift */; };
 		8BC811601ECCE75300F455CC /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8115F1ECCE75300F455CC /* Hashable.swift */; };
 		8BC811611ECCE75300F455CC /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8115F1ECCE75300F455CC /* Hashable.swift */; };
 		8BC811621ECCE75300F455CC /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8115F1ECCE75300F455CC /* Hashable.swift */; };
@@ -418,6 +421,7 @@
 		8BB415E51FB0DFFF0002C86C /* StatusBarable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarable.swift; sourceTree = "<group>"; };
 		8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaults.swift; path = Extensions/UserDefaults.swift; sourceTree = "<group>"; };
 		8BBEA5E120309764009B7E90 /* ColumnsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ColumnsCollectionViewFlowLayout.swift; path = Models/ColumnsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		8BC6D9992047908900242DAE /* Scrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrollable.swift; sourceTree = "<group>"; };
 		8BC8115F1ECCE75300F455CC /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Hashable.swift; path = Extensions/Hashable.swift; sourceTree = "<group>"; };
 		8BCB73CD1CAD660D00E20096 /* Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Equatable.swift; path = Extensions/Equatable.swift; sourceTree = "<group>"; };
 		8BCB73D61CAD666900E20096 /* ExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTest.swift; sourceTree = "<group>"; };
@@ -677,6 +681,7 @@
 			children = (
 				8B9E98611EB3986B0067ACB7 /* iOS */,
 				8B9434551EBCDA4400C779EB /* NotificationObservable.swift */,
+				8BC6D9992047908900242DAE /* Scrollable.swift */,
 				8B2D90EA1EE47ED80019F063 /* UNNotificationTriggerDateType.swift */,
 				8B9E986E1EB500790067ACB7 /* With.swift */,
 				8BD61B351E3EFDF1009B537E /* ZamzamKitable.swift */,
@@ -1197,6 +1202,7 @@
 				8BD5086B1C99DD1E00AE205E /* Array.swift in Sources */,
 				8B2285251EB6863600425B5A /* UITableViewCell.swift in Sources */,
 				8B6FB9BE2027CF9900FE7BEB /* PluggableController.swift in Sources */,
+				8BC6D99A2047908900242DAE /* Scrollable.swift in Sources */,
 				8BD61B3A1E3F04D0009B537E /* UISwitch.swift in Sources */,
 				8BD2D1961CA581890018AC2B /* Audible.swift in Sources */,
 				8B63B2C61CD959BC000F2B5F /* UIBarButtonItem.swift in Sources */,
@@ -1284,6 +1290,7 @@
 				8B75286D1E759F2A0035A742 /* Observer.swift in Sources */,
 				8B729C761EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
+				8BC6D99B204790B600242DAE /* Scrollable.swift in Sources */,
 				8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */,
 				8B79A4761E9C1ED800C8A5A4 /* Locale.swift in Sources */,
 			);
@@ -1321,6 +1328,7 @@
 				8B9E98711EB500790067ACB7 /* With.swift in Sources */,
 				8B4C08B71EC94608002A317D /* BinaryFloatingPoint.swift in Sources */,
 				8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */,
+				8BC6D99C204790B700242DAE /* Scrollable.swift in Sources */,
 				8B0C71611E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */,
 				8B9434581EBCDA4400C779EB /* NotificationObservable.swift in Sources */,
