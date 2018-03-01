@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol DataViewable {
+public protocol DataViewable: class {
     var backgroundView: UIView? { get set }
     func reloadData()
 }
