@@ -99,7 +99,7 @@ public extension UITableView {
     }
 }
 
-public extension UITableView {
+public extension Scrollable where Self: UITableView {
     
     /// Scrolls to the bottom of table view.
     ///

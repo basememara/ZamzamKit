@@ -10,8 +10,6 @@ import UIKit
 
 extension UIScrollView: Scrollable { }
 
-// MARK: - Scrollable default implementation
-
 public extension Scrollable where Self: UIScrollView {
     
     /// Sets the offset from the content view’s origin to the top.
