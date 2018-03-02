@@ -31,8 +31,8 @@ public protocol ApplicationService {
 // MARK: - Optionals
 
 public extension ApplicationService {
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool { return true }
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool { return true }
+    func application(_ application: UIApplication, window: UIWindow?, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool { return true }
+    func application(_ application: UIApplication, window: UIWindow?, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool { return true }
     
     func applicationWillEnterForeground(_ application: UIApplication) {}
     func applicationDidEnterBackground(_ application: UIApplication) {}
@@ -62,13 +62,13 @@ public extension PluggableApplicationDelegate {
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? = nil) -> Bool {
         return services.reduce(true) {
-            $0 && $1.application(application, willFinishLaunchingWithOptions: launchOptions)
+            $0 && $1.application(application, window: window, willFinishLaunchingWithOptions: launchOptions)
         }
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         return services.reduce(true) {
-            $0 && $1.application(application, didFinishLaunchingWithOptions: launchOptions)
+            $0 && $1.application(application, window: window, didFinishLaunchingWithOptions: launchOptions)
         }
     }
 }
