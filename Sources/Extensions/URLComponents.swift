@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension URLComponents {
+public extension URL {
     
     /**
      Add, update, or remove a query string parameter from the URL
@@ -19,33 +19,20 @@ public extension URLComponents {
      
      - returns: the URL with the mutated query string
      */
-    func addOrUpdateQueryStringParameter(_ key: String, value: String?) -> String {
-        if var queryItems = queryItems {
-            var urlComponent = self
-            
-            for (index, item) in queryItems.enumerated() {
-                // Match query string key and update
-                if item.name.lowercased() == key.lowercased() {
-                    if let v = value {
-                        queryItems[index] = URLQueryItem(name: key, value: v)
-                    } else {
-                        queryItems.remove(at: index)
-                    }
-                    urlComponent.queryItems = queryItems.count > 0 ? queryItems : nil
-                    return urlComponent.string ?? ""
-                }
-            }
-            
-            // Key doesn't exist if reaches here
-            if let v = value {
-                // Add key to URL query string
-                queryItems.append(URLQueryItem(name: key, value: v))
-                urlComponent.queryItems = queryItems
-                return urlComponent.string ?? ""
-            }
+    func appendingQueryItem(_ name: String, value: String?) -> String {
+        guard var urlComponents = URLComponents(string: absoluteString) else {
+            return absoluteString
         }
         
-        return string ?? ""
+        urlComponents.queryItems = urlComponents.queryItems?
+            .filter { $0.name.lowercased() != name.lowercased() } ?? []
+        
+        // Skip if nil value
+        if let value = value {
+            urlComponents.queryItems?.append(URLQueryItem(name: name, value: value))
+        }
+        
+        return urlComponents.string ?? absoluteString
     }
     
     /**
@@ -56,14 +43,22 @@ public extension URLComponents {
      
      - returns: the URL with the mutated query string
      */
-    func addOrUpdateQueryStringParameter(_ values: [String: String?]) -> String {
-        var urlComponent = self
-        
-        values.forEach {
-            urlComponent = URLComponents(string: urlComponent.addOrUpdateQueryStringParameter($0.key, value: $0.value)) ?? urlComponent
+    func appendingQueryItems(_ contentsOf: [String: String?]) -> String {
+        guard var urlComponents = URLComponents(string: absoluteString), !contentsOf.isEmpty else {
+            return absoluteString
         }
         
-        return urlComponent.string ?? ""
+        let keys = contentsOf.keys.map { $0.lowercased() }
+        
+        urlComponents.queryItems = urlComponents.queryItems?
+            .filter { !keys.contains($0.name.lowercased()) } ?? []
+        
+        urlComponents.queryItems?.append(contentsOf: contentsOf.flatMap {
+            guard let value = $0.value else { return nil } //Skip if nil
+            return URLQueryItem(name: $0.key, value: value)
+        })
+        
+        return urlComponents.string ?? absoluteString
     }
     
     /**
@@ -74,8 +69,19 @@ public extension URLComponents {
      
      - returns: the URL with the mutated query string
      */
-    func removeQueryStringParameter(_ key: String) -> String {
-        return addOrUpdateQueryStringParameter(key, value: nil)
+    func removeQueryItem(_ name: String) -> String {
+        return appendingQueryItem(name, value: nil)
     }
+}
+
+// Deprecation notices, will be removed future version
+public extension URLComponents {
+    @available(*, unavailable, renamed: "URL.appendingQueryItem")
+    func addOrUpdateQueryStringParameter(_ key: String, value: String?) -> String { return "" }
     
+    @available(*, unavailable, renamed: "URL.appendingQueryItems")
+    func addOrUpdateQueryStringParameter(_ values: [String: String?]) -> String { return "" }
+    
+    @available(*, unavailable, renamed: "URL.removeQueryItems")
+    func removeQueryStringParameter(_ key: String) -> String { return "" }
 }

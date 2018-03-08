@@ -29,11 +29,11 @@ class WebTests: XCTestCase {
             "String should be \(expectedValue)")
     }
     
-    func testAddOrUpdateQueryStringParameter() {
+    func testappendingQueryItem() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = URLComponents(string: value)!.addOrUpdateQueryStringParameter("aBc", value: "555")
-        let expectedValue = "https://example.com?aBc=555&lmn=tuv&xyz=987"
+        let newValue = URL(string: value)!.appendingQueryItem("aBc", value: "555")
+        let expectedValue = "https://example.com?lmn=tuv&xyz=987&aBc=555"
         
         XCTAssertEqual(newValue, expectedValue,
             "String should be \(expectedValue)")
@@ -42,36 +42,82 @@ class WebTests: XCTestCase {
     func testRemoveQueryStringParameter() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = URLComponents(string: value)!.removeQueryStringParameter("xyz")
+        let newValue = URL(string: value)!.removeQueryItem("xyz")
         let expectedValue = "https://example.com?abc=123&lmn=tuv"
         
         XCTAssertEqual(newValue, expectedValue,
             "String should be \(expectedValue)")
     }
     
-    func testAddOrUpdateQueryStringParameterForAdd() {
+    func testappendingQueryItemForAdd() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = URLComponents(string: value)!.addOrUpdateQueryStringParameter("def", value: "456")
+        let newValue = URL(string: value)!.appendingQueryItem("def", value: "456")
         let expectedValue = "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
         
         XCTAssertEqual(newValue, expectedValue,
             "String should be \(expectedValue)")
     }
     
-    func testAddOrUpdateQueryStringParameterForList() {
+    func testappendingQueryItemForList() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = URLComponents(string: value)!.addOrUpdateQueryStringParameter([
+        let newValue = URL(string: value)!.appendingQueryItems([
             "def": "456",
             "jkl": "777",
             "abc": "333",
             "lmn": nil
         ])
         
-        let expectedValue = "https://example.com?abc=333&xyz=987&jkl=777&def=456"
+        let expectedValue = "https://example.com?xyz=987&abc=333&jkl=777&def=456"
         
         XCTAssertEqual(newValue, expectedValue,
             "String should be \(expectedValue)")
+    }
+    
+    func testappendingQueryItemForNoInitialParameters () {
+        // Subfolder
+        XCTAssertEqual(
+            URL(string: "https://example.com/abc/xyz")!
+                .appendingQueryItem("abc", value: "123"),
+            "https://example.com/abc/xyz?abc=123"
+        )
+        
+        // Hash in URL
+        XCTAssertEqual(
+            URL(string: "https://example.com/abc/xyz#test")!
+                .appendingQueryItem("xyz", value: "987"),
+            "https://example.com/abc/xyz?xyz=987#test"
+        )
+        
+        // Subfolder with trailing slash
+        XCTAssertEqual(
+            URL(string: "https://example.com/abc/xyz/")!
+                .appendingQueryItem("abc", value: "123"),
+            "https://example.com/abc/xyz/?abc=123"
+        )
+        
+        // Hash in URL with trailing slash
+        XCTAssertEqual(
+            URL(string: "https://example.com/abc/xyz/#test")!
+                .appendingQueryItem("xyz", value: "987"),
+            "https://example.com/abc/xyz/?xyz=987#test"
+        )
+    }
+    
+    func testappendingQueryItemForDomain () {
+        // Pure domain
+        XCTAssertEqual(
+            URL(string: "https://example.com")!
+                .appendingQueryItem("abc", value: "123"),
+            "https://example.com?abc=123"
+        )
+        
+        // With trailing slash
+        XCTAssertEqual(
+            URL(string: "https://example.com/")!
+                .appendingQueryItem("xyz", value: "987"),
+            "https://example.com/?xyz=987"
+        )
     }
 }
