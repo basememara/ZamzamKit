@@ -96,10 +96,10 @@ public extension UIViewController {
     func present(activities: [Any], popoverFrom sourceView: UIView, applicationActivities: [UIActivity]? = nil) {
         let activity = UIActivityViewController(activityItems: activities, applicationActivities: applicationActivities)
         
-        if let popOver = activity.popoverPresentationController {
-            popOver.sourceView = sourceView
-            popOver.sourceRect = sourceView.bounds
-            popOver.permittedArrowDirections = .any
+        if let popover = activity.popoverPresentationController {
+            popover.sourceView = sourceView
+            popover.sourceRect = sourceView.bounds
+            popover.permittedArrowDirections = .any
         }
 
         present(activity, animated: true, completion: nil)
@@ -115,9 +115,9 @@ public extension UIViewController {
     func present(activities: [Any], barButtonItem: UIBarButtonItem, applicationActivities: [UIActivity]? = nil) {
         let activity = UIActivityViewController(activityItems: activities, applicationActivities: applicationActivities)
         
-        if let popOver = activity.popoverPresentationController {
-            popOver.barButtonItem  = barButtonItem
-            popOver.permittedArrowDirections = .any
+        if let popover = activity.popoverPresentationController {
+            popover.barButtonItem  = barButtonItem
+            popover.permittedArrowDirections = .any
         }
 
         present(activity, animated: true, completion: nil)
