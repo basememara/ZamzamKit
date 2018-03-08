@@ -77,13 +77,19 @@ public extension UIViewController {
      - parameter url: URL to display in the browser.
      - parameter modalPresentationStyle: The presentation style of the model view controller.
      */
-    func present(safari url: String, modalPresentationStyle: UIModalPresentationStyle = .overFullScreen) {
-        let safariController = SFSafariViewController(url: URL(string: url)!)
-        safariController.modalPresentationStyle = .overFullScreen
-        
-        safariController.delegate = self as? SFSafariViewControllerDelegate
-        
-        present(safariController, animated: true, completion: nil)
+    func present(safari url: String, modalPresentationStyle: UIModalPresentationStyle = .overFullScreen,
+                 barTintColor: UIColor? = nil, preferredControlTintColor: UIColor? = nil,
+                 animated: Bool = true, completion: (() -> Void)? = nil) {
+        present(
+            SFSafariViewController(url: URL(string: url)!).with {
+                $0.delegate = self as? SFSafariViewControllerDelegate
+                $0.modalPresentationStyle = modalPresentationStyle
+                $0.preferredBarTintColor ?= barTintColor
+                $0.preferredControlTintColor ?= preferredControlTintColor
+            },
+            animated: animated,
+            completion: completion
+        )
     }
     
     /**
