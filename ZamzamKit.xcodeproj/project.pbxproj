@@ -222,9 +222,9 @@
 		8BFDB65E1C7518F800C94996 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB65D1C7518F800C94996 /* String.swift */; };
 		8BFDB65F1C7518F800C94996 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB65D1C7518F800C94996 /* String.swift */; };
 		8BFDB6601C7518F800C94996 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB65D1C7518F800C94996 /* String.swift */; };
-		8BFDB6641C751AE600C94996 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6631C751AE600C94996 /* URLComponents.swift */; };
-		8BFDB6651C751AE600C94996 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6631C751AE600C94996 /* URLComponents.swift */; };
-		8BFDB6661C751AE600C94996 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6631C751AE600C94996 /* URLComponents.swift */; };
+		8BFDB6641C751AE600C94996 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6631C751AE600C94996 /* URL.swift */; };
+		8BFDB6651C751AE600C94996 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6631C751AE600C94996 /* URL.swift */; };
+		8BFDB6661C751AE600C94996 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6631C751AE600C94996 /* URL.swift */; };
 		8BFDB66A1C751D3400C94996 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6691C751D3400C94996 /* UIViewController.swift */; };
 		8BFDB6701C751DF600C94996 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB66F1C751DF600C94996 /* UIImageView.swift */; };
 		8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6721C751E4F00C94996 /* WKInterfaceGroup.swift */; };
@@ -461,7 +461,7 @@
 		8BF307CF1CF0E3C600BBA933 /* UIActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIActivity.swift; path = Extensions/UIActivity.swift; sourceTree = "<group>"; };
 		8BFDB6561C75187200C94996 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = Extensions/Date.swift; sourceTree = "<group>"; };
 		8BFDB65D1C7518F800C94996 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = Extensions/String.swift; sourceTree = "<group>"; };
-		8BFDB6631C751AE600C94996 /* URLComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URLComponents.swift; path = Extensions/URLComponents.swift; sourceTree = "<group>"; };
+		8BFDB6631C751AE600C94996 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URL.swift; path = Extensions/URL.swift; sourceTree = "<group>"; };
 		8BFDB6691C751D3400C94996 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewController.swift; path = Extensions/UIViewController.swift; sourceTree = "<group>"; };
 		8BFDB66F1C751DF600C94996 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageView.swift; path = Extensions/UIImageView.swift; sourceTree = "<group>"; };
 		8BFDB6721C751E4F00C94996 /* WKInterfaceGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WKInterfaceGroup.swift; path = Extensions/WKInterfaceGroup.swift; sourceTree = "<group>"; };
@@ -785,7 +785,7 @@
 				8B9434601EBDEA8200C779EB /* TimeZone.swift */,
 				8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */,
 				8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */,
-				8BFDB6631C751AE600C94996 /* URLComponents.swift */,
+				8BFDB6631C751AE600C94996 /* URL.swift */,
 				8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */,
 			);
 			name = Extensions;
@@ -1225,7 +1225,7 @@
 				8B6C99971E6E031800D523CC /* LocationManager.swift in Sources */,
 				8BFDB6771C751F2300C94996 /* FileManager.swift in Sources */,
 				8B9E98111EB144540067ACB7 /* Routable.swift in Sources */,
-				8BFDB6641C751AE600C94996 /* URLComponents.swift in Sources */,
+				8BFDB6641C751AE600C94996 /* URL.swift in Sources */,
 				8B6A95611E46FBB9003F333D /* Thread.swift in Sources */,
 				8B0C715F1E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B3CD4701EE9CC0100E0BAFE /* Int.swift in Sources */,
@@ -1269,7 +1269,7 @@
 				8BFDB6901C75323900C94996 /* DateFormatter.swift in Sources */,
 				8B9434621EBDEA8200C779EB /* TimeZone.swift in Sources */,
 				8B5316AD1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
-				8BFDB6651C751AE600C94996 /* URLComponents.swift in Sources */,
+				8BFDB6651C751AE600C94996 /* URL.swift in Sources */,
 				8B5316471C9B23BF0094A6C4 /* WKInterfaceController.swift in Sources */,
 				8B9434661EBDEAA200C779EB /* Calendar.swift in Sources */,
 				8B4CFAE91CABEF0800D2B1D7 /* Color.swift in Sources */,
@@ -1313,7 +1313,7 @@
 				8BFDB6591C75187200C94996 /* Date.swift in Sources */,
 				8BC811621ECCE75300F455CC /* Hashable.swift in Sources */,
 				8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */,
-				8BFDB6661C751AE600C94996 /* URLComponents.swift in Sources */,
+				8BFDB6661C751AE600C94996 /* URL.swift in Sources */,
 				8BF2106D1E48D52F0026B802 /* Result.swift in Sources */,
 				8B79A4771E9C1ED800C8A5A4 /* Locale.swift in Sources */,
 				8BD61B381E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
