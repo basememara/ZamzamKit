@@ -19,7 +19,7 @@ public extension URL {
      
      - returns: the URL with the mutated query string
      */
-    func appendingQueryItem(_ name: String, value: String?) -> String {
+    func appendingQueryItem(_ name: String, value: Any?) -> String {
         guard var urlComponents = URLComponents(string: absoluteString) else {
             return absoluteString
         }
@@ -29,7 +29,7 @@ public extension URL {
         
         // Skip if nil value
         if let value = value {
-            urlComponents.queryItems?.append(URLQueryItem(name: name, value: value))
+            urlComponents.queryItems?.append(URLQueryItem(name: name, value: "\(value)"))
         }
         
         return urlComponents.string ?? absoluteString
@@ -43,7 +43,7 @@ public extension URL {
      
      - returns: the URL with the mutated query string
      */
-    func appendingQueryItems(_ contentsOf: [String: String?]) -> String {
+    func appendingQueryItems(_ contentsOf: [String: Any?]) -> String {
         guard var urlComponents = URLComponents(string: absoluteString), !contentsOf.isEmpty else {
             return absoluteString
         }
@@ -55,7 +55,7 @@ public extension URL {
         
         urlComponents.queryItems?.append(contentsOf: contentsOf.flatMap {
             guard let value = $0.value else { return nil } //Skip if nil
-            return URLQueryItem(name: $0.key, value: value)
+            return URLQueryItem(name: $0.key, value: "\(value)")
         })
         
         return urlComponents.string ?? absoluteString

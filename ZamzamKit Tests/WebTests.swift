@@ -75,7 +75,7 @@ class WebTests: XCTestCase {
             "String should be \(expectedValue)")
     }
     
-    func testappendingQueryItemForNoInitialParameters () {
+    func testappendingQueryItemForNoInitialParameters() {
         // Subfolder
         XCTAssertEqual(
             URL(string: "https://example.com/abc/xyz")!
@@ -105,7 +105,7 @@ class WebTests: XCTestCase {
         )
     }
     
-    func testappendingQueryItemForDomain () {
+    func testappendingQueryItemForDomain() {
         // Pure domain
         XCTAssertEqual(
             URL(string: "https://example.com")!
@@ -118,6 +118,20 @@ class WebTests: XCTestCase {
             URL(string: "https://example.com/")!
                 .appendingQueryItem("xyz", value: "987"),
             "https://example.com/?xyz=987"
+        )
+    }
+    
+    func testappendingQueryItemForStrongTypes() {
+        XCTAssertEqual(
+            URL(string: "https://example.com")!
+                .appendingQueryItem("abc", value: 1),
+            "https://example.com?abc=1"
+        )
+        
+        XCTAssertEqual(
+            URL(string: "https://example.com/")!
+                .appendingQueryItem("xyz", value: true),
+            "https://example.com/?xyz=true"
         )
     }
 }
