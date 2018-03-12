@@ -119,6 +119,7 @@
 		8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402C1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
+		8B7BAD3A205714D900273789 /* UIRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7BAD39205714D900273789 /* UIRefreshControl.swift */; };
 		8B8215421CA15E0D00C9FCC9 /* CLKComplicationServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215411CA15E0D00C9FCC9 /* CLKComplicationServer.swift */; };
 		8B82154A1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
 		8B82154B1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
@@ -409,6 +410,7 @@
 		8B7729F020486D6500C15B56 /* ApproximateComparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximateComparison.swift; sourceTree = "<group>"; };
 		8B79A4741E9C1ED800C8A5A4 /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Locale.swift; path = Extensions/Locale.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManager.swift; path = Extensions/CLLocationManager.swift; sourceTree = "<group>"; };
+		8B7BAD39205714D900273789 /* UIRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIRefreshControl.swift; path = Extensions/UIRefreshControl.swift; sourceTree = "<group>"; };
 		8B8215411CA15E0D00C9FCC9 /* CLKComplicationServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLKComplicationServer.swift; path = Extensions/CLKComplicationServer.swift; sourceTree = "<group>"; };
 		8B8215491CA1613400C9FCC9 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeInterval.swift; path = Extensions/TimeInterval.swift; sourceTree = "<group>"; };
 		8B89746D1EDE17AC004FA853 /* MigrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationTests.swift; sourceTree = "<group>"; };
@@ -802,6 +804,7 @@
 				8B63E4261CDB8DB00053C060 /* UIImage.swift */,
 				8BFDB66F1C751DF600C94996 /* UIImageView.swift */,
 				8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */,
+				8B7BAD39205714D900273789 /* UIRefreshControl.swift */,
 				8B021E3F203CA72E00A0386F /* UIScrollView.swift */,
 				8B37B8D4200549040052E9B1 /* UIStackView.swift */,
 				8B1EEC871CF7588600AE054B /* UIStoryboard.swift */,
@@ -1229,6 +1232,7 @@
 				8B6A95611E46FBB9003F333D /* Thread.swift in Sources */,
 				8B0C715F1E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B3CD4701EE9CC0100E0BAFE /* Int.swift in Sources */,
+				8B7BAD3A205714D900273789 /* UIRefreshControl.swift in Sources */,
 				8BF2106B1E48D52F0026B802 /* Result.swift in Sources */,
 				8B9E986F1EB500790067ACB7 /* With.swift in Sources */,
 				8B752F52201E2E16007DA40C /* PluggableApplicationDelegate.swift in Sources */,
