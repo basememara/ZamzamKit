@@ -61,24 +61,3 @@ public extension ZamzamKitable {
 	}
 
 }
-
-public extension ZamzamKitable {
-	
-	/// Screen height.
-	var screenHeight: CGFloat {
-		#if os(iOS) || os(tvOS)
-			return UIScreen.main.bounds.height
-		#elseif os(watchOS)
-			return WKInterfaceDevice.current().screenBounds.height
-		#endif
-	}
-	
-	/// Screen width.
-	var screenWidth: CGFloat {
-		#if os(iOS) || os(tvOS)
-			return UIScreen.main.bounds.width
-		#elseif os(watchOS)
-			return WKInterfaceDevice.current().screenBounds.width
-		#endif
-	}
-}
