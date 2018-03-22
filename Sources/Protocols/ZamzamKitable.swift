@@ -21,7 +21,8 @@ public extension ZamzamKitable {
 	/// App's name.
 	var appDisplayName: String? {
 		// http://stackoverflow.com/questions/28254377/get-app-name-in-swift
-		return Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
+		return Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+            ?? Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String
 	}
 	
 	/// App's bundle ID.
