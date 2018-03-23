@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
-    s.name             = "ZamzamKit"
-    s.version          = "2.0.0"
-    s.summary          = "A Swift framework for rapidly developing Apple apps."
+    s.name             = 'ZamzamKit'
+    s.version          = '2.0.0'
+    s.summary          = 'A Swift framework for rapidly developing Apple apps.'
     s.description      = <<-DESC
 ZamzamKit is a Swift framework for Apple devices to allow
 developers to code rapidly for building mobile applications.
@@ -10,27 +10,28 @@ abstraction layer on top of Apple SDK's and Swift.
 ZamzamKit provides you the latest patterns, techniques,
 and libraries so you can begin building for the future.
                         DESC
-    s.homepage         = "https://github.com/ZamzamInc/ZamzamKit"
-    # s.screenshots    = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
-    s.license          = { :type => "MIT", :file => "LICENSE" }
-    s.author           = { "Zamzam Inc." => "contact@zamzam.io" }
-    s.source           = { :git => "https://github.com/ZamzamInc/ZamzamKit.git", :tag => s.version }
-    s.social_media_url = "https://twitter.com/zamzaminc"
+    s.homepage         = 'https://github.com/ZamzamInc/ZamzamKit'
+    # s.screenshots    = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    s.author           = { 'Zamzam Inc.' => 'contact@zamzam.io' }
+    s.source           = { :git => 'https://github.com/ZamzamInc/ZamzamKit.git', :tag => s.version }
+    s.social_media_url = 'https://twitter.com/zamzaminc'
     
-    s.ios.deployment_target = "10.0"
-    s.watchos.deployment_target = "3.0"
-    s.tvos.deployment_target = "10.0"
-    
+    s.ios.deployment_target     = '10.0'
+    s.watchos.deployment_target = '3.0'
+    s.tvos.deployment_target    = '10.0'
+
+    s.swift_version = '4.0'
     s.requires_arc = true
     
-    s.source_files = "Sources/**/*.{h,swift}"
+    s.source_files = 'Sources/**/*.{h,swift}'
     
     s.resource_bundles = {
-        "ZamzamKit" => [
-            "Sources/*.xcassets"
+        'ZamzamKit' => [
+            'Sources/*.xcassets'
         ]
     }
-    
-    s.ios.framework = "AVFoundation"
-    s.watchos.framework = "ClockKit"
+
+    s.ios.framework     = 'AVFoundation', 'SystemConfiguration'
+    s.watchos.framework = 'ClockKit'
 end
