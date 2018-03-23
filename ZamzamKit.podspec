@@ -25,6 +25,19 @@ and libraries so you can begin building for the future.
     s.requires_arc = true
     
     s.source_files = 'Sources/**/*.{h,swift}'
+
+    s.ios.exclude_files     = 'Sources/**/watchOS/*.*', 'Sources/**/tvOS/*.*'
+    s.watchos.exclude_files = 'Sources/**/iOS/*.*', 'Sources/**/tvOS/*.*'
+    s.tvos.exclude_files    = [
+        'Sources/**/iOS/*.*',
+        'Sources/**/watchOS/*.*',
+        'Sources/Enums/LocationAuthorizationType.swift',
+        'Sources/Extensions/UNNotificationAttachment.swift',
+        'Sources/Extensions/UNUserNotificationCenter.swift',
+        'Sources/Extensions/CLLocationManager.swift',
+        'Sources/Models/LocationManager.swift',
+        'Sources/Models/WatchSession.swift'
+    ]
     
     s.resource_bundles = {
         'ZamzamKit' => [
