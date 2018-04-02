@@ -54,7 +54,7 @@ public extension UIColor {
         guard let rgbSplit = rgb?
             .split(separator: ",")
             .map(String.init)
-            .flatMap({ Int($0.trimmingCharacters(in: .whitespacesAndNewlines)) }),
+            .compactMap({ Int($0.trimmingCharacters(in: .whitespacesAndNewlines)) }),
                 rgbSplit.count == 3
                     else {
                         // Return black color if failed

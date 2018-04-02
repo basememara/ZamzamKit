@@ -276,7 +276,7 @@ public extension UNUserNotificationCenter {
     /// - Parameter withCategory: The categories of the user notification to remove.
     func remove(withCategories categories: [String], completion: (() -> Void)? = nil) {
         getPendingNotificationRequests {
-            self.remove(withIdentifiers: $0.flatMap {
+            self.remove(withIdentifiers: $0.compactMap {
                 categories.contains($0.content.categoryIdentifier) ? $0.identifier : nil
             })
             

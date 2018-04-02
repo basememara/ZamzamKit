@@ -64,6 +64,10 @@ extension StringTests {
 	
 	func testRandom() {
 		XCTAssertEqual(String(random: 10).count, 10)
+        
+        let test = String(random: 20, prefix: "TEST: ")
+        XCTAssertEqual(test.count, 26)
+        XCTAssertTrue(test.hasPrefix("TEST: "))
 	}
 	
 	func testIsNilOrEmpty() {

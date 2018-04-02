@@ -56,7 +56,7 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
 }
 
 public protocol Router {
-    weak var viewController: UIViewController? { get set }
+    var viewController: UIViewController? { get set }
     
     func present<T: UIViewController>(storyboard: String, identifier: String?, animated: Bool, modalPresentationStyle: UIModalPresentationStyle?, modalTransitionStyle: UIModalTransitionStyle?, configure: ((T) -> Void)?, completion: ((T) -> Void)?)
     func show<T: UIViewController>(storyboard: String, identifier: String?, configure: ((T) -> Void)?)
