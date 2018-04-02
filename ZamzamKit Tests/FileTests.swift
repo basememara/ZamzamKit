@@ -19,8 +19,8 @@ class FileTests: XCTestCase {
         
         // Create blank files for testing
         do {
-            try "Some text".write(toFile: fileInDocumentsDirectory(fileName), atomically: true, encoding: .utf8)
-            try "Some text 2".write(toFile: fileInDocumentsDirectory(fileName2), atomically: true, encoding: .utf8)
+            try "Some text".write(toFile: fileInDirectory(fileName), atomically: true, encoding: .utf8)
+            try "Some text 2".write(toFile: fileInDirectory(fileName2), atomically: true, encoding: .utf8)
         } catch {
             print("Could not create files!")
         }
@@ -31,25 +31,25 @@ class FileTests: XCTestCase {
         
         // Delete blank files after testing
         do {
-            try FileManager.default.removeItem(atPath: fileInDocumentsDirectory(fileName))
-            try FileManager.default.removeItem(atPath: fileInDocumentsDirectory(fileName2))
+            try FileManager.default.removeItem(atPath: fileInDirectory(fileName))
+            try FileManager.default.removeItem(atPath: fileInDirectory(fileName2))
         } catch {
             print("Could not delete files!")
         }
     }
     
     func testGetDocumentPath() {
-        let value = FileManager.default.path(of: fileName)
+        let value = FileManager.default.path(of: fileName, from: .downloadsDirectory)
         
         XCTAssert(FileManager.default.fileExists(atPath: value),
             "The file location path for \(fileName) seems incorrect (file doesn't exist)")
     }
     
     func testGetDocumentPaths() {
-        let value = FileManager.default.paths()
+        let value = FileManager.default.paths(from: .downloadsDirectory)
         let expectedValue = [
-            fileInDocumentsDirectory(fileName),
-            fileInDocumentsDirectory(fileName2)
+            fileInDirectory(fileName),
+            fileInDirectory(fileName2)
         ]
         
         XCTAssert(value.contains(expectedValue[0]) && value.contains(expectedValue[1]),
@@ -68,13 +68,10 @@ class FileTests: XCTestCase {
         waitForExpectations(timeout: 5.0, handler: nil)
     }
     
-    func getDocumentsURL() -> URL {
-        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        return documentsURL
-    }
-    
-    func fileInDocumentsDirectory(_ filename: String) -> String {
-        let fileURL = getDocumentsURL().appendingPathComponent(filename)
-        return fileURL.path
+    func fileInDirectory(_ filename: String) -> String {
+        return FileManager.default
+            .urls(for: .downloadsDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent(filename)
+            .path
     }
 }
