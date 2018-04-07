@@ -53,21 +53,27 @@ open class PluggableApplicationDelegate: UIResponder, UIApplicationDelegate {
     
     public var window: UIWindow?
     
-    // Cache overriden service instances since Swift cannot override stored properties
-    private lazy var _services: [ApplicationService] = { services }()
-    open var services: [ApplicationService] { return [ /* Populated from sub-class */ ] }
+    /// Lazy implementation of application services list
+    public lazy var lazyServices: [ApplicationService] = {
+        services()
+    }()
+    
+    /// List of application services for binding to `AppDelegate` events
+    open func services() -> [ApplicationService] {
+        return [ /* Populated from sub-class */ ]
+    }
 }
 
 public extension PluggableApplicationDelegate {
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? = nil) -> Bool {
-        return _services.reduce(true) {
+        return lazyServices.reduce(true) {
             $0 && $1.application(application, willFinishLaunchingWithOptions: launchOptions)
         }
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        return _services.reduce(true) {
+        return lazyServices.reduce(true) {
             $0 && $1.application(application, didFinishLaunchingWithOptions: launchOptions)
         }
     }
@@ -76,51 +82,51 @@ public extension PluggableApplicationDelegate {
 public extension PluggableApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        _services.forEach { $0.applicationWillEnterForeground(application) }
+        lazyServices.forEach { $0.applicationWillEnterForeground(application) }
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        _services.forEach { $0.applicationDidEnterBackground(application) }
+        lazyServices.forEach { $0.applicationDidEnterBackground(application) }
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        _services.forEach { $0.applicationDidBecomeActive(application) }
+        lazyServices.forEach { $0.applicationDidBecomeActive(application) }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        _services.forEach { $0.applicationWillResignActive(application) }
+        lazyServices.forEach { $0.applicationWillResignActive(application) }
     }
 }
 
 public extension PluggableApplicationDelegate {
     
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
-        _services.forEach { $0.applicationProtectedDataWillBecomeUnavailable(application) }
+        lazyServices.forEach { $0.applicationProtectedDataWillBecomeUnavailable(application) }
     }
     
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
-        _services.forEach { $0.applicationProtectedDataDidBecomeAvailable(application) }
+        lazyServices.forEach { $0.applicationProtectedDataDidBecomeAvailable(application) }
     }
 }
 
 public extension PluggableApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
-        _services.forEach { $0.applicationWillTerminate(application) }
+        lazyServices.forEach { $0.applicationWillTerminate(application) }
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        _services.forEach { $0.applicationDidReceiveMemoryWarning(application) }
+        lazyServices.forEach { $0.applicationDidReceiveMemoryWarning(application) }
     }
 }
 
 public extension PluggableApplicationDelegate {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        _services.forEach { $0.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken) }
+        lazyServices.forEach { $0.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken) }
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        _services.forEach { $0.application(application, didFailToRegisterForRemoteNotificationsWithError: error) }
+        lazyServices.forEach { $0.application(application, didFailToRegisterForRemoteNotificationsWithError: error) }
     }
 }

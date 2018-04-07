@@ -36,42 +36,48 @@ public extension ControllerService {
 
 open class PluggableController: UIViewController {
     
-    // Cache overriden service instances since Swift cannot override stored properties
-    private lazy var _services: [ControllerService] = { services }()
-    open var services: [ControllerService] { return [ /* Populated from sub-class */ ] }
+    /// Lazy implementation of controller services list
+    public lazy var lazyServices: [ControllerService] = {
+        services()
+    }()
+    
+    /// List of controller services for binding to `UIViewController` events
+    open func services() -> [ControllerService] {
+        return [ /* Populated from sub-class */ ]
+    }
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        _services.forEach { $0.viewDidLoad(self) }
+        lazyServices.forEach { $0.viewDidLoad(self) }
     }
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        _services.forEach { $0.viewWillAppear(self) }
+        lazyServices.forEach { $0.viewWillAppear(self) }
     }
     
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        _services.forEach { $0.viewDidAppear(self) }
+        lazyServices.forEach { $0.viewDidAppear(self) }
     }
     
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        _services.forEach { $0.viewWillDisappear(self) }
+        lazyServices.forEach { $0.viewWillDisappear(self) }
     }
     
     open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        _services.forEach { $0.viewDidDisappear(self) }
+        lazyServices.forEach { $0.viewDidDisappear(self) }
     }
     
     open override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        _services.forEach { $0.viewWillLayoutSubviews(self) }
+        lazyServices.forEach { $0.viewWillLayoutSubviews(self) }
     }
     
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        _services.forEach { $0.viewDidLayoutSubviews(self) }
+        lazyServices.forEach { $0.viewDidLayoutSubviews(self) }
     }
 }
