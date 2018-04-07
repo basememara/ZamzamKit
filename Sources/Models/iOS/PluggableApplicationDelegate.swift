@@ -53,21 +53,21 @@ open class PluggableApplicationDelegate: UIResponder, UIApplicationDelegate {
     
     public var window: UIWindow?
     
-    open func requestServices() -> [ApplicationService] {
-        return []
-    }
+    // Cache overriden service instances since Swift cannot override stored properties
+    private lazy var _services: [ApplicationService] = { services }()
+    open var services: [ApplicationService] { return [ /* Populated from sub-class */ ] }
 }
 
 public extension PluggableApplicationDelegate {
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? = nil) -> Bool {
-        return requestServices().reduce(true) {
+        return _services.reduce(true) {
             $0 && $1.application(application, willFinishLaunchingWithOptions: launchOptions)
         }
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        return requestServices().reduce(true) {
+        return _services.reduce(true) {
             $0 && $1.application(application, didFinishLaunchingWithOptions: launchOptions)
         }
     }
@@ -76,51 +76,51 @@ public extension PluggableApplicationDelegate {
 public extension PluggableApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        requestServices().forEach { $0.applicationWillEnterForeground(application) }
+        _services.forEach { $0.applicationWillEnterForeground(application) }
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        requestServices().forEach { $0.applicationDidEnterBackground(application) }
+        _services.forEach { $0.applicationDidEnterBackground(application) }
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        requestServices().forEach { $0.applicationDidBecomeActive(application) }
+        _services.forEach { $0.applicationDidBecomeActive(application) }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        requestServices().forEach { $0.applicationWillResignActive(application) }
+        _services.forEach { $0.applicationWillResignActive(application) }
     }
 }
 
 public extension PluggableApplicationDelegate {
     
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
-        requestServices().forEach { $0.applicationProtectedDataWillBecomeUnavailable(application) }
+        _services.forEach { $0.applicationProtectedDataWillBecomeUnavailable(application) }
     }
     
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
-        requestServices().forEach { $0.applicationProtectedDataDidBecomeAvailable(application) }
+        _services.forEach { $0.applicationProtectedDataDidBecomeAvailable(application) }
     }
 }
 
 public extension PluggableApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
-        requestServices().forEach { $0.applicationWillTerminate(application) }
+        _services.forEach { $0.applicationWillTerminate(application) }
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        requestServices().forEach { $0.applicationDidReceiveMemoryWarning(application) }
+        _services.forEach { $0.applicationDidReceiveMemoryWarning(application) }
     }
 }
 
 public extension PluggableApplicationDelegate {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        requestServices().forEach { $0.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken) }
+        _services.forEach { $0.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken) }
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        requestServices().forEach { $0.application(application, didFailToRegisterForRemoteNotificationsWithError: error) }
+        _services.forEach { $0.application(application, didFailToRegisterForRemoteNotificationsWithError: error) }
     }
 }

@@ -36,42 +36,42 @@ public extension ControllerService {
 
 open class PluggableController: UIViewController {
     
-    open func requestServices() -> [ControllerService] {
-        return []
-    }
+    // Cache overriden service instances since Swift cannot override stored properties
+    private lazy var _services: [ControllerService] = { services }()
+    open var services: [ControllerService] { return [ /* Populated from sub-class */ ] }
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        requestServices().forEach { $0.viewDidLoad(self) }
+        _services.forEach { $0.viewDidLoad(self) }
     }
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        requestServices().forEach { $0.viewWillAppear(self) }
+        _services.forEach { $0.viewWillAppear(self) }
     }
     
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        requestServices().forEach { $0.viewDidAppear(self) }
+        _services.forEach { $0.viewDidAppear(self) }
     }
     
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        requestServices().forEach { $0.viewWillDisappear(self) }
+        _services.forEach { $0.viewWillDisappear(self) }
     }
     
     open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        requestServices().forEach { $0.viewDidDisappear(self) }
+        _services.forEach { $0.viewDidDisappear(self) }
     }
     
     open override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        requestServices().forEach { $0.viewWillLayoutSubviews(self) }
+        _services.forEach { $0.viewWillLayoutSubviews(self) }
     }
     
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        requestServices().forEach { $0.viewDidLayoutSubviews(self) }
+        _services.forEach { $0.viewDidLayoutSubviews(self) }
     }
 }
