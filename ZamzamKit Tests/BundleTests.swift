@@ -11,9 +11,7 @@ import XCTest
 
 class BundleTests: XCTestCase {
     
-    lazy var bundle: Bundle = {
-        Bundle(for: type(of: self))
-    }()
+    lazy var bundle = Bundle(for: type(of: self))
     
     func testValuesFromText() {
         let values = bundle.string(file: "Test.txt")

@@ -54,9 +54,7 @@ open class PluggableApplicationDelegate: UIResponder, UIApplicationDelegate {
     public var window: UIWindow?
     
     /// Lazy implementation of application services list
-    public lazy var lazyServices: [ApplicationService] = {
-        services()
-    }()
+    public lazy var lazyServices: [ApplicationService] = services()
     
     /// List of application services for binding to `AppDelegate` events
     open func services() -> [ApplicationService] {

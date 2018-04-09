@@ -62,18 +62,16 @@ public extension LocationManagerType {
 public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDelegate {
 
     /// Internal Core Location manager
-    private lazy var manager: CLLocationManager = {
-        CLLocationManager().with {
-            $0.desiredAccuracy ?= self.desiredAccuracy
-            $0.distanceFilter ?= self.distanceFilter
-        
-            #if os(iOS)
-            $0.activityType ?= self.activityType
-            #endif
-        
-            $0.delegate = self
-        }
-    }()
+    private lazy var manager = CLLocationManager().with {
+        $0.desiredAccuracy ?= self.desiredAccuracy
+        $0.distanceFilter ?= self.distanceFilter
+    
+        #if os(iOS)
+        $0.activityType ?= self.activityType
+        #endif
+    
+        $0.delegate = self
+    }
     
     /// Default location manager options
     private let desiredAccuracy: CLLocationAccuracy?

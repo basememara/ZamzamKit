@@ -37,9 +37,7 @@ public extension ControllerService {
 open class PluggableController: UIViewController {
     
     /// Lazy implementation of controller services list
-    public lazy var lazyServices: [ControllerService] = {
-        services()
-    }()
+    public lazy var lazyServices: [ControllerService] = services()
     
     /// List of controller services for binding to `UIViewController` events
     open func services() -> [ControllerService] {

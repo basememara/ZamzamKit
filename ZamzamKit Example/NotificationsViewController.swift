@@ -16,13 +16,8 @@ protocol ViewControllerDelegate: class {
 
 class NotificationsViewController: UITableViewController, ViewControllerDelegate {
 
-    lazy var viewModel: NotificationsViewModel = {
-        NotificationsViewModel(delegate: self)
-    }()
-    
-    lazy var activityIndicator: UIActivityIndicatorView = {
-        tableView.makeActivityIndicator()
-    }()
+    lazy var viewModel = NotificationsViewModel(delegate: self)
+    lazy var activityIndicator = tableView.makeActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
