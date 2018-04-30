@@ -128,9 +128,6 @@
 		8B8974711EDF555C004FA853 /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8974701EDF555C004FA853 /* Migration.swift */; };
 		8B8974721EDF555C004FA853 /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8974701EDF555C004FA853 /* Migration.swift */; };
 		8B8974731EDF555C004FA853 /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8974701EDF555C004FA853 /* Migration.swift */; };
-		8B9434561EBCDA4400C779EB /* NotificationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434551EBCDA4400C779EB /* NotificationObservable.swift */; };
-		8B9434571EBCDA4400C779EB /* NotificationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434551EBCDA4400C779EB /* NotificationObservable.swift */; };
-		8B9434581EBCDA4400C779EB /* NotificationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434551EBCDA4400C779EB /* NotificationObservable.swift */; };
 		8B94345A1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */; };
 		8B94345B1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */; };
 		8B94345C1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */; };
@@ -415,7 +412,6 @@
 		8B8215491CA1613400C9FCC9 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		8B89746D1EDE17AC004FA853 /* MigrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationTests.swift; sourceTree = "<group>"; };
 		8B8974701EDF555C004FA853 /* Migration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
-		8B9434551EBCDA4400C779EB /* NotificationObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationObservable.swift; sourceTree = "<group>"; };
 		8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		8B9434601EBDEA8200C779EB /* TimeZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
 		8B9434641EBDEAA200C779EB /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
@@ -750,7 +746,6 @@
 			isa = PBXGroup;
 			children = (
 				8B1FE7E92065AB5200EE8DBE /* iOS */,
-				8B9434551EBCDA4400C779EB /* NotificationObservable.swift */,
 				8BC6D9992047908900242DAE /* Scrollable.swift */,
 				8B2D90EA1EE47ED80019F063 /* UNNotificationTriggerDateType.swift */,
 				8B9E986E1EB500790067ACB7 /* With.swift */,
@@ -1175,7 +1170,6 @@
 				8B4C08AC1EC9422E002A317D /* BinaryFloatingPoint.swift in Sources */,
 				8B6FB9B6202777DE00FE7BEB /* DataViewable.swift in Sources */,
 				8BD98D651FC33B4600E74A8C /* Font.swift in Sources */,
-				8B9434561EBCDA4400C779EB /* NotificationObservable.swift in Sources */,
 				8B9E98601EB396D20067ACB7 /* CellIdentifiable.swift in Sources */,
 				8BFDB68C1C752C5C00C94996 /* UIApplication.swift in Sources */,
 				8BEFE4791E4515D900100744 /* ScheduleInterval.swift in Sources */,
@@ -1282,7 +1276,6 @@
 				8BD016851E77371A008F306E /* WatchSession.swift in Sources */,
 				8B8974721EDF555C004FA853 /* Migration.swift in Sources */,
 				8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */,
-				8B9434571EBCDA4400C779EB /* NotificationObservable.swift in Sources */,
 				8BFDB6781C751F2300C94996 /* FileManager.swift in Sources */,
 				8BD98D661FC33B4600E74A8C /* Font.swift in Sources */,
 				8BF2106C1E48D52F0026B802 /* Result.swift in Sources */,
@@ -1343,7 +1336,6 @@
 				8BC6D99C204790B700242DAE /* Scrollable.swift in Sources */,
 				8B0C71611E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */,
-				8B9434581EBCDA4400C779EB /* NotificationObservable.swift in Sources */,
 				8BEFE47B1E4515D900100744 /* ScheduleInterval.swift in Sources */,
 				8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */,
 				8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */,

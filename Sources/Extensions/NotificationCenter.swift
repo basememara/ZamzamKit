@@ -19,3 +19,27 @@ public extension NotificationCenter {
         post(name: name, object: nil, userInfo: userInfo)
     }
 }
+
+public extension NotificationCenter {
+    
+    /// Adds an entry to the receiver’s dispatch table with an observer, a notification selector and optional criteria: notification name and sender.
+    ///
+    /// - Parameters:
+    ///   - name: The name of the notification for which to register the observer; that is, only notifications with this name are delivered to the observer.
+    ///   - selector: Selector that specifies the message the receiver sends observer to notify it of the notification posting.
+    ///   - observer: Object registering as an observer.
+    ///   - object: The object whose notifications the observer wants to receive; that is, only notifications sent by this sender are delivered to the observer.
+    func addObserver(for name: NSNotification.Name, selector: Selector, from observer: Any, object: Any? = nil) {
+        addObserver(observer, selector: selector, name: name, object: object)
+    }
+    
+    /// Removes matching entries from the notification center's dispatch table.
+    ///
+    /// - Parameters:
+    ///   - name: The name of the notification for which to register the observer; that is, only notifications with this name are delivered to the observer.
+    ///   - observer: Object registering as an observer.
+    ///   - object: The object whose notifications the observer wants to receive; that is, only notifications sent by this sender are delivered to the observer.
+    func removeObserver(for name: NSNotification.Name, from observer: Any, object: Any? = nil) {
+        removeObserver(observer, name: name, object: object)
+    }
+}
