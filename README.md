@@ -278,6 +278,9 @@ You can use [Carthage](https://github.com/Carthage/Carthage) to install `ZamzamK
 github "ZamzamInc/ZamzamKit"
 ```
 
+#### CocoaPods
+Add `pod "ZamzamKit"` to your `Podfile`.
+
 ## Author
 
 http://zamzam.io
