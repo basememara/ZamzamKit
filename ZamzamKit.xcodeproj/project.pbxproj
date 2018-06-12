@@ -60,6 +60,9 @@
 		8B4C08B71EC94608002A317D /* BinaryFloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4C08AB1EC9422E002A317D /* BinaryFloatingPoint.swift */; };
 		8B4CFAE91CABEF0800D2B1D7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
 		8B4CFAEF1CABEF0900D2B1D7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
+		8B5250E020CFDED700E77F70 /* FailableCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */; };
+		8B5250E120CFDED700E77F70 /* FailableCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */; };
+		8B5250E220CFDED700E77F70 /* FailableCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */; };
 		8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316071C9B22F50094A6C4 /* AppDelegate.swift */; };
 		8B53160A1C9B22F50094A6C4 /* UserNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316091C9B22F50094A6C4 /* UserNotificationViewController.swift */; };
 		8B53160C1C9B22F60094A6C4 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53160B1C9B22F60094A6C4 /* LocationViewController.swift */; };
@@ -363,6 +366,7 @@
 		8B4967B21EA7FFF700091A7D /* LocaleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaleTests.swift; sourceTree = "<group>"; };
 		8B4C08AB1EC9422E002A317D /* BinaryFloatingPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryFloatingPoint.swift; sourceTree = "<group>"; };
 		8B4C08AF1EC94489002A317D /* NumberTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberTests.swift; sourceTree = "<group>"; };
+		8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailableCodableArray.swift; sourceTree = "<group>"; };
 		8B5316051C9B22F40094A6C4 /* ZamzamKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZamzamKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5316071C9B22F50094A6C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B5316091C9B22F50094A6C4 /* UserNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationViewController.swift; sourceTree = "<group>"; };
@@ -824,6 +828,7 @@
 			isa = PBXGroup;
 			children = (
 				8B1FE7EA2065AB6600EE8DBE /* iOS */,
+				8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */,
 				8BE2BB3F1F03259C00877447 /* Localizable.swift */,
 				8B6C99961E6E031800D523CC /* LocationManager.swift */,
 				8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */,
@@ -1195,6 +1200,7 @@
 				8B2DE3E11C8A86B2008F1569 /* Bundle.swift in Sources */,
 				8B729C751EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,
 				8BFDB6571C75187200C94996 /* Date.swift in Sources */,
+				8B5250E020CFDED700E77F70 /* FailableCodableArray.swift in Sources */,
 				8B2D90EB1EE47ED80019F063 /* UNNotificationTriggerDateType.swift in Sources */,
 				8B63E4271CDB8DB00053C060 /* UIImage.swift in Sources */,
 				8BDA5E311E795DE300429F78 /* BackgroundTask.swift in Sources */,
@@ -1293,6 +1299,7 @@
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
 				8BC6D99B204790B600242DAE /* Scrollable.swift in Sources */,
 				8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */,
+				8B5250E120CFDED700E77F70 /* FailableCodableArray.swift in Sources */,
 				8B79A4761E9C1ED800C8A5A4 /* Locale.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1317,6 +1324,7 @@
 				8B9434671EBDEAA200C779EB /* Calendar.swift in Sources */,
 				8B7729F320486D6500C15B56 /* ApproximateComparison.swift in Sources */,
 				8B9434631EBDEA8200C779EB /* TimeZone.swift in Sources */,
+				8B5250E220CFDED700E77F70 /* FailableCodableArray.swift in Sources */,
 				8BFDB6601C7518F800C94996 /* String.swift in Sources */,
 				8BBB66E31E9C010600AB1973 /* LocationMeta.swift in Sources */,
 				8B3CD4721EE9CC0100E0BAFE /* Int.swift in Sources */,
