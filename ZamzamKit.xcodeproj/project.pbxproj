@@ -533,7 +533,7 @@
 		8B1447451C72237E00043657 = {
 			isa = PBXGroup;
 			children = (
-				8B14476A1C722D3900043657 /* Metadata */,
+				8B14476A1C722D3900043657 /* Meta */,
 				8B1447511C72237E00043657 /* Sources */,
 				8BE19B091C72D6DF00D4D437 /* ZamzamKit Tests */,
 				8B5316061C9B22F40094A6C4 /* ZamzamKit Example */,
@@ -574,14 +574,14 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		8B14476A1C722D3900043657 /* Metadata */ = {
+		8B14476A1C722D3900043657 /* Meta */ = {
 			isa = PBXGroup;
 			children = (
 				8B14476C1C722D5700043657 /* LICENSE */,
 				8B14476D1C722D5700043657 /* README.md */,
 				8B1FE7C92065A0DD00EE8DBE /* ZamzamKit.podspec */,
 			);
-			name = Metadata;
+			name = Meta;
 			sourceTree = "<group>";
 		};
 		8B1447B51C7253B100043657 /* Frameworks */ = {
