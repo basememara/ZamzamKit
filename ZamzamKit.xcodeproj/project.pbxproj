@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B021E40203CA72E00A0386F /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B021E3F203CA72E00A0386F /* UIScrollView.swift */; };
+		8B07420720DFB69300204C2F /* UIView.swift in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B0BA2241FAA6DFC0042BFF0 /* NextResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */; };
 		8B0C715F1E64CEF9006148CD /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */; };
 		8B0C71601E64CEF9006148CD /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */; };
@@ -848,6 +849,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B1447F81C7258E500043657 /* ZamzamKit.h in Headers */,
+				8B07420720DFB69300204C2F /* UIView.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
