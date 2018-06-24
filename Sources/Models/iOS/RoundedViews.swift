@@ -24,7 +24,7 @@ public class RoundedButton: UIButton {
     }
 }
 
-public class RoundedImage: UIImageView {
+public class RoundedImageView: UIImageView {
     
     public override func awakeFromNib() {
         super.awakeFromNib()
