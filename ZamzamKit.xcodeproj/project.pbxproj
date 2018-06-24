@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B021E40203CA72E00A0386F /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B021E3F203CA72E00A0386F /* UIScrollView.swift */; };
+		8B07420B20DFBD2300204C2F /* RoundedViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B07420A20DFBD2300204C2F /* RoundedViews.swift */; };
 		8B0BA2241FAA6DFC0042BFF0 /* NextResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */; };
 		8B0C715F1E64CEF9006148CD /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */; };
 		8B0C71601E64CEF9006148CD /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */; };
@@ -336,6 +337,7 @@
 
 /* Begin PBXFileReference section */
 		8B021E3F203CA72E00A0386F /* UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
+		8B07420A20DFBD2300204C2F /* RoundedViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedViews.swift; sourceTree = "<group>"; };
 		8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextResponderTextField.swift; sourceTree = "<group>"; };
 		8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		8B14476C1C722D5700043657 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 				8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */,
 				8B752F51201E2E16007DA40C /* PluggableApplicationDelegate.swift */,
 				8B6FB9BD2027CF9900FE7BEB /* PluggableController.swift */,
+				8B07420A20DFBD2300204C2F /* RoundedViews.swift */,
 				8B756F141E5CF16D00DE4B02 /* XIBView.swift */,
 			);
 			path = iOS;
@@ -1179,6 +1182,7 @@
 				8B756EF81E5C025A00DE4B02 /* UINavigationBar.swift in Sources */,
 				8BC811601ECCE75300F455CC /* Hashable.swift in Sources */,
 				8BF307D01CF0E3C600BBA933 /* UIActivity.swift in Sources */,
+				8B07420B20DFBD2300204C2F /* RoundedViews.swift in Sources */,
 				8BCB73CE1CAD660D00E20096 /* Equatable.swift in Sources */,
 				8BB415E61FB0DFFF0002C86C /* StatusBarable.swift in Sources */,
 				8BD08EB51CE28ACA0051080A /* SCNetworkReachability.swift in Sources */,
