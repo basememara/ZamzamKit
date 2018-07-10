@@ -25,6 +25,7 @@
 		8B2285251EB6863600425B5A /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2285241EB6863600425B5A /* UITableViewCell.swift */; };
 		8B25F6B91EC38F0200B4406D /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; };
 		8B25F6BA1EC38F0200B4406D /* ZamzamKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8B2D57B920E2D38900CF4B01 /* UILabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D57B820E2D38900CF4B01 /* UILabelView.swift */; };
 		8B2D90E81EE430BF0019F063 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D90E71EE430BF0019F063 /* NotificationsViewController.swift */; };
 		8B2D90EB1EE47ED80019F063 /* UNNotificationTriggerDateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D90EA1EE47ED80019F063 /* UNNotificationTriggerDateType.swift */; };
 		8B2DE3E11C8A86B2008F1569 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* Bundle.swift */; };
@@ -354,6 +355,7 @@
 		8B1EEC871CF7588600AE054B /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		8B1FE7C92065A0DD00EE8DBE /* ZamzamKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = ZamzamKit.podspec; sourceTree = "<group>"; };
 		8B2285241EB6863600425B5A /* UITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
+		8B2D57B820E2D38900CF4B01 /* UILabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelView.swift; sourceTree = "<group>"; };
 		8B2D90E71EE430BF0019F063 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		8B2D90EA1EE47ED80019F063 /* UNNotificationTriggerDateType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNNotificationTriggerDateType.swift; sourceTree = "<group>"; };
 		8B2DE3E01C8A86B2008F1569 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
@@ -632,6 +634,7 @@
 				8B752F51201E2E16007DA40C /* PluggableApplicationDelegate.swift */,
 				8B6FB9BD2027CF9900FE7BEB /* PluggableController.swift */,
 				8B07420A20DFBD2300204C2F /* RoundedViews.swift */,
+				8B2D57B820E2D38900CF4B01 /* UILabelView.swift */,
 				8B756F141E5CF16D00DE4B02 /* XIBView.swift */,
 			);
 			path = iOS;
@@ -1197,6 +1200,7 @@
 				8B37B8D5200549040052E9B1 /* UIStackView.swift in Sources */,
 				8BD508761C99E18500AE205E /* Collection.swift in Sources */,
 				8B94345A1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
+				8B2D57B920E2D38900CF4B01 /* UILabelView.swift in Sources */,
 				8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */,
 				8B752F7E2020EA30007DA40C /* BadgeBarButtonItem.swift in Sources */,
 				8B021E40203CA72E00A0386F /* UIScrollView.swift in Sources */,
