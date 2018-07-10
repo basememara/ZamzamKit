@@ -26,7 +26,3 @@ open class XIBView: UIView {
         loadFromNib()
     }
 }
-
-// Deprecation notice, will be removed future version
-@available(*, unavailable, renamed: "XIBView")
-typealias BaseNibView = XIBView
