@@ -64,6 +64,7 @@
 		8B4C08B71EC94608002A317D /* BinaryFloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4C08AB1EC9422E002A317D /* BinaryFloatingPoint.swift */; };
 		8B4CFAE91CABEF0800D2B1D7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
 		8B4CFAEF1CABEF0900D2B1D7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
+		8B50C507211E2F9B00A36ABB /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B50C506211E2F9B00A36ABB /* GradientView.swift */; };
 		8B5250E020CFDED700E77F70 /* FailableCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */; };
 		8B5250E120CFDED700E77F70 /* FailableCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */; };
 		8B5250E220CFDED700E77F70 /* FailableCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */; };
@@ -363,6 +364,7 @@
 		8B2DE3E01C8A86B2008F1569 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleTests.swift; sourceTree = "<group>"; };
 		8B2DE3EE1C8A90AF008F1569 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		8B379A0720F65F46002144F7 /* PlaceholderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
 		8B37B8D4200549040052E9B1 /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
 		8B3CD46F1EE9CC0100E0BAFE /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		8B40C2B41CC0A6F400BEC9E0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -374,6 +376,7 @@
 		8B4967B21EA7FFF700091A7D /* LocaleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaleTests.swift; sourceTree = "<group>"; };
 		8B4C08AB1EC9422E002A317D /* BinaryFloatingPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryFloatingPoint.swift; sourceTree = "<group>"; };
 		8B4C08AF1EC94489002A317D /* NumberTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberTests.swift; sourceTree = "<group>"; };
+		8B50C506211E2F9B00A36ABB /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailableCodableArray.swift; sourceTree = "<group>"; };
 		8B5316051C9B22F40094A6C4 /* ZamzamKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZamzamKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5316071C9B22F50094A6C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -631,8 +634,10 @@
 				8BDA5E301E795DE300429F78 /* BackgroundTask.swift */,
 				8B752F7D2020EA30007DA40C /* BadgeBarButtonItem.swift */,
 				8BBEA5E120309764009B7E90 /* ColumnsCollectionViewFlowLayout.swift */,
+				8B50C506211E2F9B00A36ABB /* GradientView.swift */,
 				8B0E0F5020F430C200DF3975 /* IntrinsicHeightDataView.swift */,
 				8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */,
+				8B379A0720F65F46002144F7 /* PlaceholderTextView.swift */,
 				8B752F51201E2E16007DA40C /* PluggableApplicationDelegate.swift */,
 				8B6FB9BD2027CF9900FE7BEB /* PluggableController.swift */,
 				8B07420A20DFBD2300204C2F /* RoundedViews.swift */,
@@ -1215,6 +1220,7 @@
 				8B2DE3E11C8A86B2008F1569 /* Bundle.swift in Sources */,
 				8B729C751EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,
 				8BFDB6571C75187200C94996 /* Date.swift in Sources */,
+				8B379A0820F65F46002144F7 /* PlaceholderTextView.swift in Sources */,
 				8B5250E020CFDED700E77F70 /* FailableCodableArray.swift in Sources */,
 				8B2D90EB1EE47ED80019F063 /* UNNotificationTriggerDateType.swift in Sources */,
 				8B63E4271CDB8DB00053C060 /* UIImage.swift in Sources */,
@@ -1253,6 +1259,7 @@
 				8BFDB65E1C7518F800C94996 /* String.swift in Sources */,
 				8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8B5D8A971E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */,
+				8B50C507211E2F9B00A36ABB /* GradientView.swift in Sources */,
 				8BD016841E77371A008F306E /* WatchSession.swift in Sources */,
 				8B756F151E5CF16D00DE4B02 /* XIBView.swift in Sources */,
 				8BD98D6F1FC35B3700E74A8C /* UIWindow.swift in Sources */,
