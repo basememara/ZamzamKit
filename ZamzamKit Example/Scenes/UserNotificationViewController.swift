@@ -10,14 +10,16 @@ import UIKit
 import UserNotifications
 import ZamzamKit
 
-class UserNotificationViewController: UIViewController, StatusBarable, NotificationObservable {
+class UserNotificationViewController: UIViewController, StatusBarable {
+    
+    private let notificationCenter = NotificationCenter.default
     
     let sharedApplication = UIApplication.shared
     var statusBar: UIView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addObserver(for: .UIDeviceOrientationDidChange, selector: #selector(deviceOrientationDidChange))
+        notificationCenter.addObserver(self, selector: #selector(deviceOrientationDidChange), name: .UIDeviceOrientationDidChange, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

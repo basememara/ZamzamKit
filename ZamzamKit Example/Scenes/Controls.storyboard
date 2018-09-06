@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ei4-K5-ZcS">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Controls-->
+        <scene sceneID="ynh-Pg-ch4">
+            <objects>
+                <viewController id="ei4-K5-ZcS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hug-uj-IMp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="967"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHD-aX-hVC">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="967"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAB-NL-gPa" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="775"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="k9n-6u-Qqa">
+                                                <rect key="frame" x="19" y="52" width="337.5" height="691"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PlaceholderTextView" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKF-uG-VDO">
+                                                        <rect key="frame" x="0.0" y="0.0" width="337.5" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mg5-uS-ai3" customClass="PlaceholderTextView" customModule="ZamzamKit">
+                                                        <rect key="frame" x="0.0" y="36.5" width="337.5" height="33"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Enter message..."/>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UILabelView" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5x-Z3-m8S">
+                                                        <rect key="frame" x="0.0" y="85.5" width="337.5" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="1 Infinite Loop Cupertino, CA 95014 United States  408-555-5555  May 1, 2020 at 3pm  https://apple.com" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="b8z-Qn-ktF" customClass="UILabelView" customModule="ZamzamKit">
+                                                        <rect key="frame" x="0.0" y="122" width="337.5" height="166.5"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                                                    </textView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GradientView" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mav-j7-dIv">
+                                                        <rect key="frame" x="0.0" y="304.5" width="337.5" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1e5-Gh-J8V" customClass="GradientView" customModule="ZamzamKit">
+                                                        <rect key="frame" x="0.0" y="341" width="337.5" height="350"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="350" id="H7u-uH-Oa5"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
+                                                                <color key="value" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="secondColor">
+                                                                <color key="value" red="0.99953407049999998" green="0.98835557699999999" blue="0.47265523669999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isHorizontal" value="NO"/>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="k9n-6u-Qqa" firstAttribute="top" secondItem="pAB-NL-gPa" secondAttribute="topMargin" constant="24" id="2SU-fy-pil"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="k9n-6u-Qqa" secondAttribute="bottom" constant="24" id="Sja-nh-epl"/>
+                                            <constraint firstItem="k9n-6u-Qqa" firstAttribute="centerX" secondItem="pAB-NL-gPa" secondAttribute="centerX" id="XeE-Y0-LZ5"/>
+                                            <constraint firstItem="k9n-6u-Qqa" firstAttribute="width" secondItem="pAB-NL-gPa" secondAttribute="width" multiplier="0.5" id="aMs-T4-tBh"/>
+                                            <constraint firstItem="k9n-6u-Qqa" firstAttribute="width" secondItem="pAB-NL-gPa" secondAttribute="width" multiplier="0.9" id="rTa-t7-iTq"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="aMs-T4-tBh"/>
+                                                <exclude reference="rTa-t7-iTq"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="rTa-t7-iTq"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=regular">
+                                            <mask key="constraints">
+                                                <include reference="aMs-T4-tBh"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="pAB-NL-gPa" secondAttribute="bottom" id="CAX-m3-prl"/>
+                                    <constraint firstItem="pAB-NL-gPa" firstAttribute="leading" secondItem="bHD-aX-hVC" secondAttribute="leading" id="YEU-sv-7jr"/>
+                                    <constraint firstAttribute="trailing" secondItem="pAB-NL-gPa" secondAttribute="trailing" id="eW8-MX-Prs"/>
+                                    <constraint firstItem="pAB-NL-gPa" firstAttribute="top" secondItem="bHD-aX-hVC" secondAttribute="top" id="rbZ-gM-TfP"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bHD-aX-hVC" firstAttribute="top" secondItem="hug-uj-IMp" secondAttribute="top" id="DOW-m6-LIb"/>
+                            <constraint firstItem="nGK-0M-Tlh" firstAttribute="trailing" secondItem="bHD-aX-hVC" secondAttribute="trailing" id="glV-R5-ltX"/>
+                            <constraint firstAttribute="bottom" secondItem="bHD-aX-hVC" secondAttribute="bottom" id="hUf-wL-ImZ"/>
+                            <constraint firstItem="pAB-NL-gPa" firstAttribute="width" secondItem="hug-uj-IMp" secondAttribute="width" id="jnO-iP-xmu"/>
+                            <constraint firstItem="bHD-aX-hVC" firstAttribute="leading" secondItem="nGK-0M-Tlh" secondAttribute="leading" id="kIC-Qr-odk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nGK-0M-Tlh"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Controls" image="first" id="bap-Pf-o0v"/>
+                    <size key="freeformSize" width="375" height="967"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dvy-bm-7nn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="900" y="1118"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="first" width="30" height="30"/>
+    </resources>
+</document>
