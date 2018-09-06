@@ -8,9 +8,8 @@
 
 import UIKit
 
-
 /// UITextView that mimics UILabel for leveraging data detectors and other features
-public class UILabelView: UITextView {
+open class UILabelView: UITextView {
     
     public init(dataDetectorTypes: UIDataDetectorTypes) {
         self.init()
