@@ -36,8 +36,8 @@ class LocationViewController: UIViewController {
             startUpdatingLocation: true) {
                 guard $0 else {
                     return self.present(
-                        alert: .localized(.alert),
-                        message: .localized(.message),
+                        alert: .localized(.allowLocationAlert),
+                        message: .localized(.allowLocationMessage),
                         buttonText: .localized(.allow),
                         includeCancelAction: true,
                         handler: {
@@ -68,11 +68,5 @@ extension LocationViewController {
             print($0.description)
         }
     }
-}
-
-extension Localizable {
-    static let allow = Localizable(NSLocalizedString("Allow", comment: "For dialogs"))
-    static let alert = Localizable(NSLocalizedString("Allow “My App” to Access Your Current Location?", comment: "For dialogs"))
-    static let message = Localizable(NSLocalizedString("Coordinates needed to calculate your location.", comment: "For dialogs"))
 }
 

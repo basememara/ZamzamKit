@@ -26,6 +26,8 @@
 	<string>Location updates needed for demo.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location updates needed for demo.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Calendar updates needed for demo.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

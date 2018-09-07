@@ -10,10 +10,6 @@ import UIKit
 import UserNotifications
 import ZamzamKit
 
-protocol ViewControllerDelegate: class {
-    func update()
-}
-
 class NotificationsViewController: UITableViewController, ViewControllerDelegate {
 
     lazy var viewModel = NotificationsViewModel(delegate: self)

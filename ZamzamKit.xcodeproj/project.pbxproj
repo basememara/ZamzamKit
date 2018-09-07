@@ -160,6 +160,10 @@
 		8BB343212140E842000F0CEF /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB343182140E842000F0CEF /* LocationViewController.swift */; };
 		8BB343222140E842000F0CEF /* Controls.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB343192140E842000F0CEF /* Controls.storyboard */; };
 		8BB343242141890F000F0CEF /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB343232141890F000F0CEF /* EventManager.swift */; };
+		8BB343262141BB25000F0CEF /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB343252141BB25000F0CEF /* Calendar.storyboard */; };
+		8BB343282141BB34000F0CEF /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB343272141BB34000F0CEF /* CalendarViewController.swift */; };
+		8BB3432B2141BC92000F0CEF /* ViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB3432A2141BC92000F0CEF /* ViewControllerDelegate.swift */; };
+		8BB3432E2141D557000F0CEF /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB3432D2141D557000F0CEF /* Localizable.swift */; };
 		8BB376121CF8B8D6005E7F67 /* Restorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB376111CF8B8D6005E7F67 /* Restorable.swift */; };
 		8BB415E61FB0DFFF0002C86C /* StatusBarable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB415E51FB0DFFF0002C86C /* StatusBarable.swift */; };
 		8BB45FB51C9BDD180070CE07 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */; };
@@ -446,6 +450,10 @@
 		8BB343182140E842000F0CEF /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		8BB343192140E842000F0CEF /* Controls.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Controls.storyboard; sourceTree = "<group>"; };
 		8BB343232141890F000F0CEF /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		8BB343252141BB25000F0CEF /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
+		8BB343272141BB34000F0CEF /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		8BB3432A2141BC92000F0CEF /* ViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDelegate.swift; sourceTree = "<group>"; };
+		8BB3432D2141D557000F0CEF /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		8BB376111CF8B8D6005E7F67 /* Restorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restorable.swift; sourceTree = "<group>"; };
 		8BB415E51FB0DFFF0002C86C /* StatusBarable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarable.swift; sourceTree = "<group>"; };
 		8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -712,6 +720,8 @@
 		8B5316061C9B22F40094A6C4 /* ZamzamKit Example */ = {
 			isa = PBXGroup;
 			children = (
+				8BB3432C2141D54B000F0CEF /* Extensions */,
+				8BB343292141BC7C000F0CEF /* Protocols */,
 				8BB343102140E81A000F0CEF /* Scenes */,
 				8B5316071C9B22F50094A6C4 /* AppDelegate.swift */,
 				8B53160D1C9B22F60094A6C4 /* Main.storyboard */,
@@ -778,17 +788,35 @@
 		8BB343102140E81A000F0CEF /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				8BB343252141BB25000F0CEF /* Calendar.storyboard */,
+				8BB343272141BB34000F0CEF /* CalendarViewController.swift */,
 				8BB343192140E842000F0CEF /* Controls.storyboard */,
 				8BB343132140E842000F0CEF /* ControlsViewController.swift */,
 				8BB343112140E842000F0CEF /* Location.storyboard */,
 				8BB343182140E842000F0CEF /* LocationViewController.swift */,
-				8BB343152140E842000F0CEF /* NotificationsViewController.swift */,
 				8BB343142140E842000F0CEF /* Notification.storyboard */,
+				8BB343152140E842000F0CEF /* NotificationsViewController.swift */,
 				8BB343162140E842000F0CEF /* UserNotificationViewController.swift */,
 				8BB343172140E842000F0CEF /* Watch.storyboard */,
 				8BB343122140E842000F0CEF /* WatchViewController.swift */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		8BB343292141BC7C000F0CEF /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				8BB3432A2141BC92000F0CEF /* ViewControllerDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		8BB3432C2141D54B000F0CEF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8BB3432D2141D557000F0CEF /* Localizable.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		8BE19B091C72D6DF00D4D437 /* ZamzamKit Tests */ = {
@@ -1159,6 +1187,7 @@
 				8BB343222140E842000F0CEF /* Controls.storyboard in Resources */,
 				8BB3431D2140E842000F0CEF /* Notification.storyboard in Resources */,
 				8BB343202140E842000F0CEF /* Watch.storyboard in Resources */,
+				8BB343262141BB25000F0CEF /* Calendar.storyboard in Resources */,
 				8B5316111C9B22F60094A6C4 /* Assets.xcassets in Resources */,
 				8B53160F1C9B22F60094A6C4 /* Main.storyboard in Resources */,
 				8BB3431A2140E842000F0CEF /* Location.storyboard in Resources */,
@@ -1400,13 +1429,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BB343282141BB34000F0CEF /* CalendarViewController.swift in Sources */,
 				8BB343212140E842000F0CEF /* LocationViewController.swift in Sources */,
+				8BB3432E2141D557000F0CEF /* Localizable.swift in Sources */,
 				8BB3431E2140E842000F0CEF /* NotificationsViewController.swift in Sources */,
 				8B5316661C9B24A70094A6C4 /* ZamzamConstants.swift in Sources */,
 				8BB3431B2140E842000F0CEF /* WatchViewController.swift in Sources */,
 				8BB3431C2140E842000F0CEF /* ControlsViewController.swift in Sources */,
 				8BB3431F2140E842000F0CEF /* UserNotificationViewController.swift in Sources */,
 				8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */,
+				8BB3432B2141BC92000F0CEF /* ViewControllerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
