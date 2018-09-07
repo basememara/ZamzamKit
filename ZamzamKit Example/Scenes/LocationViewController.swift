@@ -14,24 +14,18 @@ class LocationViewController: UIViewController {
 
     @IBOutlet weak var outputLabel: UILabel!
     
-    var locationManager: LocationManager = {
-        LocationManager(
-            desiredAccuracy: kCLLocationAccuracyThreeKilometers,
-            distanceFilter: 1000
-        )
-    }()
-    
-    var locationObserver = Observer<LocationManager.LocationHandler> {
-        print($0.description)
-    }
+    var locationsWorker: LocationsWorkerType = LocationsWorker(
+        desiredAccuracy: kCLLocationAccuracyThreeKilometers,
+        distanceFilter: 1000
+    )
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        locationManager.addObserver(locationObserver)
-        locationManager.addObserver(locationObserver)
+        locationsWorker.addObserver(locationObserver)
+        locationsWorker.addObserver(headingObserver)
         
-        locationManager.requestAuthorization(
+        locationsWorker.requestAuthorization(
             for: .whenInUse,
             startUpdatingLocation: true) {
                 guard $0 else {
@@ -47,23 +41,29 @@ class LocationViewController: UIViewController {
                     )
                 }
                 
-                self.locationManager.startUpdatingHeading()
+                self.locationsWorker.startUpdatingHeading()
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        locationManager.removeObservers()
+        locationsWorker.removeObservers()
     }
     
     deinit {
-        locationManager.removeObservers()
+        locationsWorker.removeObservers()
     }
 }
 
 extension LocationViewController {
     
-    var headingObserver: Observer<LocationManager.HeadingHandler> {
+    var locationObserver: Observer<LocationsWorker.LocationHandler> {
+        return Observer { [weak self] in
+            self?.outputLabel.text = $0.description
+        }
+    }
+    
+    var headingObserver: Observer<LocationsWorker.HeadingHandler> {
         return Observer {
             print($0.description)
         }

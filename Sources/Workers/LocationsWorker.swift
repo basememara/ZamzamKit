@@ -8,89 +8,7 @@
 
 import CoreLocation
 
-public protocol LocationManagerType {
-    typealias LocationHandler = (CLLocation) -> Void
-    typealias AuthorizationHandler = (Bool) -> Void
-    
-    /// Determines if location services is enabled and authorized for always or when in use.
-    var isAuthorized: Bool { get }
-    
-    /// Determines if location services is enabled and authorized for the specified authorization type.
-    func isAuthorized(for type: LocationAuthorizationType) -> Bool
-    
-    /// The most recently retrieved user location.
-    var location: CLLocation? { get }
-    
-    init(desiredAccuracy: CLLocationAccuracy?, distanceFilter: Double?, activityType: CLActivityType?)
-    
-    /// Starts the generation of updates that report the user’s current location.
-    func startUpdatingLocation(enableBackground: Bool)
-    
-    /// Stops the generation of location updates.
-    func stopUpdatingLocation()
-    
-    /// Requests permission to use location services.
-    ///
-    /// - Parameters:
-    ///   - type: Type of permission required, whether in the foreground (.whenInUse) or while running (.always).
-    ///   - startUpdatingLocation: Starts the generation of updates that report the user’s current location.
-    ///   - completion: True if the authorization succeeded for the authorization type, false otherwise.
-    func requestAuthorization(for type: LocationAuthorizationType, startUpdatingLocation: Bool, completion: AuthorizationHandler?)
-    
-    /// Request the one-time delivery of the user’s current location.
-    ///
-    /// - Parameter completion: The completion with the location object.
-    func requestLocation(completion: @escaping LocationHandler)
-    
-    func addObserver(_ observer: Observer<LocationHandler>)
-    func addObserver(_ observer: Observer<AuthorizationHandler>)
-    func removeObserver(_ observer: Observer<LocationHandler>)
-    func removeObserver(_ observer: Observer<AuthorizationHandler>)
-    func removeObservers(with prefix: String)
-    
-    #if os(iOS)
-    typealias HeadingHandler = (CLHeading) -> Void
-    
-    /// The most recently reported heading.
-    var heading: CLHeading? { get }
-    
-    /// Starts the generation of updates based on significant location changes.
-    func startMonitoringSignificantLocationChanges()
-    
-    /// Stops the delivery of location events based on significant location changes.
-    func stopMonitoringSignificantLocationChanges()
-    
-    /// Starts the generation of updates that report the user’s current heading.
-    func startUpdatingHeading()
-    
-    /// Stops the generation of heading updates.
-    func stopUpdatingHeading()
-    
-    func addObserver(_ observer: Observer<HeadingHandler>)
-    func removeObserver(_ observer: Observer<HeadingHandler>)
-    #endif
-}
-
-public extension LocationManagerType {
-    
-    func startUpdatingLocation() {
-        startUpdatingLocation(enableBackground: false)
-    }
-    
-    func requestAuthorization(for type: LocationAuthorizationType = .whenInUse, startUpdatingLocation: Bool = false, completion: AuthorizationHandler?) {
-        requestAuthorization(for: type, startUpdatingLocation: startUpdatingLocation, completion: completion)
-    }
-    
-    func requestAuthorization(for type: LocationAuthorizationType) {
-        requestAuthorization(for: type, startUpdatingLocation: false, completion: nil)
-    }
-
-    func removeObservers(from file: String = #file) {
-        removeObservers(with: file)
-    }
-}
-
-public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDelegate {
+public class LocationsWorker: NSObject, LocationsWorkerType, CLLocationManagerDelegate {
 
     /// Internal Core Location manager
     private lazy var manager = CLLocationManager().with {
@@ -146,7 +64,7 @@ public class LocationManager: NSObject, LocationManagerType, CLLocationManagerDe
 
 // MARK: - Location manager observers
 
-public extension LocationManager {
+public extension LocationsWorker {
 
     func addObserver(_ observer: Observer<LocationHandler>) {
         didUpdateLocations += observer
@@ -189,7 +107,7 @@ public extension LocationManager {
 
 // MARK: - CLLocationManagerDelegate functions
 
-public extension LocationManager {
+public extension LocationsWorker {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
@@ -215,7 +133,7 @@ public extension LocationManager {
 
 // MARK: - CLLocationManager wrappers
 
-public extension LocationManager {
+public extension LocationsWorker {
     
     var isAuthorized: Bool {
         return CLLocationManager.isAuthorized
@@ -257,7 +175,7 @@ public extension LocationManager {
 
 // MARK: - Single requests
 
-public extension LocationManager {
+public extension LocationsWorker {
 
     func requestAuthorization(for type: LocationAuthorizationType, startUpdatingLocation: Bool, completion: AuthorizationHandler?) {
         // Handle authorized and exit
@@ -307,7 +225,7 @@ public extension LocationManager {
 }
 
 #if os(iOS)
-public extension LocationManager {
+public extension LocationsWorker {
     
     /// A Boolean value indicating whether the app wants to receive location updates when suspended.
     var allowsBackgroundLocationUpdates: Bool {

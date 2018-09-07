@@ -100,8 +100,8 @@
 		8B6A956D1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
 		8B6A956E1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
 		8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
-		8B6C99971E6E031800D523CC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationManager.swift */; };
-		8B6C99981E6E031800D523CC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationManager.swift */; };
+		8B6C99971E6E031800D523CC /* LocationsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationsWorker.swift */; };
+		8B6C99981E6E031800D523CC /* LocationsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationsWorker.swift */; };
 		8B6FB9B6202777DE00FE7BEB /* DataViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FB9B5202777DE00FE7BEB /* DataViewable.swift */; };
 		8B6FB9BE2027CF9900FE7BEB /* PluggableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FB9BD2027CF9900FE7BEB /* PluggableController.swift */; };
 		8B729C751EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B729C741EAB9D56004A6BF1 /* ConditionalAssignment.swift */; };
@@ -159,7 +159,7 @@
 		8BB343202140E842000F0CEF /* Watch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB343172140E842000F0CEF /* Watch.storyboard */; };
 		8BB343212140E842000F0CEF /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB343182140E842000F0CEF /* LocationViewController.swift */; };
 		8BB343222140E842000F0CEF /* Controls.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB343192140E842000F0CEF /* Controls.storyboard */; };
-		8BB343242141890F000F0CEF /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB343232141890F000F0CEF /* EventManager.swift */; };
+		8BB343242141890F000F0CEF /* EventsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB343232141890F000F0CEF /* EventsWorker.swift */; };
 		8BB343262141BB25000F0CEF /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB343252141BB25000F0CEF /* Calendar.storyboard */; };
 		8BB343282141BB34000F0CEF /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB343272141BB34000F0CEF /* CalendarViewController.swift */; };
 		8BB3432B2141BC92000F0CEF /* ViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB3432A2141BC92000F0CEF /* ViewControllerDelegate.swift */; };
@@ -223,6 +223,12 @@
 		8BEFE4791E4515D900100744 /* ScheduleInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE4781E4515D900100744 /* ScheduleInterval.swift */; };
 		8BEFE47A1E4515D900100744 /* ScheduleInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE4781E4515D900100744 /* ScheduleInterval.swift */; };
 		8BEFE47B1E4515D900100744 /* ScheduleInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE4781E4515D900100744 /* ScheduleInterval.swift */; };
+		8BF0CD0D2143242900DF6DAF /* EventsWorkerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0CD0C2143242900DF6DAF /* EventsWorkerType.swift */; };
+		8BF0CD0E2143242900DF6DAF /* EventsWorkerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0CD0C2143242900DF6DAF /* EventsWorkerType.swift */; };
+		8BF0CD0F2143242900DF6DAF /* EventsWorkerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0CD0C2143242900DF6DAF /* EventsWorkerType.swift */; };
+		8BF0CD112143243500DF6DAF /* LocationsWorkerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0CD102143243500DF6DAF /* LocationsWorkerType.swift */; };
+		8BF0CD122143243500DF6DAF /* LocationsWorkerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0CD102143243500DF6DAF /* LocationsWorkerType.swift */; };
+		8BF0CD132143243500DF6DAF /* LocationsWorkerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0CD102143243500DF6DAF /* LocationsWorkerType.swift */; };
 		8BF2106B1E48D52F0026B802 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2106A1E48D52F0026B802 /* Result.swift */; };
 		8BF2106C1E48D52F0026B802 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2106A1E48D52F0026B802 /* Result.swift */; };
 		8BF2106D1E48D52F0026B802 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2106A1E48D52F0026B802 /* Result.swift */; };
@@ -415,7 +421,7 @@
 		8B63E4261CDB8DB00053C060 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		8B6A95601E46FBB9003F333D /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		8B6A956C1E484D5A003F333D /* ZamzamError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamError.swift; sourceTree = "<group>"; };
-		8B6C99961E6E031800D523CC /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		8B6C99961E6E031800D523CC /* LocationsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsWorker.swift; sourceTree = "<group>"; };
 		8B6FB9B5202777DE00FE7BEB /* DataViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewable.swift; sourceTree = "<group>"; };
 		8B6FB9BD2027CF9900FE7BEB /* PluggableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluggableController.swift; sourceTree = "<group>"; };
 		8B729C741EAB9D56004A6BF1 /* ConditionalAssignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditionalAssignment.swift; sourceTree = "<group>"; };
@@ -449,7 +455,7 @@
 		8BB343172140E842000F0CEF /* Watch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Watch.storyboard; sourceTree = "<group>"; };
 		8BB343182140E842000F0CEF /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		8BB343192140E842000F0CEF /* Controls.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Controls.storyboard; sourceTree = "<group>"; };
-		8BB343232141890F000F0CEF /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		8BB343232141890F000F0CEF /* EventsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsWorker.swift; sourceTree = "<group>"; };
 		8BB343252141BB25000F0CEF /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		8BB343272141BB34000F0CEF /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		8BB3432A2141BC92000F0CEF /* ViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -487,6 +493,8 @@
 		8BE814FC1C7842DC005F23CE /* Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUserNotificationCenter.swift; sourceTree = "<group>"; };
 		8BEFE4781E4515D900100744 /* ScheduleInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleInterval.swift; sourceTree = "<group>"; };
+		8BF0CD0C2143242900DF6DAF /* EventsWorkerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsWorkerType.swift; sourceTree = "<group>"; };
+		8BF0CD102143243500DF6DAF /* LocationsWorkerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsWorkerType.swift; sourceTree = "<group>"; };
 		8BF2106A1E48D52F0026B802 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNNotificationAttachment.swift; sourceTree = "<group>"; };
 		8BF307C01CF0D44200BBA933 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -599,9 +607,10 @@
 				8B729C731EAB9D56004A6BF1 /* Infixes */,
 				8BFDB6A51C75B4B200C94996 /* Models */,
 				8B840E651C904F3300D85781 /* Protocols */,
+				8BEC1BB71EE81CD3002FA271 /* Supporting Files */,
+				8BF0CD0B2143239000DF6DAF /* Workers */,
 				8B1447821C722F5E00043657 /* ZamzamConstants.swift */,
 				8BF307C01CF0D44200BBA933 /* Media.xcassets */,
-				8BEC1BB71EE81CD3002FA271 /* Supporting Files */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -855,6 +864,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8BF0CD0B2143239000DF6DAF /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				8BB343232141890F000F0CEF /* EventsWorker.swift */,
+				8BF0CD0C2143242900DF6DAF /* EventsWorkerType.swift */,
+				8B6C99961E6E031800D523CC /* LocationsWorker.swift */,
+				8BF0CD102143243500DF6DAF /* LocationsWorkerType.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
 		8BFDB65C1C75187800C94996 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -891,10 +911,8 @@
 			isa = PBXGroup;
 			children = (
 				8B1FE7EA2065AB6600EE8DBE /* iOS */,
-				8BB343232141890F000F0CEF /* EventManager.swift */,
 				8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */,
 				8BE2BB3F1F03259C00877447 /* Localizable.swift */,
-				8B6C99961E6E031800D523CC /* LocationManager.swift */,
 				8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */,
 				8B8974701EDF555C004FA853 /* Migration.swift */,
 				8B75286B1E759F2A0035A742 /* Observer.swift */,
@@ -1272,11 +1290,12 @@
 				8B2DE3E11C8A86B2008F1569 /* Bundle.swift in Sources */,
 				8B729C751EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,
 				8BFDB6571C75187200C94996 /* Date.swift in Sources */,
+				8BF0CD112143243500DF6DAF /* LocationsWorkerType.swift in Sources */,
 				8B379A0820F65F46002144F7 /* PlaceholderTextView.swift in Sources */,
 				8B5250E020CFDED700E77F70 /* FailableCodableArray.swift in Sources */,
 				8B2D90EB1EE47ED80019F063 /* UNNotificationTriggerDateType.swift in Sources */,
 				8B63E4271CDB8DB00053C060 /* UIImage.swift in Sources */,
-				8BB343242141890F000F0CEF /* EventManager.swift in Sources */,
+				8BB343242141890F000F0CEF /* EventsWorker.swift in Sources */,
 				8BDA5E311E795DE300429F78 /* BackgroundTask.swift in Sources */,
 				8BD5086B1C99DD1E00AE205E /* Array.swift in Sources */,
 				8B2285251EB6863600425B5A /* UITableViewCell.swift in Sources */,
@@ -1296,7 +1315,7 @@
 				8BB45FB51C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8B7729F120486D6500C15B56 /* ApproximateComparison.swift in Sources */,
 				8BE2BB401F03259C00877447 /* Localizable.swift in Sources */,
-				8B6C99971E6E031800D523CC /* LocationManager.swift in Sources */,
+				8B6C99971E6E031800D523CC /* LocationsWorker.swift in Sources */,
 				8BFDB6771C751F2300C94996 /* FileManager.swift in Sources */,
 				8B9E98111EB144540067ACB7 /* Routable.swift in Sources */,
 				8BFDB6641C751AE600C94996 /* URL.swift in Sources */,
@@ -1320,6 +1339,7 @@
 				8BD2D19E1CA583110018AC2B /* UIAlertAction.swift in Sources */,
 				8B9434651EBDEAA200C779EB /* Calendar.swift in Sources */,
 				8B1448061C7258F700043657 /* ZamzamConstants.swift in Sources */,
+				8BF0CD0D2143242900DF6DAF /* EventsWorkerType.swift in Sources */,
 				8BE814FD1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8BFDB66A1C751D3400C94996 /* UIViewController.swift in Sources */,
 			);
@@ -1338,7 +1358,7 @@
 				8BD61B371E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
 				8BE2BB411F03259C00877447 /* Localizable.swift in Sources */,
 				8B3CD4711EE9CC0100E0BAFE /* Int.swift in Sources */,
-				8B6C99981E6E031800D523CC /* LocationManager.swift in Sources */,
+				8B6C99981E6E031800D523CC /* LocationsWorker.swift in Sources */,
 				8B6A956E1E484D5A003F333D /* ZamzamError.swift in Sources */,
 				8B7729F220486D6500C15B56 /* ApproximateComparison.swift in Sources */,
 				8B82154B1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
@@ -1375,8 +1395,10 @@
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
 				8BC6D99B204790B600242DAE /* Scrollable.swift in Sources */,
 				8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */,
+				8BF0CD122143243500DF6DAF /* LocationsWorkerType.swift in Sources */,
 				8B5250E120CFDED700E77F70 /* FailableCodableArray.swift in Sources */,
 				8B79A4761E9C1ED800C8A5A4 /* Locale.swift in Sources */,
+				8BF0CD0E2143242900DF6DAF /* EventsWorkerType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1393,6 +1415,7 @@
 				8BFDB6661C751AE600C94996 /* URL.swift in Sources */,
 				8BF2106D1E48D52F0026B802 /* Result.swift in Sources */,
 				8B79A4771E9C1ED800C8A5A4 /* Locale.swift in Sources */,
+				8BF0CD0F2143242900DF6DAF /* EventsWorkerType.swift in Sources */,
 				8BD61B381E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
 				8BD508781C99E18500AE205E /* Collection.swift in Sources */,
 				8B4CFAEF1CABEF0900D2B1D7 /* Color.swift in Sources */,
@@ -1419,6 +1442,7 @@
 				8BEFE47B1E4515D900100744 /* ScheduleInterval.swift in Sources */,
 				8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */,
 				8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */,
+				8BF0CD132143243500DF6DAF /* LocationsWorkerType.swift in Sources */,
 				8BD98D671FC33B4600E74A8C /* Font.swift in Sources */,
 				8BE2BB421F03259C00877447 /* Localizable.swift in Sources */,
 				8B729C771EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,

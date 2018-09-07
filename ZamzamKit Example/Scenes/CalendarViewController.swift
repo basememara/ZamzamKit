@@ -15,7 +15,7 @@ class CalendarViewController: UITableViewController {
     private let notificationCenter = NotificationCenter.default
     private lazy var activityIndicator = tableView.makeActivityIndicator()
     
-    private let eventManager: EventManagerType = EventManager()
+    private let eventsWorker: EventsWorkerType = EventsWorker()
     private var elements = [EKEvent]()
     
     override func viewDidLoad() {
@@ -48,7 +48,7 @@ private extension CalendarViewController {
     @objc func loadData() {
         beginRefreshing()
         
-        eventManager.fetchEvents(
+        eventsWorker.fetchEvents(
             from: Date(timeIntervalSinceNow: 60 * 60 * 24 * -30),
             to: Date(timeIntervalSinceNow: 60 * 60 * 24 * 30),
             completion: { [weak self] in
@@ -71,7 +71,7 @@ private extension CalendarViewController {
 private extension CalendarViewController {
     
     func requestAccess() {
-        eventManager.requestAccess { [weak self] granted in
+        eventsWorker.requestAccess { [weak self] granted in
             guard granted else {
                 self?.presentAlert(for: .unauthorized)
                 return
@@ -87,7 +87,7 @@ private extension CalendarViewController {
         let taskGroup = DispatchGroup()
         
         taskGroup.enter()
-        eventManager.createEvent(
+        eventsWorker.createEvent(
             configure: {
                 $0.title = "Single: Meeting with \(Int(arc4random_uniform(2000)))"
                 $0.notes = "Don't forget to bring the meeting memos"
@@ -105,7 +105,7 @@ private extension CalendarViewController {
         )
         
         taskGroup.enter()
-        eventManager.createEvents(
+        eventsWorker.createEvents(
             from: [
                 "List 1",
                 "List 2",
@@ -135,7 +135,7 @@ private extension CalendarViewController {
     func reset() {
         beginRefreshing()
         
-        eventManager.deleteEvents(withIdentifiers: elements.map { $0.eventIdentifier }) { [weak self] in
+        eventsWorker.deleteEvents(withIdentifiers: elements.map { $0.eventIdentifier }) { [weak self] in
             self?.loadData()
             
             if $0.isFailure {
@@ -185,7 +185,7 @@ extension CalendarViewController {
         return UISwipeActionsConfiguration(
             actions: [
                 UIContextualAction(style: .destructive, title: "Delete") { [unowned self] _, _, completion in
-                    self.eventManager.deleteEvent(withIdentifier: model.eventIdentifier) {
+                    self.eventsWorker.deleteEvent(withIdentifier: model.eventIdentifier) {
                         completion($0.isSuccess)
                         
                         guard $0.isSuccess else {
@@ -197,7 +197,7 @@ extension CalendarViewController {
                     }
                 },
                 UIContextualAction(style: .normal, title: "Modify") { [unowned self] _, _, completion in
-                    self.eventManager.updateEvent(
+                    self.eventsWorker.updateEvent(
                         withIdentifier: model.eventIdentifier,
                         configure: {
                             $0.endDate = Date().addingTimeInterval(Double(Int.random(in: 86400...259200)))
