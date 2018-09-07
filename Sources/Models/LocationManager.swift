@@ -12,15 +12,34 @@ public protocol LocationManagerType {
     typealias LocationHandler = (CLLocation) -> Void
     typealias AuthorizationHandler = (Bool) -> Void
     
+    /// Determines if location services is enabled and authorized for always or when in use.
     var isAuthorized: Bool { get }
+    
+    /// Determines if location services is enabled and authorized for the specified authorization type.
+    func isAuthorized(for type: LocationAuthorizationType) -> Bool
+    
+    /// The most recently retrieved user location.
     var location: CLLocation? { get }
     
     init(desiredAccuracy: CLLocationAccuracy?, distanceFilter: Double?, activityType: CLActivityType?)
     
-    func isAuthorized(for type: LocationAuthorizationType) -> Bool
+    /// Starts the generation of updates that report the user’s current location.
     func startUpdatingLocation(enableBackground: Bool)
+    
+    /// Stops the generation of location updates.
     func stopUpdatingLocation()
+    
+    /// Requests permission to use location services.
+    ///
+    /// - Parameters:
+    ///   - type: Type of permission required, whether in the foreground (.whenInUse) or while running (.always).
+    ///   - startUpdatingLocation: Starts the generation of updates that report the user’s current location.
+    ///   - completion: True if the authorization succeeded for the authorization type, false otherwise.
     func requestAuthorization(for type: LocationAuthorizationType, startUpdatingLocation: Bool, completion: AuthorizationHandler?)
+    
+    /// Request the one-time delivery of the user’s current location.
+    ///
+    /// - Parameter completion: The completion with the location object.
     func requestLocation(completion: @escaping LocationHandler)
     
     func addObserver(_ observer: Observer<LocationHandler>)
@@ -31,17 +50,29 @@ public protocol LocationManagerType {
     
     #if os(iOS)
     typealias HeadingHandler = (CLHeading) -> Void
+    
+    /// The most recently reported heading.
     var heading: CLHeading? { get }
+    
+    /// Starts the generation of updates based on significant location changes.
     func startMonitoringSignificantLocationChanges()
+    
+    /// Stops the delivery of location events based on significant location changes.
     func stopMonitoringSignificantLocationChanges()
+    
+    /// Starts the generation of updates that report the user’s current heading.
     func startUpdatingHeading()
+    
+    /// Stops the generation of heading updates.
     func stopUpdatingHeading()
+    
     func addObserver(_ observer: Observer<HeadingHandler>)
     func removeObserver(_ observer: Observer<HeadingHandler>)
     #endif
 }
 
 public extension LocationManagerType {
+    
     func startUpdatingLocation() {
         startUpdatingLocation(enableBackground: false)
     }
@@ -186,24 +217,20 @@ public extension LocationManager {
 
 public extension LocationManager {
     
-    /// Determines if location services is enabled and authorized for always or when in use.
     var isAuthorized: Bool {
         return CLLocationManager.isAuthorized
     }
     
-    /// Determines if location services is enabled and authorized for the specified authorization type.
     func isAuthorized(for type: LocationAuthorizationType) -> Bool {
         guard CLLocationManager.locationServicesEnabled() else { return false }
         return (type == .whenInUse && CLLocationManager.authorizationStatus() == .authorizedWhenInUse)
             || (type == .always && CLLocationManager.authorizationStatus() == .authorizedAlways)
     }
     
-    /// The most recently retrieved user location.
     var location: CLLocation? {
         return manager.location
     }
     
-    /// Starts the generation of updates that report the user’s current location.
     func startUpdatingLocation(enableBackground: Bool) {
         #if os(iOS)
         manager.allowsBackgroundLocationUpdates = enableBackground
@@ -232,12 +259,6 @@ public extension LocationManager {
 
 public extension LocationManager {
 
-    /// Requests permission to use location services.
-    ///
-    /// - Parameters:
-    ///   - type: Type of permission required, whether in the foreground (.whenInUse) or while running (.always).
-    ///   - startUpdatingLocation: Starts the generation of updates that report the user’s current location.
-    ///   - completion: True if the authorization succeeded for the authorization type, false otherwise.
     func requestAuthorization(for type: LocationAuthorizationType, startUpdatingLocation: Bool, completion: AuthorizationHandler?) {
         // Handle authorized and exit
         guard !isAuthorized(for: type) else {
@@ -269,17 +290,16 @@ public extension LocationManager {
         }
         
         // Handle denied and exit
-        guard CLLocationManager.authorizationStatus() == .notDetermined
-            else { completion?(false); return }
+        guard CLLocationManager.authorizationStatus() == .notDetermined else {
+            completion?(false)
+            return
+        }
         
         if let completion = completion {
             didChangeAuthorizationSingle += completion
         }
     }
     
-    /// Request the one-time delivery of the user’s current location.
-    ///
-    /// - Parameter completion: The completion with the location object.
     func requestLocation(completion: @escaping LocationHandler) {
         didUpdateLocationsSingle += completion
         manager.requestLocation()
@@ -288,36 +308,32 @@ public extension LocationManager {
 
 #if os(iOS)
 public extension LocationManager {
+    
     /// A Boolean value indicating whether the app wants to receive location updates when suspended.
     var allowsBackgroundLocationUpdates: Bool {
         get { return manager.allowsBackgroundLocationUpdates }
         set { manager.allowsBackgroundLocationUpdates = newValue }
     }
     
-    /// The most recently reported heading.
     var heading: CLHeading? {
         return manager.heading
     }
     
-    /// Starts the generation of updates based on significant location changes.
     func startMonitoringSignificantLocationChanges() {
         manager.allowsBackgroundLocationUpdates = true
         manager.pausesLocationUpdatesAutomatically = true
         manager.startMonitoringSignificantLocationChanges()
     }
     
-    /// Stops the delivery of location events based on significant location changes.
     func stopMonitoringSignificantLocationChanges() {
         manager.allowsBackgroundLocationUpdates = false
         manager.stopMonitoringSignificantLocationChanges()
     }
     
-    /// Starts the generation of updates that report the user’s current heading.
     func startUpdatingHeading() {
         manager.startUpdatingHeading()
     }
     
-    /// Stops the generation of heading updates.
     func stopUpdatingHeading() {
         manager.stopUpdatingHeading()
     }
