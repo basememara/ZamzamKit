@@ -607,10 +607,10 @@
 				8B729C731EAB9D56004A6BF1 /* Infixes */,
 				8BFDB6A51C75B4B200C94996 /* Models */,
 				8B840E651C904F3300D85781 /* Protocols */,
-				8BEC1BB71EE81CD3002FA271 /* Supporting Files */,
 				8BF0CD0B2143239000DF6DAF /* Workers */,
 				8B1447821C722F5E00043657 /* ZamzamConstants.swift */,
 				8BF307C01CF0D44200BBA933 /* Media.xcassets */,
+				8BEC1BB71EE81CD3002FA271 /* Supporting Files */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
