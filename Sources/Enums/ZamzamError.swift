@@ -11,6 +11,8 @@ import Foundation
 public enum ZamzamError: Error {
     case general
     case invalidData
+    case nonExistent
     case notReachable
+    case unauthorized
     case other(Error?)
 }
