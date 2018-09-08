@@ -38,7 +38,7 @@ public extension EventsWorker {
     ///   - queue: The dispatch queue used for tasks and queries.
     init(store: EKEventStore = EKEventStore(),
          withCalendarIdentifier calendarIdentifier: String? = nil,
-         queue: DispatchQueue = DispatchQueue(label: ZamzamConstants.bundleIdentifier, qos: .userInteractive)) {
+         queue: DispatchQueue = DispatchQueue(label: "\(ZamzamConstants.bundleNamespace).EventsWorker", qos: .userInteractive)) {
         self.store = store
         self.calendarIdentifier = calendarIdentifier
         self.queue = queue

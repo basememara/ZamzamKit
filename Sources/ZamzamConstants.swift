@@ -16,13 +16,15 @@ public struct ZamzamConstants {
     // Prevent others from initializing singleton
     private init() { }
     
+    public static let bundleNamespace = "io.zamzam.ZamzamKit"
+    
     /// Declare bundle depending on platform
     #if os(iOS)
-        public static let bundleIdentifier = "io.zamzam.ZamzamKit-iOS"
+        public static let bundleIdentifier = "\(bundleNamespace)-iOS"
     #elseif os(watchOS)
-        public static let bundleIdentifier = "io.zamzam.ZamzamKit-watchOS"
+        public static let bundleIdentifier = "\(bundleNamespace)-watchOS"
     #elseif os(tvOS)
-        public static let bundleIdentifier = "io.zamzam.ZamzamKit-tvOS"
+        public static let bundleIdentifier = "\(bundleNamespace)-tvOS"
     #endif
     
     public static let bundle = Bundle(identifier: bundleIdentifier)!
