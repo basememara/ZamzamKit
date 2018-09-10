@@ -89,7 +89,9 @@ public extension EventsWorker {
             
             self.queue.async {
                 guard let calendar = self.calendar else {
-                    return completion(.failure(.invalidData))
+                    return DispatchQueue.main.async {
+                        completion(.failure(.invalidData))
+                    }
                 }
                 
                 let events = self.store.events(
@@ -117,8 +119,9 @@ public extension EventsWorker {
             
             self.queue.async {
                 guard let calendar = self.calendar else {
-                    completion?(.failure(.invalidData))
-                    return
+                    return DispatchQueue.main.async {
+                        completion?(.failure(.invalidData))
+                    }
                 }
                 
                 let event = EKEvent(eventStore: self.store).with {
@@ -149,8 +152,9 @@ public extension EventsWorker {
             
             self.queue.async {
                 guard let calendar = self.calendar else {
-                    completion?(.failure(.invalidData))
-                    return
+                    return DispatchQueue.main.async {
+                        completion?(.failure(.invalidData))
+                    }
                 }
                 
                 let events = elements.map { element in
