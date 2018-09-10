@@ -57,6 +57,14 @@ public protocol EventsWorkerType {
     ///   - completion: The block to call when the request completes.
     func updateEvent(withIdentifier identifier: String, span: EKSpan, configure: @escaping (EKEvent) -> Void, completion: ((Result<EKEvent, ZamzamError>) -> Void)?)
     
+    /// Creates or modifies an event to the event store and committing the change.
+    ///
+    /// - Parameters:
+    ///   - elements: Elements zipped with type and corresponding event identifier if applicable.
+    ///   - configure: The block to call to configure the event.
+    ///   - completion: The block to call when the request completes.
+    func createOrUpdateEvents<T>(from elements: [(T, String?)], configure: @escaping (EKEvent, T) -> Void, completion: ((Result<[EKEvent], ZamzamError>) -> Void)?)
+    
     /// Removes an event or recurring events from the event store by committing the change.
     ///
     /// - Parameters:
@@ -121,6 +129,15 @@ public extension EventsWorkerType {
     ///   - configure: The block to call to configure the event.
     func updateEvent(withIdentifier identifier: String, configure: @escaping (EKEvent) -> Void, completion: ((Result<EKEvent, ZamzamError>) -> Void)?) {
         updateEvent(withIdentifier: identifier, span: .thisEvent, configure: configure, completion: completion)
+    }
+    
+    /// Creates or modifies an event to the event store and committing the change.
+    ///
+    /// - Parameters:
+    ///   - elements: Elements zipped with type and corresponding event identifier if applicable.
+    ///   - configure: The block to call to configure the event.
+    func createOrUpdateEvents<T>(from elements: [(T, String?)], configure: @escaping (EKEvent, T) -> Void) {
+        createOrUpdateEvents(from: elements, configure: configure, completion: nil)
     }
     
     /// Removes an event or recurring events from the event store by committing the change.

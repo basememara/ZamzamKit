@@ -222,6 +222,60 @@ public extension EventsWorker {
 
 public extension EventsWorker {
     
+    func createOrUpdateEvents<T>(
+        from elements: [(T, String?)],
+        configure: @escaping (EKEvent, T) -> Void,
+        completion: ((Result<[EKEvent], ZamzamError>) -> Void)?)
+    {
+        guard !elements.isEmpty else { completion?(.success([])); return }
+        
+        requestAccess { granted in
+            guard granted else { completion?(.failure(.unauthorized)); return }
+            
+            self.queue.async {
+                guard let calendar = self.calendar else {
+                    return DispatchQueue.main.async {
+                        completion?(.failure(.invalidData))
+                    }
+                }
+                
+                let events = elements.reduce(into: [EKEvent]()) { result, next in
+                    guard let id = next.1, let event = self.store.event(withIdentifier: id) else {
+                        result.append(
+                            EKEvent(eventStore: self.store).with {
+                                $0.calendar = calendar
+                                configure($0, next.0)
+                            }
+                        )
+                        return
+                    }
+                    
+                    configure(event, next.0)
+                    result.append(event)
+                }
+                
+                do {
+                    try events.forEach {
+                        try self.store.save($0, span: .thisEvent, commit: false)
+                    }
+                    
+                    try self.store.commit()
+                    
+                    DispatchQueue.main.async {
+                        completion?(.success(events))
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion?(.failure(.other(error)))
+                    }
+                }
+            }
+        }
+    }
+}
+
+public extension EventsWorker {
+    
     func deleteEvent(withIdentifier identifier: String, span: EKSpan, completion: ((Result<Void, ZamzamError>) -> Void)?) {
         requestAccess { granted in
             guard granted else { completion?(.failure(.unauthorized)); return }
