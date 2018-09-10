@@ -50,7 +50,7 @@ private extension CalendarViewController {
         
         eventsWorker.fetchEvents(
             from: Date(timeIntervalSinceNow: 60 * 60 * 24 * -30),
-            to: Date(timeIntervalSinceNow: 60 * 60 * 24 * 30),
+            to: Date(timeIntervalSinceNow: 60 * 60 * 24 * 90),
             completion: { [weak self] in
                 self?.endRefreshing()
                 
