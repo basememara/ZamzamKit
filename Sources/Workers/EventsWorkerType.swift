@@ -46,7 +46,7 @@ public protocol EventsWorkerType {
     ///   - elements: The elements to map to events.
     ///   - configure: The block to call to configure the event.
     ///   - completion: The block to call when the request completes.
-    func createEvents<T>(from elements: Array<T>, configure: @escaping (EKEvent, T) -> Void, completion: ((Result<[EKEvent], ZamzamError>) -> Void)?)
+    func createEvents<T>(from elements: [T], configure: @escaping (EKEvent, T) -> Void, completion: ((Result<[EKEvent], ZamzamError>) -> Void)?)
     
     /// Modifies an event or recurring events to the event store and committing the change.
     ///

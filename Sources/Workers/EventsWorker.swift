@@ -144,9 +144,11 @@ public extension EventsWorker {
         }
     }
     
-    func createEvents<T>(from elements: Array<T>,
+    func createEvents<T>(from elements: [T],
                          configure: @escaping (EKEvent, T) -> Void,
                          completion: ((Result<[EKEvent], ZamzamError>) -> Void)?) {
+        guard !elements.isEmpty else { completion?(.success([])); return }
+        
         requestAccess { granted in
             guard granted else { completion?(.failure(.unauthorized)); return }
             
