@@ -15,15 +15,15 @@ public extension UNNotificationAttachment {
     /// - Parameters:
     ///   - link: The remote HTTP path to the resource.
     ///   - identifier: The identitifer of the user notification attachment.
-    ///   - complete: The callback with the constucted user notification attachment.
-    static func download(from link: String, identifier: String? = nil, complete: @escaping (Result<UNNotificationAttachment, ZamzamError>) -> Void) {
+    ///   - completion: The callback with the constucted user notification attachment.
+    static func download(from link: String, identifier: String? = nil, completion: @escaping (Result<UNNotificationAttachment, ZamzamError>) -> Void) {
         FileManager.default.download(from: link) {
-            guard $2 == nil else { return complete(.failure($2 != nil ? .other($2!) : .general)) }
+            guard $2 == nil else { return completion(.failure($2 != nil ? .other($2!) : .general)) }
             
             guard let url = $0, let attachment = try? UNNotificationAttachment(identifier: identifier ?? link, url: url)
-                else { return complete(.failure(.invalidData)) }
+                else { return completion(.failure(.invalidData)) }
             
-            complete(.success(attachment))
+            completion(.success(attachment))
         }
     }
 }

@@ -73,15 +73,15 @@ public extension FileManager {
     ///
     /// - Parameters:
     ///   - url: The HTTP URL to retrieve the file.
-    ///   - complete: The completion handler to call when the load request is complete.
-    func download(from url: String, complete: @escaping (URL?, URLResponse?, Error?) -> Void) {
-        guard let nsURL = URL(string: url) else { return complete(nil, nil, ZamzamError.invalidData) }
+    ///   - completion: The completion handler to call when the load request is complete.
+    func download(from url: String, completion: @escaping (URL?, URLResponse?, Error?) -> Void) {
+        guard let nsURL = URL(string: url) else { return completion(nil, nil, ZamzamError.invalidData) }
         
         URLSession.shared.downloadTask(with: nsURL) {
             let response = $1
             let error = $2
             
-            guard error == nil, let location = $0 else { return complete(nil, nil, error) }
+            guard error == nil, let location = $0 else { return completion(nil, nil, error) }
             
             // Construct file destination and prepare location
             let destination = self.url(of: nsURL.lastPathComponent, from: .cachesDirectory)
@@ -89,9 +89,9 @@ public extension FileManager {
             
             // Store remote file locally
             do { try self.moveItem(at: location, to: destination) }
-            catch { return complete(nil, nil, error) }
+            catch { return completion(nil, nil, error) }
             
-            complete(destination, response, error)
+            completion(destination, response, error)
         }.resume()
     }
 }

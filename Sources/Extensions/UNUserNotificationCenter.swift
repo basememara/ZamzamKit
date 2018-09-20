@@ -79,12 +79,12 @@ public extension UNUserNotificationCenter {
     ///
     /// - Parameters:
     ///   - withIdentifier: The identifier for the requests.
-    ///   - complete: The completion block that will return the request with the identifier.
-    func get(withIdentifier: String, complete: @escaping (UNNotificationRequest?) -> Void) {
-        getPendingNotificationRequests {
+    ///   - completion: The completion block that will return the request with the identifier.
+    func get(withIdentifier: String, completion: @escaping (UNNotificationRequest?) -> Void) {
+        getNotificationRequests {
             let requests = $0.first { $0.identifier == withIdentifier }
             DispatchQueue.main.async {
-                complete(requests)
+                completion(requests)
             }
         }
     }
@@ -93,12 +93,12 @@ public extension UNUserNotificationCenter {
     ///
     /// - Parameters:
     ///   - withIdentifiers: The identifiers for the requests.
-    ///   - complete: The completion block that will return the requests with the identifiers.
-    func get(withIdentifiers: [String], complete: @escaping ([UNNotificationRequest]) -> Void) {
-        getPendingNotificationRequests {
+    ///   - completion: The completion block that will return the requests with the identifiers.
+    func get(withIdentifiers: [String], completion: @escaping ([UNNotificationRequest]) -> Void) {
+        getNotificationRequests {
             let requests = $0.filter { withIdentifiers.contains($0.identifier) }
             DispatchQueue.main.async {
-                complete(requests)
+                completion(requests)
             }
         }
     }
@@ -107,9 +107,9 @@ public extension UNUserNotificationCenter {
     ///
     /// - Parameters:
     ///   - withIdentifier: The identifier for the requests.
-    ///   - complete: The completion block that will return the request with the identifier.
-    func exists(withIdentifier: String, complete: @escaping (Bool) -> Void) {
-        get(withIdentifier: withIdentifier) { complete($0 != nil) }
+    ///   - completion: The completion block that will return the request with the identifier.
+    func exists(withIdentifier: String, completion: @escaping (Bool) -> Void) {
+        get(withIdentifier: withIdentifier) { completion($0 != nil) }
     }
 
 }
@@ -204,10 +204,6 @@ public extension UNUserNotificationCenter {
         
             add(request, withCompletionHandler: completion)
     }
-
-}
-
-public extension UNUserNotificationCenter {
     
     #if os(iOS)
     /// Schedules a local notification for delivery.
@@ -247,6 +243,9 @@ public extension UNUserNotificationCenter {
             add(request, withCompletionHandler: completion)
     }
     #endif
+}
+
+public extension UNUserNotificationCenter {
     
     /// Remove pending or delivered user notifications.
     ///
