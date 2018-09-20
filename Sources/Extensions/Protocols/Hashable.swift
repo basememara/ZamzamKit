@@ -19,10 +19,13 @@ public extension Hashable {
     private func combineHashValues(_ initial: Int, _ other: Int) -> Int {
         // https://github.com/krzysztofzablocki/Sourcery/blob/master/Templates/AutoHashable.stencil
         // https://useyourloaf.com/blog/swift-hashable/
+        let magic: UInt
         #if arch(x86_64) || arch(arm64)
-            let magic: UInt = 0x9e3779b97f4a7c15
+            magic = 0x9e3779b97f4a7c15
         #elseif arch(i386) || arch(arm)
-            let magic: UInt = 0x9e3779b9
+            magic = 0x9e3779b9
+        #else
+            magic = 0
         #endif
         var lhs = UInt(bitPattern: initial)
         let rhs = UInt(bitPattern: other)
