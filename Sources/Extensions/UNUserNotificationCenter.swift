@@ -75,6 +75,28 @@ public extension UNUserNotificationCenter {
 
 public extension UNUserNotificationCenter {
     
+    /// Returns a list of all all pending or delivered user notifications.
+    func getNotificationRequests(completion: @escaping ([UNNotificationRequest]) -> Void) {
+        var notificationRequests = [UNNotificationRequest]()
+        let taskGroup = DispatchGroup()
+        
+        taskGroup.enter()
+        getPendingNotificationRequests {
+            notificationRequests.append(contentsOf: $0)
+            taskGroup.leave()
+        }
+        
+        taskGroup.enter()
+        getDeliveredNotifications {
+            notificationRequests.append(contentsOf: $0.map { $0.request })
+            taskGroup.leave()
+        }
+        
+        taskGroup.notify(queue: .main) {
+            completion(notificationRequests)
+        }
+    }
+    
     /// Retrieve the pending notification request.
     ///
     /// - Parameters:
@@ -274,12 +296,12 @@ public extension UNUserNotificationCenter {
     ///
     /// - Parameter withCategory: The categories of the user notification to remove.
     func remove(withCategories categories: [String], completion: (() -> Void)? = nil) {
-        getPendingNotificationRequests {
+        getNotificationRequests {
             self.remove(withIdentifiers: $0.compactMap {
                 categories.contains($0.content.categoryIdentifier) ? $0.identifier : nil
             })
             
-            DispatchQueue.main.async { completion?() }
+            completion?()
         }
     }
     
