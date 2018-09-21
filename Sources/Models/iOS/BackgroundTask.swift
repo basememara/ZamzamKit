@@ -12,7 +12,7 @@ import UIKit
 /// Encapsulate iOS background tasks
 open class BackgroundTask {
     private let application: UIApplication
-    private var identifier = UIBackgroundTaskInvalid
+    private var identifier: UIBackgroundTaskIdentifier = .invalid
     
     public init(application: UIApplication) {
         self.application = application
@@ -33,10 +33,10 @@ open class BackgroundTask {
     }
     
     open func end() {
-        if identifier != UIBackgroundTaskInvalid {
+        if identifier != .invalid {
             application.endBackgroundTask(identifier)
         }
         
-        identifier = UIBackgroundTaskInvalid
+        identifier = .invalid
     }
 }

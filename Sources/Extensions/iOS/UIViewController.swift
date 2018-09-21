@@ -39,7 +39,7 @@ public extension UIViewController {
         message: String? = nil,
         buttonText: String = .localized(.ok),
         additionalActions: [UIAlertAction]? = nil,
-        preferredStyle: UIAlertControllerStyle = .alert,
+        preferredStyle: UIAlertController.Style = .alert,
         includeCancelAction: Bool = false,
         cancelText: String = .localized(.cancel),
         cancelHandler: (() -> Void)? = nil,

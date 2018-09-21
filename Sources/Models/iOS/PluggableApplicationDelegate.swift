@@ -10,8 +10,8 @@
 import UIKit
 
 public protocol ApplicationService {
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     
     func applicationWillEnterForeground(_ application: UIApplication)
     func applicationDidEnterBackground(_ application: UIApplication)
@@ -31,8 +31,8 @@ public protocol ApplicationService {
 // MARK: - Optionals
 
 public extension ApplicationService {
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool { return true }
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool { return true }
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool { return true }
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool { return true }
     
     func applicationWillEnterForeground(_ application: UIApplication) {}
     func applicationDidEnterBackground(_ application: UIApplication) {}
@@ -64,13 +64,13 @@ open class PluggableApplicationDelegate: UIResponder, UIApplicationDelegate {
 
 public extension PluggableApplicationDelegate {
     
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         return lazyServices.reduce(true) {
             $0 && $1.application(application, willFinishLaunchingWithOptions: launchOptions)
         }
     }
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         return lazyServices.reduce(true) {
             $0 && $1.application(application, didFinishLaunchingWithOptions: launchOptions)
         }

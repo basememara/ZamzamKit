@@ -33,7 +33,7 @@ public extension StatusBarable where Self: UIViewController {
      - parameter backgroundColor: Background color of status bar.
      */
     @discardableResult
-    func addStatusBar(style: UIBlurEffectStyle = .regular) -> UIView? {
+    func addStatusBar(style: UIBlurEffect.Style = .regular) -> UIView? {
         guard !sharedApplication.isStatusBarHidden else { return nil }
         
         let statusBar = UIVisualEffectView().with {
@@ -55,7 +55,7 @@ public extension StatusBarable where Self: UIViewController {
 public extension StatusBarable where Self: UIViewController {
     
     /// Add visible status bar since transparent by default with scrolling
-    func showStatusBar(style: UIBlurEffectStyle = .regular) {
+    func showStatusBar(style: UIBlurEffect.Style = .regular) {
         guard let statusBar = statusBar else {
             self.statusBar = addStatusBar(style: style)
             return

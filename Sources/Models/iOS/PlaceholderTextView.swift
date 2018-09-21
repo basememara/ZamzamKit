@@ -50,9 +50,9 @@ open class PlaceholderTextView: UITextView {
         ).isActive = true
         placeholderLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
-        notificationCenter.addObserver(self, selector: #selector(didBeginEditing), name: .UITextViewTextDidBeginEditing, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(didChangeText), name: .UITextViewTextDidChange, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(didEndEditing), name: .UITextViewTextDidEndEditing, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(didBeginEditing), name: UITextView.textDidBeginEditingNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(didChangeText), name: UITextView.textDidChangeNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(didEndEditing), name: UITextView.textDidEndEditingNotification, object: nil)
     }
     
     open override var text: String! {

@@ -94,9 +94,10 @@ public extension Date {
 }
 
 // MARK: - Calculation helpers
+
 public extension Date {
 
-    func increment(years: Int, calendar: Calendar = Calendar.current) -> Date {
+    func increment(years: Int, calendar: Calendar = .current) -> Date {
         guard years != 0 else { return self }
         return calendar.date(
             byAdding: .year,
@@ -105,7 +106,7 @@ public extension Date {
         )!
     }
 
-    func increment(months: Int, calendar: Calendar = Calendar.current) -> Date {
+    func increment(months: Int, calendar: Calendar = .current) -> Date {
         guard months != 0 else { return self }
         return calendar.date(
             byAdding: .month,
@@ -114,7 +115,7 @@ public extension Date {
         )!
     }
 
-    func increment(days: Int, calendar: Calendar = Calendar.current) -> Date {
+    func increment(days: Int, calendar: Calendar = .current) -> Date {
         guard days != 0 else { return self }
         return calendar.date(
             byAdding: .day,
@@ -123,7 +124,7 @@ public extension Date {
         )!
     }
     
-    func increment(minutes: Int, calendar: Calendar = Calendar.current) -> Date {
+    func increment(minutes: Int, calendar: Calendar = .current) -> Date {
         guard minutes != 0 else { return self }
         return calendar.date(
             byAdding: .minute,
@@ -133,7 +134,7 @@ public extension Date {
     }
     
     func incrementDayIfPast() -> Date {
-        return self.isPast ? self.increment(days: 1) : self
+        return isPast ? increment(days: 1) : self
     }
     
     /**

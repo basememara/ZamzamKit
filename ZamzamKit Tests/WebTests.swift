@@ -69,11 +69,11 @@ class WebTests: XCTestCase {
             "lmn": nil
         ])
         
-        let expectedValue = "https://example.com?xyz=987&def=456&abc=333&jkl=777"
-        
-        // TODO: Make test more robust since dictionary do not retain order so results in false alarms
-        XCTAssertEqual(newValue, expectedValue,
-            "String should be \(expectedValue)")
+        XCTAssertTrue(newValue.contains("abc=333"))
+        XCTAssertTrue(newValue.contains("def=456"))
+        XCTAssertTrue(newValue.contains("jkl=777"))
+        XCTAssertTrue(newValue.contains("xyz=987"))
+        XCTAssertFalse(newValue.contains("lmn="))
     }
     
     func testappendingQueryItemForNoInitialParameters() {

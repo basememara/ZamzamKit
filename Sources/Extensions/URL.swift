@@ -73,15 +73,3 @@ public extension URL {
         return appendingQueryItem(name, value: nil)
     }
 }
-
-// Deprecation notices, will be removed future version
-public extension URLComponents {
-    @available(*, unavailable, renamed: "URL.appendingQueryItem")
-    func addOrUpdateQueryStringParameter(_ key: String, value: String?) -> String { return "" }
-    
-    @available(*, unavailable, renamed: "URL.appendingQueryItems")
-    func addOrUpdateQueryStringParameter(_ values: [String: String?]) -> String { return "" }
-    
-    @available(*, unavailable, renamed: "URL.removeQueryItems")
-    func removeQueryStringParameter(_ key: String) -> String { return "" }
-}

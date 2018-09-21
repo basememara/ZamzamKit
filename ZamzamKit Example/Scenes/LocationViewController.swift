@@ -35,7 +35,7 @@ class LocationViewController: UIViewController {
                         buttonText: .localized(.allow),
                         includeCancelAction: true,
                         handler: {
-                            guard let settings = URL(string: UIApplicationOpenSettingsURLString) else { return }
+                            guard let settings = URL(string: UIApplication.openSettingsURLString) else { return }
                             UIApplication.shared.open(settings)
                         }
                     )

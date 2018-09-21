@@ -61,11 +61,6 @@ class ArrayTests: XCTestCase {
 }
 
 extension ArrayTests {
-
-    func testRandom() {
-        let result = sample1.random()
-        XCTAssert(sample1.contains(result))
-    }
     
     func testShuffled() {
         let original = [1, 2, 3, 4, 5]

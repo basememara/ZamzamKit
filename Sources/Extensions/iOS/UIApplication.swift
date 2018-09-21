@@ -19,7 +19,7 @@ public extension UIApplication {
      - returns: The root view controller.
      */
     @discardableResult
-    func set(root controller: UIViewController, transition: UIViewAnimationOptions = .curveEaseInOut) -> UIViewController? {
+    func set(root controller: UIViewController, transition: UIView.AnimationOptions = .curveEaseInOut) -> UIViewController? {
         guard let window = keyWindow ?? delegate?.window ?? nil else { return nil }
         let previous = window.rootViewController
         

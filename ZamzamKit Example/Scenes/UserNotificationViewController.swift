@@ -19,7 +19,7 @@ class UserNotificationViewController: UIViewController, StatusBarable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        notificationCenter.addObserver(self, selector: #selector(deviceOrientationDidChange), name: .UIDeviceOrientationDidChange, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(deviceOrientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +45,7 @@ class UserNotificationViewController: UIViewController, StatusBarable {
                 "misc2Category": [UNNotificationAction(identifier: "misc2Action", title: "Misc 2")]
             ],
             completion: {
-                guard !$0, let settings = URL(string: UIApplicationOpenSettingsURLString) else { return }
+                guard !$0, let settings = URL(string: UIApplication.openSettingsURLString) else { return }
                 self.present(alert: "Notification authorization not granted.",
                     buttonText: "Settings",
                     includeCancelAction: true) {

@@ -17,8 +17,10 @@ class DictionaryTests: XCTestCase {
             "efd": "xyz"
         ]
         
-        // TODO: Make test more robust since dictionary do not retain order so results in false alarms
-        XCTAssertEqual(value.jsonString!, "{\"efd\":\"xyz\",\"abc\":123}")
+        let json = value.jsonString!
+        
+        XCTAssertTrue(json.contains("\"abc\":123"))
+        XCTAssertTrue(json.contains("\"efd\":\"xyz\""))
     }
     
     func testDictionaryUnion() {

@@ -29,30 +29,6 @@ public extension Array {
     }
 }
 
-public extension Array {
-    
-    /// Get a random element from the collection
-    func random() -> Element {
-        return self[Int(arc4random_uniform(UInt32(count)))]
-    }
-    
-    /// Return array in shuffled order.
-    func shuffled() -> Array {
-        // http://stackoverflow.com/questions/37843647/shuffle-array-swift-3
-        guard count > 1 else { return self }
-        
-        var elements = self
-        
-        for i in elements.indices.dropLast() {
-            let diff = elements.distance(from: i, to: elements.endIndex)
-            let j = elements.index(i, offsetBy: numericCast(arc4random_uniform(numericCast(diff))))
-            elements.swapAt(i, j)
-        }
-        
-        return elements
-    }
-}
-
 // MARK: - Equatables
 public extension Array where Element: Equatable {
 	

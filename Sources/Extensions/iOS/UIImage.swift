@@ -23,14 +23,14 @@ public extension UIImage {
     }
     
     /// Save image to disk as PNG.
-    var pngToDisk: URL? {
-        let data = UIImagePNGRepresentation(self)
+    func pngToDisk() -> URL? {
+        let data = pngData()
         let folder = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
         
         do {
             let name = String(random: 6, prefix: "img_")
             let url = folder.appendingPathComponent("\(name).png")
-            _ = try data?.write(to: url)
+            try data?.write(to: url)
             return url
         } catch {
             return nil

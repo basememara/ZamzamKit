@@ -19,7 +19,7 @@ public extension String {
 		let base = Array("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
         
         self = random > 0
-            ? (0..<random).reduce(prefix) { result, next in result + "\(base.random())" }
+            ? (0..<random).reduce(prefix) { result, next in result + "\(base.randomElement()!)" }
             : prefix
 	}
 }
