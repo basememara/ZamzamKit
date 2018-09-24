@@ -12,17 +12,27 @@ public extension Date {
     
     /// Determines if date is in the past.
     var isPast: Bool {
-        return compare(Date()) == .orderedAscending
+        return self < Date()
     }
     
     /// Determines if date is in the future.
     var isFuture: Bool {
-        return !isPast
+        return self > Date()
     }
     
     /// Determines if date is in today's date.
     var isToday: Bool {
         return Calendar.current.isDateInToday(self)
+    }
+    
+    /// Determines if date is in yesterday's date.
+    var isYesterday: Bool {
+        return Calendar.current.isDateInYesterday(self)
+    }
+    
+    /// Determines if date is in tomorrow's date.
+    var isTomorrow: Bool {
+        return Calendar.current.isDateInTomorrow(self)
     }
 	
 	/// Determines if date is within a weekend period.
@@ -35,22 +45,54 @@ public extension Date {
         return !Calendar.current.isDateInWeekend(self)
     }
     
+    /// Determine if a date is between two other dates.
+    /// Dates do not have to be in sequential order.
+    ///
+    /// - Parameters:
+    ///   - date1: first date to compare to.
+    ///   - date2: second date to compare to.
+    /// - Returns: true if the date is between the two given dates.
+    func isBetween(_ date1: Date, _ date2: Date) -> Bool {
+        // https://github.com/SwifterSwift/SwifterSwift/blob/master/Sources/Extensions/Foundation/DateExtensions.swift
+        return date1.compare(self).rawValue * compare(date2).rawValue > 0
+    }
+}
+
+// MARK: - String helpers
+
+public extension Date {
+    
     /// Gets the beginning of the day.
     var startOfDay: Date {
         return Calendar.current.startOfDay(for: self)
     }
     
-    /// Gets the decimal representation of the time.
-    var timeToDecimal: Double {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.hour, .minute], from: self)
-        let hour = components.hour
-        let minutes = components.minute
-        return Double(hour!) + (Double(minutes!) / 60.0)
+    /// Gets the end of the day.
+    var endOfDay: Date {
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfDay)!
+    }
+    
+    /// Gets the beginning of the month.
+    var startOfMonth: Date {
+        return Calendar.current.date(
+            from: Calendar.current.dateComponents([.year, .month], from: startOfDay)
+        )!
+    }
+    
+    /// Gets the end of the month.
+    var endOfMonth: Date {
+        var components = DateComponents()
+        components.month = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfMonth)!
     }
 }
 
 // MARK: - String helpers
+
 public extension Date {
     
     init?(fromString: String, dateFormat: String = "yyyy/MM/dd HH:mm", timeZone: TimeZone? = nil) {
@@ -148,9 +190,19 @@ public extension Date {
     func hasElapsed(seconds: Int, from date: Date = Date()) -> Bool {
         return date.timeIntervalSince(self).seconds > seconds
     }
+    
+    /// Gets the decimal representation of the time.
+    var timeToDecimal: Double {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute], from: self)
+        let hour = components.hour
+        let minutes = components.minute
+        return Double(hour!) + (Double(minutes!) / 60.0)
+    }
 }
 
 // MARK: - Time zone helpers
+
 public extension Date {
 
     /// Moves the date to the specified time zone.

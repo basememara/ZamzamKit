@@ -21,6 +21,32 @@ class DateTimeTests: XCTestCase {
         XCTAssertEqual(date.isWeekday, !Calendar.current.isDateInWeekend(date))
     }
     
+    func testIsBetween() {
+        XCTAssertTrue(
+            Date(fromString: "2018/06/15 09:30")!.isBetween(
+                Date(fromString: "2018/06/15 09:00")!,
+                Date(fromString: "2018/08/15 09:30")!
+            )
+        )
+        
+        XCTAssertFalse(
+            Date(fromString: "2020/01/15 09:00")!.isBetween(
+                Date(fromString: "2020/01/15 10:00")!,
+                Date(fromString: "2020/01/15 13:00")!
+            )
+        )
+        
+        XCTAssertTrue(
+            Date(fromString: "2020/01/15 09:00")!.isBetween(
+                Date(fromString: "2020/01/15 10:00")!,
+                Date(fromString: "2018/01/15 13:00")!
+            )
+        )
+    }
+}
+
+extension DateTimeTests {
+    
     func testCurrentTimeInDecimal() {
         let time = Date(fromString: "2012/10/23 18:15")!.timeToDecimal
         let expectedTime = 18.25
@@ -35,7 +61,31 @@ class DateTimeTests: XCTestCase {
     }
 }
 
+extension DateTimeTests {
+    
+    func testStartOfDay() {
+        let date = Date(fromString: "2016/03/22 09:30")!
+        XCTAssertEqual(date.startOfDay.string(format: "yyyy/MM/dd HH:mm:ss"), "2016/03/22 00:00:00")
+    }
+    
+    func testEndOfDay() {
+        let date = Date(fromString: "2018/01/31 19:30")!
+        XCTAssertEqual(date.endOfDay.string(format: "yyyy/MM/dd HH:mm:ss"), "2018/01/31 23:59:59")
+    }
+    
+    func testStartOfMonth() {
+        let date = Date(fromString: "2016/03/22 09:30")!
+        XCTAssertEqual(date.startOfMonth.string(format: "yyyy/MM/dd"), "2016/03/01")
+    }
+    
+    func testEndOfMonth() {
+        let date = Date(fromString: "2016/03/22 09:30")!
+        XCTAssertEqual(date.endOfMonth.string(format: "yyyy/MM/dd"), "2016/03/31")
+    }
+}
+
 // MARK: - String
+
 extension DateTimeTests {
     
     func testStringToDate() {
