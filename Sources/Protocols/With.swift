@@ -19,6 +19,7 @@ public extension With where Self: Any {
     ///       $0.textColor = UIColor.black
     ///       $0.text = "Hello, World!"
     ///     }
+    @discardableResult
     func with(_ block: (Self) -> Void) -> Self {
         // https://github.com/devxoul/Then
         block(self)
