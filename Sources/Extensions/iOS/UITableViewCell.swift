@@ -11,7 +11,7 @@ import UIKit
 public extension UITableViewCell {
 
     /// The color of the cell when it is selected.
-    var selectionColor: UIColor? {
+    @objc dynamic var selectionColor: UIColor? {
         get { return selectedBackgroundView?.backgroundColor }
         set {
             guard selectionStyle != .none else { return }
