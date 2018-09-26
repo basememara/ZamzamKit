@@ -35,16 +35,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AppDelegate.watchSession.addObserver(forApplicationContext: Observer {
             UNUserNotificationCenter.current().add(
-                body: $0["value"] as? String ?? "",
                 title: "Watch Transfer: Application Context",
+                body: $0["value"] as? String,
                 timeInterval: 5
             )
         })
         
         AppDelegate.watchSession.addObserver(forUserInfo: Observer {
             UNUserNotificationCenter.current().add(
-                body: $0["value"] as? String ?? "",
                 title: "Watch Transfer: User Info",
+                body: $0["value"] as? String,
                 timeInterval: 5
             )
         })

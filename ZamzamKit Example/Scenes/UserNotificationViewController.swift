@@ -59,28 +59,28 @@ class UserNotificationViewController: UIViewController, StatusBarable {
         UNUserNotificationCenter.current().removeAll()
         
         UNUserNotificationCenter.current().add(
-            body: "This is the body for time interval",
+            title: "This is the body for time interval",
             timeInterval: 5
         )
         
         UNUserNotificationCenter.current().add(
-            body: "This is the body for time interval",
             title: "This is the snooze title",
+            body: "This is the body for time interval",
             timeInterval: 60,
             identifier: "abc123-main"
         )
         
         UNUserNotificationCenter.current().add(
-            body: "This is the body for time interval",
             title: "This is the misc1 title",
+            body: "This is the body for time interval",
             timeInterval: 60,
             identifier: "abc123-misc1",
             category: "misc1Category"
         )
         
         UNUserNotificationCenter.current().add(
-            body: "This is the body for time interval",
             title: "This is the misc2 title",
+            body: "This is the body for time interval",
             timeInterval: 60,
             identifier: "abc123-misc2",
             category: "misc2Category"
@@ -88,7 +88,7 @@ class UserNotificationViewController: UIViewController, StatusBarable {
         
         UNUserNotificationCenter.current().add(
             date: Date(timeIntervalSinceNow: 5),
-            body: "This is the body for date",
+            title: "This is the title for date",
             repeats: .minute,
             identifier: "abc123-repeat"
         )
