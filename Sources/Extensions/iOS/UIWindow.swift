@@ -10,6 +10,11 @@ import UIKit
 
 public extension UIWindow {
     
+    /// The top view controller for the window.
+    var topViewController: UIViewController? {
+        return getTopViewController(from: rootViewController)
+    }
+    
     /// Recursively retrieve the top most view controller
     /// https://stackoverflow.com/a/39857342/235334
     private func getTopViewController(from controller: UIViewController?) -> UIViewController? {
@@ -23,9 +28,25 @@ public extension UIWindow {
         
         return controller
     }
+}
+
+public extension UIWindow {
     
-    /// The top view controller for the window.
-    var topViewController: UIViewController? {
-        return getTopViewController(from: rootViewController)
+    /// Unload all views and add back.
+    /// Useful for applying `UIAppearance` changes to existing views.
+    func reload() {
+        subviews.forEach { view in
+            view.removeFromSuperview()
+            addSubview(view)
+        }
+    }
+}
+
+public extension Array where Element == UIWindow {
+    
+    /// Unload all views for each `UIWindow` and add back.
+    /// Useful for applying `UIAppearance` changes to existing views.
+    func reload() {
+        forEach { $0.reload() }
     }
 }
