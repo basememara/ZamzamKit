@@ -143,8 +143,8 @@ public extension UNUserNotificationCenter {
     /// - Parameters:
     ///   - timeInterval: The time interval of when to fire the notification.
     func add(
-        title: String,
-        body: String? = nil,
+        body: String,
+        title: String? = nil,
         subtitle: String? = nil,
         badge: NSNumber? = nil,
         sound: UNNotificationSound? = .default,
@@ -157,11 +157,11 @@ public extension UNUserNotificationCenter {
         completion: ((Error?) -> Void)? = nil) {
             // Constuct content
             let content = UNMutableNotificationContent().with {
-                $0.title = title
+                $0.body = body
                 $0.categoryIdentifier = category
             
                 // Assign optional values to content
-                $0.body ?= body
+                $0.title ?= title
                 $0.subtitle ?= subtitle
                 $0.badge ?= badge
                 $0.sound = sound
@@ -180,10 +180,9 @@ public extension UNUserNotificationCenter {
     ///
     /// - Parameters:
     ///   - date: The date of when to fire the notification.
-    func add(
-        date: Date,
-        title: String,
-        body: String? = nil,
+    func add(date: Date,
+        body: String,
+        title: String? = nil,
         subtitle: String? = nil,
         badge: NSNumber? = nil,
         sound: UNNotificationSound? = .default,
@@ -196,11 +195,11 @@ public extension UNUserNotificationCenter {
         completion: ((Error?) -> Void)? = nil) {
             // Constuct content
             let content = UNMutableNotificationContent().with {
-                $0.title = title
+                $0.body = body
                 $0.categoryIdentifier = category
             
                 // Assign optional values to content
-                $0.body ?= body
+                $0.title ?= title
                 $0.subtitle ?= subtitle
                 $0.badge ?= badge
                 $0.sound = sound
@@ -233,10 +232,9 @@ public extension UNUserNotificationCenter {
     ///
     /// - Parameters:
     ///   - region: The region of when to fire the notification.
-    func add(
-        region: CLRegion,
-        title: String,
-        body: String? = nil,
+    func add(region: CLRegion,
+        body: String,
+        title: String? = nil,
         subtitle: String? = nil,
         badge: NSNumber? = nil,
         sound: UNNotificationSound? = .default,
@@ -248,11 +246,11 @@ public extension UNUserNotificationCenter {
         completion: ((Error?) -> Void)? = nil) {
             // Constuct content
             let content = UNMutableNotificationContent().with {
-                $0.title = title
+                $0.body = body
                 $0.categoryIdentifier = category
             
                 // Assign optional values to content
-                $0.body ?= body
+                $0.title ?= title
                 $0.subtitle ?= subtitle
                 $0.badge ?= badge
                 $0.sound = sound
