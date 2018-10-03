@@ -27,8 +27,6 @@ public struct ZamzamConstants {
         public static let bundleIdentifier = "\(bundleNamespace)-tvOS"
     #endif
     
-    public static let bundle = Bundle(identifier: bundleIdentifier)!
-    
     public struct DateTime {
         public static let JSON_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"
     }
@@ -61,4 +59,6 @@ public struct ZamzamConstants {
         
     }
     
+    @available(*, unavailable, message: "Use Bundle.zamzamKit`")
+    static let bundle = Bundle(identifier: bundleIdentifier)!
 }
