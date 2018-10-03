@@ -13,7 +13,7 @@
         <!--Controls-->
         <scene sceneID="ynh-Pg-ch4">
             <objects>
-                <viewController id="ei4-K5-ZcS" sceneMemberID="viewController">
+                <viewController id="ei4-K5-ZcS" customClass="ControlsViewController" customModule="ZamzamKit_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hug-uj-IMp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="967"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,10 +22,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="967"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAB-NL-gPa" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="775"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="913"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="k9n-6u-Qqa">
-                                                <rect key="frame" x="19" y="52" width="337.5" height="691"/>
+                                                <rect key="frame" x="19" y="52" width="337.5" height="829"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PlaceholderTextView" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKF-uG-VDO">
                                                         <rect key="frame" x="0.0" y="0.0" width="337.5" height="20.5"/>
@@ -64,14 +64,35 @@
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
                                                     </textView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDL-1Z-TAi">
+                                                        <rect key="frame" x="0.0" y="304.5" width="337.5" height="30"/>
+                                                        <state key="normal" title="Present Alert"/>
+                                                        <connections>
+                                                            <action selector="alertButtonTapped" destination="ei4-K5-ZcS" eventType="touchUpInside" id="RYn-uG-K7m"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TKn-K3-A05">
+                                                        <rect key="frame" x="0.0" y="350.5" width="337.5" height="30"/>
+                                                        <state key="normal" title="Present Safari"/>
+                                                        <connections>
+                                                            <action selector="safariButtonTapped" destination="ei4-K5-ZcS" eventType="touchUpInside" id="VPA-fV-dUj"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHt-wk-dTo">
+                                                        <rect key="frame" x="0.0" y="396.5" width="337.5" height="30"/>
+                                                        <state key="normal" title="Present Share Activity"/>
+                                                        <connections>
+                                                            <action selector="presentShareActivityTapped:" destination="ei4-K5-ZcS" eventType="touchUpInside" id="mrI-bl-lv6"/>
+                                                        </connections>
+                                                    </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GradientView" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mav-j7-dIv">
-                                                        <rect key="frame" x="0.0" y="304.5" width="337.5" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="442.5" width="337.5" height="20.5"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1e5-Gh-J8V" customClass="GradientView" customModule="ZamzamKit">
-                                                        <rect key="frame" x="0.0" y="341" width="337.5" height="350"/>
+                                                        <rect key="frame" x="0.0" y="479" width="337.5" height="350"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="350" id="H7u-uH-Oa5"/>
