@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  ZamzamKit
+
+  Created by Basem Emara on 2018-10-03.
+  Copyright © 2018 Zamzam. All rights reserved.
+*/
+
+"pull.to.refresh" = "Pull to refresh";
+"open.in.safari" = "Open in Safari";
+"ok.dialog" = "OK";
+"cancel.dialog" = "Cancel";

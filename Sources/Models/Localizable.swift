@@ -18,9 +18,10 @@ public struct Localizable {
 }
 
 public extension Localizable {
-    static let pullToRefresh = Localizable(NSLocalizedString("Pull to refresh", comment: "For tables"))
-    static let ok = Localizable(NSLocalizedString("OK", comment: "For dialogs"))
-    static let cancel = Localizable(NSLocalizedString("Cancel", comment: "For dialogs"))
+    static let pullToRefresh = Localizable(NSLocalizedString("pull.to.refresh", bundle: .zamzamKit, comment: "For tables"))
+    static let openInSafari = Localizable(NSLocalizedString("open.in.safari", bundle: .zamzamKit, comment: "For opening Safari from share activity"))
+    static let ok = Localizable(NSLocalizedString("ok.dialog", bundle: .zamzamKit, comment: "For dialogs"))
+    static let cancel = Localizable(NSLocalizedString("cancel.dialog", bundle: .zamzamKit, comment: "For dialogs"))
 }
 
 public extension String {
