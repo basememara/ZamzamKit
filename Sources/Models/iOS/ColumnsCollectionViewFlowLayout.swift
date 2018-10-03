@@ -11,20 +11,16 @@ import UIKit
 open class ColumnsCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     /// Number of columns in portrait orientation
-    @IBInspectable
-    open var portraitColumns: Int = 1
+    @IBInspectable open var portraitColumns: Int = 1
     
     /// Number of columns in landscape orientation
-    @IBInspectable
-    open var landscapeColumns: Int = 0
+    @IBInspectable open var landscapeColumns: Int = 0
     
     /// Increase columns for larger screens
-    @IBInspectable
-    open var multiplierForRegularTrait: CGFloat = 0
+    @IBInspectable open var multiplierForRegularTrait: CGFloat = 0
     
     /// The ratio between width and height while obeying number of columns
-    @IBInspectable
-    open var aspectRatio: CGFloat = 1
+    @IBInspectable open var aspectRatio: CGFloat = 1
     
     open override func prepare() {
         super.prepare()
