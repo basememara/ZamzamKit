@@ -10,18 +10,15 @@ import Foundation
 
 public extension URL {
     
-    /**
-     Add, update, or remove a query string parameter from the URL
-     
-     - parameter url:   the URL
-     - parameter key:   the key of the query string parameter
-     - parameter value: the value to replace the query string parameter, nil will remove item
-     
-     - returns: the URL with the mutated query string
-     */
-    func appendingQueryItem(_ name: String, value: Any?) -> String {
+    /// Returns a URL constructed by appending the given query string parameter to self.
+    ///
+    /// - Parameters:
+    ///   - name: the key of the query string parameter
+    ///   - value: the value to replace the query string parameter, nil will remove item
+    /// - Returns: the URL with the appended query string
+    func appendingQueryItem(_ name: String, value: Any?) -> URL {
         guard var urlComponents = URLComponents(string: absoluteString) else {
-            return absoluteString
+            return self
         }
         
         urlComponents.queryItems = urlComponents.queryItems?
@@ -32,20 +29,16 @@ public extension URL {
             urlComponents.queryItems?.append(URLQueryItem(name: name, value: "\(value)"))
         }
         
-        return urlComponents.string ?? absoluteString
+        return urlComponents.url ?? self
     }
     
-    /**
-     Add, update, or remove a query string parameters from the URL
-     
-     - parameter url:   the URL
-     - parameter values: the dictionary of query string parameters to replace
-     
-     - returns: the URL with the mutated query string
-     */
-    func appendingQueryItems(_ contentsOf: [String: Any?]) -> String {
+    /// Returns a URL constructed by appending the given query string parameters to self.
+    ///
+    /// - Parameter contentsOf: a dictionary of query string parameters to modify
+    /// - Returns: the URL with the appended query string
+    func appendingQueryItems(_ contentsOf: [String: Any?]) -> URL {
         guard var urlComponents = URLComponents(string: absoluteString), !contentsOf.isEmpty else {
-            return absoluteString
+            return self
         }
         
         let keys = contentsOf.keys.map { $0.lowercased() }
@@ -58,18 +51,14 @@ public extension URL {
             return URLQueryItem(name: $0.key, value: "\(value)")
         })
         
-        return urlComponents.string ?? absoluteString
+        return urlComponents.url ?? self
     }
     
-    /**
-     Removes a query string parameter from the URL
-     
-     - parameter url:   the URL
-     - parameter key:   the key of the query string parameter
-     
-     - returns: the URL with the mutated query string
-     */
-    func removeQueryItem(_ name: String) -> String {
+    /// Returns a URL constructed by removing the given query string parameter to self.
+    ///
+    /// - Parameter name: the key of the query string parameter
+    /// - Returns: the URL with the mutated query string
+    func removeQueryItem(_ name: String) -> URL {
         return appendingQueryItem(name, value: nil)
     }
 }

@@ -32,7 +32,7 @@ class WebTests: XCTestCase {
     func testappendingQueryItem() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = URL(string: value)!.appendingQueryItem("aBc", value: "555")
+        let newValue = URL(string: value)!.appendingQueryItem("aBc", value: "555").absoluteString
         let expectedValue = "https://example.com?lmn=tuv&xyz=987&aBc=555"
         
         XCTAssertEqual(newValue, expectedValue,
@@ -42,7 +42,7 @@ class WebTests: XCTestCase {
     func testRemoveQueryStringParameter() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = URL(string: value)!.removeQueryItem("xyz")
+        let newValue = URL(string: value)!.removeQueryItem("xyz").absoluteString
         let expectedValue = "https://example.com?abc=123&lmn=tuv"
         
         XCTAssertEqual(newValue, expectedValue,
@@ -52,7 +52,7 @@ class WebTests: XCTestCase {
     func testappendingQueryItemForAdd() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = URL(string: value)!.appendingQueryItem("def", value: "456")
+        let newValue = URL(string: value)!.appendingQueryItem("def", value: "456").absoluteString
         let expectedValue = "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
         
         XCTAssertEqual(newValue, expectedValue,
@@ -67,7 +67,7 @@ class WebTests: XCTestCase {
             "jkl": "777",
             "abc": "333",
             "lmn": nil
-        ])
+        ]).absoluteString
         
         XCTAssertTrue(newValue.contains("abc=333"))
         XCTAssertTrue(newValue.contains("def=456"))
@@ -80,28 +80,32 @@ class WebTests: XCTestCase {
         // Subfolder
         XCTAssertEqual(
             URL(string: "https://example.com/abc/xyz")!
-                .appendingQueryItem("abc", value: "123"),
+                .appendingQueryItem("abc", value: "123")
+                .absoluteString,
             "https://example.com/abc/xyz?abc=123"
         )
         
         // Hash in URL
         XCTAssertEqual(
             URL(string: "https://example.com/abc/xyz#test")!
-                .appendingQueryItem("xyz", value: "987"),
+                .appendingQueryItem("xyz", value: "987")
+                .absoluteString,
             "https://example.com/abc/xyz?xyz=987#test"
         )
         
         // Subfolder with trailing slash
         XCTAssertEqual(
             URL(string: "https://example.com/abc/xyz/")!
-                .appendingQueryItem("abc", value: "123"),
+                .appendingQueryItem("abc", value: "123")
+                .absoluteString,
             "https://example.com/abc/xyz/?abc=123"
         )
         
         // Hash in URL with trailing slash
         XCTAssertEqual(
             URL(string: "https://example.com/abc/xyz/#test")!
-                .appendingQueryItem("xyz", value: "987"),
+                .appendingQueryItem("xyz", value: "987")
+                .absoluteString,
             "https://example.com/abc/xyz/?xyz=987#test"
         )
     }
@@ -110,14 +114,16 @@ class WebTests: XCTestCase {
         // Pure domain
         XCTAssertEqual(
             URL(string: "https://example.com")!
-                .appendingQueryItem("abc", value: "123"),
+                .appendingQueryItem("abc", value: "123")
+                .absoluteString,
             "https://example.com?abc=123"
         )
         
         // With trailing slash
         XCTAssertEqual(
             URL(string: "https://example.com/")!
-                .appendingQueryItem("xyz", value: "987"),
+                .appendingQueryItem("xyz", value: "987")
+                .absoluteString,
             "https://example.com/?xyz=987"
         )
     }
@@ -125,13 +131,15 @@ class WebTests: XCTestCase {
     func testappendingQueryItemForStrongTypes() {
         XCTAssertEqual(
             URL(string: "https://example.com")!
-                .appendingQueryItem("abc", value: 1),
+                .appendingQueryItem("abc", value: 1)
+                .absoluteString,
             "https://example.com?abc=1"
         )
         
         XCTAssertEqual(
             URL(string: "https://example.com/")!
-                .appendingQueryItem("xyz", value: true),
+                .appendingQueryItem("xyz", value: true)
+                .absoluteString,
             "https://example.com/?xyz=true"
         )
     }
