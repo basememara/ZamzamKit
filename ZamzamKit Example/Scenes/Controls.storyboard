@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ei4-K5-ZcS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="f3w-w0-Ent">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Controls-->
+        <!--Controls View Controller-->
         <scene sceneID="ynh-Pg-ch4">
             <objects>
                 <viewController id="ei4-K5-ZcS" customClass="ControlsViewController" customModule="ZamzamKit_Example" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,10 +22,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="967"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAB-NL-gPa" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="913"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="893"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="k9n-6u-Qqa">
-                                                <rect key="frame" x="19" y="52" width="337.5" height="829"/>
+                                                <rect key="frame" x="19" y="32" width="337.5" height="829"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PlaceholderTextView" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKF-uG-VDO">
                                                         <rect key="frame" x="0.0" y="0.0" width="337.5" height="20.5"/>
@@ -157,12 +157,31 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nGK-0M-Tlh"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Controls" image="first" id="bap-Pf-o0v"/>
+                    <navigationItem key="navigationItem" id="Aws-Ww-dX0"/>
                     <size key="freeformSize" width="375" height="967"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dvy-bm-7nn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900" y="1118"/>
+            <point key="canvasLocation" x="1796" y="1118"/>
+        </scene>
+        <!--Controls-->
+        <scene sceneID="X1I-Zv-Mwu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="f3w-w0-Ent" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Controls" image="first" id="bap-Pf-o0v"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lg1-gH-ZVx">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ei4-K5-ZcS" kind="relationship" relationship="rootViewController" id="2X0-JR-6LT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hvQ-t9-kVN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="900" y="1117.6911544227887"/>
         </scene>
     </scenes>
     <resources>

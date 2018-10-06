@@ -11,34 +11,30 @@ import UIKit
 
 public class BadgeBarButtonItem: UIBarButtonItem {
     
-    private(set) public lazy var badgeLabel: UILabel = {
-        let label = UILabel()
+    private(set) public lazy var badgeLabel = UILabel().with {
+        $0.text = badgeText?.isEmpty == false ? " \(badgeText!) " : nil
+        $0.isHidden = badgeText?.isEmpty != false
+        $0.textColor = badgeFontColor
+        $0.backgroundColor = badgeBackgroundColor
         
-        label.text = badgeText?.isEmpty == false ? " \(badgeText!) " : nil
-        label.isHidden = badgeText?.isEmpty != false
-        label.textColor = badgeFontColor
-        label.backgroundColor = badgeBackgroundColor
+        $0.font = .systemFont(ofSize: badgeFontSize)
+        $0.layer.cornerRadius = badgeFontSize * CGFloat(0.6)
+        $0.clipsToBounds = true
+        $0.isUserInteractionEnabled = true
         
-        label.font = .systemFont(ofSize: badgeFontSize)
-        label.layer.cornerRadius = badgeFontSize * CGFloat(0.6)
-        label.clipsToBounds = true
-        label.isUserInteractionEnabled = true
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.addConstraint(
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.addConstraint(
             NSLayoutConstraint(
-                item: label,
+                item: $0,
                 attribute: .width,
                 relatedBy: .greaterThanOrEqual,
-                toItem: label,
+                toItem: $0,
                 attribute: .height,
                 multiplier: 1,
                 constant: 0
             )
         )
-        
-        return label
-    }()
+    }
     
     public var badgeButton: UIButton? {
         return customView as? UIButton
@@ -113,17 +109,19 @@ public extension BadgeBarButtonItem {
 public extension BadgeBarButtonItem {
     
     convenience init(image: UIImage, badgeText: String? = nil, target: AnyObject?, action: Selector) {
-        let button = UIButton(type: .custom)
-        button.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
-        button.setBackgroundImage(image, for: .normal)
+        let button = UIButton(type: .custom).with {
+            $0.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+            $0.setBackgroundImage(image, for: .normal)
+        }
         
         self.init(button: button, badgeText: badgeText, target: target, action: action)
     }
     
     convenience init(title: String, badgeText: String? = nil, target: AnyObject?, action: Selector) {
-        let button = UIButton(type: .system)
-        button.setTitle(title, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.buttonFontSize)
+        let button = UIButton(type: .system).with {
+            $0.setTitle(title, for: .normal)
+            $0.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.buttonFontSize)
+        }
         
         self.init(button: button, badgeText: badgeText, target: target, action: action)
     }

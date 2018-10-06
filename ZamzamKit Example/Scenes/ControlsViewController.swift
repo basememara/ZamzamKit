@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ZamzamKit
 import SystemConfiguration
 
 class ControlsViewController: UIViewController {
@@ -40,5 +41,40 @@ class ControlsViewController: UIViewController {
             popoverFrom: sender,
             applicationActivities: [safariActivity]
         )
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configure()
+    }
+}
+
+private extension ControlsViewController {
+    
+    func configure() {
+        navigationItem.rightBarButtonItems = [
+            BadgeBarButtonItem(
+                button: UIButton(type: .contactAdd),
+                badgeText: "123",
+                target: self,
+                action: #selector(test)
+            )
+        ]
+        
+        navigationItem.leftBarButtonItems = [
+            BadgeBarButtonItem(
+                button: UIButton(type: .detailDisclosure),
+                badgeText: "abc",
+                target: self,
+                action: #selector(test)
+                ).with {
+                    $0.badgeFontColor = .black
+                    $0.badgeBackgroundColor = .green
+            }
+        ]
+    }
+    
+    @objc func test() {
+        
     }
 }
