@@ -64,6 +64,14 @@
 		8B4C08B71EC94608002A317D /* BinaryFloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4C08AB1EC9422E002A317D /* BinaryFloatingPoint.swift */; };
 		8B4CFAE91CABEF0800D2B1D7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
 		8B4CFAEF1CABEF0900D2B1D7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
+		8B4D71AF216A542A002ACA81 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71AE216A542A002ACA81 /* Debouncer.swift */; };
+		8B4D71B0216A542A002ACA81 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71AE216A542A002ACA81 /* Debouncer.swift */; };
+		8B4D71B1216A542A002ACA81 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71AE216A542A002ACA81 /* Debouncer.swift */; };
+		8B4D71B3216A5560002ACA81 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71B2216A5560002ACA81 /* Throttler.swift */; };
+		8B4D71B4216A5560002ACA81 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71B2216A5560002ACA81 /* Throttler.swift */; };
+		8B4D71B5216A5560002ACA81 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71B2216A5560002ACA81 /* Throttler.swift */; };
+		8B4D71B7216A55C6002ACA81 /* RateLimitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71B6216A55C6002ACA81 /* RateLimitTests.swift */; };
+		8B4D71B8216A55C6002ACA81 /* RateLimitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71B6216A55C6002ACA81 /* RateLimitTests.swift */; };
 		8B50C507211E2F9B00A36ABB /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B50C506211E2F9B00A36ABB /* GradientView.swift */; };
 		8B5250E020CFDED700E77F70 /* FailableCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */; };
 		8B5250E120CFDED700E77F70 /* FailableCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */; };
@@ -392,6 +400,9 @@
 		8B4967B21EA7FFF700091A7D /* LocaleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaleTests.swift; sourceTree = "<group>"; };
 		8B4C08AB1EC9422E002A317D /* BinaryFloatingPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryFloatingPoint.swift; sourceTree = "<group>"; };
 		8B4C08AF1EC94489002A317D /* NumberTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberTests.swift; sourceTree = "<group>"; };
+		8B4D71AE216A542A002ACA81 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
+		8B4D71B2216A5560002ACA81 /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
+		8B4D71B6216A55C6002ACA81 /* RateLimitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateLimitTests.swift; sourceTree = "<group>"; };
 		8B50C506211E2F9B00A36ABB /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailableCodableArray.swift; sourceTree = "<group>"; };
 		8B5316051C9B22F40094A6C4 /* ZamzamKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZamzamKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -844,6 +855,7 @@
 				8BFDB69C1C755A5300C94996 /* LocationTests.swift */,
 				8B4C08AF1EC94489002A317D /* NumberTests.swift */,
 				8B89746D1EDE17AC004FA853 /* MigrationTests.swift */,
+				8B4D71B6216A55C6002ACA81 /* RateLimitTests.swift */,
 				8B48E6261DAFFDCD00087328 /* SequenceTests.swift */,
 				8BE19B281C72D71F00D4D437 /* StringTests.swift */,
 				8B54B9D71FCC6B6A00ED571F /* UserDefaultsTests.swift */,
@@ -913,12 +925,14 @@
 			isa = PBXGroup;
 			children = (
 				8B1FE7EA2065AB6600EE8DBE /* iOS */,
+				8B4D71AE216A542A002ACA81 /* Debouncer.swift */,
 				8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */,
 				8BE2BB3F1F03259C00877447 /* Localizable.swift */,
 				8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */,
 				8B8974701EDF555C004FA853 /* Migration.swift */,
 				8B75286B1E759F2A0035A742 /* Observer.swift */,
 				8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */,
+				8B4D71B2216A5560002ACA81 /* Throttler.swift */,
 				8BD016831E77371A008F306E /* WatchSession.swift */,
 			);
 			path = Models;
@@ -1281,6 +1295,7 @@
 				8BFDB6A01C75B4A600C94996 /* LocationMeta.swift in Sources */,
 				8BBEA5E220309764009B7E90 /* ColumnsCollectionViewFlowLayout.swift in Sources */,
 				8B37B8D5200549040052E9B1 /* UIStackView.swift in Sources */,
+				8B4D71AF216A542A002ACA81 /* Debouncer.swift in Sources */,
 				8BD508761C99E18500AE205E /* Collection.swift in Sources */,
 				8B94345A1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B2D57B920E2D38900CF4B01 /* UILabelView.swift in Sources */,
@@ -1332,6 +1347,7 @@
 				8B7BAD3A205714D900273789 /* UIRefreshControl.swift in Sources */,
 				8BF2106B1E48D52F0026B802 /* Result.swift in Sources */,
 				8B9E986F1EB500790067ACB7 /* With.swift in Sources */,
+				8B4D71B3216A5560002ACA81 /* Throttler.swift in Sources */,
 				8B752F52201E2E16007DA40C /* PluggableApplicationDelegate.swift in Sources */,
 				8B1EEC881CF7588600AE054B /* UIStoryboard.swift in Sources */,
 				8BFDB65E1C7518F800C94996 /* String.swift in Sources */,
@@ -1380,6 +1396,7 @@
 				8BD016851E77371A008F306E /* WatchSession.swift in Sources */,
 				8B8974721EDF555C004FA853 /* Migration.swift in Sources */,
 				8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */,
+				8B4D71B4216A5560002ACA81 /* Throttler.swift in Sources */,
 				8BFDB6781C751F2300C94996 /* FileManager.swift in Sources */,
 				8BD98D661FC33B4600E74A8C /* Font.swift in Sources */,
 				8BF2106C1E48D52F0026B802 /* Result.swift in Sources */,
@@ -1399,6 +1416,7 @@
 				8B75286D1E759F2A0035A742 /* Observer.swift in Sources */,
 				8B729C761EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
+				8B4D71B0216A542A002ACA81 /* Debouncer.swift in Sources */,
 				8BC6D99B204790B600242DAE /* Scrollable.swift in Sources */,
 				8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */,
 				8BF0CD122143243500DF6DAF /* LocationsWorkerType.swift in Sources */,
@@ -1421,6 +1439,7 @@
 				8BF2106D1E48D52F0026B802 /* Result.swift in Sources */,
 				8B79A4771E9C1ED800C8A5A4 /* Locale.swift in Sources */,
 				8BD61B381E3EFDF1009B537E /* ZamzamKitable.swift in Sources */,
+				8B4D71B1216A542A002ACA81 /* Debouncer.swift in Sources */,
 				8BD508781C99E18500AE205E /* Collection.swift in Sources */,
 				8B4CFAEF1CABEF0900D2B1D7 /* Color.swift in Sources */,
 				8BFDB6911C75323900C94996 /* DateFormatter.swift in Sources */,
@@ -1433,6 +1452,7 @@
 				8B3CD4721EE9CC0100E0BAFE /* Int.swift in Sources */,
 				8B75286E1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BB45FB71C9BDD180070CE07 /* UserDefaults.swift in Sources */,
+				8B4D71B5216A5560002ACA81 /* Throttler.swift in Sources */,
 				8B94345C1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B6A95631E46FBB9003F333D /* Thread.swift in Sources */,
 				8BE814FF1C7842DC005F23CE /* Sequence.swift in Sources */,
@@ -1485,6 +1505,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B4D71B7216A55C6002ACA81 /* RateLimitTests.swift in Sources */,
 				8BE19B2E1C72D71F00D4D437 /* StringTests.swift in Sources */,
 				8B48E6291DAFFDDA00087328 /* ColorTests.swift in Sources */,
 				8B48E6271DAFFDCD00087328 /* SequenceTests.swift in Sources */,
@@ -1518,6 +1539,7 @@
 				8B4967B51EA8017000091A7D /* BundleTests.swift in Sources */,
 				8B4967C21EA8019700091A7D /* WebTests.swift in Sources */,
 				8B4C08B51EC94497002A317D /* NumberTests.swift in Sources */,
+				8B4D71B8216A55C6002ACA81 /* RateLimitTests.swift in Sources */,
 				8B4967B81EA8017600091A7D /* DateTimeTests.swift in Sources */,
 				8B4967BB1EA8018A00091A7D /* DictionaryTests.swift in Sources */,
 				8B4967C11EA8019500091A7D /* StringTests.swift in Sources */,
