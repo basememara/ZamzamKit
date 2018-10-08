@@ -22,10 +22,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="967"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAB-NL-gPa" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="893"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="939"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="k9n-6u-Qqa">
-                                                <rect key="frame" x="19" y="32" width="337.5" height="829"/>
+                                                <rect key="frame" x="19" y="32" width="337.5" height="875"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PlaceholderTextView" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKF-uG-VDO">
                                                         <rect key="frame" x="0.0" y="0.0" width="337.5" height="20.5"/>
@@ -85,14 +85,21 @@
                                                             <action selector="presentShareActivityTapped:" destination="ei4-K5-ZcS" eventType="touchUpInside" id="mrI-bl-lv6"/>
                                                         </connections>
                                                     </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MIo-9y-BLY">
+                                                        <rect key="frame" x="0.0" y="442.5" width="337.5" height="30"/>
+                                                        <state key="normal" title="Compose Mail"/>
+                                                        <connections>
+                                                            <action selector="composeMailButtonTapped" destination="ei4-K5-ZcS" eventType="touchUpInside" id="8SB-xR-jkY"/>
+                                                        </connections>
+                                                    </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GradientView" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mav-j7-dIv">
-                                                        <rect key="frame" x="0.0" y="442.5" width="337.5" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="488.5" width="337.5" height="20.5"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1e5-Gh-J8V" customClass="GradientView" customModule="ZamzamKit">
-                                                        <rect key="frame" x="0.0" y="479" width="337.5" height="350"/>
+                                                        <rect key="frame" x="0.0" y="525" width="337.5" height="350"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="350" id="H7u-uH-Oa5"/>

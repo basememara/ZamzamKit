@@ -72,6 +72,7 @@
 		8B4D71B5216A5560002ACA81 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71B2216A5560002ACA81 /* Throttler.swift */; };
 		8B4D71B7216A55C6002ACA81 /* RateLimitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71B6216A55C6002ACA81 /* RateLimitTests.swift */; };
 		8B4D71B8216A55C6002ACA81 /* RateLimitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71B6216A55C6002ACA81 /* RateLimitTests.swift */; };
+		8B4D71BE216B208B002ACA81 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71BD216B208B002ACA81 /* MailComposer.swift */; };
 		8B50C507211E2F9B00A36ABB /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B50C506211E2F9B00A36ABB /* GradientView.swift */; };
 		8B5250E020CFDED700E77F70 /* FailableCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */; };
 		8B5250E120CFDED700E77F70 /* FailableCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */; };
@@ -403,6 +404,7 @@
 		8B4D71AE216A542A002ACA81 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		8B4D71B2216A5560002ACA81 /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		8B4D71B6216A55C6002ACA81 /* RateLimitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateLimitTests.swift; sourceTree = "<group>"; };
+		8B4D71BD216B208B002ACA81 /* MailComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
 		8B50C506211E2F9B00A36ABB /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		8B5250DF20CFDED700E77F70 /* FailableCodableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailableCodableArray.swift; sourceTree = "<group>"; };
 		8B5316051C9B22F40094A6C4 /* ZamzamKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZamzamKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -678,6 +680,7 @@
 				8BBEA5E120309764009B7E90 /* ColumnsCollectionViewFlowLayout.swift */,
 				8B50C506211E2F9B00A36ABB /* GradientView.swift */,
 				8B0E0F5020F430C200DF3975 /* IntrinsicHeightDataView.swift */,
+				8B4D71BD216B208B002ACA81 /* MailComposer.swift */,
 				8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */,
 				8B379A0720F65F46002144F7 /* PlaceholderTextView.swift */,
 				8B752F51201E2E16007DA40C /* PluggableApplicationDelegate.swift */,
@@ -1140,17 +1143,14 @@
 					8B5316041C9B22F40094A6C4 = {
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
 					};
 					8B53161A1C9B23140094A6C4 = {
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
 					};
 					8B5316261C9B23140094A6C4 = {
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 1000;
-						ProvisioningStyle = Manual;
 					};
 					8BE19B071C72D6DF00D4D437 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -1349,6 +1349,7 @@
 				8B9E986F1EB500790067ACB7 /* With.swift in Sources */,
 				8B4D71B3216A5560002ACA81 /* Throttler.swift in Sources */,
 				8B752F52201E2E16007DA40C /* PluggableApplicationDelegate.swift in Sources */,
+				8B4D71BE216B208B002ACA81 /* MailComposer.swift in Sources */,
 				8B1EEC881CF7588600AE054B /* UIStoryboard.swift in Sources */,
 				8BFDB65E1C7518F800C94996 /* String.swift in Sources */,
 				8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */,
@@ -1893,8 +1894,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZYJTUJP7C7;
 				INFOPLIST_FILE = "ZamzamKit Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1915,8 +1916,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZYJTUJP7C7;
 				INFOPLIST_FILE = "ZamzamKit Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1936,8 +1937,8 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZYJTUJP7C7;
 				INFOPLIST_FILE = "ZamzamKit Example Watch Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1962,8 +1963,8 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZYJTUJP7C7;
 				INFOPLIST_FILE = "ZamzamKit Example Watch Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1989,8 +1990,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZYJTUJP7C7;
 				IBSC_MODULE = ZamzamKit_Example_Watch_Extension;
 				INFOPLIST_FILE = "ZamzamKit Example Watch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
@@ -2012,8 +2013,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZYJTUJP7C7;
 				IBSC_MODULE = ZamzamKit_Example_Watch_Extension;
 				INFOPLIST_FILE = "ZamzamKit Example Watch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;

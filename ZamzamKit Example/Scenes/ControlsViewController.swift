@@ -12,36 +12,7 @@ import SystemConfiguration
 
 class ControlsViewController: UIViewController {
     
-    @IBAction func alertButtonTapped() {
-        present(alert: "Test Alert")
-    }
-    
-    @IBAction func safariButtonTapped() {
-        present(safari: "https://apple.com")
-    }
-    
-    @IBAction func presentShareActivityTapped(_ sender: UIButton) {
-        guard let link = URL(string: "https://apple.com") else { return }
-        
-        let safariActivity = UIActivity.make(
-            title: .localized(.openInSafari),
-            imageName: "safari-share",
-            imageBundle: .zamzamKit,
-            handler: {
-                guard SCNetworkReachability.isOnline else {
-                    return self.present(alert: "Device must be online to view within the browser.")
-                }
-            
-                UIApplication.shared.open(link)
-            }
-        )
-        
-        present(
-            activities: ["Test Title", link],
-            popoverFrom: sender,
-            applicationActivities: [safariActivity]
-        )
-    }
+    private let mailComposer: MailComposerType = MailComposer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,14 +38,59 @@ private extension ControlsViewController {
                 badgeText: "abc",
                 target: self,
                 action: #selector(test)
-                ).with {
-                    $0.badgeFontColor = .black
-                    $0.badgeBackgroundColor = .green
+            ).with {
+                $0.badgeFontColor = .black
+                $0.badgeBackgroundColor = .green
             }
         ]
     }
     
     @objc func test() {
         
+    }
+}
+
+private extension ControlsViewController {
+    
+    @IBAction func alertButtonTapped() {
+        present(alert: "Test Alert")
+    }
+    
+    @IBAction func safariButtonTapped() {
+        present(safari: "https://apple.com")
+    }
+    
+    @IBAction func presentShareActivityTapped(_ sender: UIButton) {
+        guard let link = URL(string: "https://apple.com") else { return }
+        
+        let safariActivity = UIActivity.make(
+            title: .localized(.openInSafari),
+            imageName: "safari-share",
+            imageBundle: .zamzamKit,
+            handler: {
+                guard SCNetworkReachability.isOnline else {
+                    return self.present(alert: "Device must be online to view within the browser.")
+                }
+                
+                UIApplication.shared.open(link)
+            }
+        )
+        
+        present(
+            activities: ["Test Title", link],
+            popoverFrom: sender,
+            applicationActivities: [safariActivity]
+        )
+    }
+    
+    @IBAction func composeMailButtonTapped() {
+        guard let controller = mailComposer.makeViewController(email: "test@example.com") else {
+            return present(
+                alert: "Could Not Send Email",
+                message: "Your device could not send e-mail."
+            )
+        }
+        
+        present(controller, animated: true)
     }
 }
