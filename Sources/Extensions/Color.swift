@@ -41,29 +41,9 @@ public extension UIColor {
             alpha: CGFloat(alpha)
         )
     }
-    
-    /**
-     An additional convenience initializer function that allows to init a UIColor object using a RGB string.
+}
 
-     - parameter rgb: A string of integers representing the RGB colors.
-     - parameter alpha: Alpha Double Optional value that sets the alpha range 0=invisible / 1=totally visible.
-     
-     */
-    convenience init(rgb: String?, alpha: Double = 1.0) {
-        // Validate correct number of colors supplied
-        guard let rgbSplit = rgb?
-            .split(separator: ",")
-            .map(String.init)
-            .compactMap({ Int($0.trimmingCharacters(in: .whitespacesAndNewlines)) }),
-                rgbSplit.count == 3
-                    else {
-                        // Return black color if failed
-                        self.init(white: 0, alpha: CGFloat(alpha))
-                        return
-                    }
-        
-        self.init(rgb: (rgbSplit[0], rgbSplit[1], rgbSplit[2]), alpha: alpha)
-    }
+public extension UIColor {
     
     /**
      Returns the inverse color

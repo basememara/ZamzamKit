@@ -47,21 +47,3 @@ public extension Dictionary where Key == String, Value: Any {
         return String(bytes: jsonData, encoding: .utf8)
     }
 }
-
-/// Combine dictionaries.
-func + <K,V> (left: Dictionary<K,V>, right: Dictionary<K,V>?) -> Dictionary<K,V> {
-    // http://stackoverflow.com/a/34527546/235334
-    guard let right = right else { return left }
-    return left.reduce(right) {
-        var new = $0 as [K:V]
-        new.updateValue($1.1, forKey: $1.0)
-        return new
-    }
-}
-
-/// Append dictionary.
-func += <K,V> (left: inout Dictionary<K,V>, right: Dictionary<K,V>?) {
-    // http://stackoverflow.com/a/34527546/235334
-    guard let right = right else { return }
-    right.forEach { left.updateValue($0.value, forKey: $0.key) }
-}

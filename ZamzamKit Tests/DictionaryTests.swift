@@ -22,21 +22,4 @@ class DictionaryTests: XCTestCase {
         XCTAssertTrue(json.contains("\"abc\":123"))
         XCTAssertTrue(json.contains("\"efd\":\"xyz\""))
     }
-    
-    func testDictionaryUnion() {
-        let moreAttributes: [String: String] = ["Function": "authenticate"]
-        var attributes: [String: String] = ["File": "Auth.swift"]
-        
-        // Immutable
-        XCTAssertEqual(attributes + moreAttributes + nil, ["Function": "authenticate", "File": "Auth.swift"])
-        XCTAssertEqual(attributes + moreAttributes, ["Function": "authenticate", "File": "Auth.swift"])
-        XCTAssertEqual(attributes + nil, ["File": "Auth.swift"])
-        
-        // Mutable
-        attributes += nil
-        XCTAssertEqual(attributes, ["File": "Auth.swift"])
-        
-        attributes += moreAttributes
-        XCTAssertEqual(attributes, ["File": "Auth.swift", "Function": "authenticate"])
-    }
 }

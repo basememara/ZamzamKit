@@ -18,15 +18,6 @@ public struct ZamzamConstants {
     
     public static let bundleNamespace = "io.zamzam.ZamzamKit"
     
-    /// Declare bundle depending on platform
-    #if os(iOS)
-        public static let bundleIdentifier = "\(bundleNamespace)-iOS"
-    #elseif os(watchOS)
-        public static let bundleIdentifier = "\(bundleNamespace)-watchOS"
-    #elseif os(tvOS)
-        public static let bundleIdentifier = "\(bundleNamespace)-tvOS"
-    #endif
-    
     public struct DateTime {
         public static let JSON_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"
     }
@@ -55,7 +46,4 @@ public struct ZamzamConstants {
         }
         #endif
     }
-    
-    @available(*, unavailable, message: "Use Bundle.zamzamKit`")
-    static let bundle = Bundle(identifier: bundleIdentifier)!
 }
