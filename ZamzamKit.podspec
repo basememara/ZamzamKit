@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ZamzamKit'
-    s.version          = '2.3.0'
+    s.version          = '3.0.0'
     s.summary          = 'A Swift framework for rapidly developing Apple apps.'
     s.description      = <<-DESC
 ZamzamKit is a Swift framework for Apple devices to allow
@@ -21,7 +21,7 @@ and libraries so you can begin building for the future.
     s.watchos.deployment_target = '3.0'
     s.tvos.deployment_target    = '10.0'
 
-    s.swift_version = '4.0'
+    s.swift_version = '4.2'
     s.requires_arc = true
     
     s.source_files = 'Sources/**/*.{h,swift}'
