@@ -6,6 +6,7 @@
 //  Copyright © 2018 Zamzam. All rights reserved.
 //
 
+/// Skips failed elements during decoding instead exiting collection completely; lossy array decoding.
 public struct FailableCodableArray<Element: Decodable>: Decodable {
     // https://github.com/phynet/Lossy-array-decode-swift4
     private struct DummyCodable: Codable {}

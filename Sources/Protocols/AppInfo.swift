@@ -12,11 +12,11 @@ import UIKit
 import WatchKit
 #endif
 
-public protocol ZamzamKitable {
+public protocol AppInfo {
 
 }
 
-public extension ZamzamKitable {
+public extension AppInfo {
 
 	/// App's name.
 	var appDisplayName: String? {
@@ -42,7 +42,8 @@ public extension ZamzamKitable {
 }
 
 // MARK: - Environment
-public extension ZamzamKitable {
+
+public extension AppInfo {
 	
 	/// Check if app is running in TestFlight mode.
 	var isInTestFlight: Bool {

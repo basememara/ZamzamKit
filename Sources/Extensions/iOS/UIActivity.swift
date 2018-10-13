@@ -19,14 +19,19 @@ public extension UIActivity {
 
      - returns: The custom activity
      */
-    static func make(title: String, imageName: String, imageBundle: Bundle? = nil,
+    static func make(
+        title: String,
+        imageName: String,
+        imageBundle: Bundle? = nil,
         canPerform: (([Any]) -> Bool)? = nil,
-        handler: @escaping () -> Void) -> UIActivity {
-            return CustomActivity(
-                title: title,
-                imageName: imageName,
-                imageBundle: imageBundle,
-                handler: handler)
+        handler: @escaping () -> Void) -> UIActivity
+    {
+        return CustomActivity(
+            title: title,
+            imageName: imageName,
+            imageBundle: imageBundle,
+            handler: handler
+        )
     }
 }
 

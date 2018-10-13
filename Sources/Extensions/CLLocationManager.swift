@@ -17,5 +17,4 @@ public extension CLLocationManager {
             && CLLocationManager.authorizationStatus()
                 .within([.authorizedAlways, .authorizedWhenInUse])
     }
-
 }

@@ -11,9 +11,7 @@ import Foundation
 public extension Locale {
 
     /// Unix representation of locale usually used for normalizing.
-    static var posix: Locale = {
-        Locale(identifier: "en_US_POSIX")
-    }()
+    static let posix = Locale(identifier: "en_US_POSIX")
     
     /// Returns the language name of the locale, or nil if has none.
     var languageName: String? {

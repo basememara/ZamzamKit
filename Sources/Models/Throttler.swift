@@ -16,7 +16,7 @@ public final class Throttler {
     private let limit: TimeInterval
     private var lastExecutedAt: Date?
     
-    private let syncQueue = DispatchQueue(label: "\(ZamzamConstants.bundleIdentifier).throttler", attributes: [])
+    private let syncQueue = DispatchQueue(label: "\(ZamzamConstants.bundleNamespace).Throttler", attributes: [])
     
     /// Initialize a new throttler with given time interval.
     ///

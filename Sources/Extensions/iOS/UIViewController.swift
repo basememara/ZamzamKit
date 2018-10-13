@@ -35,7 +35,8 @@ public extension UIViewController {
      - parameter additionalActions: Array of alert actions.
      - parameter handler:           Call back handler when main action tapped.
      */
-    func present(alert title: String,
+    func present(
+        alert title: String,
         message: String? = nil,
         buttonText: String = .localized(.ok),
         additionalActions: [UIAlertAction]? = nil,
@@ -44,31 +45,32 @@ public extension UIViewController {
         cancelText: String = .localized(.cancel),
         cancelHandler: (() -> Void)? = nil,
         configure: ((UIAlertController) -> Void)? = nil,
-        handler: (() -> Void)? = nil) {
-            let alertController = UIAlertController(
-                title: title,
-                message: message,
-                preferredStyle: preferredStyle
+        handler: (() -> Void)? = nil)
+    {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: preferredStyle
+        )
+    
+        if includeCancelAction {
+            alertController.addAction(
+                UIAlertAction(title: cancelText, style: .cancel) { _ in cancelHandler?() }
             )
+        }
         
-            if includeCancelAction {
-                alertController.addAction(
-                    UIAlertAction(title: cancelText, style: .cancel) { _ in cancelHandler?() }
-                )
+        if let additionalActions = additionalActions {
+            additionalActions.forEach { item in
+                alertController.addAction(item)
             }
-            
-            if let additionalActions = additionalActions {
-                additionalActions.forEach { item in
-                    alertController.addAction(item)
-                }
-            }
-            
-            alertController.addAction(UIAlertAction(title: buttonText) { handler?() })
+        }
         
-            // Handle any last configurations before presenting alert
-            configure?(alertController)
-            
-            present(alertController, animated: true, completion: nil)
+        alertController.addAction(UIAlertAction(title: buttonText) { handler?() })
+    
+        // Handle any last configurations before presenting alert
+        configure?(alertController)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     /**
@@ -77,9 +79,14 @@ public extension UIViewController {
      - parameter url: URL to display in the browser.
      - parameter modalPresentationStyle: The presentation style of the model view controller.
      */
-    func present(safari url: String, modalPresentationStyle: UIModalPresentationStyle = .overFullScreen,
-                 barTintColor: UIColor? = nil, preferredControlTintColor: UIColor? = nil,
-                 animated: Bool = true, completion: (() -> Void)? = nil) {
+    func present(
+        safari url: String,
+        modalPresentationStyle: UIModalPresentationStyle = .overFullScreen,
+        barTintColor: UIColor? = nil,
+        preferredControlTintColor: UIColor? = nil,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil)
+    {
         present(
             SFSafariViewController(url: URL(string: url)!).with {
                 $0.delegate = self as? SFSafariViewControllerDelegate

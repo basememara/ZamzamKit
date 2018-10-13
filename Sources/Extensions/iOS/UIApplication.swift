@@ -54,8 +54,9 @@ public extension UIApplication {
      */
     func updateShortcutItem(_ type: String, handler: (UIMutableApplicationShortcutItem) -> UIMutableApplicationShortcutItem) {
         guard let index = shortcutItems?.index(where: { $0.type == type }),
-            let item = shortcutItems?[index].mutableCopy() as? UIMutableApplicationShortcutItem
-                else { return }
+            let item = shortcutItems?[index].mutableCopy() as? UIMutableApplicationShortcutItem else {
+                return
+        }
         
         shortcutItems?[index] = handler(item)
     }

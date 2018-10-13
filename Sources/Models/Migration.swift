@@ -10,6 +10,7 @@
 
 import Foundation
 
+/// Manages blocks of code that only need to run once on version updates in apps.
 public class Migration {
     public static let suiteName = "\(ZamzamConstants.bundleNamespace).Migration"
     

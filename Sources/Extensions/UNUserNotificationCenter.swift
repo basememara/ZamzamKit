@@ -22,8 +22,9 @@ public extension UNUserNotificationCenter {
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         actions: [UNNotificationAction]? = nil,
         authorizations: UNAuthorizationOptions? = [.alert, .badge, .sound],
-        completion: ((Bool) -> Void)? = nil) {
-            register(delegate: delegate, categories: [category: actions], authorizations: authorizations, completion: completion)
+        completion: ((Bool) -> Void)? = nil)
+    {
+        register(delegate: delegate, categories: [category: actions], authorizations: authorizations, completion: completion)
     }
     
     /// Registers your app’s notification types and the custom actions that they support.
@@ -37,39 +38,40 @@ public extension UNUserNotificationCenter {
         delegate: UNUserNotificationCenterDelegate? = nil,
         categories: [String: [UNNotificationAction]?],
         authorizations: UNAuthorizationOptions? = [.alert, .badge, .sound],
-        completion: ((Bool) -> Void)? = nil) {
-            self.delegate ?= delegate
-        
-            getNotificationSettings { settings in
-                let categorySet = Set(categories.map {
-                    UNNotificationCategory(
-                        identifier: $0.key,
-                        actions: $0.value ?? [],
-                        intentIdentifiers: [],
-                        options: .customDismissAction
-                    )
-                })
-                
-                guard let authorizations = authorizations, settings.authorizationStatus == .notDetermined else {
-                    // Register category if applicable
-                    return self.getNotificationCategories {
-                        defer {
-                            let granted = settings.authorizationStatus == .authorized
-                            DispatchQueue.main.async { completion?(granted) }
-                        }
-                        
-                        guard categorySet != $0 else { return }
-                        self.setNotificationCategories(categorySet)
+        completion: ((Bool) -> Void)? = nil)
+    {
+        self.delegate ?= delegate
+    
+        getNotificationSettings { settings in
+            let categorySet = Set(categories.map {
+                UNNotificationCategory(
+                    identifier: $0.key,
+                    actions: $0.value ?? [],
+                    intentIdentifiers: [],
+                    options: .customDismissAction
+                )
+            })
+            
+            guard let authorizations = authorizations, settings.authorizationStatus == .notDetermined else {
+                // Register category if applicable
+                return self.getNotificationCategories {
+                    defer {
+                        let granted = settings.authorizationStatus == .authorized
+                        DispatchQueue.main.async { completion?(granted) }
                     }
-                }
-                
-                // Request permission before registering if applicable
-                self.requestAuthorization(options: authorizations) { granted, error in
-                    defer { DispatchQueue.main.async { completion?(granted) } }
-                    guard granted else { return }
+                    
+                    guard categorySet != $0 else { return }
                     self.setNotificationCategories(categorySet)
                 }
             }
+            
+            // Request permission before registering if applicable
+            self.requestAuthorization(options: authorizations) { granted, error in
+                defer { DispatchQueue.main.async { completion?(granted) } }
+                guard granted else { return }
+                self.setNotificationCategories(categorySet)
+            }
+        }
     }
 }
 
@@ -133,7 +135,6 @@ public extension UNUserNotificationCenter {
     func exists(withIdentifier: String, completion: @escaping (Bool) -> Void) {
         get(withIdentifier: withIdentifier) { completion($0 != nil) }
     }
-
 }
 
 public extension UNUserNotificationCenter {
@@ -154,26 +155,27 @@ public extension UNUserNotificationCenter {
         identifier: String = UUID().uuidString,
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         userInfo: [String: Any]? = nil,
-        completion: ((Error?) -> Void)? = nil) {
-            // Constuct content
-            let content = UNMutableNotificationContent().with {
-                $0.body = body
-                $0.categoryIdentifier = category
-            
-                // Assign optional values to content
-                $0.title ?= title
-                $0.subtitle ?= subtitle
-                $0.badge ?= badge
-                $0.sound = sound
-                if let userInfo = userInfo { $0.userInfo = userInfo }
-                if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
-            }
+        completion: ((Error?) -> Void)? = nil)
+    {
+        // Constuct content
+        let content = UNMutableNotificationContent().with {
+            $0.body = body
+            $0.categoryIdentifier = category
         
-            // Construct request with trigger
-            let trigger = timeInterval > 0 ? UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: repeats) : nil
-            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        
-            add(request, withCompletionHandler: completion)
+            // Assign optional values to content
+            $0.title ?= title
+            $0.subtitle ?= subtitle
+            $0.badge ?= badge
+            $0.sound = sound
+            if let userInfo = userInfo { $0.userInfo = userInfo }
+            if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
+        }
+    
+        // Construct request with trigger
+        let trigger = timeInterval > 0 ? UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: repeats) : nil
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+    
+        add(request, withCompletionHandler: completion)
     }
     
     /// Schedules a local notification for delivery.
@@ -192,39 +194,40 @@ public extension UNUserNotificationCenter {
         identifier: String = UUID().uuidString,
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         userInfo: [String: Any]? = nil,
-        completion: ((Error?) -> Void)? = nil) {
-            // Constuct content
-            let content = UNMutableNotificationContent().with {
-                $0.body = body
-                $0.categoryIdentifier = category
-            
-                // Assign optional values to content
-                $0.title ?= title
-                $0.subtitle ?= subtitle
-                $0.badge ?= badge
-                $0.sound = sound
-                if let userInfo = userInfo { $0.userInfo = userInfo }
-                if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
-            }
+        completion: ((Error?) -> Void)? = nil)
+    {
+        // Constuct content
+        let content = UNMutableNotificationContent().with {
+            $0.body = body
+            $0.categoryIdentifier = category
         
-            // Constuct date components for trigger
-            // https://github.com/d7laungani/DLLocalNotifications/blob/master/DLLocalNotifications/DLLocalNotifications.swift#L31
-            let components: DateComponents
-            switch repeats {
-            case .once: components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
-            case .minute: components = calendar.dateComponents([.second], from: date)
-            case .hour: components = calendar.dateComponents([.minute], from: date)
-            case .day: components = calendar.dateComponents([.hour, .minute], from: date)
-            case .week: components = calendar.dateComponents([.hour, .minute, .weekday], from: date)
-            case .month: components = calendar.dateComponents([.hour, .minute, .day], from: date)
-            case .year: components = calendar.dateComponents([.hour, .minute, .day, .month], from: date)
-            }
-        
-            // Construct request with trigger
-            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeats != .once)
-            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        
-            add(request, withCompletionHandler: completion)
+            // Assign optional values to content
+            $0.title ?= title
+            $0.subtitle ?= subtitle
+            $0.badge ?= badge
+            $0.sound = sound
+            if let userInfo = userInfo { $0.userInfo = userInfo }
+            if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
+        }
+    
+        // Constuct date components for trigger
+        // https://github.com/d7laungani/DLLocalNotifications/blob/master/DLLocalNotifications/DLLocalNotifications.swift#L31
+        let components: DateComponents
+        switch repeats {
+        case .once: components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        case .minute: components = calendar.dateComponents([.second], from: date)
+        case .hour: components = calendar.dateComponents([.minute], from: date)
+        case .day: components = calendar.dateComponents([.hour, .minute], from: date)
+        case .week: components = calendar.dateComponents([.hour, .minute, .weekday], from: date)
+        case .month: components = calendar.dateComponents([.hour, .minute, .day], from: date)
+        case .year: components = calendar.dateComponents([.hour, .minute, .day, .month], from: date)
+        }
+    
+        // Construct request with trigger
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeats != .once)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+    
+        add(request, withCompletionHandler: completion)
     }
     
     #if os(iOS)
@@ -232,7 +235,8 @@ public extension UNUserNotificationCenter {
     ///
     /// - Parameters:
     ///   - region: The region of when to fire the notification.
-    func add(region: CLRegion,
+    func add(
+        region: CLRegion,
         body: String,
         title: String? = nil,
         subtitle: String? = nil,
@@ -243,26 +247,27 @@ public extension UNUserNotificationCenter {
         identifier: String = UUID().uuidString,
         category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
         userInfo: [String: Any]? = nil,
-        completion: ((Error?) -> Void)? = nil) {
-            // Constuct content
-            let content = UNMutableNotificationContent().with {
-                $0.body = body
-                $0.categoryIdentifier = category
-            
-                // Assign optional values to content
-                $0.title ?= title
-                $0.subtitle ?= subtitle
-                $0.badge ?= badge
-                $0.sound = sound
-                if let userInfo = userInfo { $0.userInfo = userInfo }
-                if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
-            }
+        completion: ((Error?) -> Void)? = nil)
+    {
+        // Constuct content
+        let content = UNMutableNotificationContent().with {
+            $0.body = body
+            $0.categoryIdentifier = category
         
-            // Construct request with trigger
-            let trigger = UNLocationNotificationTrigger(region: region, repeats: repeats)
-            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        
-            add(request, withCompletionHandler: completion)
+            // Assign optional values to content
+            $0.title ?= title
+            $0.subtitle ?= subtitle
+            $0.badge ?= badge
+            $0.sound = sound
+            if let userInfo = userInfo { $0.userInfo = userInfo }
+            if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
+        }
+    
+        // Construct request with trigger
+        let trigger = UNLocationNotificationTrigger(region: region, repeats: repeats)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+    
+        add(request, withCompletionHandler: completion)
     }
     #endif
 }
@@ -297,9 +302,11 @@ public extension UNUserNotificationCenter {
     /// - Parameter withCategory: The categories of the user notification to remove.
     func remove(withCategories categories: [String], completion: (() -> Void)? = nil) {
         getNotificationRequests {
-            self.remove(withIdentifiers: $0.compactMap {
-                categories.contains($0.content.categoryIdentifier) ? $0.identifier : nil
-            })
+            self.remove(
+                withIdentifiers: $0.compactMap {
+                    categories.contains($0.content.categoryIdentifier) ? $0.identifier : nil
+                }
+            )
             
             completion?()
         }

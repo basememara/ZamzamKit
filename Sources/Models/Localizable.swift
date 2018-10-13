@@ -9,6 +9,7 @@
 
 import Foundation
 
+/// Collection of static keys used for localization.
 public struct Localizable {
     fileprivate let rawValue: String
     

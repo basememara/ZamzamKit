@@ -17,7 +17,9 @@ public extension Audible {
     
     func setupAudioPlayer(_ application: UIApplication, fileName: String, bundle: Bundle = .main) {
         guard let sound = bundle.url(forResource: fileName, withExtension: nil),
-            (audioPlayer == nil || audioPlayer?.url != sound) else { return }
+            (audioPlayer == nil || audioPlayer?.url != sound) else {
+                return
+        }
         
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
@@ -27,7 +29,9 @@ public extension Audible {
             
             audioPlayer = try AVAudioPlayer(contentsOf: sound)
             audioPlayer?.prepareToPlay()
-        } catch { }
+        } catch {
+            
+        }
         
     }
 }

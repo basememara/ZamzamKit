@@ -124,6 +124,7 @@ public extension WatchSession {
 }
 
 // MARK: - Nested types
+
 public extension WatchSession {
 
     /// Handler queue types

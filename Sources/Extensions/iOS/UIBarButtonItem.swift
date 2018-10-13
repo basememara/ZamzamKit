@@ -21,12 +21,15 @@ public extension UIBarButtonItem {
      - returns: An initialized UIBarButtonItem.
      */
     convenience init(imageName: String, target: Any?, action: Selector, bundleIdentifier: String? = nil) {
-        self.init(image: UIImage(named: imageName,
-            in: bundleIdentifier != nil ? Bundle(identifier: bundleIdentifier!) : nil,
-            compatibleWith: nil),
+        self.init(
+            image: UIImage(
+                named: imageName,
+                in: bundleIdentifier != nil ? Bundle(identifier: bundleIdentifier!) : nil,
+                compatibleWith: nil
+            ),
             style: .plain,
             target: target,
-            action: action)
+            action: action
+        )
     }
-    
 }

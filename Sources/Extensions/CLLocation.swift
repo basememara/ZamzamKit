@@ -19,15 +19,19 @@ public extension CLLocation {
         // Reverse geocode stored coordinates
         CLGeocoder().reverseGeocodeLocation(self) { placemarks, error in
             DispatchQueue.main.async {
-                guard let mark = placemarks?.first, error == nil else { return completion(nil) }
+                guard let mark = placemarks?.first, error == nil else {
+                    return completion(nil)
+                }
                 
-                completion(LocationMeta(
-                    coordinates: (self.coordinate.latitude, self.coordinate.longitude),
-                    locality: mark.locality,
-                    country: mark.country,
-                    countryCode: mark.isoCountryCode,
-                    timeZone: mark.timeZone,
-                    administrativeArea: mark.administrativeArea)
+                completion(
+                    LocationMeta(
+                        coordinates: (self.coordinate.latitude, self.coordinate.longitude),
+                        locality: mark.locality,
+                        country: mark.country,
+                        countryCode: mark.isoCountryCode,
+                        timeZone: mark.timeZone,
+                        administrativeArea: mark.administrativeArea
+                    )
                 )
             }
         }

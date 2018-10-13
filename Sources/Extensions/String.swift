@@ -69,6 +69,7 @@ public extension String {
         
         // Determine options
         var options: CompareOptions = [.regularExpression]
+        
         if !caseSensitive {
             options.insert(.caseInsensitive)
         }
@@ -85,6 +86,7 @@ public extension String {
     func match(_ pattern: String, caseSensitive: Bool = false) -> Bool {
         // Determine options
         var options: CompareOptions = [.regularExpression]
+        
         if !caseSensitive {
             options.insert(.caseInsensitive)
         }

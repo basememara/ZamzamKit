@@ -27,6 +27,6 @@ public extension UIStoryboard {
      - returns: Instantiated controller from storyboard, or nil if non existent.
      */
     func instantiateViewController<T: UIViewController>() -> T? {
-        return self.instantiateViewController(withIdentifier: String(describing: T.self)) as? T
+        return instantiateViewController(withIdentifier: String(describing: T.self)) as? T
     }
 }

@@ -30,15 +30,20 @@ public extension WKInterfaceController {
         includeCancelAction: Bool = false,
         cancelText: String = .localized(.cancel),
         cancelHandler: (() -> Void)? = nil,
-        handler: (() -> Void)? = nil) {
-            var actions = [WKAlertAction(title: buttonText, style: .default) {
-                handler?()
-            }]
+        handler: (() -> Void)? = nil)
+    {
+            var actions = [
+                WKAlertAction(title: buttonText, style: .default) {
+                    handler?()
+                }
+            ]
             
             if includeCancelAction {
-                actions.append(WKAlertAction(title: cancelText, style: .cancel) {
-                    cancelHandler?()
-                })
+                actions.append(
+                    WKAlertAction(title: cancelText, style: .cancel) {
+                        cancelHandler?()
+                    }
+                )
             }
             
             // Add additional actions if applicable
@@ -55,7 +60,8 @@ public extension WKInterfaceController {
                 withTitle: title,
                 message: message,
                 preferredStyle: alertControllerStyle,
-                actions: actions)
+                actions: actions
+            )
     }
     
 }

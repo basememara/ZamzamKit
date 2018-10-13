@@ -6,7 +6,7 @@
 //  Copyright © 2016 Zamzam. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public extension UIAlertAction {
     
@@ -15,5 +15,4 @@ public extension UIAlertAction {
             handler()
         }
     }
-    
 }

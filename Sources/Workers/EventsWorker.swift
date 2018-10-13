@@ -112,8 +112,7 @@ public extension EventsWorker {
 
 public extension EventsWorker {
     
-    func createEvent(configure: @escaping (EKEvent) -> Void,
-                     completion: ((Result<EKEvent, ZamzamError>) -> Void)?) {
+    func createEvent(configure: @escaping (EKEvent) -> Void, completion: ((Result<EKEvent, ZamzamError>) -> Void)?) {
         requestAccess { granted in
             guard granted else { completion?(.failure(.unauthorized)); return }
             
@@ -144,9 +143,7 @@ public extension EventsWorker {
         }
     }
     
-    func createEvents<T>(from elements: [T],
-                         configure: @escaping (EKEvent, T) -> Void,
-                         completion: ((Result<[EKEvent], ZamzamError>) -> Void)?) {
+    func createEvents<T>(from elements: [T], configure: @escaping (EKEvent, T) -> Void, completion: ((Result<[EKEvent], ZamzamError>) -> Void)?) {
         guard !elements.isEmpty else { completion?(.success([])); return }
         
         requestAccess { granted in
@@ -188,10 +185,7 @@ public extension EventsWorker {
 
 public extension EventsWorker {
     
-    func updateEvent(withIdentifier identifier: String,
-                     span: EKSpan,
-                     configure: @escaping (EKEvent) -> Void,
-                     completion: ((Result<EKEvent, ZamzamError>) -> Void)?) {
+    func updateEvent(withIdentifier identifier: String, span: EKSpan, configure: @escaping (EKEvent) -> Void, completion: ((Result<EKEvent, ZamzamError>) -> Void)?) {
         requestAccess { granted in
             guard granted else { completion?(.failure(.unauthorized)); return }
             
@@ -222,11 +216,7 @@ public extension EventsWorker {
 
 public extension EventsWorker {
     
-    func createOrUpdateEvents<T>(
-        from elements: [(T, String?)],
-        configure: @escaping (EKEvent, T) -> Void,
-        completion: ((Result<[EKEvent], ZamzamError>) -> Void)?)
-    {
+    func createOrUpdateEvents<T>(from elements: [(T, String?)], configure: @escaping (EKEvent, T) -> Void, completion: ((Result<[EKEvent], ZamzamError>) -> Void)?) {
         guard !elements.isEmpty else { completion?(.success([])); return }
         
         requestAccess { granted in

@@ -20,8 +20,9 @@ public extension UNNotificationAttachment {
         FileManager.default.download(from: link) {
             guard $2 == nil else { return completion(.failure($2 != nil ? .other($2!) : .general)) }
             
-            guard let url = $0, let attachment = try? UNNotificationAttachment(identifier: identifier ?? link, url: url)
-                else { return completion(.failure(.invalidData)) }
+            guard let url = $0, let attachment = try? UNNotificationAttachment(identifier: identifier ?? link, url: url) else {
+                return completion(.failure(.invalidData))
+            }
             
             completion(.success(attachment))
         }

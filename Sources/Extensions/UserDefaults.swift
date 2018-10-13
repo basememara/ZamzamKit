@@ -46,9 +46,7 @@ public extension UserDefaults {
     
     /// Gets and sets the value from user defaults that corresponds to the given key.
     subscript<T>(key: DefaultsKey<T?>) -> T? {
-        get {
-            return object(forKey: key.name) as? T
-        }
+        get { return object(forKey: key.name) as? T }
         
         set {
             guard let value = newValue else { return remove(key) }

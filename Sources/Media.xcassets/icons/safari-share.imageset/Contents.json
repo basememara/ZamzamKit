@@ -22,6 +22,14 @@
       "idiom" : "ipad",
       "filename" : "safari-share-ipad@2x.png",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "tv",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "tv",
+      "scale" : "2x"
     }
   ],
   "info" : {

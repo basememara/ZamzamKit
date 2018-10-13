@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Type for creating observable properties
+/// Type for creating observable properties with unique keys for later retrival.
 public struct Observer<T> {
     public let id: String
     public let handler: T

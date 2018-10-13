@@ -65,8 +65,9 @@ public extension UIView {
     /// Loads the XIB based on class name and adds as a subview.
     func loadFromNib(bunde: Bundle? = nil) {
         guard let subView = UINib(nibName: "\(type(of: self))", bundle: bunde)
-            .instantiate(withOwner: self, options: nil).first as? UIView
-                else { return }
+            .instantiate(withOwner: self, options: nil).first as? UIView else {
+                return
+        }
         
         subView.frame = bounds
         subView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -193,16 +194,17 @@ public extension UIView {
     func makeActivityIndicator(
         style: UIActivityIndicatorView.Style = .whiteLarge,
         color: UIColor = .gray,
-        size: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40)) -> UIActivityIndicatorView {
-            let activityIndicator = UIActivityIndicatorView(frame: size).with {
-                $0.style = style
-                $0.color = color
-                $0.hidesWhenStopped = true
-                $0.center = center
-            }
-            
-            addSubview(activityIndicator)
-            
-            return activityIndicator
+        size: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40)) -> UIActivityIndicatorView
+    {
+        let activityIndicator = UIActivityIndicatorView(frame: size).with {
+            $0.style = style
+            $0.color = color
+            $0.hidesWhenStopped = true
+            $0.center = center
+        }
+        
+        addSubview(activityIndicator)
+        
+        return activityIndicator
     }
 }
