@@ -114,8 +114,9 @@ fileprivate enum RoutingLogic {
         
         guard let controller = (identifier != nil
             ? storyboard.instantiateViewController(withIdentifier: identifier!)
-            : storyboard.instantiateInitialViewController()) as? T
-            else { return assertionFailure("Invalid controller for storyboard \(storyboard).") }
+            : storyboard.instantiateInitialViewController()) as? T else {
+                return assertionFailure("Invalid controller for storyboard \(storyboard).")
+        }
         
         if let modalPresentationStyle = modalPresentationStyle {
             controller.modalPresentationStyle = modalPresentationStyle
@@ -137,8 +138,9 @@ fileprivate enum RoutingLogic {
         
         guard let controller = (identifier != nil
             ? storyboard.instantiateViewController(withIdentifier: identifier!)
-            : storyboard.instantiateInitialViewController()) as? T
-            else { return assertionFailure("Invalid controller for storyboard \(storyboard).") }
+            : storyboard.instantiateInitialViewController()) as? T else {
+                return assertionFailure("Invalid controller for storyboard \(storyboard).")
+        }
         
         configure?(controller)
         
@@ -150,8 +152,9 @@ fileprivate enum RoutingLogic {
         
         guard let controller = (identifier != nil
             ? storyboard.instantiateViewController(withIdentifier: identifier!)
-            : storyboard.instantiateInitialViewController()) as? T
-            else { return assertionFailure("Invalid controller for storyboard \(storyboard).") }
+            : storyboard.instantiateInitialViewController()) as? T else {
+                return assertionFailure("Invalid controller for storyboard \(storyboard).")
+        }
         
         configure?(controller)
         
