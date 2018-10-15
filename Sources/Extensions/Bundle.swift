@@ -12,9 +12,7 @@ public extension Bundle {
     private class TempClassForBundle {}
     
     /// A representation of the code and resources stored in ZamzamKit bundle directory on disk.
-    static var zamzamKit: Bundle {
-        return Bundle(for: TempClassForBundle.self)
-    }
+    static let zamzamKit = Bundle(for: TempClassForBundle.self)
 }
 
 public extension Bundle {
