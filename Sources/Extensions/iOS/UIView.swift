@@ -63,7 +63,7 @@ public extension UIView {
 	}
 
     /// Loads the XIB based on class name and adds as a subview.
-    func loadFromNib(bunde: Bundle? = nil) {
+    func loadFromNib(inBundle bunde: Bundle? = nil) {
         guard let subView = UINib(nibName: "\(type(of: self))", bundle: bunde)
             .instantiate(withOwner: self, options: nil).first as? UIView else {
                 return
