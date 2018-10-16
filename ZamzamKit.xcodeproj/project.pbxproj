@@ -138,6 +138,11 @@
 		8B82154A1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
 		8B82154B1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
 		8B82154C1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
+		8B8802CB21757E6E0035543D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8802CA21757E6E0035543D /* TableViewController.swift */; };
+		8B8802CD21757E800035543D /* Table.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B8802CC21757E800035543D /* Table.storyboard */; };
+		8B8802D521757F160035543D /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B8802D421757F160035543D /* TableViewCell.xib */; };
+		8B8802D721757F220035543D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8802D621757F220035543D /* TableViewCell.swift */; };
+		8B8802D92175804B0035543D /* TableModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8802D82175804B0035543D /* TableModels.swift */; };
 		8B89746E1EDE17AC004FA853 /* MigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B89746D1EDE17AC004FA853 /* MigrationTests.swift */; };
 		8B89746F1EDE17AC004FA853 /* MigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B89746D1EDE17AC004FA853 /* MigrationTests.swift */; };
 		8B8974711EDF555C004FA853 /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8974701EDF555C004FA853 /* Migration.swift */; };
@@ -445,6 +450,11 @@
 		8B7BAD39205714D900273789 /* UIRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRefreshControl.swift; sourceTree = "<group>"; };
 		8B8215411CA15E0D00C9FCC9 /* CLKComplicationServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLKComplicationServer.swift; sourceTree = "<group>"; };
 		8B8215491CA1613400C9FCC9 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
+		8B8802CA21757E6E0035543D /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		8B8802CC21757E800035543D /* Table.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Table.storyboard; sourceTree = "<group>"; };
+		8B8802D421757F160035543D /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		8B8802D621757F220035543D /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		8B8802D82175804B0035543D /* TableModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModels.swift; sourceTree = "<group>"; };
 		8B89746D1EDE17AC004FA853 /* MigrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationTests.swift; sourceTree = "<group>"; };
 		8B8974701EDF555C004FA853 /* Migration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
 		8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
@@ -790,20 +800,73 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		8BB343102140E81A000F0CEF /* Scenes */ = {
+		8B8802CE21757E9D0035543D /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
 				8BB343252141BB25000F0CEF /* Calendar.storyboard */,
 				8BB343272141BB34000F0CEF /* CalendarViewController.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		8B8802CF21757EA80035543D /* Controls */ = {
+			isa = PBXGroup;
+			children = (
 				8BB343192140E842000F0CEF /* Controls.storyboard */,
 				8BB343132140E842000F0CEF /* ControlsViewController.swift */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		8B8802D021757EB30035543D /* Location */ = {
+			isa = PBXGroup;
+			children = (
 				8BB343112140E842000F0CEF /* Location.storyboard */,
 				8BB343182140E842000F0CEF /* LocationViewController.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		8B8802D121757EC20035543D /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
 				8BB343142140E842000F0CEF /* Notification.storyboard */,
 				8BB343152140E842000F0CEF /* NotificationsViewController.swift */,
 				8BB343162140E842000F0CEF /* UserNotificationViewController.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		8B8802D221757ECD0035543D /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				8B8802CC21757E800035543D /* Table.storyboard */,
+				8B8802CA21757E6E0035543D /* TableViewController.swift */,
+				8B8802D421757F160035543D /* TableViewCell.xib */,
+				8B8802D621757F220035543D /* TableViewCell.swift */,
+				8B8802D82175804B0035543D /* TableModels.swift */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		8B8802D321757EDB0035543D /* Watch */ = {
+			isa = PBXGroup;
+			children = (
 				8BB343172140E842000F0CEF /* Watch.storyboard */,
 				8BB343122140E842000F0CEF /* WatchViewController.swift */,
+			);
+			path = Watch;
+			sourceTree = "<group>";
+		};
+		8BB343102140E81A000F0CEF /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				8B8802CE21757E9D0035543D /* Calendar */,
+				8B8802CF21757EA80035543D /* Controls */,
+				8B8802D021757EB30035543D /* Location */,
+				8B8802D121757EC20035543D /* Notifications */,
+				8B8802D221757ECD0035543D /* Table */,
+				8B8802D321757EDB0035543D /* Watch */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -1206,8 +1269,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B5316141C9B22F60094A6C4 /* LaunchScreen.storyboard in Resources */,
+				8B8802D521757F160035543D /* TableViewCell.xib in Resources */,
 				8BB343222140E842000F0CEF /* Controls.storyboard in Resources */,
 				8BB3431D2140E842000F0CEF /* Notification.storyboard in Resources */,
+				8B8802CD21757E800035543D /* Table.storyboard in Resources */,
 				8BB343202140E842000F0CEF /* Watch.storyboard in Resources */,
 				8BB343262141BB25000F0CEF /* Calendar.storyboard in Resources */,
 				8B5316111C9B22F60094A6C4 /* Assets.xcassets in Resources */,
@@ -1457,14 +1522,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B8802D92175804B0035543D /* TableModels.swift in Sources */,
 				8BB343282141BB34000F0CEF /* CalendarViewController.swift in Sources */,
 				8BB343212140E842000F0CEF /* LocationViewController.swift in Sources */,
 				8BB3432E2141D557000F0CEF /* Localizable.swift in Sources */,
 				8BB3431E2140E842000F0CEF /* NotificationsViewController.swift in Sources */,
 				8B5316661C9B24A70094A6C4 /* ZamzamConstants.swift in Sources */,
 				8BB3431B2140E842000F0CEF /* WatchViewController.swift in Sources */,
+				8B8802CB21757E6E0035543D /* TableViewController.swift in Sources */,
 				8BB3431C2140E842000F0CEF /* ControlsViewController.swift in Sources */,
 				8BB3431F2140E842000F0CEF /* UserNotificationViewController.swift in Sources */,
+				8B8802D721757F220035543D /* TableViewCell.swift in Sources */,
 				8B5316081C9B22F50094A6C4 /* AppDelegate.swift in Sources */,
 				8BB3432B2141BC92000F0CEF /* ViewControllerDelegate.swift in Sources */,
 			);
@@ -1874,10 +1942,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZYJTUJP7C7;
 				INFOPLIST_FILE = "ZamzamKit Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1896,10 +1964,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZYJTUJP7C7;
 				INFOPLIST_FILE = "ZamzamKit Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1917,8 +1985,8 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZYJTUJP7C7;
 				INFOPLIST_FILE = "ZamzamKit Example Watch Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1933,7 +2001,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Debug;
 		};
@@ -1943,8 +2011,8 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZYJTUJP7C7;
 				INFOPLIST_FILE = "ZamzamKit Example Watch Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1959,7 +2027,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Release;
 		};
@@ -1970,8 +2038,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZYJTUJP7C7;
 				IBSC_MODULE = ZamzamKit_Example_Watch_Extension;
 				INFOPLIST_FILE = "ZamzamKit Example Watch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
@@ -1982,7 +2050,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Debug;
 		};
@@ -1993,8 +2061,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZYJTUJP7C7;
 				IBSC_MODULE = ZamzamKit_Example_Watch_Extension;
 				INFOPLIST_FILE = "ZamzamKit Example Watch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
@@ -2005,7 +2073,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Release;
 		};
