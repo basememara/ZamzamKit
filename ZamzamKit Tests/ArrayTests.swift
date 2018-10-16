@@ -59,17 +59,3 @@ class ArrayTests: XCTestCase {
             "Result should be empty")
     }
 }
-
-extension ArrayTests {
-    
-    func testShuffled() {
-        let original = [1, 2, 3, 4, 5]
-        var array = original
-        
-        while original == array {
-            array = array.shuffled()
-        }
-        XCTAssertEqual(array.count, 5)
-        XCTAssertNotEqual(original, array)
-    }
-}
