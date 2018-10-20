@@ -38,6 +38,26 @@ public extension UIView {
 }
 
 public extension UIView {
+    
+    /// Unarchives the contents of a XIB file associared with the receiver.
+    ///
+    /// - Parameters:
+    ///   - name: The name of the XIB file. Defaults to the type's class name.
+    /// - Returns: The instantiated type with its associated XIB unarchived.
+    static func loadNIB(named name: String? = nil) -> Self {
+        // Internal function used to handle generics and
+        // returning the actual view type instead of `UIView`.
+        func loadNIBHelper<T>(named name: String? = nil) -> T where T: UIView {
+            let bundle = Bundle(for: T.self)
+            let name = name ?? String(describing: T.self)
+            return bundle.loadNibNamed(name, owner: nil, options: nil)?.first as? T ?? T()
+        }
+        
+        return loadNIBHelper(named: name)
+    }
+}
+
+public extension UIView {
 
     /// First responder.
 	var firstResponder: UIView? {
@@ -61,19 +81,6 @@ public extension UIView {
 		}
 		return nil
 	}
-
-    /// Loads the XIB based on class name and adds as a subview.
-    func loadFromNib(inBundle bunde: Bundle? = nil) {
-        guard let subView = UINib(nibName: "\(type(of: self))", bundle: bunde)
-            .instantiate(withOwner: self, options: nil).first as? UIView else {
-                return
-        }
-        
-        subView.frame = bounds
-        subView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        addSubview(subView)
-    }
 }
 
 public extension UIView {
