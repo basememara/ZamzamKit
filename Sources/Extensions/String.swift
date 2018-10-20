@@ -104,7 +104,7 @@ public extension String {
 	///   - toLength: maximum number of characters before cutting.
 	///   - trailing: string to add at the end of truncated string.
 	/// - Returns: truncated string (this is an extr...).
-	public func truncated(_ length: Int, trailing: String = "...") -> String {
+	func truncated(_ length: Int, trailing: String = "...") -> String {
         guard 1..<count ~= length else { return self }
 		return prefix(length) + trailing
 	}
