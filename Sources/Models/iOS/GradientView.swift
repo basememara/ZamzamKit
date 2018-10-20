@@ -20,7 +20,7 @@ open class GradientView: UIView {
         didSet { configure() }
     }
     
-    @IBInspectable open var isHorizontal: Bool = true {
+    @IBInspectable open var isVertical: Bool = true {
         didSet { configure() }
     }
     
@@ -36,11 +36,11 @@ private extension GradientView {
         
         layer.colors = [firstColor, secondColor].map { $0.cgColor }
         
-        layer.startPoint = isHorizontal
+        layer.startPoint = isVertical
             ? CGPoint(x: 0, y: 0.5)
             : CGPoint(x: 0.5, y: 0)
         
-        layer.endPoint = isHorizontal
+        layer.endPoint = isVertical
             ? CGPoint (x: 1, y: 0.5)
             : CGPoint (x: 0.5, y: 1)
     }
