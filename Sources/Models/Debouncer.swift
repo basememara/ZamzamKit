@@ -17,7 +17,7 @@ public final class Debouncer {
     private let queue: DispatchQueue
     
     private var workItem: DispatchWorkItem?
-    private let syncQueue = DispatchQueue(label: "\(ZamzamConstants.bundleNamespace).Debouncer", attributes: [])
+    private let syncQueue = DispatchQueue(label: "\(DispatchQueue.labelPrefix).Debouncer", attributes: [])
     
     /// Initialize a new debouncer with given delay limit for work items.
     ///

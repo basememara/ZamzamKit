@@ -10,6 +10,13 @@
 import Foundation
 
 /// Collection of static keys used for localization.
+///
+///     extension Localizable {
+///       static let ok = Localizable(NSLocalizedString("ok.dialog", bundle: .zamzamKit, comment: "For dialogs"))
+///     }
+///
+///     let label: String = .localized(.ok)
+///     someLabel.text = .localized(.ok)
 public struct Localizable {
     fileprivate let rawValue: String
     

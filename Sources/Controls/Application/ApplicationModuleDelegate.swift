@@ -8,6 +8,20 @@
 //
 
 /// Subclassed by the `AppDelegate` to pass lifecycle events to loaded modules.
+///
+///     @UIApplicationMain
+///     class AppDelegate: ApplicationModuleDelegate {
+///
+///       override func modules() -> [ApplicationModule] {
+///         return [
+///           DependencyApplicationModule(),
+///           LoggerApplicationModule(),
+///           DataApplicationModule(),
+///           WindowApplicationModule(for: window),
+///           ThemeApplicationModule()
+///         ]
+///       }
+///     }
 open class ApplicationModuleDelegate: UIResponder, UIApplicationDelegate {
     
     public var window: UIWindow?

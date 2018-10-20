@@ -18,12 +18,12 @@
 		8B1447F81C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1447F91C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1447FA1C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
-		8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
-		8B1448061C7258F700043657 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
 		8B1CC4F1217AE48C00F00A70 /* ApplicationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1CC4F0217AE48C00F00A70 /* ApplicationModule.swift */; };
 		8B1CC4F4217AE56D00F00A70 /* ApplicationModuleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1CC4F3217AE56D00F00A70 /* ApplicationModuleDelegate.swift */; };
 		8B1CC4F7217AE91100F00A70 /* ControllerModuleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1CC4F6217AE91100F00A70 /* ControllerModuleDelegate.swift */; };
+		8B1CC522217BDA4E00F00A70 /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1CC521217BDA4E00F00A70 /* DispatchQueue.swift */; };
+		8B1CC523217BDA4E00F00A70 /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1CC521217BDA4E00F00A70 /* DispatchQueue.swift */; };
+		8B1CC524217BDA4E00F00A70 /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1CC521217BDA4E00F00A70 /* DispatchQueue.swift */; };
 		8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */; };
 		8B1EEC881CF7588600AE054B /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EEC871CF7588600AE054B /* UIStoryboard.swift */; };
 		8B2285251EB6863600425B5A /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2285241EB6863600425B5A /* UITableViewCell.swift */; };
@@ -95,8 +95,6 @@
 		8B5316391C9B23140094A6C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B5316381C9B23140094A6C4 /* Assets.xcassets */; };
 		8B53163D1C9B23140094A6C4 /* ZamzamKit Example Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8B53161B1C9B23140094A6C4 /* ZamzamKit Example Watch.app */; };
 		8B5316471C9B23BF0094A6C4 /* WKInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316461C9B23BF0094A6C4 /* WKInterfaceController.swift */; };
-		8B5316661C9B24A70094A6C4 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
-		8B5316671C9B24A80094A6C4 /* ZamzamConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1447821C722F5E00043657 /* ZamzamConstants.swift */; };
 		8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
 		8B5316AD1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
 		8B5316AE1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
@@ -376,7 +374,6 @@
 		8B0E0F5020F430C200DF3975 /* IntrinsicHeightDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicHeightDataView.swift; sourceTree = "<group>"; };
 		8B14476C1C722D5700043657 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8B14476D1C722D5700043657 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		8B1447821C722F5E00043657 /* ZamzamConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamConstants.swift; sourceTree = "<group>"; };
 		8B1447C81C72577900043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1447D51C7257D600043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1447E21C7257F100043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -385,6 +382,7 @@
 		8B1CC4F0217AE48C00F00A70 /* ApplicationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModule.swift; sourceTree = "<group>"; };
 		8B1CC4F3217AE56D00F00A70 /* ApplicationModuleDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModuleDelegate.swift; sourceTree = "<group>"; };
 		8B1CC4F6217AE91100F00A70 /* ControllerModuleDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerModuleDelegate.swift; sourceTree = "<group>"; };
+		8B1CC521217BDA4E00F00A70 /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		8B1EEC871CF7588600AE054B /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		8B1FE7C92065A0DD00EE8DBE /* ZamzamKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = ZamzamKit.podspec; sourceTree = "<group>"; };
@@ -631,7 +629,6 @@
 				8BFDB6A51C75B4B200C94996 /* Models */,
 				8B840E651C904F3300D85781 /* Protocols */,
 				8BF0CD0B2143239000DF6DAF /* Workers */,
-				8B1447821C722F5E00043657 /* ZamzamConstants.swift */,
 				8BF307C01CF0D44200BBA933 /* Media.xcassets */,
 				8BEC1BB71EE81CD3002FA271 /* Supporting Files */,
 			);
@@ -982,6 +979,7 @@
 				8BFDB68E1C75323900C94996 /* DateFormatter.swift */,
 				8B5250DF20CFDED700E77F70 /* Decodable.swift */,
 				8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */,
+				8B1CC521217BDA4E00F00A70 /* DispatchQueue.swift */,
 				8BCB73CD1CAD660D00E20096 /* Equatable.swift */,
 				8BFDB6761C751F2300C94996 /* FileManager.swift */,
 				8BD98D641FC33B4600E74A8C /* Font.swift */,
@@ -1438,8 +1436,8 @@
 				8B75286C1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BD2D19E1CA583110018AC2B /* UIAlertAction.swift in Sources */,
 				8B9434651EBDEAA200C779EB /* Calendar.swift in Sources */,
-				8B1448061C7258F700043657 /* ZamzamConstants.swift in Sources */,
 				8BE814FD1C7842DC005F23CE /* Sequence.swift in Sources */,
+				8B1CC522217BDA4E00F00A70 /* DispatchQueue.swift in Sources */,
 				8BFDB66A1C751D3400C94996 /* UIViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1474,6 +1472,7 @@
 				8B8974721EDF555C004FA853 /* Migration.swift in Sources */,
 				8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */,
 				8B4D71B4216A5560002ACA81 /* Throttler.swift in Sources */,
+				8B1CC523217BDA4E00F00A70 /* DispatchQueue.swift in Sources */,
 				8BFDB6781C751F2300C94996 /* FileManager.swift in Sources */,
 				8BD98D661FC33B4600E74A8C /* Font.swift in Sources */,
 				8BF2106C1E48D52F0026B802 /* Result.swift in Sources */,
@@ -1494,7 +1493,6 @@
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
 				8B4D71B0216A542A002ACA81 /* Debouncer.swift in Sources */,
 				8BC6D99B204790B600242DAE /* Scrollable.swift in Sources */,
-				8B1448031C7258F600043657 /* ZamzamConstants.swift in Sources */,
 				8BF0CD122143243500DF6DAF /* LocationsWorkerType.swift in Sources */,
 				8B5250E120CFDED700E77F70 /* Decodable.swift in Sources */,
 				8B79A4761E9C1ED800C8A5A4 /* Locale.swift in Sources */,
@@ -1508,6 +1506,7 @@
 				8B82154C1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8B2DE3E31C8A86B2008F1569 /* Bundle.swift in Sources */,
 				8B5316AE1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
+				8B1CC524217BDA4E00F00A70 /* DispatchQueue.swift in Sources */,
 				8BFDB6591C75187200C94996 /* Date.swift in Sources */,
 				8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BFDB6661C751AE600C94996 /* URL.swift in Sources */,
@@ -1540,7 +1539,6 @@
 				8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */,
 				8BEFE47B1E4515D900100744 /* ScheduleInterval.swift in Sources */,
 				8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */,
-				8B1448001C7258F500043657 /* ZamzamConstants.swift in Sources */,
 				8BD98D671FC33B4600E74A8C /* Font.swift in Sources */,
 				8BE2BB421F03259C00877447 /* Localizable.swift in Sources */,
 				8B729C771EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,
@@ -1557,7 +1555,6 @@
 				8BB120C42178B54800B72ECF /* PresentableView.swift in Sources */,
 				8BB3432E2141D557000F0CEF /* Localizable.swift in Sources */,
 				8BB3431E2140E842000F0CEF /* NotificationsViewController.swift in Sources */,
-				8B5316661C9B24A70094A6C4 /* ZamzamConstants.swift in Sources */,
 				8BB3431B2140E842000F0CEF /* WatchViewController.swift in Sources */,
 				8B8802CB21757E6E0035543D /* TableViewController.swift in Sources */,
 				8BB3431C2140E842000F0CEF /* ControlsViewController.swift in Sources */,
@@ -1575,7 +1572,6 @@
 				8B5316331C9B23140094A6C4 /* NotificationController.swift in Sources */,
 				8B5316311C9B23140094A6C4 /* ExtensionDelegate.swift in Sources */,
 				8B5316371C9B23140094A6C4 /* ComplicationController.swift in Sources */,
-				8B5316671C9B24A80094A6C4 /* ZamzamConstants.swift in Sources */,
 				8B53162F1C9B23140094A6C4 /* InterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

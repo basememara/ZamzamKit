@@ -10,7 +10,7 @@ import Foundation
 
 /// A thread-safe array.
 public class SynchronizedArray<Element> {
-    private let queue = DispatchQueue(label: "\(ZamzamConstants.bundleNamespace).SynchronizedArray", attributes: .concurrent)
+    private let queue = DispatchQueue(label: "\(DispatchQueue.labelPrefix).SynchronizedArray", attributes: .concurrent)
     private var array = [Element]()
     
     public init() { }

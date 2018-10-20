@@ -25,25 +25,29 @@ public extension String {
 }
 
 public extension String {
+    private static let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+    private static let numberRegEx = "^[0-9]+?$"
+    private static let alphaRegEx = "^[A-Za-z]+$"
+    private static let alphaNumericRegEx = "^[A-Za-z0-9]+$"
     
     /// Check if string is valid email format.
     var isEmail: Bool {
-        return match(ZamzamConstants.RegEx.EMAIL)
+        return match(String.emailRegEx)
     }
 
 	/// Check if string contains only numbers.
     var isNumber: Bool {
-        return match(ZamzamConstants.RegEx.NUMBER)
+        return match(String.numberRegEx)
     }
 
 	/// Check if string contains only letters.
     var isAlpha: Bool {
-        return match(ZamzamConstants.RegEx.ALPHA)
+        return match(String.alphaRegEx)
     }
 
 	/// Check if string contains at least one letter and one number.
     var isAlphaNumeric: Bool {
-        return match(ZamzamConstants.RegEx.ALPHANUMERIC)
+        return match(String.alphaNumericRegEx)
     }
 
     /// String with no spaces or new lines in beginning and end.
@@ -327,6 +331,7 @@ public extension String {
 
 public extension Substring {
     
+    /// A string value representation of the string slice.
     var string: String {
         return String(self)
     }

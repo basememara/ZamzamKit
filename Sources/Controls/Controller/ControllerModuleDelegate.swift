@@ -1,6 +1,7 @@
 //
 //  ControllerModuleDelegate.swift
 //  ZamzamKit iOS
+//  https://github.com/fmo91/PluggableApplicationDelegate
 //
 //  Created by Basem Emara on 2018-10-20.
 //  Copyright © 2018 Zamzam. All rights reserved.
@@ -9,7 +10,16 @@
 import UIKit
 
 /// Subclassed by the `UIViewController` to pass lifecycle events to loaded modules.
-open class PluggableController: UIViewController {
+///
+///     class ViewController: ControllerModuleDelegate {
+///
+///       override func modules() -> [ControllerModule] {
+///         return [
+///           ChatControllerModule()
+///         ]
+///       }
+///     }
+open class ControllerModuleDelegate: UIViewController {
     
     /// Lazy implementation of controller services list
     private lazy var lazyModules: [ControllerModule] = modules()

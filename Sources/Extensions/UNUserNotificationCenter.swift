@@ -10,6 +10,7 @@ import UserNotifications
 import CoreLocation
 
 public extension UNUserNotificationCenter {
+    static let mainCategoryIdentifier = "mainCategory"
     
     /// Registers your app’s notification types and the custom actions that they support.
     ///
@@ -19,7 +20,7 @@ public extension UNUserNotificationCenter {
     ///   - authorizations: The authorization options.
     func register(
         delegate: UNUserNotificationCenterDelegate? = nil,
-        category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
+        category: String = UNUserNotificationCenter.mainCategoryIdentifier,
         actions: [UNNotificationAction]? = nil,
         authorizations: UNAuthorizationOptions? = [.alert, .badge, .sound],
         completion: ((Bool) -> Void)? = nil)
@@ -153,7 +154,7 @@ public extension UNUserNotificationCenter {
         timeInterval: TimeInterval = 0,
         repeats: Bool = false,
         identifier: String = UUID().uuidString,
-        category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
+        category: String = UNUserNotificationCenter.mainCategoryIdentifier,
         userInfo: [String: Any]? = nil,
         completion: ((Error?) -> Void)? = nil)
     {
@@ -182,7 +183,8 @@ public extension UNUserNotificationCenter {
     ///
     /// - Parameters:
     ///   - date: The date of when to fire the notification.
-    func add(date: Date,
+    func add(
+        date: Date,
         body: String,
         title: String? = nil,
         subtitle: String? = nil,
@@ -192,7 +194,7 @@ public extension UNUserNotificationCenter {
         repeats: ScheduleInterval = .once,
         calendar: Calendar = .current,
         identifier: String = UUID().uuidString,
-        category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
+        category: String = UNUserNotificationCenter.mainCategoryIdentifier,
         userInfo: [String: Any]? = nil,
         completion: ((Error?) -> Void)? = nil)
     {
@@ -245,7 +247,7 @@ public extension UNUserNotificationCenter {
         attachments: [UNNotificationAttachment]? = nil,
         repeats: Bool = false,
         identifier: String = UUID().uuidString,
-        category: String = ZamzamConstants.Notification.MAIN_CATEGORY,
+        category: String = UNUserNotificationCenter.mainCategoryIdentifier,
         userInfo: [String: Any]? = nil,
         completion: ((Error?) -> Void)? = nil)
     {
