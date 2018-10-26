@@ -81,7 +81,7 @@ public extension UIViewController {
      */
     func present(
         safari url: String,
-        modalPresentationStyle: UIModalPresentationStyle = .overFullScreen,
+        modalPresentationStyle: UIModalPresentationStyle? = nil,
         barTintColor: UIColor? = nil,
         preferredControlTintColor: UIColor? = nil,
         animated: Bool = true,
@@ -90,7 +90,7 @@ public extension UIViewController {
         present(
             SFSafariViewController(url: URL(string: url)!).with {
                 $0.delegate = self as? SFSafariViewControllerDelegate
-                $0.modalPresentationStyle = modalPresentationStyle
+                $0.modalPresentationStyle ?= modalPresentationStyle
                 $0.preferredBarTintColor ?= barTintColor
                 $0.preferredControlTintColor ?= preferredControlTintColor
             },
