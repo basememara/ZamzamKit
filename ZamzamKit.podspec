@@ -27,16 +27,16 @@ and libraries so you can begin building for the future.
     s.source_files = 'Sources/**/*.{h,swift}'
 
     s.ios.exclude_files = [
-        'Sources/**/watchOS/*',
-        'Sources/**/tvOS/*'
+        'Sources/**/watchOS/**',
+        'Sources/**/tvOS/**'
     ]
     s.watchos.exclude_files = [
-        'Sources/**/iOS/*',
-        'Sources/**/tvOS/*'
+        'Sources/**/iOS/**',
+        'Sources/**/tvOS/**'
     ]
     s.tvos.exclude_files = [
-        'Sources/**/iOS/*',
-        'Sources/**/watchOS/*',
+        'Sources/**/iOS/**',
+        'Sources/**/watchOS/**',
         'Sources/Enums/LocationAuthorizationType.swift',
         'Sources/Extensions/UNNotificationAttachment.swift',
         'Sources/Extensions/UNUserNotificationCenter.swift',
