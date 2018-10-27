@@ -708,18 +708,7 @@
 		8B1FE7EA2065AB6600EE8DBE /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				8B1CC4F2217AE49100F00A70 /* Application */,
-				8B1CC4F5217AE89300F00A70 /* Controller */,
-				8B752F7D2020EA30007DA40C /* BadgeBarButtonItem.swift */,
-				8BBEA5E120309764009B7E90 /* ColumnsCollectionViewFlowLayout.swift */,
-				8B50C506211E2F9B00A36ABB /* GradientView.swift */,
-				8B0E0F5020F430C200DF3975 /* IntrinsicHeightDataView.swift */,
-				8B4D71BD216B208B002ACA81 /* MailComposer.swift */,
-				8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */,
-				8B379A0720F65F46002144F7 /* PlaceholderTextView.swift */,
-				8B07420A20DFBD2300204C2F /* RoundedViews.swift */,
-				8B2D57B820E2D38900CF4B01 /* UILabelView.swift */,
-				8B756F141E5CF16D00DE4B02 /* XIBView.swift */,
+				8B83049D2184940C002F3E7C /* iOS */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -815,6 +804,25 @@
 				8B729C741EAB9D56004A6BF1 /* ConditionalAssignment.swift */,
 			);
 			path = Infixes;
+			sourceTree = "<group>";
+		};
+		8B83049D2184940C002F3E7C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				8B1CC4F2217AE49100F00A70 /* Application */,
+				8B1CC4F5217AE89300F00A70 /* Controller */,
+				8B752F7D2020EA30007DA40C /* BadgeBarButtonItem.swift */,
+				8BBEA5E120309764009B7E90 /* ColumnsCollectionViewFlowLayout.swift */,
+				8B50C506211E2F9B00A36ABB /* GradientView.swift */,
+				8B0E0F5020F430C200DF3975 /* IntrinsicHeightDataView.swift */,
+				8B4D71BD216B208B002ACA81 /* MailComposer.swift */,
+				8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */,
+				8B379A0720F65F46002144F7 /* PlaceholderTextView.swift */,
+				8B07420A20DFBD2300204C2F /* RoundedViews.swift */,
+				8B2D57B820E2D38900CF4B01 /* UILabelView.swift */,
+				8B756F141E5CF16D00DE4B02 /* XIBView.swift */,
+			);
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		8B840E651C904F3300D85781 /* Protocols */ = {
