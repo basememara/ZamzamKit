@@ -825,6 +825,14 @@
 			path = iOS;
 			sourceTree = "<group>";
 		};
+		8B83049E21849970002F3E7C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				8BDA5E301E795DE300429F78 /* BackgroundTask.swift */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
 		8B840E651C904F3300D85781 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -1010,7 +1018,7 @@
 		8BFDB6A51C75B4B200C94996 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8BDA5E301E795DE300429F78 /* BackgroundTask.swift */,
+				8B83049E21849970002F3E7C /* iOS */,
 				8B4D71AE216A542A002ACA81 /* Debouncer.swift */,
 				8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */,
 				8B8974701EDF555C004FA853 /* Migration.swift */,
