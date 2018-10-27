@@ -28,27 +28,27 @@ and libraries so you can begin building for the future.
 
     s.ios.exclude_files = [
         'Sources/**/watchOS/*.*',
-        'Sources/**/**/watchOS/*.*',
+        'Sources/**/watchOS/**/*.*',
         'Sources/**/tvOS/*.*',
-        'Sources/**/**/tvOS/*.*'
+        'Sources/**/tvOS/**/*.*'
     ]
     s.watchos.exclude_files = [
         'Sources/**/iOS/*.*',
-        'Sources/**/**/iOS/*.*',
+        'Sources/**/iOS/**/*.*',
         'Sources/**/tvOS/*.*',
-        'Sources/**/**/tvOS/*.*'
+        'Sources/**/tvOS/**/*.*'
     ]
     s.tvos.exclude_files = [
         'Sources/**/iOS/*.*',
-        'Sources/**/**/watchOS/*.*',
+        'Sources/**/watchOS/**/*.*',
         'Sources/**/iOS/*.*',
-        'Sources/**/**/watchOS/*.*',
+        'Sources/**/watchOS/**/*.*',
         'Sources/Enums/LocationAuthorizationType.swift',
         'Sources/Extensions/UNNotificationAttachment.swift',
         'Sources/Extensions/UNUserNotificationCenter.swift',
         'Sources/Extensions/CLLocationManager.swift',
-        'Sources/Workers/LocationWorker.swift',
-        'Sources/Workers/LocationWorkerType.swift',
+        'Sources/Workers/LocationsWorker.swift',
+        'Sources/Workers/LocationsWorkerType.swift',
         'Sources/Models/WatchSession.swift'
     ]
     
