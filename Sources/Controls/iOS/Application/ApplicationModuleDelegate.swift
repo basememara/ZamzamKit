@@ -27,7 +27,7 @@ open class ApplicationModuleDelegate: UIResponder, UIApplicationDelegate {
     public var window: UIWindow?
     
     /// Lazy implementation of application modules list
-    private lazy var lazyModules: [ApplicationModule] = modules()
+    public private(set) lazy var lazyModules: [ApplicationModule] = modules()
     
     /// List of application modules for binding to `AppDelegate` events
     open func modules() -> [ApplicationModule] {
