@@ -26,11 +26,6 @@ public protocol ApplicationModule {
     func applicationDidReceiveMemoryWarning(_ application: UIApplication)
 }
 
-public protocol AuthenticationModuleDelegate {
-    func authenticationDidLogin(userID: Int, isTemporary: Bool)
-    func authenticationDidLogout(userID: Int)
-}
-
 // MARK: - Optionals
 
 public extension ApplicationModule {
