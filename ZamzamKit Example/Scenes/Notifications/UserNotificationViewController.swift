@@ -14,7 +14,7 @@ class UserNotificationViewController: UIViewController, StatusBarable {
     
     private let notificationCenter = NotificationCenter.default
     
-    let sharedApplication = UIApplication.shared
+    let application = UIApplication.shared
     var statusBar: UIView?
 
     override func viewDidLoad() {

@@ -7,25 +7,9 @@
 //
 
 import XCTest
-@testable import ZamzamKit
+import ZamzamKit
 
 class StringTests: XCTestCase {
-    
-    func testReplaceRegEx() {
-        let value = "my car reg 1 - dD11 AAA  my car reg 2 - AA22 BbB"
-        let pattern = "([A-HK-PRSVWY][A-HJ-PR-Y])\\s?([0][2-9]|[1-9][0-9])\\s?[A-HJ-PR-Z]{3}"
-        
-        // Case insensitive
-        let newValue = value.replace(regex: pattern, with: "XX", caseSensitive: false)
-        let expectedValue = "my car reg 1 - XX  my car reg 2 - XX"
-        XCTAssertEqual(newValue, expectedValue,
-            "String should be \(expectedValue)")
-        
-        // Case sensitive
-        let newValue2 = value.replace(regex: pattern, with: "XX", caseSensitive: true)
-        XCTAssertEqual(newValue2, value,
-            "String should be \(expectedValue)")
-    }
     
     func testEmailRegEx() {
         let value = "contact@zamzam.io"
@@ -57,6 +41,25 @@ class StringTests: XCTestCase {
         
         XCTAssertTrue(value.isAlphaNumeric, "Alphanumberic \(value) should be valid.")
         XCTAssertFalse(wrong.isAlphaNumeric, "Alphanumberic \(value) should not be valid.")
+    }
+}
+
+extension StringTests {
+    
+    func testReplacingRegEx() {
+        let value = "my car reg 1 - dD11 AAA  my car reg 2 - AA22 BbB"
+        let pattern = "([A-HK-PRSVWY][A-HJ-PR-Y])\\s?([0][2-9]|[1-9][0-9])\\s?[A-HJ-PR-Z]{3}"
+        
+        // Case insensitive
+        let newValue = value.replacing(regex: pattern, with: "XX", caseSensitive: false)
+        let expectedValue = "my car reg 1 - XX  my car reg 2 - XX"
+        XCTAssertEqual(newValue, expectedValue,
+                       "String should be \(expectedValue)")
+        
+        // Case sensitive
+        let newValue2 = value.replacing(regex: pattern, with: "XX", caseSensitive: true)
+        XCTAssertEqual(newValue2, value,
+                       "String should be \(expectedValue)")
     }
 }
 

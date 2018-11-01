@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol StatusBarable: class {
-    var sharedApplication: UIApplication { get }
+    var application: UIApplication { get }
     var statusBar: UIView? { get set }
 }
 
@@ -17,7 +17,7 @@ public extension StatusBarable where Self: UIViewController {
     
     /// Determine dynamic status bar size
     var statusBarSize: CGSize {
-        let size = sharedApplication.statusBarFrame.size
+        let size = application.statusBarFrame.size
         
         // Consider landscape and portrait mode
         // https://stackoverflow.com/a/16598350/235334
@@ -34,7 +34,7 @@ public extension StatusBarable where Self: UIViewController {
      */
     @discardableResult
     func addStatusBar(style: UIBlurEffect.Style = .regular) -> UIView? {
-        guard !sharedApplication.isStatusBarHidden else { return nil }
+        guard !application.isStatusBarHidden else { return nil }
         
         let statusBar = UIVisualEffectView().with {
             $0.effect = UIBlurEffect(style: style)

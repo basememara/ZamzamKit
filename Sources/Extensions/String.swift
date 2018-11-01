@@ -32,22 +32,22 @@ public extension String {
     
     /// Check if string is valid email format.
     var isEmail: Bool {
-        return match(String.emailRegEx)
+        return match(regex: String.emailRegEx)
     }
 
 	/// Check if string contains only numbers.
     var isNumber: Bool {
-        return match(String.numberRegEx)
+        return match(regex: String.numberRegEx)
     }
 
 	/// Check if string contains only letters.
     var isAlpha: Bool {
-        return match(String.alphaRegEx)
+        return match(regex: String.alphaRegEx)
     }
 
 	/// Check if string contains at least one letter and one number.
     var isAlphaNumeric: Bool {
-        return match(String.alphaNumericRegEx)
+        return match(regex: String.alphaNumericRegEx)
     }
 
     /// String with no spaces or new lines in beginning and end.
@@ -57,18 +57,29 @@ public extension String {
 }
 
 // MARK: - Regular Expression
-public extension String {
 
-    /**
-     Replaces a string using a regular expression pattern.
-     
-     - parameter value: the value of the string
-     - parameter pattern: the regular expression value
-     - parameter replacement: the value to replace with
-     
-     - returns: the value with the replaced string
-     */
-    func replace(regex: String, with replacement: String, caseSensitive: Bool = false) -> String {
+public extension String {
+    
+    /// Matches a string using a regular expression pattern.
+    ///
+    /// - Parameters:
+    ///   - regex: the regular expression pattern
+    /// - Returns: whether the regex matches in the string
+    func match(regex pattern: String) -> Bool {
+        let options: CompareOptions = [.regularExpression]
+        return range(of: pattern, options: options) != nil
+    }
+    
+    /// Returns a new string in which all occurrences of a
+    /// regular expression pattern in a specified range of
+    /// the string are replaced by another given string.
+    ///
+    /// - Parameters:
+    ///   - regex: the regular expression pattern
+    ///   - replacement: the value to replace with
+    ///   - caseSensitive: specify for case insensitive option
+    /// - Returns: the value with the replaced string
+    func replacing(regex pattern: String, with replacement: String, caseSensitive: Bool = false) -> String {
         guard !isEmpty else { return self }
         
         // Determine options
@@ -78,26 +89,8 @@ public extension String {
             options.insert(.caseInsensitive)
         }
         
-        return replacingOccurrences(of: regex, with: replacement, options: options)
+        return replacingOccurrences(of: pattern, with: replacement, options: options)
     }
-    
-    /// Matches a string using a regular expression pattern.
-    ///
-    /// - Parameters:
-    ///   - pattern: the regular expression value
-    ///   - caseSensitive: case-sensitive search
-    /// - Returns: whether the regex matches in the string
-    func match(_ pattern: String, caseSensitive: Bool = false) -> Bool {
-        // Determine options
-        var options: CompareOptions = [.regularExpression]
-        
-        if !caseSensitive {
-            options.insert(.caseInsensitive)
-        }
-        
-        return range(of: pattern, options: options) != nil
-    }
-
 }
 
 public extension String {
@@ -155,7 +148,7 @@ public extension String {
     
     /// Stripped out HTML to plain text.
     var htmlStripped: String {
-        return replace(regex: "<[^>]+>", with: "")
+        return replacing(regex: "<[^>]+>", with: "")
     }
     
     /// Decode an HTML string

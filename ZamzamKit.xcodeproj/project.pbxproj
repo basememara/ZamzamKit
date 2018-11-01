@@ -248,6 +248,9 @@
 		8BF307C11CF0D44200BBA933 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BF307C01CF0D44200BBA933 /* Media.xcassets */; };
 		8BF307C21CF0D44200BBA933 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BF307C01CF0D44200BBA933 /* Media.xcassets */; };
 		8BF307D01CF0E3C600BBA933 /* UIActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF307CF1CF0E3C600BBA933 /* UIActivity.swift */; };
+		8BFA87E6218BA5D50084F6FD /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFA87E5218BA5D50084F6FD /* Deprecated.swift */; };
+		8BFA87E7218BA5D50084F6FD /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFA87E5218BA5D50084F6FD /* Deprecated.swift */; };
+		8BFA87E8218BA5D50084F6FD /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFA87E5218BA5D50084F6FD /* Deprecated.swift */; };
 		8BFDB6571C75187200C94996 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6561C75187200C94996 /* Date.swift */; };
 		8BFDB6581C75187200C94996 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6561C75187200C94996 /* Date.swift */; };
 		8BFDB6591C75187200C94996 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB6561C75187200C94996 /* Date.swift */; };
@@ -518,6 +521,7 @@
 		8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNNotificationAttachment.swift; sourceTree = "<group>"; };
 		8BF307C01CF0D44200BBA933 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		8BF307CF1CF0E3C600BBA933 /* UIActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIActivity.swift; sourceTree = "<group>"; };
+		8BFA87E5218BA5D50084F6FD /* Deprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deprecated.swift; sourceTree = "<group>"; };
 		8BFDB6561C75187200C94996 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		8BFDB65D1C7518F800C94996 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		8BFDB6631C751AE600C94996 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
@@ -963,6 +967,7 @@
 		8BEC1BB71EE81CD3002FA271 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8BFA87E5218BA5D50084F6FD /* Deprecated.swift */,
 				8B1447F71C7258E500043657 /* ZamzamKit.h */,
 				8B1448411C725BFE00043657 /* Info.plist */,
 			);
@@ -1421,6 +1426,7 @@
 				8BCB73DC1CAD6BD700E20096 /* UICollectionView.swift in Sources */,
 				8B0BA2241FAA6DFC0042BFF0 /* NextResponderTextField.swift in Sources */,
 				8B79A4751E9C1ED800C8A5A4 /* Locale.swift in Sources */,
+				8BFA87E6218BA5D50084F6FD /* Deprecated.swift in Sources */,
 				8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
 				8B82154A1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8BB45FB51C9BDD180070CE07 /* UserDefaults.swift in Sources */,
@@ -1495,6 +1501,7 @@
 				8B94345B1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B0C71601E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B2DE3E21C8A86B2008F1569 /* Bundle.swift in Sources */,
+				8BFA87E7218BA5D50084F6FD /* Deprecated.swift in Sources */,
 				8B4C08B61EC94608002A317D /* BinaryFloatingPoint.swift in Sources */,
 				8BFDB65F1C7518F800C94996 /* String.swift in Sources */,
 				8B5D8A981E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */,
@@ -1531,6 +1538,7 @@
 				8BD61B381E3EFDF1009B537E /* AppInfo.swift in Sources */,
 				8B4D71B1216A542A002ACA81 /* Debouncer.swift in Sources */,
 				8BD508781C99E18500AE205E /* Collection.swift in Sources */,
+				8BFA87E8218BA5D50084F6FD /* Deprecated.swift in Sources */,
 				8B4CFAEF1CABEF0900D2B1D7 /* Color.swift in Sources */,
 				8BFDB6911C75323900C94996 /* DateFormatter.swift in Sources */,
 				8B9434671EBDEAA200C779EB /* Calendar.swift in Sources */,
