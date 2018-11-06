@@ -27,18 +27,16 @@ public extension UIViewController {
 
 public extension UIViewController {
     
-    /// Display an alert action in a convenient way.
+    /// Display an alert message to the user.
     ///
     /// - Parameters:
     ///   - title: Title of the alert.
     ///   - message: Body of the alert.
     ///   - buttonText: Text for the primary button.
-    ///   - preferredStyle: The style to use when presenting the alert controller.
     ///   - additionalActions: Array of alert actions.
     ///   - includeCancelAction: Include a cancel action within the alert.
     ///   - cancelText: Text for the cancel button.
     ///   - cancelHandler: Call back handler when cancel action tapped.
-    ///   - sourceView: The view containing the anchor rectangle for the popover.
     ///   - animated: Pass true to animate the presentation; otherwise, pass false.
     ///   - configure: Configure the `UIAlertController` before it is loaded.
     ///   - handler: Call back handler when main action tapped.
@@ -46,12 +44,10 @@ public extension UIViewController {
         alert title: String,
         message: String? = nil,
         buttonText: String = .localized(.ok),
-        preferredStyle: UIAlertController.Style = .alert,
         additionalActions: [UIAlertAction]? = nil,
         includeCancelAction: Bool = false,
         cancelText: String = .localized(.cancel),
         cancelHandler: (() -> Void)? = nil,
-        popoverFrom sourceView: UIView? = nil,
         animated: Bool = true,
         configure: ((UIAlertController) -> Void)? = nil,
         handler: (() -> Void)? = nil)
@@ -59,7 +55,7 @@ public extension UIViewController {
         let alertController = UIAlertController(
             title: title,
             message: message,
-            preferredStyle: preferredStyle
+            preferredStyle: .alert
         )
     
         if includeCancelAction {
@@ -74,20 +70,62 @@ public extension UIViewController {
             }
         }
         
-        if preferredStyle == .alert {
-            alertController.addAction(UIAlertAction(title: buttonText) { handler?() })
+        alertController.addAction(UIAlertAction(title: buttonText) { handler?() })
+    
+        // Handle any last configurations before presenting alert
+        configure?(alertController)
+        
+        present(alertController, animated: animated, completion: nil)
+    }
+    
+    /// Display an alert message to the user.
+    ///
+    /// - Parameters:
+    ///   - title: Title of the alert.
+    ///   - message: Body of the alert.
+    ///   - sourceView: The view containing the anchor rectangle for the popover.
+    ///   - additionalActions: Array of alert actions.
+    ///   - includeCancelAction: Include a cancel action within the alert.
+    ///   - cancelText: Text for the cancel button.
+    ///   - cancelHandler: Call back handler when cancel action tapped.
+    ///   - animated: Pass true to animate the presentation; otherwise, pass false.
+    ///   - configure: Configure the `UIAlertController` before it is loaded.
+    ///   - handler: Call back handler when main action tapped.
+    func present(
+        actionSheet title: String,
+        message: String? = nil,
+        popoverFrom sourceView: UIView,
+        additionalActions: [UIAlertAction],
+        includeCancelAction: Bool = false,
+        cancelText: String = .localized(.cancel),
+        cancelHandler: (() -> Void)? = nil,
+        animated: Bool = true,
+        configure: ((UIAlertController) -> Void)? = nil,
+        handler: (() -> Void)? = nil)
+    {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .actionSheet
+        )
+        
+        additionalActions.forEach { item in
+            alertController.addAction(item)
+        }
+        
+        if includeCancelAction {
+            alertController.addAction(
+                UIAlertAction(title: cancelText, style: .cancel) { _ in cancelHandler?() }
+            )
         }
         
         // Handle popover for iPad's, etc if available
-        if let popover = alertController.popoverPresentationController,
-            let sourceView = sourceView,
-            preferredStyle == .actionSheet
-        {
+        if let popover = alertController.popoverPresentationController {
             popover.sourceView  = sourceView
             popover.sourceRect = sourceView.bounds
             popover.permittedArrowDirections = .any
         }
-    
+        
         // Handle any last configurations before presenting alert
         configure?(alertController)
         

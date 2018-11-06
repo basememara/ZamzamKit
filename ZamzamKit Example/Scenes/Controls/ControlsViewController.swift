@@ -59,21 +59,27 @@ private extension ControlsViewController {
 private extension ControlsViewController {
     
     @IBAction func alertButtonTapped() {
-        present(alert: "Test Alert")
+        present(
+            alert: "Test Alert",
+            message: "This is the message body.",
+            additionalActions: [
+                UIAlertAction(title: "Action 123") { }
+            ],
+            includeCancelAction: true
+        )
     }
     
     @IBAction func actionSheetButtonTapped(_ sender: UIButton) {
         present(
-            alert: "Test Action Sheet",
+            actionSheet: "Test Action Sheet",
             message: "Choose your action",
-            preferredStyle: .actionSheet,
+            popoverFrom: sender,
             additionalActions: [
                 UIAlertAction(title: "Action 1") { },
                 UIAlertAction(title: "Action 2") { },
                 UIAlertAction(title: "Action 3") { }
             ],
-            includeCancelAction: true,
-            popoverFrom: sender
+            includeCancelAction: true
         )
     }
     
