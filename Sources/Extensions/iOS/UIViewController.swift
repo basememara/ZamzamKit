@@ -23,27 +23,36 @@ public extension UIViewController {
     }
 }
 
-// MARK: - Presenters
+// MARK: - Alerts
+
 public extension UIViewController {
     
-    /**
-     Display an alert action in a convenient way.
-
-     - parameter message:           Body of the alert.
-     - parameter title:             Title of the alert.
-     - parameter buttonTitle:       Text for the button.
-     - parameter additionalActions: Array of alert actions.
-     - parameter handler:           Call back handler when main action tapped.
-     */
+    /// Display an alert action in a convenient way.
+    ///
+    /// - Parameters:
+    ///   - title: Title of the alert.
+    ///   - message: Body of the alert.
+    ///   - buttonText: Text for the primary button.
+    ///   - preferredStyle: The style to use when presenting the alert controller.
+    ///   - additionalActions: Array of alert actions.
+    ///   - includeCancelAction: Include a cancel action within the alert.
+    ///   - cancelText: Text for the cancel button.
+    ///   - cancelHandler: Call back handler when cancel action tapped.
+    ///   - sourceView: The view containing the anchor rectangle for the popover.
+    ///   - animated: Pass true to animate the presentation; otherwise, pass false.
+    ///   - configure: Configure the `UIAlertController` before it is loaded.
+    ///   - handler: Call back handler when main action tapped.
     func present(
         alert title: String,
         message: String? = nil,
         buttonText: String = .localized(.ok),
-        additionalActions: [UIAlertAction]? = nil,
         preferredStyle: UIAlertController.Style = .alert,
+        additionalActions: [UIAlertAction]? = nil,
         includeCancelAction: Bool = false,
         cancelText: String = .localized(.cancel),
         cancelHandler: (() -> Void)? = nil,
+        popoverFrom sourceView: UIView? = nil,
+        animated: Bool = true,
         configure: ((UIAlertController) -> Void)? = nil,
         handler: (() -> Void)? = nil)
     {
@@ -65,20 +74,40 @@ public extension UIViewController {
             }
         }
         
-        alertController.addAction(UIAlertAction(title: buttonText) { handler?() })
+        if preferredStyle == .alert {
+            alertController.addAction(UIAlertAction(title: buttonText) { handler?() })
+        }
+        
+        // Handle popover for iPad's, etc if available
+        if let popover = alertController.popoverPresentationController,
+            let sourceView = sourceView,
+            preferredStyle == .actionSheet
+        {
+            popover.sourceView  = sourceView
+            popover.sourceRect = sourceView.bounds
+            popover.permittedArrowDirections = .any
+        }
     
         // Handle any last configurations before presenting alert
         configure?(alertController)
         
-        present(alertController, animated: true, completion: nil)
+        present(alertController, animated: animated, completion: nil)
     }
-    
-    /**
-     Open Safari view controller overlay.
+}
 
-     - parameter url: URL to display in the browser.
-     - parameter modalPresentationStyle: The presentation style of the model view controller.
-     */
+// MARK: - Safari
+
+public extension UIViewController {
+    
+    /// Open Safari view controller.
+    ///
+    /// - Parameters:
+    ///   - url: URL to display in the browser.
+    ///   - modalPresentationStyle: The presentation style of the model view controller.
+    ///   - barTintColor: The color to tint the background of the navigation bar and the toolbar.
+    ///   - preferredControlTintColor: The color to tint the control buttons on the navigation bar and the toolbar.
+    ///   - animated: Pass true to animate the presentation.
+    ///   - completion: The block to execute after the presentation finishes.
     func present(
         safari url: String,
         modalPresentationStyle: UIModalPresentationStyle? = nil,
@@ -98,6 +127,11 @@ public extension UIViewController {
             completion: completion
         )
     }
+}
+
+// MARK: - Activities
+
+public extension UIViewController {
     
     /**
      Presents an activity view controller modally that you can use to offer various services from your application.
@@ -135,24 +169,9 @@ public extension UIViewController {
 
         present(activity, animated: true, completion: nil)
     }
-    
-    /// Presents a alert controller modally.
-    ///
-    /// - Parameters:
-    ///   - alertControllerToPresent: The view controller to display over the current view controller’s content.
-    ///   - sourceView: The view containing the anchor rectangle for the popover.
-    ///   - animated: Pass true to animate the presentation; otherwise, pass false.
-    ///   - completion: The block to execute after the presentation finishes.
-    func present(_ alertControllerToPresent: UIAlertController, popoverFrom sourceView: UIView, animated: Bool = true, completion: (() -> Void)? = nil) {
-        if let popover = alertControllerToPresent.popoverPresentationController {
-            popover.sourceView  = sourceView
-            popover.sourceRect = sourceView.bounds
-            popover.permittedArrowDirections = .any
-        }
-        
-        present(alertControllerToPresent, animated: animated, completion: completion)
-    }
 }
+
+// MARK: - Dimensions
 
 public extension UIViewController {
     

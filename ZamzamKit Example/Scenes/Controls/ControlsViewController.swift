@@ -12,6 +12,12 @@ import SystemConfiguration
 
 class ControlsViewController: UIViewController {
     
+    @IBOutlet private weak var shadowView: UIView! {
+        didSet { shadowView.addShadow(ofColor: .black) }
+    }
+    
+    @IBOutlet private weak var fadeView: UIView!
+    
     private let mailComposer: MailComposerType = MailComposer()
     
     override func viewDidLoad() {
@@ -56,6 +62,21 @@ private extension ControlsViewController {
         present(alert: "Test Alert")
     }
     
+    @IBAction func actionSheetButtonTapped(_ sender: UIButton) {
+        present(
+            alert: "Test Action Sheet",
+            message: "Choose your action",
+            preferredStyle: .actionSheet,
+            additionalActions: [
+                UIAlertAction(title: "Action 1") { },
+                UIAlertAction(title: "Action 2") { },
+                UIAlertAction(title: "Action 3") { }
+            ],
+            includeCancelAction: true,
+            popoverFrom: sender
+        )
+    }
+    
     @IBAction func safariButtonTapped() {
         present(safari: "https://apple.com")
     }
@@ -92,5 +113,9 @@ private extension ControlsViewController {
         }
         
         present(controller, animated: true)
+    }
+    
+    @IBAction func toggleFadeButtonTapped() {
+        fadeView.isHidden ? fadeView.fadeIn() : fadeView.fadeOut()
     }
 }

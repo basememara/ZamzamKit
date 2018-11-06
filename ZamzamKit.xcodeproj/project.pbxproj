@@ -175,8 +175,6 @@
 		8BB343202140E842000F0CEF /* Watch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB343172140E842000F0CEF /* Watch.storyboard */; };
 		8BB343212140E842000F0CEF /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB343182140E842000F0CEF /* LocationViewController.swift */; };
 		8BB343222140E842000F0CEF /* Controls.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB343192140E842000F0CEF /* Controls.storyboard */; };
-		8BB343262141BB25000F0CEF /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB343252141BB25000F0CEF /* Calendar.storyboard */; };
-		8BB343282141BB34000F0CEF /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB343272141BB34000F0CEF /* CalendarViewController.swift */; };
 		8BB3432B2141BC92000F0CEF /* ViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB3432A2141BC92000F0CEF /* ViewControllerDelegate.swift */; };
 		8BB3432E2141D557000F0CEF /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB3432D2141D557000F0CEF /* Localizable.swift */; };
 		8BB376121CF8B8D6005E7F67 /* Restorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB376111CF8B8D6005E7F67 /* Restorable.swift */; };
@@ -479,8 +477,6 @@
 		8BB343172140E842000F0CEF /* Watch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Watch.storyboard; sourceTree = "<group>"; };
 		8BB343182140E842000F0CEF /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		8BB343192140E842000F0CEF /* Controls.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Controls.storyboard; sourceTree = "<group>"; };
-		8BB343252141BB25000F0CEF /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
-		8BB343272141BB34000F0CEF /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		8BB3432A2141BC92000F0CEF /* ViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDelegate.swift; sourceTree = "<group>"; };
 		8BB3432D2141D557000F0CEF /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		8BB376111CF8B8D6005E7F67 /* Restorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restorable.swift; sourceTree = "<group>"; };
@@ -849,15 +845,6 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		8B8802CE21757E9D0035543D /* Calendar */ = {
-			isa = PBXGroup;
-			children = (
-				8BB343252141BB25000F0CEF /* Calendar.storyboard */,
-				8BB343272141BB34000F0CEF /* CalendarViewController.swift */,
-			);
-			path = Calendar;
-			sourceTree = "<group>";
-		};
 		8B8802CF21757EA80035543D /* Controls */ = {
 			isa = PBXGroup;
 			children = (
@@ -910,7 +897,6 @@
 		8BB343102140E81A000F0CEF /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				8B8802CE21757E9D0035543D /* Calendar */,
 				8B8802CF21757EA80035543D /* Controls */,
 				8B8802D021757EB30035543D /* Location */,
 				8B8802D121757EC20035543D /* Notifications */,
@@ -1321,7 +1307,6 @@
 				8BB3431D2140E842000F0CEF /* Notification.storyboard in Resources */,
 				8B8802CD21757E800035543D /* Table.storyboard in Resources */,
 				8BB343202140E842000F0CEF /* Watch.storyboard in Resources */,
-				8BB343262141BB25000F0CEF /* Calendar.storyboard in Resources */,
 				8B5316111C9B22F60094A6C4 /* Assets.xcassets in Resources */,
 				8B53160F1C9B22F60094A6C4 /* Main.storyboard in Resources */,
 				8BB3431A2140E842000F0CEF /* Location.storyboard in Resources */,
@@ -1574,7 +1559,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B8802D92175804B0035543D /* TableModels.swift in Sources */,
-				8BB343282141BB34000F0CEF /* CalendarViewController.swift in Sources */,
 				8BB343212140E842000F0CEF /* LocationViewController.swift in Sources */,
 				8BB120C42178B54800B72ECF /* PresentableView.swift in Sources */,
 				8BB3432E2141D557000F0CEF /* Localizable.swift in Sources */,

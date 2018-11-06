@@ -40,7 +40,9 @@ class UserNotificationViewController: UIViewController, StatusBarable {
         
         UNUserNotificationCenter.current().register(
             categories: [
-                ZamzamConstants.Notification.MAIN_CATEGORY: [UNNotificationAction(identifier: "snoozeAction", title: "Snooze")],
+                UNUserNotificationCenter.mainCategoryIdentifier: [
+                    UNNotificationAction(identifier: "snoozeAction", title: "Snooze")
+                ],
                 "misc1Category": [UNNotificationAction(identifier: "misc1Action", title: "Misc 1")],
                 "misc2Category": [UNNotificationAction(identifier: "misc2Action", title: "Misc 2")]
             ],

@@ -9,35 +9,6 @@
 import UIKit
 
 public extension UIView {
-
-    var height: CGFloat {
-        get { return frame.height }
-        set { frame.size.height = newValue }
-    }
-
-    var width: CGFloat {
-        get { return frame.width }
-        set { frame.size.width = newValue }
-    }
-
-    var x: CGFloat {
-        get { return frame.minX }
-        set { frame.origin.x = newValue }
-    }
-
-    var y: CGFloat {
-        get { return frame.minY }
-        set { frame.origin.y = newValue }
-    }
-
-    /// A Boolean value that determines whether the view is visible.
-    var isVisible: Bool {
-        get { return !isHidden }
-        set { isHidden = !newValue }
-    }
-}
-
-public extension UIView {
     
     /// Unarchives the contents of a XIB file associared with the receiver.
     ///
@@ -58,20 +29,28 @@ public extension UIView {
 }
 
 public extension UIView {
+    
+    /// A Boolean value that determines whether the view is visible.
+    var isVisible: Bool {
+        get { return !isHidden }
+        set { isHidden = !newValue }
+    }
+    
+    /// Returns the width of the frame.
+    var width: CGFloat {
+        get { return frame.width }
+        set { frame.size.width = newValue }
+    }
 
-    /// First responder.
-	var firstResponder: UIView? {
-		guard !self.isFirstResponder else { return self }
-		for subView in subviews {
-			if subView.isFirstResponder {
-				return subView
-			}
-		}
-		return nil
-	}
+    /// Returns the height of the frame.
+    var height: CGFloat {
+        get { return frame.height }
+        set { frame.size.height = newValue }
+    }
 	
 	/// Get view's parent view controller
 	var parentViewController: UIViewController? {
+        // https://github.com/SwifterSwift
 		weak var parentResponder: UIResponder? = self
 		while parentResponder != nil {
 			parentResponder = parentResponder!.next
@@ -117,9 +96,6 @@ public extension UIView {
             layer.cornerRadius = newValue
         }
     }
-}
-
-public extension UIView {
 	
 	/// Add shadow to view.
 	///
@@ -128,13 +104,17 @@ public extension UIView {
 	///   - radius: shadow radius (default is 3).
 	///   - offset: shadow offset (default is .zero).
 	///   - opacity: shadow opacity (default is 0.5).
-	func addShadow(ofColor color: UIColor = UIColor(hex: 0x137992),
-        radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5) {
-            layer.shadowColor = color.cgColor
-            layer.shadowOffset = offset
-            layer.shadowRadius = radius
-            layer.shadowOpacity = opacity
-            layer.masksToBounds = true
+	func addShadow(
+        ofColor color: UIColor = .black,
+        radius: CGFloat = 3,
+        offset: CGSize = .zero,
+        opacity: Float = 0.5)
+    {
+        layer.shadowColor = color.cgColor
+        layer.shadowRadius = radius
+        layer.shadowOffset = offset
+        layer.shadowOpacity = opacity
+        layer.masksToBounds = false
 	}
 }
 
@@ -145,8 +125,10 @@ public extension UIView {
     /// - Parameters:
     ///   - duration: animation duration in seconds (default is 0.35 second).
     ///   - completion: optional completion handler to run with animation finishes (default is nil)
-    func fadeIn(duration: TimeInterval = 0.35, completion: ((Bool) -> Void)? = nil) {
+    func fadeIn(duration: TimeInterval = 0.25, completion: ((Bool) -> Void)? = nil) {
         guard isHidden || alpha < 1 else { completion?(true); return }
+        
+        let originalAlpha = alpha
         
         if isHidden {
             alpha = 0
@@ -156,7 +138,7 @@ public extension UIView {
             withDuration: duration,
             animations: {
                 self.isHidden = false
-                self.alpha = 1
+                self.alpha = originalAlpha
             },
             completion: completion
         )
@@ -167,8 +149,10 @@ public extension UIView {
     /// - Parameters:
     ///   - duration: animation duration in seconds (default is 0.35 second).
     ///   - completion: optional completion handler to run with animation finishes (default is nil)
-    func fadeOut(duration: TimeInterval = 0.35, completion: ((Bool) -> Void)? = nil) {
+    func fadeOut(duration: TimeInterval = 0.25, completion: ((Bool) -> Void)? = nil) {
         guard !isHidden || alpha > 0 else { completion?(true); return }
+        
+        let originalAlpha = alpha
         
         UIView.animate(
             withDuration: duration,
@@ -177,6 +161,7 @@ public extension UIView {
             },
             completion:  {
                 self.isHidden = true
+                self.alpha = originalAlpha
                 completion?($0)
             }
         )
