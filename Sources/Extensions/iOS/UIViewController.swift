@@ -78,7 +78,7 @@ public extension UIViewController {
         present(alertController, animated: animated, completion: nil)
     }
     
-    /// Display an alert message to the user.
+    /// Display an action sheet to the user.
     ///
     /// - Parameters:
     ///   - title: Title of the alert.
