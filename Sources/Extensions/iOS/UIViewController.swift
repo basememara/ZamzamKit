@@ -90,9 +90,9 @@ public extension UIViewController {
     ///   - cancelHandler: Call back handler when cancel action tapped.
     ///   - animated: Pass true to animate the presentation; otherwise, pass false.
     ///   - configure: Configure the `UIAlertController` before it is loaded.
-    ///   - handler: Call back handler when main action tapped.
+    ///   - completion: The block to execute after the presentation finishes.
     func present(
-        actionSheet title: String,
+        actionSheet title: String?,
         message: String? = nil,
         popoverFrom sourceView: UIView,
         additionalActions: [UIAlertAction],
@@ -101,7 +101,7 @@ public extension UIViewController {
         cancelHandler: (() -> Void)? = nil,
         animated: Bool = true,
         configure: ((UIAlertController) -> Void)? = nil,
-        handler: (() -> Void)? = nil)
+        completion: (() -> Void)? = nil)
     {
         let alertController = UIAlertController(
             title: title,
@@ -129,7 +129,7 @@ public extension UIViewController {
         // Handle any last configurations before presenting alert
         configure?(alertController)
         
-        present(alertController, animated: animated, completion: nil)
+        present(alertController, animated: animated, completion: completion)
     }
 }
 
