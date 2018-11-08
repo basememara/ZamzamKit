@@ -137,7 +137,7 @@ public extension UIViewController {
 
 public extension UIViewController {
     
-    /// Open Safari view controller.
+    /// Present a Safari view controller.
     ///
     /// - Parameters:
     ///   - url: URL to display in the browser.
@@ -166,7 +166,7 @@ public extension UIViewController {
         )
     }
     
-    /// Present or push a view controller in a primary context.
+    /// Present or push a Safari view controller in a primary context.
     ///
     /// - Parameters:
     ///   - url: URL to display in the browser.
