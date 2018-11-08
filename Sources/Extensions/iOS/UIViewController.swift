@@ -148,7 +148,7 @@ public extension UIViewController {
     ///   - completion: The block to execute after the presentation finishes.
     func present(
         safari url: String,
-        modalPresentationStyle: UIModalPresentationStyle? = nil,
+        modalPresentationStyle: UIModalPresentationStyle? = .overFullScreen,
         barTintColor: UIColor? = nil,
         preferredControlTintColor: UIColor? = nil,
         animated: Bool = true,
@@ -161,6 +161,32 @@ public extension UIViewController {
                 $0.preferredBarTintColor ?= barTintColor
                 $0.preferredControlTintColor ?= preferredControlTintColor
             },
+            animated: animated,
+            completion: completion
+        )
+    }
+    
+    /// Present or push a view controller in a primary context.
+    ///
+    /// - Parameters:
+    ///   - url: URL to display in the browser.
+    ///   - modalPresentationStyle: The presentation style of the model view controller.
+    ///   - barTintColor: The color to tint the background of the navigation bar and the toolbar.
+    ///   - preferredControlTintColor: The color to tint the control buttons on the navigation bar and the toolbar.
+    ///   - animated: Pass true to animate the presentation.
+    ///   - completion: The block to execute after the presentation finishes.
+    func show(
+        safari url: String,
+        barTintColor: UIColor? = nil,
+        preferredControlTintColor: UIColor? = nil,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil)
+    {
+        present(
+            safari: url,
+            modalPresentationStyle: nil,
+            barTintColor: barTintColor,
+            preferredControlTintColor: preferredControlTintColor,
             animated: animated,
             completion: completion
         )
