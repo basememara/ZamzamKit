@@ -33,6 +33,7 @@ public extension UIViewController {
     ///   - title: Title of the alert.
     ///   - message: Body of the alert.
     ///   - buttonText: Text for the primary button.
+    ///   - buttonStyle: Style to apply to the primary button.
     ///   - additionalActions: Array of alert actions.
     ///   - includeCancelAction: Include a cancel action within the alert.
     ///   - cancelText: Text for the cancel button.
@@ -44,6 +45,7 @@ public extension UIViewController {
         alert title: String,
         message: String? = nil,
         buttonText: String = .localized(.ok),
+        buttonStyle: UIAlertAction.Style = .default,
         additionalActions: [UIAlertAction]? = nil,
         includeCancelAction: Bool = false,
         cancelText: String = .localized(.cancel),
@@ -70,7 +72,9 @@ public extension UIViewController {
             }
         }
         
-        alertController.addAction(UIAlertAction(title: buttonText) { handler?() })
+        alertController.addAction(
+            UIAlertAction(title: buttonText, style: buttonStyle) { _ in handler?() }
+        )
     
         // Handle any last configurations before presenting alert
         configure?(alertController)
