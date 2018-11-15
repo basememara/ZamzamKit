@@ -108,6 +108,7 @@
 		8B6A956E1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
 		8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
 		8B6B0CBA219D30830018F2E0 /* KeyboardScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B0CB9219D30830018F2E0 /* KeyboardScrollView.swift */; };
+		8B6B0CBC219D312E0018F2E0 /* UIToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B0CBB219D312E0018F2E0 /* UIToolbar.swift */; };
 		8B6C99971E6E031800D523CC /* LocationsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationsWorker.swift */; };
 		8B6C99981E6E031800D523CC /* LocationsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationsWorker.swift */; };
 		8B6FB9B6202777DE00FE7BEB /* DataViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FB9B5202777DE00FE7BEB /* DataViewable.swift */; };
@@ -435,6 +436,7 @@
 		8B6A95601E46FBB9003F333D /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		8B6A956C1E484D5A003F333D /* ZamzamError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamError.swift; sourceTree = "<group>"; };
 		8B6B0CB9219D30830018F2E0 /* KeyboardScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardScrollView.swift; sourceTree = "<group>"; };
+		8B6B0CBB219D312E0018F2E0 /* UIToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIToolbar.swift; sourceTree = "<group>"; };
 		8B6C99961E6E031800D523CC /* LocationsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsWorker.swift; sourceTree = "<group>"; };
 		8B6FB9B5202777DE00FE7BEB /* DataViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewable.swift; sourceTree = "<group>"; };
 		8B6FB9BD2027CF9900FE7BEB /* ControllerModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerModule.swift; sourceTree = "<group>"; };
@@ -728,6 +730,7 @@
 				8B1EEC871CF7588600AE054B /* UIStoryboard.swift */,
 				8BCB73D91CAD69BF00E20096 /* UITableView.swift */,
 				8B2285241EB6863600425B5A /* UITableViewCell.swift */,
+				8B6B0CBB219D312E0018F2E0 /* UIToolbar.swift */,
 				8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */,
 				8BFDB6691C751D3400C94996 /* UIViewController.swift */,
 				8BD98D6E1FC35B3700E74A8C /* UIWindow.swift */,
@@ -1408,6 +1411,7 @@
 				8B79A4751E9C1ED800C8A5A4 /* Locale.swift in Sources */,
 				8BFA87E6218BA5D50084F6FD /* Deprecated.swift in Sources */,
 				8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
+				8B6B0CBC219D312E0018F2E0 /* UIToolbar.swift in Sources */,
 				8B82154A1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8BB45FB51C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8B7729F120486D6500C15B56 /* ApproximateComparison.swift in Sources */,

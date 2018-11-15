@@ -28,8 +28,9 @@ public struct Localizable {
 public extension Localizable {
     static let pullToRefresh = Localizable(NSLocalizedString("pull.to.refresh", bundle: .zamzamKit, comment: "For tables"))
     static let openInSafari = Localizable(NSLocalizedString("open.in.safari", bundle: .zamzamKit, comment: "For opening Safari from share activity"))
-    static let ok = Localizable(NSLocalizedString("ok.dialog", bundle: .zamzamKit, comment: "For dialogs"))
-    static let cancel = Localizable(NSLocalizedString("cancel.dialog", bundle: .zamzamKit, comment: "For dialogs"))
+    static let ok = Localizable(NSLocalizedString("ok.dialog", bundle: .zamzamKit, comment: "OK text for dialogs"))
+    static let cancel = Localizable(NSLocalizedString("cancel.dialog", bundle: .zamzamKit, comment: "Cancel text for dialogs"))
+    static let next = Localizable(NSLocalizedString("next.dialog", bundle: .zamzamKit, comment: "Next text for dialogs"))
 }
 
 public extension String {
