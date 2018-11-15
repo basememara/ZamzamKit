@@ -283,7 +283,7 @@ Add `pod "ZamzamKit"` to your `Podfile`.
 
 ## Author
 
-http://zamzam.io
+Zamzam Inc., http://zamzam.io
 
 ## License
 
