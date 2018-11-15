@@ -107,6 +107,7 @@
 		8B6A956D1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
 		8B6A956E1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
 		8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
+		8B6B0CBA219D30830018F2E0 /* KeyboardScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B0CB9219D30830018F2E0 /* KeyboardScrollView.swift */; };
 		8B6C99971E6E031800D523CC /* LocationsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationsWorker.swift */; };
 		8B6C99981E6E031800D523CC /* LocationsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationsWorker.swift */; };
 		8B6FB9B6202777DE00FE7BEB /* DataViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FB9B5202777DE00FE7BEB /* DataViewable.swift */; };
@@ -433,6 +434,7 @@
 		8B63E4261CDB8DB00053C060 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		8B6A95601E46FBB9003F333D /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		8B6A956C1E484D5A003F333D /* ZamzamError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamError.swift; sourceTree = "<group>"; };
+		8B6B0CB9219D30830018F2E0 /* KeyboardScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardScrollView.swift; sourceTree = "<group>"; };
 		8B6C99961E6E031800D523CC /* LocationsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsWorker.swift; sourceTree = "<group>"; };
 		8B6FB9B5202777DE00FE7BEB /* DataViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewable.swift; sourceTree = "<group>"; };
 		8B6FB9BD2027CF9900FE7BEB /* ControllerModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerModule.swift; sourceTree = "<group>"; };
@@ -808,6 +810,7 @@
 				8BBEA5E120309764009B7E90 /* ColumnsCollectionViewFlowLayout.swift */,
 				8B50C506211E2F9B00A36ABB /* GradientView.swift */,
 				8B0E0F5020F430C200DF3975 /* IntrinsicHeightDataView.swift */,
+				8B6B0CB9219D30830018F2E0 /* KeyboardScrollView.swift */,
 				8B4D71BD216B208B002ACA81 /* MailComposer.swift */,
 				8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */,
 				8B379A0720F65F46002144F7 /* PlaceholderTextView.swift */,
@@ -1361,6 +1364,7 @@
 				8BF307D01CF0E3C600BBA933 /* UIActivity.swift in Sources */,
 				8B07420B20DFBD2300204C2F /* RoundedViews.swift in Sources */,
 				8BCB73CE1CAD660D00E20096 /* Equatable.swift in Sources */,
+				8B6B0CBA219D30830018F2E0 /* KeyboardScrollView.swift in Sources */,
 				8BB415E61FB0DFFF0002C86C /* StatusBarable.swift in Sources */,
 				8BD08EB51CE28ACA0051080A /* SCNetworkReachability.swift in Sources */,
 				8B9434611EBDEA8200C779EB /* TimeZone.swift in Sources */,
