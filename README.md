@@ -296,7 +296,7 @@ myDiv.stringByReplacingOccurrencesOfString("<[^>]+>",
 // After
 myDiv.stripHTML()
 ```
-And more! See the [API documentation here](https://cdn.rawgit.com/ZamzamInc/ZamzamKit/master/docs/index.html).
+And more!
 
 ## Installation
 
