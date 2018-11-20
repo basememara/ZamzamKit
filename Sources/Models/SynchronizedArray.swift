@@ -253,7 +253,7 @@ public extension SynchronizedArray where Element: Equatable {
     /// - Parameter element: An element to search for in the collection.
     func remove(_ element: Element, completion: (() -> Void)? = nil) {
         queue.async(flags: .barrier) {
-            self.array.remove(of: element)
+            self.array.remove(element)
             DispatchQueue.main.async { completion?() }
         }
     }

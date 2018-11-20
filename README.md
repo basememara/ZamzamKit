@@ -3,14 +3,42 @@
 [![Build Status](https://api.travis-ci.org/ZamzamInc/ZamzamKit.svg?branch=master)](https://travis-ci.org/ZamzamInc/ZamzamKit)
 [![Platform](https://img.shields.io/cocoapods/p/ZamzamKit.svg?style=flat)](https://github.com/ZamzamInc/ZamzamKit)
 [![Swift](https://img.shields.io/badge/Swift-4.2-orange.svg)](https://swift.org)
-[![Xcode](https://img.shields.io/badge/Xcode-10.0-blue.svg)](https://developer.apple.com/xcode)
+[![Xcode](https://img.shields.io/badge/Xcode-10.1-blue.svg)](https://developer.apple.com/xcode)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-Compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Version](https://img.shields.io/cocoapods/v/ZamzamKit.svg?style=flat)](http://cocoapods.org/pods/ZamzamKit)
 [![MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
-ZamzamKit a Swift framework for rapid development using a collection of small utility extensions for NSFoundation and UIKit classes and protocols.
+ZamzamKit a Swift framework for rapid development using a collection of small utility extensions for Foundation and UIKit classes and protocols.
 
 ## Usage
+
+<details>
+<summary>Array</summary>
+
+- Safely retrieve an element at the given index if it exists:
+```swift
+[1, 3, 5, 7, 9].get(1) -> Optional(3)
+[1, 3, 5, 7, 9].get(12) -> nil
+tabBarController.tabBar.items?.get(3)?.selectedImage = UIImage("my-image")
+```
+
+- Get distinct elements from an array:
+```swift
+[1, 1, 3, 3, 5, 5, 7, 9, 9].distinct -> [1, 3, 5, 7, 9]
+```
+
+- Remove an element from an array by the value:
+```swift
+var array = ["a", "b", "c", "d", "e", "a"]
+array.remove("a")
+array -> ["b", "c", "d", "e", "a"]
+```
+
+- Easily get the array version of an array slice:
+```swift
+["a", "b", "c", "d", "e"].prefix(3).array
+```
+</details>
 
 ### Foundation
 #### Array + get
