@@ -9,13 +9,14 @@ env:
   - TVOS_FRAMEWORK_SCHEME="ZamzamKit tvOS"
   - WATCHOS_FRAMEWORK_SCHEME="ZamzamKit watchOS"
   matrix:
-    - DESTINATION="OS=4.3,name=Apple Watch - 42mm" SCHEME="$WATCHOS_FRAMEWORK_SCHEME"  RUN_TESTS="NO"
+    - DESTINATION="OS=4.3,name=Apple Watch Series 2 - 38mm" SCHEME="$WATCHOS_FRAMEWORK_SCHEME"  RUN_TESTS="NO"
+    - DESTINATION="OS=5.1,name=Apple Watch Series 4 - 44mm" SCHEME="$WATCHOS_FRAMEWORK_SCHEME"  RUN_TESTS="NO"
 
-    - DESTINATION="OS=11.3,name=iPhone X"          SCHEME="$IOS_FRAMEWORK_SCHEME"      RUN_TESTS="YES"
+    - DESTINATION="OS=12.1,name=iPhone XS Max"     SCHEME="$IOS_FRAMEWORK_SCHEME"      RUN_TESTS="YES"
     - DESTINATION="OS=11.3,name=iPhone X"          SCHEME="$IOS_FRAMEWORK_SCHEME"      RUN_TESTS="YES"
     - DESTINATION="OS=10.3.1,name=iPhone 7 Plus"   SCHEME="$IOS_FRAMEWORK_SCHEME"      RUN_TESTS="YES"
 
-    - DESTINATION="OS=11.3,name=Apple TV 4K"       SCHEME="$TVOS_FRAMEWORK_SCHEME"     RUN_TESTS="YES"
+    - DESTINATION="OS=12.1,name=Apple TV 4K"       SCHEME="$TVOS_FRAMEWORK_SCHEME"     RUN_TESTS="YES"
 script:
   - set -o pipefail
   - xcodebuild -version
