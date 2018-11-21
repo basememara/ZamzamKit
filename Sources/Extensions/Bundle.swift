@@ -17,32 +17,37 @@ public extension Bundle {
 
 public extension Bundle {
     
-    /**
-     Gets the contents of the specified file.
-     
-     - parameter file: Name of file to retrieve contents from.
-     - parameter bundle: Bundle where defaults reside.
-     - parameter encoding: Encoding of string from file.
-     
-     - returns: Contents of file.
-     */
-    func string(file: String, inDirectory: String? = nil, encoding: String.Encoding = .utf8) -> String? {
-        guard let resourcePath = path(forResource: file, ofType: nil, inDirectory: inDirectory) else { return nil }
+    /// Gets the contents of the specified file.
+    ///
+    ///     Bundle.main.string(file: "Test.txt") -> "This is a test. Abc 123.\n"
+    ///
+    /// - Parameters:
+    ///   - file: Name of file to retrieve contents from.
+    ///   - directory: The name of the bundle subdirectory.
+    ///   - encoding: The encoding of the Unicode characters. The default is UTF8.
+    /// - Returns: Contents of file.
+    func string(file: String, inDirectory directory: String? = nil, encoding: String.Encoding = .utf8) -> String? {
+        guard let resourcePath = path(forResource: file, ofType: nil, inDirectory: directory) else { return nil }
         return try? String(contentsOfFile: resourcePath, encoding: encoding)
     }
     
-    /**
-     Gets the contents of the specified plist file.
-     
-     - parameter plist: property list where defaults are declared
-     - parameter bundle: bundle where defaults reside
-     
-     - returns: dictionary of values
-     */
-    func contents(plist: String, inDirectory: String? = nil) -> [String: Any] {
-        guard let resourcePath = path(forResource: plist, ofType: nil, inDirectory: inDirectory),
-            let contents = NSDictionary(contentsOfFile: resourcePath) as? [String: Any]
-            else { return [:] }
+    /// Gets the contents of the specified plist file.
+    ///
+    ///     let values = Bundle.main.string(plist: "Settings.plist")
+    ///     values["MyString1"] as? String -> "My string value 1."
+    ///     values["MyNumber1"] as? Int -> 123
+    ///     values["MyBool1"] as? Bool -> false
+    ///     values["MyDate1"] as? Date -> 2018-11-21 15:40:03 +0000
+    ///
+    /// - Parameters:
+    ///   - plist: The property list where key and values are declared.
+    ///   - directory: The name of the bundle subdirectory.
+    /// - Returns: Dictionary of values of the property list file.
+    func contents(plist: String, inDirectory directory: String? = nil) -> [String: Any] {
+        guard let resourcePath = path(forResource: plist, ofType: nil, inDirectory: directory),
+            let contents = NSDictionary(contentsOfFile: resourcePath) as? [String: Any] else {
+                return [:]
+        }
         
         return contents
     }

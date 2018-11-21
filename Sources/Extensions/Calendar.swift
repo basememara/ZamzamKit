@@ -10,7 +10,7 @@ import Foundation
 
 public extension Calendar {
     
-    /// Normalize date calculations using gregorian calendar with UTC timezone and POSIX.
+    /// Normalize date calculations using Gregorian calendar with UTC timezone and POSIX.
     static let gregorianUTC: Calendar = {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone(identifier: "UTC")!
@@ -20,5 +20,7 @@ public extension Calendar {
 }
 
 public extension Calendar.Component {
-    static let date: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
+    
+    /// The set component units of date that includes year, month, day, hour, minute, and second
+    static let full: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
 }

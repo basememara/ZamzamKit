@@ -11,42 +11,128 @@ import Foundation
 public extension Date {
     
     /// Determines if date is in the past.
+    ///
+    /// Uses the user's current calendar.
+    ///
+    ///     Date(timeIntervalSinceNow: -100).isPast -> true
+    ///     Date(timeIntervalSinceNow: 100).isPast -> false
     var isPast: Bool {
         return self < Date()
     }
     
     /// Determines if date is in the future.
+    ///
+    /// Uses the user's current calendar.
+    ///
+    ///     Date(timeIntervalSinceNow: 100).isFuture -> true
+    ///     Date(timeIntervalSinceNow: -100).isFuture -> false
     var isFuture: Bool {
         return self > Date()
     }
     
     /// Determines if date is in today's date.
+    ///
+    /// Uses the user's current calendar.
+    ///
+    ///     Date().isToday -> true
     var isToday: Bool {
         return Calendar.current.isDateInToday(self)
     }
     
     /// Determines if date is in yesterday's date.
+    ///
+    /// Uses the user's current calendar.
+    ///
+    ///     Date(timeIntervalSinceNow: -90_000).isYesterday -> true
     var isYesterday: Bool {
         return Calendar.current.isDateInYesterday(self)
     }
     
     /// Determines if date is in tomorrow's date.
+    ///
+    /// Uses the user's current calendar.
+    ///
+    ///     Date(timeIntervalSinceNow: 90_000).isTomorrow -> true
     var isTomorrow: Bool {
         return Calendar.current.isDateInTomorrow(self)
     }
-	
-	/// Determines if date is within a weekend period.
-	var isWeekend: Bool {
-		return Calendar.current.isDateInWeekend(self)
-	}
     
     /// Determines if date is within a weekday period.
+    ///
+    /// Uses the user's current calendar.
     var isWeekday: Bool {
         return !Calendar.current.isDateInWeekend(self)
     }
+	
+	/// Determines if date is within a weekend period.
+    ///
+    /// Uses the user's current calendar.
+	var isWeekend: Bool {
+		return Calendar.current.isDateInWeekend(self)
+	}
+}
+
+// MARK: - String helpers
+
+public extension Date {
+    
+    /// Returns the beginning of the day.
+    ///
+    /// Uses the user's current calendar.
+    ///
+    ///     Date().startOfDay -> "2018/11/21 00:00:00"
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+    
+    /// Returns the end of the day.
+    ///
+    /// Uses the user's current calendar.
+    ///
+    ///     Date().endOfDay -> "2018/11/21 23:59:59"
+    var endOfDay: Date {
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfDay)!
+    }
+    
+    /// Returns the beginning of the month.
+    ///
+    /// Uses the user's current calendar.
+    ///
+    ///     Date().startOfMonth -> "2018/11/01 00:00:00"
+    var startOfMonth: Date {
+        return Calendar.current.date(
+            from: Calendar.current.dateComponents([.year, .month], from: startOfDay)
+        )!
+    }
+    
+    /// Returns the end of the month.
+    ///
+    /// Uses the user's current calendar.
+    ///
+    ///     Date().endOfMonth -> "2018/11/30 23:59:59"
+    var endOfMonth: Date {
+        var components = DateComponents()
+        components.month = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfMonth)!
+    }
+}
+
+// MARK: - Comparisons
+
+public extension Date {
     
     /// Determine if a date is between two other dates.
+    ///
     /// Dates do not have to be in sequential order.
+    ///
+    ///     let date = Date()
+    ///     let date1 = Date(timeIntervalSinceNow: 1000)
+    ///     let date2 = Date(timeIntervalSinceNow: -1000)
+    ///     date.isBetween(date1, date2) -> true
     ///
     /// - Parameters:
     ///   - date1: first date to compare to.
@@ -56,54 +142,83 @@ public extension Date {
         // https://github.com/SwifterSwift/SwifterSwift/blob/master/Sources/Extensions/Foundation/DateExtensions.swift
         return date1.compare(self).rawValue * compare(date2).rawValue > 0
     }
+    
+    /// Specifies if the date is beyond the time window.
+    ///
+    ///     let date = Date(fromString: "2016/03/22 09:40")
+    ///     let fromDate = Date(fromString: "2016/03/22 09:30")
+    ///
+    ///     date.isBeyond(fromDate, bySeconds: 300) -> true
+    ///     date.isBeyond(fromDate, bySeconds: 600) -> false
+    ///     date.isBeyond(fromDate, bySeconds: 1200) -> false
+    ///
+    /// - Parameters:
+    ///   - date: Date to use as a reference.
+    ///   - seconds: Time window the date is considered valid.
+    /// - Returns: Has the time elapsed the time window.
+    func isBeyond(_ date: Date, bySeconds seconds: Int) -> Bool {
+        return timeIntervalSince(date).seconds > seconds
+    }
+    
+    /// Specifies if the date is beyond the time window.
+    ///
+    ///     let date = Date(fromString: "2016/03/22 09:40")
+    ///     let fromDate = Date(fromString: "2016/03/22 09:30")
+    ///
+    ///     date.isBeyond(fromDate, byMinutes: 5) -> true
+    ///     date.isBeyond(fromDate, byMinutes: 10) -> false
+    ///     date.isBeyond(fromDate, byMinutes: 25) -> false
+    ///
+    /// - Parameters:
+    ///   - date: Date to use as a reference.
+    ///   - minutes: Time window the date is considered valid.
+    /// - Returns: Has the time elapsed the time window.
+    func isBeyond(_ date: Date, byMinutes minutes: Double) -> Bool {
+        return timeIntervalSince(date).minutes > minutes
+    }
+    
+    /// Specifies if the date is beyond the time window.
+    ///
+    ///     let date = Date(fromString: "2016/03/22 11:40")
+    ///     let fromDate = Date(fromString: "2016/03/22 09:40")
+    ///
+    ///     date.isBeyond(fromDate, byHours: 1) -> true
+    ///     date.isBeyond(fromDate, byHours: 2) -> false
+    ///     date.isBeyond(fromDate, byHours: 4) -> false
+    ///
+    /// - Parameters:
+    ///   - date: Date to use as a reference.
+    ///   - hours: Time window the date is considered valid.
+    /// - Returns: Has the time elapsed the time window.
+    func isBeyond(_ date: Date, byHours hours: Double) -> Bool {
+        return timeIntervalSince(date).hours > hours
+    }
 }
 
 // MARK: - String helpers
 
 public extension Date {
     
-    /// Gets the beginning of the day.
-    var startOfDay: Date {
-        return Calendar.current.startOfDay(for: self)
-    }
-    
-    /// Gets the end of the day.
-    var endOfDay: Date {
-        var components = DateComponents()
-        components.day = 1
-        components.second = -1
-        return Calendar.current.date(byAdding: components, to: startOfDay)!
-    }
-    
-    /// Gets the beginning of the month.
-    var startOfMonth: Date {
-        return Calendar.current.date(
-            from: Calendar.current.dateComponents([.year, .month], from: startOfDay)
-        )!
-    }
-    
-    /// Gets the end of the month.
-    var endOfMonth: Date {
-        var components = DateComponents()
-        components.month = 1
-        components.second = -1
-        return Calendar.current.date(byAdding: components, to: startOfMonth)!
-    }
-}
-
-// MARK: - String helpers
-
-public extension Date {
-    
-    init?(fromString: String, dateFormat: String = "yyyy/MM/dd HH:mm", timeZone: TimeZone? = nil) {
-        guard !fromString.isEmpty,
-            let date = DateFormatter(dateFormat: dateFormat, timeZone: timeZone).date(from: fromString)
-            else { return nil }
+    /// Creates a date value initialized from a string.
+    ///
+    ///     Date(fromString: "2018/11/01 18:15")
+    ///
+    /// - Parameters:
+    ///   - string: The string to parse the date from. The default is `"yyyy/MM/dd HH:mm"`.
+    ///   - dateFormat: The date format string used by the receiver.
+    ///   - timeZone: The time zone for the receiver.
+    init?(fromString string: String, dateFormat: String = "yyyy/MM/dd HH:mm", timeZone: TimeZone? = nil) {
+        guard !string.isEmpty,
+            let date = DateFormatter(dateFormat: dateFormat, timeZone: timeZone).date(from: string) else {
+                return nil
+        }
         
         self.init(timeInterval: 0, since: date)
     }
 
     /// Returns a string representation of a given date formatted using the receiver’s current settings.
+    ///
+    ///     Date().string(format: "MMM d, h:mm a") -> "Jan 3, 8:43 PM"
     ///
     /// - Parameter format: The date format string used by the receiver.
     /// - Returns: The string representation of the given date.
@@ -111,7 +226,11 @@ public extension Date {
         return DateFormatter(dateFormat: format, timeZone: timeZone).string(from: self)
     }
     
-    /// Fixed-format for the date without time, i.e. 2017-05-15.
+    /// Fixed-format for the date without time.
+    ///
+    /// An example use case for this function is creating a dictionary of days that group respective values by days.
+    ///
+    ///     Date().shortString() -> "2017-05-15"
     ///
     /// - Parameter timeZone: Time zone to determine day boundries of the date.
     /// - Returns: The formatted date string.
@@ -122,6 +241,11 @@ public extension Date {
     }
     
     /// Formats time interval for display timer.
+    ///
+    ///     Date(fromString: "2016/03/22 09:45").timerString(
+    ///         from: Date(fromString: "2016/03/22 09:40")
+    ///     )
+    ///     // Prints "00:05:00"
     ///
     /// - Parameter date: The date to countdown from.
     /// - Returns: The formatted timer as hh:mm:ss.
@@ -207,18 +331,13 @@ public extension Date {
     func incrementDayIfPast(calendar: Calendar = .current) -> Date {
         return isPast ? increment(days: 1, calendar: calendar) : self
     }
-    
-    /// Specifies if the date is beyond the time window.
-    ///
-    /// - Parameters:
-    ///   - seconds: Time window the date is considered valid.
-    ///   - date: Date to use as a reference.
-    /// - Returns: Has the time elapsed the time window.
-    func hasElapsed(seconds: Int, from date: Date = Date()) -> Bool {
-        return date.timeIntervalSince(self).seconds > seconds
-    }
+}
+
+public extension Date {
     
     /// Gets the decimal representation of the time.
+    ///
+    ///     Date(fromString: "2012/10/23 18:15").timeToDecimal -> 18.25
     var timeToDecimal: Double {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.hour, .minute], from: self)
@@ -238,10 +357,10 @@ public extension Date {
     /// - Returns: The shifted date using the time zone.
     func shift(to timeZone: TimeZone) -> Date {
         return timeZone.isCurrent ? self : {
-            let calendar = Calendar.current
+            let calendar: Calendar = .current
             
             var dateComponents = calendar.dateComponents(
-                [.year, .month, .day, .hour, .minute, .second],
+                Calendar.Component.full,
                 from: self
             )
             
@@ -272,7 +391,7 @@ public extension Date {
     ///   - calendar: The calendar of the receiver.
     /// - Returns: A string representation of a given date formatted to hijri date.
     func hijriString(
-        components: Set<Calendar.Component> = Calendar.Component.date,
+        components: Set<Calendar.Component> = Calendar.Component.full,
         format: String? = nil,
         offSet: Int = 0,
         timeZone: TimeZone? = nil,
@@ -309,7 +428,7 @@ public extension Date {
     ///   - calendar: The calendar of the receiver.
     /// - Returns: The date components of the hijri date.
     func hijri(
-        components: Set<Calendar.Component> = Calendar.Component.date,
+        components: Set<Calendar.Component> = Calendar.Component.full,
         offSet: Int = 0,
         timeZone: TimeZone? = nil,
         calendar: Calendar = Date.islamicCalendar) -> DateComponents

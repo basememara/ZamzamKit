@@ -10,55 +10,38 @@ import XCTest
 @testable import ZamzamKit
 
 class DateTimeTests: XCTestCase {
-	
-	func testIsWeekend() {
-		let date = Date()
-		XCTAssertEqual(date.isWeekend, Calendar.current.isDateInWeekend(date))
-	}
+    
+    func testIsPast() {
+        XCTAssertTrue(Date(timeIntervalSinceNow: -100).isPast)
+        XCTAssertFalse(Date(timeIntervalSinceNow: 100).isPast)
+    }
+    
+    func testIsFuture() {
+        XCTAssertTrue(Date(timeIntervalSinceNow: 100).isFuture)
+        XCTAssertFalse(Date(timeIntervalSinceNow: -100).isFuture)
+    }
+    
+    func testIsToday() {
+        XCTAssertTrue(Date().isToday)
+    }
+    
+    func testIsYesterday() {
+        XCTAssertTrue(Date(timeIntervalSinceNow: -90_000).isYesterday)
+    }
+    
+    func testIsTomorrow() {
+        XCTAssertTrue(Date(timeIntervalSinceNow: 90_000).isTomorrow)
+    }
     
     func testIsWeekday() {
         let date = Date()
         XCTAssertEqual(date.isWeekday, !Calendar.current.isDateInWeekend(date))
     }
-    
-    func testIsBetween() {
-        XCTAssertTrue(
-            Date(fromString: "2018/06/15 09:30")!.isBetween(
-                Date(fromString: "2018/06/15 09:00")!,
-                Date(fromString: "2018/08/15 09:30")!
-            )
-        )
-        
-        XCTAssertFalse(
-            Date(fromString: "2020/01/15 09:00")!.isBetween(
-                Date(fromString: "2020/01/15 10:00")!,
-                Date(fromString: "2020/01/15 13:00")!
-            )
-        )
-        
-        XCTAssertTrue(
-            Date(fromString: "2020/01/15 09:00")!.isBetween(
-                Date(fromString: "2020/01/15 10:00")!,
-                Date(fromString: "2018/01/15 13:00")!
-            )
-        )
-    }
-}
-
-extension DateTimeTests {
-    
-    func testCurrentTimeInDecimal() {
-        let time = Date(fromString: "2012/10/23 18:15")!.timeToDecimal
-        let expectedTime = 18.25
-        
-        XCTAssertEqual(time, expectedTime)
-    }
-    
-    func testHasElapsed() {
-        let date = Date(fromString: "2016/03/22 09:30")!
-        
-        XCTAssert(date.hasElapsed(seconds: 300, from: Date(fromString: "2016/03/22 09:40")!))
-    }
+	
+	func testIsWeekend() {
+		let date = Date()
+		XCTAssertEqual(date.isWeekend, Calendar.current.isDateInWeekend(date))
+	}
 }
 
 extension DateTimeTests {
@@ -84,6 +67,66 @@ extension DateTimeTests {
     }
 }
 
+// MARK: - Comparisons
+
+extension DateTimeTests {
+    
+    func testIsBetween() {
+        XCTAssertTrue(
+            Date(fromString: "2018/06/15 09:30")!.isBetween(
+                Date(fromString: "2018/06/15 09:00")!,
+                Date(fromString: "2018/08/15 09:30")!
+            )
+        )
+        
+        XCTAssertFalse(
+            Date(fromString: "2020/01/15 09:00")!.isBetween(
+                Date(fromString: "2020/01/15 10:00")!,
+                Date(fromString: "2020/01/15 13:00")!
+            )
+        )
+        
+        XCTAssertTrue(
+            Date(fromString: "2020/01/15 09:00")!.isBetween(
+                Date(fromString: "2020/01/15 10:00")!,
+                Date(fromString: "2018/01/15 13:00")!
+            )
+        )
+        
+        let date = Date()
+        let date1 = Date(timeIntervalSinceNow: 1000)
+        let date2 = Date(timeIntervalSinceNow: -1000)
+        XCTAssertTrue(date.isBetween(date1, date2))
+    }
+    
+    func testIsBeyondSeconds() {
+        let date = Date(fromString: "2016/03/22 09:40")!
+        let fromDate = Date(fromString: "2016/03/22 09:30")!
+        
+        XCTAssertTrue(date.isBeyond(fromDate, bySeconds: 300))
+        XCTAssertFalse(date.isBeyond(fromDate, bySeconds: 600))
+        XCTAssertFalse(date.isBeyond(fromDate, bySeconds: 1200))
+    }
+    
+    func testIsBeyondMinutes() {
+        let date = Date(fromString: "2016/03/22 09:40")!
+        let fromDate = Date(fromString: "2016/03/22 09:30")!
+        
+        XCTAssertTrue(date.isBeyond(fromDate, byMinutes: 5))
+        XCTAssertFalse(date.isBeyond(fromDate, byMinutes: 10))
+        XCTAssertFalse(date.isBeyond(fromDate, byMinutes: 25))
+    }
+    
+    func testIsBeyondHours() {
+        let date = Date(fromString: "2016/03/22 11:40")!
+        let fromDate = Date(fromString: "2016/03/22 09:40")!
+        
+        XCTAssertTrue(date.isBeyond(fromDate, byHours: 1))
+        XCTAssertFalse(date.isBeyond(fromDate, byHours: 2))
+        XCTAssertFalse(date.isBeyond(fromDate, byHours: 4))
+    }
+}
+
 // MARK: - String
 
 extension DateTimeTests {
@@ -94,8 +137,7 @@ extension DateTimeTests {
             - TimeInterval(TimeZone.current.secondsFromGMT())
             + TimeZone.current.daylightSavingTimeOffset())
         
-        XCTAssertEqual(date, expected,
-            "Date should be \(expected)")
+        XCTAssertEqual(date, expected, "Date should be \(expected)")
     }
     
     func testDateToString() {
@@ -129,7 +171,32 @@ extension DateTimeTests {
 }
 
 // MARK: - Increments
+
 extension DateTimeTests {
+    
+    func testIncrementYear() {
+        XCTAssertEqual(
+            Date(fromString: "2018/11/01 00:00")!.increment(years: 1),
+            Date(fromString: "2019/11/01 00:00")
+        )
+        
+        XCTAssertEqual(
+            Date(fromString: "2018/11/01 00:00")!.increment(years: -3),
+            Date(fromString: "2015/11/01 00:00")
+        )
+    }
+    
+    func testIncrementMonth() {
+        XCTAssertEqual(
+            Date(fromString: "2018/12/01 00:00")!.increment(months: 1),
+            Date(fromString: "2019/01/01 00:00")
+        )
+        
+        XCTAssertEqual(
+            Date(fromString: "2018/11/01 00:00")!.increment(months: -3),
+            Date(fromString: "2018/08/01 00:00")
+        )
+    }
     
     func testIncrementToday() {
         let incrementedDate = Date().increment(days: 1)
@@ -215,6 +282,16 @@ extension DateTimeTests {
         let expectedDate = Date(fromString: "2015/04/03 13:20")
         
         XCTAssertEqual(incrementedDate, expectedDate)
+    }
+}
+
+extension DateTimeTests {
+    
+    func testCurrentTimeInDecimal() {
+        let time = Date(fromString: "2012/10/23 18:15")!.timeToDecimal
+        let expectedTime = 18.25
+        
+        XCTAssertEqual(time, expectedTime)
     }
 }
 

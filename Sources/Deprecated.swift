@@ -18,3 +18,11 @@ public extension String {
         return match(regex: pattern)
     }
 }
+
+public extension Date {
+    
+    @available(*, unavailable, renamed: "Date.isBeyond(_:bySeconds:)")
+    func hasElapsed(seconds: Int, from date: Date = Date()) -> Bool {
+        return date.timeIntervalSince(self).seconds > seconds
+    }
+}
