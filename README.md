@@ -16,8 +16,6 @@ ZamzamKit a Swift framework for rapid development using a collection of small ut
 <details>
 <summary>Array</summary>
 
----
-
 > Safely retrieve an element at the given index if it exists:
 ```swift
 // Before
@@ -53,7 +51,7 @@ array -> ["b", "c", "d", "e", "a"]
 
 <details>
 <summary>Number</summary>
----
+
 > Round doubles, floats, or any floating-point type:
 ```swift
 123.12312421.rounded(toPlaces: 3) -> 123.123
@@ -63,7 +61,7 @@ Double.pi.rounded(toPlaces: 2) -> 3.14
 
 <details>
 <summary>Bundle</summary>
----
+
 > Get the contents of a file within any bundle:
 ```swift
 Bundle.main.string(file: "Test.txt") -> "This is a test. Abc 123.\n"
@@ -81,7 +79,7 @@ values["MyDate1"] as? Date -> 2018-11-21 15:40:03 +0000
 
 <details>
 <summary>Date</summary>
----
+
 > A Gregorian calendar object with `UTC` time zone and `POSIX` locale used to normalize date calculations and data storage:
 ```swift
 let calendar: Calendar = .gregorianUTC
