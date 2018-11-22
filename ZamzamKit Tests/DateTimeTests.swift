@@ -174,114 +174,181 @@ extension DateTimeTests {
 
 extension DateTimeTests {
     
-    func testIncrementYear() {
+    func testIncrementYears() {
         XCTAssertEqual(
-            Date(fromString: "2018/11/01 00:00")!.increment(years: 1),
+            Date(fromString: "2018/11/01 00:00")! + .years(1),
             Date(fromString: "2019/11/01 00:00")
         )
         
         XCTAssertEqual(
-            Date(fromString: "2018/11/01 00:00")!.increment(years: -3),
+            Date(fromString: "2018/11/01 00:00")! - .years(3),
             Date(fromString: "2015/11/01 00:00")
+        )
+        
+        XCTAssertEqual(
+            Date(fromString: "2015/10/26 18:31")! + .years(0),
+            Date(fromString: "2015/10/26 18:31")!
         )
     }
     
-    func testIncrementMonth() {
+    func testIncrementMonths() {
         XCTAssertEqual(
-            Date(fromString: "2018/12/01 00:00")!.increment(months: 1),
+            Date(fromString: "2018/12/01 00:00")! + .months(1),
             Date(fromString: "2019/01/01 00:00")
         )
         
         XCTAssertEqual(
-            Date(fromString: "2018/11/01 00:00")!.increment(months: -3),
+            Date(fromString: "2018/11/01 00:00")! - .months(3),
             Date(fromString: "2018/08/01 00:00")
         )
-    }
-    
-    func testIncrementToday() {
-        let incrementedDate = Date().increment(days: 1)
-        let calendar = Calendar(identifier: .gregorian)
-        let tomorrow = calendar.date(
-            byAdding: .day,
-            value: 1,
-            to: Date()
-        )!
         
         XCTAssertEqual(
-            calendar.startOfDay(for: incrementedDate),
-            calendar.startOfDay(for: tomorrow)
+            Date(fromString: "2015/10/26 18:31")! + .months(0),
+            Date(fromString: "2015/10/26 18:31")!
         )
     }
     
-    func testIncrementZeroDay() {
-        let fromDate = Date(fromString: "2015/10/26 18:31")!
-        let incrementedDate = fromDate.increment(days: 0)
+    func testIncrementDays() {
+        XCTAssertEqual(
+            Date(fromString: "2015/09/18 18:31")! + .days(1),
+            Date(fromString: "2015/09/19 18:31")
+        )
         
-        XCTAssertEqual(incrementedDate, fromDate)
+        XCTAssertEqual(
+            Date(fromString: "2015/09/18 18:31")! - .days(1),
+            Date(fromString: "2015/09/17 18:31")
+        )
+        
+        XCTAssertEqual(
+            Date(fromString: "2015/10/26 18:31")! + .days(0),
+            Date(fromString: "2015/10/26 18:31")!
+        )
+        
+        // Cross months
+        XCTAssertEqual(
+            Date(fromString: "1990/01/31 22:12")! + .days(2),
+            Date(fromString: "1990/02/02 22:12")
+        )
+        
+        // Leap year
+        XCTAssertEqual(
+            Date(fromString: "2016/02/20 13:12")! + .days(10),
+            Date(fromString: "2016/03/01 13:12")
+        )
     }
     
-    func testIncrementOneDay() {
-        let fromDate = Date(fromString: "2050/02/15 05:06")!
-        let incrementedDate = fromDate.increment(days: 1)
-        let expectedDate = Date(fromString: "2050/02/16 05:06")
+    func testIncrementHours() {
+        XCTAssertEqual(
+            Date(fromString: "2015/09/18 18:31")! + .hours(1),
+            Date(fromString: "2015/09/18 19:31")
+        )
         
-        XCTAssertEqual(incrementedDate, expectedDate)
+        XCTAssertEqual(
+            Date(fromString: "2015/09/18 18:31")! - .hours(1),
+            Date(fromString: "2015/09/18 17:31")
+        )
+        
+        // Overnight
+        XCTAssertEqual(
+            Date(fromString: "2015/12/14 23:04")! + .hours(1),
+            Date(fromString: "2015/12/15 00:04")
+        )
+        
+        XCTAssertEqual(
+            Date(fromString: "2018/11/01 01:00")! - .hours(3),
+            Date(fromString: "2018/10/31 22:00")
+        )
+        
+        // New year
+        XCTAssertEqual(
+            Date(fromString: "2018/12/31 23:00")! + .hours(2),
+            Date(fromString: "2019/01/01 01:00")
+        )
+        
+        XCTAssertEqual(
+            Date(fromString: "2017/01/01 02:00")! - .hours(3),
+            Date(fromString: "2016/12/31 23:00")
+        )
     }
     
-    func testIncrementTwoDay() {
-        let fromDate = Date(fromString: "1990/01/31 22:12")!
-        let incrementedDate = fromDate.increment(days: 2)
-        let expectedDate = Date(fromString: "1990/02/02 22:12")
+    func testIncrementMinutes() {
+        XCTAssertEqual(
+            Date(fromString: "2015/09/18 18:31")! + .minutes(1),
+            Date(fromString: "2015/09/18 18:32")
+        )
         
-        XCTAssertEqual(incrementedDate, expectedDate)
+        XCTAssertEqual(
+            Date(fromString: "2015/09/18 18:31")! - .minutes(1),
+            Date(fromString: "2015/09/18 18:30")
+        )
+        
+        XCTAssertEqual(
+            Date(fromString: "2015/12/14 07:04")! + .minutes(95),
+            Date(fromString: "2015/12/14 08:39")
+        )
+        
+        // Overnight
+        XCTAssertEqual(
+            Date(fromString: "2015/04/02 13:15")! + .minutes(1445),
+            Date(fromString: "2015/04/03 13:20")
+        )
+        
+        XCTAssertEqual(
+            Date(fromString: "2015/12/14 23:04")! + .minutes(60),
+            Date(fromString: "2015/12/15 00:04")
+        )
+        
+        XCTAssertEqual(
+            Date(fromString: "2018/11/01 01:00")! - .minutes(180),
+            Date(fromString: "2018/10/31 22:00")
+        )
+        
+        // New year
+        XCTAssertEqual(
+            Date(fromString: "2018/12/31 23:00")! + .minutes(120),
+            Date(fromString: "2019/01/01 01:00")
+        )
+        
+        XCTAssertEqual(
+            Date(fromString: "2017/01/01 02:00")! - .minutes(180),
+            Date(fromString: "2016/12/31 23:00")
+        )
     }
     
-    func testIncrementLeapYearDay() {
-        let fromDate = Date(fromString: "2016/02/20 13:12")!
-        let incrementedDate = fromDate.increment(days: 10)
-        let expectedDate = Date(fromString: "2016/03/01 13:12")
+    func testIncrementSeconds() {
+        let format = "yyyy/MM/dd HH:mm:ss"
         
-        XCTAssertEqual(incrementedDate, expectedDate)
-    }
-    
-    func testIncrementDayIfPast() {
-        let fromDate = Date(fromString: "1999/01/15 10:15")!
-        let incrementedDate = fromDate.incrementDayIfPast()
-        let expectedDate = Date(fromString: "1999/01/16 10:15")
+        XCTAssertEqual(
+            Date(fromString: "2015/09/18 18:31:00", dateFormat: format)! + .seconds(1),
+            Date(fromString: "2015/09/18 18:31:01", dateFormat: format)
+        )
         
-        XCTAssertEqual(incrementedDate, expectedDate)
-    }
-    
-    func testIncrementDayIfPastForFuture() {
-        let fromDate = Date(fromString: "2050/01/15 10:15")!
-        let incrementedDate = fromDate.incrementDayIfPast()
-        let expectedDate = Date(fromString: "2050/01/15 10:15")
+        XCTAssertEqual(
+            Date(fromString: "2015/09/18 18:31:00", dateFormat: format)! - .seconds(1),
+            Date(fromString: "2015/09/18 18:30:59", dateFormat: format)
+        )
         
-        XCTAssertEqual(incrementedDate, expectedDate)
-    }
-    
-    func testIncrementMinute() {
-        let fromDate = Date(fromString: "2015/09/18 18:31")!
-        let incrementedDate = fromDate.increment(minutes: 1)
-        let expectedDate = Date(fromString: "2015/09/18 18:32")
+        // Overnight
+        XCTAssertEqual(
+            Date(fromString: "2015/12/14 23:59:59", dateFormat: format)! + .seconds(1),
+            Date(fromString: "2015/12/15 00:00:00", dateFormat: format)
+        )
         
-        XCTAssertEqual(incrementedDate, expectedDate)
-    }
-    
-    func testIncrementNintyFiveMinutes() {
-        let fromDate = Date(fromString: "2015/12/14 07:04")!
-        let incrementedDate = fromDate.increment(minutes: 95)
-        let expectedDate = Date(fromString: "2015/12/14 08:39")
+        XCTAssertEqual(
+            Date(fromString: "2018/11/01 00:00:00", dateFormat: format)! - .seconds(3),
+            Date(fromString: "2018/10/31 23:59:57", dateFormat: format)
+        )
         
-        XCTAssertEqual(incrementedDate, expectedDate)
-    }
-    
-    func testIncrementDayByMinutes() {
-        let fromDate = Date(fromString: "2015/04/02 13:15")!
-        let incrementedDate = fromDate.increment(minutes: 1445)
-        let expectedDate = Date(fromString: "2015/04/03 13:20")
+        // New year
+        XCTAssertEqual(
+            Date(fromString: "2018/12/31 23:59:59", dateFormat: format)! + .seconds(2),
+            Date(fromString: "2019/01/01 00:00:01", dateFormat: format)
+        )
         
-        XCTAssertEqual(incrementedDate, expectedDate)
+        XCTAssertEqual(
+            Date(fromString: "2017/01/01 00:00:00", dateFormat: format)! - .seconds(3),
+            Date(fromString: "2016/12/31 23:59:57", dateFormat: format)
+        )
     }
 }
 

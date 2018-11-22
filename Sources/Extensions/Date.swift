@@ -259,80 +259,6 @@ public extension Date {
     }
 }
 
-// MARK: - Calculation helpers
-
-public extension Date {
-
-    /// Add years to date.
-    ///
-    /// - Parameters:
-    ///   - years: Number of years to add.
-    ///   - calendar: The calendar to use for the computation.
-    /// - Returns: The date result after the addition of years. Defaults to the current calendar.
-    func increment(years: Int, calendar: Calendar = .current) -> Date {
-        guard years != 0 else { return self }
-        return calendar.date(
-            byAdding: .year,
-            value: years,
-            to: self
-        )!
-    }
-
-    /// Add months to date.
-    ///
-    /// - Parameters:
-    ///   - months: Number of months to add.
-    ///   - calendar: The calendar to use for the computation.
-    /// - Returns: The date result after the addition of months. Defaults to the current calendar.
-    func increment(months: Int, calendar: Calendar = .current) -> Date {
-        guard months != 0 else { return self }
-        return calendar.date(
-            byAdding: .month,
-            value: months,
-            to: self
-        )!
-    }
-
-    /// Add days to date.
-    ///
-    /// - Parameters:
-    ///   - days: Number of days to add.
-    ///   - calendar: The calendar to use for the computation.
-    /// - Returns: The date result after the addition of days. Defaults to the current calendar.
-    func increment(days: Int, calendar: Calendar = .current) -> Date {
-        guard days != 0 else { return self }
-        return calendar.date(
-            byAdding: .day,
-            value: days,
-            to: self
-        )!
-    }
-    
-    /// Add minutes to date.
-    ///
-    /// - Parameters:
-    ///   - minutes: Number of minutes to add.
-    ///   - calendar: The calendar to use for the computation.
-    /// - Returns: The date result after the addition of minutes. Defaults to the current calendar.
-    func increment(minutes: Int, calendar: Calendar = .current) -> Date {
-        guard minutes != 0 else { return self }
-        return calendar.date(
-            byAdding: .minute,
-            value: minutes,
-            to: self
-        )!
-    }
-    
-    /// Ensures the date is always in the future.
-    ///
-    /// - Parameters:
-    ///   - calendar: The calendar to use for the computation.
-    /// - Returns: No change if in the future or adds exactly one day
-    func incrementDayIfPast(calendar: Calendar = .current) -> Date {
-        return isPast ? increment(days: 1, calendar: calendar) : self
-    }
-}
-
 public extension Date {
     
     /// Gets the decimal representation of the time.
@@ -439,7 +365,7 @@ public extension Date {
             calendar.timeZone = timeZone
         }
         
-        let date = increment(days: offSet, calendar: calendar)
+        let date = self + .days(offSet, calendar)
         return calendar.dateComponents(components, from: date)
     }
     
@@ -457,5 +383,162 @@ public extension Date {
     /// Determines if the date if Friday / Jumuah.
     var isJumuah: Bool {
         return Calendar.current.dateComponents([.weekday], from: self).weekday == 6
+    }
+}
+
+// MARK: - Calculations
+
+public extension Date {
+    
+    static func +(left: Date, right: TimeInterval.Unit) -> Date {
+        let calendar: Calendar = .current
+        let component: Calendar.Component
+        let value: Int
+        
+        switch right {
+        case .seconds(let addValue):
+            component = .second
+            value = addValue
+        case .minutes(let addValue):
+            component = .minute
+            value = addValue
+        case .hours(let addValue):
+            component = .hour
+            value = addValue
+        case .days(let addValue):
+            component = .day
+            value = addValue
+        case .months(let addValue):
+            component = .month
+            value = addValue
+        case .years(let addValue):
+            component = .year
+            value = addValue
+        }
+        
+        guard value != 0 else { return left }
+        
+        return calendar.date(
+            byAdding: component,
+            value: value,
+            to: left
+        )!
+    }
+    
+    static func -(left: Date, right: TimeInterval.Unit) -> Date {
+        let calendar: Calendar = .current
+        let component: Calendar.Component
+        let value: Int
+        
+        switch right {
+        case .seconds(let minusValue):
+            component = .second
+            value = minusValue
+        case .minutes(let minusValue):
+            component = .minute
+            value = minusValue
+        case .hours(let minusValue):
+            component = .hour
+            value = minusValue
+        case .days(let minusValue):
+            component = .day
+            value = minusValue
+        case .months(let minusValue):
+            component = .month
+            value = minusValue
+        case .years(let minusValue):
+            component = .year
+            value = minusValue
+        }
+        
+        guard value != 0 else { return left }
+        
+        return calendar.date(
+            byAdding: component,
+            value: -value,
+            to: left
+        )!
+    }
+    
+    static func +(left: Date, right: TimeInterval.UnitWithCalendar) -> Date {
+        let calendar: Calendar
+        let component: Calendar.Component
+        let value: Int
+        
+        switch right {
+        case .seconds(let addValue, let toCalendar):
+            calendar = toCalendar
+            component = .second
+            value = addValue
+        case .minutes(let addValue, let toCalendar):
+            calendar = toCalendar
+            component = .minute
+            value = addValue
+        case .hours(let addValue, let toCalendar):
+            calendar = toCalendar
+            component = .hour
+            value = addValue
+        case .days(let addValue, let toCalendar):
+            calendar = toCalendar
+            component = .day
+            value = addValue
+        case .months(let addValue, let toCalendar):
+            calendar = toCalendar
+            component = .month
+            value = addValue
+        case .years(let addValue, let toCalendar):
+            calendar = toCalendar
+            component = .year
+            value = addValue
+        }
+        
+        guard value != 0 else { return left }
+        
+        return calendar.date(
+            byAdding: component,
+            value: value,
+            to: left
+        )!
+    }
+    
+    static func -(left: Date, right: TimeInterval.UnitWithCalendar) -> Date {
+        let calendar: Calendar
+        let component: Calendar.Component
+        let value: Int
+        
+        switch right {
+        case .seconds(let minusValue, let toCalendar):
+            calendar = toCalendar
+            component = .second
+            value = minusValue
+        case .minutes(let minusValue, let toCalendar):
+            calendar = toCalendar
+            component = .minute
+            value = minusValue
+        case .hours(let minusValue, let toCalendar):
+            calendar = toCalendar
+            component = .hour
+            value = minusValue
+        case .days(let minusValue, let toCalendar):
+            calendar = toCalendar
+            component = .day
+            value = minusValue
+        case .months(let minusValue, let toCalendar):
+            calendar = toCalendar
+            component = .month
+            value = minusValue
+        case .years(let minusValue, let toCalendar):
+            calendar = toCalendar
+            component = .year
+            value = minusValue
+        }
+        
+        guard value != 0 else { return left }
+        
+        return calendar.date(
+            byAdding: component,
+            value: -value,
+            to: left
+        )!
     }
 }

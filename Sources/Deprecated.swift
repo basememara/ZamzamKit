@@ -25,4 +25,49 @@ public extension Date {
     func hasElapsed(seconds: Int, from date: Date = Date()) -> Bool {
         return date.timeIntervalSince(self).seconds > seconds
     }
+    
+    @available(*, unavailable, message: "Use Date() + .years(5)")
+    func increment(years: Int, calendar: Calendar = .current) -> Date {
+        guard years != 0 else { return self }
+        return calendar.date(
+            byAdding: .year,
+            value: years,
+            to: self
+        )!
+    }
+    
+    @available(*, unavailable, message: "Use Date() + .months(5)")
+    func increment(months: Int, calendar: Calendar = .current) -> Date {
+        guard months != 0 else { return self }
+        return calendar.date(
+            byAdding: .month,
+            value: months,
+            to: self
+        )!
+    }
+    
+    @available(*, unavailable, message: "Use Date() + .days(5)")
+    func increment(days: Int, calendar: Calendar = .current) -> Date {
+        guard days != 0 else { return self }
+        return calendar.date(
+            byAdding: .day,
+            value: days,
+            to: self
+        )!
+    }
+    
+    @available(*, unavailable, message: "Use Date() + .minutes(5)")
+    func increment(minutes: Int, calendar: Calendar = .current) -> Date {
+        guard minutes != 0 else { return self }
+        return calendar.date(
+            byAdding: .minute,
+            value: minutes,
+            to: self
+        )!
+    }
+    
+    @available(*, unavailable)
+    func incrementDayIfPast(calendar: Calendar = .current) -> Date {
+        return isPast ? self + .days(1, calendar) : self
+    }
 }
