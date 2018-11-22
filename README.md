@@ -140,11 +140,15 @@ date.isBeyond(fromDate, bySeconds: 1200) -> false
 > Create a date from a string:
 ```swift
 Date(fromString: "2018/11/01 18:15")
+
+Date(fromString: "1440/03/01 18:31", calendar: Calendar(identifier: .islamicUmmAlQura))
 ```
 
 > Format a date to a string:
 ```swift
 Date().string(format: "MMM d, h:mm a") -> "Jan 3, 8:43 PM"
+
+Date().string(format: "MMM d, h:mm a", calendar: Calendar(identifier: .islamicUmmAlQura)) -> "Rab. I 1, 6:31 PM"
 ```
 
 > Format a time interval to display as a timer.
