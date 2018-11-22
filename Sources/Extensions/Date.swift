@@ -390,7 +390,7 @@ public extension Date {
 
 public extension Date {
     
-    static func +(left: Date, right: TimeInterval.Unit) -> Date {
+    static func +(left: Date, right: Calendar.Component.Value) -> Date {
         let calendar: Calendar = .current
         let component: Calendar.Component
         let value: Int
@@ -425,7 +425,7 @@ public extension Date {
         )!
     }
     
-    static func -(left: Date, right: TimeInterval.Unit) -> Date {
+    static func -(left: Date, right: Calendar.Component.Value) -> Date {
         let calendar: Calendar = .current
         let component: Calendar.Component
         let value: Int
@@ -460,7 +460,7 @@ public extension Date {
         )!
     }
     
-    static func +(left: Date, right: TimeInterval.UnitWithCalendar) -> Date {
+    static func +(left: Date, right: Calendar.Component.ValueWithCalendar) -> Date {
         let calendar: Calendar
         let component: Calendar.Component
         let value: Int
@@ -501,7 +501,7 @@ public extension Date {
         )!
     }
     
-    static func -(left: Date, right: TimeInterval.UnitWithCalendar) -> Date {
+    static func -(left: Date, right: Calendar.Component.ValueWithCalendar) -> Date {
         let calendar: Calendar
         let component: Calendar.Component
         let value: Int

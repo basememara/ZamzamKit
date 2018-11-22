@@ -35,26 +35,3 @@ public extension TimeInterval {
         return self / 604800.0
     }
 }
-
-extension TimeInterval {
-    
-    /// Time interval unit used for date calculations
-    public enum Unit {
-        case seconds(Int)
-        case minutes(Int)
-        case hours(Int)
-        case days(Int)
-        case months(Int)
-        case years(Int)
-    }
-    
-    /// Time interval unit used for date calculations
-    public enum UnitWithCalendar {
-        case seconds(Int, Calendar)
-        case minutes(Int, Calendar)
-        case hours(Int, Calendar)
-        case days(Int, Calendar)
-        case months(Int, Calendar)
-        case years(Int, Calendar)
-    }
-}
