@@ -15,7 +15,9 @@ ZamzamKit a Swift framework for rapid development using a collection of small ut
 ### Foundation
 <details>
 <summary>Array</summary>
+
 ---
+
 > Safely retrieve an element at the given index if it exists:
 ```swift
 // Before
