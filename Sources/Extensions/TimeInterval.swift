@@ -36,10 +36,10 @@ public extension TimeInterval {
     }
 }
 
-public extension TimeInterval {
+extension TimeInterval {
     
     /// Time interval unit used for date calculations
-    enum Unit {
+    public enum Unit {
         case seconds(Int)
         case minutes(Int)
         case hours(Int)
@@ -49,7 +49,7 @@ public extension TimeInterval {
     }
     
     /// Time interval unit used for date calculations
-    enum UnitWithCalendar {
+    public enum UnitWithCalendar {
         case seconds(Int, Calendar)
         case minutes(Int, Calendar)
         case hours(Int, Calendar)
