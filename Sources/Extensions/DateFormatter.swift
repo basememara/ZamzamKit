@@ -15,12 +15,17 @@ public extension DateFormatter {
     /// - Parameters:
     ///   - dateFormat: The date format string used by the receiver.
     ///   - timeZone: The time zone for the receiver.
-    convenience init(dateFormat: String, timeZone: TimeZone? = nil) {
+    ///   - calendar: The calendar for the receiver.
+    convenience init(dateFormat: String, timeZone: TimeZone? = nil, calendar: Calendar? = nil) {
         self.init()
         self.dateFormat = dateFormat
         
         if let timeZone = timeZone {
             self.timeZone = timeZone
+        }
+        
+        if let calendar = calendar {
+            self.calendar = calendar
         }
     }
     

@@ -207,9 +207,10 @@ public extension Date {
     ///   - string: The string to parse the date from. The default is `"yyyy/MM/dd HH:mm"`.
     ///   - dateFormat: The date format string used by the receiver.
     ///   - timeZone: The time zone for the receiver.
-    init?(fromString string: String, dateFormat: String = "yyyy/MM/dd HH:mm", timeZone: TimeZone? = nil) {
+    ///   - calendar: The calendar for the receiver.
+    init?(fromString string: String, dateFormat: String = "yyyy/MM/dd HH:mm", timeZone: TimeZone? = nil, calendar: Calendar? = nil) {
         guard !string.isEmpty,
-            let date = DateFormatter(dateFormat: dateFormat, timeZone: timeZone).date(from: string) else {
+            let date = DateFormatter(dateFormat: dateFormat, timeZone: timeZone, calendar: calendar).date(from: string) else {
                 return nil
         }
         
@@ -222,8 +223,8 @@ public extension Date {
     ///
     /// - Parameter format: The date format string used by the receiver.
     /// - Returns: The string representation of the given date.
-    func string(format: String, timeZone: TimeZone? = nil) -> String {
-        return DateFormatter(dateFormat: format, timeZone: timeZone).string(from: self)
+    func string(format: String, timeZone: TimeZone? = nil, calendar: Calendar? = nil) -> String {
+        return DateFormatter(dateFormat: format, timeZone: timeZone, calendar: calendar).string(from: self)
     }
     
     /// Fixed-format for the date without time.

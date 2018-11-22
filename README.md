@@ -38,9 +38,9 @@ tabBarController.tabBar.items?.get(3)?.selectedImage = UIImage("my-image")
 
 > Remove an element from an array by the value:
 ```swift
-var array = ["a", "b", "c", "d", "e", "a"]
-array.remove("a")
-array -> ["b", "c", "d", "e", "a"]
+var array = ["a", "b", "c", "d", "e"]
+array.remove("c")
+array -> ["a", "b", "d", "e"]
 ```
 
 > Easily get the array version of an array slice:
@@ -124,6 +124,7 @@ Date().endOfMonth -> "2018/11/30 23:59:59"
 let date = Date()
 let date1 = Date(timeIntervalSinceNow: 1000)
 let date2 = Date(timeIntervalSinceNow: -1000)
+
 date.isBetween(date1, date2) -> true
 ```
 
@@ -141,32 +142,35 @@ date.isBeyond(fromDate, bySeconds: 1200) -> false
 Date(fromString: "2018/11/01 18:15")
 ```
 
-> Format a time interval to display as a timer.
-```swift
-Date(fromString: "2016/03/22 09:45").timerString(
-    from: Date(fromString: "2016/03/22 09:40")
-)
-
-// Prints "00:05:00"
-```
-
 > Format a date to a string:
 ```swift
 Date().string(format: "MMM d, h:mm a") -> "Jan 3, 8:43 PM"
 ```
 
-> Increment years, months, days, hours, or minutes:
+> Format a time interval to display as a timer.
 ```swift
-Date().increment(years: 1)
-Date().increment(months: 2)
-Date().increment(days: -4)
-Date().increment(hours: 6)
-Date().increment(minutes: 12)
+let date = Date(fromString: "2016/03/22 09:45")
+let fromDate = Date(fromString: "2016/03/22 09:40")
+
+date.timerString(from: fromDate)
+
+// Prints "00:05:00"
 ```
 
 > Get the decimal representation of the time:
 ```swift
 Date(fromString: "2018/10/23 18:15").timeToDecimal -> 18.25
+```
+
+> Increment years, months, days, hours, or minutes:
+```swift
+let date = Date()
+date + .years(1)
+date + .months(2)
+date - .days(4)
+date - .hours(6)
+date + .minutes(12)
+date + .days(5, Calendar(identifier: .islamic))
 ```
 </details>
 

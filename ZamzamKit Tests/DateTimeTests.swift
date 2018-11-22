@@ -147,6 +147,14 @@ extension DateTimeTests {
         XCTAssertEqual("Jan 3, 8:43 PM", expected)
     }
     
+    func testDateToStringForCalendar() {
+        let calendar = Calendar(identifier: .islamicUmmAlQura)
+        let date = Date(fromString: "1440/03/01 18:31", calendar: calendar)!
+        let expected = date.string(format: "MMM d, h:mm a", calendar: calendar)
+        
+        XCTAssertEqual("Rab. I 1, 6:31 PM", expected)
+    }
+    
     func testDateToTimer() {
         XCTAssertEqual(Date(fromString: "2016/03/22 09:45")!.timerString(
             from: Date(fromString: "2016/03/22 09:40")!), "00:05:00")
@@ -348,6 +356,15 @@ extension DateTimeTests {
         XCTAssertEqual(
             Date(fromString: "2017/01/01 00:00:00", dateFormat: format)! - .seconds(3),
             Date(fromString: "2016/12/31 23:59:57", dateFormat: format)
+        )
+    }
+    
+    func testIncrementDaysWithCalendar() {
+        let calendar = Calendar(identifier: .islamicUmmAlQura)
+        
+        XCTAssertEqual(
+            Date(fromString: "1440/02/30 18:31", calendar: calendar)! + .days(1, calendar),
+            Date(fromString: "1440/03/01 18:31", calendar: calendar)
         )
     }
 }

@@ -27,7 +27,7 @@ public extension Calendar.Component {
 
 public extension Calendar.Component {
     
-    /// Value type used for date calculations
+    /// Value of unit used for date calculations
     enum Value {
         case seconds(Int)
         case minutes(Int)
@@ -37,7 +37,7 @@ public extension Calendar.Component {
         case years(Int)
     }
     
-    /// Value type with calendar used for date calculations
+    /// Value of unit with calendar used for date calculations
     enum ValueWithCalendar {
         case seconds(Int, Calendar)
         case minutes(Int, Calendar)
