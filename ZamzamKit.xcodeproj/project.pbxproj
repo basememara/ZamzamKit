@@ -74,6 +74,9 @@
 		8B4D71B7216A55C6002ACA81 /* RateLimitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71B6216A55C6002ACA81 /* RateLimitTests.swift */; };
 		8B4D71B8216A55C6002ACA81 /* RateLimitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71B6216A55C6002ACA81 /* RateLimitTests.swift */; };
 		8B4D71BE216B208B002ACA81 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71BD216B208B002ACA81 /* MailComposer.swift */; };
+		8B4F144421A730E600F5154E /* DateTimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F144321A730E600F5154E /* DateTimeInterval.swift */; };
+		8B4F144521A730E600F5154E /* DateTimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F144321A730E600F5154E /* DateTimeInterval.swift */; };
+		8B4F144621A730E600F5154E /* DateTimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F144321A730E600F5154E /* DateTimeInterval.swift */; };
 		8B50C507211E2F9B00A36ABB /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B50C506211E2F9B00A36ABB /* GradientView.swift */; };
 		8B5250E020CFDED700E77F70 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5250DF20CFDED700E77F70 /* Decodable.swift */; };
 		8B5250E120CFDED700E77F70 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5250DF20CFDED700E77F70 /* Decodable.swift */; };
@@ -407,6 +410,7 @@
 		8B4D71B2216A5560002ACA81 /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		8B4D71B6216A55C6002ACA81 /* RateLimitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateLimitTests.swift; sourceTree = "<group>"; };
 		8B4D71BD216B208B002ACA81 /* MailComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
+		8B4F144321A730E600F5154E /* DateTimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeInterval.swift; sourceTree = "<group>"; };
 		8B50C506211E2F9B00A36ABB /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		8B5250DF20CFDED700E77F70 /* Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
 		8B5316051C9B22F40094A6C4 /* ZamzamKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZamzamKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -681,6 +685,7 @@
 		8B1EEC641CF6AE5100AE054B /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				8B4F144321A730E600F5154E /* DateTimeInterval.swift */,
 				8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */,
 				8BF2106A1E48D52F0026B802 /* Result.swift */,
 				8BEFE4781E4515D900100744 /* ScheduleInterval.swift */,
@@ -1424,6 +1429,7 @@
 				8B6A95611E46FBB9003F333D /* Thread.swift in Sources */,
 				8B0C715F1E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B2B0C0321360DA100353F4E /* UINavigationController.swift in Sources */,
+				8B4F144421A730E600F5154E /* DateTimeInterval.swift in Sources */,
 				8B7BAD3A205714D900273789 /* UIRefreshControl.swift in Sources */,
 				8BF2106B1E48D52F0026B802 /* Result.swift in Sources */,
 				8B9E986F1EB500790067ACB7 /* With.swift in Sources */,
@@ -1470,6 +1476,7 @@
 				8BFDB6651C751AE600C94996 /* URL.swift in Sources */,
 				8B5316471C9B23BF0094A6C4 /* WKInterfaceController.swift in Sources */,
 				8B9434661EBDEAA200C779EB /* Calendar.swift in Sources */,
+				8B4F144521A730E600F5154E /* DateTimeInterval.swift in Sources */,
 				8B4CFAE91CABEF0800D2B1D7 /* Color.swift in Sources */,
 				8BD5086C1C99DD1E00AE205E /* Array.swift in Sources */,
 				8BD016851E77371A008F306E /* WatchSession.swift in Sources */,
@@ -1519,6 +1526,7 @@
 				8B79A4771E9C1ED800C8A5A4 /* Locale.swift in Sources */,
 				8BD61B381E3EFDF1009B537E /* AppInfo.swift in Sources */,
 				8B4D71B1216A542A002ACA81 /* Debouncer.swift in Sources */,
+				8B4F144621A730E600F5154E /* DateTimeInterval.swift in Sources */,
 				8BD508781C99E18500AE205E /* Collection.swift in Sources */,
 				8BFA87E8218BA5D50084F6FD /* Deprecated.swift in Sources */,
 				8B4CFAEF1CABEF0900D2B1D7 /* Color.swift in Sources */,

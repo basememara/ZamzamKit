@@ -24,26 +24,3 @@ public extension Calendar.Component {
     /// The set component units of date that includes year, month, day, hour, minute, and second
     static let full: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
 }
-
-public extension Calendar.Component {
-    
-    /// Value of unit used for date calculations
-    enum Value {
-        case seconds(Int)
-        case minutes(Int)
-        case hours(Int)
-        case days(Int)
-        case months(Int)
-        case years(Int)
-    }
-    
-    /// Value of unit with calendar used for date calculations
-    enum ValueWithCalendar {
-        case seconds(Int, Calendar)
-        case minutes(Int, Calendar)
-        case hours(Int, Calendar)
-        case days(Int, Calendar)
-        case months(Int, Calendar)
-        case years(Int, Calendar)
-    }
-}
