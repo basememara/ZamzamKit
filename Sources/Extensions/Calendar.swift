@@ -10,8 +10,8 @@ import Foundation
 
 public extension Calendar {
     
-    /// Normalize date calculations using Gregorian calendar with UTC timezone and POSIX.
-    static let gregorianUTC: Calendar = {
+    /// Normalize date calculations and data storage using Gregorian calendar with `UTC` timezone and `POSIX` locale.
+    static let posix: Calendar = {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone(identifier: "UTC")!
         calendar.locale = .posix

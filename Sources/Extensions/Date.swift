@@ -72,7 +72,26 @@ public extension Date {
 	}
 }
 
-// MARK: - String helpers
+public extension Date {
+    
+    /// Return yesterday's date.
+    ///
+    ///     let date = Date() // "Oct 3, 2018, 10:57:11"
+    ///     let yesterday = date.yesterday // "Oct 2, 2018, 10:57:11"
+    ///
+    var yesterday: Date {
+        return addingTimeInterval(-86400)
+    }
+    
+    /// Return tomorrow's date.
+    ///
+    ///     let date = Date() // "Oct 3, 2018, 10:57:11"
+    ///     let tomorrow = date.tomorrow // "Oct 4, 2018, 10:57:11"
+    ///
+    var tomorrow: Date {
+        return addingTimeInterval(86400)
+    }
+}
 
 public extension Date {
     
@@ -216,15 +235,36 @@ public extension Date {
         
         self.init(timeInterval: 0, since: date)
     }
-
+    
     /// Returns a string representation of a given date formatted using the receiver’s current settings.
     ///
     ///     Date().string(format: "MMM d, h:mm a") -> "Jan 3, 8:43 PM"
     ///
-    /// - Parameter format: The date format string used by the receiver.
+    /// - Parameters:
+    ///   - format: The date format string used by the receiver.
+    ///   - timeZone: The time zone for the receiver.
+    ///   - calendar: The calendar for the receiver.
     /// - Returns: The string representation of the given date.
     func string(format: String, timeZone: TimeZone? = nil, calendar: Calendar? = nil) -> String {
         return DateFormatter(dateFormat: format, timeZone: timeZone, calendar: calendar).string(from: self)
+    }
+    
+    /// Returns a string representation of a given date formatted using the receiver’s current settings.
+    ///
+    ///     Date().string(style: .short) -> "1/12/17"
+    ///     Date().string(style: .medium) -> "Jan 12, 2017"
+    ///     Date().string(style: .long) -> "January 12, 2017"
+    ///     Date().string(style: .full) -> "Thursday, January 12, 2017"
+    ///     Date().string(style: .full, withTime: .medium) -> "Thursday, January 12, 2017 at 4:45:23 PM"
+    ///
+    /// - Parameters:
+    ///   - dateStyle: The date style string used by the receiver.
+    ///   - timeStyle: The time style string used by the receiver.
+    ///   - timeZone: The time zone for the receiver.
+    ///   - calendar: The calendar for the receiver.
+    /// - Returns: The string representation of the given date.
+    func string(style dateStyle: DateFormatter.Style, withTime timeStyle: DateFormatter.Style? = nil, timeZone: TimeZone? = nil, calendar: Calendar? = nil) -> String {
+        return DateFormatter(dateStyle: dateStyle, timeStyle: timeStyle, timeZone: timeZone, calendar: calendar).string(from: self)
     }
     
     /// Fixed-format for the date without time.

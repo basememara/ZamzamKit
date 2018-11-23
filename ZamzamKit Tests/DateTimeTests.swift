@@ -46,6 +46,21 @@ class DateTimeTests: XCTestCase {
 
 extension DateTimeTests {
     
+    func testTomorrow() {
+        let date = Date(fromString: "2016/03/22 09:30")!
+        let expected = Date(fromString: "2016/03/23 09:30")!
+        XCTAssertEqual(date.tomorrow, expected)
+    }
+    
+    func testYesterday() {
+        let date = Date(fromString: "2016/03/22 09:30")!
+        let expected = Date(fromString: "2016/03/21 09:30")!
+        XCTAssertEqual(date.yesterday, expected)
+    }
+}
+
+extension DateTimeTests {
+    
     func testStartOfDay() {
         let date = Date(fromString: "2016/03/22 09:30")!
         XCTAssertEqual(date.startOfDay.string(format: "yyyy/MM/dd HH:mm:ss"), "2016/03/22 00:00:00")
@@ -148,11 +163,15 @@ extension DateTimeTests {
     }
     
     func testDateToStringForCalendar() {
-        let calendar = Calendar(identifier: .islamicUmmAlQura)
+        let calendar = Calendar(identifier: .islamic)
         let date = Date(fromString: "1440/03/01 18:31", calendar: calendar)!
-        let expected = date.string(format: "MMM d, h:mm a", calendar: calendar)
-        
-        XCTAssertEqual("Rab. I 1, 6:31 PM", expected)
+        XCTAssertEqual(date.string(format: "MMM d, h:mm a", calendar: calendar), "Rab. I 1, 6:31 PM")
+    }
+    
+    func testDateToStringForCalendar2() {
+        let calendar = Calendar(identifier: .hebrew)
+        let date = Date(fromString: "5779/03/01 18:31", calendar: calendar)!
+        XCTAssertEqual(date.string(style: .full, calendar: calendar), "Friday, 1 Kislev 5779")
     }
     
     func testDateToTimer() {

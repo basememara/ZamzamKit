@@ -71,3 +71,9 @@ public extension Date {
         return isPast ? self + .days(1, calendar) : self
     }
 }
+
+public extension Calendar {
+    
+    @available(*, unavailable, renamed: "Calendar.posix")
+    static let gregorianUTC: Calendar = .posix
+}

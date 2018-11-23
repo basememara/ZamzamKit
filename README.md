@@ -80,9 +80,10 @@ values["MyDate1"] as? Date -> 2018-11-21 15:40:03 +0000
 <details>
 <summary>Date</summary>
 
-> A Gregorian calendar object with `UTC` time zone and `POSIX` locale used to normalize date calculations and data storage:
+> Normalize date calculations using Gregorian calendar with `UTC` timezone and `POSIX` locale for date calculations and data storage:
 ```swift
-let calendar: Calendar = .gregorianUTC
+let calendar: Calendar = .posix
+let locale: Locale = .posix
 ```
 
 > Determine if a date is in the past or future:
@@ -140,13 +141,13 @@ date.isBeyond(fromDate, bySeconds: 1200) -> false
 > Create a date from a string:
 ```swift
 Date(fromString: "2018/11/01 18:15")
-Date(fromString: "1440/03/01 18:31", calendar: Calendar(identifier: .islamicUmmAlQura))
+Date(fromString: "1440/03/01 18:31", calendar: Calendar(identifier: .islamic))
 ```
 
 > Format a date to a string:
 ```swift
 Date().string(format: "MMM d, h:mm a") -> "Jan 3, 8:43 PM"
-Date().string(format: "MMM d, h:mm a", calendar: Calendar(identifier: .islamicUmmAlQura)) -> "Rab. I 1, 6:31 PM"
+Date().string(style: .full, calendar: Calendar(identifier: .hebrew)) -> "Friday, 1 Kislev 5779"
 ```
 
 > Format a time interval to display as a timer.
@@ -172,7 +173,7 @@ date + .months(2)
 date - .days(4)
 date - .hours(6)
 date + .minutes(12)
-date + .days(5, Calendar(identifier: .islamic))
+date + .days(5, Calendar(identifier: .chinese))
 ```
 </details>
 
