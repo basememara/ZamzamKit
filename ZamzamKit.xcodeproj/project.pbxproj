@@ -104,9 +104,6 @@
 		8B5D8A981E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */; };
 		8B63B2C61CD959BC000F2B5F /* UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B63B2C51CD959BC000F2B5F /* UIBarButtonItem.swift */; };
 		8B63E4271CDB8DB00053C060 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B63E4261CDB8DB00053C060 /* UIImage.swift */; };
-		8B6A95611E46FBB9003F333D /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A95601E46FBB9003F333D /* Thread.swift */; };
-		8B6A95621E46FBB9003F333D /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A95601E46FBB9003F333D /* Thread.swift */; };
-		8B6A95631E46FBB9003F333D /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A95601E46FBB9003F333D /* Thread.swift */; };
 		8B6A956D1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
 		8B6A956E1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
 		8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
@@ -440,7 +437,6 @@
 		8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationType.swift; sourceTree = "<group>"; };
 		8B63B2C51CD959BC000F2B5F /* UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItem.swift; sourceTree = "<group>"; };
 		8B63E4261CDB8DB00053C060 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
-		8B6A95601E46FBB9003F333D /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		8B6A956C1E484D5A003F333D /* ZamzamError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamError.swift; sourceTree = "<group>"; };
 		8B6B0CB9219D30830018F2E0 /* KeyboardScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardScrollView.swift; sourceTree = "<group>"; };
 		8B6B0CBB219D312E0018F2E0 /* UIToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIToolbar.swift; sourceTree = "<group>"; };
@@ -1003,7 +999,6 @@
 				8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */,
 				8BE814FC1C7842DC005F23CE /* Sequence.swift */,
 				8BFDB65D1C7518F800C94996 /* String.swift */,
-				8B6A95601E46FBB9003F333D /* Thread.swift */,
 				8B8215491CA1613400C9FCC9 /* TimeInterval.swift */,
 				8B9434601EBDEA8200C779EB /* TimeZone.swift */,
 				8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */,
@@ -1432,7 +1427,6 @@
 				8BFDB6771C751F2300C94996 /* FileManager.swift in Sources */,
 				8B9E98111EB144540067ACB7 /* Routable.swift in Sources */,
 				8BFDB6641C751AE600C94996 /* URL.swift in Sources */,
-				8B6A95611E46FBB9003F333D /* Thread.swift in Sources */,
 				8B0C715F1E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B2B0C0321360DA100353F4E /* UINavigationController.swift in Sources */,
 				8B4F144421A730E600F5154E /* DateTimeInterval.swift in Sources */,
@@ -1464,7 +1458,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BFDB6581C75187200C94996 /* Date.swift in Sources */,
-				8B6A95621E46FBB9003F333D /* Thread.swift in Sources */,
 				8BEFE47A1E4515D900100744 /* ScheduleInterval.swift in Sources */,
 				8BE814FE1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8B8215421CA15E0D00C9FCC9 /* CLKComplicationServer.swift in Sources */,
@@ -1549,7 +1542,6 @@
 				8BB45FB71C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8B4D71B5216A5560002ACA81 /* Throttler.swift in Sources */,
 				8B94345C1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
-				8B6A95631E46FBB9003F333D /* Thread.swift in Sources */,
 				8BE814FF1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8B8974731EDF555C004FA853 /* Migration.swift in Sources */,
 				8BD5086D1C99DD1E00AE205E /* Array.swift in Sources */,
