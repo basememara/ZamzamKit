@@ -112,6 +112,9 @@
 		8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
 		8B6B0CBA219D30830018F2E0 /* KeyboardScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B0CB9219D30830018F2E0 /* KeyboardScrollView.swift */; };
 		8B6B0CBC219D312E0018F2E0 /* UIToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B0CBB219D312E0018F2E0 /* UIToolbar.swift */; };
+		8B6C762F21A9AE3600CA90EB /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C762E21A9AE3600CA90EB /* CurrencyFormatter.swift */; };
+		8B6C763021A9AE3600CA90EB /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C762E21A9AE3600CA90EB /* CurrencyFormatter.swift */; };
+		8B6C763121A9AE3600CA90EB /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C762E21A9AE3600CA90EB /* CurrencyFormatter.swift */; };
 		8B6C99971E6E031800D523CC /* LocationsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationsWorker.swift */; };
 		8B6C99981E6E031800D523CC /* LocationsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C99961E6E031800D523CC /* LocationsWorker.swift */; };
 		8B6FB9B6202777DE00FE7BEB /* DataViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FB9B5202777DE00FE7BEB /* DataViewable.swift */; };
@@ -441,6 +444,7 @@
 		8B6A956C1E484D5A003F333D /* ZamzamError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamError.swift; sourceTree = "<group>"; };
 		8B6B0CB9219D30830018F2E0 /* KeyboardScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardScrollView.swift; sourceTree = "<group>"; };
 		8B6B0CBB219D312E0018F2E0 /* UIToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIToolbar.swift; sourceTree = "<group>"; };
+		8B6C762E21A9AE3600CA90EB /* CurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
 		8B6C99961E6E031800D523CC /* LocationsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsWorker.swift; sourceTree = "<group>"; };
 		8B6FB9B5202777DE00FE7BEB /* DataViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewable.swift; sourceTree = "<group>"; };
 		8B6FB9BD2027CF9900FE7BEB /* ControllerModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerModule.swift; sourceTree = "<group>"; };
@@ -986,6 +990,7 @@
 				8B7A40291C76245200A0077D /* CLLocationManager.swift */,
 				8BD508751C99E18500AE205E /* Collection.swift */,
 				8BE814F41C784233005F23CE /* Color.swift */,
+				8B6C762E21A9AE3600CA90EB /* CurrencyFormatter.swift */,
 				8BFDB6561C75187200C94996 /* Date.swift */,
 				8BFDB68E1C75323900C94996 /* DateFormatter.swift */,
 				8B5250DF20CFDED700E77F70 /* Decodable.swift */,
@@ -1371,6 +1376,7 @@
 				8B756EF81E5C025A00DE4B02 /* UINavigationBar.swift in Sources */,
 				8BF307D01CF0E3C600BBA933 /* UIActivity.swift in Sources */,
 				8B07420B20DFBD2300204C2F /* RoundedViews.swift in Sources */,
+				8B6C762F21A9AE3600CA90EB /* CurrencyFormatter.swift in Sources */,
 				8BCB73CE1CAD660D00E20096 /* Equatable.swift in Sources */,
 				8B6B0CBA219D30830018F2E0 /* KeyboardScrollView.swift in Sources */,
 				8BB415E61FB0DFFF0002C86C /* StatusBarable.swift in Sources */,
@@ -1502,6 +1508,7 @@
 				8BD508771C99E18500AE205E /* Collection.swift in Sources */,
 				8B75286D1E759F2A0035A742 /* Observer.swift in Sources */,
 				8B729C761EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,
+				8B6C763021A9AE3600CA90EB /* CurrencyFormatter.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
 				8B4D71B0216A542A002ACA81 /* Debouncer.swift in Sources */,
 				8BC6D99B204790B600242DAE /* Scrollable.swift in Sources */,
@@ -1524,6 +1531,7 @@
 				8BFDB6661C751AE600C94996 /* URL.swift in Sources */,
 				8BF2106D1E48D52F0026B802 /* Result.swift in Sources */,
 				8B79A4771E9C1ED800C8A5A4 /* Locale.swift in Sources */,
+				8B6C763121A9AE3600CA90EB /* CurrencyFormatter.swift in Sources */,
 				8BD61B381E3EFDF1009B537E /* AppInfo.swift in Sources */,
 				8B4D71B1216A542A002ACA81 /* Debouncer.swift in Sources */,
 				8B4F144621A730E600F5154E /* DateTimeInterval.swift in Sources */,
