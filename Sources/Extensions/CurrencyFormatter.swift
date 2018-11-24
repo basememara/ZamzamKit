@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A formatter that converts between numeric values and their textual currency representations.
 public struct CurrencyFormatter {
     private let formatter: NumberFormatter
     

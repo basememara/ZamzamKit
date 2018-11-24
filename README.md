@@ -51,6 +51,41 @@ array -> ["a", "b", "d", "e"]
 </details>
 
 <details>
+<summary>Dictionary</summary>
+
+> Remove all values equal to nil:
+```swift
+var value: [String: Any?] = [
+    "abc": 123,
+    "efd": "xyz",
+    "ghi": nil,
+    "lmm": true,
+    "qrs": nil,
+    "tuv": 987
+]
+
+value.removeAllNils()
+
+value.count -> 4
+value.keys.contains("abc") -> true
+value.keys.contains("ghi") -> false
+value.keys.contains("qrs") -> false
+```
+</details>
+
+<details>
+<summary>Equatable</summary>
+
+> Determine if a value is contained within the array of values:
+```swift
+"b".within(["a", "b", "c"]) -> true
+
+let status: OrderStatus = .cancelled
+status.within([.requeseted, .accepted, .inProgress]) -> false
+```
+</details>
+
+<details>
 <summary>Number</summary>
 
 > Round doubles, floats, or any floating-point type:
@@ -146,6 +181,21 @@ value.base64URLEncoded
 var value: String? = "test 123"
 value.isNilOrEmpty
 ```
+
+> Convert sequences and disctionarys to JSON string:
+```swift
+// Before
+guard let data = self as? [[String: Any]],
+    let stringData = try? JSONSerialization.data(withJSONObject: data, options: []) else {
+        return nil
+    }
+    
+let json = String(data: stringData, encoding: .utf8) as? String
+```
+```swift
+// After
+let json = mySequence.jsonString
+```
 </details>
 
 ### Foundation
@@ -176,6 +226,21 @@ values["MyDate1"] as? Date -> 2018-11-21 15:40:03 +0000
 UIColor(hex: 0x990000)
 UIColor(hex: 0x4286F4)
 UIColor(rgb: (66, 134, 244))
+```
+</details>
+
+<details>
+<summary>Currency</summary>
+
+> A formatter that converts between numeric values and their textual currency representations:
+```swift
+let amount: Decimal = 123456789.987
+
+let formatter = CurrencyFormatter()
+formatter.string(fromAmount: amount) -> "$123,456,789.99"
+
+let formatter2 = CurrencyFormatter(from: Locale(identifier: "fr-FR"))
+formatter2.string(fromAmount: amount) -> "123 456 789,99 €"
 ```
 </details>
 
@@ -270,6 +335,32 @@ date - .days(4)
 date - .hours(6)
 date + .minutes(12)
 date + .days(5, Calendar(identifier: .chinese))
+```
+
+> Convert between time interval units:
+```swift
+let diff = date.timeIntervalSince(date2) -> 172,800 seconds
+diff.minutes -> 2,800 minutes
+diff.hours -> 48 hours
+diff.days -> 2 days
+```
+</details>
+
+<details>
+<summary>Object</summary>
+
+> Set properties with closures just after initializing:
+```swift
+let paragraph = NSMutableParagraphStyle().with {
+    $0.alignment = .center
+    $0.lineSpacing = 8
+}
+
+let label = UILabel().with {
+    $0.textAlignment = .center
+    $0.textColor = UIColor.black
+    $0.text = "Hello, World!"
+}
 ```
 </details>
 

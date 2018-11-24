@@ -10,31 +10,58 @@ import Foundation
 
 public extension Dictionary where Value: Any {
     
-    /**
-     Convert tuple to dictionary.
-     
-     - returns: Dictionary from tuple.
-     */
-    init<S: Sequence>(_ seq: S) where S.Iterator.Element == (Key, Value) {
-        self.init()
-        for (k, v) in seq { self[k] = v }
-    }
-    
-    /**
-     Remove all values equal to null.
-     
-     - returns: Keys removed due to being null.
-     */
+    /// Remove all values equal to nil.
+    ///
+    ///     var value: [String: Any?] = [
+    ///         "abc": 123,
+    ///         "efd": "xyz",
+    ///         "ghi": NSNull(),
+    ///         "lmm": true,
+    ///         "qrs": NSNull(),
+    ///         "tuv": 987
+    ///     ]
+    ///
+    ///     value.removeAllNils()
+    ///
+    ///     value.count -> 4
+    ///     value.keys.contains("abc") -> true
+    ///     value.keys.contains("ghi") -> false
+    ///     value.keys.contains("qrs") -> false
+    ///
+    /// - Returns: Keys removed due to being null.
     @discardableResult
-    mutating func removeAllNulls() -> [Key] {
-        let keysWithNull: [Key] = self.compactMap {
-            guard $0.value is NSNull else { return nil }
-            return $0.key
-        }
-        
-        guard !keysWithNull.isEmpty else { return [] }
+    mutating func removeAllNils() -> [Key] {
+        let keysWithNull = filter { $0.value is NSNull }.map { $0.key }
         keysWithNull.forEach { removeValue(forKey: $0) }
-        
+        return keysWithNull
+    }
+}
+
+public extension Dictionary where Value == Optional<Any> {
+    
+    /// Remove all values equal to nil.
+    ///
+    ///     var value: [String: Any?] = [
+    ///         "abc": 123,
+    ///         "efd": "xyz",
+    ///         "ghi": nil,
+    ///         "lmm": true,
+    ///         "qrs": nil,
+    ///         "tuv": 987
+    ///     ]
+    ///
+    ///     value.removeAllNils()
+    ///
+    ///     value.count -> 4
+    ///     value.keys.contains("abc") -> true
+    ///     value.keys.contains("ghi") -> false
+    ///     value.keys.contains("qrs") -> false
+    ///
+    /// - Returns: Keys removed due to being null.
+    @discardableResult
+    mutating func removeAllNils() -> [Key] {
+        let keysWithNull = filter { $0.value == nil }.map { $0.key }
+        keysWithNull.forEach { removeValue(forKey: $0) }
         return keysWithNull
     }
 }

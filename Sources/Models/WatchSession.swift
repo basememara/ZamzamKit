@@ -232,7 +232,7 @@ public extension WatchSession {
                 else { completion?(.failure(.notReachable)); return }
             
             var values = values
-            values.removeAllNulls()
+            values.removeAllNils()
             
             do { try session.updateApplicationContext(values) }
             catch { completion?(.failure(.other(error))); return }
@@ -254,7 +254,7 @@ public extension WatchSession {
                 else { completion?(.failure(.notReachable)); return }
             
             var values = values
-            values.removeAllNulls()
+            values.removeAllNils()
             
             let transfer = session.transferUserInfo(values)
             completion?(.success(transfer))
@@ -277,7 +277,7 @@ public extension WatchSession {
             guard session.isReachable else { completion?(.failure(.general)); return }
             
             var values = values
-            values.removeAllNulls()
+            values.removeAllNils()
             
             return session.sendMessage(values,
                 replyHandler: { completion?(.success($0)) },
@@ -323,7 +323,7 @@ public extension WatchSession {
             guard session.isComplicationEnabled else { completion?(.failure(.general)); return }
             
             var values = values
-            values.removeAllNulls()
+            values.removeAllNils()
             
             let transfer = session.transferCurrentComplicationUserInfo(values)
             completion?(.success(transfer))
