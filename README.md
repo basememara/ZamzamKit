@@ -8,11 +8,12 @@
 [![Version](https://img.shields.io/cocoapods/v/ZamzamKit.svg?style=flat)](http://cocoapods.org/pods/ZamzamKit)
 [![MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
-ZamzamKit a Swift framework for rapid development using a collection of small utility extensions for Foundation and UIKit classes and protocols.
+ZamzamKit a Swift framework for rapid development using a collection of small utility extensions for Standard Library, Foundation and UIKit classes and protocols.
 
 ## Usage
 
-### Foundation
+### Standard Library
+
 <details>
 <summary>Array</summary>
 
@@ -60,6 +61,96 @@ Double.pi.rounded(toPlaces: 2) -> 3.14
 </details>
 
 <details>
+<summary>String</summary>
+
+> Create a new random string of given length:
+```swift
+String(random: 10) -> "zXWG4hSgL9"
+String(random: 4, prefix: "PIN-") -> "PIN-uSjm"
+```
+
+> Safely use subscript indexes and ranges on strings:
+```swift
+let value = "Abcdef123456"
+value[3] -> "d"
+value[3..<6] -> "def"
+value[3...6] -> "def1"
+value[3...] -> "def123456"
+value[3...99] -> nil
+value[99] -> nil
+```
+
+> Validate string against common formats:
+```swift
+"test@example.com".isEmail -> true
+"123456789".isNumber -> true
+"zamzam".isAlpha -> true
+"zamzam123".isAlphaNumeric -> true
+```
+
+> Remove spaces or new lines from both ends:
+```swift
+" Abcdef123456 \n\r  ".trimmed -> "Abcdef123456"
+```
+
+> Truncate to a given number of characters:
+```swift
+"Abcdef123456".truncated(3) -> "Abc..."
+"Abcdef123456".truncated(6, trailing: "***") -> "Abcdef***"
+```
+
+> Determine if a given value is contained:
+```swift
+"1234567890".contains("567") -> true
+"abc123xyz".contains("ghi") -> false
+```
+
+> Injects a separator every nth characters:
+```swift
+"1234567890".separate(every: 2, with: "-") -> "12-34-56-78-90"
+```
+
+> Match using a regular expression pattern:
+```swift
+"1234567890".match(regex: "^[0-9]+?$") -> true
+"abc123xyz".match(regex: "^[A-Za-z]+$") -> false
+```
+
+> Replace occurrences of a regular expression pattern:
+```swift
+"aa1bb22cc3d888d4ee5".replacing(regex: "\\d", with: "*") -> "aa*bb**cc*d***d*ee*"
+```
+
+> Remove HTML for plain text:
+```swift
+"<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>".htmlStripped -> "This is web content with a link."
+```
+
+> Encoders and decoders:
+```swift
+value.urlEncoded
+value.urlDecoded
+value.htmlDecoded
+value.base64Encoded
+value.base64Decoded
+value.base64URLEncoded
+```
+
+> Easily get the string version of substring:
+```swift
+"hello world".prefix(5).string
+```
+
+> Determine if an optional string is `nil` or has no characters
+```swift
+var value: String? = "test 123"
+value.isNilOrEmpty
+```
+</details>
+
+### Foundation
+
+<details>
 <summary>Bundle</summary>
 
 > Get the contents of a file within any bundle:
@@ -78,13 +169,18 @@ values["MyDate1"] as? Date -> 2018-11-21 15:40:03 +0000
 </details>
 
 <details>
-<summary>Date</summary>
+<summary>Color</summary>
 
-> Normalize date calculations using Gregorian calendar with `UTC` timezone and `POSIX` locale for date calculations and data storage:
+> Additional color initializers:
 ```swift
-let calendar: Calendar = .posix
-let locale: Locale = .posix
+UIColor(hex: 0x990000)
+UIColor(hex: 0x4286F4)
+UIColor(rgb: (66, 134, 244))
 ```
+</details>
+
+<details>
+<summary>Date</summary>
 
 > Determine if a date is in the past or future:
 ```swift

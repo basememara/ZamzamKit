@@ -11,91 +11,92 @@ import ZamzamKit
 
 class StringTests: XCTestCase {
     
+}
+
+extension StringTests {
+    
+    func testRandom() {
+        XCTAssertEqual(String(random: 10).count, 10)
+        
+        let test = String(random: 20, prefix: "TEST: ")
+        XCTAssertEqual(test.count, 26)
+        XCTAssertTrue(test.hasPrefix("TEST: "))
+    }
+}
+
+extension StringTests {
+    
+    func testSubscript() {
+        let test = "Abcdef123456"
+        
+        XCTAssertEqual(test[3]!, "d")
+        XCTAssertNil(test[99])
+    }
+    
+    func testSubscriptRange() {
+        let test = "Abcdef123456"
+        
+        XCTAssertEqual(test[3..<6]!, "def")
+        XCTAssertEqual(test[3...6]!, "def1")
+        XCTAssertEqual(test[3...]!, "def123456")
+        XCTAssertEqual(test[3...99], nil)
+    }
+}
+
+extension StringTests {
+    
     func testEmailRegEx() {
-        let value = "contact@zamzam.io"
+        let value = "test@example.com"
         let wrong = "zamzam"
         
-        XCTAssertTrue(value.isEmail, "Email \(value) should be valid.")
-        XCTAssertFalse(wrong.isEmail, "Email \(value) should not be valid.")
+        XCTAssertTrue(value.isEmail)
+        XCTAssertFalse(wrong.isEmail)
     }
     
     func testNumberRegEx() {
         let value = "123456789"
         let wrong = "zamzam"
         
-        XCTAssertTrue(value.isNumber, "Number \(value) should be valid.")
-        XCTAssertFalse(wrong.isNumber, "Number \(value) should not be valid.")
+        XCTAssertTrue(value.isNumber)
+        XCTAssertFalse(wrong.isNumber)
     }
     
     func testAlphaRegEx() {
         let value = "zamzam"
         let wrong = "zamzam123"
         
-        XCTAssertTrue(value.isAlpha, "Alpha \(value) should be valid.")
-        XCTAssertFalse(wrong.isAlpha, "Alpha \(value) should not be valid.")
+        XCTAssertTrue(value.isAlpha)
+        XCTAssertFalse(wrong.isAlpha)
     }
     
     func testAlphaNumbericRegEx() {
         let value = "zamzam123"
         let wrong = "zamzam!"
         
-        XCTAssertTrue(value.isAlphaNumeric, "Alphanumberic \(value) should be valid.")
-        XCTAssertFalse(wrong.isAlphaNumeric, "Alphanumberic \(value) should not be valid.")
+        XCTAssertTrue(value.isAlphaNumeric)
+        XCTAssertFalse(wrong.isAlphaNumeric)
     }
 }
 
 extension StringTests {
     
-    func testReplacingRegEx() {
-        let value = "my car reg 1 - dD11 AAA  my car reg 2 - AA22 BbB"
-        let pattern = "([A-HK-PRSVWY][A-HJ-PR-Y])\\s?([0][2-9]|[1-9][0-9])\\s?[A-HJ-PR-Z]{3}"
-        
-        // Case insensitive
-        let newValue = value.replacing(regex: pattern, with: "XX", caseSensitive: false)
-        let expectedValue = "my car reg 1 - XX  my car reg 2 - XX"
-        XCTAssertEqual(newValue, expectedValue,
-                       "String should be \(expectedValue)")
-        
-        // Case sensitive
-        let newValue2 = value.replacing(regex: pattern, with: "XX", caseSensitive: true)
-        XCTAssertEqual(newValue2, value,
-                       "String should be \(expectedValue)")
+    func testTrimmed() {
+        let test = " Abcdef123456 \n\r  "
+        let expected = "Abcdef123456"
+        XCTAssertEqual(test.trimmed, expected)
     }
-}
-
-extension StringTests {
-	
-	func testRandom() {
-		XCTAssertEqual(String(random: 10).count, 10)
-        
-        let test = String(random: 20, prefix: "TEST: ")
-        XCTAssertEqual(test.count, 26)
-        XCTAssertTrue(test.hasPrefix("TEST: "))
-	}
-	
-	func testIsNilOrEmpty() {
-        var test: String?
-        
-		XCTAssertTrue(test.isNilOrEmpty)
-        XCTAssertFalse(!test.isNilOrEmpty)
-        
-        test = ""
-		XCTAssertTrue(test.isNilOrEmpty)
-        XCTAssertFalse(!test.isNilOrEmpty)
-        
-        test = "abc"
-		XCTAssertFalse(test.isNilOrEmpty)
-        XCTAssertTrue(!test.isNilOrEmpty)
-	}
-	
-	func testTruncated() {
+    
+    func testTruncated() {
         let test = "Abcdef123456"
-        let expected = "Abc..."
-        XCTAssertEqual(test.truncated(3), expected)
+        XCTAssertEqual(test.truncated(3), "Abc...")
+        XCTAssertEqual(test.truncated(3, trailing: "***"), "Abc***")
     }
-}
-
-extension StringTests {
+    
+    func testContains() {
+        XCTAssertTrue("1234567890".contains("567"))
+        XCTAssertTrue("abc123xyz".contains("c12"))
+        XCTAssertFalse("abc123xyz".contains("ghi"))
+    }
     
     func testSeparator() {
         XCTAssertEqual("Abcdef123456".separate(every: 3, with: "-"), "Abc-def-123-456")
@@ -110,18 +111,35 @@ extension StringTests {
 
 extension StringTests {
     
-    func testSubscript() {
-        let test = "Abcdef123456"
-        let expected = "d"
-        XCTAssertEqual(test[3]!, expected)
+    func testMatchRegEx() {
+        XCTAssertTrue("1234567890".match(regex: "^[0-9]+?$"))
+        XCTAssertTrue("abc123xyz".match(regex: "^[A-Za-z0-9]+$"))
+        XCTAssertFalse("abc123xyz".match(regex: "^[A-Za-z]+$"))
     }
     
-    func testSubscriptRange() {
-        let test = "Abcdef123456"
+    func testReplacingRegEx() {
+        let value = "my car reg 1 - dD11 AAA  my car reg 2 - AA22 BbB"
+        let pattern = "([A-HK-PRSVWY][A-HJ-PR-Y])\\s?([0][2-9]|[1-9][0-9])\\s?[A-HJ-PR-Z]{3}"
         
-        XCTAssertEqual(test[3..<6]!, "def")
-        XCTAssertEqual(test[3...6]!, "def1")
-        XCTAssertEqual(test[3...]!, "def123456")
+        // Case insensitive
+        let newValue = value.replacing(regex: pattern, with: "XX", caseSensitive: false)
+        let expectedValue = "my car reg 1 - XX  my car reg 2 - XX"
+        XCTAssertEqual(newValue, expectedValue)
+        
+        // Case sensitive
+        let newValue2 = value.replacing(regex: pattern, with: "XX", caseSensitive: true)
+        XCTAssertEqual(newValue2, value)
+        
+        XCTAssertEqual("aa1bb22cc3d888d4ee5".replacing(regex: "\\d", with: "*"), "aa*bb**cc*d***d*ee*")
+    }
+}
+
+extension StringTests {
+    
+    func testHTMLStripped() {
+        let test = "<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>"
+        let expected = "This is web content with a link."
+        XCTAssertEqual(test.htmlStripped, expected)
     }
 }
 
@@ -139,3 +157,65 @@ extension StringTests {
         XCTAssertEqual(test.base64Decoded, expected)
     }
 }
+
+extension StringTests {
+    
+    func testIsNilOrEmpty() {
+        var test: String?
+        
+        XCTAssertTrue(test.isNilOrEmpty)
+        XCTAssertFalse(!test.isNilOrEmpty)
+        
+        test = ""
+        XCTAssertTrue(test.isNilOrEmpty)
+        XCTAssertFalse(!test.isNilOrEmpty)
+        
+        test = "abc"
+        XCTAssertFalse(test.isNilOrEmpty)
+        XCTAssertTrue(!test.isNilOrEmpty)
+    }
+}
+
+extension StringTests {
+    
+    func testCurrencyFormatter() {
+        let formatter = CurrencyFormatter()
+        
+        let cents = 123456789
+        XCTAssertEqual(formatter.string(fromCents: cents), "$1,234,567.89")
+        
+        let amount: Decimal = 123456789.987
+        XCTAssertEqual(formatter.string(fromAmount: amount), "$123,456,789.99")
+    }
+    
+    func testCurrencyFormatter2() {
+        let formatter = CurrencyFormatter(from: Locale(identifier: "fr-FR"))
+        
+        let cents = 123456789
+        XCTAssertEqual(formatter.string(fromCents: cents), "1 234 567,89 €")
+        
+        let amount: Decimal = 123456789.987
+        XCTAssertEqual(formatter.string(fromAmount: amount), "123 456 789,99 €")
+    }
+    
+    func testCurrencyFormatter3() {
+        let formatter = CurrencyFormatter(from: Locale(identifier: "ar-SA"))
+        
+        let cents = 123456789
+        XCTAssertEqual(formatter.string(fromCents: cents), "١٬٢٣٤٬٥٦٧٫٨٩ ر.س.‏")
+        
+        let amount: Decimal = 123456789.987
+        XCTAssertEqual(formatter.string(fromAmount: amount), "١٢٣٬٤٥٦٬٧٨٩٫٩٩ ر.س.‏")
+    }
+    
+    func testCurrencyFormatter4() {
+        let formatter = CurrencyFormatter(from: Locale(identifier: "zh_HANS"))
+        
+        let cents = 123456789
+        XCTAssertEqual(formatter.string(fromCents: cents), "¤1,234,567.89")
+        
+        let amount: Decimal = 123456789.987
+        XCTAssertEqual(formatter.string(fromAmount: amount), "¤123,456,789.99")
+    }
+}
+
