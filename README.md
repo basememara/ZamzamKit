@@ -472,6 +472,27 @@ let testArray: [Int]? = UserDefaults.standard[.testArray]
 ```
 </details>
 
+### Helpers
+
+<details>
+<summary>Localization</summary>
+
+> Strongly-typed localizable keys that's also `XLIFF` export friendly:
+```swift
+// First define localization keys
+extension Localizable {
+    static let ok = Localizable(NSLocalizedString("ok.dialog", comment: "OK text for dialogs"))
+    static let cancel = Localizable(NSLocalizedString("cancel.dialog", comment: "Cancel text for dialogs"))
+    static let next = Localizable(NSLocalizedString("next.dialog", comment: "Next text for dialogs"))
+}
+
+// Then use strongly-typed localization keys
+myLabel1.text = .localized(.ok)
+myLabel2.text = .localized(.cancel)
+myLabel3.text = .localized(.next)
+```
+</details>
+
 ### Foundation
 
 #### SCNetworkReachability + online
