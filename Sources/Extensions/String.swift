@@ -243,6 +243,9 @@ public extension String {
     }
     
     /// Decode an HTML string
+    ///
+    ///     let value = "<strong> 4 &lt; 5 &amp; 3 &gt; 2 .</strong> Price: 12 &#x20ac;.  &#64;"
+    ///     value.htmlDecoded -> "<strong> 4 < 5 & 3 > 2 .</strong> Price: 12 €.  @"
     var htmlDecoded: String {
         // http://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
         guard !isEmpty else { return self }

@@ -182,13 +182,13 @@ var value: String? = "test 123"
 value.isNilOrEmpty
 ```
 
-> Convert sequences and disctionarys to JSON string:
+> Convert sequences and dictionaries to a JSON string:
 ```swift
 // Before
 guard let data = self as? [[String: Any]],
     let stringData = try? JSONSerialization.data(withJSONObject: data, options: []) else {
         return nil
-    }
+}
     
 let json = String(data: stringData, encoding: .utf8) as? String
 ```
@@ -344,6 +344,72 @@ diff.minutes -> 2,800 minutes
 diff.hours -> 48 hours
 diff.days -> 2 days
 ```
+
+> Time zone context and offset:
+```swift
+let timeZone = TimeZone(identifier: "Europe/Paris")
+timeZone?.isCurrent -> false
+timeZone?.offsetFromCurrent -> -21600
+```
+</details>
+
+<details>
+<summary>FileManager</summary>
+
+> Get URL or file system path for a file:
+```swift
+FileManager.default.url(of: fileName, from: .documentDirectory)
+FileManager.default.path(of: fileName, from: .cachesDirectory)
+```
+
+> Get URL or file system paths of files within a directory:
+```swift
+FileManager.default.urls(from: .documentDirectory)
+FileManager.default.paths(from: .downloadsDirectory)
+```
+
+> Retrieve a file remotely and persist to local disk:
+```swift
+FileManager.default.download(from: "http://example.com/test.pdf") { url, response, error in
+    // The `url` parameter represents location on local disk where remote file was downloaded.
+}
+```
+</details>
+
+<details>
+<summary>Infix</summary>
+
+> Assign a value if not nil:
+```swift
+var test: Int? = 123
+var value: Int? = nil
+
+test ?= value
+// test == 123
+
+value = 456
+test ?= value
+// test == 456
+```
+</details>
+
+<details>
+<summary>NotificationCenter</summary>
+
+> Shorthand to post and observer functions:
+```swift
+let notificationCenter: NotificationCenter = .default
+
+// Before
+notificationCenter.post(name: .MyCustomNotificationKey, object: nil, userInfo: nil)
+notificationCenter.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+notificationCenter.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+
+// After
+notificationCenter.post(name: .MyCustomNotificationKey)
+notificationCenter.addObserver(for: UIApplication.willEnterForegroundNotification, selector: #selector(willEnterForeground), from: self)
+notificationCenter.removeObserver(for: UIApplication.willEnterForegroundNotification, from: self)
+```
 </details>
 
 <details>
@@ -361,6 +427,48 @@ let label = UILabel().with {
     $0.textColor = UIColor.black
     $0.text = "Hello, World!"
 }
+```
+</details>
+
+<details>
+<summary>URL</summary>
+
+> Append or remove query string parameters:
+```swift
+let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
+
+url?.appendingQueryItem("def", value: "456") -> "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
+url?.appendingQueryItem("xyz", value: "999") -> "https://example.com?abc=123&lmn=tuv&xyz=999"
+
+url?.appendingQueryItems([
+    "def": "456",
+    "jkl": "777",
+    "abc": "333",
+    "lmn": nil
+]) -> "https://example.com?xyz=987&def=456&abc=333&jkl=777"
+
+url?.removeQueryItem("xyz") -> "https://example.com?abc=123&lmn=tuv"
+```
+</details>
+
+<details>
+<summary>UserDefaults</summary>
+
+> Append or remove query string parameters:
+```swift
+// First define keys
+extension DefaultsKeys {
+    static let testString = DefaultsKey<String?>("testString")
+    static let testInt = DefaultsKey<Int?>("testInt")
+    static let testBool = DefaultsKey<Bool?>("testBool")
+    static let testArray = DefaultsKey<[Int]?>("testArray")
+}
+
+// Then use strongly-typed values
+let testString: String? = UserDefaults.standard[.testString]
+let testInt: Int? = UserDefaults.standard[.testInt]
+let testBool: Bool? = UserDefaults.standard[.testBool]
+let testArray: [Int]? = UserDefaults.standard[.testArray]
 ```
 </details>
 

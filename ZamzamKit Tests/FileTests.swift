@@ -7,12 +7,11 @@
 //
 
 import XCTest
-@testable import ZamzamKit
+import ZamzamKit
 
 class FileTests: XCTestCase {
-    
-    let fileName = "FileServiceTests.txt"
-    let fileName2 = "FileServiceTests2.txt"
+    private let fileName = "FileServiceTests.txt"
+    private let fileName2 = "FileServiceTests2.txt"
     
     override func setUp() {
         super.setUp()
@@ -37,6 +36,9 @@ class FileTests: XCTestCase {
             print("Could not delete files!")
         }
     }
+}
+
+extension FileTests {
     
     func testGetDocumentPath() {
         let value = FileManager.default.path(of: fileName, from: .downloadsDirectory)
@@ -67,6 +69,9 @@ class FileTests: XCTestCase {
         
         waitForExpectations(timeout: 5.0, handler: nil)
     }
+}
+
+private extension FileTests {
     
     func fileInDirectory(_ filename: String) -> String {
         return FileManager.default

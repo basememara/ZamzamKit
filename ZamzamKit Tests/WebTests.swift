@@ -11,12 +11,15 @@ import XCTest
 
 class WebTests: XCTestCase {
 
-    func teststrippedHTML() {
+}
+
+extension WebTests {
+    
+    func testStrippedHTML() {
         let value = "<html><head><title>Test</title></head><body></body></html>"
         let expectedValue = "Test"
         
-        XCTAssertEqual(value.htmlStripped, expectedValue,
-            "String should be \(expectedValue)")
+        XCTAssertEqual(value.htmlStripped, expectedValue)
     }
     
     func testDecodeHTML() {
@@ -25,18 +28,19 @@ class WebTests: XCTestCase {
         let newValue = value.htmlDecoded
         let expectedValue = "<strong> 4 < 5 & 3 > 2 .</strong> Price: 12 €.  @"
         
-        XCTAssertEqual(newValue, expectedValue,
-            "String should be \(expectedValue)")
+        XCTAssertEqual(newValue, expectedValue)
     }
+}
+
+extension WebTests {
     
-    func testappendingQueryItem() {
+    func testAppendingQueryItem() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
         let newValue = URL(string: value)!.appendingQueryItem("aBc", value: "555").absoluteString
         let expectedValue = "https://example.com?lmn=tuv&xyz=987&aBc=555"
         
-        XCTAssertEqual(newValue, expectedValue,
-            "String should be \(expectedValue)")
+        XCTAssertEqual(newValue, expectedValue)
     }
     
     func testRemoveQueryStringParameter() {
@@ -45,21 +49,24 @@ class WebTests: XCTestCase {
         let newValue = URL(string: value)!.removeQueryItem("xyz").absoluteString
         let expectedValue = "https://example.com?abc=123&lmn=tuv"
         
-        XCTAssertEqual(newValue, expectedValue,
-            "String should be \(expectedValue)")
+        XCTAssertEqual(newValue, expectedValue)
     }
     
-    func testappendingQueryItemForAdd() {
+    func testAppendingQueryItemForAdd() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = URL(string: value)!.appendingQueryItem("def", value: "456").absoluteString
-        let expectedValue = "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
+        XCTAssertEqual(
+            URL(string: value)!.appendingQueryItem("def", value: "456").absoluteString,
+            "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
+        )
         
-        XCTAssertEqual(newValue, expectedValue,
-            "String should be \(expectedValue)")
+        XCTAssertEqual(
+            URL(string: value)!.appendingQueryItem("xyz", value: "999").absoluteString,
+            "https://example.com?abc=123&lmn=tuv&xyz=999"
+        )
     }
     
-    func testappendingQueryItemForList() {
+    func testAppendingQueryItemForList() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
         let newValue = URL(string: value)!.appendingQueryItems([
@@ -76,7 +83,7 @@ class WebTests: XCTestCase {
         XCTAssertFalse(newValue.contains("lmn="))
     }
     
-    func testappendingQueryItemForNoInitialParameters() {
+    func testAppendingQueryItemForNoInitialParameters() {
         // Subfolder
         XCTAssertEqual(
             URL(string: "https://example.com/abc/xyz")!
@@ -110,7 +117,7 @@ class WebTests: XCTestCase {
         )
     }
     
-    func testappendingQueryItemForDomain() {
+    func testAppendingQueryItemForDomain() {
         // Pure domain
         XCTAssertEqual(
             URL(string: "https://example.com")!
@@ -128,7 +135,7 @@ class WebTests: XCTestCase {
         )
     }
     
-    func testappendingQueryItemForStrongTypes() {
+    func testAppendingQueryItemForStrongTypes() {
         XCTAssertEqual(
             URL(string: "https://example.com")!
                 .appendingQueryItem("abc", value: 1)

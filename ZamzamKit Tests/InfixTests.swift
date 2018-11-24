@@ -10,6 +10,7 @@ import XCTest
 @testable import ZamzamKit
 
 class InfixTests: XCTestCase {
+    
     func testConditionalAssign() {
         var someProperty = "abc"
         var someProperty2: String? = "def"
@@ -25,5 +26,13 @@ class InfixTests: XCTestCase {
         someProperty2 ?= someValue
         XCTAssertEqual(someProperty, "xyz")
         XCTAssertEqual(someProperty2, "xyz")
+        
+        var test: Int? = 123
+        var value: Int? = nil
+        test ?= value
+        XCTAssertEqual(test, 123)
+        value = 456
+        test ?= value
+        XCTAssertEqual(test, 456)
     }
 }

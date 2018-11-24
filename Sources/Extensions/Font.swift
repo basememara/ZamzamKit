@@ -11,6 +11,8 @@ import UIKit
 public extension UIFont {
     
     /// Specify font trait while leaving size intact.
+    ///
+    ///     textLabel?.font = textLabel?.font.with(traits: [.traitBold])
     func with(traits: UIFontDescriptor.SymbolicTraits...) -> UIFont {
         // https://stackoverflow.com/a/39999497/235334
         let descriptor = fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits(traits))

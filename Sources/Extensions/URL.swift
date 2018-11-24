@@ -12,6 +12,10 @@ public extension URL {
     
     /// Returns a URL constructed by appending the given query string parameter to self.
     ///
+    ///     let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
+    ///     url?.appendingQueryItem("def", value: "456") -> "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
+    ///     url?.appendingQueryItem("xyz", value: "999") -> "https://example.com?abc=123&lmn=tuv&xyz=999"
+    ///
     /// - Parameters:
     ///   - name: the key of the query string parameter
     ///   - value: the value to replace the query string parameter, nil will remove item
@@ -34,6 +38,14 @@ public extension URL {
     
     /// Returns a URL constructed by appending the given query string parameters to self.
     ///
+    ///     let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
+    ///     url?.appendingQueryItems([
+    ///         "def": "456",
+    ///         "jkl": "777",
+    ///         "abc": "333",
+    ///         "lmn": nil
+    ///     ]) -> "https://example.com?xyz=987&def=456&abc=333&jkl=777"
+    ///
     /// - Parameter contentsOf: a dictionary of query string parameters to modify
     /// - Returns: the URL with the appended query string
     func appendingQueryItems(_ contentsOf: [String: Any?]) -> URL {
@@ -55,6 +67,9 @@ public extension URL {
     }
     
     /// Returns a URL constructed by removing the given query string parameter to self.
+    ///
+    ///     let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
+    ///     url?.removeQueryItem("xyz") -> "https://example.com?abc=123&lmn=tuv"
     ///
     /// - Parameter name: the key of the query string parameter
     /// - Returns: the URL with the mutated query string
