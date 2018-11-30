@@ -10,11 +10,9 @@ import CoreLocation
 
 public extension CLLocation {
     
-    /**
-     Retrieves location details for coordinates.
-     
-     - parameter completion: Async callback with retrived location details.
-     */
+    /// Retrieves location details for coordinates.
+    ///
+    /// - Parameter completion: Async callback with retrived location details.
     func geocoder(completion: @escaping (LocationMeta?) -> Void) {
         // Reverse geocode stored coordinates
         CLGeocoder().reverseGeocodeLocation(self) { placemarks, error in
@@ -54,13 +52,17 @@ public extension CLLocationCoordinate2D {
 public extension Array where Element == CLLocationCoordinate2D {
     
     /// Returns the closest coordinate to the specified location.
+    ///
+    /// If the sequence has no elements, returns nil.
     func closest(to coordinate: CLLocationCoordinate2D) -> CLLocationCoordinate2D? {
         return self.min { $0.distance(from: coordinate) < $1.distance(from: coordinate) }
     }
     
     /// Returns the farthest coordinate from the specified location.
+    ///
+    /// If the sequence has no elements, returns nil.
     func farthest(from coordinate: CLLocationCoordinate2D) -> CLLocationCoordinate2D? {
-        return self.max { $0.distance(from: coordinate) > $1.distance(from: coordinate) }
+        return self.max { $0.distance(from: coordinate) < $1.distance(from: coordinate) }
     }
 }
 

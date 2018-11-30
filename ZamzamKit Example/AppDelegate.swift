@@ -49,6 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             )
         })
         
+        let _ = UserDefaults.standard[.userID]
+        let _ = UserDefaults.standard[.currentTheme]
+        
         return true
     }
 }

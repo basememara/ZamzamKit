@@ -77,3 +77,18 @@ public extension Calendar {
     @available(*, unavailable, renamed: "Calendar.posix")
     static let gregorianUTC: Calendar = .posix
 }
+
+@available(*, unavailable, renamed: "UserDefaults.Keys")
+open class DefaultsKeys {
+    fileprivate init() {}
+}
+
+@available(*, unavailable, renamed: "UserDefaults.Key")
+open class DefaultsKey<ValueType>: UserDefaults.Keys {
+    public let name: String
+    
+    public init(_ key: String) {
+        self.name = key
+        super.init()
+    }
+}

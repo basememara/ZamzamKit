@@ -12,12 +12,34 @@ import CoreLocation
 public extension UNUserNotificationCenter {
     static let mainCategoryIdentifier = "mainCategory"
     
-    /// Registers your app’s notification types and the custom actions that they support.
+    /// Registers the local and remote notifications with the category and actions it supports.
+    ///
+    ///     UNUserNotificationCenter.current().register(
+    ///         delegate: self,
+    ///         category: "chat",
+    ///         actions: [
+    ///             UNTextInputNotificationAction(
+    ///                 identifier: "replyAction",
+    ///                 title: "Reply",
+    ///                 options: [],
+    ///                 textInputButtonTitle: "Send",
+    ///                 textInputPlaceholder: "Type your message"
+    ///             )
+    ///         ],
+    ///         authorizations: [.alert, .badge, .sound],
+    ///         completion: { granted in
+    ///             granted
+    ///                 ? log(debug: "Authorization for notification succeeded.")
+    ///                 : log(warn: "Authorization for notification not given.")
+    ///         }
+    ///     )
     ///
     /// - Parameters:
-    ///   - category: The category identifier.
+    ///   - delegate: The object that processes incoming notifications and notification-related actions.
+    ///   - category: The category identifier. Default is `UNUserNotificationCenter.mainCategoryIdentifier`.
     ///   - actions: The actions for the category.
-    ///   - authorizations: The authorization options.
+    ///   - authorizations: Constants for requesting authorization to interact with the user. Default is `[.alert, .badge, .sound]`.
+    ///   - completion: The block to execute asynchronously with the granted flag provided.
     func register(
         delegate: UNUserNotificationCenterDelegate? = nil,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
@@ -28,13 +50,42 @@ public extension UNUserNotificationCenter {
         register(delegate: delegate, categories: [category: actions], authorizations: authorizations, completion: completion)
     }
     
-    /// Registers your app’s notification types and the custom actions that they support.
+    /// Registers the local and remote notifications with the categories and actions it supports.
+    ///
+    ///     UNUserNotificationCenter.current().register(
+    ///         delegate: self,
+    ///         categories: [
+    ///             "order": [
+    ///                 UNNotificationAction(
+    ///                     identifier: "confirmAction",
+    ///                     title: "Confirm",
+    ///                     options: [.foreground]
+    ///                 )
+    ///             ],
+    ///             "chat": [
+    ///                 UNTextInputNotificationAction(
+    ///                     identifier: "replyAction",
+    ///                     title: "Reply",
+    ///                     options: [],
+    ///                     textInputButtonTitle: "Send",
+    ///                     textInputPlaceholder: "Type your message"
+    ///                 )
+    ///             ],
+    ///             "offer": nil
+    ///         ],
+    ///         authorizations: [.alert, .badge, .sound],
+    ///         completion: { granted in
+    ///             granted
+    ///                 ? log(debug: "Authorization for notification succeeded.")
+    ///                 : log(warn: "Authorization for notification not given.")
+    ///         }
+    ///     )
     ///
     /// - Parameters:
-    ///   - category: The category identifier.
-    ///   - actions: The actions for the category.
-    ///   - authorizations: The authorization options.
-    ///   - completion: The callback to process with the granted flag provided.
+    ///   - delegate: The object that processes incoming notifications and notification-related actions.
+    ///   - categories: The category identifiers and associated actions.
+    ///   - authorizations: Constants for requesting authorization to interact with the user. Default is `[.alert, .badge, .sound]`.
+    ///   - completion: The block to execute asynchronously with the granted flag provided.
     func register(
         delegate: UNUserNotificationCenterDelegate? = nil,
         categories: [String: [UNNotificationAction]?],
@@ -78,7 +129,7 @@ public extension UNUserNotificationCenter {
 
 public extension UNUserNotificationCenter {
     
-    /// Returns a list of all all pending or delivered user notifications.
+    /// Returns a list of all pending or delivered user notifications.
     func getNotificationRequests(completion: @escaping ([UNNotificationRequest]) -> Void) {
         var notificationRequests = [UNNotificationRequest]()
         let taskGroup = DispatchGroup()
@@ -100,7 +151,7 @@ public extension UNUserNotificationCenter {
         }
     }
     
-    /// Retrieve the pending notification request.
+    /// Retrieve the pending or delivered notification request.
     ///
     /// - Parameters:
     ///   - withIdentifier: The identifier for the requests.
@@ -114,7 +165,7 @@ public extension UNUserNotificationCenter {
         }
     }
     
-    /// Retrieve the pending notification requests.
+    /// Retrieve the pending or delivered notification requests.
     ///
     /// - Parameters:
     ///   - withIdentifiers: The identifiers for the requests.
@@ -292,14 +343,14 @@ public extension UNUserNotificationCenter {
         removeDeliveredNotifications(withIdentifiers: ids)
     }
     
-    /// Remove pending or delivered user notifications.
+    /// Remove pending and delivered user notifications.
     ///
     /// - Parameter withCategory: The category of the user notification to remove.
     func remove(withCategory category: String, completion: (() -> Void)? = nil) {
         remove(withCategories: [category], completion: completion)
     }
     
-    /// Remove pending or delivered user notifications.
+    /// Remove pending and delivered user notifications.
     ///
     /// - Parameter withCategory: The categories of the user notification to remove.
     func remove(withCategories categories: [String], completion: (() -> Void)? = nil) {
@@ -314,7 +365,7 @@ public extension UNUserNotificationCenter {
         }
     }
     
-    /// Remove all pending or delivered user notifications.
+    /// Remove all pending and delivered user notifications.
     func removeAll() {
         removeAllPendingNotificationRequests()
         removeAllDeliveredNotifications()

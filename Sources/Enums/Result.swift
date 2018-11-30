@@ -8,14 +8,33 @@
 
 import Foundation
 
-/**
-    Used to represent whether a request was successful or encountered an error.
-    Stolen from Alamofire: https://github.com/Alamofire/Alamofire/blob/master/Source/Result.swift
-    - Success: The request and all processing operations were successful resulting in the handling of the
-               provided associated value.
-    - Failure: The request encountered an error resulting in a failure. The associated values are the original data 
-               provided by the destination as well as the error that caused the failure.
-*/
+/// Used to represent whether an asynchronous request was successful or encountered an error.
+///
+/// - Success: The request and all processing operations were successful resulting in the handling of the provided associated value.
+/// - Failure: The request encountered an error resulting in a failure. The associated values are the original data provided by the destination as well as the error that caused the failure.
+///
+///
+///     // Declare the function with a completion handler of `Result` type
+///     func fetch(id: Int, completion: @escaping (Result<Author, ZamzamError>) -> Void) {
+///         guard id > 0 else {
+///             completion(.failure(.nonExistent))
+///             return
+///         }
+///
+///         DispatchQueue.global().async {
+///             completion(.success(Author(...)))
+///         }
+///     }
+///
+///     // Call the asynchronous function and determine the response
+///     fetch(id: 123) {
+///         guard let value = $0.value, $0.isSuccess else {
+///             print("An error occurred: \($0.error ?? .general)")
+///             return
+///         }
+///
+///         print(value)
+///     }
 public enum Result<Value, ErrorType: Error> {
     case success(Value)
     case failure(ErrorType)

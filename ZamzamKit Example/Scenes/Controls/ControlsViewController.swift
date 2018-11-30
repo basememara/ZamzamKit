@@ -41,12 +41,12 @@ private extension ControlsViewController {
         navigationItem.leftBarButtonItems = [
             BadgeBarButtonItem(
                 button: UIButton(type: .detailDisclosure),
-                badgeText: "abc",
+                badgeText: SCNetworkReachability.isOnline ? "Online" : "Offline",
                 target: self,
                 action: #selector(test)
             ).with {
-                $0.badgeFontColor = .black
-                $0.badgeBackgroundColor = .green
+                $0.badgeFontColor = SCNetworkReachability.isOnline ? .black : .white
+                $0.badgeBackgroundColor = SCNetworkReachability.isOnline ? .green : .red
             }
         ]
     }

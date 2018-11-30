@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import ZamzamKit
+import ZamzamKit
 
 class CollectionTests: XCTestCase {
 

@@ -11,6 +11,31 @@
 import Foundation
 
 /// Manages blocks of code that only need to run once on version updates in apps.
+///
+///     @UIApplicationMain
+///     class AppDelegate: UIResponder, UIApplicationDelegate {
+///
+///         var window: UIWindow?
+///         let migration = Migration()
+///
+///         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+///             migration
+///                 .performUpdate {
+///                     print("Migrate update occurred.")
+///                 }
+///                 .perform(forVersion: "1.0") {
+///                     print("Migrate to 1.0 occurred.")
+///                 }
+///                 .perform(forVersion: "1.0", withBuild: "1") {
+///                     print("Migrate to 1.0 (1) occurred.")
+///                 }
+///                 .perform(forVersion: "1.0", withBuild: "2") {
+///                     print("Migrate to 1.0 (2) occurred.")
+///             }
+///
+///             return true
+///         }
+///     }
 public class Migration {
     public static let suiteName = "\(DispatchQueue.labelPrefix).Migration"
     

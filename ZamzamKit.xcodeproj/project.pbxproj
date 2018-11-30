@@ -168,6 +168,9 @@
 		8B9E98711EB500790067ACB7 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E986E1EB500790067ACB7 /* With.swift */; };
 		8BB120C32178B54800B72ECF /* PresentableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB120C22178B54800B72ECF /* PresentableView.swift */; };
 		8BB120C42178B54800B72ECF /* PresentableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB120C22178B54800B72ECF /* PresentableView.swift */; };
+		8BB1D4B721B19F0C00C9FBC0 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1D4B621B19F0C00C9FBC0 /* UserDefaultsKeys.swift */; };
+		8BB1D4B821B1B40400C9FBC0 /* SCNetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */; };
+		8BB1D4B921B1B40500C9FBC0 /* SCNetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */; };
 		8BB3431A2140E842000F0CEF /* Location.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB343112140E842000F0CEF /* Location.storyboard */; };
 		8BB3431B2140E842000F0CEF /* WatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB343122140E842000F0CEF /* WatchViewController.swift */; };
 		8BB3431C2140E842000F0CEF /* ControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB343132140E842000F0CEF /* ControlsViewController.swift */; };
@@ -471,6 +474,7 @@
 		8B9E985F1EB396D20067ACB7 /* CellIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellIdentifiable.swift; sourceTree = "<group>"; };
 		8B9E986E1EB500790067ACB7 /* With.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = With.swift; sourceTree = "<group>"; };
 		8BB120C22178B54800B72ECF /* PresentableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableView.swift; sourceTree = "<group>"; };
+		8BB1D4B621B19F0C00C9FBC0 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		8BB343112140E842000F0CEF /* Location.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Location.storyboard; sourceTree = "<group>"; };
 		8BB343122140E842000F0CEF /* WatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchViewController.swift; sourceTree = "<group>"; };
 		8BB343132140E842000F0CEF /* ControlsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlsViewController.swift; sourceTree = "<group>"; };
@@ -719,7 +723,6 @@
 		8B1FE7EC2065ABD600EE8DBE /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */,
 				8BF307CF1CF0E3C600BBA933 /* UIActivity.swift */,
 				8BD2D19D1CA583110018AC2B /* UIAlertAction.swift */,
 				8BFDB68B1C752C5C00C94996 /* UIApplication.swift */,
@@ -922,6 +925,7 @@
 			isa = PBXGroup;
 			children = (
 				8BB3432D2141D557000F0CEF /* Localizable.swift */,
+				8BB1D4B621B19F0C00C9FBC0 /* UserDefaultsKeys.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -997,6 +1001,7 @@
 				8BD98D641FC33B4600E74A8C /* Font.swift */,
 				8B79A4741E9C1ED800C8A5A4 /* Locale.swift */,
 				8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */,
+				8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */,
 				8BE814FC1C7842DC005F23CE /* Sequence.swift */,
 				8BFDB65D1C7518F800C94996 /* String.swift */,
 				8B8215491CA1613400C9FCC9 /* TimeInterval.swift */,
@@ -1484,6 +1489,7 @@
 				8B4D71B4216A5560002ACA81 /* Throttler.swift in Sources */,
 				8B1CC523217BDA4E00F00A70 /* DispatchQueue.swift in Sources */,
 				8BFDB6781C751F2300C94996 /* FileManager.swift in Sources */,
+				8BB1D4B821B1B40400C9FBC0 /* SCNetworkReachability.swift in Sources */,
 				8BD98D661FC33B4600E74A8C /* Font.swift in Sources */,
 				8BF2106C1E48D52F0026B802 /* Result.swift in Sources */,
 				8B94345B1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
@@ -1515,6 +1521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BB1D4B921B1B40500C9FBC0 /* SCNetworkReachability.swift in Sources */,
 				8B82154C1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8B2DE3E31C8A86B2008F1569 /* Bundle.swift in Sources */,
 				8B5316AE1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
@@ -1564,6 +1571,7 @@
 			files = (
 				8B8802D92175804B0035543D /* TableModels.swift in Sources */,
 				8BB343212140E842000F0CEF /* LocationViewController.swift in Sources */,
+				8BB1D4B721B19F0C00C9FBC0 /* UserDefaultsKeys.swift in Sources */,
 				8BB120C42178B54800B72ECF /* PresentableView.swift in Sources */,
 				8BB3432E2141D557000F0CEF /* Localizable.swift in Sources */,
 				8BB3431E2140E842000F0CEF /* NotificationsViewController.swift in Sources */,

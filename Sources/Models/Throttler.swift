@@ -8,7 +8,30 @@
 
 import Foundation
 
-/// The Throttler will ignore work items until the time limit for the preceding call is over.
+/// A throttler that will ignore work items until the time limit for the preceding call is over.
+///
+///     let limiter = Throttler(limit: 5)
+///     var value = 0
+///
+///     limiter.execute {
+///         value += 1
+///     }
+///
+///     limiter.execute {
+///         value += 1
+///     }
+///
+///     limiter.execute {
+///         value += 1
+///     }
+///
+///     sleep(5)
+///
+///     limiter.execute {
+///         value += 1
+///     }
+///
+///     // value == 2
 public final class Throttler {
     
     // MARK: - Properties

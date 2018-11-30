@@ -195,6 +195,7 @@ let json = String(data: stringData, encoding: .utf8) as? String
 ```swift
 // After
 let json = mySequence.jsonString
+let json = myDictionary.jsonString
 ```
 </details>
 
@@ -351,6 +352,12 @@ let timeZone = TimeZone(identifier: "Europe/Paris")
 timeZone?.isCurrent -> false
 timeZone?.offsetFromCurrent -> -21600
 ```
+
+> Normalize date calculations and data storage using `UTC` and `POSIX`:
+```swift
+let calendar: Calendar = .posix
+let locale: Locale = .posix
+```
 </details>
 
 <details>
@@ -451,33 +458,148 @@ url?.removeQueryItem("xyz") -> "https://example.com?abc=123&lmn=tuv"
 ```
 </details>
 
+### Platforms
+
 <details>
-<summary>UserDefaults</summary>
+<summary>iOS</summary>
 
-> Append or remove query string parameters:
+> Display an `UIAlertController` to the user:
 ```swift
-// First define keys
-extension DefaultsKeys {
-    static let testString = DefaultsKey<String?>("testString")
-    static let testInt = DefaultsKey<Int?>("testInt")
-    static let testBool = DefaultsKey<Bool?>("testBool")
-    static let testArray = DefaultsKey<[Int]?>("testArray")
-}
+present(alert: "Test Alert")
+```
+</details>
 
-// Then use strongly-typed values
-let testString: String? = UserDefaults.standard[.testString]
-let testInt: Int? = UserDefaults.standard[.testInt]
-let testBool: Bool? = UserDefaults.standard[.testBool]
-let testArray: [Int]? = UserDefaults.standard[.testArray]
+<details>
+<summary>watchOS</summary>
+
+> Display an alert to the user:
+```swift
+present(alert: "Test Alert")
 ```
 </details>
 
 ### Helpers
 
 <details>
+<summary>AppInfo</summary>
+
+> Get details of the current app:
+```swift
+struct SomeStruct: AppInfo {
+
+}
+
+let someStruct = SomeStruct()
+
+someStruct.appDisplayName -> "Zamzam App"
+someStruct.appBundleID -> "io.zamzam.app"
+someStruct.appVersion -> "1.0.0"
+someStruct.appBuild -> "23"
+someStruct.isInTestFlight -> false
+someStruct.isRunningOnSimulator -> false
+```
+</details>
+
+<details>
+<summary>CoreLocation</summary>
+
+> Determine if location services is enabled and authorized for always or when in use:
+```swift
+CLLocationManager.isAuthorized -> bool
+```
+
+> Get the location details for coordinates:
+```swift
+CLLocation(latitude: 43.6532, longitude: -79.3832).geocoder { meta in
+    print(meta.locality)
+    print(meta.country)
+    print(meta.countryCode)
+    print(meta.timezone)
+    print(meta.administrativeArea)
+}
+```
+
+> Get the closest or farthest location from a list of coordinates:
+```swift
+let coordinates = [
+    CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832),
+    CLLocationCoordinate2D(latitude: 59.9094, longitude: 10.7349),
+    CLLocationCoordinate2D(latitude: 35.7750, longitude: -78.6336),
+    CLLocationCoordinate2D(latitude: 33.720817, longitude: 73.090032)
+]
+
+coordinates.closest(to: homeCoordinate)
+coordinates.farthest(from: homeCoordinate)
+```
+
+> Approximate comparison of coordinates rounded to 3 decimal places (about 100 meters):
+```swift
+let coordinate1 = CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832)
+let coordinate2 = CLLocationCoordinate2D(latitude: 43.6531, longitude: -79.3834)
+let coordinate3 = CLLocationCoordinate2D(latitude: 43.6522, longitude: -79.3822)
+
+coordinate1 ~~ coordinate2 -> true
+coordinate1 ~~ coordinate3 -> false
+```
+
+> Location worker that offers easy authorization and observable closures ([read more](http://basememara.com/swifty-locations-observables/)):
+```swift
+class LocationViewController: UIViewController {
+
+    @IBOutlet weak var outputLabel: UILabel!
+    
+    var locationsWorker: LocationsWorkerType = LocationsWorker(
+        desiredAccuracy: kCLLocationAccuracyThreeKilometers,
+        distanceFilter: 1000
+    )
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        locationsWorker.addObserver(locationObserver)
+        locationsWorker.addObserver(headingObserver)
+        
+        locationsWorker.requestAuthorization(
+            for: .whenInUse,
+            startUpdatingLocation: true,
+            completion: { granted in
+                guard granted else { return }
+                self.locationsWorker.startUpdatingHeading()
+            }
+        )
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        locationsWorker.removeObservers()
+    }
+    
+    deinit {
+        locationsWorker.removeObservers()
+    }
+}
+
+extension LocationViewController {
+    
+    var locationObserver: Observer<LocationsWorker.LocationHandler> {
+        return Observer { [weak self] in
+            self?.outputLabel.text = $0.description
+        }
+    }
+    
+    var headingObserver: Observer<LocationsWorker.HeadingHandler> {
+        return Observer {
+            print($0.description)
+        }
+    }
+}
+```
+</details>
+
+<details>
 <summary>Localization</summary>
 
-> Strongly-typed localizable keys that's also `XLIFF` export friendly:
+> Strongly-typed localizable keys that's also `XLIFF` export friendly ([read more](http://basememara.com/swifty-localization-xcode-support/)):
 ```swift
 // First define localization keys
 extension Localizable {
@@ -490,6 +612,306 @@ extension Localizable {
 myLabel1.text = .localized(.ok)
 myLabel2.text = .localized(.cancel)
 myLabel3.text = .localized(.next)
+```
+</details>
+
+<details>
+<summary>Migration</summary>
+
+> Manages blocks of code that only need to run once on version updates in apps:
+```swift
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var window: UIWindow?
+    let migration = Migration()
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        migration
+            .performUpdate {
+                print("Migrate update occurred.")
+            }
+            .perform(forVersion: "1.0") {
+                print("Migrate to 1.0 occurred.")
+            }
+            .perform(forVersion: "1.0", withBuild: "1") {
+                print("Migrate to 1.0 (1) occurred.")
+            }
+            .perform(forVersion: "1.0", withBuild: "2") {
+                print("Migrate to 1.0 (2) occurred.")
+            }
+            
+        return true
+    }
+}
+```
+</details>
+
+<details>
+<summary>RateLimit</summary>
+
+> A throttler that will ignore work items until the time limit for the preceding call is over:
+```swift
+let limiter = Throttler(limit: 5)
+var value = 0
+
+limiter.execute {
+    value += 1
+}
+
+limiter.execute {
+    value += 1
+}
+
+limiter.execute {
+    value += 1
+}
+
+sleep(5)
+
+limiter.execute {
+    value += 1
+}
+
+// value == 2
+```
+
+> A debouncer that will delay work items until time limit for the preceding call is over:
+```swift
+let limiter = Debouncer(limit: 5)
+var value = ""
+
+func sendToServer() {
+    limiter.execute {
+        // Sends to server after no typing for 5 seconds
+        // instead of once per character, so:
+        value == "hello" -> true
+    }
+}
+
+value.append("h")
+sendToServer()
+
+value.append("e")
+sendToServer()
+
+value.append("l")
+sendToServer()
+
+value.append("l")
+sendToServer()
+
+value.append("o")
+sendToServer()
+```
+</details>
+
+<details>
+<summary>Result</summary>
+
+> Used to represent whether an asynchronous request was successful or encountered an error:
+```swift
+// Declare the function with a completion handler of `Result` type
+func fetch(id: Int, completion: @escaping (Result<Author, ZamzamError>) -> Void) {
+    guard id > 0 else {
+        completion(.failure(.nonExistent))
+        return
+    }
+
+    DispatchQueue.global().async {
+        completion(.success(Author(...)))
+    }
+}
+
+// Call the asynchronous function and determine the response
+fetch(id: 123) {
+    guard let value = $0.value, $0.isSuccess else {
+        print("An error occurred: \($0.error ?? .general)")
+        return
+    }
+
+    print(value)
+}
+```
+</details>
+
+<details>
+<summary>SystemConfiguration</summary>
+
+> Determine if the device is connected to a network:
+```swift
+import SystemConfiguration
+
+SCNetworkReachability.isOnline
+```
+</details>
+
+<details>
+<summary>SynchronizedArray</summary>
+
+> A thread-safe array that allows concurrent reads and exclusive writes ([read more](http://basememara.com/creating-thread-safe-arrays-in-swift/)):
+```swift
+var array = SynchronizedArray<Int>()
+
+DispatchQueue.concurrentPerform(iterations: 1000) { index in
+    array.append(index)
+}
+```
+</details>
+
+<details>
+<summary>UserNotification</summary>
+
+> Registers the local and remote notifications with the categories and actions it supports:
+```swift
+UNUserNotificationCenter.current().register(
+    delegate: self,
+    categories: [
+        "order": [
+            UNNotificationAction(
+                identifier: "confirmAction",
+                title: "Confirm",
+                options: [.foreground]
+            )
+        ],
+        "chat": [
+            UNTextInputNotificationAction(
+                identifier: "replyAction",
+                title: "Reply",
+                options: [],
+                textInputButtonTitle: "Send",
+                textInputPlaceholder: "Type your message"
+            )
+        ],
+        "offer": nil
+    ],
+    authorizations: [.alert, .badge, .sound],
+    completion: { granted in
+        granted
+            ? log(debug: "Authorization for notification succeeded.")
+            : log(warn: "Authorization for notification not given.")
+    }
+)
+```
+
+> Get a list of all pending or delivered user notifications:
+```swift
+UNUserNotificationCenter.current().getNotificationRequests { notifications in
+    notifications.forEach {
+        print($0.identifier)
+    }
+}
+```
+
+> Find the pending or delivered notification request by identifier:
+```swift
+UNUserNotificationCenter.current().get(withIdentifier: "abc123") {
+    print($0?.identifier)
+}
+
+UNUserNotificationCenter.current().get(withIdentifiers: ["abc123", "xyz789"]) {
+    $0.forEach {
+        print($0.identifier)
+    }
+}
+```
+
+> Determine if the pending or delivered notification request exists:
+```swift
+UNUserNotificationCenter.current().exists(withIdentifier: "abc123") {
+    print("Does notification exist: \($0)")
+}
+```
+
+> Schedules local notifications for delivery:
+```swift
+UNUserNotificationCenter.current().add(
+    body: "This is the body for time interval",
+    timeInterval: 5
+)
+
+UNUserNotificationCenter.current().add(
+    body: "This is the body for time interval",
+    title: "This is the snooze title",
+    timeInterval: 60,
+    identifier: "abc123-main"
+)
+
+UNUserNotificationCenter.current().add(
+    body: "This is the body for time interval",
+    title: "This is the misc1 title",
+    timeInterval: 60,
+    identifier: "abc123-misc1",
+    category: "misc1Category"
+)
+
+UNUserNotificationCenter.current().add(
+    body: "This is the body for time interval",
+    title: "This is the misc2 title",
+    timeInterval: 60,
+    identifier: "abc123-misc2",
+    category: "misc2Category",
+    userInfo: [
+        "id": post.id,
+        "link": post.link,
+        "mediaURL": mediaURL
+    ],
+    completion: { error in
+        guard error == nil else { return }
+        // Added successfully
+    }
+)
+
+UNUserNotificationCenter.current().add(
+    date: Date(timeIntervalSinceNow: 5),
+    body: "This is the body for date",
+    repeats: .minute,
+    identifier: "abc123-repeat"
+)
+```
+
+> Get a remote image from the web and convert to a user notification attachment:
+```swift
+UNNotificationAttachment.download(from: urlString) {
+    guard $0.isSuccess, let attachment = $0.value else {
+        return log(error: "Could not download the remote resource (\(urlString)): \($0.error.debugDescription).")
+    }
+
+    UNUserNotificationCenter.current().add(
+        body: "This is the body",
+        attachments: [attachment]
+    )
+}
+```
+
+> Remove pending or delivered notification requests by identifiers, categories, or all:
+```swift
+UNUserNotificationCenter.current().remove(withIdentifier: "abc123")
+UNUserNotificationCenter.current().remove(withIdentifiers: ["abc123", "xyz789"])
+UNUserNotificationCenter.current().remove(withCategory: "chat") { /* Done */ }
+UNUserNotificationCenter.current().remove(withCategories: ["order", "chat"]) { /* Done */ }
+UNUserNotificationCenter.current().removeAll()
+```
+</details>
+
+<details>
+<summary>UserDefaults</summary>
+
+> Strongly-typed UserDefault keys:
+```swift
+// First define keys
+extension UserDefaults.Keys {
+    static let testString = UserDefaults.Key<String?>("testString")
+    static let testInt = UserDefaults.Key<Int?>("testInt")
+    static let testBool = UserDefaults.Key<Bool?>("testBool")
+    static let testArray = UserDefaults.Key<[Int]?>("testArray")
+}
+
+// Then use strongly-typed values
+let testString: String? = UserDefaults.standard[.testString]
+let testInt: Int? = UserDefaults.standard[.testInt]
+let testBool: Bool? = UserDefaults.standard[.testBool]
+let testArray: [Int]? = UserDefaults.standard[.testArray]
 ```
 </details>
 

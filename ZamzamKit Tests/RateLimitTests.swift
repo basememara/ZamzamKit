@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import ZamzamKit
+import ZamzamKit
 
 class RateLimitTests: XCTestCase {
 
@@ -61,6 +61,41 @@ extension RateLimitTests {
         waitForExpectations(timeout: 2)
         
         XCTAssertEqual(2, currentValue)
+    }
+    
+    func testDebouncer2() {
+        let limiter = Debouncer(limit: 5)
+        
+        let promise = expectation(description: "Run once and call immediately")
+        var value = ""
+        
+        func sendToServer() {
+            limiter.execute {
+                guard value == "hello" else {
+                    XCTFail("Failed to debounce.")
+                    return
+                }
+                
+                promise.fulfill()
+            }
+        }
+        
+        value.append("h")
+        sendToServer()
+        
+        value.append("e")
+        sendToServer()
+        
+        value.append("l")
+        sendToServer()
+        
+        value.append("l")
+        sendToServer()
+        
+        value.append("o")
+        sendToServer()
+        
+        wait(for: [promise], timeout: 10)
     }
     
     func testDebouncerRunOnceImmediatly() {
@@ -207,6 +242,40 @@ extension RateLimitTests {
         }
         
         wait(for: [promise], timeout: 2)
+    }
+    
+    func testThrottler3() {
+        let limiter = Throttler(limit: 5)
+        
+        let promise = expectation(description: "Run once and call immediately")
+        var value = 0
+        
+        limiter.execute {
+            value += 1
+        }
+        
+        limiter.execute {
+            value += 1
+        }
+        
+        limiter.execute {
+            value += 1
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
+            limiter.execute {
+                value += 1
+            }
+            
+            guard value == 2 else {
+                XCTFail("Failed to throttle, calls were not ignored.")
+                return
+            }
+            
+            promise.fulfill()
+        }
+        
+        wait(for: [promise], timeout: 10)
     }
     
     func testThrottlerResetting() {

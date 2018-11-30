@@ -8,7 +8,33 @@
 
 import Foundation
 
-/// The Debouncer will delay work items until time limit for the preceding call is over.
+/// A debouncer that will delay work items until time limit for the preceding call is over.
+///
+///     let limiter = Debouncer(limit: 5)
+///     var value = ""
+///
+///     func sendToServer() {
+///         limiter.execute {
+///             // Sends to server after no typing for 5 seconds
+///             // instead of once per character, so:
+///             value == "hello" -> true
+///         }
+///     }
+///
+///     value.append("h")
+///     sendToServer()
+///
+///     value.append("e")
+///     sendToServer()
+///
+///     value.append("l")
+///     sendToServer()
+///
+///     value.append("l")
+///     sendToServer()
+///
+///     value.append("o")
+///     sendToServer()
 public final class Debouncer {
     
     // MARK: - Properties

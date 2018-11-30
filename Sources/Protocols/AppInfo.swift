@@ -12,6 +12,7 @@ import UIKit
 import WatchKit
 #endif
 
+/// Provides details of the current app.
 public protocol AppInfo {
 
 }
