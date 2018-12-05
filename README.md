@@ -13,10 +13,16 @@ ZamzamKit a Swift framework for rapid development using a collection of small ut
 ## Installation
 
 #### Carthage
-Add `github "ZamzamInc/ZamzamKit"` to your `Cartfile`.
+You can use [Carthage](https://github.com/Carthage/Carthage) to install `ZamzamKit` by adding it to your `Cartfile`:
+```
+github "ZamzamInc/ZamzamKit"
+```
 
 #### CocoaPods
-Add `pod "ZamzamKit"` to your `Podfile`.
+You can use [CocoaPods](https://cocoapods.org) to install `ZamzamKit` by adding it to your `Podfile`:
+```
+pod "ZamzamKit"
+```
 
 ## Usage
 
