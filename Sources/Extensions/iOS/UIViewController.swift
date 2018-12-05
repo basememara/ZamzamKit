@@ -84,6 +84,18 @@ public extension UIViewController {
     
     /// Display an action sheet to the user.
     ///
+    ///     present(
+    ///         actionSheet: "Test Action Sheet",
+    ///         message: "Choose your action",
+    ///         popoverFrom: sender,
+    ///         additionalActions: [
+    ///             UIAlertAction(title: "Action 1") { },
+    ///             UIAlertAction(title: "Action 2") { },
+    ///             UIAlertAction(title: "Action 3") { }
+    ///         ],
+    ///         includeCancelAction: true
+    ///     )
+    ///
     /// - Parameters:
     ///   - title: Title of the alert.
     ///   - message: Body of the alert.
@@ -143,6 +155,8 @@ public extension UIViewController {
     
     /// Present a Safari view controller.
     ///
+    /// Use `present(safari:)` or `show(safari:)` depending on desired transition effect.
+    ///
     /// - Parameters:
     ///   - url: URL to display in the browser.
     ///   - modalPresentationStyle: The presentation style of the model view controller.
@@ -171,6 +185,8 @@ public extension UIViewController {
     }
     
     /// Present or push a Safari view controller in a primary context.
+    ///
+    /// Use `present(safari:)` or `show(safari:)` depending on desired transition effect.
     ///
     /// - Parameters:
     ///   - url: URL to display in the browser.
@@ -201,13 +217,31 @@ public extension UIViewController {
 
 public extension UIViewController {
     
-    /**
-     Presents an activity view controller modally that you can use to offer various services from your application.
-
-     - parameter activityItems: The array of data objects on which to perform the activity. The type of objects in the array is variable and dependent on the data your application manages.
-     - parameter sourceView: The view containing the anchor rectangle for the popover for supporting iPad device.
-     - parameter applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
-     */
+    /// Presents an activity view controller modally that you can use to offer various services from your application.
+    ///
+    ///     let safariActivity = UIActivity.make(
+    ///         title: .localized(.openInSafari),
+    ///         imageName: "safari-share",
+    ///         imageBundle: .zamzamKit,
+    ///         handler: {
+    ///             guard SCNetworkReachability.isOnline else {
+    ///                 return self.present(alert: "Device must be online to view within the browser.")
+    ///             }
+    ///
+    ///             UIApplication.shared.open(link)
+    ///         }
+    ///     )
+    ///
+    ///     present(
+    ///         activities: ["Test Title", link],
+    ///         popoverFrom: sender,
+    ///         applicationActivities: [safariActivity]
+    ///     )
+    ///
+    /// - Parameters:
+    ///   - activities: The array of data objects on which to perform the activity. The type of objects in the array is variable and dependent on the data your application manages.
+    ///   - sourceView: The view containing the anchor rectangle for the popover for supporting iPad device.
+    ///   - applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
     func present(activities: [Any], popoverFrom sourceView: UIView, applicationActivities: [UIActivity]? = nil) {
         let activity = UIActivityViewController(activityItems: activities, applicationActivities: applicationActivities)
         
@@ -220,13 +254,31 @@ public extension UIViewController {
         present(activity, animated: true, completion: nil)
     }
     
-    /**
-     Presents an activity view controller modally that you can use to offer various services from your application.
-
-     - parameter activityItems: The array of data objects on which to perform the activity. The type of objects in the array is variable and dependent on the data your application manages.
-     - parameter barButtonItem: The bar button item containing the anchor rectangle for the popover for supporting iPad device.
-     - parameter applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
-     */
+    /// Presents an activity view controller modally that you can use to offer various services from your application.
+    ///
+    ///     let safariActivity = UIActivity.make(
+    ///         title: .localized(.openInSafari),
+    ///         imageName: "safari-share",
+    ///         imageBundle: .zamzamKit,
+    ///         handler: {
+    ///             guard SCNetworkReachability.isOnline else {
+    ///                 return self.present(alert: "Device must be online to view within the browser.")
+    ///             }
+    ///
+    ///             UIApplication.shared.open(link)
+    ///         }
+    ///     )
+    ///
+    ///     present(
+    ///         activities: ["Test Title", link],
+    ///         barButtonItem: sender,
+    ///         applicationActivities: [safariActivity]
+    ///     )
+    ///
+    /// - Parameters:
+    ///   - activities: The array of data objects on which to perform the activity. The type of objects in the array is variable and dependent on the data your application manages.
+    ///   - barButtonItem: The bar button item containing the anchor rectangle for the popover for supporting iPad device.
+    ///   - applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
     func present(activities: [Any], barButtonItem: UIBarButtonItem, applicationActivities: [UIActivity]? = nil) {
         let activity = UIActivityViewController(activityItems: activities, applicationActivities: applicationActivities)
         
@@ -243,24 +295,18 @@ public extension UIViewController {
 
 public extension UIViewController {
     
-    /**
-     Calculate points from a percentage of the width of the view.
-     
-     - parameter value: Percentage of the width.
-     
-     - returns: Points calculated from percentage of width.
-     */
+    /// Calculate points from a percentage of the width of the view.
+    ///
+    /// - Parameter value: Percentage of the width.
+    /// - Returns: Points calculated from percentage of width.
     func percentX(_ value: CGFloat) -> CGFloat {
         return view.frame.width  * value
     }
     
-    /**
-     Calculate points from a percentage of the height of the view.
-     
-     - parameter value: Percentage of the height.
-     
-     - returns: Points calculated from percentage of height.
-     */
+    /// Calculate points from a percentage of the height of the view.
+    ///
+    /// - Parameter value: Percentage of the height.
+    /// - Returns: Points calculated from percentage of height.
     func percentY(_ value: CGFloat) -> CGFloat {
         return view.frame.height * value
     }

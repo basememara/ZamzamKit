@@ -41,7 +41,7 @@ private extension ControlsViewController {
         navigationItem.leftBarButtonItems = [
             BadgeBarButtonItem(
                 button: UIButton(type: .detailDisclosure),
-                badgeText: SCNetworkReachability.isOnline ? "Online" : "Offline",
+                badgeText: SCNetworkReachability.isOnline ? "On" : "Off",
                 target: self,
                 action: #selector(test)
             ).with {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Conforming to an app module and added to the `AppDelegate.modules` will trigger events.
+/// Conforming to a controller module and added to `UIViewController.modules()` will trigger events.
 public protocol ControllerModule {
     func viewDidLoad(_ controller: UIViewController)
     

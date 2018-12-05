@@ -4,23 +4,21 @@
 //  https://github.com/mohamede1945/NextResponderTextField
 //  https://stackoverflow.com/a/5889795/235334
 //
-//  Created by mohamede1945 on 6/20/15.
+//  Created by mohamede1945, @author mohamede1945 on 6/20/15.
 //  Copyright (c) 2015 Varaw. All rights reserved.
 //
 
 import UIKit
 
 /**
- Represents a next responder UITextField.
+ Represents a next responder `UITextField`.
+ 
  When the instance becomes first responder, and then the user taps the action button (e.g. return keyboard key)
  then one of the following happens:
- 1. If nextResponderField is not set, keyboard dismissed.
- 2. If nextResponderField is a UIButton and disabled, then keyboard dismissed.
- 3. If nextResponderField is a UIButton and enabled, then the UIButton fires touch up inside event (simulating a tap).
- 4. If nextResponderField is another implementation of UIResponder (e.g. other text field), then it becomes the first responder (e.g. receives keyboard input).
- 
- @author mohamede1945
- @version 1.0
+ 1. If `nextResponderField` is not set, keyboard dismissed.
+ 2. If `nextResponderField` is a `UIButton` and disabled, then keyboard dismissed.
+ 3. If `nextResponderField` is a `UIButton` and enabled, then the `UIButton` fires touch up inside event (simulating a tap).
+ 4. If `nextResponderField` is another implementation of `UIResponder` (e.g. other text field), then it becomes the first responder (e.g. receives keyboard input).
  */
 @objc
 open class NextResponderTextField: UITextField {

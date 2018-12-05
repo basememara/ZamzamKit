@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A `UITextView` with a placeholder text.
 open class PlaceholderTextView: UITextView {
     
     @IBInspectable open var placeholder: String = "" {

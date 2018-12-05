@@ -27,11 +27,10 @@ public extension StatusBarable where Self: UIViewController {
         )
     }
 
-    /**
-     Adds status bar with blur background instead of being transparent.
-     
-     - parameter backgroundColor: Background color of status bar.
-     */
+    /// Adds status bar with blur background instead of being transparent.
+    ///
+    /// - Parameter style: Background color of status bar.
+    /// - Returns: The status bar instance.
     @discardableResult
     func addStatusBar(style: UIBlurEffect.Style = .regular) -> UIView? {
         guard !application.isStatusBarHidden else { return nil }
@@ -69,6 +68,7 @@ public extension StatusBarable where Self: UIViewController {
         statusBar?.isHidden = true
     }
     
+    /// Unlinks the status bar from its superview and its window, and removes it from the responder chain.
     func removeStatusBar() {
         statusBar?.removeFromSuperview()
         statusBar = nil

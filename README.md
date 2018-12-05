@@ -12,17 +12,25 @@ ZamzamKit a Swift framework for rapid development using a collection of small ut
 
 ## Installation
 
-#### Carthage
-You can use [Carthage](https://github.com/Carthage/Carthage) to install `ZamzamKit` by adding it to your `Cartfile`:
-```
-github "ZamzamInc/ZamzamKit"
-```
+<details>
+<summary>Carthage</summary>
 
-#### CocoaPods
-You can use [CocoaPods](https://cocoapods.org) to install `ZamzamKit` by adding it to your `Podfile`:
-```
-pod "ZamzamKit"
-```
+Add `github "ZamzamInc/ZamzamKit"` to your `Cartfile`.
+</details>
+
+<details>
+<summary>CocoaPods</summary>
+
+Add `pod "ZamzamKit"` to your `Podfile`.
+</details>
+
+<details>
+<summary>Framework</summary>
+
+1. Download the latest release of `ZamzamKit` and extract the zip.
+2. Go to your Xcode project’s "General" settings. Drag ZamzamKit.framework and ZamzamKit.framework from the appropriate Swift-versioned directory for your project in `ios/`, `tvos/` or `watchos/` directory to the "Embedded Binaries" section. Make sure "Copy items if needed" is selected (except if using on multiple platforms in your project) and click Finish.
+3. In your unit test target's "Build Settings", add the parent path to ZamzamKit.framework in the "Framework Search Paths" section.
+</details>
 
 ## Usage
 
@@ -249,13 +257,11 @@ UIColor(rgb: (66, 134, 244))
 
 > A formatter that converts between numeric values and their textual currency representations:
 ```swift
-let amount: Decimal = 123456789.987
-
 let formatter = CurrencyFormatter()
-formatter.string(fromAmount: amount) -> "$123,456,789.99"
+formatter.string(fromAmount: 123456789.987) -> "$123,456,789.99"
 
-let formatter2 = CurrencyFormatter(from: Locale(identifier: "fr-FR"))
-formatter2.string(fromAmount: amount) -> "123 456 789,99 €"
+let formatter2 = CurrencyFormatter(for: Locale(identifier: "fr-FR"))
+formatter2.string(fromCents: 123456789) -> "1 234 567,89 €"
 ```
 </details>
 
@@ -472,19 +478,419 @@ url?.removeQueryItem("xyz") -> "https://example.com?abc=123&lmn=tuv"
 ```
 </details>
 
-### Platforms
+### iOS
 
 <details>
-<summary>iOS</summary>
+<summary>Application</summary>
 
-> Display an `UIAlertController` to the user:
+> Split up `AppDelegate` into [pluggable modules](http://basememara.com/pluggable-appdelegate-services/):
 ```swift
-present(alert: "Test Alert")
+// Subclass to pass lifecycle events to loaded modules
+@UIApplicationMain
+class AppDelegate: ApplicationModuleDelegate {
+
+    override func modules() -> [ApplicationModule] {
+        return [
+            LoggerApplicationModule(),
+            NotificationApplicationModule()
+        ]
+    }
+}
+```
+```swift
+// Each application module has access to the AppDelegate lifecycle events
+final class LoggerApplicationModule: ApplicationModule {
+    private let log = Logger()
+ 
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        log.config(for: application)
+        return true
+    }
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
+        log.info("App did finish launching.")
+        return true
+    }
+    
+    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+        log.warn("App did receive memory warning.")
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        log.warn("App will terminate.")
+    }
+}
+```
+
+The pluggable module technique also works for `UIViewController`:
+```swift
+// Subclass to pass lifecycle events to loaded modules
+class ViewController: ControllerModuleDelegate {
+
+    override func modules() -> [ControllerModule] {
+        return [
+            ChatControllerModule(),
+            OrderControllerService()
+        ]
+    }
+}
+```
+```swift
+// Each controller module has access to the UIViewController lifecycle events
+final class ChatControllerModule: ControllerModule {
+    private let chatWorker = ChatWorker()
+
+    func viewDidLoad(_ controller: UIViewController) {
+        chatWorker.config()
+    }
+}
+
+extension ChatControllerService {
+
+    func viewWillAppear(_ controller: UIViewController) {
+        chatWorker.subscribe()
+    }
+
+    func viewWillDisappear(_ controller: UIViewController) {
+        chatWorker.unsubscribe()
+    }
+}
 ```
 </details>
 
 <details>
-<summary>watchOS</summary>
+<summary>Background</summary>
+
+> Easily execute a [long-running background task](https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtask):
+```swift
+BackgroundTask.run(for: application) { task in
+    // Perform finite-length task...
+    task.end()
+}
+```
+</details>
+
+<details>
+<summary>BadgeBarButtonItem</summary>
+
+> A bar button item with a badge value:
+```swift
+navigationItem.rightBarButtonItems = [
+    BadgeBarButtonItem(
+        button: UIButton(type: .contactAdd),
+        badgeText: "123",
+        target: self,
+        action: #selector(test)
+    )
+]
+
+navigationItem.leftBarButtonItems = [
+    BadgeBarButtonItem(
+        button: UIButton(type: .detailDisclosure),
+        badgeText: SCNetworkReachability.isOnline ? "On" : "Off",
+        target: self,
+        action: #selector(test)
+    ).with {
+        $0.badgeFontColor = SCNetworkReachability.isOnline ? .black : .white
+        $0.badgeBackgroundColor = SCNetworkReachability.isOnline ? .green : .red
+    }
+]
+```
+</details>
+
+<details>
+<summary>MailComposer</summary>
+
+> Compose an email with optional subject, body, or attachment:
+```swift
+// Before
+extension MyViewController: MFMailComposeViewControllerDelegate {
+
+    func sendEmail() {
+        guard MFMailComposeViewController.canSendMail() else {
+            return present(alert: "Could Not Send Email", message: "Your device could not send e-mail.")
+        }
+
+        let mail = MFMailComposeViewController()
+        mail.mailComposeDelegate = self
+        mail.setToRecipients(["test@example.com"])
+
+        present(mail, animated: true)
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+}
+```
+
+```swift
+// After
+class MyViewController: UIViewController {
+    private let mailComposer = MailComposer()
+
+    func sendEmail() {
+        guard let controller = mailComposer.makeViewController(email: "test@example.com") else {
+            return present(alert: "Could Not Send Email", message: "Your device could not send e-mail.")
+        }
+
+        present(controller, animated: true)
+    }
+```
+</details>
+
+<details>
+<summary>UILabel</summary>
+
+> Enable data detectors like in `UITextView`:
+```swift
+// Before
+let label = UITextView()
+label.isEditable = false
+label.isScrollEnabled = false
+label.textContainer.lineFragmentPadding = 0
+label.textContainerInset = .zero
+label.backgroundColor = .clear
+label.dataDetectorTypes = [.phoneNumber, .link, .address, .calendarEvent]
+```
+```swift
+// After
+let label = UILabelView(
+    dataDetectorTypes: [.phoneNumber, .link, .address, .calendarEvent]
+)
+```
+</details>
+
+<details>
+<summary>UIStoryboard</summary>
+
+> Instantiate a view controller using convention of storyboard identifier matching class name:
+```swift
+let storyboard = UIStoryboard("Main")
+let controller: MyViewController = storyboard.instantiateViewController()
+```
+</details>
+
+<details>
+<summary>UITableView</summary>
+
+> Register cells in strongly-typed manner:
+```swift
+tableView.register(nib: TransactionViewCell.self)
+```
+
+> Get reusable cells through subscript:
+```swift
+// Before
+let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as? TransactionViewCell 
+```
+```swift
+// After
+let cell: TransactionViewCell = tableView[indexPath]
+```
+
+> Scroll to top or bottom:
+```swift
+tableView.scrollToTop()
+tableView.scrollToBottom()
+```
+
+> Set selection color of cell:
+```swift
+// Before
+let backgroundView = UIView()
+backgroundView.backgroundColor = .lightGray
+cell.selectedBackgroundView = backgroundView
+```
+```swift
+// After
+cell.selectionColor = .lightGray
+```
+
+> Strong-typed cell identifiers for static tables:
+```swift
+class ViewController: UITableViewController {
+    
+}
+
+extension ViewController: CellIdentifiable {
+    
+    // Each table view cell must have an identifier set that matches a case
+    enum CellIdentifier: String {
+        case about
+        case subscribe
+        case feedback
+        case tutorial
+    }
+}
+
+extension ViewController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let cell = tableView.cellForRow(at: indexPath),
+            let identifier = CellIdentifier(from: cell) else {
+                return
+        }
+        
+        // Easily reference the associated cell
+        switch identifier {
+        case .about:
+            router.showAbout()
+        case .subscribe:
+            router.showSubscribe()
+        case .feedback:
+            router.sendFeedback(
+                subject: .localizedFormat(.emailFeedbackSubject, constants.appDisplayName!)
+            )
+        case .tutorial:
+            router.startTutorial()
+        }
+    }
+}
+```
+</details>
+
+<details>
+<summary>UITextView</summary>
+
+> A placeholder like in `UITextField`:
+```swift
+let textView = PlaceholderTextView()
+textView.placeholder = "Enter a message..."
+```
+</details>
+
+<details>
+<summary>UIToolbar</summary>
+
+> Create a toolbar that toggles to next field or dismisses keyboard:
+```swift
+class ViewController: UIViewController {
+
+    private lazy var inputToolbar: UIToolbar = .makeInputDoneToolbar(
+        target: self,
+        action: #selector(endEditing)
+    )
+    
+    @IBAction func textFieldDidBeginEditing(_ sender: UITextField) {
+        sender.inputAccessoryView = inputToolbar
+    }
+}
+```
+</details>
+
+<details>
+<summary>UIView</summary>
+
+> Sometimes `isHidden` can be unintuitive:
+```swift
+myView.isVisible = isAuthorized && role.within[.admin, .author]
+```
+
+> Adjust border, corners, and shadows conveniently:
+```swift
+myView.borderColor = .red
+myView.borderWidth = 1
+myView.cornerRadius = 3
+myView.addShadow()
+```
+
+> Animate visibility:
+```swift
+myView.fadeIn()
+myView.fadeOut()
+```
+
+> Add activity indicator to center of view:
+```swift
+let activityIndicator = myView.makeActivityIndicator()
+activityIndicator.startAnimating()
+```
+
+> Create instance from `XIB`:
+```swift
+let control = MyView.loadNIB()
+control.isAwesome = true
+addSubview(control)
+```
+</details>
+
+<details>
+<summary>UIViewController</summary>
+
+> Display an alert to the user:
+```swift
+// Before
+let alert = UIAlertController(title: "My Title", message: "This is my message.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { alert in
+    print("OK tapped")
+}
+presentViewController(alert, animated: true, completion: nil)
+```
+```swift
+// After
+present(alert: "My Title", message: "This is my message.") {
+    print("OK tapped")
+}
+```
+
+> Display a Safari web page to the user:
+```swift
+// Before
+let safariController = SFSafariViewController(URL: URL(string: "https://apple.com")!)
+safariController.modalPresentationStyle = .overFullScreen
+presentViewController(safariController, animated: true, completion: nil)
+```
+```swift
+// After
+present(safari: "https://apple.com")
+show(safari: "https://apple.com")
+```
+
+> Display an action sheet to the user:
+```swift
+present(
+    actionSheet: "Test Action Sheet",
+    message: "Choose your action",
+    popoverFrom: sender,
+    additionalActions: [
+        UIAlertAction(title: "Action 1") { },
+        UIAlertAction(title: "Action 2") { },
+        UIAlertAction(title: "Action 3") { }
+    ],
+    includeCancelAction: true
+)
+```
+
+> Display a share activity with Safari added:
+```swift
+let safariActivity = UIActivity.make(
+    title: .localized(.openInSafari),
+    imageName: "safari-share",
+    imageBundle: .zamzamKit,
+    handler: {
+        guard SCNetworkReachability.isOnline else {
+            return self.present(alert: "Device must be online to view within the browser.")
+        }
+        
+        UIApplication.shared.open(link)
+    }
+)
+
+present(
+    activities: ["Test Title", link],
+    popoverFrom: sender,
+    applicationActivities: [safariActivity]
+)
+```
+</details>
+
+### watchOS
+
+<details>
+<summary>WKViewController</summary>
 
 > Display an alert to the user:
 ```swift

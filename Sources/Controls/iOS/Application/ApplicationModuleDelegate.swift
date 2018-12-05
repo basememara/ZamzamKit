@@ -9,18 +9,41 @@
 
 /// Subclassed by the `AppDelegate` to pass lifecycle events to loaded modules.
 ///
+/// The application modules will be processed in sequence.
+///
 ///     @UIApplicationMain
 ///     class AppDelegate: ApplicationModuleDelegate {
 ///
-///       override func modules() -> [ApplicationModule] {
-///         return [
-///           DependencyApplicationModule(),
-///           LoggerApplicationModule(),
-///           DataApplicationModule(),
-///           WindowApplicationModule(for: window),
-///           ThemeApplicationModule()
-///         ]
-///       }
+///         override func modules() -> [ApplicationModule] {
+///             return [
+///                 LoggerApplicationModule(),
+///                 NotificationApplicationModule()
+///             ]
+///         }
+///     }
+///
+/// Each application module has access to the `AppDelegate` lifecycle events:
+///
+///     final class LoggerApplicationModule: ApplicationModule {
+///         private let log = Logger()
+///
+///         func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+///             log.config(for: application)
+///             return true
+///         }
+///
+///         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
+///             log.info("App did finish launching.")
+///             return true
+///         }
+///
+///         func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+///             log.warn("App did receive memory warning.")
+///         }
+///
+///         func applicationWillTerminate(_ application: UIApplication) {
+///             log.warn("App will terminate.")
+///         }
 ///     }
 open class ApplicationModuleDelegate: UIResponder, UIApplicationDelegate {
     

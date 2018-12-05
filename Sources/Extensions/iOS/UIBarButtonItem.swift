@@ -10,16 +10,13 @@ import UIKit
 
 public extension UIBarButtonItem {
 
-    /**
-     Initializes a UIBarButtonItem with an image more conveniently.
-
-     - parameter imageName:        Image name.
-     - parameter target:           Target of the context.
-     - parameter action:           Action to trigger.
-     - parameter bundleIdentifier: Identifier of the bundle.
-
-     - returns: An initialized UIBarButtonItem.
-     */
+    /// Initializes a UIBarButtonItem with an image more conveniently.
+    ///
+    /// - Parameters:
+    ///   - imageName: Image name.
+    ///   - target: Target of the context.
+    ///   - action: Action to trigger.
+    ///   - bundleIdentifier: Identifier of the bundle.
     convenience init(imageName: String, target: Any?, action: Selector, bundleIdentifier: String? = nil) {
         self.init(
             image: UIImage(

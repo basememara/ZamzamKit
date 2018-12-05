@@ -11,13 +11,12 @@ import UIKit
 public extension UITableView {
     static let defaultCellIdentifier = "Cell"
     
-    /**
-     Register NIB to table view. NIB type and cell reuse identifier can match for convenience.
-     
-     - parameter nibName: Type of the NIB.
-     - parameter withIdentifier: Name of the reusable cell identifier.
-     - parameter inBundle: Bundle if not local.
-     */
+    /// Register NIB to table view. NIB type and cell reuse identifier can match for convenience.
+    ///
+    /// - Parameters:
+    ///   - type: Type of the NIB.
+    ///   - identifier: Name of the reusable cell identifier.
+    ///   - bundle: Bundle if not local.
     func register<T: UITableViewCell>(nib type: T.Type, withIdentifier identifier: String = UITableView.defaultCellIdentifier, inBundle bundle: Bundle? = nil) {
         register(
             UINib(nibName: String(describing: type), bundle: bundle),
@@ -29,13 +28,12 @@ public extension UITableView {
 public extension UITableView {
     static let defaultHeaderFooterIdentifier = "Header"
     
-    /**
-     Register NIB to table view. NIB type and header/footer reuse identifier can match for convenience.
-     
-     - parameter nibName: Type of the NIB.
-     - parameter withIdentifier: Name of the reusable cell identifier.
-     - parameter inBundle: Bundle if not local.
-     */
+    /// Register NIB to table view. NIB type and header/footer reuse identifier can match for convenience.
+    ///
+    /// - Parameters:
+    ///   - type: Type of the NIB.
+    ///   - identifier: Name of the reusable cell identifier.
+    ///   - bundle: Bundle if not local.
     func register<T: UITableViewHeaderFooterView>(nib type: T.Type, withIdentifier identifier: String = UITableView.defaultHeaderFooterIdentifier, inBundle bundle: Bundle? = nil) {
         register(
             UINib(nibName: String(describing: type), bundle: bundle),
@@ -51,48 +49,34 @@ public extension UITableView {
 
 public extension UITableView {
     
-    /**
-     Gets the reusable cell with default identifier name.
-     
-     - parameter indexPath: The index path of the cell from the table.
-     
-     - returns: Returns the table view cell.
-     */
+    /// Gets the reusable cell with default identifier name.
+    ///
+    /// - Parameter indexPath: The index path of the cell from the table.
     subscript(indexPath: IndexPath) -> UITableViewCell {
         return dequeueReusableCell(withIdentifier: UITableView.defaultCellIdentifier, for: indexPath)
     }
 
-    /**
-     Gets the reusable cell with default identifier name.
-
-     - parameter indexPath: The index path of the cell from the table.
-
-     - returns: Returns the table view cell.
-     */
+    /// Gets the reusable cell with default identifier name.
+    ///
+    /// - Parameter indexPath: The index path of the cell from the table.
     subscript<T: UITableViewCell>(indexPath: IndexPath) -> T {
         return dequeueReusableCell(withIdentifier: UITableView.defaultCellIdentifier, for: indexPath) as! T
     }
 
-    /**
-     Gets the reusable cell with the specified identifier name.
-
-     - parameter indexPath: The index path of the cell from the table.
-     - parameter withIdentifier: Name of the reusable cell identifier.
-
-     - returns: Returns the table view cell.
-     */
+    /// Gets the reusable cell with the specified identifier name.
+    ///
+    /// - Parameters:
+    ///   - indexPath: The index path of the cell from the table.
+    ///   - identifier: Name of the reusable cell identifier.
     subscript(indexPath: IndexPath, withIdentifier identifier: String) -> UITableViewCell {
         return dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
     
-    /**
-     Gets the reusable cell with default identifier name.
-     
-     - parameter indexPath: The index path of the cell from the table.
-     - parameter withIdentifier: Name of the reusable cell identifier.
-     
-     - returns: Returns the table view cell.
-     */
+    /// Gets the reusable cell with default identifier name.
+    ///
+    /// - Parameters:
+    ///   - indexPath: The index path of the cell from the table.
+    ///   - identifier: Name of the reusable cell identifier.
     subscript<T: UITableViewCell>(indexPath: IndexPath, withIdentifier identifier: String) -> T {
         return dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! T
     }

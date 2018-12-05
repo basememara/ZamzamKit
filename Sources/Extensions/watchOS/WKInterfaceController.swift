@@ -32,36 +32,35 @@ public extension WKInterfaceController {
         cancelHandler: (() -> Void)? = nil,
         handler: (() -> Void)? = nil)
     {
-            var actions = [
-                WKAlertAction(title: buttonText, style: .default) {
-                    handler?()
-                }
-            ]
-            
-            if includeCancelAction {
-                actions.append(
-                    WKAlertAction(title: cancelText, style: .cancel) {
-                        cancelHandler?()
-                    }
-                )
+        var actions = [
+            WKAlertAction(title: buttonText, style: .default) {
+                handler?()
             }
-            
-            // Add additional actions if applicable
-            if let additionalActions = additionalActions, !additionalActions.isEmpty {
-                if alertControllerStyle != .sideBySideButtonsAlert {
-                    actions += additionalActions
-                } else if actions.count < 2 {
-                    // Only two actions are needed for side by side alert
-                    actions.append(additionalActions.first!)
-                }
-            }
+        ]
         
-            presentAlert(
-                withTitle: title,
-                message: message,
-                preferredStyle: alertControllerStyle,
-                actions: actions
+        if includeCancelAction {
+            actions.append(
+                WKAlertAction(title: cancelText, style: .cancel) {
+                    cancelHandler?()
+                }
             )
-    }
+        }
+        
+        // Add additional actions if applicable
+        if let additionalActions = additionalActions, !additionalActions.isEmpty {
+            if alertControllerStyle != .sideBySideButtonsAlert {
+                actions += additionalActions
+            } else if actions.count < 2 {
+                // Only two actions are needed for side by side alert
+                actions.append(additionalActions.first!)
+            }
+        }
     
+        presentAlert(
+            withTitle: title,
+            message: message,
+            preferredStyle: alertControllerStyle,
+            actions: actions
+        )
+    }
 }

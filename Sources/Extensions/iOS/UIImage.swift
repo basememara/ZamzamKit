@@ -10,14 +10,11 @@ import Foundation
 
 public extension UIImage {
 
-    /**
-     Convenience initializer to handle default parameter value
-
-     - parameter named:    The name of the image.
-     - parameter inBundle: The bundle containing the image file or asset catalog. Specify nil to search the app's main bundle.
-
-     - returns: The image object.
-     */
+    /// Convenience initializer to handle default parameter value.
+    ///
+    /// - Parameters:
+    ///   - named: The name of the image.
+    ///   - inBundle: The bundle containing the image file or asset catalog. Specify nil to search the app's main bundle.
     convenience init?(named: String, inBundle: Bundle?) {
         self.init(named: named, in: inBundle, compatibleWith: nil)
     }
@@ -40,14 +37,11 @@ public extension UIImage {
 
 public extension UIImage {
     
-    /**
-     Convenience initializer to convert a color to image
-     
-     - parameter color: The target color of the image.
-     - parameter size: The size of the image.
-     
-     - returns: The image object.
-     */
+    /// Convenience initializer to convert a color to image.
+    ///
+    /// - Parameters:
+    ///   - color: The target color of the image.
+    ///   - size: The size of the image.
     convenience init?(from color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
         // https://stackoverflow.com/q/6496441/235334
         UIGraphicsBeginImageContext(size)

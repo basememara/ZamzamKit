@@ -11,7 +11,14 @@ import UIKit
 
 public extension UIImageView {
     
-    func setProgressAnimation(_ imageName: String, totalImages: Int, percent: Double, duration: Double = 1.0) {
+    /// Starts animating the sequential images in the receiver.
+    ///
+    /// - Parameters:
+    ///   - imageName: The root name of the image that will be used to generate an array of `UIImage` objects to use for an animation.
+    ///   - totalImages: Total images to generate the list of images used for animation.
+    ///   - percent: The percentage of the image to generate.
+    ///   - duration: The duration of the animation.
+    func setProgressAnimation(_ imageName: String, totalImages: Int, percent: Double, duration: TimeInterval = 1.0) {
         let imageCount = Int(Double(totalImages) * percent)
         
         guard imageCount > 0 else {
@@ -26,7 +33,7 @@ public extension UIImageView {
         
         image = imagesList.last
         animationImages = imagesList
-        animationDuration = 1.0
+        animationDuration = duration
         animationRepeatCount = 1
         startAnimating()
     }

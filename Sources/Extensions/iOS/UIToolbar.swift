@@ -10,6 +10,12 @@ import UIKit
 
 public extension UIToolbar {
     
+    /// Create an instance of a `UIToolbar` with a `Done` button that performs the action.
+    ///
+    /// - Parameters:
+    ///   - target: The object that receives the action message.
+    ///   - action: The action to send to target when this item is selected.
+    /// - Returns: A control that displays the done button along the bottom edge of your interface.
     static func makeInputDoneToolbar(target: Any?, action: Selector) -> UIToolbar {
         return UIToolbar().with {
             $0.barStyle = .default
@@ -23,6 +29,12 @@ public extension UIToolbar {
         }
     }
     
+    /// Create an instance of a `UIToolbar` with a `Next` button that performs the action.
+    ///
+    /// - Parameters:
+    ///   - target: The object that receives the action message.
+    ///   - action: The action to send to target when this item is selected.
+    /// - Returns: A control that displays the next button along the bottom edge of your interface.
     static func makeInputNextToolbar(target: Any?, action: Selector) -> UIToolbar {
         return UIToolbar().with {
             $0.barStyle = .default

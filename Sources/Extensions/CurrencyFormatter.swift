@@ -12,7 +12,7 @@ import Foundation
 public struct CurrencyFormatter {
     private let formatter: NumberFormatter
     
-    public init(from locale: Locale = .current, fractionDigits: Int = 2) {
+    public init(for locale: Locale = .current, fractionDigits: Int = 2) {
         self.formatter = NumberFormatter().with {
             $0.locale = locale
             $0.numberStyle = .currency
@@ -32,7 +32,7 @@ public extension CurrencyFormatter {
     ///     let formatter = CurrencyFormatter()
     ///     formatter.string(fromAmount: amount) -> "$123,456,789.99"
     ///
-    ///     let formatter2 = CurrencyFormatter(from: Locale(identifier: "fr-FR"))
+    ///     let formatter2 = CurrencyFormatter(for: Locale(identifier: "fr-FR"))
     ///     formatter2.string(fromAmount: amount) -> "123 456 789,99 €"
     ///
     /// - Parameter amount: The amount of the value.
@@ -48,7 +48,7 @@ public extension CurrencyFormatter {
     ///     let formatter = CurrencyFormatter()
     ///     formatter.string(fromCents: cents) -> "$1,234,567.89"
     ///
-    ///     let formatter2 = CurrencyFormatter(from: Locale(identifier: "fr-FR"))
+    ///     let formatter2 = CurrencyFormatter(for: Locale(identifier: "fr-FR"))
     ///     formatter2.string(fromCents: cents) -> "1 234 567,89 €"
     ///
     /// - Parameter cents: The cents of the value.

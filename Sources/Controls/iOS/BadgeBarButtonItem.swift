@@ -9,7 +9,8 @@
 
 import UIKit
 
-public class BadgeBarButtonItem: UIBarButtonItem {
+/// A bar button item with an optional badge value.
+open class BadgeBarButtonItem: UIBarButtonItem {
     
     private(set) public lazy var badgeLabel = UILabel().with {
         $0.text = badgeText?.isEmpty == false ? " \(badgeText!) " : nil
@@ -36,11 +37,11 @@ public class BadgeBarButtonItem: UIBarButtonItem {
         )
     }
     
-    public var badgeButton: UIButton? {
+    open var badgeButton: UIButton? {
         return customView as? UIButton
     }
     
-    public var badgeText: String? {
+    open var badgeText: String? {
         didSet {
             badgeLabel.text = badgeText?.isEmpty == false ? " \(badgeText!) " : nil
             badgeLabel.isHidden = badgeText?.isEmpty != false
@@ -48,15 +49,15 @@ public class BadgeBarButtonItem: UIBarButtonItem {
         }
     }
     
-    public var badgeBackgroundColor: UIColor = .red {
+    open var badgeBackgroundColor: UIColor = .red {
         didSet { badgeLabel.backgroundColor = badgeBackgroundColor }
     }
     
-    public var badgeFontColor: UIColor = .white {
+    open var badgeFontColor: UIColor = .white {
         didSet { badgeLabel.textColor = badgeFontColor }
     }
     
-    public var badgeFontSize: CGFloat = UIFont.smallSystemFontSize {
+    open var badgeFontSize: CGFloat = UIFont.smallSystemFontSize {
         didSet {
             badgeLabel.font = .systemFont(ofSize: badgeFontSize)
             badgeLabel.layer.cornerRadius = badgeFontSize * CGFloat(0.6)

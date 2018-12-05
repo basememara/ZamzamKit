@@ -10,7 +10,7 @@ import UIKit
 
 public extension UIView {
     
-    /// Unarchives the contents of a XIB file associared with the receiver.
+    /// Unarchives the contents of a XIB file associated with the receiver.
     ///
     /// - Parameters:
     ///   - name: The name of the XIB file. Defaults to the type's class name.
@@ -178,11 +178,13 @@ public extension UIView {
 
 public extension UIView {
     
-    /**
-     Adds activity indicator to the center of the view.
-     
-     - returns: Returns an instance of the activity indicator.
-     */
+    /// Adds activity indicator to the center of the view.
+    ///
+    /// - Parameters:
+    ///   - style: The basic appearance of the activity indicator.
+    ///   - color: The color of the activity indicator.
+    ///   - size: The frame rectangle for the view, measured in points.
+    /// - Returns: Returns an instance of the activity indicator.
     func makeActivityIndicator(
         style: UIActivityIndicatorView.Style = .whiteLarge,
         color: UIColor = .gray,

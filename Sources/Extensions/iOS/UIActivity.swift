@@ -8,17 +8,15 @@
 
 public extension UIActivity {
 
-    /**
-     Creates an instance of an activity.
-
-     - parameter title: Title to display for the activity
-     - parameter imageName: Name of the image
-     - parameter imageBundle: Bundle of the image
-     - parameter canPerform: Function to determine if the activity can be shown. Default is true.
-     - parameter handler: Function to perform activity when selected by the user.
-
-     - returns: The custom activity
-     */
+    /// Creates an instance of an activity.
+    ///
+    /// - Parameters:
+    ///   - title: Title to display for the activity.
+    ///   - imageName: Name of the image.
+    ///   - imageBundle: Bundle of the image.
+    ///   - canPerform: Function to determine if the activity can be shown. Default is true.
+    ///   - handler: Function to perform activity when selected by the user.
+    /// - Returns: The custom activity.
     static func make(
         title: String,
         imageName: String,

@@ -189,7 +189,7 @@ extension StringTests {
     }
     
     func testCurrencyFormatter2() {
-        let formatter = CurrencyFormatter(from: Locale(identifier: "fr-FR"))
+        let formatter = CurrencyFormatter(for: Locale(identifier: "fr-FR"))
         
         let cents = 123456789
         XCTAssertEqual(formatter.string(fromCents: cents), "1 234 567,89 €")
@@ -199,7 +199,7 @@ extension StringTests {
     }
     
     func testCurrencyFormatter3() {
-        let formatter = CurrencyFormatter(from: Locale(identifier: "ar-SA"))
+        let formatter = CurrencyFormatter(for: Locale(identifier: "ar-SA"))
         
         let cents = 123456789
         XCTAssertEqual(formatter.string(fromCents: cents), "١٬٢٣٤٬٥٦٧٫٨٩ ر.س.‏")
@@ -209,7 +209,7 @@ extension StringTests {
     }
     
     func testCurrencyFormatter4() {
-        let formatter = CurrencyFormatter(from: Locale(identifier: "zh_HANS"))
+        let formatter = CurrencyFormatter(for: Locale(identifier: "zh_HANS"))
         
         let cents = 123456789
         XCTAssertEqual(formatter.string(fromCents: cents), "¤1,234,567.89")

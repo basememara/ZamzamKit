@@ -320,6 +320,7 @@ public extension SynchronizedArray where Element: Equatable {
 }
 
 // MARK: - Infix operators
+
 public extension SynchronizedArray {
 
     /// Adds a new element at the end of the array.

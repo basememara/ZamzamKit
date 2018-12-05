@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// The UIView class with a .xib file by the same name added as a subview as file owner.
+/// The `UIView` class with a `.xib` file by the same name added as a subview as file owner.
 open class XIBView: UIView {
 
     public override init(frame: CGRect) {

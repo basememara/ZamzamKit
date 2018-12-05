@@ -11,13 +11,37 @@ import UIKit
 
 /// Subclassed by the `UIViewController` to pass lifecycle events to loaded modules.
 ///
+/// The controller modules will be processed in sequence.
+///
 ///     class ViewController: ControllerModuleDelegate {
 ///
-///       override func modules() -> [ControllerModule] {
-///         return [
-///           ChatControllerModule()
-///         ]
-///       }
+///         override func modules() -> [ControllerModule] {
+///             return [
+///                 ChatControllerModule(),
+///                 OrderControllerService()
+///             ]
+///         }
+///     }
+///
+/// Each controller module has access to the `UIViewController` lifecycle events:
+///
+///     final class ChatControllerModule: ControllerModule {
+///         private let chatWorker = ChatWorker()
+///
+///         func viewDidLoad(_ controller: UIViewController) {
+///             chatWorker.config()
+///         }
+///     }
+///
+///     extension ChatControllerService {
+///
+///         func viewWillAppear(_ controller: UIViewController) {
+///             chatWorker.subscribe()
+///         }
+///
+///         func viewWillDisappear(_ controller: UIViewController) {
+///             chatWorker.unsubscribe()
+///         }
 ///     }
 open class ControllerModuleDelegate: UIViewController {
     

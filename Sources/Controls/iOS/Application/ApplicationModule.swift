@@ -9,7 +9,7 @@
 
 import UIKit
 
-/// Conforming to an app module and added to the `AppDelegate.modules` will trigger events.
+/// Conforming to an app module and added to `AppDelegate.modules()` will trigger events.
 public protocol ApplicationModule {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool

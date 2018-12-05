@@ -16,8 +16,8 @@ public extension UIWindow {
     }
     
     /// Recursively retrieve the top most view controller
-    /// https://stackoverflow.com/a/39857342/235334
     private func getTopViewController(from controller: UIViewController?) -> UIViewController? {
+        /// https://stackoverflow.com/a/39857342/235334
         if let nav = controller as? UINavigationController {
             return getTopViewController(from: nav.visibleViewController)
         } else if let tab = controller as? UITabBarController, let selected = tab.selectedViewController {
@@ -33,6 +33,7 @@ public extension UIWindow {
 public extension UIWindow {
     
     /// Unload all views and add back.
+    ///
     /// Useful for applying `UIAppearance` changes to existing views.
     func reload() {
         subviews.forEach { view in
@@ -45,6 +46,7 @@ public extension UIWindow {
 public extension Array where Element == UIWindow {
     
     /// Unload all views for each `UIWindow` and add back.
+    ///
     /// Useful for applying `UIAppearance` changes to existing views.
     func reload() {
         forEach { $0.reload() }
