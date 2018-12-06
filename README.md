@@ -619,6 +619,14 @@ Interface Builder compatible via "User Defined Runtime Attributes":
 </details>
 
 <details>
+<summary>KeyboardScrollView</summary>
+
+> The `automaticallyAdjustsInsetsForKeyboard` property extends the scroll view insets when the keyboard is shown:
+
+![Image of KeyboardScrollView](./Resources/KeyboardScrollView.png)
+</details>
+
+<details>
 <summary>MailComposer</summary>
 
 > Compose an email with optional subject, body, or attachment:
@@ -843,16 +851,22 @@ Interface Builder compatible via Attributes inspector:
 ```swift
 class ViewController: UIViewController {
 
-    private lazy var inputToolbar: UIToolbar = .makeInputDoneToolbar(
+    private lazy var inputDoneToolbar: UIToolbar = .makeInputDoneToolbar(
         target: self,
         action: #selector(endEditing)
     )
-    
-    @IBAction func textFieldDidBeginEditing(_ sender: UITextField) {
-        sender.inputAccessoryView = inputToolbar
+}
+
+extension ViewController: UITextViewDelegate {
+
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        textView.inputAccessoryView = inputDoneToolbar
+        return true
     }
 }
 ```
+
+![Image of UIToolbar](./Resources/UIToolbar.png)
 </details>
 
 <details>
