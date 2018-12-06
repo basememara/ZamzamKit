@@ -574,6 +574,9 @@ BackgroundTask.run(for: application) { task in
 <summary>BadgeBarButtonItem</summary>
 
 > A bar button item with a badge value:
+
+![Image of BadgeBarButtonItem](./Resources/BadgeBarButtonItem.png)
+
 ```swift
 navigationItem.rightBarButtonItems = [
     BadgeBarButtonItem(
@@ -596,6 +599,23 @@ navigationItem.leftBarButtonItems = [
     }
 ]
 ```
+</details>
+
+<details>
+<summary>GradientView</summary>
+
+> A `UIView` with gradient effects:
+```swift
+@IBOutlet weak var gradientView: GradientView! {
+    didSet {
+        gradientView.firstColor = .blue
+        gradientView.secondColor = .red
+    }
+}
+```
+Interface Builder compatible via "User Defined Runtime Attributes":
+
+![Image of GradientView](./Resources/GradientView-Storyboard.png)
 </details>
 
 <details>
@@ -640,6 +660,33 @@ class MyViewController: UIViewController {
 </details>
 
 <details>
+<summary>RoundedView</summary>
+
+> A `UIView`, `UIImage`, and `UIButton` subclasses with circular masking:
+
+![Image of RoundedView](./Resources/RoundedView.png)
+</details>
+
+<details>
+<summary>UICollectionView</summary>
+
+> Register cells in strongly-typed manner:
+```swift
+collectionView.register(nib: TransactionViewCell.self)
+```
+
+> Get reusable cells through subscript:
+```swift
+// Before
+let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? TransactionViewCell 
+```
+```swift
+// After
+let cell: TransactionViewCell = collectionView[indexPath]
+```
+</details>
+
+<details>
 <summary>UILabel</summary>
 
 > Enable data detectors like in `UITextView`:
@@ -658,6 +705,28 @@ label.dataDetectorTypes = [.phoneNumber, .link, .address, .calendarEvent]
 let label = UILabelView(
     dataDetectorTypes: [.phoneNumber, .link, .address, .calendarEvent]
 )
+```
+</details>
+
+<details>
+<summary>UIStackView</summary>
+
+> Add a view with animation:
+```swift
+stackView.addArrangedSubview(view1, animated: true)
+```
+
+> Add a list of views:
+```swift
+stackView.addArrangedSubviews([view1, view2, view3])
+stackView.addArrangedSubviews([view1, view3], animated: true)
+```
+
+> Remove and deinitialize all views:
+```swift
+stackView
+    .deleteArrangedSubviews()
+    .addArrangedSubviews([view2, view3]) // Chain commands
 ```
 </details>
 
@@ -707,7 +776,7 @@ cell.selectedBackgroundView = backgroundView
 cell.selectionColor = .lightGray
 ```
 
-> Strong-typed cell identifiers for static tables:
+> Strongly-typed cell identifiers for static tables:
 ```swift
 class ViewController: UITableViewController {
     
@@ -715,7 +784,7 @@ class ViewController: UITableViewController {
 
 extension ViewController: CellIdentifiable {
     
-    // Each table view cell must have an identifier set that matches a case
+    // Each table view cell must have an identifier that matches a case
     enum CellIdentifier: String {
         case about
         case subscribe
@@ -758,8 +827,13 @@ extension ViewController {
 > A placeholder like in `UITextField`:
 ```swift
 let textView = PlaceholderTextView()
-textView.placeholder = "Enter a message..."
+textView.placeholder = "Enter message..."
 ```
+
+Interface Builder compatible via Attributes inspector:
+
+![Image of GradientView](./Resources/PlaceholderTextView-Storyboard.png)
+
 </details>
 
 <details>
@@ -884,6 +958,15 @@ present(
     popoverFrom: sender,
     applicationActivities: [safariActivity]
 )
+```
+</details>
+
+<details>
+<summary>UIWindow</summary>
+
+> Get the top view controller for the window:
+```swift
+window?.topViewController
 ```
 </details>
 
