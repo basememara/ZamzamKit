@@ -885,6 +885,8 @@ myView.cornerRadius = 3
 myView.addShadow()
 ```
 
+![Image of UIView-Shadow](./Resources/UIView-Shadow.png)
+
 > Animate visibility:
 ```swift
 myView.fadeIn()
