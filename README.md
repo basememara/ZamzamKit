@@ -575,7 +575,7 @@ BackgroundTask.run(for: application) { task in
 
 > A bar button item with a badge value:
 
-![Image of BadgeBarButtonItem](./Resources/BadgeBarButtonItem.png)
+![Image of BadgeBarButtonItem](./Documentation/Images/BadgeBarButtonItem.png)
 
 ```swift
 navigationItem.rightBarButtonItems = [
@@ -615,7 +615,7 @@ navigationItem.leftBarButtonItems = [
 ```
 Interface Builder compatible via "User Defined Runtime Attributes":
 
-![Image of GradientView](./Resources/GradientView-Storyboard.png)
+![Image of GradientView](./Documentation/Images/GradientView-Storyboard.png)
 </details>
 
 <details>
@@ -623,7 +623,7 @@ Interface Builder compatible via "User Defined Runtime Attributes":
 
 > The `automaticallyAdjustsInsetsForKeyboard` property extends the scroll view insets when the keyboard is shown:
 
-![Image of KeyboardScrollView](./Resources/KeyboardScrollView.png)
+![Image of KeyboardScrollView](./Documentation/Images/KeyboardScrollView.png)
 </details>
 
 <details>
@@ -668,11 +668,97 @@ class MyViewController: UIViewController {
 </details>
 
 <details>
+<summary>NextResponderTextField</summary>
+
+> An extended `UITextView` that wires the "Return Key" to another `UIResponder`:
+
+![Image of NextResponderTextField](./Documentation/Images/NextResponderTextField.png)
+
+![Image of NextResponderTextField2](./Documentation/Images/NextResponderTextField2.png)
+</details>
+
+<details>
 <summary>RoundedView</summary>
 
 > A `UIView`, `UIImage`, and `UIButton` subclasses with circular masking:
 
-![Image of RoundedView](./Resources/RoundedView.png)
+![Image of RoundedView](./Documentation/Images/RoundedView.png)
+</details>
+
+<details>
+<summary>Routing</summary>
+
+> Conforming types to `Routable` provides extensions in `UIViewController` for strongly-typed storyboard routing ([read more](http://basememara.com/protocol-oriented-router-in-swift/)):
+
+```
+class ViewController: UIViewController {
+
+    @IBAction func moreTapped() {
+        present(storyboard: .more) { (controller: MoreViewController) in
+            controller.someProperty = "\(Date())"
+        }
+    }
+}
+
+extension ViewController: Routable {
+
+    enum StoryboardIdentifier: String {
+        case more = "More"
+        case login = "Login"
+    }
+}
+```
+
+> Conforming types to `Router` can specify a weak `UIViewController` instance:
+
+```
+struct HomeRouter: Router {
+    weak var viewController: UIViewController?
+
+    init(viewController: UIViewController?) {
+        self.viewController = viewController
+    }
+
+    func listPosts(for fetchType: FetchType) {
+        show(storyboard: .listPosts) { (controller: ListPostsViewController) in
+            controller.fetchType = fetchType
+        }
+    }
+}
+```
+</details>
+
+<details>
+<summary>StatusBarable</summary>
+
+> Manages the status bar view:
+```swift
+class ViewController: UIViewController, StatusBarable {
+
+    let application = UIApplication.shared
+    var statusBar: UIView?
+
+    override func viewDidLoad() {
+        showStatusBar()
+
+        NotificationCenter.default.addObserver(
+            for: UIDevice.orientationDidChangeNotification,
+            selector: #selector(deviceOrientationDidChange),
+            from: self
+        )
+    }
+}
+
+private extension ViewController {
+
+    @objc func deviceOrientationDidChange() {
+        removeStatusBar()
+        showStatusBar()
+    }
+}
+```
+
+![Image of StatusBarable](./Documentation/Images/StatusBarable.png)
 </details>
 
 <details>
@@ -691,6 +777,20 @@ let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: 
 ```swift
 // After
 let cell: TransactionViewCell = collectionView[indexPath]
+```
+</details>
+
+<details>
+<summary>UIImage</summary>
+
+> Save an image to disk as .png:
+```swift
+imageView.image.pngToDisk() -> "/.../Library/Caches/img_ezoPU8.png"
+```
+> Convert a color to an image:
+```swift
+let image = UIImage(from: .lightGray)
+button.setBackgroundImage(image, for: .selected)
 ```
 </details>
 
@@ -840,7 +940,7 @@ textView.placeholder = "Enter message..."
 
 Interface Builder compatible via Attributes inspector:
 
-![Image of GradientView](./Resources/PlaceholderTextView-Storyboard.png)
+![Image of GradientView](./Documentation/Images/PlaceholderTextView-Storyboard.png)
 
 </details>
 
@@ -866,7 +966,7 @@ extension ViewController: UITextViewDelegate {
 }
 ```
 
-![Image of UIToolbar](./Resources/UIToolbar.png)
+![Image of UIToolbar](./Documentation/Images/UIToolbar.png)
 </details>
 
 <details>
@@ -885,7 +985,7 @@ myView.cornerRadius = 3
 myView.addShadow()
 ```
 
-![Image of UIView-Shadow](./Resources/UIView-Shadow.png)
+![Image of UIView-Shadow](./Documentation/Images/UIView-Shadow.png)
 
 > Animate visibility:
 ```swift
@@ -905,6 +1005,33 @@ let control = MyView.loadNIB()
 control.isAwesome = true
 addSubview(control)
 ```
+
+> Present a view modally:
+```swift
+class ModalView: UIView, PresentableView {
+
+    @IBOutlet weak var contentView: UIView!
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Dismiss self when tapped on background
+        dismiss()
+    }
+
+    @IBAction func closeButtonTapped() {
+        dismiss()
+    }
+}
+
+class ViewController: UIViewController {
+
+    @IBAction func modalButtonTapped() {
+        let modalView = ModalView.loadNIB()
+        present(control: modalView)
+    }
+}
+```
+
+![Image of PresentableView](./Documentation/Images/PresentableView.gif)
 </details>
 
 <details>
@@ -989,11 +1116,205 @@ window?.topViewController
 ### watchOS
 
 <details>
+<summary>CLKComplicationServer</summary>
+
+> Invalidates and reloads all timeline data for all complications:
+```swift
+// Before
+guard let complications = activeComplications, !complications.isEmpty else { return }
+complications.forEach { reloadTimeline(for: $0) }
+```
+```swift
+// After
+CLKComplicationServer.sharedInstance().reloadTimelineForComplication()
+```
+
+> Extends all timeline data for all complications:
+```swift
+// Before
+guard let complications = activeComplications, !complications.isEmpty else { return }
+complications.forEach { extendTimeline(for: $0) }
+```
+```swift
+// After
+CLKComplicationServer.sharedInstance().extendTimelineForComplications()
+```
+</details>
+
+<details>
+<summary>WatchSession</summary>
+
+> Communicate conveniently between `iOS` and `watchOS`:
+```swift
+// iOS
+class WatchViewController: UIViewController {
+    
+    @IBOutlet weak var receivedContextLabel: UILabel!
+    @IBOutlet weak var sentContextLabel: UILabel!
+    @IBOutlet weak var receivedUserInfoLabel: UILabel!
+    @IBOutlet weak var sentUserInfoLabel: UILabel!
+    @IBOutlet weak var receivedMessageLabel: UILabel!
+    @IBOutlet weak var sentMessageLabel: UILabel!
+    
+    var watchSession: WatchSession {
+        return AppDelegate.watchSession
+    }
+    
+    /// Another way to add observer
+    var userInfoObserver: WatchSession.ReceiveUserInfoObserver {
+        return Observer { [weak self] result in
+            DispatchQueue.main.async {
+                self?.receivedUserInfoLabel.text = result["value"] as? String ?? ""
+            }
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        /// One way to add observer
+        watchSession.addObserver(forApplicationContext: Observer { [weak self] result in
+            DispatchQueue.main.async {
+                self?.receivedContextLabel.text = result["value"] as? String ?? ""
+            }
+        })
+        
+        watchSession.addObserver(forUserInfo: userInfoObserver)
+        watchSession.addObserver(forMessage: messageObserver)
+    }
+    
+    @IBAction func sendContextTapped() {
+        let value = ["value": "\(Date())"]
+        watchSession.transfer(context: value)
+        sentContextLabel.text = value["value"] ?? ""
+    }
+    
+    @IBAction func sendUserInfoTapped() {
+        let value = ["value": "\(Date())"]
+        watchSession.transfer(userInfo: value)
+        sentUserInfoLabel.text = value["value"] ?? ""
+    }
+    
+    @IBAction func sendMessageTapped() {
+        let value = ["value": "\(Date())"]
+        watchSession.transfer(message: value)
+        sentMessageLabel.text = value["value"] ?? ""
+    }
+    
+    deinit {
+        watchSession.removeObservers()
+    }
+}
+
+extension WatchViewController {
+    
+    /// Another way to add observer
+    var messageObserver: WatchSession.ReceiveMessageObserver {
+        return Observer { [weak self] message, replyHandler in
+            DispatchQueue.main.async {
+                self?.receivedMessageLabel.text = message["value"] as? String ?? ""
+            }
+        }
+    }
+}
+```
+```swift
+// watchOS
+class ExtensionDelegate: NSObject, WKExtensionDelegate {
+    static let watchSession = WatchSession()
+}
+
+class InterfaceController: WKInterfaceController {
+
+    @IBOutlet var receivedContextLabel: WKInterfaceLabel!
+    @IBOutlet var sentContextLabel: WKInterfaceLabel!
+    @IBOutlet var receivedUserInfoLabel: WKInterfaceLabel!
+    @IBOutlet var sentUserInfoLabel: WKInterfaceLabel!
+    @IBOutlet var receivedMessageLabel: WKInterfaceLabel!
+    @IBOutlet var sentMessageLabel: WKInterfaceLabel!
+    
+    var watchSession: WatchSession {
+        return ExtensionDelegate.watchSession
+    }
+    
+    override func awake(withContext: Any?) {
+        super.awake(withContext: withContext)
+        
+        watchSession.addObserver(forApplicationContext: Observer { [weak self] result in
+            DispatchQueue.main.async {
+                self?.receivedContextLabel.setText(result["value"] as? String ?? "")
+            }
+        })
+        
+        watchSession.addObserver(forUserInfo: Observer { [weak self] result in
+            DispatchQueue.main.async {
+                self?.receivedUserInfoLabel.setText(result["value"] as? String ?? "")
+            }
+        })
+        
+        watchSession.addObserver(forMessage: Observer { [weak self] message, replyHandler in
+            DispatchQueue.main.async {
+                self?.receivedMessageLabel.setText(message["value"] as? String ?? "")
+            }
+        })
+    }
+    
+    @IBAction func sendContextTapped() {
+        let value = ["value": "\(Date())"]
+        watchSession.transfer(context: value)
+        sentContextLabel.setText(value["value"] ?? "")
+    }
+    
+    @IBAction func sendUserInfoTapped() {
+        let value = ["value": "\(Date())"]
+        watchSession.transfer(userInfo: value)
+        sentUserInfoLabel.setText(value["value"] ?? "")
+    }
+    
+    @IBAction func sendMessageTapped() {
+        let value = ["value": "\(Date())"]
+        watchSession.transfer(message: value)
+        sentMessageLabel.setText(value["value"] ?? "")
+    }
+}
+```
+
+![Image of WatchSession](./Documentation/Images/WatchSession.png)
+</details>
+
+<details>
 <summary>WKViewController</summary>
 
 > Display an alert to the user:
 ```swift
 present(alert: "Test Alert")
+```
+
+> Display an action sheet to the user:
+```swift
+present(
+    actionSheet: "Test",
+    message: "This is the message.",
+    additionalActions: [
+        WKAlertAction(title: "Action 1", handler: {}),
+        WKAlertAction(title: "Action 2", handler: {}),
+        WKAlertAction(title: "Action 3", style: .destructive, handler: {})
+    ],
+    includeCancelAction: true
+)
+```
+
+> Display an side-by-side alert to the user:
+```swift
+present(
+    sideBySideAlert: "Test",
+    message: "This is the message.",
+    additionalActions: [
+        WKAlertAction(title: "Action 1", handler: {}),
+        WKAlertAction(title: "Action 2", style: .destructive, handler: {}),
+        WKAlertAction(title: "Action 3", handler: {})
+    ]
+)
 ```
 </details>
 

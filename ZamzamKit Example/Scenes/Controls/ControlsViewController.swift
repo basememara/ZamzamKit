@@ -16,7 +16,25 @@ class ControlsViewController: UIViewController {
         didSet { shadowView.addShadow(ofColor: .black) }
     }
     
+    @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var fadeView: UIView!
+    
+    @IBOutlet private weak var submitButton: UIButton! {
+        didSet {
+            let image = UIImage(from: .lightGray)
+            submitButton.setBackgroundImage(image, for: .selected)
+        }
+    }
+    
+    private lazy var inputDoneToolbar: UIToolbar = .makeInputDoneToolbar(
+        target: self,
+        action: #selector(endEditing)
+    )
+    
+    private lazy var inputNextToolbar: UIToolbar = .makeInputNextToolbar(
+        target: self,
+        action: #selector(endEditing)
+    )
     
     private let mailComposer: MailComposerType = MailComposer()
     
@@ -55,6 +73,8 @@ private extension ControlsViewController {
         
     }
 }
+
+// MARK: - Interactions
 
 private extension ControlsViewController {
     
@@ -110,6 +130,27 @@ private extension ControlsViewController {
         )
     }
     
+    @IBAction func modalButtonTapped() {
+        let modalView = ModalView.loadNIB().with {
+            $0.delegate = self
+        }
+        
+        present(control: modalView)
+    }
+    
+    @IBAction func submitButtonTapped() {
+        present(
+            alert: "Are you sure you want to submit?",
+            includeCancelAction: true,
+            handler: { [unowned self] in
+                self.submitButton.isSelected = true
+                
+                guard let url = self.imageView.image?.pngToDisk() else { return }
+                print(url)
+            }
+        )
+    }
+    
     @IBAction func composeMailButtonTapped() {
         guard let controller = mailComposer.makeViewController(email: "test@example.com") else {
             return present(
@@ -123,5 +164,26 @@ private extension ControlsViewController {
     
     @IBAction func toggleFadeButtonTapped() {
         fadeView.isHidden ? fadeView.fadeIn() : fadeView.fadeOut()
+    }
+    
+    @IBAction func textFieldDidEditingBegin(_ sender: UITextField) {
+        sender.inputAccessoryView = inputDoneToolbar
+    }
+}
+
+// MARK: - Delegates
+
+extension ControlsViewController: UITextViewDelegate {
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        textView.inputAccessoryView = inputNextToolbar
+        return true
+    }
+}
+
+extension ControlsViewController: ModalViewDelegate {
+    
+    func modalViewDidApply() {
+        print("Applied modal")
     }
 }

@@ -39,6 +39,9 @@ public extension UIImage {
     
     /// Convenience initializer to convert a color to image.
     ///
+    ///     let image = UIImage(from: .lightGray)
+    ///     button.setBackgroundImage(image, for: .selected)
+    ///
     /// - Parameters:
     ///   - color: The target color of the image.
     ///   - size: The size of the image.

@@ -10,7 +10,7 @@ import UIKit
 
 /// Enables cell indentifiers for static tables.
 ///
-/// Each table view cell must have an identifier set that matches a `CellIdentifier` case.
+/// Each table view cell must have an identifier that matches a `CellIdentifier` case.
 ///
 ///     class ViewController: UITableViewController {
 ///

@@ -8,21 +8,22 @@
 
 import UIKit
 
-public class KeyboardScrollView: UIScrollView {
+/// A `UIScrollView` that extends the insets when the keyboard is shown.
+open class KeyboardScrollView: UIScrollView {
     private let notificationCenter: NotificationCenter = .default
     
-    public var activeField: UIView?
+    open var activeField: UIView?
     
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // Dismiss keyboard when tapped out of textfield
         endEditing(true)
     }
 }
 
-public extension KeyboardScrollView {
+extension KeyboardScrollView {
     
     /// Adjusts layout to prevent keyboard overlaying UI elements
-    @IBInspectable var automaticallyAdjustsInsetsForKeyboard: Bool {
+    @IBInspectable open var automaticallyAdjustsInsetsForKeyboard: Bool {
         get { return false /* Not stored */ }
         set {
             guard newValue else { return }
@@ -49,7 +50,7 @@ public extension KeyboardScrollView {
         scrollToActiveField()
     }
     
-    func scrollToActiveField() {
+    open func scrollToActiveField() {
         guard let activeField = activeField else { return }
         let rect = activeField.convert(activeField.bounds, to: self)
         scrollRectToVisible(rect, animated: true)

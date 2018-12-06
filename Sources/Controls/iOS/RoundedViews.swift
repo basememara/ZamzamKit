@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A circular `UIView`.
 open class RoundedView: UIView {
     
     open override func layoutSubviews() {
@@ -16,6 +17,7 @@ open class RoundedView: UIView {
     }
 }
 
+/// A circular `UIButton`.
 open class RoundedButton: UIButton {
     
     open override func layoutSubviews() {
@@ -24,6 +26,7 @@ open class RoundedButton: UIButton {
     }
 }
 
+/// A circular `UIImageView`.
 open class RoundedImageView: UIImageView {
     
     open override func awakeFromNib() {

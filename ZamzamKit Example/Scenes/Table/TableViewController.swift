@@ -9,17 +9,38 @@
 import UIKit
 import ZamzamKit
 
-class TableViewController: UIViewController {
+class TableViewController: UIViewController, StatusBarable {
     
-    @IBOutlet weak var tableView: UITableView! {
+    @IBOutlet private weak var tableView: UITableView! {
         didSet { tableView.register(nib: TableViewCell.self) }
     }
     
-    let viewModels = (0..<1000).map {
+    private let viewModels = (0..<1000).map {
         TableModels.ViewModel(
             title: "Test \($0 * 10)",
             detail: "Detail \($0 * 100)"
         )
+    }
+    
+    let application = UIApplication.shared
+    var statusBar: UIView?
+    
+    override func viewDidLoad() {
+        showStatusBar()
+        
+        NotificationCenter.default.addObserver(
+            for: UIDevice.orientationDidChangeNotification,
+            selector: #selector(deviceOrientationDidChange),
+            from: self
+        )
+    }
+}
+
+private extension TableViewController {
+    
+    @objc func deviceOrientationDidChange() {
+        removeStatusBar()
+        showStatusBar()
     }
 }
 

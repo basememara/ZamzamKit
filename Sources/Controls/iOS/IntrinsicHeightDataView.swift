@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// CollectionView that auto-sizes in StackView
+/// CollectionView that auto-sizes in StackView.
 public class IntrinsicHeightCollectionView: UICollectionView {
     
     public override var contentSize: CGSize {
@@ -21,7 +21,7 @@ public class IntrinsicHeightCollectionView: UICollectionView {
     }
 }
 
-/// TableView that auto-sizes in StackView
+/// TableView that auto-sizes in StackView.
 public class IntrinsicHeightTableView: UITableView {
     
     public override var contentSize: CGSize {

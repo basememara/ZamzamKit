@@ -23,6 +23,7 @@
                         <segue destination="Qpo-k8-AaJ" kind="relationship" relationship="viewControllers" id="Ayv-5n-3p5"/>
                         <segue destination="DPd-ov-36b" kind="relationship" relationship="viewControllers" id="6a5-VC-1GW"/>
                         <segue destination="NNW-8X-4O1" kind="relationship" relationship="viewControllers" id="pef-0b-4s6"/>
+                        <segue destination="YUC-6g-dzy" kind="relationship" relationship="viewControllers" id="E4G-Ba-vo0"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -58,6 +59,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jPb-JB-TeN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="642" y="148"/>
+        </scene>
+        <!--Watch-->
+        <scene sceneID="UNW-Fh-MFq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Watch" id="YUC-6g-dzy" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="2vw-pz-Zkc"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cZo-k5-MS5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="664" y="282"/>
         </scene>
         <!--Controls-->
         <scene sceneID="x1K-Um-WkG">

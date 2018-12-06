@@ -20,6 +20,23 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
     
     /// Presents the intial view controller of the specified storyboard modally.
     ///
+    ///     class ViewController: UIViewController {
+    ///
+    ///         @IBAction func moreTapped() {
+    ///             present(storyboard: .more) { (controller: MoreViewController) in
+    ///                 controller.someProperty = "\(Date())"
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     extension ViewController: Routable {
+    ///
+    ///         enum StoryboardIdentifier: String {
+    ///             case more = "More"
+    ///             case login = "Login"
+    ///         }
+    ///     }
+    ///
     /// - Parameters:
     ///   - storyboard: Storyboard name.
     ///   - bundle: Bundle of the storyboard.
@@ -35,6 +52,23 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
     
     /// Present the intial view controller of the specified storyboard in the primary context.
     /// Set the initial view controller in the target storyboard or specify the identifier.
+    ///
+    ///     class ViewController: UIViewController {
+    ///
+    ///         @IBAction func moreTapped() {
+    ///             show(storyboard: .more) { (controller: MoreViewController) in
+    ///                 controller.someProperty = "\(Date())"
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     extension ViewController: Routable {
+    ///
+    ///         enum StoryboardIdentifier: String {
+    ///             case more = "More"
+    ///             case login = "Login"
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - storyboard: Storyboard name.
@@ -58,6 +92,7 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
     }
 }
 
+/// Conforming types can use a weak `UIViewController` instance.
 public protocol Router {
     var viewController: UIViewController? { get set }
     

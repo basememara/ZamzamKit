@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BuM-Ib-Hjr">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Collection-->
+        <scene sceneID="UOs-H3-TxJ">
+            <objects>
+                <viewController id="BuM-Ib-Hjr" customClass="CollectionViewController" customModule="ZamzamKit_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WlL-Ol-JPj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bmN-Qn-5DD">
+                                <rect key="frame" x="0.0" y="52" width="375" height="160"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="38V-iz-u7J"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AW9-np-YS1">
+                                    <size key="itemSize" width="150" height="150"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BuM-Ib-Hjr" id="deF-So-DbY"/>
+                                    <outlet property="delegate" destination="BuM-Ib-Hjr" id="ctn-gI-aa1"/>
+                                </connections>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rUS-w7-MnJ">
+                                <rect key="frame" x="0.0" y="212" width="375" height="2"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="X2V-AY-l9v"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bmN-Qn-5DD" firstAttribute="trailing" secondItem="WlL-Ol-JPj" secondAttribute="trailing" id="5l2-8R-gIz"/>
+                            <constraint firstItem="bmN-Qn-5DD" firstAttribute="leading" secondItem="WlL-Ol-JPj" secondAttribute="leading" id="BRV-d3-kdR"/>
+                            <constraint firstItem="bmN-Qn-5DD" firstAttribute="top" secondItem="DAL-4a-Lhf" secondAttribute="top" constant="32" id="F6Q-k0-wgq"/>
+                            <constraint firstItem="rUS-w7-MnJ" firstAttribute="leading" secondItem="WlL-Ol-JPj" secondAttribute="leading" id="LtZ-1G-Wrq"/>
+                            <constraint firstAttribute="trailing" secondItem="rUS-w7-MnJ" secondAttribute="trailing" id="S1t-9o-I0R"/>
+                            <constraint firstItem="rUS-w7-MnJ" firstAttribute="top" secondItem="bmN-Qn-5DD" secondAttribute="bottom" id="eNf-fN-75e"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="DAL-4a-Lhf"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Collection" image="first" id="Vb7-gj-f19"/>
+                    <navigationItem key="navigationItem" id="jdw-WJ-vyt"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="collectionView" destination="bmN-Qn-5DD" id="VyV-9j-Wez"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Omf-Pm-9x3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1136.8" y="31.934032983508249"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="first" width="30" height="30"/>
+    </resources>
+</document>

@@ -9,6 +9,29 @@
 
 import UIKit
 
+/// Conforming views can be presented modally from `UIViewController`.
+///
+///     class ModalView: UIView, PresentableView {
+///
+///         @IBOutlet weak var contentView: UIView!
+///
+///         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+///             // Dismiss self when tapped on background
+///             dismiss()
+///         }
+///
+///         @IBAction func closeButtonTapped() {
+///             dismiss()
+///         }
+///     }
+///
+///     class ViewController: UIViewController {
+///
+///         @IBAction func modalButtonTapped() {
+///             let modalView = ModalView.loadNIB()
+///             present(control: modalView)
+///         }
+///     }
 public protocol PresentableView {
     var contentView: UIView! { get }
 }
@@ -39,6 +62,9 @@ public extension PresentableView where Self: UIView {
 public extension UIViewController {
     
     /// Presents a control modally.
+    ///
+    ///     let modalView = ModalView.loadNIB()
+    ///     present(control: modalView)
     ///
     /// - Parameters:
     ///   - control: The control to display over the current view controller’s content.

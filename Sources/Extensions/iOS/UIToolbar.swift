@@ -12,6 +12,22 @@ public extension UIToolbar {
     
     /// Create an instance of a `UIToolbar` with a `Done` button that performs the action.
     ///
+    ///     class ViewController: UIViewController {
+    ///
+    ///         private lazy var inputDoneToolbar: UIToolbar = .makeInputDoneToolbar(
+    ///             target: self,
+    ///             action: #selector(endEditing)
+    ///         )
+    ///     }
+    ///
+    ///     extension ViewController: UITextViewDelegate {
+    ///
+    ///         func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+    ///             textView.inputAccessoryView = inputDoneToolbar
+    ///             return true
+    ///         }
+    ///     }
+    ///
     /// - Parameters:
     ///   - target: The object that receives the action message.
     ///   - action: The action to send to target when this item is selected.

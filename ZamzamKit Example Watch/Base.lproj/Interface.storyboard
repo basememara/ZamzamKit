@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14313.18" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14460.31" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14238.10"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14460.16"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
@@ -41,6 +40,16 @@
                         <button width="1" alignment="left" title="Alert" id="BHZ-mJ-b0H">
                             <connections>
                                 <action selector="alertTapped" destination="AgC-eL-Hgc" id="CSe-4z-XMM"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Action Sheet" id="RHB-is-EEV">
+                            <connections>
+                                <action selector="actionSheetTapped" destination="AgC-eL-Hgc" id="50J-64-d5B"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Side-by-Side" id="rIb-Jk-djG">
+                            <connections>
+                                <action selector="sideBySideAlertTapped" destination="AgC-eL-Hgc" id="AXN-Et-gnP"/>
                             </connections>
                         </button>
                     </items>

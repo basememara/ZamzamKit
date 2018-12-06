@@ -8,6 +8,33 @@
 
 import UIKit
 
+/// Manages status bar view.
+///
+/// Redraw on device orientation change.
+///
+///     class ViewController: UIViewController, StatusBarable {
+///
+///         let application = UIApplication.shared
+///         var statusBar: UIView?
+///
+///         override func viewDidLoad() {
+///             showStatusBar()
+///
+///             NotificationCenter.default.addObserver(
+///                 for: UIDevice.orientationDidChangeNotification,
+///                 selector: #selector(deviceOrientationDidChange),
+///                 from: self
+///             )
+///         }
+///     }
+///
+///     private extension ViewController {
+///
+///         @objc func deviceOrientationDidChange() {
+///             removeStatusBar()
+///             showStatusBar()
+///         }
+///     }
 public protocol StatusBarable: class {
     var application: UIApplication { get }
     var statusBar: UIView? { get set }

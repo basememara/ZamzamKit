@@ -18,6 +18,12 @@ public extension UIStackView {
     }
     
     /// Removes and releases all arranged subviews from `UIStackView` and `superview`.
+    ///
+    /// Chaining commands is possible.
+    ///
+    ///     stackView
+    ///         .deleteArrangedSubviews()
+    ///         .addArrangedSubviews([view1, view2, view3])
     @discardableResult
     func deleteArrangedSubviews() -> Self {
         arrangedSubviews.forEach {
