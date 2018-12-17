@@ -5,30 +5,33 @@
 //  Created by Basem Emara on 2018-07-09.
 //  Copyright © 2018 Zamzam. All rights reserved.
 //
+//  Resizing UITableView to fit content:
+//  https://stackoverflow.com/a/48623673/235334
+//
 
 import UIKit
 
 /// CollectionView that auto-sizes in StackView.
-public class IntrinsicHeightCollectionView: UICollectionView {
+open class IntrinsicHeightCollectionView: UICollectionView {
     
-    public override var contentSize: CGSize {
+    open override var contentSize: CGSize {
         didSet { invalidateIntrinsicContentSize() }
     }
     
-    public override var intrinsicContentSize: CGSize {
+    open override var intrinsicContentSize: CGSize {
         layoutIfNeeded()
         return CGSize(width: UIView.noIntrinsicMetric, height: contentSize.height)
     }
 }
 
 /// TableView that auto-sizes in StackView.
-public class IntrinsicHeightTableView: UITableView {
+open class IntrinsicHeightTableView: UITableView {
     
-    public override var contentSize: CGSize {
+    open override var contentSize: CGSize {
         didSet { invalidateIntrinsicContentSize() }
     }
     
-    public override var intrinsicContentSize: CGSize {
+    open override var intrinsicContentSize: CGSize {
         layoutIfNeeded()
         return CGSize(width: UIView.noIntrinsicMetric, height: contentSize.height)
     }

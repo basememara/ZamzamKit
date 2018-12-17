@@ -11,7 +11,7 @@ import Foundation
 extension UserDefaults {
     // Slim version of: https://github.com/radex/SwiftyUserDefaults
     
-    /// User defaults keys for strongly-typed access.
+    /// User Defaults keys for strongly-typed access.
     ///
     ///     // First define keys
     ///     extension UserDefaults.Keys {
@@ -30,7 +30,7 @@ extension UserDefaults {
         init() {} // TODO: Add `fileprivate` when deprecations removed
     }
     
-    /// User defaults key for strongly-typed access.
+    /// User Defaults key for strongly-typed access.
     open class Key<ValueType>: Keys {
         public let name: String
         
@@ -40,7 +40,7 @@ extension UserDefaults {
         }
     }
     
-    /// Gets and sets the value from user defaults that corresponds to the given key.
+    /// Gets and sets the value from User Defaults that corresponds to the given key.
     public subscript<T>(key: Key<T?>) -> T? {
         get { return object(forKey: key.name) as? T }
         
@@ -50,7 +50,7 @@ extension UserDefaults {
         }
     }
     
-    /// Removes the single user defaults item specified by the key.
+    /// Removes the single User Defaults item specified by the key.
     ///
     /// - Parameter key: The key that is used to delete the user defaults item.
     public func remove<T>(_ key: Key<T?>) {
@@ -60,7 +60,7 @@ extension UserDefaults {
 
 public extension UserDefaults {
     
-    /// Removes all keys and values from user defaults.
+    /// Removes all keys and values from User Defaults.
     /// - Note: This method only removes keys on the receiver `UserDefaults` object.
     ///         System-defined keys will still be present afterwards.
     func removeAll() {

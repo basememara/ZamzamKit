@@ -197,7 +197,7 @@ extension DateTimeTests {
     }
 }
 
-// MARK: - Increments
+// MARK: - Calculations
 
 extension DateTimeTests {
     
