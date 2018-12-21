@@ -39,21 +39,6 @@ Add `pod "ZamzamKit"` to your `Podfile`.
 <details>
 <summary>Array</summary>
 
-> Safely retrieve an element at the given index if it exists:
-```swift
-// Before
-if let items = tabBarController.tabBar.items, items.count > 4 {
-    items[3].selectedImage = UIImage("my-image")
-}
-```
-```swift
-// After
-tabBarController.tabBar.items?.get(3)?.selectedImage = UIImage("my-image")
-
-[1, 3, 5, 7, 9].get(1) -> Optional(3)
-[1, 3, 5, 7, 9].get(12) -> nil
-```
-
 > Get distinct elements from an array:
 ```swift
 [1, 1, 3, 3, 5, 5, 7, 9, 9].distinct -> [1, 3, 5, 7, 9]
@@ -69,6 +54,25 @@ array -> ["a", "b", "d", "e"]
 > Easily get the array version of an array slice:
 ```swift
 ["a", "b", "c", "d", "e"].prefix(3).array
+```
+</details>
+
+<details>
+<summary>Collection</summary>
+
+> Safely retrieve an element at the given index if it exists:
+```swift
+// Before
+if let items = tabBarController.tabBar.items, items.count > 4 {
+    items[3].selectedImage = UIImage("my-image")
+}
+```
+```swift
+// After
+tabBarController.tabBar.items?[safe: 3]?.selectedImage = UIImage("my-image")
+
+[1, 3, 5, 7, 9][safe: 1] -> Optional(3)
+[1, 3, 5, 7, 9][safe: 12] -> nil
 ```
 </details>
 
