@@ -10,18 +10,6 @@ import Foundation
 
 public extension Array {
     
-    /// Element at the given index if it exists.
-    ///
-    ///     [1, 3, 5, 7, 9].get(1) -> Optional(3)
-    ///     [1, 3, 5, 7, 9].get(12) -> nil
-    ///
-	/// - Parameter index: index of element.
-	/// - Returns: optional element (if exists).
-    func get(_ index: Int) -> Element? {
-		guard startIndex..<endIndex ~= index else { return nil }
-        return self[index]
-    }
-    
     /// Remove array items in a thread-safe manner and executes
     /// the hander on each item of the array.
     ///
@@ -82,17 +70,5 @@ public extension ArraySlice {
     /// Returns the array of the slice
     var array: Array<Element> {
         return Array(self)
-    }
-    
-    /// Element at the given index if it exists.
-    ///
-    ///     [1, 3, 5, 7, 9].get(1) -> Optional(3)
-    ///     [1, 3, 5, 7, 9].get(12) -> nil
-	///
-	/// - Parameter index: index of element.
-	/// - Returns: optional element (if exists).
-    func get(_ index: Int) -> Element? {
-		guard startIndex..<endIndex ~= index else { return nil }
-		return self[index]
     }
 }

@@ -272,7 +272,7 @@ public extension SynchronizedArray {
     subscript(index: Int) -> Element? {
         get {
             var result: Element?
-            queue.sync { result = self.array.get(index) }
+            queue.sync { result = self.array[safe: index] }
             return result
         }
         set {

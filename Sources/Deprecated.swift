@@ -92,3 +92,21 @@ open class DefaultsKey<ValueType>: UserDefaults.Keys {
         super.init()
     }
 }
+
+public extension Array {
+    
+    @available(*, unavailable, message: "Use collection[safe: index]")
+    func get(_ index: Int) -> Element? {
+        guard startIndex..<endIndex ~= index else { return nil }
+        return self[index]
+    }
+}
+
+public extension ArraySlice {
+    
+    @available(*, unavailable, message: "Use collection[safe: index]")
+    func get(_ index: Int) -> Element? {
+        guard startIndex..<endIndex ~= index else { return nil }
+        return self[safe: index]
+    }
+}

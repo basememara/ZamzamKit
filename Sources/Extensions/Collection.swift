@@ -8,6 +8,17 @@
 
 import Foundation
 
+public extension Collection {
+    
+    /// Element at the given index if it exists.
+    ///
+    /// - Parameter index: index of element.
+    subscript(safe index: Index) -> Element? {
+        // http://www.vadimbulavin.com/handling-out-of-bounds-exception/
+        return indices.contains(index) ? self[index] : nil
+    }
+}
+
 public extension Collection where Iterator.Element == (String, Any) {
     
     /// Converts collection of objects to JSON string

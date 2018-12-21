@@ -14,18 +14,6 @@ class ArrayTests: XCTestCase {
 }
 
 extension ArrayTests {
-    
-    func testGet() {
-        // Given
-        let sample = [1, 3, 5, 7, 9]
-        
-        // When
-        let result = sample.get(4)
-        
-        // Then
-        XCTAssertEqual(result, 9)
-        XCTAssertNil(sample.get(99))
-    }
 
     func testRemoveEach() {
         // Given
