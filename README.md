@@ -237,7 +237,7 @@ Bundle.main.string(file: "Test.txt") -> "This is a test. Abc 123.\n"
 
 > Get the contents of a property list file within any bundle:
 ```swift
-let values = Bundle.main.string(plist: "Settings.plist")
+let values = Bundle.main.contents(plist: "Settings.plist")
 values["MyString1"] as? String -> "My string value 1."
 values["MyNumber1"] as? Int -> 123
 values["MyBool1"] as? Bool -> false
