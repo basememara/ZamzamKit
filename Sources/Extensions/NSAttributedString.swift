@@ -66,7 +66,7 @@ public extension NSAttributedString {
     ///   - rhs: String to add.
     /// - Returns: New instance with add attributed string and string.
     static func +(lhs: NSAttributedString, rhs: String) -> NSMutableAttributedString {
-        return lhs + NSAttributedString(string: rhs)
+        return lhs + rhs.attributed
     }
 }
 
