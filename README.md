@@ -444,6 +444,28 @@ notificationCenter.removeObserver(for: UIApplication.willEnterForegroundNotifica
 </details>
 
 <details>
+<summary>NSAttributedString</summary>
+
+> Easily get the attributed string version of a string:
+```swift
+"Abc".attributed
+"Lmn".mutableAttributed
+"Xyz".mutableAttributed([
+    .font: UIFont.italicSystemFont(ofSize: .systemFontSize),
+    .foregroundColor, value: UIColor.green
+])
+```
+
+> Add attributed strings together:
+```swift
+label.attributedText = "Abc".attributed + " def " +
+    "ghi".mutableAttributed([
+        .underlineStyle: NSUnderlineStyle.single.rawValue
+    ])
+```
+</details>
+
+<details>
 <summary>Object</summary>
 
 > Set properties with closures just after initializing:

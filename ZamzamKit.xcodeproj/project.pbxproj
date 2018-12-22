@@ -237,6 +237,9 @@
 		8BE2BB401F03259C00877447 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE2BB3F1F03259C00877447 /* Localizable.swift */; };
 		8BE2BB411F03259C00877447 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE2BB3F1F03259C00877447 /* Localizable.swift */; };
 		8BE2BB421F03259C00877447 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE2BB3F1F03259C00877447 /* Localizable.swift */; };
+		8BE43EF021CEEB2900247DE4 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE43EEF21CEEB2900247DE4 /* NSAttributedString.swift */; };
+		8BE43EF121CEEB2900247DE4 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE43EEF21CEEB2900247DE4 /* NSAttributedString.swift */; };
+		8BE43EF221CEEB2900247DE4 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE43EEF21CEEB2900247DE4 /* NSAttributedString.swift */; };
 		8BE814F51C784233005F23CE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
 		8BE814FD1C7842DC005F23CE /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* Sequence.swift */; };
 		8BE814FE1C7842DC005F23CE /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814FC1C7842DC005F23CE /* Sequence.swift */; };
@@ -528,6 +531,7 @@
 		8BE19B281C72D71F00D4D437 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		8BE19B291C72D71F00D4D437 /* WebTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebTests.swift; sourceTree = "<group>"; };
 		8BE2BB3F1F03259C00877447 /* Localizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Localizable.swift; path = Models/Localizable.swift; sourceTree = "<group>"; };
+		8BE43EEF21CEEB2900247DE4 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		8BE814F41C784233005F23CE /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		8BE814FC1C7842DC005F23CE /* Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUserNotificationCenter.swift; sourceTree = "<group>"; };
@@ -1030,6 +1034,7 @@
 				8BD98D641FC33B4600E74A8C /* Font.swift */,
 				8B79A4741E9C1ED800C8A5A4 /* Locale.swift */,
 				8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */,
+				8BE43EEF21CEEB2900247DE4 /* NSAttributedString.swift */,
 				8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */,
 				8BE814FC1C7842DC005F23CE /* Sequence.swift */,
 				8BFDB65D1C7518F800C94996 /* String.swift */,
@@ -1458,6 +1463,7 @@
 				8B7729F120486D6500C15B56 /* ApproximateComparison.swift in Sources */,
 				8BE2BB401F03259C00877447 /* Localizable.swift in Sources */,
 				8B6C99971E6E031800D523CC /* LocationsWorker.swift in Sources */,
+				8BE43EF021CEEB2900247DE4 /* NSAttributedString.swift in Sources */,
 				8B1CC4F7217AE91100F00A70 /* ControllerModuleDelegate.swift in Sources */,
 				8BFDB6771C751F2300C94996 /* FileManager.swift in Sources */,
 				8B9E98111EB144540067ACB7 /* Routable.swift in Sources */,
@@ -1505,6 +1511,7 @@
 				8B7729F220486D6500C15B56 /* ApproximateComparison.swift in Sources */,
 				8B82154B1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8BCB73CF1CAD660D00E20096 /* Equatable.swift in Sources */,
+				8BE43EF121CEEB2900247DE4 /* NSAttributedString.swift in Sources */,
 				8BFDB6901C75323900C94996 /* DateFormatter.swift in Sources */,
 				8B9434621EBDEA8200C779EB /* TimeZone.swift in Sources */,
 				8B5316AD1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
@@ -1559,6 +1566,7 @@
 				8B1CC524217BDA4E00F00A70 /* DispatchQueue.swift in Sources */,
 				8BFDB6591C75187200C94996 /* Date.swift in Sources */,
 				8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */,
+				8BE43EF221CEEB2900247DE4 /* NSAttributedString.swift in Sources */,
 				8BFDB6661C751AE600C94996 /* URL.swift in Sources */,
 				8BF2106D1E48D52F0026B802 /* Result.swift in Sources */,
 				8B79A4771E9C1ED800C8A5A4 /* Locale.swift in Sources */,
