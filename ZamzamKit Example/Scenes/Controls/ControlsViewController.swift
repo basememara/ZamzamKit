@@ -103,6 +103,20 @@ private extension ControlsViewController {
         )
     }
     
+    @IBAction func promptButtonTapped() {
+        self.present(
+            prompt: "Test Prompt",
+            message: "Enter user input.",
+            placeholder: "Your placeholder here",
+            response: {
+                self.present(
+                    alert: "User Response",
+                    message: $0
+                )
+            }
+        )
+    }
+    
     @IBAction func safariButtonTapped() {
         present(safari: "https://apple.com")
     }

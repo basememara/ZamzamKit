@@ -147,6 +147,79 @@ public extension UIViewController {
         
         present(alertController, animated: animated, completion: completion)
     }
+    
+    /// Display a prompt with a text field to the user.
+    ///
+    ///     present(
+    ///         prompt: "Test Prompt",
+    ///         message: "Enter user input.",
+    ///         placeholder: "Your placeholder here",
+    ///         configure: {
+    ///             $0.keyboardType = .phonePad
+    ///             $0.textContentType = .telephoneNumber
+    ///         },
+    ///         response: {
+    ///             print("User response: \($0)")
+    ///         }
+    ///     )
+    ///
+    /// - Parameters:
+    ///   - title: Title of the prompt.
+    ///   - message: Body of the prompt.
+    ///   - placeholder: The string that is displayed when there is no other text in the text field.
+    ///   - buttonText: Text for the primary button.
+    ///   - buttonStyle: Style to apply to the primary button.
+    ///   - includeCancelAction: Include a cancel action within the alert.
+    ///   - cancelText: Text for the cancel button.
+    ///   - cancelHandler: Call back handler when cancel action tapped.
+    ///   - animated: Pass true to animate the presentation; otherwise, pass false.
+    ///   - configure: Configure the `UITextField` before it is loaded.
+    ///   - response: Call back handler when main action tapped.
+    func present(
+        prompt title: String,
+        message: String? = nil,
+        placeholder: String? = nil,
+        buttonText: String = .localized(.ok),
+        buttonStyle: UIAlertAction.Style = .default,
+        includeCancelAction: Bool = true,
+        cancelText: String = .localized(.cancel),
+        cancelHandler: (() -> Void)? = nil,
+        animated: Bool = true,
+        configure: ((UITextField) -> Void)? = nil,
+        response: @escaping ((String?) -> Void))
+    {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        if includeCancelAction {
+            alertController.addAction(
+                UIAlertAction(title: cancelText, style: .cancel) { _ in cancelHandler?() }
+            )
+        }
+        
+        alertController.addTextField {
+            $0.placeholder ?= placeholder
+            
+            // Handle any last configurations before presenting text field
+            configure?($0)
+        }
+        
+        alertController.addAction(
+            UIAlertAction(title: buttonText, style: buttonStyle) { _ in
+                guard let text = alertController.textFields?.first?.text else {
+                    response(nil)
+                    return
+                }
+                
+                response(text)
+            }
+        )
+        
+        present(alertController, animated: animated, completion: nil)
+    }
 }
 
 // MARK: - Safari

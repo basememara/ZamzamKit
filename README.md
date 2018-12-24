@@ -1066,15 +1066,15 @@ class ViewController: UIViewController {
 > Display an alert to the user:
 ```swift
 // Before
-let alert = UIAlertController(title: "My Title", message: "This is my message.", preferredStyle: .alert)
+let alertController = UIAlertController(title: "My Title", message: "This is my message.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default) { alert in
     print("OK tapped")
 }
-presentViewController(alert, animated: true, completion: nil)
+present(alertController, animated: true, completion: nil)
 ```
 ```swift
 // After
-present(alert: "My Title", message: "This is my message.") {
+present(alertController: "My Title", message: "This is my message.") {
     print("OK tapped")
 }
 ```
@@ -1084,7 +1084,7 @@ present(alert: "My Title", message: "This is my message.") {
 // Before
 let safariController = SFSafariViewController(URL: URL(string: "https://apple.com")!)
 safariController.modalPresentationStyle = .overFullScreen
-presentViewController(safariController, animated: true, completion: nil)
+present(safariController, animated: true, completion: nil)
 ```
 ```swift
 // After
@@ -1106,6 +1106,55 @@ present(
     includeCancelAction: true
 )
 ```
+
+> Display a prompt to the user:
+```swift
+// Before
+let alertController = UIAlertController(
+    title: "Test Prompt",
+    message: "Enter user input.",
+    preferredStyle: .alert
+)
+
+alertController.addAction(
+    UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+)
+
+alertController.addTextField {
+    $0.placeholder = "Your placeholder here"
+    $0.keyboardType = .phonePad
+    $0.textContentType = .telephoneNumber
+}
+
+alertController.addAction(
+    UIAlertAction(title: "Ok", style: .default) { _ in
+        guard let text = alertController.textFields?.first?.text else {
+            return
+        }
+
+        print("User response: \($0)")
+    }
+)
+
+present(alertController, animated: animated, completion: nil)
+```
+```swift
+// After
+present(
+    prompt: "Test Prompt",
+    message: "Enter user input.",
+    placeholder: "Your placeholder here",
+    configure: {
+        $0.keyboardType = .phonePad
+        $0.textContentType = .telephoneNumber
+    },
+    response: {
+        print("User response: \($0)")
+    }
+)
+```
+
+![Image of UIViewController Prompt](./Documentation/Images/UIViewController-Prompt.png)
 
 > Display a share activity with Safari added:
 ```swift
