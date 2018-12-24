@@ -1067,7 +1067,7 @@ class ViewController: UIViewController {
 ```swift
 // Before
 let alertController = UIAlertController(title: "My Title", message: "This is my message.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { alert in
+alertController.addAction(UIAlertAction(title: "OK", style: .default) { alert in
     print("OK tapped")
 }
 present(alertController, animated: true, completion: nil)
