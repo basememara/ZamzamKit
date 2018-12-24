@@ -137,7 +137,7 @@ public extension UIViewController {
         
         // Handle popover for iPad's, etc if available
         if let popover = alertController.popoverPresentationController {
-            popover.sourceView  = sourceView
+            popover.sourceView = sourceView
             popover.sourceRect = sourceView.bounds
             popover.permittedArrowDirections = .any
         }
@@ -283,7 +283,7 @@ public extension UIViewController {
         let activity = UIActivityViewController(activityItems: activities, applicationActivities: applicationActivities)
         
         if let popover = activity.popoverPresentationController {
-            popover.barButtonItem  = barButtonItem
+            popover.barButtonItem = barButtonItem
             popover.permittedArrowDirections = .any
         }
 

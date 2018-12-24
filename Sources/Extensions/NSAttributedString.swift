@@ -43,6 +43,43 @@ public extension NSMutableAttributedString {
     }
 }
 
+// MARK: - String
+
+public extension String {
+    
+    /// The full series of characters.
+    var range: NSRange {
+        return NSRange(location: 0, length: count)
+    }
+    
+    /// A string that has associated attributes (such as visual style, hyperlinks, or accessibility data) for portions of its text.
+    var attributed: NSAttributedString {
+        return NSAttributedString(string: self)
+    }
+    
+    /// A mutable string object that also contains attributes (such as visual style, hyperlinks, or accessibility data) associated with various portions of its text content.
+    var mutableAttributed: NSMutableAttributedString {
+        return NSMutableAttributedString(string: self)
+    }
+    
+    /// Adds the given collection of attributes to the characters in the specified range.
+    ///
+    ///     "Hello world".mutableAttributed([
+    ///         .underlineStyle: NSUnderlineStyle.single.rawValue,
+    ///         .foregroundColor: UIColor.blue
+    ///     ])
+    ///
+    /// - Parameters:
+    ///   - attributes: A dictionary containing the attributes to add.
+    ///   - range: The range of characters to which the specified attributes apply.
+    /// - Returns: The mutated attributed string.
+    func mutableAttributed(_ attributes: [NSAttributedString.Key: Any], range: NSRange? = nil) -> NSMutableAttributedString {
+        let mutable = mutableAttributed
+        mutable.addAttributes(attributes, range: range ?? self.range)
+        return mutable
+    }
+}
+
 // MARK: - Operators
 
 public extension NSAttributedString {
