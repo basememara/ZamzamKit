@@ -221,6 +221,69 @@ public extension SynchronizedArray {
             self.array.insert(element, at: index)
         }
     }
+	
+	/// Removes first element.
+    func removeFirst() {
+        queue.async(flags: .barrier) {
+            self.array.removeFirst()
+        }
+    }
+    
+    /// Removes first n elements.
+    ///
+    /// - Parameters:
+    ///   - count: The number of elements to remove from the array.
+    func removeFirst(count: Int) {
+        queue.async(flags: .barrier) {
+            self.array.removeFirst(count)
+        }
+    }
+
+    /// Removes and returns the first element.
+    ///
+    /// - Parameters:
+    ///   - completion: The handler with the removed element.
+    func removeFirst(completion: ((Element) -> Void)? = nil) {
+        queue.async(flags: .barrier) {
+            if let element = self.array.first {
+                DispatchQueue.main.async {
+                    completion?(element)
+                }
+            }
+        }
+    }
+
+    /// Removes last element.
+    func removeLast() {
+        queue.async(flags: .barrier) {
+            self.array.removeLast()
+        }
+    }
+
+    /// Removes last n elements.
+    ///
+    /// - Parameters:
+    ///   - count: The number of elements to remove from the array.
+    func removeLast(count: Int) {
+        queue.async(flags: .barrier) {
+            self.array.removeLast(count)
+        }
+    }
+
+    /// Removes and returns the last element.
+    ///
+    /// - Parameters:
+    ///   - completion: The handler with the removed element.
+    func removeLast(completion: ((Element) -> Void)? = nil) {
+        queue.async(flags: .barrier) {
+            if let element = self.array.last {
+                self.array.removeLast()
+                DispatchQueue.main.async {
+                    completion?(element)
+                }
+            }
+        }
+    }
 
     /// Removes and returns the element at the specified position.
     ///
