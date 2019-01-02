@@ -195,97 +195,106 @@ public extension SynchronizedArray {
 
     /// Adds a new element at the end of the array.
     ///
-    /// - Parameter element: The element to append to the array.
-    func append(_ element: Element) {
+    /// The task is performed asynchronously due to thread-locking management.
+    ///
+    /// - Parameters:
+    ///   - element: The element to append to the array.
+    ///   - completion: The block to execute when completed.
+    func append(_ element: Element, completion: (() -> Void)? = nil) {
         queue.async(flags: .barrier) {
             self.array.append(element)
+            DispatchQueue.main.async { completion?() }
         }
     }
 
     /// Adds new elements at the end of the array.
     ///
-    /// - Parameter element: The elements to append to the array.
-    func append(_ elements: [Element]) {
+    /// The task is performed asynchronously due to thread-locking management.
+    ///
+    /// - Parameters:
+    ///   - element: The elements to append to the array.
+    ///   - completion: The block to execute when completed.
+    func append(_ elements: [Element], completion: (() -> Void)? = nil) {
         queue.async(flags: .barrier) {
             self.array += elements
+            DispatchQueue.main.async { completion?() }
         }
     }
 
     /// Inserts a new element at the specified position.
     ///
+    /// The task is performed asynchronously due to thread-locking management.
+    ///
     /// - Parameters:
     ///   - element: The new element to insert into the array.
     ///   - index: The position at which to insert the new element.
-    func insert(_ element: Element, at index: Int) {
+    ///   - completion: The block to execute when completed.
+    func insert(_ element: Element, at index: Int, completion: (() -> Void)? = nil) {
         queue.async(flags: .barrier) {
             self.array.insert(element, at: index)
-        }
-    }
-	
-	/// Removes first element.
-    func removeFirst() {
-        queue.async(flags: .barrier) {
-            self.array.removeFirst()
-        }
-    }
-    
-    /// Removes first n elements.
-    ///
-    /// - Parameters:
-    ///   - count: The number of elements to remove from the array.
-    func removeFirst(count: Int) {
-        queue.async(flags: .barrier) {
-            self.array.removeFirst(count)
+            DispatchQueue.main.async { completion?() }
         }
     }
 
-    /// Removes and returns the first element.
+    /// Removes and returns the first element of the collection.
     ///
-    /// - Parameters:
-    ///   - completion: The handler with the removed element.
+    /// The collection must not be empty.
+    /// The task is performed asynchronously due to thread-locking management.
+    ///
+    /// - Parameter completion: The handler with the removed element.
     func removeFirst(completion: ((Element) -> Void)? = nil) {
         queue.async(flags: .barrier) {
-            if let element = self.array.first {
-                DispatchQueue.main.async {
-                    completion?(element)
-                }
-            }
+            let element = self.array.removeFirst()
+            DispatchQueue.main.async { completion?(element) }
         }
     }
 
-    /// Removes last element.
-    func removeLast() {
-        queue.async(flags: .barrier) {
-            self.array.removeLast()
-        }
-    }
-
-    /// Removes last n elements.
+    /// Removes the specified number of elements from the beginning of the collection.
+    ///
+    /// The task is performed asynchronously due to thread-locking management.
     ///
     /// - Parameters:
-    ///   - count: The number of elements to remove from the array.
-    func removeLast(count: Int) {
+    ///   - k: The number of elements to remove from the collection.
+    ///   - completion: The block to execute when remove completed.
+    func removeFirst(_ k: Int, completion: (() -> Void)? = nil) {
         queue.async(flags: .barrier) {
-            self.array.removeLast(count)
+            defer { DispatchQueue.main.async { completion?() } }
+            guard 0...self.array.count ~= k else { return }
+            self.array.removeFirst(k)
         }
     }
 
-    /// Removes and returns the last element.
+    /// Removes and returns the last element of the collection.
     ///
-    /// - Parameters:
-    ///   - completion: The handler with the removed element.
+    /// The collection must not be empty.
+    /// The task is performed asynchronously due to thread-locking management.
+    ///
+    /// - Parameter completion: The handler with the removed element.
     func removeLast(completion: ((Element) -> Void)? = nil) {
         queue.async(flags: .barrier) {
-            if let element = self.array.last {
-                self.array.removeLast()
-                DispatchQueue.main.async {
-                    completion?(element)
-                }
-            }
+            let element = self.array.removeLast()
+            DispatchQueue.main.async { completion?(element) }
+        }
+    }
+
+    /// Removes the specified number of elements from the end of the collection.
+    ///
+    /// The task is performed asynchronously due to thread-locking management.
+    ///
+    /// - Parameters:
+    ///   - k: The number of elements to remove from the collection.
+    ///   - completion: The block to execute when remove completed.
+    func removeLast(_ k: Int, completion: (() -> Void)? = nil) {
+        queue.async(flags: .barrier) {
+            defer { DispatchQueue.main.async { completion?() } }
+            guard 0...self.array.count ~= k else { return }
+            self.array.removeLast(k)
         }
     }
 
     /// Removes and returns the element at the specified position.
+    ///
+    /// The task is performed asynchronously due to thread-locking management.
     ///
     /// - Parameters:
     ///   - index: The position of the element to remove.
@@ -298,6 +307,8 @@ public extension SynchronizedArray {
     }
     
     /// Removes and returns the elements that meet the criteria.
+    ///
+    /// The task is performed asynchronously due to thread-locking management.
     ///
     /// - Parameters:
     ///   - predicate: A closure that takes an element of the sequence as its argument and returns a Boolean value indicating whether the element is a match.
@@ -316,6 +327,8 @@ public extension SynchronizedArray {
 
     /// Removes all elements from the array.
     ///
+    /// The task is performed asynchronously due to thread-locking management.
+    ///
     /// - Parameter completion: The handler with the removed elements.
     func removeAll(completion: (([Element]) -> Void)? = nil) {
         queue.async(flags: .barrier) {
@@ -329,15 +342,16 @@ public extension SynchronizedArray {
 public extension SynchronizedArray {
     
     /// Accesses the element at the specified position if it exists.
-	///
-	/// - Parameter index: The position of the element to access.
-	/// - Returns: optional element if it exists.
+    ///
+    /// - Parameter index: The position of the element to access.
+    /// - Returns: optional element if it exists.
     subscript(index: Int) -> Element? {
         get {
             var result: Element?
             queue.sync { result = self.array[safe: index] }
             return result
         }
+
         set {
             guard let newValue = newValue else { return }
             
@@ -364,6 +378,8 @@ public extension SynchronizedArray where Element: Equatable {
     
     /// Removes the specified element.
     ///
+    /// The task is performed asynchronously due to thread-locking management.
+    ///
     /// - Parameter element: An element to search for in the collection.
     func remove(_ element: Element, completion: (() -> Void)? = nil) {
         queue.async(flags: .barrier) {
@@ -373,6 +389,8 @@ public extension SynchronizedArray where Element: Equatable {
     }
     
     /// Removes the specified element.
+    ///
+    /// The task is performed asynchronously due to thread-locking management.
     ///
     /// - Parameters:
     ///   - left: The collection to remove from.
@@ -388,6 +406,8 @@ public extension SynchronizedArray {
 
     /// Adds a new element at the end of the array.
     ///
+    /// The task is performed asynchronously due to thread-locking management.
+    ///
     /// - Parameters:
     ///   - left: The collection to append to.
     ///   - right: The element to append to the array.
@@ -396,6 +416,8 @@ public extension SynchronizedArray {
     }
 
     /// Adds new elements at the end of the array.
+    ///
+    /// The task is performed asynchronously due to thread-locking management.
     ///
     /// - Parameters:
     ///   - left: The collection to append to.
