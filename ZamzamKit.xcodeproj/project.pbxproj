@@ -118,6 +118,9 @@
 		8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
 		8B6B0CBA219D30830018F2E0 /* KeyboardScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B0CB9219D30830018F2E0 /* KeyboardScrollView.swift */; };
 		8B6B0CBC219D312E0018F2E0 /* UIToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B0CBB219D312E0018F2E0 /* UIToolbar.swift */; };
+		8B6B7C0C21E950BD003FB20D /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B7C0B21E950BD003FB20D /* Thread.swift */; };
+		8B6B7C0D21E950BD003FB20D /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B7C0B21E950BD003FB20D /* Thread.swift */; };
+		8B6B7C0E21E950BD003FB20D /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B7C0B21E950BD003FB20D /* Thread.swift */; };
 		8B6C762F21A9AE3600CA90EB /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C762E21A9AE3600CA90EB /* CurrencyFormatter.swift */; };
 		8B6C763021A9AE3600CA90EB /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C762E21A9AE3600CA90EB /* CurrencyFormatter.swift */; };
 		8B6C763121A9AE3600CA90EB /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6C762E21A9AE3600CA90EB /* CurrencyFormatter.swift */; };
@@ -462,6 +465,7 @@
 		8B6A956C1E484D5A003F333D /* ZamzamError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamError.swift; sourceTree = "<group>"; };
 		8B6B0CB9219D30830018F2E0 /* KeyboardScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardScrollView.swift; sourceTree = "<group>"; };
 		8B6B0CBB219D312E0018F2E0 /* UIToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIToolbar.swift; sourceTree = "<group>"; };
+		8B6B7C0B21E950BD003FB20D /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		8B6C762E21A9AE3600CA90EB /* CurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
 		8B6C99961E6E031800D523CC /* LocationsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsWorker.swift; sourceTree = "<group>"; };
 		8B6FB9B5202777DE00FE7BEB /* DataViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewable.swift; sourceTree = "<group>"; };
@@ -1038,6 +1042,7 @@
 				8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */,
 				8BE814FC1C7842DC005F23CE /* Sequence.swift */,
 				8BFDB65D1C7518F800C94996 /* String.swift */,
+				8B6B7C0B21E950BD003FB20D /* Thread.swift */,
 				8B8215491CA1613400C9FCC9 /* TimeInterval.swift */,
 				8B9434601EBDEA8200C779EB /* TimeZone.swift */,
 				8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */,
@@ -1443,6 +1448,7 @@
 				8B1CC4F4217AE56D00F00A70 /* ApplicationModuleDelegate.swift in Sources */,
 				8B2D90EB1EE47ED80019F063 /* UNNotificationTriggerDateType.swift in Sources */,
 				8B63E4271CDB8DB00053C060 /* UIImage.swift in Sources */,
+				8B6B7C0C21E950BD003FB20D /* Thread.swift in Sources */,
 				8BDA5E311E795DE300429F78 /* BackgroundTask.swift in Sources */,
 				8BD5086B1C99DD1E00AE205E /* Array.swift in Sources */,
 				8B2285251EB6863600425B5A /* UITableViewCell.swift in Sources */,
@@ -1544,6 +1550,7 @@
 				8BF210931E4A22460026B802 /* UNNotificationAttachment.swift in Sources */,
 				8BD508771C99E18500AE205E /* Collection.swift in Sources */,
 				8B75286D1E759F2A0035A742 /* Observer.swift in Sources */,
+				8B6B7C0D21E950BD003FB20D /* Thread.swift in Sources */,
 				8B729C761EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,
 				8B6C763021A9AE3600CA90EB /* CurrencyFormatter.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
@@ -1595,6 +1602,7 @@
 				8B4C08B71EC94608002A317D /* BinaryFloatingPoint.swift in Sources */,
 				8BC6D99C204790B700242DAE /* Scrollable.swift in Sources */,
 				8B0C71611E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
+				8B6B7C0E21E950BD003FB20D /* Thread.swift in Sources */,
 				8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */,
 				8BEFE47B1E4515D900100744 /* ScheduleInterval.swift in Sources */,
 				8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */,
