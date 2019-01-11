@@ -1201,7 +1201,7 @@ complications.forEach { reloadTimeline(for: $0) }
 ```
 ```swift
 // After
-CLKComplicationServer.sharedInstance().reloadTimelineForComplication()
+CLKComplicationServer.sharedInstance().reloadTimelineForComplications()
 ```
 
 > Extends all timeline data for all complications:
