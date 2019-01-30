@@ -148,15 +148,12 @@ public extension String {
         return prefix(length) + trailing
     }
     
-    /// Determines if the given value is contained in the string.
+    /// Returns true if any character in the range is contained within.
     ///
-    ///     "1234567890".contains("567") -> true
-    ///     "abc123xyz".contains("ghi") -> false
-    ///
-    /// - Parameter find: The value to search for.
-    /// - Returns: True if the value exists in the string, false otherwise.
-    func contains(_ find: String) -> Bool {
-        return range(of: find) != nil
+    ///     "def".contains(CharacterSet(charactersIn: "Abcdef123456")) -> true
+    ///     "Xyz".contains(CharacterSet(charactersIn: "Abcdef123456")) -> false
+    func contains(_ elements: CharacterSet) -> Bool {
+        return rangeOfCharacter(from: elements) != nil
     }
     
     /// Injects a separator every nth characters.
