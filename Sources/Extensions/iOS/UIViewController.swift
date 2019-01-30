@@ -41,6 +41,8 @@ public extension UIViewController {
     ///   - animated: Pass true to animate the presentation; otherwise, pass false.
     ///   - configure: Configure the `UIAlertController` before it is loaded.
     ///   - handler: Call back handler when main action tapped.
+    /// - Returns: Returns the alert controller instance that was presented.
+    @discardableResult
     func present(
         alert title: String,
         message: String? = nil,
@@ -52,7 +54,7 @@ public extension UIViewController {
         cancelHandler: (() -> Void)? = nil,
         animated: Bool = true,
         configure: ((UIAlertController) -> Void)? = nil,
-        handler: (() -> Void)? = nil)
+        handler: (() -> Void)? = nil) -> UIAlertController
     {
         let alertController = UIAlertController(
             title: title,
@@ -80,6 +82,7 @@ public extension UIViewController {
         configure?(alertController)
         
         present(alertController, animated: animated, completion: nil)
+        return alertController
     }
     
     /// Display an action sheet to the user.
@@ -107,6 +110,8 @@ public extension UIViewController {
     ///   - animated: Pass true to animate the presentation; otherwise, pass false.
     ///   - configure: Configure the `UIAlertController` before it is loaded.
     ///   - completion: The block to execute after the presentation finishes.
+    /// - Returns: Returns the alert controller instance that was presented.
+    @discardableResult
     func present(
         actionSheet title: String?,
         message: String? = nil,
@@ -117,7 +122,7 @@ public extension UIViewController {
         cancelHandler: (() -> Void)? = nil,
         animated: Bool = true,
         configure: ((UIAlertController) -> Void)? = nil,
-        completion: (() -> Void)? = nil)
+        completion: (() -> Void)? = nil) -> UIAlertController
     {
         let alertController = UIAlertController(
             title: title,
@@ -146,6 +151,75 @@ public extension UIViewController {
         configure?(alertController)
         
         present(alertController, animated: animated, completion: completion)
+        return alertController
+    }
+    
+    /// Display an action sheet to the user.
+    ///
+    ///     present(
+    ///         actionSheet: "Test Action Sheet",
+    ///         message: "Choose your action",
+    ///         popoverFrom: sender,
+    ///         additionalActions: [
+    ///             UIAlertAction(title: "Action 1") { },
+    ///             UIAlertAction(title: "Action 2") { },
+    ///             UIAlertAction(title: "Action 3") { }
+    ///         ],
+    ///         includeCancelAction: true
+    ///     )
+    ///
+    /// - Parameters:
+    ///   - title: Title of the alert.
+    ///   - message: Body of the alert.
+    ///   - barButtonItem: The bar button item containing the anchor rectangle for the popover for supporting iPad device.
+    ///   - additionalActions: Array of alert actions.
+    ///   - includeCancelAction: Include a cancel action within the alert.
+    ///   - cancelText: Text for the cancel button.
+    ///   - cancelHandler: Call back handler when cancel action tapped.
+    ///   - animated: Pass true to animate the presentation; otherwise, pass false.
+    ///   - configure: Configure the `UIAlertController` before it is loaded.
+    ///   - completion: The block to execute after the presentation finishes.
+    /// - Returns: Returns the alert controller instance that was presented.
+    @discardableResult
+    func present(
+        actionSheet title: String?,
+        message: String? = nil,
+        barButtonItem: UIBarButtonItem,
+        additionalActions: [UIAlertAction],
+        includeCancelAction: Bool = false,
+        cancelText: String = .localized(.cancel),
+        cancelHandler: (() -> Void)? = nil,
+        animated: Bool = true,
+        configure: ((UIAlertController) -> Void)? = nil,
+        completion: (() -> Void)? = nil) -> UIAlertController
+    {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .actionSheet
+        )
+        
+        additionalActions.forEach { item in
+            alertController.addAction(item)
+        }
+        
+        if includeCancelAction {
+            alertController.addAction(
+                UIAlertAction(title: cancelText, style: .cancel) { _ in cancelHandler?() }
+            )
+        }
+        
+        // Handle popover for iPad's, etc if available
+        if let popover = alertController.popoverPresentationController {
+            popover.barButtonItem = barButtonItem
+            popover.permittedArrowDirections = .any
+        }
+        
+        // Handle any last configurations before presenting alert
+        configure?(alertController)
+        
+        present(alertController, animated: animated, completion: completion)
+        return alertController
     }
     
     /// Display a prompt with a text field to the user.
@@ -175,6 +249,8 @@ public extension UIViewController {
     ///   - animated: Pass true to animate the presentation; otherwise, pass false.
     ///   - configure: Configure the `UITextField` before it is loaded.
     ///   - response: Call back handler when main action tapped.
+    /// - Returns: Returns the alert controller instance that was presented.
+    @discardableResult
     func present(
         prompt title: String,
         message: String? = nil,
@@ -186,7 +262,7 @@ public extension UIViewController {
         cancelHandler: (() -> Void)? = nil,
         animated: Bool = true,
         configure: ((UITextField) -> Void)? = nil,
-        response: @escaping ((String?) -> Void))
+        response: @escaping ((String?) -> Void)) -> UIAlertController
     {
         let alertController = UIAlertController(
             title: title,
@@ -219,6 +295,7 @@ public extension UIViewController {
         )
         
         present(alertController, animated: animated, completion: nil)
+        return alertController
     }
 }
 
@@ -237,24 +314,25 @@ public extension UIViewController {
     ///   - preferredControlTintColor: The color to tint the control buttons on the navigation bar and the toolbar.
     ///   - animated: Pass true to animate the presentation.
     ///   - completion: The block to execute after the presentation finishes.
+    /// - Returns: Returns the alert controller instance that was presented.
+    @discardableResult
     func present(
         safari url: String,
         modalPresentationStyle: UIModalPresentationStyle? = .overFullScreen,
         barTintColor: UIColor? = nil,
         preferredControlTintColor: UIColor? = nil,
         animated: Bool = true,
-        completion: (() -> Void)? = nil)
+        completion: (() -> Void)? = nil) -> SFSafariViewController
     {
-        present(
-            SFSafariViewController(url: URL(string: url)!).with {
-                $0.delegate = self as? SFSafariViewControllerDelegate
-                $0.modalPresentationStyle ?= modalPresentationStyle
-                $0.preferredBarTintColor ?= barTintColor
-                $0.preferredControlTintColor ?= preferredControlTintColor
-            },
-            animated: animated,
-            completion: completion
-        )
+        let controller = SFSafariViewController(url: URL(string: url)!).with {
+            $0.delegate = self as? SFSafariViewControllerDelegate
+            $0.modalPresentationStyle ?= modalPresentationStyle
+            $0.preferredBarTintColor ?= barTintColor
+            $0.preferredControlTintColor ?= preferredControlTintColor
+        }
+        
+        present(controller, animated: animated, completion: completion)
+        return controller
     }
     
     /// Present or push a Safari view controller in a primary context.
@@ -268,14 +346,16 @@ public extension UIViewController {
     ///   - preferredControlTintColor: The color to tint the control buttons on the navigation bar and the toolbar.
     ///   - animated: Pass true to animate the presentation.
     ///   - completion: The block to execute after the presentation finishes.
+    /// - Returns: Returns the alert controller instance that was presented.
+    @discardableResult
     func show(
         safari url: String,
         barTintColor: UIColor? = nil,
         preferredControlTintColor: UIColor? = nil,
         animated: Bool = true,
-        completion: (() -> Void)? = nil)
+        completion: (() -> Void)? = nil) -> SFSafariViewController
     {
-        present(
+        return present(
             safari: url,
             modalPresentationStyle: nil,
             barTintColor: barTintColor,
@@ -315,7 +395,9 @@ public extension UIViewController {
     ///   - activities: The array of data objects on which to perform the activity. The type of objects in the array is variable and dependent on the data your application manages.
     ///   - sourceView: The view containing the anchor rectangle for the popover for supporting iPad device.
     ///   - applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
-    func present(activities: [Any], popoverFrom sourceView: UIView, applicationActivities: [UIActivity]? = nil) {
+    /// - Returns: Returns the activity view controller instance that was presented.
+    @discardableResult
+    func present(activities: [Any], popoverFrom sourceView: UIView, applicationActivities: [UIActivity]? = nil) -> UIActivityViewController {
         let activity = UIActivityViewController(activityItems: activities, applicationActivities: applicationActivities)
         
         if let popover = activity.popoverPresentationController {
@@ -325,6 +407,7 @@ public extension UIViewController {
         }
 
         present(activity, animated: true, completion: nil)
+        return activity
     }
     
     /// Presents an activity view controller modally that you can use to offer various services from your application.
@@ -352,7 +435,9 @@ public extension UIViewController {
     ///   - activities: The array of data objects on which to perform the activity. The type of objects in the array is variable and dependent on the data your application manages.
     ///   - barButtonItem: The bar button item containing the anchor rectangle for the popover for supporting iPad device.
     ///   - applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
-    func present(activities: [Any], barButtonItem: UIBarButtonItem, applicationActivities: [UIActivity]? = nil) {
+    /// - Returns: Returns the activity view controller instance that was presented.
+    @discardableResult
+    func present(activities: [Any], barButtonItem: UIBarButtonItem, applicationActivities: [UIActivity]? = nil) -> UIActivityViewController {
         let activity = UIActivityViewController(activityItems: activities, applicationActivities: applicationActivities)
         
         if let popover = activity.popoverPresentationController {
@@ -361,6 +446,7 @@ public extension UIViewController {
         }
 
         present(activity, animated: true, completion: nil)
+        return activity
     }
 }
 

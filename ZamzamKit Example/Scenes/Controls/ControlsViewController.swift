@@ -130,7 +130,8 @@ private extension ControlsViewController {
             imageBundle: .zamzamKit,
             handler: {
                 guard SCNetworkReachability.isOnline else {
-                    return self.present(alert: "Device must be online to view within the browser.")
+                    self.present(alert: "Device must be online to view within the browser.")
+                    return
                 }
                 
                 UIApplication.shared.open(link)
@@ -167,10 +168,11 @@ private extension ControlsViewController {
     
     @IBAction func composeMailButtonTapped() {
         guard let controller = mailComposer.makeViewController(email: "test@example.com") else {
-            return present(
+            present(
                 alert: "Could Not Send Email",
                 message: "Your device could not send e-mail."
             )
+            return
         }
         
         present(controller, animated: true)

@@ -29,7 +29,7 @@ class LocationViewController: UIViewController {
             for: .whenInUse,
             startUpdatingLocation: true) {
                 guard $0 else {
-                    return self.present(
+                    self.present(
                         alert: .localized(.allowLocationAlert),
                         message: .localized(.allowLocationMessage),
                         buttonText: .localized(.allow),
@@ -39,6 +39,7 @@ class LocationViewController: UIViewController {
                             UIApplication.shared.open(settings)
                         }
                     )
+                    return
                 }
                 
                 self.locationsWorker.startUpdatingHeading()
