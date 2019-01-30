@@ -93,9 +93,18 @@ extension StringTests {
     }
     
     func testContains() {
-        XCTAssertTrue("1234567890".contains("567"))
-        XCTAssertTrue("abc123xyz".contains("c12"))
-        XCTAssertFalse("abc123xyz".contains("ghi"))
+        let elements = CharacterSet(charactersIn: "AbCz456!")
+        
+        XCTAssertFalse("".contains(elements))
+        XCTAssertTrue("Foo5".contains(elements))
+        XCTAssertTrue("bar 222".contains(elements))
+        XCTAssertFalse("none".contains(elements))
+        XCTAssertFalse("999".contains(elements))
+        XCTAssertFalse("#$23".contains(elements))
+        XCTAssertTrue("qwe!".contains(elements))
+        
+        XCTAssertTrue("def".contains(CharacterSet(charactersIn: "Abcdef123456")))
+        XCTAssertFalse("Xyz".contains(CharacterSet(charactersIn: "Abcdef123456")))
     }
     
     func testSeparator() {
