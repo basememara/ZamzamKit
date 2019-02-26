@@ -202,3 +202,18 @@ public extension UIView {
         return activityIndicator
     }
 }
+
+public extension UIView {
+    
+    /// Anchor all sides of the view using auto layout constraints.
+    ///
+    /// - Parameter view: The ancestor view to pin edges to.
+    func edges(to view: UIView?) {
+        guard let view = view else { return }
+        translatesAutoresizingMaskIntoConstraints = false
+        topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+}
