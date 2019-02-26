@@ -1,11 +1,11 @@
 //
 //  SynchronizedArray.swift
 //  ZamzamKit
+//  http://basememara.com/creating-thread-safe-arrays-in-swift/
 //
 //  Created by Basem Emara on 2/27/17.
 //  Copyright © 2017 Zamzam. All rights reserved.
 //
-//  http://basememara.com/creating-thread-safe-arrays-in-swift/
 //
 
 import Foundation

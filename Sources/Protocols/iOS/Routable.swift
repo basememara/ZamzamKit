@@ -12,13 +12,37 @@ public protocol Routable {
     associatedtype StoryboardIdentifier: RawRepresentable
     
     @discardableResult
-    func present<T: UIViewController>(storyboard: StoryboardIdentifier, inBundle bundle: Bundle?, identifier: String?, animated: Bool, modalPresentationStyle: UIModalPresentationStyle?, modalTransitionStyle: UIModalTransitionStyle?, configure: ((T) -> Void)?, completion: ((T) -> Void)?) -> UIViewController?
+    func present<T: UIViewController>(
+        storyboard: StoryboardIdentifier,
+        inBundle bundle: Bundle?,
+        identifier: String?,
+        animated: Bool,
+        modalPresentationStyle: UIModalPresentationStyle?,
+        modalTransitionStyle: UIModalTransitionStyle?,
+        configure: ((T) -> Void)?,
+        completion: ((T) -> Void)?) -> T?
     
     @discardableResult
-    func show<T: UIViewController>(storyboard: StoryboardIdentifier, inBundle bundle: Bundle?, identifier: String?, configure: ((T) -> Void)?) -> UIViewController?
+    func show<T: UIViewController>(
+        storyboard: StoryboardIdentifier,
+        inBundle bundle: Bundle?,
+        identifier: String?,
+        configure: ((T) -> Void)?) -> T?
     
     @discardableResult
-    func showDetailViewController<T: UIViewController>(storyboard: StoryboardIdentifier, inBundle bundle: Bundle?, identifier: String?, configure: ((T) -> Void)?) -> UIViewController?
+    func showDetailViewController<T: UIViewController>(
+        storyboard: StoryboardIdentifier,
+        inBundle bundle: Bundle?,
+        identifier: String?,
+        configure: ((T) -> Void)?) -> T?
+    
+    @discardableResult
+    func add<T: UIViewController>(
+        child storyboard: String,
+        inBundle bundle: Bundle?,
+        identifier: String?,
+        to containerView: UIView?,
+        configure: ((T) -> Void)?) -> T?
 }
 
 public extension Routable where Self: UIViewController, StoryboardIdentifier.RawValue == String {
@@ -52,8 +76,29 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
     ///   - configure: Configure the view controller before it is loaded.
     ///   - completion: Completion the view controller after it is loaded.
     /// - Returns: Returns the view controller instance from the storyboard.
-    func present<T: UIViewController>(storyboard: StoryboardIdentifier, inBundle bundle: Bundle? = nil, identifier: String? = nil, animated: Bool = true, modalPresentationStyle: UIModalPresentationStyle? = nil, modalTransitionStyle: UIModalTransitionStyle? = nil, configure: ((T) -> Void)? = nil, completion: ((T) -> Void)? = nil) -> UIViewController? {
-        return RoutingLogic.present(delegate: self, storyboard: storyboard.rawValue, inBundle: bundle, identifier: identifier, animated: animated, modalPresentationStyle: modalPresentationStyle, modalTransitionStyle: modalTransitionStyle, configure: configure, completion: completion)
+    func present<T: UIViewController>(
+        storyboard: StoryboardIdentifier,
+        inBundle bundle: Bundle? = nil,
+        identifier: String? = nil,
+        animated: Bool = true,
+        modalPresentationStyle: UIModalPresentationStyle? = nil,
+        modalTransitionStyle: UIModalTransitionStyle? = nil,
+        configure: ((T) -> Void)? = nil,
+        completion: ((T) -> Void)? = nil) -> T?
+    {
+        return RoutingLogic.present(
+            delegate: self,
+            storyboard: storyboard.rawValue,
+            inBundle: bundle,
+            identifier: identifier,
+            animated: animated,
+            modalPresentationStyle:
+            modalPresentationStyle,
+            modalTransitionStyle:
+            modalTransitionStyle,
+            configure: configure,
+            completion: completion
+        )
     }
     
     /// Present the intial view controller of the specified storyboard in the primary context.
@@ -82,8 +127,19 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
     ///   - identifier: Storyboard identifier.
     ///   - configure: Configure the view controller before it is loaded.
     /// - Returns: Returns the view controller instance from the storyboard.
-    func show<T: UIViewController>(storyboard: StoryboardIdentifier, inBundle bundle: Bundle? = nil, identifier: String? = nil, configure: ((T) -> Void)? = nil) -> UIViewController? {
-        return RoutingLogic.show(delegate: self, storyboard: storyboard.rawValue, inBundle: bundle, identifier: identifier, configure: configure)
+    func show<T: UIViewController>(
+        storyboard: StoryboardIdentifier,
+        inBundle bundle: Bundle? = nil,
+        identifier: String? = nil,
+        configure: ((T) -> Void)? = nil) -> T?
+    {
+        return RoutingLogic.show(
+            delegate: self,
+            storyboard: storyboard.rawValue,
+            inBundle: bundle,
+            identifier: identifier,
+            configure: configure
+        )
     }
     
     /// Present the intial view controller of the specified storyboard in the secondary (or detail) context.
@@ -95,8 +151,19 @@ public extension Routable where Self: UIViewController, StoryboardIdentifier.Raw
     ///   - identifier: Storyboard identifier.
     ///   - configure: Configure the view controller before it is loaded.
     /// - Returns: Returns the view controller instance from the storyboard.
-    func showDetailViewController<T: UIViewController>(storyboard: StoryboardIdentifier, inBundle bundle: Bundle? = nil, identifier: String? = nil, configure: ((T) -> Void)? = nil) -> UIViewController? {
-        return RoutingLogic.showDetailViewController(delegate: self, storyboard: storyboard.rawValue, inBundle: bundle, identifier: identifier, configure: configure)
+    func showDetailViewController<T: UIViewController>(
+        storyboard: StoryboardIdentifier,
+        inBundle bundle: Bundle? = nil,
+        identifier: String? = nil,
+        configure: ((T) -> Void)? = nil) -> T?
+    {
+        return RoutingLogic.showDetailViewController(
+            delegate: self,
+            storyboard: storyboard.rawValue,
+            inBundle: bundle,
+            identifier: identifier,
+            configure: configure
+        )
     }
 }
 
@@ -105,13 +172,29 @@ public protocol Router {
     var viewController: UIViewController? { get set }
     
     @discardableResult
-    func present<T: UIViewController>(storyboard: String, inBundle bundle: Bundle?, identifier: String?, animated: Bool, modalPresentationStyle: UIModalPresentationStyle?, modalTransitionStyle: UIModalTransitionStyle?, configure: ((T) -> Void)?, completion: ((T) -> Void)?) -> UIViewController?
+    func present<T: UIViewController>(
+        storyboard: String,
+        inBundle bundle: Bundle?,
+        identifier: String?,
+        animated: Bool,
+        modalPresentationStyle: UIModalPresentationStyle?,
+        modalTransitionStyle: UIModalTransitionStyle?,
+        configure: ((T) -> Void)?,
+        completion: ((T) -> Void)?) -> T?
     
     @discardableResult
-    func show<T: UIViewController>(storyboard: String, inBundle bundle: Bundle?, identifier: String?, configure: ((T) -> Void)?) -> UIViewController?
+    func show<T: UIViewController>(
+        storyboard: String,
+        inBundle bundle: Bundle?,
+        identifier: String?,
+        configure: ((T) -> Void)?) -> T?
     
     @discardableResult
-    func showDetailViewController<T: UIViewController>(storyboard: String, inBundle bundle: Bundle?, identifier: String?, configure: ((T) -> Void)?) -> UIViewController?
+    func showDetailViewController<T: UIViewController>(
+        storyboard: String,
+        inBundle bundle: Bundle?,
+        identifier: String?,
+        configure: ((T) -> Void)?) -> T?
     
     func dismiss(animated: Bool, completion: (() -> Void)?)
 }
@@ -130,9 +213,30 @@ public extension Router {
     ///   - configure: Configure the view controller before it is loaded.
     ///   - completion: Completion the view controller after it is loaded.
     /// - Returns: Returns the view controller instance from the storyboard.
-    func present<T: UIViewController>(storyboard: String, inBundle bundle: Bundle? = nil, identifier: String? = nil, animated: Bool = true, modalPresentationStyle: UIModalPresentationStyle? = nil, modalTransitionStyle: UIModalTransitionStyle? = nil, configure: ((T) -> Void)? = nil, completion: ((T) -> Void)? = nil) -> UIViewController? {
+    func present<T: UIViewController>(
+        storyboard: String,
+        inBundle bundle: Bundle? = nil,
+        identifier: String? = nil,
+        animated: Bool = true,
+        modalPresentationStyle: UIModalPresentationStyle? = nil,
+        modalTransitionStyle: UIModalTransitionStyle? = nil,
+        configure: ((T) -> Void)? = nil,
+        completion: ((T) -> Void)? = nil) -> T?
+    {
         guard let viewController = viewController else { return nil }
-        return RoutingLogic.present(delegate: viewController, storyboard: storyboard, inBundle: bundle, identifier: identifier, animated: animated, modalPresentationStyle: modalPresentationStyle, modalTransitionStyle: modalTransitionStyle, configure: configure, completion: completion)
+        
+        return RoutingLogic.present(
+            delegate: viewController,
+            storyboard: storyboard,
+            inBundle: bundle,
+            identifier: identifier,
+            animated: animated,
+            modalPresentationStyle:
+            modalPresentationStyle,
+            modalTransitionStyle: modalTransitionStyle,
+            configure: configure,
+            completion: completion
+        )
     }
     
     /// Present the intial view controller of the specified storyboard in the primary context.
@@ -144,9 +248,21 @@ public extension Router {
     ///   - identifier: Storyboard identifier.
     ///   - configure: Configure the view controller before it is loaded.
     /// - Returns: Returns the view controller instance from the storyboard.
-    func show<T: UIViewController>(storyboard: String, inBundle bundle: Bundle? = nil, identifier: String? = nil, configure: ((T) -> Void)? = nil) -> UIViewController? {
+    func show<T: UIViewController>(
+        storyboard: String,
+        inBundle bundle: Bundle? = nil,
+        identifier: String? = nil,
+        configure: ((T) -> Void)? = nil) -> T?
+    {
         guard let viewController = viewController else { return nil }
-        return RoutingLogic.show(delegate: viewController, storyboard: storyboard, inBundle: bundle, identifier: identifier, configure: configure)
+        
+        return RoutingLogic.show(
+            delegate: viewController,
+            storyboard: storyboard,
+            inBundle: bundle,
+            identifier: identifier,
+            configure: configure
+        )
     }
     
     /// Present the intial view controller of the specified storyboard in the secondary (or detail) context.
@@ -158,9 +274,21 @@ public extension Router {
     ///   - identifier: Storyboard identifier.
     ///   - configure: Configure the view controller before it is loaded.
     /// - Returns: Returns the view controller instance from the storyboard.
-    func showDetailViewController<T: UIViewController>(storyboard: String, inBundle bundle: Bundle? = nil, identifier: String? = nil, configure: ((T) -> Void)? = nil) -> UIViewController? {
+    func showDetailViewController<T: UIViewController>(
+        storyboard: String,
+        inBundle bundle: Bundle? = nil,
+        identifier: String? = nil,
+        configure: ((T) -> Void)? = nil) -> T?
+    {
         guard let viewController = viewController else { return nil }
-        return RoutingLogic.showDetailViewController(delegate: viewController, storyboard: storyboard, inBundle: bundle, identifier: identifier, configure: configure)
+        
+        return RoutingLogic.showDetailViewController(
+            delegate: viewController,
+            storyboard: storyboard,
+            inBundle: bundle,
+            identifier: identifier,
+            configure: configure
+        )
     }
     
     /// Dismisses or pops the view controller that was presented.
@@ -170,7 +298,12 @@ public extension Router {
     ///   - completion: The block to execute after the view controller is dismissed.
     func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
         guard let viewController = viewController else { return }
-        return RoutingLogic.dismiss(delegate: viewController, animated: animated, completion: completion)
+        
+        return RoutingLogic.dismiss(
+            delegate: viewController,
+            animated: animated,
+            completion: completion
+        )
     }
 }
 
@@ -178,7 +311,17 @@ public extension Router {
 
 fileprivate enum RoutingLogic {
     
-    static func present<T: UIViewController>(delegate: UIViewController, storyboard: String, inBundle bundle: Bundle? = nil, identifier: String? = nil, animated: Bool = true, modalPresentationStyle: UIModalPresentationStyle? = nil, modalTransitionStyle: UIModalTransitionStyle? = nil, configure: ((T) -> Void)? = nil, completion: ((T) -> Void)? = nil) -> UIViewController? {
+    static func present<T: UIViewController>(
+        delegate: UIViewController,
+        storyboard: String,
+        inBundle bundle: Bundle? = nil,
+        identifier: String? = nil,
+        animated: Bool = true,
+        modalPresentationStyle: UIModalPresentationStyle? = nil,
+        modalTransitionStyle: UIModalTransitionStyle? = nil,
+        configure: ((T) -> Void)? = nil,
+        completion: ((T) -> Void)? = nil) -> T?
+    {
         let storyboard = UIStoryboard(name: storyboard, bundle: bundle)
         
         guard let controller = (identifier != nil
@@ -205,7 +348,13 @@ fileprivate enum RoutingLogic {
         return controller
     }
 
-    static func show<T: UIViewController>(delegate: UIViewController, storyboard: String, inBundle bundle: Bundle? = nil, identifier: String? = nil, configure: ((T) -> Void)? = nil) -> UIViewController? {
+    static func show<T: UIViewController>(
+        delegate: UIViewController,
+        storyboard: String,
+        inBundle bundle: Bundle? = nil,
+        identifier: String? = nil,
+        configure: ((T) -> Void)? = nil) -> T?
+    {
         let storyboard = UIStoryboard(name: storyboard, bundle: bundle)
         
         guard let controller = (identifier != nil
@@ -222,7 +371,13 @@ fileprivate enum RoutingLogic {
         return controller
     }
 
-    static func showDetailViewController<T: UIViewController>(delegate: UIViewController, storyboard: String, inBundle bundle: Bundle? = nil, identifier: String? = nil, configure: ((T) -> Void)? = nil) -> UIViewController? {
+    static func showDetailViewController<T: UIViewController>(
+        delegate: UIViewController,
+        storyboard: String,
+        inBundle bundle: Bundle? = nil,
+        identifier: String? = nil,
+        configure: ((T) -> Void)? = nil) -> T?
+    {
         let storyboard = UIStoryboard(name: storyboard, bundle: bundle)
         
         guard let controller = (identifier != nil
