@@ -450,6 +450,42 @@ public extension UIViewController {
     }
 }
 
+// MARK: - Child view controllers
+
+public extension UIViewController {
+    
+    /// Adds the specified view controller as a child of the current view controller.
+    ///
+    ///     add(child: viewController1)
+    ///     add(child: viewController2, to: containerView)
+    ///
+    /// - Parameters:
+    ///   - viewController: The child view controller.
+    ///   - containerView: The target view, or `nil` to use the current view controller `view`.
+    func add(child viewController: UIViewController, to containerView: UIView? = nil) {
+        // https://cocoacasts.com/managing-view-controllers-with-container-view-controllers/
+        // https://useyourloaf.com/blog/container-view-controllers/
+        guard let containerView = containerView ?? view else { return }
+        
+        addChild(viewController)
+        
+        containerView.addSubview(viewController.view)
+        viewController.view.edges(to: containerView)
+        
+        viewController.didMove(toParent: self)
+    }
+    
+    /// Removes and unlink the view controller from its parent, and notifies any listeners.
+    func remove() {
+        // https://www.swiftbysundell.com/posts/using-child-view-controllers-as-plugins-in-swift
+        guard parent != nil else { return }
+        
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
+    }
+}
+
 // MARK: - Dimensions
 
 public extension UIViewController {
