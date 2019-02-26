@@ -14,7 +14,7 @@ class LocationViewController: UIViewController {
 
     @IBOutlet weak var outputLabel: UILabel!
     
-    var locationsWorker: LocationsWorkerType = LocationsWorker(
+    var locationsWorker: LocationWorkerType = LocationWorker(
         desiredAccuracy: kCLLocationAccuracyThreeKilometers,
         distanceFilter: 1000
     )
@@ -58,13 +58,13 @@ class LocationViewController: UIViewController {
 
 extension LocationViewController {
     
-    var locationObserver: Observer<LocationsWorker.LocationHandler> {
+    var locationObserver: Observer<LocationWorker.LocationHandler> {
         return Observer { [weak self] in
             self?.outputLabel.text = $0.description
         }
     }
     
-    var headingObserver: Observer<LocationsWorker.HeadingHandler> {
+    var headingObserver: Observer<LocationWorker.HeadingHandler> {
         return Observer {
             print($0.description)
         }

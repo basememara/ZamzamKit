@@ -110,3 +110,13 @@ public extension ArraySlice {
         return self[safe: index]
     }
 }
+
+@available(*, unavailable, renamed: "LocationWorker")
+public class LocationsWorker: LocationWorker {
+    
+}
+
+@available(*, unavailable, renamed: "LocationWorkerType")
+public protocol LocationsWorkerType: LocationWorkerType {
+    
+}
