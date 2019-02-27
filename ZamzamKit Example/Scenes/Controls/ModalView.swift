@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ZamzamKit
 
 protocol ModalViewDelegate: class {
     func modalViewDidApply()

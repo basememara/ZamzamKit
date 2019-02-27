@@ -712,43 +712,33 @@ class MyViewController: UIViewController {
 </details>
 
 <details>
-<summary>Routing</summary>
+<summary>Router</summary>
 
-> Conforming types to `Routable` provides extensions in `UIViewController` for strongly-typed storyboard routing ([read more](http://basememara.com/protocol-oriented-router-in-swift/)):
-
-```
-class ViewController: UIViewController {
-
-    @IBAction func moreTapped() {
-        present(storyboard: .more) { (controller: MoreViewController) in
-            controller.someProperty = "\(Date())"
-        }
-    }
-}
-
-extension ViewController: Routable {
-
-    enum StoryboardIdentifier: String {
-        case more = "More"
-        case login = "Login"
-    }
-}
-```
-
-> Conforming types to `Router` can specify a weak `UIViewController` instance:
+> Provides routing functionality for a type to remove navigation responsibility off `UIViewController`  ([extend for strongly-typed storyboard routing](http://basememara.com/protocol-oriented-router-in-swift/)):
 
 ```
-struct HomeRouter: Router {
+struct MyRouter: Router {
     weak var viewController: UIViewController?
 
     init(viewController: UIViewController?) {
         self.viewController = viewController
     }
 
-    func listPosts(for fetchType: FetchType) {
-        show(storyboard: .listPosts) { (controller: ListPostsViewController) in
-            controller.fetchType = fetchType
+    func showSettings(date: Date) {
+        present(storyboard: "ShowSettings") { (controller: ShowSettingsViewController) in
+            controller.someProperty = date
         }
+    }
+}
+
+class MyViewController: UIViewController {
+
+    private lazy var router: Router = MyRouter(
+        viewController: self
+    )
+
+    @IBAction func settingsTapped() {
+        router.showSettings(date: Date())
     }
 }
 ```

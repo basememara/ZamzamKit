@@ -173,13 +173,12 @@
 		8B9434671EBDEAA200C779EB /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434641EBDEAA200C779EB /* Calendar.swift */; };
 		8B9E97A71EAFA4980067ACB7 /* Test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E97A61EAFA4980067ACB7 /* Test.txt */; };
 		8B9E97A81EAFA4980067ACB7 /* Test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E97A61EAFA4980067ACB7 /* Test.txt */; };
-		8B9E98111EB144540067ACB7 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E98101EB144540067ACB7 /* Routable.swift */; };
+		8B9E98111EB144540067ACB7 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E98101EB144540067ACB7 /* Router.swift */; };
 		8B9E98601EB396D20067ACB7 /* CellIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E985F1EB396D20067ACB7 /* CellIdentifiable.swift */; };
 		8B9E986F1EB500790067ACB7 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E986E1EB500790067ACB7 /* With.swift */; };
 		8B9E98701EB500790067ACB7 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E986E1EB500790067ACB7 /* With.swift */; };
 		8B9E98711EB500790067ACB7 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E986E1EB500790067ACB7 /* With.swift */; };
 		8BB120C32178B54800B72ECF /* PresentableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB120C22178B54800B72ECF /* PresentableView.swift */; };
-		8BB120C42178B54800B72ECF /* PresentableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB120C22178B54800B72ECF /* PresentableView.swift */; };
 		8BB1D4B721B19F0C00C9FBC0 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1D4B621B19F0C00C9FBC0 /* UserDefaultsKeys.swift */; };
 		8BB1D4B821B1B40400C9FBC0 /* SCNetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */; };
 		8BB1D4B921B1B40500C9FBC0 /* SCNetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD08EB41CE28ACA0051080A /* SCNetworkReachability.swift */; };
@@ -497,7 +496,7 @@
 		8B9434601EBDEA8200C779EB /* TimeZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
 		8B9434641EBDEAA200C779EB /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		8B9E97A61EAFA4980067ACB7 /* Test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Test.txt; sourceTree = "<group>"; };
-		8B9E98101EB144540067ACB7 /* Routable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
+		8B9E98101EB144540067ACB7 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		8B9E985F1EB396D20067ACB7 /* CellIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellIdentifiable.swift; sourceTree = "<group>"; };
 		8B9E986E1EB500790067ACB7 /* With.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = With.swift; sourceTree = "<group>"; };
 		8BB120C22178B54800B72ECF /* PresentableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableView.swift; sourceTree = "<group>"; };
@@ -726,17 +725,16 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		8B1FE7E92065AB5200EE8DBE /* iOS */ = {
+		8B1FE7E92065AB5200EE8DBE /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				8BD2D1951CA581890018AC2B /* Audible.swift */,
 				8B9E985F1EB396D20067ACB7 /* CellIdentifiable.swift */,
 				8B6FB9B5202777DE00FE7BEB /* DataViewable.swift */,
 				8BB120C22178B54800B72ECF /* PresentableView.swift */,
-				8B9E98101EB144540067ACB7 /* Routable.swift */,
 				8BB415E51FB0DFFF0002C86C /* StatusBarable.swift */,
 			);
-			path = iOS;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		8B1FE7EA2065AB6600EE8DBE /* Controls */ = {
@@ -857,6 +855,8 @@
 			children = (
 				8B1CC4F2217AE49100F00A70 /* Application */,
 				8B1CC4F5217AE89300F00A70 /* Controller */,
+				8B1FE7E92065AB5200EE8DBE /* Protocols */,
+				8BDA5E301E795DE300429F78 /* BackgroundTask.swift */,
 				8B752F7D2020EA30007DA40C /* BadgeBarButtonItem.swift */,
 				8B50C506211E2F9B00A36ABB /* GradientView.swift */,
 				8B0E0F5020F430C200DF3975 /* IntrinsicHeightDataView.swift */,
@@ -865,16 +865,9 @@
 				8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */,
 				8B379A0720F65F46002144F7 /* PlaceholderTextView.swift */,
 				8B07420A20DFBD2300204C2F /* RoundedViews.swift */,
+				8B9E98101EB144540067ACB7 /* Router.swift */,
 				8B2D57B820E2D38900CF4B01 /* UILabelView.swift */,
 				8B756F141E5CF16D00DE4B02 /* XIBView.swift */,
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
-		8B83049E21849970002F3E7C /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				8BDA5E301E795DE300429F78 /* BackgroundTask.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -882,7 +875,6 @@
 		8B840E651C904F3300D85781 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				8B1FE7E92065AB5200EE8DBE /* iOS */,
 				8BD61B351E3EFDF1009B537E /* AppInfo.swift */,
 				8BC6D9992047908900242DAE /* Scrollable.swift */,
 				8B2D90EA1EE47ED80019F063 /* UNNotificationTriggerDateType.swift */,
@@ -1064,7 +1056,6 @@
 		8BFDB6A51C75B4B200C94996 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8B83049E21849970002F3E7C /* iOS */,
 				8B4D71AE216A542A002ACA81 /* Debouncer.swift */,
 				8BFDB69F1C75B4A600C94996 /* LocationMeta.swift */,
 				8B8974701EDF555C004FA853 /* Migration.swift */,
@@ -1484,7 +1475,7 @@
 				8BE43EF021CEEB2900247DE4 /* NSAttributedString.swift in Sources */,
 				8B1CC4F7217AE91100F00A70 /* ControllerModuleDelegate.swift in Sources */,
 				8BFDB6771C751F2300C94996 /* FileManager.swift in Sources */,
-				8B9E98111EB144540067ACB7 /* Routable.swift in Sources */,
+				8B9E98111EB144540067ACB7 /* Router.swift in Sources */,
 				8BFDB6641C751AE600C94996 /* URL.swift in Sources */,
 				8B0C715F1E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B2B0C0321360DA100353F4E /* UINavigationController.swift in Sources */,
@@ -1633,7 +1624,6 @@
 				8BB343212140E842000F0CEF /* LocationViewController.swift in Sources */,
 				8BB1D4B721B19F0C00C9FBC0 /* UserDefaultsKeys.swift in Sources */,
 				8B58856721B90A7A00B0D0CD /* ModalView.swift in Sources */,
-				8BB120C42178B54800B72ECF /* PresentableView.swift in Sources */,
 				8BB3432E2141D557000F0CEF /* Localizable.swift in Sources */,
 				8B58855D21B8F4DE00B0D0CD /* CollectionViewController.swift in Sources */,
 				8BB3431E2140E842000F0CEF /* NotificationsViewController.swift in Sources */,
