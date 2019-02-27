@@ -10,8 +10,10 @@ import XCTest
 import ZamzamKit
 
 class BundleTests: XCTestCase {
-    
     lazy var bundle = Bundle(for: type(of: self))
+}
+
+extension BundleTests {
     
     func testValuesFromText() {
         let values = bundle.string(file: "Test.txt")
@@ -22,27 +24,57 @@ class BundleTests: XCTestCase {
     func testValuesFromPlist() {
         let values = bundle.contents(plist: "Settings.plist")
         
-        XCTAssert(values["MyString1"] as? String == "My string value 1.")
-        XCTAssert(values["MyNumber1"] as? Int == 123)
-        XCTAssert(values["MyBool1"] as? Bool == false)
-        XCTAssert(values["MyDate1"] as? Date == Date(
+        XCTAssertEqual(values["MyString1"] as? String, "My string value 1.")
+        XCTAssertEqual(values["MyNumber1"] as? Int, 123)
+        XCTAssertEqual(values["MyBool1"] as? Bool, false)
+        XCTAssertEqual(values["MyDate1"] as? Date, Date(
             fromString: "2016/03/03 9:50",
             timeZone: TimeZone(identifier: "America/Toronto")
         )!)
     }
+}
+
+extension BundleTests {
     
     func testArrayFromPlist() {
+        let values: [String] = bundle.array(plist: "Array.plist")
+        
+        XCTAssertEqual(values[0], "Abc")
+        XCTAssertEqual(values[1], "Def")
+        XCTAssertEqual(values[2], "Ghi")
+    }
+    
+    func testArrayModelsFromPlist() {
+        let values: [[String: Any]] = bundle.array(plist: "Array2.plist")
+        
+        XCTAssertEqual(values[0]["id"] as? Int, 1)
+        XCTAssertEqual(values[0]["name"] as? String, "Test 1")
+        XCTAssertEqual(values[0]["description"] as? String, "This is a test for 1.")
+        
+        XCTAssertEqual(values[1]["id"] as? Int, 2)
+        XCTAssertEqual(values[1]["name"] as? String, "Test 2")
+        XCTAssertEqual(values[1]["description"] as? String, "This is a test for 2.")
+        
+        XCTAssertEqual(values[2]["id"] as? Int, 3)
+        XCTAssertEqual(values[2]["name"] as? String, "Test 3")
+        XCTAssertEqual(values[2]["description"] as? String, "This is a test for 3.")
+    }
+}
+
+extension BundleTests {
+    
+    func testArrayInDictionaryFromPlist() {
         let values = bundle.contents(plist: "Settings.plist")
-        let array = values["MyArray1"] as! [AnyObject]
+        let array = values["MyArray1"] as! [Any]
         let expected: [Any] = [
             "My string for array value." as Any,
             999 as Any,
             true as Any
         ]
         
-        XCTAssert(array[0] as! String == expected[0] as! String)
-        XCTAssert(array[1] as! Int == expected[1] as! Int)
-        XCTAssert(array[2] as! Bool == expected[2] as! Bool)
+        XCTAssertEqual(array[0] as! String, expected[0] as! String)
+        XCTAssertEqual(array[1] as! Int, expected[1] as! Int)
+        XCTAssertEqual(array[2] as! Bool, expected[2] as! Bool)
     }
     
     func testDictFromPlist() {
@@ -54,9 +86,9 @@ class BundleTests: XCTestCase {
             "active": true as Any
         ]
         
-        XCTAssert(dict["id"] as! Int == expected["id"] as! Int)
-        XCTAssert(dict["title"] as! String == expected["title"] as! String)
-        XCTAssert(dict["active"] as! Bool == expected["active"] as! Bool)
+        XCTAssertEqual(dict["id"] as! Int, expected["id"] as! Int)
+        XCTAssertEqual(dict["title"] as! String,expected["title"] as! String)
+        XCTAssertEqual(dict["active"] as! Bool, expected["active"] as! Bool)
     }
 
 }

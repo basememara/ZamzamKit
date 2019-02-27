@@ -33,7 +33,28 @@ public extension Bundle {
     
     /// Gets the contents of the specified plist file.
     ///
-    ///     let values = Bundle.main.string(plist: "Settings.plist")
+    ///     let values: [[String: Any]] = Bundle.main.array(plist: "Settings.plist")
+    ///     values.first?.["MyString1"] as? String -> "My string value 1."
+    ///     values.first?.["MyNumber1"] as? Int -> 123
+    ///     values.first?.["MyBool1"] as? Bool -> false
+    ///     values.first?.["MyDate1"] as? Date -> 2018-11-21 15:40:03 +0000
+    ///
+    /// - Parameters:
+    ///   - plist: The property list where the array is declared.
+    ///   - directory: The name of the bundle subdirectory.
+    /// - Returns: Array of values of the property list file.
+    func array<T>(plist: String, inDirectory directory: String? = nil) -> [T] {
+        guard let resourcePath = path(forResource: plist, ofType: nil, inDirectory: directory),
+            let contents = NSArray(contentsOfFile: resourcePath) as? [T] else {
+                return []
+        }
+        
+        return contents
+    }
+    
+    /// Gets the contents of the specified plist file.
+    ///
+    ///     let values = Bundle.main.contents(plist: "Settings.plist")
     ///     values["MyString1"] as? String -> "My string value 1."
     ///     values["MyNumber1"] as? Int -> 123
     ///     values["MyBool1"] as? Bool -> false
