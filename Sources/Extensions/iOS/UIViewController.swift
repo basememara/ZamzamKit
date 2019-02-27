@@ -485,25 +485,3 @@ public extension UIViewController {
         removeFromParent()
     }
 }
-
-// MARK: - Dimensions
-
-public extension UIViewController {
-    
-    /// Calculate points from a percentage of the width of the view.
-    ///
-    /// - Parameter value: Percentage of the width.
-    /// - Returns: Points calculated from percentage of width.
-    func percentX(_ value: CGFloat) -> CGFloat {
-        return view.frame.width  * value
-    }
-    
-    /// Calculate points from a percentage of the height of the view.
-    ///
-    /// - Parameter value: Percentage of the height.
-    /// - Returns: Points calculated from percentage of height.
-    func percentY(_ value: CGFloat) -> CGFloat {
-        return view.frame.height * value
-    }
-}
-
