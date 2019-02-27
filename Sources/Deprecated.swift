@@ -111,6 +111,7 @@ public extension ArraySlice {
     }
 }
 
+#if os(iOS) || os(watchOS)
 @available(*, unavailable, renamed: "LocationWorker")
 public class LocationsWorker: LocationWorker {
     
@@ -120,3 +121,4 @@ public class LocationsWorker: LocationWorker {
 public protocol LocationsWorkerType: LocationWorkerType {
     
 }
+#endif
