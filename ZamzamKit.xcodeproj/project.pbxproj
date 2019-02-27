@@ -39,6 +39,9 @@
 		8B2DE3F01C8A90AF008F1569 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EE1C8A90AF008F1569 /* Settings.plist */; };
 		8B379A0820F65F46002144F7 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B379A0720F65F46002144F7 /* PlaceholderTextView.swift */; };
 		8B37B8D5200549040052E9B1 /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B37B8D4200549040052E9B1 /* UIStackView.swift */; };
+		8B3A6A4C22275917000011BC /* AppModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4922275917000011BC /* AppModels.swift */; };
+		8B3A6A4D22275917000011BC /* AppDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4A22275917000011BC /* AppDisplayable.swift */; };
+		8B3A6A4E22275917000011BC /* AppRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4B22275917000011BC /* AppRoutable.swift */; };
 		8B48E6211DAFFD4100087328 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6201DAFFD4100087328 /* ArrayTests.swift */; };
 		8B48E6231DAFFD8900087328 /* CollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6221DAFFD8900087328 /* CollectionTests.swift */; };
 		8B48E6251DAFFDA900087328 /* DictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6241DAFFDA900087328 /* DictionaryTests.swift */; };
@@ -416,6 +419,9 @@
 		8B2DE3EE1C8A90AF008F1569 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		8B379A0720F65F46002144F7 /* PlaceholderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
 		8B37B8D4200549040052E9B1 /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
+		8B3A6A4922275917000011BC /* AppModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModels.swift; sourceTree = "<group>"; };
+		8B3A6A4A22275917000011BC /* AppDisplayable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDisplayable.swift; sourceTree = "<group>"; };
+		8B3A6A4B22275917000011BC /* AppRoutable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRoutable.swift; sourceTree = "<group>"; };
 		8B40C2B41CC0A6F400BEC9E0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8B48E6201DAFFD4100087328 /* ArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
 		8B48E6221DAFFD8900087328 /* CollectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTests.swift; sourceTree = "<group>"; };
@@ -782,6 +788,16 @@
 			path = watchOS;
 			sourceTree = "<group>";
 		};
+		8B3A6A4822275917000011BC /* CleanScene */ = {
+			isa = PBXGroup;
+			children = (
+				8B3A6A4922275917000011BC /* AppModels.swift */,
+				8B3A6A4A22275917000011BC /* AppDisplayable.swift */,
+				8B3A6A4B22275917000011BC /* AppRoutable.swift */,
+			);
+			path = CleanScene;
+			sourceTree = "<group>";
+		};
 		8B5316061C9B22F40094A6C4 /* ZamzamKit Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -854,6 +870,7 @@
 			isa = PBXGroup;
 			children = (
 				8B1CC4F2217AE49100F00A70 /* Application */,
+				8B3A6A4822275917000011BC /* CleanScene */,
 				8B1CC4F5217AE89300F00A70 /* Controller */,
 				8B1FE7E92065AB5200EE8DBE /* Protocols */,
 				8BDA5E301E795DE300429F78 /* BackgroundTask.swift */,
@@ -1410,6 +1427,7 @@
 			files = (
 				8BF210921E4A22460026B802 /* UNNotificationAttachment.swift in Sources */,
 				8B4C08AC1EC9422E002A317D /* BinaryFloatingPoint.swift in Sources */,
+				8B3A6A4D22275917000011BC /* AppDisplayable.swift in Sources */,
 				8B6FB9B6202777DE00FE7BEB /* DataViewable.swift in Sources */,
 				8B0E0F5120F430C200DF3975 /* IntrinsicHeightDataView.swift in Sources */,
 				8BD98D651FC33B4600E74A8C /* Font.swift in Sources */,
@@ -1453,6 +1471,7 @@
 				8B63E4271CDB8DB00053C060 /* UIImage.swift in Sources */,
 				8B6B7C0C21E950BD003FB20D /* Thread.swift in Sources */,
 				8BDA5E311E795DE300429F78 /* BackgroundTask.swift in Sources */,
+				8B3A6A4E22275917000011BC /* AppRoutable.swift in Sources */,
 				8BD5086B1C99DD1E00AE205E /* Array.swift in Sources */,
 				8B2285251EB6863600425B5A /* UITableViewCell.swift in Sources */,
 				8B6FB9BE2027CF9900FE7BEB /* ControllerModule.swift in Sources */,
@@ -1496,6 +1515,7 @@
 				8BD98D6F1FC35B3700E74A8C /* UIWindow.swift in Sources */,
 				8B75286C1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BD2D19E1CA583110018AC2B /* UIAlertAction.swift in Sources */,
+				8B3A6A4C22275917000011BC /* AppModels.swift in Sources */,
 				8B9434651EBDEAA200C779EB /* Calendar.swift in Sources */,
 				8BE814FD1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8B1CC522217BDA4E00F00A70 /* DispatchQueue.swift in Sources */,
