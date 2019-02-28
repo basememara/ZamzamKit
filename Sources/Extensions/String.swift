@@ -158,19 +158,19 @@ public extension String {
     
     /// Injects a separator every nth characters.
     ///
-    ///     "1234567890".separate(every: 2, with: "-") -> "12-34-56-78-90"
+    ///     "1234567890".separated(every: 2, with: "-") -> "12-34-56-78-90"
     ///
     /// - Parameters:
     ///   - every: Number of characters to separate by.
     ///   - separator: The separator to inject.
     /// - Returns: The string with the injected separator.
-    func separate(every: Int, with separator: String) -> String {
-        guard !isEmpty, 1...count ~= every else { return self }
+    func separated(every nth: Int, with separator: String) -> String {
+        guard !isEmpty, 1...count ~= nth else { return self }
         
-        // https://stackoverflow.com/a/47566321/235334
+        // https://stackoverflow.com/a/47566321
         return String(
-            stride(from: 0, to: count, by: every)
-                .map { Array(Array(self)[$0..<min($0 + every, count)]) }
+            stride(from: 0, to: count, by: nth)
+                .map { Array(Array(self)[$0..<min($0 + nth, count)]) }
                 .joined(separator: separator)
         )
     }

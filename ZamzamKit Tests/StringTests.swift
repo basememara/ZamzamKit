@@ -108,13 +108,16 @@ extension StringTests {
     }
     
     func testSeparator() {
-        XCTAssertEqual("Abcdef123456".separate(every: 3, with: "-"), "Abc-def-123-456")
-        XCTAssertEqual("Abcd".separate(every: 6, with: ":"), "Abcd")
-        XCTAssertEqual("Abcdef123456".separate(every: 0, with: "-"), "Abcdef123456")
-        XCTAssertEqual("Abcdef123456".separate(every: 1, with: "-"), "A-b-c-d-e-f-1-2-3-4-5-6")
-        XCTAssertEqual("Abcdef123456".separate(every: 12, with: "-"), "Abcdef123456")
-        XCTAssertEqual("Abcdef123456".separate(every: 11, with: "-"), "Abcdef12345-6")
-        XCTAssertEqual("".separate(every: 6, with: ":"), "")
+        XCTAssertEqual("Abcdef123456".separated(every: 3, with: "-"), "Abc-def-123-456")
+        XCTAssertEqual("Abcd".separated(every: 6, with: ":"), "Abcd")
+        XCTAssertEqual("Abcdef123456".separated(every: 0, with: "-"), "Abcdef123456")
+        XCTAssertEqual("Abcdef123456".separated(every: 1, with: "-"), "A-b-c-d-e-f-1-2-3-4-5-6")
+        XCTAssertEqual("Abcdef123456".separated(every: 12, with: "-"), "Abcdef123456")
+        XCTAssertEqual("Abcdef123456".separated(every: 11, with: "-"), "Abcdef12345-6")
+        XCTAssertEqual("".separated(every: 6, with: ":"), "")
+        XCTAssertEqual("112312451".separated(every: 2, with: ":"), "11:23:12:45:1")
+        XCTAssertEqual("112312451".separated(every: 3, with: ":"), "112:312:451")
+        XCTAssertEqual("112312451".separated(every: 4, with: ":"), "1123:1245:1")
     }
 }
 

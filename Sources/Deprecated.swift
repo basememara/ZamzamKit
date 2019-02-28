@@ -17,6 +17,11 @@ public extension String {
     func match(_ pattern: String, caseSensitive: Bool = false) -> Bool {
         return match(regex: pattern)
     }
+    
+    @available(*, unavailable, renamed: "separated")
+    func separate(every: Int, with separator: String) -> String {
+        return separated(every: every, with: separator)
+    }
 }
 
 public extension Date {
