@@ -47,7 +47,7 @@ public extension StatusBarable where Self: UIViewController {
         let size = application.statusBarFrame.size
         
         // Consider landscape and portrait mode
-        // https://stackoverflow.com/a/16598350/235334
+        // https://stackoverflow.com/a/16598350
         return CGSize(
             width: max(size.width, size.height),
             height: min(size.width, size.height)

@@ -1,7 +1,7 @@
 //
 //  PresentableView.swift
 //  ZamzamKit
-//  https://stackoverflow.com/q/49597822/235334
+//  https://stackoverflow.com/q/49597822
 //
 //  Created by Basem Emara on 2018-10-18.
 //  Copyright © 2018 Zamzam. All rights reserved.

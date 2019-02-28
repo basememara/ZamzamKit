@@ -18,7 +18,7 @@ public extension UIFont {
             return self
         }
         
-        // https://stackoverflow.com/a/39999497/235334
+        // https://stackoverflow.com/a/39999497
         return UIFont(descriptor: descriptor, size: 0)
     }
 }

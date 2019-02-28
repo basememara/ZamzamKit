@@ -31,7 +31,7 @@ public extension Scrollable where Self: UIScrollView {
     /// - Parameter animated: `true` to animate the transition at a constant
     ///     velocity to the new offset, `false` to make the transition immediate.
     func scrollToBottom(animated: Bool = true) {
-        // https://stackoverflow.com/q/952412/235334
+        // https://stackoverflow.com/q/952412
         setContentOffset(
             CGPoint(x: 0, y: max(contentSize.height - bounds.size.height, 0)),
             animated: animated

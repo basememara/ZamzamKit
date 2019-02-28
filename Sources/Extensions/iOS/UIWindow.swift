@@ -17,7 +17,7 @@ public extension UIWindow {
     
     /// Recursively retrieve the top most view controller
     private func getTopViewController(from controller: UIViewController?) -> UIViewController? {
-        /// https://stackoverflow.com/a/39857342/235334
+        /// https://stackoverflow.com/a/39857342
         if let nav = controller as? UINavigationController {
             return getTopViewController(from: nav.visibleViewController)
         } else if let tab = controller as? UITabBarController, let selected = tab.selectedViewController {

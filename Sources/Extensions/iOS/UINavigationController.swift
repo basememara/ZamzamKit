@@ -16,7 +16,7 @@ public extension UINavigationController {
     ///   - animated: Set this value to true to animate the transition.
     ///   - completion: Optional completion handler
     func popViewController(animated: Bool = true, completion: (() -> Void)? = nil) {
-        // https://stackoverflow.com/a/35064909/235334
+        // https://stackoverflow.com/a/35064909
         popViewController(animated: animated)
         
         guard let completion = completion else { return }

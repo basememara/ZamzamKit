@@ -6,7 +6,7 @@
 //  Copyright © 2018 Zamzam. All rights reserved.
 //
 //  Resizing UITableView to fit content:
-//  https://stackoverflow.com/a/48623673/235334
+//  https://stackoverflow.com/a/48623673
 //
 
 import UIKit

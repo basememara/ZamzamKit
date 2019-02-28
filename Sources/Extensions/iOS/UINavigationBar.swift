@@ -46,7 +46,7 @@ public extension UINavigationBar {
     ///
     /// - Parameter hidden: Specify true to hide the navigation bar shadow or false to show it.
     func setShadowHidden(_ hidden: Bool) {
-        // https://stackoverflow.com/a/38745391/235334
+        // https://stackoverflow.com/a/38745391
         setValue(hidden, forKey: "hidesShadow")
     }
 }

@@ -46,7 +46,7 @@ public extension UIImage {
     ///   - color: The target color of the image.
     ///   - size: The size of the image.
     convenience init?(from color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
-        // https://stackoverflow.com/q/6496441/235334
+        // https://stackoverflow.com/q/6496441
         UIGraphicsBeginImageContext(size)
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
         context.setFillColor(color.cgColor)

@@ -18,7 +18,7 @@ public extension SCNetworkReachability {
     /// Reachability does not guarantee that the data packet will actually
     /// be received by the host.
     static var isOnline: Bool {
-        // http://stackoverflow.com/a/25623647/235334
+        // http://stackoverflow.com/a/25623647
         var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
         zeroAddress.sin_family = sa_family_t(AF_INET)
