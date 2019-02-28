@@ -235,8 +235,8 @@
 		8BDA5E311E795DE300429F78 /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDA5E301E795DE300429F78 /* BackgroundTask.swift */; };
 		8BDFFCD422262BF60007D582 /* Array.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BDFFCD322262BF60007D582 /* Array.plist */; };
 		8BDFFCD522262BF60007D582 /* Array.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BDFFCD322262BF60007D582 /* Array.plist */; };
-		8BDFFCD722262C5D0007D582 /* Array2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BDFFCD622262C5D0007D582 /* Array2.plist */; };
-		8BDFFCD822262C5D0007D582 /* Array2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BDFFCD622262C5D0007D582 /* Array2.plist */; };
+		8BDFFCD722262C5D0007D582 /* Thing.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BDFFCD622262C5D0007D582 /* Thing.plist */; };
+		8BDFFCD822262C5D0007D582 /* Thing.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BDFFCD622262C5D0007D582 /* Thing.plist */; };
 		8BE19B0D1C72D6DF00D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; };
 		8BE19B1C1C72D6F200D4D437 /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447E21C7257F100043657 /* ZamzamKit.framework */; };
 		8BE19B2A1C72D71F00D4D437 /* FileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B231C72D71F00D4D437 /* FileTests.swift */; };
@@ -537,7 +537,7 @@
 		8BD98D6E1FC35B3700E74A8C /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
 		8BDA5E301E795DE300429F78 /* BackgroundTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTask.swift; sourceTree = "<group>"; };
 		8BDFFCD322262BF60007D582 /* Array.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Array.plist; sourceTree = "<group>"; };
-		8BDFFCD622262C5D0007D582 /* Array2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Array2.plist; sourceTree = "<group>"; };
+		8BDFFCD622262C5D0007D582 /* Thing.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Thing.plist; sourceTree = "<group>"; };
 		8BE19B081C72D6DF00D4D437 /* ZamzamKit iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE19B0C1C72D6DF00D4D437 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BE19B171C72D6F200D4D437 /* ZamzamKit tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZamzamKit tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1004,7 +1004,7 @@
 				8B54B9D71FCC6B6A00ED571F /* UserDefaultsTests.swift */,
 				8BE19B291C72D71F00D4D437 /* WebTests.swift */,
 				8BDFFCD322262BF60007D582 /* Array.plist */,
-				8BDFFCD622262C5D0007D582 /* Array2.plist */,
+				8BDFFCD622262C5D0007D582 /* Thing.plist */,
 				8B2DE3EE1C8A90AF008F1569 /* Settings.plist */,
 				8B9E97A61EAFA4980067ACB7 /* Test.txt */,
 				8BE19B0C1C72D6DF00D4D437 /* Info.plist */,
@@ -1403,7 +1403,7 @@
 				8BDFFCD422262BF60007D582 /* Array.plist in Resources */,
 				8B9E97A71EAFA4980067ACB7 /* Test.txt in Resources */,
 				8B2DE3F01C8A90AF008F1569 /* Settings.plist in Resources */,
-				8BDFFCD722262C5D0007D582 /* Array2.plist in Resources */,
+				8BDFFCD722262C5D0007D582 /* Thing.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1414,7 +1414,7 @@
 				8BDFFCD522262BF60007D582 /* Array.plist in Resources */,
 				8B9E97A81EAFA4980067ACB7 /* Test.txt in Resources */,
 				8B4967BA1EA8018400091A7D /* Settings.plist in Resources */,
-				8BDFFCD822262C5D0007D582 /* Array2.plist in Resources */,
+				8BDFFCD822262C5D0007D582 /* Thing.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

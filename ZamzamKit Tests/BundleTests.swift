@@ -45,7 +45,7 @@ extension BundleTests {
     }
     
     func testArrayModelsFromPlist() {
-        let values: [[String: Any]] = bundle.array(plist: "Array2.plist")
+        let values: [[String: Any]] = bundle.array(plist: "Thing.plist")
         
         XCTAssertEqual(values[0]["id"] as? Int, 1)
         XCTAssertEqual(values[0]["name"] as? String, "Test 1")

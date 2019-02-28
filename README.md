@@ -230,12 +230,42 @@ let json = myDictionary.jsonString
 <details>
 <summary>Bundle</summary>
 
-> Get the contents of a file within any bundle:
+> Get the string from a file within any bundle:
 ```swift
 Bundle.main.string(file: "Test.txt") -> "This is a test. Abc 123.\n"
 ```
 
-> Get the contents of a property list file within any bundle:
+> Get the generic array from a property list file within any bundle:
+
+![Image of BundleArray](./Assets/Documentation/Images/BundleArray.png)
+
+```swift
+let values: [String] = bundle.array(plist: "Array.plist")
+
+values[0] -> "Abc"
+values[1] -> "Def"
+values[2] -> "Ghi"
+```
+
+![Image of BundleDictionary](./Assets/Documentation/Images/BundleDictionary.png)
+
+```swift
+let values: [[String: Any]] = bundle.array(plist: "Thing.plist")
+
+values[0]["id"] as? Int -> 1
+values[0]["name"] as? String -> "Test 1"
+values[0]["description"] as? String -> "This is a test for 1.")
+
+values[1]["id"] as? Int -> 2)
+values[1]["name"] as? String -> "Test 2")
+values[1]["description"] as? String -> "This is a test for 2.")
+
+values[2]["id"] as? Int -> 3)
+values[2]["name"] as? String -> "Test 3")
+values[2]["description"] as? String -> "This is a test for 3.")
+```
+
+> Get the dictionary from a property list file within any bundle:
 ```swift
 let values = Bundle.main.contents(plist: "Settings.plist")
 values["MyString1"] as? String -> "My string value 1."
@@ -601,7 +631,7 @@ BackgroundTask.run(for: application) { task in
 
 > A bar button item with a badge value:
 
-![Image of BadgeBarButtonItem](./Documentation/Images/BadgeBarButtonItem.png)
+![Image of BadgeBarButtonItem](./Assets/Documentation/Images/BadgeBarButtonItem.png)
 
 ```swift
 navigationItem.rightBarButtonItems = [
@@ -641,7 +671,7 @@ navigationItem.leftBarButtonItems = [
 ```
 Interface Builder compatible via "User Defined Runtime Attributes":
 
-![Image of GradientView](./Documentation/Images/GradientView-Storyboard.png)
+![Image of GradientView](./Assets/Documentation/Images/GradientView-Storyboard.png)
 </details>
 
 <details>
@@ -649,7 +679,7 @@ Interface Builder compatible via "User Defined Runtime Attributes":
 
 > The `automaticallyAdjustsInsetsForKeyboard` property extends the scroll view insets when the keyboard is shown:
 
-![Image of KeyboardScrollView](./Documentation/Images/KeyboardScrollView.png)
+![Image of KeyboardScrollView](./Assets/Documentation/Images/KeyboardScrollView.png)
 </details>
 
 <details>
@@ -698,9 +728,9 @@ class MyViewController: UIViewController {
 
 > An extended `UITextView` that wires the "Return Key" to another `UIResponder`:
 
-![Image of NextResponderTextField](./Documentation/Images/NextResponderTextField.png)
+![Image of NextResponderTextField](./Assets/Documentation/Images/NextResponderTextField.png)
 
-![Image of NextResponderTextField2](./Documentation/Images/NextResponderTextField2.png)
+![Image of NextResponderTextField2](./Assets/Documentation/Images/NextResponderTextField2.png)
 </details>
 
 <details>
@@ -708,7 +738,7 @@ class MyViewController: UIViewController {
 
 > A `UIView`, `UIImage`, and `UIButton` subclasses with circular masking:
 
-![Image of RoundedView](./Documentation/Images/RoundedView.png)
+![Image of RoundedView](./Assets/Documentation/Images/RoundedView.png)
 </details>
 
 <details>
@@ -774,7 +804,7 @@ private extension ViewController {
 }
 ```
 
-![Image of StatusBarable](./Documentation/Images/StatusBarable.png)
+![Image of StatusBarable](./Assets/Documentation/Images/StatusBarable.png)
 </details>
 
 <details>
@@ -956,7 +986,7 @@ textView.placeholder = "Enter message..."
 
 Interface Builder compatible via Attributes inspector:
 
-![Image of GradientView](./Documentation/Images/PlaceholderTextView-Storyboard.png)
+![Image of GradientView](./Assets/Documentation/Images/PlaceholderTextView-Storyboard.png)
 
 </details>
 
@@ -982,7 +1012,7 @@ extension ViewController: UITextViewDelegate {
 }
 ```
 
-![Image of UIToolbar](./Documentation/Images/UIToolbar.png)
+![Image of UIToolbar](./Assets/Documentation/Images/UIToolbar.png)
 </details>
 
 <details>
@@ -1001,7 +1031,7 @@ myView.cornerRadius = 3
 myView.addShadow()
 ```
 
-![Image of UIView-Shadow](./Documentation/Images/UIView-Shadow.png)
+![Image of UIView-Shadow](./Assets/Documentation/Images/UIView-Shadow.png)
 
 > Animate visibility:
 ```swift
@@ -1047,7 +1077,7 @@ class ViewController: UIViewController {
 }
 ```
 
-![Image of PresentableView](./Documentation/Images/PresentableView.gif)
+![Image of PresentableView](./Assets/Documentation/Images/PresentableView.gif)
 </details>
 
 <details>
@@ -1144,7 +1174,7 @@ present(
 )
 ```
 
-![Image of UIViewController Prompt](./Documentation/Images/UIViewController-Prompt.png)
+![Image of UIViewController Prompt](./Assets/Documentation/Images/UIViewController-Prompt.png)
 
 > Display a share activity with Safari added:
 ```swift
@@ -1344,7 +1374,7 @@ class InterfaceController: WKInterfaceController {
 }
 ```
 
-![Image of WatchSession](./Documentation/Images/WatchSession.png)
+![Image of WatchSession](./Assets/Documentation/Images/WatchSession.png)
 </details>
 
 <details>
