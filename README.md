@@ -891,7 +891,7 @@ stackView
 
 > Instantiate a view controller using convention of storyboard identifier matching class name:
 ```swift
-let storyboard = UIStoryboard("Main")
+let storyboard = UIStoryboard(name: "Main")
 let controller: MyViewController = storyboard.instantiateViewController()
 ```
 </details>
