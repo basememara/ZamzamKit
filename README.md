@@ -235,9 +235,7 @@ let json = myDictionary.jsonString
 Bundle.main.string(file: "Test.txt") -> "This is a test. Abc 123.\n"
 ```
 
-> Get the generic array from a property list file within any bundle:
-
-![Image of BundleArray](./Assets/Documentation/Images/BundleArray.png)
+> Get a generic array from a property list file within any bundle:
 
 ```swift
 let values: [String] = bundle.array(plist: "Array.plist")
@@ -247,7 +245,7 @@ values[1] -> "Def"
 values[2] -> "Ghi"
 ```
 
-![Image of BundleDictionary](./Assets/Documentation/Images/BundleDictionary.png)
+![Image of BundleArray](./Assets/Documentation/Images/BundleArray.png)
 
 ```swift
 let values: [[String: Any]] = bundle.array(plist: "Thing.plist")
@@ -265,7 +263,9 @@ values[2]["name"] as? String -> "Test 3")
 values[2]["description"] as? String -> "This is a test for 3.")
 ```
 
-> Get the dictionary from a property list file within any bundle:
+![Image of BundleArray](./Assets/Documentation/Images/BundleArray2.png)
+
+> Get a dictionary from a property list file within any bundle:
 ```swift
 let values = Bundle.main.contents(plist: "Settings.plist")
 values["MyString1"] as? String -> "My string value 1."
@@ -273,6 +273,8 @@ values["MyNumber1"] as? Int -> 123
 values["MyBool1"] as? Bool -> false
 values["MyDate1"] as? Date -> 2018-11-21 15:40:03 +0000
 ```
+
+![Image of BundleDictionary](./Assets/Documentation/Images/BundleDictionary.png)
 </details>
 
 <details>
