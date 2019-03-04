@@ -454,6 +454,23 @@ value = 456
 test ?= value
 // test == 456
 ```
+
+> Assign a value if not nil or empty:
+```swift
+var test: String
+var value: String?
+
+test = value ??? "Abc"
+// test == "Abc"
+
+value = ""
+test = value ??? "Abc"
+// test == "Abc"
+
+value = "Xyz"
+test = value ??? "Abc"
+// test == "Xyz"
+```
 </details>
 
 <details>

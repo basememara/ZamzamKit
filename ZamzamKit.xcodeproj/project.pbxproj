@@ -151,6 +151,9 @@
 		8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7A402B1C76245200A0077D /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7BAD3A205714D900273789 /* UIRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7BAD39205714D900273789 /* UIRefreshControl.swift */; };
+		8B81DD88222DB15E00847395 /* NilOrEmptyAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81DD87222DB15E00847395 /* NilOrEmptyAssignment.swift */; };
+		8B81DD89222DB15E00847395 /* NilOrEmptyAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81DD87222DB15E00847395 /* NilOrEmptyAssignment.swift */; };
+		8B81DD8A222DB15E00847395 /* NilOrEmptyAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81DD87222DB15E00847395 /* NilOrEmptyAssignment.swift */; };
 		8B8215421CA15E0D00C9FCC9 /* CLKComplicationServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215411CA15E0D00C9FCC9 /* CLKComplicationServer.swift */; };
 		8B82154A1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
 		8B82154B1CA1613500C9FCC9 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8215491CA1613400C9FCC9 /* TimeInterval.swift */; };
@@ -489,6 +492,7 @@
 		8B79A4741E9C1ED800C8A5A4 /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locale.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLocationManager.swift; sourceTree = "<group>"; };
 		8B7BAD39205714D900273789 /* UIRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRefreshControl.swift; sourceTree = "<group>"; };
+		8B81DD87222DB15E00847395 /* NilOrEmptyAssignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NilOrEmptyAssignment.swift; sourceTree = "<group>"; };
 		8B8215411CA15E0D00C9FCC9 /* CLKComplicationServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLKComplicationServer.swift; sourceTree = "<group>"; };
 		8B8215491CA1613400C9FCC9 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		8B8802CA21757E6E0035543D /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -862,6 +866,7 @@
 			children = (
 				8B7729F020486D6500C15B56 /* ApproximateComparison.swift */,
 				8B729C741EAB9D56004A6BF1 /* ConditionalAssignment.swift */,
+				8B81DD87222DB15E00847395 /* NilOrEmptyAssignment.swift */,
 			);
 			path = Infixes;
 			sourceTree = "<group>";
@@ -1490,6 +1495,7 @@
 				8BB45FB51C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8B7729F120486D6500C15B56 /* ApproximateComparison.swift in Sources */,
 				8BE2BB401F03259C00877447 /* Localizable.swift in Sources */,
+				8B81DD88222DB15E00847395 /* NilOrEmptyAssignment.swift in Sources */,
 				8B6C99971E6E031800D523CC /* LocationWorker.swift in Sources */,
 				8BE43EF021CEEB2900247DE4 /* NSAttributedString.swift in Sources */,
 				8B1CC4F7217AE91100F00A70 /* ControllerModuleDelegate.swift in Sources */,
@@ -1576,6 +1582,7 @@
 				8B6B7C0D21E950BD003FB20D /* Thread.swift in Sources */,
 				8B729C761EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,
 				8B6C763021A9AE3600CA90EB /* CurrencyFormatter.swift in Sources */,
+				8B81DD89222DB15E00847395 /* NilOrEmptyAssignment.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
 				8B4D71B0216A542A002ACA81 /* Debouncer.swift in Sources */,
 				8BC6D99B204790B600242DAE /* Scrollable.swift in Sources */,
@@ -1626,6 +1633,7 @@
 				8BC6D99C204790B700242DAE /* Scrollable.swift in Sources */,
 				8B0C71611E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B6B7C0E21E950BD003FB20D /* Thread.swift in Sources */,
+				8B81DD8A222DB15E00847395 /* NilOrEmptyAssignment.swift in Sources */,
 				8B6A956F1E484D5A003F333D /* ZamzamError.swift in Sources */,
 				8BEFE47B1E4515D900100744 /* ScheduleInterval.swift in Sources */,
 				8BCB73D01CAD660D00E20096 /* Equatable.swift in Sources */,
