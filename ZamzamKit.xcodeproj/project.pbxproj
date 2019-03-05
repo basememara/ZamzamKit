@@ -264,9 +264,6 @@
 		8BEFE47B1E4515D900100744 /* ScheduleInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE4781E4515D900100744 /* ScheduleInterval.swift */; };
 		8BF0CD112143243500DF6DAF /* LocationWorkerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0CD102143243500DF6DAF /* LocationWorkerType.swift */; };
 		8BF0CD122143243500DF6DAF /* LocationWorkerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0CD102143243500DF6DAF /* LocationWorkerType.swift */; };
-		8BF2106B1E48D52F0026B802 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2106A1E48D52F0026B802 /* Result.swift */; };
-		8BF2106C1E48D52F0026B802 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2106A1E48D52F0026B802 /* Result.swift */; };
-		8BF2106D1E48D52F0026B802 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2106A1E48D52F0026B802 /* Result.swift */; };
 		8BF210921E4A22460026B802 /* UNNotificationAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */; };
 		8BF210931E4A22460026B802 /* UNNotificationAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */; };
 		8BF307C11CF0D44200BBA933 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BF307C01CF0D44200BBA933 /* Media.xcassets */; };
@@ -556,7 +553,6 @@
 		8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUserNotificationCenter.swift; sourceTree = "<group>"; };
 		8BEFE4781E4515D900100744 /* ScheduleInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleInterval.swift; sourceTree = "<group>"; };
 		8BF0CD102143243500DF6DAF /* LocationWorkerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWorkerType.swift; sourceTree = "<group>"; };
-		8BF2106A1E48D52F0026B802 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNNotificationAttachment.swift; sourceTree = "<group>"; };
 		8BF307C01CF0D44200BBA933 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		8BF307CF1CF0E3C600BBA933 /* UIActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIActivity.swift; sourceTree = "<group>"; };
@@ -728,7 +724,6 @@
 			children = (
 				8B4F144321A730E600F5154E /* DateTimeInterval.swift */,
 				8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */,
-				8BF2106A1E48D52F0026B802 /* Result.swift */,
 				8BEFE4781E4515D900100744 /* ScheduleInterval.swift */,
 				8B6A956C1E484D5A003F333D /* ZamzamError.swift */,
 			);
@@ -1506,7 +1501,6 @@
 				8B2B0C0321360DA100353F4E /* UINavigationController.swift in Sources */,
 				8B4F144421A730E600F5154E /* DateTimeInterval.swift in Sources */,
 				8B7BAD3A205714D900273789 /* UIRefreshControl.swift in Sources */,
-				8BF2106B1E48D52F0026B802 /* Result.swift in Sources */,
 				8B9E986F1EB500790067ACB7 /* With.swift in Sources */,
 				8B4D71B3216A5560002ACA81 /* Throttler.swift in Sources */,
 				8B4D71BE216B208B002ACA81 /* MailComposer.swift in Sources */,
@@ -1564,7 +1558,6 @@
 				8BFDB6781C751F2300C94996 /* FileManager.swift in Sources */,
 				8BB1D4B821B1B40400C9FBC0 /* SCNetworkReachability.swift in Sources */,
 				8BD98D661FC33B4600E74A8C /* Font.swift in Sources */,
-				8BF2106C1E48D52F0026B802 /* Result.swift in Sources */,
 				8B94345B1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B0C71601E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B2DE3E21C8A86B2008F1569 /* Bundle.swift in Sources */,
@@ -1605,7 +1598,6 @@
 				8BFDB67F1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BE43EF221CEEB2900247DE4 /* NSAttributedString.swift in Sources */,
 				8BFDB6661C751AE600C94996 /* URL.swift in Sources */,
-				8BF2106D1E48D52F0026B802 /* Result.swift in Sources */,
 				8B79A4771E9C1ED800C8A5A4 /* Locale.swift in Sources */,
 				8B6C763121A9AE3600CA90EB /* CurrencyFormatter.swift in Sources */,
 				8BD61B381E3EFDF1009B537E /* AppInfo.swift in Sources */,

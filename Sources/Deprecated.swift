@@ -116,6 +116,50 @@ public extension ArraySlice {
     }
 }
 
+public enum Result<Value, ErrorType: Error> {
+    case success(Value)
+    case failure(ErrorType)
+    
+    /// Returns `true` if the result is a success, `false` otherwise.
+    @available(*, deprecated, message: "This method will be removed soon. Use methods defined in `Swift.Result`.")
+    public var isSuccess: Bool {
+        switch self {
+        case .success:
+            return true
+        case .failure:
+            return false
+        }
+    }
+    
+    /// Returns `true` if the result is a failure, `false` otherwise.
+    @available(*, deprecated, message: "This method will be removed soon. Use methods defined in `Swift.Result`.")
+    public var isFailure: Bool {
+        return !isSuccess
+    }
+    
+    /// Returns the associated value if the result is a success, `nil` otherwise.
+    @available(*, deprecated, message: "This method will be removed soon. Use `get() throws -> Success` instead.")
+    public var value: Value? {
+        switch self {
+        case .success(let value):
+            return value
+        case .failure:
+            return nil
+        }
+    }
+    
+    /// Returns the associated error value if the result is a failure, `nil` otherwise.
+    @available(*, deprecated, message: "This method will be removed soon. Use `get() throws -> Success` instead.")
+    public var error: ErrorType? {
+        switch self {
+        case .success:
+            return nil
+        case .failure(let error):
+            return error
+        }
+    }
+}
+
 #if os(iOS) || os(watchOS)
 @available(*, unavailable, renamed: "LocationWorker")
 public class LocationsWorker: LocationWorker {
