@@ -460,15 +460,15 @@ test ?= value
 var test: String
 var value: String?
 
-test = value ??? "Abc"
+test = value ??+ "Abc"
 // test == "Abc"
 
 value = ""
-test = value ??? "Abc"
+test = value ??+ "Abc"
 // test == "Abc"
 
 value = "Xyz"
-test = value ??? "Abc"
+test = value ??+ "Abc"
 // test == "Xyz"
 ```
 </details>
