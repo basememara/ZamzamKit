@@ -485,3 +485,15 @@ public extension UIViewController {
         removeFromParent()
     }
 }
+
+public extension UIViewController {
+    
+    /// Dismisses or pops the view controller that was presented.
+    ///
+    /// - Parameters:
+    ///   - animated: Pass true to animate the presentation; otherwise, pass false.
+    ///   - completion: The block to execute after the view controller is dismissed.
+    func dismiss(completion: (() -> Void)? = nil) {
+        dismiss(animated: true, completion: completion)
+    }
+}
