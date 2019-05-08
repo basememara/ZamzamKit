@@ -29,6 +29,7 @@ public extension Array {
 }
 
 // MARK: - Equatables
+
 public extension Array where Element: Equatable {
 	
     /// Array with all duplicates removed from it.

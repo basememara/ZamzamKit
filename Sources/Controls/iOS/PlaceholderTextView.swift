@@ -11,49 +11,71 @@ import UIKit
 /// A `UITextView` with a placeholder text.
 open class PlaceholderTextView: UITextView {
     
-    @IBInspectable open var placeholder: String = "" {
+    @IBInspectable dynamic open var placeholder: String = "" {
         didSet { placeholderLabel.text = placeholder }
     }
     
-    @IBInspectable open var placeholderColor: UIColor = .lightGray {
+    @IBInspectable dynamic open var placeholderColor: UIColor = .lightGray {
         didSet { placeholderLabel.textColor = placeholderColor }
     }
     
+    @IBInspectable dynamic open var placeholderFont: UIFont? {
+        didSet { placeholderLabel.font ?= placeholderFont }
+    }
+    
+    @IBInspectable open dynamic var textPaddingTop: CGFloat = 10
+    @IBInspectable open dynamic var textPaddingBottom: CGFloat = 10
+    @IBInspectable open dynamic var textPaddingLeft: CGFloat = 20
+    @IBInspectable open dynamic var textPaddingRight: CGFloat = 20
+    
     // Allow placeholders in UITextView
-    private lazy var placeholderLabel: UILabel = {
-        UILabel().with {
-            $0.text = placeholder
-            $0.numberOfLines = 0
-            $0.font = font
-            $0.textColor = placeholderColor
-        }
-    }()
+    private lazy var placeholderLabel = UILabel().with {
+        $0.text = placeholder
+        $0.textColor = placeholderColor
+        $0.font ?= placeholderFont
+        $0.numberOfLines = 0
+    }
     
     private let notificationCenter = NotificationCenter.default
-    private let padding = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
     
     open override func awakeFromNib() {
         super.awakeFromNib()
         
-        textContainerInset = padding
+        textContainerInset = UIEdgeInsets(
+            top: textPaddingTop,
+            left: textPaddingLeft,
+            bottom: textPaddingBottom,
+            right: textPaddingRight
+        )
         
         guard !placeholder.isEmpty else { return }
         addSubview(placeholderLabel)
         
         // Set constraints
-        // https://useyourloaf.com/blog/pain-free-constraints-with-layout-anchors/
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-        placeholderLabel.topAnchor.constraint(equalTo: topAnchor, constant: padding.top).isActive = true
-        placeholderLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding.bottom).isActive = true
-        placeholderLabel.widthAnchor.constraint(
-            equalTo: widthAnchor,
-            constant: -(padding.left + padding.right)
-        ).isActive = true
-        placeholderLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
-        notificationCenter.addObserver(self, selector: #selector(didBeginEditing), name: UITextView.textDidBeginEditingNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(didChangeText), name: UITextView.textDidChangeNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(didEndEditing), name: UITextView.textDidEndEditingNotification, object: nil)
+        placeholderLabel.topAnchor
+            .constraint(equalTo: topAnchor, constant: textPaddingTop)
+            .isActive = true
+        
+        placeholderLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: textPaddingBottom).with {
+            $0.priority = .defaultLow
+            $0.isActive = true
+        }
+        
+        let cursorSpacing: CGFloat = 4
+        
+        placeholderLabel.leadingAnchor
+            .constraint(equalTo: leadingAnchor, constant: textPaddingLeft + cursorSpacing)
+            .isActive = true
+        
+        placeholderLabel.widthAnchor
+            .constraint(equalTo: widthAnchor, constant: -(textPaddingLeft + textPaddingRight) - cursorSpacing)
+            .isActive = true
+        
+        notificationCenter.addObserver(self, selector: #selector(textDidBeginEditing), name: UITextView.textDidBeginEditingNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(textDidEndEditing), name: UITextView.textDidEndEditingNotification, object: nil)
     }
     
     open override var text: String! {
@@ -62,25 +84,27 @@ open class PlaceholderTextView: UITextView {
             super.text = newValue
             
             // Since observer does not fire when manually set
-            placeholderLabel.isHidden = !text.isEmpty
+            placeholderDidChange(placeholderLabel)
         }
+    }
+    
+    @objc open func textDidBeginEditing(_ notification: Notification) {
+        guard notification.object as? UITextView == self else { return }
+        placeholderDidChange(placeholderLabel)
+    }
+    
+    @objc open func textDidChange(_ notification: Notification) {
+        guard notification.object as? UITextView == self else { return }
+        placeholderDidChange(placeholderLabel)
+    }
+    
+    @objc open func textDidEndEditing(_ notification: Notification) {
+        guard notification.object as? UITextView == self else { return }
+        placeholderDidChange(placeholderLabel)
+    }
+    
+    open func placeholderDidChange(_ sender: UILabel) {
+        placeholderLabel.isHidden = !text.isEmpty
     }
 }
 
-private extension PlaceholderTextView {
-    
-    @objc func didBeginEditing(_ notification: Notification) {
-        guard notification.object as? UITextView == self else { return }
-        placeholderLabel.isHidden = true
-    }
-    
-    @objc func didChangeText(_ notification: Notification) {
-        guard notification.object as? UITextView == self else { return }
-        placeholderLabel.isHidden = !text.isEmpty
-    }
-    
-    @objc func didEndEditing(_ notification: Notification) {
-        guard notification.object as? UITextView == self else { return }
-        placeholderLabel.isHidden = !text.isEmpty
-    }
-}

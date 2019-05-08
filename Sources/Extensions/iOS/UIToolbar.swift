@@ -31,17 +31,35 @@ public extension UIToolbar {
     /// - Parameters:
     ///   - target: The object that receives the action message.
     ///   - action: The action to send to target when this item is selected.
+    ///   - clearAction: The action to send to target when this item is cleared.
     /// - Returns: A control that displays the done button along the bottom edge of your interface.
-    static func makeInputDoneToolbar(target: Any?, action: Selector) -> UIToolbar {
+    static func makeInputDoneToolbar(target: Any?, action: Selector, clearAction: Selector? = nil) -> UIToolbar {
         return UIToolbar().with {
-            $0.barStyle = .default
             $0.isTranslucent = true
             $0.isUserInteractionEnabled = true
             $0.sizeToFit()
-            $0.setItems([
+            
+            var items = [
                 UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
                 UIBarButtonItem(barButtonSystemItem: .done, target: target, action: action)
-            ], animated: false)
+            ]
+            
+            if let clearAction = clearAction {
+                let clearButton = UIBarButtonItem(
+                    title: .localized(.clear),
+                    style: .plain,
+                    target: target,
+                    action: clearAction
+                )
+                
+                clearButton.setTitleTextAttributes([
+                    .font: UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
+                ], for: .normal)
+                
+                items.insert(clearButton, at: 0)
+            }
+            
+            $0.setItems(items, animated: false)
         }
     }
     
@@ -50,10 +68,10 @@ public extension UIToolbar {
     /// - Parameters:
     ///   - target: The object that receives the action message.
     ///   - action: The action to send to target when this item is selected.
+    ///   - clearAction: The action to send to target when this item is cleared.
     /// - Returns: A control that displays the next button along the bottom edge of your interface.
-    static func makeInputNextToolbar(target: Any?, action: Selector) -> UIToolbar {
+    static func makeInputNextToolbar(target: Any?, action: Selector, clearAction: Selector? = nil) -> UIToolbar {
         return UIToolbar().with {
-            $0.barStyle = .default
             $0.isTranslucent = true
             $0.isUserInteractionEnabled = true
             $0.sizeToFit()
@@ -69,10 +87,27 @@ public extension UIToolbar {
                 .font: UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
             ], for: .normal)
             
-            $0.setItems([
+            var items = [
                 UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
                 nextButton
-            ], animated: false)
+            ]
+            
+            if let clearAction = clearAction {
+                let clearButton = UIBarButtonItem(
+                    title: .localized(.clear),
+                    style: .plain,
+                    target: target,
+                    action: clearAction
+                )
+                
+                clearButton.setTitleTextAttributes([
+                    .font: UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
+                ], for: .normal)
+                
+                items.insert(clearButton, at: 0)
+            }
+            
+            $0.setItems(items, animated: false)
         }
     }
 }

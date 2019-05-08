@@ -25,7 +25,7 @@ public extension Thread {
      
      - parameter block: Process to be executed.
      */
-    public func async(execute: @escaping Block) {
+    func async(execute: @escaping Block) {
         guard Thread.current != self else { return execute() }
         perform(#selector(run(block:)), on: self, with: execute, waitUntilDone: false)
     }
@@ -35,7 +35,7 @@ public extension Thread {
      
      - parameter block: Process to be executed.
      */
-    public func sync(execute: @escaping Block) {
+    func sync(execute: @escaping Block) {
         guard Thread.current != self else { return execute() }
         perform(#selector(run(block:)), on: self, with: execute, waitUntilDone: true)
     }

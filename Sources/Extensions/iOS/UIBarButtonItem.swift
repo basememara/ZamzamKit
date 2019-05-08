@@ -14,15 +14,14 @@ public extension UIBarButtonItem {
     ///
     /// - Parameters:
     ///   - imageName: Image name.
+    ///   - bundle: The bundle containing the image file or asset catalog. Specify nil to search the app's main bundle.
     ///   - target: Target of the context.
     ///   - action: Action to trigger.
-    ///   - bundleIdentifier: Identifier of the bundle.
-    convenience init(imageName: String, target: Any?, action: Selector, bundleIdentifier: String? = nil) {
+    convenience init(imageName: String, inBundle bundle: Bundle? = nil, target: Any?, action: Selector) {
         self.init(
             image: UIImage(
                 named: imageName,
-                in: bundleIdentifier != nil ? Bundle(identifier: bundleIdentifier!) : nil,
-                compatibleWith: nil
+                inBundle: bundle
             ),
             style: .plain,
             target: target,

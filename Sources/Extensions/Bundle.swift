@@ -34,10 +34,10 @@ public extension Bundle {
     /// Gets the contents of the specified plist file.
     ///
     ///     let values: [[String: Any]] = Bundle.main.array(plist: "Settings.plist")
-    ///     values.first?.["MyString1"] as? String -> "My string value 1."
-    ///     values.first?.["MyNumber1"] as? Int -> 123
-    ///     values.first?.["MyBool1"] as? Bool -> false
-    ///     values.first?.["MyDate1"] as? Date -> 2018-11-21 15:40:03 +0000
+    ///     values.first?["MyString1"] as? String -> "My string value 1."
+    ///     values.first?["MyNumber1"] as? Int -> 123
+    ///     values.first?["MyBool1"] as? Bool -> false
+    ///     values.first?["MyDate1"] as? Date -> 2018-11-21 15:40:03 +0000
     ///
     /// - Parameters:
     ///   - plist: The property list where the array is declared.

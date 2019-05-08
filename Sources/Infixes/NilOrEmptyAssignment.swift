@@ -17,13 +17,13 @@ public extension Optional where Wrapped == String {
     ///     var test: String
     ///     var value: String?
     ///
-    ///     test = value ??? "Abc" // test == "Abc"
+    ///     test = value ??+ "Abc" // test == "Abc"
     ///
     ///     value = ""
-    ///     test = value ??? "Abc" // test == "Abc"
+    ///     test = value ??+ "Abc" // test == "Abc"
     ///
     ///     value = "Xyz"
-    ///     test = value ??? "Abc" // test == "Xyz"
+    ///     test = value ??+ "Abc" // test == "Xyz"
     static func ??+(left: Wrapped?, right: Wrapped) -> Wrapped {
         // https://janthielemann.de/random-stuff/providing-default-values-optional-string-empty-optional-string-swift-3-1/
         guard let left = left, !left.isEmpty else { return right }

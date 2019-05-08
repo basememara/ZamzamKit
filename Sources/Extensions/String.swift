@@ -17,7 +17,7 @@ public extension String {
 	///
 	/// - Parameter random: Number of characters in string.
 	/// - Parameter prefix: Prepend to string.
-	public init(random: Int, prefix: String = "") {
+	init(random: Int, prefix: String = "") {
         // https://github.com/SwifterSwift/SwifterSwift
 		let base = Array("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
         
@@ -106,22 +106,22 @@ public extension String {
     
     /// Determine if the string is valid email format.
     var isEmail: Bool {
-        return match(regex: String.emailRegEx)
+        return match(regex: .emailRegEx)
     }
     
     /// Determine if the string contains only numbers.
     var isNumber: Bool {
-        return match(regex: String.numberRegEx)
+        return match(regex: .numberRegEx)
     }
     
     /// Determine if the string contains only letters.
     var isAlpha: Bool {
-        return match(regex: String.alphaRegEx)
+        return match(regex: .alphaRegEx)
     }
     
     /// Determine if the string contains at least one letter and one number.
     var isAlphaNumeric: Bool {
-        return match(regex: String.alphaNumericRegEx)
+        return match(regex: .alphaNumericRegEx)
     }
 }
 

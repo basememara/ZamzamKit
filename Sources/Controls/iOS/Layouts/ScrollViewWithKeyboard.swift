@@ -1,18 +1,33 @@
 //
-//  KeyboardScrollView.swift
+//  ScrollViewWithKeyboard.swift
 //  ZamzamKit iOS
 //
-//  Created by Basem Emara on 2018-11-14.
-//  Copyright © 2018 Zamzam. All rights reserved.
+//  Created by Basem Emara on 2019-05-08.
+//  Copyright © 2019 Zamzam. All rights reserved.
 //
 
 import UIKit
 
-/// A `UIScrollView` that extends the insets when the keyboard is shown.
-open class KeyboardScrollView: UIScrollView {
-    private let notificationCenter: NotificationCenter = .default
+open class ScrollViewWithKeyboard: UIScrollView {
+    private lazy var notificationCenter: NotificationCenter = .default
+    public var activeField: UIView?
     
-    open var activeField: UIView?
+    open override func didMoveToWindow() {
+        super.didMoveToWindow()
+        
+        // https://stackoverflow.com/a/8203326
+        guard window != nil else { return }
+        notificationCenter.addObserver(for: UIResponder.keyboardWillShowNotification, selector: #selector(adjustsInsetsForKeyboard), from: self)
+        notificationCenter.addObserver(for: UIResponder.keyboardWillHideNotification, selector: #selector(adjustsInsetsForKeyboard), from: self)
+    }
+    
+    open override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        
+        guard newWindow == nil else { return }
+        notificationCenter.removeObserver(for: UIResponder.keyboardWillShowNotification, from: self)
+        notificationCenter.removeObserver(for: UIResponder.keyboardWillHideNotification, from: self)
+    }
     
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // Dismiss keyboard when tapped out of textfield
@@ -20,17 +35,7 @@ open class KeyboardScrollView: UIScrollView {
     }
 }
 
-extension KeyboardScrollView {
-    
-    /// Adjusts layout to prevent keyboard overlaying UI elements
-    @IBInspectable open var automaticallyAdjustsInsetsForKeyboard: Bool {
-        get { return false /* Not stored */ }
-        set {
-            guard newValue else { return }
-            notificationCenter.addObserver(for: UIResponder.keyboardWillShowNotification, selector: #selector(adjustsInsetsForKeyboard), from: self)
-            notificationCenter.addObserver(for: UIResponder.keyboardWillHideNotification, selector: #selector(adjustsInsetsForKeyboard), from: self)
-        }
-    }
+public extension ScrollViewWithKeyboard {
     
     @objc private func adjustsInsetsForKeyboard(_ notification: NSNotification) {
         guard let info = notification.userInfo,
@@ -50,7 +55,7 @@ extension KeyboardScrollView {
         scrollToActiveField()
     }
     
-    open func scrollToActiveField() {
+    func scrollToActiveField() {
         guard let activeField = activeField else { return }
         let rect = activeField.convert(activeField.bounds, to: self)
         scrollRectToVisible(rect, animated: true)

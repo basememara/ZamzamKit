@@ -6,7 +6,6 @@
 //  Copyright © 2016 Zamzam. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 public extension UIImageView {
@@ -18,17 +17,22 @@ public extension UIImageView {
     ///   - totalImages: Total images to generate the list of images used for animation.
     ///   - percent: The percentage of the image to generate.
     ///   - duration: The duration of the animation.
-    func setProgressAnimation(_ imageName: String, totalImages: Int, percent: Double, duration: TimeInterval = 1.0) {
+    func startAnimating(
+        forImageNamed imageName: String,
+        beginningSuffixNumber: Int = 0,
+        totalImages: Int,
+        percent: Double,
+        duration: TimeInterval = 1.0
+    ) {
         let imageCount = Int(Double(totalImages) * percent)
         
         guard imageCount > 0 else {
-            image = UIImage(named: imageName + "0")
+            image = UIImage(named: imageName + "\(beginningSuffixNumber)")
             return
         }
         
-        var imagesList: [UIImage] = []
-        for index in 0...imageCount {
-            imagesList.append(UIImage(named: "\(imageName)\(index)")!)
+        let imagesList = (beginningSuffixNumber...imageCount).compactMap {
+            UIImage(named: "\(imageName)\($0)")
         }
         
         image = imagesList.last

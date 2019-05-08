@@ -6,7 +6,7 @@
 //  Copyright © 2016 Zamzam. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public extension UIImage {
 
@@ -14,24 +14,9 @@ public extension UIImage {
     ///
     /// - Parameters:
     ///   - named: The name of the image.
-    ///   - inBundle: The bundle containing the image file or asset catalog. Specify nil to search the app's main bundle.
-    convenience init?(named: String, inBundle: Bundle?) {
-        self.init(named: named, in: inBundle, compatibleWith: nil)
-    }
-    
-    /// Save image to disk as PNG.
-    func pngToDisk() -> URL? {
-        let data = pngData()
-        let folder = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-        
-        do {
-            let name = String(random: 6, prefix: "img_")
-            let url = folder.appendingPathComponent("\(name).png")
-            try data?.write(to: url)
-            return url
-        } catch {
-            return nil
-        }
+    ///   - bundle: The bundle containing the image file or asset catalog. Specify nil to search the app's main bundle.
+    convenience init?(named: String, inBundle bundle: Bundle?) {
+        self.init(named: named, in: bundle, compatibleWith: nil)
     }
 }
 
@@ -55,5 +40,23 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         guard let cgImage = colorImage?.cgImage else { return nil }
         self.init(cgImage: cgImage)
+    }
+}
+
+public extension UIImage {
+    
+    /// Save image to disk as PNG.
+    func pngToDisk() -> URL? {
+        let data = pngData()
+        let folder = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        
+        do {
+            let name = String(random: 12, prefix: "img_")
+            let url = folder.appendingPathComponent("\(name).png")
+            try data?.write(to: url)
+            return url
+        } catch {
+            return nil
+        }
     }
 }

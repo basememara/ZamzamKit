@@ -11,32 +11,40 @@ import UIKit
 public extension UITableView {
     static let defaultCellIdentifier = "Cell"
     
-    /// Register NIB to table view. NIB type and cell reuse identifier can match for convenience.
+    /// Register NIB to table view.
     ///
     /// - Parameters:
-    ///   - type: Type of the NIB.
+    ///   - nibType: Type of the NIB.
     ///   - identifier: Name of the reusable cell identifier.
     ///   - bundle: Bundle if not local.
-    func register<T: UITableViewCell>(nib type: T.Type, withIdentifier identifier: String = UITableView.defaultCellIdentifier, inBundle bundle: Bundle? = nil) {
+    func register<T: UITableViewCell>(
+        nib nibType: T.Type,
+        withIdentifier identifier: String = UITableView.defaultCellIdentifier,
+        inBundle bundle: Bundle? = nil
+    ) {
         register(
-            UINib(nibName: String(describing: type), bundle: bundle),
+            UINib(nibName: String(describing: nibType), bundle: bundle),
             forCellReuseIdentifier: identifier
         )
     }
 }
 
 public extension UITableView {
-    static let defaultHeaderFooterIdentifier = "Header"
+    static let defaultHeaderFooterIdentifier = "Section"
     
-    /// Register NIB to table view. NIB type and header/footer reuse identifier can match for convenience.
+    /// Register NIB to table view.
     ///
     /// - Parameters:
-    ///   - type: Type of the NIB.
+    ///   - nibType: Type of the NIB.
     ///   - identifier: Name of the reusable cell identifier.
     ///   - bundle: Bundle if not local.
-    func register<T: UITableViewHeaderFooterView>(nib type: T.Type, withIdentifier identifier: String = UITableView.defaultHeaderFooterIdentifier, inBundle bundle: Bundle? = nil) {
+    func register<T: UITableViewHeaderFooterView>(
+        nib nibType: T.Type,
+        withIdentifier identifier: String = UITableView.defaultHeaderFooterIdentifier,
+        inBundle bundle: Bundle? = nil
+    ) {
         register(
-            UINib(nibName: String(describing: type), bundle: bundle),
+            UINib(nibName: String(describing: nibType), bundle: bundle),
             forHeaderFooterViewReuseIdentifier: identifier
         )
     }

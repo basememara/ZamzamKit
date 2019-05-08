@@ -46,7 +46,6 @@
 ///         }
 ///     }
 open class ApplicationModuleDelegate: UIResponder, UIApplicationDelegate {
-    
     public var window: UIWindow?
     
     /// Lazy implementation of application modules list

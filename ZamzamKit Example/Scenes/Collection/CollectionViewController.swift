@@ -12,7 +12,7 @@ import ZamzamKit
 class CollectionViewController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView! {
-        didSet { collectionView.register(nib: CollectionViewCell.self) }
+        didSet { collectionView.register(cell: CollectionViewCell.self) }
     }
     
     private let viewModels = (0..<1000).map {

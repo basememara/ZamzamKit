@@ -20,15 +20,13 @@ import UIKit
  3. If `nextResponderField` is a `UIButton` and enabled, then the `UIButton` fires touch up inside event (simulating a tap).
  4. If `nextResponderField` is another implementation of `UIResponder` (e.g. other text field), then it becomes the first responder (e.g. receives keyboard input).
  */
-@objc
-open class NextResponderTextField: UITextField {
+@objc open class NextResponderTextField: UITextField {
     
     /// Represents the next field. It can be any responder.
     /// If it is UIButton and enabled then the button will be tapped.
     /// If it is UIButton and disabled then the keyboard will be dismissed.
     /// If it is another implementation, it becomes first responder.
-    @objc
-    @IBOutlet open weak var nextResponderField: UIResponder?
+    @objc @IBOutlet open weak var nextResponderField: UIResponder?
     
     /**
      Creates a new view with the passed coder.
@@ -37,10 +35,9 @@ open class NextResponderTextField: UITextField {
      
      :returns: the created new view.
      */
-    @objc
-    public required init?(coder aDecoder: NSCoder) {
+    @objc public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setUp()
+        configure()
     }
     
     /**
@@ -50,16 +47,15 @@ open class NextResponderTextField: UITextField {
      
      :returns: the created new view.
      */
-    @objc
-    override public init(frame: CGRect) {
+    @objc override public init(frame: CGRect) {
         super.init(frame: frame)
-        setUp()
+        configure()
     }
     
     /**
      Sets up the view.
      */
-    private func setUp() {
+    private func configure() {
         addTarget(self, action: #selector(actionKeyboardButtonTapped(sender:)), for: .editingDidEndOnExit)
     }
     
@@ -68,8 +64,7 @@ open class NextResponderTextField: UITextField {
      
      :param: sender The sender of the action parameter.
      */
-    @objc
-    private func actionKeyboardButtonTapped(sender: UITextField) {
+    @objc private func actionKeyboardButtonTapped(sender: UITextField) {
         switch nextResponderField {
         case let button as UIButton where button.isEnabled:
             button.sendActions(for: .touchUpInside)

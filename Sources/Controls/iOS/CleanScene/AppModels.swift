@@ -6,6 +6,7 @@
 //  Copyright © 2018 Zamzam. All rights reserved.
 //
 
+/// App model continer for implementing global models.
 public enum AppModels {
     
     public struct Error {

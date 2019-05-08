@@ -9,7 +9,7 @@
 import CoreLocation
 
 /// A `LocationManager` wrapper with extensions.
-public class LocationWorker: NSObject, LocationWorkerType, CLLocationManagerDelegate {
+public class LocationWorker: NSObject, LocationWorkerType {
     private let desiredAccuracy: CLLocationAccuracy?
     private let distanceFilter: Double?
     private let activityType: CLActivityType?
@@ -241,9 +241,9 @@ public extension LocationWorker {
 
 // MARK: - Delegates
 
-public extension LocationWorker {
+extension LocationWorker: CLLocationManagerDelegate {
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status != .notDetermined else { return }
         
         // Trigger and empty queues
@@ -251,7 +251,7 @@ public extension LocationWorker {
         didChangeAuthorizationSingleUseHandlers.removeAll { $0.forEach { $0(self.isAuthorized) } }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         
         // Trigger and empty queues
@@ -259,7 +259,7 @@ public extension LocationWorker {
         didUpdateLocationsSingleUseHandlers.removeAll { $0.forEach { $0(location) } }
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         // TODO: Injectable logger
         debugPrint(error)
     }

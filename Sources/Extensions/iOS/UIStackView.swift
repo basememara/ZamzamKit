@@ -38,7 +38,7 @@ public extension UIStackView {
 public extension UIStackView {
     
     /// Adds a view to the end of the arrangedSubviews array with animation.
-    func addArrangedSubview(_ view: UIView, animated: Bool) {
+    func addArrangedSubview(_ view: UIView, animated: Bool, withDuration duration: TimeInterval = 0.35) {
         guard animated else { return addArrangedSubview(view) }
         
         view.isHidden = true
@@ -46,7 +46,7 @@ public extension UIStackView {
         
         addArrangedSubview(view)
         
-        UIView.animate(withDuration: 0.35) {
+        UIView.animate(withDuration: duration) {
             view.isHidden = false
             view.alpha = 1
         }
@@ -55,7 +55,7 @@ public extension UIStackView {
     /// Adds a views to the end of the arrangedSubviews array with animation.
     ///
     /// - Parameter views: List of views.
-    func addArrangedSubviews(_ views: [UIView], animated: Bool) {
+    func addArrangedSubviews(_ views: [UIView], animated: Bool, withDuration duration: TimeInterval = 0.35) {
         guard animated else { return addArrangedSubviews(views) }
         
         views.forEach {
@@ -65,7 +65,7 @@ public extension UIStackView {
         
         addArrangedSubviews(views)
         
-        UIView.animate(withDuration: 0.35) {
+        UIView.animate(withDuration: duration) {
             views.forEach {
                 $0.isHidden = false
                 $0.alpha = 1

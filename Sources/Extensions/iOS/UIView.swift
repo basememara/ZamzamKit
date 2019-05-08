@@ -63,19 +63,6 @@ public extension UIView {
         get { return frame.height }
         set { frame.size.height = newValue }
     }
-	
-	/// Get view's parent view controller
-	var parentViewController: UIViewController? {
-        // https://github.com/SwifterSwift
-		weak var parentResponder: UIResponder? = self
-		while parentResponder != nil {
-			parentResponder = parentResponder!.next
-			if let viewController = parentResponder as? UIViewController {
-				return viewController
-			}
-		}
-		return nil
-	}
 }
 
 public extension UIView {
@@ -112,6 +99,9 @@ public extension UIView {
             layer.cornerRadius = newValue
         }
     }
+}
+
+public extension UIView {
 	
 	/// Add shadow to view.
 	///
@@ -124,8 +114,8 @@ public extension UIView {
         ofColor color: UIColor = .black,
         radius: CGFloat = 3,
         offset: CGSize = .zero,
-        opacity: Float = 0.5)
-    {
+        opacity: Float = 0.5
+    ) {
         layer.shadowColor = color.cgColor
         layer.shadowRadius = radius
         layer.shadowOffset = offset
@@ -139,10 +129,13 @@ public extension UIView {
     /// Fade in view.
     ///
     /// - Parameters:
-    ///   - duration: animation duration in seconds (default is 0.35 second).
+    ///   - duration: animation duration in seconds (default is 0.25 second).
     ///   - completion: optional completion handler to run with animation finishes (default is nil)
     func fadeIn(duration: TimeInterval = 0.25, completion: ((Bool) -> Void)? = nil) {
-        guard isHidden || alpha < 1 else { completion?(true); return }
+        guard isHidden || alpha < 1 else {
+            completion?(true)
+            return
+        }
         
         let originalAlpha = alpha
         
@@ -163,10 +156,13 @@ public extension UIView {
     /// Fade out view.
     ///
     /// - Parameters:
-    ///   - duration: animation duration in seconds (default is 0.35 second).
+    ///   - duration: animation duration in seconds (default is 0.25 second).
     ///   - completion: optional completion handler to run with animation finishes (default is nil)
     func fadeOut(duration: TimeInterval = 0.25, completion: ((Bool) -> Void)? = nil) {
-        guard !isHidden || alpha > 0 else { completion?(true); return }
+        guard !isHidden || alpha > 0 else {
+            completion?(true)
+            return
+        }
         
         let originalAlpha = alpha
         
@@ -225,8 +221,8 @@ public extension UIView {
     func makeActivityIndicator(
         style: UIActivityIndicatorView.Style = .whiteLarge,
         color: UIColor = .gray,
-        size: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40)) -> UIActivityIndicatorView
-    {
+        size: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40)
+    ) -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(frame: size).with {
             $0.style = style
             $0.color = color

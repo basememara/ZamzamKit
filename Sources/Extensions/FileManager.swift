@@ -86,7 +86,7 @@ public extension FileManager {
             let destination = self.url(of: nsURL.lastPathComponent, from: .cachesDirectory)
             
             // Delete local file if it exists to overwrite
-            _ = try? self.removeItem(at: destination)
+            try? self.removeItem(at: destination)
             
             // Store remote file locally
             do { try self.moveItem(at: location, to: destination) }
