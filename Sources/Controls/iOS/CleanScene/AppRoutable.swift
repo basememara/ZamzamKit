@@ -8,7 +8,6 @@
 
 import UIKit
 
-public protocol AppRoutable: Router {
+public protocol AppRoutable {
     var viewController: UIViewController? { get set }
-    func dismiss(animated: Bool, completion: (() -> Void)?)
 }
