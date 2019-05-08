@@ -10,23 +10,53 @@ import UIKit
 
 public extension UIWindow {
     
-    /// The top view controller for the window.
-    var topViewController: UIViewController? {
-        return getTopViewController(from: rootViewController)
+    /// The view controller associated with the currently visible view in the window interface.
+    ///
+    /// The currently visible view can belong to:
+    /// * the view controller at the top of the navigation stack
+    /// * the view controller that is selected in a tab bar controller
+    /// * the view controller that was presented modally
+    /// * the root view controller of the window
+    var visibleViewController: UIViewController? {
+        return getVisibleViewController(from: rootViewController)
     }
     
-    /// Recursively retrieve the top most view controller
-    private func getTopViewController(from controller: UIViewController?) -> UIViewController? {
+    /// Recursively retrieve the most visible view controller
+    private func getVisibleViewController(from controller: UIViewController?) -> UIViewController? {
         /// https://stackoverflow.com/a/39857342
         if let nav = controller as? UINavigationController {
-            return getTopViewController(from: nav.visibleViewController)
+            return getVisibleViewController(from: nav.visibleViewController)
         } else if let tab = controller as? UITabBarController, let selected = tab.selectedViewController {
-            return getTopViewController(from: selected)
+            return getVisibleViewController(from: selected)
         } else if let presented = controller?.presentedViewController {
-            return getTopViewController(from: presented)
+            return getVisibleViewController(from: presented)
         }
         
         return controller
+    }
+}
+
+public extension UIWindow {
+    
+    /// Assign a view controller to root view controller for the window.
+    ///
+    /// Using this method provides more safety than assigning the root
+    /// controller directly, such as dismissing all view controllers
+    /// before setting. These steps ensure that view controllers are
+    /// not retained in the background as zombies.
+    ///
+    /// - Parameter viewController: The view controller to assign as the root view controller.
+    func setRootViewController(to viewController: UIViewController) {
+        // https://github.com/onmyway133/notes/issues/251
+        guard rootViewController?.presentedViewController == nil else {
+            rootViewController?.dismiss(animated: false) {
+                self.rootViewController = viewController
+            }
+            
+            return
+        }
+        
+        rootViewController = viewController
     }
 }
 

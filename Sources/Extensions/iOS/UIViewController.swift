@@ -10,16 +10,145 @@ import UIKit
 import SafariServices
 
 public extension UIViewController {
-	
-	/// Check if ViewController is onscreen and not hidden.
-	var isVisible: Bool {
-		// http://stackoverflow.com/questions/2777438/how-to-tell-if-uiviewcontrollers-view-is-visible
-		return isViewLoaded && view.window != nil
-	}
+    
+    /// Constructs an instance of the UIViewController type.
+    ///
+    /// - Parameters:
+    ///   - storyboard: The Storyboard where the UIViewController is bound to.
+    ///   - bundle: The bundle where the Storyboard is stored.
+    ///   - identifier: The identifier of the UIViewController on the Storyboard,
+    ///         or will fallback on the UIViewController designated as the initial
+    ///         storyboard, or the UIViewController in the Storyboard with the
+    ///         same identifier as the type name.
+    /// - Returns: An instance of the UIViewController type.
+    static func make<T: UIViewController>(
+        fromStoryboard storyboard: String,
+        inBundle bundle: Bundle? = nil,
+        identifier: String? = nil) -> T {
+        let storyboard = UIStoryboard(name: storyboard, bundle: bundle)
+        
+        guard let controller = (identifier != nil
+            ? storyboard.instantiateViewController(withIdentifier: identifier!)
+            : (storyboard.instantiateInitialViewController()
+                ?? storyboard.instantiateViewController(withIdentifier: String(describing: T.self)))) as? T else {
+                    // Check crash logs for occurances, confirm remote logger properly setup
+                    fatalError("Invalid controller for storyboard \(storyboard).")
+        }
+        
+        return controller
+    }
+}
+
+public extension UIViewController {
+    
+    /// The root view controller for the container view controller, or returns itself if it is not embeded.
+    var contentViewController: UIViewController {
+        return (self as? UINavigationController)?.viewControllers.first
+            ?? (self as? UITabBarController)?.selectedViewController
+            ?? self
+    }
 
     /// Causes the view to resign the first responder status.
     @objc func endEditing() {
         view.endEditing(true)
+    }
+}
+
+// MARK: - Default parameters
+
+public extension UIViewController {
+    
+    /// Presents a view controller modally.
+    ///
+    /// - Parameters:
+    ///   - viewControllerToPresent: The view controller to display over the current view controller’s content.
+    ///   - completion: The block to execute after the presentation finishes.
+    func present(_ viewControllerToPresent: UIViewController, completion: (() -> Void)? = nil) {
+        present(viewControllerToPresent, animated: true, completion: completion)
+    }
+    
+    /// Presents or pushes a view controller in a primary context.
+    ///
+    /// - Parameters:
+    ///   - viewController: The view controller to display.
+    ///   - sender: The object that initiated the request.
+    func show(viewController: UIViewController, sender: Any? = nil) {
+        show(viewController, sender: sender)
+    }
+    
+    /// Dismisses the view controller that was presented.
+    ///
+    /// - Parameters:
+    ///   - completion: The block to execute after the view controller is dismissed.
+    func dismiss(completion: (() -> Void)? = nil) {
+        dismiss(animated: true, completion: completion)
+    }
+    
+    /// Dismisses or pops the view controller that was presented modally by the view controller.
+    ///
+    /// This method dismisses the view controller or pops it if it is part of a navigation controller.
+    /// If the view controller is the last in the stack of a navigation controller, this method will
+    /// dismiss the navigation controller. In other words, it will no longer be presented modally.
+    ///
+    /// - Parameters:
+    ///   - animated: Set this value to true to animate the transition.
+    ///   - completion: The block to execute after the the task finishes.
+    func dismissOrPop(animated: Bool = true, completion: (() -> Void)? = nil) {
+        guard let navigationController = navigationController else {
+            dismiss(animated: animated, completion: completion)
+            return
+        }
+        
+        guard navigationController.viewControllers.count > 1 else {
+            navigationController.dismiss(animated: animated, completion: completion)
+            return
+        }
+        
+        navigationController.popViewController(animated: animated, completion: completion)
+    }
+    
+    /// Closes the view controller and container that was presenting it.
+    ///
+    /// - Parameters:
+    ///   - animated: Set this value to true to animate the transition.
+    ///   - completion: The block to execute after the the task finishes.
+    func close(animated: Bool = true, completion: (() -> Void)? = nil) {
+        navigationController?.dismiss(animated: animated, completion: completion)
+            ?? dismiss(animated: animated, completion: completion)
+    }
+}
+
+public extension UIViewController {
+    
+    /// Adds the specified view controller as a child of the current view controller.
+    ///
+    ///     add(child: viewController1)
+    ///     add(child: viewController2, to: containerView)
+    ///
+    /// - Parameters:
+    ///   - viewController: The child view controller.
+    ///   - containerView: The target view, or `nil` to use the current view controller `view`.
+    func add(child viewController: UIViewController, to containerView: UIView? = nil) {
+        // https://cocoacasts.com/managing-view-controllers-with-container-view-controllers/
+        // https://useyourloaf.com/blog/container-view-controllers/
+        guard let containerView = containerView ?? view else { return }
+        
+        addChild(viewController)
+        
+        containerView.addSubview(viewController.view)
+        viewController.view.edges(to: containerView)
+        
+        viewController.didMove(toParent: self)
+    }
+    
+    /// Removes and unlink the view controller from its parent, and notifies any listeners.
+    func remove() {
+        // https://www.swiftbysundell.com/posts/using-child-view-controllers-as-plugins-in-swift
+        guard parent != nil else { return }
+        
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
     }
 }
 
@@ -54,8 +183,8 @@ public extension UIViewController {
         cancelHandler: (() -> Void)? = nil,
         animated: Bool = true,
         configure: ((UIAlertController) -> Void)? = nil,
-        handler: (() -> Void)? = nil) -> UIAlertController
-    {
+        handler: (() -> Void)? = nil
+    ) -> UIAlertController {
         let alertController = UIAlertController(
             title: title,
             message: message,
@@ -122,8 +251,8 @@ public extension UIViewController {
         cancelHandler: (() -> Void)? = nil,
         animated: Bool = true,
         configure: ((UIAlertController) -> Void)? = nil,
-        completion: (() -> Void)? = nil) -> UIAlertController
-    {
+        completion: (() -> Void)? = nil
+    ) -> UIAlertController {
         let alertController = UIAlertController(
             title: title,
             message: message,
@@ -191,8 +320,8 @@ public extension UIViewController {
         cancelHandler: (() -> Void)? = nil,
         animated: Bool = true,
         configure: ((UIAlertController) -> Void)? = nil,
-        completion: (() -> Void)? = nil) -> UIAlertController
-    {
+        completion: (() -> Void)? = nil
+    ) -> UIAlertController {
         let alertController = UIAlertController(
             title: title,
             message: message,
@@ -262,8 +391,8 @@ public extension UIViewController {
         cancelHandler: (() -> Void)? = nil,
         animated: Bool = true,
         configure: ((UITextField) -> Void)? = nil,
-        response: @escaping ((String?) -> Void)) -> UIAlertController
-    {
+        response: @escaping ((String?) -> Void)
+    ) -> UIAlertController {
         let alertController = UIAlertController(
             title: title,
             message: message,
@@ -322,8 +451,8 @@ public extension UIViewController {
         barTintColor: UIColor? = nil,
         preferredControlTintColor: UIColor? = nil,
         animated: Bool = true,
-        completion: (() -> Void)? = nil) -> SFSafariViewController
-    {
+        completion: (() -> Void)? = nil
+    ) -> SFSafariViewController {
         let controller = SFSafariViewController(url: URL(string: url)!).with {
             $0.delegate = self as? SFSafariViewControllerDelegate
             $0.modalPresentationStyle ?= modalPresentationStyle
@@ -353,8 +482,8 @@ public extension UIViewController {
         barTintColor: UIColor? = nil,
         preferredControlTintColor: UIColor? = nil,
         animated: Bool = true,
-        completion: (() -> Void)? = nil) -> SFSafariViewController
-    {
+        completion: (() -> Void)? = nil
+    ) -> SFSafariViewController {
         return present(
             safari: url,
             modalPresentationStyle: nil,
@@ -447,53 +576,5 @@ public extension UIViewController {
 
         present(activity, animated: true, completion: nil)
         return activity
-    }
-}
-
-// MARK: - Child view controllers
-
-public extension UIViewController {
-    
-    /// Adds the specified view controller as a child of the current view controller.
-    ///
-    ///     add(child: viewController1)
-    ///     add(child: viewController2, to: containerView)
-    ///
-    /// - Parameters:
-    ///   - viewController: The child view controller.
-    ///   - containerView: The target view, or `nil` to use the current view controller `view`.
-    func add(child viewController: UIViewController, to containerView: UIView? = nil) {
-        // https://cocoacasts.com/managing-view-controllers-with-container-view-controllers/
-        // https://useyourloaf.com/blog/container-view-controllers/
-        guard let containerView = containerView ?? view else { return }
-        
-        addChild(viewController)
-        
-        containerView.addSubview(viewController.view)
-        viewController.view.edges(to: containerView)
-        
-        viewController.didMove(toParent: self)
-    }
-    
-    /// Removes and unlink the view controller from its parent, and notifies any listeners.
-    func remove() {
-        // https://www.swiftbysundell.com/posts/using-child-view-controllers-as-plugins-in-swift
-        guard parent != nil else { return }
-        
-        willMove(toParent: nil)
-        view.removeFromSuperview()
-        removeFromParent()
-    }
-}
-
-public extension UIViewController {
-    
-    /// Dismisses or pops the view controller that was presented.
-    ///
-    /// - Parameters:
-    ///   - animated: Pass true to animate the presentation; otherwise, pass false.
-    ///   - completion: The block to execute after the view controller is dismissed.
-    func dismiss(completion: (() -> Void)? = nil) {
-        dismiss(animated: true, completion: completion)
     }
 }

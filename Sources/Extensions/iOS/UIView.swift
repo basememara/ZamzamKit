@@ -30,6 +30,22 @@ public extension UIView {
 
 public extension UIView {
     
+    /// Get view's parent view controller
+    var parentViewController: UIViewController? {
+        // https://github.com/SwifterSwift
+        weak var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
+}
+
+public extension UIView {
+    
     /// A Boolean value that determines whether the view is visible.
     var isVisible: Bool {
         get { return !isHidden }
@@ -165,6 +181,27 @@ public extension UIView {
                 completion?($0)
             }
         )
+    }
+    
+    /// Fade out or in view based on current state.
+    ///
+    /// - Parameters:
+    ///   - duration: animation duration in seconds (default is 0.25 second).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil)
+    func fadeToggle(duration: TimeInterval = 0.25, completion: ((Bool) -> Void)? = nil) {
+        guard isHidden else { return fadeOut(duration: duration, completion: completion) }
+        fadeIn(duration: duration, completion: completion)
+    }
+    
+    /// Fade out or in view based on current state.
+    ///
+    /// - Parameters:
+    ///   - value: Fade out or in view based on this value.
+    ///   - duration: animation duration in seconds (default is 0.25 second).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil)
+    func fadeToggle(_ value: Bool, duration: TimeInterval = 0.25, completion: ((Bool) -> Void)? = nil) {
+        guard value else { return fadeOut(duration: duration, completion: completion) }
+        fadeIn(duration: duration, completion: completion)
     }
 }
 
