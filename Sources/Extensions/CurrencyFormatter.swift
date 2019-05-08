@@ -8,26 +8,41 @@
 
 import Foundation
 
-/// A formatter that converts between numeric values and their textual currency representations.
+/// A formatter that converts between monetary values and their textual representations.
 public struct CurrencyFormatter {
     private let formatter: NumberFormatter
+    private let autoTruncate: Bool
     
-    public init(for locale: Locale = .current, fractionDigits: Int = 2) {
+    /// Initialize a new currency formatter.
+    ///
+    /// - Parameters:
+    ///   - locale: The locale to retrieve the currency from.
+    ///   - autoTruncate: Truncate decimal if `.00`.
+    ///   - decimalDigits: The minimum number of digits after the decimal separator. Default is 2.
+    ///   - usePrefix: Adds a prefix for positive and negative values.
+    public init(for locale: Locale = .current, autoTruncate: Bool = false, decimalDigits: Int = 2, usePrefix: Bool = false) {
         self.formatter = NumberFormatter().with {
-            $0.locale = locale
             $0.numberStyle = .currency
+            $0.locale = locale
             $0.currencyCode = locale.currencyCode
-            $0.minimumFractionDigits = fractionDigits
-            $0.maximumFractionDigits = fractionDigits
+            $0.minimumFractionDigits = decimalDigits
+            $0.maximumFractionDigits = decimalDigits
+            
+            if usePrefix {
+                $0.positivePrefix = $0.plusSign + $0.currencySymbol
+                $0.negativePrefix = $0.negativePrefix + ""
+            }
         }
+        
+        self.autoTruncate = autoTruncate
     }
 }
 
 public extension CurrencyFormatter {
     
-    /// Returns a string containing the currency formatted value of the provided number object.
+    /// Returns a string containing the formatted value of the provided number object.
     ///
-    ///     let amount: Decimal = 123456789.987
+    ///     let amount: DOuble = 123456789.987
     ///
     ///     let formatter = CurrencyFormatter()
     ///     formatter.string(fromAmount: amount) -> "$123,456,789.99"
@@ -35,11 +50,36 @@ public extension CurrencyFormatter {
     ///     let formatter2 = CurrencyFormatter(for: Locale(identifier: "fr-FR"))
     ///     formatter2.string(fromAmount: amount) -> "123 456 789,99 €"
     ///
-    /// - Parameter amount: The amount of the value.
-    /// - Returns: A string containing the formatted value of number using the receiver’s current currency settings.
-    func string(fromAmount amount: Decimal) -> String {
-        return formatter.string(from: amount as NSDecimalNumber) ?? "\(amount)"
+    /// - Parameter double: A monetary number that is parsed to create the returned string object.
+    /// - Returns: A string containing the formatted value of number using the receiver’s current settings.
+    func string(fromAmount double: Double) -> String {
+        let validValue = getAdjustedForDefinedInterval(value: double)
+        
+        if autoTruncate && validValue.truncatingRemainder(dividingBy: 1) == 0 {
+            let truncatingFormatter = formatter.copy() as? NumberFormatter // TODO: Lazy load
+            truncatingFormatter?.minimumFractionDigits = 0
+            truncatingFormatter?.maximumFractionDigits = 0
+            return truncatingFormatter?.string(from: validValue as NSNumber) ?? "\(double)"
+        }
+        
+        return formatter.string(from: validValue as NSNumber) ?? "\(double)"
     }
+    
+    /// Returns the given value adjusted to respect formatter's max an min values.
+    ///
+    /// - Parameter value: value to be adjusted if needed
+    /// - Returns: Ajusted value
+    private func getAdjustedForDefinedInterval(value: Double?) -> Double {
+        if let minValue = formatter.minimum?.doubleValue, value ?? 0 < minValue {
+            return minValue
+        } else if let maxValue = formatter.maximum?.doubleValue, value ?? 0 > maxValue {
+            return maxValue
+        }
+        return value ?? 0
+    }
+}
+
+public extension CurrencyFormatter {
     
     /// Returns a string containing the currency formatted value of the provided number object.
     ///
@@ -54,7 +94,7 @@ public extension CurrencyFormatter {
     /// - Parameter cents: The cents of the value.
     /// - Returns: A string containing the formatted value of number using the receiver’s current currency settings.
     func string(fromCents cents: Int) -> String {
-        let amount = Decimal(cents) / 100
+        let amount = Double(cents) / 100
         return string(fromAmount: amount)
     }
 }
