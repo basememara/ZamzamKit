@@ -16,7 +16,7 @@ public extension UIApplication {
     ///   - type: Indentifier of shortcut item.
     ///   - handler: Handler which to modify the shortcut item.
     func updateShortcutItem(_ type: String, handler: (UIMutableApplicationShortcutItem) -> UIMutableApplicationShortcutItem) {
-        guard let index = shortcutItems?.index(where: { $0.type == type }),
+        guard let index = shortcutItems?.firstIndex(where: { $0.type == type }),
             let item = shortcutItems?[index].mutableCopy() as? UIMutableApplicationShortcutItem else {
                 return
         }

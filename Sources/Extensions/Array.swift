@@ -60,7 +60,7 @@ public extension Array where Element: Equatable {
     ///
     /// - Parameter element: The element to remove from the array.
     mutating func remove(_ element: Element) {
-        guard let index = index(of: element) else { return }
+        guard let index = firstIndex(of: element) else { return }
         remove(at: index)
     }
 }
