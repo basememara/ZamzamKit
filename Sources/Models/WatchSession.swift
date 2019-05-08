@@ -233,8 +233,11 @@ public extension WatchSession {
             
             let values = values.compactMapValues { $0 is NSNull ? nil : $0 }
             
-            do { try session.updateApplicationContext(values) }
-            catch { completion?(.failure(.other(error))); return }
+            do {
+                try session.updateApplicationContext(values)
+            } catch {
+                completion?(.failure(.other(error))); return
+            }
             
             completion?(.success(true))
         }

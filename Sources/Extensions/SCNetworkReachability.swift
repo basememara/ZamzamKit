@@ -24,8 +24,7 @@ public extension SCNetworkReachability {
         zeroAddress.sin_family = sa_family_t(AF_INET)
 
         guard let defaultRouteReachability = withUnsafePointer(
-            to: &zeroAddress,
-            {
+            to: &zeroAddress, {
                 $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
                     SCNetworkReachabilityCreateWithAddress(nil, $0)
                 }

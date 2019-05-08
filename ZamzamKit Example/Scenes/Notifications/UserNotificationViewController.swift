@@ -34,7 +34,6 @@ class UserNotificationViewController: UIViewController, StatusBarable {
         showStatusBar()
     }
     
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -56,6 +55,9 @@ class UserNotificationViewController: UIViewController, StatusBarable {
             }
         )
     }
+}
+
+private extension UserNotificationViewController {
     
     @IBAction func scheduleTapped() {
         UNUserNotificationCenter.current().removeAll()
@@ -101,10 +103,7 @@ class UserNotificationViewController: UIViewController, StatusBarable {
         UNUserNotificationCenter.current().remove(withIdentifier: "abc123-repeat")
     }
     
-
     @IBAction func barButtonTapped(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "notificationSegue", sender: nil)
     }
-    
 }
-

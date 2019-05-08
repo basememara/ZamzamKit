@@ -22,7 +22,7 @@ public extension String {
 		let base = Array("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
         
         self = random > 0
-            ? (0..<random).reduce(prefix) { result, next in result + "\(base.randomElement()!)" }
+            ? (0..<random).reduce(prefix) { result, _ in result + "\(base.randomElement() ?? base[0])" }
             : prefix
 	}
 }
@@ -270,9 +270,10 @@ public extension String {
         // Unicode character, e.g.
         //    decodeNumeric("64", 10)   --> "@"
         //    decodeNumeric("20ac", 16) --> "€"
-        func decodeNumeric(_ string: String, base : Int32) -> Character? {
+        func decodeNumeric(_ string: String, base: Int32) -> Character? {
             let code = UInt32(strtoul(string, nil, base))
-            return Character(UnicodeScalar(code)!)
+            guard let scalar = UnicodeScalar(code) else { return nil }
+            return Character(scalar)
         }
         
         // Decode the HTML character entity to the corresponding
@@ -283,9 +284,9 @@ public extension String {
         //     decode("&foo;")    --> nil
         func decode(_ entity: String) -> Character? {
             return entity.hasPrefix("&#x") || entity.hasPrefix("&#X")
-                ? decodeNumeric(entity[3...]!, base: 16)
+                ? decodeNumeric(entity[3...] ?? "", base: 16)
                 : entity.hasPrefix("&#")
-                    ? decodeNumeric(entity[2...]!, base: 10)
+                    ? decodeNumeric(entity[2...] ?? "", base: 10)
                 : characterEntities[entity]
         }
         

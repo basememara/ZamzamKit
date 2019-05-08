@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHD-aX-hVC" customClass="KeyboardScrollView" customModule="ZamzamKit">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHD-aX-hVC" customClass="ScrollViewWithKeyboard" customModule="ZamzamKit">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAB-NL-gPa" userLabel="Content View">
@@ -310,9 +310,6 @@
                                     <constraint firstAttribute="trailing" secondItem="pAB-NL-gPa" secondAttribute="trailing" id="eW8-MX-Prs"/>
                                     <constraint firstItem="pAB-NL-gPa" firstAttribute="top" secondItem="bHD-aX-hVC" secondAttribute="top" id="rbZ-gM-TfP"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="automaticallyAdjustsInsetsForKeyboard" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -29,7 +29,9 @@ public extension UNNotificationAttachment {
     ///   - completion: The callback with the constucted user notification attachment.
     static func download(from urlString: String, identifier: String? = nil, completion: @escaping (Result<UNNotificationAttachment, ZamzamError>) -> Void) {
         FileManager.default.download(from: urlString) {
-            guard $2 == nil else { return completion(.failure($2 != nil ? .other($2!) : .general)) }
+            guard $2 == nil else {
+                return completion(.failure($2 != nil ? .other($2 ?? ZamzamError.invalidData) : .general))
+            }
             
             guard let url = $0, let attachment = try? UNNotificationAttachment(identifier: identifier ?? urlString, url: url) else {
                 return completion(.failure(.invalidData))

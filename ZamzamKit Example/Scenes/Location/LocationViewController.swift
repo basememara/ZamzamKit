@@ -12,7 +12,7 @@ import ZamzamKit
 
 class LocationViewController: UIViewController {
 
-    @IBOutlet weak var outputLabel: UILabel!
+    @IBOutlet private weak var outputLabel: UILabel!
     
     var locationsWorker: LocationWorkerType = LocationWorker(
         desiredAccuracy: kCLLocationAccuracyThreeKilometers,
@@ -70,4 +70,3 @@ extension LocationViewController {
         }
     }
 }
-

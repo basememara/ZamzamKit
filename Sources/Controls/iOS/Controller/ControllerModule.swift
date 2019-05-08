@@ -34,4 +34,3 @@ public extension ControllerModule {
     func viewWillLayoutSubviews(_ controller: UIViewController) {}
     func viewDidLayoutSubviews(_ controller: UIViewController) {}
 }
-

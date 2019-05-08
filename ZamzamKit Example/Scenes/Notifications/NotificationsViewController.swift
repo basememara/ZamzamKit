@@ -44,6 +44,9 @@ class NotificationsViewController: UITableViewController, ViewControllerDelegate
         
         return cell
     }
+}
+
+private extension NotificationsViewController {
     
     @IBAction func closeTapped(_ sender: Any) {
         dismiss(animated: true)

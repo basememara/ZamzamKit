@@ -24,5 +24,3 @@ public extension UIApplication {
         shortcutItems?[index] = handler(item)
     }
 }
-
-

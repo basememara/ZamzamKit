@@ -93,7 +93,7 @@ public extension CLLocationCoordinate2D {
     private static let decimalPrecision = 3
     
     /// Approximate comparison of coordinates rounded to 3 decimal places.
-    static func ~~(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+    static func ~~ (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
         return lhs.latitude.rounded(toPlaces: CLLocationCoordinate2D.decimalPrecision)
             == rhs.latitude.rounded(toPlaces: CLLocationCoordinate2D.decimalPrecision)
             && lhs.longitude.rounded(toPlaces: CLLocationCoordinate2D.decimalPrecision)
@@ -101,7 +101,7 @@ public extension CLLocationCoordinate2D {
     }
     
     /// Approximate comparison of coordinates rounded to 3 decimal places.
-    static func !~(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+    static func !~ (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
         return !(lhs ~~ rhs)
     }
 }

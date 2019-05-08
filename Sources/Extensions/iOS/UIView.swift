@@ -30,22 +30,6 @@ public extension UIView {
 
 public extension UIView {
     
-    /// Get view's parent view controller
-    var parentViewController: UIViewController? {
-        // https://github.com/SwifterSwift
-        weak var parentResponder: UIResponder? = self
-        while parentResponder != nil {
-            parentResponder = parentResponder!.next
-            if let viewController = parentResponder as? UIViewController {
-                return viewController
-            }
-        }
-        return nil
-    }
-}
-
-public extension UIView {
-    
     /// A Boolean value that determines whether the view is visible.
     var isVisible: Bool {
         get { return !isHidden }
@@ -171,7 +155,7 @@ public extension UIView {
             animations: {
                 self.alpha = 0
             },
-            completion:  {
+            completion: {
                 self.isHidden = true
                 self.alpha = originalAlpha
                 completion?($0)

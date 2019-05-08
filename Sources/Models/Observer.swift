@@ -24,7 +24,8 @@ public struct Observer<T> {
 }
 
 extension Observer: Equatable {
-     public static func ==(lhs: Observer, rhs: Observer) -> Bool {
+    
+     public static func == (lhs: Observer, rhs: Observer) -> Bool {
         return lhs.id == rhs.id
     }
 }

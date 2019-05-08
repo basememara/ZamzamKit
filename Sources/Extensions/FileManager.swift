@@ -17,7 +17,7 @@ public extension FileManager {
     ///   - directory: The directory of the file.
     /// - Returns: File URL from document directory.
     func url(of fileName: String, from directory: FileManager.SearchPathDirectory = .documentDirectory) -> URL {
-        let root = NSSearchPathForDirectoriesInDomains(directory, .userDomainMask, true).first!
+        let root = NSSearchPathForDirectoriesInDomains(directory, .userDomainMask, true)[0]
         return URL(fileURLWithPath: root).appendingPathComponent(fileName)
     }
     
@@ -28,7 +28,7 @@ public extension FileManager {
     ///   - filter: Specify filter to apply.
     /// - Returns: List of file URL's from document directory.
     func urls(from directory: FileManager.SearchPathDirectory = .documentDirectory, filter: ((URL) -> Bool)? = nil) -> [URL] {
-        let root = urls(for: directory, in: .userDomainMask).first!
+        let root = urls(for: directory, in: .userDomainMask)[0]
         
         // Get the directory contents including folders
         guard var directoryUrls = try? contentsOfDirectory(at: root, includingPropertiesForKeys: nil) else { return [] }
@@ -89,8 +89,11 @@ public extension FileManager {
             try? self.removeItem(at: destination)
             
             // Store remote file locally
-            do { try self.moveItem(at: location, to: destination) }
-            catch { return completion(nil, nil, error) }
+            do {
+                try self.moveItem(at: location, to: destination)
+            } catch {
+                return completion(nil, nil, error)
+            }
             
             completion(destination, response, error)
         }.resume()

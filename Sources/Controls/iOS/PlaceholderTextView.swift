@@ -10,6 +10,7 @@ import UIKit
 
 /// A `UITextView` with a placeholder text.
 open class PlaceholderTextView: UITextView {
+    //swiftlint:disable implicitly_unwrapped_optional
     
     @IBInspectable dynamic open var placeholder: String = "" {
         didSet { placeholderLabel.text = placeholder }
@@ -19,7 +20,7 @@ open class PlaceholderTextView: UITextView {
         didSet { placeholderLabel.textColor = placeholderColor }
     }
     
-    @IBInspectable dynamic open var placeholderFont: UIFont? {
+    dynamic open var placeholderFont: UIFont? {
         didSet { placeholderLabel.font ?= placeholderFont }
     }
     
@@ -107,4 +108,3 @@ open class PlaceholderTextView: UITextView {
         placeholderLabel.isHidden = !text.isEmpty
     }
 }
-

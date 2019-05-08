@@ -280,7 +280,11 @@ public extension Date {
         var components = DateComponents()
         components.day = 1
         components.second = -1
-        return calendar.date(byAdding: components, to: startOfDay(for: calendar))!
+        
+        return calendar.date(
+            byAdding: components,
+            to: startOfDay(for: calendar)
+        ) ?? self
     }
 }
 
@@ -304,7 +308,7 @@ public extension Date {
     func startOfMonth(for calendar: Calendar) -> Date {
         return calendar.date(
             from: calendar.dateComponents([.year, .month], from: startOfDay(for: calendar))
-        )!
+        ) ?? self
     }
 }
 
@@ -329,7 +333,11 @@ public extension Date {
         var components = DateComponents()
         components.month = 1
         components.second = -1
-        return calendar.date(byAdding: components, to: startOfMonth(for: calendar))!
+        
+        return calendar.date(
+            byAdding: components,
+            to: startOfMonth(for: calendar)
+        ) ?? self
     }
 }
 
@@ -510,9 +518,9 @@ public extension Date {
     /// - Returns: Returns the date.
     func timeToDecimal(for calendar: Calendar) -> Double {
         let components = calendar.dateComponents([.hour, .minute], from: self)
-        let hour = components.hour
-        let minutes = components.minute
-        return Double(hour!) + (Double(minutes!) / 60.0)
+        let hour = components.hour ?? 0
+        let minutes = components.minute ?? 0
+        return Double(hour) + (Double(minutes) / 60.0)
     }
 }
 
@@ -575,8 +583,12 @@ public extension Date {
         let formatter = DateFormatter().with {
             $0.calendar = calendar
             $0.timeZone = calendar.timeZone
-            if let f = format { $0.dateFormat = f }
-            else { $0.dateStyle = .long }
+            
+            if let f = format {
+                $0.dateFormat = f
+            } else {
+                $0.dateStyle = .long
+            }
         }
         
         let date = calendar.date(
@@ -586,7 +598,7 @@ public extension Date {
                 timeZone: timeZone,
                 calendar: calendar
             )
-        )!
+        ) ?? self
         
         return formatter.string(from: date)
     }
@@ -644,7 +656,7 @@ public extension Date {
 
 public extension Date {
     
-    static func +(left: Date, right: DateTimeInterval) -> Date {
+    static func + (left: Date, right: DateTimeInterval) -> Date {
         let calendar: Calendar = .current
         let component: Calendar.Component
         let value: Int
@@ -679,10 +691,10 @@ public extension Date {
             byAdding: component,
             value: value,
             to: left
-        )!
+        ) ?? left
     }
     
-    static func -(left: Date, right: DateTimeInterval) -> Date {
+    static func - (left: Date, right: DateTimeInterval) -> Date {
         let calendar: Calendar = .current
         let component: Calendar.Component
         let value: Int
@@ -717,10 +729,10 @@ public extension Date {
             byAdding: component,
             value: -value,
             to: left
-        )!
+        ) ?? left
     }
     
-    static func +(left: Date, right: DateTimeIntervalWithCalendar) -> Date {
+    static func + (left: Date, right: DateTimeIntervalWithCalendar) -> Date {
         let calendar: Calendar
         let component: Calendar.Component
         let value: Int
@@ -762,10 +774,10 @@ public extension Date {
             byAdding: component,
             value: value,
             to: left
-        )!
+        ) ?? left
     }
     
-    static func -(left: Date, right: DateTimeIntervalWithCalendar) -> Date {
+    static func - (left: Date, right: DateTimeIntervalWithCalendar) -> Date {
         let calendar: Calendar
         let component: Calendar.Component
         let value: Int
@@ -807,6 +819,10 @@ public extension Date {
             byAdding: component,
             value: -value,
             to: left
-        )!
+        ) ?? left
     }
+}
+
+private extension Date {
+    //swiftlint:disable file_length
 }

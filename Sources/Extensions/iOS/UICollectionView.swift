@@ -58,7 +58,7 @@ public extension UICollectionView {
             ofKind: elementKind,
             withReuseIdentifier: UICollectionView.defaultSectionIdentifier,
             for: indexPath
-        ) as! T
+        ) as? T ?? T()
     }
     
     /// Register header NIB to collection view.
@@ -106,7 +106,6 @@ public extension UICollectionView {
     }
 }
 
-
 public extension UICollectionView {
     
     /// Gets the reusable cell with default identifier name.
@@ -120,7 +119,7 @@ public extension UICollectionView {
     ///
     /// - Parameter indexPath: The index path of the cell from the collection.
     subscript<T: UICollectionViewCell>(indexPath: IndexPath) -> T {
-        return dequeueReusableCell(withReuseIdentifier: UICollectionView.defaultCellIdentifier, for: indexPath) as! T
+        return dequeueReusableCell(withReuseIdentifier: UICollectionView.defaultCellIdentifier, for: indexPath) as? T ?? T()
     }
 
     /// Gets the reusable cell with the specified identifier name.
@@ -138,6 +137,6 @@ public extension UICollectionView {
     ///   - indexPath: The index path of the cell from the collection.
     ///   - identifier: Name of the reusable cell identifier.
     subscript<T: UICollectionViewCell>(indexPath: IndexPath, withReuseIdentifier identifier: String) -> T {
-        return dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! T
+        return dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? T ?? T()
     }
 }

@@ -68,7 +68,7 @@ public extension Array where Element: Equatable {
 public extension ArraySlice {
     
     /// Returns the array of the slice
-    var array: Array<Element> {
+    var array: [Element] {
         return Array(self)
     }
 }

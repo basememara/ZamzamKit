@@ -13,7 +13,7 @@ import UIKit
 open class BadgeBarButtonItem: UIBarButtonItem {
     
     private(set) public lazy var badgeLabel = UILabel().with {
-        $0.text = badgeText?.isEmpty == false ? " \(badgeText!) " : nil
+        $0.text = badgeText?.isEmpty == false ? " \(badgeText ?? "") " : nil
         $0.isHidden = badgeText?.isEmpty != false
         $0.textColor = badgeFontColor
         $0.backgroundColor = badgeBackgroundColor
@@ -43,7 +43,7 @@ open class BadgeBarButtonItem: UIBarButtonItem {
     
     open var badgeText: String? {
         didSet {
-            badgeLabel.text = badgeText?.isEmpty == false ? " \(badgeText!) " : nil
+            badgeLabel.text = badgeText?.isEmpty == false ? " \(badgeText ?? "") " : nil
             badgeLabel.isHidden = badgeText?.isEmpty != false
             badgeLabel.sizeToFit()
         }

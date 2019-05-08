@@ -12,12 +12,12 @@ import ZamzamKit
 
 class InterfaceController: WKInterfaceController {
 
-    @IBOutlet var receivedContextLabel: WKInterfaceLabel!
-    @IBOutlet var sentContextLabel: WKInterfaceLabel!
-    @IBOutlet var receivedUserInfoLabel: WKInterfaceLabel!
-    @IBOutlet var sentUserInfoLabel: WKInterfaceLabel!
-    @IBOutlet var receivedMessageLabel: WKInterfaceLabel!
-    @IBOutlet var sentMessageLabel: WKInterfaceLabel!
+    @IBOutlet private var receivedContextLabel: WKInterfaceLabel!
+    @IBOutlet private var sentContextLabel: WKInterfaceLabel!
+    @IBOutlet private var receivedUserInfoLabel: WKInterfaceLabel!
+    @IBOutlet private var sentUserInfoLabel: WKInterfaceLabel!
+    @IBOutlet private var receivedMessageLabel: WKInterfaceLabel!
+    @IBOutlet private var sentMessageLabel: WKInterfaceLabel!
     
     var watchSession: WatchSession {
         return ExtensionDelegate.watchSession
@@ -38,12 +38,15 @@ class InterfaceController: WKInterfaceController {
             }
         })
         
-        watchSession.addObserver(forMessage: Observer { [weak self] message, replyHandler in
+        watchSession.addObserver(forMessage: Observer { [weak self] message, _ in
             DispatchQueue.main.async {
                 self?.receivedMessageLabel.setText(message["value"] as? String ?? "")
             }
         })
     }
+}
+
+private extension InterfaceController {
     
     @IBAction func sendContextTapped() {
         let value = ["value": "\(Date())"]

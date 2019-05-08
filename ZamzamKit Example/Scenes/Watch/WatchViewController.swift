@@ -11,12 +11,12 @@ import ZamzamKit
 
 class WatchViewController: UIViewController {
     
-    @IBOutlet weak var receivedContextLabel: UILabel!
-    @IBOutlet weak var sentContextLabel: UILabel!
-    @IBOutlet weak var receivedUserInfoLabel: UILabel!
-    @IBOutlet weak var sentUserInfoLabel: UILabel!
-    @IBOutlet weak var receivedMessageLabel: UILabel!
-    @IBOutlet weak var sentMessageLabel: UILabel!
+    @IBOutlet private weak var receivedContextLabel: UILabel!
+    @IBOutlet private weak var sentContextLabel: UILabel!
+    @IBOutlet private weak var receivedUserInfoLabel: UILabel!
+    @IBOutlet private weak var sentUserInfoLabel: UILabel!
+    @IBOutlet private weak var receivedMessageLabel: UILabel!
+    @IBOutlet private weak var sentMessageLabel: UILabel!
     
     var watchSession: WatchSession {
         return AppDelegate.watchSession
@@ -45,6 +45,13 @@ class WatchViewController: UIViewController {
         watchSession.addObserver(forMessage: messageObserver)
     }
     
+    deinit {
+        watchSession.removeObservers()
+    }
+}
+
+private extension WatchViewController {
+    
     @IBAction func sendContextTapped() {
         let value = ["value": "\(Date())"]
         watchSession.transfer(context: value)
@@ -62,21 +69,16 @@ class WatchViewController: UIViewController {
         watchSession.transfer(message: value)
         sentMessageLabel.text = value["value"] ?? ""
     }
-    
-    deinit {
-        watchSession.removeObservers()
-    }
 }
 
 extension WatchViewController {
     
     /// Another way to add observer
     var messageObserver: WatchSession.ReceiveMessageObserver {
-        return Observer { [weak self] message, replyHandler in
+        return Observer { [weak self] message, _ in
             DispatchQueue.main.async {
                 self?.receivedMessageLabel.text = message["value"] as? String ?? ""
             }
         }
     }
 }
-

@@ -24,11 +24,12 @@ public extension UIViewController {
     static func make<T: UIViewController>(
         fromStoryboard storyboard: String,
         inBundle bundle: Bundle? = nil,
-        identifier: String? = nil) -> T {
+        identifier: String? = nil
+    ) -> T {
         let storyboard = UIStoryboard(name: storyboard, bundle: bundle)
         
         guard let controller = (identifier != nil
-            ? storyboard.instantiateViewController(withIdentifier: identifier!)
+            ? storyboard.instantiateViewController(withIdentifier: identifier ?? "")
             : (storyboard.instantiateInitialViewController()
                 ?? storyboard.instantiateViewController(withIdentifier: String(describing: T.self)))) as? T else {
                     // Check crash logs for occurances, confirm remote logger properly setup
@@ -453,7 +454,11 @@ public extension UIViewController {
         animated: Bool = true,
         completion: (() -> Void)? = nil
     ) -> SFSafariViewController {
-        let controller = SFSafariViewController(url: URL(string: url)!).with {
+        guard let url = URL(string: url) else {
+            fatalError("Invalid url.")
+        }
+        
+        let controller = SFSafariViewController(url: url).with {
             $0.delegate = self as? SFSafariViewControllerDelegate
             $0.modalPresentationStyle ?= modalPresentationStyle
             $0.preferredBarTintColor ?= barTintColor
@@ -577,4 +582,8 @@ public extension UIViewController {
         present(activity, animated: true, completion: nil)
         return activity
     }
+}
+
+private extension UIViewController {
+    //swiftlint:disable file_length
 }

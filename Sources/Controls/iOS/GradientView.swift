@@ -9,8 +9,6 @@
 
 import UIKit
 
-
-
 /// A `UIView` with gradient effects.
 @IBDesignable
 open class GradientView: UIView {

@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let migration = Migration()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         migration
             .performUpdate {
                 print("Migrate update occurred.")
@@ -49,8 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             )
         })
         
-        let _ = UserDefaults.standard[.userID]
-        let _ = UserDefaults.standard[.currentTheme]
+        _ = UserDefaults.standard[.userID]
+        _ = UserDefaults.standard[.currentTheme]
         
         return true
     }

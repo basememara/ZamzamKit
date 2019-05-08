@@ -37,8 +37,8 @@ public extension WKInterfaceController {
         includeCancelAction: Bool = false,
         cancelText: String = .localized(.cancel),
         cancelHandler: (() -> Void)? = nil,
-        handler: (() -> Void)? = nil)
-    {
+        handler: (() -> Void)? = nil
+    ) {
         var actions = [
             WKAlertAction(title: buttonText, style: .default) {
                 handler?()
@@ -79,8 +79,8 @@ public extension WKInterfaceController {
         additionalActions: [WKAlertAction],
         includeCancelAction: Bool = false,
         cancelText: String = .localized(.cancel),
-        cancelHandler: (() -> Void)? = nil)
-    {
+        cancelHandler: (() -> Void)? = nil
+    ) {
         var actions = additionalActions
         
         if includeCancelAction {
@@ -113,8 +113,8 @@ public extension WKInterfaceController {
     func present(
         sideBySideAlert title: String,
         message: String? = nil,
-        additionalActions: [WKAlertAction])
-    {
+        additionalActions: [WKAlertAction]
+    ) {
         presentAlert(
             withTitle: title,
             message: message,

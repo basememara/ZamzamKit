@@ -38,7 +38,6 @@
 		8B2DE3E31C8A86B2008F1569 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* Bundle.swift */; };
 		8B2DE3EC1C8A8F79008F1569 /* BundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */; };
 		8B2DE3F01C8A90AF008F1569 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EE1C8A90AF008F1569 /* Settings.plist */; };
-		8B379A0820F65F46002144F7 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B379A0720F65F46002144F7 /* PlaceholderTextView.swift */; };
 		8B37B8D5200549040052E9B1 /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B37B8D4200549040052E9B1 /* UIStackView.swift */; };
 		8B3A6A4C22275917000011BC /* AppModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4922275917000011BC /* AppModels.swift */; };
 		8B3A6A4D22275917000011BC /* AppDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4A22275917000011BC /* AppDisplayable.swift */; };
@@ -166,6 +165,7 @@
 		8B83045122832FF600AD5D61 /* AppPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B83044E22832FF600AD5D61 /* AppPresentable.swift */; };
 		8B830453228333A000AD5D61 /* ScrollViewWithKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B830452228333A000AD5D61 /* ScrollViewWithKeyboard.swift */; };
 		8B83045522833C9700AD5D61 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B83045422833C9700AD5D61 /* PhotoPicker.swift */; };
+		8B83045A22839EC700AD5D61 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B379A0720F65F46002144F7 /* PlaceholderTextView.swift */; };
 		8B8802CB21757E6E0035543D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8802CA21757E6E0035543D /* TableViewController.swift */; };
 		8B8802CD21757E800035543D /* Table.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B8802CC21757E800035543D /* Table.storyboard */; };
 		8B8802D521757F160035543D /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B8802D421757F160035543D /* TableViewCell.xib */; };
@@ -504,6 +504,9 @@
 		8B83044E22832FF600AD5D61 /* AppPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPresentable.swift; sourceTree = "<group>"; };
 		8B830452228333A000AD5D61 /* ScrollViewWithKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewWithKeyboard.swift; sourceTree = "<group>"; };
 		8B83045422833C9700AD5D61 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		8B8304562283910500AD5D61 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		8B8304572283914700AD5D61 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		8B8304582283915700AD5D61 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8B8802CA21757E6E0035543D /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		8B8802CC21757E800035543D /* Table.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Table.storyboard; sourceTree = "<group>"; };
 		8B8802D421757F160035543D /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
@@ -703,9 +706,12 @@
 		8B14476A1C722D3900043657 /* Meta */ = {
 			isa = PBXGroup;
 			children = (
+				8B8304582283915700AD5D61 /* .gitignore */,
+				8B8304572283914700AD5D61 /* .travis.yml */,
+				8B8304562283910500AD5D61 /* .swiftlint.yml */,
+				8B1FE7C92065A0DD00EE8DBE /* ZamzamKit.podspec */,
 				8B14476C1C722D5700043657 /* LICENSE */,
 				8B14476D1C722D5700043657 /* README.md */,
-				8B1FE7C92065A0DD00EE8DBE /* ZamzamKit.podspec */,
 			);
 			name = Meta;
 			sourceTree = "<group>";
@@ -1178,6 +1184,7 @@
 				8B1447C41C72577900043657 /* Frameworks */,
 				8B1447C51C72577900043657 /* Headers */,
 				8B1447C61C72577900043657 /* Resources */,
+				8B8304592283918600AD5D61 /* Run Lint Script */,
 			);
 			buildRules = (
 			);
@@ -1507,6 +1514,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8B8304592283918600AD5D61 /* Run Lint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Lint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8B1447C31C72577900043657 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1551,7 +1579,6 @@
 				8B83044F22832FF600AD5D61 /* AppPresentable.swift in Sources */,
 				8BFDB6571C75187200C94996 /* Date.swift in Sources */,
 				8BF0CD112143243500DF6DAF /* LocationWorkerType.swift in Sources */,
-				8B379A0820F65F46002144F7 /* PlaceholderTextView.swift in Sources */,
 				8B5250E020CFDED700E77F70 /* Decodable.swift in Sources */,
 				8B1CC4F4217AE56D00F00A70 /* ApplicationModuleDelegate.swift in Sources */,
 				8B2D90EB1EE47ED80019F063 /* UNNotificationTriggerDateType.swift in Sources */,
@@ -1600,6 +1627,7 @@
 				8B1CC4F1217AE48C00F00A70 /* ApplicationModule.swift in Sources */,
 				8B756F151E5CF16D00DE4B02 /* XIBView.swift in Sources */,
 				8BD98D6F1FC35B3700E74A8C /* UIWindow.swift in Sources */,
+				8B83045A22839EC700AD5D61 /* PlaceholderTextView.swift in Sources */,
 				8B75286C1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BD2D19E1CA583110018AC2B /* UIAlertAction.swift in Sources */,
 				8B3A6A4C22275917000011BC /* AppModels.swift in Sources */,

@@ -94,7 +94,7 @@ public extension SynchronizedArray {
     func filter(_ isIncluded: @escaping (Element) -> Bool) -> SynchronizedArray {
         var result: SynchronizedArray?
         queue.sync { result = SynchronizedArray(self.array.filter(isIncluded)) }
-        return result!
+        return result ?? self
     }
     
     /// Returns the first index in which an element of the collection satisfies the given predicate.
@@ -114,7 +114,7 @@ public extension SynchronizedArray {
     func sorted(by areInIncreasingOrder: (Element, Element) -> Bool) -> SynchronizedArray {
         var result: SynchronizedArray?
         queue.sync { result = SynchronizedArray(self.array.sorted(by: areInIncreasingOrder)) }
-        return result!
+        return result ?? self
     }
     
     /// Returns an array containing the results of mapping the given closure over the sequence’s elements.
@@ -155,7 +155,7 @@ public extension SynchronizedArray {
     ///   - initialResult: The value to use as the initial accumulating value.
     ///   - updateAccumulatingResult: A closure that updates the accumulating value with an element of the sequence.
     /// - Returns: The final accumulated value. If the sequence has no elements, the result is initialResult.
-    func reduce<ElementOfResult>(into initialResult: ElementOfResult, _ updateAccumulatingResult: @escaping (inout ElementOfResult, Element) -> ()) -> ElementOfResult {
+    func reduce<ElementOfResult>(into initialResult: ElementOfResult, _ updateAccumulatingResult: @escaping (inout ElementOfResult, Element) -> Void) -> ElementOfResult {
         var result: ElementOfResult?
         queue.sync { result = self.array.reduce(into: initialResult, updateAccumulatingResult) }
         return result ?? initialResult
@@ -395,7 +395,7 @@ public extension SynchronizedArray where Element: Equatable {
     /// - Parameters:
     ///   - left: The collection to remove from.
     ///   - right: An element to search for in the collection.
-    static func -=(left: inout SynchronizedArray, right: Element) {
+    static func -= (left: inout SynchronizedArray, right: Element) {
         left.remove(right)
     }
 }
@@ -411,7 +411,7 @@ public extension SynchronizedArray {
     /// - Parameters:
     ///   - left: The collection to append to.
     ///   - right: The element to append to the array.
-    static func +=(left: inout SynchronizedArray, right: Element) {
+    static func += (left: inout SynchronizedArray, right: Element) {
         left.append(right)
     }
 
@@ -422,7 +422,11 @@ public extension SynchronizedArray {
     /// - Parameters:
     ///   - left: The collection to append to.
     ///   - right: The elements to append to the array.
-    static func +=(left: inout SynchronizedArray, right: [Element]) {
+    static func += (left: inout SynchronizedArray, right: [Element]) {
         left.append(right)
     }
+}
+
+private extension SynchronizedArray {
+    //swiftlint:disable file_length
 }

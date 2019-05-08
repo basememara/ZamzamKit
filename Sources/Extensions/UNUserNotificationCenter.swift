@@ -45,8 +45,8 @@ public extension UNUserNotificationCenter {
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
         actions: [UNNotificationAction]? = nil,
         authorizations: UNAuthorizationOptions? = [.alert, .badge, .sound],
-        completion: ((Bool) -> Void)? = nil)
-    {
+        completion: ((Bool) -> Void)? = nil
+    ) {
         register(delegate: delegate, categories: [category: actions], authorizations: authorizations, completion: completion)
     }
     
@@ -90,8 +90,8 @@ public extension UNUserNotificationCenter {
         delegate: UNUserNotificationCenterDelegate? = nil,
         categories: [String: [UNNotificationAction]?],
         authorizations: UNAuthorizationOptions? = [.alert, .badge, .sound],
-        completion: ((Bool) -> Void)? = nil)
-    {
+        completion: ((Bool) -> Void)? = nil
+    ) {
         self.delegate ?= delegate
     
         getNotificationSettings { settings in
@@ -118,7 +118,7 @@ public extension UNUserNotificationCenter {
             }
             
             // Request permission before registering if applicable
-            self.requestAuthorization(options: authorizations) { granted, error in
+            self.requestAuthorization(options: authorizations) { granted, _ in
                 defer { DispatchQueue.main.async { completion?(granted) } }
                 guard granted else { return }
                 self.setNotificationCategories(categorySet)
@@ -207,8 +207,8 @@ public extension UNUserNotificationCenter {
         identifier: String = UUID().uuidString,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
         userInfo: [String: Any]? = nil,
-        completion: ((Error?) -> Void)? = nil)
-    {
+        completion: ((Error?) -> Void)? = nil
+    ) {
         // Constuct content
         let content = UNMutableNotificationContent().with {
             $0.body = body
@@ -247,8 +247,8 @@ public extension UNUserNotificationCenter {
         identifier: String = UUID().uuidString,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
         userInfo: [String: Any]? = nil,
-        completion: ((Error?) -> Void)? = nil)
-    {
+        completion: ((Error?) -> Void)? = nil
+    ) {
         // Constuct content
         let content = UNMutableNotificationContent().with {
             $0.body = body
@@ -267,13 +267,20 @@ public extension UNUserNotificationCenter {
         // https://github.com/d7laungani/DLLocalNotifications/blob/master/DLLocalNotifications/DLLocalNotifications.swift#L31
         let components: DateComponents
         switch repeats {
-        case .once: components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
-        case .minute: components = calendar.dateComponents([.second], from: date)
-        case .hour: components = calendar.dateComponents([.minute], from: date)
-        case .day: components = calendar.dateComponents([.hour, .minute], from: date)
-        case .week: components = calendar.dateComponents([.hour, .minute, .weekday], from: date)
-        case .month: components = calendar.dateComponents([.hour, .minute, .day], from: date)
-        case .year: components = calendar.dateComponents([.hour, .minute, .day, .month], from: date)
+        case .once:
+            components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        case .minute:
+            components = calendar.dateComponents([.second], from: date)
+        case .hour:
+            components = calendar.dateComponents([.minute], from: date)
+        case .day:
+            components = calendar.dateComponents([.hour, .minute], from: date)
+        case .week:
+            components = calendar.dateComponents([.hour, .minute, .weekday], from: date)
+        case .month:
+            components = calendar.dateComponents([.hour, .minute, .day], from: date)
+        case .year:
+            components = calendar.dateComponents([.hour, .minute, .day, .month], from: date)
         }
     
         // Construct request with trigger
@@ -300,8 +307,8 @@ public extension UNUserNotificationCenter {
         identifier: String = UUID().uuidString,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
         userInfo: [String: Any]? = nil,
-        completion: ((Error?) -> Void)? = nil)
-    {
+        completion: ((Error?) -> Void)? = nil
+    ) {
         // Constuct content
         let content = UNMutableNotificationContent().with {
             $0.body = body

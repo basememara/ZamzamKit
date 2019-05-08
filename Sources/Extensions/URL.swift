@@ -93,7 +93,7 @@ public extension URL {
         // https://stackoverflow.com/q/41421686
         return URLComponents(string: absoluteString)?
             .queryItems?
-            .first{ $0.name.caseInsensitiveCompare(name) == .orderedSame }?
+            .first { $0.name.caseInsensitiveCompare(name) == .orderedSame }?
             .value
     }
 }

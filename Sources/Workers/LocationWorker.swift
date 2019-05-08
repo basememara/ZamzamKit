@@ -39,8 +39,8 @@ public class LocationWorker: NSObject, LocationWorkerType {
     public required init(
         desiredAccuracy: CLLocationAccuracy? = nil,
         distanceFilter: Double? = nil,
-        activityType: CLActivityType? = nil)
-    {
+        activityType: CLActivityType? = nil
+    ) {
             // Assign values to location manager options
             self.desiredAccuracy = desiredAccuracy
             self.distanceFilter = distanceFilter
@@ -90,8 +90,10 @@ public extension LocationWorker {
         // Request appropiate authorization before exit
         defer {
             switch type {
-            case .whenInUse: manager.requestWhenInUseAuthorization()
-            case .always: manager.requestAlwaysAuthorization()
+            case .whenInUse:
+                manager.requestWhenInUseAuthorization()
+            case .always:
+                manager.requestAlwaysAuthorization()
             }
         }
         

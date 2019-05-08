@@ -48,7 +48,7 @@ public class Migration {
     private lazy var appBuild: String = bundle
         .infoDictionary?[kCFBundleVersionKey as String] as? String ?? ""
 
-    public init(userDefaults: UserDefaults = UserDefaults(suiteName: suiteName)!, bundle: Bundle = Bundle.main) {
+    public init(userDefaults: UserDefaults = UserDefaults(suiteName: suiteName) ?? .standard, bundle: Bundle = .main) {
         self.defaults = userDefaults
         self.bundle = bundle
     }

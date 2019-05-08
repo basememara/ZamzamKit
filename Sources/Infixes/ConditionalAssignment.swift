@@ -14,6 +14,7 @@ precedencegroup Comparison {
 }
 
 infix operator ?= : Comparison
+//swiftlint:disable static_operator
 
 /// Assign value if not nil.
 ///
@@ -24,7 +25,7 @@ infix operator ?= : Comparison
 ///
 ///     value = 456
 ///     test ?= value // test == 456
-public func ?=<T>(left: inout T, right: T?) {
+public func ?= <T>(left: inout T, right: T?) {
     // https://github.com/hyperoslo/Sugar
     guard let value = right else { return }
     left = value
@@ -39,7 +40,7 @@ public func ?=<T>(left: inout T, right: T?) {
 ///
 ///     value = 456
 ///     test ?= value // test == 456
-public func ?=<T>(left: inout T?, right: T?) {
+public func ?= <T>(left: inout T?, right: T?) {
     // https://github.com/hyperoslo/Sugar
     guard let value = right else { return }
     left = value

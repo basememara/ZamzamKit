@@ -27,6 +27,7 @@ public extension WKInterfaceGroup {
         
         setBackgroundImageNamed(imageName)
         
+        //swiftlint:disable legacy_constructor
         startAnimatingWithImages(
             in: NSMakeRange(0, imageCount),
             duration: duration,
