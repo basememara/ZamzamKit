@@ -84,6 +84,21 @@ public extension UITableView {
 
 public extension Scrollable where Self: UITableView {
     
+    /// Scrolls to the top of table view.
+    ///
+    /// - Parameter animated: `true` if you want to animate the change in position; `false` if it should be immediate.
+    func scrollToTop(animated: Bool = true) {
+        let indexPath = IndexPath(row: 0, section: 0)
+        
+        // Ensure row exists before scrolling
+        guard indexPath.section < numberOfSections
+            && indexPath.row < numberOfRows(inSection: indexPath.section) else {
+                return
+        }
+        
+        scrollToRow(at: indexPath, at: .top, animated: animated)
+    }
+    
     /// Scrolls to the bottom of table view.
     ///
     /// - Parameter animated: `true` if you want to animate the change in position; `false` if it should be immediate.
