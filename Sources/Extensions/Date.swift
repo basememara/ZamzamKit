@@ -12,64 +12,179 @@ public extension Date {
     
     /// Determines if date is in the past.
     ///
-    /// Uses the user's current calendar.
+    ///     Date(timeIntervalSinceNow: -100).isPast // true
+    ///     Date(timeIntervalSinceNow: 100).isPast // false
     ///
-    ///     Date(timeIntervalSinceNow: -100).isPast -> true
-    ///     Date(timeIntervalSinceNow: 100).isPast -> false
+    /// Uses the user's current calendar.
     var isPast: Bool {
         return self < Date()
     }
     
     /// Determines if date is in the future.
     ///
-    /// Uses the user's current calendar.
+    ///     Date(timeIntervalSinceNow: 100).isFuture // true
+    ///     Date(timeIntervalSinceNow: -100).isFuture // false
     ///
-    ///     Date(timeIntervalSinceNow: 100).isFuture -> true
-    ///     Date(timeIntervalSinceNow: -100).isFuture -> false
+    /// Uses the user's current calendar.
     var isFuture: Bool {
         return self > Date()
+    }
+}
+
+public extension Date {
+    
+    /// Determines if date is in today's date.
+    ///
+    ///     Date().isToday // true
+    ///
+    /// Uses the user's current calendar.
+    var isToday: Bool {
+        return isToday(for: .current)
     }
     
     /// Determines if date is in today's date.
     ///
-    /// Uses the user's current calendar.
+    ///     Date().isToday(for: Calendar(identifier: .islamic)) // true
     ///
-    ///     Date().isToday -> true
-    var isToday: Bool {
-        return Calendar.current.isDateInToday(self)
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns true if date passes the criteria.
+    func isToday(for calendar: Calendar) -> Bool {
+        return calendar.isDateInToday(self)
+    }
+}
+
+public extension Date {
+    
+    /// Determines if date is in yesterday's date.
+    ///
+    ///     Date(timeIntervalSinceNow: -90_000).isYesterday // true
+    ///
+    /// Uses the user's current calendar.
+    var isYesterday: Bool {
+        return isYesterday(for: .current)
     }
     
     /// Determines if date is in yesterday's date.
     ///
-    /// Uses the user's current calendar.
+    ///     Date(timeIntervalSinceNow: -90_000).isYesterday(for: Calendar(identifier: .islamic)) // true
     ///
-    ///     Date(timeIntervalSinceNow: -90_000).isYesterday -> true
-    var isYesterday: Bool {
-        return Calendar.current.isDateInYesterday(self)
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns true if date passes the criteria.
+    func isYesterday(for calendar: Calendar) -> Bool {
+        return calendar.isDateInYesterday(self)
+    }
+}
+
+public extension Date {
+    
+    /// Determines if date is in tomorrow's date.
+    ///
+    ///     Date(timeIntervalSinceNow: 90_000).isTomorrow // true
+    ///
+    /// Uses the user's current calendar.
+    var isTomorrow: Bool {
+        return isTomorrow(for: .current)
     }
     
     /// Determines if date is in tomorrow's date.
     ///
-    /// Uses the user's current calendar.
+    ///     Date(timeIntervalSinceNow: 90_000).isTomorrow(for: Calendar(identifier: .islamic)) // true
     ///
-    ///     Date(timeIntervalSinceNow: 90_000).isTomorrow -> true
-    var isTomorrow: Bool {
-        return Calendar.current.isDateInTomorrow(self)
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns true if date passes the criteria.
+    func isTomorrow(for calendar: Calendar) -> Bool {
+        return calendar.isDateInTomorrow(self)
     }
+}
+
+public extension Date {
     
     /// Determines if date is within a weekday period.
     ///
     /// Uses the user's current calendar.
     var isWeekday: Bool {
-        return !Calendar.current.isDateInWeekend(self)
+        return isWeekday(for: .current)
     }
+    
+    /// Determines if date is within a weekday period.
+    ///
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns true if date passes the criteria.
+    func isWeekday(for calendar: Calendar) -> Bool {
+        return !calendar.isDateInWeekend(self)
+    }
+}
+
+public extension Date {
 	
 	/// Determines if date is within a weekend period.
     ///
     /// Uses the user's current calendar.
 	var isWeekend: Bool {
-		return Calendar.current.isDateInWeekend(self)
+        return isWeekend(for: .current)
 	}
+    
+    /// Determines if date is within a weekend period.
+    ///
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns true if date passes the criteria.
+    func isWeekend(for calendar: Calendar) -> Bool {
+        return calendar.isDateInWeekend(self)
+    }
+}
+
+public extension Date {
+    
+    /// Check if date is within the current week.
+    ///
+    /// Uses the user's current calendar.
+    var isCurrentWeek: Bool {
+        return isCurrentWeek(for: .current)
+    }
+    
+    /// Check if date is within the current week.
+    ///
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns true if date passes the criteria.
+    func isCurrentWeek(for calendar: Calendar) -> Bool {
+        return calendar.isDate(self, equalTo: Date(), toGranularity: .weekOfYear)
+    }
+}
+
+public extension Date {
+    
+    /// Check if date is within the current month.
+    ///
+    /// Uses the user's current calendar.
+    var isCurrentMonth: Bool {
+        return isCurrentMonth(for: .current)
+    }
+    
+    /// Check if date is within the current month.
+    ///
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns true if date passes the criteria.
+    func isCurrentMonth(for calendar: Calendar) -> Bool {
+        return calendar.isDate(self, equalTo: Date(), toGranularity: .month)
+    }
+}
+
+public extension Date {
+    
+    /// Check if date is within the current year.
+    ///
+    /// Uses the user's current calendar.
+    var isCurrentYear: Bool {
+        return isCurrentYear(for: .current)
+    }
+    
+    /// Check if date is within the current year.
+    ///
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns true if date passes the criteria.
+    func isCurrentYear(for calendar: Calendar) -> Bool {
+        return calendar.isDate(self, equalTo: Date(), toGranularity: .year)
+    }
 }
 
 public extension Date {
@@ -79,8 +194,34 @@ public extension Date {
     ///     let date = Date() // "Oct 3, 2018, 10:57:11"
     ///     let yesterday = date.yesterday // "Oct 2, 2018, 10:57:11"
     ///
+    /// Uses the user's current calendar.
     var yesterday: Date {
-        return addingTimeInterval(-86400)
+        return yesterday(for: .current)
+    }
+    
+    /// Return yesterday's date.
+    ///
+    ///     let date = Date() // "Oct 3, 2018, 10:57:11"
+    ///     let yesterday = date.yesterday // "Oct 2, 2018, 10:57:11"
+    ///
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns the date.
+    func yesterday(for calendar: Calendar) -> Date {
+        return calendar.date(byAdding: .day, value: -1, to: self)
+            ?? addingTimeInterval(-86400)
+    }
+}
+
+public extension Date {
+    
+    /// Return tomorrow's date.
+    ///
+    ///     let date = Date() // "Oct 3, 2018, 10:57:11"
+    ///     let tomorrow = date.tomorrow // "Oct 4, 2018, 10:57:11"
+    ///
+    /// Uses the user's current calendar.
+    var tomorrow: Date {
+        return tomorrow(for: .current)
     }
     
     /// Return tomorrow's date.
@@ -88,8 +229,11 @@ public extension Date {
     ///     let date = Date() // "Oct 3, 2018, 10:57:11"
     ///     let tomorrow = date.tomorrow // "Oct 4, 2018, 10:57:11"
     ///
-    var tomorrow: Date {
-        return addingTimeInterval(86400)
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns the date.
+    func tomorrow(for calendar: Calendar) -> Date {
+        return calendar.date(byAdding: .day, value: 1, to: self)
+            ?? addingTimeInterval(86400)
     }
 }
 
@@ -97,46 +241,95 @@ public extension Date {
     
     /// Returns the beginning of the day.
     ///
-    /// Uses the user's current calendar.
+    ///     Date().startOfDay // "2018/11/21 00:00:00"
     ///
-    ///     Date().startOfDay -> "2018/11/21 00:00:00"
+    /// Uses the user's current calendar.
     var startOfDay: Date {
-        return Calendar.current.startOfDay(for: self)
+        return startOfDay(for: .current)
+    }
+    
+    /// Returns the beginning of the day.
+    ///
+    ///     Date().startOfDay // "2018/11/21 00:00:00"
+    ///
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns the date.
+    func startOfDay(for calendar: Calendar) -> Date {
+        return calendar.startOfDay(for: self)
+    }
+}
+
+public extension Date {
+    
+    /// Returns the end of the day.
+    ///
+    ///     Date().endOfDay // "2018/11/21 23:59:59"
+    ///
+    /// Uses the user's current calendar.
+    var endOfDay: Date {
+        return endOfDay(for: .current)
     }
     
     /// Returns the end of the day.
     ///
-    /// Uses the user's current calendar.
+    ///     Date().endOfDay // "2018/11/21 23:59:59"
     ///
-    ///     Date().endOfDay -> "2018/11/21 23:59:59"
-    var endOfDay: Date {
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns the date.
+    func endOfDay(for calendar: Calendar) -> Date {
         var components = DateComponents()
         components.day = 1
         components.second = -1
-        return Calendar.current.date(byAdding: components, to: startOfDay)!
+        return calendar.date(byAdding: components, to: startOfDay(for: calendar))!
+    }
+}
+
+public extension Date {
+    
+    /// Returns the beginning of the month.
+    ///
+    ///     Date().startOfMonth // "2018/11/01 00:00:00"
+    ///
+    /// Uses the user's current calendar.
+    var startOfMonth: Date {
+        return startOfMonth(for: .current)
     }
     
     /// Returns the beginning of the month.
     ///
-    /// Uses the user's current calendar.
+    ///     Date().startOfMonth // "2018/11/01 00:00:00"
     ///
-    ///     Date().startOfMonth -> "2018/11/01 00:00:00"
-    var startOfMonth: Date {
-        return Calendar.current.date(
-            from: Calendar.current.dateComponents([.year, .month], from: startOfDay)
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns the date.
+    func startOfMonth(for calendar: Calendar) -> Date {
+        return calendar.date(
+            from: calendar.dateComponents([.year, .month], from: startOfDay(for: calendar))
         )!
+    }
+}
+
+public extension Date {
+    
+    /// Returns the end of the month.
+    ///
+    ///     Date().endOfMonth // "2018/11/30 23:59:59"
+    ///
+    /// Uses the user's current calendar.
+    var endOfMonth: Date {
+        return endOfMonth(for: .current)
     }
     
     /// Returns the end of the month.
     ///
-    /// Uses the user's current calendar.
+    ///     Date().endOfMonth // "2018/11/30 23:59:59"
     ///
-    ///     Date().endOfMonth -> "2018/11/30 23:59:59"
-    var endOfMonth: Date {
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns the date.
+    func endOfMonth(for calendar: Calendar) -> Date {
         var components = DateComponents()
         components.month = 1
         components.second = -1
-        return Calendar.current.date(byAdding: components, to: startOfMonth)!
+        return calendar.date(byAdding: components, to: startOfMonth(for: calendar))!
     }
 }
 
@@ -151,7 +344,7 @@ public extension Date {
     ///     let date = Date()
     ///     let date1 = Date(timeIntervalSinceNow: 1000)
     ///     let date2 = Date(timeIntervalSinceNow: -1000)
-    ///     date.isBetween(date1, date2) -> true
+    ///     date.isBetween(date1, date2) // true
     ///
     /// - Parameters:
     ///   - date1: first date to compare to.
@@ -167,9 +360,9 @@ public extension Date {
     ///     let date = Date(fromString: "2016/03/22 09:40")
     ///     let fromDate = Date(fromString: "2016/03/22 09:30")
     ///
-    ///     date.isBeyond(fromDate, bySeconds: 300) -> true
-    ///     date.isBeyond(fromDate, bySeconds: 600) -> false
-    ///     date.isBeyond(fromDate, bySeconds: 1200) -> false
+    ///     date.isBeyond(fromDate, bySeconds: 300) // true
+    ///     date.isBeyond(fromDate, bySeconds: 600) // false
+    ///     date.isBeyond(fromDate, bySeconds: 1200) // false
     ///
     /// - Parameters:
     ///   - date: Date to use as a reference.
@@ -184,9 +377,9 @@ public extension Date {
     ///     let date = Date(fromString: "2016/03/22 09:40")
     ///     let fromDate = Date(fromString: "2016/03/22 09:30")
     ///
-    ///     date.isBeyond(fromDate, byMinutes: 5) -> true
-    ///     date.isBeyond(fromDate, byMinutes: 10) -> false
-    ///     date.isBeyond(fromDate, byMinutes: 25) -> false
+    ///     date.isBeyond(fromDate, byMinutes: 5) // true
+    ///     date.isBeyond(fromDate, byMinutes: 10) // false
+    ///     date.isBeyond(fromDate, byMinutes: 25) // false
     ///
     /// - Parameters:
     ///   - date: Date to use as a reference.
@@ -201,9 +394,9 @@ public extension Date {
     ///     let date = Date(fromString: "2016/03/22 11:40")
     ///     let fromDate = Date(fromString: "2016/03/22 09:40")
     ///
-    ///     date.isBeyond(fromDate, byHours: 1) -> true
-    ///     date.isBeyond(fromDate, byHours: 2) -> false
-    ///     date.isBeyond(fromDate, byHours: 4) -> false
+    ///     date.isBeyond(fromDate, byHours: 1) // true
+    ///     date.isBeyond(fromDate, byHours: 2) // false
+    ///     date.isBeyond(fromDate, byHours: 4) // false
     ///
     /// - Parameters:
     ///   - date: Date to use as a reference.
@@ -227,9 +420,10 @@ public extension Date {
     ///   - dateFormat: The date format string used by the receiver.
     ///   - timeZone: The time zone for the receiver.
     ///   - calendar: The calendar for the receiver.
-    init?(fromString string: String, dateFormat: String = "yyyy/MM/dd HH:mm", timeZone: TimeZone? = nil, calendar: Calendar? = nil) {
+    ///   - locale: The locale for the receiver.
+    init?(fromString string: String, dateFormat: String = "yyyy/MM/dd HH:mm", timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) {
         guard !string.isEmpty,
-            let date = DateFormatter(dateFormat: dateFormat, timeZone: timeZone, calendar: calendar).date(from: string) else {
+            let date = DateFormatter(dateFormat: dateFormat, timeZone: timeZone, calendar: calendar, locale: locale).date(from: string) else {
                 return nil
         }
         
@@ -238,55 +432,54 @@ public extension Date {
     
     /// Returns a string representation of a given date formatted using the receiver’s current settings.
     ///
-    ///     Date().string(format: "MMM d, h:mm a") -> "Jan 3, 8:43 PM"
+    ///     Date().string(format: "MMM d, h:mm a") // "Jan 3, 8:43 PM"
     ///
     /// - Parameters:
     ///   - format: The date format string used by the receiver.
     ///   - timeZone: The time zone for the receiver.
     ///   - calendar: The calendar for the receiver.
+    ///   - locale: The locale for the receiver.
     /// - Returns: The string representation of the given date.
-    func string(format: String, timeZone: TimeZone? = nil, calendar: Calendar? = nil) -> String {
-        return DateFormatter(dateFormat: format, timeZone: timeZone, calendar: calendar).string(from: self)
+    func string(format: String, timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
+        return DateFormatter(dateFormat: format, timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
     }
     
     /// Returns a string representation of a given date formatted using the receiver’s current settings.
     ///
-    ///     Date().string(style: .short) -> "1/12/17"
-    ///     Date().string(style: .medium) -> "Jan 12, 2017"
-    ///     Date().string(style: .long) -> "January 12, 2017"
-    ///     Date().string(style: .full) -> "Thursday, January 12, 2017"
-    ///     Date().string(style: .full, withTime: .medium) -> "Thursday, January 12, 2017 at 4:45:23 PM"
+    ///     Date().string(style: .short) // "1/12/17"
+    ///     Date().string(style: .medium) // "Jan 12, 2017"
+    ///     Date().string(style: .long) // "January 12, 2017"
+    ///     Date().string(style: .full) // "Thursday, January 12, 2017"
+    ///     Date().string(style: .full, withTime: .medium) // "Thursday, January 12, 2017 at 4:45:23 PM"
     ///
     /// - Parameters:
     ///   - dateStyle: The date style string used by the receiver.
     ///   - timeStyle: The time style string used by the receiver.
     ///   - timeZone: The time zone for the receiver.
     ///   - calendar: The calendar for the receiver.
+    ///   - locale: The locale for the receiver.
     /// - Returns: The string representation of the given date.
-    func string(style dateStyle: DateFormatter.Style, withTime timeStyle: DateFormatter.Style? = nil, timeZone: TimeZone? = nil, calendar: Calendar? = nil) -> String {
-        return DateFormatter(dateStyle: dateStyle, timeStyle: timeStyle, timeZone: timeZone, calendar: calendar).string(from: self)
+    func string(style dateStyle: DateFormatter.Style, withTime timeStyle: DateFormatter.Style? = nil, timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
+        return DateFormatter(dateStyle: dateStyle, timeStyle: timeStyle, timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
     }
     
     /// Fixed-format for the date without time.
     ///
     /// An example use case for this function is creating a dictionary of days that group respective values by days.
     ///
-    ///     Date().shortString() -> "2017-05-15"
+    ///     Date().shortString() // "2017-05-15"
     ///
     /// - Parameter timeZone: Time zone to determine day boundries of the date.
     /// - Returns: The formatted date string.
-    func shortString(with timeZone: TimeZone? = nil) -> String {
-        return DateFormatter(dateFormat: "yyyy-MM-dd", timeZone: timeZone).with {
-            $0.locale = .posix
-        }.string(from: self)
+    func shortString(timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
+        return DateFormatter(dateFormat: "yyyy-MM-dd", timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
     }
     
     /// Formats time interval for display timer.
     ///
     ///     Date(fromString: "2016/03/22 09:45").timerString(
     ///         from: Date(fromString: "2016/03/22 09:40")
-    ///     )
-    ///     // Prints "00:05:00"
+    ///     ) // "00:05:00"
     ///
     /// - Parameter date: The date to countdown from.
     /// - Returns: The formatted timer as hh:mm:ss.
@@ -304,9 +497,18 @@ public extension Date {
     
     /// Gets the decimal representation of the time.
     ///
-    ///     Date(fromString: "2012/10/23 18:15").timeToDecimal -> 18.25
+    ///     Date(fromString: "2012/10/23 18:15").timeToDecimal // 18.25
     var timeToDecimal: Double {
-        let calendar = Calendar.current
+        return timeToDecimal(for: .current)
+    }
+    
+    /// Gets the decimal representation of the time.
+    ///
+    ///     Date(fromString: "2012/10/23 18:15").timeToDecimal // 18.25
+    ///
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns the date.
+    func timeToDecimal(for calendar: Calendar) -> Double {
         let components = calendar.dateComponents([.hour, .minute], from: self)
         let hour = components.hour
         let minutes = components.minute
@@ -320,22 +522,22 @@ public extension Date {
 
     /// Moves the date to the specified time zone.
     ///
-    /// - Parameter timeZone: The target time zone.
+    /// - Parameters:
+    ///   - timeZone: The target time zone.
+    ///   - calendar: Calendar used for calculation.
     /// - Returns: The shifted date using the time zone.
-    func shift(to timeZone: TimeZone) -> Date {
-        return timeZone.isCurrent ? self : {
-            let calendar: Calendar = .current
-            
-            var dateComponents = calendar.dateComponents(
-                Calendar.Component.full,
-                from: self
-            )
-            
-            // Shift from GMT using difference of current and specified time zone
-            dateComponents.second = -timeZone.offsetFromCurrent
+    func shift(to timeZone: TimeZone, for calendar: Calendar) -> Date {
+        guard !timeZone.isCurrent else { return self }
+        
+        var dateComponents = calendar.dateComponents(
+            Calendar.Component.full,
+            from: self
+        )
+        
+        // Shift from GMT using difference of current and specified time zone
+        dateComponents.second = -timeZone.offsetFromCurrent
 
-            return calendar.date(from: dateComponents) ?? self
-        }()
+        return calendar.date(from: dateComponents) ?? self
     }
 }
 
@@ -362,10 +564,13 @@ public extension Date {
         format: String? = nil,
         offSet: Int = 0,
         timeZone: TimeZone? = nil,
-        calendar: Calendar = Date.islamicCalendar) -> String
-    {
+        calendar: Calendar = Date.islamicCalendar
+    ) -> String {
         var calendar = calendar
-        if let timeZone = timeZone { calendar.timeZone = timeZone }
+        
+        if let timeZone = timeZone {
+            calendar.timeZone = timeZone
+        }
         
         let formatter = DateFormatter().with {
             $0.calendar = calendar
@@ -398,8 +603,8 @@ public extension Date {
         components: Set<Calendar.Component> = Calendar.Component.full,
         offSet: Int = 0,
         timeZone: TimeZone? = nil,
-        calendar: Calendar = Date.islamicCalendar) -> DateComponents
-    {
+        calendar: Calendar = Date.islamicCalendar
+    ) -> DateComponents {
         var calendar = calendar
         
         if let timeZone = timeZone {
@@ -423,7 +628,15 @@ public extension Date {
     
     /// Determines if the date if Friday / Jumuah.
     var isJumuah: Bool {
-        return Calendar.current.dateComponents([.weekday], from: self).weekday == 6
+        return isJumuah(for: .current)
+    }
+    
+    /// Determines if the date if Friday / Jumuah.
+    ///
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns true if date passes the criteria.
+    func isJumuah(for calendar: Calendar) -> Bool {
+        return calendar.dateComponents([.weekday], from: self).weekday == 6
     }
 }
 
@@ -449,6 +662,9 @@ public extension Date {
         case .days(let addValue):
             component = .day
             value = addValue
+        case .weeks(let addValue):
+            component = .day
+            value = addValue * 7 // All calendars have 7 days in a week
         case .months(let addValue):
             component = .month
             value = addValue
@@ -484,6 +700,9 @@ public extension Date {
         case .days(let minusValue):
             component = .day
             value = minusValue
+        case .weeks(let minusValue):
+            component = .day
+            value = minusValue * 7 // All calendars have 7 days in a week
         case .months(let minusValue):
             component = .month
             value = minusValue
@@ -523,6 +742,10 @@ public extension Date {
             calendar = toCalendar
             component = .day
             value = addValue
+        case .weeks(let addValue, let toCalendar):
+            calendar = toCalendar
+            component = .day
+            value = addValue * 7 // All calendars have 7 days in a week
         case .months(let addValue, let toCalendar):
             calendar = toCalendar
             component = .month
@@ -564,6 +787,10 @@ public extension Date {
             calendar = toCalendar
             component = .day
             value = minusValue
+        case .weeks(let minusValue, let toCalendar):
+            calendar = toCalendar
+            component = .day
+            value = minusValue * 7 // All calendars have 7 days in a week
         case .months(let minusValue, let toCalendar):
             calendar = toCalendar
             component = .month

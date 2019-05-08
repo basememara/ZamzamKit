@@ -16,7 +16,8 @@ public extension DateFormatter {
     ///   - dateFormat: The date format string used by the receiver.
     ///   - timeZone: The time zone for the receiver.
     ///   - calendar: The calendar for the receiver.
-    convenience init(dateFormat: String, timeZone: TimeZone? = nil, calendar: Calendar? = nil) {
+    ///   - locale: The locale for the receiver.
+    convenience init(dateFormat: String, timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) {
         self.init()
         
         self.dateFormat = dateFormat
@@ -28,6 +29,10 @@ public extension DateFormatter {
         if let calendar = calendar {
             self.calendar = calendar
         }
+        
+        if let locale = locale {
+            self.locale = locale
+        }
     }
     
     /// Create a date formatter.
@@ -37,7 +42,8 @@ public extension DateFormatter {
     ///   - timeStyle: The time style of the receiver.
     ///   - timeZone: The time zone for the receiver.
     ///   - calendar: The calendar for the receiver.
-    convenience init(dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style? = nil, timeZone: TimeZone? = nil, calendar: Calendar? = nil) {
+    ///   - locale: The locale for the receiver.
+    convenience init(dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style? = nil, timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) {
         self.init()
         
         self.dateStyle = dateStyle
@@ -52,6 +58,10 @@ public extension DateFormatter {
         
         if let calendar = calendar {
             self.calendar = calendar
+        }
+        
+        if let locale = locale {
+            self.locale = locale
         }
     }
 }

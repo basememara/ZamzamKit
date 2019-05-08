@@ -14,6 +14,7 @@ public enum DateTimeInterval {
     case minutes(Int)
     case hours(Int)
     case days(Int)
+    case weeks(Int)
     case months(Int)
     case years(Int)
 }
@@ -24,6 +25,7 @@ public enum DateTimeIntervalWithCalendar {
     case minutes(Int, Calendar)
     case hours(Int, Calendar)
     case days(Int, Calendar)
+    case weeks(Int, Calendar)
     case months(Int, Calendar)
     case years(Int, Calendar)
 }

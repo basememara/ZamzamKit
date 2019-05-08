@@ -42,6 +42,27 @@ class DateTimeTests: XCTestCase {
 		let date = Date()
 		XCTAssertEqual(date.isWeekend, Calendar.current.isDateInWeekend(date))
 	}
+    
+    func testIsInCurrentWeek() {
+        let date = Date()
+        XCTAssert(date.isCurrentWeek)
+        let dateOneYearFromNow = date + .weeks(1)
+        XCTAssertFalse(dateOneYearFromNow.isCurrentWeek)
+    }
+    
+    func testIsInCurrentMonth() {
+        let date = Date()
+        XCTAssert(date.isCurrentMonth)
+        let dateOneYearFromNow = date + .months(1)
+        XCTAssertFalse(dateOneYearFromNow.isCurrentMonth)
+    }
+    
+    func testIsInCurrentYear() {
+        let date = Date()
+        XCTAssert(date.isCurrentYear)
+        let dateOneYearFromNow = date + .years(1)
+        XCTAssertFalse(dateOneYearFromNow.isCurrentYear)
+    }
 }
 
 extension DateTimeTests {
@@ -261,6 +282,44 @@ extension DateTimeTests {
         XCTAssertEqual(
             Date(fromString: "2016/02/20 13:12")! + .days(10),
             Date(fromString: "2016/03/01 13:12")
+        )
+    }
+    
+    func testIncrementWeeks() {
+        XCTAssertEqual(
+            Date(fromString: "2015/09/18 18:31")! + .weeks(1),
+            Date(fromString: "2015/09/25 18:31")
+        )
+        
+        XCTAssertEqual(
+            Date(fromString: "2015/09/18 18:31")! - .weeks(1),
+            Date(fromString: "2015/09/11 18:31")
+        )
+        XCTAssertEqual(
+            Date(fromString: "2015/09/18 18:31")! + .weeks(4),
+            Date(fromString: "2015/10/16 18:31")
+        )
+        
+        XCTAssertEqual(
+            Date(fromString: "2015/09/18 18:31")! - .weeks(4),
+            Date(fromString: "2015/08/21 18:31")
+        )
+        
+        XCTAssertEqual(
+            Date(fromString: "2015/10/26 18:31")! + .weeks(0),
+            Date(fromString: "2015/10/26 18:31")!
+        )
+        
+        // Cross months
+        XCTAssertEqual(
+            Date(fromString: "1990/01/31 22:12")! + .weeks(4),
+            Date(fromString: "1990/02/28 22:12")
+        )
+        
+        // Leap year
+        XCTAssertEqual(
+            Date(fromString: "2016/02/20 13:12")! + .weeks(10),
+            Date(fromString: "2016/04/30 13:12")
         )
     }
     

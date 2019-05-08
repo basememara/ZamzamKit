@@ -9,6 +9,12 @@
 import Foundation
 
 public extension TimeZone {
+    
+    /// Unix representation of time zone usually used for normalizing.
+    static let posix = TimeZone(identifier: "GMT")
+}
+
+public extension TimeZone {
 
     /// Determines if the time zone is the current time zone of the device.
     ///
