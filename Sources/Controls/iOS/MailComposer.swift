@@ -27,10 +27,16 @@ public extension MailComposerType {
     }
 }
 
+public protocol MailComposerDelegate: class {
+    func mailComposer(didFinishWith result: MFMailComposeResult)
+}
+
 open class MailComposer: NSObject, MailComposerType {
+    private weak var delegate: MailComposerDelegate?
     private let tintColor: UIColor?
     
-    public init(tintColor: UIColor? = nil) {
+    public init(delegate: MailComposerDelegate? = nil, tintColor: UIColor? = nil) {
+        self.delegate = delegate
         self.tintColor = tintColor
     }
     
@@ -84,6 +90,8 @@ public extension MailComposer {
 extension MailComposer: MFMailComposeViewControllerDelegate {
     
     public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
+        controller.dismiss {
+            self.delegate?.mailComposer(didFinishWith: result)
+        }
     }
 }
