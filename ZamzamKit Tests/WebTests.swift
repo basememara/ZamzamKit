@@ -151,3 +151,14 @@ extension WebTests {
         )
     }
 }
+
+extension WebTests {
+    
+    func testGetQueryItem() {
+        let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
+        
+        XCTAssertEqual(URL(string: value)!.queryItem("aBc"), "123")
+        XCTAssertEqual(URL(string: value)!.queryItem("lmn"), "tuv")
+        XCTAssertNil(URL(string: value)!.queryItem("yyy"))
+    }
+}

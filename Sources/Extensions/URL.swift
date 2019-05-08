@@ -17,16 +17,16 @@ public extension URL {
     ///     url?.appendingQueryItem("xyz", value: "999") -> "https://example.com?abc=123&lmn=tuv&xyz=999"
     ///
     /// - Parameters:
-    ///   - name: the key of the query string parameter
-    ///   - value: the value to replace the query string parameter, nil will remove item
-    /// - Returns: the URL with the appended query string
+    ///   - name: The key of the query string parameter.
+    ///   - value: The value to replace the query string parameter, nil will remove item.
+    /// - Returns: The URL with the appended query string.
     func appendingQueryItem(_ name: String, value: Any?) -> URL {
         guard var urlComponents = URLComponents(string: absoluteString) else {
             return self
         }
         
         urlComponents.queryItems = urlComponents.queryItems?
-            .filter { $0.name.lowercased() != name.lowercased() } ?? []
+            .filter { $0.name.caseInsensitiveCompare(name) != .orderedSame } ?? []
         
         // Skip if nil value
         if let value = value {
@@ -46,8 +46,8 @@ public extension URL {
     ///         "lmn": nil
     ///     ]) -> "https://example.com?xyz=987&def=456&abc=333&jkl=777"
     ///
-    /// - Parameter contentsOf: a dictionary of query string parameters to modify
-    /// - Returns: the URL with the appended query string
+    /// - Parameter contentsOf: A dictionary of query string parameters to modify.
+    /// - Returns: The URL with the appended query string.
     func appendingQueryItems(_ contentsOf: [String: Any?]) -> URL {
         guard var urlComponents = URLComponents(string: absoluteString), !contentsOf.isEmpty else {
             return self
@@ -71,9 +71,29 @@ public extension URL {
     ///     let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
     ///     url?.removeQueryItem("xyz") -> "https://example.com?abc=123&lmn=tuv"
     ///
-    /// - Parameter name: the key of the query string parameter
-    /// - Returns: the URL with the mutated query string
+    /// - Parameter name: The key of the query string parameter.
+    /// - Returns: The URL with the mutated query string.
     func removeQueryItem(_ name: String) -> URL {
         return appendingQueryItem(name, value: nil)
+    }
+}
+
+public extension URL {
+    
+    /// Query a URL from a parameter name.
+    ///
+    ///     let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
+    ///     url?.queryItem("aBc") -> "123"
+    ///     url?.queryItem("lmn") -> "tuv"
+    ///     url?.queryItem("yyy") -> nil
+    ///
+    /// - Parameter name: The key of the query string parameter.
+    /// - Returns: The value of the query string parameter.
+    func queryItem(_ name: String) -> String? {
+        // https://stackoverflow.com/q/41421686
+        return URLComponents(string: absoluteString)?
+            .queryItems?
+            .first{ $0.name.caseInsensitiveCompare(name) == .orderedSame }?
+            .value
     }
 }
