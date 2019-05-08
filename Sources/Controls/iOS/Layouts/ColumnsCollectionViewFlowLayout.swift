@@ -48,6 +48,8 @@ open class ColumnsCollectionViewFlowLayout: UICollectionViewFlowLayout {
                     output += collectionView.layoutMargins.left + collectionView.layoutMargins.right
                 case .fromSafeArea:
                     output += collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right
+                @unknown default:
+                    break
                 }
             }
             

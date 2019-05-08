@@ -145,14 +145,6 @@ private extension ControlsViewController {
         )
     }
     
-    @IBAction func modalButtonTapped() {
-        let modalView = ModalView.loadNIB().with {
-            $0.delegate = self
-        }
-        
-        present(control: modalView)
-    }
-    
     @IBAction func submitButtonTapped() {
         present(
             alert: "Are you sure you want to submit?",
@@ -194,12 +186,5 @@ extension ControlsViewController: UITextViewDelegate {
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         textView.inputAccessoryView = inputNextToolbar
         return true
-    }
-}
-
-extension ControlsViewController: ModalViewDelegate {
-    
-    func modalViewDidApply() {
-        print("Applied modal")
     }
 }
