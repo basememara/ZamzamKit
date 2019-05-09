@@ -173,7 +173,7 @@
 		8B87FC3522843EBC004AC246 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3422843EBC004AC246 /* Preferences.swift */; };
 		8B87FC3622843EBC004AC246 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3422843EBC004AC246 /* Preferences.swift */; };
 		8B87FC3722843EBC004AC246 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3422843EBC004AC246 /* Preferences.swift */; };
-		8B87FC42228440BA004AC246 /* ThemedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC39228440BA004AC246 /* ThemedImage.swift */; };
+		8B87FC42228440BA004AC246 /* ThemedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC39228440BA004AC246 /* ThemedImageView.swift */; };
 		8B87FC43228440BA004AC246 /* ThemedPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3A228440BA004AC246 /* ThemedPageControl.swift */; };
 		8B87FC44228440BA004AC246 /* ThemedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3B228440BA004AC246 /* ThemedTextView.swift */; };
 		8B87FC45228440BA004AC246 /* ThemedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3C228440BA004AC246 /* ThemedTextField.swift */; };
@@ -528,7 +528,7 @@
 		8B87FC2C22843E9A004AC246 /* PreferencesStoreInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesStoreInterfaces.swift; sourceTree = "<group>"; };
 		8B87FC3022843EAE004AC246 /* PreferencesDefaultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesDefaultsStore.swift; sourceTree = "<group>"; };
 		8B87FC3422843EBC004AC246 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
-		8B87FC39228440BA004AC246 /* ThemedImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedImage.swift; sourceTree = "<group>"; };
+		8B87FC39228440BA004AC246 /* ThemedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedImageView.swift; sourceTree = "<group>"; };
 		8B87FC3A228440BA004AC246 /* ThemedPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedPageControl.swift; sourceTree = "<group>"; };
 		8B87FC3B228440BA004AC246 /* ThemedTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedTextView.swift; sourceTree = "<group>"; };
 		8B87FC3C228440BA004AC246 /* ThemedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedTextField.swift; sourceTree = "<group>"; };
@@ -996,7 +996,7 @@
 			isa = PBXGroup;
 			children = (
 				8B87FC3D228440BA004AC246 /* ThemedButton.swift */,
-				8B87FC39228440BA004AC246 /* ThemedImage.swift */,
+				8B87FC39228440BA004AC246 /* ThemedImageView.swift */,
 				8B87FC3F228440BA004AC246 /* ThemedLabel.swift */,
 				8B87FC3A228440BA004AC246 /* ThemedPageControl.swift */,
 				8B87FC41228440BA004AC246 /* ThemedSegmentedControl.swift */,
@@ -1689,7 +1689,7 @@
 				8B2B0C0321360DA100353F4E /* UINavigationController.swift in Sources */,
 				8B4F144421A730E600F5154E /* DateTimeInterval.swift in Sources */,
 				8B7BAD3A205714D900273789 /* UIRefreshControl.swift in Sources */,
-				8B87FC42228440BA004AC246 /* ThemedImage.swift in Sources */,
+				8B87FC42228440BA004AC246 /* ThemedImageView.swift in Sources */,
 				8B9E986F1EB500790067ACB7 /* With.swift in Sources */,
 				8B4D71B3216A5560002ACA81 /* Throttler.swift in Sources */,
 				8B4D71BE216B208B002ACA81 /* MailComposer.swift in Sources */,
