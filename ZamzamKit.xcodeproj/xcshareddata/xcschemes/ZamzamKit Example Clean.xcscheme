@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8BE19B161C72D6F200D4D437"
-               BuildableName = "ZamzamKit tvOSTests.xctest"
-               BlueprintName = "ZamzamKit tvOSTests"
+               BlueprintIdentifier = "8BC6930F2233B9370020A039"
+               BuildableName = "ZamzamKit Example Clean.app"
+               BlueprintName = "ZamzamKit Example Clean"
                ReferencedContainer = "container:ZamzamKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,33 +28,13 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8BE19B161C72D6F200D4D437"
-               BuildableName = "ZamzamKit tvOSTests.xctest"
-               BlueprintName = "ZamzamKit tvOSTests"
-               ReferencedContainer = "container:ZamzamKit.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8BE19B071C72D6DF00D4D437"
-               BuildableName = "ZamzamKit iOSTests.xctest"
-               BlueprintName = "ZamzamKit iOSTests"
-               ReferencedContainer = "container:ZamzamKit.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8BE19B161C72D6F200D4D437"
-            BuildableName = "ZamzamKit tvOSTests.xctest"
-            BlueprintName = "ZamzamKit tvOSTests"
+            BlueprintIdentifier = "8BC6930F2233B9370020A039"
+            BuildableName = "ZamzamKit Example Clean.app"
+            BlueprintName = "ZamzamKit Example Clean"
             ReferencedContainer = "container:ZamzamKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -71,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8BE19B161C72D6F200D4D437"
-            BuildableName = "ZamzamKit tvOSTests.xctest"
-            BlueprintName = "ZamzamKit tvOSTests"
+            BlueprintIdentifier = "8BC6930F2233B9370020A039"
+            BuildableName = "ZamzamKit Example Clean.app"
+            BlueprintName = "ZamzamKit Example Clean"
             ReferencedContainer = "container:ZamzamKit.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -89,15 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8BE19B161C72D6F200D4D437"
-            BuildableName = "ZamzamKit tvOSTests.xctest"
-            BlueprintName = "ZamzamKit tvOSTests"
+            BlueprintIdentifier = "8BC6930F2233B9370020A039"
+            BuildableName = "ZamzamKit Example Clean.app"
+            BlueprintName = "ZamzamKit Example Clean"
             ReferencedContainer = "container:ZamzamKit.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
