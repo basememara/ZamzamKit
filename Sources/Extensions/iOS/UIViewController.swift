@@ -76,6 +76,11 @@ public extension UIViewController {
     func show(viewController: UIViewController, sender: Any? = nil) {
         show(viewController, sender: sender)
     }
+}
+
+// MARK: - Exit
+
+public extension UIViewController {
     
     /// Dismisses the view controller that was presented.
     ///
