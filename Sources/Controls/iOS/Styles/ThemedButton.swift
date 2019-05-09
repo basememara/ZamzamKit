@@ -19,3 +19,7 @@ open class ThemedPrimaryButton: UIButton {
 open class ThemedSecondaryButton: UIButton {
     
 }
+
+open class ThemedImageButton: UIButton {
+    
+}
