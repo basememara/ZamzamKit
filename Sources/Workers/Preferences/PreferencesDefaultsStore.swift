@@ -34,7 +34,7 @@ public extension PreferencesDefaultsStore {
     
     /// Deletes the single user defaults item specified by the key.
     ///
-    /// - Parameter key: The key that is used to delete the keychain item.
+    /// - Parameter key: The key that is used to delete the user default item.
     /// - Returns: True if the item was successfully deleted.
     func remove<T>(_ key: UserDefaults.Key<T?>) {
         defaults.remove(key)
