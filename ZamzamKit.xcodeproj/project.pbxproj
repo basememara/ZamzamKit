@@ -110,8 +110,6 @@
 		8B58856321B8F54700B0D0CD /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B58856221B8F54700B0D0CD /* CollectionViewCell.xib */; };
 		8B58856921B9116A00B0D0CD /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58856821B9116A00B0D0CD /* UIApplication.swift */; };
 		8B58856B21B928FF00B0D0CD /* WKAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58856A21B928FF00B0D0CD /* WKAlertAction.swift */; };
-		8B5D8A971E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */; };
-		8B5D8A981E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */; };
 		8B63B2C61CD959BC000F2B5F /* UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B63B2C51CD959BC000F2B5F /* UIBarButtonItem.swift */; };
 		8B63E4271CDB8DB00053C060 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B63E4261CDB8DB00053C060 /* UIImage.swift */; };
 		8B6A956D1E484D5A003F333D /* ZamzamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6A956C1E484D5A003F333D /* ZamzamError.swift */; };
@@ -166,6 +164,24 @@
 		8B830453228333A000AD5D61 /* ScrollViewWithKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B830452228333A000AD5D61 /* ScrollViewWithKeyboard.swift */; };
 		8B83045522833C9700AD5D61 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B83045422833C9700AD5D61 /* PhotoPicker.swift */; };
 		8B83045A22839EC700AD5D61 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B379A0720F65F46002144F7 /* PlaceholderTextView.swift */; };
+		8B87FC2D22843E9A004AC246 /* PreferencesStoreInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC2C22843E9A004AC246 /* PreferencesStoreInterfaces.swift */; };
+		8B87FC2E22843E9A004AC246 /* PreferencesStoreInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC2C22843E9A004AC246 /* PreferencesStoreInterfaces.swift */; };
+		8B87FC2F22843E9A004AC246 /* PreferencesStoreInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC2C22843E9A004AC246 /* PreferencesStoreInterfaces.swift */; };
+		8B87FC3122843EAE004AC246 /* PreferencesDefaultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3022843EAE004AC246 /* PreferencesDefaultsStore.swift */; };
+		8B87FC3222843EAE004AC246 /* PreferencesDefaultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3022843EAE004AC246 /* PreferencesDefaultsStore.swift */; };
+		8B87FC3322843EAE004AC246 /* PreferencesDefaultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3022843EAE004AC246 /* PreferencesDefaultsStore.swift */; };
+		8B87FC3522843EBC004AC246 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3422843EBC004AC246 /* Preferences.swift */; };
+		8B87FC3622843EBC004AC246 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3422843EBC004AC246 /* Preferences.swift */; };
+		8B87FC3722843EBC004AC246 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3422843EBC004AC246 /* Preferences.swift */; };
+		8B87FC42228440BA004AC246 /* ThemedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC39228440BA004AC246 /* ThemedImage.swift */; };
+		8B87FC43228440BA004AC246 /* ThemedPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3A228440BA004AC246 /* ThemedPageControl.swift */; };
+		8B87FC44228440BA004AC246 /* ThemedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3B228440BA004AC246 /* ThemedTextView.swift */; };
+		8B87FC45228440BA004AC246 /* ThemedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3C228440BA004AC246 /* ThemedTextField.swift */; };
+		8B87FC46228440BA004AC246 /* ThemedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3D228440BA004AC246 /* ThemedButton.swift */; };
+		8B87FC47228440BA004AC246 /* ThemedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3E228440BA004AC246 /* ThemedView.swift */; };
+		8B87FC48228440BA004AC246 /* ThemedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC3F228440BA004AC246 /* ThemedLabel.swift */; };
+		8B87FC49228440BA004AC246 /* ThemedSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC40228440BA004AC246 /* ThemedSwitch.swift */; };
+		8B87FC4A228440BA004AC246 /* ThemedSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87FC41228440BA004AC246 /* ThemedSegmentedControl.swift */; };
 		8B8802CB21757E6E0035543D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8802CA21757E6E0035543D /* TableViewController.swift */; };
 		8B8802CD21757E800035543D /* Table.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B8802CC21757E800035543D /* Table.storyboard */; };
 		8B8802D521757F160035543D /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B8802D421757F160035543D /* TableViewCell.xib */; };
@@ -479,7 +495,6 @@
 		8B58856221B8F54700B0D0CD /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
 		8B58856821B9116A00B0D0CD /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		8B58856A21B928FF00B0D0CD /* WKAlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKAlertAction.swift; sourceTree = "<group>"; };
-		8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationType.swift; sourceTree = "<group>"; };
 		8B63B2C51CD959BC000F2B5F /* UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItem.swift; sourceTree = "<group>"; };
 		8B63E4261CDB8DB00053C060 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		8B6A956C1E484D5A003F333D /* ZamzamError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZamzamError.swift; sourceTree = "<group>"; };
@@ -510,6 +525,18 @@
 		8B8304562283910500AD5D61 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8B8304572283914700AD5D61 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		8B8304582283915700AD5D61 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		8B87FC2C22843E9A004AC246 /* PreferencesStoreInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesStoreInterfaces.swift; sourceTree = "<group>"; };
+		8B87FC3022843EAE004AC246 /* PreferencesDefaultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesDefaultsStore.swift; sourceTree = "<group>"; };
+		8B87FC3422843EBC004AC246 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		8B87FC39228440BA004AC246 /* ThemedImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedImage.swift; sourceTree = "<group>"; };
+		8B87FC3A228440BA004AC246 /* ThemedPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedPageControl.swift; sourceTree = "<group>"; };
+		8B87FC3B228440BA004AC246 /* ThemedTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedTextView.swift; sourceTree = "<group>"; };
+		8B87FC3C228440BA004AC246 /* ThemedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedTextField.swift; sourceTree = "<group>"; };
+		8B87FC3D228440BA004AC246 /* ThemedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedButton.swift; sourceTree = "<group>"; };
+		8B87FC3E228440BA004AC246 /* ThemedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedView.swift; sourceTree = "<group>"; };
+		8B87FC3F228440BA004AC246 /* ThemedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedLabel.swift; sourceTree = "<group>"; };
+		8B87FC40228440BA004AC246 /* ThemedSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedSwitch.swift; sourceTree = "<group>"; };
+		8B87FC41228440BA004AC246 /* ThemedSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedSegmentedControl.swift; sourceTree = "<group>"; };
 		8B8802CA21757E6E0035543D /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		8B8802CC21757E800035543D /* Table.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Table.storyboard; sourceTree = "<group>"; };
 		8B8802D421757F160035543D /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
@@ -759,7 +786,6 @@
 			isa = PBXGroup;
 			children = (
 				8B4F144321A730E600F5154E /* DateTimeInterval.swift */,
-				8B5D8A961E9DDF480008C9BF /* LocationAuthorizationType.swift */,
 				8BEFE4781E4515D900100744 /* ScheduleInterval.swift */,
 				8B6A956C1E484D5A003F333D /* ZamzamError.swift */,
 			);
@@ -920,6 +946,7 @@
 				8B1CC4F5217AE89300F00A70 /* Controller */,
 				8B23CF33223E190D00B0E038 /* Layouts */,
 				8B1FE7E92065AB5200EE8DBE /* Protocols */,
+				8B87FC3822844018004AC246 /* Styles */,
 				8BDA5E301E795DE300429F78 /* BackgroundTask.swift */,
 				8B752F7D2020EA30007DA40C /* BadgeBarButtonItem.swift */,
 				8B50C506211E2F9B00A36ABB /* GradientView.swift */,
@@ -944,6 +971,41 @@
 				8B9E986E1EB500790067ACB7 /* With.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		8B87FC2A22843E4C004AC246 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				8BF0CD102143243500DF6DAF /* LocationWorkerType.swift */,
+				8B6C99961E6E031800D523CC /* LocationWorker.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		8B87FC2B22843E57004AC246 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				8B87FC2C22843E9A004AC246 /* PreferencesStoreInterfaces.swift */,
+				8B87FC3022843EAE004AC246 /* PreferencesDefaultsStore.swift */,
+				8B87FC3422843EBC004AC246 /* Preferences.swift */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		8B87FC3822844018004AC246 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				8B87FC3D228440BA004AC246 /* ThemedButton.swift */,
+				8B87FC39228440BA004AC246 /* ThemedImage.swift */,
+				8B87FC3F228440BA004AC246 /* ThemedLabel.swift */,
+				8B87FC3A228440BA004AC246 /* ThemedPageControl.swift */,
+				8B87FC41228440BA004AC246 /* ThemedSegmentedControl.swift */,
+				8B87FC40228440BA004AC246 /* ThemedSwitch.swift */,
+				8B87FC3C228440BA004AC246 /* ThemedTextField.swift */,
+				8B87FC3B228440BA004AC246 /* ThemedTextView.swift */,
+				8B87FC3E228440BA004AC246 /* ThemedView.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 		8B8802CF21757EA80035543D /* Controls */ = {
@@ -1092,8 +1154,8 @@
 		8BF0CD0B2143239000DF6DAF /* Workers */ = {
 			isa = PBXGroup;
 			children = (
-				8B6C99961E6E031800D523CC /* LocationWorker.swift */,
-				8BF0CD102143243500DF6DAF /* LocationWorkerType.swift */,
+				8B87FC2A22843E4C004AC246 /* Location */,
+				8B87FC2B22843E57004AC246 /* Preferences */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -1557,6 +1619,7 @@
 				8BFDB6701C751DF600C94996 /* UIImageView.swift in Sources */,
 				8BFDB67D1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8B756EF81E5C025A00DE4B02 /* UINavigationBar.swift in Sources */,
+				8B87FC3122843EAE004AC246 /* PreferencesDefaultsStore.swift in Sources */,
 				8BF307D01CF0E3C600BBA933 /* UIActivity.swift in Sources */,
 				8B07420B20DFBD2300204C2F /* RoundedViews.swift in Sources */,
 				8B6C762F21A9AE3600CA90EB /* CurrencyFormatter.swift in Sources */,
@@ -1570,6 +1633,7 @@
 				8BD508761C99E18500AE205E /* Collection.swift in Sources */,
 				8B94345A1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B2D57B920E2D38900CF4B01 /* UILabelView.swift in Sources */,
+				8B87FC2D22843E9A004AC246 /* PreferencesStoreInterfaces.swift in Sources */,
 				8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */,
 				8B752F7E2020EA30007DA40C /* BadgeBarButtonItem.swift in Sources */,
 				8B021E40203CA72E00A0386F /* UIScrollView.swift in Sources */,
@@ -1581,6 +1645,7 @@
 				8BE814F51C784233005F23CE /* Color.swift in Sources */,
 				8B2DE3E11C8A86B2008F1569 /* Bundle.swift in Sources */,
 				8B729C751EAB9D56004A6BF1 /* ConditionalAssignment.swift in Sources */,
+				8B87FC45228440BA004AC246 /* ThemedTextField.swift in Sources */,
 				8B83044F22832FF600AD5D61 /* AppPresentable.swift in Sources */,
 				8BFDB6571C75187200C94996 /* Date.swift in Sources */,
 				8BF0CD112143243500DF6DAF /* LocationWorkerType.swift in Sources */,
@@ -1590,6 +1655,7 @@
 				8B63E4271CDB8DB00053C060 /* UIImage.swift in Sources */,
 				8B6B7C0C21E950BD003FB20D /* Thread.swift in Sources */,
 				8B90782C2283A08500052809 /* Result.swift in Sources */,
+				8B87FC46228440BA004AC246 /* ThemedButton.swift in Sources */,
 				8B83044B22832F4C00AD5D61 /* AppBusinessLogic.swift in Sources */,
 				8BDA5E311E795DE300429F78 /* BackgroundTask.swift in Sources */,
 				8B3A6A4E22275917000011BC /* AppRoutable.swift in Sources */,
@@ -1605,9 +1671,11 @@
 				8B79A4751E9C1ED800C8A5A4 /* Locale.swift in Sources */,
 				8BFA87E6218BA5D50084F6FD /* Deprecated.swift in Sources */,
 				8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */,
+				8B87FC3522843EBC004AC246 /* Preferences.swift in Sources */,
 				8B6B0CBC219D312E0018F2E0 /* UIToolbar.swift in Sources */,
 				8B82154A1CA1613500C9FCC9 /* TimeInterval.swift in Sources */,
 				8BB45FB51C9BDD180070CE07 /* UserDefaults.swift in Sources */,
+				8B87FC43228440BA004AC246 /* ThemedPageControl.swift in Sources */,
 				8B7729F120486D6500C15B56 /* ApproximateComparison.swift in Sources */,
 				8BE2BB401F03259C00877447 /* Localizable.swift in Sources */,
 				8B81DD88222DB15E00847395 /* NilOrEmptyAssignment.swift in Sources */,
@@ -1615,31 +1683,36 @@
 				8BE43EF021CEEB2900247DE4 /* NSAttributedString.swift in Sources */,
 				8B1CC4F7217AE91100F00A70 /* ControllerModuleDelegate.swift in Sources */,
 				8BFDB6771C751F2300C94996 /* FileManager.swift in Sources */,
+				8B87FC44228440BA004AC246 /* ThemedTextView.swift in Sources */,
 				8BFDB6641C751AE600C94996 /* URL.swift in Sources */,
 				8B0C715F1E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B2B0C0321360DA100353F4E /* UINavigationController.swift in Sources */,
 				8B4F144421A730E600F5154E /* DateTimeInterval.swift in Sources */,
 				8B7BAD3A205714D900273789 /* UIRefreshControl.swift in Sources */,
+				8B87FC42228440BA004AC246 /* ThemedImage.swift in Sources */,
 				8B9E986F1EB500790067ACB7 /* With.swift in Sources */,
 				8B4D71B3216A5560002ACA81 /* Throttler.swift in Sources */,
 				8B4D71BE216B208B002ACA81 /* MailComposer.swift in Sources */,
 				8B1EEC881CF7588600AE054B /* UIStoryboard.swift in Sources */,
 				8BFDB65E1C7518F800C94996 /* String.swift in Sources */,
 				8B7A402A1C76245200A0077D /* CLLocationManager.swift in Sources */,
-				8B5D8A971E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */,
+				8B87FC47228440BA004AC246 /* ThemedView.swift in Sources */,
 				8B50C507211E2F9B00A36ABB /* GradientView.swift in Sources */,
+				8B87FC4A228440BA004AC246 /* ThemedSegmentedControl.swift in Sources */,
 				8BD016841E77371A008F306E /* WatchSession.swift in Sources */,
 				8B83045522833C9700AD5D61 /* PhotoPicker.swift in Sources */,
 				8B1CC4F1217AE48C00F00A70 /* ApplicationModule.swift in Sources */,
 				8B756F151E5CF16D00DE4B02 /* XIBView.swift in Sources */,
 				8BD98D6F1FC35B3700E74A8C /* UIWindow.swift in Sources */,
 				8B83045A22839EC700AD5D61 /* PlaceholderTextView.swift in Sources */,
+				8B87FC49228440BA004AC246 /* ThemedSwitch.swift in Sources */,
 				8B75286C1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BD2D19E1CA583110018AC2B /* UIAlertAction.swift in Sources */,
 				8B3A6A4C22275917000011BC /* AppModels.swift in Sources */,
 				8B9434651EBDEAA200C779EB /* Calendar.swift in Sources */,
 				8BE814FD1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8B1CC522217BDA4E00F00A70 /* DispatchQueue.swift in Sources */,
+				8B87FC48228440BA004AC246 /* ThemedLabel.swift in Sources */,
 				8B23CF35223E192500B0E038 /* ColumnsCollectionViewFlowLayout.swift in Sources */,
 				8BFDB66A1C751D3400C94996 /* UIViewController.swift in Sources */,
 			);
@@ -1649,13 +1722,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B87FC3622843EBC004AC246 /* Preferences.swift in Sources */,
 				8BFDB6581C75187200C94996 /* Date.swift in Sources */,
 				8BEFE47A1E4515D900100744 /* ScheduleInterval.swift in Sources */,
 				8BE814FE1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8B8215421CA15E0D00C9FCC9 /* CLKComplicationServer.swift in Sources */,
 				8BFDB67E1C7525BD00C94996 /* CLLocation.swift in Sources */,
 				8BD61B371E3EFDF1009B537E /* AppInfo.swift in Sources */,
+				8B87FC2E22843E9A004AC246 /* PreferencesStoreInterfaces.swift in Sources */,
 				8BE2BB411F03259C00877447 /* Localizable.swift in Sources */,
+				8B87FC3222843EAE004AC246 /* PreferencesDefaultsStore.swift in Sources */,
 				8B6C99981E6E031800D523CC /* LocationWorker.swift in Sources */,
 				8B58856B21B928FF00B0D0CD /* WKAlertAction.swift in Sources */,
 				8B6A956E1E484D5A003F333D /* ZamzamError.swift in Sources */,
@@ -1689,7 +1765,6 @@
 				8BFA87E7218BA5D50084F6FD /* Deprecated.swift in Sources */,
 				8B4C08B61EC94608002A317D /* BinaryFloatingPoint.swift in Sources */,
 				8BFDB65F1C7518F800C94996 /* String.swift in Sources */,
-				8B5D8A981E9DDF480008C9BF /* LocationAuthorizationType.swift in Sources */,
 				8BB45FB61C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8B9E98701EB500790067ACB7 /* With.swift in Sources */,
 				8BBB66E21E9C000900AB1973 /* UNUserNotificationCenter.swift in Sources */,
@@ -1724,8 +1799,10 @@
 				8BFDB6661C751AE600C94996 /* URL.swift in Sources */,
 				8B79A4771E9C1ED800C8A5A4 /* Locale.swift in Sources */,
 				8B6C763121A9AE3600CA90EB /* CurrencyFormatter.swift in Sources */,
+				8B87FC3322843EAE004AC246 /* PreferencesDefaultsStore.swift in Sources */,
 				8BD61B381E3EFDF1009B537E /* AppInfo.swift in Sources */,
 				8B4D71B1216A542A002ACA81 /* Debouncer.swift in Sources */,
+				8B87FC3722843EBC004AC246 /* Preferences.swift in Sources */,
 				8B4F144621A730E600F5154E /* DateTimeInterval.swift in Sources */,
 				8B83044D22832F4C00AD5D61 /* AppBusinessLogic.swift in Sources */,
 				8BD508781C99E18500AE205E /* Collection.swift in Sources */,
@@ -1743,6 +1820,7 @@
 				8B94345C1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8BE814FF1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8B83045122832FF600AD5D61 /* AppPresentable.swift in Sources */,
+				8B87FC2F22843E9A004AC246 /* PreferencesStoreInterfaces.swift in Sources */,
 				8B8974731EDF555C004FA853 /* Migration.swift in Sources */,
 				8BD5086D1C99DD1E00AE205E /* Array.swift in Sources */,
 				8B9E98711EB500790067ACB7 /* With.swift in Sources */,
