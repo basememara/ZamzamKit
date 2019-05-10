@@ -56,6 +56,16 @@ public extension String {
     static func localizedFormat(_ key: Localizable, _ arguments: CVarArg...) -> String {
         return withVaList(arguments) { vaListHandler(key.rawValue, $0, nil) } as String
     }
+    
+    /// Returns an attributed string created by using a given format string as a template into which the remaining argument value is substituted.
+    static func localizedFormat(_ key: Localizable, _ argument: NSAttributedString) -> NSMutableAttributedString {
+        let string: String = .localizedFormat(key, argument.string)
+        
+        return string.mutableAttributed(
+            argument.attributes,
+            range: (string as NSString).range(of: argument.string)
+        )
+    }
 
     /// Returns a string created by using a given format string as a template into which the
     /// remaining argument values are substituted according to the user’s default locale.
