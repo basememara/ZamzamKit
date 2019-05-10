@@ -109,9 +109,9 @@ public extension BadgeBarButtonItem {
 
 public extension BadgeBarButtonItem {
     
-    convenience init(image: UIImage, badgeText: String? = nil, target: AnyObject?, action: Selector) {
+    convenience init(image: UIImage?, badgeText: String? = nil, target: AnyObject?, action: Selector) {
         let button = UIButton(type: .custom).with {
-            $0.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+            $0.frame = CGRect(x: 0, y: 0, width: image?.size.width ?? 40, height: image?.size.height ?? 40)
             $0.setBackgroundImage(image, for: .normal)
         }
         

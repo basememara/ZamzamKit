@@ -6,8 +6,6 @@
 //  Copyright © 2018 Zamzam. All rights reserved.
 //
 
-import Foundation
-
 extension DispatchQueue {
     static let labelPrefix = "io.zamzam.ZamzamKit"
 }
