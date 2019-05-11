@@ -3,7 +3,7 @@
 //  ZamzamKit
 //
 //  Created by Basem Emara on 2/5/17.
-//  Copyright © 2017 Zamzam. All rights reserved.
+//  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
 import Foundation

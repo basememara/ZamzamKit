@@ -3,7 +3,7 @@
 //  ZamzamKit
 //
 //  Created by Basem Emara on 1/29/17.
-//  Copyright © 2017 Zamzam. All rights reserved.
+//  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
 #if os(iOS) || os(tvOS)

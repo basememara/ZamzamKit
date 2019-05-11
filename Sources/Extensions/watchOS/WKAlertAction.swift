@@ -3,7 +3,7 @@
 //  ZamzamKit watchOS
 //
 //  Created by Basem Emara on 2018-12-06.
-//  Copyright © 2018 Zamzam. All rights reserved.
+//  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
 import WatchKit

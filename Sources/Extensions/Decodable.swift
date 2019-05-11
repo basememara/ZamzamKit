@@ -3,7 +3,7 @@
 //  ZamzamKit
 //
 //  Created by Basem Emara on 2018-06-12.
-//  Copyright © 2018 Zamzam. All rights reserved.
+//  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
 /// Skips failed elements during decoding instead exiting collection completely; lossy array decoding.

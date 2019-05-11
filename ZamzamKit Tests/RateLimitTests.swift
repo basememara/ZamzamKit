@@ -3,7 +3,7 @@
 //  ZamzamKit
 //
 //  Created by Basem Emara on 2018-10-07.
-//  Copyright © 2018 Zamzam. All rights reserved.
+//  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
 import XCTest

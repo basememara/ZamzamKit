@@ -4,7 +4,7 @@
 //  https://github.com/fmo91/PluggableApplicationDelegate
 //
 //  Created by Basem Emara on 2018-01-28.
-//  Copyright © 2018 Zamzam. All rights reserved.
+//  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
 /// Subclassed by the `AppDelegate` to pass lifecycle events to loaded modules.

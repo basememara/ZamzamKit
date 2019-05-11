@@ -4,7 +4,7 @@
 //  ZamzamKit
 //
 //  Created by Basem Emara on 3/15/17.
-//  Copyright © 2017 Zamzam. All rights reserved.
+//  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
 import UIKit

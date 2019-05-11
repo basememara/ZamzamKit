@@ -3,7 +3,7 @@
 //  ZamzamKit
 //
 //  Created by Basem Emara on 2019-03-04.
-//  Copyright © 2019 Zamzam. All rights reserved.
+//  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
 import Foundation

@@ -4,7 +4,7 @@
 //  http://basememara.com/creating-thread-safe-arrays-in-swift/
 //
 //  Created by Basem Emara on 2/27/17.
-//  Copyright © 2017 Zamzam. All rights reserved.
+//  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 //
 

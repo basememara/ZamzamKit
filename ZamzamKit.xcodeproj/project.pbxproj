@@ -1425,7 +1425,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1020;
-				ORGANIZATIONNAME = Zamzam;
+				ORGANIZATIONNAME = "Zamzam Inc.";
 				TargetAttributes = {
 					8B1447C71C72577900043657 = {
 						CreatedOnToolsVersion = 7.2.1;

@@ -5,7 +5,7 @@
 //  Inspired by: https://github.com/mysterioustrousers/MTMigration
 //
 //  Created by Basem Emara on 5/30/17.
-//  Copyright © 2017 Zamzam. All rights reserved.
+//  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
 import Foundation

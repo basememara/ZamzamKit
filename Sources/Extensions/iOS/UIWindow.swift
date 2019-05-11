@@ -3,7 +3,7 @@
 //  ZamzamKit iOS
 //
 //  Created by Basem Emara on 2017-11-20.
-//  Copyright © 2017 Zamzam. All rights reserved.
+//  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
 import UIKit

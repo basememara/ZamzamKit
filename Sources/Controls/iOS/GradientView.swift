@@ -4,7 +4,7 @@
 //  https://medium.com/@sakhabaevegor/create-a-color-gradient-on-the-storyboard-18ccfd8158c2
 //
 //  Created by Basem Emara on 2018-08-10.
-//  Copyright © 2018 Zamzam. All rights reserved.
+//  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
 import UIKit

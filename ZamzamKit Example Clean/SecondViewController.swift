@@ -3,7 +3,7 @@
 //  ZamzamKit Example Clean
 //
 //  Created by Basem Emara on 2019-03-09.
-//  Copyright © 2019 Zamzam. All rights reserved.
+//  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
 import UIKit
