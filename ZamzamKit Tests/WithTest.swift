@@ -9,12 +9,7 @@
 import XCTest
 import ZamzamKit
 
-class ExtensionsTest: XCTestCase {
-    
-    func testEquatableWithin() {
-        XCTAssert("def".within(["abc", "def", "ghi"]))
-        XCTAssert(!"xyz".within(["abc", "def", "ghi"]))
-    }
+class WithTest: XCTestCase {
     
     func testWith() {
         let model = SomeModel().with {
