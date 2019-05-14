@@ -62,13 +62,6 @@ class DecodableTests: XCTestCase {
 private extension JSONDecoder {
     
     static let test = JSONDecoder().with {
-        $0.dateDecodingStrategy = .formatted(
-            DateFormatter().with {
-                $0.calendar = Calendar(identifier: .iso8601)
-                $0.locale = .posix
-                $0.timeZone = .posix
-                $0.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-            }
-        )
+        $0.dateDecodingStrategy = .formatted(.init(iso8601Format: "yyyy-MM-dd'T'HH:mm:ssZ"))
     }
 }
