@@ -20,6 +20,7 @@ public protocol AppDisplayable {
     func endRefreshing()
 }
 
+#if os(iOS)
 extension AppDisplayable where Self: UIViewController {
     
     /// Display a native alert controller modally.
@@ -30,3 +31,4 @@ extension AppDisplayable where Self: UIViewController {
         present(alert: error.title, message: error.message)
     }
 }
+#endif

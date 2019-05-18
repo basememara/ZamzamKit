@@ -240,6 +240,11 @@
 		8BB5513921651D1400CD733E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BB5513D21651D1400CD733E /* Localizable.strings */; };
 		8BB5513A21651D1400CD733E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BB5513D21651D1400CD733E /* Localizable.strings */; };
 		8BB5513B21651D1400CD733E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BB5513D21651D1400CD733E /* Localizable.strings */; };
+		8BB5755F229026770079BE42 /* AppModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4922275917000011BC /* AppModels.swift */; };
+		8BB57560229026770079BE42 /* AppModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4922275917000011BC /* AppModels.swift */; };
+		8BB575612290267F0079BE42 /* AppDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4A22275917000011BC /* AppDisplayable.swift */; };
+		8BB57562229026800079BE42 /* AppDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4A22275917000011BC /* AppDisplayable.swift */; };
+		8BB57564229028250079BE42 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB57563229028250079BE42 /* UITabBarController.swift */; };
 		8BBB66E21E9C000900AB1973 /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */; };
 		8BC693132233B9370020A039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC693122233B9370020A039 /* AppDelegate.swift */; };
 		8BC693152233B9370020A039 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC693142233B9370020A039 /* FirstViewController.swift */; };
@@ -579,6 +584,7 @@
 		8BB415E51FB0DFFF0002C86C /* StatusBarable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarable.swift; sourceTree = "<group>"; };
 		8BB45FB41C9BDD180070CE07 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		8BB5513C21651D1400CD733E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8BB57563229028250079BE42 /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
 		8BC693102233B9370020A039 /* ZamzamKit Example Clean.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZamzamKit Example Clean.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC693122233B9370020A039 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BC693142233B9370020A039 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -840,6 +846,7 @@
 				8B021E3F203CA72E00A0386F /* UIScrollView.swift */,
 				8B37B8D4200549040052E9B1 /* UIStackView.swift */,
 				8B1EEC871CF7588600AE054B /* UIStoryboard.swift */,
+				8BB57563229028250079BE42 /* UITabBarController.swift */,
 				8BCB73D91CAD69BF00E20096 /* UITableView.swift */,
 				8B2285241EB6863600425B5A /* UITableViewCell.swift */,
 				8B6B0CBB219D312E0018F2E0 /* UIToolbar.swift */,
@@ -1657,6 +1664,7 @@
 				8B8974711EDF555C004FA853 /* Migration.swift in Sources */,
 				8B830453228333A000AD5D61 /* ScrollViewWithKeyboard.swift in Sources */,
 				8BFDB68F1C75323900C94996 /* DateFormatter.swift in Sources */,
+				8BB57564229028250079BE42 /* UITabBarController.swift in Sources */,
 				8BEFE46E1E4506B500100744 /* UNUserNotificationCenter.swift in Sources */,
 				8B6A956D1E484D5A003F333D /* ZamzamError.swift in Sources */,
 				8BE814F51C784233005F23CE /* Color.swift in Sources */,
@@ -1787,6 +1795,7 @@
 				8BB45FB61C9BDD180070CE07 /* UserDefaults.swift in Sources */,
 				8B9E98701EB500790067ACB7 /* With.swift in Sources */,
 				8BBB66E21E9C000900AB1973 /* UNUserNotificationCenter.swift in Sources */,
+				8BB5755F229026770079BE42 /* AppModels.swift in Sources */,
 				8BF210931E4A22460026B802 /* UNNotificationAttachment.swift in Sources */,
 				8BD508771C99E18500AE205E /* Collection.swift in Sources */,
 				8B75286D1E759F2A0035A742 /* Observer.swift in Sources */,
@@ -1797,6 +1806,7 @@
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
 				8B4D71B0216A542A002ACA81 /* Debouncer.swift in Sources */,
 				8BC6D99B204790B600242DAE /* Scrollable.swift in Sources */,
+				8BB575612290267F0079BE42 /* AppDisplayable.swift in Sources */,
 				8BF0CD122143243500DF6DAF /* LocationWorkerType.swift in Sources */,
 				8B5250E120CFDED700E77F70 /* Decodable.swift in Sources */,
 				8B79A4761E9C1ED800C8A5A4 /* Locale.swift in Sources */,
@@ -1840,6 +1850,8 @@
 				8B94345C1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8BE814FF1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8B83045122832FF600AD5D61 /* AppPresentable.swift in Sources */,
+				8BB57560229026770079BE42 /* AppModels.swift in Sources */,
+				8BB57562229026800079BE42 /* AppDisplayable.swift in Sources */,
 				8B87FC2F22843E9A004AC246 /* PreferencesStoreInterfaces.swift in Sources */,
 				8B8974731EDF555C004FA853 /* Migration.swift in Sources */,
 				8BD5086D1C99DD1E00AE205E /* Array.swift in Sources */,
