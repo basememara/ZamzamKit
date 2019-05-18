@@ -72,9 +72,8 @@ public extension UIViewController {
     ///
     /// - Parameters:
     ///   - viewController: The view controller to display.
-    ///   - sender: The object that initiated the request.
-    func show(viewController: UIViewController, sender: Any? = nil) {
-        show(viewController, sender: sender)
+    func show(_ viewController: UIViewController) {
+        show(viewController, sender: nil)
     }
 }
 

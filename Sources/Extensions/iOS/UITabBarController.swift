@@ -16,7 +16,6 @@ public extension UITabBarController {
     /// such as dismissing and popping all view controllers before setting. These steps ensure
     /// the selected tab is shown in a fresh state.
     ///
-    ///
     /// - Parameters:
     ///   - index: The index of the view controller associated with the currently selected tab item.
     ///   - configure: Configure the view controller before it is loaded.
