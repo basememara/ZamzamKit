@@ -42,11 +42,26 @@ public extension UIViewController {
 
 public extension UIViewController {
     
-    /// The root view controller for the container view controller, or returns itself if it is not embeded.
+    /// The root view controller for the container view controller, or returns itself if it is not embedded.
+    ///
+    /// This method crawls the following container view controller types:
+    /// * `UISplitViewController`
+    /// * `UITabBarController`
+    /// * `UINavigationController`
     var contentViewController: UIViewController {
-        return (self as? UINavigationController)?.viewControllers.first
-            ?? (self as? UITabBarController)?.selectedViewController
-            ?? self
+        switch self {
+        case let controller as UISplitViewController:
+            return controller.viewControllers.last?.contentViewController ?? self
+        case let controller as UITabBarController:
+            // Default to first tab if tab is not selected yet
+            return (controller.selectedViewController ?? controller.viewControllers?.first)?
+                // Recursively call in case it is another container view controller
+                .contentViewController ?? self
+        case let controller as UINavigationController:
+            return controller.viewControllers.first ?? self
+        default:
+            return self
+        }
     }
 
     /// Causes the view to resign the first responder status.
