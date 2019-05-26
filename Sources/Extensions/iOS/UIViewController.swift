@@ -42,6 +42,14 @@ public extension UIViewController {
 
 public extension UIViewController {
     
+    /// Determines if a view controller is being presented modally
+    var isModal: Bool {
+        // https://stackoverflow.com/a/27301207
+        return presentingViewController != nil
+            || navigationController?.presentingViewController?.presentedViewController == navigationController
+            || tabBarController?.presentingViewController is UITabBarController
+    }
+    
     /// The root view controller for the container view controller, or returns itself if it is not embedded.
     ///
     /// This method crawls the following container view controller types:
