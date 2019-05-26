@@ -350,6 +350,13 @@
 			remoteGlobalIDString = 8B1447C71C72577900043657;
 			remoteInfo = "ZamzamKit iOS";
 		};
+		8B443A27229AB96300EC5575 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B1447461C72237E00043657 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B5316041C9B22F40094A6C4;
+			remoteInfo = "ZamzamKit Example";
+		};
 		8B5316291C9B23140094A6C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8B1447461C72237E00043657 /* Project object */;
@@ -1416,6 +1423,7 @@
 			);
 			dependencies = (
 				8BE19B0F1C72D6DF00D4D437 /* PBXTargetDependency */,
+				8B443A28229AB96300EC5575 /* PBXTargetDependency */,
 			);
 			name = "ZamzamKit iOSTests";
 			productName = "ZamzamKit iOSTests";
@@ -1989,6 +1997,11 @@
 			isa = PBXTargetDependency;
 			target = 8B1447C71C72577900043657 /* ZamzamKit iOS */;
 			targetProxy = 8B25F6BB1EC38F0200B4406D /* PBXContainerItemProxy */;
+		};
+		8B443A28229AB96300EC5575 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B5316041C9B22F40094A6C4 /* ZamzamKit Example */;
+			targetProxy = 8B443A27229AB96300EC5575 /* PBXContainerItemProxy */;
 		};
 		8B53162A1C9B23140094A6C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

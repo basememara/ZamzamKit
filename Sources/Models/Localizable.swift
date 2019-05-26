@@ -16,6 +16,7 @@ public extension Localizable {
     static let cancel = Localizable(NSLocalizedString("cancel.dialog", bundle: bundle(forKey: "cancel.dialog"), comment: "Cancel text for dialogs"))
     static let next = Localizable(NSLocalizedString("next.dialog", bundle: bundle(forKey: "next.dialog"), comment: "Next text for dialogs"))
     static let clear = Localizable(NSLocalizedString("clear.dialog", bundle: bundle(forKey: "clear.dialog"), comment: "For dialogs"))
+    static let genericErrorTitle = Localizable(NSLocalizedString("generic.error.title", bundle: bundle(forKey: "generic.error.title"), comment: "General error title for unknown reason"))
 }
 
 /// Collection of static keys used for localization.

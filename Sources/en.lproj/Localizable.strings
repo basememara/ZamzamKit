@@ -12,3 +12,4 @@
 "cancel.dialog" = "Cancel";
 "next.dialog" = "Next";
 "clear.dialog" = "Clear";
+"generic.error.title" = "Error";

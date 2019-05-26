@@ -90,6 +90,13 @@ public extension UIViewController {
     func show(_ viewController: UIViewController) {
         show(viewController, sender: nil)
     }
+    
+    /// Presents a view controller in a secondary (or detail) context.
+    ///
+    /// - Parameter vc: The current view controller.
+    func showDetailViewController(_ vc: UIViewController) {
+        showDetailViewController(vc, sender: nil)
+    }
 }
 
 // MARK: - Exit
