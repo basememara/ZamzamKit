@@ -164,6 +164,32 @@ class ViewControllerLifecycleObserversTests: XCTestCase {
         })
     }
     
+    func testObserverReturningInstance() {
+        assertObserverIsAddedAsChild(when: { sut in
+            sut.viewWillAppear {
+                XCTAssertEqual(sut, $0)
+            }
+        })
+        
+        assertObserverIsAddedAsChild(when: { sut in
+            sut.viewDidAppear {
+                XCTAssertEqual(sut, $0)
+            }
+        })
+        
+        assertObserverIsAddedAsChild(when: { sut in
+            sut.viewWillDisappear {
+                XCTAssertEqual(sut, $0)
+            }
+        })
+        
+        assertObserverIsAddedAsChild(when: { sut in
+            sut.viewDidDisappear {
+                XCTAssertEqual(sut, $0)
+            }
+        })
+    }
+    
     // MARK: Integration Tests
     
     func testObserversWorkingWithNavigationControllerAnimatedTransitions() {

@@ -20,8 +20,17 @@ public extension UIViewController {
     /// - Parameter task: The closure to execute.
     /// - Returns: The observer for unsubscribing to event.
     @discardableResult
-    func viewWillAppear(execute task: @escaping (UIViewController?) -> Void) -> ViewControllerLifecycleObserver {
+    func viewWillAppear(execute task: @escaping () -> Void) -> ViewControllerLifecycleObserver {
         return LifecycleObserver(parent: self, viewWillAppearTask: task)
+    }
+    
+    /// Event that notifies the view controller is about to be added to a view hierarchy.
+    ///
+    /// - Parameter task: The closure to execute.
+    /// - Returns: The observer for unsubscribing to event with the view controller instance.
+    @discardableResult
+    func viewWillAppear(execute task: @escaping (UIViewController) -> Void) -> ViewControllerLifecycleObserver {
+        return LifecycleObserver(parent: self, viewWillAppearTask: { task(self) })
     }
     
     /// Event that notifies the view controller was added to a view hierarchy.
@@ -29,8 +38,17 @@ public extension UIViewController {
     /// - Parameter task: The closure to execute.
     /// - Returns: The observer for unsubscribing to event.
     @discardableResult
-    func viewDidAppear(execute task: @escaping (UIViewController?) -> Void) -> ViewControllerLifecycleObserver {
+    func viewDidAppear(execute task: @escaping () -> Void) -> ViewControllerLifecycleObserver {
         return LifecycleObserver(parent: self, viewDidAppearTask: task)
+    }
+    
+    /// Event that notifies the view controller was added to a view hierarchy.
+    ///
+    /// - Parameter task: The closure to execute.
+    /// - Returns: The observer for unsubscribing to event with the view controller instance.
+    @discardableResult
+    func viewDidAppear(execute task: @escaping (UIViewController) -> Void) -> ViewControllerLifecycleObserver {
+        return LifecycleObserver(parent: self, viewDidAppearTask: { task(self) })
     }
     
     /// Event that notifies the view controller is about to be removed from a view hierarchy.
@@ -38,8 +56,17 @@ public extension UIViewController {
     /// - Parameter task: The closure to execute.
     /// - Returns: The observer for unsubscribing to event.
     @discardableResult
-    func viewWillDisappear(execute task: @escaping (UIViewController?) -> Void) -> ViewControllerLifecycleObserver {
+    func viewWillDisappear(execute task: @escaping () -> Void) -> ViewControllerLifecycleObserver {
         return LifecycleObserver(parent: self, viewWillDisappearTask: task)
+    }
+    
+    /// Event that notifies the view controller is about to be removed from a view hierarchy.
+    ///
+    /// - Parameter task: The closure to execute.
+    /// - Returns: The observer for unsubscribing to event with the view controller instance.
+    @discardableResult
+    func viewWillDisappear(execute task: @escaping (UIViewController) -> Void) -> ViewControllerLifecycleObserver {
+        return LifecycleObserver(parent: self, viewWillDisappearTask: { task(self) })
     }
     
     /// Event that notifies the view controller was removed from a view hierarchy.
@@ -47,22 +74,31 @@ public extension UIViewController {
     /// - Parameter task: The closure to execute.
     /// - Returns: The observer for unsubscribing to event.
     @discardableResult
-    func viewDidDisappear(execute task: @escaping (UIViewController?) -> Void) -> ViewControllerLifecycleObserver {
+    func viewDidDisappear(execute task: @escaping () -> Void) -> ViewControllerLifecycleObserver {
         return LifecycleObserver(parent: self, viewDidDisappearTask: task)
     }
     
+    /// Event that notifies the view controller was removed from a view hierarchy.
+    ///
+    /// - Parameter task: The closure to execute.
+    /// - Returns: The observer for unsubscribing to event with the view controller instance.
+    @discardableResult
+    func viewDidDisappear(execute task: @escaping (UIViewController) -> Void) -> ViewControllerLifecycleObserver {
+        return LifecycleObserver(parent: self, viewDidDisappearTask: { task(self) })
+    }
+    
     private class LifecycleObserver: UIViewController, ViewControllerLifecycleObserver {
-        private var viewWillAppearTask: ((UIViewController?) -> Void)?
-        private var viewDidAppearTask: ((UIViewController?) -> Void)?
-        private var viewWillDisappearTask: ((UIViewController?) -> Void)?
-        private var viewDidDisappearTask: ((UIViewController?) -> Void)?
+        private var viewWillAppearTask: (() -> Void)?
+        private var viewDidAppearTask: (() -> Void)?
+        private var viewWillDisappearTask: (() -> Void)?
+        private var viewDidDisappearTask: (() -> Void)?
         
         convenience init(
             parent: UIViewController,
-            viewWillAppearTask: ((UIViewController?) -> Void)? = nil,
-            viewDidAppearTask: ((UIViewController?) -> Void)? = nil,
-            viewWillDisappearTask: ((UIViewController?) -> Void)? = nil,
-            viewDidDisappearTask: ((UIViewController?) -> Void)? = nil
+            viewWillAppearTask: (() -> Void)? = nil,
+            viewDidAppearTask: (() -> Void)? = nil,
+            viewWillDisappearTask: (() -> Void)? = nil,
+            viewDidDisappearTask: (() -> Void)? = nil
         ) {
             self.init()
             self.viewWillAppearTask = viewWillAppearTask
@@ -74,22 +110,22 @@ public extension UIViewController {
         
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
-            viewWillAppearTask?(parent)
+            viewWillAppearTask?()
         }
         
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
-            viewDidAppearTask?(parent)
+            viewDidAppearTask?()
         }
         
         override func viewWillDisappear(_ animated: Bool) {
             super.viewWillDisappear(animated)
-            viewWillDisappearTask?(parent)
+            viewWillDisappearTask?()
         }
         
         override func viewDidDisappear(_ animated: Bool) {
             super.viewDidDisappear(animated)
-            viewDidDisappearTask?(parent)
+            viewDidDisappearTask?()
         }
         
         private func add(to parent: UIViewController) {
