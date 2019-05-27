@@ -33,11 +33,20 @@ public protocol MailComposerDelegate: class {
 
 open class MailComposer: NSObject, MailComposerType {
     private weak var delegate: MailComposerDelegate?
+    private let barStyle: UIBarStyle?
     private let tintColor: UIColor?
+    private let labelColor: UIColor?
     
-    public init(delegate: MailComposerDelegate? = nil, tintColor: UIColor? = nil) {
+    public init(
+        delegate: MailComposerDelegate? = nil,
+        barStyle: UIBarStyle? = nil,
+        tintColor: UIColor? = nil,
+        labelColor: UIColor? = nil
+    ) {
         self.delegate = delegate
+        self.barStyle = barStyle
         self.tintColor = tintColor
+        self.labelColor = labelColor
     }
     
     /// Returns a Boolean indicating whether the current device is able to send email.
@@ -78,8 +87,24 @@ public extension MailComposer {
                 )
             }
             
+            if let barStyle = barStyle {
+                $0.navigationBar.barStyle = barStyle
+            }
+            
             if let tintColor = tintColor {
                 $0.navigationBar.tintColor = tintColor
+            }
+            
+            if let labelColor = labelColor {
+                $0.navigationBar.titleTextAttributes = [
+                    .foregroundColor: labelColor
+                ]
+                
+                if #available(iOSApplicationExtension 11.0, *) {
+                    $0.navigationBar.largeTitleTextAttributes = [
+                        .foregroundColor: labelColor
+                    ]
+                }
             }
         }
     }
