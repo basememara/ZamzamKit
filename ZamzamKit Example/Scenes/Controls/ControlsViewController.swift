@@ -36,7 +36,18 @@ class ControlsViewController: UIViewController {
         action: #selector(endEditing)
     )
     
-    private let mailComposer: MailComposerType = MailComposer()
+    private let mailComposer: MailComposerType = MailComposer(
+        styleNavigationBar: {
+            $0.barStyle = .black
+            $0.tintColor = .red
+            $0.titleTextAttributes = [
+                .foregroundColor: UIColor.white
+            ]
+            $0.largeTitleTextAttributes = [
+                .foregroundColor: UIColor.white
+            ]
+        }
+    )
     
     override func viewDidLoad() {
         super.viewDidLoad()
