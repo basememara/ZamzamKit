@@ -20,9 +20,11 @@ public protocol PhotoPickerDelegate: class {
 
 open class PhotoPicker: NSObject, PhotoPickerType {
     private weak var delegate: (PhotoPickerDelegate & UIViewController)?
+    private let allowsEditing: Bool
     
-    public init(delegate: (PhotoPickerDelegate & UIViewController)?) {
+    public init(delegate: PhotoPickerDelegate & UIViewController, allowsEditing: Bool) {
         self.delegate = delegate
+        self.allowsEditing = allowsEditing
     }
 }
 
@@ -33,7 +35,7 @@ extension PhotoPicker {
         
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             actionSheet.addAction(
-                UIAlertAction(title: "Camera") { [weak self] in
+                UIAlertAction(title: .localized(.camera)) { [weak self] in
                     guard AVCaptureDevice.authorizationStatus(for: .video) != .denied else {
                         self?.delegate?.photoPickerDidFailPermission()
                         return
@@ -46,7 +48,7 @@ extension PhotoPicker {
         
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             actionSheet.addAction(
-                UIAlertAction(title: "Photos") { [weak self] in
+                UIAlertAction(title: .localized(.photos)) { [weak self] in
                     self?.openPhotoLibrary()
                 }
             )
@@ -65,7 +67,9 @@ extension PhotoPicker {
 extension PhotoPicker: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        guard let image = info[.editedImage] as? UIImage else { return }
+        guard let image = info[allowsEditing ? .editedImage : .originalImage] as? UIImage else {
+            return
+        }
         
         picker.dismiss {
             self.delegate?.photoPicker(didFinishPicking: image)
@@ -86,7 +90,7 @@ private extension PhotoPicker {
             UIImagePickerController().with {
                 $0.delegate = self
                 $0.sourceType = .camera
-                $0.allowsEditing = true
+                $0.allowsEditing = allowsEditing
             },
             animated: true
         )
@@ -97,7 +101,7 @@ private extension PhotoPicker {
             UIImagePickerController().with {
                 $0.delegate = self
                 $0.sourceType = .photoLibrary
-                $0.allowsEditing = true
+                $0.allowsEditing = allowsEditing
             },
             animated: true
         )

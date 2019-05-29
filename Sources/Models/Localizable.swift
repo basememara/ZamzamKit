@@ -15,7 +15,9 @@ public extension Localizable {
     static let ok = Localizable(NSLocalizedString("ok.dialog", bundle: bundle(forKey: "ok.dialog"), comment: "OK text for dialogs"))
     static let cancel = Localizable(NSLocalizedString("cancel.dialog", bundle: bundle(forKey: "cancel.dialog"), comment: "Cancel text for dialogs"))
     static let next = Localizable(NSLocalizedString("next.dialog", bundle: bundle(forKey: "next.dialog"), comment: "Next text for dialogs"))
-    static let clear = Localizable(NSLocalizedString("clear.dialog", bundle: bundle(forKey: "clear.dialog"), comment: "For dialogs"))
+    static let clear = Localizable(NSLocalizedString("clear.dialog", bundle: bundle(forKey: "clear.dialog"), comment: "Clear text for dialogs"))
+    static let camera = Localizable(NSLocalizedString("camera.dialog", bundle: bundle(forKey: "camera.dialog"), comment: "Camera text for dialogs"))
+    static let photos = Localizable(NSLocalizedString("photos.dialog", bundle: bundle(forKey: "photos.dialog"), comment: "Photos text for dialogs"))
     static let genericErrorTitle = Localizable(NSLocalizedString("generic.error.title", bundle: bundle(forKey: "generic.error.title"), comment: "General error title for unknown reason"))
 }
 

@@ -12,4 +12,6 @@
 "cancel.dialog" = "Cancel";
 "next.dialog" = "Next";
 "clear.dialog" = "Clear";
+"camera.dialog" = "Camera";
+"photos.dialog" = "Photos";
 "generic.error.title" = "Error";
