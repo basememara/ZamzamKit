@@ -95,8 +95,8 @@ public extension UIViewController {
     ///
     /// - Parameters:
     ///   - viewController: The view controller to display.
-    func show(_ viewController: UIViewController) {
-        show(viewController, sender: nil)
+    func show(_ vc: UIViewController) {
+        show(vc, sender: nil)
     }
     
     /// Presents a view controller in a secondary (or detail) context.
@@ -104,6 +104,28 @@ public extension UIViewController {
     /// - Parameter vc: The current view controller.
     func showDetailViewController(_ vc: UIViewController) {
         showDetailViewController(vc, sender: nil)
+    }
+}
+
+public extension UIViewController {
+    
+    /// Presents or pushes a view controller in a primary context.
+    ///
+    /// Dismisses any presenting view controller before taking this action.
+    ///
+    /// - Parameters:
+    ///   - vc: The view controller to display.
+    ///   - dismiss: Specifies to dismiss any presenting view controllers first.
+    ///   - sender: The object that initiated the request.
+    func show(_ vc: UIViewController, dismiss: Bool, sender: Any? = nil) {
+        guard presentedViewController != nil, dismiss else {
+            show(vc, sender: sender)
+            return
+        }
+        
+        self.dismiss(animated: false) { [weak self] in
+            self?.show(vc, sender: sender)
+        }
     }
 }
 

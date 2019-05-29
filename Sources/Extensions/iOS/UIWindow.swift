@@ -38,6 +38,33 @@ public extension UIWindow {
 
 public extension UIWindow {
     
+    /// The view controller at the top of the window interface.
+    ///
+    /// The currently top view can belong to:
+    /// * the view controller at the top of the navigation stack
+    /// * the view controller that is selected in a tab bar controller
+    /// * the view controller that is detail in a split view controller
+    /// * the root view controller of the window
+    var topViewController: UIViewController? {
+        return getTopViewController(from: rootViewController)
+    }
+    
+    /// Recursively retrieve the most top view controller
+    private func getTopViewController(from controller: UIViewController?) -> UIViewController? {
+        if let nav = controller as? UINavigationController {
+            return getTopViewController(from: nav.topViewController)
+        } else if let tab = controller as? UITabBarController, let selected = tab.selectedViewController {
+            return getTopViewController(from: selected)
+        } else if let split = controller as? UISplitViewController, let detail = split.viewControllers.last {
+            return getTopViewController(from: detail)
+        }
+        
+        return controller
+    }
+}
+
+public extension UIWindow {
+    
     /// Assign a view controller to root view controller for the window.
     ///
     /// Using this method provides more safety than assigning the root
