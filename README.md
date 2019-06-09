@@ -41,14 +41,14 @@ Add `pod "ZamzamKit"` to your `Podfile`.
 
 > Get distinct elements from an array:
 ```swift
-[1, 1, 3, 3, 5, 5, 7, 9, 9].distinct -> [1, 3, 5, 7, 9]
+[1, 1, 3, 3, 5, 5, 7, 9, 9].distinct // [1, 3, 5, 7, 9]
 ```
 
 > Remove an element from an array by the value:
 ```swift
 var array = ["a", "b", "c", "d", "e"]
 array.remove("c")
-array -> ["a", "b", "d", "e"]
+array // ["a", "b", "d", "e"]
 ```
 
 > Easily get the array version of an array slice:
@@ -71,31 +71,8 @@ if let items = tabBarController.tabBar.items, items.count > 4 {
 // After
 tabBarController.tabBar.items?[safe: 3]?.selectedImage = UIImage("my-image")
 
-[1, 3, 5, 7, 9][safe: 1] -> Optional(3)
-[1, 3, 5, 7, 9][safe: 12] -> nil
-```
-</details>
-
-<details>
-<summary>Dictionary</summary>
-
-> Remove all values equal to nil:
-```swift
-var value: [String: Any?] = [
-    "abc": 123,
-    "efd": "xyz",
-    "ghi": nil,
-    "lmm": true,
-    "qrs": nil,
-    "tuv": 987
-]
-
-value.removeAllNils()
-
-value.count -> 4
-value.keys.contains("abc") -> true
-value.keys.contains("ghi") -> false
-value.keys.contains("qrs") -> false
+[1, 3, 5, 7, 9][safe: 1] // Optional(3)
+[1, 3, 5, 7, 9][safe: 12] // nil
 ```
 </details>
 
@@ -104,10 +81,10 @@ value.keys.contains("qrs") -> false
 
 > Determine if a value is contained within the array of values:
 ```swift
-"b".within(["a", "b", "c"]) -> true
+"b".within(["a", "b", "c"]) // true
 
 let status: OrderStatus = .cancelled
-status.within([.requeseted, .accepted, .inProgress]) -> false
+status.within([.requeseted, .accepted, .inProgress]) // false
 ```
 </details>
 
@@ -126,65 +103,65 @@ Double.pi.rounded(toPlaces: 2) -> 3.14
 
 > Create a new random string of given length:
 ```swift
-String(random: 10) -> "zXWG4hSgL9"
-String(random: 4, prefix: "PIN-") -> "PIN-uSjm"
+String(random: 10) // "zXWG4hSgL9"
+String(random: 4, prefix: "PIN-") // "PIN-uSjm"
 ```
 
 > Safely use subscript indexes and ranges on strings:
 ```swift
 let value = "Abcdef123456"
-value[3] -> "d"
-value[3..<6] -> "def"
-value[3...6] -> "def1"
-value[3...] -> "def123456"
-value[3...99] -> nil
-value[99] -> nil
+value[3] // "d"
+value[3..<6] // "def"
+value[3...6] // "def1"
+value[3...] // "def123456"
+value[3...99] // nil
+value[99] // nil
 ```
 
 > Validate string against common formats:
 ```swift
-"test@example.com".isEmail -> true
-"123456789".isNumber -> true
-"zamzam".isAlpha -> true
-"zamzam123".isAlphaNumeric -> true
+"test@example.com".isEmail // true
+"123456789".isNumber // true
+"zamzam".isAlpha // true
+"zamzam123".isAlphaNumeric // true
 ```
 
 > Remove spaces or new lines from both ends:
 ```swift
-" Abcdef123456 \n\r  ".trimmed -> "Abcdef123456"
+" Abcdef123456 \n\r  ".trimmed // "Abcdef123456"
 ```
 
 > Truncate to a given number of characters:
 ```swift
-"Abcdef123456".truncated(3) -> "Abc..."
-"Abcdef123456".truncated(6, trailing: "***") -> "Abcdef***"
+"Abcdef123456".truncated(3) // "Abc..."
+"Abcdef123456".truncated(6, trailing: "***") // "Abcdef***"
 ```
 
 > Determine if a given value is contained:
 ```swift
-"1234567890".contains("567") -> true
-"abc123xyz".contains("ghi") -> false
+"1234567890".contains("567") // true
+"abc123xyz".contains("ghi") // false
 ```
 
 > Injects a separator every nth characters:
 ```swift
-"1234567890".separate(every: 2, with: "-") -> "12-34-56-78-90"
+"1234567890".separated(every: 2, with: "-") // "12-34-56-78-90"
 ```
 
 > Match using a regular expression pattern:
 ```swift
-"1234567890".match(regex: "^[0-9]+?$") -> true
-"abc123xyz".match(regex: "^[A-Za-z]+$") -> false
+"1234567890".match(regex: "^[0-9]+?$") // true
+"abc123xyz".match(regex: "^[A-Za-z]+$") // false
 ```
 
 > Replace occurrences of a regular expression pattern:
 ```swift
-"aa1bb22cc3d888d4ee5".replacing(regex: "\\d", with: "*") -> "aa*bb**cc*d***d*ee*"
+"aa1bb22cc3d888d4ee5".replacing(regex: "\\d", with: "*") // "aa*bb**cc*d***d*ee*"
 ```
 
 > Remove HTML for plain text:
 ```swift
-"<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>".htmlStripped -> "This is web content with a link."
+"<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>".htmlStripped // "This is web content with a link."
 ```
 
 > Encoders and decoders:
@@ -232,35 +209,35 @@ let json = myDictionary.jsonString
 
 > Get the string from a file within any bundle:
 ```swift
-Bundle.main.string(file: "Test.txt") -> "This is a test. Abc 123.\n"
+Bundle.main.string(file: "Test.txt") // "This is a test. Abc 123.\n"
 ```
 
 > Get a generic array from a property list file within any bundle:
 
 ```swift
-let values: [String] = bundle.array(plist: "Array.plist")
+let values: [String] = Bundle.main.array(plist: "Array.plist")
 
-values[0] -> "Abc"
-values[1] -> "Def"
-values[2] -> "Ghi"
+values[0] // "Abc"
+values[1] // "Def"
+values[2] // "Ghi"
 ```
 
 ![Image of BundleArray](./Assets/Documentation/Images/BundleArray.png)
 
 ```swift
-let values: [[String: Any]] = bundle.array(plist: "Thing.plist")
+let values: [[String: Any]] = Bundle.main.array(plist: "Things.plist")
 
-values[0]["id"] as? Int -> 1
-values[0]["name"] as? String -> "Test 1"
-values[0]["description"] as? String -> "This is a test for 1.")
+values[0]["id"] as? Int // 1
+values[0]["name"] as? String // "Test 1"
+values[0]["description"] as? String // "This is a test for 1.")
 
-values[1]["id"] as? Int -> 2)
-values[1]["name"] as? String -> "Test 2")
-values[1]["description"] as? String -> "This is a test for 2.")
+values[1]["id"] as? Int // 2)
+values[1]["name"] as? String // "Test 2")
+values[1]["description"] as? String // "This is a test for 2.")
 
-values[2]["id"] as? Int -> 3)
-values[2]["name"] as? String -> "Test 3")
-values[2]["description"] as? String -> "This is a test for 3.")
+values[2]["id"] as? Int // 3)
+values[2]["name"] as? String // "Test 3")
+values[2]["description"] as? String // "This is a test for 3.")
 ```
 
 ![Image of BundleArray](./Assets/Documentation/Images/BundleArray2.png)
@@ -268,10 +245,11 @@ values[2]["description"] as? String -> "This is a test for 3.")
 > Get a dictionary from a property list file within any bundle:
 ```swift
 let values = Bundle.main.contents(plist: "Settings.plist")
-values["MyString1"] as? String -> "My string value 1."
-values["MyNumber1"] as? Int -> 123
-values["MyBool1"] as? Bool -> false
-values["MyDate1"] as? Date -> 2018-11-21 15:40:03 +0000
+
+values["MyString1"] as? String // "My string value 1."
+values["MyNumber1"] as? Int // 123
+values["MyBool1"] as? Bool // false
+values["MyDate1"] as? Date // 2018-11-21 15:40:03 +0000
 ```
 
 ![Image of BundleDictionary](./Assets/Documentation/Images/BundleDictionary.png)
@@ -294,10 +272,10 @@ UIColor(rgb: (66, 134, 244))
 > A formatter that converts between numeric values and their textual currency representations:
 ```swift
 let formatter = CurrencyFormatter()
-formatter.string(fromAmount: 123456789.987) -> "$123,456,789.99"
+formatter.string(fromAmount: 123456789.987) // "$123,456,789.99"
 
 let formatter2 = CurrencyFormatter(for: Locale(identifier: "fr-FR"))
-formatter2.string(fromCents: 123456789) -> "1 234 567,89 €"
+formatter2.string(fromCents: 123456789) // "1 234 567,89 €"
 ```
 </details>
 

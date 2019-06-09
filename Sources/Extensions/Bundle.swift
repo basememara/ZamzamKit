@@ -19,7 +19,7 @@ public extension Bundle {
     
     /// Gets the contents of the specified file.
     ///
-    ///     Bundle.main.string(file: "Test.txt") -> "This is a test. Abc 123.\n"
+    ///     Bundle.main.string(file: "Test.txt") // "This is a test. Abc 123.\n"
     ///
     /// - Parameters:
     ///   - file: Name of file to retrieve contents from.
@@ -33,11 +33,16 @@ public extension Bundle {
     
     /// Gets the contents of the specified plist file.
     ///
-    ///     let values: [[String: Any]] = Bundle.main.array(plist: "Settings.plist")
-    ///     values.first?["MyString1"] as? String -> "My string value 1."
-    ///     values.first?["MyNumber1"] as? Int -> 123
-    ///     values.first?["MyBool1"] as? Bool -> false
-    ///     values.first?["MyDate1"] as? Date -> 2018-11-21 15:40:03 +0000
+    ///     let values: [String] = Bundle.main.array(plist: "Array.plist")
+    ///     values[0] // "Abc"
+    ///     values[1] // "Def"
+    ///     values[2] // "Ghi"
+    ///
+    ///     let values: [[String: Any]] = Bundle.main.array(plist: "Things.plist")
+    ///     values[0]["MyString1"] as? String // "My string value 1."
+    ///     values[0]["MyNumber1"] as? Int // 123
+    ///     values[0]["MyBool1"] as? Bool // false
+    ///     values[0]["MyDate1"] as? Date // 2018-11-21 15:40:03 +0000
     ///
     /// - Parameters:
     ///   - plist: The property list where the array is declared.
@@ -55,10 +60,10 @@ public extension Bundle {
     /// Gets the contents of the specified plist file.
     ///
     ///     let values = Bundle.main.contents(plist: "Settings.plist")
-    ///     values["MyString1"] as? String -> "My string value 1."
-    ///     values["MyNumber1"] as? Int -> 123
-    ///     values["MyBool1"] as? Bool -> false
-    ///     values["MyDate1"] as? Date -> 2018-11-21 15:40:03 +0000
+    ///     values["MyString1"] as? String // "My string value 1."
+    ///     values["MyNumber1"] as? Int // 123
+    ///     values["MyBool1"] as? Bool // false
+    ///     values["MyDate1"] as? Date // 2018-11-21 15:40:03 +0000
     ///
     /// - Parameters:
     ///   - plist: The property list where key and values are declared.

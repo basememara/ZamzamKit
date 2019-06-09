@@ -12,8 +12,8 @@ public extension String {
     
     /// Create a new random string of given length.
     ///
-    ///     String(random: 10) -> "zXWG4hSgL9"
-    ///     String(random: 4, prefix: "PIN-") -> "PIN-uSjm"
+    ///     String(random: 10) // "zXWG4hSgL9"
+    ///     String(random: 4, prefix: "PIN-") // "PIN-uSjm"
 	///
 	/// - Parameter random: Number of characters in string.
 	/// - Parameter prefix: Prepend to string.
@@ -35,8 +35,8 @@ public extension String {
     /// Safely subscript string with index.
     ///
     ///     let value = "Abcdef123456"
-    ///     value[3] -> "d"
-    ///     value[99] -> nil
+    ///     value[3] // "d"
+    ///     value[99] // nil
     ///
     /// - Parameter i: index.
     subscript(i: Int) -> String? {
@@ -47,10 +47,10 @@ public extension String {
     /// Safely subscript string within a half-open range.
     ///
     ///     let value = "Abcdef123456"
-    ///     value[3..<6] -> "def"
-    ///     value[3...6] -> "def1"
-    ///     value[3...] -> "def123456"
-    ///     value[3...99] -> nil
+    ///     value[3..<6] // "def"
+    ///     value[3...6] // "def1"
+    ///     value[3...] // "def123456"
+    ///     value[3...99] // nil
     ///
     /// - Parameter range: Half-open range.
     subscript(range: CountableRange<Int>) -> String? {
@@ -65,10 +65,10 @@ public extension String {
     /// Safely subscript string within a closed range.
     ///
     ///     let value = "Abcdef123456"
-    ///     value[3..<6] -> "def"
-    ///     value[3...6] -> "def1"
-    ///     value[3...] -> "def123456"
-    ///     value[3...99] -> nil
+    ///     value[3..<6] // "def"
+    ///     value[3...6] // "def1"
+    ///     value[3...] // "def123456"
+    ///     value[3...99] // nil
     ///
     /// - Parameter range: Closed range.
     subscript(range: ClosedRange<Int>) -> String? {
@@ -83,10 +83,10 @@ public extension String {
     /// Safely subscript string from the lower range to the end of the string.
     ///
     ///     let value = "Abcdef123456"
-    ///     value[3..<6] -> "def"
-    ///     value[3...6] -> "def1"
-    ///     value[3...] -> "def123456"
-    ///     value[3...99] -> nil
+    ///     value[3..<6] // "def"
+    ///     value[3...6] // "def1"
+    ///     value[3...] // "def123456"
+    ///     value[3...99] // nil
     ///
     /// - Parameter range: A partial interval extending upward from a lower bound that forms a sequence of increasing values..
     subscript(range: CountablePartialRangeFrom<Int>) -> String? {
@@ -129,15 +129,15 @@ public extension String {
     
     /// Returns a new string made by removing spaces or new lines from both ends.
     ///
-    ///     " Abcdef123456 \n\r  ".trimmed -> "Abcdef123456"
+    ///     " Abcdef123456 \n\r  ".trimmed // "Abcdef123456"
     var trimmed: String {
         return trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     /// Truncated string limited to a given number of characters.
     ///
-    ///     "Abcdef123456".truncated(3) -> "Abc..."
-    ///     "Abcdef123456".truncated(6, trailing: "***") -> "Abcdef***"
+    ///     "Abcdef123456".truncated(3) // "Abc..."
+    ///     "Abcdef123456".truncated(6, trailing: "***") // "Abcdef***"
     ///
     /// - Parameters:
     ///   - length: maximum number of characters before cutting.
@@ -150,15 +150,15 @@ public extension String {
     
     /// Returns true if any character in the range is contained within.
     ///
-    ///     "def".contains(CharacterSet(charactersIn: "Abcdef123456")) -> true
-    ///     "Xyz".contains(CharacterSet(charactersIn: "Abcdef123456")) -> false
+    ///     "def".contains(CharacterSet(charactersIn: "Abcdef123456")) // true
+    ///     "Xyz".contains(CharacterSet(charactersIn: "Abcdef123456")) // false
     func contains(_ elements: CharacterSet) -> Bool {
         return rangeOfCharacter(from: elements) != nil
     }
     
     /// Injects a separator every nth characters.
     ///
-    ///     "1234567890".separated(every: 2, with: "-") -> "12-34-56-78-90"
+    ///     "1234567890".separated(every: 2, with: "-") // "12-34-56-78-90"
     ///
     /// - Parameters:
     ///   - every: Number of characters to separate by.
@@ -182,8 +182,8 @@ public extension String {
     
     /// Matches a string using a regular expression pattern.
     ///
-    ///     "1234567890".match(regex: "^[0-9]+?$") -> true
-    ///     "abc123xyz".match(regex: "^[A-Za-z]+$") -> false
+    ///     "1234567890".match(regex: "^[0-9]+?$") // true
+    ///     "abc123xyz".match(regex: "^[A-Za-z]+$") // false
     ///
     /// - Parameters:
     ///   - regex: the regular expression pattern
@@ -197,7 +197,7 @@ public extension String {
     /// regular expression pattern in a specified range of
     /// the string are replaced by another given string.
     ///
-    ///     "aa1bb22cc3d888d4ee5".replacing(regex: "\\d", with: "*") -> "aa*bb**cc*d***d*ee*"
+    ///     "aa1bb22cc3d888d4ee5".replacing(regex: "\\d", with: "*") // "aa*bb**cc*d***d*ee*"
     ///
     /// - Parameters:
     ///   - regex: the regular expression pattern

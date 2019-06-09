@@ -34,7 +34,7 @@ public extension Array where Element: Equatable {
 	
     /// Array with all duplicates removed from it.
     ///
-    ///     [1, 3, 3, 5, 7, 9].distinct -> [1, 3, 5, 7, 9]
+    ///     [1, 3, 3, 5, 7, 9].distinct // [1, 3, 5, 7, 9]
     var distinct: [Element] {
         // https://github.com/SwifterSwift/SwifterSwift
         return reduce(into: [Element]()) {
@@ -47,7 +47,7 @@ public extension Array where Element: Equatable {
     ///
     ///     var array = [1, 3, 3, 5, 7, 9]
     ///     array.removeDuplicates()
-    ///     array -> [1, 3, 5, 7, 9]
+    ///     array // [1, 3, 5, 7, 9]
     mutating func removeDuplicates() {
         self = distinct
     }
@@ -56,7 +56,7 @@ public extension Array where Element: Equatable {
     ///
     ///     var array = ["a", "b", "c", "d", "e", "a"]
     ///     array.remove("a")
-    ///     array -> ["b", "c", "d", "e", "a"]
+    ///     array // ["b", "c", "d", "e", "a"]
     ///
     /// - Parameter element: The element to remove from the array.
     mutating func remove(_ element: Element) {

@@ -12,8 +12,8 @@ public extension BinaryFloatingPoint {
 
     /// Returns this value rounded to an integral value.
     ///
-    ///     123.12312421.rounded(toPlaces: 3) -> 123.123
-    ///     Double.pi.rounded(toPlaces: 2) -> 3.14
+    ///     123.12312421.rounded(toPlaces: 3) // 123.123
+    ///     Double.pi.rounded(toPlaces: 2) // 3.14
     ///
     /// - Parameter places: The number of decimal places to round to.
     /// - Returns: The rounded value.

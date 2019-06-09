@@ -45,10 +45,10 @@ public extension CurrencyFormatter {
     ///     let amount: DOuble = 123456789.987
     ///
     ///     let formatter = CurrencyFormatter()
-    ///     formatter.string(fromAmount: amount) -> "$123,456,789.99"
+    ///     formatter.string(fromAmount: amount) // "$123,456,789.99"
     ///
     ///     let formatter2 = CurrencyFormatter(for: Locale(identifier: "fr-FR"))
-    ///     formatter2.string(fromAmount: amount) -> "123 456 789,99 €"
+    ///     formatter2.string(fromAmount: amount) // "123 456 789,99 €"
     ///
     /// - Parameter double: A monetary number that is parsed to create the returned string object.
     /// - Returns: A string containing the formatted value of number using the receiver’s current settings.
@@ -86,10 +86,10 @@ public extension CurrencyFormatter {
     ///     let cents = 123456789
     ///
     ///     let formatter = CurrencyFormatter()
-    ///     formatter.string(fromCents: cents) -> "$1,234,567.89"
+    ///     formatter.string(fromCents: cents) // "$1,234,567.89"
     ///
     ///     let formatter2 = CurrencyFormatter(for: Locale(identifier: "fr-FR"))
-    ///     formatter2.string(fromCents: cents) -> "1 234 567,89 €"
+    ///     formatter2.string(fromCents: cents) // "1 234 567,89 €"
     ///
     /// - Parameter cents: The cents of the value.
     /// - Returns: A string containing the formatted value of number using the receiver’s current currency settings.
