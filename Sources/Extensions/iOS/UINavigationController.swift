@@ -10,6 +10,11 @@ import UIKit
 
 public extension UINavigationController {
     
+    /// The previous view controller of the navigation stack.
+    var previousViewController: UIViewController? {
+        return viewControllers[safe: viewControllers.count - 2]
+    }
+    
     /// Pops the top view controller from the navigation stack and updates the display.
     ///
     /// - Parameters:
