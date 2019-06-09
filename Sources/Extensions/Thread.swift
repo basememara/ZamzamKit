@@ -16,27 +16,27 @@ public extension Thread {
      
      - parameter block: Process to be executed.
      */
-    @objc private func run(block: Block) {
+    @objc private func execute(block: Block) {
         block()
     }
     
     /**
      Perform block on current thread asynchronously.
      
-     - parameter block: Process to be executed.
+     - parameter task: Process to be executed.
      */
-    func async(execute: @escaping Block) {
-        guard Thread.current != self else { return execute() }
-        perform(#selector(run(block:)), on: self, with: execute, waitUntilDone: false)
+    func async(execute task: @escaping Block) {
+        guard Thread.current != self else { return task() }
+        perform(#selector(execute(block:)), on: self, with: task, waitUntilDone: false)
     }
     
     /**
      Perform block on current thread synchronously.
      
-     - parameter block: Process to be executed.
+     - parameter task: Process to be executed.
      */
-    func sync(execute: @escaping Block) {
-        guard Thread.current != self else { return execute() }
-        perform(#selector(run(block:)), on: self, with: execute, waitUntilDone: true)
+    func sync(execute task: @escaping Block) {
+        guard Thread.current != self else { return task() }
+        perform(#selector(execute(block:)), on: self, with: task, waitUntilDone: true)
     }
 }
