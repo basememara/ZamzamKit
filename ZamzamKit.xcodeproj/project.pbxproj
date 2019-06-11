@@ -571,6 +571,7 @@
 		8B8802D82175804B0035543D /* TableModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModels.swift; sourceTree = "<group>"; };
 		8B89746D1EDE17AC004FA853 /* MigrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationTests.swift; sourceTree = "<group>"; };
 		8B8974701EDF555C004FA853 /* Migration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
+		8B8DD57522AFB9EA008B86A9 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		8B90782B2283A08500052809 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		8B9434601EBDEA8200C779EB /* TimeZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
@@ -764,6 +765,7 @@
 				8B8304572283914700AD5D61 /* .travis.yml */,
 				8B1448411C725BFE00043657 /* Info.plist */,
 				8B14476C1C722D5700043657 /* LICENSE */,
+				8B8DD57522AFB9EA008B86A9 /* Package.swift */,
 				8B14476D1C722D5700043657 /* README.md */,
 				8B1447F71C7258E500043657 /* ZamzamKit.h */,
 				8B1FE7C92065A0DD00EE8DBE /* ZamzamKit.podspec */,
