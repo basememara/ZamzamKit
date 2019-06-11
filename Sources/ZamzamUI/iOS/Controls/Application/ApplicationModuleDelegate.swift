@@ -7,6 +7,8 @@
 //  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
+import UIKit
+
 /// Subclassed by the `AppDelegate` to pass lifecycle events to loaded modules.
 ///
 /// The application modules will be processed in sequence.

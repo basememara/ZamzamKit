@@ -6,7 +6,7 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import Foundation;
 
 //! Project version number for ZamzamKit.
 FOUNDATION_EXPORT double ZamzamKitVersionNumber;

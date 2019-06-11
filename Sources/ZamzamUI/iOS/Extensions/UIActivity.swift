@@ -6,6 +6,8 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
+import UIKit
+
 public extension UIActivity {
 
     /// Creates an instance of an activity.
