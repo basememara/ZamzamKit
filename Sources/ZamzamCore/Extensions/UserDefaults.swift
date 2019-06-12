@@ -27,7 +27,7 @@ extension UserDefaults {
     ///     let testBool: Bool? = UserDefaults.standard[.testBool]
     ///     let testArray: [Int]? = UserDefaults.standard[.testArray]
     open class Keys {
-        init() {} // TODO: Add `fileprivate` when deprecations removed
+        fileprivate init() {}
     }
     
     /// User Defaults key for strongly-typed access.
