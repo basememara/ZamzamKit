@@ -38,7 +38,7 @@ public extension Calendar {
     /// Returns a new Calendar.
     ///
     /// - parameter identifier: The kind of calendar to use.
-    /// - parameter timeZone: The time zone of the calendar.
+    /// - parameter locale: The locale of the calendar.
     init(identifier: Identifier, locale: Locale?) {
         self.init(identifier: identifier, timeZone: nil, locale: locale)
     }
