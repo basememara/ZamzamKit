@@ -39,7 +39,7 @@ public extension DateFormatter {
         
         self.dateFormat = dateFormat
         
-        if let timeZone = timeZone {
+        if let timeZone = timeZone ?? calendar?.timeZone {
             self.timeZone = timeZone
         }
         
@@ -47,7 +47,7 @@ public extension DateFormatter {
             self.calendar = calendar
         }
         
-        if let locale = locale {
+        if let locale = locale ?? calendar?.locale {
             self.locale = locale
         }
     }
@@ -69,7 +69,7 @@ public extension DateFormatter {
             self.timeStyle = timeStyle
         }
         
-        if let timeZone = timeZone {
+        if let timeZone = timeZone ?? calendar?.timeZone {
             self.timeZone = timeZone
         }
         
@@ -77,7 +77,7 @@ public extension DateFormatter {
             self.calendar = calendar
         }
         
-        if let locale = locale {
+        if let locale = locale ?? calendar?.locale {
             self.locale = locale
         }
     }
