@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8B17683C22AFC9F1002CC991"
-               BuildableName = "ZamzamKit_macOS.framework"
+               BuildableName = "ZamzamKit.framework"
                BlueprintName = "ZamzamKit macOS"
                ReferencedContainer = "container:ZamzamKit.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B17683C22AFC9F1002CC991"
-            BuildableName = "ZamzamKit_macOS.framework"
+            BuildableName = "ZamzamKit.framework"
             BlueprintName = "ZamzamKit macOS"
             ReferencedContainer = "container:ZamzamKit.xcodeproj">
          </BuildableReference>
@@ -79,7 +79,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B17683C22AFC9F1002CC991"
-            BuildableName = "ZamzamKit_macOS.framework"
+            BuildableName = "ZamzamKit.framework"
             BlueprintName = "ZamzamKit macOS"
             ReferencedContainer = "container:ZamzamKit.xcodeproj">
          </BuildableReference>
@@ -97,7 +97,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B17683C22AFC9F1002CC991"
-            BuildableName = "ZamzamKit_macOS.framework"
+            BuildableName = "ZamzamKit.framework"
             BlueprintName = "ZamzamKit macOS"
             ReferencedContainer = "container:ZamzamKit.xcodeproj">
          </BuildableReference>
