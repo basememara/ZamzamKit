@@ -192,7 +192,7 @@ extension DateTimeTests {
     func testDateToStringForCalendar2() {
         let calendar = Calendar(identifier: .hebrew)
         let date = Date(fromString: "5779/03/01 18:31", calendar: calendar)!
-        XCTAssertEqual(date.string(style: .full, calendar: calendar), "Friday, 1 Kislev 5779")
+        XCTAssertEqual(date.string(format: "E, d MMMM yyyy", calendar: calendar), "Fri, 1 Kislev 5779")
     }
     
     func testDateToTimer() {
