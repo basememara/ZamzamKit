@@ -105,3 +105,10 @@ public extension CLLocationCoordinate2D {
         return !(lhs ~~ rhs)
     }
 }
+
+extension CLLocationCoordinate2D: CustomStringConvertible {
+    
+    public var description: String {
+        return .localizedStringWithFormat("%.2f°, %.2f°", latitude, longitude)
+    }
+}
