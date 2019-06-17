@@ -322,7 +322,7 @@ public extension UIViewController {
         
         if includeCancelAction {
             alertController.addAction(
-                UIAlertAction(title: cancelText, style: .cancel) { _ in cancelHandler?() }
+                .init(title: cancelText, style: .cancel) { _ in cancelHandler?() }
             )
         }
         
