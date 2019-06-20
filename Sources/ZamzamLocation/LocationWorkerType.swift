@@ -45,16 +45,16 @@ public protocol LocationWorkerType {
     func stopUpdatingLocation()
     
     #if os(iOS)
-    typealias HeadingHandler = (CLHeading) -> Void
-    
-    /// The most recently reported heading.
-    var heading: CLHeading? { get }
-    
     /// Starts the generation of updates based on significant location changes.
     func startMonitoringSignificantLocationChanges()
     
     /// Stops the delivery of location events based on significant location changes.
     func stopMonitoringSignificantLocationChanges()
+    
+    typealias HeadingHandler = (CLHeading) -> Void
+    
+    /// The most recently reported heading.
+    var heading: CLHeading? { get }
     
     /// Starts the generation of updates that report the user’s current heading.
     func startUpdatingHeading()

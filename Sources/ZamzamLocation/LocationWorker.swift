@@ -41,12 +41,12 @@ public class LocationWorker: NSObject, LocationWorkerType {
         distanceFilter: Double? = nil,
         activityType: CLActivityType? = nil
     ) {
-            // Assign values to location manager options
-            self.desiredAccuracy = desiredAccuracy
-            self.distanceFilter = distanceFilter
-            self.activityType = activityType
-        
-            super.init()
+        // Assign values to location manager options
+        self.desiredAccuracy = desiredAccuracy
+        self.distanceFilter = distanceFilter
+        self.activityType = activityType
+    
+        super.init()
     }
     
     deinit {
@@ -149,11 +149,6 @@ public extension LocationWorker {
     func startUpdatingLocation(enableBackground: Bool) {
         #if os(iOS)
         manager.allowsBackgroundLocationUpdates = enableBackground
-        
-        // From Apple docs: a pause to location updates ends access to location changes
-        // until the app is launched again and able to restart those updates. If you do not
-        // wish location updates to stop entirely, consider disabling this property.
-        manager.pausesLocationUpdatesAutomatically = false
         #endif
         
         manager.startUpdatingLocation()
@@ -162,7 +157,6 @@ public extension LocationWorker {
     func stopUpdatingLocation() {
         #if os(iOS)
         manager.allowsBackgroundLocationUpdates = false
-        manager.pausesLocationUpdatesAutomatically = true
         #endif
         
         manager.stopUpdatingLocation()
@@ -172,25 +166,19 @@ public extension LocationWorker {
 #if os(iOS)
 public extension LocationWorker {
     
-    /// A Boolean value indicating whether the app wants to receive location updates when suspended.
-    var allowsBackgroundLocationUpdates: Bool {
-        get { return manager.allowsBackgroundLocationUpdates }
-        set { manager.allowsBackgroundLocationUpdates = newValue }
-    }
-    
-    var heading: CLHeading? {
-        return manager.heading
-    }
-    
     func startMonitoringSignificantLocationChanges() {
-        manager.allowsBackgroundLocationUpdates = true
-        manager.pausesLocationUpdatesAutomatically = true
         manager.startMonitoringSignificantLocationChanges()
     }
     
     func stopMonitoringSignificantLocationChanges() {
-        manager.allowsBackgroundLocationUpdates = false
         manager.stopMonitoringSignificantLocationChanges()
+    }
+}
+
+public extension LocationWorker {
+    
+    var heading: CLHeading? {
+        return manager.heading
     }
     
     func startUpdatingHeading() {
