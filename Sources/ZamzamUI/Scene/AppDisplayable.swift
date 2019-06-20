@@ -27,8 +27,11 @@ extension AppDisplayable where Self: UIViewController {
     ///
     /// - Parameter error: The error details to present.
     public func display(error: AppModels.Error) {
-        endRefreshing()
-        present(alert: error.title, message: error.message)
+        // Force in next runloop via main queue since view hierachy may not be loaded yet
+        DispatchQueue.main.async { [weak self] in
+            self?.endRefreshing()
+            self?.present(alert: error.title, message: error.message)
+        }
     }
 }
 #endif
