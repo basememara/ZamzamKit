@@ -89,9 +89,15 @@ public extension CLLocation {
 
 extension CLLocationCoordinate2D: Equatable {
     
+    /// Determine if coordinates match using latitude and longitude values.
     public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
         return lhs.latitude == rhs.latitude
             && lhs.longitude == rhs.longitude
+    }
+    
+    /// Determine if coordinates do not match using latitude and longitude values.
+    public static func != (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        return !(lhs == rhs)
     }
 }
 
