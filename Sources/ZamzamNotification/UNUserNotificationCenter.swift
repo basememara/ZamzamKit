@@ -10,6 +10,20 @@ import UserNotifications
 import CoreLocation
 
 public extension UNUserNotificationCenter {
+    
+    /// The app's ability to schedule and receive local and remote notifications.
+    ///
+    /// - Parameter completion: Handler indicating whether the app is allowed to schedule notifications.
+    func authorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
+        getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                completion(settings.authorizationStatus)
+            }
+        }
+    }
+}
+
+public extension UNUserNotificationCenter {
     static let mainCategoryIdentifier = "mainCategory"
     
     /// Registers the local and remote notifications with the category and actions it supports.
