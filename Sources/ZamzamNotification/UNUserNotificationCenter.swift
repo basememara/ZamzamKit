@@ -382,7 +382,11 @@ public extension UNUserNotificationCenter {
                 }
             )
             
-            completion?()
+            // Get back in queue since native remove has no completion block
+            // https://stackoverflow.com/a/46434645
+            self.getNotificationRequests { _ in
+                completion?()
+            }
         }
     }
     
@@ -390,5 +394,67 @@ public extension UNUserNotificationCenter {
     func removeAll() {
         removeAllPendingNotificationRequests()
         removeAllDeliveredNotifications()
+    }
+}
+
+public extension UNUserNotificationCenter {
+    
+    /// Remove pending user notifications.
+    ///
+    /// - Parameter withCategory: The category of the user notification to remove.
+    func removePending(withCategory category: String, completion: (() -> Void)? = nil) {
+        removePending(withCategories: [category], completion: completion)
+    }
+    
+    /// Remove pending user notifications.
+    ///
+    /// - Parameter withCategory: The categories of the user notification to remove.
+    func removePending(withCategories categories: [String], completion: (() -> Void)? = nil) {
+        getPendingNotificationRequests {
+            self.removePendingNotificationRequests(
+                withIdentifiers: $0.compactMap {
+                    categories.contains($0.content.categoryIdentifier) ? $0.identifier : nil
+                }
+            )
+            
+            // Get back in queue since native remove has no completion block
+            // https://stackoverflow.com/a/46434645
+            self.getPendingNotificationRequests { _ in
+                DispatchQueue.main.async {
+                    completion?()
+                }
+            }
+        }
+    }
+}
+
+public extension UNUserNotificationCenter {
+    
+    /// Remove delivered user notifications.
+    ///
+    /// - Parameter withCategory: The category of the user notification to remove.
+    func removeDelivered(withCategory category: String, completion: (() -> Void)? = nil) {
+        removeDelivered(withCategories: [category], completion: completion)
+    }
+    
+    /// Remove delivered user notifications.
+    ///
+    /// - Parameter withCategory: The categories of the user notification to remove.
+    func removeDelivered(withCategories categories: [String], completion: (() -> Void)? = nil) {
+        getDeliveredNotifications {
+            self.removeDeliveredNotifications(
+                withIdentifiers: $0.compactMap {
+                    categories.contains($0.request.content.categoryIdentifier) ? $0.request.identifier : nil
+                }
+            )
+            
+            // Get back in queue since native remove has no completion block
+            // https://stackoverflow.com/a/46434645
+            self.getDeliveredNotifications { _ in
+                DispatchQueue.main.async {
+                    completion?()
+                }
+            }
+        }
     }
 }
