@@ -489,11 +489,13 @@ public extension Date {
     ///         from: Date(fromString: "2016/03/22 09:40")
     ///     ) // "00:05:00"
     ///
-    /// - Parameter date: The date to countdown from.
+    /// - Parameter
+    ///   - date: The date to countdown from.
+    ///   - positivePrefix: THe prefix string to prepend to the timer.
     /// - Returns: The formatted timer as hh:mm:ss.
-    func timerString(from date: Date = Date()) -> String {
+    func timerString(from date: Date = Date(), positivePrefix: String = "+") -> String {
         let seconds = Int(timeIntervalSince(date))
-        let prefix = seconds < 0 ? "+" : ""
+        let prefix = seconds < 0 ? positivePrefix : ""
         let hr = abs(seconds / 3600)
         let min = abs(seconds / 60 % 60)
         let sec = abs(seconds % 60)
