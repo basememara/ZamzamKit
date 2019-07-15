@@ -15,6 +15,7 @@
 		8B0C71611E64CEF9006148CD /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */; };
 		8B0E0F5120F430C200DF3975 /* IntrinsicHeightDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E0F5020F430C200DF3975 /* IntrinsicHeightDataView.swift */; };
 		8B105512217197D400D8EBE8 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BF307C01CF0D44200BBA933 /* Media.xcassets */; };
+		8B110D6422DC977200BE0276 /* ThemedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B110D6322DC977200BE0276 /* ThemedProgressView.swift */; };
 		8B1447F81C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1447F91C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1447FA1C7258E500043657 /* ZamzamKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1447F71C7258E500043657 /* ZamzamKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -526,6 +527,7 @@
 		8B0BA2231FAA6DFC0042BFF0 /* NextResponderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextResponderTextField.swift; sourceTree = "<group>"; };
 		8B0C715E1E64CEF9006148CD /* SynchronizedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		8B0E0F5020F430C200DF3975 /* IntrinsicHeightDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicHeightDataView.swift; sourceTree = "<group>"; };
+		8B110D6322DC977200BE0276 /* ThemedProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemedProgressView.swift; sourceTree = "<group>"; };
 		8B14476C1C722D5700043657 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8B14476D1C722D5700043657 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8B1447C81C72577900043657 /* ZamzamKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZamzamKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1037,6 +1039,7 @@
 				8B87FC39228440BA004AC246 /* ThemedImageView.swift */,
 				8B87FC3F228440BA004AC246 /* ThemedLabel.swift */,
 				8B87FC3A228440BA004AC246 /* ThemedPageControl.swift */,
+				8B110D6322DC977200BE0276 /* ThemedProgressView.swift */,
 				8B87FC41228440BA004AC246 /* ThemedSegmentedControl.swift */,
 				8B87FC40228440BA004AC246 /* ThemedSwitch.swift */,
 				8B87FC3C228440BA004AC246 /* ThemedTextField.swift */,
@@ -1954,6 +1957,7 @@
 				8B3A6A4C22275917000011BC /* AppModels.swift in Sources */,
 				8B9434651EBDEAA200C779EB /* Calendar.swift in Sources */,
 				8BE814FD1C7842DC005F23CE /* Sequence.swift in Sources */,
+				8B110D6422DC977200BE0276 /* ThemedProgressView.swift in Sources */,
 				8B1CC522217BDA4E00F00A70 /* DispatchQueue.swift in Sources */,
 				8B87FC48228440BA004AC246 /* ThemedLabel.swift in Sources */,
 				8B23CF35223E192500B0E038 /* ColumnsCollectionViewFlowLayout.swift in Sources */,
