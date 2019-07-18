@@ -43,3 +43,15 @@ public extension ApplicationModule {
     func applicationWillTerminate(_ application: UIApplication) {}
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {}
 }
+
+public protocol RemoteNotificationModuleDelegate: class {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any])
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error)
+}
+
+public extension RemoteNotificationModuleDelegate {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {}
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {}
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {}
+}
