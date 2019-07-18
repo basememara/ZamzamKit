@@ -426,7 +426,3 @@ public extension SynchronizedArray {
         left.append(right)
     }
 }
-
-private extension SynchronizedArray {
-    //swiftlint:disable file_length
-}

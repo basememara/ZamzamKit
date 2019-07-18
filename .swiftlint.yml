@@ -53,3 +53,4 @@ disabled_rules:
 - multiline_function_chains
 - sorted_imports
 
+file_length: 750

@@ -639,7 +639,3 @@ public extension UIViewController {
         return activity
     }
 }
-
-private extension UIViewController {
-    //swiftlint:disable file_length
-}
