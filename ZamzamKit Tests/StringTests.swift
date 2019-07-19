@@ -210,6 +210,25 @@ extension StringTests {
         XCTAssertEqual(json.decode(), expected)
     }
     
+    func testDecodeDictionaryBool() {
+        let expected: [Int: Bool] = [
+            1: true,
+            3: false,
+            4: true,
+            5: true,
+            8: false,
+            9: true
+        ]
+        
+        guard let data = try? JSONEncoder().encode(expected),
+            let json = String(data: data, encoding: .utf8) else {
+                XCTFail("Could not encode value for testing")
+                return
+        }
+        
+        XCTAssertEqual(json.decode(), expected)
+    }
+    
     func testDecodeDictionaryInt() {
         let test = "{\"test1\":29,\"test2\":62,\"test3\":33,\"test4\":24,\"test5\":14,\"test6\":72}"
         let expected: [String: Int] = [
