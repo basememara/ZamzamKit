@@ -7,9 +7,9 @@
 //
 
 public protocol PreferencesStore {
-    func get<T>(_ key: UserDefaults.Key<T?>) -> T?
-    func set<T>(_ value: T?, forKey key: UserDefaults.Key<T?>)
-    func remove<T>(_ key: UserDefaults.Key<T?>)
+    func get<T>(_ key: String.Key<T?>) -> T?
+    func set<T>(_ value: T?, forKey key: String.Key<T?>)
+    func remove<T>(_ key: String.Key<T?>)
 }
 
 public protocol PreferencesType: PreferencesStore {

@@ -347,6 +347,38 @@ public extension String {
     }
 }
 
+extension String {
+    
+    /// Keys for strongly-typed access for User Defaults, Keychain, or custom types.
+    ///
+    ///     // First define keys
+    ///     extension String.Keys {
+    ///         static let testString = String.Key<String?>("testString")
+    ///         static let testInt = String.Key<Int?>("testInt")
+    ///         static let testBool = String.Key<Bool?>("testBool")
+    ///         static let testArray = String.Key<[Int]?>("testArray")
+    ///     }
+    ///
+    ///     // Then use strongly-typed values
+    ///     let testString: String? = UserDefaults.standard[.testString]
+    ///     let testInt: Int? = UserDefaults.standard[.testInt]
+    ///     let testBool: Bool? = UserDefaults.standard[.testBool]
+    ///     let testArray: [Int]? = UserDefaults.standard[.testArray]
+    open class Keys {
+        fileprivate init() {}
+    }
+    
+    /// User Defaults key for strongly-typed access.
+    open class Key<ValueType>: Keys {
+        public let name: String
+        
+        public init(_ key: String) {
+            self.name = key
+            super.init()
+        }
+    }
+}
+
 public extension Substring {
     
     /// A string value representation of the string slice.

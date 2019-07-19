@@ -9,9 +9,9 @@
 import XCTest
 import ZamzamKit
 
-class UserDefaultsTests: XCTestCase {
+class StringKeyTests: XCTestCase {
 
-    private let defaults = UserDefaults(suiteName: "UserDefaultsTests")!
+    private let defaults = UserDefaults(suiteName: "StringKeyTests")!
     
     override func setUp() {
         super.setUp()
@@ -19,7 +19,7 @@ class UserDefaultsTests: XCTestCase {
     }
 }
 
-extension UserDefaultsTests {
+extension StringKeyTests {
     
     func testString() {
         defaults[.testString1] = "abc"
@@ -95,21 +95,21 @@ extension UserDefaultsTests {
     }
 }
 
-private extension UserDefaults.Keys {
-    static let testString1 = UserDefaults.Key<String?>("testString1")
-    static let testString2 = UserDefaults.Key<String?>("testString2")
-    static let testBool1 = UserDefaults.Key<Bool?>("testBool1")
-    static let testBool2 = UserDefaults.Key<Bool?>("testBool2")
-    static let testInt1 = UserDefaults.Key<Int?>("testInt1")
-    static let testInt2 = UserDefaults.Key<Int?>("testInt2")
-    static let testFloat1 = UserDefaults.Key<Float?>("testFloat1")
-    static let testFloat2 = UserDefaults.Key<Float?>("testFloat2")
-    static let testDouble1 = UserDefaults.Key<Double?>("testDouble1")
-    static let testDouble2 = UserDefaults.Key<Double?>("testDouble2")
-    static let testDate1 = UserDefaults.Key<Date?>("testDate1")
-    static let testDate2 = UserDefaults.Key<Date?>("testDate2")
-    static let testArray1 = UserDefaults.Key<[String]?>("testArray1")
-    static let testArray2 = UserDefaults.Key<[Int]?>("testArray2")
-    static let testDictionary1 = UserDefaults.Key<[String: String]?>("testDictionary1")
-    static let testDictionary2 = UserDefaults.Key<[String: Int]?>("testDictionary2")
+private extension String.Keys {
+    static let testString1 = String.Key<String?>("testString1")
+    static let testString2 = String.Key<String?>("testString2")
+    static let testBool1 = String.Key<Bool?>("testBool1")
+    static let testBool2 = String.Key<Bool?>("testBool2")
+    static let testInt1 = String.Key<Int?>("testInt1")
+    static let testInt2 = String.Key<Int?>("testInt2")
+    static let testFloat1 = String.Key<Float?>("testFloat1")
+    static let testFloat2 = String.Key<Float?>("testFloat2")
+    static let testDouble1 = String.Key<Double?>("testDouble1")
+    static let testDouble2 = String.Key<Double?>("testDouble2")
+    static let testDate1 = String.Key<Date?>("testDate1")
+    static let testDate2 = String.Key<Date?>("testDate2")
+    static let testArray1 = String.Key<[String]?>("testArray1")
+    static let testArray2 = String.Key<[Int]?>("testArray2")
+    static let testDictionary1 = String.Key<[String: String]?>("testDictionary1")
+    static let testDictionary2 = String.Key<[String: Int]?>("testDictionary2")
 }

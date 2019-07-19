@@ -11,37 +11,8 @@ import Foundation
 extension UserDefaults {
     // Slim version of: https://github.com/radex/SwiftyUserDefaults
     
-    /// User Defaults keys for strongly-typed access.
-    ///
-    ///     // First define keys
-    ///     extension UserDefaults.Keys {
-    ///         static let testString = UserDefaults.Key<String?>("testString")
-    ///         static let testInt = UserDefaults.Key<Int?>("testInt")
-    ///         static let testBool = UserDefaults.Key<Bool?>("testBool")
-    ///         static let testArray = UserDefaults.Key<[Int]?>("testArray")
-    ///     }
-    ///
-    ///     // Then use strongly-typed values
-    ///     let testString: String? = UserDefaults.standard[.testString]
-    ///     let testInt: Int? = UserDefaults.standard[.testInt]
-    ///     let testBool: Bool? = UserDefaults.standard[.testBool]
-    ///     let testArray: [Int]? = UserDefaults.standard[.testArray]
-    open class Keys {
-        fileprivate init() {}
-    }
-    
-    /// User Defaults key for strongly-typed access.
-    open class Key<ValueType>: Keys {
-        public let name: String
-        
-        public init(_ key: String) {
-            self.name = key
-            super.init()
-        }
-    }
-    
     /// Gets and sets the value from User Defaults that corresponds to the given key.
-    public subscript<T>(key: Key<T?>) -> T? {
+    public subscript<T>(key: String.Key<T?>) -> T? {
         get { return object(forKey: key.name) as? T }
         
         set {
@@ -53,7 +24,7 @@ extension UserDefaults {
     /// Removes the single User Defaults item specified by the key.
     ///
     /// - Parameter key: The key that is used to delete the user defaults item.
-    public func remove<T>(_ key: Key<T?>) {
+    public func remove<T>(_ key: String.Key<T?>) {
         removeObject(forKey: key.name)
     }
 }

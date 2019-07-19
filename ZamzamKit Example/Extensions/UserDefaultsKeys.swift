@@ -8,7 +8,7 @@
 
 import ZamzamKit
 
-extension UserDefaults.Keys {
-    static let userID = UserDefaults.Key<Int?>("userID")
-    static let currentTheme = UserDefaults.Key<String?>("currentTheme")
+extension String.Keys {
+    static let userID = String.Key<Int?>("userID")
+    static let currentTheme = String.Key<String?>("currentTheme")
 }
