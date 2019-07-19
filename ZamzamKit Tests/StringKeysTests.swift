@@ -9,9 +9,9 @@
 import XCTest
 import ZamzamKit
 
-class StringKeyTests: XCTestCase {
+class StringKeysTests: XCTestCase {
 
-    private let defaults = UserDefaults(suiteName: "StringKeyTests")!
+    private let defaults = UserDefaults(suiteName: "StringKeysTests")!
     
     override func setUp() {
         super.setUp()
@@ -19,7 +19,7 @@ class StringKeyTests: XCTestCase {
     }
 }
 
-extension StringKeyTests {
+extension StringKeysTests {
     
     func testString() {
         defaults[.testString1] = "abc"

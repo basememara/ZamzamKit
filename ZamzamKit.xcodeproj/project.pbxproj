@@ -86,7 +86,7 @@
 		8B17689B22AFCB2E002CC991 /* RateLimitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D71B6216A55C6002ACA81 /* RateLimitTests.swift */; };
 		8B17689C22AFCB2E002CC991 /* SequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B48E6261DAFFDCD00087328 /* SequenceTests.swift */; };
 		8B17689D22AFCB2E002CC991 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B281C72D71F00D4D437 /* StringTests.swift */; };
-		8B17689E22AFCB2E002CC991 /* StringKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B54B9D71FCC6B6A00ED571F /* StringKeyTests.swift */; };
+		8B17689E22AFCB2E002CC991 /* StringKeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B54B9D71FCC6B6A00ED571F /* StringKeysTests.swift */; };
 		8B1768A022AFCB2E002CC991 /* WebTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE19B291C72D71F00D4D437 /* WebTests.swift */; };
 		8B1768A122AFCB2E002CC991 /* WithTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB73D61CAD666900E20096 /* WithTest.swift */; };
 		8B1768A222AFCB2E002CC991 /* Array.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BDFFCD322262BF60007D582 /* Array.plist */; };
@@ -177,8 +177,8 @@
 		8B5316AC1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
 		8B5316AD1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
 		8B5316AE1C9BD7B90094A6C4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */; };
-		8B54B9DB1FCC6B8F00ED571F /* StringKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B54B9D71FCC6B6A00ED571F /* StringKeyTests.swift */; };
-		8B54B9DC1FCC6B9000ED571F /* StringKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B54B9D71FCC6B6A00ED571F /* StringKeyTests.swift */; };
+		8B54B9DB1FCC6B8F00ED571F /* StringKeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B54B9D71FCC6B6A00ED571F /* StringKeysTests.swift */; };
+		8B54B9DC1FCC6B9000ED571F /* StringKeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B54B9D71FCC6B6A00ED571F /* StringKeysTests.swift */; };
 		8B58855B21B8F4D000B0D0CD /* Collection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B58855A21B8F4D000B0D0CD /* Collection.storyboard */; };
 		8B58855D21B8F4DE00B0D0CD /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58855C21B8F4DE00B0D0CD /* CollectionViewController.swift */; };
 		8B58855F21B8F50200B0D0CD /* CollectionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58855E21B8F50200B0D0CD /* CollectionModels.swift */; };
@@ -598,7 +598,7 @@
 		8B53163A1C9B23140094A6C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B5316461C9B23BF0094A6C4 /* WKInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKInterfaceController.swift; sourceTree = "<group>"; };
 		8B5316AB1C9BD7B90094A6C4 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
-		8B54B9D71FCC6B6A00ED571F /* StringKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringKeyTests.swift; sourceTree = "<group>"; };
+		8B54B9D71FCC6B6A00ED571F /* StringKeysTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringKeysTests.swift; sourceTree = "<group>"; };
 		8B58855A21B8F4D000B0D0CD /* Collection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Collection.storyboard; sourceTree = "<group>"; };
 		8B58855C21B8F4DE00B0D0CD /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		8B58855E21B8F50200B0D0CD /* CollectionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModels.swift; sourceTree = "<group>"; };
@@ -1344,7 +1344,7 @@
 				8B4D71B6216A55C6002ACA81 /* RateLimitTests.swift */,
 				8B48E6261DAFFDCD00087328 /* SequenceTests.swift */,
 				8BE19B281C72D71F00D4D437 /* StringTests.swift */,
-				8B54B9D71FCC6B6A00ED571F /* StringKeyTests.swift */,
+				8B54B9D71FCC6B6A00ED571F /* StringKeysTests.swift */,
 				8B443A21229AB86A00EC5575 /* ViewControllerLifecycleObserversTests.swift */,
 				8BE19B291C72D71F00D4D437 /* WebTests.swift */,
 				8BCB73D61CAD666900E20096 /* WithTest.swift */,
@@ -2172,7 +2172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B17689E22AFCB2E002CC991 /* StringKeyTests.swift in Sources */,
+				8B17689E22AFCB2E002CC991 /* StringKeysTests.swift in Sources */,
 				8B17688B22AFCB2E002CC991 /* ArrayTests.swift in Sources */,
 				8B17689022AFCB2E002CC991 /* DataTests.swift in Sources */,
 				8B17688E22AFCB2E002CC991 /* ColorTests.swift in Sources */,
@@ -2252,7 +2252,7 @@
 				8B87FCBF2289829F004AC246 /* DecodableTests.swift in Sources */,
 				8B48E6271DAFFDCD00087328 /* SequenceTests.swift in Sources */,
 				8B48E6231DAFFD8900087328 /* CollectionTests.swift in Sources */,
-				8B54B9DB1FCC6B8F00ED571F /* StringKeyTests.swift in Sources */,
+				8B54B9DB1FCC6B8F00ED571F /* StringKeysTests.swift in Sources */,
 				8B729C7C1EAB9E42004A6BF1 /* InfixTests.swift in Sources */,
 				8B2DE3EC1C8A8F79008F1569 /* BundleTests.swift in Sources */,
 				8BCB73D71CAD666900E20096 /* WithTest.swift in Sources */,
@@ -2291,7 +2291,7 @@
 				8B87FCC02289829F004AC246 /* DecodableTests.swift in Sources */,
 				8B4967BB1EA8018A00091A7D /* DictionaryTests.swift in Sources */,
 				8B4967C11EA8019500091A7D /* StringTests.swift in Sources */,
-				8B54B9DC1FCC6B9000ED571F /* StringKeyTests.swift in Sources */,
+				8B54B9DC1FCC6B9000ED571F /* StringKeysTests.swift in Sources */,
 				8B4967BE1EA8018F00091A7D /* LocaleTests.swift in Sources */,
 				8B89746F1EDE17AC004FA853 /* MigrationTests.swift in Sources */,
 				8B729C7D1EAB9E43004A6BF1 /* InfixTests.swift in Sources */,
