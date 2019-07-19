@@ -13,8 +13,15 @@ public extension CLLocationManager {
     
     /// Determines if location services is enabled and authorized for always or when in use.
     static var isAuthorized: Bool {
+        var statuses: [CLAuthorizationStatus] = [.authorizedAlways]
+        
+        #if os(iOS) || os(watchOS) || os(tvOS)
+            statuses.append(.authorizedWhenInUse)
+        #elseif os(macOS)
+            statuses.append(.authorized)
+        #endif
+        
         return CLLocationManager.locationServicesEnabled()
-            && CLLocationManager.authorizationStatus()
-                .within([.authorizedAlways, .authorizedWhenInUse])
+            && CLLocationManager.authorizationStatus().within(statuses)
     }
 }
