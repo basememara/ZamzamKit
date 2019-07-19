@@ -213,6 +213,8 @@
 		8B752F7E2020EA30007DA40C /* BadgeBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B752F7D2020EA30007DA40C /* BadgeBarButtonItem.swift */; };
 		8B756EF81E5C025A00DE4B02 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */; };
 		8B756F151E5CF16D00DE4B02 /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756F141E5CF16D00DE4B02 /* XIBView.swift */; };
+		8B75EA8622E234A4009B7502 /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
+		8B75EA8722E234A4009B7502 /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B7729F120486D6500C15B56 /* ApproximateComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7729F020486D6500C15B56 /* ApproximateComparison.swift */; };
 		8B7729F220486D6500C15B56 /* ApproximateComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7729F020486D6500C15B56 /* ApproximateComparison.swift */; };
 		8B7729F320486D6500C15B56 /* ApproximateComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7729F020486D6500C15B56 /* ApproximateComparison.swift */; };
@@ -2085,6 +2087,7 @@
 				8B7729F320486D6500C15B56 /* ApproximateComparison.swift in Sources */,
 				8B9434631EBDEA8200C779EB /* TimeZone.swift in Sources */,
 				8B5250E220CFDED700E77F70 /* Decodable.swift in Sources */,
+				8B75EA8622E234A4009B7502 /* CLLocationManager.swift in Sources */,
 				8BFDB6601C7518F800C94996 /* String.swift in Sources */,
 				8B75286E1E759F2A0035A742 /* Observer.swift in Sources */,
 				8BB45FB71C9BDD180070CE07 /* UserDefaults.swift in Sources */,
@@ -2155,6 +2158,7 @@
 				8B17686722AFCAF2002CC991 /* Equatable.swift in Sources */,
 				8B17686C22AFCAF2002CC991 /* NSAttributedString.swift in Sources */,
 				8B17685622AFCAD8002CC991 /* ScheduleInterval.swift in Sources */,
+				8B75EA8722E234A4009B7502 /* CLLocationManager.swift in Sources */,
 				8B17688322AFCB10002CC991 /* AppInfo.swift in Sources */,
 				8B17686B22AFCAF2002CC991 /* NotificationCenter.swift in Sources */,
 				8B17685B22AFCAF2002CC991 /* Calendar.swift in Sources */,
