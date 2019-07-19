@@ -338,6 +338,15 @@ public extension String {
     }
 }
 
+public extension String {
+    
+    /// Returns a value of the type you specify, decoded from a JSON object.
+    func decode<T: Decodable>(using encoding: String.Encoding = .utf8) -> T? {
+        guard let data = data(using: encoding) else { return nil }
+        return try? JSONDecoder().decode(T.self, from: data)
+    }
+}
+
 public extension Substring {
     
     /// A string value representation of the string slice.

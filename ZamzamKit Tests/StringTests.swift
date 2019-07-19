@@ -172,6 +172,61 @@ extension StringTests {
 
 extension StringTests {
     
+    func testDecodeDictionaryString() {
+        let expected: [String: String] = [
+            "test1": "abc",
+            "test2": "def",
+            "test3": "ghi",
+            "test4": "jkl",
+            "test5": "mno",
+            "test6": "prs"
+        ]
+        
+        guard let data = try? JSONEncoder().encode(expected),
+            let json = String(data: data, encoding: .utf8) else {
+                XCTFail("Could not encode value for testing")
+                return
+        }
+        
+        XCTAssertEqual(json.decode(), expected)
+    }
+    
+    func testDecodeDictionaryDouble() {
+        let expected: [String: Double] = [
+            "abc": 1.4,
+            "def": 0.23,
+            "ghi": 53.221,
+            "jkl": 232.23,
+            "mno": 745,
+            "prs": 325.235
+        ]
+        
+        guard let data = try? JSONEncoder().encode(expected),
+            let json = String(data: data, encoding: .utf8) else {
+                XCTFail("Could not encode value for testing")
+                return
+        }
+        
+        XCTAssertEqual(json.decode(), expected)
+    }
+    
+    func testDecodeDictionaryInt() {
+        let test = "{\"test1\":29,\"test2\":62,\"test3\":33,\"test4\":24,\"test5\":14,\"test6\":72}"
+        let expected: [String: Int] = [
+            "test1": 29,
+            "test2": 62,
+            "test3": 33,
+            "test4": 24,
+            "test5": 14,
+            "test6": 72
+        ]
+        
+        XCTAssertEqual(test.decode(), expected)
+    }
+}
+
+extension StringTests {
+    
     func testIsNilOrEmpty() {
         var test: String?
         
