@@ -215,6 +215,9 @@
 		8B756F151E5CF16D00DE4B02 /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B756F141E5CF16D00DE4B02 /* XIBView.swift */; };
 		8B75EA8622E234A4009B7502 /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
 		8B75EA8722E234A4009B7502 /* CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A40291C76245200A0077D /* CLLocationManager.swift */; };
+		8B75EA8A22E2C0FD009B7502 /* AppDisplayable+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75EA8922E2C0FD009B7502 /* AppDisplayable+iOS.swift */; };
+		8B75EA8D22E2C142009B7502 /* AppDisplayable+watchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75EA8C22E2C142009B7502 /* AppDisplayable+watchOS.swift */; };
+		8B75EA8E22E2C154009B7502 /* AppDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4A22275917000011BC /* AppDisplayable.swift */; };
 		8B7729F120486D6500C15B56 /* ApproximateComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7729F020486D6500C15B56 /* ApproximateComparison.swift */; };
 		8B7729F220486D6500C15B56 /* ApproximateComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7729F020486D6500C15B56 /* ApproximateComparison.swift */; };
 		8B7729F320486D6500C15B56 /* ApproximateComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7729F020486D6500C15B56 /* ApproximateComparison.swift */; };
@@ -621,6 +624,8 @@
 		8B752F7D2020EA30007DA40C /* BadgeBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeBarButtonItem.swift; sourceTree = "<group>"; };
 		8B756EF71E5C025A00DE4B02 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
 		8B756F141E5CF16D00DE4B02 /* XIBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBView.swift; sourceTree = "<group>"; };
+		8B75EA8922E2C0FD009B7502 /* AppDisplayable+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDisplayable+iOS.swift"; sourceTree = "<group>"; };
+		8B75EA8C22E2C142009B7502 /* AppDisplayable+watchOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDisplayable+watchOS.swift"; sourceTree = "<group>"; };
 		8B7729F020486D6500C15B56 /* ApproximateComparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximateComparison.swift; sourceTree = "<group>"; };
 		8B79A4741E9C1ED800C8A5A4 /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locale.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLocationManager.swift; sourceTree = "<group>"; };
@@ -1016,6 +1021,22 @@
 			path = Infixes;
 			sourceTree = "<group>";
 		};
+		8B75EA8822E2C0D5009B7502 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				8B75EA8922E2C0FD009B7502 /* AppDisplayable+iOS.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		8B75EA8B22E2C12F009B7502 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				8B75EA8C22E2C142009B7502 /* AppDisplayable+watchOS.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
 		8B840E651C904F3300D85781 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -1231,6 +1252,7 @@
 			children = (
 				8BC9D00722E1111F002B177B /* Controls */,
 				8BD2743E22AC97D900211D31 /* Extensions */,
+				8B75EA8B22E2C12F009B7502 /* Scene */,
 			);
 			path = watchOS;
 			sourceTree = "<group>";
@@ -1282,6 +1304,7 @@
 				8B1CC4F5217AE89300F00A70 /* Controller */,
 				8B23CF33223E190D00B0E038 /* Layouts */,
 				8B1FE7E92065AB5200EE8DBE /* Protocols */,
+				8B75EA8822E2C0D5009B7502 /* Scene */,
 				8B87FC3822844018004AC246 /* Styles */,
 				8B752F7D2020EA30007DA40C /* BadgeBarButtonItem.swift */,
 				8B50C506211E2F9B00A36ABB /* GradientView.swift */,
@@ -1899,6 +1922,7 @@
 				8B94345A1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B2D57B920E2D38900CF4B01 /* UILabelView.swift in Sources */,
 				8B87FC2D22843E9A004AC246 /* PreferencesStoreInterfaces.swift in Sources */,
+				8B75EA8A22E2C0FD009B7502 /* AppDisplayable+iOS.swift in Sources */,
 				8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */,
 				8B752F7E2020EA30007DA40C /* BadgeBarButtonItem.swift in Sources */,
 				8B021E40203CA72E00A0386F /* UIScrollView.swift in Sources */,
@@ -2029,6 +2053,7 @@
 				8BFDB6781C751F2300C94996 /* FileManager.swift in Sources */,
 				8BB1D4B821B1B40400C9FBC0 /* SCNetworkReachability.swift in Sources */,
 				8BD98D661FC33B4600E74A8C /* Font.swift in Sources */,
+				8B75EA8D22E2C142009B7502 /* AppDisplayable+watchOS.swift in Sources */,
 				8B94345B1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B0C71601E64CEF9006148CD /* SynchronizedArray.swift in Sources */,
 				8B2DE3E21C8A86B2008F1569 /* Bundle.swift in Sources */,
@@ -2121,6 +2146,7 @@
 			files = (
 				8B17685522AFCAD8002CC991 /* DateTimeInterval.swift in Sources */,
 				8B17688522AFCB10002CC991 /* With.swift in Sources */,
+				8B75EA8E22E2C154009B7502 /* AppDisplayable.swift in Sources */,
 				8B17687D22AFCB09002CC991 /* Observer.swift in Sources */,
 				8B17687F22AFCB09002CC991 /* Throttler.swift in Sources */,
 				8B17687222AFCAF2002CC991 /* TimeInterval.swift in Sources */,
