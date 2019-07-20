@@ -301,6 +301,7 @@
 		8B9434651EBDEAA200C779EB /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434641EBDEAA200C779EB /* Calendar.swift */; };
 		8B9434661EBDEAA200C779EB /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434641EBDEAA200C779EB /* Calendar.swift */; };
 		8B9434671EBDEAA200C779EB /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9434641EBDEAA200C779EB /* Calendar.swift */; };
+		8B99620F22E2C4790010BA04 /* AppRoutable+watchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B99620E22E2C4790010BA04 /* AppRoutable+watchOS.swift */; };
 		8B9E97A71EAFA4980067ACB7 /* Test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E97A61EAFA4980067ACB7 /* Test.txt */; };
 		8B9E97A81EAFA4980067ACB7 /* Test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E97A61EAFA4980067ACB7 /* Test.txt */; };
 		8B9E98601EB396D20067ACB7 /* CellIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E985F1EB396D20067ACB7 /* CellIdentifiable.swift */; };
@@ -677,6 +678,7 @@
 		8B9434591EBCDA6C00C779EB /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		8B9434601EBDEA8200C779EB /* TimeZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
 		8B9434641EBDEAA200C779EB /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		8B99620E22E2C4790010BA04 /* AppRoutable+watchOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppRoutable+watchOS.swift"; sourceTree = "<group>"; };
 		8B9E97A61EAFA4980067ACB7 /* Test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Test.txt; sourceTree = "<group>"; };
 		8B9E985F1EB396D20067ACB7 /* CellIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellIdentifiable.swift; sourceTree = "<group>"; };
 		8B9E986E1EB500790067ACB7 /* With.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = With.swift; sourceTree = "<group>"; };
@@ -1042,6 +1044,7 @@
 			isa = PBXGroup;
 			children = (
 				8B75EA8C22E2C142009B7502 /* AppDisplayable+watchOS.swift */,
+				8B99620E22E2C4790010BA04 /* AppRoutable+watchOS.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -2062,6 +2065,7 @@
 				8B1CC523217BDA4E00F00A70 /* DispatchQueue.swift in Sources */,
 				8BFDB6781C751F2300C94996 /* FileManager.swift in Sources */,
 				8BB1D4B821B1B40400C9FBC0 /* SCNetworkReachability.swift in Sources */,
+				8B99620F22E2C4790010BA04 /* AppRoutable+watchOS.swift in Sources */,
 				8BD98D661FC33B4600E74A8C /* Font.swift in Sources */,
 				8B75EA8D22E2C142009B7502 /* AppDisplayable+watchOS.swift in Sources */,
 				8B94345B1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
