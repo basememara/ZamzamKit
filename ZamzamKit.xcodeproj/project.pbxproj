@@ -218,6 +218,13 @@
 		8B75EA8A22E2C0FD009B7502 /* AppDisplayable+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75EA8922E2C0FD009B7502 /* AppDisplayable+iOS.swift */; };
 		8B75EA8D22E2C142009B7502 /* AppDisplayable+watchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75EA8C22E2C142009B7502 /* AppDisplayable+watchOS.swift */; };
 		8B75EA8E22E2C154009B7502 /* AppDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4A22275917000011BC /* AppDisplayable.swift */; };
+		8B75EA8F22E2C228009B7502 /* AppModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4922275917000011BC /* AppModels.swift */; };
+		8B75EA9022E2C231009B7502 /* AppPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B83044E22832FF600AD5D61 /* AppPresentable.swift */; };
+		8B75EA9122E2C23D009B7502 /* AppBusinessLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B83044A22832F4C00AD5D61 /* AppBusinessLogic.swift */; };
+		8B75EA9322E2C256009B7502 /* AppRoutable+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75EA9222E2C256009B7502 /* AppRoutable+iOS.swift */; };
+		8B75EA9422E2C2E6009B7502 /* AppRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4B22275917000011BC /* AppRoutable.swift */; };
+		8B75EA9522E2C2E7009B7502 /* AppRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4B22275917000011BC /* AppRoutable.swift */; };
+		8B75EA9622E2C2E8009B7502 /* AppRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4B22275917000011BC /* AppRoutable.swift */; };
 		8B7729F120486D6500C15B56 /* ApproximateComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7729F020486D6500C15B56 /* ApproximateComparison.swift */; };
 		8B7729F220486D6500C15B56 /* ApproximateComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7729F020486D6500C15B56 /* ApproximateComparison.swift */; };
 		8B7729F320486D6500C15B56 /* ApproximateComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7729F020486D6500C15B56 /* ApproximateComparison.swift */; };
@@ -626,6 +633,7 @@
 		8B756F141E5CF16D00DE4B02 /* XIBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBView.swift; sourceTree = "<group>"; };
 		8B75EA8922E2C0FD009B7502 /* AppDisplayable+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDisplayable+iOS.swift"; sourceTree = "<group>"; };
 		8B75EA8C22E2C142009B7502 /* AppDisplayable+watchOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDisplayable+watchOS.swift"; sourceTree = "<group>"; };
+		8B75EA9222E2C256009B7502 /* AppRoutable+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppRoutable+iOS.swift"; sourceTree = "<group>"; };
 		8B7729F020486D6500C15B56 /* ApproximateComparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximateComparison.swift; sourceTree = "<group>"; };
 		8B79A4741E9C1ED800C8A5A4 /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locale.swift; sourceTree = "<group>"; };
 		8B7A40291C76245200A0077D /* CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLocationManager.swift; sourceTree = "<group>"; };
@@ -1025,6 +1033,7 @@
 			isa = PBXGroup;
 			children = (
 				8B75EA8922E2C0FD009B7502 /* AppDisplayable+iOS.swift */,
+				8B75EA9222E2C256009B7502 /* AppRoutable+iOS.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -1922,6 +1931,7 @@
 				8B94345A1EBCDA6C00C779EB /* NotificationCenter.swift in Sources */,
 				8B2D57B920E2D38900CF4B01 /* UILabelView.swift in Sources */,
 				8B87FC2D22843E9A004AC246 /* PreferencesStoreInterfaces.swift in Sources */,
+				8B75EA9322E2C256009B7502 /* AppRoutable+iOS.swift in Sources */,
 				8B75EA8A22E2C0FD009B7502 /* AppDisplayable+iOS.swift in Sources */,
 				8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */,
 				8B752F7E2020EA30007DA40C /* BadgeBarButtonItem.swift in Sources */,
@@ -2076,6 +2086,7 @@
 				8B4D71B0216A542A002ACA81 /* Debouncer.swift in Sources */,
 				8BC6D99B204790B600242DAE /* Scrollable.swift in Sources */,
 				8BB575612290267F0079BE42 /* AppDisplayable.swift in Sources */,
+				8B75EA9422E2C2E6009B7502 /* AppRoutable.swift in Sources */,
 				8BF0CD122143243500DF6DAF /* LocationWorkerType.swift in Sources */,
 				8B5250E120CFDED700E77F70 /* Decodable.swift in Sources */,
 				8B79A4761E9C1ED800C8A5A4 /* Locale.swift in Sources */,
@@ -2121,6 +2132,7 @@
 				8BE814FF1C7842DC005F23CE /* Sequence.swift in Sources */,
 				8B83045122832FF600AD5D61 /* AppPresentable.swift in Sources */,
 				8BB57560229026770079BE42 /* AppModels.swift in Sources */,
+				8B75EA9522E2C2E7009B7502 /* AppRoutable.swift in Sources */,
 				8BB57562229026800079BE42 /* AppDisplayable.swift in Sources */,
 				8B87FC2F22843E9A004AC246 /* PreferencesStoreInterfaces.swift in Sources */,
 				8B8974731EDF555C004FA853 /* Migration.swift in Sources */,
@@ -2146,11 +2158,13 @@
 			files = (
 				8B17685522AFCAD8002CC991 /* DateTimeInterval.swift in Sources */,
 				8B17688522AFCB10002CC991 /* With.swift in Sources */,
+				8B75EA9622E2C2E8009B7502 /* AppRoutable.swift in Sources */,
 				8B75EA8E22E2C154009B7502 /* AppDisplayable.swift in Sources */,
 				8B17687D22AFCB09002CC991 /* Observer.swift in Sources */,
 				8B17687F22AFCB09002CC991 /* Throttler.swift in Sources */,
 				8B17687222AFCAF2002CC991 /* TimeInterval.swift in Sources */,
 				8B17687C22AFCB09002CC991 /* Migration.swift in Sources */,
+				8B75EA9022E2C231009B7502 /* AppPresentable.swift in Sources */,
 				8B17687322AFCAF2002CC991 /* TimeZone.swift in Sources */,
 				8B17686E22AFCAF2002CC991 /* SCNetworkReachability.swift in Sources */,
 				8B17686022AFCAF2002CC991 /* CurrencyFormatter.swift in Sources */,
@@ -2163,6 +2177,7 @@
 				8B17688222AFCB0C002CC991 /* Preferences.swift in Sources */,
 				8B17688022AFCB0C002CC991 /* PreferencesStoreInterfaces.swift in Sources */,
 				8B17687522AFCAF2002CC991 /* UserDefaults.swift in Sources */,
+				8B75EA9122E2C23D009B7502 /* AppBusinessLogic.swift in Sources */,
 				8B17686122AFCAF2002CC991 /* Data.swift in Sources */,
 				8B17688122AFCB0C002CC991 /* PreferencesDefaultsStore.swift in Sources */,
 				8B17686322AFCAF2002CC991 /* DateFormatter.swift in Sources */,
@@ -2175,6 +2190,7 @@
 				8B17685722AFCAD8002CC991 /* ZamzamError.swift in Sources */,
 				8B17687022AFCAF2002CC991 /* String.swift in Sources */,
 				8B17686422AFCAF2002CC991 /* Decodable.swift in Sources */,
+				8B75EA8F22E2C228009B7502 /* AppModels.swift in Sources */,
 				8B17687422AFCAF2002CC991 /* URL.swift in Sources */,
 				8B17686522AFCAF2002CC991 /* Dictionary.swift in Sources */,
 				8B17686822AFCAF2002CC991 /* FileManager.swift in Sources */,
