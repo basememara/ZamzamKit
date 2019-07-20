@@ -65,11 +65,19 @@ private extension InterfaceController {
         watchSession.transfer(message: value)
         sentMessageLabel.setText(value["value"] ?? "")
     }
+}
+
+private extension InterfaceController {
 
     @IBAction func alertTapped() {
         present(
             alert: "Test",
             message: "This is the message.",
+            additionalActions: [
+                WKAlertAction(title: "Action 1", handler: {}),
+                WKAlertAction(title: "Action 2", handler: {}),
+                WKAlertAction(title: "Action 3", style: .destructive, handler: {})
+            ],
             includeCancelAction: true
         )
     }
@@ -90,12 +98,7 @@ private extension InterfaceController {
     @IBAction func sideBySideAlertTapped() {
         present(
             sideBySideAlert: "Test",
-            message: "This is the message.",
-            additionalActions: [
-                WKAlertAction(title: "Action 1", handler: {}),
-                WKAlertAction(title: "Action 2", style: .destructive, handler: {}),
-                WKAlertAction(title: "Action 3", handler: {})
-            ]
+            message: "This is the message."
         )
     }
 }

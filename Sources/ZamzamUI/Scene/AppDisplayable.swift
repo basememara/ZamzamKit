@@ -34,4 +34,18 @@ extension AppDisplayable where Self: UIViewController {
         }
     }
 }
+#elseif os(iOS)
+extension AppDisplayable where Self: WKInterfaceController {
+    
+    /// Display a native alert controller modally.
+    ///
+    /// - Parameter error: The error details to present.
+    public func display(error: AppModels.Error) {
+        // Force in next runloop via main queue since view hierachy may not be loaded yet
+        DispatchQueue.main.async { [weak self] in
+            self?.endRefreshing()
+            self?.present(alert: error.title, message: error.message)
+        }
+    }
+}
 #endif

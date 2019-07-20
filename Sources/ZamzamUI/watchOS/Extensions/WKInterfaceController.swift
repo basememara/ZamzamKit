@@ -29,6 +29,16 @@ public extension WKInterfaceController {
     ///         message: "This is the message.",
     ///         includeCancelAction: true
     ///     )
+    ///
+    /// - Parameters:
+    ///   - title: Title of the alert.
+    ///   - message: Body of the alert.
+    ///   - buttonText: Text for the primary button.
+    ///   - additionalActions: Array of alert actions.
+    ///   - includeCancelAction: Include a cancel action within the alert.
+    ///   - cancelText: Text for the cancel button.
+    ///   - cancelHandler: Call back handler when cancel action tapped.
+    ///   - handler: Call back handler when main action tapped.
     func present(
         alert title: String,
         message: String? = nil,
@@ -44,6 +54,10 @@ public extension WKInterfaceController {
                 handler?()
             }
         ]
+        
+        if let additionalActions = additionalActions {
+            actions.append(contentsOf: additionalActions)
+        }
         
         if includeCancelAction {
             actions.append(
@@ -73,6 +87,14 @@ public extension WKInterfaceController {
     ///         ],
     ///         includeCancelAction: true
     ///     )
+    ///
+    /// - Parameters:
+    ///   - title: Title of the alert.
+    ///   - message: Body of the alert.
+    ///   - additionalActions: Array of alert actions.
+    ///   - includeCancelAction: Include a cancel action within the alert.
+    ///   - cancelText: Text for the cancel button.
+    ///   - cancelHandler: Call back handler when cancel action tapped.
     func present(
         actionSheet title: String,
         message: String? = nil,
@@ -103,23 +125,36 @@ public extension WKInterfaceController {
     ///
     ///     present(
     ///         sideBySideAlert: "Test",
-    ///         message: "This is the message.",
-    ///         additionalActions: [
-    ///             WKAlertAction(title: "Action 1", handler: {}),
-    ///             WKAlertAction(title: "Action 2", style: .destructive, handler: {}),
-    ///             WKAlertAction(title: "Action 3", handler: {})
-    ///         ]
+    ///         message: "This is the message."
     ///     )
+    ///
+    /// - Parameters:
+    ///   - title: Title of the alert.
+    ///   - message: Body of the alert.
+    ///   - buttonText: Text for the primary button.
+    ///   - cancelText: Text for the cancel button.
+    ///   - cancelHandler: Call back handler when cancel action tapped.
+    ///   - handler: Call back handler when main action tapped.
     func present(
         sideBySideAlert title: String,
         message: String? = nil,
-        additionalActions: [WKAlertAction]
+        buttonText: String = .localized(.ok),
+        cancelText: String = .localized(.cancel),
+        cancelHandler: (() -> Void)? = nil,
+        handler: (() -> Void)? = nil
     ) {
         presentAlert(
             withTitle: title,
             message: message,
             preferredStyle: .sideBySideButtonsAlert,
-            actions: additionalActions.prefix(2).array
+            actions: [
+                WKAlertAction(title: cancelText, style: .cancel) {
+                    cancelHandler?()
+                },
+                WKAlertAction(title: buttonText, style: .default) {
+                    handler?()
+                }
+            ]
         )
     }
 }
