@@ -138,38 +138,58 @@ public extension WatchSession {
 public extension WatchSession {
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        activationDidCompleteSingle.removeAll { $0.forEach { $0(activationState == .activated) } }
+        DispatchQueue.main.async { [weak self] in
+            self?.activationDidCompleteSingle.removeAll {
+                $0.forEach { $0(activationState == .activated) }
+            }
+        }
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {
-        didBecomeInactive.forEach { $0.handler() }
+        DispatchQueue.main.async { [weak self] in
+            self?.didBecomeInactive.forEach { $0.handler() }
+        }
     }
     
     func sessionDidDeactivate(_ session: WCSession) {
-        didDeactivate.forEach { $0.handler() }
+        DispatchQueue.main.async { [weak self] in
+            self?.didDeactivate.forEach { $0.handler() }
+        }
     }
     
     func sessionWatchStateDidChange(_ session: WCSession) {
-        stateDidChange.forEach { $0.handler() }
+        DispatchQueue.main.async { [weak self] in
+            self?.stateDidChange.forEach { $0.handler() }
+        }
     }
     
     func sessionReachabilityDidChange(_ session: WCSession) {
-        reachabilityDidChange.forEach { $0.handler(session.isReachable) }
+        DispatchQueue.main.async { [weak self] in
+            self?.reachabilityDidChange.forEach {
+                $0.handler(session.isReachable)
+            }
+        }
     }
 }
 
 public extension WatchSession {
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        didReceiveApplicationContext.forEach { $0.handler(applicationContext) }
+        DispatchQueue.main.async { [weak self] in
+            self?.didReceiveApplicationContext.forEach { $0.handler(applicationContext) }
+        }
     }
     
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
-        didReceiveUserInfo.forEach { $0.handler(userInfo) }
+        DispatchQueue.main.async { [weak self] in
+            self?.didReceiveUserInfo.forEach { $0.handler(userInfo) }
+        }
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
-        didReceiveMessage.forEach { $0.handler(message, replyHandler) }
+        DispatchQueue.main.async { [weak self] in
+            self?.didReceiveMessage.forEach { $0.handler(message, replyHandler) }
+        }
     }
 }
 
@@ -204,10 +224,15 @@ public extension WatchSession {
     ///
     /// - Parameter completion: The completion with the location object.
     func activate(completion: ActivationHandler? = nil) {
-        guard let session = sessionDefault else { completion?(false); return }
+        guard let session = sessionDefault else {
+            completion?(false)
+            return
+        }
         
-        guard session.activationState == .notActivated
-            else { completion?(session.activationState == .activated); return }
+        guard session.activationState == .notActivated else {
+            completion?(session.activationState == .activated)
+            return
+        }
         
         if let completion = completion {
             activationDidCompleteSingle += completion
@@ -225,11 +250,16 @@ public extension WatchSession {
     ///   - values: The dictionary of values.
     ///   - completion: The callback of the success of the transmission.
     func transfer(context values: [String: Any], completion: ((Result<Bool, ZamzamError>) -> Void)? = nil) {
-        guard !values.isEmpty else { completion?(.success(true)); return }
+        guard !values.isEmpty else {
+            completion?(.success(true))
+            return
+        }
     
         activate {
-            guard $0, let session = self.sessionDefault, self.isAvailable
-                else { completion?(.failure(.notReachable)); return }
+            guard $0, let session = self.sessionDefault, self.isAvailable else {
+                completion?(.failure(.notReachable))
+                return
+            }
             
             let values = values.compactMapValues { $0 is NSNull ? nil : $0 }
             
@@ -252,8 +282,10 @@ public extension WatchSession {
         guard !values.isEmpty else { completion?(.success(nil)); return }
     
         activate {
-            guard $0, let session = self.sessionDefault, self.isAvailable
-                else { completion?(.failure(.notReachable)); return }
+            guard $0, let session = self.sessionDefault, self.isAvailable else {
+                completion?(.failure(.notReachable))
+                return
+            }
             
             let values = values.compactMapValues { $0 is NSNull ? nil : $0 }
             let transfer = session.transferUserInfo(values)
@@ -269,13 +301,21 @@ public extension WatchSession {
     ///   - completion: A reply handler for receiving a response from the counterpart, or the error.
     ///     The dictionary of property list values contains the response from the counterpart.
     func transfer(message values: [String: Any], completion: ((Result<[String: Any], ZamzamError>) -> Void)? = nil) {
-        guard !values.isEmpty else { completion?(.success([:])); return }
+        guard !values.isEmpty else {
+            completion?(.success([:]))
+            return
+        }
     
         activate {
-            guard $0, let session = self.sessionDefault, self.isAvailable
-                else { completion?(.failure(.notReachable)); return }
+            guard $0, let session = self.sessionDefault, self.isAvailable else {
+                completion?(.failure(.notReachable))
+                return
+            }
             
-            guard session.isReachable else { completion?(.failure(.general)); return }
+            guard session.isReachable else {
+                completion?(.failure(.general))
+                return
+            }
             
             let values = values.compactMapValues { $0 is NSNull ? nil : $0 }
             
@@ -317,10 +357,15 @@ public extension WatchSession {
         guard !values.isEmpty else { completion?(.success(nil)); return }
     
         activate {
-            guard $0, let session = self.sessionDefault, self.isAvailable
-                else { completion?(.failure(.notReachable)); return }
+            guard $0, let session = self.sessionDefault, self.isAvailable else {
+                completion?(.failure(.notReachable))
+                return
+            }
             
-            guard session.isComplicationEnabled else { completion?(.failure(.general)); return }
+            guard session.isComplicationEnabled else {
+                completion?(.failure(.general))
+                return
+            }
             
             let values = values.compactMapValues { $0 is NSNull ? nil : $0 }
             let transfer = session.transferCurrentComplicationUserInfo(values)

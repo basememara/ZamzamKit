@@ -190,7 +190,9 @@ public extension LocationWorker {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        didUpdateHeading.forEach { $0.handler(newHeading) }
+        DispatchQueue.main.async { [weak self] in
+            self?.didUpdateHeading.forEach { $0.handler(newHeading) }
+        }
     }
 }
 #endif
@@ -245,16 +247,22 @@ extension LocationWorker: CLLocationManagerDelegate {
         guard status != .notDetermined else { return }
         
         // Trigger and empty queues
-        didChangeAuthorizationHandlers.forEach { $0.handler(isAuthorized) }
-        didChangeAuthorizationSingleUseHandlers.removeAll { $0.forEach { $0(self.isAuthorized) } }
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.didChangeAuthorizationHandlers.forEach { $0.handler(self.isAuthorized) }
+            self.didChangeAuthorizationSingleUseHandlers.removeAll { $0.forEach { $0(self.isAuthorized) } }
+        }
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         
         // Trigger and empty queues
-        didUpdateLocationsHandlers.forEach { $0.handler(location) }
-        didUpdateLocationsSingleUseHandlers.removeAll { $0.forEach { $0(location) } }
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.didUpdateLocationsHandlers.forEach { $0.handler(location) }
+            self.didUpdateLocationsSingleUseHandlers.removeAll { $0.forEach { $0(location) } }
+        }
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
