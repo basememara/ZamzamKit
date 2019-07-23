@@ -12,18 +12,18 @@ public protocol MailComposerType {
     typealias AttachmentType = (data: Data, mimeType: String, fileName: String)
     
     func canSendMail() -> Bool
-    func makeViewController(email: String, subject: String?, body: String?, attachment: AttachmentType?) -> MFMailComposeViewController?
-    func makeViewController(emails: [String], subject: String?, body: String?, attachment: AttachmentType?) -> MFMailComposeViewController?
+    func makeViewController(email: String, subject: String?, body: String?, isHTML: Bool, attachment: AttachmentType?) -> MFMailComposeViewController?
+    func makeViewController(emails: [String], subject: String?, body: String?, isHTML: Bool, attachment: AttachmentType?) -> MFMailComposeViewController?
 }
 
 public extension MailComposerType {
     
     func makeViewController(email: String) -> MFMailComposeViewController? {
-        return makeViewController(email: email, subject: nil, body: nil, attachment: nil)
+        return makeViewController(email: email, subject: nil, body: nil, isHTML: true, attachment: nil)
     }
     
     func makeViewController(email: String, subject: String, body: String) -> MFMailComposeViewController? {
-        return makeViewController(email: email, subject: subject, body: body, attachment: nil)
+        return makeViewController(email: email, subject: subject, body: body, isHTML: true, attachment: nil)
     }
 }
 
@@ -52,12 +52,12 @@ open class MailComposer: NSObject, MailComposerType {
 public extension MailComposer {
     
     /// A standard interface for managing, editing, and sending an email message.
-    func makeViewController(email: String, subject: String?, body: String?, attachment: AttachmentType?) -> MFMailComposeViewController? {
-        return makeViewController(emails: [email], subject: subject, body: body, attachment: attachment)
+    func makeViewController(email: String, subject: String?, body: String?, isHTML: Bool, attachment: AttachmentType?) -> MFMailComposeViewController? {
+        return makeViewController(emails: [email], subject: subject, body: body, isHTML: isHTML, attachment: attachment)
     }
     
     /// A standard interface for managing, editing, and sending an email message.
-    func makeViewController(emails: [String], subject: String?, body: String?, attachment: AttachmentType?) -> MFMailComposeViewController? {
+    func makeViewController(emails: [String], subject: String?, body: String?, isHTML: Bool, attachment: AttachmentType?) -> MFMailComposeViewController? {
         guard canSendMail() else { return nil }
         
         return MFMailComposeViewController().with {
@@ -70,7 +70,7 @@ public extension MailComposer {
             }
             
             if let body = body {
-                $0.setMessageBody(body, isHTML: true)
+                $0.setMessageBody(body, isHTML: isHTML)
             }
             
             if let attachment = attachment {
