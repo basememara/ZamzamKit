@@ -320,8 +320,16 @@ public extension WatchSession {
             let values = values.compactMapValues { $0 is NSNull ? nil : $0 }
             
             return session.sendMessage(values,
-                replyHandler: { completion?(.success($0)) },
-                errorHandler: { completion?(.failure(.other($0))) }
+                replyHandler: { response in
+                    DispatchQueue.main.async {
+                        completion?(.success(response))
+                    }
+                },
+                errorHandler: { error in
+                    DispatchQueue.main.async {
+                        completion?(.failure(.other(error)))
+                    }
+                }
             )
         }
     }
