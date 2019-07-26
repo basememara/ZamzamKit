@@ -190,8 +190,10 @@ public extension LocationWorker {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        DispatchQueue.main.async { [weak self] in
-            self?.didUpdateHeading.forEach { $0.handler(newHeading) }
+        didUpdateHeading.forEach { task in
+            DispatchQueue.main.async {
+                task.handler(newHeading)
+            }
         }
     }
 }
@@ -247,10 +249,16 @@ extension LocationWorker: CLLocationManagerDelegate {
         guard status != .notDetermined else { return }
         
         // Trigger and empty queues
-        DispatchQueue.main.async { [weak self] in
+        didChangeAuthorizationHandlers.forEach { task in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                task.handler(self.isAuthorized)
+            }
+        }
+        
+        didChangeAuthorizationSingleUseHandlers.removeAll { [weak self] in
             guard let self = self else { return }
-            self.didChangeAuthorizationHandlers.forEach { $0.handler(self.isAuthorized) }
-            self.didChangeAuthorizationSingleUseHandlers.removeAll { $0.forEach { $0(self.isAuthorized) } }
+            $0.forEach { $0(self.isAuthorized) }
         }
     }
     
@@ -258,10 +266,14 @@ extension LocationWorker: CLLocationManagerDelegate {
         guard let location = locations.last else { return }
         
         // Trigger and empty queues
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.didUpdateLocationsHandlers.forEach { $0.handler(location) }
-            self.didUpdateLocationsSingleUseHandlers.removeAll { $0.forEach { $0(location) } }
+        didUpdateLocationsHandlers.forEach { task in
+            DispatchQueue.main.async {
+                task.handler(location)
+            }
+        }
+        
+        didUpdateLocationsSingleUseHandlers.removeAll {
+            $0.forEach { $0(location) }
         }
     }
     

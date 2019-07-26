@@ -138,35 +138,39 @@ public extension WatchSession {
 public extension WatchSession {
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        DispatchQueue.main.async { [weak self] in
-            self?.activationDidCompleteSingle.removeAll {
-                $0.forEach { $0(activationState == .activated) }
-            }
+        activationDidCompleteSingle.removeAll {
+            $0.forEach { $0(activationState == .activated) }
         }
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {
-        DispatchQueue.main.async { [weak self] in
-            self?.didBecomeInactive.forEach { $0.handler() }
+        didBecomeInactive.forEach { task in
+            DispatchQueue.main.async {
+                task.handler()
+            }
         }
     }
     
     func sessionDidDeactivate(_ session: WCSession) {
-        DispatchQueue.main.async { [weak self] in
-            self?.didDeactivate.forEach { $0.handler() }
+        didDeactivate.forEach { task in
+            DispatchQueue.main.async {
+                task.handler()
+            }
         }
     }
     
     func sessionWatchStateDidChange(_ session: WCSession) {
-        DispatchQueue.main.async { [weak self] in
-            self?.stateDidChange.forEach { $0.handler() }
+        stateDidChange.forEach { task in
+            DispatchQueue.main.async {
+                task.handler()
+            }
         }
     }
     
     func sessionReachabilityDidChange(_ session: WCSession) {
-        DispatchQueue.main.async { [weak self] in
-            self?.reachabilityDidChange.forEach {
-                $0.handler(session.isReachable)
+        reachabilityDidChange.forEach { task in
+            DispatchQueue.main.async {
+                task.handler(session.isReachable)
             }
         }
     }
@@ -175,20 +179,26 @@ public extension WatchSession {
 public extension WatchSession {
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        DispatchQueue.main.async { [weak self] in
-            self?.didReceiveApplicationContext.forEach { $0.handler(applicationContext) }
+        didReceiveApplicationContext.forEach { task in
+            DispatchQueue.main.async {
+                task.handler(applicationContext)
+            }
         }
     }
     
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
-        DispatchQueue.main.async { [weak self] in
-            self?.didReceiveUserInfo.forEach { $0.handler(userInfo) }
+        didReceiveUserInfo.forEach { task in
+            DispatchQueue.main.async {
+                task.handler(userInfo)
+            }
         }
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
-        DispatchQueue.main.async { [weak self] in
-            self?.didReceiveMessage.forEach { $0.handler(message, replyHandler) }
+        didReceiveMessage.forEach { task in
+            DispatchQueue.main.async {
+                task.handler(message, replyHandler)
+            }
         }
     }
 }
@@ -266,7 +276,8 @@ public extension WatchSession {
             do {
                 try session.updateApplicationContext(values)
             } catch {
-                completion?(.failure(.other(error))); return
+                completion?(.failure(.other(error)))
+                return
             }
             
             completion?(.success(true))
