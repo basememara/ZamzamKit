@@ -63,11 +63,31 @@ public extension CLLocation {
     
     /// Retrieves location details for coordinates.
     ///
-    /// - Parameter completion: Async callback with retrived location details.
-    func geocoder(completion: @escaping (LocationMeta?) -> Void) {
+    /// - Parameters:
+    ///   - timeout: A timeout to exit and call completion handler. Default is 10 seconds.
+    ///   - completion: Async callback with retrived location details.
+    func geocoder(timeout: TimeInterval = 10, completion: @escaping (LocationMeta?) -> Void) {
+        var hasCompleted = false
+        
+        // Fallback on timeout since could take too long
+        // https://stackoverflow.com/a/34389742
+        let timer = Timer(timeInterval: timeout, repeats: false) { timer in
+            defer { timer.invalidate() }
+            
+            guard !hasCompleted else { return }
+            hasCompleted = true
+            
+            completion(nil)
+        }
+        
         // Reverse geocode stored coordinates
         CLGeocoder().reverseGeocodeLocation(self) { placemarks, error in
             DispatchQueue.main.async {
+                // Destroy timeout mechanism
+                guard !hasCompleted else { return }
+                hasCompleted = true
+                timer.invalidate()
+                
                 guard let mark = placemarks?.first, error == nil else {
                     return completion(nil)
                 }
