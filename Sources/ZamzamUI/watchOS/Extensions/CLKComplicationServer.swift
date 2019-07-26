@@ -22,5 +22,4 @@ public extension CLKComplicationServer {
         guard let complications = activeComplications, !complications.isEmpty else { return }
         complications.forEach { extendTimeline(for: $0) }
     }
-    
 }
