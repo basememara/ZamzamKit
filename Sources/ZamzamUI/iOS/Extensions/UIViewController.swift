@@ -230,7 +230,7 @@ public extension UIViewController {
     /// - Returns: Returns the alert controller instance that was presented.
     @discardableResult
     func present(
-        alert title: String,
+        alert title: String?,
         message: String? = nil,
         buttonText: String = .localized(.ok),
         buttonStyle: UIAlertAction.Style = .default,

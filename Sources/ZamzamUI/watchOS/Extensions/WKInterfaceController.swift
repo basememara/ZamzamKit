@@ -40,7 +40,7 @@ public extension WKInterfaceController {
     ///   - cancelHandler: Call back handler when cancel action tapped.
     ///   - handler: Call back handler when main action tapped.
     func present(
-        alert title: String,
+        alert title: String?,
         message: String? = nil,
         buttonText: String = .localized(.ok),
         additionalActions: [WKAlertAction]? = nil,
