@@ -104,6 +104,9 @@ public extension CLLocation {
                 )
             }
         }
+        
+        // Start timer
+        RunLoop.current.add(timer, forMode: .default)
     }
 }
 
