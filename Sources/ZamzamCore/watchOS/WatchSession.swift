@@ -12,7 +12,7 @@ public class WatchSession: NSObject, WCSessionDelegate {
 
     private var sessionDefault: WCSession? {
         guard WCSession.isSupported() else { return nil }
-        return WCSession.default
+        return .default
     }
     
     public override init() {
