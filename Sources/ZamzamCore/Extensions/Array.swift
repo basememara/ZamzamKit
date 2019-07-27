@@ -72,3 +72,11 @@ public extension ArraySlice {
         return Array(self)
     }
 }
+
+public extension Zip2Sequence {
+    
+    /// Returns the array of the zipped sequence
+    var array: [(Sequence1.Element, Sequence2.Element)] {
+        return Array(self)
+    }
+}
