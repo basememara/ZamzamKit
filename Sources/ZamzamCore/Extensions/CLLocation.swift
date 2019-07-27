@@ -77,7 +77,9 @@ public extension CLLocation {
             guard !hasCompleted else { return }
             hasCompleted = true
             
-            completion(nil)
+            DispatchQueue.main.async {
+                completion(nil)
+            }
         }
         
         // Reverse geocode stored coordinates
