@@ -12,5 +12,10 @@ public protocol UNNotificationTriggerDateType {
     func nextTriggerDate() -> Date?
 }
 
+// TODO: Next trigger date broken on Apple's side
+// Either remove or abstract bug away
+// https://openradar.appspot.com/32865247
+// https://stackoverflow.com/q/40411812
+
 extension UNCalendarNotificationTrigger: UNNotificationTriggerDateType {}
 extension UNTimeIntervalNotificationTrigger: UNNotificationTriggerDateType {}
