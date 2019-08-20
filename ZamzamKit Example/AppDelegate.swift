@@ -26,12 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .perform(forVersion: "1.0") {
                 print("Migrate to 1.0 occurred.")
             }
-            .perform(forVersion: "1.0", withBuild: "1") {
-                print("Migrate to 1.0 (1) occurred.")
-            }
-            .perform(forVersion: "1.0", withBuild: "2") {
-                print("Migrate to 1.0 (2) occurred.")
-            }
         
         AppDelegate.watchSession.addObserver(forApplicationContext: Observer {
             UNUserNotificationCenter.current().add(

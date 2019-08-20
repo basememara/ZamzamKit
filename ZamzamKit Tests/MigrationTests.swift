@@ -7,32 +7,20 @@
 //
 
 import XCTest
-import ZamzamKit
+@testable import ZamzamKit
 
 class MigrationTests: XCTestCase {
-
-    var migration: Migration!
     
-    override func setUp() {
-        super.setUp()
-        
-        migration = Migration(
-            userDefaults: UserDefaults(suiteName: "MigrationTests")!,
-            bundle: Bundle(for: type(of: self))
-        )
-        
-        migration.reset()
-    }
+}
+
+extension MigrationTests {
     
     func testMigrationReset() {
+        let migration: Migration = .makeMigration(forVersion: "1.0")
+        
         let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
         migration.perform(forVersion: "0.9") {
             expectation1.fulfill()
-        }
-        
-        let expectation2 = self.expectation(description: "Expecting block to be run for version 0.9 (1)")
-        migration.perform(forVersion: "0.9", withBuild: "1") {
-            expectation2.fulfill()
         }
         
         let expectation3 = self.expectation(description: "Expecting block to be run for version 1.0")
@@ -47,11 +35,6 @@ class MigrationTests: XCTestCase {
             expectation4.fulfill()
         }
         
-        let expectation5 = self.expectation(description: "Expecting block to be run for version 0.9 (1)")
-        migration.perform(forVersion: "0.9", withBuild: "1") {
-            expectation5.fulfill()
-        }
-        
         let expectation6 = self.expectation(description: "Expecting block to be run again for version 1.0")
         migration.perform(forVersion: "1.0") {
             expectation6.fulfill()
@@ -59,71 +42,68 @@ class MigrationTests: XCTestCase {
         
         waitForAllExpectations()
     }
+}
+
+extension MigrationTests {
     
     func testMigrationChained() {
+        let migration: Migration = .makeMigration(forVersion: "1.0")
+        
         let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
-        let expectation2 = self.expectation(description: "Expecting block to be run for version 0.9 (1)")
-        let expectation3 = self.expectation(description: "Expecting block to be run for version 1.0")
-        let expectation4 = self.expectation(description: "Expecting block to be run for version 1.0 (0.1)")
-        let expectation5 = self.expectation(description: "Expecting block to be run for version 1.0 (1)")
+        let expectation2 = self.expectation(description: "Expecting block to be run for version 1.0")
         
         migration
             .perform(forVersion: "0.9") {
                 expectation1.fulfill()
             }
-            .perform(forVersion: "0.9", withBuild: "1") {
+            .perform(forVersion: "0.9") {
+                XCTFail("Should not execute a block for the same version twice")
+            }
+            .perform(forVersion: "1.0") {
                 expectation2.fulfill()
             }
             .perform(forVersion: "1.0") {
-                expectation3.fulfill()
-            }
-            .perform(forVersion: "1.0", withBuild: "0.1") {
-                expectation4.fulfill()
-            }
-            .perform(forVersion: "1.0", withBuild: "1") {
-                expectation5.fulfill()
-            }
-            .perform(forVersion: "1.0", withBuild: "1") {
                 XCTFail("Should not execute a block for the same version twice")
             }
+            .perform(forVersion: "2.0") {
+                XCTFail("Should not execute a block for a future version")
+        }
         
         waitForAllExpectations()
     }
+}
+
+extension MigrationTests {
     
     func testMigrationBuild() {
+        let migration: Migration = .makeMigration(forVersion: "1.0")
+        
         let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
         migration.perform(forVersion: "0.9") {
             expectation1.fulfill()
         }
         
-        let expectation2 = self.expectation(description: "Expecting block to be run for version 0.9 (1)")
-        migration.perform(forVersion: "0.9", withBuild: "1") {
+        migration.perform(forVersion: "0.9") {
+            XCTFail("Should not execute a block for the same version twice")
+        }
+        
+        let expectation2 = self.expectation(description: "Expecting block to be run for version 1.0")
+        migration.perform(forVersion: "1.0") {
             expectation2.fulfill()
         }
         
-        let expectation3 = self.expectation(description: "Expecting block to be run for version 1.0")
         migration.perform(forVersion: "1.0") {
-            expectation3.fulfill()
-        }
-        
-        let expectation4 = self.expectation(description: "Expecting block to be run for version 1.0 (0.1)")
-        migration.perform(forVersion: "1.0", withBuild: "0.1") {
-            expectation4.fulfill()
-        }
-        
-        let expectation5 = self.expectation(description: "Expecting block to be run for version 1.0 (1)")
-        migration.perform(forVersion: "1.0", withBuild: "1") {
-            expectation5.fulfill()
-        }
-        
-        migration.perform(forVersion: "1.0", withBuild: "1") {
             XCTFail("Should not execute a block for the same version twice")
         }
         
         waitForAllExpectations()
     }
+}
+
+extension MigrationTests {
     
     func testMigratesOnFirstRun() {
+        let migration: Migration = .makeMigration(forVersion: "1.1")
         let expectation = self.expectation(description: "Should execute migration after reset")
         
         migration.perform(forVersion: "1.0") {
@@ -132,8 +112,13 @@ class MigrationTests: XCTestCase {
         
         waitForAllExpectations()
     }
+}
+
+extension MigrationTests {
     
     func testMigratesOnce() {
+        let migration: Migration = .makeMigration(forVersion: "1.0")
+        
         let expectation = self.expectation(description: "Expecting block to be run")
         migration.perform(forVersion: "0.9") {
             expectation.fulfill()
@@ -144,18 +129,23 @@ class MigrationTests: XCTestCase {
         }
         
         let expectation2 = self.expectation(description: "Expecting block to be run")
-        migration.perform(forVersion: "1.0", withBuild: "1") {
+        migration.perform(forVersion: "1.0") {
             expectation2.fulfill()
         }
         
-        migration.perform(forVersion: "1.0", withBuild: "1") {
+        migration.perform(forVersion: "1.0") {
             XCTFail("Should not execute a block for the same version twice")
         }
         
         waitForAllExpectations()
     }
+}
+
+extension MigrationTests {
     
     func testMigratesPreviousVersionBlocks() {
+        let migration: Migration = .makeMigration(forVersion: "1.0")
+        
         let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
         migration.perform(forVersion: "0.9") {
             expectation1.fulfill()
@@ -168,8 +158,13 @@ class MigrationTests: XCTestCase {
         
         waitForAllExpectations()
     }
+}
+
+extension MigrationTests {
     
     func testMigratesVersionInNaturalSortOrder() {
+        let migration: Migration = .makeMigration(forVersion: "1.0")
+        
         let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
         migration.perform(forVersion: "0.9") {
             expectation1.fulfill()
@@ -191,45 +186,12 @@ class MigrationTests: XCTestCase {
         
         waitForAllExpectations()
     }
-    
-    func testMigratesPreviousBuildsBlocks() {
-        let expectation1 = self.expectation(description: "Expecting block to be run for build 0.9")
-        migration.perform(forVersion: "1.0", withBuild: "0.9") {
-            expectation1.fulfill()
-        }
-        
-        let expectation2 = self.expectation(description: "Expecting block to be run for build 1")
-        migration.perform(forVersion: "1.0", withBuild: "1") {
-            expectation2.fulfill()
-        }
-        
-        waitForAllExpectations()
-    }
-    
-    func testMigratesBuildsInNaturalSortOrder() {
-        let expectation1 = self.expectation(description: "Expecting block to be run for version 1.0 (0.9)")
-        migration.perform(forVersion: "1.0", withBuild: "0.9") {
-            expectation1.fulfill()
-        }
-        
-        migration.perform(forVersion: "1.0", withBuild: "0.1") {
-            XCTFail("Should use natural sort order, e.g. treat 0.10 as a follower of 0.9")
-        }
-        
-        let expectation2 = self.expectation(description: "Expecting block to be run for version 1.0 (0.10)")
-        migration.perform(forVersion: "1.0", withBuild: "0.10") {
-            expectation2.fulfill()
-        }
-        
-        let expectation3 = self.expectation(description: "Expecting block to be run for version 1 (1)")
-        migration.perform(forVersion: "1.0", withBuild: "1") {
-            expectation3.fulfill()
-        }
-        
-        waitForAllExpectations()
-    }
+}
+
+extension MigrationTests {
     
     func testRunsApplicationUpdateBlockOnce() {
+        let migration: Migration = .makeMigration(forVersion: "1.0")
         let expectation = self.expectation(description: "Should only call block once")
         
         migration.performUpdate {
@@ -242,8 +204,13 @@ class MigrationTests: XCTestCase {
         
         waitForAllExpectations()
     }
+}
+
+extension MigrationTests {
     
     func testRunsApplicationUpdateBlockOnlyOnceWithMultipleMigrations() {
+        let migration: Migration = .makeMigration(forVersion: "1.0")
+        
         let expectation1 = self.expectation(description: "Expecting block to be run for version 0.8")
         migration.perform(forVersion: "0.8") {
             expectation1.fulfill()
@@ -266,30 +233,11 @@ class MigrationTests: XCTestCase {
         
         waitForAllExpectations()
     }
-    
-    func testRunsBuildUpdateUpdateBlockOnlyOnceWithMultipleMigrations() {
-        let expectation1 = self.expectation(description: "Expecting block to be run for version 0.8")
-        migration.perform(forVersion: "1.0", withBuild: "0.8") {
-            expectation1.fulfill()
-        }
-        
-        let expectation2 = self.expectation(description: "Expecting block to be run for version 0.9")
-        migration.perform(forVersion: "1.0", withBuild: "0.9") {
-            expectation2.fulfill()
-        }
-        
-        let expectation3 = self.expectation(description: "Expecting block to be run for version 0.10")
-        migration.perform(forVersion: "1.0", withBuild: "0.10") {
-            expectation3.fulfill()
-        }
-        
-        let expectation4 = self.expectation(description: "Should call the buildNumberUpdate only once no matter how many migrations have to be done")
-        migration.performUpdate {
-            expectation4.fulfill()
-        }
-        
-        waitForAllExpectations()
-    }
+}
+
+// MARK: - Helpers
+
+private extension MigrationTests {
     
     func waitForAllExpectations() {
         waitForExpectations(timeout: 5) {
@@ -297,5 +245,22 @@ class MigrationTests: XCTestCase {
             print("waitForAllExpectations timeout: \(error)")
         }
     }
+}
+
+private extension Migration {
+    private class TempClassForBundle {}
     
+    static func makeMigration(forVersion version: String) -> Migration {
+        let migration = Migration(
+            userDefaults: UserDefaults(suiteName: "MigrationTests")!,
+            bundle: Bundle(for: TempClassForBundle.self)
+        )
+        
+        // Simulate build version
+        migration.set(version: version)
+        
+        migration.reset()
+        
+        return migration
+    }
 }
