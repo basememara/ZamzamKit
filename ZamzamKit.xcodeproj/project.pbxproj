@@ -112,6 +112,7 @@
 		8B2DE3E31C8A86B2008F1569 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3E01C8A86B2008F1569 /* Bundle.swift */; };
 		8B2DE3EC1C8A8F79008F1569 /* BundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EB1C8A8F79008F1569 /* BundleTests.swift */; };
 		8B2DE3F01C8A90AF008F1569 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DE3EE1C8A90AF008F1569 /* Settings.plist */; };
+		8B2E7C1F230E3A6400F70E43 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE814F41C784233005F23CE /* Color.swift */; };
 		8B37B8D5200549040052E9B1 /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B37B8D4200549040052E9B1 /* UIStackView.swift */; };
 		8B3A6A4C22275917000011BC /* AppModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4922275917000011BC /* AppModels.swift */; };
 		8B3A6A4D22275917000011BC /* AppDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4A22275917000011BC /* AppDisplayable.swift */; };
@@ -2127,6 +2128,7 @@
 				8B17686D22AFCAF2002CC991 /* Result.swift in Sources */,
 				8B17685922AFCAF2002CC991 /* BinaryFloatingPoint.swift in Sources */,
 				8B17685C22AFCAF2002CC991 /* CLLocation.swift in Sources */,
+				8B2E7C1F230E3A6400F70E43 /* Color.swift in Sources */,
 				8B17686F22AFCAF2002CC991 /* Sequence.swift in Sources */,
 				8B17688222AFCB0C002CC991 /* Preferences.swift in Sources */,
 				8B17688022AFCB0C002CC991 /* PreferencesStoreInterfaces.swift in Sources */,

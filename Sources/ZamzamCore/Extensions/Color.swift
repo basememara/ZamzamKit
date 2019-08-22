@@ -6,7 +6,12 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import UIKit
+#if canImport(UIKit)
+    import UIKit
+#elseif os(OSX)
+    import AppKit
+    typealias UIColor = NSColor
+#endif
 
 public extension UIColor {
 
