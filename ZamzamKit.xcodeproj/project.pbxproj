@@ -37,6 +37,18 @@
 		8B226853230FB2F100291D1F /* ZamzamKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B226851230FB2F100291D1F /* ZamzamKit.swift */; };
 		8B226854230FB2F100291D1F /* ZamzamKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B226851230FB2F100291D1F /* ZamzamKit.swift */; };
 		8B226855230FB2F100291D1F /* ZamzamKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B226851230FB2F100291D1F /* ZamzamKit.swift */; };
+		8B22685B230FB3FC00291D1F /* ZamzamLocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B22685A230FB3FC00291D1F /* ZamzamLocationTests.swift */; };
+		8B22685C230FB3FC00291D1F /* ZamzamLocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B22685A230FB3FC00291D1F /* ZamzamLocationTests.swift */; };
+		8B22685D230FB3FC00291D1F /* ZamzamLocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B22685A230FB3FC00291D1F /* ZamzamLocationTests.swift */; };
+		8B22685E230FB3FC00291D1F /* ZamzamLocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B22685A230FB3FC00291D1F /* ZamzamLocationTests.swift */; };
+		8B226860230FB40A00291D1F /* ZamzamNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B22685F230FB40A00291D1F /* ZamzamNotificationTests.swift */; };
+		8B226861230FB40A00291D1F /* ZamzamNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B22685F230FB40A00291D1F /* ZamzamNotificationTests.swift */; };
+		8B226862230FB40A00291D1F /* ZamzamNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B22685F230FB40A00291D1F /* ZamzamNotificationTests.swift */; };
+		8B226863230FB40A00291D1F /* ZamzamNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B22685F230FB40A00291D1F /* ZamzamNotificationTests.swift */; };
+		8B226865230FB41900291D1F /* ZamzamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B226864230FB41900291D1F /* ZamzamUITests.swift */; };
+		8B226866230FB41900291D1F /* ZamzamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B226864230FB41900291D1F /* ZamzamUITests.swift */; };
+		8B226867230FB41900291D1F /* ZamzamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B226864230FB41900291D1F /* ZamzamUITests.swift */; };
+		8B226868230FB41900291D1F /* ZamzamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B226864230FB41900291D1F /* ZamzamUITests.swift */; };
 		8B2285251EB6863600425B5A /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2285241EB6863600425B5A /* UITableViewCell.swift */; };
 		8B23CF35223E192500B0E038 /* ColumnsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23CF34223E192500B0E038 /* ColumnsCollectionViewFlowLayout.swift */; };
 		8B25F6B91EC38F0200B4406D /* ZamzamKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1447C81C72577900043657 /* ZamzamKit.framework */; };
@@ -320,6 +332,9 @@
 		8B1EEC871CF7588600AE054B /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		8B1FE7C92065A0DD00EE8DBE /* ZamzamKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = ZamzamKit.podspec; sourceTree = "<group>"; };
 		8B226851230FB2F100291D1F /* ZamzamKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZamzamKit.swift; sourceTree = "<group>"; };
+		8B22685A230FB3FC00291D1F /* ZamzamLocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZamzamLocationTests.swift; sourceTree = "<group>"; };
+		8B22685F230FB40A00291D1F /* ZamzamNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZamzamNotificationTests.swift; sourceTree = "<group>"; };
+		8B226864230FB41900291D1F /* ZamzamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZamzamUITests.swift; sourceTree = "<group>"; };
 		8B2285241EB6863600425B5A /* UITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		8B23CF34223E192500B0E038 /* ColumnsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		8B2B0C0221360DA100353F4E /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
@@ -628,6 +643,9 @@
 			isa = PBXGroup;
 			children = (
 				8B226850230FB2A800291D1F /* ZamzamKitTests */,
+				8B226856230FB3BB00291D1F /* ZamzamLocationTests */,
+				8B226857230FB3D000291D1F /* ZamzamNotificationTests */,
+				8B226858230FB3DB00291D1F /* ZamzamUITests */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -638,6 +656,30 @@
 				8B226851230FB2F100291D1F /* ZamzamKit.swift */,
 			);
 			path = ZamzamKitTests;
+			sourceTree = "<group>";
+		};
+		8B226856230FB3BB00291D1F /* ZamzamLocationTests */ = {
+			isa = PBXGroup;
+			children = (
+				8B22685A230FB3FC00291D1F /* ZamzamLocationTests.swift */,
+			);
+			path = ZamzamLocationTests;
+			sourceTree = "<group>";
+		};
+		8B226857230FB3D000291D1F /* ZamzamNotificationTests */ = {
+			isa = PBXGroup;
+			children = (
+				8B22685F230FB40A00291D1F /* ZamzamNotificationTests.swift */,
+			);
+			path = ZamzamNotificationTests;
+			sourceTree = "<group>";
+		};
+		8B226858230FB3DB00291D1F /* ZamzamUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8B226864230FB41900291D1F /* ZamzamUITests.swift */,
+			);
+			path = ZamzamUITests;
 			sourceTree = "<group>";
 		};
 		8B23CF33223E190D00B0E038 /* Layouts */ = {
@@ -1529,6 +1571,7 @@
 				8B37B8D5200549040052E9B1 /* UIStackView.swift in Sources */,
 				8BCB6529230E61110008A666 /* Bundle.swift in Sources */,
 				8B2D57B920E2D38900CF4B01 /* UILabelView.swift in Sources */,
+				8B226865230FB41900291D1F /* ZamzamUITests.swift in Sources */,
 				8B75EA9322E2C256009B7502 /* AppRoutable+iOS.swift in Sources */,
 				8B75EA8A22E2C0FD009B7502 /* AppDisplayable+iOS.swift in Sources */,
 				8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */,
@@ -1538,6 +1581,7 @@
 				8BB57564229028250079BE42 /* UITabBarController.swift in Sources */,
 				8BEFE46E1E4506B500100744 /* UNUserNotificationCenter.swift in Sources */,
 				8B83044F22832FF600AD5D61 /* AppPresentable.swift in Sources */,
+				8B22685B230FB3FC00291D1F /* ZamzamLocationTests.swift in Sources */,
 				8BF0CD112143243500DF6DAF /* LocationWorkerType.swift in Sources */,
 				8B1CC4F4217AE56D00F00A70 /* ApplicationModuleDelegate.swift in Sources */,
 				8B2D90EB1EE47ED80019F063 /* UNNotificationTriggerDateType.swift in Sources */,
@@ -1568,6 +1612,7 @@
 				8B1CC4F1217AE48C00F00A70 /* ApplicationModule.swift in Sources */,
 				8B756F151E5CF16D00DE4B02 /* XIBView.swift in Sources */,
 				8BD98D6F1FC35B3700E74A8C /* UIWindow.swift in Sources */,
+				8B226860230FB40A00291D1F /* ZamzamNotificationTests.swift in Sources */,
 				8B83045A22839EC700AD5D61 /* PlaceholderTextView.swift in Sources */,
 				8BD2D19E1CA583110018AC2B /* UIAlertAction.swift in Sources */,
 				8B3A6A4C22275917000011BC /* AppModels.swift in Sources */,
@@ -1582,6 +1627,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B22685C230FB3FC00291D1F /* ZamzamLocationTests.swift in Sources */,
 				8B8215421CA15E0D00C9FCC9 /* CLKComplicationServer.swift in Sources */,
 				8BCB652A230E61110008A666 /* Bundle.swift in Sources */,
 				8BD2744722AC99D400211D31 /* Localizable.swift in Sources */,
@@ -1591,6 +1637,7 @@
 				8B5316471C9B23BF0094A6C4 /* WKInterfaceController.swift in Sources */,
 				8B83045022832FF600AD5D61 /* AppPresentable.swift in Sources */,
 				8B226853230FB2F100291D1F /* ZamzamKit.swift in Sources */,
+				8B226861230FB40A00291D1F /* ZamzamNotificationTests.swift in Sources */,
 				8BD016851E77371A008F306E /* WatchSession.swift in Sources */,
 				8BFDB6781C751F2300C94996 /* FileManager.swift in Sources */,
 				8B99620F22E2C4790010BA04 /* AppRoutable+watchOS.swift in Sources */,
@@ -1603,6 +1650,7 @@
 				8BC9D00A22E11139002B177B /* ApplicationModuleDelegate.swift in Sources */,
 				8BD2745122AC9AF100211D31 /* UNNotificationTriggerDateType.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
+				8B226866230FB41900291D1F /* ZamzamUITests.swift in Sources */,
 				8BC6D99B204790B600242DAE /* Scrollable.swift in Sources */,
 				8BB575612290267F0079BE42 /* AppDisplayable.swift in Sources */,
 				8B75EA9422E2C2E6009B7502 /* AppRoutable.swift in Sources */,
@@ -1616,6 +1664,7 @@
 			files = (
 				8B83044D22832F4C00AD5D61 /* AppBusinessLogic.swift in Sources */,
 				8BCB652B230E61110008A666 /* Bundle.swift in Sources */,
+				8B226867230FB41900291D1F /* ZamzamUITests.swift in Sources */,
 				8BD2744622AC99D400211D31 /* Localizable.swift in Sources */,
 				8B83045122832FF600AD5D61 /* AppPresentable.swift in Sources */,
 				8BB57560229026770079BE42 /* AppModels.swift in Sources */,
@@ -1624,6 +1673,8 @@
 				8BC6D99C204790B700242DAE /* Scrollable.swift in Sources */,
 				8B226854230FB2F100291D1F /* ZamzamKit.swift in Sources */,
 				8BD98D671FC33B4600E74A8C /* Font.swift in Sources */,
+				8B226862230FB40A00291D1F /* ZamzamNotificationTests.swift in Sources */,
+				8B22685D230FB3FC00291D1F /* ZamzamLocationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1633,6 +1684,7 @@
 			files = (
 				8B75EA9622E2C2E8009B7502 /* AppRoutable.swift in Sources */,
 				8BCB652C230E61110008A666 /* Bundle.swift in Sources */,
+				8B226868230FB41900291D1F /* ZamzamUITests.swift in Sources */,
 				8B75EA8E22E2C154009B7502 /* AppDisplayable.swift in Sources */,
 				8B75EA9022E2C231009B7502 /* AppPresentable.swift in Sources */,
 				8B75EA9122E2C23D009B7502 /* AppBusinessLogic.swift in Sources */,
@@ -1641,6 +1693,8 @@
 				8B17688422AFCB10002CC991 /* Scrollable.swift in Sources */,
 				8B226855230FB2F100291D1F /* ZamzamKit.swift in Sources */,
 				8B17687922AFCAFD002CC991 /* Localizable.swift in Sources */,
+				8B226863230FB40A00291D1F /* ZamzamNotificationTests.swift in Sources */,
+				8B22685E230FB3FC00291D1F /* ZamzamLocationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
