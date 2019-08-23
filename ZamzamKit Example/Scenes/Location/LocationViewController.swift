@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import ZamzamCore
 import ZamzamKit
 
 class LocationViewController: UIViewController {

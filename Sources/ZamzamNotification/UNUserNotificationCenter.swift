@@ -8,6 +8,7 @@
 
 import UserNotifications
 import CoreLocation
+import ZamzamCore
 
 public extension UNUserNotificationCenter {
     

@@ -6,7 +6,8 @@
 //  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
-import ZamzamKit
+import Foundation
+import ZamzamCore
 
 extension Localizable {
     static let allow = Localizable(NSLocalizedString("Allow", comment: "For dialogs"))

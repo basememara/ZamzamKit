@@ -4,4 +4,7 @@
    <FileRef
       location = "container:ZamzamKit.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Packages/ZamzamCore">
+   </FileRef>
 </Workspace>

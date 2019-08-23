@@ -8,6 +8,7 @@
 //
 
 import UIKit
+import ZamzamCore
 
 /// A bar button item with an optional badge value.
 open class BadgeBarButtonItem: UIBarButtonItem {

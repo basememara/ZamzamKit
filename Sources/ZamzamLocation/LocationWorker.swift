@@ -7,6 +7,7 @@
 //
 
 import CoreLocation
+import ZamzamCore
 
 /// A `LocationManager` wrapper with extensions.
 public class LocationWorker: NSObject, LocationWorkerType {

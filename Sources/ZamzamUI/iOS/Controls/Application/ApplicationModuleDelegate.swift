@@ -62,12 +62,16 @@ open class ApplicationModuleDelegate: UIResponder, UIApplicationDelegate {
 public extension ApplicationModuleDelegate {
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        // Ensure all delegates called even if condition fails early
+        //swiftlint:disable reduce_boolean
         return lazyModules.reduce(true) {
             $0 && $1.application(application, willFinishLaunchingWithOptions: launchOptions)
         }
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Ensure all delegates called even if condition fails early
+        //swiftlint:disable reduce_boolean
         return lazyModules.reduce(true) {
             $0 && $1.application(application, didFinishLaunchingWithOptions: launchOptions)
         }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ZamzamCore
 import ZamzamKit
 
 class WatchViewController: UIViewController {

@@ -8,6 +8,7 @@
 
 import AVFoundation
 import UIKit
+import ZamzamCore
 
 public protocol PhotoPickerType {
     func makeViewController() -> UIViewController?

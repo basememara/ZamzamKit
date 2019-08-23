@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import ZamzamCore
 import ZamzamKit
 
 @UIApplicationMain

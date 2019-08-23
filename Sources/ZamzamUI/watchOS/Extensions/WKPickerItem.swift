@@ -7,6 +7,7 @@
 //
 
 import WatchKit
+import ZamzamCore
 
 public extension WKPickerItem {
     

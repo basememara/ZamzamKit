@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ZamzamCore
 
 open class ScrollViewWithKeyboard: UIScrollView {
     private lazy var notificationCenter: NotificationCenter = .default

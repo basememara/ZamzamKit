@@ -7,6 +7,7 @@
 //
 
 import CoreLocation
+import ZamzamCore
 
 public protocol LocationWorkerType {
     typealias LocationHandler = (CLLocation) -> Void

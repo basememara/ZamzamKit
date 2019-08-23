@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ZamzamCore
 
 /// A `UITextView` with a placeholder text.
 open class PlaceholderTextView: UITextView {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ZamzamCore
 
 public extension UITabBarController {
     
