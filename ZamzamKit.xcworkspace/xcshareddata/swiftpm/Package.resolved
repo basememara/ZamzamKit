@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ZamzamCore",
+        "repositoryURL": "https://github.com/ZamzamInc/ZamzamCore",
+        "state": {
+          "branch": "develop",
+          "revision": "5c4c7e64c8108de19f97d355843f25cd30d4789a",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
