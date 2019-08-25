@@ -123,6 +123,14 @@
 		8B8802D721757F220035543D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8802D621757F220035543D /* TableViewCell.swift */; };
 		8B8802D92175804B0035543D /* TableModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8802D82175804B0035543D /* TableModels.swift */; };
 		8B99620F22E2C4790010BA04 /* AppRoutable+watchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B99620E22E2C4790010BA04 /* AppRoutable+watchOS.swift */; };
+		8B9B15642312A5B000C0925C /* LocationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B15632312A5B000C0925C /* LocationModels.swift */; };
+		8B9B15652312A5B000C0925C /* LocationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B15632312A5B000C0925C /* LocationModels.swift */; };
+		8B9B15662312A5B000C0925C /* LocationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B15632312A5B000C0925C /* LocationModels.swift */; };
+		8B9B15672312A5B000C0925C /* LocationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B15632312A5B000C0925C /* LocationModels.swift */; };
+		8B9B15692312A63900C0925C /* NotificationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B15682312A63900C0925C /* NotificationModels.swift */; };
+		8B9B156A2312A63900C0925C /* NotificationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B15682312A63900C0925C /* NotificationModels.swift */; };
+		8B9B156B2312A63900C0925C /* NotificationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B15682312A63900C0925C /* NotificationModels.swift */; };
+		8B9B156C2312A63900C0925C /* NotificationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B15682312A63900C0925C /* NotificationModels.swift */; };
 		8B9E97A71EAFA4980067ACB7 /* Test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E97A61EAFA4980067ACB7 /* Test.txt */; };
 		8B9E97A81EAFA4980067ACB7 /* Test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E97A61EAFA4980067ACB7 /* Test.txt */; };
 		8B9E98601EB396D20067ACB7 /* CellIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E985F1EB396D20067ACB7 /* CellIdentifiable.swift */; };
@@ -407,6 +415,8 @@
 		8B8802D82175804B0035543D /* TableModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModels.swift; sourceTree = "<group>"; };
 		8B8DD57522AFB9EA008B86A9 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		8B99620E22E2C4790010BA04 /* AppRoutable+watchOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppRoutable+watchOS.swift"; sourceTree = "<group>"; };
+		8B9B15632312A5B000C0925C /* LocationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModels.swift; sourceTree = "<group>"; };
+		8B9B15682312A63900C0925C /* NotificationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModels.swift; sourceTree = "<group>"; };
 		8B9E97A61EAFA4980067ACB7 /* Test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Test.txt; sourceTree = "<group>"; };
 		8B9E985F1EB396D20067ACB7 /* CellIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellIdentifiable.swift; sourceTree = "<group>"; };
 		8BAA353F22E38D2500C2701A /* WKPickerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKPickerItem.swift; sourceTree = "<group>"; };
@@ -938,6 +948,7 @@
 		8BD2743A22AC970300211D31 /* ZamzamLocation */ = {
 			isa = PBXGroup;
 			children = (
+				8B9B15632312A5B000C0925C /* LocationModels.swift */,
 				8BF0CD102143243500DF6DAF /* LocationWorkerType.swift */,
 				8B6C99961E6E031800D523CC /* LocationWorker.swift */,
 			);
@@ -947,6 +958,7 @@
 		8BD2743B22AC971400211D31 /* ZamzamNotification */ = {
 			isa = PBXGroup;
 			children = (
+				8B9B15682312A63900C0925C /* NotificationModels.swift */,
 				8BF210911E4A22460026B802 /* UNNotificationAttachment.swift */,
 				8B2D90EA1EE47ED80019F063 /* UNNotificationTriggerDateType.swift */,
 				8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */,
@@ -1577,6 +1589,7 @@
 				8BF307D01CF0E3C600BBA933 /* UIActivity.swift in Sources */,
 				8B07420B20DFBD2300204C2F /* RoundedViews.swift in Sources */,
 				8BB415E61FB0DFFF0002C86C /* StatusBarable.swift in Sources */,
+				8B9B15642312A5B000C0925C /* LocationModels.swift in Sources */,
 				8B37B8D5200549040052E9B1 /* UIStackView.swift in Sources */,
 				8BCB6529230E61110008A666 /* Bundle.swift in Sources */,
 				8B2D57B920E2D38900CF4B01 /* UILabelView.swift in Sources */,
@@ -1604,6 +1617,7 @@
 				8BD2D1961CA581890018AC2B /* Audible.swift in Sources */,
 				8B63B2C61CD959BC000F2B5F /* UIBarButtonItem.swift in Sources */,
 				8BCB73DA1CAD69BF00E20096 /* UITableView.swift in Sources */,
+				8B9B15692312A63900C0925C /* NotificationModels.swift in Sources */,
 				8BCB73DC1CAD6BD700E20096 /* UICollectionView.swift in Sources */,
 				8B0BA2241FAA6DFC0042BFF0 /* NextResponderTextField.swift in Sources */,
 				8B6B0CBC219D312E0018F2E0 /* UIToolbar.swift in Sources */,
@@ -1659,10 +1673,12 @@
 				8BC9D00A22E11139002B177B /* ExtensionModuleDelegate.swift in Sources */,
 				8BD2745122AC9AF100211D31 /* UNNotificationTriggerDateType.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
+				8B9B15652312A5B000C0925C /* LocationModels.swift in Sources */,
 				8B226866230FB41900291D1F /* ZamzamUITests.swift in Sources */,
 				8BC6D99B204790B600242DAE /* Scrollable.swift in Sources */,
 				8BB575612290267F0079BE42 /* AppDisplayable.swift in Sources */,
 				8B75EA9422E2C2E6009B7502 /* AppRoutable.swift in Sources */,
+				8B9B156A2312A63900C0925C /* NotificationModels.swift in Sources */,
 				8BF0CD122143243500DF6DAF /* LocationWorkerType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1675,6 +1691,7 @@
 				8BCB652B230E61110008A666 /* Bundle.swift in Sources */,
 				8B226867230FB41900291D1F /* ZamzamUITests.swift in Sources */,
 				8BD2744622AC99D400211D31 /* Localizable.swift in Sources */,
+				8B9B15662312A5B000C0925C /* LocationModels.swift in Sources */,
 				8B83045122832FF600AD5D61 /* AppPresentable.swift in Sources */,
 				8BB57560229026770079BE42 /* AppModels.swift in Sources */,
 				8B75EA9522E2C2E7009B7502 /* AppRoutable.swift in Sources */,
@@ -1683,6 +1700,7 @@
 				8B226854230FB2F100291D1F /* ZamzamKit.swift in Sources */,
 				8BD98D671FC33B4600E74A8C /* Font.swift in Sources */,
 				8B226862230FB40A00291D1F /* ZamzamNotificationTests.swift in Sources */,
+				8B9B156B2312A63900C0925C /* NotificationModels.swift in Sources */,
 				8B22685D230FB3FC00291D1F /* ZamzamLocationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1695,6 +1713,7 @@
 				8BCB652C230E61110008A666 /* Bundle.swift in Sources */,
 				8B226868230FB41900291D1F /* ZamzamUITests.swift in Sources */,
 				8B75EA8E22E2C154009B7502 /* AppDisplayable.swift in Sources */,
+				8B9B15672312A5B000C0925C /* LocationModels.swift in Sources */,
 				8B75EA9022E2C231009B7502 /* AppPresentable.swift in Sources */,
 				8B75EA9122E2C23D009B7502 /* AppBusinessLogic.swift in Sources */,
 				8B75EA8F22E2C228009B7502 /* AppModels.swift in Sources */,
@@ -1703,6 +1722,7 @@
 				8B226855230FB2F100291D1F /* ZamzamKit.swift in Sources */,
 				8B17687922AFCAFD002CC991 /* Localizable.swift in Sources */,
 				8B226863230FB40A00291D1F /* ZamzamNotificationTests.swift in Sources */,
+				8B9B156C2312A63900C0925C /* NotificationModels.swift in Sources */,
 				8B22685E230FB3FC00291D1F /* ZamzamLocationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

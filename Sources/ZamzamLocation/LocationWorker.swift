@@ -67,25 +67,17 @@ public class LocationWorker: NSObject, LocationWorkerType {
 
 public extension LocationWorker {
     
-    /// Permission types to use location services.
-    ///
-    /// - whenInUse: While the app is in the foreground.
-    /// - always: Whenever the app is running.
-    enum AuthorizationType {
-        case whenInUse, always
-    }
-    
     var isAuthorized: Bool {
         return CLLocationManager.isAuthorized
     }
     
-    func isAuthorized(for type: AuthorizationType) -> Bool {
+    func isAuthorized(for type: LocationModels.AuthorizationType) -> Bool {
         guard CLLocationManager.locationServicesEnabled() else { return false }
         return (type == .whenInUse && CLLocationManager.authorizationStatus() == .authorizedWhenInUse)
             || (type == .always && CLLocationManager.authorizationStatus() == .authorizedAlways)
     }
     
-    func requestAuthorization(for type: AuthorizationType, startUpdatingLocation: Bool, completion: AuthorizationHandler?) {
+    func requestAuthorization(for type: LocationModels.AuthorizationType, startUpdatingLocation: Bool, completion: AuthorizationHandler?) {
         // Handle authorized and exit
         guard !isAuthorized(for: type) else {
             if startUpdatingLocation {
