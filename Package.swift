@@ -63,7 +63,7 @@ let package = Package(
         ),
         .testTarget(
             name: "ZamzamUITests",
-            dependencies: ["ZamzamUI"]
+            dependencies: ["ZamzamUI"],
             exclude: {
                 var exclude = [String]()
                 
