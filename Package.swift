@@ -59,11 +59,7 @@ let package = Package(
         ),
         .target(
             name: "ZamzamUI",
-            dependencies: ["ZamzamKit"]
-        ),
-        .testTarget(
-            name: "ZamzamUITests",
-            dependencies: ["ZamzamUI"],
+            dependencies: ["ZamzamKit"],
             exclude: {
                 var exclude = [String]()
                 
@@ -75,6 +71,10 @@ let package = Package(
                 
                 return exclude
             }()
+        ),
+        .testTarget(
+            name: "ZamzamUITests",
+            dependencies: ["ZamzamUI"]
         )
     ]
 )
