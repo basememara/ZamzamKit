@@ -43,7 +43,7 @@ let package = Package(
         ),
         .target(
             name: "ZamzamLocation",
-            dependencies: ["ZamzamCore"]
+            dependencies: ["ZamzamKit"]
         ),
         .testTarget(
             name: "ZamzamLocationTests",
@@ -51,7 +51,7 @@ let package = Package(
         ),
         .target(
             name: "ZamzamNotification",
-            dependencies: ["ZamzamCore"]
+            dependencies: ["ZamzamKit"]
         ),
         .testTarget(
             name: "ZamzamNotificationTests",
@@ -59,7 +59,7 @@ let package = Package(
         ),
         .target(
             name: "ZamzamUI",
-            dependencies: ["ZamzamCore"]
+            dependencies: ["ZamzamKit"]
         ),
         .testTarget(
             name: "ZamzamUITests",
