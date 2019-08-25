@@ -64,6 +64,17 @@ let package = Package(
         .testTarget(
             name: "ZamzamUITests",
             dependencies: ["ZamzamUI"]
+            exclude: {
+                var exclude = [String]()
+                
+                #if os(iOS)
+                exclude.append("watchOS")
+                #elseif os(watchOS)
+                exclude.append("iOS")
+                #endif
+                
+                return exclude
+            }()
         )
     ]
 )
