@@ -43,7 +43,17 @@ let package = Package(
         ),
         .target(
             name: "ZamzamLocation",
-            dependencies: ["ZamzamKit"]
+            dependencies: ["ZamzamKit"],
+            exclude: {
+                var exclude = [String]()
+                
+                #if !(os(iOS) || os(watchOS))
+                exclude.append("LocationWorkerType")
+                exclude.append("LocationWorker")
+                #endif
+                
+                return exclude
+            }()
         ),
         .testTarget(
             name: "ZamzamLocationTests",
@@ -51,7 +61,18 @@ let package = Package(
         ),
         .target(
             name: "ZamzamNotification",
-            dependencies: ["ZamzamKit"]
+            dependencies: ["ZamzamKit"],
+            exclude: {
+                var exclude = [String]()
+                
+                #if !(os(iOS) || os(watchOS))
+                exclude.append("UNNotificationAttachment")
+                exclude.append("UNNotificationTriggerDateType")
+                exclude.append("UNUserNotificationCenter")
+                #endif
+                
+                return exclude
+            }()
         ),
         .testTarget(
             name: "ZamzamNotificationTests",
