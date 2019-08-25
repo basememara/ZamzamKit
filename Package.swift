@@ -48,8 +48,8 @@ let package = Package(
                 var exclude = [String]()
                 
                 #if !(os(iOS) || os(watchOS))
-                exclude.append("LocationWorkerType")
-                exclude.append("LocationWorker")
+                exclude.append("LocationWorkerType.swift")
+                exclude.append("LocationWorker.swift")
                 #endif
                 
                 return exclude
@@ -66,9 +66,9 @@ let package = Package(
                 var exclude = [String]()
                 
                 #if !(os(iOS) || os(watchOS))
-                exclude.append("UNNotificationAttachment")
-                exclude.append("UNNotificationTriggerDateType")
-                exclude.append("UNUserNotificationCenter")
+                exclude.append("UNNotificationAttachment.swift")
+                exclude.append("UNNotificationTriggerDateType.swift")
+                exclude.append("UNUserNotificationCenter.swift")
                 #endif
                 
                 return exclude
