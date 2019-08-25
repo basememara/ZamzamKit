@@ -63,10 +63,12 @@ let package = Package(
             exclude: {
                 var exclude = [String]()
                 
-                #if os(iOS)
-                exclude.append("watchOS")
-                #elseif os(watchOS)
+                #if !os(iOS)
                 exclude.append("iOS")
+                #endif
+
+                #if !os(watchOS)
+                exclude.append("watchOS")
                 #endif
                 
                 return exclude
