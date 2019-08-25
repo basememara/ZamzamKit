@@ -160,7 +160,7 @@
 		8BC6D99A2047908900242DAE /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC6D9992047908900242DAE /* Scrollable.swift */; };
 		8BC6D99B204790B600242DAE /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC6D9992047908900242DAE /* Scrollable.swift */; };
 		8BC6D99C204790B700242DAE /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC6D9992047908900242DAE /* Scrollable.swift */; };
-		8BC9D00A22E11139002B177B /* ApplicationModuleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D00922E11139002B177B /* ApplicationModuleDelegate.swift */; };
+		8BC9D00A22E11139002B177B /* ExtensionModuleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D00922E11139002B177B /* ExtensionModuleDelegate.swift */; };
 		8BCB6529230E61110008A666 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB6528230E61110008A666 /* Bundle.swift */; };
 		8BCB652A230E61110008A666 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB6528230E61110008A666 /* Bundle.swift */; };
 		8BCB652B230E61110008A666 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB6528230E61110008A666 /* Bundle.swift */; };
@@ -434,7 +434,7 @@
 		8BC6931E2233B9380020A039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8BC693202233B9380020A039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BC6D9992047908900242DAE /* Scrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrollable.swift; sourceTree = "<group>"; };
-		8BC9D00922E11139002B177B /* ApplicationModuleDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModuleDelegate.swift; sourceTree = "<group>"; };
+		8BC9D00922E11139002B177B /* ExtensionModuleDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionModuleDelegate.swift; sourceTree = "<group>"; };
 		8BCB6528230E61110008A666 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		8BCB73D91CAD69BF00E20096 /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		8BCB73DB1CAD6BD700E20096 /* UICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
@@ -907,7 +907,7 @@
 		8BC9D00822E11127002B177B /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				8BC9D00922E11139002B177B /* ApplicationModuleDelegate.swift */,
+				8BC9D00922E11139002B177B /* ExtensionModuleDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1656,7 +1656,7 @@
 				8BBB66E21E9C000900AB1973 /* UNUserNotificationCenter.swift in Sources */,
 				8BB5755F229026770079BE42 /* AppModels.swift in Sources */,
 				8BF210931E4A22460026B802 /* UNNotificationAttachment.swift in Sources */,
-				8BC9D00A22E11139002B177B /* ApplicationModuleDelegate.swift in Sources */,
+				8BC9D00A22E11139002B177B /* ExtensionModuleDelegate.swift in Sources */,
 				8BD2745122AC9AF100211D31 /* UNNotificationTriggerDateType.swift in Sources */,
 				8BFDB6731C751E4F00C94996 /* WKInterfaceGroup.swift in Sources */,
 				8B226866230FB41900291D1F /* ZamzamUITests.swift in Sources */,

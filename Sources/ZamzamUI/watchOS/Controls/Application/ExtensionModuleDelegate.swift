@@ -1,5 +1,5 @@
 //
-//  ApplicationModuleDelegate.swift
+//  ExtensionModuleDelegate.swift
 //  ZamzamKit watchOS
 //
 //  Created by Basem Emara on 2019-07-18.
@@ -12,9 +12,9 @@ import WatchKit
 ///
 /// The application modules will be processed in sequence.
 ///
-///     class ExtensionDelegate: ApplicationModuleDelegate {
+///     class ExtensionDelegate: ExtensionModuleDelegate {
 ///
-///         override func modules() -> [ApplicationModule] {
+///         override func modules() -> [ExtensionModule] {
 ///             return [
 ///                 LoggerApplicationModule(),
 ///                 LocationApplicationModule()
@@ -24,7 +24,7 @@ import WatchKit
 ///
 /// Each application module has access to the `ExtensionDelegate` lifecycle events:
 ///
-///     final class LoggerApplicationModule: ApplicationModule {
+///     final class LoggerApplicationModule: ExtensionModule {
 ///         private let log = Logger()
 ///
 ///         func applicationDidFinishLaunching(_ application: WKExtension) {
@@ -47,25 +47,25 @@ import WatchKit
 ///             log.warn("App did enter background.")
 ///         }
 ///     }
-open class ApplicationModuleDelegate: NSObject, WKExtensionDelegate {
+open class ExtensionModuleDelegate: NSObject, WKExtensionDelegate {
     
     /// Lazy implementation of application modules list
-    public private(set) lazy var lazyModules: [ApplicationModule] = modules()
+    public private(set) lazy var lazyModules: [ExtensionModule] = modules()
     
     /// List of application modules for binding to `ExtensionDelegate` events
-    open func modules() -> [ApplicationModule] {
+    open func modules() -> [ExtensionModule] {
         return [ /* Populated from sub-class */ ]
     }
 }
 
-public extension ApplicationModuleDelegate {
+public extension ExtensionModuleDelegate {
     
     func applicationDidFinishLaunching() {
         lazyModules.forEach { $0.applicationDidFinishLaunching(.shared()) }
     }
 }
 
-public extension ApplicationModuleDelegate {
+public extension ExtensionModuleDelegate {
     
     func applicationDidBecomeActive() {
         lazyModules.forEach { $0.applicationDidBecomeActive(.shared()) }
@@ -85,7 +85,7 @@ public extension ApplicationModuleDelegate {
 }
 
 /// Conforming to an app module and added to `ExtensionDelegate.modules()` will trigger events.
-public protocol ApplicationModule {
+public protocol ExtensionModule {
     func applicationDidFinishLaunching(_ application: WKExtension)
     
     func applicationDidBecomeActive(_ application: WKExtension)
@@ -96,7 +96,7 @@ public protocol ApplicationModule {
 
 // MARK: - Optionals
 
-public extension ApplicationModule {
+public extension ExtensionModule {
     func applicationDidFinishLaunching(_ application: WKExtension) {}
     
     func applicationDidBecomeActive(_ application: WKExtension) {}
