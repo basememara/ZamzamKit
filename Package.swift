@@ -23,10 +23,6 @@ let package = Package(
         .library(
             name: "ZamzamNotification",
             targets: ["ZamzamNotification"]
-        ),
-        .library(
-            name: "ZamzamUI",
-            targets: ["ZamzamUI"]
         )
     ],
     dependencies: [
@@ -77,27 +73,6 @@ let package = Package(
         .testTarget(
             name: "ZamzamNotificationTests",
             dependencies: ["ZamzamNotification"]
-        ),
-        .target(
-            name: "ZamzamUI",
-            dependencies: ["ZamzamKit"],
-            exclude: {
-                var exclude = [String]()
-                
-                #if !os(iOS)
-                exclude.append("iOS")
-                #endif
-
-                #if !os(watchOS)
-                exclude.append("watchOS")
-                #endif
-                
-                return exclude
-            }()
-        ),
-        .testTarget(
-            name: "ZamzamUITests",
-            dependencies: ["ZamzamUI"]
         )
     ]
 )
