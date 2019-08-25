@@ -32,7 +32,6 @@
 		8B1CC4F7217AE91100F00A70 /* ControllerModuleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1CC4F6217AE91100F00A70 /* ControllerModuleDelegate.swift */; };
 		8B1EEC5E1CF6AB4E00AE054B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EEC5D1CF6AB4E00AE054B /* UIView.swift */; };
 		8B1EEC881CF7588600AE054B /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EEC871CF7588600AE054B /* UIStoryboard.swift */; };
-		8B22684E230FA7C400291D1F /* ZamzamCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8B22684D230FA7C400291D1F /* ZamzamCore */; };
 		8B226852230FB2F100291D1F /* ZamzamKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B226851230FB2F100291D1F /* ZamzamKit.swift */; };
 		8B226853230FB2F100291D1F /* ZamzamKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B226851230FB2F100291D1F /* ZamzamKit.swift */; };
 		8B226854230FB2F100291D1F /* ZamzamKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B226851230FB2F100291D1F /* ZamzamKit.swift */; };
@@ -148,6 +147,10 @@
 		8BB57562229026800079BE42 /* AppDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A6A4A22275917000011BC /* AppDisplayable.swift */; };
 		8BB57564229028250079BE42 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB57563229028250079BE42 /* UITabBarController.swift */; };
 		8BBB66E21E9C000900AB1973 /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE46D1E4506B500100744 /* UNUserNotificationCenter.swift */; };
+		8BC3B32C231258E000A182F0 /* ZamzamCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC3B32B231258E000A182F0 /* ZamzamCore */; };
+		8BC3B32E231258EB00A182F0 /* ZamzamCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC3B32D231258EB00A182F0 /* ZamzamCore */; };
+		8BC3B330231258F000A182F0 /* ZamzamCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC3B32F231258F000A182F0 /* ZamzamCore */; };
+		8BC3B332231258F500A182F0 /* ZamzamCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC3B331231258F500A182F0 /* ZamzamCore */; };
 		8BC693132233B9370020A039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC693122233B9370020A039 /* AppDelegate.swift */; };
 		8BC693152233B9370020A039 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC693142233B9370020A039 /* FirstViewController.swift */; };
 		8BC693172233B9370020A039 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC693162233B9370020A039 /* SecondViewController.swift */; };
@@ -466,7 +469,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B22684E230FA7C400291D1F /* ZamzamCore in Frameworks */,
+				8BC3B32C231258E000A182F0 /* ZamzamCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +477,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BC3B32E231258EB00A182F0 /* ZamzamCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +485,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BC3B330231258F000A182F0 /* ZamzamCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +493,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BC3B332231258F500A182F0 /* ZamzamCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1132,7 +1138,7 @@
 			);
 			name = "ZamzamKit iOS";
 			packageProductDependencies = (
-				8B22684D230FA7C400291D1F /* ZamzamCore */,
+				8BC3B32B231258E000A182F0 /* ZamzamCore */,
 			);
 			productName = "ZamzamKit iOS";
 			productReference = 8B1447C81C72577900043657 /* ZamzamKit.framework */;
@@ -1153,6 +1159,7 @@
 			);
 			name = "ZamzamKit watchOS";
 			packageProductDependencies = (
+				8BC3B32D231258EB00A182F0 /* ZamzamCore */,
 			);
 			productName = "ZamzamKit watchOS";
 			productReference = 8B1447D51C7257D600043657 /* ZamzamKit.framework */;
@@ -1173,6 +1180,7 @@
 			);
 			name = "ZamzamKit tvOS";
 			packageProductDependencies = (
+				8BC3B32F231258F000A182F0 /* ZamzamCore */,
 			);
 			productName = "ZamzamKit tvOS";
 			productReference = 8B1447E21C7257F100043657 /* ZamzamKit.framework */;
@@ -1193,6 +1201,7 @@
 			);
 			name = "ZamzamKit macOS";
 			packageProductDependencies = (
+				8BC3B331231258F500A182F0 /* ZamzamCore */,
 			);
 			productName = "ZamzamKit macOS";
 			productReference = 8B17683D22AFC9F1002CC991 /* ZamzamKit.framework */;
@@ -1393,7 +1402,7 @@
 			);
 			mainGroup = 8B1447451C72237E00043657;
 			packageReferences = (
-				8B22684C230FA7C400291D1F /* XCRemoteSwiftPackageReference "ZamzamCore" */,
+				8BC3B32A231258E000A182F0 /* XCRemoteSwiftPackageReference "ZamzamCore" */,
 			);
 			productRefGroup = 8B1447501C72237E00043657 /* Products */;
 			projectDirPath = "";
@@ -2668,9 +2677,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8B22684C230FA7C400291D1F /* XCRemoteSwiftPackageReference "ZamzamCore" */ = {
+		8BC3B32A231258E000A182F0 /* XCRemoteSwiftPackageReference "ZamzamCore" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ZamzamInc/ZamzamCore";
+			repositoryURL = "git@github.com:ZamzamInc/ZamzamCore.git";
 			requirement = {
 				branch = develop;
 				kind = branch;
@@ -2679,9 +2688,24 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8B22684D230FA7C400291D1F /* ZamzamCore */ = {
+		8BC3B32B231258E000A182F0 /* ZamzamCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8B22684C230FA7C400291D1F /* XCRemoteSwiftPackageReference "ZamzamCore" */;
+			package = 8BC3B32A231258E000A182F0 /* XCRemoteSwiftPackageReference "ZamzamCore" */;
+			productName = ZamzamCore;
+		};
+		8BC3B32D231258EB00A182F0 /* ZamzamCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BC3B32A231258E000A182F0 /* XCRemoteSwiftPackageReference "ZamzamCore" */;
+			productName = ZamzamCore;
+		};
+		8BC3B32F231258F000A182F0 /* ZamzamCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BC3B32A231258E000A182F0 /* XCRemoteSwiftPackageReference "ZamzamCore" */;
+			productName = ZamzamCore;
+		};
+		8BC3B331231258F500A182F0 /* ZamzamCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BC3B32A231258E000A182F0 /* XCRemoteSwiftPackageReference "ZamzamCore" */;
 			productName = ZamzamCore;
 		};
 /* End XCSwiftPackageProductDependency section */

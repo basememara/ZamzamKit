@@ -3,10 +3,10 @@
     "pins": [
       {
         "package": "ZamzamCore",
-        "repositoryURL": "https://github.com/ZamzamInc/ZamzamCore",
+        "repositoryURL": "git@github.com:ZamzamInc/ZamzamCore.git",
         "state": {
           "branch": "develop",
-          "revision": "5c4c7e64c8108de19f97d355843f25cd30d4789a",
+          "revision": "883886cfdc76bca90a8c6ae8900bdcecefc2878a",
           "version": null
         }
       }
