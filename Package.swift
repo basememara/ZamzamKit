@@ -6,15 +6,15 @@ import PackageDescription
 let package = Package(
     name: "ZamzamKit",
     platforms: [
-        .macOS(.v10_12),
-        .iOS(.v10),
-        .tvOS(.v10),
-        .watchOS(.v3)
+        .macOS(.v10_14),
+        .iOS(.v11),
+        .tvOS(.v11),
+        .watchOS(.v4)
     ],
     products: [
         .library(
-            name: "ZamzamKit",
-            targets: ["ZamzamKit"]
+            name: "ZamzamCore",
+            targets: ["ZamzamCore"]
         ),
         .library(
             name: "ZamzamLocation",
@@ -23,33 +23,44 @@ let package = Package(
         .library(
             name: "ZamzamNotification",
             targets: ["ZamzamNotification"]
+        ),
+        .library(
+            name: "ZamzamUI",
+            targets: ["ZamzamUI"]
         )
-    ],
-    dependencies: [
-        .package(url: "git@github.com:ZamzamInc/ZamzamCore.git", .branch("develop"))
     ],
     targets: [
         .target(
-            name: "ZamzamKit",
-            dependencies: ["ZamzamCore"]
-        ),
-        .testTarget(
-            name: "ZamzamKitTests",
-            dependencies: ["ZamzamKit"]
-        ),
-        .target(
-            name: "ZamzamLocation",
-            dependencies: ["ZamzamKit"],
+            name: "ZamzamCore",
             exclude: {
                 var exclude = [String]()
+
+                #if os(macOS)
+                exclude.append("Extensions/Font.swift")
+                #endif
+                
+                #if os(tvOS)
+                exclude.append("Extensions/FileManager.swift")
+                #endif
+                
+                #if !os(iOS)
+                exclude.append("Utilities/BackgroundTask.swift")
+                #endif
                 
                 #if !(os(iOS) || os(watchOS))
-                exclude.append("LocationWorkerType.swift")
-                exclude.append("LocationWorker.swift")
+                exclude.append("Utilities/WatchSession.swift")
                 #endif
                 
                 return exclude
             }()
+        ),
+        .testTarget(
+            name: "ZamzamCoreTests",
+            dependencies: ["ZamzamCore"]
+        ),
+        .target(
+            name: "ZamzamLocation",
+            dependencies: ["ZamzamCore"]
         ),
         .testTarget(
             name: "ZamzamLocationTests",
@@ -57,22 +68,32 @@ let package = Package(
         ),
         .target(
             name: "ZamzamNotification",
-            dependencies: ["ZamzamKit"],
+            dependencies: ["ZamzamCore"]
+        ),
+        .testTarget(
+            name: "ZamzamNotificationTests",
+            dependencies: ["ZamzamNotification"]
+        ),
+        .target(
+            name: "ZamzamUI",
+            dependencies: ["ZamzamCore"],
             exclude: {
                 var exclude = [String]()
                 
-                #if !(os(iOS) || os(watchOS))
-                exclude.append("UNNotificationAttachment.swift")
-                exclude.append("UNNotificationTriggerDateType.swift")
-                exclude.append("UNUserNotificationCenter.swift")
+                #if !os(iOS)
+                    exclude.append("Platforms/UIKit")
+                #endif
+                
+                #if !os(watchOS)
+                    exclude.append("Platforms/WatchKit")
                 #endif
                 
                 return exclude
             }()
         ),
         .testTarget(
-            name: "ZamzamNotificationTests",
-            dependencies: ["ZamzamNotification"]
+            name: "ZamzamUITests",
+            dependencies: ["ZamzamUI"]
         )
     ]
 )

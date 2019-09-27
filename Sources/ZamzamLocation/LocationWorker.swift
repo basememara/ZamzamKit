@@ -73,8 +73,13 @@ public extension LocationWorker {
     
     func isAuthorized(for type: LocationModels.AuthorizationType) -> Bool {
         guard CLLocationManager.locationServicesEnabled() else { return false }
-        return (type == .whenInUse && CLLocationManager.authorizationStatus() == .authorizedWhenInUse)
-            || (type == .always && CLLocationManager.authorizationStatus() == .authorizedAlways)
+        
+        #if os(OSX)
+            return type == .always && CLLocationManager.authorizationStatus() == .authorizedAlways
+        #else
+            return (type == .whenInUse && CLLocationManager.authorizationStatus() == .authorizedWhenInUse)
+                || (type == .always && CLLocationManager.authorizationStatus() == .authorizedAlways)
+        #endif
     }
     
     func requestAuthorization(for type: LocationModels.AuthorizationType, startUpdatingLocation: Bool, completion: AuthorizationHandler?) {
@@ -90,12 +95,20 @@ public extension LocationWorker {
         
         // Request appropiate authorization before exit
         defer {
-            switch type {
-            case .whenInUse:
-                manager.requestWhenInUseAuthorization()
-            case .always:
-                manager.requestAlwaysAuthorization()
-            }
+            #if os(OSX)
+                if #available(OSX 10.15, *) {
+                    manager.requestAlwaysAuthorization()
+                }
+            #else
+                switch type {
+                case .whenInUse:
+                    manager.requestWhenInUseAuthorization()
+                case .always:
+                    if #available(OSX 10.15, *) {
+                        manager.requestAlwaysAuthorization()
+                    }
+                }
+            #endif
         }
         
         // Handle mismatched allowed and exit
