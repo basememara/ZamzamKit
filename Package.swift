@@ -6,13 +6,12 @@ import PackageDescription
 let package = Package(
     name: "ZamzamKit",
     platforms: [
-        .macOS(.v10_12),
-        .iOS(.v10),
-        .tvOS(.v10),
-        .watchOS(.v3)
+        .macOS(.v10_14),
+        .iOS(.v11),
+        .tvOS(.v11),
+        .watchOS(.v4)
     ],
     products: [
-        // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "ZamzamCore",
             targets: ["ZamzamCore"]
@@ -31,11 +30,29 @@ let package = Package(
         )
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "ZamzamCore",
-            dependencies: []
+            exclude: {
+                var exclude = [String]()
+
+                #if os(macOS)
+                exclude.append("Extensions/Font.swift")
+                #endif
+                
+                #if os(tvOS)
+                exclude.append("Extensions/FileManager.swift")
+                #endif
+                
+                #if !os(iOS)
+                exclude.append("Utilities/BackgroundTask.swift")
+                #endif
+                
+                #if !(os(iOS) || os(watchOS))
+                exclude.append("Utilities/WatchSession.swift")
+                #endif
+                
+                return exclude
+            }()
         ),
         .testTarget(
             name: "ZamzamCoreTests",
@@ -59,7 +76,20 @@ let package = Package(
         ),
         .target(
             name: "ZamzamUI",
-            dependencies: ["ZamzamCore"]
+            dependencies: ["ZamzamCore"],
+            exclude: {
+                var exclude = [String]()
+                
+                #if !os(iOS)
+                    exclude.append("Platforms/UIKit")
+                #endif
+                
+                #if !os(watchOS)
+                    exclude.append("Platforms/WatchKit")
+                #endif
+                
+                return exclude
+            }()
         ),
         .testTarget(
             name: "ZamzamUITests",

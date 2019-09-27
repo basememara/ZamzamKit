@@ -7,6 +7,7 @@
 //
 
 import CoreLocation
+import ZamzamCore
 
 public protocol LocationWorkerType {
     typealias LocationHandler = (CLLocation) -> Void
@@ -18,7 +19,7 @@ public protocol LocationWorkerType {
     var isAuthorized: Bool { get }
     
     /// Determines if location services is enabled and authorized for the specified authorization type.
-    func isAuthorized(for type: LocationWorker.AuthorizationType) -> Bool
+    func isAuthorized(for type: LocationModels.AuthorizationType) -> Bool
     
     /// Requests permission to use location services.
     ///
@@ -26,7 +27,7 @@ public protocol LocationWorkerType {
     ///   - type: Type of permission required, whether in the foreground (.whenInUse) or while running (.always).
     ///   - startUpdatingLocation: Starts the generation of updates that report the user’s current location.
     ///   - completion: True if the authorization succeeded for the authorization type, false otherwise.
-    func requestAuthorization(for type: LocationWorker.AuthorizationType, startUpdatingLocation: Bool, completion: AuthorizationHandler?)
+    func requestAuthorization(for type: LocationModels.AuthorizationType, startUpdatingLocation: Bool, completion: AuthorizationHandler?)
     
     // MARK: - Coordinates
     
@@ -79,11 +80,11 @@ public protocol LocationWorkerType {
 
 public extension LocationWorkerType {
     
-    func requestAuthorization(for type: LocationWorker.AuthorizationType) {
+    func requestAuthorization(for type: LocationModels.AuthorizationType) {
         requestAuthorization(for: type, startUpdatingLocation: false, completion: nil)
     }
     
-    func requestAuthorization(for type: LocationWorker.AuthorizationType = .whenInUse, startUpdatingLocation: Bool = false, completion: AuthorizationHandler?) {
+    func requestAuthorization(for type: LocationModels.AuthorizationType = .whenInUse, startUpdatingLocation: Bool = false, completion: AuthorizationHandler?) {
         requestAuthorization(for: type, startUpdatingLocation: startUpdatingLocation, completion: completion)
     }
     

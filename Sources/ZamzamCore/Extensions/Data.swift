@@ -6,6 +6,8 @@
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
+import Foundation
+
 public extension Data {
     
     ///String by encoding Data using UTF8 encoding.
