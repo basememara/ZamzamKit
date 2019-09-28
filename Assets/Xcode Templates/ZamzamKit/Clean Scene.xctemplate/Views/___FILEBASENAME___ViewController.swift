@@ -10,7 +10,7 @@ class ___VARIABLE_productName:identifier___ViewController: UIViewController, Has
 
     // MARK: - Scene variables
     
-    private lazy var interactor: ___VARIABLE_productName:identifier___BusinessLogic = ___VARIABLE_productName:identifier___Interactor(
+    private lazy var action: ___VARIABLE_productName:identifier___Actionable = ___VARIABLE_productName:identifier___Action(
         presenter: ___VARIABLE_productName:identifier___Presenter(viewController: self)
     )
     
@@ -43,7 +43,7 @@ private extension ___VARIABLE_productName:identifier___ViewController {
     }
 
     func loadData() {
-        interactor.fetch(
+        action.fetch(
             with: ___VARIABLE_productName:identifier___Models.Request()
         )
     }

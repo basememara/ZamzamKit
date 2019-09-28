@@ -12,7 +12,7 @@ struct ___VARIABLE_productName:identifier___Presenter: ___VARIABLE_productName:i
 
 extension ___VARIABLE_productName:identifier___Presenter {
 
-    func presentFetched(for response: ___VARIABLE_productName:identifier___Models.Response) {
+    func presentFetched(for response: ___VARIABLE_productName:identifier___API.Response) {
         
     }
     

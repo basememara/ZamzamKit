@@ -3,8 +3,8 @@
 import XCTest
 import ZamzamKit
 
-class ___VARIABLE_productName:identifier___WorkerTests: AuthTestCase {
-    private lazy var testService: ___VARIABLE_productName:identifier___ServiceType = dependencies.resolveService()
+final class ___VARIABLE_productName:identifier___WorkerTests: AuthTestCase {
+    private lazy var testWorker: ___VARIABLE_productName:identifier___WorkerType = dependencies.resolve()
     private lazy var preferences: PreferencesType = dependencies.resolve()
 }
 
@@ -15,10 +15,10 @@ extension ___VARIABLE_productName:identifier___WorkerTests {
             // Given
             let userID = preferences.userID ?? 0
             
-            let request = ___VARIABLE_productName:identifier___Models.Request()
+            let request = ___VARIABLE_productName:identifier___API.Request()
             
             // When
-            self.testService.fetch(byUserID: userID, with: request) {
+            self.testWorker.fetch(byUserID: userID, with: request) {
                 defer { promise.fulfill() }
                 
                 // Then

@@ -14,11 +14,11 @@ public extension CLLocationManager {
     static var isAuthorized: Bool {
         var statuses: [CLAuthorizationStatus] = [.authorizedAlways]
         
-#if os(iOS) || os(watchOS) || os(tvOS)
-    statuses.append(.authorizedWhenInUse)
-#elseif os(macOS)
-    statuses.append(.authorized)
-#endif
+        #if os(iOS) || os(watchOS) || os(tvOS)
+            statuses.append(.authorizedWhenInUse)
+        #elseif os(macOS)
+            statuses.append(.authorized)
+        #endif
         
         return CLLocationManager.locationServicesEnabled()
             && CLLocationManager.authorizationStatus().within(statuses)

@@ -3,7 +3,7 @@
 import XCTest
 @testable import ZamzamKit
 
-class ___VARIABLE_productName:identifier___ModelTests: XCTestCase {
+final class ___VARIABLE_productName:identifier___ModelTests: XCTestCase {
     
     func testDecoding() {
         do {
