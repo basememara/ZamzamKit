@@ -16,15 +16,15 @@ import WatchKit
 ///
 ///         override func plugins() -> [ExtensionPlugin] {
 ///             return [
-///                 LoggerApplicationPlugin(),
-///                 LocationApplicationPlugin()
+///                 LoggerPlugin(),
+///                 LocationPlugin()
 ///             ]
 ///         }
 ///     }
 ///
 /// Each application module has access to the `ExtensionDelegate` lifecycle events:
 ///
-///     final class LoggerApplicationPlugin: ExtensionPlugin {
+///     final class LoggerPlugin: ExtensionPlugin {
 ///         private let log = Logger()
 ///
 ///         func applicationDidFinishLaunching(_ application: WKExtension) {

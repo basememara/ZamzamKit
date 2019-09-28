@@ -18,15 +18,15 @@ import UIKit
 ///
 ///         override func plugins() -> [ApplicationPlugin] {
 ///             return [
-///                 LoggerApplicationPlugin(),
-///                 NotificationApplicationPlugin()
+///                 LoggerPlugin(),
+///                 NotificationPlugin()
 ///             ]
 ///         }
 ///     }
 ///
 /// Each application module has access to the `AppDelegate` lifecycle events:
 ///
-///     final class LoggerApplicationPlugin: ApplicationPlugin {
+///     final class LoggerPlugin: ApplicationPlugin {
 ///         private let log = Logger()
 ///
 ///         func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
