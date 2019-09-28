@@ -1,5 +1,4 @@
 // swift-tools-version:5.1
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
@@ -81,7 +80,8 @@ let package = Package(
                 var exclude = [String]()
                 
                 #if !os(iOS)
-                    exclude.append("Platforms/UIKit")
+                    // TODO: Macro doesn't work?
+                    //exclude.append("Platforms/UIKit")
                 #endif
                 
                 #if !os(watchOS)
