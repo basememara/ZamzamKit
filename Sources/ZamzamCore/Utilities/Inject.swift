@@ -12,33 +12,19 @@
 
 import Foundation
 
-/// A dependency containner that provides resolutions for object instances.
-open class Container {
-    /// Stored object instance closures.
-    private var dependencies = [String: () -> Any]()
-    
-    /// DSL for declaring dependencies within the container initializer.
-    @_functionBuilder public struct DependencyBuilder {
-        public static func buildBlock(_ dependencies: Dependency...) -> [Dependency] {
-            dependencies
-        }
-        
-        public static func buildBlock(_ dependency: Dependency) -> Dependency {
-            dependency
-        }
-    }
+/// A dependency collection that provides resolutions for object instances.
+open class Dependencies {
+    /// Stored object instance factories.
+    private var modules = [String: Module]()
     
     /// Construct dependency resolutions.
-    public init(@DependencyBuilder _ dependencies: () -> [Dependency]) {
-        dependencies().forEach {
-            add(String(describing: $0.type.self), dependency: $0.block)
-        }
+    public init(@ModuleBuilder _ modules: () -> [Module]) {
+        modules().forEach { add(module: $0) }
     }
     
     /// Construct dependency resolution.
-    public init(@DependencyBuilder _ dependency: () -> Dependency) {
-        let unwrap = dependency()
-        add(String(describing: unwrap.type.self), dependency: unwrap.block)
+    public init(@ModuleBuilder _ module: () -> Module) {
+        add(module: module())
     }
     
     /// Assigns the current container to the composition root.
@@ -47,58 +33,68 @@ open class Container {
     }
     
     fileprivate init() {}
-    deinit { dependencies.removeAll() }
+    deinit { modules.removeAll() }
 }
 
-private extension Container {
+private extension Dependencies {
     /// Composition root container of dependencies.
-    static var root = Container()
+    static var root = Dependencies()
     
     /// Registers a specific type and its instantiating factory.
-    func add<T>(_ key: String? = nil, dependency: @escaping () -> T) {
-        let key = key ?? self.key(for: T.self)
-        dependencies[key] = dependency
+    func add(module: Module) {
+        modules[module.name] = module
     }
 
     /// Resolves through inference and returns an instance of the given type from the current default container.
     ///
     /// If the dependency is not found, an exception will occur.
-    func resolve<T>() -> T {
-        let key = self.key(for: T.self)
+    func resolve<T>(for name: String? = nil) -> T {
+        let name = name ?? String(describing: T.self)
         
-        guard let dependency: T = dependencies[key]?() as? T else {
+        guard let component: T = modules[name]?.resolve() as? T else {
             fatalError("Dependency '\(T.self)' not resolved!")
         }
         
-        return dependency
-    }
-    
-    /// Generate key for storing object resolution.
-    func key<T>(for type: T.Type) -> String {
-        String(describing: T.self)
+        return component
     }
 }
 
 // MARK: Public API
 
-/// A type that contributes to the object graph.
-public struct Dependency {
-    fileprivate let block: () -> Any
-    fileprivate let type: Any.Type
+public extension Dependencies {
     
-    public init<T>(_ block: @escaping () -> T) {
-        self.block = block
-        self.type = T.self
+    /// DSL for declaring modules within the container dependency initializer.
+    @_functionBuilder struct ModuleBuilder {
+        public static func buildBlock(_ modules: Module...) -> [Module] { modules }
+        public static func buildBlock(_ module: Module) -> Module { module }
+    }
+}
+
+/// A type that contributes to the object graph.
+public struct Module {
+    fileprivate let name: String
+    fileprivate let resolve: () -> Any
+    
+    public init<T>(_ name: String? = nil, _ resolve: @escaping () -> T) {
+        self.name = name ?? String(describing: T.self)
+        self.resolve = resolve
     }
 }
 
 /// Resolves an instance from the dependency injection container.
 @propertyWrapper
 public struct Inject<Value> {
+    private let name: String?
     
     public var wrappedValue: Value {
-        Container.root.resolve()
+        Dependencies.root.resolve(for: name)
     }
     
-    public init() {}
+    public init() {
+        self.name = nil
+    }
+    
+    public init(_ name: String) {
+        self.name = name
+    }
 }
