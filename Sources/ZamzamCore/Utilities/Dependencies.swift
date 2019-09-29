@@ -49,7 +49,7 @@ private extension Dependencies {
     ///
     /// If the dependency is not found, an exception will occur.
     func resolve<T>(for name: String? = nil) -> T {
-        let name = name ?? String(describing: T.self)
+        let name = name ??+ String(describing: T.self)
         
         guard let component: T = modules[name]?.resolve() as? T else {
             fatalError("Dependency '\(T.self)' not resolved!")
@@ -59,7 +59,7 @@ private extension Dependencies {
     }
 }
 
-// MARK: Public API
+// MARK: - Public API
 
 public extension Dependencies {
     
