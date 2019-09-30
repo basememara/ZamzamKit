@@ -13,32 +13,15 @@
 import Foundation
 
 /// A dependency collection that provides resolutions for object instances.
-open class Dependencies {
+public class Dependencies {
     /// Stored object instance factories.
     private var modules = [String: Module]()
     
-    /// Construct dependency resolutions.
-    public init(@ModuleBuilder _ modules: () -> [Module]) {
-        modules().forEach { add(module: $0) }
-    }
-    
-    /// Construct dependency resolution.
-    public init(@ModuleBuilder _ module: () -> Module) {
-        add(module: module())
-    }
-    
-    /// Assigns the current container to the composition root.
-    open func build() {
-        Self.root = self
-    }
-    
-    fileprivate init() {}
+    private init() {}
     deinit { modules.removeAll() }
 }
 
 private extension Dependencies {
-    /// Composition root container of dependencies.
-    static var root = Dependencies()
     
     /// Registers a specific type and its instantiating factory.
     func add(module: Module) {
@@ -49,7 +32,7 @@ private extension Dependencies {
     ///
     /// If the dependency is not found, an exception will occur.
     func resolve<T>(for name: String? = nil) -> T {
-        let name = name ??+ String(describing: T.self)
+        let name = name ?? String(describing: T.self)
         
         guard let component: T = modules[name]?.resolve() as? T else {
             fatalError("Dependency '\(T.self)' not resolved!")
@@ -62,6 +45,26 @@ private extension Dependencies {
 // MARK: - Public API
 
 public extension Dependencies {
+    /// Composition root container of dependencies.
+    fileprivate static var root = Dependencies()
+    
+    /// Construct dependency resolutions.
+    convenience init(@ModuleBuilder _ modules: () -> [Module]) {
+        self.init()
+        modules().forEach { add(module: $0) }
+    }
+    
+    /// Construct dependency resolution.
+    convenience init(@ModuleBuilder _ module: () -> Module) {
+        self.init()
+        add(module: module())
+    }
+    
+    /// Assigns the current container to the composition root.
+    func build() {
+        // Used later in property wrapper
+        Self.root = self
+    }
     
     /// DSL for declaring modules within the container dependency initializer.
     @_functionBuilder struct ModuleBuilder {
