@@ -8,26 +8,6 @@
 
 import Foundation
 
-public extension Array {
-    
-    /// Remove array items in a thread-safe manner and executes
-    /// the hander on each item of the array.
-    ///
-    /// The handler will be executed on each item in reverse order
-    /// to ensure items that are appended to the array during this
-    /// process does not interfere with the mutation.
-    ///
-    ///     var array = [1, 3, 5, 7, 9]
-    ///     array.removeEach { print($0) }
-    ///     // Prints "9" "7" "5" "3" "1"
-    ///     array -> []
-    ///
-    /// - Parameter handler: Handler with array item that was popped.
-    mutating func removeEach(handler: @escaping (Element) -> Void) {
-        enumerated().reversed().forEach { handler(remove(at: $0.offset)) }
-    }
-}
-
 // MARK: - Equatables
 
 public extension Array where Element: Equatable {
