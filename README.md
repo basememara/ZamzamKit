@@ -7,31 +7,25 @@
 [![SPM](https://img.shields.io/badge/SPM-Compatible-blue)](https://swift.org/package-manager)
 [![MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
-ZamzamKit a Swift framework for rapid development using a collection of small utility extensions for Standard Library, Foundation and UIKit classes and protocols.
+ZamzamKit a Swift framework for rapid development using a collection of small utility extensions for Standard Library, Foundation, and native frameworks.
 
 ## Installation
 
-<details>
-<summary>Carthage</summary>
+### Swift Package Manager
 
-Add `github "ZamzamInc/ZamzamKit"` to your `Cartfile`.
-</details>
+`.package(url: "git@github.com:ZamzamInc/ZamzamKit.git", .upToNextMajor(from: "5.0.0"))` 
 
-<details>
-<summary>CocoaPods</summary>
+The `ZamzamKit` package has four different products in it:
+* `ZamzamCore`
+* `ZamzamLocation`
+* `ZamzamNotification`
+* `ZamzamUI`
 
-Add `pod "ZamzamKit"` to your `Podfile`.
-</details>
+Add any combination of these to your target's dependencies within the manifest.
 
-<details>
-<summary>Framework</summary>
+There is a limitation with SwiftPM where resources can not be embedded at the moment. For now, manually drag `Resources/ZamzamCore.bundle` to your target's project settings > Build Phases > Copy Bundle.
 
-1. Download the latest release of `ZamzamKit` and extract the zip.
-2. Go to your Xcode project’s "General" settings. Drag ZamzamKit.framework and ZamzamKit.framework from the appropriate Swift-versioned directory for your project in `ios/`, `tvos/` or `watchos/` directory to the "Embedded Binaries" section. Make sure "Copy items if needed" is selected (except if using on multiple platforms in your project) and click Finish.
-3. In your unit test target's "Build Settings", add the parent path to ZamzamKit.framework in the "Framework Search Paths" section.
-</details>
-
-## Usage
+## ZamzamCore
 
 ### Standard Library
 
@@ -492,24 +486,6 @@ label.attributedText = "Abc".attributed + " def " +
 </details>
 
 <details>
-<summary>Object</summary>
-
-> Set properties with closures just after initializing:
-```swift
-let paragraph = NSMutableParagraphStyle().with {
-    $0.alignment = .center
-    $0.lineSpacing = 8
-}
-
-let label = UILabel().with {
-    $0.textAlignment = .center
-    $0.textColor = UIColor.black
-    $0.text = "Hello, World!"
-}
-```
-</details>
-
-<details>
 <summary>URL</summary>
 
 > Append or remove query string parameters:
@@ -529,6 +505,608 @@ url?.appendingQueryItems([
 url?.removeQueryItem("xyz") -> "https://example.com?abc=123&lmn=tuv"
 ```
 </details>
+
+### Utilities
+
+<details>
+<summary>AppInfo</summary>
+
+> Get details of the current app:
+```swift
+struct SomeStruct: AppInfo {
+
+}
+
+let someStruct = SomeStruct()
+
+someStruct.appDisplayName -> "Zamzam App"
+someStruct.appBundleID -> "io.zamzam.app"
+someStruct.appVersion -> "1.0.0"
+someStruct.appBuild -> "23"
+someStruct.isInTestFlight -> false
+someStruct.isRunningOnSimulator -> false
+```
+</details>
+
+<details>
+<summary>Localization</summary>
+
+> Strongly-typed localizable keys that's also `XLIFF` export friendly ([read more](http://basememara.com/swifty-localization-xcode-support/)):
+```swift
+// First define localization keys
+extension Localizable {
+    static let ok = Localizable(NSLocalizedString("ok.dialog", comment: "OK text for dialogs"))
+    static let cancel = Localizable(NSLocalizedString("cancel.dialog", comment: "Cancel text for dialogs"))
+    static let next = Localizable(NSLocalizedString("next.dialog", comment: "Next text for dialogs"))
+}
+
+// Then use strongly-typed localization keys
+myLabel1.text = .localized(.ok)
+myLabel2.text = .localized(.cancel)
+myLabel3.text = .localized(.next)
+```
+</details>
+
+<details>
+<summary>Migration</summary>
+
+> Manages blocks of code that only need to run once on version updates in apps:
+```swift
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var window: UIWindow?
+    let migration = Migration()
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        migration
+            .performUpdate {
+                print("Migrate update occurred.")
+            }
+            .perform(forVersion: "1.0") {
+                print("Migrate to 1.0 occurred.")
+            }
+            .perform(forVersion: "1.0", withBuild: "1") {
+                print("Migrate to 1.0 (1) occurred.")
+            }
+            .perform(forVersion: "1.0", withBuild: "2") {
+                print("Migrate to 1.0 (2) occurred.")
+            }
+            
+        return true
+    }
+}
+```
+</details>
+
+<details>
+<summary>RateLimit</summary>
+
+> A throttler that will ignore work items until the time limit for the preceding call is over:
+```swift
+let limiter = Throttler(limit: 5)
+var value = 0
+
+limiter.execute {
+    value += 1
+}
+
+limiter.execute {
+    value += 1
+}
+
+limiter.execute {
+    value += 1
+}
+
+sleep(5)
+
+limiter.execute {
+    value += 1
+}
+
+// value == 2
+```
+
+> A debouncer that will delay work items until time limit for the preceding call is over:
+```swift
+let limiter = Debouncer(limit: 5)
+var value = ""
+
+func sendToServer() {
+    limiter.execute {
+        // Sends to server after no typing for 5 seconds
+        // instead of once per character, so:
+        value == "hello" -> true
+    }
+}
+
+value.append("h")
+sendToServer()
+
+value.append("e")
+sendToServer()
+
+value.append("l")
+sendToServer()
+
+value.append("l")
+sendToServer()
+
+value.append("o")
+sendToServer()
+```
+</details>
+
+<details>
+<summary>Result</summary>
+
+> Used to represent whether an asynchronous request was successful or encountered an error:
+```swift
+// Declare the function with a completion handler of `Result` type
+func fetch(id: Int, completion: @escaping (Result<Author, ZamzamError>) -> Void) {
+    guard id > 0 else {
+        completion(.failure(.nonExistent))
+        return
+    }
+
+    DispatchQueue.global().async {
+        completion(.success(Author(...)))
+    }
+}
+
+// Call the asynchronous function and determine the response
+fetch(id: 123) {
+    guard let value = $0.value, $0.isSuccess else {
+        print("An error occurred: \($0.error ?? .general)")
+        return
+    }
+
+    print(value)
+}
+```
+</details>
+
+<details>
+<summary>SystemConfiguration</summary>
+
+> Determine if the device is connected to a network:
+```swift
+import SystemConfiguration
+
+SCNetworkReachability.isOnline
+```
+</details>
+
+<details>
+<summary>SynchronizedArray</summary>
+
+> A thread-safe array that allows concurrent reads and exclusive writes ([read more](http://basememara.com/creating-thread-safe-arrays-in-swift/)):
+```swift
+var array = SynchronizedArray<Int>()
+
+DispatchQueue.concurrentPerform(iterations: 1000) { index in
+    array.append(index)
+}
+```
+</details>
+
+<details>
+<summary>UserDefaults</summary>
+
+> Strongly-typed UserDefault keys:
+```swift
+// First define keys
+extension UserDefaults.Keys {
+    static let testString = UserDefaults.Key<String?>("testString")
+    static let testInt = UserDefaults.Key<Int?>("testInt")
+    static let testBool = UserDefaults.Key<Bool?>("testBool")
+    static let testArray = UserDefaults.Key<[Int]?>("testArray")
+}
+
+// Then use strongly-typed values
+let testString: String? = UserDefaults.standard[.testString]
+let testInt: Int? = UserDefaults.standard[.testInt]
+let testBool: Bool? = UserDefaults.standard[.testBool]
+let testArray: [Int]? = UserDefaults.standard[.testArray]
+```
+</details>
+
+<details>
+<summary>WatchSession</summary>
+
+> Communicate conveniently between `iOS` and `watchOS`:
+```swift
+// iOS
+class WatchViewController: UIViewController {
+    
+    @IBOutlet weak var receivedContextLabel: UILabel!
+    @IBOutlet weak var sentContextLabel: UILabel!
+    @IBOutlet weak var receivedUserInfoLabel: UILabel!
+    @IBOutlet weak var sentUserInfoLabel: UILabel!
+    @IBOutlet weak var receivedMessageLabel: UILabel!
+    @IBOutlet weak var sentMessageLabel: UILabel!
+    
+    var watchSession: WatchSession {
+        return AppDelegate.watchSession
+    }
+    
+    /// Another way to add observer
+    var userInfoObserver: WatchSession.ReceiveUserInfoObserver {
+        return Observer { [weak self] result in
+            DispatchQueue.main.async {
+                self?.receivedUserInfoLabel.text = result["value"] as? String ?? ""
+            }
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        /// One way to add observer
+        watchSession.addObserver(forApplicationContext: Observer { [weak self] result in
+            DispatchQueue.main.async {
+                self?.receivedContextLabel.text = result["value"] as? String ?? ""
+            }
+        })
+        
+        watchSession.addObserver(forUserInfo: userInfoObserver)
+        watchSession.addObserver(forMessage: messageObserver)
+    }
+    
+    @IBAction func sendContextTapped() {
+        let value = ["value": "\(Date())"]
+        watchSession.transfer(context: value)
+        sentContextLabel.text = value["value"] ?? ""
+    }
+    
+    @IBAction func sendUserInfoTapped() {
+        let value = ["value": "\(Date())"]
+        watchSession.transfer(userInfo: value)
+        sentUserInfoLabel.text = value["value"] ?? ""
+    }
+    
+    @IBAction func sendMessageTapped() {
+        let value = ["value": "\(Date())"]
+        watchSession.transfer(message: value)
+        sentMessageLabel.text = value["value"] ?? ""
+    }
+    
+    deinit {
+        watchSession.removeObservers()
+    }
+}
+
+extension WatchViewController {
+    
+    /// Another way to add observer
+    var messageObserver: WatchSession.ReceiveMessageObserver {
+        return Observer { [weak self] message, replyHandler in
+            DispatchQueue.main.async {
+                self?.receivedMessageLabel.text = message["value"] as? String ?? ""
+            }
+        }
+    }
+}
+```
+```swift
+// watchOS
+class ExtensionDelegate: NSObject, WKExtensionDelegate {
+    static let watchSession = WatchSession()
+}
+
+class InterfaceController: WKInterfaceController {
+
+    @IBOutlet var receivedContextLabel: WKInterfaceLabel!
+    @IBOutlet var sentContextLabel: WKInterfaceLabel!
+    @IBOutlet var receivedUserInfoLabel: WKInterfaceLabel!
+    @IBOutlet var sentUserInfoLabel: WKInterfaceLabel!
+    @IBOutlet var receivedMessageLabel: WKInterfaceLabel!
+    @IBOutlet var sentMessageLabel: WKInterfaceLabel!
+    
+    var watchSession: WatchSession {
+        return ExtensionDelegate.watchSession
+    }
+    
+    override func awake(withContext: Any?) {
+        super.awake(withContext: withContext)
+        
+        watchSession.addObserver(forApplicationContext: Observer { [weak self] result in
+            DispatchQueue.main.async {
+                self?.receivedContextLabel.setText(result["value"] as? String ?? "")
+            }
+        })
+        
+        watchSession.addObserver(forUserInfo: Observer { [weak self] result in
+            DispatchQueue.main.async {
+                self?.receivedUserInfoLabel.setText(result["value"] as? String ?? "")
+            }
+        })
+        
+        watchSession.addObserver(forMessage: Observer { [weak self] message, replyHandler in
+            DispatchQueue.main.async {
+                self?.receivedMessageLabel.setText(message["value"] as? String ?? "")
+            }
+        })
+    }
+    
+    @IBAction func sendContextTapped() {
+        let value = ["value": "\(Date())"]
+        watchSession.transfer(context: value)
+        sentContextLabel.setText(value["value"] ?? "")
+    }
+    
+    @IBAction func sendUserInfoTapped() {
+        let value = ["value": "\(Date())"]
+        watchSession.transfer(userInfo: value)
+        sentUserInfoLabel.setText(value["value"] ?? "")
+    }
+    
+    @IBAction func sendMessageTapped() {
+        let value = ["value": "\(Date())"]
+        watchSession.transfer(message: value)
+        sentMessageLabel.setText(value["value"] ?? "")
+    }
+}
+```
+
+![Image of WatchSession](./Assets/Documentation/Images/WatchSession.png)
+</details>
+
+<details>
+<summary>With</summary>
+
+> Set properties with closures just after initializing:
+```swift
+let paragraph = NSMutableParagraphStyle().with {
+    $0.alignment = .center
+    $0.lineSpacing = 8
+}
+
+let label = UILabel().with {
+    $0.textAlignment = .center
+    $0.textColor = UIColor.black
+    $0.text = "Hello, World!"
+}
+```
+</details>
+
+## ZamzamLocation
+
+<details>
+<summary>CoreLocation</summary>
+
+> Determine if location services is enabled and authorized for always or when in use:
+```swift
+CLLocationManager.isAuthorized -> bool
+```
+
+> Get the location details for coordinates:
+```swift
+CLLocation(latitude: 43.6532, longitude: -79.3832).geocoder { meta in
+    print(meta.locality)
+    print(meta.country)
+    print(meta.countryCode)
+    print(meta.timezone)
+    print(meta.administrativeArea)
+}
+```
+
+> Get the closest or farthest location from a list of coordinates:
+```swift
+let coordinates = [
+    CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832),
+    CLLocationCoordinate2D(latitude: 59.9094, longitude: 10.7349),
+    CLLocationCoordinate2D(latitude: 35.7750, longitude: -78.6336),
+    CLLocationCoordinate2D(latitude: 33.720817, longitude: 73.090032)
+]
+
+coordinates.closest(to: homeCoordinate)
+coordinates.farthest(from: homeCoordinate)
+```
+
+> Approximate comparison of coordinates rounded to 3 decimal places (about 100 meters):
+```swift
+let coordinate1 = CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832)
+let coordinate2 = CLLocationCoordinate2D(latitude: 43.6531, longitude: -79.3834)
+let coordinate3 = CLLocationCoordinate2D(latitude: 43.6522, longitude: -79.3822)
+
+coordinate1 ~~ coordinate2 -> true
+coordinate1 ~~ coordinate3 -> false
+```
+
+> Location worker that offers easy authorization and observable closures ([read more](http://basememara.com/swifty-locations-observables/)):
+```swift
+class LocationViewController: UIViewController {
+
+    @IBOutlet weak var outputLabel: UILabel!
+    
+    var locationsWorker: LocationsWorkerType = LocationsWorker(
+        desiredAccuracy: kCLLocationAccuracyThreeKilometers,
+        distanceFilter: 1000
+    )
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        locationsWorker.addObserver(locationObserver)
+        locationsWorker.addObserver(headingObserver)
+        
+        locationsWorker.requestAuthorization(
+            for: .whenInUse,
+            startUpdatingLocation: true,
+            completion: { granted in
+                guard granted else { return }
+                self.locationsWorker.startUpdatingHeading()
+            }
+        )
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        locationsWorker.removeObservers()
+    }
+    
+    deinit {
+        locationsWorker.removeObservers()
+    }
+}
+
+extension LocationViewController {
+    
+    var locationObserver: Observer<LocationsWorker.LocationHandler> {
+        return Observer { [weak self] in
+            self?.outputLabel.text = $0.description
+        }
+    }
+    
+    var headingObserver: Observer<LocationsWorker.HeadingHandler> {
+        return Observer {
+            print($0.description)
+        }
+    }
+}
+```
+</details>
+
+## ZamzamNotification
+
+<details>
+<summary>UserNotification</summary>
+
+> Registers the local and remote notifications with the categories and actions it supports:
+```swift
+UNUserNotificationCenter.current().register(
+    delegate: self,
+    categories: [
+        "order": [
+            UNNotificationAction(
+                identifier: "confirmAction",
+                title: "Confirm",
+                options: [.foreground]
+            )
+        ],
+        "chat": [
+            UNTextInputNotificationAction(
+                identifier: "replyAction",
+                title: "Reply",
+                options: [],
+                textInputButtonTitle: "Send",
+                textInputPlaceholder: "Type your message"
+            )
+        ],
+        "offer": nil
+    ],
+    authorizations: [.alert, .badge, .sound],
+    completion: { granted in
+        granted
+            ? log(debug: "Authorization for notification succeeded.")
+            : log(warn: "Authorization for notification not given.")
+    }
+)
+```
+
+> Get a list of all pending or delivered user notifications:
+```swift
+UNUserNotificationCenter.current().getNotificationRequests { notifications in
+    notifications.forEach {
+        print($0.identifier)
+    }
+}
+```
+
+> Find the pending or delivered notification request by identifier:
+```swift
+UNUserNotificationCenter.current().get(withIdentifier: "abc123") {
+    print($0?.identifier)
+}
+
+UNUserNotificationCenter.current().get(withIdentifiers: ["abc123", "xyz789"]) {
+    $0.forEach {
+        print($0.identifier)
+    }
+}
+```
+
+> Determine if the pending or delivered notification request exists:
+```swift
+UNUserNotificationCenter.current().exists(withIdentifier: "abc123") {
+    print("Does notification exist: \($0)")
+}
+```
+
+> Schedules local notifications for delivery:
+```swift
+UNUserNotificationCenter.current().add(
+    body: "This is the body for time interval",
+    timeInterval: 5
+)
+
+UNUserNotificationCenter.current().add(
+    body: "This is the body for time interval",
+    title: "This is the snooze title",
+    timeInterval: 60,
+    identifier: "abc123-main"
+)
+
+UNUserNotificationCenter.current().add(
+    body: "This is the body for time interval",
+    title: "This is the misc1 title",
+    timeInterval: 60,
+    identifier: "abc123-misc1",
+    category: "misc1Category"
+)
+
+UNUserNotificationCenter.current().add(
+    body: "This is the body for time interval",
+    title: "This is the misc2 title",
+    timeInterval: 60,
+    identifier: "abc123-misc2",
+    category: "misc2Category",
+    userInfo: [
+        "id": post.id,
+        "link": post.link,
+        "mediaURL": mediaURL
+    ],
+    completion: { error in
+        guard error == nil else { return }
+        // Added successfully
+    }
+)
+
+UNUserNotificationCenter.current().add(
+    date: Date(timeIntervalSinceNow: 5),
+    body: "This is the body for date",
+    repeats: .minute,
+    identifier: "abc123-repeat"
+)
+```
+
+> Get a remote image from the web and convert to a user notification attachment:
+```swift
+UNNotificationAttachment.download(from: urlString) {
+    guard $0.isSuccess, let attachment = $0.value else {
+        return log(error: "Could not download the remote resource (\(urlString)): \($0.error.debugDescription).")
+    }
+
+    UNUserNotificationCenter.current().add(
+        body: "This is the body",
+        attachments: [attachment]
+    )
+}
+```
+
+> Remove pending or delivered notification requests by identifiers, categories, or all:
+```swift
+UNUserNotificationCenter.current().remove(withIdentifier: "abc123")
+UNUserNotificationCenter.current().remove(withIdentifiers: ["abc123", "xyz789"])
+UNUserNotificationCenter.current().remove(withCategory: "chat") { /* Done */ }
+UNUserNotificationCenter.current().remove(withCategories: ["order", "chat"]) { /* Done */ }
+UNUserNotificationCenter.current().removeAll()
+```
+</details>
+
+## ZamzamUI
 
 ### iOS
 
@@ -1233,147 +1811,6 @@ CLKComplicationServer.sharedInstance().extendTimelineForComplications()
 </details>
 
 <details>
-<summary>WatchSession</summary>
-
-> Communicate conveniently between `iOS` and `watchOS`:
-```swift
-// iOS
-class WatchViewController: UIViewController {
-    
-    @IBOutlet weak var receivedContextLabel: UILabel!
-    @IBOutlet weak var sentContextLabel: UILabel!
-    @IBOutlet weak var receivedUserInfoLabel: UILabel!
-    @IBOutlet weak var sentUserInfoLabel: UILabel!
-    @IBOutlet weak var receivedMessageLabel: UILabel!
-    @IBOutlet weak var sentMessageLabel: UILabel!
-    
-    var watchSession: WatchSession {
-        return AppDelegate.watchSession
-    }
-    
-    /// Another way to add observer
-    var userInfoObserver: WatchSession.ReceiveUserInfoObserver {
-        return Observer { [weak self] result in
-            DispatchQueue.main.async {
-                self?.receivedUserInfoLabel.text = result["value"] as? String ?? ""
-            }
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        /// One way to add observer
-        watchSession.addObserver(forApplicationContext: Observer { [weak self] result in
-            DispatchQueue.main.async {
-                self?.receivedContextLabel.text = result["value"] as? String ?? ""
-            }
-        })
-        
-        watchSession.addObserver(forUserInfo: userInfoObserver)
-        watchSession.addObserver(forMessage: messageObserver)
-    }
-    
-    @IBAction func sendContextTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(context: value)
-        sentContextLabel.text = value["value"] ?? ""
-    }
-    
-    @IBAction func sendUserInfoTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(userInfo: value)
-        sentUserInfoLabel.text = value["value"] ?? ""
-    }
-    
-    @IBAction func sendMessageTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(message: value)
-        sentMessageLabel.text = value["value"] ?? ""
-    }
-    
-    deinit {
-        watchSession.removeObservers()
-    }
-}
-
-extension WatchViewController {
-    
-    /// Another way to add observer
-    var messageObserver: WatchSession.ReceiveMessageObserver {
-        return Observer { [weak self] message, replyHandler in
-            DispatchQueue.main.async {
-                self?.receivedMessageLabel.text = message["value"] as? String ?? ""
-            }
-        }
-    }
-}
-```
-```swift
-// watchOS
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
-    static let watchSession = WatchSession()
-}
-
-class InterfaceController: WKInterfaceController {
-
-    @IBOutlet var receivedContextLabel: WKInterfaceLabel!
-    @IBOutlet var sentContextLabel: WKInterfaceLabel!
-    @IBOutlet var receivedUserInfoLabel: WKInterfaceLabel!
-    @IBOutlet var sentUserInfoLabel: WKInterfaceLabel!
-    @IBOutlet var receivedMessageLabel: WKInterfaceLabel!
-    @IBOutlet var sentMessageLabel: WKInterfaceLabel!
-    
-    var watchSession: WatchSession {
-        return ExtensionDelegate.watchSession
-    }
-    
-    override func awake(withContext: Any?) {
-        super.awake(withContext: withContext)
-        
-        watchSession.addObserver(forApplicationContext: Observer { [weak self] result in
-            DispatchQueue.main.async {
-                self?.receivedContextLabel.setText(result["value"] as? String ?? "")
-            }
-        })
-        
-        watchSession.addObserver(forUserInfo: Observer { [weak self] result in
-            DispatchQueue.main.async {
-                self?.receivedUserInfoLabel.setText(result["value"] as? String ?? "")
-            }
-        })
-        
-        watchSession.addObserver(forMessage: Observer { [weak self] message, replyHandler in
-            DispatchQueue.main.async {
-                self?.receivedMessageLabel.setText(message["value"] as? String ?? "")
-            }
-        })
-    }
-    
-    @IBAction func sendContextTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(context: value)
-        sentContextLabel.setText(value["value"] ?? "")
-    }
-    
-    @IBAction func sendUserInfoTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(userInfo: value)
-        sentUserInfoLabel.setText(value["value"] ?? "")
-    }
-    
-    @IBAction func sendMessageTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(message: value)
-        sentMessageLabel.setText(value["value"] ?? "")
-    }
-}
-```
-
-![Image of WatchSession](./Assets/Documentation/Images/WatchSession.png)
-</details>
-
-<details>
 <summary>WKViewController</summary>
 
 > Display an alert to the user:
@@ -1409,446 +1846,10 @@ present(
 ```
 </details>
 
-### Helpers
-
-<details>
-<summary>AppInfo</summary>
-
-> Get details of the current app:
-```swift
-struct SomeStruct: AppInfo {
-
-}
-
-let someStruct = SomeStruct()
-
-someStruct.appDisplayName -> "Zamzam App"
-someStruct.appBundleID -> "io.zamzam.app"
-someStruct.appVersion -> "1.0.0"
-someStruct.appBuild -> "23"
-someStruct.isInTestFlight -> false
-someStruct.isRunningOnSimulator -> false
-```
-</details>
-
-<details>
-<summary>CoreLocation</summary>
-
-> Determine if location services is enabled and authorized for always or when in use:
-```swift
-CLLocationManager.isAuthorized -> bool
-```
-
-> Get the location details for coordinates:
-```swift
-CLLocation(latitude: 43.6532, longitude: -79.3832).geocoder { meta in
-    print(meta.locality)
-    print(meta.country)
-    print(meta.countryCode)
-    print(meta.timezone)
-    print(meta.administrativeArea)
-}
-```
-
-> Get the closest or farthest location from a list of coordinates:
-```swift
-let coordinates = [
-    CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832),
-    CLLocationCoordinate2D(latitude: 59.9094, longitude: 10.7349),
-    CLLocationCoordinate2D(latitude: 35.7750, longitude: -78.6336),
-    CLLocationCoordinate2D(latitude: 33.720817, longitude: 73.090032)
-]
-
-coordinates.closest(to: homeCoordinate)
-coordinates.farthest(from: homeCoordinate)
-```
-
-> Approximate comparison of coordinates rounded to 3 decimal places (about 100 meters):
-```swift
-let coordinate1 = CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832)
-let coordinate2 = CLLocationCoordinate2D(latitude: 43.6531, longitude: -79.3834)
-let coordinate3 = CLLocationCoordinate2D(latitude: 43.6522, longitude: -79.3822)
-
-coordinate1 ~~ coordinate2 -> true
-coordinate1 ~~ coordinate3 -> false
-```
-
-> Location worker that offers easy authorization and observable closures ([read more](http://basememara.com/swifty-locations-observables/)):
-```swift
-class LocationViewController: UIViewController {
-
-    @IBOutlet weak var outputLabel: UILabel!
-    
-    var locationsWorker: LocationsWorkerType = LocationsWorker(
-        desiredAccuracy: kCLLocationAccuracyThreeKilometers,
-        distanceFilter: 1000
-    )
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        locationsWorker.addObserver(locationObserver)
-        locationsWorker.addObserver(headingObserver)
-        
-        locationsWorker.requestAuthorization(
-            for: .whenInUse,
-            startUpdatingLocation: true,
-            completion: { granted in
-                guard granted else { return }
-                self.locationsWorker.startUpdatingHeading()
-            }
-        )
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        locationsWorker.removeObservers()
-    }
-    
-    deinit {
-        locationsWorker.removeObservers()
-    }
-}
-
-extension LocationViewController {
-    
-    var locationObserver: Observer<LocationsWorker.LocationHandler> {
-        return Observer { [weak self] in
-            self?.outputLabel.text = $0.description
-        }
-    }
-    
-    var headingObserver: Observer<LocationsWorker.HeadingHandler> {
-        return Observer {
-            print($0.description)
-        }
-    }
-}
-```
-</details>
-
-<details>
-<summary>Localization</summary>
-
-> Strongly-typed localizable keys that's also `XLIFF` export friendly ([read more](http://basememara.com/swifty-localization-xcode-support/)):
-```swift
-// First define localization keys
-extension Localizable {
-    static let ok = Localizable(NSLocalizedString("ok.dialog", comment: "OK text for dialogs"))
-    static let cancel = Localizable(NSLocalizedString("cancel.dialog", comment: "Cancel text for dialogs"))
-    static let next = Localizable(NSLocalizedString("next.dialog", comment: "Next text for dialogs"))
-}
-
-// Then use strongly-typed localization keys
-myLabel1.text = .localized(.ok)
-myLabel2.text = .localized(.cancel)
-myLabel3.text = .localized(.next)
-```
-</details>
-
-<details>
-<summary>Migration</summary>
-
-> Manages blocks of code that only need to run once on version updates in apps:
-```swift
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var window: UIWindow?
-    let migration = Migration()
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        migration
-            .performUpdate {
-                print("Migrate update occurred.")
-            }
-            .perform(forVersion: "1.0") {
-                print("Migrate to 1.0 occurred.")
-            }
-            .perform(forVersion: "1.0", withBuild: "1") {
-                print("Migrate to 1.0 (1) occurred.")
-            }
-            .perform(forVersion: "1.0", withBuild: "2") {
-                print("Migrate to 1.0 (2) occurred.")
-            }
-            
-        return true
-    }
-}
-```
-</details>
-
-<details>
-<summary>RateLimit</summary>
-
-> A throttler that will ignore work items until the time limit for the preceding call is over:
-```swift
-let limiter = Throttler(limit: 5)
-var value = 0
-
-limiter.execute {
-    value += 1
-}
-
-limiter.execute {
-    value += 1
-}
-
-limiter.execute {
-    value += 1
-}
-
-sleep(5)
-
-limiter.execute {
-    value += 1
-}
-
-// value == 2
-```
-
-> A debouncer that will delay work items until time limit for the preceding call is over:
-```swift
-let limiter = Debouncer(limit: 5)
-var value = ""
-
-func sendToServer() {
-    limiter.execute {
-        // Sends to server after no typing for 5 seconds
-        // instead of once per character, so:
-        value == "hello" -> true
-    }
-}
-
-value.append("h")
-sendToServer()
-
-value.append("e")
-sendToServer()
-
-value.append("l")
-sendToServer()
-
-value.append("l")
-sendToServer()
-
-value.append("o")
-sendToServer()
-```
-</details>
-
-<details>
-<summary>Result</summary>
-
-> Used to represent whether an asynchronous request was successful or encountered an error:
-```swift
-// Declare the function with a completion handler of `Result` type
-func fetch(id: Int, completion: @escaping (Result<Author, ZamzamError>) -> Void) {
-    guard id > 0 else {
-        completion(.failure(.nonExistent))
-        return
-    }
-
-    DispatchQueue.global().async {
-        completion(.success(Author(...)))
-    }
-}
-
-// Call the asynchronous function and determine the response
-fetch(id: 123) {
-    guard let value = $0.value, $0.isSuccess else {
-        print("An error occurred: \($0.error ?? .general)")
-        return
-    }
-
-    print(value)
-}
-```
-</details>
-
-<details>
-<summary>SystemConfiguration</summary>
-
-> Determine if the device is connected to a network:
-```swift
-import SystemConfiguration
-
-SCNetworkReachability.isOnline
-```
-</details>
-
-<details>
-<summary>SynchronizedArray</summary>
-
-> A thread-safe array that allows concurrent reads and exclusive writes ([read more](http://basememara.com/creating-thread-safe-arrays-in-swift/)):
-```swift
-var array = SynchronizedArray<Int>()
-
-DispatchQueue.concurrentPerform(iterations: 1000) { index in
-    array.append(index)
-}
-```
-</details>
-
-<details>
-<summary>UserNotification</summary>
-
-> Registers the local and remote notifications with the categories and actions it supports:
-```swift
-UNUserNotificationCenter.current().register(
-    delegate: self,
-    categories: [
-        "order": [
-            UNNotificationAction(
-                identifier: "confirmAction",
-                title: "Confirm",
-                options: [.foreground]
-            )
-        ],
-        "chat": [
-            UNTextInputNotificationAction(
-                identifier: "replyAction",
-                title: "Reply",
-                options: [],
-                textInputButtonTitle: "Send",
-                textInputPlaceholder: "Type your message"
-            )
-        ],
-        "offer": nil
-    ],
-    authorizations: [.alert, .badge, .sound],
-    completion: { granted in
-        granted
-            ? log(debug: "Authorization for notification succeeded.")
-            : log(warn: "Authorization for notification not given.")
-    }
-)
-```
-
-> Get a list of all pending or delivered user notifications:
-```swift
-UNUserNotificationCenter.current().getNotificationRequests { notifications in
-    notifications.forEach {
-        print($0.identifier)
-    }
-}
-```
-
-> Find the pending or delivered notification request by identifier:
-```swift
-UNUserNotificationCenter.current().get(withIdentifier: "abc123") {
-    print($0?.identifier)
-}
-
-UNUserNotificationCenter.current().get(withIdentifiers: ["abc123", "xyz789"]) {
-    $0.forEach {
-        print($0.identifier)
-    }
-}
-```
-
-> Determine if the pending or delivered notification request exists:
-```swift
-UNUserNotificationCenter.current().exists(withIdentifier: "abc123") {
-    print("Does notification exist: \($0)")
-}
-```
-
-> Schedules local notifications for delivery:
-```swift
-UNUserNotificationCenter.current().add(
-    body: "This is the body for time interval",
-    timeInterval: 5
-)
-
-UNUserNotificationCenter.current().add(
-    body: "This is the body for time interval",
-    title: "This is the snooze title",
-    timeInterval: 60,
-    identifier: "abc123-main"
-)
-
-UNUserNotificationCenter.current().add(
-    body: "This is the body for time interval",
-    title: "This is the misc1 title",
-    timeInterval: 60,
-    identifier: "abc123-misc1",
-    category: "misc1Category"
-)
-
-UNUserNotificationCenter.current().add(
-    body: "This is the body for time interval",
-    title: "This is the misc2 title",
-    timeInterval: 60,
-    identifier: "abc123-misc2",
-    category: "misc2Category",
-    userInfo: [
-        "id": post.id,
-        "link": post.link,
-        "mediaURL": mediaURL
-    ],
-    completion: { error in
-        guard error == nil else { return }
-        // Added successfully
-    }
-)
-
-UNUserNotificationCenter.current().add(
-    date: Date(timeIntervalSinceNow: 5),
-    body: "This is the body for date",
-    repeats: .minute,
-    identifier: "abc123-repeat"
-)
-```
-
-> Get a remote image from the web and convert to a user notification attachment:
-```swift
-UNNotificationAttachment.download(from: urlString) {
-    guard $0.isSuccess, let attachment = $0.value else {
-        return log(error: "Could not download the remote resource (\(urlString)): \($0.error.debugDescription).")
-    }
-
-    UNUserNotificationCenter.current().add(
-        body: "This is the body",
-        attachments: [attachment]
-    )
-}
-```
-
-> Remove pending or delivered notification requests by identifiers, categories, or all:
-```swift
-UNUserNotificationCenter.current().remove(withIdentifier: "abc123")
-UNUserNotificationCenter.current().remove(withIdentifiers: ["abc123", "xyz789"])
-UNUserNotificationCenter.current().remove(withCategory: "chat") { /* Done */ }
-UNUserNotificationCenter.current().remove(withCategories: ["order", "chat"]) { /* Done */ }
-UNUserNotificationCenter.current().removeAll()
-```
-</details>
-
-<details>
-<summary>UserDefaults</summary>
-
-> Strongly-typed UserDefault keys:
-```swift
-// First define keys
-extension UserDefaults.Keys {
-    static let testString = UserDefaults.Key<String?>("testString")
-    static let testInt = UserDefaults.Key<Int?>("testInt")
-    static let testBool = UserDefaults.Key<Bool?>("testBool")
-    static let testArray = UserDefaults.Key<[Int]?>("testArray")
-}
-
-// Then use strongly-typed values
-let testString: String? = UserDefaults.standard[.testString]
-let testInt: Int? = UserDefaults.standard[.testInt]
-let testBool: Bool? = UserDefaults.standard[.testBool]
-let testArray: [Int]? = UserDefaults.standard[.testArray]
-```
-</details>
-
 ## Author
 
-Zamzam Inc., http://zamzam.io
+Zamzam Inc., https://zamzam.io
+Basem Emara, https://basememara.com
 
 ## License
 
