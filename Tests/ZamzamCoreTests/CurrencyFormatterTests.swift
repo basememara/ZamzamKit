@@ -46,7 +46,7 @@ extension CurrencyFormatterTests {
         let formatter = CurrencyFormatter(for: Locale(identifier: "fr-FR"))
         
         let amount: Double = 123456789.987
-        XCTAssertEqual(formatter.string(fromAmount: amount), "123 456 789,99 €")
+        XCTAssertEqual(formatter.string(fromAmount: amount), "123 456 789,99 €")
     }
     
     func testSA() {
@@ -57,10 +57,10 @@ extension CurrencyFormatterTests {
     }
     
     func testZH() {
-        let formatter = CurrencyFormatter(for: Locale(identifier: "zh_HANS"))
+        let formatter = CurrencyFormatter(for: Locale(identifier: "zh_HANS_CN"))
         
         let amount: Double = 123456789.987
-        XCTAssertEqual(formatter.string(fromAmount: amount), "¤123,456,789.99")
+        XCTAssertEqual(formatter.string(fromAmount: amount), "¥123,456,789.99")
     }
 }
 
@@ -80,7 +80,7 @@ extension CurrencyFormatterTests {
         let formatter = CurrencyFormatter(for: Locale(identifier: "fr-FR"), autoTruncate: true)
         
         let amount: Double = 123456789.00
-        XCTAssertEqual(formatter.string(fromAmount: amount), "123 456 789 €")
+        XCTAssertEqual(formatter.string(fromAmount: amount), "123 456 789 €")
     }
 }
 

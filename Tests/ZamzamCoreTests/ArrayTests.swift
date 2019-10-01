@@ -14,20 +14,6 @@ final class ArrayTests: XCTestCase {
 }
 
 extension ArrayTests {
-
-    func testRemoveEach() {
-        // Given
-        var result = [1, 3, 5, 7, 9]
-        
-        // When
-        result.removeEach { print($0) }
-        
-        // Then
-        XCTAssert(result.isEmpty)
-    }
-}
-
-extension ArrayTests {
     
     func testDistinct() {
         // Given
