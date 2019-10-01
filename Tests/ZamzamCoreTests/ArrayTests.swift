@@ -25,17 +25,6 @@ extension ArrayTests {
         // Then
         XCTAssertEqual(result, [1, 3, 5, 7, 9])
     }
-    
-    func testRemoveDuplicates() {
-        // Given
-        var sample = [1, 1, 3, 3, 5, 5, 7, 7, 9, 9]
-        
-        // When
-        sample.removeDuplicates()
-        
-        // Then
-        XCTAssertEqual(sample, [1, 3, 5, 7, 9])
-    }
 }
 
 extension ArrayTests {
