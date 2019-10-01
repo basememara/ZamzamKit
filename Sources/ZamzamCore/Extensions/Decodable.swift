@@ -26,7 +26,7 @@ public struct FailableCodableArray<Element: Decodable>: Decodable {
     
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
-        var elements = [Element]()
+        var elements: [Element] = []
         
         if let count = container.count {
             elements.reserveCapacity(count)

@@ -41,7 +41,7 @@ public extension UIToolbar {
             $0.isUserInteractionEnabled = true
             $0.sizeToFit()
             
-            var items = [UIBarButtonItem]()
+            var items: [UIBarButtonItem] = []
             
             if let clearAction = clearAction {
                 let clearButton = UIBarButtonItem(
@@ -96,7 +96,7 @@ public extension UIToolbar {
             $0.isUserInteractionEnabled = true
             $0.sizeToFit()
             
-            var items = [UIBarButtonItem]()
+            var items: [UIBarButtonItem] = []
             
             if let clearAction = clearAction {
                 let clearButton = UIBarButtonItem(

@@ -146,7 +146,7 @@ public extension UNUserNotificationCenter {
     
     /// Returns a list of all pending or delivered user notifications.
     func getNotificationRequests(completion: @escaping ([UNNotificationRequest]) -> Void) {
-        var notificationRequests = [UNNotificationRequest]()
+        var notificationRequests: [UNNotificationRequest] = []
         let taskGroup = DispatchGroup()
         
         taskGroup.enter()

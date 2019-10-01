@@ -32,22 +32,22 @@ let package = Package(
         .target(
             name: "ZamzamCore",
             exclude: {
-                var exclude = [String]()
+                var exclude: [String] = []
 
                 #if os(macOS)
-                exclude.append("Extensions/Font.swift")
+                    exclude.append("Extensions/Font.swift")
                 #endif
                 
                 #if os(tvOS)
-                exclude.append("Extensions/FileManager.swift")
+                    exclude.append("Extensions/FileManager.swift")
                 #endif
                 
                 #if !os(iOS)
-                exclude.append("Utilities/BackgroundTask.swift")
+                    exclude.append("Utilities/BackgroundTask.swift")
                 #endif
                 
-                #if !(os(iOS) || os(watchOS))
-                exclude.append("Utilities/WatchSession.swift")
+                #if !canImport(WatchConnectivity)
+                    exclude.append("Utilities/WatchSession.swift")
                 #endif
                 
                 return exclude
@@ -77,7 +77,7 @@ let package = Package(
             name: "ZamzamUI",
             dependencies: ["ZamzamCore"],
             exclude: {
-                var exclude = [String]()
+                var exclude: [String] = []
                 
                 #if !os(iOS)
                     // TODO: Macro doesn't work?

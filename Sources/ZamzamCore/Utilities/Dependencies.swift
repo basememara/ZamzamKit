@@ -15,7 +15,7 @@ import Foundation
 /// A dependency collection that provides resolutions for object instances.
 public class Dependencies {
     /// Stored object instance factories.
-    private var modules = [String: Module]()
+    private var modules: [String: Module] = [:]
     
     private init() {}
     deinit { modules.removeAll() }
