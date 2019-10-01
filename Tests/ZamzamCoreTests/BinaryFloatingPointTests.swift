@@ -1,5 +1,5 @@
 //
-//  NumberTests.swift
+//  BinaryFloatingPointTests.swift
 //  ZamzamKit
 //
 //  Created by Basem Emara on 5/14/17.
@@ -9,7 +9,7 @@
 import XCTest
 import ZamzamCore
 
-final class NumberTests: XCTestCase {
+final class BinaryFloatingPointTests: XCTestCase {
     
     func testRounded() {
         let test1: Float = 123.12312421
