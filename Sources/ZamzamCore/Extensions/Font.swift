@@ -6,6 +6,7 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 public extension UIFont {
@@ -22,3 +23,4 @@ public extension UIFont {
         return UIFont(descriptor: descriptor, size: 0)
     }
 }
+#endif

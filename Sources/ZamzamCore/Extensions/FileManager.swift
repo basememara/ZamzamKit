@@ -8,6 +8,7 @@
 
 import Foundation
 
+#if !os(tvOS)
 public extension FileManager {
     
     /// Get URL for the file.
@@ -99,3 +100,4 @@ public extension FileManager {
         }.resume()
     }
 }
+#endif

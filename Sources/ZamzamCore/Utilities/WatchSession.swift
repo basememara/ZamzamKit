@@ -6,8 +6,8 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
+#if canImport(WatchConnectivity)
 import WatchConnectivity
-import ZamzamCore
 
 public class WatchSession: NSObject, WCSessionDelegate {
 
@@ -393,4 +393,5 @@ public extension WatchSession {
         }
     }
 }
+#endif
 #endif

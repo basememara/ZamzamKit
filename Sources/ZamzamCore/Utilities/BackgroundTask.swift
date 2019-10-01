@@ -7,6 +7,7 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
+#if os(iOS)
 import UIKit
 
 /// Encapsulate iOS background tasks
@@ -52,3 +53,4 @@ public class BackgroundTask {
         identifier = .invalid
     }
 }
+#endif

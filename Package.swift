@@ -30,28 +30,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "ZamzamCore",
-            exclude: {
-                var exclude: [String] = []
-
-                #if os(macOS)
-                    exclude.append("Extensions/Font.swift")
-                #endif
-                
-                #if os(tvOS)
-                    exclude.append("Extensions/FileManager.swift")
-                #endif
-                
-                #if !os(iOS)
-                    exclude.append("Utilities/BackgroundTask.swift")
-                #endif
-                
-                #if !canImport(WatchConnectivity)
-                    exclude.append("Utilities/WatchSession.swift")
-                #endif
-                
-                return exclude
-            }()
+            name: "ZamzamCore"
         ),
         .testTarget(
             name: "ZamzamCoreTests",
