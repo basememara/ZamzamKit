@@ -99,14 +99,14 @@ public extension LocationWorker {
                 if #available(OSX 10.15, *) {
                     manager.requestAlwaysAuthorization()
                 }
+            #elseif os(tvOS)
+                manager.requestWhenInUseAuthorization()
             #else
                 switch type {
                 case .whenInUse:
                     manager.requestWhenInUseAuthorization()
                 case .always:
-                    if #available(OSX 10.15, *) {
-                        manager.requestAlwaysAuthorization()
-                    }
+                    manager.requestAlwaysAuthorization()
                 }
             #endif
         }
@@ -154,10 +154,13 @@ public extension LocationWorker {
     
     func startUpdatingLocation(enableBackground: Bool) {
         #if os(iOS)
-        manager.allowsBackgroundLocationUpdates = enableBackground
+            manager.allowsBackgroundLocationUpdates = enableBackground
         #endif
         
-        manager.startUpdatingLocation()
+
+        #if !os(tvOS)
+            manager.startUpdatingLocation()
+        #endif
     }
     
     func stopUpdatingLocation() {

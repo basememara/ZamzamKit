@@ -9,6 +9,7 @@
 import XCTest
 import ZamzamCore
 
+#if !os(tvOS)
 class FileTests: XCTestCase {
     private let fileName = "FileServiceTests.txt"
     private let fileName2 = "FileServiceTests2.txt"
@@ -80,3 +81,4 @@ private extension FileTests {
             .path
     }
 }
+#endif

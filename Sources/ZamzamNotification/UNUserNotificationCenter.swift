@@ -6,6 +6,7 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
+#if !os(tvOS)
 import UserNotifications
 import CoreLocation
 import ZamzamCore
@@ -459,3 +460,4 @@ public extension UNUserNotificationCenter {
         }
     }
 }
+#endif

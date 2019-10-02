@@ -54,21 +54,7 @@ let package = Package(
         ),
         .target(
             name: "ZamzamUI",
-            dependencies: ["ZamzamCore"],
-            exclude: {
-                var exclude: [String] = []
-                
-                #if !os(iOS)
-                    // TODO: Macro doesn't work?
-                    //exclude.append("Platforms/UIKit")
-                #endif
-                
-                #if !os(watchOS)
-                    exclude.append("Platforms/WatchKit")
-                #endif
-                
-                return exclude
-            }()
+            dependencies: ["ZamzamCore"]
         ),
         .testTarget(
             name: "ZamzamUITests",
