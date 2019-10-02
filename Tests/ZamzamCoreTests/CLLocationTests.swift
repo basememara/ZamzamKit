@@ -10,11 +10,11 @@ import XCTest
 import CoreLocation
 import ZamzamCore
 
-final class LocationTests: XCTestCase {
+final class CLLocationTests: XCTestCase {
     
 }
 
-extension LocationTests {
+extension CLLocationTests {
     
     func testMetaData() {
         let promise = expectation(description: "fetch location")
@@ -43,7 +43,7 @@ extension LocationTests {
     }
 }
 
-extension LocationTests {
+extension CLLocationTests {
     
     func testClosestFarthestLocation() {
         let toronto = CLLocationCoordinate2D(latitude: 43.6529, longitude: -79.3849)
@@ -90,7 +90,7 @@ extension LocationTests {
     }
 }
 
-extension LocationTests {
+extension CLLocationTests {
     
     func testDistanceLocation() {
         let toronto = CLLocationCoordinate2D(latitude: 43.6529, longitude: -79.3849)
@@ -103,7 +103,7 @@ extension LocationTests {
     }
 }
 
-extension LocationTests {
+extension CLLocationTests {
     
     func testApproximateComparison() {
         let coordinate1 = CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832)

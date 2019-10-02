@@ -92,6 +92,11 @@ extension StringTests {
         XCTAssertEqual(test.truncated(3, trailing: "***"), "Abc***")
     }
     
+    func testTruncatOutOfRange() {
+        let test = "Abcdef123456"
+        XCTAssertEqual(test.truncated(20), test)
+    }
+    
     func testContains() {
         let elements = CharacterSet(charactersIn: "AbCz456!")
         

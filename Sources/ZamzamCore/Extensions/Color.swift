@@ -15,6 +15,18 @@
 
 public extension UIColor {
 
+    /// A random color.
+    static var random: UIColor {
+        UIColor(rgb: (
+            .random(in: 0...255),
+            .random(in: 0...255),
+            .random(in: 0...255)
+        ))
+    }
+}
+
+public extension UIColor {
+
     /// An additional convenience initializer function that allows to init a color object using a hex color value.
     ///
     /// For hex code `#990000`, initialize using `0x990000`.

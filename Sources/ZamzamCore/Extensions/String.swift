@@ -339,11 +339,16 @@ public extension String {
 }
 
 public extension String {
+    private static let defaultDecoder = JSONDecoder()
     
-    /// Returns a value of the type you specify, decoded from a JSON object.
-    func decode<T: Decodable>(using encoding: String.Encoding = .utf8) -> T? {
+    /// Returns a value of the type you specify, decoded from a JSON string.
+    func decode<T: Decodable>(
+        using encoding: String.Encoding = .utf8,
+        with decoder: JSONDecoder? = nil
+    ) -> T? {
         guard let data = data(using: encoding) else { return nil }
-        return try? JSONDecoder().decode(T.self, from: data)
+        let decoder = decoder ?? Self.defaultDecoder
+        return try? decoder.decode(T.self, from: data)
     }
 }
 

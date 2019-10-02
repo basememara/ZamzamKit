@@ -26,3 +26,10 @@ extension ColorTests {
         XCTAssertEqual(UIColor(rgb: (77, 116, 107)), UIColor(hex: 0x4D746B))
     }
 }
+
+extension ColorTests {
+
+    func testRandom() {
+        XCTAssertNotEqual(UIColor.random, .random)
+    }
+}

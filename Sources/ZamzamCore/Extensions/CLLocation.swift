@@ -12,12 +12,12 @@ public extension CLLocationCoordinate2D {
     
     /// Returns a location object.
     var location: CLLocation {
-        return CLLocation(latitude: latitude, longitude: longitude)
+        CLLocation(latitude: latitude, longitude: longitude)
     }
     
     /// Returns the distance (measured in meters) from the receiver’s location to the specified location.
     func distance(from coordinate: CLLocationCoordinate2D) -> CLLocationDistance {
-        return location.distance(from: coordinate.location)
+        location.distance(from: coordinate.location)
     }
 }
 
@@ -27,14 +27,14 @@ public extension Array where Element == CLLocationCoordinate2D {
     ///
     /// If the sequence has no elements, returns nil.
     func closest(to coordinate: CLLocationCoordinate2D) -> CLLocationCoordinate2D? {
-        return self.min { $0.distance(from: coordinate) < $1.distance(from: coordinate) }
+        self.min { $0.distance(from: coordinate) < $1.distance(from: coordinate) }
     }
     
     /// Returns the farthest coordinate from the specified location.
     ///
     /// If the sequence has no elements, returns nil.
     func farthest(from coordinate: CLLocationCoordinate2D) -> CLLocationCoordinate2D? {
-        return self.max { $0.distance(from: coordinate) < $1.distance(from: coordinate) }
+        self.max { $0.distance(from: coordinate) < $1.distance(from: coordinate) }
     }
 }
 
@@ -116,13 +116,12 @@ extension CLLocationCoordinate2D: Equatable {
     
     /// Determine if coordinates match using latitude and longitude values.
     public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
-        return lhs.latitude == rhs.latitude
-            && lhs.longitude == rhs.longitude
+        lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
     }
     
     /// Determine if coordinates do not match using latitude and longitude values.
     public static func != (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
-        return !(lhs == rhs)
+        !(lhs == rhs)
     }
 }
 
@@ -133,21 +132,21 @@ public extension CLLocationCoordinate2D {
     
     /// Approximate comparison of coordinates rounded to 3 decimal places.
     static func ~~ (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
-        return lhs.latitude.rounded(toPlaces: CLLocationCoordinate2D.decimalPrecision)
+        lhs.latitude.rounded(toPlaces: CLLocationCoordinate2D.decimalPrecision)
             == rhs.latitude.rounded(toPlaces: CLLocationCoordinate2D.decimalPrecision)
-            && lhs.longitude.rounded(toPlaces: CLLocationCoordinate2D.decimalPrecision)
-                == rhs.longitude.rounded(toPlaces: CLLocationCoordinate2D.decimalPrecision)
+                && lhs.longitude.rounded(toPlaces: CLLocationCoordinate2D.decimalPrecision)
+                    == rhs.longitude.rounded(toPlaces: CLLocationCoordinate2D.decimalPrecision)
     }
     
     /// Approximate comparison of coordinates rounded to 3 decimal places.
     static func !~ (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
-        return !(lhs ~~ rhs)
+        !(lhs ~~ rhs)
     }
 }
 
 extension CLLocationCoordinate2D: CustomStringConvertible {
     
     public var description: String {
-        return .localizedStringWithFormat("%.2f°, %.2f°", latitude, longitude)
+        .localizedStringWithFormat("%.2f°, %.2f°", latitude, longitude)
     }
 }
