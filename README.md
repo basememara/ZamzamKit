@@ -15,7 +15,7 @@ ZamzamKit a Swift framework for rapid development using a collection of small ut
 
 `.package(url: "git@github.com:ZamzamInc/ZamzamKit.git", .upToNextMajor(from: "5.0.0"))` 
 
-The `ZamzamKit` package has four different products in it:
+The `ZamzamKit` package contains four different products:
 * `ZamzamCore`
 * `ZamzamLocation`
 * `ZamzamNotification`
@@ -157,6 +157,11 @@ value[99] // nil
 "<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>".htmlStripped // "This is web content with a link."
 ```
 
+> Decode from a JSON string using type inference:
+```swift
+"{\"test1\":29,\"test2\":62,\"test3\":33,\"test4\":24,\"test5\":14,\"test6\":72}"
+```
+
 > Encoders and decoders:
 ```swift
 value.urlEncoded
@@ -237,7 +242,7 @@ values[2]["description"] as? String // "This is a test for 3.")
 
 > Get a dictionary from a property list file within any bundle:
 ```swift
-let values = Bundle.main.contents(plist: "Settings.plist")
+let values: [String: Any] = Bundle.main.contents(plist: "Settings.plist")
 
 values["MyString1"] as? String // "My string value 1."
 values["MyNumber1"] as? Int // 123
@@ -256,6 +261,7 @@ values["MyDate1"] as? Date // 2018-11-21 15:40:03 +0000
 UIColor(hex: 0x990000)
 UIColor(hex: 0x4286F4)
 UIColor(rgb: (66, 134, 244))
+UIColor.random
 ```
 </details>
 
@@ -411,36 +417,45 @@ FileManager.default.download(from: "http://example.com/test.pdf") { url, respons
 </details>
 
 <details>
-<summary>Infix</summary>
+<summary>Location</summary>
 
-> Assign a value if not nil:
+> Determine if location services is enabled and authorized for always or when in use:
 ```swift
-var test: Int? = 123
-var value: Int? = nil
-
-test ?= value
-// test == 123
-
-value = 456
-test ?= value
-// test == 456
+CLLocationManager.isAuthorized -> bool
 ```
 
-> Assign a value if not nil or empty:
+> Get the location details for coordinates:
 ```swift
-var test: String
-var value: String?
+CLLocation(latitude: 43.6532, longitude: -79.3832).geocoder { meta in
+    print(meta.locality)
+    print(meta.country)
+    print(meta.countryCode)
+    print(meta.timezone)
+    print(meta.administrativeArea)
+}
+```
 
-test = value ??+ "Abc"
-// test == "Abc"
+> Get the closest or farthest location from a list of coordinates:
+```swift
+let coordinates = [
+    CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832),
+    CLLocationCoordinate2D(latitude: 59.9094, longitude: 10.7349),
+    CLLocationCoordinate2D(latitude: 35.7750, longitude: -78.6336),
+    CLLocationCoordinate2D(latitude: 33.720817, longitude: 73.090032)
+]
 
-value = ""
-test = value ??+ "Abc"
-// test == "Abc"
+coordinates.closest(to: homeCoordinate)
+coordinates.farthest(from: homeCoordinate)
+```
 
-value = "Xyz"
-test = value ??+ "Abc"
-// test == "Xyz"
+> Approximate comparison of coordinates rounded to 3 decimal places (about 100 meters):
+```swift
+let coordinate1 = CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832)
+let coordinate2 = CLLocationCoordinate2D(latitude: 43.6531, longitude: -79.3834)
+let coordinate3 = CLLocationCoordinate2D(latitude: 43.6522, longitude: -79.3822)
+
+coordinate1 ~~ coordinate2 -> true
+coordinate1 ~~ coordinate3 -> false
 ```
 </details>
 
@@ -871,49 +886,50 @@ let label = UILabel().with {
 ```
 </details>
 
+### Infixes
+
+<details>
+<summary>ConditionalAssignment ?=</summary>
+
+> Assign a value if not nil:
+```swift
+var test: Int? = 123
+var value: Int? = nil
+
+test ?= value
+// test == 123
+
+value = 456
+test ?= value
+// test == 456
+```
+</details>
+
+<details>
+<summary>NilOrEmptyAssignment ??+</summary>
+
+> Assign a value if not nil or empty:
+```swift
+var test: String
+var value: String?
+
+test = value ??+ "Abc"
+// test == "Abc"
+
+value = ""
+test = value ??+ "Abc"
+// test == "Abc"
+
+value = "Xyz"
+test = value ??+ "Abc"
+// test == "Xyz"
+```
+</details>
+
 ## ZamzamLocation
 
 <details>
-<summary>CoreLocation</summary>
-
-> Determine if location services is enabled and authorized for always or when in use:
-```swift
-CLLocationManager.isAuthorized -> bool
-```
-
-> Get the location details for coordinates:
-```swift
-CLLocation(latitude: 43.6532, longitude: -79.3832).geocoder { meta in
-    print(meta.locality)
-    print(meta.country)
-    print(meta.countryCode)
-    print(meta.timezone)
-    print(meta.administrativeArea)
-}
-```
-
-> Get the closest or farthest location from a list of coordinates:
-```swift
-let coordinates = [
-    CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832),
-    CLLocationCoordinate2D(latitude: 59.9094, longitude: 10.7349),
-    CLLocationCoordinate2D(latitude: 35.7750, longitude: -78.6336),
-    CLLocationCoordinate2D(latitude: 33.720817, longitude: 73.090032)
-]
-
-coordinates.closest(to: homeCoordinate)
-coordinates.farthest(from: homeCoordinate)
-```
-
-> Approximate comparison of coordinates rounded to 3 decimal places (about 100 meters):
-```swift
-let coordinate1 = CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832)
-let coordinate2 = CLLocationCoordinate2D(latitude: 43.6531, longitude: -79.3834)
-let coordinate3 = CLLocationCoordinate2D(latitude: 43.6522, longitude: -79.3822)
-
-coordinate1 ~~ coordinate2 -> true
-coordinate1 ~~ coordinate3 -> false
-```
+<summary>LocationsWorker</summary>
 
 > Location worker that offers easy authorization and observable closures ([read more](http://basememara.com/swifty-locations-observables/)):
 ```swift
