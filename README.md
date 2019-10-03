@@ -27,7 +27,7 @@ There is a limitation with SwiftPM where resources can not be embedded at the mo
 
 ## ZamzamCore
 
-### Standard Library
+### Standard+
 
 <details>
 <summary>Array</summary>
@@ -48,10 +48,6 @@ array // ["a", "b", "d", "e"]
 ```swift
 ["a", "b", "c", "d", "e"].prefix(3).array
 ```
-</details>
-
-<details>
-<summary>Collection</summary>
 
 > Safely retrieve an element at the given index if it exists:
 ```swift
@@ -67,17 +63,149 @@ tabBarController.tabBar.items?[safe: 3]?.selectedImage = UIImage("my-image")
 [1, 3, 5, 7, 9][safe: 1] // Optional(3)
 [1, 3, 5, 7, 9][safe: 12] // nil
 ```
-</details>
 
-<details>
-<summary>Equatable</summary>
-
-> Determine if a value is contained within the array of values:
+> Determine if a value is contained within the array of equatable values:
 ```swift
 "b".within(["a", "b", "c"]) // true
 
 let status: OrderStatus = .cancelled
 status.within([.requeseted, .accepted, .inProgress]) // false
+```
+</details>
+
+<details>
+<summary>Date</summary>
+
+> Determine if a date is in the past or future:
+```swift
+Date(timeIntervalSinceNow: -100).isPast -> true
+Date(timeIntervalSinceNow: 100).isPast -> false
+
+Date(timeIntervalSinceNow: 100).isFuture -> true
+Date(timeIntervalSinceNow: -100).isFuture -> false
+```
+
+> Determine if a date is today, yesterday, or tomorrow:
+```swift
+Date().isToday -> true
+Date(timeIntervalSinceNow: -90_000).isYesterday -> true
+Date(timeIntervalSinceNow: 90_000).isTomorrow -> true
+```
+
+> Determine if a date is within a weekday or weekend period:
+```swift
+Date().isWeekday -> false
+Date().isWeekend -> true
+```
+
+> Get the beginning or end of the day:
+```swift
+Date().startOfDay -> "2018/11/21 00:00:00"
+Date().endOfDay -> "2018/11/21 23:59:59"
+```
+
+> Get the beginning or end of the month:
+```swift
+Date().startOfMonth -> "2018/11/01 00:00:00"
+Date().endOfMonth -> "2018/11/30 23:59:59"
+```
+
+> Determine if a date is current:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+date.isCurrentWeek
+date.isCurrentMonth
+date.isCurrentYear
+```
+
+> Determine if a date is between two other dates:
+```swift
+let date = Date()
+let date1 = Date(timeIntervalSinceNow: 1000)
+let date2 = Date(timeIntervalSinceNow: -1000)
+
+date.isBetween(date1, date2) -> true
+```
+
+> Use specific calendar for data manipulations:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+let calendar = Calendar(identifier: .chinese)
+
+date.isToday(for: calendar)
+date.isWeekday(for: calendar)
+date.isCurrentMonth(for: calendar)
+date.isToday(for: calendar)
+date.startOfDay(for: calendar)
+date.startOfMonth(for: calendar)
+```
+
+> Determine if a date is beyond a specified time window:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+let fromDate = Date(fromString: "2018/03/22 09:30")
+
+date.isBeyond(fromDate, bySeconds: 300) -> true
+date.isBeyond(fromDate, bySeconds: 1200) -> false
+```
+
+> Create a date from a string:
+```swift
+Date(fromString: "2018/11/01 18:15")
+Date(fromString: "1440/03/01 18:31", calendar: Calendar(identifier: .islamic))
+```
+
+> Format a date to a string:
+```swift
+Date().string(format: "MMM d, h:mm a") -> "Jan 3, 8:43 PM"
+Date().string(style: .full, calendar: Calendar(identifier: .hebrew)) -> "Friday, 1 Kislev 5779"
+```
+
+> Format a time interval to display as a timer.
+```swift
+let date = Date(fromString: "2016/03/22 09:45")
+let fromDate = Date(fromString: "2016/03/22 09:40")
+
+date.timerString(from: fromDate)
+
+// Prints "00:05:00"
+```
+
+> Get the decimal representation of the time:
+```swift
+Date(fromString: "2018/10/23 18:15").timeToDecimal -> 18.25
+```
+
+> Increment years, months, days, hours, or minutes:
+```swift
+let date = Date()
+date + .years(1)
+date + .months(2)
+date - .days(4)
+date - .hours(6)
+date + .minutes(12)
+date + .days(5, Calendar(identifier: .chinese))
+```
+
+> Convert between time interval units:
+```swift
+let diff = date.timeIntervalSince(date2) -> 172,800 seconds
+diff.minutes -> 2,800 minutes
+diff.hours -> 48 hours
+diff.days -> 2 days
+```
+
+> Time zone context and offset:
+```swift
+let timeZone = TimeZone(identifier: "Europe/Paris")
+timeZone?.isCurrent -> false
+timeZone?.offsetFromCurrent -> -21600
+```
+
+> Normalize date calculations and data storage:
+```swift
+let timeZone: TimeZone = .posix // GMT
+let locale: Locale = .posix // en_US_POSIX
 ```
 </details>
 
@@ -157,11 +285,6 @@ value[99] // nil
 "<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>".htmlStripped // "This is web content with a link."
 ```
 
-> Decode from a JSON string using type inference:
-```swift
-"{\"test1\":29,\"test2\":62,\"test3\":33,\"test4\":24,\"test5\":14,\"test6\":72}"
-```
-
 > Encoders and decoders:
 ```swift
 value.urlEncoded
@@ -182,25 +305,9 @@ value.base64URLEncoded
 var value: String? = "test 123"
 value.isNilOrEmpty
 ```
-
-> Convert sequences and dictionaries to a JSON string:
-```swift
-// Before
-guard let data = self as? [[String: Any]],
-    let stringData = try? JSONSerialization.data(withJSONObject: data, options: []) else {
-        return nil
-}
-    
-let json = String(data: stringData, encoding: .utf8) as? String
-```
-```swift
-// After
-let json = mySequence.jsonString
-let json = myDictionary.jsonString
-```
 </details>
 
-### Foundation
+### Foundation+
 
 <details>
 <summary>Bundle</summary>
@@ -279,117 +386,48 @@ formatter2.string(fromCents: 123456789) // "1 234 567,89 €"
 </details>
 
 <details>
-<summary>Date</summary>
+<summary>Decodable</summary>
 
-> Determine if a date is in the past or future:
+> Get a value of the type you specify, decoded from a JSON string.
 ```swift
-Date(timeIntervalSinceNow: -100).isPast -> true
-Date(timeIntervalSinceNow: 100).isPast -> false
+let jsonString = "{\"test1\":29,\"test2\":62,\"test3\":33,\"test4\":24,\"test5\":14,\"test6\":72}"
+let jsonObject: [String: Int] = jsonString.decode()
 
-Date(timeIntervalSinceNow: 100).isFuture -> true
-Date(timeIntervalSinceNow: -100).isFuture -> false
+// Result
+[
+    "test1": 29,
+    "test2": 62,
+    "test3": 33,
+    "test4": 24,
+    "test5": 14,
+    "test6": 72
+]
 ```
 
-> Determine if a date is today, yesterday, or tomorrow:
+> Get a type-erased `Decodable` value:
 ```swift
-Date().isToday -> true
-Date(timeIntervalSinceNow: -90_000).isYesterday -> true
-Date(timeIntervalSinceNow: 90_000).isTomorrow -> true
-```
+let json = """
+{
+    "boolean": true,
+    "integer": 1,
+    "double": 3.14159265358979323846,
+    "string": "Abc123",
+    "date": "2018-12-05T15:28:25+00:00",
+    "array": [1, 2, 3],
+    "nested": {
+        "a": "alpha",
+        "b": "bravo",
+        "c": "charlie"
+    }
+}
+""".data(using: .utf8)
 
-> Determine if a date is within a weekday or weekend period:
-```swift
-Date().isWeekday -> false
-Date().isWeekend -> true
-```
+let decoder = JSONDecoder()
+let dictionary = try decoder.decode([String: AnyDecodable].self, from: json)
 
-> Get the beginning or end of the day:
-```swift
-Date().startOfDay -> "2018/11/21 00:00:00"
-Date().endOfDay -> "2018/11/21 23:59:59"
-```
-
-> Get the beginning or end of the month:
-```swift
-Date().startOfMonth -> "2018/11/01 00:00:00"
-Date().endOfMonth -> "2018/11/30 23:59:59"
-```
-
-> Determine if a date is between two other dates:
-```swift
-let date = Date()
-let date1 = Date(timeIntervalSinceNow: 1000)
-let date2 = Date(timeIntervalSinceNow: -1000)
-
-date.isBetween(date1, date2) -> true
-```
-
-> Determine if a date is beyond a specified time window:
-```swift
-let date = Date(fromString: "2018/03/22 09:40")
-let fromDate = Date(fromString: "2018/03/22 09:30")
-
-date.isBeyond(fromDate, bySeconds: 300) -> true
-date.isBeyond(fromDate, bySeconds: 1200) -> false
-```
-
-> Create a date from a string:
-```swift
-Date(fromString: "2018/11/01 18:15")
-Date(fromString: "1440/03/01 18:31", calendar: Calendar(identifier: .islamic))
-```
-
-> Format a date to a string:
-```swift
-Date().string(format: "MMM d, h:mm a") -> "Jan 3, 8:43 PM"
-Date().string(style: .full, calendar: Calendar(identifier: .hebrew)) -> "Friday, 1 Kislev 5779"
-```
-
-> Format a time interval to display as a timer.
-```swift
-let date = Date(fromString: "2016/03/22 09:45")
-let fromDate = Date(fromString: "2016/03/22 09:40")
-
-date.timerString(from: fromDate)
-
-// Prints "00:05:00"
-```
-
-> Get the decimal representation of the time:
-```swift
-Date(fromString: "2018/10/23 18:15").timeToDecimal -> 18.25
-```
-
-> Increment years, months, days, hours, or minutes:
-```swift
-let date = Date()
-date + .years(1)
-date + .months(2)
-date - .days(4)
-date - .hours(6)
-date + .minutes(12)
-date + .days(5, Calendar(identifier: .chinese))
-```
-
-> Convert between time interval units:
-```swift
-let diff = date.timeIntervalSince(date2) -> 172,800 seconds
-diff.minutes -> 2,800 minutes
-diff.hours -> 48 hours
-diff.days -> 2 days
-```
-
-> Time zone context and offset:
-```swift
-let timeZone = TimeZone(identifier: "Europe/Paris")
-timeZone?.isCurrent -> false
-timeZone?.offsetFromCurrent -> -21600
-```
-
-> Normalize date calculations and data storage using `UTC` and `POSIX`:
-```swift
-let calendar: Calendar = .posix
-let locale: Locale = .posix
+dictionary["boolean"].value // true
+dictionary["integer"].value // 1
+dictionary["string"].value // Abc123
 ```
 </details>
 
@@ -418,11 +456,6 @@ FileManager.default.download(from: "http://example.com/test.pdf") { url, respons
 
 <details>
 <summary>Location</summary>
-
-> Determine if location services is enabled and authorized for always or when in use:
-```swift
-CLLocationManager.isAuthorized -> bool
-```
 
 > Get the location details for coordinates:
 ```swift
@@ -454,8 +487,13 @@ let coordinate1 = CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832)
 let coordinate2 = CLLocationCoordinate2D(latitude: 43.6531, longitude: -79.3834)
 let coordinate3 = CLLocationCoordinate2D(latitude: 43.6522, longitude: -79.3822)
 
-coordinate1 ~~ coordinate2 -> true
-coordinate1 ~~ coordinate3 -> false
+coordinate1 ~~ coordinate2 // true
+coordinate1 ~~ coordinate3 // false
+```
+
+> Determine if location services is enabled and authorized for always or when in use:
+```swift
+CLLocationManager.isAuthorized // bool
 ```
 </details>
 
@@ -487,7 +525,7 @@ notificationCenter.removeObserver(for: UIApplication.willEnterForegroundNotifica
 "Lmn".mutableAttributed
 "Xyz".mutableAttributed([
     .font: UIFont.italicSystemFont(ofSize: .systemFontSize),
-    .foregroundColor, value: UIColor.green
+    .foregroundColor: UIColor.green
 ])
 ```
 
@@ -507,8 +545,8 @@ label.attributedText = "Abc".attributed + " def " +
 ```swift
 let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
 
-url?.appendingQueryItem("def", value: "456") -> "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
-url?.appendingQueryItem("xyz", value: "999") -> "https://example.com?abc=123&lmn=tuv&xyz=999"
+url?.appendingQueryItem("def", value: "456") // "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
+url?.appendingQueryItem("xyz", value: "999") // "https://example.com?abc=123&lmn=tuv&xyz=999"
 
 url?.appendingQueryItems([
     "def": "456",
@@ -517,7 +555,7 @@ url?.appendingQueryItems([
     "lmn": nil
 ]) -> "https://example.com?xyz=987&def=456&abc=333&jkl=777"
 
-url?.removeQueryItem("xyz") -> "https://example.com?abc=123&lmn=tuv"
+url?.removeQueryItem("xyz") // "https://example.com?abc=123&lmn=tuv"
 ```
 </details>
 
@@ -883,6 +921,18 @@ let label = UILabel().with {
     $0.textColor = UIColor.black
     $0.text = "Hello, World!"
 }
+```
+</details>
+
+<details>
+<summary>Within</summary>
+
+> Determine if the value is contained within the sequence of values:
+```swift
+"b".within(["a", "b", "c"]) // true
+
+let status: OrderStatus = .cancelled
+status.within([.requeseted, .accepted, .inProgress]) // false
 ```
 </details>
 
@@ -1864,8 +1914,8 @@ present(
 
 ## Author
 
-Zamzam Inc., https://zamzam.io
-Basem Emara, https://basememara.com
+* Zamzam Inc., https://zamzam.io
+* Basem Emara, https://basememara.com
 
 ## License
 
