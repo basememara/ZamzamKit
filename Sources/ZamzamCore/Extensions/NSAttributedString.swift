@@ -11,9 +11,7 @@ import Foundation
 public extension NSAttributedString {
     
     /// The full series of characters.
-    var range: NSRange {
-        return NSRange(location: 0, length: length)
-    }
+    var range: NSRange { NSRange(location: 0, length: length) }
     
     /// Dictionary of the attributes applied across the whole string.
     var attributes: [NSAttributedString.Key: Any] {
@@ -48,19 +46,13 @@ public extension NSMutableAttributedString {
 public extension String {
     
     /// The full series of characters.
-    var range: NSRange {
-        return NSRange(location: 0, length: count)
-    }
+    var range: NSRange { NSRange(location: 0, length: count) }
     
     /// A string that has associated attributes (such as visual style, hyperlinks, or accessibility data) for portions of its text.
-    var attributed: NSAttributedString {
-        return NSAttributedString(string: self)
-    }
+    var attributed: NSAttributedString { NSAttributedString(string: self) }
     
     /// A mutable string object that also contains attributes (such as visual style, hyperlinks, or accessibility data) associated with various portions of its text content.
-    var mutableAttributed: NSMutableAttributedString {
-        return NSMutableAttributedString(string: self)
-    }
+    var mutableAttributed: NSMutableAttributedString { NSMutableAttributedString(string: self) }
     
     /// Adds the given collection of attributes to the characters in the specified range.
     ///
@@ -103,6 +95,6 @@ public extension NSAttributedString {
     ///   - rhs: String to add.
     /// - Returns: New instance with add attributed string and string.
     static func + (lhs: NSAttributedString, rhs: String) -> NSMutableAttributedString {
-        return lhs + rhs.attributed
+        lhs + rhs.attributed
     }
 }

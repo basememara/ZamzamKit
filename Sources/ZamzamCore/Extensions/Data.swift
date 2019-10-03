@@ -11,16 +11,13 @@ import Foundation
 public extension Data {
     
     ///String by encoding Data using UTF8 encoding.
-    var string: String? {
-        return string(encoding: .utf8)
-    }
+    var string: String? { string(encoding: .utf8) }
     
     ///String by encoding Data using the given encoding (if applicable).
     ///
     /// - Parameter encoding: encoding.
     /// - Returns: String by encoding Data using the given encoding (if applicable).
     func string(encoding: String.Encoding) -> String? {
-        // https://github.com/SwifterSwift
-        return String(data: self, encoding: encoding)
+        String(data: self, encoding: encoding)
     }
 }

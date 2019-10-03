@@ -71,7 +71,7 @@ public struct FailableCodableArray<Element: Decodable>: Decodable {
 ///     """.data(using: .utf8)!
 ///
 ///     let decoder = JSONDecoder()
-///     let dictionary = try! decoder.decode([String: AnyDecodable].self, from: json)
+///     let dictionary = try? decoder.decode([String: AnyDecodable].self, from: json)
 public struct AnyDecodable: Decodable {
     // https://github.com/Flight-School/AnyCodable
     public let value: Any
@@ -81,7 +81,7 @@ public struct AnyDecodable: Decodable {
     }
 }
 
-protocol _AnyDecodable {
+private protocol _AnyDecodable {
     var value: Any { get }
     init<T>(_ value: T?)
 }
@@ -89,6 +89,7 @@ protocol _AnyDecodable {
 extension AnyDecodable: _AnyDecodable {}
 
 extension _AnyDecodable {
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         

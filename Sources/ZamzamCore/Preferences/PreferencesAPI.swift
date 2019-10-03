@@ -12,6 +12,4 @@ public protocol PreferencesStore {
     func remove<T>(_ key: String.Key<T?>)
 }
 
-public protocol PreferencesType: PreferencesStore {
-    
-}
+public protocol PreferencesType: PreferencesStore {}

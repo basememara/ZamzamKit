@@ -9,7 +9,6 @@
 import Foundation
 
 extension UserDefaults {
-    // Slim version of: https://github.com/radex/SwiftyUserDefaults
     
     /// Gets and sets the value from User Defaults that corresponds to the given key.
     public subscript<T>(key: String.Key<T?>) -> T? {
