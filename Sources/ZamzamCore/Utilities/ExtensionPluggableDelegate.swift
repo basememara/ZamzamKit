@@ -55,7 +55,7 @@ open class ExtensionPluggableDelegate: NSObject, WKExtensionDelegate {
     
     /// List of application plugins for binding to `ExtensionDelegate` events
     open func plugins() -> [ExtensionPlugin] {
-        return [ /* Populated from sub-class */ ]
+        [ /* Populated from sub-class */ ]
     }
 }
 

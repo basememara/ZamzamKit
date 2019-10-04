@@ -12,7 +12,35 @@
 
 import Foundation
 
-/// A dependency collection that provides resolutions for object instances.
+/// A dependency collection that resolves object instances through the `@Inject` property wrapper.
+///
+///     class AppDelegate: UIResponder, UIApplicationDelegate {
+///
+///         private let dependencies = Dependencies {
+///             Module { WidgetModule() as WidgetModuleType }
+///             Module { SampleModule() as SampleModuleType }
+///         }
+///
+///         override init() {
+///             super.init()
+///             dependencies.build()
+///         }
+///     }
+///
+///     // Some time later...
+///
+///     class ViewController: UIViewController {
+///
+///         @Inject private var widgetService: WidgetServiceType
+///         @Inject private var sampleService: SampleServiceType
+///
+///         override func viewDidLoad() {
+///             super.viewDidLoad()
+///
+///             print(widgetService.test())
+///             print(sampleService.test())
+///         }
+///     }
 public class Dependencies {
     /// Stored object instance factories.
     private var modules: [String: Module] = [:]

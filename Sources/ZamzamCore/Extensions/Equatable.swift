@@ -19,7 +19,8 @@ public extension Equatable {
     ///
     /// - Parameter values: Array of values to check.
     /// - Returns: Returns true if the values equals to one of the values in the array.
-    func within<Seq: Sequence> (_ values: Seq) -> Bool where Seq.Iterator.Element == Self {
+    func within<T> (_ values: T) -> Bool
+        where T: Sequence, T.Iterator.Element == Self {
         values.contains(self)
     }
 }

@@ -18,14 +18,14 @@ import UIKit
 ///     class AppDelegate: ApplicationPluggableDelegate {
 ///
 ///         override func plugins() -> [ApplicationPlugin] {
-///             return [
+///             [
 ///                 LoggerPlugin(),
 ///                 NotificationPlugin()
 ///             ]
 ///         }
 ///     }
 ///
-/// Each application module has access to the `AppDelegate` lifecycle events:
+/// Each application plugin has access to the `AppDelegate` lifecycle events:
 ///
 ///     final class LoggerPlugin: ApplicationPlugin {
 ///         private let log = Logger()
@@ -35,7 +35,7 @@ import UIKit
 ///             return true
 ///         }
 ///
-///         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
+///         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 ///             log.info("App did finish launching.")
 ///             return true
 ///         }
@@ -56,7 +56,7 @@ open class ApplicationPluggableDelegate: UIResponder, UIApplicationDelegate {
     
     /// List of application modules for binding to `AppDelegate` events
     open func plugins() -> [ApplicationPlugin] {
-        return [ /* Populated from sub-class */ ]
+        [ /* Populated from sub-class */ ]
     }
 }
 
@@ -65,7 +65,7 @@ public extension ApplicationPluggableDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Ensure all delegates called even if condition fails early
         //swiftlint:disable reduce_boolean
-        return lazyPlugins.reduce(true) {
+        lazyPlugins.reduce(true) {
             $0 && $1.application(application, willFinishLaunchingWithOptions: launchOptions)
         }
     }
@@ -73,7 +73,7 @@ public extension ApplicationPluggableDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Ensure all delegates called even if condition fails early
         //swiftlint:disable reduce_boolean
-        return lazyPlugins.reduce(true) {
+        lazyPlugins.reduce(true) {
             $0 && $1.application(application, didFinishLaunchingWithOptions: launchOptions)
         }
     }

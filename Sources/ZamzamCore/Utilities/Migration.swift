@@ -18,7 +18,7 @@ import Foundation
 ///         var window: UIWindow?
 ///         let migration = Migration()
 ///
-///         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+///         func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
 ///             migration
 ///                 .performUpdate {
 ///                     print("Migrate update occurred.")
@@ -95,12 +95,12 @@ private extension Migration {
     private static let lastVersionKey = "lastMigrationVersion"
     
     var lastAppVersion: String? {
-        get { return defaults.string(forKey: Migration.lastAppVersionKey) }
+        get { defaults.string(forKey: Migration.lastAppVersionKey) }
         set { defaults.setValue(newValue, forKey: Migration.lastAppVersionKey) }
     }
     
     var lastMigrationVersion: String? {
-        get { return defaults.string(forKey: Migration.lastVersionKey) }
+        get { defaults.string(forKey: Migration.lastVersionKey) }
         set { defaults.setValue(newValue, forKey: Migration.lastVersionKey) }
     }
 }

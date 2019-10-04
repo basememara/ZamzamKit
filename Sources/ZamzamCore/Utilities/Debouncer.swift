@@ -22,19 +22,19 @@ import Foundation
 ///     }
 ///
 ///     value.append("h")
-///     sendToServer()
+///     sendToServer() // Waits until 5 seconds
 ///
 ///     value.append("e")
-///     sendToServer()
+///     sendToServer() // Waits until 5 seconds
 ///
 ///     value.append("l")
-///     sendToServer()
+///     sendToServer() // Waits until 5 seconds
 ///
 ///     value.append("l")
-///     sendToServer()
+///     sendToServer() // Waits until 5 seconds
 ///
 ///     value.append("o")
-///     sendToServer()
+///     sendToServer() // Fires after 5 seconds
 public final class Debouncer {
     
     // MARK: - Properties
