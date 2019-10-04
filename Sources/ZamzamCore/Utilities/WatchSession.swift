@@ -12,8 +12,7 @@ import WatchConnectivity
 public class WatchSession: NSObject, WCSessionDelegate {
 
     private var sessionDefault: WCSession? {
-        guard WCSession.isSupported() else { return nil }
-        return .default
+        WCSession.isSupported() ? .default : nil
     }
     
     public override init() {
@@ -25,25 +24,25 @@ public class WatchSession: NSObject, WCSessionDelegate {
     }
     
     /// Subscription queues for firing within delegates
-    private var activationDidCompleteSingle = SynchronizedArray<ActivationHandler>()
-    private var didBecomeInactive = SynchronizedArray<Observer<() -> Void>>()
-    private var didDeactivate = SynchronizedArray<Observer<() -> Void>>()
-    private var stateDidChange = SynchronizedArray<Observer<() -> Void>>()
-    private var reachabilityDidChange = SynchronizedArray<ReachabilityChangeObserver>()
-    private var didReceiveApplicationContext = SynchronizedArray<ReceiveApplicationContextObserver>()
-    private var didReceiveUserInfo = SynchronizedArray<ReceiveUserInfoObserver>()
-    private var didReceiveMessage = SynchronizedArray<ReceiveMessageObserver>()
+    private var activationDidCompleteSingle = Synchronized<[ActivationHandler]>([])
+    private var didBecomeInactive = Synchronized<[Observer<() -> Void>]>([])
+    private var didDeactivate = Synchronized<[Observer<() -> Void>]>([])
+    private var stateDidChange = Synchronized<[Observer<() -> Void>]>([])
+    private var reachabilityDidChange = Synchronized<[ReachabilityChangeObserver]>([])
+    private var didReceiveApplicationContext = Synchronized<[ReceiveApplicationContextObserver]>([])
+    private var didReceiveUserInfo = Synchronized<[ReceiveUserInfoObserver]>([])
+    private var didReceiveMessage = Synchronized<[ReceiveMessageObserver]>([])
     
     deinit {
         // Empty task queues of references
-        activationDidCompleteSingle.removeAll()
-        didBecomeInactive.removeAll()
-        didDeactivate.removeAll()
-        stateDidChange.removeAll()
-        reachabilityDidChange.removeAll()
-        didReceiveApplicationContext.removeAll()
-        didReceiveUserInfo.removeAll()
-        didReceiveMessage.removeAll()
+        activationDidCompleteSingle.value { $0.removeAll() }
+        didBecomeInactive.value { $0.removeAll() }
+        didDeactivate.value { $0.removeAll() }
+        stateDidChange.value { $0.removeAll() }
+        reachabilityDidChange.value { $0.removeAll() }
+        didReceiveApplicationContext.value { $0.removeAll() }
+        didReceiveUserInfo.value { $0.removeAll() }
+        didReceiveMessage.value { $0.removeAll() }
     }
 }
 
@@ -52,71 +51,71 @@ public class WatchSession: NSObject, WCSessionDelegate {
 public extension WatchSession {
 
     func addObserver(forInactive observer: Observer<() -> Void>) {
-        didBecomeInactive += observer
+        didBecomeInactive.value { $0.append(observer) }
     }
 
     func removeObserver(forInactive observer: Observer<() -> Void>) {
-        didBecomeInactive -= observer
+        didBecomeInactive.value { $0.remove(observer) }
     }
 
     func addObserver(forDeactivate observer: Observer<() -> Void>) {
-        didDeactivate += observer
+        didDeactivate.value { $0.append(observer) }
     }
 
     func removeObserver(forDeactivate observer: Observer<() -> Void>) {
-        didDeactivate -= observer
+        didDeactivate.value { $0.remove(observer) }
     }
 
     func addObserver(forStateChange observer: Observer<() -> Void>) {
-        stateDidChange += observer
+        stateDidChange.value { $0.append(observer) }
     }
 
     func removeObserver(forStateChange observer: Observer<() -> Void>) {
-        stateDidChange -= observer
+        stateDidChange.value { $0.remove(observer) }
     }
 
     func addObserver(_ observer: ReachabilityChangeObserver) {
-        reachabilityDidChange += observer
+        reachabilityDidChange.value { $0.append(observer) }
     }
 
     func removeObserver(_ observer: ReachabilityChangeObserver) {
-        reachabilityDidChange -= observer
+        reachabilityDidChange.value { $0.remove(observer) }
     }
 
     func addObserver(forApplicationContext observer: ReceiveApplicationContextObserver) {
-        didReceiveApplicationContext += observer
+        didReceiveApplicationContext.value { $0.append(observer) }
     }
 
     func removeObserver(forApplicationContext observer: ReceiveApplicationContextObserver) {
-        didReceiveApplicationContext -= observer
+        didReceiveApplicationContext.value { $0.remove(observer) }
     }
 
     func addObserver(forUserInfo observer: ReceiveUserInfoObserver) {
-        didReceiveUserInfo += observer
+        didReceiveUserInfo.value { $0.append(observer) }
     }
 
     func removeObserver(forUserInfo observer: ReceiveUserInfoObserver) {
-        didReceiveUserInfo -= observer
+        didReceiveUserInfo.value { $0.remove(observer) }
     }
 
     func addObserver(forMessage observer: ReceiveMessageObserver) {
-        didReceiveMessage += observer
+        didReceiveMessage.value { $0.append(observer) }
     }
 
     func removeObserver(forMessage observer: ReceiveMessageObserver) {
-        didReceiveMessage -= observer
+        didReceiveMessage.value { $0.remove(observer) }
     }
     
     func removeObservers(with prefix: String) {
         let prefix = prefix + "."
     
-        didBecomeInactive.remove(where: { $0.id.hasPrefix(prefix) })
-        didDeactivate.remove(where: { $0.id.hasPrefix(prefix) })
-        stateDidChange.remove(where: { $0.id.hasPrefix(prefix) })
-        reachabilityDidChange.remove(where: { $0.id.hasPrefix(prefix) })
-        didReceiveApplicationContext.remove(where: { $0.id.hasPrefix(prefix) })
-        didReceiveUserInfo.remove(where: { $0.id.hasPrefix(prefix) })
-        didReceiveMessage.remove(where: { $0.id.hasPrefix(prefix) })
+        didBecomeInactive.value { $0.removeAll { $0.id.hasPrefix(prefix) } }
+        didDeactivate.value { $0.removeAll { $0.id.hasPrefix(prefix) } }
+        stateDidChange.value { $0.removeAll { $0.id.hasPrefix(prefix) } }
+        reachabilityDidChange.value { $0.removeAll { $0.id.hasPrefix(prefix) } }
+        didReceiveApplicationContext.value { $0.removeAll { $0.id.hasPrefix(prefix) } }
+        didReceiveUserInfo.value { $0.removeAll { $0.id.hasPrefix(prefix) } }
+        didReceiveMessage.value { $0.removeAll { $0.id.hasPrefix(prefix) } }
     }
 
     func removeObservers(from file: String = #file) {
@@ -139,13 +138,14 @@ public extension WatchSession {
 public extension WatchSession {
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        activationDidCompleteSingle.removeAll {
-            $0.forEach { $0(activationState == .activated) }
-        }
+        let handlers = activationDidCompleteSingle.value
+        activationDidCompleteSingle.value { $0.removeAll() }
+        handlers.forEach { $0(activationState == .activated) }
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {
-        didBecomeInactive.forEach { task in
+        let handlers = didBecomeInactive.value
+        handlers.forEach { task in
             DispatchQueue.main.async {
                 task.handler()
             }
@@ -153,7 +153,8 @@ public extension WatchSession {
     }
     
     func sessionDidDeactivate(_ session: WCSession) {
-        didDeactivate.forEach { task in
+        let handlers = didDeactivate.value
+        handlers.forEach { task in
             DispatchQueue.main.async {
                 task.handler()
             }
@@ -161,7 +162,8 @@ public extension WatchSession {
     }
     
     func sessionWatchStateDidChange(_ session: WCSession) {
-        stateDidChange.forEach { task in
+        let handlers = stateDidChange.value
+        handlers.forEach { task in
             DispatchQueue.main.async {
                 task.handler()
             }
@@ -169,7 +171,8 @@ public extension WatchSession {
     }
     
     func sessionReachabilityDidChange(_ session: WCSession) {
-        reachabilityDidChange.forEach { task in
+        let handlers = reachabilityDidChange.value
+        handlers.forEach { task in
             DispatchQueue.main.async {
                 task.handler(session.isReachable)
             }
@@ -180,7 +183,8 @@ public extension WatchSession {
 public extension WatchSession {
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        didReceiveApplicationContext.forEach { task in
+        let handlers = didReceiveApplicationContext.value
+        handlers.forEach { task in
             DispatchQueue.main.async {
                 task.handler(applicationContext)
             }
@@ -188,7 +192,8 @@ public extension WatchSession {
     }
     
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
-        didReceiveUserInfo.forEach { task in
+        let handlers = didReceiveUserInfo.value
+        handlers.forEach { task in
             DispatchQueue.main.async {
                 task.handler(userInfo)
             }
@@ -196,7 +201,8 @@ public extension WatchSession {
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
-        didReceiveMessage.forEach { task in
+        let handlers = didReceiveMessage.value
+        handlers.forEach { task in
             DispatchQueue.main.async {
                 task.handler(message, replyHandler)
             }
@@ -221,14 +227,12 @@ public extension WatchSession {
     
     /// The current activation state of the session.
     var activationState: WCSessionActivationState {
-        guard let session = sessionDefault else { return .notActivated }
-        return session.activationState
+        sessionDefault?.activationState ?? .notActivated
     }
     
     /// The most recent contextual data sent to the paired and active device.
     var applicationContext: [String: Any] {
-        guard let session = sessionDefault else { return [:] }
-        return session.applicationContext
+        sessionDefault?.applicationContext ?? [:]
     }
     
     /// Request the one-time delivery of the user’s current location.
@@ -246,7 +250,7 @@ public extension WatchSession {
         }
         
         if let completion = completion {
-            activationDidCompleteSingle += completion
+            activationDidCompleteSingle.value { $0.append(completion) }
         }
         
         session.activate()
@@ -352,20 +356,17 @@ public extension WatchSession {
 
     /// The number of remaining times you can send complication data from the iOS app to the WatchKit extension
     var remainingComplicationTransfers: Int {
-        guard let session = sessionDefault else { return 0 }
-        return session.remainingComplicationUserInfoTransfers
+        sessionDefault?.remainingComplicationUserInfoTransfers ?? 0
     }
 
     /// A Boolean value indicating whether the Watch app’s complication is in use on the currently paired and active Apple Watch.
     var isComplicationEnabled: Bool {
-        guard let session = sessionDefault else { return false }
-        return session.isComplicationEnabled
+        sessionDefault?.isComplicationEnabled ?? false
     }
     
     /// A directory for storing information specific to the currently paired and active Apple Watch.
     var directoryURL: URL? {
-        guard let session = sessionDefault else { return nil }
-        return session.watchDirectoryURL
+        sessionDefault?.watchDirectoryURL
     }
     
     /// Transfers the values to the watch in a queue relevant to complications.

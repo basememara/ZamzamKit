@@ -16,13 +16,13 @@ public class LocationWorker: NSObject, LocationWorkerType {
     private let activityType: CLActivityType?
     
     /// Subscribes to receive new data when available
-    private var didChangeAuthorizationHandlers = SynchronizedArray<Observer<AuthorizationHandler>>()
-    private var didChangeAuthorizationSingleUseHandlers = SynchronizedArray<AuthorizationHandler>()
-    private var didUpdateLocationsHandlers = SynchronizedArray<Observer<LocationHandler>>()
-    private var didUpdateLocationsSingleUseHandlers = SynchronizedArray<LocationHandler>()
+    private var didChangeAuthorizationHandlers = Synchronized<[Observer<AuthorizationHandler>]>([])
+    private var didChangeAuthorizationSingleUseHandlers = Synchronized<[AuthorizationHandler]>([])
+    private var didUpdateLocationsHandlers = Synchronized<[Observer<LocationHandler>]>([])
+    private var didUpdateLocationsSingleUseHandlers = Synchronized<[LocationHandler]>([])
     
     #if os(iOS)
-    private var didUpdateHeading = SynchronizedArray<Observer<HeadingHandler>>()
+    private var didUpdateHeading = Synchronized<[Observer<HeadingHandler>]>([])
     #endif
     
     /// Internal Core Location manager
@@ -52,13 +52,13 @@ public class LocationWorker: NSObject, LocationWorkerType {
     
     deinit {
         // Empty task queues of references
-        didChangeAuthorizationHandlers.removeAll()
-        didChangeAuthorizationSingleUseHandlers.removeAll()
-        didUpdateLocationsHandlers.removeAll()
-        didUpdateLocationsSingleUseHandlers.removeAll()
+        didChangeAuthorizationHandlers.value { $0.removeAll() }
+        didChangeAuthorizationSingleUseHandlers.value { $0.removeAll() }
+        didUpdateLocationsHandlers.value { $0.removeAll() }
+        didUpdateLocationsSingleUseHandlers.value { $0.removeAll() }
         
         #if os(iOS)
-        didUpdateHeading.removeAll()
+        didUpdateHeading.value { $0.removeAll() }
         #endif
     }
 }
@@ -67,9 +67,7 @@ public class LocationWorker: NSObject, LocationWorkerType {
 
 public extension LocationWorker {
     
-    var isAuthorized: Bool {
-        return CLLocationManager.isAuthorized
-    }
+    var isAuthorized: Bool { CLLocationManager.isAuthorized }
     
     func isAuthorized(for type: LocationModels.AuthorizationType) -> Bool {
         guard CLLocationManager.locationServicesEnabled() else { return false }
@@ -124,7 +122,7 @@ public extension LocationWorker {
         }
         
         if startUpdatingLocation {
-            didChangeAuthorizationSingleUseHandlers += { _ in self.startUpdatingLocation() }
+            didChangeAuthorizationSingleUseHandlers.value { $0.append({ _ in self.startUpdatingLocation() }) }
         }
         
         // Handle denied and exit
@@ -134,7 +132,7 @@ public extension LocationWorker {
         }
         
         if let completion = completion {
-            didChangeAuthorizationSingleUseHandlers += completion
+            didChangeAuthorizationSingleUseHandlers.value { $0.append(completion) }
         }
     }
 }
@@ -143,12 +141,10 @@ public extension LocationWorker {
 
 public extension LocationWorker {
     
-    var location: CLLocation? {
-        return manager.location
-    }
+    var location: CLLocation? { manager.location }
     
     func requestLocation(completion: @escaping LocationHandler) {
-        didUpdateLocationsSingleUseHandlers += completion
+        didUpdateLocationsSingleUseHandlers.value { $0.append(completion) }
         manager.requestLocation()
     }
     
@@ -186,9 +182,7 @@ public extension LocationWorker {
 
 public extension LocationWorker {
     
-    var heading: CLHeading? {
-        return manager.heading
-    }
+    var heading: CLHeading? { manager.heading }
     
     func startUpdatingHeading() {
         manager.startUpdatingHeading()
@@ -199,7 +193,8 @@ public extension LocationWorker {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        didUpdateHeading.forEach { task in
+        let handlers = self.didUpdateHeading.value
+        handlers.forEach { task in
             DispatchQueue.main.async {
                 task.handler(newHeading)
             }
@@ -213,39 +208,39 @@ public extension LocationWorker {
 public extension LocationWorker {
     
     func addObserver(_ observer: Observer<AuthorizationHandler>) {
-        didChangeAuthorizationHandlers += observer
+        didChangeAuthorizationHandlers.value { $0.append(observer) }
     }
     
     func removeObserver(_ observer: Observer<AuthorizationHandler>) {
-        didChangeAuthorizationHandlers -= observer
+        didChangeAuthorizationHandlers.value { $0.remove(observer) }
     }
     
     func addObserver(_ observer: Observer<LocationHandler>) {
-        didUpdateLocationsHandlers += observer
+        didUpdateLocationsHandlers.value { $0.append(observer) }
     }
     
     func removeObserver(_ observer: Observer<LocationHandler>) {
-        didUpdateLocationsHandlers -= observer
+        didUpdateLocationsHandlers.value { $0.remove(observer) }
     }
     
     #if os(iOS)
     func addObserver(_ observer: Observer<HeadingHandler>) {
-        didUpdateHeading += observer
+        didUpdateHeading.value { $0.append(observer) }
     }
     
     func removeObserver(_ observer: Observer<HeadingHandler>) {
-        didUpdateHeading -= observer
+        didUpdateHeading.value { $0.remove(observer) }
     }
     #endif
     
     func removeObservers(with prefix: String) {
         let prefix = prefix + "."
         
-        didChangeAuthorizationHandlers.remove(where: { $0.id.hasPrefix(prefix) })
-        didUpdateLocationsHandlers.remove(where: { $0.id.hasPrefix(prefix) })
+        didChangeAuthorizationHandlers.value { $0.removeAll { $0.id.hasPrefix(prefix) } }
+        didUpdateLocationsHandlers.value { $0.removeAll { $0.id.hasPrefix(prefix) } }
         
         #if os(iOS)
-        didUpdateHeading.remove(where: { $0.id.hasPrefix(prefix) })
+        didUpdateHeading.value { $0.removeAll { $0.id.hasPrefix(prefix) } }
         #endif
     }
 }
@@ -258,32 +253,33 @@ extension LocationWorker: CLLocationManagerDelegate {
         guard status != .notDetermined else { return }
         
         // Trigger and empty queues
-        didChangeAuthorizationHandlers.forEach { task in
+        let recurringHandlers = self.didChangeAuthorizationHandlers.value
+        recurringHandlers.forEach { task in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 task.handler(self.isAuthorized)
             }
         }
         
-        didChangeAuthorizationSingleUseHandlers.removeAll { [weak self] in
-            guard let self = self else { return }
-            $0.forEach { $0(self.isAuthorized) }
-        }
+        let singleHandlers = didChangeAuthorizationSingleUseHandlers.value
+        didChangeAuthorizationSingleUseHandlers.value { $0.removeAll() }
+        singleHandlers.forEach { $0(isAuthorized) }
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         
         // Trigger and empty queues
-        didUpdateLocationsHandlers.forEach { task in
+        let recurringHandlers = self.didUpdateLocationsHandlers.value
+        recurringHandlers.forEach { task in
             DispatchQueue.main.async {
                 task.handler(location)
             }
         }
         
-        didUpdateLocationsSingleUseHandlers.removeAll {
-            $0.forEach { $0(location) }
-        }
+        let singleHandlers = didUpdateLocationsSingleUseHandlers.value
+        didUpdateLocationsSingleUseHandlers.value { $0.removeAll() }
+        singleHandlers.forEach { $0(location) }
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
