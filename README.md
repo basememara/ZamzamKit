@@ -30,7 +30,7 @@ There is a limitation with SwiftPM where resources can not be embedded at the mo
 ### Standard+
 
 <details>
-<summary>Array</summary>
+<summary>Collection</summary>
 
 > Get distinct elements from an array:
 ```swift
@@ -304,6 +304,36 @@ value.base64URLEncoded
 ```swift
 var value: String? = "test 123"
 value.isNilOrEmpty
+```
+
+> Strongly-typed string keys:
+```swift
+// First define keys
+extension String.Keys {
+    static let testString = String.Key<String?>("testString")
+    static let testInt = String.Key<Int?>("testInt")
+    static let testBool = String.Key<Bool?>("testBool")
+    static let testArray = String.Key<[Int]?>("testArray")
+}
+
+// Create method or subscript for any type
+extension UserDefaults {
+    
+    subscript<T>(key: String.Key<T?>) -> T? {
+        get { object(forKey: key.name) as? T }
+        
+        set {
+            guard let value = newValue else { return remove(key) }
+            set(value, forKey: key.name)
+        }
+    }
+}
+
+// Then use strongly-typed values
+let testString: String? = UserDefaults.standard[.testString]
+let testInt: Int? = UserDefaults.standard[.testInt]
+let testBool: Bool? = UserDefaults.standard[.testBool]
+let testArray: [Int]? = UserDefaults.standard[.testArray]
 ```
 </details>
 
@@ -582,9 +612,99 @@ someStruct.isRunningOnSimulator -> false
 </details>
 
 <details>
+<summary>ApplicationPlugin</summary>
+
+> Split up `AppDelegate` into [plugins](https://basememara.com/pluggable-appdelegate-services/) (also available for `WKExtensionDelegate`):
+```swift
+// Subclass to pass lifecycle events to loaded plugins
+@UIApplicationMain
+class AppDelegate: ApplicationPluginDelegate {
+
+    override func plugins() -> [ApplicationPlugin] {
+        [
+            LoggerPlugin(),
+            NotificationPlugin()
+        ]
+    }
+}
+```
+```swift
+// Each application plugin has access to the AppDelegate lifecycle events
+final class LoggerPlugin: ApplicationPlugin {
+    private let log = Logger()
+ 
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        log.config(for: application)
+        return true
+    }
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
+        log.info("App did finish launching.")
+        return true
+    }
+    
+    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+        log.warn("App did receive memory warning.")
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        log.warn("App will terminate.")
+    }
+}
+```
+</details>
+
+<details>
+<summary>BackgroundTask</summary>
+
+> Easily execute a [long-running background task](https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtask):
+```swift
+BackgroundTask.run(for: application) { task in
+    // Perform finite-length task...
+    task.end()
+}
+```
+</details>
+
+<details>
+<summary>Dependency Injection</summary>
+
+> Lightweight dependency injection via property wrapper ([read more](https://basememara.com/swift-dependency-injection-via-property-wrapper/)):
+```swift
+class AppDelegate: UIResponder, UIApplicationDelegate {
+ 
+    private let dependencies = Dependencies {
+        Module { WidgetModule() as WidgetModuleType }
+        Module { SampleModule() as SampleModuleType }
+    }
+    
+    override init() {
+        super.init()
+        dependencies.build()
+    }
+}
+
+// Some time later...
+
+class ViewController: UIViewController {
+    
+    @Inject private var widgetService: WidgetServiceType
+    @Inject private var sampleService: SampleServiceType
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        print(widgetService.test())
+        print(sampleService.test())
+    }
+}
+```
+</details>
+
+<details>
 <summary>Localization</summary>
 
-> Strongly-typed localizable keys that's also `XLIFF` export friendly ([read more](http://basememara.com/swifty-localization-xcode-support/)):
+> Strongly-typed localizable keys that's also `XLIFF` export friendly ([read more](https://basememara.com/swifty-localization-xcode-support/)):
 ```swift
 // First define localization keys
 extension Localizable {
@@ -611,7 +731,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let migration = Migration()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         migration
             .performUpdate {
                 print("Migrate update occurred.")
@@ -619,11 +739,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .perform(forVersion: "1.0") {
                 print("Migrate to 1.0 occurred.")
             }
-            .perform(forVersion: "1.0", withBuild: "1") {
-                print("Migrate to 1.0 (1) occurred.")
+            .perform(forVersion: "1.7") {
+                print("Migrate to 1.7 occurred.")
             }
-            .perform(forVersion: "1.0", withBuild: "2") {
-                print("Migrate to 1.0 (2) occurred.")
+            .perform(forVersion: "2.4") {
+                print("Migrate to 2.4 occurred.")
             }
             
         return true
@@ -633,7 +753,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 </details>
 
 <details>
-<summary>RateLimit</summary>
+<summary>SystemConfiguration</summary>
+
+> Determine if the device is connected to a network:
+```swift
+import SystemConfiguration
+
+SCNetworkReachability.isOnline
+```
+</details>
+
+<details>
+<summary>Synchronized</summary>
+
+> A thread-safe value that handles concurrent reads and writes ([read more](https://basememara.com/creating-thread-safe-generic-values-in-swift/)):
+```swift
+var temp = Synchronized<Int>(0)
+
+DispatchQueue.concurrentPerform(iterations: 1_000_000) { index in
+    temp.value { $0 += 1 }
+}
+
+XCTAssertEqual(temp.value, 1_000_000) // true
+```
+</details>
+
+<details>
+<summary>Throttle & Debounce</summary>
 
 > A throttler that will ignore work items until the time limit for the preceding call is over:
 ```swift
@@ -675,235 +821,20 @@ func sendToServer() {
 }
 
 value.append("h")
-sendToServer()
+sendToServer() // Waits until 5 seconds
 
 value.append("e")
-sendToServer()
+sendToServer() // Waits until 5 seconds
 
 value.append("l")
-sendToServer()
+sendToServer() // Waits until 5 seconds
 
 value.append("l")
-sendToServer()
+sendToServer() // Waits until 5 seconds
 
 value.append("o")
-sendToServer()
+sendToServer() // Fires after 5 seconds
 ```
-</details>
-
-<details>
-<summary>Result</summary>
-
-> Used to represent whether an asynchronous request was successful or encountered an error:
-```swift
-// Declare the function with a completion handler of `Result` type
-func fetch(id: Int, completion: @escaping (Result<Author, ZamzamError>) -> Void) {
-    guard id > 0 else {
-        completion(.failure(.nonExistent))
-        return
-    }
-
-    DispatchQueue.global().async {
-        completion(.success(Author(...)))
-    }
-}
-
-// Call the asynchronous function and determine the response
-fetch(id: 123) {
-    guard let value = $0.value, $0.isSuccess else {
-        print("An error occurred: \($0.error ?? .general)")
-        return
-    }
-
-    print(value)
-}
-```
-</details>
-
-<details>
-<summary>SystemConfiguration</summary>
-
-> Determine if the device is connected to a network:
-```swift
-import SystemConfiguration
-
-SCNetworkReachability.isOnline
-```
-</details>
-
-<details>
-<summary>SynchronizedArray</summary>
-
-> A thread-safe array that allows concurrent reads and exclusive writes ([read more](http://basememara.com/creating-thread-safe-arrays-in-swift/)):
-```swift
-var array = SynchronizedArray<Int>()
-
-DispatchQueue.concurrentPerform(iterations: 1000) { index in
-    array.append(index)
-}
-```
-</details>
-
-<details>
-<summary>UserDefaults</summary>
-
-> Strongly-typed UserDefault keys:
-```swift
-// First define keys
-extension UserDefaults.Keys {
-    static let testString = UserDefaults.Key<String?>("testString")
-    static let testInt = UserDefaults.Key<Int?>("testInt")
-    static let testBool = UserDefaults.Key<Bool?>("testBool")
-    static let testArray = UserDefaults.Key<[Int]?>("testArray")
-}
-
-// Then use strongly-typed values
-let testString: String? = UserDefaults.standard[.testString]
-let testInt: Int? = UserDefaults.standard[.testInt]
-let testBool: Bool? = UserDefaults.standard[.testBool]
-let testArray: [Int]? = UserDefaults.standard[.testArray]
-```
-</details>
-
-<details>
-<summary>WatchSession</summary>
-
-> Communicate conveniently between `iOS` and `watchOS`:
-```swift
-// iOS
-class WatchViewController: UIViewController {
-    
-    @IBOutlet weak var receivedContextLabel: UILabel!
-    @IBOutlet weak var sentContextLabel: UILabel!
-    @IBOutlet weak var receivedUserInfoLabel: UILabel!
-    @IBOutlet weak var sentUserInfoLabel: UILabel!
-    @IBOutlet weak var receivedMessageLabel: UILabel!
-    @IBOutlet weak var sentMessageLabel: UILabel!
-    
-    var watchSession: WatchSession {
-        return AppDelegate.watchSession
-    }
-    
-    /// Another way to add observer
-    var userInfoObserver: WatchSession.ReceiveUserInfoObserver {
-        return Observer { [weak self] result in
-            DispatchQueue.main.async {
-                self?.receivedUserInfoLabel.text = result["value"] as? String ?? ""
-            }
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        /// One way to add observer
-        watchSession.addObserver(forApplicationContext: Observer { [weak self] result in
-            DispatchQueue.main.async {
-                self?.receivedContextLabel.text = result["value"] as? String ?? ""
-            }
-        })
-        
-        watchSession.addObserver(forUserInfo: userInfoObserver)
-        watchSession.addObserver(forMessage: messageObserver)
-    }
-    
-    @IBAction func sendContextTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(context: value)
-        sentContextLabel.text = value["value"] ?? ""
-    }
-    
-    @IBAction func sendUserInfoTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(userInfo: value)
-        sentUserInfoLabel.text = value["value"] ?? ""
-    }
-    
-    @IBAction func sendMessageTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(message: value)
-        sentMessageLabel.text = value["value"] ?? ""
-    }
-    
-    deinit {
-        watchSession.removeObservers()
-    }
-}
-
-extension WatchViewController {
-    
-    /// Another way to add observer
-    var messageObserver: WatchSession.ReceiveMessageObserver {
-        return Observer { [weak self] message, replyHandler in
-            DispatchQueue.main.async {
-                self?.receivedMessageLabel.text = message["value"] as? String ?? ""
-            }
-        }
-    }
-}
-```
-```swift
-// watchOS
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
-    static let watchSession = WatchSession()
-}
-
-class InterfaceController: WKInterfaceController {
-
-    @IBOutlet var receivedContextLabel: WKInterfaceLabel!
-    @IBOutlet var sentContextLabel: WKInterfaceLabel!
-    @IBOutlet var receivedUserInfoLabel: WKInterfaceLabel!
-    @IBOutlet var sentUserInfoLabel: WKInterfaceLabel!
-    @IBOutlet var receivedMessageLabel: WKInterfaceLabel!
-    @IBOutlet var sentMessageLabel: WKInterfaceLabel!
-    
-    var watchSession: WatchSession {
-        return ExtensionDelegate.watchSession
-    }
-    
-    override func awake(withContext: Any?) {
-        super.awake(withContext: withContext)
-        
-        watchSession.addObserver(forApplicationContext: Observer { [weak self] result in
-            DispatchQueue.main.async {
-                self?.receivedContextLabel.setText(result["value"] as? String ?? "")
-            }
-        })
-        
-        watchSession.addObserver(forUserInfo: Observer { [weak self] result in
-            DispatchQueue.main.async {
-                self?.receivedUserInfoLabel.setText(result["value"] as? String ?? "")
-            }
-        })
-        
-        watchSession.addObserver(forMessage: Observer { [weak self] message, replyHandler in
-            DispatchQueue.main.async {
-                self?.receivedMessageLabel.setText(message["value"] as? String ?? "")
-            }
-        })
-    }
-    
-    @IBAction func sendContextTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(context: value)
-        sentContextLabel.setText(value["value"] ?? "")
-    }
-    
-    @IBAction func sendUserInfoTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(userInfo: value)
-        sentUserInfoLabel.setText(value["value"] ?? "")
-    }
-    
-    @IBAction func sendMessageTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(message: value)
-        sentMessageLabel.setText(value["value"] ?? "")
-    }
-}
-```
-
-![Image of WatchSession](./Assets/Documentation/Images/WatchSession.png)
 </details>
 
 <details>
@@ -921,18 +852,11 @@ let label = UILabel().with {
     $0.textColor = UIColor.black
     $0.text = "Hello, World!"
 }
-```
-</details>
 
-<details>
-<summary>Within</summary>
-
-> Determine if the value is contained within the sequence of values:
-```swift
-"b".within(["a", "b", "c"]) // true
-
-let status: OrderStatus = .cancelled
-status.within([.requeseted, .accepted, .inProgress]) // false
+UITabBar.appearance().with {
+    $0.barStyle = .dark
+    $0.tintColor = .blue
+}
 ```
 </details>
 
@@ -981,7 +905,7 @@ test = value ??+ "Abc"
 <details>
 <summary>LocationsWorker</summary>
 
-> Location worker that offers easy authorization and observable closures ([read more](http://basememara.com/swifty-locations-observables/)):
+> Location worker that offers easy authorization and observable closures ([read more](https://basememara.com/swifty-locations-observables/)):
 ```swift
 class LocationViewController: UIViewController {
 
@@ -1177,96 +1101,6 @@ UNUserNotificationCenter.current().removeAll()
 ### iOS
 
 <details>
-<summary>Application</summary>
-
-> Split up `AppDelegate` into [pluggable modules](http://basememara.com/pluggable-appdelegate-services/):
-```swift
-// Subclass to pass lifecycle events to loaded modules
-@UIApplicationMain
-class AppDelegate: ApplicationModuleDelegate {
-
-    override func modules() -> [ApplicationModule] {
-        return [
-            LoggerApplicationModule(),
-            NotificationApplicationModule()
-        ]
-    }
-}
-```
-```swift
-// Each application module has access to the AppDelegate lifecycle events
-final class LoggerApplicationModule: ApplicationModule {
-    private let log = Logger()
- 
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        log.config(for: application)
-        return true
-    }
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
-        log.info("App did finish launching.")
-        return true
-    }
-    
-    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        log.warn("App did receive memory warning.")
-    }
-    
-    func applicationWillTerminate(_ application: UIApplication) {
-        log.warn("App will terminate.")
-    }
-}
-```
-
-The pluggable module technique also works for `UIViewController`:
-```swift
-// Subclass to pass lifecycle events to loaded modules
-class ViewController: ControllerModuleDelegate {
-
-    override func modules() -> [ControllerModule] {
-        return [
-            ChatControllerModule(),
-            OrderControllerService()
-        ]
-    }
-}
-```
-```swift
-// Each controller module has access to the UIViewController lifecycle events
-final class ChatControllerModule: ControllerModule {
-    private let chatWorker = ChatWorker()
-
-    func viewDidLoad(_ controller: UIViewController) {
-        chatWorker.config()
-    }
-}
-
-extension ChatControllerService {
-
-    func viewWillAppear(_ controller: UIViewController) {
-        chatWorker.subscribe()
-    }
-
-    func viewWillDisappear(_ controller: UIViewController) {
-        chatWorker.unsubscribe()
-    }
-}
-```
-</details>
-
-<details>
-<summary>Background</summary>
-
-> Easily execute a [long-running background task](https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtask):
-```swift
-BackgroundTask.run(for: application) { task in
-    // Perform finite-length task...
-    task.end()
-}
-```
-</details>
-
-<details>
 <summary>BadgeBarButtonItem</summary>
 
 > A bar button item with a badge value:
@@ -1384,7 +1218,7 @@ class MyViewController: UIViewController {
 <details>
 <summary>Router</summary>
 
-> Provides routing functionality for a type to remove navigation responsibility off `UIViewController`  ([extend for strongly-typed storyboard routing](http://basememara.com/protocol-oriented-router-in-swift/)):
+> Provides routing functionality for a type to remove navigation responsibility off `UIViewController`  ([extend for strongly-typed storyboard routing](https://basememara.com/protocol-oriented-router-in-swift/)):
 
 ```
 struct MyRouter: Router {
