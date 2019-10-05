@@ -15,15 +15,15 @@ ZamzamKit a Swift framework for rapid development using a collection of small ut
 
 `.package(url: "git@github.com:ZamzamInc/ZamzamKit.git", .upToNextMajor(from: "5.0.0"))` 
 
-The `ZamzamKit` package contains four different products:
+The `ZamzamKit` package contains four different products you can import:
 * `ZamzamCore`
 * `ZamzamLocation`
 * `ZamzamNotification`
 * `ZamzamUI`
 
-Add any combination of these to your target's dependencies within the manifest.
+Add any combination of these to your target's dependencies within your `Package.swift` manifest.
 
-There is a limitation with SwiftPM where resources can not be embedded at the moment. For now, manually drag `Resources/ZamzamCore.bundle` to your target's project settings > Build Phases > Copy Bundle.
+Currently, a limitation with SwiftPM where resources can not be embedded at the moment requires an extra manual step. Drag `Resources/ZamzamCore.bundle` to your target's project settings > Build Phases > Copy Bundle manually.
 
 ## ZamzamCore
 
@@ -1100,7 +1100,7 @@ UNUserNotificationCenter.current().removeAll()
 
 ## ZamzamUI
 
-### iOS
+### UIKit
 
 <details>
 <summary>BadgeBarButtonItem</summary>
@@ -1148,14 +1148,6 @@ navigationItem.leftBarButtonItems = [
 Interface Builder compatible via "User Defined Runtime Attributes":
 
 ![Image of GradientView](./Assets/Documentation/Images/GradientView-Storyboard.png)
-</details>
-
-<details>
-<summary>KeyboardScrollView</summary>
-
-> The `automaticallyAdjustsInsetsForKeyboard` property extends the scroll view insets when the keyboard is shown:
-
-![Image of KeyboardScrollView](./Assets/Documentation/Images/KeyboardScrollView.png)
 </details>
 
 <details>
@@ -1218,36 +1210,11 @@ class MyViewController: UIViewController {
 </details>
 
 <details>
-<summary>Router</summary>
+<summary>ScrollViewWithKeyboard</summary>
 
-> Provides routing functionality for a type to remove navigation responsibility off `UIViewController`  ([extend for strongly-typed storyboard routing](https://basememara.com/protocol-oriented-router-in-swift/)):
+> Automatically extends the scroll view insets when the keyboard is shown:
 
-```
-struct MyRouter: Router {
-    weak var viewController: UIViewController?
-
-    init(viewController: UIViewController?) {
-        self.viewController = viewController
-    }
-
-    func showSettings(date: Date) {
-        present(storyboard: "ShowSettings") { (controller: ShowSettingsViewController) in
-            controller.someProperty = date
-        }
-    }
-}
-
-class MyViewController: UIViewController {
-
-    private lazy var router: Router = MyRouter(
-        viewController: self
-    )
-
-    @IBAction func settingsTapped() {
-        router.showSettings(date: Date())
-    }
-}
-```
+![Image of KeyboardScrollView](./Assets/Documentation/Images/KeyboardScrollView.png)
 </details>
 
 <details>
@@ -1684,7 +1651,7 @@ window?.topViewController
 ```
 </details>
 
-### watchOS
+### WatchKit
 
 <details>
 <summary>CLKComplicationServer</summary>
