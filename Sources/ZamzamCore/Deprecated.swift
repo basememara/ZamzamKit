@@ -124,32 +124,6 @@ public extension UIFont {
 }
 #endif
 
-public extension Thread {
-    typealias Block = @convention(block) () -> Void
-    
-    /// Execute block, used internally for async/sync functions.
-    /// - Parameter block: Process to be executed.
-    @objc private func execute(block: Block) {
-        block()
-    }
-    
-    /// Perform block on current thread asynchronously.
-    /// - Parameter task: Process to be executed.
-    @available(*, deprecated, message: "Open issue if needed.")
-    func async(execute task: @escaping Block) {
-        guard Thread.current != self else { return task() }
-        perform(#selector(execute(block:)), on: self, with: task, waitUntilDone: false)
-    }
-    
-    /// Perform block on current thread synchronously.
-    /// - Parameter task: Perform block on current thread synchronously.
-    @available(*, deprecated, message: "Open issue if needed.")
-    func sync(execute task: @escaping Block) {
-        guard Thread.current != self else { return task() }
-        perform(#selector(execute(block:)), on: self, with: task, waitUntilDone: true)
-    }
-}
-
 @available(*, deprecated, message: "Use `AppAPI` instead.")
 public enum AppModels {
     
