@@ -17,7 +17,7 @@ extension ___VARIABLE_productName:identifier___Presenter {
     }
     
     func presentFetched(error: ZamzamError) {
-        let viewModel = AppModels.Error(
+        let viewModel = AppAPI.Error(
             title: .localized(.genericErrorTitle),
             message: error.localizedDescription
         )
