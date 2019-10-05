@@ -9,7 +9,7 @@ import Foundation
 
 /// An object that manages the execution of tasks atomically.
 public struct Synchronized<Value> {
-    private let mutex = DispatchQueue(label: "io.zamzam.Synchronized", attributes: .concurrent)
+    private let mutex = DispatchQueue(label: "\(DispatchQueue.labelPrefix).Synchronized", attributes: .concurrent)
     private var _value: Value
 
     public init(_ value: Value) {
