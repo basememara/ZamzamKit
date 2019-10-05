@@ -1,16 +1,15 @@
 //
-//  LocationModels.swift
+//  LocationAPI.swift
 //  ZamzamKit
 //
 //  Created by Basem Emara on 2019-08-25.
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
-public enum LocationModels {
-    
-}
+/// Namespaec for location
+public enum LocationAPI {}
 
-public extension LocationModels {
+public extension LocationAPI {
     
     /// Permission types to use location services.
     ///

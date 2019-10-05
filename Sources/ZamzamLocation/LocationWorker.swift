@@ -69,7 +69,7 @@ public extension LocationWorker {
     
     var isAuthorized: Bool { CLLocationManager.isAuthorized }
     
-    func isAuthorized(for type: LocationModels.AuthorizationType) -> Bool {
+    func isAuthorized(for type: LocationAPI.AuthorizationType) -> Bool {
         guard CLLocationManager.locationServicesEnabled() else { return false }
         
         #if os(OSX)
@@ -80,7 +80,7 @@ public extension LocationWorker {
         #endif
     }
     
-    func requestAuthorization(for type: LocationModels.AuthorizationType, startUpdatingLocation: Bool, completion: AuthorizationHandler?) {
+    func requestAuthorization(for type: LocationAPI.AuthorizationType, startUpdatingLocation: Bool, completion: AuthorizationHandler?) {
         // Handle authorized and exit
         guard !isAuthorized(for: type) else {
             if startUpdatingLocation {
