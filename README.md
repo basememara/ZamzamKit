@@ -891,11 +891,11 @@ test = value ??+ "Abc"
 // test == "Abc"
 
 value = ""
-test = value ??+ "Abc"
+test = value ??+ "Lmn"
 // test == "Abc"
 
 value = "Xyz"
-test = value ??+ "Abc"
+test = value ??+ "Rst"
 // test == "Xyz"
 ```
 </details>
