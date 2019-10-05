@@ -35,26 +35,4 @@ public extension Audible {
         }
     }
 }
-
-public extension Audible {
-    
-    func setupAudioPlayer(_ application: UIApplication, forAsset assetName: String, type: String? = nil, bundle: Bundle = .main) {
-        guard let sound = NSDataAsset(name: assetName, bundle: bundle)?.data,
-            (audioPlayer == nil || audioPlayer?.data != sound) else {
-                return
-        }
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-            
-            application.beginReceivingRemoteControlEvents()
-            
-            audioPlayer = try AVAudioPlayer(data: sound, fileTypeHint: type)
-            audioPlayer?.prepareToPlay()
-        } catch {
-            
-        }
-    }
-}
 #endif

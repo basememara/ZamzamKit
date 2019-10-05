@@ -152,6 +152,7 @@ public class SynchronizedArray<Element> {
     }
 }
 
+@available(*, deprecated, message: "Use generic `Synchronized<Value>` instead.")
 public extension SynchronizedArray {
     
     /// The first element of the collection.
@@ -476,8 +477,7 @@ public extension SynchronizedArray {
     }
 }
 
-// MARK: - Equatable
-
+@available(*, deprecated, message: "Use generic `Synchronized<Value>` instead.")
 public extension SynchronizedArray where Element: Equatable {
 
     /// Returns a Boolean value indicating whether the sequence contains the given element.
@@ -535,3 +535,30 @@ public extension SynchronizedArray where Element: Equatable {
         left.append(right)
     }
 }
+
+#if os(iOS)
+import AVFoundation
+
+public extension Audible {
+
+    @available(*, deprecated, message: "Open issue if needed.")
+    func setupAudioPlayer(_ application: UIApplication, forAsset assetName: String, type: String? = nil, bundle: Bundle = .main) {
+        guard let sound = NSDataAsset(name: assetName, bundle: bundle)?.data,
+            (audioPlayer == nil || audioPlayer?.data != sound) else {
+                return
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            application.beginReceivingRemoteControlEvents()
+            
+            audioPlayer = try AVAudioPlayer(data: sound, fileTypeHint: type)
+            audioPlayer?.prepareToPlay()
+        } catch {
+            
+        }
+    }
+}
+#endif
