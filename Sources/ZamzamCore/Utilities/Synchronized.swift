@@ -9,7 +9,7 @@ import Foundation
 
 /// An object that manages the execution of tasks atomically.
 public struct Synchronized<Value> {
-    private let mutex = NSLock()
+    private let mutex = DispatchSemaphore(value: 1)
     private var _value: Value
 
     public init(_ value: Value) {

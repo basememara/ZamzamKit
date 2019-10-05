@@ -7,12 +7,11 @@
 
 import Foundation
 
-public extension NSLocking {
+public extension DispatchSemaphore {
     
-    /// Attempts to acquire a lock, blocking a thread’s execution until the
-    /// process can be executed, then relinquishes a previously acquired lock.
+    /// Waits then signals a semaphore.
     ///
-    ///     let mutex = NSLock()
+    ///     let mutex = DispatchSemaphore(value: 1)
     ///     let value = "Abc123"
     ///
     ///     // Called from multiple threads
@@ -22,8 +21,8 @@ public extension NSLocking {
     ///
     /// The `Synchronized<Value>` uses this extension for thread-safe tasks.
     func lock<T>(execute task: () throws -> T) rethrows -> T {
-        lock()
-        defer { unlock() }
+        wait()
+        defer { signal() }
         return try task()
     }
 }
