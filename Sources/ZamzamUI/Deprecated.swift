@@ -5,9 +5,8 @@
 //  Created by Basem Emara on 2019-10-05.
 //
 
-import UIKit
-
 #if os(iOS)
+import UIKit
 
 extension AppDisplayable where Self: UIViewController {
     

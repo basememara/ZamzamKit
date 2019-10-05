@@ -10,7 +10,7 @@
     import UIKit
 #elseif os(OSX)
     import AppKit
-    typealias UIColor = NSColor
+    public typealias UIColor = NSColor
 #endif
 
 public extension UIColor {
