@@ -8,7 +8,6 @@
 
 #if os(iOS)
 import UIKit
-import ZamzamCore
 
 /// Manages status bar view.
 ///
