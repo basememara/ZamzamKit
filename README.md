@@ -589,7 +589,7 @@ url?.removeQueryItem("xyz") // "https://example.com?abc=123&lmn=tuv"
 ```
 </details>
 
-### Utilities
+### Application
 
 <details>
 <summary>AppInfo</summary>
@@ -655,6 +655,38 @@ final class LoggerPlugin: ApplicationPlugin {
 </details>
 
 <details>
+<summary>AppMigration</summary>
+
+> Manages blocks of code that only need to run once on version updates in apps:
+```swift
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var window: UIWindow?
+    let migration = AppMigration()
+
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        migration
+            .performUpdate {
+                print("Migrate update occurred.")
+            }
+            .perform(forVersion: "1.0") {
+                print("Migrate to 1.0 occurred.")
+            }
+            .perform(forVersion: "1.7") {
+                print("Migrate to 1.7 occurred.")
+            }
+            .perform(forVersion: "2.4") {
+                print("Migrate to 2.4 occurred.")
+            }
+            
+        return true
+    }
+}
+```
+</details>
+
+<details>
 <summary>BackgroundTask</summary>
 
 > Easily execute a [long-running background task](https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtask):
@@ -701,6 +733,8 @@ class ViewController: UIViewController {
 ```
 </details>
 
+### Utilities
+
 <details>
 <summary>Localization</summary>
 
@@ -717,38 +751,6 @@ extension Localizable {
 myLabel1.text = .localized(.ok)
 myLabel2.text = .localized(.cancel)
 myLabel3.text = .localized(.next)
-```
-</details>
-
-<details>
-<summary>Migration</summary>
-
-> Manages blocks of code that only need to run once on version updates in apps:
-```swift
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var window: UIWindow?
-    let migration = Migration()
-
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        migration
-            .performUpdate {
-                print("Migrate update occurred.")
-            }
-            .perform(forVersion: "1.0") {
-                print("Migrate to 1.0 occurred.")
-            }
-            .perform(forVersion: "1.7") {
-                print("Migrate to 1.7 occurred.")
-            }
-            .perform(forVersion: "2.4") {
-                print("Migrate to 2.4 occurred.")
-            }
-            
-        return true
-    }
-}
 ```
 </details>
 
