@@ -1,5 +1,5 @@
 //
-//  Migration.swift
+//  AppMigration.swift
 //  ZamzamKit
 //
 //  Inspired by: https://github.com/mysterioustrousers/MTMigration
@@ -36,7 +36,7 @@ import Foundation
 ///             return true
 ///         }
 ///     }
-public class Migration {
+public class AppMigration {
     public static let suiteName = "\(DispatchQueue.labelPrefix).Migration"
     
     private let defaults: UserDefaults
@@ -51,7 +51,7 @@ public class Migration {
     }
 }
 
-public extension Migration {
+public extension AppMigration {
     
     /// Checks the current version of the app against the previous saved version.
     ///
@@ -90,24 +90,24 @@ public extension Migration {
     }
 }
 
-private extension Migration {
+private extension AppMigration {
     private static let lastAppVersionKey = "lastAppVersion"
     private static let lastVersionKey = "lastMigrationVersion"
     
     var lastAppVersion: String? {
-        get { defaults.string(forKey: Migration.lastAppVersionKey) }
-        set { defaults.setValue(newValue, forKey: Migration.lastAppVersionKey) }
+        get { defaults.string(forKey: Self.lastAppVersionKey) }
+        set { defaults.setValue(newValue, forKey: Self.lastAppVersionKey) }
     }
     
     var lastMigrationVersion: String? {
-        get { defaults.string(forKey: Migration.lastVersionKey) }
-        set { defaults.setValue(newValue, forKey: Migration.lastVersionKey) }
+        get { defaults.string(forKey: Self.lastVersionKey) }
+        set { defaults.setValue(newValue, forKey: Self.lastVersionKey) }
     }
 }
 
 // MARK: - Only used for XCTest
 
-extension Migration {
+extension AppMigration {
     
     func set(version: String) {
         appVersion = version
