@@ -12,7 +12,7 @@ public protocol AppDisplayable {
     /// Display error details.
     ///
     /// - Parameter error: The error details to present.
-    func display(error: AppModels.Error)
+    func display(error: AppAPI.Error)
     
     /// Hides spinners, loaders, and anything else
     func endRefreshing()

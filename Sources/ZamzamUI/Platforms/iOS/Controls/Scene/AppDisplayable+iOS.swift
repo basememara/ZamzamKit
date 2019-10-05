@@ -14,7 +14,7 @@ extension AppDisplayable where Self: UIViewController {
     /// Display a native alert controller modally.
     ///
     /// - Parameter error: The error details to present.
-    public func display(error: AppModels.Error) {
+    public func display(error: AppAPI.Error) {
         // Force in next runloop via main queue since view hierachy may not be loaded yet
         DispatchQueue.main.async { [weak self] in
             self?.endRefreshing()

@@ -1,5 +1,5 @@
 //
-//  AppModels.swift
+//  AppAPI.swift
 //  ZamzamKit iOS
 //
 //  Created by Basem Emara on 2018-02-04.
@@ -7,7 +7,7 @@
 //
 
 /// App model continer for implementing global models.
-public enum AppModels {
+public enum AppAPI {
     
     public struct Error {
         public let title: String?

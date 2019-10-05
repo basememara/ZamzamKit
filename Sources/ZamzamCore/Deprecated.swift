@@ -150,6 +150,20 @@ public extension Thread {
     }
 }
 
+@available(*, deprecated, message: "Use `AppAPI` instead.")
+public enum AppModels {
+    
+    public struct Error {
+        public let title: String?
+        public let message: String?
+        
+        public init(title: String? = nil, message: String? = nil) {
+            self.title = title
+            self.message = message
+        }
+    }
+}
+
 /// A thread-safe array.
 @available(*, deprecated, message: "Use generic `Synchronized<Value>` instead.")
 public class SynchronizedArray<Element> {
