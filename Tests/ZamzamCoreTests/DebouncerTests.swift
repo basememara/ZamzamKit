@@ -9,13 +9,11 @@
 import XCTest
 import ZamzamCore
 
-final class RateLimitTests: XCTestCase {
+final class DebouncerTests: XCTestCase {
 
 }
 
-// MARK: - Debounce
-
-extension RateLimitTests {
+extension DebouncerTests {
     
     func testDebouncer() {
         let promise = expectation(description: "Debouncer executed")
@@ -62,6 +60,9 @@ extension RateLimitTests {
         
         XCTAssertEqual(2, currentValue)
     }
+}
+
+extension DebouncerTests {
     
     func testDebouncer2() {
         let limiter = Debouncer(limit: 5)
@@ -97,6 +98,9 @@ extension RateLimitTests {
         
         wait(for: [promise], timeout: 10)
     }
+}
+
+extension DebouncerTests {
     
     func testDebouncerRunOnceImmediatly() {
         let limiter = Debouncer(limit: 0)
@@ -108,6 +112,9 @@ extension RateLimitTests {
         
         wait(for: [promise], timeout: 1)
     }
+}
+
+extension DebouncerTests {
     
     func testDebouncerRunThreeTimesCountTwice() {
         let limiter = Debouncer(limit: 0.5)
@@ -132,6 +139,9 @@ extension RateLimitTests {
         
         wait(for: [promise], timeout: 5)
     }
+}
+
+extension DebouncerTests {
     
     func testDebouncerRunTwiceCountTwice() {
         let limiter = Debouncer(limit: 1)
@@ -151,6 +161,9 @@ extension RateLimitTests {
         
         wait(for: [promise], timeout: 3)
     }
+}
+
+extension DebouncerTests {
     
     func testDebouncerRunTwiceCountOnce() {
         let limiter = Debouncer(limit: 1)
@@ -166,144 +179,5 @@ extension RateLimitTests {
         }
         
         wait(for: [promise], timeout: 5)
-    }
-}
-
-// MARK: - Throttle
-
-extension RateLimitTests {
-    
-    func testThrottler() {
-        let limiter = Throttler(limit: 2)
-        
-        // It should get excuted first
-        let promise1 = expectation(description: "Throttler execute 1")
-        var reported = limiter.execute {
-            promise1.fulfill()
-        }
-        XCTAssertTrue(reported)
-        waitForExpectations(timeout: 0, handler: nil)
-        
-        // Not right away after
-        reported = limiter.execute {
-            XCTFail("This shouldn't have run.")
-        }
-        XCTAssertFalse(reported)
-        
-        // Sleep for a bit
-        sleep(2)
-        
-        // Now it should get executed
-        let promise2 = expectation(description: "Throttler execute 2")
-        reported = limiter.execute {
-            promise2.fulfill()
-        }
-        XCTAssertTrue(reported)
-        waitForExpectations(timeout: 0, handler: nil)
-    }
-    
-    func testThrottler2() {
-        let limiter = Throttler(limit: 1)
-        
-        let promise = expectation(description: "Run once and call immediately")
-        var value = 0
-        
-        limiter.execute {
-            value += 1
-        }
-        
-        limiter.execute {
-            value += 1
-        }
-        
-        limiter.execute {
-            value += 1
-        }
-        
-        limiter.execute {
-            value += 1
-        }
-        
-        limiter.execute {
-            value += 1
-        }
-        
-        limiter.execute {
-            value += 1
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-            guard value == 1 else {
-                XCTFail("Failed to throttle, calls were not ignored.")
-                return
-            }
-            
-            promise.fulfill()
-        }
-        
-        wait(for: [promise], timeout: 2)
-    }
-    
-    func testThrottler3() {
-        let limiter = Throttler(limit: 5)
-        
-        let promise = expectation(description: "Run once and call immediately")
-        var value = 0
-        
-        limiter.execute {
-            value += 1
-        }
-        
-        limiter.execute {
-            value += 1
-        }
-        
-        limiter.execute {
-            value += 1
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
-            limiter.execute {
-                value += 1
-            }
-            
-            guard value == 2 else {
-                XCTFail("Failed to throttle, calls were not ignored.")
-                return
-            }
-            
-            promise.fulfill()
-        }
-        
-        wait(for: [promise], timeout: 10)
-    }
-    
-    func testThrottlerResetting() {
-        let limiter = Throttler(limit: 1)
-        
-        // It should get excuted first
-        let promise1 = expectation(description: "Throttler execute 1")
-        let reported1 = limiter.execute {
-            promise1.fulfill()
-        }
-        XCTAssertTrue(reported1)
-        waitForExpectations(timeout: 0, handler: nil)
-        
-        // Not right away after
-        let reported2 = limiter.execute {
-            XCTFail("This shouldn't have run.")
-        }
-        XCTAssertFalse(reported2)
-        
-        // Reset limit
-        limiter.reset()
-        
-        // Now it should get executed
-        let promise2 = expectation(description: "Throttler execute 2")
-        let reported3 = limiter.execute {
-            promise2.fulfill()
-        }
-        XCTAssertTrue(reported3)
-        waitForExpectations(timeout: 0, handler: nil)
     }
 }
