@@ -25,6 +25,6 @@ public extension Locale {
     /// Returns the character direction for the current language code.
     var characterDirection: LanguageDirection {
         guard let code = languageCode else { return .unknown }
-        return Locale.characterDirection(forLanguage: code)
+        return Self.characterDirection(forLanguage: code)
     }
 }

@@ -19,7 +19,7 @@ public extension UIWindow {
     /// * the view controller that was presented modally
     /// * the root view controller of the window
     var visibleViewController: UIViewController? {
-        return getVisibleViewController(from: rootViewController)
+        getVisibleViewController(from: rootViewController)
     }
     
     /// Recursively retrieve the most visible view controller
@@ -47,7 +47,7 @@ public extension UIWindow {
     /// * the view controller that is detail in a split view controller
     /// * the root view controller of the window
     var topViewController: UIViewController? {
-        return getTopViewController(from: rootViewController)
+        getTopViewController(from: rootViewController)
     }
     
     /// Recursively retrieve the most top view controller

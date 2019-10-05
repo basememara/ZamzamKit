@@ -9,7 +9,7 @@
 #if os(iOS)
 import UIKit
 
-extension UIScrollView: Scrollable { }
+extension UIScrollView: Scrollable {}
 
 public extension Scrollable where Self: UIScrollView {
     

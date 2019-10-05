@@ -39,9 +39,7 @@ open class BadgeBarButtonItem: UIBarButtonItem {
         )
     }
     
-    open var badgeButton: UIButton? {
-        return customView as? UIButton
-    }
+    open var badgeButton: UIButton? { customView as? UIButton }
     
     open var badgeText: String? {
         didSet {

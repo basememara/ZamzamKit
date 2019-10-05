@@ -20,11 +20,11 @@ public extension TimeZone {
     ///
     ///     let timeZone = TimeZone(identifier: "Europe/Paris")
     ///     timeZone?.isCurrent -> false
-    var isCurrent: Bool { TimeZone.current.secondsFromGMT() == secondsFromGMT() }
+    var isCurrent: Bool { Self.current.secondsFromGMT() == secondsFromGMT() }
     
     /// The difference in seconds between the specified time zone and the current time zone of the device.
     ///
     ///     let timeZone = TimeZone(identifier: "Europe/Paris")
     ///     timeZone?.offsetFromCurrent -> -21600
-    var offsetFromCurrent: Int { TimeZone.current.secondsFromGMT() - secondsFromGMT() }
+    var offsetFromCurrent: Int { Self.current.secondsFromGMT() - secondsFromGMT() }
 }

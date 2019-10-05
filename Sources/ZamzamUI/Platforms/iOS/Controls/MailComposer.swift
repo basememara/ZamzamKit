@@ -20,11 +20,11 @@ public protocol MailComposerType {
 public extension MailComposerType {
     
     func makeViewController(email: String) -> MFMailComposeViewController? {
-        return makeViewController(email: email, subject: nil, body: nil, isHTML: true, attachment: nil)
+        makeViewController(email: email, subject: nil, body: nil, isHTML: true, attachment: nil)
     }
     
     func makeViewController(email: String, subject: String, body: String) -> MFMailComposeViewController? {
-        return makeViewController(email: email, subject: subject, body: body, isHTML: true, attachment: nil)
+        makeViewController(email: email, subject: subject, body: body, isHTML: true, attachment: nil)
     }
 }
 
@@ -46,7 +46,7 @@ open class MailComposer: NSObject, MailComposerType {
     
     /// Returns a Boolean indicating whether the current device is able to send email.
     open func canSendMail() -> Bool {
-        return MFMailComposeViewController.canSendMail()
+        MFMailComposeViewController.canSendMail()
     }
 }
 
@@ -54,7 +54,7 @@ public extension MailComposer {
     
     /// A standard interface for managing, editing, and sending an email message.
     func makeViewController(email: String, subject: String?, body: String?, isHTML: Bool, attachment: AttachmentType?) -> MFMailComposeViewController? {
-        return makeViewController(emails: [email], subject: subject, body: body, isHTML: isHTML, attachment: attachment)
+        makeViewController(emails: [email], subject: subject, body: body, isHTML: isHTML, attachment: attachment)
     }
     
     /// A standard interface for managing, editing, and sending an email message.

@@ -47,7 +47,7 @@ public extension UIViewController {
     /// Determines if a view controller is being presented modally
     var isModal: Bool {
         // https://stackoverflow.com/a/27301207
-        return presentingViewController != nil
+        presentingViewController != nil
             || navigationController?.presentingViewController?.presentedViewController == navigationController
             || tabBarController?.presentingViewController is UITabBarController
     }

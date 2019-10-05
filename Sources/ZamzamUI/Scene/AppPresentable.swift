@@ -7,6 +7,4 @@
 //
 
 /// Super presenter for implementing global extensions.
-public protocol AppPresentable {
-    
-}
+public protocol AppPresentable {}

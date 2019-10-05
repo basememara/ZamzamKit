@@ -62,7 +62,7 @@ public extension CellIdentifiable where Self: UITableViewController, CellIdentif
     /// - Parameter identifier: Enum value of the cell identifier.
     /// - Returns: Returns the table view cell.
     func tableViewCell(at identifier: CellIdentifier) -> UITableViewCell? {
-        return tableView.visibleCells.first { $0.reuseIdentifier == identifier.rawValue }
+        tableView.visibleCells.first { $0.reuseIdentifier == identifier.rawValue }
     }
 }
 

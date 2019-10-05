@@ -59,7 +59,7 @@ public extension UIApplication {
     /// on `statusBarOrientation` if the device orientation is not valid yet.
     var orientation: Orientation {
         // https://stackoverflow.com/a/45705783
-        return .init(for: self)
+        .init(for: self)
     }
 }
 #endif

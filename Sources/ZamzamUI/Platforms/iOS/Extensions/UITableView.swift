@@ -52,7 +52,7 @@ public extension UITableView {
     
     /// Gets the reusable header with default identifier name.
     func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>() -> T? {
-        return dequeueReusableHeaderFooterView(withIdentifier: UITableView.defaultHeaderFooterIdentifier) as? T
+        dequeueReusableHeaderFooterView(withIdentifier: UITableView.defaultHeaderFooterIdentifier) as? T
     }
 }
 
@@ -62,14 +62,14 @@ public extension UITableView {
     ///
     /// - Parameter indexPath: The index path of the cell from the table.
     subscript(indexPath: IndexPath) -> UITableViewCell {
-        return dequeueReusableCell(withIdentifier: UITableView.defaultCellIdentifier, for: indexPath)
+        dequeueReusableCell(withIdentifier: UITableView.defaultCellIdentifier, for: indexPath)
     }
 
     /// Gets the reusable cell with default identifier name.
     ///
     /// - Parameter indexPath: The index path of the cell from the table.
     subscript<T: UITableViewCell>(indexPath: IndexPath) -> T {
-        return dequeueReusableCell(withIdentifier: UITableView.defaultCellIdentifier, for: indexPath) as? T ?? T()
+        dequeueReusableCell(withIdentifier: UITableView.defaultCellIdentifier, for: indexPath) as? T ?? T()
     }
 
     /// Gets the reusable cell with the specified identifier name.
@@ -78,7 +78,7 @@ public extension UITableView {
     ///   - indexPath: The index path of the cell from the table.
     ///   - identifier: Name of the reusable cell identifier.
     subscript(indexPath: IndexPath, withIdentifier identifier: String) -> UITableViewCell {
-        return dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
     
     /// Gets the reusable cell with default identifier name.
@@ -87,7 +87,7 @@ public extension UITableView {
     ///   - indexPath: The index path of the cell from the table.
     ///   - identifier: Name of the reusable cell identifier.
     subscript<T: UITableViewCell>(indexPath: IndexPath, withIdentifier identifier: String) -> T {
-        return dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? T ?? T()
+        dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? T ?? T()
     }
 }
 

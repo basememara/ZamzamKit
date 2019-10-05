@@ -55,7 +55,7 @@ public extension UICollectionView {
     
     /// Gets the reusable supplementary view with default identifier name.
     func dequeueReusableSupplementaryView<T: UICollectionReusableView>(ofKind elementKind: String, for indexPath: IndexPath) -> T {
-        return dequeueReusableSupplementaryView(
+        dequeueReusableSupplementaryView(
             ofKind: elementKind,
             withReuseIdentifier: UICollectionView.defaultSectionIdentifier,
             for: indexPath
@@ -78,7 +78,7 @@ public extension UICollectionView {
     
     /// Gets the reusable header with default identifier name.
     func dequeueReusableHeaderView<T: UICollectionReusableView>(for indexPath: IndexPath) -> T {
-        return dequeueReusableSupplementaryView(
+        dequeueReusableSupplementaryView(
             ofKind: UICollectionView.elementKindSectionHeader,
             for: indexPath
         )
@@ -100,7 +100,7 @@ public extension UICollectionView {
     
     /// Gets the reusable footer with default identifier name.
     func dequeueReusableFooterView<T: UICollectionReusableView>(for indexPath: IndexPath) -> T {
-        return dequeueReusableSupplementaryView(
+        dequeueReusableSupplementaryView(
             ofKind: UICollectionView.elementKindSectionFooter,
             for: indexPath
         )
@@ -113,14 +113,14 @@ public extension UICollectionView {
     ///
     /// - Parameter indexPath: The index path of the cell from the collection.
     subscript(indexPath: IndexPath) -> UICollectionViewCell {
-        return dequeueReusableCell(withReuseIdentifier: UICollectionView.defaultCellIdentifier, for: indexPath)
+        dequeueReusableCell(withReuseIdentifier: UICollectionView.defaultCellIdentifier, for: indexPath)
     }
     
     /// Gets the reusable cell with default identifier name.
     ///
     /// - Parameter indexPath: The index path of the cell from the collection.
     subscript<T: UICollectionViewCell>(indexPath: IndexPath) -> T {
-        return dequeueReusableCell(withReuseIdentifier: UICollectionView.defaultCellIdentifier, for: indexPath) as? T ?? T()
+        dequeueReusableCell(withReuseIdentifier: UICollectionView.defaultCellIdentifier, for: indexPath) as? T ?? T()
     }
 
     /// Gets the reusable cell with the specified identifier name.
@@ -129,7 +129,7 @@ public extension UICollectionView {
     ///   - indexPath: The index path of the cell from the collection.
     ///   - identifier: Name of the reusable cell identifier.
     subscript(indexPath: IndexPath, withReuseIdentifier identifier: String) -> UICollectionViewCell {
-        return dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+        dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
     
     /// Gets the reusable cell with default identifier name.
@@ -138,7 +138,7 @@ public extension UICollectionView {
     ///   - indexPath: The index path of the cell from the collection.
     ///   - identifier: Name of the reusable cell identifier.
     subscript<T: UICollectionViewCell>(indexPath: IndexPath, withReuseIdentifier identifier: String) -> T {
-        return dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? T ?? T()
+        dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? T ?? T()
     }
 }
 #endif

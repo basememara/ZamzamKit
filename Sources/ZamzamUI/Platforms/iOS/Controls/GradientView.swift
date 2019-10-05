@@ -26,9 +26,7 @@ open class GradientView: UIView {
         didSet { configure() }
     }
     
-    override class open var layerClass: AnyClass {
-        return CAGradientLayer.self
-    }
+    override class open var layerClass: AnyClass { CAGradientLayer.self }
 }
 
 private extension GradientView {

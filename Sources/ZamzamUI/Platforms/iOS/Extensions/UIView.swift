@@ -34,19 +34,19 @@ public extension UIView {
     
     /// A Boolean value that determines whether the view is visible.
     var isVisible: Bool {
-        get { return !isHidden }
+        get { !isHidden }
         set { isHidden = !newValue }
     }
     
     /// Returns the width of the frame.
     var width: CGFloat {
-        get { return frame.width }
+        get { frame.width }
         set { frame.size.width = newValue }
     }
 
     /// Returns the height of the frame.
     var height: CGFloat {
-        get { return frame.height }
+        get { frame.height }
         set { frame.size.height = newValue }
     }
 }
@@ -72,13 +72,13 @@ public extension UIView {
     
     /// Border width of view; also inspectable from Storyboard.
     @IBInspectable var borderWidth: CGFloat {
-        get { return layer.borderWidth }
+        get { layer.borderWidth }
         set { layer.borderWidth = newValue }
     }
     
     /// Corner radius of view; also inspectable from Storyboard.
     @IBInspectable var cornerRadius: CGFloat {
-        get { return layer.cornerRadius }
+        get { layer.cornerRadius }
         
         set {
             layer.masksToBounds = true
@@ -191,7 +191,7 @@ public extension UIView {
 
     /// Returns the user interface direction.
     var userInterfaceLayoutDirection: UIUserInterfaceLayoutDirection {
-        return UIView.userInterfaceLayoutDirection(for: semanticContentAttribute)
+        UIView.userInterfaceLayoutDirection(for: semanticContentAttribute)
     }
 }
 

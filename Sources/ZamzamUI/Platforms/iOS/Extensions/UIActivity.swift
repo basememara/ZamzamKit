@@ -27,7 +27,7 @@ public extension UIActivity {
         canPerform: (([Any]) -> Bool)? = nil,
         handler: @escaping () -> Void
     ) -> UIActivity {
-        return CustomActivity(
+        CustomActivity(
             title: title,
             imageName: imageName,
             imageBundle: imageBundle,
@@ -51,25 +51,17 @@ private class CustomActivity: UIActivity {
         self.handler = handler
     }
     
-    override var activityTitle: String? {
-        return title
-    }
+    override var activityTitle: String? { title }
+    override var activityImage: UIImage? { UIImage(named: imageName, inBundle: imageBundle) }
+    override var activityViewController: UIViewController? { nil }
     
     override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
         return canPerform?(activityItems as [Any]) ?? true
     }
     
-    override var activityViewController: UIViewController? {
-        return nil
-    }
-    
     override func perform() {
         handler()
         activityDidFinish(true)
-    }
-    
-    override var activityImage: UIImage? {
-        return UIImage(named: imageName, inBundle: imageBundle)
     }
 }
 #endif

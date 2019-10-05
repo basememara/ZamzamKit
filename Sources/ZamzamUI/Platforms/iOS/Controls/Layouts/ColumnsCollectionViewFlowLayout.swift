@@ -65,7 +65,7 @@ open class ColumnsCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        return newBounds != collectionView?.bounds
+        newBounds != collectionView?.bounds
     }
 }
 #endif

@@ -37,7 +37,7 @@ public extension UIToolbar {
     ///   - title: The title of the toolbar.
     /// - Returns: A control that displays the done button along the bottom edge of your interface.
     static func makeInputDoneToolbar(target: Any?, action: Selector, clearAction: Selector? = nil, title: String? = nil) -> UIToolbar {
-        return UIToolbar().with {
+        UIToolbar().with {
             $0.isTranslucent = true
             $0.isUserInteractionEnabled = true
             $0.sizeToFit()
@@ -92,7 +92,7 @@ public extension UIToolbar {
     ///   - title: The title of the toolbar.
     /// - Returns: A control that displays the next button along the bottom edge of your interface.
     static func makeInputNextToolbar(target: Any?, action: Selector, clearAction: Selector? = nil, title: String? = nil) -> UIToolbar {
-        return UIToolbar().with {
+        UIToolbar().with {
             $0.isTranslucent = true
             $0.isUserInteractionEnabled = true
             $0.sizeToFit()

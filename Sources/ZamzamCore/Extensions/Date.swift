@@ -515,7 +515,7 @@ public extension Date {
         format: String? = nil,
         offSet: Int = 0,
         timeZone: TimeZone? = nil,
-        calendar: Calendar = Date.islamicCalendar
+        calendar: Calendar = Self.islamicCalendar
     ) -> String {
         var calendar = calendar
         
@@ -558,7 +558,7 @@ public extension Date {
         components: Set<Calendar.Component> = Calendar.Component.full,
         offSet: Int = 0,
         timeZone: TimeZone? = nil,
-        calendar: Calendar = Date.islamicCalendar
+        calendar: Calendar = Self.islamicCalendar
     ) -> DateComponents {
         var calendar = calendar
         
@@ -577,7 +577,7 @@ public extension Date {
     ///   - timeZone: The time zone for the receiver.
     ///   - calendar: The calendar of the receiver.
     /// - Returns: True if the date is within Ramadan; false otherwise.
-    func isRamadan(offSet: Int = 0, timeZone: TimeZone? = nil, calendar: Calendar = Date.islamicCalendar) -> Bool {
+    func isRamadan(offSet: Int = 0, timeZone: TimeZone? = nil, calendar: Calendar = Self.islamicCalendar) -> Bool {
         hijri(offSet: offSet, timeZone: timeZone, calendar: calendar).month == 9
     }
     

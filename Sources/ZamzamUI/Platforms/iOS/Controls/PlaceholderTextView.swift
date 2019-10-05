@@ -82,7 +82,8 @@ open class PlaceholderTextView: UITextView {
     }
     
     open override var text: String! {
-        get { return super.text }
+        get { super.text }
+        
         set {
             super.text = newValue
             

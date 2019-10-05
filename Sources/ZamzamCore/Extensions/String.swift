@@ -330,7 +330,7 @@ public extension String {
     
     /// Returns a value of the type you specify, decoded from a JSON string.
     func decode<T: Decodable>(
-        using encoding: String.Encoding = .utf8,
+        using encoding: Self.Encoding = .utf8,
         with decoder: JSONDecoder? = nil
     ) -> T? {
         guard let data = data(using: encoding) else { return nil }

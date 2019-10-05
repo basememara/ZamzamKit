@@ -15,7 +15,7 @@ public extension UINavigationBar {
     var transparent: Bool {
         // http://stackoverflow.com/questions/2315862/make-uinavigationbar-transparent
         
-        get { return backgroundColor == .clear }
+        get { backgroundColor == .clear }
         
         set {
             guard newValue else {

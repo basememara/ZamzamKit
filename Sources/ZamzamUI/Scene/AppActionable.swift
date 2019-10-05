@@ -7,6 +7,4 @@
 //
 
 /// Super action for implementing global extensions.
-public protocol AppActionable {
-    
-}
+public protocol AppActionable {}
