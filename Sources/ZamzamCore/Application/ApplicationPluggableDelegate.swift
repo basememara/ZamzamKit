@@ -12,16 +12,19 @@ import UIKit
 
 /// Subclassed by the `AppDelegate` to pass lifecycle events to loaded plugins.
 ///
-/// The application plugins will be processed in sequence.
+/// The application plugins will be processed in sequence after calling `install(plugins:)`.
 ///
 ///     @UIApplicationMain
 ///     class AppDelegate: ApplicationPluggableDelegate {
 ///
-///         override func plugins() -> [ApplicationPlugin] {
-///             [
-///                 LoggerPlugin(),
-///                 NotificationPlugin()
-///             ]
+///         private let plugins: [ApplicationPlugin] = [
+///             LoggerPlugin(),
+///             NotificationPlugin()
+///         ]
+///
+///         override init() {
+///             super.init()
+///             install(plugins)
 ///         }
 ///     }
 ///
@@ -50,13 +53,11 @@ import UIKit
 ///     }
 open class ApplicationPluggableDelegate: UIResponder, UIApplicationDelegate {
     public var window: UIWindow?
+    private var plugins: [ApplicationPlugin] = []
     
-    /// Lazy implementation of application modules list
-    public private(set) lazy var lazyPlugins: [ApplicationPlugin] = plugins()
-    
-    /// List of application modules for binding to `AppDelegate` events
-    open func plugins() -> [ApplicationPlugin] {
-        [ /* Populated from sub-class */ ]
+    /// Bind application plugins to `AppDelegate` events
+    public func install(_ plugins: [ApplicationPlugin]) {
+        self.plugins = plugins
     }
 }
 
@@ -65,7 +66,7 @@ public extension ApplicationPluggableDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Ensure all delegates called even if condition fails early
         //swiftlint:disable reduce_boolean
-        lazyPlugins.reduce(true) {
+        plugins.reduce(true) {
             $0 && $1.application(application, willFinishLaunchingWithOptions: launchOptions)
         }
     }
@@ -73,7 +74,7 @@ public extension ApplicationPluggableDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Ensure all delegates called even if condition fails early
         //swiftlint:disable reduce_boolean
-        lazyPlugins.reduce(true) {
+        plugins.reduce(true) {
             $0 && $1.application(application, didFinishLaunchingWithOptions: launchOptions)
         }
     }
@@ -82,41 +83,41 @@ public extension ApplicationPluggableDelegate {
 public extension ApplicationPluggableDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        lazyPlugins.forEach { $0.applicationWillEnterForeground(application) }
+        plugins.forEach { $0.applicationWillEnterForeground(application) }
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        lazyPlugins.forEach { $0.applicationDidEnterBackground(application) }
+        plugins.forEach { $0.applicationDidEnterBackground(application) }
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        lazyPlugins.forEach { $0.applicationDidBecomeActive(application) }
+        plugins.forEach { $0.applicationDidBecomeActive(application) }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        lazyPlugins.forEach { $0.applicationWillResignActive(application) }
+        plugins.forEach { $0.applicationWillResignActive(application) }
     }
 }
 
 public extension ApplicationPluggableDelegate {
     
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
-        lazyPlugins.forEach { $0.applicationProtectedDataWillBecomeUnavailable(application) }
+        plugins.forEach { $0.applicationProtectedDataWillBecomeUnavailable(application) }
     }
     
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
-        lazyPlugins.forEach { $0.applicationProtectedDataDidBecomeAvailable(application) }
+        plugins.forEach { $0.applicationProtectedDataDidBecomeAvailable(application) }
     }
 }
 
 public extension ApplicationPluggableDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
-        lazyPlugins.forEach { $0.applicationWillTerminate(application) }
+        plugins.forEach { $0.applicationWillTerminate(application) }
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        lazyPlugins.forEach { $0.applicationDidReceiveMemoryWarning(application) }
+        plugins.forEach { $0.applicationDidReceiveMemoryWarning(application) }
     }
 }
 

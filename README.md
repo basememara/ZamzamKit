@@ -616,15 +616,18 @@ someStruct.isRunningOnSimulator -> false
 
 > Split up `AppDelegate` into [plugins](https://basememara.com/pluggable-appdelegate-services/) (also available for `WKExtensionDelegate`):
 ```swift
-// Subclass to pass lifecycle events to loaded plugins
+// Subclass and install to pass lifecycle events to loaded plugins
 @UIApplicationMain
 class AppDelegate: ApplicationPluginDelegate {
 
-    override func plugins() -> [ApplicationPlugin] {
-        [
-            LoggerPlugin(),
-            NotificationPlugin()
-        ]
+    private(set) lazy var plugins: [ApplicationPlugin] = [
+        LoggerPlugin(),
+        NotificationPlugin()
+    ]
+
+    override init() {
+        super.init()
+        install(plugins)
     }
 }
 ```
