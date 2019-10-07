@@ -61,9 +61,9 @@ open class ApplicationPluggableDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-public extension ApplicationPluggableDelegate {
+extension ApplicationPluggableDelegate {
     
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+    open func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Ensure all delegates called even if condition fails early
         //swiftlint:disable reduce_boolean
         plugins.reduce(true) {
@@ -71,7 +71,7 @@ public extension ApplicationPluggableDelegate {
         }
     }
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    open func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Ensure all delegates called even if condition fails early
         //swiftlint:disable reduce_boolean
         plugins.reduce(true) {
@@ -80,43 +80,43 @@ public extension ApplicationPluggableDelegate {
     }
 }
 
-public extension ApplicationPluggableDelegate {
+extension ApplicationPluggableDelegate {
     
-    func applicationWillEnterForeground(_ application: UIApplication) {
+    open func applicationWillEnterForeground(_ application: UIApplication) {
         plugins.forEach { $0.applicationWillEnterForeground(application) }
     }
     
-    func applicationDidEnterBackground(_ application: UIApplication) {
+    open func applicationDidEnterBackground(_ application: UIApplication) {
         plugins.forEach { $0.applicationDidEnterBackground(application) }
     }
     
-    func applicationDidBecomeActive(_ application: UIApplication) {
+    open func applicationDidBecomeActive(_ application: UIApplication) {
         plugins.forEach { $0.applicationDidBecomeActive(application) }
     }
     
-    func applicationWillResignActive(_ application: UIApplication) {
+    open func applicationWillResignActive(_ application: UIApplication) {
         plugins.forEach { $0.applicationWillResignActive(application) }
     }
 }
 
-public extension ApplicationPluggableDelegate {
+extension ApplicationPluggableDelegate {
     
-    func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
+    open func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
         plugins.forEach { $0.applicationProtectedDataWillBecomeUnavailable(application) }
     }
     
-    func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
+    open func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
         plugins.forEach { $0.applicationProtectedDataDidBecomeAvailable(application) }
     }
 }
 
-public extension ApplicationPluggableDelegate {
+extension ApplicationPluggableDelegate {
     
-    func applicationWillTerminate(_ application: UIApplication) {
+    open func applicationWillTerminate(_ application: UIApplication) {
         plugins.forEach { $0.applicationWillTerminate(application) }
     }
     
-    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+    open func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
         plugins.forEach { $0.applicationDidReceiveMemoryWarning(application) }
     }
 }
