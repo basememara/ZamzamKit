@@ -12,20 +12,15 @@ import UIKit
 
 /// Subclassed by the `AppDelegate` to pass lifecycle events to loaded plugins.
 ///
-/// The application plugins will be processed in sequence after calling `install(plugins:)`.
+/// The application plugins will be processed in sequence after calling `application() -> [ApplicationPlugin]`.
 ///
 ///     @UIApplicationMain
 ///     class AppDelegate: ApplicationPluggableDelegate {
 ///
-///         private let plugins: [ApplicationPlugin] = [
+///         override func application() -> [ApplicationPlugin] {[
 ///             LoggerPlugin(),
 ///             NotificationPlugin()
-///         ]
-///
-///         override init() {
-///             super.init()
-///             install(plugins)
-///         }
+///         ]}
 ///     }
 ///
 /// Each application plugin has access to the `AppDelegate` lifecycle events:
@@ -53,12 +48,9 @@ import UIKit
 ///     }
 open class ApplicationPluggableDelegate: UIResponder, UIApplicationDelegate {
     public var window: UIWindow?
-    private var plugins: [ApplicationPlugin] = []
     
-    /// Bind application plugins to `AppDelegate` events
-    public func install(_ plugins: [ApplicationPlugin]) {
-        self.plugins = plugins
-    }
+    public private(set) lazy var plugins: [ApplicationPlugin] = { application() }()
+    open func application() -> [ApplicationPlugin] {[]} // Override
 }
 
 extension ApplicationPluggableDelegate {
