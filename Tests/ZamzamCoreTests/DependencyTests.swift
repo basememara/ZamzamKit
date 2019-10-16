@@ -14,11 +14,13 @@ final class DependencyTests: XCTestCase {
         Module { WidgetModule() as WidgetModuleType }
         Module { SampleModule() as SampleModuleType }
         Module("abc") { SampleModule(value: "123") as SampleModuleType }
+        Module { SomeClass() as SomeClassType }
     }
     
     @Inject private var widgetModule: WidgetModuleType
     @Inject private var sampleModule: SampleModuleType
     @Inject("abc") private var sampleModule2: SampleModuleType
+    @Inject private var someClass: SomeClassType
     
     private lazy var widgetWorker: WidgetWorkerType = widgetModule.component()
     private lazy var someObject: SomeObjectType = sampleModule.component()
@@ -60,6 +62,15 @@ extension DependencyTests {
         XCTAssertEqual(viewModelNestedResult, "SomeViewModel.testLmnNested|AnotherObject.testXyz|SomeObject.testAbc")
         XCTAssertEqual(viewControllerResult, "SomeViewController.testRst|SomeObject.testAbc")
         XCTAssertEqual(viewControllerNestedResult, "SomeViewController.testRstNested|AnotherObject.testXyz|SomeObject.testAbc")
+    }
+}
+
+extension DependencyTests {
+    
+    func testNumberOfInstances() {
+        let instance1 = someClass
+        let instance2 = someClass
+        XCTAssertEqual(instance1.id, instance2.id)
     }
 }
 
@@ -127,6 +138,14 @@ extension DependencyTests {
     struct SomeObject: SomeObjectType {
         func testAbc() -> String {
             "SomeObject.testAbc"
+        }
+    }
+    
+    class SomeClass: SomeClassType {
+        let id: String
+        
+        init() {
+            self.id = UUID().uuidString
         }
     }
 
@@ -245,6 +264,10 @@ protocol SampleModuleType {
 
 protocol SomeObjectType {
     func testAbc() -> String
+}
+
+protocol SomeClassType {
+    var id: String { get }
 }
 
 protocol AnotherObjectType {

@@ -114,11 +114,16 @@ public struct Module {
 
 /// Resolves an instance from the dependency injection container.
 @propertyWrapper
-public struct Inject<Value> {
+public class Inject<Value> {
     private let name: String?
+    private var storage: Value?
     
     public var wrappedValue: Value {
-        Dependencies.root.resolve(for: name)
+        storage ?? {
+            let value: Value = Dependencies.root.resolve(for: name)
+            storage = value // Reuse instance for later
+            return value
+        }()
     }
     
     public init() {
