@@ -11,16 +11,14 @@ import WatchKit
 
 /// Subclassed by the `ExtensionDelegate` to pass lifecycle events to loaded plugins.
 ///
-/// The application plugins will be processed in sequence.
+/// The application plugins will be processed in sequence after calling `application() -> [ExtensionPlugin]`.
 ///
 ///     class ExtensionDelegate: ExtensionPluggableDelegate {
 ///
-///         override func plugins() -> [ExtensionPlugin] {
-///             return [
-///                 LoggerPlugin(),
-///                 LocationPlugin()
-///             ]
-///         }
+///         override func application() -> [ExtensionPlugin] {[
+///             LoggerPlugin(),
+///             LocationPlugin()
+///         ]}
 ///     }
 ///
 /// Each application module has access to the `ExtensionDelegate` lifecycle events:
@@ -50,42 +48,40 @@ import WatchKit
 ///     }
 open class ExtensionPluggableDelegate: NSObject, WKExtensionDelegate {
     
-    /// Lazy implementation of application modules list
-    public private(set) lazy var lazyPlugins: [ExtensionPlugin] = plugins()
+    /// List of application plugins for binding to `ExtensionDelegate` events
+    public private(set) lazy var plugins: [ExtensionPlugin] = { application() }()
     
     /// List of application plugins for binding to `ExtensionDelegate` events
-    open func plugins() -> [ExtensionPlugin] {
-        [ /* Populated from sub-class */ ]
-    }
+    open func application() -> [ExtensionPlugin] {[]} // Override
 }
 
 public extension ExtensionPluggableDelegate {
     
     func applicationDidFinishLaunching() {
-        lazyPlugins.forEach { $0.applicationDidFinishLaunching(.shared()) }
+        plugins.forEach { $0.applicationDidFinishLaunching(.shared()) }
     }
 }
 
 public extension ExtensionPluggableDelegate {
     
     func applicationDidBecomeActive() {
-        lazyPlugins.forEach { $0.applicationDidBecomeActive(.shared()) }
+        plugins.forEach { $0.applicationDidBecomeActive(.shared()) }
     }
     
     func applicationWillResignActive() {
-        lazyPlugins.forEach { $0.applicationWillResignActive(.shared()) }
+        plugins.forEach { $0.applicationWillResignActive(.shared()) }
     }
     
     func applicationWillEnterForeground() {
-        lazyPlugins.forEach { $0.applicationWillEnterForeground(.shared()) }
+        plugins.forEach { $0.applicationWillEnterForeground(.shared()) }
     }
     
     func applicationDidEnterBackground() {
-        lazyPlugins.forEach { $0.applicationDidEnterBackground(.shared()) }
+        plugins.forEach { $0.applicationDidEnterBackground(.shared()) }
     }
 }
 
-/// Conforming to an app module and added to `ExtensionDelegate.plugins()` will trigger events.
+/// Conforming to an app module and added to `ExtensionDelegate.application()` will trigger events.
 public protocol ExtensionPlugin {
     func applicationDidFinishLaunching(_ application: WKExtension)
     
