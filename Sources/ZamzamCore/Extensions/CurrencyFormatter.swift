@@ -42,7 +42,7 @@ public extension CurrencyFormatter {
     
     /// Returns a string containing the formatted value of the provided number object.
     ///
-    ///     let amount: DOuble = 123456789.987
+    ///     let amount: Double = 123456789.987
     ///
     ///     let formatter = CurrencyFormatter()
     ///     formatter.string(fromAmount: amount) // "$123,456,789.99"

@@ -6,8 +6,10 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
+#if !os(tvOS)
 import UserNotifications
 import CoreLocation
+import ZamzamCore
 
 public extension UNUserNotificationCenter {
     
@@ -145,7 +147,7 @@ public extension UNUserNotificationCenter {
     
     /// Returns a list of all pending or delivered user notifications.
     func getNotificationRequests(completion: @escaping ([UNNotificationRequest]) -> Void) {
-        var notificationRequests = [UNNotificationRequest]()
+        var notificationRequests: [UNNotificationRequest] = []
         let taskGroup = DispatchGroup()
         
         taskGroup.enter()
@@ -458,3 +460,4 @@ public extension UNUserNotificationCenter {
         }
     }
 }
+#endif

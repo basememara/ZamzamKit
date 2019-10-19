@@ -6,7 +6,9 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
+#if !os(tvOS)
 import UserNotifications
+import ZamzamCore
 
 public extension UNNotificationAttachment {
 
@@ -41,3 +43,4 @@ public extension UNNotificationAttachment {
         }
     }
 }
+#endif

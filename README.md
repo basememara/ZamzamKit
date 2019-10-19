@@ -1,43 +1,36 @@
 # ZamzamKit
 
 [![Build Status](https://api.travis-ci.org/ZamzamInc/ZamzamKit.svg?branch=master)](https://travis-ci.org/ZamzamInc/ZamzamKit)
-[![Platform](https://img.shields.io/cocoapods/p/ZamzamKit.svg?style=flat)](https://github.com/ZamzamInc/ZamzamKit)
+[![Platform](https://img.shields.io/badge/platform-ios%20%7C%20watchos%20%7C%20tvos%20%7C%20ipados%20%7C%20macos-lightgrey)](https://github.com/ZamzamInc/ZamzamKit)
 [![Swift](https://img.shields.io/badge/Swift-5-orange.svg)](https://swift.org)
-[![Xcode](https://img.shields.io/badge/Xcode-10.2-blue.svg)](https://developer.apple.com/xcode)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-Compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Version](https://img.shields.io/cocoapods/v/ZamzamKit.svg?style=flat)](http://cocoapods.org/pods/ZamzamKit)
+[![Xcode](https://img.shields.io/badge/Xcode-11-blue.svg)](https://developer.apple.com/xcode)
+[![SPM](https://img.shields.io/badge/SPM-Compatible-blue)](https://swift.org/package-manager)
 [![MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
-ZamzamKit a Swift framework for rapid development using a collection of small utility extensions for Standard Library, Foundation and UIKit classes and protocols.
+ZamzamKit a Swift framework for rapid development using a collection of small utility extensions for Standard Library, Foundation, and native frameworks.
 
 ## Installation
 
-<details>
-<summary>Carthage</summary>
+### Swift Package Manager
 
-Add `github "ZamzamInc/ZamzamKit"` to your `Cartfile`.
-</details>
+`.package(url: "git@github.com:ZamzamInc/ZamzamKit.git", .upToNextMajor(from: "5.0.0"))` 
 
-<details>
-<summary>CocoaPods</summary>
+The `ZamzamKit` package contains four different products you can import:
+* `ZamzamCore`
+* `ZamzamLocation`
+* `ZamzamNotification`
+* `ZamzamUI`
 
-Add `pod "ZamzamKit"` to your `Podfile`.
-</details>
+Add any combination of these to your target's dependencies within your `Package.swift` manifest.
 
-<details>
-<summary>Framework</summary>
+Currently, a limitation with SwiftPM where resources can not be embedded at the moment requires an extra manual step. Drag `Resources/ZamzamCore.bundle` to your target's project settings > Build Phases > Copy Bundle manually.
 
-1. Download the latest release of `ZamzamKit` and extract the zip.
-2. Go to your Xcode project’s "General" settings. Drag ZamzamKit.framework and ZamzamKit.framework from the appropriate Swift-versioned directory for your project in `ios/`, `tvos/` or `watchos/` directory to the "Embedded Binaries" section. Make sure "Copy items if needed" is selected (except if using on multiple platforms in your project) and click Finish.
-3. In your unit test target's "Build Settings", add the parent path to ZamzamKit.framework in the "Framework Search Paths" section.
-</details>
+## ZamzamCore
 
-## Usage
-
-### Standard Library
+### Standard+
 
 <details>
-<summary>Array</summary>
+<summary>Collection</summary>
 
 > Get distinct elements from an array:
 ```swift
@@ -55,10 +48,6 @@ array // ["a", "b", "d", "e"]
 ```swift
 ["a", "b", "c", "d", "e"].prefix(3).array
 ```
-</details>
-
-<details>
-<summary>Collection</summary>
 
 > Safely retrieve an element at the given index if it exists:
 ```swift
@@ -74,17 +63,149 @@ tabBarController.tabBar.items?[safe: 3]?.selectedImage = UIImage("my-image")
 [1, 3, 5, 7, 9][safe: 1] // Optional(3)
 [1, 3, 5, 7, 9][safe: 12] // nil
 ```
-</details>
 
-<details>
-<summary>Equatable</summary>
-
-> Determine if a value is contained within the array of values:
+> Determine if a value is contained within the array of equatable values:
 ```swift
 "b".within(["a", "b", "c"]) // true
 
 let status: OrderStatus = .cancelled
 status.within([.requeseted, .accepted, .inProgress]) // false
+```
+</details>
+
+<details>
+<summary>Date</summary>
+
+> Determine if a date is in the past or future:
+```swift
+Date(timeIntervalSinceNow: -100).isPast -> true
+Date(timeIntervalSinceNow: 100).isPast -> false
+
+Date(timeIntervalSinceNow: 100).isFuture -> true
+Date(timeIntervalSinceNow: -100).isFuture -> false
+```
+
+> Determine if a date is today, yesterday, or tomorrow:
+```swift
+Date().isToday -> true
+Date(timeIntervalSinceNow: -90_000).isYesterday -> true
+Date(timeIntervalSinceNow: 90_000).isTomorrow -> true
+```
+
+> Determine if a date is within a weekday or weekend period:
+```swift
+Date().isWeekday -> false
+Date().isWeekend -> true
+```
+
+> Get the beginning or end of the day:
+```swift
+Date().startOfDay -> "2018/11/21 00:00:00"
+Date().endOfDay -> "2018/11/21 23:59:59"
+```
+
+> Get the beginning or end of the month:
+```swift
+Date().startOfMonth -> "2018/11/01 00:00:00"
+Date().endOfMonth -> "2018/11/30 23:59:59"
+```
+
+> Determine if a date is current:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+date.isCurrentWeek
+date.isCurrentMonth
+date.isCurrentYear
+```
+
+> Determine if a date is between two other dates:
+```swift
+let date = Date()
+let date1 = Date(timeIntervalSinceNow: 1000)
+let date2 = Date(timeIntervalSinceNow: -1000)
+
+date.isBetween(date1, date2) -> true
+```
+
+> Use specific calendar for data manipulations:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+let calendar = Calendar(identifier: .chinese)
+
+date.isToday(for: calendar)
+date.isWeekday(for: calendar)
+date.isCurrentMonth(for: calendar)
+date.isToday(for: calendar)
+date.startOfDay(for: calendar)
+date.startOfMonth(for: calendar)
+```
+
+> Determine if a date is beyond a specified time window:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+let fromDate = Date(fromString: "2018/03/22 09:30")
+
+date.isBeyond(fromDate, bySeconds: 300) -> true
+date.isBeyond(fromDate, bySeconds: 1200) -> false
+```
+
+> Create a date from a string:
+```swift
+Date(fromString: "2018/11/01 18:15")
+Date(fromString: "1440/03/01 18:31", calendar: Calendar(identifier: .islamic))
+```
+
+> Format a date to a string:
+```swift
+Date().string(format: "MMM d, h:mm a") -> "Jan 3, 8:43 PM"
+Date().string(style: .full, calendar: Calendar(identifier: .hebrew)) -> "Friday, 1 Kislev 5779"
+```
+
+> Format a time interval to display as a timer.
+```swift
+let date = Date(fromString: "2016/03/22 09:45")
+let fromDate = Date(fromString: "2016/03/22 09:40")
+
+date.timerString(from: fromDate)
+
+// Prints "00:05:00"
+```
+
+> Get the decimal representation of the time:
+```swift
+Date(fromString: "2018/10/23 18:15").timeToDecimal -> 18.25
+```
+
+> Increment years, months, days, hours, or minutes:
+```swift
+let date = Date()
+date + .years(1)
+date + .months(2)
+date - .days(4)
+date - .hours(6)
+date + .minutes(12)
+date + .days(5, Calendar(identifier: .chinese))
+```
+
+> Convert between time interval units:
+```swift
+let diff = date.timeIntervalSince(date2) -> 172,800 seconds
+diff.minutes -> 2,800 minutes
+diff.hours -> 48 hours
+diff.days -> 2 days
+```
+
+> Time zone context and offset:
+```swift
+let timeZone = TimeZone(identifier: "Europe/Paris")
+timeZone?.isCurrent -> false
+timeZone?.offsetFromCurrent -> -21600
+```
+
+> Normalize date calculations and data storage:
+```swift
+let timeZone: TimeZone = .posix // GMT
+let locale: Locale = .posix // en_US_POSIX
 ```
 </details>
 
@@ -185,24 +306,38 @@ var value: String? = "test 123"
 value.isNilOrEmpty
 ```
 
-> Convert sequences and dictionaries to a JSON string:
+> Strongly-typed string keys:
 ```swift
-// Before
-guard let data = self as? [[String: Any]],
-    let stringData = try? JSONSerialization.data(withJSONObject: data, options: []) else {
-        return nil
+// First define keys
+extension String.Keys {
+    static let testString = String.Key<String?>("testString")
+    static let testInt = String.Key<Int?>("testInt")
+    static let testBool = String.Key<Bool?>("testBool")
+    static let testArray = String.Key<[Int]?>("testArray")
 }
+
+// Create method or subscript for any type
+extension UserDefaults {
     
-let json = String(data: stringData, encoding: .utf8) as? String
-```
-```swift
-// After
-let json = mySequence.jsonString
-let json = myDictionary.jsonString
+    subscript<T>(key: String.Key<T?>) -> T? {
+        get { object(forKey: key.name) as? T }
+        
+        set {
+            guard let value = newValue else { return remove(key) }
+            set(value, forKey: key.name)
+        }
+    }
+}
+
+// Then use strongly-typed values
+let testString: String? = UserDefaults.standard[.testString]
+let testInt: Int? = UserDefaults.standard[.testInt]
+let testBool: Bool? = UserDefaults.standard[.testBool]
+let testArray: [Int]? = UserDefaults.standard[.testArray]
 ```
 </details>
 
-### Foundation
+### Foundation+
 
 <details>
 <summary>Bundle</summary>
@@ -244,7 +379,7 @@ values[2]["description"] as? String // "This is a test for 3.")
 
 > Get a dictionary from a property list file within any bundle:
 ```swift
-let values = Bundle.main.contents(plist: "Settings.plist")
+let values: [String: Any] = Bundle.main.contents(plist: "Settings.plist")
 
 values["MyString1"] as? String // "My string value 1."
 values["MyNumber1"] as? Int // 123
@@ -263,6 +398,7 @@ values["MyDate1"] as? Date // 2018-11-21 15:40:03 +0000
 UIColor(hex: 0x990000)
 UIColor(hex: 0x4286F4)
 UIColor(rgb: (66, 134, 244))
+UIColor.random
 ```
 </details>
 
@@ -280,117 +416,48 @@ formatter2.string(fromCents: 123456789) // "1 234 567,89 €"
 </details>
 
 <details>
-<summary>Date</summary>
+<summary>Decodable</summary>
 
-> Determine if a date is in the past or future:
+> Get a value of the type you specify, decoded from a JSON string.
 ```swift
-Date(timeIntervalSinceNow: -100).isPast -> true
-Date(timeIntervalSinceNow: 100).isPast -> false
+let jsonString = "{\"test1\":29,\"test2\":62,\"test3\":33,\"test4\":24,\"test5\":14,\"test6\":72}"
+let jsonObject: [String: Int] = jsonString.decode()
 
-Date(timeIntervalSinceNow: 100).isFuture -> true
-Date(timeIntervalSinceNow: -100).isFuture -> false
+// Result
+[
+    "test1": 29,
+    "test2": 62,
+    "test3": 33,
+    "test4": 24,
+    "test5": 14,
+    "test6": 72
+]
 ```
 
-> Determine if a date is today, yesterday, or tomorrow:
+> Get a type-erased `Decodable` value:
 ```swift
-Date().isToday -> true
-Date(timeIntervalSinceNow: -90_000).isYesterday -> true
-Date(timeIntervalSinceNow: 90_000).isTomorrow -> true
-```
+let json = """
+{
+    "boolean": true,
+    "integer": 1,
+    "double": 3.14159265358979323846,
+    "string": "Abc123",
+    "date": "2018-12-05T15:28:25+00:00",
+    "array": [1, 2, 3],
+    "nested": {
+        "a": "alpha",
+        "b": "bravo",
+        "c": "charlie"
+    }
+}
+""".data(using: .utf8)
 
-> Determine if a date is within a weekday or weekend period:
-```swift
-Date().isWeekday -> false
-Date().isWeekend -> true
-```
+let decoder = JSONDecoder()
+let dictionary = try decoder.decode([String: AnyDecodable].self, from: json)
 
-> Get the beginning or end of the day:
-```swift
-Date().startOfDay -> "2018/11/21 00:00:00"
-Date().endOfDay -> "2018/11/21 23:59:59"
-```
-
-> Get the beginning or end of the month:
-```swift
-Date().startOfMonth -> "2018/11/01 00:00:00"
-Date().endOfMonth -> "2018/11/30 23:59:59"
-```
-
-> Determine if a date is between two other dates:
-```swift
-let date = Date()
-let date1 = Date(timeIntervalSinceNow: 1000)
-let date2 = Date(timeIntervalSinceNow: -1000)
-
-date.isBetween(date1, date2) -> true
-```
-
-> Determine if a date is beyond a specified time window:
-```swift
-let date = Date(fromString: "2018/03/22 09:40")
-let fromDate = Date(fromString: "2018/03/22 09:30")
-
-date.isBeyond(fromDate, bySeconds: 300) -> true
-date.isBeyond(fromDate, bySeconds: 1200) -> false
-```
-
-> Create a date from a string:
-```swift
-Date(fromString: "2018/11/01 18:15")
-Date(fromString: "1440/03/01 18:31", calendar: Calendar(identifier: .islamic))
-```
-
-> Format a date to a string:
-```swift
-Date().string(format: "MMM d, h:mm a") -> "Jan 3, 8:43 PM"
-Date().string(style: .full, calendar: Calendar(identifier: .hebrew)) -> "Friday, 1 Kislev 5779"
-```
-
-> Format a time interval to display as a timer.
-```swift
-let date = Date(fromString: "2016/03/22 09:45")
-let fromDate = Date(fromString: "2016/03/22 09:40")
-
-date.timerString(from: fromDate)
-
-// Prints "00:05:00"
-```
-
-> Get the decimal representation of the time:
-```swift
-Date(fromString: "2018/10/23 18:15").timeToDecimal -> 18.25
-```
-
-> Increment years, months, days, hours, or minutes:
-```swift
-let date = Date()
-date + .years(1)
-date + .months(2)
-date - .days(4)
-date - .hours(6)
-date + .minutes(12)
-date + .days(5, Calendar(identifier: .chinese))
-```
-
-> Convert between time interval units:
-```swift
-let diff = date.timeIntervalSince(date2) -> 172,800 seconds
-diff.minutes -> 2,800 minutes
-diff.hours -> 48 hours
-diff.days -> 2 days
-```
-
-> Time zone context and offset:
-```swift
-let timeZone = TimeZone(identifier: "Europe/Paris")
-timeZone?.isCurrent -> false
-timeZone?.offsetFromCurrent -> -21600
-```
-
-> Normalize date calculations and data storage using `UTC` and `POSIX`:
-```swift
-let calendar: Calendar = .posix
-let locale: Locale = .posix
+dictionary["boolean"].value // true
+dictionary["integer"].value // 1
+dictionary["string"].value // Abc123
 ```
 </details>
 
@@ -418,36 +485,45 @@ FileManager.default.download(from: "http://example.com/test.pdf") { url, respons
 </details>
 
 <details>
-<summary>Infix</summary>
+<summary>Location</summary>
 
-> Assign a value if not nil:
+> Get the location details for coordinates:
 ```swift
-var test: Int? = 123
-var value: Int? = nil
-
-test ?= value
-// test == 123
-
-value = 456
-test ?= value
-// test == 456
+CLLocation(latitude: 43.6532, longitude: -79.3832).geocoder { meta in
+    print(meta.locality)
+    print(meta.country)
+    print(meta.countryCode)
+    print(meta.timezone)
+    print(meta.administrativeArea)
+}
 ```
 
-> Assign a value if not nil or empty:
+> Get the closest or farthest location from a list of coordinates:
 ```swift
-var test: String
-var value: String?
+let coordinates = [
+    CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832),
+    CLLocationCoordinate2D(latitude: 59.9094, longitude: 10.7349),
+    CLLocationCoordinate2D(latitude: 35.7750, longitude: -78.6336),
+    CLLocationCoordinate2D(latitude: 33.720817, longitude: 73.090032)
+]
 
-test = value ??+ "Abc"
-// test == "Abc"
+coordinates.closest(to: homeCoordinate)
+coordinates.farthest(from: homeCoordinate)
+```
 
-value = ""
-test = value ??+ "Abc"
-// test == "Abc"
+> Approximate comparison of coordinates rounded to 3 decimal places (about 100 meters):
+```swift
+let coordinate1 = CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832)
+let coordinate2 = CLLocationCoordinate2D(latitude: 43.6531, longitude: -79.3834)
+let coordinate3 = CLLocationCoordinate2D(latitude: 43.6522, longitude: -79.3822)
 
-value = "Xyz"
-test = value ??+ "Abc"
-// test == "Xyz"
+coordinate1 ~~ coordinate2 // true
+coordinate1 ~~ coordinate3 // false
+```
+
+> Determine if location services is enabled and authorized for always or when in use:
+```swift
+CLLocationManager.isAuthorized // bool
 ```
 </details>
 
@@ -479,7 +555,7 @@ notificationCenter.removeObserver(for: UIApplication.willEnterForegroundNotifica
 "Lmn".mutableAttributed
 "Xyz".mutableAttributed([
     .font: UIFont.italicSystemFont(ofSize: .systemFontSize),
-    .foregroundColor, value: UIColor.green
+    .foregroundColor: UIColor.green
 ])
 ```
 
@@ -493,32 +569,14 @@ label.attributedText = "Abc".attributed + " def " +
 </details>
 
 <details>
-<summary>Object</summary>
-
-> Set properties with closures just after initializing:
-```swift
-let paragraph = NSMutableParagraphStyle().with {
-    $0.alignment = .center
-    $0.lineSpacing = 8
-}
-
-let label = UILabel().with {
-    $0.textAlignment = .center
-    $0.textColor = UIColor.black
-    $0.text = "Hello, World!"
-}
-```
-</details>
-
-<details>
 <summary>URL</summary>
 
 > Append or remove query string parameters:
 ```swift
 let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
 
-url?.appendingQueryItem("def", value: "456") -> "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
-url?.appendingQueryItem("xyz", value: "999") -> "https://example.com?abc=123&lmn=tuv&xyz=999"
+url?.appendingQueryItem("def", value: "456") // "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
+url?.appendingQueryItem("xyz", value: "999") // "https://example.com?abc=123&lmn=tuv&xyz=999"
 
 url?.appendingQueryItems([
     "def": "456",
@@ -527,32 +585,55 @@ url?.appendingQueryItems([
     "lmn": nil
 ]) -> "https://example.com?xyz=987&def=456&abc=333&jkl=777"
 
-url?.removeQueryItem("xyz") -> "https://example.com?abc=123&lmn=tuv"
+url?.removeQueryItem("xyz") // "https://example.com?abc=123&lmn=tuv"
 ```
 </details>
 
-### iOS
+### Application
 
 <details>
-<summary>Application</summary>
+<summary>AppInfo</summary>
 
-> Split up `AppDelegate` into [pluggable modules](http://basememara.com/pluggable-appdelegate-services/):
+> Get details of the current app:
 ```swift
-// Subclass to pass lifecycle events to loaded modules
-@UIApplicationMain
-class AppDelegate: ApplicationModuleDelegate {
+struct SomeStruct: AppInfo {
 
-    override func modules() -> [ApplicationModule] {
-        return [
-            LoggerApplicationModule(),
-            NotificationApplicationModule()
-        ]
+}
+
+let someStruct = SomeStruct()
+
+someStruct.appDisplayName -> "Zamzam App"
+someStruct.appBundleID -> "io.zamzam.app"
+someStruct.appVersion -> "1.0.0"
+someStruct.appBuild -> "23"
+someStruct.isInTestFlight -> false
+someStruct.isRunningOnSimulator -> false
+```
+</details>
+
+<details>
+<summary>ApplicationPlugin</summary>
+
+> Split up `AppDelegate` into [plugins](https://basememara.com/pluggable-appdelegate-services/) (also available for `WKExtensionDelegate`):
+```swift
+// Subclass and install to pass lifecycle events to loaded plugins
+@UIApplicationMain
+class AppDelegate: ApplicationPluginDelegate {
+
+    private(set) lazy var plugins: [ApplicationPlugin] = [
+        LoggerPlugin(),
+        NotificationPlugin()
+    ]
+
+    override init() {
+        super.init()
+        install(plugins)
     }
 }
 ```
 ```swift
-// Each application module has access to the AppDelegate lifecycle events
-final class LoggerApplicationModule: ApplicationModule {
+// Each application plugin has access to the AppDelegate lifecycle events
+final class LoggerPlugin: ApplicationPlugin {
     private let log = Logger()
  
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -574,45 +655,42 @@ final class LoggerApplicationModule: ApplicationModule {
     }
 }
 ```
+</details>
 
-The pluggable module technique also works for `UIViewController`:
+<details>
+<summary>AppMigration</summary>
+
+> Manages blocks of code that only need to run once on version updates in apps:
 ```swift
-// Subclass to pass lifecycle events to loaded modules
-class ViewController: ControllerModuleDelegate {
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    override func modules() -> [ControllerModule] {
-        return [
-            ChatControllerModule(),
-            OrderControllerService()
-        ]
-    }
-}
-```
-```swift
-// Each controller module has access to the UIViewController lifecycle events
-final class ChatControllerModule: ControllerModule {
-    private let chatWorker = ChatWorker()
+    var window: UIWindow?
+    let migration = AppMigration()
 
-    func viewDidLoad(_ controller: UIViewController) {
-        chatWorker.config()
-    }
-}
-
-extension ChatControllerService {
-
-    func viewWillAppear(_ controller: UIViewController) {
-        chatWorker.subscribe()
-    }
-
-    func viewWillDisappear(_ controller: UIViewController) {
-        chatWorker.unsubscribe()
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        migration
+            .performUpdate {
+                print("Migrate update occurred.")
+            }
+            .perform(forVersion: "1.0") {
+                print("Migrate to 1.0 occurred.")
+            }
+            .perform(forVersion: "1.7") {
+                print("Migrate to 1.7 occurred.")
+            }
+            .perform(forVersion: "2.4") {
+                print("Migrate to 2.4 occurred.")
+            }
+            
+        return true
     }
 }
 ```
 </details>
 
 <details>
-<summary>Background</summary>
+<summary>BackgroundTask</summary>
 
 > Easily execute a [long-running background task](https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtask):
 ```swift
@@ -622,6 +700,410 @@ BackgroundTask.run(for: application) { task in
 }
 ```
 </details>
+
+<details>
+<summary>Dependency Injection</summary>
+
+> Lightweight dependency injection via property wrapper ([read more](https://basememara.com/swift-dependency-injection-via-property-wrapper/)):
+```swift
+class AppDelegate: UIResponder, UIApplicationDelegate {
+ 
+    private let dependencies = Dependencies {
+        Module { WidgetModule() as WidgetModuleType }
+        Module { SampleModule() as SampleModuleType }
+    }
+    
+    override init() {
+        super.init()
+        dependencies.build()
+    }
+}
+
+// Some time later...
+
+class ViewController: UIViewController {
+    
+    @Inject private var widgetService: WidgetServiceType
+    @Inject private var sampleService: SampleServiceType
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        print(widgetService.test())
+        print(sampleService.test())
+    }
+}
+```
+</details>
+
+### Utilities
+
+<details>
+<summary>Localization</summary>
+
+> Strongly-typed localizable keys that's also `XLIFF` export friendly ([read more](https://basememara.com/swifty-localization-xcode-support/)):
+```swift
+// First define localization keys
+extension Localizable {
+    static let ok = Localizable(NSLocalizedString("ok.dialog", comment: "OK text for dialogs"))
+    static let cancel = Localizable(NSLocalizedString("cancel.dialog", comment: "Cancel text for dialogs"))
+    static let next = Localizable(NSLocalizedString("next.dialog", comment: "Next text for dialogs"))
+}
+
+// Then use strongly-typed localization keys
+myLabel1.text = .localized(.ok)
+myLabel2.text = .localized(.cancel)
+myLabel3.text = .localized(.next)
+```
+</details>
+
+<details>
+<summary>SystemConfiguration</summary>
+
+> Determine if the device is connected to a network:
+```swift
+import SystemConfiguration
+
+SCNetworkReachability.isOnline
+```
+</details>
+
+<details>
+<summary>Synchronized</summary>
+
+> A thread-safe value that handles concurrent reads and writes ([read more](https://basememara.com/creating-thread-safe-generic-values-in-swift/)):
+```swift
+var temp = Synchronized<Int>(0)
+
+DispatchQueue.concurrentPerform(iterations: 1_000_000) { index in
+    temp.value { $0 += 1 }
+}
+
+XCTAssertEqual(temp.value, 1_000_000) // true
+```
+</details>
+
+<details>
+<summary>Throttle & Debounce</summary>
+
+> A throttler that will ignore work items until the time limit for the preceding call is over:
+```swift
+let limiter = Throttler(limit: 5)
+var value = 0
+
+limiter.execute {
+    value += 1
+}
+
+limiter.execute {
+    value += 1
+}
+
+limiter.execute {
+    value += 1
+}
+
+sleep(5)
+
+limiter.execute {
+    value += 1
+}
+
+// value == 2
+```
+
+> A debouncer that will delay work items until time limit for the preceding call is over:
+```swift
+let limiter = Debouncer(limit: 5)
+var value = ""
+
+func sendToServer() {
+    limiter.execute {
+        // Sends to server after no typing for 5 seconds
+        // instead of once per character, so:
+        value == "hello" -> true
+    }
+}
+
+value.append("h")
+sendToServer() // Waits until 5 seconds
+
+value.append("e")
+sendToServer() // Waits until 5 seconds
+
+value.append("l")
+sendToServer() // Waits until 5 seconds
+
+value.append("l")
+sendToServer() // Waits until 5 seconds
+
+value.append("o")
+sendToServer() // Fires after 5 seconds
+```
+</details>
+
+<details>
+<summary>With</summary>
+
+> Set properties with closures just after initializing:
+```swift
+let paragraph = NSMutableParagraphStyle().with {
+    $0.alignment = .center
+    $0.lineSpacing = 8
+}
+
+let label = UILabel().with {
+    $0.textAlignment = .center
+    $0.textColor = UIColor.black
+    $0.text = "Hello, World!"
+}
+
+UITabBar.appearance().with {
+    $0.barStyle = .dark
+    $0.tintColor = .blue
+}
+```
+</details>
+
+### Infixes
+
+<details>
+<summary>ConditionalAssignment ?=</summary>
+
+> Assign a value if not nil:
+```swift
+var test: Int? = 123
+var value: Int? = nil
+
+test ?= value
+// test == 123
+
+value = 456
+test ?= value
+// test == 456
+```
+</details>
+
+<details>
+<summary>NilOrEmptyAssignment ??+</summary>
+
+> Assign a value if not nil or empty:
+```swift
+var test: String
+var value: String?
+
+test = value ??+ "Abc"
+// test == "Abc"
+
+value = ""
+test = value ??+ "Lmn"
+// test == "Abc"
+
+value = "Xyz"
+test = value ??+ "Rst"
+// test == "Xyz"
+```
+</details>
+
+## ZamzamLocation
+
+<details>
+<summary>LocationsWorker</summary>
+
+> Location worker that offers easy authorization and observable closures ([read more](https://basememara.com/swifty-locations-observables/)):
+```swift
+class LocationViewController: UIViewController {
+
+    @IBOutlet weak var outputLabel: UILabel!
+    
+    var locationsWorker: LocationsWorkerType = LocationsWorker(
+        desiredAccuracy: kCLLocationAccuracyThreeKilometers,
+        distanceFilter: 1000
+    )
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        locationsWorker.addObserver(locationObserver)
+        locationsWorker.addObserver(headingObserver)
+        
+        locationsWorker.requestAuthorization(
+            for: .whenInUse,
+            startUpdatingLocation: true,
+            completion: { granted in
+                guard granted else { return }
+                self.locationsWorker.startUpdatingHeading()
+            }
+        )
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        locationsWorker.removeObservers()
+    }
+    
+    deinit {
+        locationsWorker.removeObservers()
+    }
+}
+
+extension LocationViewController {
+    
+    var locationObserver: Observer<LocationsWorker.LocationHandler> {
+        return Observer { [weak self] in
+            self?.outputLabel.text = $0.description
+        }
+    }
+    
+    var headingObserver: Observer<LocationsWorker.HeadingHandler> {
+        return Observer {
+            print($0.description)
+        }
+    }
+}
+```
+</details>
+
+## ZamzamNotification
+
+<details>
+<summary>UserNotification</summary>
+
+> Registers the local and remote notifications with the categories and actions it supports:
+```swift
+UNUserNotificationCenter.current().register(
+    delegate: self,
+    categories: [
+        "order": [
+            UNNotificationAction(
+                identifier: "confirmAction",
+                title: "Confirm",
+                options: [.foreground]
+            )
+        ],
+        "chat": [
+            UNTextInputNotificationAction(
+                identifier: "replyAction",
+                title: "Reply",
+                options: [],
+                textInputButtonTitle: "Send",
+                textInputPlaceholder: "Type your message"
+            )
+        ],
+        "offer": nil
+    ],
+    authorizations: [.alert, .badge, .sound],
+    completion: { granted in
+        granted
+            ? log(debug: "Authorization for notification succeeded.")
+            : log(warn: "Authorization for notification not given.")
+    }
+)
+```
+
+> Get a list of all pending or delivered user notifications:
+```swift
+UNUserNotificationCenter.current().getNotificationRequests { notifications in
+    notifications.forEach {
+        print($0.identifier)
+    }
+}
+```
+
+> Find the pending or delivered notification request by identifier:
+```swift
+UNUserNotificationCenter.current().get(withIdentifier: "abc123") {
+    print($0?.identifier)
+}
+
+UNUserNotificationCenter.current().get(withIdentifiers: ["abc123", "xyz789"]) {
+    $0.forEach {
+        print($0.identifier)
+    }
+}
+```
+
+> Determine if the pending or delivered notification request exists:
+```swift
+UNUserNotificationCenter.current().exists(withIdentifier: "abc123") {
+    print("Does notification exist: \($0)")
+}
+```
+
+> Schedules local notifications for delivery:
+```swift
+UNUserNotificationCenter.current().add(
+    body: "This is the body for time interval",
+    timeInterval: 5
+)
+
+UNUserNotificationCenter.current().add(
+    body: "This is the body for time interval",
+    title: "This is the snooze title",
+    timeInterval: 60,
+    identifier: "abc123-main"
+)
+
+UNUserNotificationCenter.current().add(
+    body: "This is the body for time interval",
+    title: "This is the misc1 title",
+    timeInterval: 60,
+    identifier: "abc123-misc1",
+    category: "misc1Category"
+)
+
+UNUserNotificationCenter.current().add(
+    body: "This is the body for time interval",
+    title: "This is the misc2 title",
+    timeInterval: 60,
+    identifier: "abc123-misc2",
+    category: "misc2Category",
+    userInfo: [
+        "id": post.id,
+        "link": post.link,
+        "mediaURL": mediaURL
+    ],
+    completion: { error in
+        guard error == nil else { return }
+        // Added successfully
+    }
+)
+
+UNUserNotificationCenter.current().add(
+    date: Date(timeIntervalSinceNow: 5),
+    body: "This is the body for date",
+    repeats: .minute,
+    identifier: "abc123-repeat"
+)
+```
+
+> Get a remote image from the web and convert to a user notification attachment:
+```swift
+UNNotificationAttachment.download(from: urlString) {
+    guard $0.isSuccess, let attachment = $0.value else {
+        return log(error: "Could not download the remote resource (\(urlString)): \($0.error.debugDescription).")
+    }
+
+    UNUserNotificationCenter.current().add(
+        body: "This is the body",
+        attachments: [attachment]
+    )
+}
+```
+
+> Remove pending or delivered notification requests by identifiers, categories, or all:
+```swift
+UNUserNotificationCenter.current().remove(withIdentifier: "abc123")
+UNUserNotificationCenter.current().remove(withIdentifiers: ["abc123", "xyz789"])
+UNUserNotificationCenter.current().remove(withCategory: "chat") { /* Done */ }
+UNUserNotificationCenter.current().remove(withCategories: ["order", "chat"]) { /* Done */ }
+UNUserNotificationCenter.current().removeAll()
+```
+</details>
+
+## ZamzamUI
+
+### UIKit
 
 <details>
 <summary>BadgeBarButtonItem</summary>
@@ -669,14 +1151,6 @@ navigationItem.leftBarButtonItems = [
 Interface Builder compatible via "User Defined Runtime Attributes":
 
 ![Image of GradientView](./Assets/Documentation/Images/GradientView-Storyboard.png)
-</details>
-
-<details>
-<summary>KeyboardScrollView</summary>
-
-> The `automaticallyAdjustsInsetsForKeyboard` property extends the scroll view insets when the keyboard is shown:
-
-![Image of KeyboardScrollView](./Assets/Documentation/Images/KeyboardScrollView.png)
 </details>
 
 <details>
@@ -739,36 +1213,11 @@ class MyViewController: UIViewController {
 </details>
 
 <details>
-<summary>Router</summary>
+<summary>ScrollViewWithKeyboard</summary>
 
-> Provides routing functionality for a type to remove navigation responsibility off `UIViewController`  ([extend for strongly-typed storyboard routing](http://basememara.com/protocol-oriented-router-in-swift/)):
+> Automatically extends the scroll view insets when the keyboard is shown:
 
-```
-struct MyRouter: Router {
-    weak var viewController: UIViewController?
-
-    init(viewController: UIViewController?) {
-        self.viewController = viewController
-    }
-
-    func showSettings(date: Date) {
-        present(storyboard: "ShowSettings") { (controller: ShowSettingsViewController) in
-            controller.someProperty = date
-        }
-    }
-}
-
-class MyViewController: UIViewController {
-
-    private lazy var router: Router = MyRouter(
-        viewController: self
-    )
-
-    @IBAction func settingsTapped() {
-        router.showSettings(date: Date())
-    }
-}
-```
+![Image of KeyboardScrollView](./Assets/Documentation/Images/KeyboardScrollView.png)
 </details>
 
 <details>
@@ -1205,7 +1654,7 @@ window?.topViewController
 ```
 </details>
 
-### watchOS
+### WatchKit
 
 <details>
 <summary>CLKComplicationServer</summary>
@@ -1231,147 +1680,6 @@ complications.forEach { extendTimeline(for: $0) }
 // After
 CLKComplicationServer.sharedInstance().extendTimelineForComplications()
 ```
-</details>
-
-<details>
-<summary>WatchSession</summary>
-
-> Communicate conveniently between `iOS` and `watchOS`:
-```swift
-// iOS
-class WatchViewController: UIViewController {
-    
-    @IBOutlet weak var receivedContextLabel: UILabel!
-    @IBOutlet weak var sentContextLabel: UILabel!
-    @IBOutlet weak var receivedUserInfoLabel: UILabel!
-    @IBOutlet weak var sentUserInfoLabel: UILabel!
-    @IBOutlet weak var receivedMessageLabel: UILabel!
-    @IBOutlet weak var sentMessageLabel: UILabel!
-    
-    var watchSession: WatchSession {
-        return AppDelegate.watchSession
-    }
-    
-    /// Another way to add observer
-    var userInfoObserver: WatchSession.ReceiveUserInfoObserver {
-        return Observer { [weak self] result in
-            DispatchQueue.main.async {
-                self?.receivedUserInfoLabel.text = result["value"] as? String ?? ""
-            }
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        /// One way to add observer
-        watchSession.addObserver(forApplicationContext: Observer { [weak self] result in
-            DispatchQueue.main.async {
-                self?.receivedContextLabel.text = result["value"] as? String ?? ""
-            }
-        })
-        
-        watchSession.addObserver(forUserInfo: userInfoObserver)
-        watchSession.addObserver(forMessage: messageObserver)
-    }
-    
-    @IBAction func sendContextTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(context: value)
-        sentContextLabel.text = value["value"] ?? ""
-    }
-    
-    @IBAction func sendUserInfoTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(userInfo: value)
-        sentUserInfoLabel.text = value["value"] ?? ""
-    }
-    
-    @IBAction func sendMessageTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(message: value)
-        sentMessageLabel.text = value["value"] ?? ""
-    }
-    
-    deinit {
-        watchSession.removeObservers()
-    }
-}
-
-extension WatchViewController {
-    
-    /// Another way to add observer
-    var messageObserver: WatchSession.ReceiveMessageObserver {
-        return Observer { [weak self] message, replyHandler in
-            DispatchQueue.main.async {
-                self?.receivedMessageLabel.text = message["value"] as? String ?? ""
-            }
-        }
-    }
-}
-```
-```swift
-// watchOS
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
-    static let watchSession = WatchSession()
-}
-
-class InterfaceController: WKInterfaceController {
-
-    @IBOutlet var receivedContextLabel: WKInterfaceLabel!
-    @IBOutlet var sentContextLabel: WKInterfaceLabel!
-    @IBOutlet var receivedUserInfoLabel: WKInterfaceLabel!
-    @IBOutlet var sentUserInfoLabel: WKInterfaceLabel!
-    @IBOutlet var receivedMessageLabel: WKInterfaceLabel!
-    @IBOutlet var sentMessageLabel: WKInterfaceLabel!
-    
-    var watchSession: WatchSession {
-        return ExtensionDelegate.watchSession
-    }
-    
-    override func awake(withContext: Any?) {
-        super.awake(withContext: withContext)
-        
-        watchSession.addObserver(forApplicationContext: Observer { [weak self] result in
-            DispatchQueue.main.async {
-                self?.receivedContextLabel.setText(result["value"] as? String ?? "")
-            }
-        })
-        
-        watchSession.addObserver(forUserInfo: Observer { [weak self] result in
-            DispatchQueue.main.async {
-                self?.receivedUserInfoLabel.setText(result["value"] as? String ?? "")
-            }
-        })
-        
-        watchSession.addObserver(forMessage: Observer { [weak self] message, replyHandler in
-            DispatchQueue.main.async {
-                self?.receivedMessageLabel.setText(message["value"] as? String ?? "")
-            }
-        })
-    }
-    
-    @IBAction func sendContextTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(context: value)
-        sentContextLabel.setText(value["value"] ?? "")
-    }
-    
-    @IBAction func sendUserInfoTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(userInfo: value)
-        sentUserInfoLabel.setText(value["value"] ?? "")
-    }
-    
-    @IBAction func sendMessageTapped() {
-        let value = ["value": "\(Date())"]
-        watchSession.transfer(message: value)
-        sentMessageLabel.setText(value["value"] ?? "")
-    }
-}
-```
-
-![Image of WatchSession](./Assets/Documentation/Images/WatchSession.png)
 </details>
 
 <details>
@@ -1410,446 +1718,10 @@ present(
 ```
 </details>
 
-### Helpers
-
-<details>
-<summary>AppInfo</summary>
-
-> Get details of the current app:
-```swift
-struct SomeStruct: AppInfo {
-
-}
-
-let someStruct = SomeStruct()
-
-someStruct.appDisplayName -> "Zamzam App"
-someStruct.appBundleID -> "io.zamzam.app"
-someStruct.appVersion -> "1.0.0"
-someStruct.appBuild -> "23"
-someStruct.isInTestFlight -> false
-someStruct.isRunningOnSimulator -> false
-```
-</details>
-
-<details>
-<summary>CoreLocation</summary>
-
-> Determine if location services is enabled and authorized for always or when in use:
-```swift
-CLLocationManager.isAuthorized -> bool
-```
-
-> Get the location details for coordinates:
-```swift
-CLLocation(latitude: 43.6532, longitude: -79.3832).geocoder { meta in
-    print(meta.locality)
-    print(meta.country)
-    print(meta.countryCode)
-    print(meta.timezone)
-    print(meta.administrativeArea)
-}
-```
-
-> Get the closest or farthest location from a list of coordinates:
-```swift
-let coordinates = [
-    CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832),
-    CLLocationCoordinate2D(latitude: 59.9094, longitude: 10.7349),
-    CLLocationCoordinate2D(latitude: 35.7750, longitude: -78.6336),
-    CLLocationCoordinate2D(latitude: 33.720817, longitude: 73.090032)
-]
-
-coordinates.closest(to: homeCoordinate)
-coordinates.farthest(from: homeCoordinate)
-```
-
-> Approximate comparison of coordinates rounded to 3 decimal places (about 100 meters):
-```swift
-let coordinate1 = CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832)
-let coordinate2 = CLLocationCoordinate2D(latitude: 43.6531, longitude: -79.3834)
-let coordinate3 = CLLocationCoordinate2D(latitude: 43.6522, longitude: -79.3822)
-
-coordinate1 ~~ coordinate2 -> true
-coordinate1 ~~ coordinate3 -> false
-```
-
-> Location worker that offers easy authorization and observable closures ([read more](http://basememara.com/swifty-locations-observables/)):
-```swift
-class LocationViewController: UIViewController {
-
-    @IBOutlet weak var outputLabel: UILabel!
-    
-    var locationsWorker: LocationsWorkerType = LocationsWorker(
-        desiredAccuracy: kCLLocationAccuracyThreeKilometers,
-        distanceFilter: 1000
-    )
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        locationsWorker.addObserver(locationObserver)
-        locationsWorker.addObserver(headingObserver)
-        
-        locationsWorker.requestAuthorization(
-            for: .whenInUse,
-            startUpdatingLocation: true,
-            completion: { granted in
-                guard granted else { return }
-                self.locationsWorker.startUpdatingHeading()
-            }
-        )
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        locationsWorker.removeObservers()
-    }
-    
-    deinit {
-        locationsWorker.removeObservers()
-    }
-}
-
-extension LocationViewController {
-    
-    var locationObserver: Observer<LocationsWorker.LocationHandler> {
-        return Observer { [weak self] in
-            self?.outputLabel.text = $0.description
-        }
-    }
-    
-    var headingObserver: Observer<LocationsWorker.HeadingHandler> {
-        return Observer {
-            print($0.description)
-        }
-    }
-}
-```
-</details>
-
-<details>
-<summary>Localization</summary>
-
-> Strongly-typed localizable keys that's also `XLIFF` export friendly ([read more](http://basememara.com/swifty-localization-xcode-support/)):
-```swift
-// First define localization keys
-extension Localizable {
-    static let ok = Localizable(NSLocalizedString("ok.dialog", comment: "OK text for dialogs"))
-    static let cancel = Localizable(NSLocalizedString("cancel.dialog", comment: "Cancel text for dialogs"))
-    static let next = Localizable(NSLocalizedString("next.dialog", comment: "Next text for dialogs"))
-}
-
-// Then use strongly-typed localization keys
-myLabel1.text = .localized(.ok)
-myLabel2.text = .localized(.cancel)
-myLabel3.text = .localized(.next)
-```
-</details>
-
-<details>
-<summary>Migration</summary>
-
-> Manages blocks of code that only need to run once on version updates in apps:
-```swift
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var window: UIWindow?
-    let migration = Migration()
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        migration
-            .performUpdate {
-                print("Migrate update occurred.")
-            }
-            .perform(forVersion: "1.0") {
-                print("Migrate to 1.0 occurred.")
-            }
-            .perform(forVersion: "1.0", withBuild: "1") {
-                print("Migrate to 1.0 (1) occurred.")
-            }
-            .perform(forVersion: "1.0", withBuild: "2") {
-                print("Migrate to 1.0 (2) occurred.")
-            }
-            
-        return true
-    }
-}
-```
-</details>
-
-<details>
-<summary>RateLimit</summary>
-
-> A throttler that will ignore work items until the time limit for the preceding call is over:
-```swift
-let limiter = Throttler(limit: 5)
-var value = 0
-
-limiter.execute {
-    value += 1
-}
-
-limiter.execute {
-    value += 1
-}
-
-limiter.execute {
-    value += 1
-}
-
-sleep(5)
-
-limiter.execute {
-    value += 1
-}
-
-// value == 2
-```
-
-> A debouncer that will delay work items until time limit for the preceding call is over:
-```swift
-let limiter = Debouncer(limit: 5)
-var value = ""
-
-func sendToServer() {
-    limiter.execute {
-        // Sends to server after no typing for 5 seconds
-        // instead of once per character, so:
-        value == "hello" -> true
-    }
-}
-
-value.append("h")
-sendToServer()
-
-value.append("e")
-sendToServer()
-
-value.append("l")
-sendToServer()
-
-value.append("l")
-sendToServer()
-
-value.append("o")
-sendToServer()
-```
-</details>
-
-<details>
-<summary>Result</summary>
-
-> Used to represent whether an asynchronous request was successful or encountered an error:
-```swift
-// Declare the function with a completion handler of `Result` type
-func fetch(id: Int, completion: @escaping (Result<Author, ZamzamError>) -> Void) {
-    guard id > 0 else {
-        completion(.failure(.nonExistent))
-        return
-    }
-
-    DispatchQueue.global().async {
-        completion(.success(Author(...)))
-    }
-}
-
-// Call the asynchronous function and determine the response
-fetch(id: 123) {
-    guard let value = $0.value, $0.isSuccess else {
-        print("An error occurred: \($0.error ?? .general)")
-        return
-    }
-
-    print(value)
-}
-```
-</details>
-
-<details>
-<summary>SystemConfiguration</summary>
-
-> Determine if the device is connected to a network:
-```swift
-import SystemConfiguration
-
-SCNetworkReachability.isOnline
-```
-</details>
-
-<details>
-<summary>SynchronizedArray</summary>
-
-> A thread-safe array that allows concurrent reads and exclusive writes ([read more](http://basememara.com/creating-thread-safe-arrays-in-swift/)):
-```swift
-var array = SynchronizedArray<Int>()
-
-DispatchQueue.concurrentPerform(iterations: 1000) { index in
-    array.append(index)
-}
-```
-</details>
-
-<details>
-<summary>UserNotification</summary>
-
-> Registers the local and remote notifications with the categories and actions it supports:
-```swift
-UNUserNotificationCenter.current().register(
-    delegate: self,
-    categories: [
-        "order": [
-            UNNotificationAction(
-                identifier: "confirmAction",
-                title: "Confirm",
-                options: [.foreground]
-            )
-        ],
-        "chat": [
-            UNTextInputNotificationAction(
-                identifier: "replyAction",
-                title: "Reply",
-                options: [],
-                textInputButtonTitle: "Send",
-                textInputPlaceholder: "Type your message"
-            )
-        ],
-        "offer": nil
-    ],
-    authorizations: [.alert, .badge, .sound],
-    completion: { granted in
-        granted
-            ? log(debug: "Authorization for notification succeeded.")
-            : log(warn: "Authorization for notification not given.")
-    }
-)
-```
-
-> Get a list of all pending or delivered user notifications:
-```swift
-UNUserNotificationCenter.current().getNotificationRequests { notifications in
-    notifications.forEach {
-        print($0.identifier)
-    }
-}
-```
-
-> Find the pending or delivered notification request by identifier:
-```swift
-UNUserNotificationCenter.current().get(withIdentifier: "abc123") {
-    print($0?.identifier)
-}
-
-UNUserNotificationCenter.current().get(withIdentifiers: ["abc123", "xyz789"]) {
-    $0.forEach {
-        print($0.identifier)
-    }
-}
-```
-
-> Determine if the pending or delivered notification request exists:
-```swift
-UNUserNotificationCenter.current().exists(withIdentifier: "abc123") {
-    print("Does notification exist: \($0)")
-}
-```
-
-> Schedules local notifications for delivery:
-```swift
-UNUserNotificationCenter.current().add(
-    body: "This is the body for time interval",
-    timeInterval: 5
-)
-
-UNUserNotificationCenter.current().add(
-    body: "This is the body for time interval",
-    title: "This is the snooze title",
-    timeInterval: 60,
-    identifier: "abc123-main"
-)
-
-UNUserNotificationCenter.current().add(
-    body: "This is the body for time interval",
-    title: "This is the misc1 title",
-    timeInterval: 60,
-    identifier: "abc123-misc1",
-    category: "misc1Category"
-)
-
-UNUserNotificationCenter.current().add(
-    body: "This is the body for time interval",
-    title: "This is the misc2 title",
-    timeInterval: 60,
-    identifier: "abc123-misc2",
-    category: "misc2Category",
-    userInfo: [
-        "id": post.id,
-        "link": post.link,
-        "mediaURL": mediaURL
-    ],
-    completion: { error in
-        guard error == nil else { return }
-        // Added successfully
-    }
-)
-
-UNUserNotificationCenter.current().add(
-    date: Date(timeIntervalSinceNow: 5),
-    body: "This is the body for date",
-    repeats: .minute,
-    identifier: "abc123-repeat"
-)
-```
-
-> Get a remote image from the web and convert to a user notification attachment:
-```swift
-UNNotificationAttachment.download(from: urlString) {
-    guard $0.isSuccess, let attachment = $0.value else {
-        return log(error: "Could not download the remote resource (\(urlString)): \($0.error.debugDescription).")
-    }
-
-    UNUserNotificationCenter.current().add(
-        body: "This is the body",
-        attachments: [attachment]
-    )
-}
-```
-
-> Remove pending or delivered notification requests by identifiers, categories, or all:
-```swift
-UNUserNotificationCenter.current().remove(withIdentifier: "abc123")
-UNUserNotificationCenter.current().remove(withIdentifiers: ["abc123", "xyz789"])
-UNUserNotificationCenter.current().remove(withCategory: "chat") { /* Done */ }
-UNUserNotificationCenter.current().remove(withCategories: ["order", "chat"]) { /* Done */ }
-UNUserNotificationCenter.current().removeAll()
-```
-</details>
-
-<details>
-<summary>UserDefaults</summary>
-
-> Strongly-typed UserDefault keys:
-```swift
-// First define keys
-extension UserDefaults.Keys {
-    static let testString = UserDefaults.Key<String?>("testString")
-    static let testInt = UserDefaults.Key<Int?>("testInt")
-    static let testBool = UserDefaults.Key<Bool?>("testBool")
-    static let testArray = UserDefaults.Key<[Int]?>("testArray")
-}
-
-// Then use strongly-typed values
-let testString: String? = UserDefaults.standard[.testString]
-let testInt: Int? = UserDefaults.standard[.testInt]
-let testBool: Bool? = UserDefaults.standard[.testBool]
-let testArray: [Int]? = UserDefaults.standard[.testArray]
-```
-</details>
-
 ## Author
 
-Zamzam Inc., http://zamzam.io
+* Zamzam Inc., https://zamzam.io
+* Basem Emara, https://basememara.com
 
 ## License
 

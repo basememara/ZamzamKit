@@ -21,10 +21,12 @@ infix operator ?= : Comparison
 ///     var test: Int? = 123
 ///     var value: Int? = nil
 ///
-///     test ?= value // test == 123
+///     test ?= value
+///     // test == 123
 ///
 ///     value = 456
-///     test ?= value // test == 456
+///     test ?= value
+///     // test == 456
 public func ?= <T>(left: inout T, right: T?) {
     // https://github.com/hyperoslo/Sugar
     guard let value = right else { return }
@@ -36,10 +38,12 @@ public func ?= <T>(left: inout T, right: T?) {
 ///     var test: Int? = 123
 ///     var value: Int? = nil
 ///
-///     test ?= value // test == 123
+///     test ?= value
+///     // test == 123
 ///
 ///     value = 456
-///     test ?= value // test == 456
+///     test ?= value
+///     // test == 456
 public func ?= <T>(left: inout T?, right: T?) {
     // https://github.com/hyperoslo/Sugar
     guard let value = right else { return }

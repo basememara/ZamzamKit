@@ -13,8 +13,8 @@ public extension URL {
     /// Returns a URL constructed by appending the given query string parameter to self.
     ///
     ///     let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
-    ///     url?.appendingQueryItem("def", value: "456") -> "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
-    ///     url?.appendingQueryItem("xyz", value: "999") -> "https://example.com?abc=123&lmn=tuv&xyz=999"
+    ///     url?.appendingQueryItem("def", value: "456") // "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
+    ///     url?.appendingQueryItem("xyz", value: "999") // "https://example.com?abc=123&lmn=tuv&xyz=999"
     ///
     /// - Parameters:
     ///   - name: The key of the query string parameter.
@@ -44,7 +44,7 @@ public extension URL {
     ///         "jkl": "777",
     ///         "abc": "333",
     ///         "lmn": nil
-    ///     ]) -> "https://example.com?xyz=987&def=456&abc=333&jkl=777"
+    ///     ]) // "https://example.com?xyz=987&def=456&abc=333&jkl=777"
     ///
     /// - Parameter contentsOf: A dictionary of query string parameters to modify.
     /// - Returns: The URL with the appended query string.
@@ -69,12 +69,12 @@ public extension URL {
     /// Returns a URL constructed by removing the given query string parameter to self.
     ///
     ///     let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
-    ///     url?.removeQueryItem("xyz") -> "https://example.com?abc=123&lmn=tuv"
+    ///     url?.removeQueryItem("xyz") // "https://example.com?abc=123&lmn=tuv"
     ///
     /// - Parameter name: The key of the query string parameter.
     /// - Returns: The URL with the mutated query string.
     func removeQueryItem(_ name: String) -> URL {
-        return appendingQueryItem(name, value: nil)
+        appendingQueryItem(name, value: nil)
     }
 }
 
@@ -83,15 +83,15 @@ public extension URL {
     /// Query a URL from a parameter name.
     ///
     ///     let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
-    ///     url?.queryItem("aBc") -> "123"
-    ///     url?.queryItem("lmn") -> "tuv"
-    ///     url?.queryItem("yyy") -> nil
+    ///     url?.queryItem("aBc") // "123"
+    ///     url?.queryItem("lmn") // "tuv"
+    ///     url?.queryItem("yyy") // nil
     ///
     /// - Parameter name: The key of the query string parameter.
     /// - Returns: The value of the query string parameter.
     func queryItem(_ name: String) -> String? {
         // https://stackoverflow.com/q/41421686
-        return URLComponents(string: absoluteString)?
+        URLComponents(string: absoluteString)?
             .queryItems?
             .first { $0.name.caseInsensitiveCompare(name) == .orderedSame }?
             .value

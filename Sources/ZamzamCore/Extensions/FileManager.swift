@@ -8,6 +8,7 @@
 
 import Foundation
 
+#if !os(tvOS)
 public extension FileManager {
     
     /// Get URL for the file.
@@ -51,7 +52,7 @@ public extension FileManager {
     ///   - directory: The directory of the file.
     /// - Returns: File URL from document directory.
     func path(of fileName: String, from directory: FileManager.SearchPathDirectory = .documentDirectory) -> String {
-        return url(of: fileName, from: directory).path
+        url(of: fileName, from: directory).path
     }
     
     /// Get file system paths for files.
@@ -61,7 +62,7 @@ public extension FileManager {
     ///   - filter: Specify filter to apply.
     /// - Returns: List of file system paths from document directory.
     func paths(from directory: FileManager.SearchPathDirectory = .documentDirectory, filter: ((URL) -> Bool)? = nil) -> [String] {
-        return urls(from: directory, filter: filter).map { $0.path }
+        urls(from: directory, filter: filter).map { $0.path }
     }
 }
 
@@ -99,3 +100,4 @@ public extension FileManager {
         }.resume()
     }
 }
+#endif

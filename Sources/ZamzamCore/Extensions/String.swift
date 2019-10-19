@@ -105,24 +105,16 @@ public extension String {
     private static let alphaNumericRegEx = "^[A-Za-z0-9]+$"
     
     /// Determine if the string is valid email format.
-    var isEmail: Bool {
-        return match(regex: .emailRegEx)
-    }
+    var isEmail: Bool { match(regex: .emailRegEx) }
     
     /// Determine if the string contains only numbers.
-    var isNumber: Bool {
-        return match(regex: .numberRegEx)
-    }
+    var isNumber: Bool { match(regex: .numberRegEx) }
     
     /// Determine if the string contains only letters.
-    var isAlpha: Bool {
-        return match(regex: .alphaRegEx)
-    }
+    var isAlpha: Bool { match(regex: .alphaRegEx) }
     
     /// Determine if the string contains at least one letter and one number.
-    var isAlphaNumeric: Bool {
-        return match(regex: .alphaNumericRegEx)
-    }
+    var isAlphaNumeric: Bool { match(regex: .alphaNumericRegEx) }
 }
 
 public extension String {
@@ -130,9 +122,7 @@ public extension String {
     /// Returns a new string made by removing spaces or new lines from both ends.
     ///
     ///     " Abcdef123456 \n\r  ".trimmed // "Abcdef123456"
-    var trimmed: String {
-        return trimmingCharacters(in: .whitespacesAndNewlines)
-    }
+    var trimmed: String { trimmingCharacters(in: .whitespacesAndNewlines) }
     
     /// Truncated string limited to a given number of characters.
     ///
@@ -153,7 +143,7 @@ public extension String {
     ///     "def".contains(CharacterSet(charactersIn: "Abcdef123456")) // true
     ///     "Xyz".contains(CharacterSet(charactersIn: "Abcdef123456")) // false
     func contains(_ elements: CharacterSet) -> Bool {
-        return rangeOfCharacter(from: elements) != nil
+        rangeOfCharacter(from: elements) != nil
     }
     
     /// Injects a separator every nth characters.
@@ -189,8 +179,7 @@ public extension String {
     ///   - regex: the regular expression pattern
     /// - Returns: whether the regex matches in the string
     func match(regex pattern: String) -> Bool {
-        let options: CompareOptions = [.regularExpression]
-        return range(of: pattern, options: options) != nil
+        range(of: pattern, options: [.regularExpression]) != nil
     }
     
     /// Returns a new string in which all occurrences of a
@@ -224,20 +213,18 @@ public extension String {
     
     /// URL escaped string.
     var urlEncoded: String {
-        return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? self
+        addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? self
     }
 	
 	/// Readable string from a URL string.
 	var urlDecoded: String {
-		return removingPercentEncoding ?? self
-	}
+        removingPercentEncoding ?? self
+    }
     
     /// Stripped out HTML to plain text.
     ///
     ///     "<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>".htmlStripped -> "This is web content with a link."
-    var htmlStripped: String {
-        return replacing(regex: "<[^>]+>", with: "")
-    }
+    var htmlStripped: String { replacing(regex: "<[^>]+>", with: "") }
     
     /// Decode an HTML string
     ///
@@ -320,7 +307,7 @@ public extension String {
     
     /// Encode a string to Base64
     var base64Encoded: String {
-        return Data(self.utf8).base64EncodedString()
+        Data(self.utf8).base64EncodedString()
     }
     
     /// Decode a string from Base64
@@ -331,7 +318,7 @@ public extension String {
     
     /// URL safe encode a string to Base64
     var base64URLEncoded: String {
-        return base64Encoded
+        base64Encoded
             .replacingOccurrences(of: "/", with: "_")
             .replacingOccurrences(of: "+", with: "-")
             .replacingOccurrences(of: "=", with: "")
@@ -339,11 +326,16 @@ public extension String {
 }
 
 public extension String {
+    private static let defaultDecoder = JSONDecoder()
     
-    /// Returns a value of the type you specify, decoded from a JSON object.
-    func decode<T: Decodable>(using encoding: String.Encoding = .utf8) -> T? {
+    /// Returns a value of the type you specify, decoded from a JSON string.
+    func decode<T: Decodable>(
+        using encoding: Self.Encoding = .utf8,
+        with decoder: JSONDecoder? = nil
+    ) -> T? {
         guard let data = data(using: encoding) else { return nil }
-        return try? JSONDecoder().decode(T.self, from: data)
+        let decoder = decoder ?? Self.defaultDecoder
+        return try? decoder.decode(T.self, from: data)
     }
 }
 
@@ -382,17 +374,13 @@ extension String {
 public extension Substring {
     
     /// A string value representation of the string slice.
-    var string: String {
-        return String(self)
-    }
+    var string: String { String(self) }
 }
 
 public extension Optional where Wrapped == String {
 
     /// A Boolean value indicating whether a string is `nil` or has no characters.
-    var isNilOrEmpty: Bool {
-        return self?.isEmpty ?? true
-    }
+    var isNilOrEmpty: Bool { self?.isEmpty ?? true }
 }
 
 public extension String.StringInterpolation {

@@ -10,8 +10,20 @@
     import UIKit
 #elseif os(OSX)
     import AppKit
-    typealias UIColor = NSColor
+    public typealias UIColor = NSColor
 #endif
+
+public extension UIColor {
+
+    /// A random color.
+    static var random: UIColor {
+        UIColor(rgb: (
+            .random(in: 0...255),
+            .random(in: 0...255),
+            .random(in: 0...255)
+        ))
+    }
+}
 
 public extension UIColor {
 

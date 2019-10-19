@@ -6,6 +6,8 @@
 //  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
+import Foundation
+
 /// Skips failed elements during decoding instead exiting collection completely; lossy array decoding.
 public struct FailableCodableArray<Element: Decodable>: Decodable {
     // https://github.com/phynet/Lossy-array-decode-swift4
@@ -24,7 +26,7 @@ public struct FailableCodableArray<Element: Decodable>: Decodable {
     
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
-        var elements = [Element]()
+        var elements: [Element] = []
         
         if let count = container.count {
             elements.reserveCapacity(count)
@@ -69,7 +71,7 @@ public struct FailableCodableArray<Element: Decodable>: Decodable {
 ///     """.data(using: .utf8)!
 ///
 ///     let decoder = JSONDecoder()
-///     let dictionary = try! decoder.decode([String: AnyDecodable].self, from: json)
+///     let dictionary = try? decoder.decode([String: AnyDecodable].self, from: json)
 public struct AnyDecodable: Decodable {
     // https://github.com/Flight-School/AnyCodable
     public let value: Any
@@ -79,7 +81,7 @@ public struct AnyDecodable: Decodable {
     }
 }
 
-protocol _AnyDecodable {
+private protocol _AnyDecodable {
     var value: Any { get }
     init<T>(_ value: T?)
 }
@@ -87,6 +89,7 @@ protocol _AnyDecodable {
 extension AnyDecodable: _AnyDecodable {}
 
 extension _AnyDecodable {
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         

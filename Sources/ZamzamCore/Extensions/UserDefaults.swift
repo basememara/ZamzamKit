@@ -8,12 +8,11 @@
 
 import Foundation
 
-extension UserDefaults {
-    // Slim version of: https://github.com/radex/SwiftyUserDefaults
+public extension UserDefaults {
     
     /// Gets and sets the value from User Defaults that corresponds to the given key.
-    public subscript<T>(key: String.Key<T?>) -> T? {
-        get { return object(forKey: key.name) as? T }
+    subscript<T>(key: String.Key<T?>) -> T? {
+        get { object(forKey: key.name) as? T }
         
         set {
             guard let value = newValue else { return remove(key) }
@@ -24,7 +23,7 @@ extension UserDefaults {
     /// Removes the single User Defaults item specified by the key.
     ///
     /// - Parameter key: The key that is used to delete the user defaults item.
-    public func remove<T>(_ key: String.Key<T?>) {
+    func remove<T>(_ key: String.Key<T?>) {
         removeObject(forKey: key.name)
     }
 }

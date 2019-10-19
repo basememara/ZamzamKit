@@ -6,7 +6,6 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
 import CoreLocation
 
 public extension CLLocationManager {
@@ -21,7 +20,7 @@ public extension CLLocationManager {
             statuses.append(.authorized)
         #endif
         
-        return CLLocationManager.locationServicesEnabled()
-            && CLLocationManager.authorizationStatus().within(statuses)
+        return Self.locationServicesEnabled()
+            && Self.authorizationStatus().within(statuses)
     }
 }
