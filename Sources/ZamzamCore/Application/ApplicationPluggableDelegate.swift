@@ -49,7 +49,10 @@ import UIKit
 open class ApplicationPluggableDelegate: UIResponder, UIApplicationDelegate {
     public var window: UIWindow?
     
+    /// List of application plugins for binding to `AppDelegate` events
     public private(set) lazy var plugins: [ApplicationPlugin] = { application() }()
+    
+    /// List of application plugins for binding to `AppDelegate` events
     open func application() -> [ApplicationPlugin] {[]} // Override
 }
 
@@ -113,7 +116,7 @@ extension ApplicationPluggableDelegate {
     }
 }
 
-/// Conforming to an app module and added to `AppDelegate.plugins()` will trigger events.
+/// Conforming to an app module and added to `AppDelegate.application()` will trigger events.
 public protocol ApplicationPlugin {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool

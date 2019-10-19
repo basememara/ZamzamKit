@@ -15,13 +15,7 @@ import WatchKit
 public protocol AppRoutable {
     #if os(iOS)
     var viewController: UIViewController? { get set }
-    
-    func dismiss(animated: Bool, completion: (() -> Void)?)
-    func dismissOrPop(animated: Bool, completion: (() -> Void)?)
-    func close(animated: Bool, completion: (() -> Void)?)
     #elseif os(watchOS)
     var viewController: WKInterfaceController? { get set }
-    
-    func dismiss()
     #endif
 }
