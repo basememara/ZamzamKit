@@ -7,16 +7,10 @@ env:
     - DESTINATION="arch=x86_64" SCHEME="$PACKAGE_SCHEME" RUN_TESTS="YES"
     - DESTINATION="OS=13.1,name=iPhone 11" SCHEME="$PACKAGE_SCHEME" RUN_TESTS="YES"
     - DESTINATION="OS=12.4,name=iPhone XS" SCHEME="$PACKAGE_SCHEME" RUN_TESTS="YES"
-    - DESTINATION="OS=6.0,name=Apple Watch Series 5 - 44mm" SCHEME="$PACKAGE_SCHEME" RUN_TESTS="NO"
     - DESTINATION="OS=13.0,name=Apple TV 4K" SCHEME="$PACKAGE_SCHEME" RUN_TESTS="YES"
+    - DESTINATION="OS=6.0,name=Apple Watch Series 5 - 44mm" SCHEME="$PACKAGE_SCHEME" RUN_TESTS="NO"
 
 script:
   - set -o pipefail
   - xcodebuild -version
   - xcodebuild -showsdks
-
-  - if [$RUN_TESTS == "YES"]; then
-      xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty;
-    else
-      xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO build | xcpretty;
-    fi
