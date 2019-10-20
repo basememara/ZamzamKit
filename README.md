@@ -13,7 +13,7 @@ ZamzamKit a Swift framework for rapid development using a collection of small ut
 
 ### Swift Package Manager
 
-`.package(url: "git@github.com:ZamzamInc/ZamzamKit.git", .upToNextMajor(from: "5.0.0"))` 
+`.package(url: "git@github.com:ZamzamInc/ZamzamKit.git", .upToNextMajor(from: "5.1.0"))` 
 
 The `ZamzamKit` package contains four different products you can import:
 * `ZamzamCore`
