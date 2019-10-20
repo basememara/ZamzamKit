@@ -13,7 +13,7 @@ ZamzamKit is a Swift package for rapid development using a collection of micro u
 
 ### Swift Package Manager
 
-`.package(url: "git@github.com:ZamzamInc/ZamzamKit.git", .upToNextMajor(from: "5.1.0"))` 
+`.package(url: "git@github.com:ZamzamInc/ZamzamKit.git", .upToNextMajor(from: "5.1.0"))`
 
 The `ZamzamKit` package contains four different products you can import. Add any combination of these to your target's dependencies within your `Package.swift` manifest:
 ```
@@ -705,8 +705,10 @@ BackgroundTask.run(for: application) { task in
 ```
 </details>
 
+### Utilities
+
 <details>
-<summary>Dependency Injection</summary>
+<summary>Dependencies</summary>
 
 > Lightweight dependency injection via property wrapper ([read more](https://basememara.com/swift-dependency-injection-via-property-wrapper/)):
 ```swift
@@ -739,8 +741,6 @@ class ViewController: UIViewController {
 }
 ```
 </details>
-
-### Utilities
 
 <details>
 <summary>Localization</summary>
