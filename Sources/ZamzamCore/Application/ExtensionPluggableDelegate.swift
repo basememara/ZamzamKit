@@ -51,6 +51,13 @@ open class ExtensionPluggableDelegate: NSObject, WKExtensionDelegate {
     /// List of application plugins for binding to `ExtensionDelegate` events
     public private(set) lazy var plugins: [ExtensionPlugin] = { application() }()
     
+    public override init() {
+        super.init()
+        
+        // Load lazy property early
+        _ = plugins
+    }
+    
     /// List of application plugins for binding to `ExtensionDelegate` events
     open func application() -> [ExtensionPlugin] {[]} // Override
 }

@@ -1,29 +1,33 @@
 # ZamzamKit
 
 [![Build Status](https://api.travis-ci.org/ZamzamInc/ZamzamKit.svg?branch=master)](https://travis-ci.org/ZamzamInc/ZamzamKit)
-[![Platform](https://img.shields.io/badge/platform-ios%20%7C%20watchos%20%7C%20tvos%20%7C%20ipados%20%7C%20macos-lightgrey)](https://github.com/ZamzamInc/ZamzamKit)
+[![Platform](https://img.shields.io/badge/platform-macos%20%7C%20ios%20%7C%20watchos%20%7C%20ipados%20%7C%20tvos-lightgrey)](https://github.com/ZamzamInc/ZamzamKit)
 [![Swift](https://img.shields.io/badge/Swift-5-orange.svg)](https://swift.org)
 [![Xcode](https://img.shields.io/badge/Xcode-11-blue.svg)](https://developer.apple.com/xcode)
 [![SPM](https://img.shields.io/badge/SPM-Compatible-blue)](https://swift.org/package-manager)
 [![MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
-ZamzamKit a Swift framework for rapid development using a collection of small utility extensions for Standard Library, Foundation, and native frameworks.
+ZamzamKit is a Swift package for rapid development using a collection of micro utility extensions for Standard Library, Foundation, and other native frameworks.
 
 ## Installation
 
 ### Swift Package Manager
 
-`.package(url: "git@github.com:ZamzamInc/ZamzamKit.git", .upToNextMajor(from: "5.1.0"))` 
+`.package(url: "git@github.com:ZamzamInc/ZamzamKit.git", .upToNextMajor(from: "5.1.0"))`
 
-The `ZamzamKit` package contains four different products you can import:
-* `ZamzamCore`
-* `ZamzamLocation`
-* `ZamzamNotification`
-* `ZamzamUI`
-
-Add any combination of these to your target's dependencies within your `Package.swift` manifest.
-
-Currently, a limitation with SwiftPM where resources can not be embedded at the moment requires an extra manual step. Drag `Resources/ZamzamCore.bundle` to your target's project settings > Build Phases > Copy Bundle manually.
+The `ZamzamKit` package contains four different products you can import. Add any combination of these to your target's dependencies within your `Package.swift` manifest:
+```
+.target(
+    name: "MyAppExample",
+    dependencies: [
+        "ZamzamCore",
+        "ZamzamLocation",
+        "ZamzamNotification",
+        "ZamzamUI"
+    ]
+)
+```
+*A limitation with Swift Package Manager requires resources to be embedded manually. Drag `/Resources/ZamzamCore.bundle` to your Xcode project's `Build Phases > Copy Bundle` section.*
 
 ## ZamzamCore
 
@@ -701,8 +705,10 @@ BackgroundTask.run(for: application) { task in
 ```
 </details>
 
+### Utilities
+
 <details>
-<summary>Dependency Injection</summary>
+<summary>Dependencies</summary>
 
 > Lightweight dependency injection via property wrapper ([read more](https://basememara.com/swift-dependency-injection-via-property-wrapper/)):
 ```swift
@@ -735,8 +741,6 @@ class ViewController: UIViewController {
 }
 ```
 </details>
-
-### Utilities
 
 <details>
 <summary>Localization</summary>

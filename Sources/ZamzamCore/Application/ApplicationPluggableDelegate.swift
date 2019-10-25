@@ -52,6 +52,13 @@ open class ApplicationPluggableDelegate: UIResponder, UIApplicationDelegate {
     /// List of application plugins for binding to `AppDelegate` events
     public private(set) lazy var plugins: [ApplicationPlugin] = { application() }()
     
+    public override init() {
+        super.init()
+        
+        // Load lazy property early
+        _ = plugins
+    }
+    
     /// List of application plugins for binding to `AppDelegate` events
     open func application() -> [ApplicationPlugin] {[]} // Override
 }
