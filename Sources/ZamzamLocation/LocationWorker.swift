@@ -250,8 +250,6 @@ public extension LocationWorker {
 extension LocationWorker: CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        guard status != .notDetermined else { return }
-        
         // Trigger and empty queues
         let recurringHandlers = self.didChangeAuthorizationHandlers.value
         recurringHandlers.forEach { task in
