@@ -140,7 +140,12 @@ public extension WatchSession {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         let handlers = activationDidCompleteSingle.value
         activationDidCompleteSingle.value { $0.removeAll() }
-        handlers.forEach { $0(activationState == .activated) }
+        
+        handlers.forEach { task in
+            DispatchQueue.main.async {
+                task(activationState == .activated)
+            }
+        }
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {
