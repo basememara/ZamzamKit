@@ -622,21 +622,16 @@ someStruct.isRunningOnSimulator -> false
 ```swift
 // Subclass and install to pass lifecycle events to loaded plugins
 @UIApplicationMain
-class AppDelegate: ApplicationPluginDelegate {
+class AppDelegate: ApplicationPluggableDelegate {
 
-    private(set) lazy var plugins: [ApplicationPlugin] = [
+    override func plugins() -> [ApplicationPlugin] {[
         LoggerPlugin(),
         NotificationPlugin()
-    ]
-
-    override init() {
-        super.init()
-        install(plugins)
-    }
+    ]}
 }
 ```
 ```swift
-// Each application plugin has access to the AppDelegate lifecycle events
+// Each application plugin has access to the `AppDelegate` lifecycle events
 final class LoggerPlugin: ApplicationPlugin {
     private let log = Logger()
  
@@ -656,6 +651,32 @@ final class LoggerPlugin: ApplicationPlugin {
     
     func applicationWillTerminate(_ application: UIApplication) {
         log.warn("App will terminate.")
+    }
+}
+```
+
+> Split up `SceneDelegate` into plugins:
+```swift
+// Subclass and install to pass lifecycle events to loaded plugins
+class SceneDelegate: ScenePluggableDelegate {
+
+    override func plugins() -> [ScenePlugin] {[
+        LoggerPlugin(),
+        NotificationPlugin()
+    ]}
+}
+```
+```swift
+// Each application plugin has access to the `SceneDelegate` lifecycle events
+final class LoggerPlugin: ScenePlugin {
+    private let log = Logger()
+
+    func sceneWillEnterForeground() {
+        log.info("Scene will enter foreground.")
+    }
+    
+    func sceneDidEnterBackground() {
+        log.info("Scene did enter background.")
     }
 }
 ```

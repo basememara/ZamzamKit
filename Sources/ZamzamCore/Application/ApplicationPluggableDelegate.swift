@@ -17,7 +17,7 @@ import UIKit
 ///     @UIApplicationMain
 ///     class AppDelegate: ApplicationPluggableDelegate {
 ///
-///         override func application() -> [ApplicationPlugin] {[
+///         override func plugins() -> [ApplicationPlugin] {[
 ///             LoggerPlugin(),
 ///             NotificationPlugin()
 ///         ]}
@@ -50,17 +50,17 @@ open class ApplicationPluggableDelegate: UIResponder, UIApplicationDelegate {
     public var window: UIWindow?
     
     /// List of application plugins for binding to `AppDelegate` events
-    public private(set) lazy var plugins: [ApplicationPlugin] = { application() }()
+    public private(set) lazy var pluginInstances: [ApplicationPlugin] = { plugins() }()
     
     public override init() {
         super.init()
         
         // Load lazy property early
-        _ = plugins
+        _ = pluginInstances
     }
     
     /// List of application plugins for binding to `AppDelegate` events
-    open func application() -> [ApplicationPlugin] {[]} // Override
+    open func plugins() -> [ApplicationPlugin] {[]} // Override
 }
 
 extension ApplicationPluggableDelegate {
@@ -68,7 +68,7 @@ extension ApplicationPluggableDelegate {
     open func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Ensure all delegates called even if condition fails early
         //swiftlint:disable reduce_boolean
-        plugins.reduce(true) {
+        pluginInstances.reduce(true) {
             $0 && $1.application(application, willFinishLaunchingWithOptions: launchOptions)
         }
     }
@@ -76,7 +76,7 @@ extension ApplicationPluggableDelegate {
     open func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Ensure all delegates called even if condition fails early
         //swiftlint:disable reduce_boolean
-        plugins.reduce(true) {
+        pluginInstances.reduce(true) {
             $0 && $1.application(application, didFinishLaunchingWithOptions: launchOptions)
         }
     }
@@ -85,41 +85,49 @@ extension ApplicationPluggableDelegate {
 extension ApplicationPluggableDelegate {
     
     open func applicationWillEnterForeground(_ application: UIApplication) {
-        plugins.forEach { $0.applicationWillEnterForeground(application) }
+        pluginInstances
+            .compactMap { $0 as? ScenePlugin }
+            .forEach { $0.sceneWillEnterForeground() }
     }
     
     open func applicationDidEnterBackground(_ application: UIApplication) {
-        plugins.forEach { $0.applicationDidEnterBackground(application) }
+        pluginInstances
+            .compactMap { $0 as? ScenePlugin }
+            .forEach { $0.sceneDidEnterBackground() }
     }
     
     open func applicationDidBecomeActive(_ application: UIApplication) {
-        plugins.forEach { $0.applicationDidBecomeActive(application) }
+        pluginInstances
+            .compactMap { $0 as? ScenePlugin }
+            .forEach { $0.sceneDidBecomeActive() }
     }
     
     open func applicationWillResignActive(_ application: UIApplication) {
-        plugins.forEach { $0.applicationWillResignActive(application) }
+        pluginInstances
+            .compactMap { $0 as? ScenePlugin }
+            .forEach { $0.sceneWillResignActive() }
     }
 }
 
 extension ApplicationPluggableDelegate {
     
     open func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
-        plugins.forEach { $0.applicationProtectedDataWillBecomeUnavailable(application) }
+        pluginInstances.forEach { $0.applicationProtectedDataWillBecomeUnavailable(application) }
     }
     
     open func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
-        plugins.forEach { $0.applicationProtectedDataDidBecomeAvailable(application) }
+        pluginInstances.forEach { $0.applicationProtectedDataDidBecomeAvailable(application) }
     }
 }
 
 extension ApplicationPluggableDelegate {
     
     open func applicationWillTerminate(_ application: UIApplication) {
-        plugins.forEach { $0.applicationWillTerminate(application) }
+        pluginInstances.forEach { $0.applicationWillTerminate(application) }
     }
     
     open func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        plugins.forEach { $0.applicationDidReceiveMemoryWarning(application) }
+        pluginInstances.forEach { $0.applicationDidReceiveMemoryWarning(application) }
     }
 }
 
@@ -127,11 +135,6 @@ extension ApplicationPluggableDelegate {
 public protocol ApplicationPlugin {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
-    
-    func applicationWillEnterForeground(_ application: UIApplication)
-    func applicationDidEnterBackground(_ application: UIApplication)
-    func applicationDidBecomeActive(_ application: UIApplication)
-    func applicationWillResignActive(_ application: UIApplication)
     
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication)
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication)
@@ -145,11 +148,6 @@ public protocol ApplicationPlugin {
 public extension ApplicationPlugin {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool { return true }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool { return true }
-    
-    func applicationWillEnterForeground(_ application: UIApplication) {}
-    func applicationDidEnterBackground(_ application: UIApplication) {}
-    func applicationDidBecomeActive(_ application: UIApplication) {}
-    func applicationWillResignActive(_ application: UIApplication) {}
     
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {}
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {}
