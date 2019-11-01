@@ -783,6 +783,27 @@ myLabel3.text = .localized(.next)
 </details>
 
 <details>
+<summary>Logger</summary>
+
+> Create loggers that conform to `LogStore` and add to `LogWorker`. Then use the worker to log levels. Included log stores are `LogConsoleStore` and `LogOSStore`:
+```swift
+let log: LogWorkerType = LogWorker(
+    stores: [
+        LogConsoleStore(minLevel: .debug),
+        LogOSStore(
+            minLevel: .warning,
+            subsystem: "io.zamzam.Basem-Emara",
+            category: "Application"
+        ),
+        MyCustomLogger()
+    ]
+)
+
+log.error("There was an error.")
+```
+</details>
+
+<details>
 <summary>SystemConfiguration</summary>
 
 > Determine if the device is connected to a network:
