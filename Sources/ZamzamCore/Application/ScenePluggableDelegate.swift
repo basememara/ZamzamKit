@@ -52,35 +52,45 @@ open class ScenePluggableDelegate: UIResponder, UIWindowSceneDelegate {
 }
 
 @available(iOS 13.0, *)
-public extension ScenePluggableDelegate {
+extension ScenePluggableDelegate {
     
-    func sceneWillEnterForeground(_ scene: UIScene) {
+    open func sceneWillEnterForeground(_ scene: UIScene) {
         pluginInstances.forEach { $0.sceneWillEnterForeground() }
     }
     
-    func sceneDidEnterBackground(_ scene: UIScene) {
+    open func sceneDidEnterBackground(_ scene: UIScene) {
         pluginInstances.forEach { $0.sceneDidEnterBackground() }
     }
     
-    func sceneDidBecomeActive(_ scene: UIScene) {
+    open func sceneDidBecomeActive(_ scene: UIScene) {
         pluginInstances.forEach { $0.sceneDidBecomeActive() }
     }
     
-    func sceneWillResignActive(_ scene: UIScene) {
+    open func sceneWillResignActive(_ scene: UIScene) {
         pluginInstances.forEach { $0.sceneWillResignActive() }
     }
     
-    func sceneDidDisconnect(_ scene: UIScene) {
+    open func sceneDidDisconnect(_ scene: UIScene) {
         pluginInstances.forEach { $0.sceneDidDisconnect() }
     }
 }
 
 /// Conforming to an scene module and added to `SceneDelegate.plugins()` will trigger events.
 public protocol ScenePlugin {
+    
+    /// Tells the delegate that the scene is about to begin running in the foreground and become visible to the user.
     func sceneWillEnterForeground()
+    
+    /// Tells the delegate that the scene is running in the background and is no longer onscreen.
     func sceneDidEnterBackground()
+    
+    /// Tells the delegate that the scene became active and is now responding to user events.
     func sceneDidBecomeActive()
+    
+    /// Tells the delegate that the scene is about to resign the active state and stop responding to user events.
     func sceneWillResignActive()
+    
+    /// Tells the delegate that UIKit removed a scene from your app.
     func sceneDidDisconnect()
 }
 
