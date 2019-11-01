@@ -1,11 +1,12 @@
 //___FILEHEADER___
 
-import ZamzamKit
+import ZamzamCore
 
-public struct ___VARIABLE_productName:identifier___NetworkStore: ___VARIABLE_productName:identifier___Store, Loggable {
+public struct ___VARIABLE_productName:identifier___NetworkStore: ___VARIABLE_productName:identifier___Store {
+    private let log: LogWorkerType
     
-    public init() {
-        
+    public init(log: LogWorkerType) {
+        self.log = log
     }
 }
 
@@ -16,7 +17,7 @@ public extension ___VARIABLE_productName:identifier___NetworkStore {
             // Handle errors if applicable
             guard let value = $0.value, $0.isSuccess else {
                 let error = DataError(from: $0.error)
-                self.Log(error: "An error occured while fetching ___VARIABLE_productName:identifier___: \($0.error?.serverDescription ?? "unknown")")
+                self.log.error("An error occured while fetching ___VARIABLE_productName:identifier___: \($0.error?.serverDescription ?? "unknown")")
                 return completion(.failure(error))
             }
             
@@ -34,7 +35,7 @@ public extension ___VARIABLE_productName:identifier___NetworkStore {
                     )
                     
                     guard let data = payload.data, payload.status == .success else {
-                        self.Log(error: "An error occured while fetching ___VARIABLE_productName:identifier___, data nil or server status error: \(String(describing: payload.errors)).")
+                        self.log.error("An error occured while fetching ___VARIABLE_productName:identifier___, data nil or server status error: \(String(describing: payload.errors)).")
                         return DispatchQueue.main.async { completion(.failure(.unknownReason(nil))) }
                     }
                     
@@ -42,7 +43,7 @@ public extension ___VARIABLE_productName:identifier___NetworkStore {
                         completion(.success(data.objects))
                     }
                 } catch {
-                    self.Log(error: "An error occured while parsing ___VARIABLE_productName:identifier___: \(error).")
+                    self.log.error("An error occured while parsing ___VARIABLE_productName:identifier___: \(error).")
                     return DispatchQueue.main.async { completion(.failure(.parseFailure(error))) }
                 }
             }

@@ -1020,8 +1020,8 @@ UNUserNotificationCenter.current().register(
     authorizations: [.alert, .badge, .sound],
     completion: { granted in
         granted
-            ? log(debug: "Authorization for notification succeeded.")
-            : log(warn: "Authorization for notification not given.")
+            ? log.debug("Authorization for notification succeeded.")
+            : log.warn("Authorization for notification not given.")
     }
 )
 ```
@@ -1106,7 +1106,7 @@ UNUserNotificationCenter.current().add(
 ```swift
 UNNotificationAttachment.download(from: urlString) {
     guard $0.isSuccess, let attachment = $0.value else {
-        return log(error: "Could not download the remote resource (\(urlString)): \($0.error.debugDescription).")
+        return log.error("Could not download the remote resource (\(urlString)): \($0.error.debugDescription).")
     }
 
     UNUserNotificationCenter.current().add(

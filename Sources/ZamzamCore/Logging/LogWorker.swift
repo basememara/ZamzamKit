@@ -1,6 +1,6 @@
 //
 //  Logger.swift
-//  PrayCore
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2019-06-11.
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
@@ -8,15 +8,15 @@
 
 import Foundation
 
-public struct LoggerWorker: LoggerWorkerType {
-    private let stores: [LoggerStore]
+public struct LogWorker: LogWorkerType {
+    private let stores: [LogStore]
     
-    public init(stores: [LoggerStore]) {
+    public init(stores: [LogStore]) {
         self.stores = stores
     }
 }
 
-public extension LoggerWorker {
+public extension LogWorker {
     
     func verbose(_ message: String, path: String, function: String, line: Int, context: [String: Any]?) {
         stores.forEach { $0.verbose(message, path: path, function: function, line: line, context: context) }
@@ -30,8 +30,8 @@ public extension LoggerWorker {
         stores.forEach { $0.info(message, path: path, function: function, line: line, context: context) }
     }
     
-    func warn(_ message: String, path: String, function: String, line: Int, context: [String: Any]?) {
-        stores.forEach { $0.warn(message, path: path, function: function, line: line, context: context) }
+    func warning(_ message: String, path: String, function: String, line: Int, context: [String: Any]?) {
+        stores.forEach { $0.warning(message, path: path, function: function, line: line, context: context) }
     }
     
     func error(_ message: String, path: String, function: String, line: Int, context: [String: Any]?) {

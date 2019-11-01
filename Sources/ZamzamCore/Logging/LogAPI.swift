@@ -1,6 +1,6 @@
 //
 //  Loggable.swift
-//  PrayCore
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2019-06-11.
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
@@ -8,7 +8,10 @@
 
 import Foundation
 
-public protocol LoggerStore: AppInfo {
+// Namespace
+public enum LogAPI {}
+
+public protocol LogStore: AppInfo {
     
     /**
      Log something generally unimportant (lowest priority; not written to file)
@@ -52,7 +55,7 @@ public protocol LoggerStore: AppInfo {
      - parameter function: Function of the caller.
      - parameter line: Line of the caller.
      */
-    func warn(_ message: String, path: String, function: String, line: Int, context: [String: Any]?)
+    func warning(_ message: String, path: String, function: String, line: Int, context: [String: Any]?)
     
     /**
      Log something which will keep you awake at night (highest priority)
@@ -66,8 +69,8 @@ public protocol LoggerStore: AppInfo {
     func error(_ message: String, path: String, function: String, line: Int, context: [String: Any]?)
 }
 
-public protocol LoggerWorkerType: LoggerStore {}
-public extension LoggerWorkerType {
+public protocol LogWorkerType: LogStore {}
+public extension LogWorkerType {
     
     /// Log something generally unimportant (lowest priority; not written to file)
     func verbose(_ message: String, path: String = #file, function: String = #function, line: Int = #line) {
@@ -86,11 +89,28 @@ public extension LoggerWorkerType {
     
     /// Log something which may cause big trouble soon (high priority)
     func warn(_ message: String, path: String = #file, function: String = #function, line: Int = #line) {
-        warn(message, path: path, function: function, line: line, context: nil)
+        warning(message, path: path, function: function, line: line, context: nil)
     }
     
     /// Log something which will keep you awake at night (highest priority)
     func error(_ message: String, path: String = #file, function: String = #function, line: Int = #line) {
         error(message, path: path, function: function, line: line, context: nil)
+    }
+}
+
+// MARK: - Types
+
+public extension LogAPI {
+    
+    enum Level: Int, Comparable {
+        case verbose
+        case debug
+        case info
+        case warning
+        case error
+        
+        public static func < (lhs: Level, rhs: Level) -> Bool {
+            lhs.rawValue < rhs.rawValue
+        }
     }
 }
