@@ -46,7 +46,7 @@ import UIKit
 ///             log.warn("App will terminate.")
 ///         }
 ///     }
-open class ApplicationPluggableDelegate: UIResponder, UIApplicationDelegate {
+open class ApplicationPluggableDelegate: UIResponder, UIApplicationDelegate, WindowDelegate {
     public var window: UIWindow?
     
     /// List of application plugins for binding to `AppDelegate` events

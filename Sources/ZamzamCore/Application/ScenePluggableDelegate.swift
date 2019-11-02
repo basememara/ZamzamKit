@@ -34,7 +34,7 @@ import UIKit
 ///         }
 ///     }
 @available(iOS 13.0, *)
-open class ScenePluggableDelegate: UIResponder, UIWindowSceneDelegate {
+open class ScenePluggableDelegate: UIResponder, UIWindowSceneDelegate, WindowDelegate {
     public var window: UIWindow?
     
     /// List of scene plugins for binding to `SceneDelegate` events
@@ -53,6 +53,10 @@ open class ScenePluggableDelegate: UIResponder, UIWindowSceneDelegate {
 
 @available(iOS 13.0, *)
 extension ScenePluggableDelegate {
+    
+    open func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        pluginInstances.forEach { $0.scene(scene, willConnectTo: session, options: connectionOptions) }
+    }
     
     open func sceneWillEnterForeground(_ scene: UIScene) {
         pluginInstances.forEach { $0.sceneWillEnterForeground() }
@@ -92,6 +96,10 @@ public protocol ScenePlugin {
     
     /// Tells the delegate that UIKit removed a scene from your app.
     func sceneDidDisconnect()
+    
+    /// Tells the delegate about the addition of a scene to the app.
+    @available(iOS 13.0, *)
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions)
 }
 
 // MARK: - Optionals
@@ -102,5 +110,12 @@ public extension ScenePlugin {
     func sceneDidBecomeActive() {}
     func sceneWillResignActive() {}
     func sceneDidDisconnect() {}
+    
+    @available(iOS 13.0, *)
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {}
+}
+
+public protocol WindowDelegate: class {
+    var window: UIWindow? { get set }
 }
 #endif
