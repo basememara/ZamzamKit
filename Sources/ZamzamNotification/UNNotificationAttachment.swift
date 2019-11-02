@@ -16,7 +16,7 @@ public extension UNNotificationAttachment {
     ///
     ///     UNNotificationAttachment.download(from: urlString) {
     ///         guard $0.isSuccess, let attachment = $0.value else {
-    ///             return log(error: "Could not download the remote resource (\(urlString)): \($0.error.debugDescription).")
+    ///             return log.error("Could not download the remote resource (\(urlString)): \($0.error.debugDescription).")
     ///         }
     ///
     ///         UNUserNotificationCenter.current().add(

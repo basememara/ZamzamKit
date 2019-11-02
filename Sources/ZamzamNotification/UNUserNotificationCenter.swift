@@ -45,8 +45,8 @@ public extension UNUserNotificationCenter {
     ///         authorizations: [.alert, .badge, .sound],
     ///         completion: { granted in
     ///             granted
-    ///                 ? log(debug: "Authorization for notification succeeded.")
-    ///                 : log(warn: "Authorization for notification not given.")
+    ///                 ? log.debug("Authorization for notification succeeded.")
+    ///                 : log.warn("Authorization for notification not given.")
     ///         }
     ///     )
     ///
@@ -92,8 +92,8 @@ public extension UNUserNotificationCenter {
     ///         authorizations: [.alert, .badge, .sound],
     ///         completion: { granted in
     ///             granted
-    ///                 ? log(debug: "Authorization for notification succeeded.")
-    ///                 : log(warn: "Authorization for notification not given.")
+    ///                 ? log.debug("Authorization for notification succeeded.")
+    ///                 : log.warn("Authorization for notification not given.")
     ///         }
     ///     )
     ///

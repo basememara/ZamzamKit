@@ -15,7 +15,7 @@ import WatchKit
 ///
 ///     class ExtensionDelegate: ExtensionPluggableDelegate {
 ///
-///         override func application() -> [ExtensionPlugin] {[
+///         override func plugins() -> [ExtensionPlugin] {[
 ///             LoggerPlugin(),
 ///             LocationPlugin()
 ///         ]}
@@ -49,42 +49,42 @@ import WatchKit
 open class ExtensionPluggableDelegate: NSObject, WKExtensionDelegate {
     
     /// List of application plugins for binding to `ExtensionDelegate` events
-    public private(set) lazy var plugins: [ExtensionPlugin] = { application() }()
+    public private(set) lazy var pluginInstances: [ExtensionPlugin] = { plugins() }()
     
     public override init() {
         super.init()
         
         // Load lazy property early
-        _ = plugins
+        _ = pluginInstances
     }
     
     /// List of application plugins for binding to `ExtensionDelegate` events
-    open func application() -> [ExtensionPlugin] {[]} // Override
+    open func plugins() -> [ExtensionPlugin] {[]} // Override
 }
 
 public extension ExtensionPluggableDelegate {
     
     func applicationDidFinishLaunching() {
-        plugins.forEach { $0.applicationDidFinishLaunching(.shared()) }
+        pluginInstances.forEach { $0.applicationDidFinishLaunching(.shared()) }
     }
 }
 
 public extension ExtensionPluggableDelegate {
     
     func applicationDidBecomeActive() {
-        plugins.forEach { $0.applicationDidBecomeActive(.shared()) }
+        pluginInstances.forEach { $0.applicationDidBecomeActive(.shared()) }
     }
     
     func applicationWillResignActive() {
-        plugins.forEach { $0.applicationWillResignActive(.shared()) }
+        pluginInstances.forEach { $0.applicationWillResignActive(.shared()) }
     }
     
     func applicationWillEnterForeground() {
-        plugins.forEach { $0.applicationWillEnterForeground(.shared()) }
+        pluginInstances.forEach { $0.applicationWillEnterForeground(.shared()) }
     }
     
     func applicationDidEnterBackground() {
-        plugins.forEach { $0.applicationDidEnterBackground(.shared()) }
+        pluginInstances.forEach { $0.applicationDidEnterBackground(.shared()) }
     }
 }
 

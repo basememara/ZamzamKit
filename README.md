@@ -622,21 +622,16 @@ someStruct.isRunningOnSimulator -> false
 ```swift
 // Subclass and install to pass lifecycle events to loaded plugins
 @UIApplicationMain
-class AppDelegate: ApplicationPluginDelegate {
+class AppDelegate: ApplicationPluggableDelegate {
 
-    private(set) lazy var plugins: [ApplicationPlugin] = [
+    override func plugins() -> [ApplicationPlugin] {[
         LoggerPlugin(),
         NotificationPlugin()
-    ]
-
-    override init() {
-        super.init()
-        install(plugins)
-    }
+    ]}
 }
 ```
 ```swift
-// Each application plugin has access to the AppDelegate lifecycle events
+// Each application plugin has access to the `AppDelegate` lifecycle events
 final class LoggerPlugin: ApplicationPlugin {
     private let log = Logger()
  
@@ -656,6 +651,32 @@ final class LoggerPlugin: ApplicationPlugin {
     
     func applicationWillTerminate(_ application: UIApplication) {
         log.warn("App will terminate.")
+    }
+}
+```
+
+> Split up `SceneDelegate` into plugins:
+```swift
+// Subclass and install to pass lifecycle events to loaded plugins
+class SceneDelegate: ScenePluggableDelegate {
+
+    override func plugins() -> [ScenePlugin] {[
+        LoggerPlugin(),
+        NotificationPlugin()
+    ]}
+}
+```
+```swift
+// Each application plugin has access to the `SceneDelegate` lifecycle events
+final class LoggerPlugin: ScenePlugin {
+    private let log = Logger()
+
+    func sceneWillEnterForeground() {
+        log.info("Scene will enter foreground.")
+    }
+    
+    func sceneDidEnterBackground() {
+        log.info("Scene did enter background.")
     }
 }
 ```
@@ -758,6 +779,27 @@ extension Localizable {
 myLabel1.text = .localized(.ok)
 myLabel2.text = .localized(.cancel)
 myLabel3.text = .localized(.next)
+```
+</details>
+
+<details>
+<summary>Logger</summary>
+
+> Create loggers that conform to `LogStore` and add to `LogWorker` (console and `os_log` are included):
+```swift
+let log: LogWorkerType = LogWorker(
+    stores: [
+        LogConsoleStore(minLevel: .debug),
+        LogOSStore(
+            minLevel: .warning,
+            subsystem: "io.zamzam.Basem-Emara",
+            category: "Application"
+        ),
+        MyCustomLogger()
+    ]
+)
+
+log.error("There was an error.")
 ```
 </details>
 
@@ -999,8 +1041,8 @@ UNUserNotificationCenter.current().register(
     authorizations: [.alert, .badge, .sound],
     completion: { granted in
         granted
-            ? log(debug: "Authorization for notification succeeded.")
-            : log(warn: "Authorization for notification not given.")
+            ? log.debug("Authorization for notification succeeded.")
+            : log.warn("Authorization for notification not given.")
     }
 )
 ```
@@ -1085,7 +1127,7 @@ UNUserNotificationCenter.current().add(
 ```swift
 UNNotificationAttachment.download(from: urlString) {
     guard $0.isSuccess, let attachment = $0.value else {
-        return log(error: "Could not download the remote resource (\(urlString)): \($0.error.debugDescription).")
+        return log.error("Could not download the remote resource (\(urlString)): \($0.error.debugDescription).")
     }
 
     UNUserNotificationCenter.current().add(
