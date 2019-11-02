@@ -785,7 +785,7 @@ myLabel3.text = .localized(.next)
 <details>
 <summary>Logger</summary>
 
-> Create loggers that conform to `LogStore` and add to `LogWorker`. Then use the worker to log levels. Included log stores are `LogConsoleStore` and `LogOSStore`:
+> Create loggers that conform to `LogStore` and add to `LogWorker` (console and `os_log` are included):
 ```swift
 let log: LogWorkerType = LogWorker(
     stores: [
