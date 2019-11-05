@@ -109,6 +109,9 @@ public extension LogAPI {
         case warning
         case error
         
+        /// Disables a log store when used as minimum level
+        case none = 99
+        
         public static func < (lhs: Level, rhs: Level) -> Bool {
             lhs.rawValue < rhs.rawValue
         }
