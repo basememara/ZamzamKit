@@ -10,6 +10,7 @@ import Foundation
 
 public struct LogWorker: LogWorkerType {
     private let stores: [LogStore]
+    private let queue = DispatchQueue(label: "io.zamzam.LogWorker", qos: .utility)
     
     public init(stores: [LogStore]) {
         self.stores = stores
@@ -18,23 +19,15 @@ public struct LogWorker: LogWorkerType {
 
 public extension LogWorker {
     
-    func verbose(_ message: String, path: String, function: String, line: Int, context: [String: Any]?) {
-        stores.forEach { $0.verbose(message, path: path, function: function, line: line, context: context) }
-    }
-    
-    func debug(_ message: String, path: String, function: String, line: Int, context: [String: Any]?) {
-        stores.forEach { $0.debug(message, path: path, function: function, line: line, context: context) }
-    }
-    
-    func info(_ message: String, path: String, function: String, line: Int, context: [String: Any]?) {
-        stores.forEach { $0.info(message, path: path, function: function, line: line, context: context) }
-    }
-    
-    func warning(_ message: String, path: String, function: String, line: Int, context: [String: Any]?) {
-        stores.forEach { $0.warning(message, path: path, function: function, line: line, context: context) }
-    }
-    
-    func error(_ message: String, path: String, function: String, line: Int, context: [String: Any]?) {
-        stores.forEach { $0.error(message, path: path, function: function, line: line, context: context) }
+    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, context: [String: Any]?) {
+        // Skip if does not meet minimum log level
+        let destinations = stores.filter { $0.canWrite(for: level) }
+        guard !destinations.isEmpty else { return }
+        
+        queue.async {
+            destinations.forEach {
+                $0.write(level, with: message, path: path, function: function, line: line, context: context)
+            }
+        }
     }
 }
