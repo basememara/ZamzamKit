@@ -121,27 +121,22 @@ public protocol LogWorkerType {
 
 public extension LogWorkerType {
     
-    /// Log something generally unimportant (lowest priority; not written to file)
     func verbose(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil, completion: (() -> Void)? = nil) {
         write(.verbose, with: message, path: path, function: function, line: line, context: context, completion: completion)
     }
     
-    /// Log something which help during debugging (low priority; not written to file)
     func debug(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil, completion: (() -> Void)? = nil) {
         write(.debug, with: message, path: path, function: function, line: line, context: context, completion: completion)
     }
     
-    /// Log something which you are really interested but which is not an issue or error (normal priority)
     func info(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil, completion: (() -> Void)? = nil) {
         write(.info, with: message, path: path, function: function, line: line, context: context, completion: completion)
     }
     
-    /// Log something which may cause big trouble soon (high priority)
     func warning(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil, completion: (() -> Void)? = nil) {
         write(.warning, with: message, path: path, function: function, line: line, context: context, completion: completion)
     }
     
-    /// Log something which will keep you awake at night (highest priority)
     func error(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil, completion: (() -> Void)? = nil) {
         write(.error, with: message, path: path, function: function, line: line, context: context, completion: completion)
     }
