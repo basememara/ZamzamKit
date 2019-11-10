@@ -1,5 +1,5 @@
 //
-//  Loggable.swift
+//  LogAPI.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2019-06-11.
@@ -42,7 +42,7 @@ public protocol LogStore: AppInfo {
 public extension LogStore {
     
     func canWrite(for level: LogAPI.Level) -> Bool {
-        minLevel <= level
+        minLevel <= level && level != .none
     }
     
     func format(_ message: String, _ path: String, _ function: String, _ line: Int, _ context: [String: Any]?) -> String {
@@ -52,56 +52,6 @@ public extension LogStore {
 
 public protocol LogWorkerType {
     
-    /// Log something generally unimportant (lowest priority; not written to file)
-    /// - Parameters:
-    ///   - level: The current level of the log entry.
-    ///   - message: Description of the log.
-    ///   - path: Path of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - context: Additional meta data.
-    func verbose(_ message: String, path: String, function: String, line: Int, context: [String: Any]?)
-    
-    /// Log something which help during debugging (low priority; not written to file)
-    /// - Parameters:
-    ///   - level: The current level of the log entry.
-    ///   - message: Description of the log.
-    ///   - path: Path of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - context: Additional meta data.
-    func debug(_ message: String, path: String, function: String, line: Int, context: [String: Any]?)
-    
-    /// Log something which you are really interested but which is not an issue or error (normal priority)
-    /// - Parameters:
-    ///   - level: The current level of the log entry.
-    ///   - message: Description of the log.
-    ///   - path: Path of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - context: Additional meta data.
-    func info(_ message: String, path: String, function: String, line: Int, context: [String: Any]?)
-    
-    /// Log something which may cause big trouble soon (high priority)
-    /// - Parameters:
-    ///   - level: The current level of the log entry.
-    ///   - message: Description of the log.
-    ///   - path: Path of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - context: Additional meta data.
-    func warning(_ message: String, path: String, function: String, line: Int, context: [String: Any]?)
-    
-    /// Log something which will keep you awake at night (highest priority)
-    /// - Parameters:
-    ///   - level: The current level of the log entry.
-    ///   - message: Description of the log.
-    ///   - path: Path of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - context: Additional meta data.
-    func error(_ message: String, path: String, function: String, line: Int, context: [String: Any]?)
-    
     /// Log an entry to the destination.
     /// - Parameters:
     ///   - level: The current level of the log entry.
@@ -110,34 +60,90 @@ public protocol LogWorkerType {
     ///   - function: Function of the caller.
     ///   - line: Line of the caller.
     ///   - context: Additional meta data.
-    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, context: [String: Any]?)
+    ///   - completion: The block to call when log entries sent.
+    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, context: [String: Any]?, completion: (() -> Void)?)
+    
+    /// Log something generally unimportant (lowest priority; not written to file)
+    /// - Parameters:
+    ///   - level: The current level of the log entry.
+    ///   - message: Description of the log.
+    ///   - path: Path of the caller.
+    ///   - function: Function of the caller.
+    ///   - line: Line of the caller.
+    ///   - context: Additional meta data.
+    ///   - completion: The block to call when log entries sent.
+    func verbose(_ message: String, path: String, function: String, line: Int, context: [String: Any]?, completion: (() -> Void)?)
+    
+    /// Log something which help during debugging (low priority; not written to file)
+    /// - Parameters:
+    ///   - level: The current level of the log entry.
+    ///   - message: Description of the log.
+    ///   - path: Path of the caller.
+    ///   - function: Function of the caller.
+    ///   - line: Line of the caller.
+    ///   - context: Additional meta data.
+    ///   - completion: The block to call when log entries sent.
+    func debug(_ message: String, path: String, function: String, line: Int, context: [String: Any]?, completion: (() -> Void)?)
+    
+    /// Log something which you are really interested but which is not an issue or error (normal priority)
+    /// - Parameters:
+    ///   - level: The current level of the log entry.
+    ///   - message: Description of the log.
+    ///   - path: Path of the caller.
+    ///   - function: Function of the caller.
+    ///   - line: Line of the caller.
+    ///   - context: Additional meta data.
+    ///   - completion: The block to call when log entries sent.
+    func info(_ message: String, path: String, function: String, line: Int, context: [String: Any]?, completion: (() -> Void)?)
+    
+    /// Log something which may cause big trouble soon (high priority)
+    /// - Parameters:
+    ///   - level: The current level of the log entry.
+    ///   - message: Description of the log.
+    ///   - path: Path of the caller.
+    ///   - function: Function of the caller.
+    ///   - line: Line of the caller.
+    ///   - context: Additional meta data.
+    ///   - completion: The block to call when log entries sent.
+    func warning(_ message: String, path: String, function: String, line: Int, context: [String: Any]?, completion: (() -> Void)?)
+    
+    /// Log something which will keep you awake at night (highest priority)
+    /// - Parameters:
+    ///   - level: The current level of the log entry.
+    ///   - message: Description of the log.
+    ///   - path: Path of the caller.
+    ///   - function: Function of the caller.
+    ///   - line: Line of the caller.
+    ///   - context: Additional meta data.
+    ///   - completion: The block to call when log entries sent.   
+    func error(_ message: String, path: String, function: String, line: Int, context: [String: Any]?, completion: (() -> Void)?)
 }
 
 public extension LogWorkerType {
     
     /// Log something generally unimportant (lowest priority; not written to file)
-    func verbose(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil) {
-        write(.verbose, with: message, path: path, function: function, line: line, context: context)
+    func verbose(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil, completion: (() -> Void)? = nil) {
+        write(.verbose, with: message, path: path, function: function, line: line, context: context, completion: completion)
     }
     
     /// Log something which help during debugging (low priority; not written to file)
-    func debug(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil) {
-        write(.debug, with: message, path: path, function: function, line: line, context: context)
+    func debug(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil, completion: (() -> Void)? = nil) {
+        write(.debug, with: message, path: path, function: function, line: line, context: context, completion: completion)
     }
     
     /// Log something which you are really interested but which is not an issue or error (normal priority)
-    func info(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil) {
-        write(.info, with: message, path: path, function: function, line: line, context: context)
+    func info(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil, completion: (() -> Void)? = nil) {
+        write(.info, with: message, path: path, function: function, line: line, context: context, completion: completion)
     }
     
     /// Log something which may cause big trouble soon (high priority)
-    func warning(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil) {
-        write(.warning, with: message, path: path, function: function, line: line, context: context)
+    func warning(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil, completion: (() -> Void)? = nil) {
+        write(.warning, with: message, path: path, function: function, line: line, context: context, completion: completion)
     }
     
     /// Log something which will keep you awake at night (highest priority)
-    func error(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil) {
-        write(.error, with: message, path: path, function: function, line: line, context: context)
+    func error(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil, completion: (() -> Void)? = nil) {
+        write(.error, with: message, path: path, function: function, line: line, context: context, completion: completion)
     }
 }
 
@@ -145,7 +151,7 @@ public extension LogWorkerType {
 
 public extension LogAPI {
     
-    enum Level: Int, Comparable {
+    enum Level: Int, Comparable, CaseIterable {
         case verbose
         case debug
         case info

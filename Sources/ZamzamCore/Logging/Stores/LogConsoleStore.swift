@@ -1,8 +1,10 @@
 //
-//  File.swift
+//  LogConsoleStore.swift
+//  ZamzamCore
 //  
 //
 //  Created by Basem Emara on 2019-10-28.
+//  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
 import Foundation
