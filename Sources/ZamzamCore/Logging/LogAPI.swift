@@ -11,7 +11,7 @@ import Foundation
 // Namespace
 public enum LogAPI {}
 
-public protocol LogStore: AppInfo {
+public protocol LogStore {
     
     /// The minimum level required to create log entries.
     var minLevel: LogAPI.Level { get }
