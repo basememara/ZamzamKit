@@ -17,7 +17,6 @@ public struct LogWorker: LogWorkerType {
 }
 
 public extension LogWorker {
-    private static let queue = DispatchQueue(label: "io.zamzam.LogWorker", qos: .utility)
     
     func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, context: [String: Any]?, completion: (() -> Void)?) {
         let destinations = stores.filter { $0.canWrite(for: level) }
@@ -28,7 +27,7 @@ public extension LogWorker {
             return
         }
         
-        Self.queue.async {
+        DispatchQueue.logger.async {
             destinations.forEach {
                 $0.write(level, with: message, path: path, function: function, line: line, context: context)
             }

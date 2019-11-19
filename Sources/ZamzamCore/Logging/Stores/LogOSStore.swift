@@ -45,6 +45,6 @@ public extension LogOSStore {
             return
         }
         
-        os_log("%@", log: log, type: type, message)
+        os_log("%@", log: log, type: type, format(message, path, function, line, context))
     }
 }
