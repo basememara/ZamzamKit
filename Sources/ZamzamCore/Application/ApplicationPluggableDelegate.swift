@@ -80,6 +80,14 @@ extension ApplicationPluggableDelegate {
             $0 && $1.application(application, didFinishLaunchingWithOptions: launchOptions)
         }
     }
+    
+    open func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        // Ensure all delegates called even if condition fails early
+        //swiftlint:disable reduce_boolean
+        pluginInstances.reduce(false) {
+            $0 || $1.application(application, continue: userActivity, restorationHandler: restorationHandler)
+        }
+    }
 }
 
 extension ApplicationPluggableDelegate {
@@ -131,10 +139,11 @@ extension ApplicationPluggableDelegate {
     }
 }
 
-/// Conforming to an app module and added to `AppDelegate.application()` will trigger events.
+/// Conforming to an app plugin and added to `AppDelegate.application()` will trigger events.
 public protocol ApplicationPlugin {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
     
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication)
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication)
@@ -148,6 +157,7 @@ public protocol ApplicationPlugin {
 public extension ApplicationPlugin {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool { return true }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool { return true }
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool { return false }
     
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {}
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {}
