@@ -25,15 +25,15 @@ public extension LogConsoleStore {
         
         switch level {
         case .verbose:
-            prefix = "💜 VERBOSE"
+            prefix = "💜 \(timestamp: Date()) VERBOSE"
         case .debug:
-            prefix = "💚 DEBUG"
+            prefix = "💚 \(timestamp: Date()) DEBUG"
         case .info:
-            prefix = "💙 INFO"
+            prefix = "💙 \(timestamp: Date()) INFO"
         case .warning:
-            prefix = "💛 WARNING"
+            prefix = "💛 \(timestamp: Date()) WARNING"
         case .error:
-            prefix = "❤️ ERROR"
+            prefix = "❤️ \(timestamp: Date()) ERROR"
         case .none:
             return
         }
