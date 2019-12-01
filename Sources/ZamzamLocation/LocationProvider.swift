@@ -10,7 +10,7 @@ import CoreLocation
 import ZamzamCore
 
 /// A `LocationManager` wrapper with extensions.
-public class LocationWorker: NSObject, LocationWorkerType {
+public class LocationProvider: NSObject, LocationProviderType {
     private let desiredAccuracy: CLLocationAccuracy?
     private let distanceFilter: Double?
     private let activityType: CLActivityType?
@@ -65,7 +65,7 @@ public class LocationWorker: NSObject, LocationWorkerType {
 
 // MARK: - Authorization
 
-public extension LocationWorker {
+public extension LocationProvider {
     
     var isAuthorized: Bool { CLLocationManager.isAuthorized }
     
@@ -139,7 +139,7 @@ public extension LocationWorker {
 
 // MARK: - Coordinates
 
-public extension LocationWorker {
+public extension LocationProvider {
     
     var location: CLLocation? { manager.location }
     
@@ -169,7 +169,7 @@ public extension LocationWorker {
 }
 
 #if os(iOS)
-public extension LocationWorker {
+public extension LocationProvider {
     
     func startMonitoringSignificantLocationChanges() {
         manager.startMonitoringSignificantLocationChanges()
@@ -180,7 +180,7 @@ public extension LocationWorker {
     }
 }
 
-public extension LocationWorker {
+public extension LocationProvider {
     
     var heading: CLHeading? { manager.heading }
     
@@ -205,7 +205,7 @@ public extension LocationWorker {
 
 // MARK: - Observers
 
-public extension LocationWorker {
+public extension LocationProvider {
     
     func addObserver(_ observer: Observer<AuthorizationHandler>) {
         didChangeAuthorizationHandlers.value { $0.append(observer) }
@@ -247,7 +247,7 @@ public extension LocationWorker {
 
 // MARK: - Delegates
 
-extension LocationWorker: CLLocationManagerDelegate {
+extension LocationProvider: CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status != .notDetermined else { return }

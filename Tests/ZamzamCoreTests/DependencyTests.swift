@@ -22,7 +22,7 @@ final class DependencyTests: XCTestCase {
     @Inject("abc") private var sampleModule2: SampleModuleType
     @Inject private var someClass: SomeClassType
     
-    private lazy var widgetWorker: WidgetWorkerType = widgetModule.component()
+    private lazy var widgetProvider: WidgetProviderType = widgetModule.component()
     private lazy var someObject: SomeObjectType = sampleModule.component()
     private lazy var anotherObject: AnotherObjectType = sampleModule.component()
     private lazy var viewModelObject: ViewModelObjectType = sampleModule.component()
@@ -43,7 +43,7 @@ extension DependencyTests {
         let widgetModuleResult = widgetModule.test()
         let sampleModuleResult = sampleModule.test()
         let sampleModule2Result = sampleModule2.test()
-        let widgetResult = widgetWorker.fetch(id: 3)
+        let widgetResult = widgetProvider.fetch(id: 3)
         let someResult = someObject.testAbc()
         let anotherResult = anotherObject.testXyz()
         let viewModelResult = viewModelObject.testLmn()
@@ -80,8 +80,8 @@ extension DependencyTests {
 
     struct WidgetModule: WidgetModuleType {
         
-        func component() -> WidgetWorkerType {
-            WidgetWorker(
+        func component() -> WidgetProviderType {
+            WidgetProvider(
                 store: component(),
                 remote: component()
             )
@@ -194,7 +194,7 @@ extension DependencyTests {
         }
     }
 
-    struct WidgetWorker: WidgetWorkerType {
+    struct WidgetProvider: WidgetProviderType {
         private let store: WidgetStore
         private let remote: WidgetRemote
         
@@ -247,7 +247,7 @@ extension DependencyTests {
 // MARK: API
 
 protocol WidgetModuleType {
-    func component() -> WidgetWorkerType
+    func component() -> WidgetProviderType
     func component() -> WidgetRemote
     func component() -> WidgetStore
     func component() -> HTTPServiceType
@@ -293,7 +293,7 @@ protocol WidgetRemote {
     func fetch(id: Int) -> String
 }
 
-protocol WidgetWorkerType {
+protocol WidgetProviderType {
     func fetch(id: Int) -> String
 }
 

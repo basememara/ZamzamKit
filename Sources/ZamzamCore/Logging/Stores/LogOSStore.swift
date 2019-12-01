@@ -27,7 +27,7 @@ public struct LogOSStore: LogStore {
 
 public extension LogOSStore {
     
-    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, context: [String: Any]?) {
+    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, context: [String: CustomStringConvertible]?) {
         let type: OSLogType
         
         switch level {

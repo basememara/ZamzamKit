@@ -785,9 +785,9 @@ myLabel3.text = .localized(.next)
 <details>
 <summary>Logger</summary>
 
-> Create loggers that conform to `LogStore` and add to `LogWorker` (console and `os_log` are included):
+> Create loggers that conform to `LogStore` and add to `LogProvider` (console and `os_log` are included):
 ```swift
-let log: LogWorkerType = LogWorker(
+let log: LogProviderType = LogProvider(
     stores: [
         LogConsoleStore(minLevel: .debug),
         LogOSStore(
@@ -954,7 +954,7 @@ test = value ??+ "Rst"
 ## ZamzamLocation
 
 <details>
-<summary>LocationsWorker</summary>
+<summary>LocationsProvider</summary>
 
 > Location worker that offers easy authorization and observable closures ([read more](https://basememara.com/swifty-locations-observables/)):
 ```swift
@@ -962,7 +962,7 @@ class LocationViewController: UIViewController {
 
     @IBOutlet weak var outputLabel: UILabel!
     
-    var locationsWorker: LocationsWorkerType = LocationsWorker(
+    var locationsProvider: LocationsProviderType = LocationsProvider(
         desiredAccuracy: kCLLocationAccuracyThreeKilometers,
         distanceFilter: 1000
     )
@@ -970,38 +970,38 @@ class LocationViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        locationsWorker.addObserver(locationObserver)
-        locationsWorker.addObserver(headingObserver)
+        locationsProvider.addObserver(locationObserver)
+        locationsProvider.addObserver(headingObserver)
         
-        locationsWorker.requestAuthorization(
+        locationsProvider.requestAuthorization(
             for: .whenInUse,
             startUpdatingLocation: true,
             completion: { granted in
                 guard granted else { return }
-                self.locationsWorker.startUpdatingHeading()
+                self.locationsProvider.startUpdatingHeading()
             }
         )
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        locationsWorker.removeObservers()
+        locationsProvider.removeObservers()
     }
     
     deinit {
-        locationsWorker.removeObservers()
+        locationsProvider.removeObservers()
     }
 }
 
 extension LocationViewController {
     
-    var locationObserver: Observer<LocationsWorker.LocationHandler> {
+    var locationObserver: Observer<LocationsProvider.LocationHandler> {
         return Observer { [weak self] in
             self?.outputLabel.text = $0.description
         }
     }
     
-    var headingObserver: Observer<LocationsWorker.HeadingHandler> {
+    var headingObserver: Observer<LocationsProvider.HeadingHandler> {
         return Observer {
             print($0.description)
         }

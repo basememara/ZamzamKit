@@ -20,7 +20,7 @@ public struct LogConsoleStore: LogStore {
 
 public extension LogConsoleStore {
     
-    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, context: [String: Any]?) {
+    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, context: [String: CustomStringConvertible]?) {
         let prefix: String
         
         switch level {

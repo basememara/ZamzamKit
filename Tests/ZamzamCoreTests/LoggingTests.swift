@@ -20,7 +20,7 @@ extension LoggingTests {
         // Given
         let promise = expectation(description: "testEntriesAreWritten")
         let logStore = LogTestStore(minLevel: .verbose)
-        let log: LogWorkerType = LogWorker(stores: [logStore])
+        let log: LogProviderType = LogProvider(stores: [logStore])
         let group = DispatchGroup()
         
         // When
@@ -110,7 +110,7 @@ extension LoggingTests {
         // Given
         let promise = expectation(description: "testThreadSafety")
         let logStore = LogTestStore(minLevel: .verbose)
-        let log: LogWorkerType = LogWorker(stores: [logStore])
+        let log: LogProviderType = LogProvider(stores: [logStore])
         let group = DispatchGroup()
         let iterations = 1_000 // 10_000
         
@@ -155,7 +155,7 @@ private extension LoggingTests {
             uniqueKeysWithValues: LogAPI.Level.allCases.map { ($0, [String]()) }
         )
         
-        func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, context: [String: Any]?) {
+        func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, context: [String: CustomStringConvertible]?) {
             entries.updateValue(entries[level, default: []] + [message], forKey: level)
         }
     }
