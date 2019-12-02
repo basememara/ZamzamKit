@@ -85,12 +85,9 @@ public extension DateFormatter {
 
 public extension String.StringInterpolation {
     
-    private static let formatter = DateFormatter().with {
-        $0.calendar = Calendar(identifier: .iso8601)
-        $0.locale = .posix
-        $0.timeZone = .posix
-        $0.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
-    }
+    private static let formatter = DateFormatter(
+        iso8601Format: "yyyy-MM-dd HH:mm:ss.SSS"
+    )
     
     /// Appends a date formatted timestamp to the interpolation.
     ///

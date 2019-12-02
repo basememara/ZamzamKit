@@ -12,7 +12,7 @@ import UIKit
 
 /// Subclassed by the `AppDelegate` to pass lifecycle events to loaded plugins.
 ///
-/// The application plugins will be processed in sequence after calling `application() -> [ApplicationPlugin]`.
+/// The application plugins will be processed in sequence after calling `plugins() -> [ApplicationPlugin]`.
 ///
 ///     @UIApplicationMain
 ///     class AppDelegate: ApplicationPluggableDelegate {
@@ -25,7 +25,7 @@ import UIKit
 ///
 /// Each application plugin has access to the `AppDelegate` lifecycle events:
 ///
-///     final class LoggerPlugin: ApplicationPlugin {
+///     struct LoggerPlugin: ApplicationPlugin {
 ///         private let log = Logger()
 ///
 ///         func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -39,14 +39,14 @@ import UIKit
 ///         }
 ///
 ///         func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-///             log.warn("App did receive memory warning.")
+///             log.warning("App did receive memory warning.")
 ///         }
 ///
 ///         func applicationWillTerminate(_ application: UIApplication) {
-///             log.warn("App will terminate.")
+///             log.warning("App will terminate.")
 ///         }
 ///     }
-open class ApplicationPluggableDelegate: UIResponder, UIApplicationDelegate, WindowDelegate {
+open class ApplicationPluggableDelegate: UIResponder, UIApplicationDelegate {
     public var window: UIWindow?
     
     /// List of application plugins for binding to `AppDelegate` events

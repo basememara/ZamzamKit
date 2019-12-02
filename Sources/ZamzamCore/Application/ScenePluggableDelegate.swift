@@ -22,7 +22,7 @@ import UIKit
 ///
 /// Each scene plugin has access to the `SceneDelegate` lifecycle events:
 ///
-///     final class LoggerPlugin: ScenePlugin {
+///     struct LoggerPlugin: ScenePlugin {
 ///         private let log = Logger()
 ///
 ///         func sceneWillEnterForeground() {
@@ -34,7 +34,7 @@ import UIKit
 ///         }
 ///     }
 @available(iOS 13.0, *)
-open class ScenePluggableDelegate: UIResponder, UIWindowSceneDelegate, WindowDelegate {
+open class ScenePluggableDelegate: UIResponder, UIWindowSceneDelegate {
     public var window: UIWindow?
     
     /// List of scene plugins for binding to `SceneDelegate` events
@@ -124,9 +124,5 @@ public extension ScenePlugin {
     
     @available(iOS 13.0, *)
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {}
-}
-
-public protocol WindowDelegate: class {
-    var window: UIWindow? { get set }
 }
 #endif
