@@ -21,7 +21,7 @@ import WatchKit
 ///         ]}
 ///     }
 ///
-/// Each application module has access to the `ExtensionDelegate` lifecycle events:
+/// Each application plugin has access to the `ExtensionDelegate` lifecycle events:
 ///
 ///     struct LoggerPlugin: ExtensionPlugin {
 ///         private let log = Logger()
@@ -88,7 +88,7 @@ public extension ExtensionPluggableDelegate {
     }
 }
 
-/// Conforming to an app module and added to `ExtensionDelegate.application()` will trigger events.
+/// Conforming to an app plugin and added to `ExtensionDelegate.application()` will trigger events.
 public protocol ExtensionPlugin {
     func applicationDidFinishLaunching(_ application: WKExtension)
     
