@@ -1,65 +1,29 @@
 //
-//  A Swift micro-library that provides lightweight dependency injection.
+//  File.swift
+//  
 //
-//  Inspired by:
-//  https://dagger.dev
-//  https://github.com/hmlongco/Resolver
-//  https://github.com/InsertKoinIO/koin
-//
-//  Created by Basem Emara on 2019-09-06.
-//  Copyright © 2019 Zamzam Inc. All rights reserved.
+//  Created by Basem Emara on 2019-12-08.
 //
 
 import Foundation
 
-/// A dependency collection that resolves object instances through the `@Inject` property wrapper.
-///
-///     class AppDelegate: UIResponder, UIApplicationDelegate {
-///
-///         private let dependencies = Dependencies {
-///             Module { WidgetModule() as WidgetModuleType }
-///             Module { SampleModule() as SampleModuleType }
-///         }
-///
-///         override init() {
-///             super.init()
-///             dependencies.build()
-///         }
-///     }
-///
-///     // Some time later...
-///
-///     class ViewController: UIViewController {
-///
-///         @Inject private var widgetService: WidgetServiceType
-///         @Inject private var sampleService: SampleServiceType
-///
-///         override func viewDidLoad() {
-///             super.viewDidLoad()
-///
-///             print(widgetService.test())
-///             print(sampleService.test())
-///         }
-///     }
+@available(*, deprecated, message: "Use constructor injection instead.")
 public class Dependencies {
     /// Stored object instance factories.
     private var modules: [String: Module] = [:]
     
     private init() {}
     deinit { modules.removeAll() }
-}
-
-private extension Dependencies {
     
     /// Registers a specific type and its instantiating factory.
-    func add(module: Module) {
+    private func add(module: Module) {
         modules[module.name] = module
     }
-
+    
     /// Resolves through inference and returns an instance of the given type from the current default container.
     ///
     /// If the dependency is not found, an exception will occur.
-    func resolve<T>(for name: String? = nil) -> T {
+    private func resolve<T>(for name: String? = nil) -> T {
         let name = name ?? String(describing: T.self)
         
         guard let component: T = modules[name]?.resolve() as? T else {
@@ -68,40 +32,36 @@ private extension Dependencies {
         
         return component
     }
-}
-
-// MARK: - Public API
-
-public extension Dependencies {
+    
     /// Composition root container of dependencies.
     fileprivate static var root = Dependencies()
     
     /// Construct dependency resolutions.
-    convenience init(@ModuleBuilder _ modules: () -> [Module]) {
+    public convenience init(@ModuleBuilder _ modules: () -> [Module]) {
         self.init()
         modules().forEach { add(module: $0) }
     }
     
     /// Construct dependency resolution.
-    convenience init(@ModuleBuilder _ module: () -> Module) {
+    public convenience init(@ModuleBuilder _ module: () -> Module) {
         self.init()
         add(module: module())
     }
     
     /// Assigns the current container to the composition root.
-    func build() {
+    public func build() {
         // Used later in property wrapper
         Self.root = self
     }
     
     /// DSL for declaring modules within the container dependency initializer.
-    @_functionBuilder struct ModuleBuilder {
+    public @_functionBuilder struct ModuleBuilder {
         public static func buildBlock(_ modules: Module...) -> [Module] { modules }
         public static func buildBlock(_ module: Module) -> Module { module }
     }
 }
 
-/// A type that contributes to the object graph.
+@available(*, deprecated, message: "Use constructor injection instead.")
 public struct Module {
     fileprivate let name: String
     fileprivate let resolve: () -> Any
@@ -112,7 +72,7 @@ public struct Module {
     }
 }
 
-/// Resolves an instance from the dependency injection container.
+@available(*, deprecated, message: "Use constructor injection instead.")
 @propertyWrapper
 public class Inject<Value> {
     private let name: String?
