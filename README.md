@@ -729,41 +729,6 @@ BackgroundTask.run(for: application) { task in
 ### Utilities
 
 <details>
-<summary>Dependencies</summary>
-
-> Lightweight dependency injection via property wrapper ([read more](https://basememara.com/swift-dependency-injection-via-property-wrapper/)):
-```swift
-class AppDelegate: UIResponder, UIApplicationDelegate {
- 
-    private let dependencies = Dependencies {
-        Module { WidgetModule() as WidgetModuleType }
-        Module { SampleModule() as SampleModuleType }
-    }
-    
-    override init() {
-        super.init()
-        dependencies.build()
-    }
-}
-
-// Some time later...
-
-class ViewController: UIViewController {
-    
-    @Inject private var widgetService: WidgetServiceType
-    @Inject private var sampleService: SampleServiceType
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        print(widgetService.test())
-        print(sampleService.test())
-    }
-}
-```
-</details>
-
-<details>
 <summary>Localization</summary>
 
 > Strongly-typed localizable keys that's also `XLIFF` export friendly ([read more](https://basememara.com/swifty-localization-xcode-support/)):
