@@ -11,7 +11,7 @@ import ZamzamCore
 
 final class CollectionTests: XCTestCase {
 
-    func testGet() {
+    func testSafeOutOfBoundsIndex() {
         // Given
         let sample = [1, 3, 5, 7, 9]
         

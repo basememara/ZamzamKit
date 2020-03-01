@@ -19,7 +19,7 @@ public struct PreferencesDefaultsStore: PreferencesStore {
 public extension PreferencesDefaultsStore {
     
     func get<T>(_ key: String.Key<T?>) -> T? {
-        return defaults[key]
+        defaults[key]
     }
     
     func set<T>(_ value: T?, forKey key: String.Key<T?>) {

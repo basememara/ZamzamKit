@@ -17,7 +17,7 @@ public struct Preferences: PreferencesType {
 public extension Preferences {
     
     func get<T>(_ key: String.Key<T?>) -> T? {
-        return store.get(key)
+        store.get(key)
     }
     
     func set<T>(_ value: T?, forKey key: String.Key<T?>) {

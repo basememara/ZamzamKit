@@ -320,16 +320,12 @@ extension String.Keys {
     static let testArray = String.Key<[Int]?>("testArray")
 }
 
-// Create method or subscript for any type
+// Create method or subscript for generic types using the keys
 extension UserDefaults {
     
     subscript<T>(key: String.Key<T?>) -> T? {
         get { object(forKey: key.name) as? T }
-        
-        set {
-            guard let value = newValue else { return remove(key) }
-            set(value, forKey: key.name)
-        }
+        set { set(value, forKey: key.name) }
     }
 }
 
