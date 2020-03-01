@@ -161,6 +161,19 @@ extension DateTimeTests {
         XCTAssertFalse(date.isBeyond(fromDate, byHours: 2))
         XCTAssertFalse(date.isBeyond(fromDate, byHours: 4))
     }
+    
+    func testIsBeyondDays() {
+        let formatter = DateFormatter().with {
+            $0.dateFormat = "yyyy/MM/dd HH:mm"
+        }
+        
+        let date = formatter.date(from: "2016/03/24 11:40")!
+        let fromDate = formatter.date(from: "2016/03/22 09:40")!
+        
+        XCTAssertTrue(date.isBeyond(fromDate, byDays: 1))
+        XCTAssertTrue(date.isBeyond(fromDate, byDays: 2))
+        XCTAssertFalse(date.isBeyond(fromDate, byDays: 3))
+    }
 }
 
 // MARK: - String

@@ -381,6 +381,23 @@ public extension Date {
     func isBeyond(_ date: Date, byHours hours: Double) -> Bool {
         timeIntervalSince(date).hours > hours
     }
+    
+    /// Specifies if the date is beyond the time window.
+    ///
+    ///     let date = Date(fromString: "2016/03/24 11:40")
+    ///     let fromDate = Date(fromString: "2016/03/22 09:40")
+    ///
+    ///     date.isBeyond(fromDate, byDays: 1) // true
+    ///     date.isBeyond(fromDate, byDays: 2) // true
+    ///     date.isBeyond(fromDate, byDays: 3) // false
+    ///
+    /// - Parameters:
+    ///   - date: Date to use as a reference.
+    ///   - days: Time window the date is considered valid.
+    /// - Returns: Has the time elapsed the time window.
+    func isBeyond(_ date: Date, byDays days: Double) -> Bool {
+        timeIntervalSince(date).days > days
+    }
 }
 
 // MARK: - String helpers
