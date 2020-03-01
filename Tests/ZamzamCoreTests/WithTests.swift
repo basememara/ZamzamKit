@@ -9,7 +9,7 @@
 import XCTest
 import ZamzamCore
 
-final class WithTest: XCTestCase {
+final class WithTests: XCTestCase {
     
     func testWith() {
         let model = SomeModel().with {
