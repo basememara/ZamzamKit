@@ -32,19 +32,19 @@ extension LoggingTests {
             }
         }
         
-        // Then
         group.notify(queue: .global()) {
-            XCTAssertEqual(logStore.entries[.verbose], ["\(LogAPI.Level.verbose) test"])
-            XCTAssertEqual(logStore.entries[.debug], ["\(LogAPI.Level.debug) test"])
-            XCTAssertEqual(logStore.entries[.info], ["\(LogAPI.Level.info) test"])
-            XCTAssertEqual(logStore.entries[.warning], ["\(LogAPI.Level.warning) test"])
-            XCTAssertEqual(logStore.entries[.error], ["\(LogAPI.Level.error) test"])
-            XCTAssertEqual(logStore.entries[.none], [])
-            
             promise.fulfill()
         }
         
         wait(for: [promise], timeout: 10)
+        
+        // Then
+        XCTAssertEqual(logStore.entries[.verbose], ["\(LogAPI.Level.verbose) test"])
+        XCTAssertEqual(logStore.entries[.debug], ["\(LogAPI.Level.debug) test"])
+        XCTAssertEqual(logStore.entries[.info], ["\(LogAPI.Level.info) test"])
+        XCTAssertEqual(logStore.entries[.warning], ["\(LogAPI.Level.warning) test"])
+        XCTAssertEqual(logStore.entries[.error], ["\(LogAPI.Level.error) test"])
+        XCTAssertEqual(logStore.entries[.none], [])
     }
 }
 
@@ -125,19 +125,19 @@ extension LoggingTests {
             }
         }
         
-        // Then
         group.notify(queue: .global()) {
-            XCTAssertEqual(logStore.entries[.verbose]?.count, iterations)
-            XCTAssertEqual(logStore.entries[.debug]?.count, iterations)
-            XCTAssertEqual(logStore.entries[.info]?.count, iterations)
-            XCTAssertEqual(logStore.entries[.warning]?.count, iterations)
-            XCTAssertEqual(logStore.entries[.error]?.count, iterations)
-            XCTAssert(logStore.entries[.none]?.isEmpty == true)
-            
             promise.fulfill()
         }
         
         wait(for: [promise], timeout: 30)
+        
+        // Then
+        XCTAssertEqual(logStore.entries[.verbose]?.count, iterations)
+        XCTAssertEqual(logStore.entries[.debug]?.count, iterations)
+        XCTAssertEqual(logStore.entries[.info]?.count, iterations)
+        XCTAssertEqual(logStore.entries[.warning]?.count, iterations)
+        XCTAssertEqual(logStore.entries[.error]?.count, iterations)
+        XCTAssert(logStore.entries[.none]?.isEmpty == true)
     }
 }
 
