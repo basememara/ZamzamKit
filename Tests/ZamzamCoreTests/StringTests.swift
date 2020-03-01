@@ -153,6 +153,16 @@ extension StringTests {
 
 extension StringTests {
     
+    func testSHA256() {
+        XCTAssertEqual(
+            "JYGK Udsf6ITR^%$#UTY6GI7UGdsf gdsfgSDKHkjb768stb&(&T* &".sha256(),
+            "71e80ab896673f757d3e378d9191d8432346d961cb59e224de31977bc23def76"
+        )
+    }
+}
+
+extension StringTests {
+    
     func testHTMLStripped() {
         let test = "<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>"
         let expected = "This is web content with a link."
