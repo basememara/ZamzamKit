@@ -124,6 +124,40 @@ extension StringTests {
         XCTAssertEqual("112312451".separated(every: 3, with: ":"), "112:312:451")
         XCTAssertEqual("112312451".separated(every: 4, with: ":"), "1123:1245:1")
     }
+    
+    func testStrippingWhitespaceAndNewlines() {
+        let string = """
+                     { 0         1
+                     2                  34
+                     56       7             8
+                     9
+                     }
+                     """
+        
+        XCTAssertEqual(
+            string.strippingCharacters(in: .whitespacesAndNewlines),
+            "{0123456789}"
+        )
+    }
+    
+    func testReplacingCharacters() {
+        var allowed = CharacterSet.alphanumerics
+        allowed.insert(charactersIn: "_")
+        let disallowed = allowed.inverted
+        
+        let string = """
+                     _abcdefghijklmnopqrstuvwxyz
+                     ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                     0{1 2<3>4@5#6`7~8?9,0
+
+                     1
+                     """
+        
+        XCTAssertEqual(
+            string.replacingCharacters(in: disallowed, with: "_"),
+            "_abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ_0_1_2_3_4_5_6_7_8_9_0__1"
+        )
+    }
 }
 
 extension StringTests {

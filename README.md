@@ -273,6 +273,41 @@ value[99] // nil
 "1234567890".separated(every: 2, with: "-") // "12-34-56-78-90"
 ```
 
+> Remove the characters contained in a given set:
+```swift
+let string = """
+             { 0         1
+             2                  34
+             56       7             8
+             9
+             }
+             """
+
+string.strippingCharacters(in: .whitespacesAndNewlines) // {0123456789}
+```
+
+> Replace the characters contained in a givenharacter set with another string:
+```swift
+let set = CharacterSet.alphanumerics
+    .insert(charactersIn: "_")
+    .inverted
+
+let string = """
+             _abcdefghijklmnopqrstuvwxyz
+             ABCDEFGHIJKLMNOPQRSTUVWXYZ
+             0{1 2<3>4@5#6`7~8?9,0
+
+             1
+             """
+
+string.replacingCharacters(in: set, with: "_") //_abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ_0_1_2_3_4_5_6_7_8_9_0__1
+```
+
+> Get an encrypted version of the string in hex format:
+```swift
+"test@example.com".sha256() // 973dfe463ec85785f5f95af5ba3906eedb2d931c24e69824a89ea65dba4e813b
+```
+
 > Match using a regular expression pattern:
 ```swift
 "1234567890".match(regex: "^[0-9]+?$") // true

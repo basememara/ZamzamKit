@@ -164,6 +164,51 @@ public extension String {
                 .joined(separator: separator)
         )
     }
+    
+    /// Returns a new string made by removing the characters contained in a given set.
+    ///
+    ///     let string = """
+    ///         { 0         1
+    ///         2                  34
+    ///         56       7             8
+    ///         9
+    ///         }
+    ///         """
+    ///
+    ///     string.strippingCharacters(in: .whitespacesAndNewlines)
+    ///     // {0123456789}
+    ///
+    /// - Parameters:
+    ///   - set: A set of character values to remove.
+    /// - Returns: The string with the removed characters.
+    func strippingCharacters(in set: CharacterSet) -> String {
+        replacingCharacters(in: set, with: "")
+    }
+    
+    /// Returns a new string made by replacing the characters contained in a given set with another string.
+    ///
+    ///     let set = CharacterSet.alphanumerics
+    ///         .insert(charactersIn: "_")
+    ///         .inverted
+    ///
+    ///     let string = """
+    ///         _abcdefghijklmnopqrstuvwxyz
+    ///         ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    ///         0{1 2<3>4@5#6`7~8?9,0
+    ///
+    ///         1
+    ///         """
+    ///
+    ///     string.replacingCharacters(in: set, with: "_")
+    ///     //_abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ_0_1_2_3_4_5_6_7_8_9_0__1
+    ///
+    /// - Parameters:
+    ///   - set: A set of character values to replace.
+    ///   - string: A string to replace with.
+    /// - Returns: The string with the replaced characters.
+    func replacingCharacters(in set: CharacterSet, with string: String) -> String {
+        components(separatedBy: set).joined(separator: string)
+    }
 }
 
 // MARK: - Regular Expression
