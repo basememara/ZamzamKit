@@ -71,7 +71,7 @@ extension DecodableTests {
 
 extension DecodableTests {
         
-        func testErrorParsing() {
+        func testAnyDecodable() {
         // Given
         let jsonString = """
         {
