@@ -624,6 +624,28 @@ url?.removeQueryItem("xyz") // "https://example.com?abc=123&lmn=tuv"
 ```
 </details>
 
+<details>
+<summary>URLRequest</summary>
+
+> Convenient initializer for creating a network request object:
+```swift
+let request = URLRequest(
+    url: URL(string: "https://httpbin.org/get")!,
+    method: .get,
+    parameters: [
+        "abc": 123,
+        "def": "test456",
+        "xyz": true
+    ],
+    headers: [
+        "Abc": "test123",
+        "Def": "test456",
+        "Xyz": "test789"
+    ]
+)
+```
+</details>
+
 ### Application
 
 <details>
@@ -796,6 +818,43 @@ let log: LogProviderType = LogProvider(
 )
 
 log.error("There was an error.")
+```
+</details>
+
+<details>
+<summary>Network</summary>
+
+> Thin wrapper around `URLSession` for simple network requests:
+```swift
+ let request = URLRequest(
+     url: URL(string: "https://httpbin.org/get")!,
+     method: .get,
+     parameters: [
+         "abc": 123,
+         "def": "test456",
+         "xyz": true
+     ],
+     headers: [
+         "Abc": "test123",
+         "Def": "test456",
+         "Xyz": "test789"
+     ]
+ )
+ 
+ let networkProvider = NetworkProvider(
+     store: NetworkURLSessionStore()
+ )
+ 
+ networkProvider.send(with: request) { result in
+     switch result {
+     case .success(let response):
+         response.data
+         response.headers
+         response.statusCode
+     case .failure(let error):
+         error.statusCode
+     }
+ }
 ```
 </details>
 
