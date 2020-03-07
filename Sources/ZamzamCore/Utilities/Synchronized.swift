@@ -1,8 +1,11 @@
 //
 //  Synchronized.swift
-//  https://basememara.com/creating-thread-safe-generic-values-in-swift/
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2019-10-03.
+//  https://basememara.com/creating-thread-safe-generic-values-in-swift/
+//
+//  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
 import Foundation

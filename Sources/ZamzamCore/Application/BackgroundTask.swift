@@ -1,9 +1,10 @@
 //
 //  BackgroundTask.swift
-//  https://gist.github.com/phatmann/e96958529cc86ff584a9
 //  ZamzamKit
 //
 //  Created by Basem Emara on 3/15/17.
+//  https://gist.github.com/phatmann/e96958529cc86ff584a9
+//
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
@@ -13,7 +14,7 @@ import UIKit
 /// Encapsulate iOS background tasks
 public class BackgroundTask {
     private let application: UIApplication
-    fileprivate var identifier: UIBackgroundTaskIdentifier = .invalid
+    private var identifier: UIBackgroundTaskIdentifier = .invalid
     
     private init(application: UIApplication) {
         self.application = application
@@ -33,7 +34,6 @@ public class BackgroundTask {
     ///   - application: The application instance.
     ///   - handler: The long-running background task to execute.
     public static func run(for application: UIApplication, handler: (BackgroundTask) -> Void) {
-        // https://gist.github.com/phatmann/e96958529cc86ff584a9
         let backgroundTask = BackgroundTask(application: application)
         
         // Mark the beginning of a new long-running background task

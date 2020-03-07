@@ -73,7 +73,7 @@ tabBarController.tabBar.items?[safe: 3]?.selectedImage = UIImage("my-image")
 "b".within(["a", "b", "c"]) // true
 
 let status: OrderStatus = .cancelled
-status.within([.requeseted, .accepted, .inProgress]) // false
+status.within([.requested, .accepted, .inProgress]) // false
 ```
 </details>
 

@@ -1,9 +1,10 @@
 //
 //  ApplicationPluggableDelegate.swift
 //  ZamzamKit iOS
-//  https://github.com/fmo91/PluggableApplicationDelegate
 //
 //  Created by Basem Emara on 2018-01-28.
+//  https://github.com/fmo91/PluggableApplicationDelegate
+//
 //  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
