@@ -330,6 +330,9 @@ public extension Date {
         // https://github.com/SwifterSwift/SwifterSwift/blob/master/Sources/Extensions/Foundation/DateExtensions.swift
         date1.compare(self).rawValue * compare(date2).rawValue > 0
     }
+}
+
+public extension Date {
     
     /// Specifies if the date is beyond the time window.
     ///
