@@ -1,5 +1,5 @@
 //
-//  StringExtension.swift
+//  String.swift
 //  ZamzamKit
 //
 //  Created by Basem Emara on 2/17/16.
@@ -164,6 +164,51 @@ public extension String {
                 .joined(separator: separator)
         )
     }
+    
+    /// Returns a new string made by removing the characters contained in a given set.
+    ///
+    ///     let string = """
+    ///         { 0         1
+    ///         2                  34
+    ///         56       7             8
+    ///         9
+    ///         }
+    ///         """
+    ///
+    ///     string.strippingCharacters(in: .whitespacesAndNewlines)
+    ///     // {0123456789}
+    ///
+    /// - Parameters:
+    ///   - set: A set of character values to remove.
+    /// - Returns: The string with the removed characters.
+    func strippingCharacters(in set: CharacterSet) -> String {
+        replacingCharacters(in: set, with: "")
+    }
+    
+    /// Returns a new string made by replacing the characters contained in a given set with another string.
+    ///
+    ///     let set = CharacterSet.alphanumerics
+    ///         .insert(charactersIn: "_")
+    ///         .inverted
+    ///
+    ///     let string = """
+    ///         _abcdefghijklmnopqrstuvwxyz
+    ///         ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    ///         0{1 2<3>4@5#6`7~8?9,0
+    ///
+    ///         1
+    ///         """
+    ///
+    ///     string.replacingCharacters(in: set, with: "_")
+    ///     //_abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ_0_1_2_3_4_5_6_7_8_9_0__1
+    ///
+    /// - Parameters:
+    ///   - set: A set of character values to replace.
+    ///   - string: A string to replace with.
+    /// - Returns: The string with the replaced characters.
+    func replacingCharacters(in set: CharacterSet, with string: String) -> String {
+        components(separatedBy: set).joined(separator: string)
+    }
 }
 
 // MARK: - Regular Expression
@@ -207,107 +252,11 @@ public extension String {
     }
 }
 
-// MARK: - Web utilities
-
-public extension String {
-    
-    /// URL escaped string.
-    var urlEncoded: String {
-        addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? self
-    }
-	
-	/// Readable string from a URL string.
-	var urlDecoded: String {
-        removingPercentEncoding ?? self
-    }
-    
-    /// Stripped out HTML to plain text.
-    ///
-    ///     "<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>".htmlStripped -> "This is web content with a link."
-    var htmlStripped: String { replacing(regex: "<[^>]+>", with: "") }
-    
-    /// Decode an HTML string
-    ///
-    ///     let value = "<strong> 4 &lt; 5 &amp; 3 &gt; 2 .</strong> Price: 12 &#x20ac;.  &#64;"
-    ///     value.htmlDecoded -> "<strong> 4 < 5 & 3 > 2 .</strong> Price: 12 €.  @"
-    var htmlDecoded: String {
-        // http://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
-        guard !isEmpty else { return self }
-        
-        var position = startIndex
-        var result = ""
-        
-        // Mapping from XML/HTML character entity reference to character
-        // From http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references
-        let characterEntities: [String: Character] = [
-            // XML predefined entities:
-            "&quot;": "\"",
-            "&amp;": "&",
-            "&apos;": "'",
-            "&lt;": "<",
-            "&gt;": ">",
-            
-            // HTML character entity references:
-            "&nbsp;": "\u{00a0}"
-        ]
-        
-        // ===== Utility functions =====
-        
-        // Convert the number in the string to the corresponding
-        // Unicode character, e.g.
-        //    decodeNumeric("64", 10)   --> "@"
-        //    decodeNumeric("20ac", 16) --> "€"
-        func decodeNumeric(_ string: String, base: Int32) -> Character? {
-            let code = UInt32(strtoul(string, nil, base))
-            guard let scalar = UnicodeScalar(code) else { return nil }
-            return Character(scalar)
-        }
-        
-        // Decode the HTML character entity to the corresponding
-        // Unicode character, return `nil` for invalid input.
-        //     decode("&#64;")    --> "@"
-        //     decode("&#x20ac;") --> "€"
-        //     decode("&lt;")     --> "<"
-        //     decode("&foo;")    --> nil
-        func decode(_ entity: String) -> Character? {
-            return entity.hasPrefix("&#x") || entity.hasPrefix("&#X")
-                ? decodeNumeric(entity[3...] ?? "", base: 16)
-                : entity.hasPrefix("&#")
-                    ? decodeNumeric(entity[2...] ?? "", base: 10)
-                : characterEntities[entity]
-        }
-        
-        // Find the next '&' and copy the characters preceding it to `result`:
-        while let ampRange = range(of: "&", range: position..<endIndex) {
-            result.append(String(self[position..<ampRange.lowerBound]))
-            position = ampRange.lowerBound
-            
-            // Find the next ';' and copy everything from '&' to ';' into `entity`
-            guard let semiRange = range(of: ";", range: position..<endIndex) else { break }
-            
-            let entity = self[position..<semiRange.upperBound]
-            position = semiRange.upperBound
-            
-            if let decoded = decode(String(entity)) {
-                // Replace by decoded character:
-                result.append(decoded)
-            } else {
-                // Invalid entity, copy verbatim:
-                result.append(String(entity))
-            }
-        }
-        
-        // Copy remaining characters to result
-        result.append(String(self[position..<endIndex]))
-        return result
-    }
-}
-
 public extension String {
     
     /// Encode a string to Base64
     var base64Encoded: String {
-        Data(self.utf8).base64EncodedString()
+        Data(utf8).base64EncodedString()
     }
     
     /// Decode a string from Base64
@@ -322,6 +271,7 @@ public extension String {
             .replacingOccurrences(of: "/", with: "_")
             .replacingOccurrences(of: "+", with: "-")
             .replacingOccurrences(of: "=", with: "")
+            .trimmingCharacters(in: .whitespaces)
     }
 }
 
@@ -336,38 +286,6 @@ public extension String {
         guard let data = data(using: encoding) else { return nil }
         let decoder = decoder ?? Self.defaultDecoder
         return try? decoder.decode(T.self, from: data)
-    }
-}
-
-extension String {
-    
-    /// Keys for strongly-typed access for User Defaults, Keychain, or custom types.
-    ///
-    ///     // First define keys
-    ///     extension String.Keys {
-    ///         static let testString = String.Key<String?>("testString")
-    ///         static let testInt = String.Key<Int?>("testInt")
-    ///         static let testBool = String.Key<Bool?>("testBool")
-    ///         static let testArray = String.Key<[Int]?>("testArray")
-    ///     }
-    ///
-    ///     // Then use strongly-typed values
-    ///     let testString: String? = UserDefaults.standard[.testString]
-    ///     let testInt: Int? = UserDefaults.standard[.testInt]
-    ///     let testBool: Bool? = UserDefaults.standard[.testBool]
-    ///     let testArray: [Int]? = UserDefaults.standard[.testArray]
-    open class Keys {
-        fileprivate init() {}
-    }
-    
-    /// User Defaults key for strongly-typed access.
-    open class Key<ValueType>: Keys {
-        public let name: String
-        
-        public init(_ key: String) {
-            self.name = key
-            super.init()
-        }
     }
 }
 

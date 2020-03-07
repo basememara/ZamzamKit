@@ -1,8 +1,10 @@
 //
-//  File.swift
+//  LogOSStore.swift
+//  ZamzamCore
 //  
 //
 //  Created by Basem Emara on 2019-11-01.
+//  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
 import Foundation
@@ -10,12 +12,10 @@ import os
 
 /// Sends a message to the logging system, optionally specifying a custom log object, log level, and any message format arguments.
 public struct LogOSStore: LogStore {
-    private let minLevel: LogAPI.Level
+    public let minLevel: LogAPI.Level
     private let subsystem: String
     private let category: String
     private let log: OSLog
-    
-    private let queue = DispatchQueue(label: "io.zamzam.LogOSStore", qos: .utility)
     
     public init(minLevel: LogAPI.Level, subsystem: String, category: String) {
         self.minLevel = minLevel
@@ -27,28 +27,24 @@ public struct LogOSStore: LogStore {
 
 public extension LogOSStore {
     
-    func verbose(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil) {
-        guard minLevel <= .verbose else { return }
-        queue.async { os_log("%@", log: self.log, type: .debug, message) }
-    }
-    
-    func debug(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil) {
-        guard minLevel <= .debug else { return }
-        queue.async { os_log("%@", log: self.log, type: .debug, message) }
-    }
-    
-    func info(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil) {
-        guard minLevel <= .info else { return }
-        queue.async { os_log("%@", log: self.log, type: .info, message) }
-    }
-    
-    func warning(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil) {
-        guard minLevel <= .warning else { return }
-        queue.async { os_log("%@", log: self.log, type: .default, message) }
-    }
-    
-    func error(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: Any]? = nil) {
-        guard minLevel <= .error else { return }
-        queue.async { os_log("%@", log: self.log, type: .error, message) }
+    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, context: [String: CustomStringConvertible]?) {
+        let type: OSLogType
+        
+        switch level {
+        case .verbose:
+            type = .debug
+        case .debug:
+            type = .debug
+        case .info:
+            type = .info
+        case .warning:
+            type = .default
+        case .error:
+            type = .error
+        case .none:
+            return
+        }
+        
+        os_log("%@", log: log, type: type, format(message, path, function, line, context))
     }
 }

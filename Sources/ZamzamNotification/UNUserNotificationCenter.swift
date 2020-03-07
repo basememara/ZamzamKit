@@ -245,6 +245,19 @@ public extension UNUserNotificationCenter {
     
         add(request, withCompletionHandler: completion)
     }
+}
+
+public extension UNUserNotificationCenter {
+    
+    enum ScheduleInterval {
+        case once
+        case minute
+        case hour
+        case day
+        case week
+        case month
+        case year
+    }
     
     /// Schedules a local notification for delivery.
     ///
@@ -305,8 +318,11 @@ public extension UNUserNotificationCenter {
     
         add(request, withCompletionHandler: completion)
     }
+}
+
+#if os(iOS)
+public extension UNUserNotificationCenter {
     
-    #if os(iOS)
     /// Schedules a local notification for delivery.
     ///
     /// - Parameters:
@@ -345,8 +361,8 @@ public extension UNUserNotificationCenter {
     
         add(request, withCompletionHandler: completion)
     }
-    #endif
 }
+#endif
 
 public extension UNUserNotificationCenter {
     

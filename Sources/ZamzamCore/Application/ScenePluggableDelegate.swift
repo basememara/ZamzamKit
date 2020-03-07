@@ -22,7 +22,7 @@ import UIKit
 ///
 /// Each scene plugin has access to the `SceneDelegate` lifecycle events:
 ///
-///     final class LoggerPlugin: ScenePlugin {
+///     struct LoggerPlugin: ScenePlugin {
 ///         private let log = Logger()
 ///
 ///         func sceneWillEnterForeground() {
@@ -34,7 +34,7 @@ import UIKit
 ///         }
 ///     }
 @available(iOS 13.0, *)
-open class ScenePluggableDelegate: UIResponder, UIWindowSceneDelegate, WindowDelegate {
+open class ScenePluggableDelegate: UIResponder, UIWindowSceneDelegate {
     public var window: UIWindow?
     
     /// List of scene plugins for binding to `SceneDelegate` events
@@ -58,6 +58,10 @@ extension ScenePluggableDelegate {
         pluginInstances.forEach { $0.scene(scene, willConnectTo: session, options: connectionOptions) }
     }
     
+    open func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        pluginInstances.forEach { $0.scene(scene, continue: userActivity) }
+    }
+    
     open func sceneWillEnterForeground(_ scene: UIScene) {
         pluginInstances.forEach { $0.sceneWillEnterForeground() }
     }
@@ -79,7 +83,7 @@ extension ScenePluggableDelegate {
     }
 }
 
-/// Conforming to an scene module and added to `SceneDelegate.plugins()` will trigger events.
+/// Conforming to an scene plugin and added to `SceneDelegate.plugins()` will trigger events.
 public protocol ScenePlugin {
     
     /// Tells the delegate that the scene is about to begin running in the foreground and become visible to the user.
@@ -100,6 +104,10 @@ public protocol ScenePlugin {
     /// Tells the delegate about the addition of a scene to the app.
     @available(iOS 13.0, *)
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions)
+    
+    /// Tells the delegate to handle the specified Handoff-related activity.
+    @available(iOS 13.0, *)
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity)
 }
 
 // MARK: - Optionals
@@ -113,9 +121,8 @@ public extension ScenePlugin {
     
     @available(iOS 13.0, *)
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {}
-}
-
-public protocol WindowDelegate: class {
-    var window: UIWindow? { get set }
+    
+    @available(iOS 13.0, *)
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {}
 }
 #endif

@@ -18,15 +18,16 @@ public struct PreferencesDefaultsStore: PreferencesStore {
 
 public extension PreferencesDefaultsStore {
     
-    func get<T>(_ key: String.Key<T?>) -> T? {
-        return defaults[key]
+    func get<T>(_ key: PreferencesAPI.Key<T?>) -> T? {
+        defaults.object(forKey: key.name) as? T
     }
     
-    func set<T>(_ value: T?, forKey key: String.Key<T?>) {
-        defaults[key] = value
+    func set<T>(_ value: T?, forKey key: PreferencesAPI.Key<T?>) {
+        guard let value = value else { return remove(key) }
+        defaults.set(value, forKey: key.name)
     }
     
-    func remove<T>(_ key: String.Key<T?>) {
-        defaults.remove(key)
+    func remove<T>(_ key: PreferencesAPI.Key<T?>) {
+        defaults.removeObject(forKey: key.name)
     }
 }

@@ -3,10 +3,9 @@
 //  ZamzamKit iOS
 //
 //  Created by Basem Emara on 2018-07-09.
-//  Copyright © 2018 Zamzam Inc. All rights reserved.
-//
-//  Resizing UITableView to fit content:
 //  https://stackoverflow.com/a/48623673
+//
+//  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
 #if os(iOS)

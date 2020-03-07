@@ -11,7 +11,7 @@ import WatchKit
 
 /// Subclassed by the `ExtensionDelegate` to pass lifecycle events to loaded plugins.
 ///
-/// The application plugins will be processed in sequence after calling `application() -> [ExtensionPlugin]`.
+/// The application plugins will be processed in sequence after calling `plugins() -> [ExtensionPlugin]`.
 ///
 ///     class ExtensionDelegate: ExtensionPluggableDelegate {
 ///
@@ -21,9 +21,9 @@ import WatchKit
 ///         ]}
 ///     }
 ///
-/// Each application module has access to the `ExtensionDelegate` lifecycle events:
+/// Each application plugin has access to the `ExtensionDelegate` lifecycle events:
 ///
-///     final class LoggerPlugin: ExtensionPlugin {
+///     struct LoggerPlugin: ExtensionPlugin {
 ///         private let log = Logger()
 ///
 ///         func applicationDidFinishLaunching(_ application: WKExtension) {
@@ -35,15 +35,15 @@ import WatchKit
 ///         }
 ///
 ///         func applicationWillResignActive(_ application: WKExtension) {
-///             log.warn("App will resign active.")
+///             log.warning("App will resign active.")
 ///         }
 ///
 ///         func applicationWillEnterForeground(_ application: WKExtension) {
-///             log.warn("App will enter foreground.")
+///             log.warning("App will enter foreground.")
 ///         }
 ///
 ///         func applicationDidEnterBackground(_ application: WKExtension) {
-///             log.warn("App did enter background.")
+///             log.warning("App did enter background.")
 ///         }
 ///     }
 open class ExtensionPluggableDelegate: NSObject, WKExtensionDelegate {
@@ -88,7 +88,7 @@ public extension ExtensionPluggableDelegate {
     }
 }
 
-/// Conforming to an app module and added to `ExtensionDelegate.application()` will trigger events.
+/// Conforming to an app plugin and added to `ExtensionDelegate.application()` will trigger events.
 public protocol ExtensionPlugin {
     func applicationDidFinishLaunching(_ application: WKExtension)
     

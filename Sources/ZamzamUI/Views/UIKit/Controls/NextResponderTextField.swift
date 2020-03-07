@@ -1,10 +1,11 @@
 //
 //  NextResponderTextField.swift
-//  NextResponderTextField
+//  ZamzamUI
+//
+//  Created by mohamede1945, @author mohamede1945 on 6/20/15.
 //  https://github.com/mohamede1945/NextResponderTextField
 //  https://stackoverflow.com/a/5889795
 //
-//  Created by mohamede1945, @author mohamede1945 on 6/20/15.
 //  Copyright (c) 2015 Varaw. All rights reserved.
 //
 

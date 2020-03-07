@@ -10,17 +10,17 @@ import XCTest
 import CoreLocation
 import ZamzamCore
 
-final class CLLocationTests: XCTestCase {
-    
-}
+final class CLLocationTests: XCTestCase {}
 
 extension CLLocationTests {
     
     func testMetaData() {
+        // Given
         let promise = expectation(description: "fetch location")
         let value = CLLocation(latitude: 43.7, longitude: -79.4)
         let expected = "Toronto, CA"
     
+        // When
         value.geocoder {
             defer { promise.fulfill() }
             
@@ -30,6 +30,7 @@ extension CLLocationTests {
                     return
             }
             
+            // Then
             XCTAssertEqual("\(locality), \(countryCode)", expected,
                 "The location should be \(expected)")
             

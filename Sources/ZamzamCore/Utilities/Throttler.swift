@@ -1,8 +1,10 @@
 //
 //  Throttle.swift
-//  https://github.com/soffes/RateLimit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2018-10-07.
+//  https://github.com/soffes/RateLimit
+//
 //  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 

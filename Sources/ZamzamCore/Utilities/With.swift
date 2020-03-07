@@ -29,3 +29,4 @@ public extension With where Self: Any {
 
 extension NSObject: With {}
 extension JSONDecoder: With {}
+extension JSONEncoder: With {}

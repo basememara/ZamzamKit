@@ -1,9 +1,10 @@
 //
 //  ApplicationPluggableDelegate.swift
 //  ZamzamKit iOS
-//  https://github.com/fmo91/PluggableApplicationDelegate
 //
 //  Created by Basem Emara on 2018-01-28.
+//  https://github.com/fmo91/PluggableApplicationDelegate
+//
 //  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
@@ -12,7 +13,7 @@ import UIKit
 
 /// Subclassed by the `AppDelegate` to pass lifecycle events to loaded plugins.
 ///
-/// The application plugins will be processed in sequence after calling `application() -> [ApplicationPlugin]`.
+/// The application plugins will be processed in sequence after calling `plugins() -> [ApplicationPlugin]`.
 ///
 ///     @UIApplicationMain
 ///     class AppDelegate: ApplicationPluggableDelegate {
@@ -25,7 +26,7 @@ import UIKit
 ///
 /// Each application plugin has access to the `AppDelegate` lifecycle events:
 ///
-///     final class LoggerPlugin: ApplicationPlugin {
+///     struct LoggerPlugin: ApplicationPlugin {
 ///         private let log = Logger()
 ///
 ///         func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -39,14 +40,14 @@ import UIKit
 ///         }
 ///
 ///         func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-///             log.warn("App did receive memory warning.")
+///             log.warning("App did receive memory warning.")
 ///         }
 ///
 ///         func applicationWillTerminate(_ application: UIApplication) {
-///             log.warn("App will terminate.")
+///             log.warning("App will terminate.")
 ///         }
 ///     }
-open class ApplicationPluggableDelegate: UIResponder, UIApplicationDelegate, WindowDelegate {
+open class ApplicationPluggableDelegate: UIResponder, UIApplicationDelegate {
     public var window: UIWindow?
     
     /// List of application plugins for binding to `AppDelegate` events
@@ -78,6 +79,14 @@ extension ApplicationPluggableDelegate {
         //swiftlint:disable reduce_boolean
         pluginInstances.reduce(true) {
             $0 && $1.application(application, didFinishLaunchingWithOptions: launchOptions)
+        }
+    }
+    
+    open func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        // Ensure all delegates called even if condition fails early
+        //swiftlint:disable reduce_boolean
+        pluginInstances.reduce(false) {
+            $0 || $1.application(application, continue: userActivity, restorationHandler: restorationHandler)
         }
     }
 }
@@ -131,10 +140,11 @@ extension ApplicationPluggableDelegate {
     }
 }
 
-/// Conforming to an app module and added to `AppDelegate.application()` will trigger events.
+/// Conforming to an app plugin and added to `AppDelegate.application()` will trigger events.
 public protocol ApplicationPlugin {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
     
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication)
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication)
@@ -148,6 +158,7 @@ public protocol ApplicationPlugin {
 public extension ApplicationPlugin {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool { return true }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool { return true }
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool { return false }
     
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {}
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {}

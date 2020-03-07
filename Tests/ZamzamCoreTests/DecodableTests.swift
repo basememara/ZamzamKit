@@ -10,8 +10,69 @@ import XCTest
 import ZamzamCore
 
 final class DecodableTests: XCTestCase {
+    private let jsonDecoder = JSONDecoder()
+    private lazy var bundle = Bundle(for: type(of: self))
+}
+
+extension DecodableTests {
     
-    func testErrorParsing() {
+    func testFromString() {
+        // Given
+        struct TestModel: Decodable {
+            let string: String
+            let integer: Int
+        }
+        
+        let jsonString = """
+        {
+            "string": "Abc",
+            "integer": 123,
+        }
+        """
+        
+        // When
+        do {
+            let model = try jsonDecoder.decode(TestModel.self, from: jsonString)
+            
+            // Then
+            XCTAssertEqual(model.string, "Abc")
+            XCTAssertEqual(model.integer, 123)
+        } catch {
+            XCTFail("Could not parse JSON string: \(error)")
+        }
+    }
+}
+    
+extension DecodableTests {
+        
+    func testInBundle() {
+        // Given
+        struct TestModel: Decodable {
+            let string: String
+            let integer: Int
+        }
+        
+        // When
+        do {
+            let model = try jsonDecoder.decode(
+                TestModel.self,
+                forResource: "TestModel.json",
+                inBundle: bundle
+            )
+            
+            // Then
+            XCTAssertEqual(model.string, "Abc")
+            XCTAssertEqual(model.integer, 123)
+        } catch {
+            XCTFail("Could not parse JSON resource: \(error)")
+        }
+    }
+}
+
+extension DecodableTests {
+        
+        func testAnyDecodable() {
+        // Given
         let jsonString = """
         {
             "code": "post_does_not_exist",
@@ -44,8 +105,14 @@ final class DecodableTests: XCTestCase {
                 let data: [String: AnyDecodable]?
             }
             
-            let payload = try JSONDecoder.test.decode(ServerResponse.self, from: data)
+            let decoder = JSONDecoder().with {
+                $0.dateDecodingStrategy = .formatted(.init(iso8601Format: "yyyy-MM-dd'T'HH:mm:ssZ"))
+            }
             
+            // When
+            let payload = try decoder.decode(ServerResponse.self, from: data)
+            
+            // Then
             XCTAssertEqual((payload.data?["boolean"])?.value as! Bool, true)
             XCTAssertEqual((payload.data?["integer"])?.value as! Int, 1)
             XCTAssertEqual((payload.data?["double"])?.value as! Double, 3.14159265358979323846, accuracy: 0.001)
@@ -56,12 +123,5 @@ final class DecodableTests: XCTestCase {
         } catch {
             XCTFail("Could not parse JSON: \(error)")
         }
-    }
-}
-
-private extension JSONDecoder {
-    
-    static let test = JSONDecoder().with {
-        $0.dateDecodingStrategy = .formatted(.init(iso8601Format: "yyyy-MM-dd'T'HH:mm:ssZ"))
     }
 }

@@ -4,6 +4,7 @@
 //
 //  Created by Basem Emara on 6/27/17.
 //  http://basememara.com/swifty-localization-xcode-support/
+//
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 

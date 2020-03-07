@@ -1,9 +1,10 @@
 //
 //  BadgeBarButtonItem.swift
 //  ZamzamKit iOS
-//  https://gist.github.com/yonat/75a0f432d791165b1fd6
 //
 //  Created by Basem Emara on 2018-01-30.
+//  https://gist.github.com/yonat/75a0f432d791165b1fd6
+//
 //  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 

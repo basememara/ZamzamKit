@@ -48,10 +48,9 @@ public extension AppInfo {
 	var isRunningOnSimulator: Bool {
 		// http://stackoverflow.com/questions/24869481/detect-if-app-is-being-built-for-device-or-simulator-in-swift
         #if targetEnvironment(simulator)
-			return true
+        return true
 		#else
-			return false
+        return false
 		#endif
 	}
-
 }

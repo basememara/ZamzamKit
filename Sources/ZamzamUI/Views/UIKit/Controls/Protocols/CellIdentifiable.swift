@@ -39,15 +39,15 @@ import UIKit
 ///
 ///             switch identifier {
 ///             case .about:
-///                 router.showAbout()
+///                 render.showAbout()
 ///             case .subscribe:
-///                 router.showSubscribe()
+///                 render.showSubscribe()
 ///             case .feedback:
-///                 router.sendFeedback(
+///                 render.sendFeedback(
 ///                     subject: .localizedFormat(.emailFeedbackSubject, constants.appDisplayName!)
 ///                 )
 ///             case .tutorial:
-///                 router.startTutorial()
+///                 render.startTutorial()
 ///             }
 ///         }
 ///     }

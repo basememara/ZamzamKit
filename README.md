@@ -73,7 +73,7 @@ tabBarController.tabBar.items?[safe: 3]?.selectedImage = UIImage("my-image")
 "b".within(["a", "b", "c"]) // true
 
 let status: OrderStatus = .cancelled
-status.within([.requeseted, .accepted, .inProgress]) // false
+status.within([.requested, .accepted, .inProgress]) // false
 ```
 </details>
 
@@ -273,6 +273,41 @@ value[99] // nil
 "1234567890".separated(every: 2, with: "-") // "12-34-56-78-90"
 ```
 
+> Remove the characters contained in a given set:
+```swift
+let string = """
+             { 0         1
+             2                  34
+             56       7             8
+             9
+             }
+             """
+
+string.strippingCharacters(in: .whitespacesAndNewlines) // {0123456789}
+```
+
+> Replace the characters contained in a givenharacter set with another string:
+```swift
+let set = CharacterSet.alphanumerics
+    .insert(charactersIn: "_")
+    .inverted
+
+let string = """
+             _abcdefghijklmnopqrstuvwxyz
+             ABCDEFGHIJKLMNOPQRSTUVWXYZ
+             0{1 2<3>4@5#6`7~8?9,0
+
+             1
+             """
+
+string.replacingCharacters(in: set, with: "_") //_abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ_0_1_2_3_4_5_6_7_8_9_0__1
+```
+
+> Get an encrypted version of the string in hex format:
+```swift
+"test@example.com".sha256() // 973dfe463ec85785f5f95af5ba3906eedb2d931c24e69824a89ea65dba4e813b
+```
+
 > Match using a regular expression pattern:
 ```swift
 "1234567890".match(regex: "^[0-9]+?$") // true
@@ -308,36 +343,6 @@ value.base64URLEncoded
 ```swift
 var value: String? = "test 123"
 value.isNilOrEmpty
-```
-
-> Strongly-typed string keys:
-```swift
-// First define keys
-extension String.Keys {
-    static let testString = String.Key<String?>("testString")
-    static let testInt = String.Key<Int?>("testInt")
-    static let testBool = String.Key<Bool?>("testBool")
-    static let testArray = String.Key<[Int]?>("testArray")
-}
-
-// Create method or subscript for any type
-extension UserDefaults {
-    
-    subscript<T>(key: String.Key<T?>) -> T? {
-        get { object(forKey: key.name) as? T }
-        
-        set {
-            guard let value = newValue else { return remove(key) }
-            set(value, forKey: key.name)
-        }
-    }
-}
-
-// Then use strongly-typed values
-let testString: String? = UserDefaults.standard[.testString]
-let testInt: Int? = UserDefaults.standard[.testInt]
-let testBool: Bool? = UserDefaults.standard[.testBool]
-let testArray: [Int]? = UserDefaults.standard[.testArray]
 ```
 </details>
 
@@ -573,23 +578,60 @@ label.attributedText = "Abc".attributed + " def " +
 </details>
 
 <details>
-<summary>URL</summary>
+<summary>URLSession</summary>
 
-> Append or remove query string parameters:
+> A thin wrapper around `URLSession` and `URLRequest` for simple network requests:
 ```swift
-let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
+ let request = URLRequest(
+     url: URL(string: "https://httpbin.org/get")!,
+     method: .get,
+     parameters: [
+         "abc": 123,
+         "def": "test456",
+         "xyz": true
+     ],
+     headers: [
+         "Abc": "test123",
+         "Def": "test456",
+         "Xyz": "test789"
+     ]
+ )
+ 
+ let networkProvider: NetworkProviderType = NetworkProvider(
+     store: NetworkURLSessionStore()
+ )
+ 
+ networkProvider.send(with: request) { result in
+     switch result {
+     case .success(let response):
+         response.data
+         response.headers
+         response.statusCode
+     case .failure(let error):
+         error.statusCode
+     }
+ }
+```
+</details>
 
-url?.appendingQueryItem("def", value: "456") // "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
-url?.appendingQueryItem("xyz", value: "999") // "https://example.com?abc=123&lmn=tuv&xyz=999"
+<details>
+<summary>UserDefaults</summary>
 
-url?.appendingQueryItems([
-    "def": "456",
-    "jkl": "777",
-    "abc": "333",
-    "lmn": nil
-]) -> "https://example.com?xyz=987&def=456&abc=333&jkl=777"
+> A thin wrapper to manage `UserDefaults`, or other storages that conform to `PreferencesStore`:
+```swift
+let preferences: PreferencesType = Preferences(
+    store: PreferencesDefaultsStore(
+        defaults: UserDefaults.standard
+    )
+)
 
-url?.removeQueryItem("xyz") // "https://example.com?abc=123&lmn=tuv"
+preferences.set(123, forKey: .abc)
+preferences.get(.token) // 123
+
+// Define strongly-typed keys
+extension PreferencesAPI.Keys {
+    static let abc = PreferencesAPI.Key<String>("abc")
+}
 ```
 </details>
 
@@ -726,42 +768,29 @@ BackgroundTask.run(for: application) { task in
 ```
 </details>
 
-### Utilities
-
 <details>
-<summary>Dependencies</summary>
+<summary>Keychain</summary>
 
-> Lightweight dependency injection via property wrapper ([read more](https://basememara.com/swift-dependency-injection-via-property-wrapper/)):
+> A thin wrapper to manage Keychain, or other storages that conform to `SecuredPreferencesStore`:
 ```swift
-class AppDelegate: UIResponder, UIApplicationDelegate {
- 
-    private let dependencies = Dependencies {
-        Module { WidgetModule() as WidgetModuleType }
-        Module { SampleModule() as SampleModuleType }
-    }
-    
-    override init() {
-        super.init()
-        dependencies.build()
-    }
+let keychain: SecuredPreferencesType = SecuredPreferences(
+    store: SecuredPreferencesKeychainStore()
+)
+
+keychain.set("kjn989hi", forKey: .token)
+
+keychain.get(.token) {
+    print($0) // "kjn989hi"
 }
 
-// Some time later...
-
-class ViewController: UIViewController {
-    
-    @Inject private var widgetService: WidgetServiceType
-    @Inject private var sampleService: SampleServiceType
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        print(widgetService.test())
-        print(sampleService.test())
-    }
+// Define strongly-typed keys
+extension SecuredPreferencesAPI.Key {
+    static let token = SecuredPreferencesAPI.Key("token")
 }
 ```
 </details>
+
+### Utilities
 
 <details>
 <summary>Localization</summary>
@@ -785,9 +814,9 @@ myLabel3.text = .localized(.next)
 <details>
 <summary>Logger</summary>
 
-> Create loggers that conform to `LogStore` and add to `LogWorker` (console and `os_log` are included):
+> Create loggers that conform to `LogStore` and add to `LogProvider` (console and `os_log` are included):
 ```swift
-let log: LogWorkerType = LogWorker(
+let log: LogProviderType = LogProvider(
     stores: [
         LogConsoleStore(minLevel: .debug),
         LogOSStore(
@@ -954,7 +983,7 @@ test = value ??+ "Rst"
 ## ZamzamLocation
 
 <details>
-<summary>LocationsWorker</summary>
+<summary>LocationsProvider</summary>
 
 > Location worker that offers easy authorization and observable closures ([read more](https://basememara.com/swifty-locations-observables/)):
 ```swift
@@ -962,7 +991,7 @@ class LocationViewController: UIViewController {
 
     @IBOutlet weak var outputLabel: UILabel!
     
-    var locationsWorker: LocationsWorkerType = LocationsWorker(
+    var locationsProvider: LocationsProviderType = LocationsProvider(
         desiredAccuracy: kCLLocationAccuracyThreeKilometers,
         distanceFilter: 1000
     )
@@ -970,38 +999,38 @@ class LocationViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        locationsWorker.addObserver(locationObserver)
-        locationsWorker.addObserver(headingObserver)
+        locationsProvider.addObserver(locationObserver)
+        locationsProvider.addObserver(headingObserver)
         
-        locationsWorker.requestAuthorization(
+        locationsProvider.requestAuthorization(
             for: .whenInUse,
             startUpdatingLocation: true,
             completion: { granted in
                 guard granted else { return }
-                self.locationsWorker.startUpdatingHeading()
+                self.locationsProvider.startUpdatingHeading()
             }
         )
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        locationsWorker.removeObservers()
+        locationsProvider.removeObservers()
     }
     
     deinit {
-        locationsWorker.removeObservers()
+        locationsProvider.removeObservers()
     }
 }
 
 extension LocationViewController {
     
-    var locationObserver: Observer<LocationsWorker.LocationHandler> {
+    var locationObserver: Observer<LocationsProvider.LocationHandler> {
         return Observer { [weak self] in
             self?.outputLabel.text = $0.description
         }
     }
     
-    var headingObserver: Observer<LocationsWorker.HeadingHandler> {
+    var headingObserver: Observer<LocationsProvider.HeadingHandler> {
         return Observer {
             print($0.description)
         }

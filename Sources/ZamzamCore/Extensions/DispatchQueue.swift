@@ -21,5 +21,5 @@ public extension DispatchQueue {
     static let transform = DispatchQueue(label: "\(DispatchQueue.labelPrefix).transform", qos: .userInitiated)
     
     /// A configured queue for executing logger related work items.
-    static let logger = DispatchQueue(label: "\(DispatchQueue.labelPrefix).logger", qos: .background)
+    static let logger = DispatchQueue(label: "\(DispatchQueue.labelPrefix).logger", qos: .utility)
 }

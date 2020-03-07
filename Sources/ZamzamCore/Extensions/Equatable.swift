@@ -15,12 +15,12 @@ public extension Equatable {
     ///     "b".within(["a", "b", "c"]) // true
     ///
     ///     let status: OrderStatus = .cancelled
-    ///     status.within([.requeseted, .accepted, .inProgress]) // false
+    ///     status.within([.requested, .accepted, .inProgress]) // false
     ///
     /// - Parameter values: Array of values to check.
     /// - Returns: Returns true if the values equals to one of the values in the array.
     func within<T> (_ values: T) -> Bool
         where T: Sequence, T.Iterator.Element == Self {
-        values.contains(self)
+            values.contains(self)
     }
 }

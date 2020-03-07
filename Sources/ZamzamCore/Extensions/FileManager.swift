@@ -80,24 +80,26 @@ public extension FileManager {
     func download(from url: String, completion: @escaping (URL?, URLResponse?, Error?) -> Void) {
         guard let nsURL = URL(string: url) else { return completion(nil, nil, ZamzamError.invalidData) }
         
-        URLSession.shared.downloadTask(with: nsURL) { location, response, error in
-            guard let location = location, error == nil else { return completion(nil, nil, error) }
-            
-            // Construct file destination
-            let destination = self.url(of: nsURL.lastPathComponent, from: .cachesDirectory)
-            
-            // Delete local file if it exists to overwrite
-            try? self.removeItem(at: destination)
-            
-            // Store remote file locally
-            do {
-                try self.moveItem(at: location, to: destination)
-            } catch {
-                return completion(nil, nil, error)
+        URLSession.shared
+            .downloadTask(with: nsURL) { location, response, error in
+                guard let location = location, error == nil else { return completion(nil, nil, error) }
+                
+                // Construct file destination
+                let destination = self.url(of: nsURL.lastPathComponent, from: .cachesDirectory)
+                
+                // Delete local file if it exists to overwrite
+                try? self.removeItem(at: destination)
+                
+                // Store remote file locally
+                do {
+                    try self.moveItem(at: location, to: destination)
+                } catch {
+                    return completion(nil, nil, error)
+                }
+                
+                completion(destination, response, error)
             }
-            
-            completion(destination, response, error)
-        }.resume()
+            .resume()
     }
 }
 #endif
