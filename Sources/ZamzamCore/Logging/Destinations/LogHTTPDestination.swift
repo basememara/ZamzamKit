@@ -1,0 +1,151 @@
+//
+//  LogHTTPDestination.swift
+//  ZamzamCore
+//
+//  Created by Basem Emara on 2020-03-04.
+//  Copyright © 2020 Zamzam Inc. All rights reserved.
+//
+
+#if os(iOS)
+import Foundation
+import UIKit
+import AdSupport
+
+/// Log destination for sending over HTTP.
+final public class LogHTTPDestination {
+    private let urlRequest: URLRequest
+    private let maxEntriesInBuffer: Int
+    private let appInfo: AppInfo
+    private let networkService: NetworkProviderType
+    
+    private let deviceName = UIDevice.current.name
+    private let deviceModel = UIDevice.current.model
+    private var deviceIdentifier = UIDevice.current.identifierForVendor?.uuidString ?? ""
+    private var advertisingIdentifier = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+    private let osVersion = UIDevice.current.systemVersion
+    
+    /// Stores the log entries in memory until it is ready to send.
+    private var buffer: [String] = [] {
+        didSet { buffer.count > maxEntriesInBuffer ? send() : nil }
+    }
+    
+    /// The initializer of the log destination.
+    ///
+    /// - Parameters:
+    ///   - urlRequest: A URL load request for the destination. Leave data `nil` as this will be added to the `httpBody` upon sending.
+    ///   - maxEntriesInBuffer: The threshold of the buffer before sending to the destination.
+    ///   - appInfo: Provides details of the current app.
+    ///   - networkService: The object used to send the HTTP request.
+    ///   - notificationCenter: A notification dispatch mechanism that registers observers for flushing the buffer at certain app lifecycle events.
+    public init(
+        urlRequest: URLRequest,
+        maxEntriesInBuffer: Int,
+        appInfo: AppInfo,
+        networkService: NetworkProviderType,
+        notificationCenter: NotificationCenter
+    ) {
+        self.urlRequest = urlRequest
+        self.maxEntriesInBuffer = maxEntriesInBuffer
+        self.appInfo = appInfo
+        self.networkService = networkService
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(send),
+            name: UIApplication.willResignActiveNotification,
+            object: nil
+        )
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(send),
+            name: UIApplication.willTerminateNotification,
+            object: nil
+        )
+    }
+}
+
+public extension LogHTTPDestination {
+    
+    /// Appends the log to the buffer that will be queued for later sending.
+    ///
+    /// The buffer size is determined in the initializer. Once the threshold is met,
+    /// the entries will be flushed and sent to the destination. The buffer is
+    /// also automatically flushed on the `willResignActive` and
+    /// `willTerminate` events.
+    ///
+    /// - Parameters:
+    ///   - parameters: The values that will be merged and sent to the detination.
+    ///   - level: The current level of the log entry.
+    ///   - path: Path of the caller.
+    ///   - function: Function of the caller.
+    ///   - line: Line of the caller.
+    func write(
+        _ parameters: [String: Any],
+        level: LogAPI.Level,
+        path: String,
+        function: String,
+        line: Int
+    ) {
+        let session: [String: Any] = [
+            "app": [
+                "name": appInfo.appDisplayName ?? "Unknown",
+                "version": appInfo.appVersion ?? "Unknown",
+                "build": appInfo.appBuild ?? "Unknown",
+                "bundle_id": appInfo.appBundleID ?? "Unknown"
+            ],
+            "device": [
+                "device_id": deviceIdentifier,
+                "advertising_id": advertisingIdentifier,
+                "device_name": deviceName,
+                "device_model": deviceModel,
+                "os_version": osVersion,
+                "is_testflight": appInfo.isInTestFlight,
+                "is_simulator": appInfo.isRunningOnSimulator
+            ],
+            "code": [
+                "path": path,
+                "function": function,
+                "line": line
+            ]
+        ]
+        
+        let merged = parameters.merging(session) { (parameter, _) in parameter }
+        
+        guard let data = try? JSONSerialization.data(withJSONObject: merged, options: []),
+            let log = String(data: data, encoding: .utf8) else {
+                print("ERROR: Logger unable to serialize parameters for destination.")
+                return
+        }
+        
+        // Store in buffer for sending later
+        buffer.append(log)
+    }
+}
+
+private extension LogHTTPDestination {
+    
+    @objc func send() {
+        let logs = buffer
+        buffer = []
+        
+        guard let data = logs.joined(separator: "\n").data(using: .utf8) else {
+            debugPrint("Could not begin log destination task")
+            return
+        }
+        
+        var request = urlRequest
+        request.httpBody = data
+        
+        BackgroundTask.run(for: .shared) { task in
+            self.networkService.send(with: request) {
+                if case .failure(let error) = $0 {
+                    debugPrint("Error from log destination: \(error)")
+                }
+                
+                task.end()
+            }
+        }
+    }
+}
+#endif
