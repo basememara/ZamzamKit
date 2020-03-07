@@ -16,15 +16,15 @@ public struct Preferences: PreferencesType {
 
 public extension Preferences {
     
-    func get<T>(_ key: String.Key<T?>) -> T? {
+    func get<T>(_ key: PreferencesAPI.Key<T?>) -> T? {
         store.get(key)
     }
     
-    func set<T>(_ value: T?, forKey key: String.Key<T?>) {
+    func set<T>(_ value: T?, forKey key: PreferencesAPI.Key<T?>) {
         store.set(value, forKey: key)
     }
     
-    func remove<T>(_ key: String.Key<T?>) {
+    func remove<T>(_ key: PreferencesAPI.Key<T?>) {
         store.remove(key)
     }
 }

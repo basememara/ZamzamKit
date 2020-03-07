@@ -344,32 +344,6 @@ value.base64URLEncoded
 var value: String? = "test 123"
 value.isNilOrEmpty
 ```
-
-> Strongly-typed string keys:
-```swift
-// First define keys
-extension String.Keys {
-    static let testString = String.Key<String?>("testString")
-    static let testInt = String.Key<Int?>("testInt")
-    static let testBool = String.Key<Bool?>("testBool")
-    static let testArray = String.Key<[Int]?>("testArray")
-}
-
-// Create method or subscript for generic types using the keys
-extension UserDefaults {
-    
-    subscript<T>(key: String.Key<T?>) -> T? {
-        get { object(forKey: key.name) as? T }
-        set { set(value, forKey: key.name) }
-    }
-}
-
-// Then use strongly-typed values
-let testString: String? = UserDefaults.standard[.testString]
-let testInt: Int? = UserDefaults.standard[.testInt]
-let testBool: Bool? = UserDefaults.standard[.testBool]
-let testArray: [Int]? = UserDefaults.standard[.testArray]
-```
 </details>
 
 ### Foundation+
@@ -604,45 +578,60 @@ label.attributedText = "Abc".attributed + " def " +
 </details>
 
 <details>
-<summary>URL</summary>
+<summary>URLSession</summary>
 
-> Append or remove query string parameters:
+> A thin wrapper around `URLSession` and `URLRequest` for simple network requests:
 ```swift
-let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
-
-url?.appendingQueryItem("def", value: "456") // "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
-url?.appendingQueryItem("xyz", value: "999") // "https://example.com?abc=123&lmn=tuv&xyz=999"
-
-url?.appendingQueryItems([
-    "def": "456",
-    "jkl": "777",
-    "abc": "333",
-    "lmn": nil
-]) -> "https://example.com?xyz=987&def=456&abc=333&jkl=777"
-
-url?.removeQueryItem("xyz") // "https://example.com?abc=123&lmn=tuv"
+ let request = URLRequest(
+     url: URL(string: "https://httpbin.org/get")!,
+     method: .get,
+     parameters: [
+         "abc": 123,
+         "def": "test456",
+         "xyz": true
+     ],
+     headers: [
+         "Abc": "test123",
+         "Def": "test456",
+         "Xyz": "test789"
+     ]
+ )
+ 
+ let networkProvider: NetworkProviderType = NetworkProvider(
+     store: NetworkURLSessionStore()
+ )
+ 
+ networkProvider.send(with: request) { result in
+     switch result {
+     case .success(let response):
+         response.data
+         response.headers
+         response.statusCode
+     case .failure(let error):
+         error.statusCode
+     }
+ }
 ```
 </details>
 
 <details>
-<summary>URLRequest</summary>
+<summary>UserDefaults</summary>
 
-> Convenient initializer for creating a network request object:
+> A thin wrapper to manage `UserDefaults`, or other storages that conform to `PreferencesStore`:
 ```swift
-let request = URLRequest(
-    url: URL(string: "https://httpbin.org/get")!,
-    method: .get,
-    parameters: [
-        "abc": 123,
-        "def": "test456",
-        "xyz": true
-    ],
-    headers: [
-        "Abc": "test123",
-        "Def": "test456",
-        "Xyz": "test789"
-    ]
+let preferences: PreferencesType = Preferences(
+    store: PreferencesDefaultsStore(
+        defaults: UserDefaults.standard
+    )
 )
+
+preferences.set(123, forKey: .abc)
+preferences.get(.token) // 123
+
+// Define strongly-typed keys
+extension PreferencesAPI.Keys {
+    static let abc = PreferencesAPI.Key<String>("abc")
+}
 ```
 </details>
 
@@ -779,6 +768,28 @@ BackgroundTask.run(for: application) { task in
 ```
 </details>
 
+<details>
+<summary>Keychain</summary>
+
+> A thin wrapper to manage Keychain, or other storages that conform to `SecuredPreferencesStore`:
+```swift
+let keychain: SecuredPreferencesType = SecuredPreferences(
+    store: SecuredPreferencesKeychainStore()
+)
+
+keychain.set("kjn989hi", forKey: .token)
+
+keychain.get(.token) {
+    print($0) // "kjn989hi"
+}
+
+// Define strongly-typed keys
+extension SecuredPreferencesAPI.Key {
+    static let token = SecuredPreferencesAPI.Key("token")
+}
+```
+</details>
+
 ### Utilities
 
 <details>
@@ -818,43 +829,6 @@ let log: LogProviderType = LogProvider(
 )
 
 log.error("There was an error.")
-```
-</details>
-
-<details>
-<summary>Network</summary>
-
-> Thin wrapper around `URLSession` for simple network requests:
-```swift
- let request = URLRequest(
-     url: URL(string: "https://httpbin.org/get")!,
-     method: .get,
-     parameters: [
-         "abc": 123,
-         "def": "test456",
-         "xyz": true
-     ],
-     headers: [
-         "Abc": "test123",
-         "Def": "test456",
-         "Xyz": "test789"
-     ]
- )
- 
- let networkProvider = NetworkProvider(
-     store: NetworkURLSessionStore()
- )
- 
- networkProvider.send(with: request) { result in
-     switch result {
-     case .success(let response):
-         response.data
-         response.headers
-         response.statusCode
-     case .failure(let error):
-         error.statusCode
-     }
- }
 ```
 </details>
 
