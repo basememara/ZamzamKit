@@ -6,8 +6,6 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
-
 /// Type for creating observable properties with unique keys for later retrival.
 public struct Observer<T> {
     public let id: String

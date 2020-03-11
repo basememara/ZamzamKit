@@ -6,8 +6,6 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
-
 public extension Collection {
     
     /// Element at the given index if it exists.

@@ -6,7 +6,10 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSDateFormatter
+import Foundation.NSCalendar
+import Foundation.NSLocale
+import Foundation.NSTimeZone
 
 public extension DateFormatter {
     

@@ -6,8 +6,6 @@
 //  Created by Basem Emara on 2019-11-01.
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
-
-import Foundation
 import os
 
 /// Sends a message to the logging system, optionally specifying a custom log object, log level, and any message format arguments.

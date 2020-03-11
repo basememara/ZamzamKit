@@ -6,7 +6,8 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSJSONSerialization
+import Foundation.NSObject
 
 public protocol With {}
 

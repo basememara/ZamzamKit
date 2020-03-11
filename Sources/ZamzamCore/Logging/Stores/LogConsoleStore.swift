@@ -7,7 +7,7 @@
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSDate
 
 /// Sends a message to the IDE console.
 public struct LogConsoleStore: LogStore {

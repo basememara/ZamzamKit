@@ -6,8 +6,6 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
-
 public extension BinaryFloatingPoint {
 
     /// Returns this value rounded to an integral value.

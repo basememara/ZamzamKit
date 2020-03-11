@@ -6,7 +6,9 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSCalendar
+import Foundation.NSDate
+import Foundation.NSDateFormatter
 
 public extension Date {
     

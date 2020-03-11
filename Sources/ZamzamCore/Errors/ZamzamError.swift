@@ -6,7 +6,7 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSURLError
 
 public enum ZamzamError: Error {
     case general

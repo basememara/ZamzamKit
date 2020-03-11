@@ -6,7 +6,7 @@
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSUserDefaults
 
 public struct PreferencesDefaultsStore: PreferencesStore {
     private let defaults: UserDefaults

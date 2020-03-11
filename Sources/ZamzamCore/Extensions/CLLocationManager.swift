@@ -6,7 +6,7 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import CoreLocation
+import CoreLocation.CLLocationManager
 
 public extension CLLocationManager {
     

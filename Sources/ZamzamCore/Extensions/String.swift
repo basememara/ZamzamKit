@@ -6,7 +6,7 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSData
 
 public extension String {
     

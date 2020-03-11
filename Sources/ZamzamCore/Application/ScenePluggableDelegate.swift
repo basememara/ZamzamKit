@@ -6,7 +6,10 @@
 //
 
 #if os(iOS)
-import UIKit
+import UIKit.UIResponder
+import UIKit.UIScene
+import UIKit.UIWindow
+import UIKit.UIWindowScene
 
 /// Subclassed by the `SceneDelegate` to pass lifecycle events to loaded plugins.
 ///

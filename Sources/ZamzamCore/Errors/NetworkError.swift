@@ -6,7 +6,8 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSData
+import Foundation.NSURLRequest
 
 public struct NetworkError: Error {
     

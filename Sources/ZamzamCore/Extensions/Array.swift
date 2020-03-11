@@ -6,8 +6,6 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
-
 public extension Array where Element: Equatable {
 	
     /// Array with all duplicates removed from it.

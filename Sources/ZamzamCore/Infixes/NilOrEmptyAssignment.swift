@@ -6,8 +6,6 @@
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
-
 infix operator ??+: NilCoalescingPrecedence
 
 public extension Optional where Wrapped == String {

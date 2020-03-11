@@ -8,7 +8,8 @@
 
 #if os(iOS)
 import Foundation
-import UIKit
+import UIKit.UIApplication
+import UIKit.UIDevice
 import AdSupport
 
 /// Log destination for sending over HTTP.

@@ -7,8 +7,9 @@
 //
 
 #if os(iOS)
-import UIKit
 import AVFoundation
+import Foundation.NSBundle
+import UIKit.UIApplication
 
 public protocol Audible: class {
     var audioPlayer: AVAudioPlayer? { get set }

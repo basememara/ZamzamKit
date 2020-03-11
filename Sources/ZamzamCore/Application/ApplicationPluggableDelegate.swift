@@ -9,7 +9,8 @@
 //
 
 #if os(iOS)
-import UIKit
+import UIKit.UIApplication
+import UIKit.UIWindow
 
 /// Subclassed by the `AppDelegate` to pass lifecycle events to loaded plugins.
 ///

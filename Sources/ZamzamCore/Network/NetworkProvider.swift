@@ -6,7 +6,7 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSURLRequest
 
 public struct NetworkProvider: NetworkProviderType {
     private let store: NetworkStore

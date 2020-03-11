@@ -5,11 +5,14 @@
 //  Created by Basem Emara on 2019-11-18.
 //
 
-import Foundation
+import Foundation.NSBundle
+import Foundation.NSData
+import Foundation.NSJSONSerialization
 
 public extension JSONDecoder {
     
     /// Decodes an instance of the indicated type.
+    ///
     /// - Parameters:
     ///   - type: The type to decode.
     ///   - string: The string representation of the JSON object.
@@ -27,10 +30,8 @@ public extension JSONDecoder {
 
 public extension JSONDecoder {
     
-    /// Returns a value of the type you specify, decoded from a JSON object.
-    
-    
     /// Decodes an instance of the indicated type.
+    /// 
     /// - Parameters:
     ///   - type: The type to decode.
     ///   - name: The name of the embedded resource.

@@ -6,7 +6,8 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSFileManager
+import Foundation.NSURL
 
 #if !os(tvOS)
 public extension FileManager {

@@ -6,7 +6,9 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSCalendar
+import Foundation.NSLocale
+import Foundation.NSTimeZone
 
 public extension Calendar {
     

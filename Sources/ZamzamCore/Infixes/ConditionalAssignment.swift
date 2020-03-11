@@ -6,8 +6,6 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
-
 precedencegroup Comparison {
     associativity: left
     higherThan: LogicalConjunctionPrecedence

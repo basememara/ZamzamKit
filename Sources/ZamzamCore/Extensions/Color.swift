@@ -7,10 +7,10 @@
 //
 
 #if canImport(UIKit)
-    import UIKit
+import UIKit.UIColor
 #elseif os(OSX)
-    import AppKit
-    public typealias UIColor = NSColor
+import AppKit.NSColor
+public typealias UIColor = NSColor
 #endif
 
 public extension UIColor {

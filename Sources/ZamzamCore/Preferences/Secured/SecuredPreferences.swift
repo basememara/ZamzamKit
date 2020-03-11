@@ -6,8 +6,6 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
-
 public struct SecuredPreferences: SecuredPreferencesType {
     private let store: SecuredPreferencesStore
     
