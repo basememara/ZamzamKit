@@ -6,7 +6,7 @@
 //  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSDate
 
 /// Skips failed elements during decoding instead exiting collection completely; lossy array decoding.
 public struct FailableCodableArray<Element: Decodable>: Decodable {

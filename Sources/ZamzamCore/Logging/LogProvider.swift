@@ -18,7 +18,7 @@ public struct LogProvider: LogProviderType {
 
 public extension LogProvider {
     
-    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, context: [String: CustomStringConvertible]?, completion: (() -> Void)?) {
+    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]?, completion: (() -> Void)?) {
         let destinations = stores.filter { $0.canWrite(for: level) }
         
         // Skip if does not meet minimum log level
@@ -29,7 +29,7 @@ public extension LogProvider {
         
         DispatchQueue.logger.async {
             destinations.forEach {
-                $0.write(level, with: message, path: path, function: function, line: line, context: context)
+                $0.write(level, with: message, path: path, function: function, line: line, error: error, context: context)
             }
             
             completion?()

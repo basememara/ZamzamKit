@@ -131,6 +131,15 @@ let date2 = Date(timeIntervalSinceNow: -1000)
 date.isBetween(date1, date2) -> true
 ```
 
+> Determine if a date is beyond a specified time window:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+let fromDate = Date(fromString: "2018/03/22 09:30")
+
+date.isBeyond(fromDate, bySeconds: 300) -> true
+date.isBeyond(fromDate, bySeconds: 1200) -> false
+```
+
 > Use specific calendar for data manipulations:
 ```swift
 let date = Date(fromString: "2018/03/22 09:40")

@@ -6,7 +6,9 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import CoreLocation
+import CoreLocation.CLGeocoder
+import CoreLocation.CLLocation
+import Foundation
 
 public extension CLLocationCoordinate2D {
     

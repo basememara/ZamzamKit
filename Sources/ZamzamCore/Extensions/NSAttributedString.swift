@@ -6,7 +6,8 @@
 //  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSAttributedString
+import Foundation.NSRange
 
 public extension NSAttributedString {
     

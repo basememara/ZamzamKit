@@ -9,7 +9,7 @@
 //
 
 #if os(iOS)
-import UIKit
+import UIKit.UIApplication
 
 /// Encapsulate iOS background tasks
 public class BackgroundTask {

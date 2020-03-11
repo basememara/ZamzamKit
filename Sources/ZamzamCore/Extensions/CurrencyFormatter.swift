@@ -6,7 +6,8 @@
 //  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSLocale
+import Foundation.NSNumberFormatter
 
 /// A formatter that converts between monetary values and their textual representations.
 public struct CurrencyFormatter {

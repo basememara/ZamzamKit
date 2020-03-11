@@ -6,7 +6,9 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSCalendar
+import Foundation.NSDate
+import Foundation.NSDateFormatter
 
 public extension Date {
     
@@ -330,6 +332,9 @@ public extension Date {
         // https://github.com/SwifterSwift/SwifterSwift/blob/master/Sources/Extensions/Foundation/DateExtensions.swift
         date1.compare(self).rawValue * compare(date2).rawValue > 0
     }
+}
+
+public extension Date {
     
     /// Specifies if the date is beyond the time window.
     ///

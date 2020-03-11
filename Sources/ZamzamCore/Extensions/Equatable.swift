@@ -6,8 +6,6 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
-
 public extension Equatable {
 
     /// Determines if the value is contained within the sequence of values.

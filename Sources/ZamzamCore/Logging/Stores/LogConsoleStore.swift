@@ -7,7 +7,7 @@
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSDate
 
 /// Sends a message to the IDE console.
 public struct LogConsoleStore: LogStore {
@@ -20,7 +20,7 @@ public struct LogConsoleStore: LogStore {
 
 public extension LogConsoleStore {
     
-    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, context: [String: CustomStringConvertible]?) {
+    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]?) {
         let prefix: String
         
         switch level {
@@ -38,6 +38,6 @@ public extension LogConsoleStore {
             return
         }
         
-        print("\(prefix) \(format(message, path, function, line, context))")
+        print("\(prefix) \(format(message, path, function, line, error, context))")
     }
 }

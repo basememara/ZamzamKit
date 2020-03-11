@@ -5,7 +5,7 @@
 //  Created by Basem Emara on 2019-10-05.
 //
 
-import Foundation
+import Foundation.NSThread
 
 public extension Thread {
     typealias Task = @convention(block) () -> Void

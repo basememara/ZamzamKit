@@ -6,7 +6,8 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSCalendar
+import Foundation.NSDate
 
 /// Represents a specified number of a calendar component unit.
 ///

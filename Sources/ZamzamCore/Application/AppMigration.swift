@@ -8,7 +8,7 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSUserDefaults
 
 /// Manages blocks of code that only need to run once on version updates in apps.
 ///

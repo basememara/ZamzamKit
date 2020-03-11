@@ -8,7 +8,7 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSBundle
 
 public extension Localizable {
     static let pullToRefresh = Localizable(NSLocalizedString("pull.to.refresh", bundle: bundle(forKey: "pull.to.refresh"), comment: "For tables"))
