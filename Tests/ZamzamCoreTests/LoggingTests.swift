@@ -27,7 +27,7 @@ extension LoggingTests {
         LogAPI.Level.allCases.forEach {
             group.enter()
             
-            log.write($0, with: "\($0) test", path: #file, function: #function, line: #line, context: nil) {
+            log.write($0, with: "\($0) test", path: #file, function: #function, line: #line, error: nil, context: nil) {
                 group.leave()
             }
         }
@@ -119,7 +119,7 @@ extension LoggingTests {
             LogAPI.Level.allCases.forEach {
                 group.enter()
                 
-                log.write($0, with: "\($0) test \(iteration)", path: #file, function: #function, line: #line, context: nil) {
+                log.write($0, with: "\($0) test \(iteration)", path: #file, function: #function, line: #line, error: nil, context: nil) {
                     group.leave()
                 }
             }
@@ -155,7 +155,7 @@ private extension LoggingTests {
             uniqueKeysWithValues: LogAPI.Level.allCases.map { ($0, [String]()) }
         )
         
-        func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, context: [String: CustomStringConvertible]?) {
+        func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]?) {
             entries.updateValue(entries[level, default: []] + [message], forKey: level)
         }
     }
