@@ -1,23 +1,24 @@
 //
-//  UIColor.swift
+//  ColorTypeAlias.swift
 //  ZamzamKit
 //
 //  Created by Basem Emara on 2/20/16.
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-#if canImport(UIKit)
-import UIKit.UIColor
-#elseif os(OSX)
+#if os(OSX)
 import AppKit.NSColor
-public typealias UIColor = NSColor
+public typealias ColorTypeAlias = NSColor
+#elseif canImport(UIKit)
+import UIKit.UIColor
+public typealias ColorTypeAlias = UIColor
 #endif
 
-public extension UIColor {
+public extension ColorTypeAlias {
 
     /// A random color.
-    static var random: UIColor {
-        UIColor(rgb: (
+    static var random: ColorTypeAlias {
+        ColorTypeAlias(rgb: (
             .random(in: 0...255),
             .random(in: 0...255),
             .random(in: 0...255)
@@ -25,13 +26,13 @@ public extension UIColor {
     }
 }
 
-public extension UIColor {
+public extension ColorTypeAlias {
 
     /// An additional convenience initializer function that allows to init a color object using a hex color value.
     ///
     /// For hex code `#990000`, initialize using `0x990000`.
     ///
-    ///     UIColor(hex: 0x990000)
+    ///     ColorTypeAlias(hex: 0x990000)
     ///
     /// - Parameters:
     ///   - hex: RGB UInt color hex value.
@@ -47,7 +48,7 @@ public extension UIColor {
     
     /// An additional convenience initializer function that allows to init a color object using integers.
     ///
-    ///     UIColor(rgb: (66, 134, 244))
+    ///     ColorTypeAlias(rgb: (66, 134, 244))
     ///
     /// - Parameters:
     ///   - rgb: A tuple of integers representing the RGB colors.
