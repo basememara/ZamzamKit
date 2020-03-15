@@ -3,7 +3,7 @@
 //  ZamzamKit
 //
 //  Created by Basem Emara on 1/20/16.
-//  Copyright © 2016 CocoaPods. All rights reserved.
+//  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
 import XCTest
