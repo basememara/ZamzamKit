@@ -180,6 +180,13 @@ extension DateTimeTests {
 
 extension DateTimeTests {
     
+    func testStringFromFormatter() {
+        let formatter = DateFormatter(iso8601Format: "MM-dd-yyyy HH:mm:ss")
+        let date = Date(timeIntervalSince1970: 1583697427)
+        
+        XCTAssertEqual(date.string(formatter: formatter), "03-08-2020 19:57:07")
+    }
+    
     func testStringToDate() {
         let date = Date(fromString: "1970/01/03 00:00")!
         let expected = Date(timeIntervalSince1970: TimeInterval(172800)

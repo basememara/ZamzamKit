@@ -409,6 +409,17 @@ public extension Date {
 
 public extension Date {
     
+    /// Returns a string representation of a given date formatted using the receiver’s formatter.
+    ///
+    ///     Date().string(formatter: .MM_dd_yyyy_HH_mm) // "03-15-2020 22:46"
+    ///
+    /// - Parameters:
+    ///   - formatter: The date formatter to use.
+    /// - Returns: The string representation of the given date.
+    func string(formatter: DateFormatter) -> String {
+        formatter.string(from: self)
+    }
+    
     /// Creates a date value initialized from a string.
     ///
     ///     Date(fromString: "2018/11/01 18:15")

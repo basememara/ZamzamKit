@@ -32,7 +32,7 @@ public extension ColorTypeAlias {
     ///
     /// For hex code `#990000`, initialize using `0x990000`.
     ///
-    ///     ColorTypeAlias(hex: 0x990000)
+    ///     UIColor(hex: 0x990000)
     ///
     /// - Parameters:
     ///   - hex: RGB UInt color hex value.
@@ -48,7 +48,7 @@ public extension ColorTypeAlias {
     
     /// An additional convenience initializer function that allows to init a color object using integers.
     ///
-    ///     ColorTypeAlias(rgb: (66, 134, 244))
+    ///     UIColor(rgb: (66, 134, 244))
     ///
     /// - Parameters:
     ///   - rgb: A tuple of integers representing the RGB colors.

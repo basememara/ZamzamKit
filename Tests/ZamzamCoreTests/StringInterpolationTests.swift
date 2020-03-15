@@ -9,7 +9,7 @@
 import XCTest
 import ZamzamCore
 
-final class StringInterpolationTests: BaseTestCase {
+final class StringInterpolationTests: XCTestCase {
     
     func testTimestamp() {
         // Given

@@ -66,7 +66,7 @@ public extension CurrencyFormatter {
         return formatter.string(from: validValue as NSNumber) ?? "\(double)"
     }
     
-    /// Returns the given value adjusted to respect formatter's max an min values.
+    /// Returns the given value adjusted to respect formatter's min and max values.
     ///
     /// - Parameter value: value to be adjusted if needed
     /// - Returns: Ajusted value
