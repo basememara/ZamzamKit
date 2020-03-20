@@ -300,15 +300,3 @@ public extension Optional where Wrapped == String {
     /// A Boolean value indicating whether a string is `nil` or has no characters.
     var isNilOrEmpty: Bool { self?.isEmpty ?? true }
 }
-
-public extension String.StringInterpolation {
-    
-    /// Returns a string representation of a given date formatted using the receiver’s current settings.
-    ///
-    /// - Parameters:
-    ///   - value: The date to format.
-    ///   - formatter: A formatter that converts between dates and their textual representations.
-    mutating func appendInterpolation(_ value: Date, formatter: DateFormatter) {
-        appendLiteral(formatter.string(from: value))
-    }
-}

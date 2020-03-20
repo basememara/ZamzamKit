@@ -10,6 +10,18 @@ import Foundation.NSDateFormatter
 
 public extension String.StringInterpolation {
     
+    /// Returns a string representation of a given date formatted using the receiver’s current settings.
+    ///
+    /// - Parameters:
+    ///   - value: The date to format.
+    ///   - formatter: A formatter that converts between dates and their textual representations.
+    mutating func appendInterpolation(_ value: Date, formatter: DateFormatter) {
+        appendLiteral(formatter.string(from: value))
+    }
+}
+
+public extension String.StringInterpolation {
+    
     private static let formatter = DateFormatter(
         iso8601Format: "yyyy-MM-dd HH:mm:ss.SSS"
     )
