@@ -1,11 +1,12 @@
 //
 //  URLRequest.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2020-03-01.
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
+import Foundation.NSJSONSerialization
 import Foundation.NSData
 import Foundation.NSURLRequest
 
@@ -53,8 +54,8 @@ public extension URLRequest {
         self.httpMethod = method.rawValue
         
         self.allHTTPHeaderFields = headers
-        self.addValue("application/json", forHTTPHeaderField: "Accept")
-        self.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        self.setValue("application/json", forHTTPHeaderField: "Accept")
+        self.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         // Parameters become serialized into body for all other HTTP methods
         if let parameters = parameters, !parameters.isEmpty, doesSupportBody {
@@ -87,8 +88,8 @@ public extension URLRequest {
         self.httpMethod = method.rawValue
         
         self.allHTTPHeaderFields = headers
-        self.addValue("application/json", forHTTPHeaderField: "Accept")
-        self.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        self.setValue("application/json", forHTTPHeaderField: "Accept")
+        self.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         if let data = data, method != .get {
             self.httpBody = data

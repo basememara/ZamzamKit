@@ -1,5 +1,5 @@
 //
-//  LogProvider.swift
+//  LogRepository.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2019-06-11.
@@ -8,18 +8,18 @@
 
 import Foundation
 
-public struct LogProvider: LogProviderType {
-    private let stores: [LogStore]
+public struct LogRepository: LogRepositoryType {
+    private let services: [LogService]
     
-    public init(stores: [LogStore]) {
-        self.stores = stores
+    public init(services: [LogService]) {
+        self.services = services
     }
 }
 
-public extension LogProvider {
+public extension LogRepository {
     
     func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]?, completion: (() -> Void)?) {
-        let destinations = stores.filter { $0.canWrite(for: level) }
+        let destinations = services.filter { $0.canWrite(for: level) }
         
         // Skip if does not meet minimum log level
         guard !destinations.isEmpty else {

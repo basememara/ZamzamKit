@@ -1,5 +1,5 @@
 //
-//  LogHTTPDestination.swift
+//  LogHTTPService.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2020-03-04.
@@ -13,11 +13,11 @@ import UIKit.UIDevice
 import AdSupport
 
 /// Log destination for sending over HTTP.
-final public class LogHTTPDestination {
+final public class LogHTTPService {
     private let urlRequest: URLRequest
     private let maxEntriesInBuffer: Int
     private let appInfo: AppInfo
-    private let networkService: NetworkProviderType
+    private let networkRepository: NetworkRepositoryType
     
     private let deviceName = UIDevice.current.name
     private let deviceModel = UIDevice.current.model
@@ -36,19 +36,19 @@ final public class LogHTTPDestination {
     ///   - urlRequest: A URL load request for the destination. Leave data `nil` as this will be added to the `httpBody` upon sending.
     ///   - maxEntriesInBuffer: The threshold of the buffer before sending to the destination.
     ///   - appInfo: Provides details of the current app.
-    ///   - networkService: The object used to send the HTTP request.
+    ///   - networkRepository: The object used to send the HTTP request.
     ///   - notificationCenter: A notification dispatch mechanism that registers observers for flushing the buffer at certain app lifecycle events.
     public init(
         urlRequest: URLRequest,
         maxEntriesInBuffer: Int,
         appInfo: AppInfo,
-        networkService: NetworkProviderType,
+        networkRepository: NetworkRepositoryType,
         notificationCenter: NotificationCenter
     ) {
         self.urlRequest = urlRequest
         self.maxEntriesInBuffer = maxEntriesInBuffer
         self.appInfo = appInfo
-        self.networkService = networkService
+        self.networkRepository = networkRepository
         
         notificationCenter.addObserver(
             self,
@@ -66,7 +66,7 @@ final public class LogHTTPDestination {
     }
 }
 
-public extension LogHTTPDestination {
+public extension LogHTTPService {
     
     /// Appends the log to the buffer that will be queued for later sending.
     ///
@@ -113,10 +113,9 @@ public extension LogHTTPDestination {
         
         let merged = parameters.merging(session) { (parameter, _) in parameter }
         
-        guard let data = try? JSONSerialization.data(withJSONObject: merged, options: []),
-            let log = String(data: data, encoding: .utf8) else {
-                print("ERROR: Logger unable to serialize parameters for destination.")
-                return
+        guard let log = merged.jsonString() else {
+            print("ERROR: Logger unable to serialize parameters for destination.")
+            return
         }
         
         // Store in buffer for sending later
@@ -124,7 +123,7 @@ public extension LogHTTPDestination {
     }
 }
 
-private extension LogHTTPDestination {
+private extension LogHTTPService {
     
     @objc func send() {
         let logs = buffer
@@ -139,7 +138,7 @@ private extension LogHTTPDestination {
         request.httpBody = data
         
         BackgroundTask.run(for: .shared) { task in
-            self.networkService.send(with: request) {
+            self.networkRepository.send(with: request) {
                 if case .failure(let error) = $0 {
                     debugPrint("Error from log destination: \(error)")
                 }

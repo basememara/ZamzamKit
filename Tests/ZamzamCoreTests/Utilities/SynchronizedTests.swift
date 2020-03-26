@@ -9,7 +9,7 @@ import XCTest
 import ZamzamCore
 
 final class SynchronizedTests: XCTestCase {
-    private let iterations = 1_000_000
+    private let iterations = 10_000 // 1_000_000
     private let writeMultipleOf = 1000
 }
 
@@ -28,6 +28,9 @@ extension SynchronizedTests {
             XCTAssertEqual(temp.value, iterations)
         }
     }
+}
+
+extension SynchronizedTests {
     
     func testReadPerformance() {
         var temp = Synchronized<Int>(0)

@@ -1,8 +1,10 @@
 //
 //  NSURLComponentsExtension.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2/17/16.
+//  https://basememara.com/updating-query-string-parameters-in-swift/
+//
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 

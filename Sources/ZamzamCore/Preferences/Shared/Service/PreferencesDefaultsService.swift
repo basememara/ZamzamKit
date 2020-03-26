@@ -1,6 +1,6 @@
 //
 //  PreferencesType.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2019-05-09.
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
@@ -8,7 +8,7 @@
 
 import Foundation.NSUserDefaults
 
-public struct PreferencesDefaultsStore: PreferencesStore {
+public struct PreferencesDefaultsService: PreferencesService {
     private let defaults: UserDefaults
     
     public init(defaults: UserDefaults) {
@@ -16,7 +16,7 @@ public struct PreferencesDefaultsStore: PreferencesStore {
     }
 }
 
-public extension PreferencesDefaultsStore {
+public extension PreferencesDefaultsService {
     
     func get<T>(_ key: PreferencesAPI.Key<T?>) -> T? {
         defaults.object(forKey: key.name) as? T

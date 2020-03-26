@@ -1,6 +1,6 @@
 //
 //  NSFileManagerExtension.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2/17/16.
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
@@ -79,11 +79,17 @@ public extension FileManager {
     ///   - url: The HTTP URL to retrieve the file.
     ///   - completion: The completion handler to call when the load request is complete.
     func download(from url: String, completion: @escaping (URL?, URLResponse?, Error?) -> Void) {
-        guard let nsURL = URL(string: url) else { return completion(nil, nil, ZamzamError.invalidData) }
+        guard let nsURL = URL(string: url) else {
+            completion(nil, nil, ZamzamError.invalidData)
+            return
+        }
         
         URLSession.shared
             .downloadTask(with: nsURL) { location, response, error in
-                guard let location = location, error == nil else { return completion(nil, nil, error) }
+                guard let location = location, error == nil else {
+                    completion(nil, nil, error)
+                    return
+                }
                 
                 // Construct file destination
                 let destination = self.url(of: nsURL.lastPathComponent, from: .cachesDirectory)
@@ -95,7 +101,8 @@ public extension FileManager {
                 do {
                     try self.moveItem(at: location, to: destination)
                 } catch {
-                    return completion(nil, nil, error)
+                    completion(nil, nil, error)
+                    return
                 }
                 
                 completion(destination, response, error)

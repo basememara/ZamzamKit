@@ -1,6 +1,6 @@
 //
 //  Data.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2019-05-11.
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
@@ -22,10 +22,21 @@ public extension Data {
     }
 }
 
+// MARK: - Encoding
+
 public extension Data {
     
+    /// Returns a URL safe Base-64 encoded string.
+    func base64URLEncodedString() -> String {
+        base64EncodedString()
+            .replacingOccurrences(of: "/", with: "_")
+            .replacingOccurrences(of: "+", with: "-")
+            .replacingOccurrences(of: "=", with: "")
+            .trimmingCharacters(in: .whitespaces)
+    }
+    
     /// Returns a hex string representation of the data.
-    var hexString: String {
+    func hexString() -> String {
         // https://stackoverflow.com/a/55523487/235334
         reduce("", { $0 + String(format: "%02x", $1) })
     }

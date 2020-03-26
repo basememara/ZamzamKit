@@ -1,6 +1,6 @@
 //
 //  StringHelper.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 1/20/16.
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
@@ -127,12 +127,12 @@ extension StringTests {
     
     func testStrippingWhitespaceAndNewlines() {
         let string = """
-                     { 0         1
-                     2                  34
-                     56       7             8
-                     9
-                     }
-                     """
+            { 0         1
+            2                  34
+            56       7             8
+            9
+            }
+            """
         
         XCTAssertEqual(
             string.strippingCharacters(in: .whitespacesAndNewlines),
@@ -146,12 +146,12 @@ extension StringTests {
         let disallowed = allowed.inverted
         
         let string = """
-                     _abcdefghijklmnopqrstuvwxyz
-                     ABCDEFGHIJKLMNOPQRSTUVWXYZ
-                     0{1 2<3>4@5#6`7~8?9,0
+            _abcdefghijklmnopqrstuvwxyz
+            ABCDEFGHIJKLMNOPQRSTUVWXYZ
+            0{1 2<3>4@5#6`7~8?9,0
 
-                     1
-                     """
+            1
+            """
         
         XCTAssertEqual(
             string.replacingCharacters(in: disallowed, with: "_"),
@@ -182,40 +182,6 @@ extension StringTests {
         XCTAssertEqual(newValue2, value)
         
         XCTAssertEqual("aa1bb22cc3d888d4ee5".replacing(regex: "\\d", with: "*"), "aa*bb**cc*d***d*ee*")
-    }
-}
-
-extension StringTests {
-    
-    func testSHA256() {
-        XCTAssertEqual(
-            "JYGK Udsf6ITR^%$#UTY6GI7UGdsf gdsfgSDKHkjb768stb&(&T* &".sha256(),
-            "71e80ab896673f757d3e378d9191d8432346d961cb59e224de31977bc23def76"
-        )
-    }
-}
-
-extension StringTests {
-    
-    func testHTMLStripped() {
-        let test = "<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>"
-        let expected = "This is web content with a link."
-        XCTAssertEqual(test.htmlStripped, expected)
-    }
-}
-
-extension StringTests {
-    
-    func testBase64Encoded() {
-        let test = "Abcdef123456"
-        let expected = "QWJjZGVmMTIzNDU2"
-        XCTAssertEqual(test.base64Encoded, expected)
-    }
-    
-    func testBase64Decoded() {
-        let test = "NjU0MzIxRmVkY2Jh"
-        let expected = "654321Fedcba"
-        XCTAssertEqual(test.base64Decoded, expected)
     }
 }
 
@@ -290,6 +256,44 @@ extension StringTests {
         ]
         
         XCTAssertEqual(test.decode(), expected)
+    }
+}
+
+extension StringTests {
+    
+    func testBase64Encoded() {
+        let test = "Abcdef123456"
+        let expected = "QWJjZGVmMTIzNDU2"
+        XCTAssertEqual(test.base64Encoded(), expected)
+    }
+    
+    func testBase64URLEncoded() {
+        let test = "dsva-kjKH IU_H78yds8/7fyt78O TD+SY*O&*&T*A&(A*SF Y d8=q933827 z*&T*(ui sda ds"
+        let expected = "ZHN2YS1raktIIElVX0g3OHlkczgvN2Z5dDc4TyBURCtTWSpPJiomVCpBJihBKlNGIFkgZDg9cTkzMzgyNyB6KiZUKih1aSBzZGEgZHM"
+        XCTAssertEqual(test.base64URLEncoded(), expected)
+    }
+    
+    func testBase64Decoded() {
+        let test = "NjU0MzIxRmVkY2Jh"
+        let expected = "654321Fedcba"
+        XCTAssertEqual(test.base64Decoded(), expected)
+    }
+}
+
+extension StringTests {
+    
+    func testSHA256ToHex() {
+        XCTAssertEqual(
+            "JYGK Udsf6ITR^%$#UTY6GI7UGdsf gdsfgSDKHkjb768stb&(&T* &".sha256().hexString(),
+            "71e80ab896673f757d3e378d9191d8432346d961cb59e224de31977bc23def76"
+        )
+    }
+    
+    func testSHA256ToBase64() {
+        XCTAssertEqual(
+            "JYGK Udsf6ITR^%$#UTY6GI7UGdsf gdsfgSDKHkjb768stb&(&T* &".sha256().base64EncodedString(),
+            "cegKuJZnP3V9PjeNkZHYQyNG2WHLWeIk3jGXe8I973Y="
+        )
     }
 }
 

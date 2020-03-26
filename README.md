@@ -78,147 +78,20 @@ status.within([.requested, .accepted, .inProgress]) // false
 </details>
 
 <details>
-<summary>Date</summary>
+<summary>Dictionary</summary>
 
-> Determine if a date is in the past or future:
+> Convert to JSON string or data:
 ```swift
-Date(timeIntervalSinceNow: -100).isPast -> true
-Date(timeIntervalSinceNow: 100).isPast -> false
+// Before
+guard let data = try? JSONSerialization.data(withJSONObject: merged, options: []),
+    let log = String(data: data, encoding: .utf8) else {
+        return
+}
 
-Date(timeIntervalSinceNow: 100).isFuture -> true
-Date(timeIntervalSinceNow: -100).isFuture -> false
-```
-
-> Determine if a date is today, yesterday, or tomorrow:
-```swift
-Date().isToday -> true
-Date(timeIntervalSinceNow: -90_000).isYesterday -> true
-Date(timeIntervalSinceNow: 90_000).isTomorrow -> true
-```
-
-> Determine if a date is within a weekday or weekend period:
-```swift
-Date().isWeekday -> false
-Date().isWeekend -> true
-```
-
-> Get the beginning or end of the day:
-```swift
-Date().startOfDay -> "2018/11/21 00:00:00"
-Date().endOfDay -> "2018/11/21 23:59:59"
-```
-
-> Get the beginning or end of the month:
-```swift
-Date().startOfMonth -> "2018/11/01 00:00:00"
-Date().endOfMonth -> "2018/11/30 23:59:59"
-```
-
-> Determine if a date is current:
-```swift
-let date = Date(fromString: "2018/03/22 09:40")
-date.isCurrentWeek
-date.isCurrentMonth
-date.isCurrentYear
-```
-
-> Determine if a date is between two other dates:
-```swift
-let date = Date()
-let date1 = Date(timeIntervalSinceNow: 1000)
-let date2 = Date(timeIntervalSinceNow: -1000)
-
-date.isBetween(date1, date2) -> true
-```
-
-> Determine if a date is beyond a specified time window:
-```swift
-let date = Date(fromString: "2018/03/22 09:40")
-let fromDate = Date(fromString: "2018/03/22 09:30")
-
-date.isBeyond(fromDate, bySeconds: 300) -> true
-date.isBeyond(fromDate, bySeconds: 1200) -> false
-```
-
-> Use specific calendar for data manipulations:
-```swift
-let date = Date(fromString: "2018/03/22 09:40")
-let calendar = Calendar(identifier: .chinese)
-
-date.isToday(for: calendar)
-date.isWeekday(for: calendar)
-date.isCurrentMonth(for: calendar)
-date.isToday(for: calendar)
-date.startOfDay(for: calendar)
-date.startOfMonth(for: calendar)
-```
-
-> Determine if a date is beyond a specified time window:
-```swift
-let date = Date(fromString: "2018/03/22 09:40")
-let fromDate = Date(fromString: "2018/03/22 09:30")
-
-date.isBeyond(fromDate, bySeconds: 300) -> true
-date.isBeyond(fromDate, bySeconds: 1200) -> false
-```
-
-> Create a date from a string:
-```swift
-Date(fromString: "2018/11/01 18:15")
-Date(fromString: "1440/03/01 18:31", calendar: Calendar(identifier: .islamic))
-```
-
-> Format a date to a string:
-```swift
-Date().string(format: "MMM d, h:mm a") -> "Jan 3, 8:43 PM"
-Date().string(style: .full, calendar: Calendar(identifier: .hebrew)) -> "Friday, 1 Kislev 5779"
-```
-
-> Format a time interval to display as a timer.
-```swift
-let date = Date(fromString: "2016/03/22 09:45")
-let fromDate = Date(fromString: "2016/03/22 09:40")
-
-date.timerString(from: fromDate)
-
-// Prints "00:05:00"
-```
-
-> Get the decimal representation of the time:
-```swift
-Date(fromString: "2018/10/23 18:15").timeToDecimal -> 18.25
-```
-
-> Increment years, months, days, hours, or minutes:
-```swift
-let date = Date()
-date + .years(1)
-date + .months(2)
-date - .days(4)
-date - .hours(6)
-date + .minutes(12)
-date + .days(5, Calendar(identifier: .chinese))
-```
-
-> Convert between time interval units:
-```swift
-let diff = date.timeIntervalSince(date2) -> 172,800 seconds
-diff.minutes -> 2,800 minutes
-diff.hours -> 48 hours
-diff.days -> 2 days
-```
-
-> Time zone context and offset:
-```swift
-let timeZone = TimeZone(identifier: "Europe/Paris")
-timeZone?.isCurrent -> false
-timeZone?.offsetFromCurrent -> -21600
-```
-
-> Normalize date calculations and data storage:
-```swift
-let timeZone: TimeZone = .posix // GMT
-let locale: Locale = .posix // en_US_POSIX
+// After
+guard let log = merged.jsonString else {
+    return
+}
 ```
 </details>
 
@@ -227,8 +100,8 @@ let locale: Locale = .posix // en_US_POSIX
 
 > Round doubles, floats, or any floating-point type:
 ```swift
-123.12312421.rounded(toPlaces: 3) -> 123.123
-Double.pi.rounded(toPlaces: 2) -> 3.14
+123.12312421.rounded(toPlaces: 3) // 123.123
+Double.pi.rounded(toPlaces: 2) // 3.14
 ```
 </details>
 
@@ -285,12 +158,12 @@ value[99] // nil
 > Remove the characters contained in a given set:
 ```swift
 let string = """
-             { 0         1
-             2                  34
-             56       7             8
-             9
-             }
-             """
+    { 0         1
+    2                  34
+    56       7             8
+    9
+    }
+    """
 
 string.strippingCharacters(in: .whitespacesAndNewlines) // {0123456789}
 ```
@@ -302,19 +175,14 @@ let set = CharacterSet.alphanumerics
     .inverted
 
 let string = """
-             _abcdefghijklmnopqrstuvwxyz
-             ABCDEFGHIJKLMNOPQRSTUVWXYZ
-             0{1 2<3>4@5#6`7~8?9,0
+    _abcdefghijklmnopqrstuvwxyz
+    ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    0{1 2<3>4@5#6`7~8?9,0
 
-             1
-             """
+    1
+    """
 
 string.replacingCharacters(in: set, with: "_") //_abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ_0_1_2_3_4_5_6_7_8_9_0__1
-```
-
-> Get an encrypted version of the string in hex format:
-```swift
-"test@example.com".sha256() // 973dfe463ec85785f5f95af5ba3906eedb2d931c24e69824a89ea65dba4e813b
 ```
 
 > Match using a regular expression pattern:
@@ -335,12 +203,17 @@ string.replacingCharacters(in: set, with: "_") //_abcdefghijklmnopqrstuvwxyz_ABC
 
 > Encoders and decoders:
 ```swift
-value.urlEncoded
-value.urlDecoded
-value.htmlDecoded
-value.base64Encoded
-value.base64Decoded
-value.base64URLEncoded
+value.urlEncoded()
+value.urlDecoded()
+value.htmlDecoded()
+value.base64Encoded()
+value.base64Decoded()
+value.base64URLEncoded()
+```
+
+> Get an encrypted version of the string in hex format:
+```swift
+"test@example.com".sha256() // 973dfe463ec85785f5f95af5ba3906eedb2d931c24e69824a89ea65dba4e813b
 ```
 
 > Easily get the string version of substring:
@@ -375,7 +248,7 @@ values[1] // "Def"
 values[2] // "Ghi"
 ```
 
-![Image of BundleArray](./Assets/Documentation/Images/BundleArray.png)
+![Image of BundleArray](./Documentation/Images/BundleArray.png)
 
 ```swift
 let values: [[String: Any]] = Bundle.main.array(plist: "Things.plist")
@@ -393,7 +266,7 @@ values[2]["name"] as? String // "Test 3")
 values[2]["description"] as? String // "This is a test for 3.")
 ```
 
-![Image of BundleArray](./Assets/Documentation/Images/BundleArray2.png)
+![Image of BundleArray](./Documentation/Images/BundleArray2.png)
 
 > Get a dictionary from a property list file within any bundle:
 ```swift
@@ -405,7 +278,7 @@ values["MyBool1"] as? Bool // false
 values["MyDate1"] as? Date // 2018-11-21 15:40:03 +0000
 ```
 
-![Image of BundleDictionary](./Assets/Documentation/Images/BundleDictionary.png)
+![Image of BundleDictionary](./Documentation/Images/BundleDictionary.png)
 </details>
 
 <details>
@@ -430,6 +303,166 @@ formatter.string(fromAmount: 123456789.987) // "$123,456,789.99"
 
 let formatter2 = CurrencyFormatter(for: Locale(identifier: "fr-FR"))
 formatter2.string(fromCents: 123456789) // "1 234 567,89 €"
+```
+</details>
+
+<details>
+<summary>Data</summary>
+
+> Get a hex string representation of the data:
+```swift
+Data()?.hexString() // 68626a4a424a6a68626a68616420663773376474663720737567796f3837545e49542a69797567
+```
+
+> Get an encrypted version of the data:
+```swift
+Data()?.sha256()
+```
+</details>
+
+<details>
+<summary>Date</summary>
+
+> Determine if a date is in the past or future:
+```swift
+Date(timeIntervalSinceNow: -100).isPast // true
+Date(timeIntervalSinceNow: 100).isPast // false
+
+Date(timeIntervalSinceNow: 100).isFuture // true
+Date(timeIntervalSinceNow: -100).isFuture // false
+```
+
+> Determine if a date is today, yesterday, or tomorrow:
+```swift
+Date().isToday // true
+Date(timeIntervalSinceNow: -90_000).isYesterday // true
+Date(timeIntervalSinceNow: 90_000).isTomorrow // true
+```
+
+> Determine if a date is within a weekday or weekend period:
+```swift
+Date().isWeekday // false
+Date().isWeekend // true
+```
+
+> Get the beginning or end of the day:
+```swift
+Date().startOfDay // "2018/11/21 00:00:00"
+Date().endOfDay // "2018/11/21 23:59:59"
+```
+
+> Get the beginning or end of the month:
+```swift
+Date().startOfMonth // "2018/11/01 00:00:00"
+Date().endOfMonth // "2018/11/30 23:59:59"
+```
+
+> Determine if a date is current:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+date.isCurrentWeek
+date.isCurrentMonth
+date.isCurrentYear
+```
+
+> Determine if a date is between two other dates:
+```swift
+let date = Date()
+let date1 = Date(timeIntervalSinceNow: 1000)
+let date2 = Date(timeIntervalSinceNow: -1000)
+
+date.isBetween(date1, date2) // true
+```
+
+> Determine if a date is beyond a specified time window:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+let fromDate = Date(fromString: "2018/03/22 09:30")
+
+date.isBeyond(fromDate, bySeconds: 300) // true
+date.isBeyond(fromDate, bySeconds: 1200) // false
+```
+
+> Use specific calendar for data manipulations:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+let calendar = Calendar(identifier: .chinese)
+
+date.isToday(for: calendar)
+date.isWeekday(for: calendar)
+date.isCurrentMonth(for: calendar)
+date.isToday(for: calendar)
+date.startOfDay(for: calendar)
+date.startOfMonth(for: calendar)
+```
+
+> Determine if a date is beyond a specified time window:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+let fromDate = Date(fromString: "2018/03/22 09:30")
+
+date.isBeyond(fromDate, bySeconds: 300) // true
+date.isBeyond(fromDate, bySeconds: 1200) // false
+```
+
+> Create a date from a string:
+```swift
+Date(fromString: "2018/11/01 18:15")
+Date(fromString: "1440/03/01 18:31", calendar: Calendar(identifier: .islamic))
+```
+
+> Format a date to a string:
+```swift
+Date().string(format: "MMM d, h:mm a") // "Jan 3, 8:43 PM"
+Date().string(style: .full, calendar: Calendar(identifier: .hebrew)) // "Friday, 1 Kislev 5779"
+Date().string(formatter: .MM_dd_yyyy_HH_mm)
+```
+
+> Format a time interval to display as a timer.
+```swift
+let date = Date(fromString: "2016/03/22 09:45")
+let fromDate = Date(fromString: "2016/03/22 09:40")
+
+date.timerString(from: fromDate)
+
+// Prints "00:05:00"
+```
+
+> Get the decimal representation of the time:
+```swift
+Date(fromString: "2018/10/23 18:15").timeToDecimal // 18.25
+```
+
+> Increment years, months, days, hours, or minutes:
+```swift
+let date = Date()
+date + .years(1)
+date + .months(2)
+date - .days(4)
+date - .hours(6)
+date + .minutes(12)
+date + .days(5, Calendar(identifier: .chinese))
+```
+
+> Convert between time interval units:
+```swift
+let diff = date.timeIntervalSince(date2) // 172,800 seconds
+diff.minutes // 2,800 minutes
+diff.hours // 48 hours
+diff.days // 2 days
+```
+
+> Time zone context and offset:
+```swift
+let timeZone = TimeZone(identifier: "Europe/Paris")
+timeZone?.isCurrent // false
+timeZone?.offsetFromCurrent // -21600
+```
+
+> Normalize date calculations and data storage:
+```swift
+let timeZone: TimeZone = .posix // GMT
+let locale: Locale = .posix // en_US_POSIX
 ```
 </details>
 
@@ -476,6 +509,34 @@ let dictionary = try decoder.decode([String: AnyDecodable].self, from: json)
 dictionary["boolean"].value // true
 dictionary["integer"].value // 1
 dictionary["string"].value // Abc123
+```
+
+> Skip failed elements during decoding instead exiting collection completely; lossy array decoding.
+```swift
+init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    
+    self.authors = try container.decode(FailableCodableArray<Author>.self, forKey: .author)
+}
+```
+</details>
+
+<details>
+<summary>DispatchQueue</summary>
+
+> Provides configured queues for executing commonly related work items:
+```swift
+DispatchQueue.database.async {
+    // Database work here
+}
+
+DispatchQueue.transform.async {
+    // Parse or decode work here
+}
+
+DispatchQueue.logger.async {
+    // Logging work here
+}
 ```
 </details>
 
@@ -548,19 +609,17 @@ CLLocationManager.isAuthorized // bool
 <details>
 <summary>NotificationCenter</summary>
 
-> Shorthand to post and observer functions:
+> Auto released block-based notifications using a token property:
 ```swift
-let notificationCenter: NotificationCenter = .default
+class MyObserver: NSObject {
+    var token: NotificationCenter.Token? // Auto-released in deinit
 
-// Before
-notificationCenter.post(name: .MyCustomNotificationKey, object: nil, userInfo: nil)
-notificationCenter.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-notificationCenter.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
-
-// After
-notificationCenter.post(name: .MyCustomNotificationKey)
-notificationCenter.addObserver(for: UIApplication.willEnterForegroundNotification, selector: #selector(willEnterForeground), from: self)
-notificationCenter.removeObserver(for: UIApplication.willEnterForegroundNotification, from: self)
+    func setup() {
+        NotificationCenter.default.addObserver(forName: .SomeName, in: &token) {
+            print("test")
+        }
+    }
+}
 ```
 </details>
 
@@ -587,59 +646,114 @@ label.attributedText = "Abc".attributed + " def " +
 </details>
 
 <details>
-<summary>URLSession</summary>
+<summary>URL</summary>
 
-> A thin wrapper around `URLSession` and `URLRequest` for simple network requests:
+> Append a query string parameter to a URL:
 ```swift
- let request = URLRequest(
-     url: URL(string: "https://httpbin.org/get")!,
-     method: .get,
-     parameters: [
-         "abc": 123,
-         "def": "test456",
-         "xyz": true
-     ],
-     headers: [
-         "Abc": "test123",
-         "Def": "test456",
-         "Xyz": "test789"
-     ]
- )
- 
- let networkProvider: NetworkProviderType = NetworkProvider(
-     store: NetworkURLSessionStore()
- )
- 
- networkProvider.send(with: request) { result in
-     switch result {
-     case .success(let response):
-         response.data
-         response.headers
-         response.statusCode
-     case .failure(let error):
-         error.statusCode
-     }
- }
+let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
+url?.appendingQueryItem("def", value: "456") // "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
+url?.appendingQueryItem("xyz", value: "999") // "https://example.com?abc=123&lmn=tuv&xyz=999"
+```
+
+> Append a dictionary of query string parameters to a URL:
+```swift
+let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
+url?.appendingQueryItems([
+    "def": "456",
+    "jkl": "777",
+    "abc": "333",
+    "lmn": nil
+]) // "https://example.com?xyz=987&def=456&abc=333&jkl=777"
+```
+
+> Remove a query string parameter to a URL:
+```swift
+let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
+url?.removeQueryItem("xyz") // "https://example.com?abc=123&lmn=tuv"
+```
+
+> Query a URL from a parameter name:
+```swift
+let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
+url?.queryItem("aBc") // "123"
+url?.queryItem("lmn") // "tuv"
+url?.queryItem("yyy") // nil
 ```
 </details>
 
 <details>
-<summary>UserDefaults</summary>
+<summary>URLSession</summary>
 
-> A thin wrapper to manage `UserDefaults`, or other storages that conform to `PreferencesStore`:
+> A thin wrapper around `URLSession` and `URLRequest` for simple network requests:
 ```swift
-let preferences: PreferencesType = Preferences(
-    store: PreferencesDefaultsStore(
-        defaults: UserDefaults.standard
-    )
+let request = URLRequest(
+    url: URL(string: "https://httpbin.org/get")!,
+    method: .get,
+    parameters: [
+        "abc": 123,
+        "def": "test456",
+        "xyz": true
+    ],
+    headers: [
+        "Abc": "test123",
+        "Def": "test456",
+        "Xyz": "test789"
+    ]
+)
+ 
+let networkRepository = NetworkRepository(
+    service: NetworkURLSessionService()
 )
 
-preferences.set(123, forKey: .abc)
-preferences.get(.token) // 123
+networkRepository.send(with: request) { result in
+    switch result {
+    case .success(let response):
+        response.data
+        response.headers
+        response.statusCode
+    case .failure(let error):
+        error.statusCode
+    }
+}
+```
+Or call multiple URL requests simultaneously:
+```swift
+let request1 = URLRequest(
+    url: URL(string: "https://httpbin.org/get")!,
+    method: .get
+)
 
-// Define strongly-typed keys
-extension PreferencesAPI.Keys {
-    static let abc = PreferencesAPI.Key<String>("abc")
+let request2 = URLRequest(
+    url: URL(string: "https://httpbin.org/post")!,
+    method: .post
+)
+
+let request3 = URLRequest(
+    url: URL(string: "https://httpbin.org/delete")!,
+    method: .delete
+)
+
+networkRepository.send(requests: request1, request2, request3) { result in
+    switch result[0] {
+    case .success(let response):
+        response.data
+    case .failure(let error):
+        error.statusCode
+    }
+
+    switch result[1] {
+    case .success(let response):
+        response.data
+    case .failure(let error):
+        error.statusCode
+    }
+    
+    switch result[2] {
+    case .success(let response):
+        response.data
+    case .failure(let error):
+        error.statusCode
+    }
 }
 ```
 </details>
@@ -657,12 +771,12 @@ struct SomeStruct: AppInfo {
 
 let someStruct = SomeStruct()
 
-someStruct.appDisplayName -> "Zamzam App"
-someStruct.appBundleID -> "io.zamzam.app"
-someStruct.appVersion -> "1.0.0"
-someStruct.appBuild -> "23"
-someStruct.isInTestFlight -> false
-someStruct.isRunningOnSimulator -> false
+someStruct.appDisplayName // "Zamzam App"
+someStruct.appBundleID // "io.zamzam.app"
+someStruct.appVersion // "1.0.0"
+someStruct.appBuild // "23"
+someStruct.isInTestFlight // false
+someStruct.isRunningOnSimulator // false
 ```
 </details>
 
@@ -697,11 +811,11 @@ final class LoggerPlugin: ApplicationPlugin {
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        log.warn("App did receive memory warning.")
+        log.warning("App did receive memory warning.")
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        log.warn("App will terminate.")
+        log.warning("App will terminate.")
     }
 }
 ```
@@ -777,13 +891,15 @@ BackgroundTask.run(for: application) { task in
 ```
 </details>
 
+### Preferences
+
 <details>
 <summary>Keychain</summary>
 
-> A thin wrapper to manage Keychain, or other storages that conform to `SecuredPreferencesStore`:
+> A thin wrapper to manage Keychain, or other services that conform to `SecuredPreferencesService`:
 ```swift
 let keychain: SecuredPreferencesType = SecuredPreferences(
-    store: SecuredPreferencesKeychainStore()
+    service: SecuredPreferencesKeychainService()
 )
 
 keychain.set("kjn989hi", forKey: .token)
@@ -795,6 +911,27 @@ keychain.get(.token) {
 // Define strongly-typed keys
 extension SecuredPreferencesAPI.Key {
     static let token = SecuredPreferencesAPI.Key("token")
+}
+```
+</details>
+
+<details>
+<summary>UserDefaults</summary>
+
+> A thin wrapper to manage `UserDefaults`, or other services that conform to `PreferencesService`:
+```swift
+let preferences: PreferencesType = Preferences(
+    service: PreferencesDefaultsService(
+        defaults: UserDefaults.standard
+    )
+)
+
+preferences.set(123, forKey: .abc)
+preferences.get(.token) // 123
+
+// Define strongly-typed keys
+extension PreferencesAPI.Keys {
+    static let abc = PreferencesAPI.Key<String>("abc")
 }
 ```
 </details>
@@ -823,12 +960,12 @@ myLabel3.text = .localized(.next)
 <details>
 <summary>Logger</summary>
 
-> Create loggers that conform to `LogStore` and add to `LogProvider` (console and `os_log` are included):
+> Create loggers that conform to `LogService` and add to `LogRepository` (console and `os_log` are included):
 ```swift
-let log: LogProviderType = LogProvider(
-    stores: [
-        LogConsoleStore(minLevel: .debug),
-        LogOSStore(
+let log: LogRepositoryType = LogRepository(
+    services: [
+        LogConsoleService(minLevel: .debug),
+        LogOSService(
             minLevel: .warning,
             subsystem: "io.zamzam.Basem-Emara",
             category: "Application"
@@ -905,7 +1042,7 @@ func sendToServer() {
     limiter.execute {
         // Sends to server after no typing for 5 seconds
         // instead of once per character, so:
-        value == "hello" -> true
+        value == "hello" // true
     }
 }
 
@@ -992,7 +1129,7 @@ test = value ??+ "Rst"
 ## ZamzamLocation
 
 <details>
-<summary>LocationsProvider</summary>
+<summary>LocationsRepository</summary>
 
 > Location worker that offers easy authorization and observable closures ([read more](https://basememara.com/swifty-locations-observables/)):
 ```swift
@@ -1000,7 +1137,7 @@ class LocationViewController: UIViewController {
 
     @IBOutlet weak var outputLabel: UILabel!
     
-    var locationsProvider: LocationsProviderType = LocationsProvider(
+    var locationsRepository: LocationsRepositoryType = LocationsRepository(
         desiredAccuracy: kCLLocationAccuracyThreeKilometers,
         distanceFilter: 1000
     )
@@ -1008,10 +1145,10 @@ class LocationViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        locationsProvider.addObserver(locationObserver)
-        locationsProvider.addObserver(headingObserver)
+        locationsRepository.addObserver(locationObserver)
+        locationsRepository.addObserver(headingObserver)
         
-        locationsProvider.requestAuthorization(
+        locationsRepository.requestAuthorization(
             for: .whenInUse,
             startUpdatingLocation: true,
             completion: { granted in
@@ -1023,24 +1160,24 @@ class LocationViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        locationsProvider.removeObservers()
+        locationsRepository.removeObservers()
     }
     
     deinit {
-        locationsProvider.removeObservers()
+        locationsRepository.removeObservers()
     }
 }
 
 extension LocationViewController {
     
-    var locationObserver: Observer<LocationsProvider.LocationHandler> {
-        return Observer { [weak self] in
+    var locationObserver: Observer<LocationsRepository.LocationHandler> {
+        Observer { [weak self] in
             self?.outputLabel.text = $0.description
         }
     }
     
-    var headingObserver: Observer<LocationsProvider.HeadingHandler> {
-        return Observer {
+    var headingObserver: Observer<LocationsRepository.HeadingHandler> {
+        Observer {
             print($0.description)
         }
     }
@@ -1164,8 +1301,9 @@ UNUserNotificationCenter.current().add(
 > Get a remote image from the web and convert to a user notification attachment:
 ```swift
 UNNotificationAttachment.download(from: urlString) {
-    guard $0.isSuccess, let attachment = $0.value else {
-        return log.error("Could not download the remote resource (\(urlString)): \($0.error.debugDescription).")
+    guard case .success(let attachment) = $0 else {
+        log.error("Could not download the remote resource (\(urlString)): \($0.error?.debugDescription).")
+        return
     }
 
     UNUserNotificationCenter.current().add(
@@ -1194,7 +1332,7 @@ UNUserNotificationCenter.current().removeAll()
 
 > A bar button item with a badge value:
 
-![Image of BadgeBarButtonItem](./Assets/Documentation/Images/BadgeBarButtonItem.png)
+![Image of BadgeBarButtonItem](./Documentation/Images/BadgeBarButtonItem.png)
 
 ```swift
 navigationItem.rightBarButtonItems = [
@@ -1234,7 +1372,7 @@ navigationItem.leftBarButtonItems = [
 ```
 Interface Builder compatible via "User Defined Runtime Attributes":
 
-![Image of GradientView](./Assets/Documentation/Images/GradientView-Storyboard.png)
+![Image of GradientView](./Documentation/Images/GradientView-Storyboard.png)
 </details>
 
 <details>
@@ -1283,9 +1421,9 @@ class MyViewController: UIViewController {
 
 > An extended `UITextView` that wires the "Return Key" to another `UIResponder`:
 
-![Image of NextResponderTextField](./Assets/Documentation/Images/NextResponderTextField.png)
+![Image of NextResponderTextField](./Documentation/Images/NextResponderTextField.png)
 
-![Image of NextResponderTextField2](./Assets/Documentation/Images/NextResponderTextField2.png)
+![Image of NextResponderTextField2](./Documentation/Images/NextResponderTextField2.png)
 </details>
 
 <details>
@@ -1293,7 +1431,7 @@ class MyViewController: UIViewController {
 
 > A `UIView`, `UIImage`, and `UIButton` subclasses with circular masking:
 
-![Image of RoundedView](./Assets/Documentation/Images/RoundedView.png)
+![Image of RoundedView](./Documentation/Images/RoundedView.png)
 </details>
 
 <details>
@@ -1301,7 +1439,7 @@ class MyViewController: UIViewController {
 
 > Automatically extends the scroll view insets when the keyboard is shown:
 
-![Image of KeyboardScrollView](./Assets/Documentation/Images/KeyboardScrollView.png)
+![Image of KeyboardScrollView](./Documentation/Images/KeyboardScrollView.png)
 </details>
 
 <details>
@@ -1334,7 +1472,7 @@ private extension ViewController {
 }
 ```
 
-![Image of StatusBarable](./Assets/Documentation/Images/StatusBarable.png)
+![Image of StatusBarable](./Documentation/Images/StatusBarable.png)
 </details>
 
 <details>
@@ -1361,7 +1499,7 @@ let cell: TransactionViewCell = collectionView[indexPath]
 
 > Save an image to disk as .png:
 ```swift
-imageView.image.pngToDisk() -> "/.../Library/Caches/img_ezoPU8.png"
+imageView.image.pngToDisk() // "/.../Library/Caches/img_ezoPU8.png"
 ```
 > Convert a color to an image:
 ```swift
@@ -1516,7 +1654,7 @@ textView.placeholder = "Enter message..."
 
 Interface Builder compatible via Attributes inspector:
 
-![Image of GradientView](./Assets/Documentation/Images/PlaceholderTextView-Storyboard.png)
+![Image of GradientView](./Documentation/Images/PlaceholderTextView-Storyboard.png)
 
 </details>
 
@@ -1542,7 +1680,7 @@ extension ViewController: UITextViewDelegate {
 }
 ```
 
-![Image of UIToolbar](./Assets/Documentation/Images/UIToolbar.png)
+![Image of UIToolbar](./Documentation/Images/UIToolbar.png)
 </details>
 
 <details>
@@ -1561,7 +1699,7 @@ myView.cornerRadius = 3
 myView.addShadow()
 ```
 
-![Image of UIView-Shadow](./Assets/Documentation/Images/UIView-Shadow.png)
+![Image of UIView-Shadow](./Documentation/Images/UIView-Shadow.png)
 
 > Animate visibility:
 ```swift
@@ -1607,7 +1745,7 @@ class ViewController: UIViewController {
 }
 ```
 
-![Image of PresentableView](./Assets/Documentation/Images/PresentableView.gif)
+![Image of PresentableView](./Documentation/Images/PresentableView.gif)
 </details>
 
 <details>
@@ -1704,7 +1842,7 @@ present(
 )
 ```
 
-![Image of UIViewController Prompt](./Assets/Documentation/Images/UIViewController-Prompt.png)
+![Image of UIViewController Prompt](./Documentation/Images/UIViewController-Prompt.png)
 
 > Display a share activity with Safari added:
 ```swift
@@ -1804,9 +1942,9 @@ present(
 
 ## Author
 
-* Zamzam Inc., https://zamzam.io
+* Zamzam, https://zamzam.io
 * Basem Emara, https://basememara.com
 
 ## License
 
-ZamzamKit is available under the MIT license. See the [LICENSE](https://github.com/ZamzamInc/ZamzamKit/blob/master/LICENSE) file for more info.
+`ZamzamKit` is available under the MIT license. See the [LICENSE](https://github.com/ZamzamInc/ZamzamKit/blob/master/LICENSE) file for more info.

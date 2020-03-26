@@ -1,6 +1,6 @@
 //
 //  WKAlertAction.swift
-//  ZamzamKit watchOS
+//  ZamzamUI
 //
 //  Created by Basem Emara on 2018-12-06.
 //  Copyright © 2018 Zamzam Inc. All rights reserved.

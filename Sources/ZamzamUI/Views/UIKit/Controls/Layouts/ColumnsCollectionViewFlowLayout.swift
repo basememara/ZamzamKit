@@ -1,6 +1,6 @@
 //
 //  ColumnsCollectionViewFlowLayout.swift
-//  ZamzamKit iOS
+//  ZamzamUI
 //
 //  Created by Basem Emara on 2019-03-17.
 //  Copyright © 2019 Zamzam Inc. All rights reserved.

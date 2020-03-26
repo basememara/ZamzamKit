@@ -1,6 +1,6 @@
 //
 //  Calendar.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 5/6/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.

@@ -1,6 +1,6 @@
 //
-//  ZamzamKitable.swift
-//  ZamzamKit
+//  AppInfo.swift
+//  ZamzamCore
 //
 //  Created by Basem Emara on 1/29/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.

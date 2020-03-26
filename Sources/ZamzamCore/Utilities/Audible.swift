@@ -1,6 +1,6 @@
 //
 //  Audible.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 3/25/16.
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
@@ -32,7 +32,8 @@ public extension Audible {
             audioPlayer = try AVAudioPlayer(contentsOf: sound)
             audioPlayer?.prepareToPlay()
         } catch {
-            
+            // TODO: Call injectable logger
+            debugPrint(error)
         }
     }
 }

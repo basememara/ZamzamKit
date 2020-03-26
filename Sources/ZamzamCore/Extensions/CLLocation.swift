@@ -1,6 +1,6 @@
 //
 //  CLLocation.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2/17/16.
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
@@ -97,7 +97,7 @@ public extension CLLocation {
                 }
                 
                 completion(
-                    .init(
+                    LocationMeta(
                         coordinates: (self.coordinate.latitude, self.coordinate.longitude),
                         locality: mark.locality,
                         country: mark.country,

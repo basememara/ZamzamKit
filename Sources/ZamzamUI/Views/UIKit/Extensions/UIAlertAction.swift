@@ -1,6 +1,6 @@
 //
 //  UIAlertAction.swift
-//  ZamzamKit
+//  ZamzamUI
 //
 //  Created by Basem Emara on 3/25/16.
 //  Copyright © 2016 Zamzam Inc. All rights reserved.

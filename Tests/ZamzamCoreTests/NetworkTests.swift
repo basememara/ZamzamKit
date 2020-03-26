@@ -1,6 +1,6 @@
 //
 //  NetworkTests.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2020-03-01.
 //
@@ -11,13 +11,13 @@ import ZamzamCore
 final class NetworkTests: XCTestCase {
     private let jsonDecoder = JSONDecoder()
     
-    private let networkProvider: NetworkProviderType = NetworkProvider(
-        store: NetworkURLSessionStore()
+    private let networkRepository: NetworkRepositoryType = NetworkRepository(
+        service: NetworkFoundationService()
     )
 }
 
 // MARK: - GET
-    
+
 extension NetworkTests {
     
     func testGET() {
@@ -32,7 +32,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -74,7 +74,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -138,7 +138,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -193,7 +193,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -235,7 +235,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -294,7 +294,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -349,7 +349,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -391,7 +391,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -450,7 +450,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -505,7 +505,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -547,7 +547,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -606,7 +606,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -661,7 +661,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -703,7 +703,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -767,7 +767,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkProvider.send(with: request) {
+        networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
             guard case .success(let value) = $0 else {
@@ -803,6 +803,93 @@ extension NetworkTests {
         } catch {
             XCTFail("The resonse data could not be parse: \(error)")
         }
+    }
+}
+
+// MARK: - Multiple
+
+extension NetworkTests {
+    
+    func testMultipleRequests() {
+        // Given
+        let promise = expectation(description: #function)
+        
+        let requests = [
+            URLRequest(
+                url: URL(string: "https://httpbin.org/get")!,
+                method: .get
+            ),
+            URLRequest(
+                url: URL(string: "https://httpbin.org/post")!,
+                method: .post
+            ),
+            URLRequest(
+                url: URL(string: "https://httpbin.org/patch")!,
+                method: .patch
+            ),
+            URLRequest(
+                url: URL(string: "https://httpbin.org/delete")!,
+                method: .delete
+            )
+        ]
+        
+        var response0: NetworkAPI.Response?
+        var response1: NetworkAPI.Response?
+        var response2: NetworkAPI.Response?
+        var response3: NetworkAPI.Response?
+        
+        // When
+        networkRepository.send(requests: requests[0], requests[1], requests[2], requests[3]) { results in
+            defer { promise.fulfill() }
+            
+            guard case .success(let value0) = results[0] else {
+                XCTFail("The network request failed: \(String(describing: results[0].error))")
+                return
+            }
+            
+            guard case .success(let value1) = results[1] else {
+                XCTFail("The network request failed: \(String(describing: results[1].error))")
+                return
+            }
+            
+            guard case .success(let value2) = results[2] else {
+                XCTFail("The network request failed: \(String(describing: results[2].error))")
+                return
+            }
+            
+            guard case .success(let value3) = results[3] else {
+                XCTFail("The network request failed: \(String(describing: results[3].error))")
+                return
+            }
+            
+            response0 = value0
+            response1 = value1
+            response2 = value2
+            response3 = value3
+        }
+        
+        wait(for: [promise], timeout: 10)
+        
+        // Then
+        XCTAssertEqual(requests[0].url?.absoluteString, "https://httpbin.org/get")
+        XCTAssertNotNil(response0?.data)
+        XCTAssertEqual(response0?.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response0?.statusCode, 200)
+        
+        XCTAssertEqual(requests[1].url?.absoluteString, "https://httpbin.org/post")
+        XCTAssertNotNil(response1?.data)
+        XCTAssertEqual(response1?.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response1?.statusCode, 200)
+        
+        XCTAssertEqual(requests[2].url?.absoluteString, "https://httpbin.org/patch")
+        XCTAssertNotNil(response2?.data)
+        XCTAssertEqual(response2?.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response2?.statusCode, 200)
+        
+        XCTAssertEqual(requests[3].url?.absoluteString, "https://httpbin.org/delete")
+        XCTAssertNotNil(response3?.data)
+        XCTAssertEqual(response3?.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response3?.statusCode, 200)
     }
 }
 

@@ -1,6 +1,6 @@
 //
 //  ExtensionPluggableDelegate.swift
-//  ZamzamKit watchOS
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2019-07-18.
 //  Copyright © 2019 Zamzam Inc. All rights reserved.

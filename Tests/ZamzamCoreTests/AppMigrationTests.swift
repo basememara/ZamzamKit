@@ -1,6 +1,6 @@
 //
 //  AppMigrationTests.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 5/30/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.

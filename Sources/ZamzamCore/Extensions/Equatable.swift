@@ -1,6 +1,6 @@
 //
 //  Equatable.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 3/31/16.
 //  Copyright © 2016 Zamzam Inc. All rights reserved.

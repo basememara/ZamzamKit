@@ -1,6 +1,6 @@
 //
 //  LocationAPI.swift
-//  ZamzamKit
+//  ZamzamLocation
 //
 //  Created by Basem Emara on 2019-08-25.
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
@@ -9,10 +9,9 @@
 import CoreLocation
 import ZamzamCore
 
-/// Namespace for location
-public enum LocationAPI {}
+// MARK: - Respository
 
-public protocol LocationProviderType {
+public protocol LocationRepositoryType {
     typealias LocationHandler = (CLLocation) -> Void
     typealias AuthorizationHandler = (Bool) -> Void
     
@@ -81,7 +80,7 @@ public protocol LocationProviderType {
     func removeObservers(with prefix: String)
 }
 
-public extension LocationProviderType {
+public extension LocationRepositoryType {
     
     func requestAuthorization(for type: LocationAPI.AuthorizationType) {
         requestAuthorization(for: type, startUpdatingLocation: false, completion: nil)
@@ -100,23 +99,15 @@ public extension LocationProviderType {
     }
 }
 
-// MARK: - Subtypes
+// MARK: - Namespace
 
-public extension LocationAPI {
+public enum LocationAPI {
     
     /// Permission types to use location services.
     ///
     /// - whenInUse: While the app is in the foreground.
     /// - always: Whenever the app is running.
-    enum AuthorizationType {
+    public enum AuthorizationType {
         case whenInUse, always
     }
 }
-
-// MARK: - Deprecated
-
-@available(*, deprecated, renamed: "LocationProviderType")
-public protocol LocationWorkerType: LocationProviderType {}
-
-@available(*, deprecated, renamed: "LocationProvider")
-public class LocationWorker: LocationProvider {}

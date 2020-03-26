@@ -109,7 +109,7 @@ extension NotificationTests {
         var token: NotificationCenter.Token?
         
         // Subscribe
-        notificationCenter.addObserver(for: Self.testNotificationName, in: &token) { _ in
+        notificationCenter.addObserver(forName: Self.testNotificationName, in: &token) { _ in
             counter += 1
         }
         
@@ -138,7 +138,7 @@ extension NotificationTests {
             
             init(observerBlock: @escaping () -> ()) {
                 // Subscribe but no need for deinit registration
-                NotificationCenter.default.addObserver(for: NotificationTests.testNotificationName, in: &token) { _ in
+                NotificationCenter.default.addObserver(forName: NotificationTests.testNotificationName, in: &token) { _ in
                     observerBlock()
                 }
             }

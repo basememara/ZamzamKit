@@ -1,6 +1,6 @@
 //
 //  UIStoryboard.swift
-//  ZamzamKit
+//  ZamzamUI
 //
 //  Created by Basem Emara on 5/26/16.
 //  Copyright © 2016 Zamzam Inc. All rights reserved.

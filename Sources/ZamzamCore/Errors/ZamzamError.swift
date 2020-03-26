@@ -1,12 +1,10 @@
 //
 //  ZamzamError.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2/6/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
-
-import Foundation.NSURLError
 
 public enum ZamzamError: Error {
     case general
@@ -21,35 +19,4 @@ public enum ZamzamError: Error {
     case cacheFailure(Error?)
     case serverFailure(Error?)
     case other(Error?)
-}
-
-// MARK: - Helpers
-
-public extension ZamzamError {
-    
-    init(from error: NetworkError?) {
-        // Handle no internet
-        if let internalError = error?.internalError as? URLError,
-            internalError.code  == .notConnectedToInternet {
-            self = .noInternet
-            return
-        }
-        
-        // Handle timeout
-        if let internalError = error?.internalError as? URLError,
-            internalError.code  == .timedOut {
-            self = .timeout
-            return
-        }
-        
-        // Handle by status code
-        switch error?.statusCode {
-        case 400:
-            self = .invalidData
-        case 401, 403:
-            self = .unauthorized
-        default:
-            self = .other(error)
-        }
-    }
 }

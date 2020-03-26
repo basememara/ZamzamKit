@@ -8,59 +8,9 @@
 
 import Foundation.NSURL
 
-// Namespace
-public enum LogAPI {}
+// MARK: - Respository
 
-public protocol LogStore {
-    
-    /// The minimum level required to create log entries.
-    var minLevel: LogAPI.Level { get }
-    
-    /// Log an entry to the destination.
-    ///
-    /// - Parameters:
-    ///   - level: The current level of the log entry.
-    ///   - message: Description of the log.
-    ///   - path: Path of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - error: Error of the caller.
-    ///   - context: Additional meta data.
-    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]?)
-    
-    /// Returns if the logger should process the entry for the specified log level.
-    func canWrite(for level: LogAPI.Level) -> Bool
-    
-    /// The output of the message and supporting information.
-    ///
-    /// - Parameters:
-    ///   - message: Description of the log.
-    ///   - path: Path of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - error: Error of the caller.
-    ///   - context: Additional meta data.
-    func format(_ message: String, _ path: String, _ function: String, _ line: Int, _ error: Error?, _ context: [String: CustomStringConvertible]?) -> String
-}
-
-public extension LogStore {
-    
-    func canWrite(for level: LogAPI.Level) -> Bool {
-        minLevel <= level && level != .none
-    }
-    
-    func format(_ message: String, _ path: String, _ function: String, _ line: Int, _ error: Error?, _ context: [String: CustomStringConvertible]?) -> String {
-        var output = "\(URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent).\(function):\(line) - \(message)"
-        
-        if let error = error {
-            output += " | Error: \(error)"
-        }
-        
-        return output
-    }
-}
-
-public protocol LogProviderType {
+public protocol LogRepositoryType {
     
     /// Log an entry to the destination.
     ///
@@ -124,7 +74,7 @@ public protocol LogProviderType {
     func warning(_ message: String, path: String, function: String, line: Int, context: [String: CustomStringConvertible]?, completion: (() -> Void)?)
     
     /// Log something which will keep you awake at night (highest priority).
-    /// 
+    ///
     /// - Parameters:
     ///   - level: The current level of the log entry.
     ///   - message: Description of the log.
@@ -133,11 +83,11 @@ public protocol LogProviderType {
     ///   - line: Line of the caller.
     ///   - error: Error of the caller.
     ///   - context: Additional meta data.
-    ///   - completion: The block to call when log entries sent.   
+    ///   - completion: The block to call when log entries sent.
     func error(_ message: String, path: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]?, completion: (() -> Void)?)
 }
 
-public extension LogProviderType {
+public extension LogRepositoryType {
     
     func verbose(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: CustomStringConvertible]? = nil, completion: (() -> Void)? = nil) {
         write(.verbose, with: message, path: path, function: function, line: line, error: nil, context: context, completion: completion)
@@ -160,18 +110,71 @@ public extension LogProviderType {
     }
 }
 
-// MARK: - Types
+// MARK: - Service
 
-public extension LogAPI {
+public protocol LogService {
     
-    enum Level: Int, Comparable, CaseIterable {
+    /// The minimum level required to create log entries.
+    var minLevel: LogAPI.Level { get }
+    
+    /// Log an entry to the destination.
+    ///
+    /// - Parameters:
+    ///   - level: The current level of the log entry.
+    ///   - message: Description of the log.
+    ///   - path: Path of the caller.
+    ///   - function: Function of the caller.
+    ///   - line: Line of the caller.
+    ///   - error: Error of the caller.
+    ///   - context: Additional meta data.
+    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]?)
+    
+    /// Returns if the logger should process the entry for the specified log level.
+    func canWrite(for level: LogAPI.Level) -> Bool
+    
+    /// The output of the message and supporting information.
+    ///
+    /// - Parameters:
+    ///   - message: Description of the log.
+    ///   - path: Path of the caller.
+    ///   - function: Function of the caller.
+    ///   - line: Line of the caller.
+    ///   - error: Error of the caller.
+    ///   - context: Additional meta data.
+    func format(_ message: String, _ path: String, _ function: String, _ line: Int, _ error: Error?, _ context: [String: CustomStringConvertible]?) -> String
+}
+
+public extension LogService {
+    
+    /// Determines if the service has the minimum level to log.
+    func canWrite(for level: LogAPI.Level) -> Bool {
+        minLevel <= level && level != .none
+    }
+    
+    /// The string output of the log.
+    func format(_ message: String, _ path: String, _ function: String, _ line: Int, _ error: Error?, _ context: [String: CustomStringConvertible]?) -> String {
+        var output = "\(URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent).\(function):\(line) - \(message)"
+        
+        if let error = error {
+            output += " | Error: \(error)"
+        }
+        
+        return output
+    }
+}
+
+// MARK: - Namespace
+
+public enum LogAPI {
+    
+    public enum Level: Int, Comparable, CaseIterable {
         case verbose
         case debug
         case info
         case warning
         case error
         
-        /// Disables a log store when used as minimum level
+        /// Disables a log service when used as minimum level
         case none = 99
         
         public static func < (lhs: Level, rhs: Level) -> Bool {

@@ -1,6 +1,6 @@
 //
 //  FailableCodableArray.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2018-06-12.
 //  Copyright © 2018 Zamzam Inc. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  Date.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2/17/16.
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
@@ -311,8 +311,6 @@ public extension Date {
     }
 }
 
-// MARK: - Comparisons
-
 public extension Date {
     
     /// Determine if a date is between two other dates.
@@ -405,105 +403,6 @@ public extension Date {
     }
 }
 
-// MARK: - String helpers
-
-public extension Date {
-    
-    /// Returns a string representation of a given date formatted using the receiver’s formatter.
-    ///
-    ///     Date().string(formatter: .MM_dd_yyyy_HH_mm) // "03-15-2020 22:46"
-    ///
-    /// - Parameters:
-    ///   - formatter: The date formatter to use.
-    /// - Returns: The string representation of the given date.
-    func string(formatter: DateFormatter) -> String {
-        formatter.string(from: self)
-    }
-    
-    /// Creates a date value initialized from a string.
-    ///
-    ///     Date(fromString: "2018/11/01 18:15")
-    ///
-    /// - Parameters:
-    ///   - string: The string to parse the date from. The default is `"yyyy/MM/dd HH:mm"`.
-    ///   - dateFormat: The date format string used by the receiver.
-    ///   - timeZone: The time zone for the receiver.
-    ///   - calendar: The calendar for the receiver.
-    ///   - locale: The locale for the receiver.
-    init?(fromString string: String, dateFormat: String = "yyyy/MM/dd HH:mm", timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) {
-        guard !string.isEmpty,
-            let date = DateFormatter(dateFormat: dateFormat, timeZone: timeZone, calendar: calendar, locale: locale).date(from: string) else {
-                return nil
-        }
-        
-        self.init(timeInterval: 0, since: date)
-    }
-    
-    /// Returns a string representation of a given date formatted using the receiver’s current settings.
-    ///
-    ///     Date().string(format: "MMM d, h:mm a") // "Jan 3, 8:43 PM"
-    ///
-    /// - Parameters:
-    ///   - format: The date format string used by the receiver.
-    ///   - timeZone: The time zone for the receiver.
-    ///   - calendar: The calendar for the receiver.
-    ///   - locale: The locale for the receiver.
-    /// - Returns: The string representation of the given date.
-    func string(format: String, timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
-        DateFormatter(dateFormat: format, timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
-    }
-    
-    /// Returns a string representation of a given date formatted using the receiver’s current settings.
-    ///
-    ///     Date().string(style: .short) // "1/12/17"
-    ///     Date().string(style: .medium) // "Jan 12, 2017"
-    ///     Date().string(style: .long) // "January 12, 2017"
-    ///     Date().string(style: .full) // "Thursday, January 12, 2017"
-    ///     Date().string(style: .full, withTime: .medium) // "Thursday, January 12, 2017 at 4:45:23 PM"
-    ///
-    /// - Parameters:
-    ///   - dateStyle: The date style string used by the receiver.
-    ///   - timeStyle: The time style string used by the receiver.
-    ///   - timeZone: The time zone for the receiver.
-    ///   - calendar: The calendar for the receiver.
-    ///   - locale: The locale for the receiver.
-    /// - Returns: The string representation of the given date.
-    func string(style dateStyle: DateFormatter.Style, withTime timeStyle: DateFormatter.Style? = nil, timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
-        DateFormatter(dateStyle: dateStyle, timeStyle: timeStyle, timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
-    }
-    
-    /// Fixed-format for the date without time.
-    ///
-    /// An example use case for this function is creating a dictionary of days that group respective values by days.
-    ///
-    ///     Date().shortString() // "2017-05-15"
-    ///
-    /// - Parameter timeZone: Time zone to determine day boundries of the date.
-    /// - Returns: The formatted date string.
-    func shortString(timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
-        DateFormatter(dateFormat: "yyyy-MM-dd", timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
-    }
-    
-    /// Formats time interval for display timer.
-    ///
-    ///     Date(fromString: "2016/03/22 09:45").timerString(
-    ///         from: Date(fromString: "2016/03/22 09:40")
-    ///     ) // "00:05:00"
-    ///
-    /// - Parameter
-    ///   - date: The date to countdown from.
-    ///   - positivePrefix: THe prefix string to prepend to the timer.
-    /// - Returns: The formatted timer as hh:mm:ss.
-    func timerString(from date: Date = Date(), positivePrefix: String = "+") -> String {
-        let seconds = Int(timeIntervalSince(date))
-        let prefix = seconds < 0 ? positivePrefix : ""
-        let hr = abs(seconds / 3600)
-        let min = abs(seconds / 60 % 60)
-        let sec = abs(seconds % 60)
-        return .localizedStringWithFormat("%@%02i:%02i:%02i", prefix, hr, min, sec)
-    }
-}
-
 public extension Date {
     
     /// Gets the decimal representation of the time.
@@ -523,109 +422,4 @@ public extension Date {
         let minutes = components.minute ?? 0
         return Double(hour) + (Double(minutes) / 60.0)
     }
-}
-
-// MARK: - Islamic calendar
-
-public extension Date {
-
-    // Cache Islamic calendar for reuse
-    // https://www.staff.science.uu.nl/~gent0113/islam/ummalqura.htm
-    // http://tabsir.net/?p=621#more-621
-    static let islamicCalendar = Calendar(identifier: .islamicUmmAlQura)
-
-    /// Returns a string representation of a given date formatted to hijri date.
-    ///
-    /// - Parameters:
-    ///   - components: The components of the date to format.
-    ///   - format: The date format string used by the receiver.
-    ///   - offSet: The number of days to offset the hijri date.
-    ///   - timeZone: The time zone for the receiver.
-    ///   - calendar: The calendar of the receiver.
-    /// - Returns: A string representation of a given date formatted to hijri date.
-    func hijriString(
-        components: Set<Calendar.Component> = Calendar.Component.full,
-        format: String? = nil,
-        offSet: Int = 0,
-        timeZone: TimeZone? = nil,
-        calendar: Calendar = Self.islamicCalendar
-    ) -> String {
-        var calendar = calendar
-        
-        if let timeZone = timeZone {
-            calendar.timeZone = timeZone
-        }
-        
-        let formatter = DateFormatter().with {
-            $0.calendar = calendar
-            $0.timeZone = calendar.timeZone
-            
-            if let f = format {
-                $0.dateFormat = f
-            } else {
-                $0.dateStyle = .long
-            }
-        }
-        
-        let date = calendar.date(
-            from: hijri(
-                components: components,
-                offSet: offSet,
-                timeZone: timeZone,
-                calendar: calendar
-            )
-        ) ?? self
-        
-        return formatter.string(from: date)
-    }
-    
-    /// Returns the date components of the hijri date.
-    ///
-    /// - Parameters:
-    ///   - components: The components of the date to format.
-    ///   - offSet: The number of days to offset the hijri date.
-    ///   - timeZone: The time zone for the receiver.
-    ///   - calendar: The calendar of the receiver.
-    /// - Returns: The date components of the hijri date.
-    func hijri(
-        components: Set<Calendar.Component> = Calendar.Component.full,
-        offSet: Int = 0,
-        timeZone: TimeZone? = nil,
-        calendar: Calendar = Self.islamicCalendar
-    ) -> DateComponents {
-        var calendar = calendar
-        
-        if let timeZone = timeZone {
-            calendar.timeZone = timeZone
-        }
-        
-        let date = self + .days(offSet, calendar)
-        return calendar.dateComponents(components, from: date)
-    }
-    
-    /// Determines if the date falls within Ramadan.
-    ///
-    /// - Parameters:
-    ///   - offSet: The number of days to offset the hijri date.
-    ///   - timeZone: The time zone for the receiver.
-    ///   - calendar: The calendar of the receiver.
-    /// - Returns: True if the date is within Ramadan; false otherwise.
-    func isRamadan(offSet: Int = 0, timeZone: TimeZone? = nil, calendar: Calendar = Self.islamicCalendar) -> Bool {
-        hijri(offSet: offSet, timeZone: timeZone, calendar: calendar).month == 9
-    }
-    
-    /// Determines if the date if Friday / Jumuah.
-    var isJumuah: Bool { isJumuah(for: .current) }
-    
-    /// Determines if the date if Friday / Jumuah.
-    ///
-    /// - Parameter calendar: Calendar used for calculation.
-    /// - Returns: Returns true if date passes the criteria.
-    func isJumuah(for calendar: Calendar) -> Bool {
-        calendar.dateComponents([.weekday], from: self).weekday == 6
-    }
-}
-
-private extension Date {
-    //swiftlint:disable file_length
 }

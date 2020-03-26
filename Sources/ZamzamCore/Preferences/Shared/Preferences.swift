@@ -1,30 +1,30 @@
 //
 //  Preferences.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2019-05-09.
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
 public struct Preferences: PreferencesType {
-    private let store: PreferencesStore
+    private let service: PreferencesService
     
-    public init(store: PreferencesStore) {
-        self.store = store
+    public init(service: PreferencesService) {
+        self.service = service
     }
 }
 
 public extension Preferences {
     
     func get<T>(_ key: PreferencesAPI.Key<T?>) -> T? {
-        store.get(key)
+        service.get(key)
     }
     
     func set<T>(_ value: T?, forKey key: PreferencesAPI.Key<T?>) {
-        store.set(value, forKey: key)
+        service.set(value, forKey: key)
     }
     
     func remove<T>(_ key: PreferencesAPI.Key<T?>) {
-        store.remove(key)
+        service.remove(key)
     }
 }

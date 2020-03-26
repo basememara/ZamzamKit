@@ -1,6 +1,6 @@
 //
 //  PreferencesTests.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2017-11-27.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
@@ -12,8 +12,8 @@ import ZamzamCore
 final class PreferencesTests: XCTestCase {
     
     private lazy var preferences: PreferencesType = Preferences(
-        store: PreferencesDefaultsStore(
-            defaults: UserDefaults(suiteName: "StringKeysTests")!
+        service: PreferencesDefaultsService(
+            defaults: UserDefaults(suiteName: "PreferencesTests")!
         )
     )
 }

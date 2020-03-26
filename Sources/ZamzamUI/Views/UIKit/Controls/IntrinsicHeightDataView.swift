@@ -1,6 +1,6 @@
 //
 //  IntrinsicHeightDataView.swift
-//  ZamzamKit iOS
+//  ZamzamUI
 //
 //  Created by Basem Emara on 2018-07-09.
 //  https://stackoverflow.com/a/48623673
