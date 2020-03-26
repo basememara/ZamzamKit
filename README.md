@@ -646,6 +646,42 @@ label.attributedText = "Abc".attributed + " def " +
 </details>
 
 <details>
+<summary>URL</summary>
+
+> Append a query string parameter to a URL:
+```swift
+let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
+url?.appendingQueryItem("def", value: "456") // "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
+url?.appendingQueryItem("xyz", value: "999") // "https://example.com?abc=123&lmn=tuv&xyz=999"
+```
+
+> Append a dictionary of query string parameters to a URL:
+```swift
+let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
+url?.appendingQueryItems([
+    "def": "456",
+    "jkl": "777",
+    "abc": "333",
+    "lmn": nil
+]) // "https://example.com?xyz=987&def=456&abc=333&jkl=777"
+```
+
+> Remove a query string parameter to a URL:
+```swift
+let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
+url?.removeQueryItem("xyz") // "https://example.com?abc=123&lmn=tuv"
+```
+
+> Query a URL from a parameter name:
+```swift
+let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
+url?.queryItem("aBc") // "123"
+url?.queryItem("lmn") // "tuv"
+url?.queryItem("yyy") // nil
+```
+</details>
+
+<details>
 <summary>URLSession</summary>
 
 > A thin wrapper around `URLSession` and `URLRequest` for simple network requests:
