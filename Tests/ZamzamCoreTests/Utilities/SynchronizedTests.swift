@@ -28,6 +28,9 @@ extension SynchronizedTests {
             XCTAssertEqual(temp.value, iterations)
         }
     }
+}
+
+extension SynchronizedTests {
     
     func testReadPerformance() {
         var temp = Synchronized<Int>(0)

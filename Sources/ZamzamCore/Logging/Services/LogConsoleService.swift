@@ -1,5 +1,5 @@
 //
-//  LogConsoleStore.swift
+//  LogConsoleService.swift
 //  ZamzamCore
 //  
 //
@@ -10,7 +10,7 @@
 import Foundation.NSDate
 
 /// Sends a message to the IDE console.
-public struct LogConsoleStore: LogStore {
+public struct LogConsoleService: LogService {
     public let minLevel: LogAPI.Level
     
     public init(minLevel: LogAPI.Level) {
@@ -18,7 +18,7 @@ public struct LogConsoleStore: LogStore {
     }
 }
 
-public extension LogConsoleStore {
+public extension LogConsoleService {
     
     func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]?) {
         let prefix: String

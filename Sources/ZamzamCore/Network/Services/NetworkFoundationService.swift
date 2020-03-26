@@ -8,13 +8,13 @@
 
 import Foundation
 
-public struct NetworkURLSessionStore: NetworkStore {
+public struct NetworkFoundationService: NetworkService {
     public init() {}
 }
 
-public extension NetworkURLSessionStore {
+public extension NetworkFoundationService {
     
-    func send(with request: URLRequest, completion: @escaping (Result<NetworkAPI.Response, NetworkError>) -> Void) {
+    func send(with request: URLRequest, completion: @escaping (Result<NetworkAPI.Response, NetworkAPI.Error>) -> Void) {
         URLSession.shared.dataTask(
             with: request,
             completionHandler: completion
@@ -33,17 +33,17 @@ private extension URLSession {
     ///   - completionHandler: The completion handler to call when the load request is complete. This handler is executed on the main queue.
     func dataTask(
         with request: URLRequest,
-        completionHandler: @escaping (Result<NetworkAPI.Response, NetworkError>) -> Void
+        completionHandler: @escaping (Result<NetworkAPI.Response, NetworkAPI.Error>) -> Void
     ) -> URLSessionDataTask {
         dataTask(with: request) { (data, response, error) in
             if let error = error {
-                let networkError = NetworkError(request: request, data: nil, headers: nil, statusCode: nil, internalError: error)
+                let networkError = NetworkAPI.Error(request: request, internalError: error)
                 DispatchQueue.main.async { completionHandler(.failure(networkError)) }
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse else {
-                let networkError = NetworkError(request: request, data: nil, headers: nil, statusCode: nil, internalError: nil)
+                let networkError = NetworkAPI.Error(request: request)
                 DispatchQueue.main.async { completionHandler(.failure(networkError)) }
                 return
             }
@@ -53,13 +53,13 @@ private extension URLSession {
             )
             
             guard let data = data else {
-                let networkError = NetworkError(request: request, data: nil, headers: headers, statusCode: httpResponse.statusCode, internalError: nil)
+                let networkError = NetworkAPI.Error(request: request, headers: headers, statusCode: httpResponse.statusCode)
                 DispatchQueue.main.async { completionHandler(.failure(networkError)) }
                 return
             }
             
             guard 200..<300 ~= httpResponse.statusCode else {
-                let networkError = NetworkError(request: request, data: data, headers: headers, statusCode: httpResponse.statusCode, internalError: nil)
+                let networkError = NetworkAPI.Error(request: request, data: data, headers: headers, statusCode: httpResponse.statusCode)
                 DispatchQueue.main.async { completionHandler(.failure(networkError)) }
                 return
             }

@@ -12,7 +12,7 @@ import ZamzamCore
 final class SecuredPreferencesTests: XCTestCase {
     
     private lazy var keychain: SecuredPreferencesType = SecuredPreferences(
-        store: SecuredPreferencesTestStore()
+        service: SecuredPreferencesTestService()
     )
 }
 
@@ -84,7 +84,7 @@ private extension SecuredPreferencesAPI.Key {
 // Unit test mocked since Keychain needs application host, see app for Keychain testing
 // https://github.com/onmyway133/blog/issues/92
 // https://forums.swift.org/t/host-application-for-spm-tests/24363
-private class SecuredPreferencesTestStore: SecuredPreferencesStore {
+private class SecuredPreferencesTestService: SecuredPreferencesService {
     var values = [String: String?]()
     
     func get(_ key: SecuredPreferencesAPI.Key, completion: @escaping (String?) -> Void) {

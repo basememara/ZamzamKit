@@ -17,7 +17,7 @@ public extension With where Self: Any {
     ///
     ///     let label = UILabel().with {
     ///       $0.textAlignment = .center
-    ///       $0.textColor = UIColor.black
+    ///       $0.textColor = .black
     ///       $0.text = "Hello, World!"
     ///     }
     @discardableResult

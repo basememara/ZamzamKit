@@ -37,7 +37,7 @@ import Foundation.NSUserDefaults
 ///         }
 ///     }
 public class AppMigration {
-    public static let suiteName = "\(DispatchQueue.labelPrefix).Migration"
+    public static let suiteName = "io.zamzam.ZamzamKit.Migration"
     
     private let defaults: UserDefaults
     private let bundle: Bundle

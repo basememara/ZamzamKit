@@ -6,19 +6,12 @@
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
-/// Preferences request namespace
-public enum PreferencesAPI {}
+// MARK: - Respository
 
-public protocol PreferencesStore {
-    func get<T>(_ key: PreferencesAPI.Key<T?>) -> T?
-    func set<T>(_ value: T?, forKey key: PreferencesAPI.Key<T?>)
-    func remove<T>(_ key: PreferencesAPI.Key<T?>)
-}
-
-/// A thin wrapper to manage `UserDefaults`, or other storages that conform to `PreferencesStore`.
+/// A thin wrapper to manage `UserDefaults`, or other storages that conform to `PreferencesService`.
 ///
 ///     let preferences: PreferencesType = Preferences(
-///         store: PreferencesDefaultsStore(
+///         service: PreferencesDefaultsService(
 ///             defaults: UserDefaults.standard
 ///         )
 ///     )
@@ -51,9 +44,17 @@ public protocol PreferencesType {
     func remove<T>(_ key: PreferencesAPI.Key<T?>)
 }
 
-// MARK: Requests / Responses
+// MARK: - Service
 
-extension PreferencesAPI {
+public protocol PreferencesService {
+    func get<T>(_ key: PreferencesAPI.Key<T?>) -> T?
+    func set<T>(_ value: T?, forKey key: PreferencesAPI.Key<T?>)
+    func remove<T>(_ key: PreferencesAPI.Key<T?>)
+}
+
+// MARK: Namespace
+
+public enum PreferencesAPI {
     
     /// Keys for strongly-typed access for generic types.
     open class Keys {

@@ -18,9 +18,9 @@ extension LoggingTests {
     
     func testEntriesAreWritten() {
         // Given
-        let promise = expectation(description: "testEntriesAreWritten")
-        let logStore = LogTestStore(minLevel: .verbose)
-        let log: LogProviderType = LogProvider(stores: [logStore])
+        let promise = expectation(description: #function)
+        let logService = LogTestService(minLevel: .verbose)
+        let log: LogRepositoryType = LogRepository(services: [logService])
         let group = DispatchGroup()
         
         // When
@@ -39,12 +39,12 @@ extension LoggingTests {
         wait(for: [promise], timeout: 10)
         
         // Then
-        XCTAssertEqual(logStore.entries[.verbose], ["\(LogAPI.Level.verbose) test"])
-        XCTAssertEqual(logStore.entries[.debug], ["\(LogAPI.Level.debug) test"])
-        XCTAssertEqual(logStore.entries[.info], ["\(LogAPI.Level.info) test"])
-        XCTAssertEqual(logStore.entries[.warning], ["\(LogAPI.Level.warning) test"])
-        XCTAssertEqual(logStore.entries[.error], ["\(LogAPI.Level.error) test"])
-        XCTAssertEqual(logStore.entries[.none], [])
+        XCTAssertEqual(logService.entries[.verbose], ["\(LogAPI.Level.verbose) test"])
+        XCTAssertEqual(logService.entries[.debug], ["\(LogAPI.Level.debug) test"])
+        XCTAssertEqual(logService.entries[.info], ["\(LogAPI.Level.info) test"])
+        XCTAssertEqual(logService.entries[.warning], ["\(LogAPI.Level.warning) test"])
+        XCTAssertEqual(logService.entries[.error], ["\(LogAPI.Level.error) test"])
+        XCTAssertEqual(logService.entries[.none], [])
     }
 }
 
@@ -52,55 +52,55 @@ extension LoggingTests {
     
     func testMinLevelsObeyed() {
         // Given
-        let verboseStore = LogTestStore(minLevel: .verbose)
-        let debugStore = LogTestStore(minLevel: .debug)
-        let infoStore = LogTestStore(minLevel: .info)
-        let warningStore = LogTestStore(minLevel: .warning)
-        let errorStore = LogTestStore(minLevel: .error)
-        let noneStore = LogTestStore(minLevel: .none)
+        let verboseService = LogTestService(minLevel: .verbose)
+        let debugService = LogTestService(minLevel: .debug)
+        let infoService = LogTestService(minLevel: .info)
+        let warningService = LogTestService(minLevel: .warning)
+        let errorService = LogTestService(minLevel: .error)
+        let noneService = LogTestService(minLevel: .none)
         
         // Then
-        XCTAssert(verboseStore.canWrite(for: .verbose))
-        XCTAssert(verboseStore.canWrite(for: .debug))
-        XCTAssert(verboseStore.canWrite(for: .info))
-        XCTAssert(verboseStore.canWrite(for: .warning))
-        XCTAssert(verboseStore.canWrite(for: .error))
-        XCTAssertFalse(verboseStore.canWrite(for: .none))
+        XCTAssert(verboseService.canWrite(for: .verbose))
+        XCTAssert(verboseService.canWrite(for: .debug))
+        XCTAssert(verboseService.canWrite(for: .info))
+        XCTAssert(verboseService.canWrite(for: .warning))
+        XCTAssert(verboseService.canWrite(for: .error))
+        XCTAssertFalse(verboseService.canWrite(for: .none))
         
-        XCTAssertFalse(debugStore.canWrite(for: .verbose))
-        XCTAssert(debugStore.canWrite(for: .debug))
-        XCTAssert(debugStore.canWrite(for: .info))
-        XCTAssert(debugStore.canWrite(for: .warning))
-        XCTAssert(debugStore.canWrite(for: .error))
-        XCTAssertFalse(debugStore.canWrite(for: .none))
+        XCTAssertFalse(debugService.canWrite(for: .verbose))
+        XCTAssert(debugService.canWrite(for: .debug))
+        XCTAssert(debugService.canWrite(for: .info))
+        XCTAssert(debugService.canWrite(for: .warning))
+        XCTAssert(debugService.canWrite(for: .error))
+        XCTAssertFalse(debugService.canWrite(for: .none))
         
-        XCTAssertFalse(infoStore.canWrite(for: .verbose))
-        XCTAssertFalse(infoStore.canWrite(for: .debug))
-        XCTAssert(infoStore.canWrite(for: .info))
-        XCTAssert(infoStore.canWrite(for: .warning))
-        XCTAssert(infoStore.canWrite(for: .error))
-        XCTAssertFalse(infoStore.canWrite(for: .none))
+        XCTAssertFalse(infoService.canWrite(for: .verbose))
+        XCTAssertFalse(infoService.canWrite(for: .debug))
+        XCTAssert(infoService.canWrite(for: .info))
+        XCTAssert(infoService.canWrite(for: .warning))
+        XCTAssert(infoService.canWrite(for: .error))
+        XCTAssertFalse(infoService.canWrite(for: .none))
         
-        XCTAssertFalse(warningStore.canWrite(for: .verbose))
-        XCTAssertFalse(warningStore.canWrite(for: .debug))
-        XCTAssertFalse(warningStore.canWrite(for: .info))
-        XCTAssert(warningStore.canWrite(for: .warning))
-        XCTAssert(warningStore.canWrite(for: .error))
-        XCTAssertFalse(warningStore.canWrite(for: .none))
+        XCTAssertFalse(warningService.canWrite(for: .verbose))
+        XCTAssertFalse(warningService.canWrite(for: .debug))
+        XCTAssertFalse(warningService.canWrite(for: .info))
+        XCTAssert(warningService.canWrite(for: .warning))
+        XCTAssert(warningService.canWrite(for: .error))
+        XCTAssertFalse(warningService.canWrite(for: .none))
         
-        XCTAssertFalse(errorStore.canWrite(for: .verbose))
-        XCTAssertFalse(errorStore.canWrite(for: .debug))
-        XCTAssertFalse(errorStore.canWrite(for: .info))
-        XCTAssertFalse(errorStore.canWrite(for: .warning))
-        XCTAssert(errorStore.canWrite(for: .error))
-        XCTAssertFalse(errorStore.canWrite(for: .none))
+        XCTAssertFalse(errorService.canWrite(for: .verbose))
+        XCTAssertFalse(errorService.canWrite(for: .debug))
+        XCTAssertFalse(errorService.canWrite(for: .info))
+        XCTAssertFalse(errorService.canWrite(for: .warning))
+        XCTAssert(errorService.canWrite(for: .error))
+        XCTAssertFalse(errorService.canWrite(for: .none))
         
-        XCTAssertFalse(noneStore.canWrite(for: .verbose))
-        XCTAssertFalse(noneStore.canWrite(for: .debug))
-        XCTAssertFalse(noneStore.canWrite(for: .info))
-        XCTAssertFalse(noneStore.canWrite(for: .warning))
-        XCTAssertFalse(noneStore.canWrite(for: .error))
-        XCTAssertFalse(noneStore.canWrite(for: .none))
+        XCTAssertFalse(noneService.canWrite(for: .verbose))
+        XCTAssertFalse(noneService.canWrite(for: .debug))
+        XCTAssertFalse(noneService.canWrite(for: .info))
+        XCTAssertFalse(noneService.canWrite(for: .warning))
+        XCTAssertFalse(noneService.canWrite(for: .error))
+        XCTAssertFalse(noneService.canWrite(for: .none))
     }
 }
 
@@ -108,9 +108,9 @@ extension LoggingTests {
     
     func testThreadSafety() {
         // Given
-        let promise = expectation(description: "testThreadSafety")
-        let logStore = LogTestStore(minLevel: .verbose)
-        let log: LogProviderType = LogProvider(stores: [logStore])
+        let promise = expectation(description: #function)
+        let logService = LogTestService(minLevel: .verbose)
+        let log: LogRepositoryType = LogRepository(services: [logService])
         let group = DispatchGroup()
         let iterations = 1_000 // 10_000
         
@@ -132,18 +132,18 @@ extension LoggingTests {
         wait(for: [promise], timeout: 30)
         
         // Then
-        XCTAssertEqual(logStore.entries[.verbose]?.count, iterations)
-        XCTAssertEqual(logStore.entries[.debug]?.count, iterations)
-        XCTAssertEqual(logStore.entries[.info]?.count, iterations)
-        XCTAssertEqual(logStore.entries[.warning]?.count, iterations)
-        XCTAssertEqual(logStore.entries[.error]?.count, iterations)
-        XCTAssert(logStore.entries[.none]?.isEmpty == true)
+        XCTAssertEqual(logService.entries[.verbose]?.count, iterations)
+        XCTAssertEqual(logService.entries[.debug]?.count, iterations)
+        XCTAssertEqual(logService.entries[.info]?.count, iterations)
+        XCTAssertEqual(logService.entries[.warning]?.count, iterations)
+        XCTAssertEqual(logService.entries[.error]?.count, iterations)
+        XCTAssert(logService.entries[.none]?.isEmpty == true)
     }
 }
 
 private extension LoggingTests {
     
-    class LogTestStore: LogStore {
+    class LogTestService: LogService {
         let minLevel: LogAPI.Level
         
         init(minLevel: LogAPI.Level) {

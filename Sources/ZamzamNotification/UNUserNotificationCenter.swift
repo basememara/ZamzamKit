@@ -175,9 +175,7 @@ public extension UNUserNotificationCenter {
     func get(withIdentifier: String, completion: @escaping (UNNotificationRequest?) -> Void) {
         getNotificationRequests {
             let requests = $0.first { $0.identifier == withIdentifier }
-            DispatchQueue.main.async {
-                completion(requests)
-            }
+            completion(requests)
         }
     }
     
@@ -189,9 +187,7 @@ public extension UNUserNotificationCenter {
     func get(withIdentifiers: [String], completion: @escaping ([UNNotificationRequest]) -> Void) {
         getNotificationRequests {
             let requests = $0.filter { withIdentifiers.contains($0.identifier) }
-            DispatchQueue.main.async {
-                completion(requests)
-            }
+            completion(requests)
         }
     }
     
@@ -438,9 +434,7 @@ public extension UNUserNotificationCenter {
             // Get back in queue since native remove has no completion block
             // https://stackoverflow.com/a/46434645
             self.getPendingNotificationRequests { _ in
-                DispatchQueue.main.async {
-                    completion?()
-                }
+                DispatchQueue.main.async { completion?() }
             }
         }
     }
@@ -469,9 +463,7 @@ public extension UNUserNotificationCenter {
             // Get back in queue since native remove has no completion block
             // https://stackoverflow.com/a/46434645
             self.getDeliveredNotifications { _ in
-                DispatchQueue.main.async {
-                    completion?()
-                }
+                DispatchQueue.main.async { completion?() }
             }
         }
     }

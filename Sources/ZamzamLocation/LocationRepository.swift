@@ -10,7 +10,7 @@ import CoreLocation
 import ZamzamCore
 
 /// A `LocationManager` wrapper with extensions.
-public class LocationProvider: NSObject, LocationProviderType {
+public class LocationRepository: NSObject, LocationRepositoryType {
     private let desiredAccuracy: CLLocationAccuracy?
     private let distanceFilter: Double?
     private let activityType: CLActivityType?
@@ -65,7 +65,7 @@ public class LocationProvider: NSObject, LocationProviderType {
 
 // MARK: - Authorization
 
-public extension LocationProvider {
+public extension LocationRepository {
     
     var isAuthorized: Bool { CLLocationManager.isAuthorized }
     
@@ -139,7 +139,7 @@ public extension LocationProvider {
 
 // MARK: - Coordinates
 
-public extension LocationProvider {
+public extension LocationRepository {
     
     var location: CLLocation? { manager.location }
     
@@ -150,12 +150,12 @@ public extension LocationProvider {
     
     func startUpdatingLocation(enableBackground: Bool) {
         #if os(iOS)
-            manager.allowsBackgroundLocationUpdates = enableBackground
+        manager.allowsBackgroundLocationUpdates = enableBackground
         #endif
         
 
         #if !os(tvOS)
-            manager.startUpdatingLocation()
+        manager.startUpdatingLocation()
         #endif
     }
     
@@ -169,7 +169,7 @@ public extension LocationProvider {
 }
 
 #if os(iOS)
-public extension LocationProvider {
+public extension LocationRepository {
     
     func startMonitoringSignificantLocationChanges() {
         manager.startMonitoringSignificantLocationChanges()
@@ -180,7 +180,7 @@ public extension LocationProvider {
     }
 }
 
-public extension LocationProvider {
+public extension LocationRepository {
     
     var heading: CLHeading? { manager.heading }
     
@@ -193,7 +193,7 @@ public extension LocationProvider {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        let handlers = self.didUpdateHeading.value
+        let handlers = didUpdateHeading.value
         handlers.forEach { task in
             DispatchQueue.main.async {
                 task.handler(newHeading)
@@ -205,7 +205,7 @@ public extension LocationProvider {
 
 // MARK: - Observers
 
-public extension LocationProvider {
+public extension LocationRepository {
     
     func addObserver(_ observer: Observer<AuthorizationHandler>) {
         didChangeAuthorizationHandlers.value { $0.append(observer) }
@@ -247,13 +247,13 @@ public extension LocationProvider {
 
 // MARK: - Delegates
 
-extension LocationProvider: CLLocationManagerDelegate {
+extension LocationRepository: CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status != .notDetermined else { return }
         
         // Trigger and empty queues
-        let recurringHandlers = self.didChangeAuthorizationHandlers.value
+        let recurringHandlers = didChangeAuthorizationHandlers.value
         recurringHandlers.forEach { task in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }

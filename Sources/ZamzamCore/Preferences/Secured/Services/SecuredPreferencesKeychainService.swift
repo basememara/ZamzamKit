@@ -1,5 +1,5 @@
 //
-//  SecuredPreferencesKeychainStore.swift
+//  SecuredPreferencesKeychainService.swift
 //  ZamzamKit
 //
 //  Created by Basem Emara on 2020-03-07.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-public struct SecuredPreferencesKeychainStore: SecuredPreferencesStore {
+public struct SecuredPreferencesKeychainService: SecuredPreferencesService {
     private static let accessOption: KeychainSwiftAccessOptions = .accessibleAfterFirstUnlock
     private let keychain: KeychainSwift
     
     public init() {
-        self.keychain = KeychainSwift()
+        self.keychain = KeychainSwift() // 3rd Party
         self.keychain.synchronizable = false
     }
     
@@ -23,8 +23,8 @@ public struct SecuredPreferencesKeychainStore: SecuredPreferencesStore {
     }
 }
 
-public extension SecuredPreferencesKeychainStore {
-    private static let queue = DispatchQueue(label: "io.zamzam.ZamzamKit.SecuredPreferencesKeychainStore", qos: .userInitiated)
+public extension SecuredPreferencesKeychainService {
+    private static let queue = DispatchQueue(label: "\(DispatchQueue.labelPrefix).SecuredPreferencesKeychainService", qos: .userInitiated)
     
     func get(_ key: SecuredPreferencesAPI.Key, completion: @escaping (String?) -> Void) {
         Self.queue.async {
@@ -37,7 +37,7 @@ public extension SecuredPreferencesKeychainStore {
     }
 }
 
-public extension SecuredPreferencesKeychainStore {
+public extension SecuredPreferencesKeychainService {
     
     func set(_ value: String?, forKey key: SecuredPreferencesAPI.Key) -> Bool {
         guard let value = value else { return remove(key) }
@@ -45,7 +45,7 @@ public extension SecuredPreferencesKeychainStore {
     }
 }
 
-public extension SecuredPreferencesKeychainStore {
+public extension SecuredPreferencesKeychainService {
     
     func remove(_ key: SecuredPreferencesAPI.Key) -> Bool {
         keychain.delete(key.name)
@@ -54,7 +54,7 @@ public extension SecuredPreferencesKeychainStore {
 
 // MARK: - External Library
 
-private extension SecuredPreferencesKeychainStore {
+private extension SecuredPreferencesKeychainService {
     
     //
     //  KeychainSwiftDistrib.swift

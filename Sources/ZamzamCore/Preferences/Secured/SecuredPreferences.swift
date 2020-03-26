@@ -7,24 +7,24 @@
 //
 
 public struct SecuredPreferences: SecuredPreferencesType {
-    private let store: SecuredPreferencesStore
+    private let service: SecuredPreferencesService
     
-    public init(store: SecuredPreferencesStore) {
-        self.store = store
+    public init(service: SecuredPreferencesService) {
+        self.service = service
     }
 }
 
 public extension SecuredPreferences {
     
     func get(_ key: SecuredPreferencesAPI.Key, completion: @escaping (String?) -> Void) {
-        store.get(key, completion: completion)
+        service.get(key, completion: completion)
     }
     
     func set(_ value: String?, forKey key: SecuredPreferencesAPI.Key) -> Bool {
-        store.set(value, forKey: key)
+        service.set(value, forKey: key)
     }
     
     func remove(_ key: SecuredPreferencesAPI.Key) -> Bool {
-        store.remove(key)
+        service.remove(key)
     }
 }
