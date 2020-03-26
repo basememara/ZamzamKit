@@ -78,151 +78,6 @@ status.within([.requested, .accepted, .inProgress]) // false
 </details>
 
 <details>
-<summary>Date</summary>
-
-> Determine if a date is in the past or future:
-```swift
-Date(timeIntervalSinceNow: -100).isPast -> true
-Date(timeIntervalSinceNow: 100).isPast -> false
-
-Date(timeIntervalSinceNow: 100).isFuture -> true
-Date(timeIntervalSinceNow: -100).isFuture -> false
-```
-
-> Determine if a date is today, yesterday, or tomorrow:
-```swift
-Date().isToday -> true
-Date(timeIntervalSinceNow: -90_000).isYesterday -> true
-Date(timeIntervalSinceNow: 90_000).isTomorrow -> true
-```
-
-> Determine if a date is within a weekday or weekend period:
-```swift
-Date().isWeekday -> false
-Date().isWeekend -> true
-```
-
-> Get the beginning or end of the day:
-```swift
-Date().startOfDay -> "2018/11/21 00:00:00"
-Date().endOfDay -> "2018/11/21 23:59:59"
-```
-
-> Get the beginning or end of the month:
-```swift
-Date().startOfMonth -> "2018/11/01 00:00:00"
-Date().endOfMonth -> "2018/11/30 23:59:59"
-```
-
-> Determine if a date is current:
-```swift
-let date = Date(fromString: "2018/03/22 09:40")
-date.isCurrentWeek
-date.isCurrentMonth
-date.isCurrentYear
-```
-
-> Determine if a date is between two other dates:
-```swift
-let date = Date()
-let date1 = Date(timeIntervalSinceNow: 1000)
-let date2 = Date(timeIntervalSinceNow: -1000)
-
-date.isBetween(date1, date2) -> true
-```
-
-> Determine if a date is beyond a specified time window:
-```swift
-let date = Date(fromString: "2018/03/22 09:40")
-let fromDate = Date(fromString: "2018/03/22 09:30")
-
-date.isBeyond(fromDate, bySeconds: 300) -> true
-date.isBeyond(fromDate, bySeconds: 1200) -> false
-```
-
-> Use specific calendar for data manipulations:
-```swift
-let date = Date(fromString: "2018/03/22 09:40")
-let calendar = Calendar(identifier: .chinese)
-
-date.isToday(for: calendar)
-date.isWeekday(for: calendar)
-date.isCurrentMonth(for: calendar)
-date.isToday(for: calendar)
-date.startOfDay(for: calendar)
-date.startOfMonth(for: calendar)
-```
-
-> Determine if a date is beyond a specified time window:
-```swift
-let date = Date(fromString: "2018/03/22 09:40")
-let fromDate = Date(fromString: "2018/03/22 09:30")
-
-date.isBeyond(fromDate, bySeconds: 300) -> true
-date.isBeyond(fromDate, bySeconds: 1200) -> false
-```
-
-> Create a date from a string:
-```swift
-Date(fromString: "2018/11/01 18:15")
-Date(fromString: "1440/03/01 18:31", calendar: Calendar(identifier: .islamic))
-```
-
-> Format a date to a string:
-```swift
-Date().string(format: "MMM d, h:mm a") -> "Jan 3, 8:43 PM"
-Date().string(style: .full, calendar: Calendar(identifier: .hebrew)) -> "Friday, 1 Kislev 5779"
-```
-
-> Format a time interval to display as a timer.
-```swift
-let date = Date(fromString: "2016/03/22 09:45")
-let fromDate = Date(fromString: "2016/03/22 09:40")
-
-date.timerString(from: fromDate)
-
-// Prints "00:05:00"
-```
-
-> Get the decimal representation of the time:
-```swift
-Date(fromString: "2018/10/23 18:15").timeToDecimal -> 18.25
-```
-
-> Increment years, months, days, hours, or minutes:
-```swift
-let date = Date()
-date + .years(1)
-date + .months(2)
-date - .days(4)
-date - .hours(6)
-date + .minutes(12)
-date + .days(5, Calendar(identifier: .chinese))
-```
-
-> Convert between time interval units:
-```swift
-let diff = date.timeIntervalSince(date2) -> 172,800 seconds
-diff.minutes -> 2,800 minutes
-diff.hours -> 48 hours
-diff.days -> 2 days
-```
-
-> Time zone context and offset:
-```swift
-let timeZone = TimeZone(identifier: "Europe/Paris")
-timeZone?.isCurrent -> false
-timeZone?.offsetFromCurrent -> -21600
-```
-
-> Normalize date calculations and data storage:
-```swift
-let timeZone: TimeZone = .posix // GMT
-let locale: Locale = .posix // en_US_POSIX
-```
-</details>
-
-<details>
 <summary>Number</summary>
 
 > Round doubles, floats, or any floating-point type:
@@ -430,6 +285,151 @@ formatter.string(fromAmount: 123456789.987) // "$123,456,789.99"
 
 let formatter2 = CurrencyFormatter(for: Locale(identifier: "fr-FR"))
 formatter2.string(fromCents: 123456789) // "1 234 567,89 €"
+```
+</details>
+
+<details>
+<summary>Date</summary>
+
+> Determine if a date is in the past or future:
+```swift
+Date(timeIntervalSinceNow: -100).isPast -> true
+Date(timeIntervalSinceNow: 100).isPast -> false
+
+Date(timeIntervalSinceNow: 100).isFuture -> true
+Date(timeIntervalSinceNow: -100).isFuture -> false
+```
+
+> Determine if a date is today, yesterday, or tomorrow:
+```swift
+Date().isToday -> true
+Date(timeIntervalSinceNow: -90_000).isYesterday -> true
+Date(timeIntervalSinceNow: 90_000).isTomorrow -> true
+```
+
+> Determine if a date is within a weekday or weekend period:
+```swift
+Date().isWeekday -> false
+Date().isWeekend -> true
+```
+
+> Get the beginning or end of the day:
+```swift
+Date().startOfDay -> "2018/11/21 00:00:00"
+Date().endOfDay -> "2018/11/21 23:59:59"
+```
+
+> Get the beginning or end of the month:
+```swift
+Date().startOfMonth -> "2018/11/01 00:00:00"
+Date().endOfMonth -> "2018/11/30 23:59:59"
+```
+
+> Determine if a date is current:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+date.isCurrentWeek
+date.isCurrentMonth
+date.isCurrentYear
+```
+
+> Determine if a date is between two other dates:
+```swift
+let date = Date()
+let date1 = Date(timeIntervalSinceNow: 1000)
+let date2 = Date(timeIntervalSinceNow: -1000)
+
+date.isBetween(date1, date2) -> true
+```
+
+> Determine if a date is beyond a specified time window:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+let fromDate = Date(fromString: "2018/03/22 09:30")
+
+date.isBeyond(fromDate, bySeconds: 300) -> true
+date.isBeyond(fromDate, bySeconds: 1200) -> false
+```
+
+> Use specific calendar for data manipulations:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+let calendar = Calendar(identifier: .chinese)
+
+date.isToday(for: calendar)
+date.isWeekday(for: calendar)
+date.isCurrentMonth(for: calendar)
+date.isToday(for: calendar)
+date.startOfDay(for: calendar)
+date.startOfMonth(for: calendar)
+```
+
+> Determine if a date is beyond a specified time window:
+```swift
+let date = Date(fromString: "2018/03/22 09:40")
+let fromDate = Date(fromString: "2018/03/22 09:30")
+
+date.isBeyond(fromDate, bySeconds: 300) -> true
+date.isBeyond(fromDate, bySeconds: 1200) -> false
+```
+
+> Create a date from a string:
+```swift
+Date(fromString: "2018/11/01 18:15")
+Date(fromString: "1440/03/01 18:31", calendar: Calendar(identifier: .islamic))
+```
+
+> Format a date to a string:
+```swift
+Date().string(format: "MMM d, h:mm a") -> "Jan 3, 8:43 PM"
+Date().string(style: .full, calendar: Calendar(identifier: .hebrew)) -> "Friday, 1 Kislev 5779"
+```
+
+> Format a time interval to display as a timer.
+```swift
+let date = Date(fromString: "2016/03/22 09:45")
+let fromDate = Date(fromString: "2016/03/22 09:40")
+
+date.timerString(from: fromDate)
+
+// Prints "00:05:00"
+```
+
+> Get the decimal representation of the time:
+```swift
+Date(fromString: "2018/10/23 18:15").timeToDecimal -> 18.25
+```
+
+> Increment years, months, days, hours, or minutes:
+```swift
+let date = Date()
+date + .years(1)
+date + .months(2)
+date - .days(4)
+date - .hours(6)
+date + .minutes(12)
+date + .days(5, Calendar(identifier: .chinese))
+```
+
+> Convert between time interval units:
+```swift
+let diff = date.timeIntervalSince(date2) -> 172,800 seconds
+diff.minutes -> 2,800 minutes
+diff.hours -> 48 hours
+diff.days -> 2 days
+```
+
+> Time zone context and offset:
+```swift
+let timeZone = TimeZone(identifier: "Europe/Paris")
+timeZone?.isCurrent -> false
+timeZone?.offsetFromCurrent -> -21600
+```
+
+> Normalize date calculations and data storage:
+```swift
+let timeZone: TimeZone = .posix // GMT
+let locale: Locale = .posix // en_US_POSIX
 ```
 </details>
 
@@ -1804,7 +1804,7 @@ present(
 
 ## Author
 
-* Zamzam Inc., https://zamzam.io
+* Zamzam, https://zamzam.io
 * Basem Emara, https://basememara.com
 
 ## License

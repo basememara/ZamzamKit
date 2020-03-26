@@ -252,28 +252,7 @@ public extension String {
     }
 }
 
-public extension String {
-    
-    /// Encode a string to Base64
-    var base64Encoded: String {
-        Data(utf8).base64EncodedString()
-    }
-    
-    /// Decode a string from Base64
-    var base64Decoded: String? {
-        guard let data = Data(base64Encoded: self) else { return nil }
-        return String(data: data, encoding: .utf8)
-    }
-    
-    /// URL safe encode a string to Base64
-    var base64URLEncoded: String {
-        base64Encoded
-            .replacingOccurrences(of: "/", with: "_")
-            .replacingOccurrences(of: "+", with: "-")
-            .replacingOccurrences(of: "=", with: "")
-            .trimmingCharacters(in: .whitespaces)
-    }
-}
+// MARK: - Encoding
 
 public extension String {
     private static let defaultDecoder = JSONDecoder()
@@ -289,14 +268,45 @@ public extension String {
     }
 }
 
+public extension String {
+    
+    /// Encode a string to Base64. Default encoding is UTF8.
+    func base64Encoded() -> String {
+        Data(utf8).base64EncodedString()
+    }
+    
+    /// URL safe encode a string to Base64. Default encoding is UTF8.
+    func base64URLEncoded() -> String {
+        Data(utf8).base64URLEncodedString()
+    }
+    
+    /// Decode a string from Base64. Default decoding is UTF8.
+    func base64Decoded() -> String? {
+        guard let data = Data(base64Encoded: self) else { return nil }
+        return String(data: data, encoding: .utf8)
+    }
+}
+
+// MARK: - Crypto
+
+public extension String {
+    
+    /// Returns an encrypted data of the string
+    func sha256() -> Data {
+        Data(utf8).sha256()
+    }
+}
+
+// MARK: - Types
+
+public extension Optional where Wrapped == String {
+    
+    /// A Boolean value indicating whether a string is `nil` or has no characters.
+    var isNilOrEmpty: Bool { self?.isEmpty ?? true }
+}
+
 public extension Substring {
     
     /// A string value representation of the string slice.
     var string: String { String(self) }
-}
-
-public extension Optional where Wrapped == String {
-
-    /// A Boolean value indicating whether a string is `nil` or has no characters.
-    var isNilOrEmpty: Bool { self?.isEmpty ?? true }
 }

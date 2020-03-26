@@ -9,7 +9,7 @@ import XCTest
 import ZamzamCore
 
 final class SynchronizedTests: XCTestCase {
-    private let iterations = 1_000_000
+    private let iterations = 10_000 // 1_000_000
     private let writeMultipleOf = 1000
 }
 
