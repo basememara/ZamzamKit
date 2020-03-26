@@ -1,6 +1,6 @@
 //
 //  LocationManager.swift
-//  ZamzamKit
+//  ZamzamLocation
 //
 //  Created by Basem Emara on 3/6/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  ScrollViewWithKeyboard.swift
-//  ZamzamKit iOS
+//  ZamzamUI
 //
 //  Created by Basem Emara on 2019-05-08.
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
@@ -19,16 +19,16 @@ open class ScrollViewWithKeyboard: UIScrollView {
         
         // https://stackoverflow.com/a/8203326
         guard window != nil else { return }
-        notificationCenter.addObserver(for: UIResponder.keyboardWillShowNotification, selector: #selector(adjustsInsetsForKeyboard), from: self)
-        notificationCenter.addObserver(for: UIResponder.keyboardWillHideNotification, selector: #selector(adjustsInsetsForKeyboard), from: self)
+        notificationCenter.addObserver(self, selector: #selector(adjustsInsetsForKeyboard), name: UIResponder.keyboardWillShowNotification)
+        notificationCenter.addObserver(self, selector: #selector(adjustsInsetsForKeyboard), name: UIResponder.keyboardWillHideNotification)
     }
     
     open override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
         
         guard newWindow == nil else { return }
-        notificationCenter.removeObserver(for: UIResponder.keyboardWillShowNotification, from: self)
-        notificationCenter.removeObserver(for: UIResponder.keyboardWillHideNotification, from: self)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification)
     }
     
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

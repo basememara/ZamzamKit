@@ -1,6 +1,6 @@
 //
 //  CellIdentifiable.swift
-//  ZamzamKit
+//  ZamzamUI
 //
 //  Created by Basem Emara on 4/28/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.

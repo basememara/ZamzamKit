@@ -1,6 +1,6 @@
 //
 //  GradientView.swift
-//  ZamzamKit iOS
+//  ZamzamUI
 //
 //  Created by Basem Emara on 2018-08-10.
 //  https://medium.com/@sakhabaevegor/create-a-color-gradient-on-the-storyboard-18ccfd8158c2

@@ -1,6 +1,6 @@
 //
 //  Then.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 4/29/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.

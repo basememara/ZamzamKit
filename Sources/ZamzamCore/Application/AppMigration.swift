@@ -1,6 +1,6 @@
 //
 //  AppMigration.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Inspired by: https://github.com/mysterioustrousers/MTMigration
 //

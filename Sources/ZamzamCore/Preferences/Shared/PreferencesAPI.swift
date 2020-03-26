@@ -1,6 +1,6 @@
 //
-//  PreferencesStoreInterfaces.swift
-//  ZamzamKit
+//  PreferencesAPI.swift
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2019-05-09.
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
@@ -8,7 +8,7 @@
 
 // MARK: - Respository
 
-/// A thin wrapper to manage `UserDefaults`, or other storages that conform to `PreferencesService`.
+/// A thin wrapper to manage `UserDefaults`, or other services that conform to `PreferencesService`.
 ///
 ///     let preferences: PreferencesType = Preferences(
 ///         service: PreferencesDefaultsService(

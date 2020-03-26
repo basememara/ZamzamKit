@@ -1,6 +1,6 @@
 //
 //  Locale.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 4/10/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.

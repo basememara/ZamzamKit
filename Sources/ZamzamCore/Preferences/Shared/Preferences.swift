@@ -1,6 +1,6 @@
 //
 //  Preferences.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2019-05-09.
 //  Copyright © 2019 Zamzam Inc. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  UIScrollView.swift
-//  ZamzamKit iOS
+//  ZamzamUI
 //
 //  Created by Basem Emara on 2018-02-20.
 //  Copyright © 2018 Zamzam Inc. All rights reserved.

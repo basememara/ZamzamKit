@@ -1,6 +1,6 @@
 //
 //  BackgroundTask.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 3/15/17.
 //  https://gist.github.com/phatmann/e96958529cc86ff584a9

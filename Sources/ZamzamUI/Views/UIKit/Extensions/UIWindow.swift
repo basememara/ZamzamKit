@@ -1,6 +1,6 @@
 //
 //  UIWindow.swift
-//  ZamzamKit iOS
+//  ZamzamUI
 //
 //  Created by Basem Emara on 2017-11-20.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.

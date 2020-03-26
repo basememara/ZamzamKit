@@ -1,6 +1,6 @@
 //
 //  SCNetworkReachability.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 5/10/16.
 //  Copyright © 2016 Zamzam Inc. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  UNUserNotificationCenter.swift
-//  ZamzamKit
+//  ZamzamLocation
 //
 //  Created by Basem Emara on 2/3/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.

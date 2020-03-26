@@ -1,6 +1,6 @@
 //
 //  String+StringInterpolation.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2020-03-11.
 //  Copyright © 2020 Zamzam Inc. All rights reserved.

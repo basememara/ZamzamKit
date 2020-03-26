@@ -1,6 +1,6 @@
 //
 //  UILabelView.swift
-//  ZamzamKit iOS
+//  ZamzamUI
 //
 //  Created by Basem Emara on 2018-06-26.
 //  Copyright © 2018 Zamzam Inc. All rights reserved.

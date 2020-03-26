@@ -1,6 +1,6 @@
 //
 //  Observable.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 3/12/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.

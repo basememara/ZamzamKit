@@ -1,6 +1,6 @@
 //
 //  Localizable.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 6/27/17.
 //  http://basememara.com/swifty-localization-xcode-support/

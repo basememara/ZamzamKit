@@ -1,6 +1,6 @@
 //
 //  DictionaryTests.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2020-03-24.
 //  Copyright © 2018 Zamzam Inc. All rights reserved.

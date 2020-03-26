@@ -1,6 +1,6 @@
 //
 //  SecuredPreferencesAPI.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2020-03-07.
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
@@ -8,7 +8,7 @@
 
 // MARK: - Respository
 
-/// A thin wrapper to manage Keychain, or other storages that conform to `SecuredPreferencesService`.
+/// A thin wrapper to manage Keychain, or other services that conform to `SecuredPreferencesService`.
 ///
 ///     let keychain: SecuredPreferencesType = SecuredPreferences(
 ///         service: SecuredPreferencesKeychainService()

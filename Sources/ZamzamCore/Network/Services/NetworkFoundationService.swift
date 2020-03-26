@@ -1,5 +1,5 @@
 //
-//  NetworkFoundationStore.swift
+//  NetworkFoundationService.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2020-03-01.

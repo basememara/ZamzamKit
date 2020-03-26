@@ -1,6 +1,6 @@
 //
 //  UIImage.swift
-//  ZamzamKit
+//  ZamzamUI
 //
 //  Created by Basem Emara on 5/5/16.
 //  Copyright © 2016 Zamzam Inc. All rights reserved.

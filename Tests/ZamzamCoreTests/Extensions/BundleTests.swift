@@ -1,6 +1,6 @@
 //
 //  NSBundleTests.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 3/4/16.
 //  Copyright © 2016 Zamzam Inc. All rights reserved.

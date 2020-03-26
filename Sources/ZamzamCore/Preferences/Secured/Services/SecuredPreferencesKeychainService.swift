@@ -1,6 +1,6 @@
 //
 //  SecuredPreferencesKeychainService.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2020-03-07.
 //  Copyright © 2020 Zamzam Inc. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  WatchSession.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 3/13/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  StringHelper.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 1/20/16.
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
@@ -127,12 +127,12 @@ extension StringTests {
     
     func testStrippingWhitespaceAndNewlines() {
         let string = """
-                     { 0         1
-                     2                  34
-                     56       7             8
-                     9
-                     }
-                     """
+            { 0         1
+            2                  34
+            56       7             8
+            9
+            }
+            """
         
         XCTAssertEqual(
             string.strippingCharacters(in: .whitespacesAndNewlines),
@@ -146,12 +146,12 @@ extension StringTests {
         let disallowed = allowed.inverted
         
         let string = """
-                     _abcdefghijklmnopqrstuvwxyz
-                     ABCDEFGHIJKLMNOPQRSTUVWXYZ
-                     0{1 2<3>4@5#6`7~8?9,0
+            _abcdefghijklmnopqrstuvwxyz
+            ABCDEFGHIJKLMNOPQRSTUVWXYZ
+            0{1 2<3>4@5#6`7~8?9,0
 
-                     1
-                     """
+            1
+            """
         
         XCTAssertEqual(
             string.replacingCharacters(in: disallowed, with: "_"),
@@ -182,15 +182,6 @@ extension StringTests {
         XCTAssertEqual(newValue2, value)
         
         XCTAssertEqual("aa1bb22cc3d888d4ee5".replacing(regex: "\\d", with: "*"), "aa*bb**cc*d***d*ee*")
-    }
-}
-
-extension StringTests {
-    
-    func testHTMLStripped() {
-        let test = "<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>"
-        let expected = "This is web content with a link."
-        XCTAssertEqual(test.htmlStripped, expected)
     }
 }
 

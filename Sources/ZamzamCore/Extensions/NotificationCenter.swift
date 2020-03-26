@@ -1,6 +1,6 @@
 //
 //  NotificationCenter.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 5/5/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
@@ -18,29 +18,24 @@ public extension NotificationCenter {
     func post(name: NSNotification.Name, userInfo: [AnyHashable: Any]? = nil) {
         post(name: name, object: nil, userInfo: userInfo)
     }
-}
-
-public extension NotificationCenter {
     
     /// Adds an entry to the receiver’s dispatch table with an observer, a notification selector and optional criteria: notification name and sender.
     ///
     /// - Parameters:
-    ///   - name: The name of the notification for which to register the observer; that is, only notifications with this name are delivered to the observer.
-    ///   - selector: Selector that specifies the message the receiver sends observer to notify it of the notification posting.
     ///   - observer: Object registering as an observer.
-    ///   - object: The object whose notifications the observer wants to receive; that is, only notifications sent by this sender are delivered to the observer.
-    func addObserver(for name: NSNotification.Name, selector: Selector, from observer: Any, object: Any? = nil) {
-        addObserver(observer, selector: selector, name: name, object: object)
+    ///   - selector: Selector that specifies the message the receiver sends observer to notify it of the notification posting.
+    ///   - name: The name of the notification for which to register the observer; that is, only notifications with this name are delivered to the observer.
+    func addObserver(_ observer: Any, selector aSelector: Selector, name aName: NSNotification.Name) {
+        addObserver(observer, selector: aSelector, name: aName, object: nil)
     }
     
     /// Removes matching entries from the notification center's dispatch table.
     ///
     /// - Parameters:
-    ///   - name: The name of the notification for which to register the observer; that is, only notifications with this name are delivered to the observer.
     ///   - observer: Object registering as an observer.
-    ///   - object: The object whose notifications the observer wants to receive; that is, only notifications sent by this sender are delivered to the observer.
-    func removeObserver(for name: NSNotification.Name, from observer: Any, object: Any? = nil) {
-        removeObserver(observer, name: name, object: object)
+    ///   - name: The name of the notification for which to register the observer; that is, only notifications with this name are delivered to the observer.
+    func removeObserver(_ observer: Any, name aName: NSNotification.Name) {
+        removeObserver(observer, name: aName, object: nil)
     }
 }
 
@@ -65,11 +60,10 @@ public extension NotificationCenter {
     /// Adds an entry to the notification center's dispatch table that includes a notification queue and a block to add to the queue, and an optional notification name and sender.
     ///
     ///     class MyObserver: NSObject {
-    ///         // Auto-released in deinit
-    ///         var token: NotificationCenter.Token?
+    ///         var token: NotificationCenter.Token? // Auto-released in deinit
     ///
     ///         func setup() {
-    ///             NotificationCenter.default.addObserver(for: .SomeName, in: &token) {
+    ///             NotificationCenter.default.addObserver(forName: .SomeName, in: &token) {
     ///                 print("test")
     ///             }
     ///         }
@@ -84,7 +78,7 @@ public extension NotificationCenter {
     ///   - token: An opaque object to act as the observer and will manage its auto release.
     ///   - block: The block to be executed when the notification is received.
     func addObserver(
-        for name: NSNotification.Name,
+        forName name: NSNotification.Name,
         object: Any? = nil,
         queue: OperationQueue? = nil,
         in token: inout Token?,

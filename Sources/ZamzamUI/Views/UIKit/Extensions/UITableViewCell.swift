@@ -1,6 +1,6 @@
 //
 //  UITableViewCell.swift
-//  ZamzamKit
+//  ZamzamUI
 //
 //  Created by Basem Emara on 4/30/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.

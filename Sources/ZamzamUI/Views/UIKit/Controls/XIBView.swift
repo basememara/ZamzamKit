@@ -1,6 +1,6 @@
 //
 //  BaseNibView.swift
-//  ZamzamKit
+//  ZamzamUI
 //
 //  Created by Basem Emara on 2/21/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.

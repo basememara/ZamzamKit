@@ -1,6 +1,6 @@
 //
 //  NetworkTests.swift
-//  ZamzamKit
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2020-03-01.
 //
