@@ -9,8 +9,20 @@
 import XCTest
 import ZamzamCore
 
-final class ArrayTests: XCTestCase {
+final class ArrayTests: XCTestCase {}
+
+extension ArrayTests {
     
+    func testPrepend() {
+        // Given
+        var sample = [2, 3, 4, 5]
+        
+        // When
+        sample.prepend(1)
+        
+        // Then
+        XCTAssertEqual(sample, [1, 2, 3, 4, 5])
+    }
 }
 
 extension ArrayTests {

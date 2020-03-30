@@ -6,6 +6,20 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
+public extension Array {
+    
+    /// Inserts a new element into the collection at the beginning position.
+    ///
+    ///        [2, 3, 4, 5].prepend(1) -> [1, 2, 3, 4, 5]
+    ///        ["e", "l", "l", "o"].prepend("h") -> ["h", "e", "l", "l", "o"]
+    ///
+    /// - Parameter newElement: The new element to insert into the collection.
+    mutating func prepend(_ newElement: Element) {
+        // https://github.com/SwifterSwift/SwifterSwift
+        insert(newElement, at: 0)
+    }
+}
+
 public extension Array where Element: Equatable {
 	
     /// Array with all duplicates removed from it.
