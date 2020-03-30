@@ -24,11 +24,12 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/get")!,
-            method: .get
-        )
+        guard let url = URL(string: "https://httpbin.org/get") else {
+            XCTFail("URL was not valid")
+            return
+        }
         
+        let request = URLRequest(url: url, method: .get)
         var response: NetworkAPI.Response?
         
         // When
@@ -59,18 +60,18 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
+        guard let url = URL(string: "https://httpbin.org/get") else {
+            XCTFail("URL was not valid")
+            return
+        }
+        
         let parameters: [String: Any] = [
             "abc": 123,
             "def": "test456",
             "xyz": true
         ]
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/get")!,
-            method: .get,
-            parameters: parameters
-        )
-        
+        let request = URLRequest(url: url, method: .get, parameters: parameters)
         var response: NetworkAPI.Response?
         
         // When
@@ -109,7 +110,6 @@ extension NetworkTests {
             
             parameters.forEach {
                 XCTAssertEqual(model.args[$0.key], "\($0.value)")
-                
             }
         } catch {
             XCTFail("The resonse data could not be parse: \(error)")
@@ -123,18 +123,18 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
+        guard let url = URL(string: "https://httpbin.org/get") else {
+            XCTFail("URL was not valid")
+            return
+        }
+        
         let headers: [String: String] = [
             "Abc": "test123",
             "Def": "test456",
             "Xyz": "test789"
         ]
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/get")!,
-            method: .get,
-            headers: headers
-        )
-        
+        let request = URLRequest(url: url, method: .get, headers: headers)
         var response: NetworkAPI.Response?
         
         // When
@@ -185,11 +185,12 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/post")!,
-            method: .post
-        )
+        guard let url = URL(string: "https://httpbin.org/post") else {
+            XCTFail("URL was not valid")
+            return
+        }
         
+        let request = URLRequest(url: url, method: .post)
         var response: NetworkAPI.Response?
         
         // When
@@ -220,18 +221,18 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
+        guard let url = URL(string: "https://httpbin.org/post") else {
+            XCTFail("URL was not valid")
+            return
+        }
+        
         let parameters: [String: Any] = [
             "abc": 123,
             "def": "test456",
             "xyz": true
         ]
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/post")!,
-            method: .post,
-            parameters: parameters
-        )
-        
+        let request = URLRequest(url: url, method: .post, parameters: parameters)
         var response: NetworkAPI.Response?
         
         // When
@@ -279,18 +280,18 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
+        guard let url = URL(string: "https://httpbin.org/post") else {
+            XCTFail("URL was not valid")
+            return
+        }
+        
         let headers: [String: String] = [
             "Abc": "test123",
             "Def": "test456",
             "Xyz": "test789"
         ]
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/post")!,
-            method: .post,
-            headers: headers
-        )
-        
+        let request = URLRequest(url: url, method: .post, headers: headers)
         var response: NetworkAPI.Response?
         
         // When
@@ -341,11 +342,12 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/patch")!,
-            method: .patch
-        )
+        guard let url = URL(string: "https://httpbin.org/patch") else {
+            XCTFail("URL was not valid")
+            return
+        }
         
+        let request = URLRequest(url: url, method: .patch)
         var response: NetworkAPI.Response?
         
         // When
@@ -376,18 +378,18 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
+        guard let url = URL(string: "https://httpbin.org/patch") else {
+            XCTFail("URL was not valid")
+            return
+        }
+        
         let parameters: [String: Any] = [
             "abc": 123,
             "def": "test456",
             "xyz": true
         ]
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/patch")!,
-            method: .patch,
-            parameters: parameters
-        )
-        
+        let request = URLRequest(url: url, method: .patch, parameters: parameters)
         var response: NetworkAPI.Response?
         
         // When
@@ -435,18 +437,18 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
+        guard let url = URL(string: "https://httpbin.org/patch") else {
+            XCTFail("URL was not valid")
+            return
+        }
+        
         let headers: [String: String] = [
             "Abc": "test123",
             "Def": "test456",
             "Xyz": "test789"
         ]
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/patch")!,
-            method: .patch,
-            headers: headers
-        )
-        
+        let request = URLRequest(url: url, method: .patch, headers: headers)
         var response: NetworkAPI.Response?
         
         // When
@@ -497,11 +499,12 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/put")!,
-            method: .put
-        )
+        guard let url = URL(string: "https://httpbin.org/put") else {
+            XCTFail("URL was not valid")
+            return
+        }
         
+        let request = URLRequest(url: url, method: .put)
         var response: NetworkAPI.Response?
         
         // When
@@ -532,18 +535,18 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
+        guard let url = URL(string: "https://httpbin.org/put") else {
+            XCTFail("URL was not valid")
+            return
+        }
+        
         let parameters: [String: Any] = [
             "abc": 123,
             "def": "test456",
             "xyz": true
         ]
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/put")!,
-            method: .put,
-            parameters: parameters
-        )
-        
+        let request = URLRequest(url: url, method: .put, parameters: parameters)
         var response: NetworkAPI.Response?
         
         // When
@@ -591,18 +594,18 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
+        guard let url = URL(string: "https://httpbin.org/put") else {
+            XCTFail("URL was not valid")
+            return
+        }
+        
         let headers: [String: String] = [
             "Abc": "test123",
             "Def": "test456",
             "Xyz": "test789"
         ]
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/put")!,
-            method: .put,
-            headers: headers
-        )
-        
+        let request = URLRequest(url: url, method: .put, headers: headers)
         var response: NetworkAPI.Response?
         
         // When
@@ -653,11 +656,12 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/delete")!,
-            method: .delete
-        )
+        guard let url = URL(string: "https://httpbin.org/delete") else {
+            XCTFail("URL was not valid")
+            return
+        }
         
+        let request = URLRequest(url: url, method: .delete)
         var response: NetworkAPI.Response?
         
         // When
@@ -688,18 +692,18 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
+        guard let url = URL(string: "https://httpbin.org/delete") else {
+            XCTFail("URL was not valid")
+            return
+        }
+        
         let parameters: [String: Any] = [
             "abc": 123,
             "def": "test456",
             "xyz": true
         ]
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/delete")!,
-            method: .delete,
-            parameters: parameters
-        )
-        
+        let request = URLRequest(url: url, method: .delete, parameters: parameters)
         var response: NetworkAPI.Response?
         
         // When
@@ -752,18 +756,18 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
+        guard let url = URL(string: "https://httpbin.org/delete") else {
+            XCTFail("URL was not valid")
+            return
+        }
+        
         let headers: [String: String] = [
             "Abc": "test123",
             "Def": "test456",
             "Xyz": "test789"
         ]
         
-        let request = URLRequest(
-            url: URL(string: "https://httpbin.org/delete")!,
-            method: .delete,
-            headers: headers
-        )
-        
+        let request = URLRequest(url: url, method: .delete, headers: headers)
         var response: NetworkAPI.Response?
         
         // When
@@ -814,23 +818,19 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
+        guard let urlGet = URL(string: "https://httpbin.org/get"),
+            let urlPost = URL(string: "https://httpbin.org/post"),
+            let urlPatch = URL(string: "https://httpbin.org/patch"),
+            let urlDelete = URL(string: "https://httpbin.org/delete") else {
+                XCTFail("URL was not valid")
+                return
+        }
+        
         let requests = [
-            URLRequest(
-                url: URL(string: "https://httpbin.org/get")!,
-                method: .get
-            ),
-            URLRequest(
-                url: URL(string: "https://httpbin.org/post")!,
-                method: .post
-            ),
-            URLRequest(
-                url: URL(string: "https://httpbin.org/patch")!,
-                method: .patch
-            ),
-            URLRequest(
-                url: URL(string: "https://httpbin.org/delete")!,
-                method: .delete
-            )
+            URLRequest(url: urlGet, method: .get),
+            URLRequest(url: urlPost, method: .post),
+            URLRequest(url: urlPatch, method: .patch),
+            URLRequest(url: urlDelete, method: .delete)
         ]
         
         var response0: NetworkAPI.Response?

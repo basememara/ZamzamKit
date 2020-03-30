@@ -20,10 +20,10 @@ The `ZamzamKit` package contains four different products you can import. Add any
 .target(
     name: "MyAppExample",
     dependencies: [
-        "ZamzamCore",
-        "ZamzamLocation",
-        "ZamzamNotification",
-        "ZamzamUI"
+        .product(name: "ZamzamCore", package: "ZamzamKit"),
+        .product(name: "ZamzamLocation", package: "ZamzamKit"),
+        .product(name: "ZamzamNotification", package: "ZamzamKit"),
+        .product(name: "ZamzamUI", package: "ZamzamKit"),
     ]
 )
 ```
