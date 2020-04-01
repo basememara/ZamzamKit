@@ -30,4 +30,24 @@ public extension Optional where Wrapped == String {
         guard let left = left, !left.isEmpty else { return right }
         return left
     }
+    
+    /// Assign value if not nil or empty, otherwise use default value.
+    ///
+    ///     var test: String
+    ///     var value: String?
+    ///
+    ///     test = value ??+ "Abc"
+    ///     // test == "Abc"
+    ///
+    ///     value = ""
+    ///     test = value ??+ "Lmn"
+    ///     // test == "Abc"
+    ///
+    ///     let value2: String? = "Xyz"
+    ///     let test2 = value2 ??+ nil
+    ///     // test2 == "Xyz"
+    static func ??+ (left: Wrapped?, right: Wrapped?) -> Wrapped? {
+        guard let left = left, !left.isEmpty else { return right }
+        return left
+    }
 }
