@@ -15,21 +15,22 @@
 ///     )
 ///
 ///     keychain.set("kjn989hi", forKey: .token)
-///
-///     keychain.get(.token) {
-///         print($0) // "kjn989hi"
-///     }
+///     keychain.get(.token) // "kjn989hi"
 ///
 ///     // Define strongly-typed keys
 ///     extension SecuredPreferencesAPI.Key {
 ///         static let token = SecuredPreferencesAPI.Key("token")
 ///     }
+///
 public protocol SecuredPreferencesType {
     
     /// Retrieves the value from keychain that corresponds to the given key.
     ///
+    /// Accessing the underlying Keychain storage is an expensive operation.
+    /// Use a background thread when possible, then store within memory for future retrievals.
+    ///
     /// - Parameter key: The key that is used to read the user defaults item.
-    func get(_ key: SecuredPreferencesAPI.Key, completion: @escaping (String?) -> Void)
+    func get(_ key: SecuredPreferencesAPI.Key) -> String?
     
     /// Stores the value in the keychain item under the given key.
     ///
@@ -50,7 +51,7 @@ public protocol SecuredPreferencesType {
 // MARK: - Service
 
 public protocol SecuredPreferencesService {
-    func get(_ key: SecuredPreferencesAPI.Key, completion: @escaping (String?) -> Void)
+    func get(_ key: SecuredPreferencesAPI.Key) -> String?
     func set(_ value: String?, forKey key: SecuredPreferencesAPI.Key) -> Bool
     func remove(_ key: SecuredPreferencesAPI.Key) -> Bool
 }

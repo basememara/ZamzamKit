@@ -16,8 +16,8 @@ public struct SecuredPreferences: SecuredPreferencesType {
 
 public extension SecuredPreferences {
     
-    func get(_ key: SecuredPreferencesAPI.Key, completion: @escaping (String?) -> Void) {
-        service.get(key, completion: completion)
+    func get(_ key: SecuredPreferencesAPI.Key) -> String? {
+        service.get(key)
     }
     
     func set(_ value: String?, forKey key: SecuredPreferencesAPI.Key) -> Bool {

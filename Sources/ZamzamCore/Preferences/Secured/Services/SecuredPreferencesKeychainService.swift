@@ -24,16 +24,9 @@ public struct SecuredPreferencesKeychainService: SecuredPreferencesService {
 }
 
 public extension SecuredPreferencesKeychainService {
-    private static let queue = DispatchQueue(label: "\(DispatchQueue.labelPrefix).SecuredPreferencesKeychainService", qos: .userInitiated)
     
-    func get(_ key: SecuredPreferencesAPI.Key, completion: @escaping (String?) -> Void) {
-        Self.queue.async {
-            let value = self.keychain.get(key.name)
-            
-            DispatchQueue.main.async {
-                completion(value)
-            }
-        }
+    func get(_ key: SecuredPreferencesAPI.Key) -> String? {
+        keychain.get(key.name)
     }
 }
 
