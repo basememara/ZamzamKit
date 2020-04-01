@@ -241,13 +241,5 @@ public extension UIView {
         leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insets.left).isActive = true
         trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -insets.right).isActive = true
     }
-    
-    /// Anchor all sides of the view to its superview using auto layout constraints.
-    ///
-    /// - Parameters:
-    ///   - insets: The inset distances for view padding.
-    func edgesToSuperview(insets: UIEdgeInsets = .zero) {
-        edges(to: superview, insets: insets)
-    }
 }
 #endif
