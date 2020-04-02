@@ -314,22 +314,3 @@ extension StringTests {
         XCTAssertTrue(!test.isNilOrEmpty)
     }
 }
-
-extension StringTests {
-    
-    func testIsNilOrEmptyInfix() {
-        var result: String
-        var test: String?
-        
-        result = test ??+ "Abc"
-        XCTAssertEqual(result, "Abc")
-        
-        test = ""
-        result = test ??+ "Abc"
-        XCTAssertEqual(result, "Abc")
-        
-        test = "Xyz"
-        result = test ??+ "Abc"
-        XCTAssertEqual(result, "Xyz")
-    }
-}

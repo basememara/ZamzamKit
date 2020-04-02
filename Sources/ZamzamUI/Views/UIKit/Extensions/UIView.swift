@@ -226,14 +226,20 @@ public extension UIView {
     
     /// Anchor all sides of the view using auto layout constraints.
     ///
-    /// - Parameter view: The ancestor view to pin edges to.
-    func edges(to view: UIView?) {
-        guard let view = view else { return }
+    /// - Parameters:
+    ///   - view: The ancestor view to pin edges to.
+    ///   - insets: The inset distances for view padding.
+    func edges(to view: UIView?, insets: UIEdgeInsets = .zero) {
+        guard let view = view else {
+            assertionFailure("Missing superview for constraint")
+            return
+        }
+        
         translatesAutoresizingMaskIntoConstraints = false
-        topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top).isActive = true
+        bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -insets.bottom).isActive = true
+        leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insets.left).isActive = true
+        trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -insets.right).isActive = true
     }
 }
 #endif

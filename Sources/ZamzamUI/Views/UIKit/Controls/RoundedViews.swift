@@ -30,14 +30,9 @@ open class RoundedButton: UIButton {
 /// A circular `UIImageView`.
 open class RoundedImageView: UIImageView {
     
-    open override func awakeFromNib() {
-        super.awakeFromNib()
-        layer.masksToBounds = true
-        
-    }
-    
     open override func layoutSubviews() {
         super.layoutSubviews()
+        layer.masksToBounds = true
         layer.cornerRadius = frame.height / 2
     }
 }

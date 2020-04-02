@@ -20,8 +20,6 @@ extension SecuredPreferencesTests {
     
     func testString() {
         // Given
-        let promise1 = expectation(description: "\(#function)1")
-        let promise2 = expectation(description: "\(#function)2")
         let value1 = "abc"
         let value2 = "xyz"
         
@@ -30,17 +28,8 @@ extension SecuredPreferencesTests {
         keychain.set(value2, forKey: .testString2)
         
         // Then
-        keychain.get(.testString1) {
-            XCTAssertEqual($0, value1)
-            promise1.fulfill()
-        }
-        
-        keychain.get(.testString2) {
-            XCTAssertEqual($0, value2)
-            promise2.fulfill()
-        }
-        
-        wait(for: [promise1, promise2], timeout: 10)
+        XCTAssertEqual(keychain.get(.testString1), value1)
+        XCTAssertEqual(keychain.get(.testString2), value2)
     }
 }
 
@@ -48,8 +37,6 @@ extension SecuredPreferencesTests {
     
     func testRemove() {
         // Given
-        let promise1 = expectation(description: "\(#function)1")
-        let promise2 = expectation(description: "\(#function)2")
         let value1 = "abc"
         let value2 = "xyz"
         
@@ -60,17 +47,8 @@ extension SecuredPreferencesTests {
         keychain.remove(.testString2)
         
         // Then
-        keychain.get(.testString1) {
-            XCTAssertNil($0)
-            promise1.fulfill()
-        }
-        
-        keychain.get(.testString2) {
-            XCTAssertNil($0)
-            promise2.fulfill()
-        }
-        
-        wait(for: [promise1, promise2], timeout: 10)
+        XCTAssertNil(keychain.get(.testString1))
+        XCTAssertNil(keychain.get(.testString2))
     }
 }
 
@@ -87,13 +65,8 @@ private extension SecuredPreferencesAPI.Key {
 private class SecuredPreferencesTestService: SecuredPreferencesService {
     var values = [String: String?]()
     
-    func get(_ key: SecuredPreferencesAPI.Key, completion: @escaping (String?) -> Void) {
-        guard let value = values[key.name] else {
-            completion(nil)
-            return
-        }
-        
-        completion(value)
+    func get(_ key: SecuredPreferencesAPI.Key) -> String? {
+        values[key.name] ?? nil
     }
     
     func set(_ value: String?, forKey key: SecuredPreferencesAPI.Key) -> Bool {

@@ -36,3 +36,26 @@ final class InfixTests: XCTestCase {
         XCTAssertEqual(test, 456)
     }
 }
+
+extension InfixTests {
+    
+    func testIsNilOrEmptyInfix() {
+        var result: String
+        var test: String?
+        
+        result = test ??+ "Abc"
+        XCTAssertEqual(result, "Abc")
+        
+        test = ""
+        result = test ??+ "Abc"
+        XCTAssertEqual(result, "Abc")
+        
+        test = "Xyz"
+        result = test ??+ "Abc"
+        XCTAssertEqual(result, "Xyz")
+        
+        let test2: String? = "Xyz2"
+        let result2 = test2 ??+ nil
+        XCTAssertEqual(result2, "Xyz2")
+    }
+}
