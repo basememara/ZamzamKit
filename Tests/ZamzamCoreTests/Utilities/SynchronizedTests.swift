@@ -46,7 +46,7 @@ extension SynchronizedTests {
                 }
             }
             
-            XCTAssertGreaterThanOrEqual(temp.value, 0)
+            XCTAssertGreaterThanOrEqual(temp.value, iterations / writeMultipleOf)
         }
     }
 }
