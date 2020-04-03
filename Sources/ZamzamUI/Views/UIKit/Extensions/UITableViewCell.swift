@@ -13,7 +13,7 @@ import ZamzamCore
 public extension UITableViewCell {
 
     /// The color of the cell when it is selected.
-    @objc dynamic var selectionColor: UIColor? {
+    @objc dynamic var selectedBackgroundColor: UIColor? {
         get { selectedBackgroundView?.backgroundColor }
         
         set {
