@@ -69,21 +69,21 @@ public protocol NetworkRepositoryType {
     ///         )
     ///
     ///         networkRepository.send(requests: request1, request2, request3) { result in
-    ///             switch result[0] {
+    ///             switch result.0 {
     ///             case .success(let response):
     ///                 response.data
     ///             case .failure(let error):
     ///                 error.statusCode
     ///             }
     ///
-    ///             switch result[1] {
+    ///             switch result.1 {
     ///             case .success(let response):
     ///                 response.data
     ///             case .failure(let error):
     ///                 error.statusCode
     ///             }
     ///
-    ///             switch result[2] {
+    ///             switch result.2 {
     ///             case .success(let response):
     ///                 response.data
     ///             case .failure(let error):
@@ -92,9 +92,116 @@ public protocol NetworkRepositoryType {
     ///         }
     ///
     /// - Parameters:
-    ///   - requests: A list of network request objects that provides the URL, parameters, headers, and so on.
-    ///   - completion: The completion handler to call when the load request is complete.
-    func send(requests: URLRequest..., completion: @escaping ([Result<NetworkAPI.Response, NetworkAPI.Error>]) -> Void)
+    ///   - request1: The first network request object that provides the URL, parameters, headers, and so on.
+    ///   - request2: The second network request object that provides the URL, parameters, headers, and so on.
+    ///   - completion: The completion handler to call when the load requests have all completed.
+    func send(requests request1: URLRequest, _ request2: URLRequest, completion: @escaping ((NetworkAPI.URLResult, NetworkAPI.URLResult)) -> Void)
+    
+    /// Create tasks that retrieves the contents of a URL based on the specified request objects, and calls a handler upon completion with the result matching the index of the request.
+    ///
+    ///         let request1 = URLRequest(
+    ///             url: URL(string: "https://httpbin.org/get")!,
+    ///             method: .get
+    ///         )
+    ///
+    ///         let request2 = URLRequest(
+    ///             url: URL(string: "https://httpbin.org/post")!,
+    ///             method: .post
+    ///         )
+    ///
+    ///         let request3 = URLRequest(
+    ///             url: URL(string: "https://httpbin.org/delete")!,
+    ///             method: .delete
+    ///         )
+    ///
+    ///         networkRepository.send(requests: request1, request2, request3) { result in
+    ///             switch result.0 {
+    ///             case .success(let response):
+    ///                 response.data
+    ///             case .failure(let error):
+    ///                 error.statusCode
+    ///             }
+    ///
+    ///             switch result.1 {
+    ///             case .success(let response):
+    ///                 response.data
+    ///             case .failure(let error):
+    ///                 error.statusCode
+    ///             }
+    ///
+    ///             switch result.2 {
+    ///             case .success(let response):
+    ///                 response.data
+    ///             case .failure(let error):
+    ///                 error.statusCode
+    ///             }
+    ///         }
+    ///
+    /// - Parameters:
+    ///   - request1: The first network request object that provides the URL, parameters, headers, and so on.
+    ///   - request2: The second network request object that provides the URL, parameters, headers, and so on.
+    ///   - request3: The third network request object that provides the URL, parameters, headers, and so on.
+    ///   - completion: The completion handler to call when the load requests have all completed.
+    func send(
+        requests request1: URLRequest,
+        _ request2: URLRequest,
+        _ request3: URLRequest,
+        completion: @escaping ((NetworkAPI.URLResult, NetworkAPI.URLResult, NetworkAPI.URLResult)) -> Void
+    )
+    
+    /// Create tasks that retrieves the contents of a URL based on the specified request objects, and calls a handler upon completion with the result matching the index of the request.
+    ///
+    ///         let request1 = URLRequest(
+    ///             url: URL(string: "https://httpbin.org/get")!,
+    ///             method: .get
+    ///         )
+    ///
+    ///         let request2 = URLRequest(
+    ///             url: URL(string: "https://httpbin.org/post")!,
+    ///             method: .post
+    ///         )
+    ///
+    ///         let request3 = URLRequest(
+    ///             url: URL(string: "https://httpbin.org/delete")!,
+    ///             method: .delete
+    ///         )
+    ///
+    ///         networkRepository.send(requests: request1, request2, request3) { result in
+    ///             switch result.0 {
+    ///             case .success(let response):
+    ///                 response.data
+    ///             case .failure(let error):
+    ///                 error.statusCode
+    ///             }
+    ///
+    ///             switch result.1 {
+    ///             case .success(let response):
+    ///                 response.data
+    ///             case .failure(let error):
+    ///                 error.statusCode
+    ///             }
+    ///
+    ///             switch result.2 {
+    ///             case .success(let response):
+    ///                 response.data
+    ///             case .failure(let error):
+    ///                 error.statusCode
+    ///             }
+    ///         }
+    ///
+    /// - Parameters:
+    ///   - request1: The first network request object that provides the URL, parameters, headers, and so on.
+    ///   - request2: The second network request object that provides the URL, parameters, headers, and so on.
+    ///   - request3: The third network request object that provides the URL, parameters, headers, and so on.
+    ///   - request4: The fourth network request object that provides the URL, parameters, headers, and so on.
+    ///   - completion: The completion handler to call when the load requests have all completed.
+    func send(
+        requests request1: URLRequest,
+        _ request2: URLRequest,
+        _ request3: URLRequest,
+        _ request4: URLRequest,
+        completion: @escaping ((NetworkAPI.URLResult, NetworkAPI.URLResult, NetworkAPI.URLResult, NetworkAPI.URLResult)) -> Void
+    )
 }
 
 // MARK: - Service
@@ -106,6 +213,7 @@ public protocol NetworkService {
 // MARK: - Namespace
 
 public enum NetworkAPI {
+    public typealias URLResult = Result<NetworkAPI.Response, NetworkAPI.Error>
     
     public struct Response {
         public let data: Data?

@@ -814,23 +814,143 @@ extension NetworkTests {
 
 extension NetworkTests {
     
-    func testMultipleRequests() {
+    func testTwoRequestsToTuple() {
         // Given
         let promise = expectation(description: #function)
         
-        guard let urlGet = URL(string: "https://httpbin.org/get"),
-            let urlPost = URL(string: "https://httpbin.org/post"),
-            let urlPatch = URL(string: "https://httpbin.org/patch"),
-            let urlDelete = URL(string: "https://httpbin.org/delete") else {
-                XCTFail("URL was not valid")
+        let requests = [
+            URLRequest(
+                url: URL(string: "https://httpbin.org/get")!,
+                method: .get
+            ),
+            URLRequest(
+                url: URL(string: "https://httpbin.org/post")!,
+                method: .post
+            )
+        ]
+        
+        var response0: NetworkAPI.Response?
+        var response1: NetworkAPI.Response?
+        
+        // When
+        networkRepository.send(requests: requests[0], requests[1]) { result in
+            defer { promise.fulfill() }
+            
+            guard case .success(let value0) = result.0 else {
+                XCTFail("The network request failed: \(String(describing: result.0.error))")
                 return
+            }
+            
+            guard case .success(let value1) = result.1 else {
+                XCTFail("The network request failed: \(String(describing: result.1.error))")
+                return
+            }
+            
+            response0 = value0
+            response1 = value1
         }
         
+        wait(for: [promise], timeout: 10)
+        
+        // Then
+        XCTAssertEqual(requests[0].url?.absoluteString, "https://httpbin.org/get")
+        XCTAssertNotNil(response0?.data)
+        XCTAssertEqual(response0?.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response0?.statusCode, 200)
+        
+        XCTAssertEqual(requests[1].url?.absoluteString, "https://httpbin.org/post")
+        XCTAssertNotNil(response1?.data)
+        XCTAssertEqual(response1?.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response1?.statusCode, 200)
+    }
+    
+    func testThreeRequestsToTuple() {
+        // Given
+        let promise = expectation(description: #function)
+        
         let requests = [
-            URLRequest(url: urlGet, method: .get),
-            URLRequest(url: urlPost, method: .post),
-            URLRequest(url: urlPatch, method: .patch),
-            URLRequest(url: urlDelete, method: .delete)
+            URLRequest(
+                url: URL(string: "https://httpbin.org/get")!,
+                method: .get
+            ),
+            URLRequest(
+                url: URL(string: "https://httpbin.org/post")!,
+                method: .post
+            ),
+            URLRequest(
+                url: URL(string: "https://httpbin.org/patch")!,
+                method: .patch
+            )
+        ]
+        
+        var response0: NetworkAPI.Response?
+        var response1: NetworkAPI.Response?
+        var response2: NetworkAPI.Response?
+        
+        // When
+        networkRepository.send(requests: requests[0], requests[1], requests[2]) { result in
+            defer { promise.fulfill() }
+            
+            guard case .success(let value0) = result.0 else {
+                XCTFail("The network request failed: \(String(describing: result.0.error))")
+                return
+            }
+            
+            guard case .success(let value1) = result.1 else {
+                XCTFail("The network request failed: \(String(describing: result.1.error))")
+                return
+            }
+            
+            guard case .success(let value2) = result.2 else {
+                XCTFail("The network request failed: \(String(describing: result.2.error))")
+                return
+            }
+            
+            response0 = value0
+            response1 = value1
+            response2 = value2
+        }
+        
+        wait(for: [promise], timeout: 10)
+        
+        // Then
+        XCTAssertEqual(requests[0].url?.absoluteString, "https://httpbin.org/get")
+        XCTAssertNotNil(response0?.data)
+        XCTAssertEqual(response0?.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response0?.statusCode, 200)
+        
+        XCTAssertEqual(requests[1].url?.absoluteString, "https://httpbin.org/post")
+        XCTAssertNotNil(response1?.data)
+        XCTAssertEqual(response1?.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response1?.statusCode, 200)
+        
+        XCTAssertEqual(requests[2].url?.absoluteString, "https://httpbin.org/patch")
+        XCTAssertNotNil(response2?.data)
+        XCTAssertEqual(response2?.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response2?.statusCode, 200)
+    }
+    
+    func testFourRequestsToTuple() {
+        // Given
+        let promise = expectation(description: #function)
+        
+        let requests = [
+            URLRequest(
+                url: URL(string: "https://httpbin.org/get")!,
+                method: .get
+            ),
+            URLRequest(
+                url: URL(string: "https://httpbin.org/post")!,
+                method: .post
+            ),
+            URLRequest(
+                url: URL(string: "https://httpbin.org/patch")!,
+                method: .patch
+            ),
+            URLRequest(
+                url: URL(string: "https://httpbin.org/delete")!,
+                method: .delete
+            )
         ]
         
         var response0: NetworkAPI.Response?
@@ -839,26 +959,26 @@ extension NetworkTests {
         var response3: NetworkAPI.Response?
         
         // When
-        networkRepository.send(requests: requests[0], requests[1], requests[2], requests[3]) { results in
+        networkRepository.send(requests: requests[0], requests[1], requests[2], requests[3]) { result in
             defer { promise.fulfill() }
             
-            guard case .success(let value0) = results[0] else {
-                XCTFail("The network request failed: \(String(describing: results[0].error))")
+            guard case .success(let value0) = result.0 else {
+                XCTFail("The network request failed: \(String(describing: result.0.error))")
                 return
             }
             
-            guard case .success(let value1) = results[1] else {
-                XCTFail("The network request failed: \(String(describing: results[1].error))")
+            guard case .success(let value1) = result.1 else {
+                XCTFail("The network request failed: \(String(describing: result.1.error))")
                 return
             }
             
-            guard case .success(let value2) = results[2] else {
-                XCTFail("The network request failed: \(String(describing: results[2].error))")
+            guard case .success(let value2) = result.2 else {
+                XCTFail("The network request failed: \(String(describing: result.2.error))")
                 return
             }
             
-            guard case .success(let value3) = results[3] else {
-                XCTFail("The network request failed: \(String(describing: results[3].error))")
+            guard case .success(let value3) = result.3 else {
+                XCTFail("The network request failed: \(String(describing: result.3.error))")
                 return
             }
             

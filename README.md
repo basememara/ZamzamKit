@@ -733,22 +733,22 @@ let request3 = URLRequest(
     method: .delete
 )
 
-networkRepository.send(requests: request1, request2, request3) { result in
-    switch result[0] {
+networkRepository.send(requests: request1, request2, request3) { firstResult, anotherResult, otherResult in
+    switch firstResult {
     case .success(let response):
         response.data
     case .failure(let error):
         error.statusCode
     }
 
-    switch result[1] {
+    switch anotherResult {
     case .success(let response):
         response.data
     case .failure(let error):
         error.statusCode
     }
     
-    switch result[2] {
+    switch otherResult {
     case .success(let response):
         response.data
     case .failure(let error):

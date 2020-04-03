@@ -25,6 +25,38 @@ public extension NetworkRepository {
 
 public extension NetworkRepository {
     
+    func send(requests request1: URLRequest, _ request2: URLRequest, completion: @escaping ((NetworkAPI.URLResult, NetworkAPI.URLResult)) -> Void) {
+        send(requests: request1, request2) { result in
+            completion((result[0], result[1]))
+        }
+    }
+    
+    func send(
+        requests request1: URLRequest,
+        _ request2: URLRequest,
+        _ request3: URLRequest,
+        completion: @escaping ((NetworkAPI.URLResult, NetworkAPI.URLResult, NetworkAPI.URLResult)) -> Void
+    ) {
+        send(requests: request1, request2, request3) { result in
+            completion((result[0], result[1], result[2]))
+        }
+    }
+    
+    func send(
+        requests request1: URLRequest,
+        _ request2: URLRequest,
+        _ request3: URLRequest,
+        _ request4: URLRequest,
+        completion: @escaping ((NetworkAPI.URLResult, NetworkAPI.URLResult, NetworkAPI.URLResult, NetworkAPI.URLResult)) -> Void
+    ) {
+        send(requests: request1, request2, request3, request4) { result in
+            completion((result[0], result[1], result[2], result[3]))
+        }
+    }
+}
+
+private extension NetworkRepository {
+    
     func send(requests: URLRequest..., completion: @escaping ([Result<NetworkAPI.Response, NetworkAPI.Error>]) -> Void) {
         let dispatchGroup = DispatchGroup()
         
