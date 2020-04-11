@@ -16,7 +16,6 @@ extension DataTests {
     func testString() {
         let dataFromString = "hello".data(using: .utf8)
         XCTAssertNotNil(dataFromString)
-        XCTAssertNotNil(dataFromString?.string(encoding: .utf8))
         XCTAssertEqual(dataFromString?.string(encoding: .utf8), "hello")
     }
 }

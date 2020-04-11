@@ -16,35 +16,35 @@ public protocol NetworkRepositoryType {
     
     /// Creates a task that retrieves the contents of a URL based on the specified request object, and calls a handler upon completion.
     ///
-    ///         let request = URLRequest(
-    ///             url: URL(string: "https://httpbin.org/get")!,
-    ///             method: .get,
-    ///             parameters: [
-    ///                 "abc": 123,
-    ///                 "def": "test456",
-    ///                 "xyz": true
-    ///             ],
-    ///             headers: [
-    ///                 "Abc": "test123",
-    ///                 "Def": "test456",
-    ///                 "Xyz": "test789"
-    ///             ]
-    ///         )
+    ///     let request = URLRequest(
+    ///         url: URL(string: "https://httpbin.org/get")!,
+    ///         method: .get,
+    ///         parameters: [
+    ///             "abc": 123,
+    ///             "def": "test456",
+    ///             "xyz": true
+    ///         ],
+    ///         headers: [
+    ///             "Abc": "test123",
+    ///             "Def": "test456",
+    ///             "Xyz": "test789"
+    ///         ]
+    ///     )
     ///
-    ///         let networkRepository = NetworkRepository(
-    ///             service: NetworkURLSessionService()
-    ///         )
+    ///     let networkRepository = NetworkRepository(
+    ///         service: NetworkURLSessionService()
+    ///     )
     ///
-    ///         networkRepository.send(with: request) { result in
-    ///             switch result {
-    ///             case .success(let response):
-    ///                 response.data
-    ///                 response.headers
-    ///                 response.statusCode
-    ///             case .failure(let error):
-    ///                 error.statusCode
-    ///             }
+    ///     networkRepository.send(with: request) { result in
+    ///         switch result {
+    ///         case .success(let response):
+    ///             response.data
+    ///             response.headers
+    ///             response.statusCode
+    ///         case .failure(let error):
+    ///             error.statusCode
     ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - request: A network request object that provides the URL, parameters, headers, and so on.
@@ -53,43 +53,43 @@ public protocol NetworkRepositoryType {
     
     /// Create tasks that retrieves the contents of a URL based on the specified request objects, and calls a handler upon completion with the result matching the index of the request.
     ///
-    ///         let request1 = URLRequest(
-    ///             url: URL(string: "https://httpbin.org/get")!,
-    ///             method: .get
-    ///         )
+    ///     let request1 = URLRequest(
+    ///         url: URL(string: "https://httpbin.org/get")!,
+    ///         method: .get
+    ///     )
     ///
-    ///         let request2 = URLRequest(
-    ///             url: URL(string: "https://httpbin.org/post")!,
-    ///             method: .post
-    ///         )
+    ///     let request2 = URLRequest(
+    ///         url: URL(string: "https://httpbin.org/post")!,
+    ///         method: .post
+    ///     )
     ///
-    ///         let request3 = URLRequest(
-    ///             url: URL(string: "https://httpbin.org/delete")!,
-    ///             method: .delete
-    ///         )
+    ///     let request3 = URLRequest(
+    ///         url: URL(string: "https://httpbin.org/delete")!,
+    ///         method: .delete
+    ///     )
     ///
-    ///         networkRepository.send(requests: request1, request2, request3) { result in
-    ///             switch result.0 {
-    ///             case .success(let response):
-    ///                 response.data
-    ///             case .failure(let error):
-    ///                 error.statusCode
-    ///             }
-    ///
-    ///             switch result.1 {
-    ///             case .success(let response):
-    ///                 response.data
-    ///             case .failure(let error):
-    ///                 error.statusCode
-    ///             }
-    ///
-    ///             switch result.2 {
-    ///             case .success(let response):
-    ///                 response.data
-    ///             case .failure(let error):
-    ///                 error.statusCode
-    ///             }
+    ///     networkRepository.send(requests: request1, request2, request3) { result in
+    ///         switch result.0 {
+    ///         case .success(let response):
+    ///             response.data
+    ///         case .failure(let error):
+    ///             error.statusCode
     ///         }
+    ///
+    ///         switch result.1 {
+    ///         case .success(let response):
+    ///             response.data
+    ///         case .failure(let error):
+    ///             error.statusCode
+    ///         }
+    ///
+    ///         switch result.2 {
+    ///         case .success(let response):
+    ///             response.data
+    ///         case .failure(let error):
+    ///             error.statusCode
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - request1: The first network request object that provides the URL, parameters, headers, and so on.
@@ -99,43 +99,43 @@ public protocol NetworkRepositoryType {
     
     /// Create tasks that retrieves the contents of a URL based on the specified request objects, and calls a handler upon completion with the result matching the index of the request.
     ///
-    ///         let request1 = URLRequest(
-    ///             url: URL(string: "https://httpbin.org/get")!,
-    ///             method: .get
-    ///         )
+    ///     let request1 = URLRequest(
+    ///         url: URL(string: "https://httpbin.org/get")!,
+    ///         method: .get
+    ///     )
     ///
-    ///         let request2 = URLRequest(
-    ///             url: URL(string: "https://httpbin.org/post")!,
-    ///             method: .post
-    ///         )
+    ///     let request2 = URLRequest(
+    ///         url: URL(string: "https://httpbin.org/post")!,
+    ///         method: .post
+    ///     )
     ///
-    ///         let request3 = URLRequest(
-    ///             url: URL(string: "https://httpbin.org/delete")!,
-    ///             method: .delete
-    ///         )
+    ///     let request3 = URLRequest(
+    ///         url: URL(string: "https://httpbin.org/delete")!,
+    ///         method: .delete
+    ///     )
     ///
-    ///         networkRepository.send(requests: request1, request2, request3) { result in
-    ///             switch result.0 {
-    ///             case .success(let response):
-    ///                 response.data
-    ///             case .failure(let error):
-    ///                 error.statusCode
-    ///             }
-    ///
-    ///             switch result.1 {
-    ///             case .success(let response):
-    ///                 response.data
-    ///             case .failure(let error):
-    ///                 error.statusCode
-    ///             }
-    ///
-    ///             switch result.2 {
-    ///             case .success(let response):
-    ///                 response.data
-    ///             case .failure(let error):
-    ///                 error.statusCode
-    ///             }
+    ///     networkRepository.send(requests: request1, request2, request3) { result in
+    ///         switch result.0 {
+    ///         case .success(let response):
+    ///             response.data
+    ///         case .failure(let error):
+    ///             error.statusCode
     ///         }
+    ///
+    ///         switch result.1 {
+    ///         case .success(let response):
+    ///             response.data
+    ///         case .failure(let error):
+    ///             error.statusCode
+    ///         }
+    ///
+    ///         switch result.2 {
+    ///         case .success(let response):
+    ///             response.data
+    ///         case .failure(let error):
+    ///             error.statusCode
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - request1: The first network request object that provides the URL, parameters, headers, and so on.
@@ -151,43 +151,43 @@ public protocol NetworkRepositoryType {
     
     /// Create tasks that retrieves the contents of a URL based on the specified request objects, and calls a handler upon completion with the result matching the index of the request.
     ///
-    ///         let request1 = URLRequest(
-    ///             url: URL(string: "https://httpbin.org/get")!,
-    ///             method: .get
-    ///         )
+    ///     let request1 = URLRequest(
+    ///         url: URL(string: "https://httpbin.org/get")!,
+    ///         method: .get
+    ///     )
     ///
-    ///         let request2 = URLRequest(
-    ///             url: URL(string: "https://httpbin.org/post")!,
-    ///             method: .post
-    ///         )
+    ///     let request2 = URLRequest(
+    ///         url: URL(string: "https://httpbin.org/post")!,
+    ///         method: .post
+    ///     )
     ///
-    ///         let request3 = URLRequest(
-    ///             url: URL(string: "https://httpbin.org/delete")!,
-    ///             method: .delete
-    ///         )
+    ///     let request3 = URLRequest(
+    ///         url: URL(string: "https://httpbin.org/delete")!,
+    ///         method: .delete
+    ///     )
     ///
-    ///         networkRepository.send(requests: request1, request2, request3) { result in
-    ///             switch result.0 {
-    ///             case .success(let response):
-    ///                 response.data
-    ///             case .failure(let error):
-    ///                 error.statusCode
-    ///             }
-    ///
-    ///             switch result.1 {
-    ///             case .success(let response):
-    ///                 response.data
-    ///             case .failure(let error):
-    ///                 error.statusCode
-    ///             }
-    ///
-    ///             switch result.2 {
-    ///             case .success(let response):
-    ///                 response.data
-    ///             case .failure(let error):
-    ///                 error.statusCode
-    ///             }
+    ///     networkRepository.send(requests: request1, request2, request3) { result in
+    ///         switch result.0 {
+    ///         case .success(let response):
+    ///             response.data
+    ///         case .failure(let error):
+    ///             error.statusCode
     ///         }
+    ///
+    ///         switch result.1 {
+    ///         case .success(let response):
+    ///             response.data
+    ///         case .failure(let error):
+    ///             error.statusCode
+    ///         }
+    ///
+    ///         switch result.2 {
+    ///         case .success(let response):
+    ///             response.data
+    ///         case .failure(let error):
+    ///             error.statusCode
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - request1: The first network request object that provides the URL, parameters, headers, and so on.
@@ -227,7 +227,7 @@ public enum NetworkAPI {
         }
     }
     
-    public struct Error: Swift.Error, CustomStringConvertible {
+    public struct Error: Swift.Error {
         /// The original request that initiated the task.
         public let request: URLRequest
         
@@ -243,19 +243,6 @@ public enum NetworkAPI {
         /// The internal error from the network request.
         public let internalError: Swift.Error?
         
-        public var description: String {
-            """
-            Error: \(internalError ?? ZamzamError.other(nil)),
-            Request: {
-                url: \(request.url?.absoluteString ?? ""),
-                method: \(request.httpMethod ?? "")
-            },
-            Response: {
-                status: \(statusCode ?? 0)
-            }
-            """
-        }
-        
         public init(
             request: URLRequest,
             data: Data? = nil,
@@ -269,5 +256,39 @@ public enum NetworkAPI {
             self.statusCode = statusCode
             self.internalError = internalError
         }
+    }
+}
+
+extension NetworkAPI.Error: CustomStringConvertible, CustomDebugStringConvertible {
+    
+    public var description: String {
+        """
+        Error: \(internalError ?? ZamzamError.other(nil)),
+        Request: {
+            url: \(request.url?.absoluteString ?? ""),
+            method: \(request.httpMethod ?? "")
+        },
+        Response: {
+            status: \(statusCode ?? 0)
+        }
+        """
+    }
+    
+    public var debugDescription: String {
+        """
+        Error: \(internalError ?? ZamzamError.other(nil)),
+        Request: {
+            url: \(request.url?.absoluteString ?? ""),
+            method: \(request.httpMethod ?? ""),
+            body: \(request.httpBody?.string ?? ""),
+            headers: \(request.allHTTPHeaderFields ?? [:])
+
+        },
+        Response: {
+            status: \(statusCode ?? 0),
+            body: \(data?.string ?? ""),
+            headers: \(headers ?? [:])
+        }
+        """
     }
 }

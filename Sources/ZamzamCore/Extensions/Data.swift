@@ -10,10 +10,10 @@ import Foundation.NSData
 
 public extension Data {
     
-    ///String by encoding Data using UTF8 encoding.
+    /// String by encoding Data using UTF8 encoding.
     var string: String? { string(encoding: .utf8) }
     
-    ///String by encoding Data using the given encoding (if applicable).
+    /// String by encoding Data using the given encoding (if applicable).
     ///
     /// - Parameter encoding: encoding.
     /// - Returns: String by encoding Data using the given encoding (if applicable).
