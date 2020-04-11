@@ -10,7 +10,6 @@
 import Foundation
 import UIKit.UIApplication
 import UIKit.UIDevice
-import AdSupport
 
 /// Log destination for sending over HTTP.
 final public class LogHTTPService {
@@ -22,7 +21,6 @@ final public class LogHTTPService {
     private let deviceName = UIDevice.current.name
     private let deviceModel = UIDevice.current.model
     private var deviceIdentifier = UIDevice.current.identifierForVendor?.uuidString ?? ""
-    private var advertisingIdentifier = ASIdentifierManager.shared().advertisingIdentifier.uuidString
     private let osVersion = UIDevice.current.systemVersion
     
     /// Stores the log entries in memory until it is ready to send.
@@ -97,7 +95,6 @@ public extension LogHTTPService {
             ],
             "device": [
                 "device_id": deviceIdentifier,
-                "advertising_id": advertisingIdentifier,
                 "device_name": deviceName,
                 "device_model": deviceModel,
                 "os_version": osVersion,
