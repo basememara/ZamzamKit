@@ -213,14 +213,19 @@ public extension UIView {
             $0.style = style
             $0.color = color
             $0.hidesWhenStopped = true
-            $0.center = center
         }
         
         addSubview(activityIndicator)
+
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
         
         return activityIndicator
     }
 }
+
+// MARK: - Auto Layout
 
 public extension UIView {
     

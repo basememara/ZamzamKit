@@ -16,8 +16,8 @@ public extension UIImage {
     /// - Parameters:
     ///   - named: The name of the image.
     ///   - bundle: The bundle containing the image file or asset catalog. Specify nil to search the app's main bundle.
-    convenience init?(named: String, inBundle bundle: Bundle?) {
-        self.init(named: named, in: bundle, compatibleWith: nil)
+    convenience init?(named name: String, inBundle bundle: Bundle?) {
+        self.init(named: name, in: bundle, compatibleWith: nil)
     }
 }
 

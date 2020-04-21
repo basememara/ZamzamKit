@@ -7,7 +7,22 @@
 //
 
 #if os(iOS)
-import UIKit
+import Foundation.NSBundle
+import Foundation.NSDate
+import UIKit.UIImage
+import UIKit.UIImageView
+
+public extension UIImageView {
+    
+    /// Returns an image view initialized with the specified image.
+    ///
+    /// - Parameters:
+    ///   - named: The name of the image.
+    ///   - bundle: The bundle containing the image file or asset catalog. Specify nil to search the app's main bundle.
+    convenience init(imageNamed name: String, inBundle bundle: Bundle? = nil) {
+        self.init(image: UIImage(named: name, inBundle: bundle))
+    }
+}
 
 public extension UIImageView {
     

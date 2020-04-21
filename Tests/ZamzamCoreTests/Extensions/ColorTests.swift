@@ -16,9 +16,7 @@ import ZamzamCore
     typealias UIColor = NSColor
 #endif
 
-final class ColorTests: XCTestCase {
-
-}
+final class ColorTests: XCTestCase {}
 
 extension ColorTests {
 

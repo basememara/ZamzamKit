@@ -12,40 +12,47 @@ import UIKit
 public extension UITableView {
     static let defaultCellIdentifier = "Cell"
     
-    /// Register NIB to table view.
+    /// Register XIB to table view.
     ///
     /// - Parameters:
-    ///   - nibType: Type of the NIB.
+    ///   - xibType: Type of the XIB.
     ///   - identifier: Name of the reusable cell identifier.
     ///   - bundle: Bundle if not local.
     func register<T: UITableViewCell>(
-        nib nibType: T.Type,
+        xib xibType: T.Type,
         withIdentifier identifier: String = UITableView.defaultCellIdentifier,
         inBundle bundle: Bundle? = nil
     ) {
         register(
-            UINib(nibName: String(describing: nibType), bundle: bundle),
+            UINib(nibName: String(describing: xibType), bundle: bundle),
             forCellReuseIdentifier: identifier
         )
+    }
+    
+    /// Register a class for use in creating new table view cells.
+    ///
+    /// - Parameter cellClass: The class of a cell that you want to use in the table view.
+    func register<T: UITableViewCell>(_ cellClass: T.Type) {
+        register(cellClass, forCellReuseIdentifier: UITableView.defaultCellIdentifier)
     }
 }
 
 public extension UITableView {
     static let defaultHeaderFooterIdentifier = "Section"
     
-    /// Register NIB to table view.
+    /// Register XIB to table view.
     ///
     /// - Parameters:
-    ///   - nibType: Type of the NIB.
+    ///   - xibType: Type of the XIB.
     ///   - identifier: Name of the reusable cell identifier.
     ///   - bundle: Bundle if not local.
     func register<T: UITableViewHeaderFooterView>(
-        nib nibType: T.Type,
+        xib xibType: T.Type,
         withIdentifier identifier: String = UITableView.defaultHeaderFooterIdentifier,
         inBundle bundle: Bundle? = nil
     ) {
         register(
-            UINib(nibName: String(describing: nibType), bundle: bundle),
+            UINib(nibName: String(describing: xibType), bundle: bundle),
             forHeaderFooterViewReuseIdentifier: identifier
         )
     }

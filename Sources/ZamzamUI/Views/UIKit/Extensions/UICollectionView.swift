@@ -12,42 +12,49 @@ import UIKit
 public extension UICollectionView {
     static let defaultCellIdentifier = "Cell"
     
-    /// Register NIB to collection view.
+    /// Register XIB to collection view.
     ///
     /// - Parameters:
-    ///   - nibType: Type of the NIB.
+    ///   - xibType: Type of the XIB.
     ///   - identifier: Name of the reusable cell identifier.
     ///   - bundle: Bundle if not local.
     func register<T: UICollectionViewCell>(
-        cell nibType: T.Type,
+        xib xibType: T.Type,
         withReuseIdentifier identifier: String = UICollectionView.defaultCellIdentifier,
         inBundle bundle: Bundle? = nil
     ) {
         register(
-            UINib(nibName: String(describing: nibType), bundle: bundle),
+            UINib(nibName: String(describing: xibType), bundle: bundle),
             forCellWithReuseIdentifier: identifier
         )
+    }
+    
+    /// Register a class for use in creating new collection view cells.
+    ///
+    /// - Parameter cellClass: The class of a cell that you want to use in the collection view.
+    func register<T: UICollectionViewCell>(_ cellClass: T.Type) {
+        register(cellClass, forCellWithReuseIdentifier: UICollectionView.defaultCellIdentifier)
     }
 }
 
 public extension UICollectionView {
     static let defaultSectionIdentifier = "Section"
     
-    /// Register supplementary NIB to collection view.
+    /// Register supplementary XIB to collection view.
     ///
     /// - Parameters:
-    ///   - nibType: Type of the NIB.
+    ///   - xibType: Type of the XIB.
     ///   - elementKind: The kind of supplementary view to create.
     ///   - identifier: Name of the reusable view identifier.
     ///   - bundle: Bundle if not local.
     func register<T: UICollectionReusableView>(
-        supplementary nibType: T.Type,
+        supplementary xibType: T.Type,
         ofKind elementKind: String,
         withIdentifier identifier: String = UICollectionView.defaultSectionIdentifier,
         inBundle bundle: Bundle? = nil
     ) {
         register(
-            UINib(nibName: String(describing: nibType), bundle: bundle),
+            UINib(nibName: String(describing: xibType), bundle: bundle),
             forSupplementaryViewOfKind: elementKind,
             withReuseIdentifier: identifier
         )
@@ -62,18 +69,18 @@ public extension UICollectionView {
         ) as? T ?? T()
     }
     
-    /// Register header NIB to collection view.
+    /// Register header XIB to collection view.
     ///
     /// - Parameters:
-    ///   - nibType: Type of the NIB.
+    ///   - xibType: Type of the XIB.
     ///   - identifier: Name of the reusable view identifier.
     ///   - bundle: Bundle if not local.
     func register<T: UICollectionReusableView>(
-        header nibType: T.Type,
+        header xibType: T.Type,
         withIdentifier identifier: String = UICollectionView.defaultSectionIdentifier,
         inBundle bundle: Bundle? = nil
     ) {
-        register(supplementary: nibType, ofKind: UICollectionView.elementKindSectionHeader, withIdentifier: identifier, inBundle: bundle)
+        register(supplementary: xibType, ofKind: UICollectionView.elementKindSectionHeader, withIdentifier: identifier, inBundle: bundle)
     }
     
     /// Gets the reusable header with default identifier name.
@@ -84,18 +91,18 @@ public extension UICollectionView {
         )
     }
     
-    /// Register footer NIB to collection view.
+    /// Register footer XIB to collection view.
     ///
     /// - Parameters:
-    ///   - nibType: Type of the NIB.
+    ///   - xibType: Type of the XIB.
     ///   - identifier: Name of the reusable view identifier.
     ///   - bundle: Bundle if not local.
     func register<T: UICollectionReusableView>(
-        footer nibType: T.Type,
+        footer xibType: T.Type,
         withIdentifier identifier: String = UICollectionView.defaultSectionIdentifier,
         inBundle bundle: Bundle? = nil
     ) {
-        register(supplementary: nibType, ofKind: UICollectionView.elementKindSectionFooter, withIdentifier: identifier, inBundle: bundle)
+        register(supplementary: xibType, ofKind: UICollectionView.elementKindSectionFooter, withIdentifier: identifier, inBundle: bundle)
     }
     
     /// Gets the reusable footer with default identifier name.
