@@ -216,10 +216,7 @@ public extension UIView {
         }
         
         addSubview(activityIndicator)
-
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
-        activityIndicator.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
+        activityIndicator.center()
         
         return activityIndicator
     }
@@ -245,6 +242,27 @@ public extension UIView {
         bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -insets.bottom).isActive = true
         leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insets.left).isActive = true
         trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -insets.right).isActive = true
+    }
+    
+    /// Center the view using auto layout constraints.
+    func center() {
+        guard let superview = superview else {
+            assertionFailure("Missing superview for constraint")
+            return
+        }
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        centerXAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        centerYAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.centerYAnchor).isActive = true
+    }
+    
+    /// Set the aspect ratio for the height and width of the view using auto layout constraints.
+    ///
+    /// - Parameters:
+    ///   - multiplier: The multiplier constant for the constraint.
+    func aspectRatioSize(multiplier: CGFloat = 1) {
+        translatesAutoresizingMaskIntoConstraints = false
+        heightAnchor.constraint(equalTo: widthAnchor, multiplier: multiplier).isActive = true
     }
 }
 #endif
