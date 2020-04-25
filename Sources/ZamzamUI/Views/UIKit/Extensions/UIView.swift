@@ -231,17 +231,36 @@ public extension UIView {
     /// - Parameters:
     ///   - view: The ancestor view to pin edges to.
     ///   - insets: The inset distances for view padding.
-    func edges(to view: UIView?, insets: UIEdgeInsets = .zero) {
+    ///   - safeArea: Speficy to use safe area layout guide.
+    func edges(to view: UIView?, insets: UIEdgeInsets = .zero, safeArea: Bool = false) {
         guard let view = view else {
             assertionFailure("Missing superview for constraint")
             return
         }
         
         translatesAutoresizingMaskIntoConstraints = false
-        topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top).isActive = true
-        bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -insets.bottom).isActive = true
-        leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insets.left).isActive = true
-        trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -insets.right).isActive = true
+        
+        if safeArea {
+            topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: insets.top).isActive = true
+            bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -insets.bottom).isActive = true
+            leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: insets.left).isActive = true
+            trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -insets.right).isActive = true
+        } else {
+            topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top).isActive = true
+            bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -insets.bottom).isActive = true
+            leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insets.left).isActive = true
+            trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -insets.right).isActive = true
+        }
+    }
+    
+    /// Anchor all sides of the view using auto layout constraints.
+    ///
+    /// - Parameters:
+    ///   - view: The ancestor view to pin edges to.
+    ///   - padding: The inset distances for view padding for all sides.
+    ///   - safeArea: Speficy to use safe area layout guide.
+    func edges(to view: UIView?, padding: CGFloat, safeArea: Bool = false) {
+        edges(to: view, insets: UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding), safeArea: safeArea)
     }
     
     /// Center the view using auto layout constraints.
