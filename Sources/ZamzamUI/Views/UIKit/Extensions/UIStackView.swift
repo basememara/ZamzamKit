@@ -34,6 +34,14 @@ public extension UIStackView {
         
         return self
     }
+    
+    /// Removes and releases all arranged subviews before adding the specified views.
+    ///
+    /// - Parameter views: List of views.
+    func setArrangedSubviews(_ views: [UIView]) {
+        deleteArrangedSubviews()
+            .addArrangedSubviews(views)
+    }
 }
 
 public extension UIStackView {
