@@ -45,7 +45,15 @@ public extension StatusBarable where Self: UIViewController {
     
     /// Determine dynamic status bar size
     var statusBarSize: CGSize {
-        let size = application.statusBarFrame.size
+        let size: CGSize
+        
+        if #available(iOS 13, *),
+            let statusBarSize = application.currentWindow?
+                .windowScene?.statusBarManager?.statusBarFrame.size {
+            size = statusBarSize
+        } else {
+            size = application.statusBarFrame.size
+        }
         
         // Consider landscape and portrait mode
         // https://stackoverflow.com/a/16598350
@@ -61,7 +69,13 @@ public extension StatusBarable where Self: UIViewController {
     /// - Returns: The status bar instance.
     @discardableResult
     func addStatusBar(style: UIBlurEffect.Style = .regular) -> UIView? {
-        guard !application.isStatusBarHidden else { return nil }
+        // Only add background if status bar exists, otherwise ignore
+        if #available(iOS 13, *), application.currentWindow?
+            .windowScene?.statusBarManager?.isStatusBarHidden ?? true {
+            return nil
+        } else if application.isStatusBarHidden {
+            return nil
+        }
         
         let statusBar = UIVisualEffectView().with {
             $0.effect = UIBlurEffect(style: style)
@@ -100,6 +114,12 @@ public extension StatusBarable where Self: UIViewController {
     func removeStatusBar() {
         statusBar?.removeFromSuperview()
         statusBar = nil
+    }
+    
+    /// Updates the status bar based on the current view.
+    func resetStatusBar() {
+        removeStatusBar()
+        showStatusBar()
     }
 }
 #endif
