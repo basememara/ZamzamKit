@@ -11,6 +11,18 @@ import UIKit
 
 public extension UIApplication {
     
+    /// The app's key window that is also backwards compatiable.
+    var currentWindow: UIWindow? {
+        guard #available(iOS 13, *) else {
+            return keyWindow
+        }
+        
+        return windows.first { $0.isKeyWindow }
+    }
+}
+
+public extension UIApplication {
+    
     /// Update existing home short cut.
     ///
     /// - Parameters:
