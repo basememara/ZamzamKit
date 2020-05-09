@@ -995,7 +995,7 @@ myLabel3.text = .localized(.next)
 
 > Create loggers that conform to `LogService` and add to `LogRepository` (console and `os_log` are included):
 ```swift
-let log: LogRepositoryType = LogRepository(
+let log = LogRepository(
     services: [
         LogConsoleService(minLevel: .debug),
         LogOSService(
