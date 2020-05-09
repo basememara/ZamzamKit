@@ -12,6 +12,46 @@ import Foundation.NSURL
 
 public extension URL {
     
+    /// Non-optional initializer with documented fail output.
+    init(safeString string: String) {
+        // https://ericasadun.com/2017/01/06/holy-war-forced-unwrapping-urls/
+        guard let instance = URL(string: string) else {
+            fatalError("Unconstructable URL: \(string)")
+        }
+        
+        self = instance
+    }
+}
+
+public extension URL {
+    
+    /// Returns a URL constructed by swapping the given path extension to self.
+    ///
+    ///         URL(fileURLWithPath: "/SomePath/SomeTests.swift")
+    ///             .replacingPathExtension("json") // "/SomePath/SomeTests.json"
+    ///
+    /// - Parameter pathExtension: The extension to append.
+    func replacingPathExtension(_ pathExtension: String) -> URL {
+        deletingPathExtension().appendingPathExtension(pathExtension)
+    }
+    
+    /// Returns a URL constructed by appending the suffix to the path component to self.
+    ///
+    ///         URL(fileURLWithPath: "/SomePath/SomeTests.json")
+    ///             .appendingToFileName("123") // "/SomePath/SomeTests123.json"
+    ///
+    /// - Parameter string: Thesuffix to add.
+    func appendingToFileName(_ string: String) -> URL {
+        guard !string.isEmpty else { return self }
+        
+        return deletingLastPathComponent()
+            .appendingPathComponent("\(deletingPathExtension().lastPathComponent)\(string)")
+            .appendingPathExtension(pathExtension)
+    }
+}
+
+public extension URL {
+    
     /// Returns a URL constructed by appending the given query string parameter to self.
     ///
     ///     let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")

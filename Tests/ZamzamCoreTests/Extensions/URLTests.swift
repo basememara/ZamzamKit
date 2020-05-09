@@ -8,8 +8,21 @@
 import XCTest
 import ZamzamCore
 
-final class URLTests: XCTestCase {
+final class URLTests: XCTestCase {}
+
+extension URLTests {
     
+    func testReplacingPathExtension() throws {
+        let url = URL(fileURLWithPath: "/SomePath/SomeTests.swift")
+        let expected = "/SomePath/SomeTests.json"
+        XCTAssertEqual(url.replacingPathExtension("json").path, expected)
+    }
+    
+    func testURLAppendingToFileName() throws {
+        let url = URL(fileURLWithPath: "/SomePath/SomeTests.json")
+        let expected = "/SomePath/SomeTests123.json"
+        XCTAssertEqual(url.appendingToFileName("123").path, expected)
+    }
 }
 
 extension URLTests {
