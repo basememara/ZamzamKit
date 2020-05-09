@@ -756,6 +756,39 @@ networkRepository.send(requests: request1, request2, request3) { firstResult, an
     }
 }
 ```
+
+> Use an adapter to intercept any `URLRequest` and modify for all network requests:
+```swift
+struct CustomURLRequestAdapter: URLRequestAdapter {
+        
+    func adapt(_ request: URLRequest) -> URLRequest {
+        var request = request
+        request.setValue("1", forHTTPHeaderField: "X-Test-1")
+        request.setValue("2", forHTTPHeaderField: "X-Test-2")
+        return request
+    }
+}
+
+let request = URLRequest(
+    url: URL(string: "https://httpbin.org/get")!,
+    method: .get
+)
+ 
+let networkRepository = NetworkRepository(
+    service: NetworkFoundationService(),
+    adapter: CustomURLRequestAdapter()
+)
+
+networkRepository.send(with: request) { result in
+    guard case .success(let response) else { return }
+
+    request.value(forHTTPHeaderField: "X-Test-1") == nil // true
+    request.value(forHTTPHeaderField: "X-Test-2") == nil // true
+
+    response.request.value(forHTTPHeaderField: "X-Test-1") == "1" // true
+    response.request.value(forHTTPHeaderField: "X-Test-2") == "2" // true
+}
+```
 </details>
 
 ### Application

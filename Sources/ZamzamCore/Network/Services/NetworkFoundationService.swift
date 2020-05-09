@@ -6,19 +6,38 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSURLSession
 
 public struct NetworkFoundationService: NetworkService {
-    public init() {}
+    private let session: URLSession
+    
+    public init(configuration: URLSessionConfiguration = .default) {
+        let delegate = SessionDelegate()
+        
+        self.session = URLSession(
+            configuration: configuration,
+            delegate: delegate,
+            delegateQueue: nil
+        )
+    }
 }
 
 public extension NetworkFoundationService {
     
     func send(with request: URLRequest, completion: @escaping (Result<NetworkAPI.Response, NetworkAPI.Error>) -> Void) {
-        URLSession.shared.dataTask(
+        session.dataTask(
             with: request,
             completionHandler: completion
         ).resume()
+    }
+}
+
+// MARK: - Delegates
+
+private extension NetworkFoundationService {
+    
+    class SessionDelegate: NSObject, URLSessionDelegate {
+        // Placeholder for custom implementations
     }
 }
 
@@ -65,7 +84,13 @@ private extension URLSession {
             }
             
             DispatchQueue.main.async {
-                let networkResponse = NetworkAPI.Response(data: data, headers: headers, statusCode: httpResponse.statusCode)
+                let networkResponse = NetworkAPI.Response(
+                    data: data,
+                    headers: headers,
+                    statusCode: httpResponse.statusCode,
+                    request: request
+                )
+                
                 completionHandler(.success(networkResponse))
             }
         }

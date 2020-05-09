@@ -11,7 +11,7 @@ import ZamzamCore
 final class NetworkTests: XCTestCase {
     private let jsonDecoder = JSONDecoder()
     
-    private let networkRepository: NetworkRepositoryType = NetworkRepository(
+    private let networkRepository: NetworkRepository = NetworkRepository(
         service: NetworkFoundationService()
     )
 }
@@ -1010,6 +1010,148 @@ extension NetworkTests {
         XCTAssertNotNil(response3?.data)
         XCTAssertEqual(response3?.headers["Content-Type"], "application/json")
         XCTAssertEqual(response3?.statusCode, 200)
+    }
+}
+
+// MARK: - Adapter
+
+extension NetworkTests {
+    
+    struct TestURLRequestAdapter: URLRequestAdapter {
+        
+        func adapt(_ request: URLRequest) -> URLRequest {
+            var request = request
+            request.setValue("1", forHTTPHeaderField: "X-Test-1")
+            request.setValue("2", forHTTPHeaderField: "X-Test-2")
+            return request
+        }
+    }
+    
+    func testWithURLRequestAdapter() {
+        // Given
+        let promise = expectation(description: #function)
+        let networkRepository = NetworkRepository(
+            service: NetworkFoundationService(),
+            adapter: TestURLRequestAdapter()
+        )
+        
+        let request = URLRequest(
+            url: URL(string: "https://httpbin.org/get")!,
+            method: .get
+        )
+        
+        var response: NetworkAPI.Response?
+        
+        // When
+        networkRepository.send(with: request) {
+            defer { promise.fulfill() }
+            
+            guard case .success(let value) = $0 else {
+                XCTFail("The network request failed: \(String(describing: $0.error))")
+                return
+            }
+            
+            response = value
+        }
+        
+        wait(for: [promise], timeout: 10)
+        
+        // Then
+        XCTAssertEqual(response?.statusCode, 200)
+        XCTAssertNil(request.value(forHTTPHeaderField: "X-Test-1"))
+        XCTAssertNil(request.value(forHTTPHeaderField: "X-Test-2"))
+        XCTAssertEqual(response?.request.value(forHTTPHeaderField: "X-Test-1"), "1")
+        XCTAssertEqual(response?.request.value(forHTTPHeaderField: "X-Test-2"), "2")
+    }
+    
+    func testWithURLRequestAdapterWithMultipleRequests() {
+        // Given
+        let promise = expectation(description: #function)
+        let networkRepository = NetworkRepository(
+            service: NetworkFoundationService(),
+            adapter: TestURLRequestAdapter()
+        )
+        
+        let requests = [
+            URLRequest(
+                url: URL(string: "https://httpbin.org/get")!,
+                method: .get
+            ),
+            URLRequest(
+                url: URL(string: "https://httpbin.org/post")!,
+                method: .post
+            ),
+            URLRequest(
+                url: URL(string: "https://httpbin.org/patch")!,
+                method: .patch
+            ),
+            URLRequest(
+                url: URL(string: "https://httpbin.org/delete")!,
+                method: .delete
+            )
+        ]
+        
+        var response0: NetworkAPI.Response?
+        var response1: NetworkAPI.Response?
+        var response2: NetworkAPI.Response?
+        var response3: NetworkAPI.Response?
+        
+        // When
+        networkRepository.send(requests: requests[0], requests[1], requests[2], requests[3]) { result in
+            defer { promise.fulfill() }
+            
+            guard case .success(let value0) = result.0 else {
+                XCTFail("The network request failed: \(String(describing: result.0.error))")
+                return
+            }
+            
+            guard case .success(let value1) = result.1 else {
+                XCTFail("The network request failed: \(String(describing: result.1.error))")
+                return
+            }
+            
+            guard case .success(let value2) = result.2 else {
+                XCTFail("The network request failed: \(String(describing: result.2.error))")
+                return
+            }
+            
+            guard case .success(let value3) = result.3 else {
+                XCTFail("The network request failed: \(String(describing: result.3.error))")
+                return
+            }
+            
+            response0 = value0
+            response1 = value1
+            response2 = value2
+            response3 = value3
+        }
+        
+        wait(for: [promise], timeout: 10)
+        
+        // Then
+        XCTAssertEqual(response0?.statusCode, 200)
+        XCTAssertNil(requests[0].value(forHTTPHeaderField: "X-Test-1"))
+        XCTAssertNil(requests[0].value(forHTTPHeaderField: "X-Test-2"))
+        XCTAssertEqual(response0?.request.value(forHTTPHeaderField: "X-Test-1"), "1")
+        XCTAssertEqual(response0?.request.value(forHTTPHeaderField: "X-Test-2"), "2")
+        
+        XCTAssertEqual(response1?.statusCode, 200)
+        XCTAssertNil(requests[1].value(forHTTPHeaderField: "X-Test-1"))
+        XCTAssertNil(requests[1].value(forHTTPHeaderField: "X-Test-2"))
+        XCTAssertEqual(response1?.request.value(forHTTPHeaderField: "X-Test-1"), "1")
+        XCTAssertEqual(response1?.request.value(forHTTPHeaderField: "X-Test-2"), "2")
+        
+        XCTAssertEqual(response2?.statusCode, 200)
+        XCTAssertNil(requests[2].value(forHTTPHeaderField: "X-Test-1"))
+        XCTAssertNil(requests[2].value(forHTTPHeaderField: "X-Test-2"))
+        XCTAssertEqual(response2?.request.value(forHTTPHeaderField: "X-Test-1"), "1")
+        XCTAssertEqual(response2?.request.value(forHTTPHeaderField: "X-Test-2"), "2")
+        
+        XCTAssertEqual(response3?.statusCode, 200)
+        XCTAssertNil(requests[3].value(forHTTPHeaderField: "X-Test-1"))
+        XCTAssertNil(requests[3].value(forHTTPHeaderField: "X-Test-2"))
+        XCTAssertEqual(response3?.request.value(forHTTPHeaderField: "X-Test-1"), "1")
+        XCTAssertEqual(response3?.request.value(forHTTPHeaderField: "X-Test-2"), "2")
     }
 }
 

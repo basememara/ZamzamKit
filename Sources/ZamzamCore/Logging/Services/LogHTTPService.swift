@@ -16,7 +16,7 @@ final public class LogHTTPService {
     private let urlRequest: URLRequest
     private let maxEntriesInBuffer: Int
     private let appInfo: AppInfo
-    private let networkRepository: NetworkRepositoryType
+    private let networkRepository: NetworkRepository
     
     private let deviceName = UIDevice.current.name
     private let deviceModel = UIDevice.current.model
@@ -40,7 +40,7 @@ final public class LogHTTPService {
         urlRequest: URLRequest,
         maxEntriesInBuffer: Int,
         appInfo: AppInfo,
-        networkRepository: NetworkRepositoryType,
+        networkRepository: NetworkRepository,
         notificationCenter: NotificationCenter
     ) {
         self.urlRequest = urlRequest
