@@ -209,7 +209,7 @@ public extension UIView {
         color: UIColor = .gray,
         size: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40)
     ) -> UIActivityIndicatorView {
-        let activityIndicator = UIActivityIndicatorView(frame: size).with {
+        let activityIndicator = UIActivityIndicatorView(frame: size).apply {
             $0.style = style
             $0.color = color
             $0.hidesWhenStopped = true

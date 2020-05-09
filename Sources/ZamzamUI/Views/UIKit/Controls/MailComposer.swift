@@ -61,7 +61,7 @@ public extension MailComposer {
     func makeViewController(emails: [String], subject: String?, body: String?, isHTML: Bool, attachment: AttachmentType?) -> MFMailComposeViewController? {
         guard canSendMail() else { return nil }
         
-        return MFMailComposeViewController().with {
+        return MFMailComposeViewController().apply {
             $0.mailComposeDelegate = self
             
             $0.setToRecipients(emails)

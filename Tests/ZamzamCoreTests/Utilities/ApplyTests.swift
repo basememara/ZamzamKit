@@ -9,10 +9,10 @@
 import XCTest
 import ZamzamCore
 
-final class WithTests: XCTestCase {
+final class ApplyTests: XCTestCase {
     
-    func testWith() {
-        let model = SomeModel().with {
+    func testApply() {
+        let model = SomeModel().apply {
             $0.propertyA = "abc"
             $0.propertyB = 5
             $0.propertyC = true
@@ -30,4 +30,4 @@ class SomeModel {
     var propertyC: Bool?
 }
 
-extension SomeModel: With {}
+extension SomeModel: Apply {}

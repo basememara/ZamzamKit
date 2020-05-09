@@ -37,7 +37,7 @@ public extension UIToolbar {
     ///   - title: The title of the toolbar.
     /// - Returns: A control that displays the done button along the bottom edge of your interface.
     static func makeInputDoneToolbar(target: Any?, action: Selector, clearAction: Selector? = nil, title: String? = nil) -> UIToolbar {
-        UIToolbar().with {
+        UIToolbar().apply {
             $0.isTranslucent = true
             $0.isUserInteractionEnabled = true
             $0.sizeToFit()
@@ -63,7 +63,7 @@ public extension UIToolbar {
                 items += [
                     .init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
                     .init(customView:
-                        UILabel(frame: .zero).with {
+                        UILabel(frame: .zero).apply {
                             $0.text = title
                             $0.sizeToFit()
                             $0.backgroundColor = .clear
@@ -92,7 +92,7 @@ public extension UIToolbar {
     ///   - title: The title of the toolbar.
     /// - Returns: A control that displays the next button along the bottom edge of your interface.
     static func makeInputNextToolbar(target: Any?, action: Selector, clearAction: Selector? = nil, title: String? = nil) -> UIToolbar {
-        UIToolbar().with {
+        UIToolbar().apply {
             $0.isTranslucent = true
             $0.isUserInteractionEnabled = true
             $0.sizeToFit()
@@ -118,7 +118,7 @@ public extension UIToolbar {
                 items += [
                     .init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
                     .init(customView:
-                        UILabel(frame: .zero).with {
+                        UILabel(frame: .zero).apply {
                             $0.text = title
                             $0.sizeToFit()
                             $0.backgroundColor = .clear

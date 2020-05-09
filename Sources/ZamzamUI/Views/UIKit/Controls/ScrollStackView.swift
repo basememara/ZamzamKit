@@ -37,7 +37,7 @@ open class ScrollStackView: UIScrollView {
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: insets.top),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insets.left),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insets.right),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -insets.bottom).with {
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -insets.bottom).apply {
                 $0.priority = UILayoutPriority(rawValue: UILayoutPriority.required.rawValue - 1)
             }
         ])
@@ -188,7 +188,7 @@ private extension ScrollStackView {
     func insertCell(withContentView contentView: UIView, atIndex index: Int, rowInsets: UIEdgeInsets, animated: Bool) {
         let cellToRemove = contains(row: contentView) ? contentView.superview : nil
         
-        let cell = CellView(contentView: contentView).with {
+        let cell = CellView(contentView: contentView).apply {
             $0.layoutMargins = rowInsets
         }
         

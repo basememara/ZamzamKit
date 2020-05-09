@@ -163,7 +163,7 @@ extension DateTimeTests {
     }
     
     func testIsBeyondDays() {
-        let formatter = DateFormatter().with {
+        let formatter = DateFormatter().apply {
             $0.dateFormat = "yyyy/MM/dd HH:mm"
         }
         

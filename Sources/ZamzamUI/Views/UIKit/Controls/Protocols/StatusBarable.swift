@@ -77,7 +77,7 @@ public extension StatusBarable where Self: UIViewController {
             return nil
         }
         
-        let statusBar = UIVisualEffectView().with {
+        let statusBar = UIVisualEffectView().apply {
             $0.effect = UIBlurEffect(style: style)
             $0.frame = CGRect(
                 x: 0,

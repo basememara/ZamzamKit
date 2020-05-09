@@ -9,25 +9,25 @@
 import Foundation.NSJSONSerialization
 import Foundation.NSObject
 
-public protocol With {}
+public protocol Apply {}
 
-public extension With where Self: Any {
+public extension Apply where Self: Any {
 
     /// Makes it available to set properties with closures just after initializing.
     ///
-    ///     let label = UILabel().with {
+    ///     let label = UILabel().apply {
     ///       $0.textAlignment = .center
     ///       $0.textColor = .black
     ///       $0.text = "Hello, World!"
     ///     }
     @discardableResult
-    func with(_ block: (Self) -> Void) -> Self {
+    func apply(_ block: (Self) -> Void) -> Self {
         // https://github.com/devxoul/Then
         block(self)
         return self
     }
 }
 
-extension NSObject: With {}
-extension JSONDecoder: With {}
-extension JSONEncoder: With {}
+extension NSObject: Apply {}
+extension JSONDecoder: Apply {}
+extension JSONEncoder: Apply {}

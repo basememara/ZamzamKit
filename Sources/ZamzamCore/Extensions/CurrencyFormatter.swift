@@ -22,7 +22,7 @@ public struct CurrencyFormatter {
     ///   - decimalDigits: The minimum number of digits after the decimal separator. Default is 2.
     ///   - usePrefix: Adds a prefix for positive and negative values.
     public init(for locale: Locale = .current, autoTruncate: Bool = false, decimalDigits: Int = 2, usePrefix: Bool = false) {
-        self.formatter = NumberFormatter().with {
+        self.formatter = NumberFormatter().apply {
             $0.numberStyle = .currency
             $0.locale = locale
             $0.currencyCode = locale.currencyCode

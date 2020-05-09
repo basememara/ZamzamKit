@@ -26,7 +26,7 @@ public class LocationRepository: NSObject, LocationRepositoryType {
     #endif
     
     /// Internal Core Location manager
-    private lazy var manager = CLLocationManager().with {
+    private lazy var manager = CLLocationManager().apply {
         $0.desiredAccuracy ?= self.desiredAccuracy
         $0.distanceFilter ?= self.distanceFilter
         

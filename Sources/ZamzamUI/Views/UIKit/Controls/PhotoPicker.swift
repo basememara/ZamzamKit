@@ -89,7 +89,7 @@ private extension PhotoPicker {
     
     func openCamera() {
         delegate?.present(
-            UIImagePickerController().with {
+            UIImagePickerController().apply {
                 $0.delegate = self
                 $0.sourceType = .camera
                 $0.allowsEditing = allowsEditing
@@ -100,7 +100,7 @@ private extension PhotoPicker {
     
     func openPhotoLibrary() {
         delegate?.present(
-            UIImagePickerController().with {
+            UIImagePickerController().apply {
                 $0.delegate = self
                 $0.sourceType = .photoLibrary
                 $0.allowsEditing = allowsEditing

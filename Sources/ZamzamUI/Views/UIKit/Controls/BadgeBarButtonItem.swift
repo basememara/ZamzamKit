@@ -15,7 +15,7 @@ import ZamzamCore
 /// A bar button item with an optional badge value.
 open class BadgeBarButtonItem: UIBarButtonItem {
     
-    private(set) public lazy var badgeLabel = UILabel().with {
+    private(set) public lazy var badgeLabel = UILabel().apply {
         $0.text = badgeText?.isEmpty == false ? " \(badgeText ?? "") " : nil
         $0.isHidden = badgeText?.isEmpty != false
         $0.textColor = badgeFontColor
@@ -111,7 +111,7 @@ public extension BadgeBarButtonItem {
 public extension BadgeBarButtonItem {
     
     convenience init(image: UIImage?, badgeText: String? = nil, target: AnyObject?, action: Selector) {
-        let button = UIButton(type: .custom).with {
+        let button = UIButton(type: .custom).apply {
             $0.frame = CGRect(x: 0, y: 0, width: image?.size.width ?? 40, height: image?.size.height ?? 40)
             $0.setBackgroundImage(image, for: .normal)
         }
@@ -120,7 +120,7 @@ public extension BadgeBarButtonItem {
     }
     
     convenience init(title: String, badgeText: String? = nil, target: AnyObject?, action: Selector) {
-        let button = UIButton(type: .system).with {
+        let button = UIButton(type: .system).apply {
             $0.setTitle(title, for: .normal)
             $0.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.buttonFontSize)
         }

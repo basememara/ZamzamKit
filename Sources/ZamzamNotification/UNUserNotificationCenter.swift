@@ -222,7 +222,7 @@ public extension UNUserNotificationCenter {
         completion: ((Error?) -> Void)? = nil
     ) {
         // Constuct content
-        let content = UNMutableNotificationContent().with {
+        let content = UNMutableNotificationContent().apply {
             $0.body = body
             $0.categoryIdentifier = category
         
@@ -275,7 +275,7 @@ public extension UNUserNotificationCenter {
         completion: ((Error?) -> Void)? = nil
     ) {
         // Constuct content
-        let content = UNMutableNotificationContent().with {
+        let content = UNMutableNotificationContent().apply {
             $0.body = body
             $0.categoryIdentifier = category
         
@@ -338,7 +338,7 @@ public extension UNUserNotificationCenter {
         completion: ((Error?) -> Void)? = nil
     ) {
         // Constuct content
-        let content = UNMutableNotificationContent().with {
+        let content = UNMutableNotificationContent().apply {
             $0.body = body
             $0.categoryIdentifier = category
         

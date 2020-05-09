@@ -105,7 +105,7 @@ extension DecodableTests {
                 let data: [String: AnyDecodable]?
             }
             
-            let decoder = JSONDecoder().with {
+            let decoder = JSONDecoder().apply {
                 $0.dateDecodingStrategy = .formatted(.init(iso8601Format: "yyyy-MM-dd'T'HH:mm:ssZ"))
             }
             

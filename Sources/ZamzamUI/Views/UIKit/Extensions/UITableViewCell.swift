@@ -18,7 +18,7 @@ public extension UITableViewCell {
         
         set {
             guard selectionStyle != .none else { return }
-            selectedBackgroundView = UIView().with {
+            selectedBackgroundView = UIView().apply {
                 $0.backgroundColor = newValue
             }
         }

@@ -32,7 +32,7 @@ open class PlaceholderTextView: UITextView {
     @IBInspectable open dynamic var textPaddingRight: CGFloat = 20
     
     // Allow placeholders in UITextView
-    private lazy var placeholderLabel = UILabel().with {
+    private lazy var placeholderLabel = UILabel().apply {
         $0.text = placeholder
         $0.textColor = placeholderColor
         $0.font ?= placeholderFont
@@ -61,7 +61,7 @@ open class PlaceholderTextView: UITextView {
             .constraint(equalTo: topAnchor, constant: textPaddingTop)
             .isActive = true
         
-        placeholderLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: textPaddingBottom).with {
+        placeholderLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: textPaddingBottom).apply {
             $0.priority = .defaultLow
             $0.isActive = true
         }

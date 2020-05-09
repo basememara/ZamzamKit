@@ -512,7 +512,7 @@ public extension UIViewController {
     ) -> SFSafariViewController? {
         guard let url = URL(string: url) else { return nil }
         
-        let controller = SFSafariViewController(url: url).with {
+        let controller = SFSafariViewController(url: url).apply {
             $0.delegate = self as? SFSafariViewControllerDelegate
             
             if #available(iOS 13, *) {

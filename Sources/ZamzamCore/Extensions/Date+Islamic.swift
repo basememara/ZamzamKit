@@ -68,7 +68,7 @@ public extension Date {
             calendar.timeZone = timeZone
         }
         
-        let formatter = DateFormatter().with {
+        let formatter = DateFormatter().apply {
             $0.calendar = calendar
             $0.timeZone = calendar.timeZone
             
