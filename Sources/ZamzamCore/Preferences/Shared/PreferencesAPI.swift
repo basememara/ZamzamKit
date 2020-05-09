@@ -6,44 +6,6 @@
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
-// MARK: - Respository
-
-/// A thin wrapper to manage `UserDefaults`, or other services that conform to `PreferencesService`.
-///
-///     let preferences: PreferencesType = Preferences(
-///         service: PreferencesDefaultsService(
-///             defaults: UserDefaults.standard
-///         )
-///     )
-///
-///     preferences.set(123, forKey: .abc)
-///     preferences.get(.token) // 123
-///
-///     // Define strongly-typed keys
-///     extension PreferencesAPI.Keys {
-///         static let abc = PreferencesAPI.Key<String>("abc")
-///     }
-public protocol PreferencesType {
-    
-    /// Retrieves the value from user defaults that corresponds to the given key.
-    ///
-    /// - Parameter key: The key that is used to read the user defaults item.
-    func get<T>(_ key: PreferencesAPI.Key<T?>) -> T?
-    
-    /// Stores the value in the user defaults item under the given key.
-    ///
-    /// - Parameters:
-    ///   - value: Value to be written to the user defaults.
-    ///   - key: Key under which the value is stored in the user defaults.
-    func set<T>(_ value: T?, forKey key: PreferencesAPI.Key<T?>)
-    
-    /// Deletes the single user defaults item specified by the key.
-    ///
-    /// - Parameter key: The key that is used to delete the user default item.
-    /// - Returns: True if the item was successfully deleted.
-    func remove<T>(_ key: PreferencesAPI.Key<T?>)
-}
-
 // MARK: - Service
 
 public protocol PreferencesService {

@@ -11,7 +11,7 @@ import ZamzamCore
 
 final class PreferencesTests: XCTestCase {
     
-    private lazy var preferences: PreferencesType = Preferences(
+    private lazy var preferences = Preferences(
         service: PreferencesDefaultsService(
             defaults: UserDefaults(suiteName: "PreferencesTests")!
         )

@@ -5,7 +5,7 @@ import ZamzamKit
 
 final class ___VARIABLE_productName:identifier___WorkerTests: AuthTestCase {
     private lazy var testWorker: ___VARIABLE_productName:identifier___WorkerType = dependencies.resolve()
-    private lazy var preferences: PreferencesType = dependencies.resolve()
+    private lazy var preferences: Preferences = dependencies.resolve()
 }
 
 extension ___VARIABLE_productName:identifier___WorkerTests {

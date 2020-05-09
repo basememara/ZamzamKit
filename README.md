@@ -931,7 +931,7 @@ BackgroundTask.run(for: application) { task in
 
 > A thin wrapper to manage Keychain, or other services that conform to `SecuredPreferencesService`:
 ```swift
-let keychain: SecuredPreferencesType = SecuredPreferences(
+let keychain = SecuredPreferences(
     service: SecuredPreferencesKeychainService()
 )
 
@@ -953,7 +953,7 @@ extension SecuredPreferencesAPI.Key {
 
 > A thin wrapper to manage `UserDefaults`, or other services that conform to `PreferencesService`:
 ```swift
-let preferences: PreferencesType = Preferences(
+let preferences = Preferences(
     service: PreferencesDefaultsService(
         defaults: UserDefaults.standard
     )

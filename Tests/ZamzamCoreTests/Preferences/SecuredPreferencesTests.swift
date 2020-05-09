@@ -11,7 +11,7 @@ import ZamzamCore
 
 final class SecuredPreferencesTests: XCTestCase {
     
-    private lazy var keychain: SecuredPreferencesType = SecuredPreferences(
+    private lazy var keychain = SecuredPreferences(
         service: SecuredPreferencesTestService()
     )
 }

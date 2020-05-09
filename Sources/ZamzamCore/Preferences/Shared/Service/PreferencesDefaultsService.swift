@@ -1,5 +1,5 @@
 //
-//  PreferencesType.swift
+//  PreferencesDefaultsService.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2019-05-09.
