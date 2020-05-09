@@ -702,7 +702,7 @@ let request = URLRequest(
 )
  
 let networkRepository = NetworkRepository(
-    service: NetworkURLSessionService()
+    service: NetworkFoundationService()
 )
 
 networkRepository.send(with: request) { result in

@@ -44,11 +44,6 @@ public extension JSONDecoder {
             ))
         }
         
-        do {
-            let data = try Data(contentsOf: url, options: .mappedIfSafe)
-            return try decode(type, from: data)
-        } catch {
-            throw error
-        }
+        return try decode(type, from: Data(contentsOf: url, options: .mappedIfSafe))
     }
 }
