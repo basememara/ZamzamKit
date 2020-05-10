@@ -20,10 +20,10 @@ extension NotificationTests {
     
     func testUnregisteringEndsObservation() {
         var counter = 0
-        var token: Any?
+        var cancellable: Any?
         
         // Subscribe
-        token = notificationCenter.addObserver(forName: Self.testNotificationName, object: nil, queue: nil) { _ in
+        cancellable = notificationCenter.addObserver(forName: Self.testNotificationName, object: nil, queue: nil) { _ in
             counter += 1
         }
         
@@ -32,8 +32,8 @@ extension NotificationTests {
         XCTAssertEqual(counter, 1)
         
         // Unregister
-        token.map { notificationCenter.removeObserver($0) }
-        token = nil
+        cancellable.map { notificationCenter.removeObserver($0) }
+        cancellable = nil
         
         // Post notification again
         notificationCenter.post(name: Self.testNotificationName, object: nil)
@@ -45,10 +45,10 @@ extension NotificationTests {
     
     func testFailingToUnregisterCausesBlockToStayAliveEvenAfterTokenIsReleased() {
         var counter = 0
-        var token: Any?
+        var cancellable: Any?
         
         // Subscribe
-        token = notificationCenter.addObserver(forName: Self.testNotificationName, object: nil, queue: nil) { _ in
+        cancellable = notificationCenter.addObserver(forName: Self.testNotificationName, object: nil, queue: nil) { _ in
             counter += 1
         }
         
@@ -57,8 +57,8 @@ extension NotificationTests {
         XCTAssertEqual(counter, 1)
         
         // Release observation token
-        if token != nil {
-            token = nil
+        if cancellable != nil {
+            cancellable = nil
         }
         
         // Post notification again
@@ -73,11 +73,11 @@ extension NotificationTests {
         var externalCounter = 0
         
         class TestObserver {
-            var token: Any?
+            var cancellable: Any?
             
             init(observerBlock: @escaping () -> ()) {
                 // Subscribe but never unregisters in deinit
-                token = NotificationCenter.default.addObserver(forName: NotificationTests.testNotificationName, object: nil, queue: nil) { _ in
+                cancellable = NotificationCenter.default.addObserver(forName: NotificationTests.testNotificationName, object: nil, queue: nil) { _ in
                     observerBlock()
                 }
             }
@@ -106,10 +106,10 @@ extension NotificationTests {
     
     func testTokenWrapperAutomaticallyUnregistersOnNil() {
         var counter = 0
-        var token: NotificationCenter.Token?
+        var cancellable: NotificationCenter.Cancellable?
         
         // Subscribe
-        notificationCenter.addObserver(forName: Self.testNotificationName, in: &token) { _ in
+        notificationCenter.addObserver(forName: Self.testNotificationName, in: &cancellable) { _ in
             counter += 1
         }
         
@@ -118,8 +118,8 @@ extension NotificationTests {
         XCTAssertEqual(counter, 1)
         
         // Destroy observation token
-        if token != nil {
-            token = nil
+        if cancellable != nil {
+            cancellable = nil
         }
         
         // Post notification again
@@ -134,11 +134,11 @@ extension NotificationTests {
         var externalCounter = 0
         
         class TestObserver {
-            var token: NotificationCenter.Token?
+            var cancellable: NotificationCenter.Cancellable?
             
             init(observerBlock: @escaping () -> ()) {
                 // Subscribe but no need for deinit registration
-                NotificationCenter.default.addObserver(forName: NotificationTests.testNotificationName, in: &token) { _ in
+                NotificationCenter.default.addObserver(forName: NotificationTests.testNotificationName, in: &cancellable) { _ in
                     observerBlock()
                 }
             }

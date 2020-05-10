@@ -42,7 +42,7 @@ public extension NotificationCenter {
 public extension NotificationCenter {
     
     /// Wraps the observer token received from `addObserver` and automatically unregisters from the notification center on deinit.
-    final class Token: NSObject {
+    final class Cancellable: NSObject {
         // https://oleb.net/blog/2018/01/notificationcenter-removeobserver/
         private let notificationCenter: NotificationCenter
         private let token: Any
@@ -60,7 +60,7 @@ public extension NotificationCenter {
     /// Adds an entry to the notification center's dispatch table that includes a notification queue and a block to add to the queue, and an optional notification name and sender.
     ///
     ///     class MyObserver: NSObject {
-    ///         var token: NotificationCenter.Token? // Auto-released in deinit
+    ///         var cancellable: NotificationCenter.Cancellable? // Auto-released in deinit
     ///
     ///         func setup() {
     ///             NotificationCenter.default.addObserver(forName: .SomeName, in: &token) {
@@ -75,16 +75,16 @@ public extension NotificationCenter {
     ///   - name: The name of the notification for which to register the observer; that is, only notifications with this name are delivered to the observer.
     ///   - object: The object whose notifications the observer wants to receive; that is, only notifications sent by this sender are delivered to the observer.
     ///   - queue: The operation queue to which block should be added. If you pass nil, the block is run synchronously on the posting thread.
-    ///   - token: An opaque object to act as the observer and will manage its auto release.
+    ///   - cancellable: An opaque object to act as the observer and will manage its auto release.
     ///   - block: The block to be executed when the notification is received.
     func addObserver(
         forName name: NSNotification.Name,
         object: Any? = nil,
         queue: OperationQueue? = nil,
-        in token: inout Token?,
+        in cancellable: inout Cancellable?,
         using block: @escaping (Notification) -> Void
     ) {
-        token = Token(
+        cancellable = Cancellable(
             notificationCenter: self,
             token: addObserver(forName: name, object: object, queue: queue, using: block)
         )
