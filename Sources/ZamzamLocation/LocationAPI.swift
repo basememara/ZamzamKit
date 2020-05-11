@@ -11,7 +11,7 @@ import ZamzamCore
 
 // MARK: - Respository
 
-public protocol LocationRepositoryType {
+public protocol LocationRepositoryProtocol {
     typealias LocationHandler = (CLLocation) -> Void
     typealias AuthorizationHandler = (Bool) -> Void
     
@@ -80,7 +80,7 @@ public protocol LocationRepositoryType {
     func removeObservers(with prefix: String)
 }
 
-public extension LocationRepositoryType {
+public extension LocationRepositoryProtocol {
     
     func requestAuthorization(for type: LocationAPI.AuthorizationType) {
         requestAuthorization(for: type, startUpdatingLocation: false, completion: nil)

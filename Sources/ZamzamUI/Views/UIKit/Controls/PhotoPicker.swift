@@ -11,7 +11,7 @@ import AVFoundation
 import UIKit
 import ZamzamCore
 
-public protocol PhotoPickerType {
+public protocol PhotoPickerProtocol {
     func makeViewController() -> UIViewController?
 }
 
@@ -20,7 +20,7 @@ public protocol PhotoPickerDelegate: AnyObject {
     func photoPickerDidFailPermission()
 }
 
-open class PhotoPicker: NSObject, PhotoPickerType {
+open class PhotoPicker: NSObject, PhotoPickerProtocol {
     private weak var delegate: (PhotoPickerDelegate & UIViewController)?
     private let allowsEditing: Bool
     

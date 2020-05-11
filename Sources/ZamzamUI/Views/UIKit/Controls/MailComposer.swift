@@ -9,30 +9,11 @@
 #if os(iOS)
 import MessageUI
 
-public protocol MailComposerType {
-    typealias AttachmentType = (data: Data, mimeType: String, fileName: String)
-    
-    func canSendMail() -> Bool
-    func makeViewController(email: String, subject: String?, body: String?, isHTML: Bool, attachment: AttachmentType?) -> MFMailComposeViewController?
-    func makeViewController(emails: [String], subject: String?, body: String?, isHTML: Bool, attachment: AttachmentType?) -> MFMailComposeViewController?
-}
-
-public extension MailComposerType {
-    
-    func makeViewController(email: String) -> MFMailComposeViewController? {
-        makeViewController(email: email, subject: nil, body: nil, isHTML: true, attachment: nil)
-    }
-    
-    func makeViewController(email: String, subject: String, body: String) -> MFMailComposeViewController? {
-        makeViewController(email: email, subject: subject, body: body, isHTML: true, attachment: nil)
-    }
-}
-
 public protocol MailComposerDelegate: AnyObject {
     func mailComposer(didFinishWith result: MFMailComposeResult)
 }
 
-open class MailComposer: NSObject, MailComposerType {
+open class MailComposer: NSObject {
     private weak var delegate: MailComposerDelegate?
     private let styleNavigationBar: ((UINavigationBar) -> Void)?
     
@@ -53,12 +34,12 @@ open class MailComposer: NSObject, MailComposerType {
 public extension MailComposer {
     
     /// A standard interface for managing, editing, and sending an email message.
-    func makeViewController(email: String, subject: String?, body: String?, isHTML: Bool, attachment: AttachmentType?) -> MFMailComposeViewController? {
+    func makeViewController(email: String, subject: String? = nil, body: String? = nil, isHTML: Bool = true, attachment: Attachment? = nil) -> MFMailComposeViewController? {
         makeViewController(emails: [email], subject: subject, body: body, isHTML: isHTML, attachment: attachment)
     }
     
     /// A standard interface for managing, editing, and sending an email message.
-    func makeViewController(emails: [String], subject: String?, body: String?, isHTML: Bool, attachment: AttachmentType?) -> MFMailComposeViewController? {
+    func makeViewController(emails: [String], subject: String?, body: String?, isHTML: Bool = true, attachment: Attachment? = nil) -> MFMailComposeViewController? {
         guard canSendMail() else { return nil }
         
         return MFMailComposeViewController().apply {
@@ -85,6 +66,12 @@ public extension MailComposer {
             styleNavigationBar?($0.navigationBar)
         }
     }
+}
+
+// MARK: - Types
+
+public extension MailComposer {
+    typealias Attachment = (data: Data, mimeType: String, fileName: String)
 }
 
 // MARK: MFMailComposeViewControllerDelegate

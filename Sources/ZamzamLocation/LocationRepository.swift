@@ -10,7 +10,7 @@ import CoreLocation
 import ZamzamCore
 
 /// A `LocationManager` wrapper with extensions.
-public class LocationRepository: NSObject, LocationRepositoryType {
+public class LocationRepository: NSObject, LocationRepositoryProtocol {
     private let desiredAccuracy: CLLocationAccuracy?
     private let distanceFilter: Double?
     private let activityType: CLActivityType?
