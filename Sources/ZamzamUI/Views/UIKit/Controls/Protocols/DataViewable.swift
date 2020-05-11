@@ -9,7 +9,7 @@
 #if os(iOS)
 import UIKit
 
-public protocol DataViewable: class {
+public protocol DataViewable: AnyObject {
     var backgroundView: UIView? { get set }
     func cellForRow(at indexPath: IndexPath) -> UIView?
     func reloadData()

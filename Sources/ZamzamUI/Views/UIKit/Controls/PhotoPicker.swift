@@ -15,7 +15,7 @@ public protocol PhotoPickerType {
     func makeViewController() -> UIViewController?
 }
 
-public protocol PhotoPickerDelegate: class {
+public protocol PhotoPickerDelegate: AnyObject {
     func photoPicker(didFinishPicking image: UIImage)
     func photoPickerDidFailPermission()
 }

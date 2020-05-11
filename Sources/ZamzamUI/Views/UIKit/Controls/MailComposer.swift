@@ -28,7 +28,7 @@ public extension MailComposerType {
     }
 }
 
-public protocol MailComposerDelegate: class {
+public protocol MailComposerDelegate: AnyObject {
     func mailComposer(didFinishWith result: MFMailComposeResult)
 }
 

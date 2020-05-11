@@ -168,7 +168,7 @@ public extension ApplicationPlugin {
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {}
 }
 
-public protocol RemoteNotificationPluginDelegate: class {
+public protocol RemoteNotificationPluginDelegate: AnyObject {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any])
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error)

@@ -11,7 +11,7 @@ import AVFoundation
 import Foundation.NSBundle
 import UIKit.UIApplication
 
-public protocol Audible: class {
+public protocol Audible: AnyObject {
     var audioPlayer: AVAudioPlayer? { get set }
 }
 

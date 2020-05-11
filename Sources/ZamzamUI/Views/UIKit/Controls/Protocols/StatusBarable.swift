@@ -36,7 +36,7 @@ import UIKit
 ///             showStatusBar()
 ///         }
 ///     }
-public protocol StatusBarable: class {
+public protocol StatusBarable: AnyObject {
     var application: UIApplication { get }
     var statusBar: UIView? { get set }
 }
