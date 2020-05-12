@@ -74,7 +74,7 @@ public extension MailComposer {
     typealias Attachment = (data: Data, mimeType: String, fileName: String)
 }
 
-// MARK: MFMailComposeViewControllerDelegate
+// MARK: Delegates
 
 extension MailComposer: MFMailComposeViewControllerDelegate {
     
