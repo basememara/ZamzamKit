@@ -11,12 +11,11 @@ import ZamzamCore
 
 final class DecodableTests: XCTestCase {
     private let jsonDecoder = JSONDecoder()
-    private lazy var bundle = Bundle(for: type(of: self))
 }
 
 extension DecodableTests {
     
-    func testFromString() {
+    func testFromString() throws {
         // Given
         struct TestModel: Decodable {
             let string: String
@@ -31,47 +30,41 @@ extension DecodableTests {
         """
         
         // When
-        do {
-            let model = try jsonDecoder.decode(TestModel.self, from: jsonString)
-            
-            // Then
-            XCTAssertEqual(model.string, "Abc")
-            XCTAssertEqual(model.integer, 123)
-        } catch {
-            XCTFail("Could not parse JSON string: \(error)")
-        }
+        let model = try jsonDecoder.decode(TestModel.self, from: jsonString)
+        
+        // Then
+        XCTAssertEqual(model.string, "Abc")
+        XCTAssertEqual(model.integer, 123)
     }
 }
     
 extension DecodableTests {
         
-    func testInBundle() {
+    func testInBundle() throws {
         // Given
+        let bundle = Bundle(for: type(of: self))
+        
         struct TestModel: Decodable {
             let string: String
             let integer: Int
         }
         
         // When
-        do {
-            let model = try jsonDecoder.decode(
-                TestModel.self,
-                forResource: "TestModel.json",
-                inBundle: bundle
-            )
-            
-            // Then
-            XCTAssertEqual(model.string, "Abc")
-            XCTAssertEqual(model.integer, 123)
-        } catch {
-            XCTFail("Could not parse JSON resource: \(error)")
-        }
+        let model = try jsonDecoder.decode(
+            TestModel.self,
+            forResource: "TestModel.json",
+            inBundle: bundle
+        )
+        
+        // Then
+        XCTAssertEqual(model.string, "Abc")
+        XCTAssertEqual(model.integer, 123)
     }
 }
 
 extension DecodableTests {
         
-        func testAnyDecodable() {
+    func testAnyDecodable() throws {
         // Given
         let jsonString = """
         {
@@ -94,34 +87,30 @@ extension DecodableTests {
         """
         
         guard let data = jsonString.data(using: .utf8) else {
-            return XCTFail("Bad JSON format.")
+            return XCTFail("Bad JSON format")
         }
         
-        do {
-            // Type used for decoding the server payload
-            struct ServerResponse: Decodable {
-                let code: String
-                let message: String
-                let data: [String: AnyDecodable]?
-            }
-            
-            let decoder = JSONDecoder().apply {
-                $0.dateDecodingStrategy = .formatted(.init(iso8601Format: "yyyy-MM-dd'T'HH:mm:ssZ"))
-            }
-            
-            // When
-            let payload = try decoder.decode(ServerResponse.self, from: data)
-            
-            // Then
-            XCTAssertEqual((payload.data?["boolean"])?.value as! Bool, true)
-            XCTAssertEqual((payload.data?["integer"])?.value as! Int, 1)
-            XCTAssertEqual((payload.data?["double"])?.value as! Double, 3.14159265358979323846, accuracy: 0.001)
-            XCTAssertEqual((payload.data?["string"])?.value as! String, "string")
-            XCTAssertEqual((payload.data?["date"])?.value as! Date, Date(timeIntervalSince1970: 1559392318))
-            XCTAssertEqual((payload.data?["array"])?.value as! [Int], [1, 2, 3])
-            XCTAssertEqual((payload.data?["nested"])?.value as! [String: String], ["a": "alpha", "b": "bravo", "c": "charlie"])
-        } catch {
-            XCTFail("Could not parse JSON: \(error)")
+        // Type used for decoding the server payload
+        struct ServerResponse: Decodable {
+            let code: String
+            let message: String
+            let data: [String: AnyDecodable]?
         }
+        
+        let decoder = JSONDecoder().apply {
+            $0.dateDecodingStrategy = .formatted(.init(iso8601Format: "yyyy-MM-dd'T'HH:mm:ssZ"))
+        }
+        
+        // When
+        let payload = try decoder.decode(ServerResponse.self, from: data)
+        
+        // Then
+        XCTAssertEqual((payload.data?["boolean"])?.value as! Bool, true)
+        XCTAssertEqual((payload.data?["integer"])?.value as! Int, 1)
+        XCTAssertEqual((payload.data?["double"])?.value as! Double, 3.14159265358979323846, accuracy: 0.001)
+        XCTAssertEqual((payload.data?["string"])?.value as! String, "string")
+        XCTAssertEqual((payload.data?["date"])?.value as! Date, Date(timeIntervalSince1970: 1559392318))
+        XCTAssertEqual((payload.data?["array"])?.value as! [Int], [1, 2, 3])
+        XCTAssertEqual((payload.data?["nested"])?.value as! [String: String], ["a": "alpha", "b": "bravo", "c": "charlie"])
     }
 }

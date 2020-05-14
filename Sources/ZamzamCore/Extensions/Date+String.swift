@@ -65,7 +65,7 @@ public extension Date {
     ///   - calendar: The calendar for the receiver.
     ///   - locale: The locale for the receiver.
     /// - Returns: The string representation of the given date.
-    func string(style dateStyle: DateFormatter.Style, withTime timeStyle: DateFormatter.Style? = nil, timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
+    func string(style dateStyle: DateFormatter.Style, withTime timeStyle: DateFormatter.Style = .none, timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
         DateFormatter(dateStyle: dateStyle, timeStyle: timeStyle, timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
     }
     
