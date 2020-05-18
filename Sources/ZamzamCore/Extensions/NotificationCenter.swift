@@ -52,8 +52,13 @@ public extension NotificationCenter {
             self.token = token
         }
         
-        deinit {
+        /// Cancel the activity.
+        public func cancel() {
             notificationCenter.removeObserver(token)
+        }
+        
+        deinit {
+            cancel()
         }
     }
     
