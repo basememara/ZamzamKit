@@ -42,6 +42,8 @@ public extension NotificationCenter {
 public extension NotificationCenter {
     
     /// Wraps the observer token received from `addObserver` and automatically unregisters from the notification center on deinit.
+    ///
+    /// To cancel the subscription, assign `nil` to this object any time to release.
     final class Cancellable: NSObject {
         // https://oleb.net/blog/2018/01/notificationcenter-removeobserver/
         private let notificationCenter: NotificationCenter
@@ -52,13 +54,8 @@ public extension NotificationCenter {
             self.token = token
         }
         
-        /// Cancel the activity.
-        public func cancel() {
-            notificationCenter.removeObserver(token)
-        }
-        
         deinit {
-            cancel()
+            notificationCenter.removeObserver(token)
         }
     }
     
