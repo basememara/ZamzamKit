@@ -47,15 +47,18 @@ public extension NotificationCenter {
     final class Cancellable: NSObject {
         // https://oleb.net/blog/2018/01/notificationcenter-removeobserver/
         private let notificationCenter: NotificationCenter
-        private let token: Any
+        private var tokens: [Any] = []
         
-        public init(notificationCenter: NotificationCenter = .default, token: Any) {
+        public init(notificationCenter: NotificationCenter = .default) {
             self.notificationCenter = notificationCenter
-            self.token = token
+        }
+        
+        fileprivate func append(token: Any) {
+            tokens.append(token)
         }
         
         deinit {
-            notificationCenter.removeObserver(token)
+            tokens.forEach { notificationCenter.removeObserver($0) }
         }
     }
     
@@ -86,8 +89,11 @@ public extension NotificationCenter {
         in cancellable: inout Cancellable?,
         using block: @escaping (Notification) -> Void
     ) {
-        cancellable = Cancellable(
-            notificationCenter: self,
+        if cancellable == nil {
+            cancellable = Cancellable(notificationCenter: self)
+        }
+        
+        cancellable?.append(
             token: addObserver(forName: name, object: object, queue: queue, using: block)
         )
     }
