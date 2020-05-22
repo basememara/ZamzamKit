@@ -19,21 +19,25 @@ public extension Localizable {
     static let clear = Localizable(NSLocalizedString("clear.dialog", bundle: bundle(forKey: "clear.dialog"), comment: "Clear text for dialogs"))
     static let camera = Localizable(NSLocalizedString("camera.dialog", bundle: bundle(forKey: "camera.dialog"), comment: "Camera text for dialogs"))
     static let photos = Localizable(NSLocalizedString("photos.dialog", bundle: bundle(forKey: "photos.dialog"), comment: "Photos text for dialogs"))
+    static let search = Localizable(NSLocalizedString("search.title", bundle: bundle(forKey: "search.title"), comment: "Navigation title of search"))
+    static let more = Localizable(NSLocalizedString("more.title", bundle: bundle(forKey: "more.title"), comment: "Navigation title of more"))
+    static let settings = Localizable(NSLocalizedString("settings.title", bundle: bundle(forKey: "settings.title"), comment: "Navigation title of settings"))
+    static let share = Localizable(NSLocalizedString("share.title", bundle: bundle(forKey: "share.title"), comment: "Share title for buttons and dialogs"))
     static let genericErrorTitle = Localizable(NSLocalizedString("generic.error.title", bundle: bundle(forKey: "generic.error.title"), comment: "General error title for unknown reason"))
 }
 
 public extension Localizable {
         
     // Retrive localization from main bundle if overriden, or use current bundle
-    static func bundle(forKey key: String) -> Bundle {
-        Bundle.main.localizedString(forKey: key, value: nil, table: nil) == key ? .zamzamCore : .main
+    static func bundle(forKey key: String, fallback bundle: Bundle = .zamzamCore) -> Bundle {
+        Bundle.main.localizedString(forKey: key, value: nil, table: nil) == key ? bundle : .main
     }
 }
 
 /// Collection of static keys used for localization.
 ///
 ///     extension Localizable {
-///       static let ok = Localizable(NSLocalizedString("ok.dialog", bundle: .zamzamKit, comment: "For dialogs"))
+///         static let ok = Localizable(NSLocalizedString("ok.dialog", bundle: .zamzamKit, comment: "For dialogs"))
 ///     }
 ///
 ///     let label: String = .localized(.ok)
