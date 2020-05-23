@@ -10,10 +10,11 @@ import XCTest
 import ZamzamCore
 
 #if canImport(UIKit)
-    import UIKit
-#elseif os(OSX)
-    import AppKit
-    typealias UIColor = NSColor
+import UIKit.UIColor
+typealias PlatformColor = UIColor
+#elseif os(macOS)
+import AppKit.NSColor
+typealias PlatformColor = NSColor
 #endif
 
 final class ColorTests: XCTestCase {}

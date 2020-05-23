@@ -6,19 +6,19 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-#if os(OSX)
+#if os(macOS)
 import AppKit.NSColor
-public typealias ColorTypeAlias = NSColor
+public typealias PlatformColor = NSColor
 #elseif canImport(UIKit)
 import UIKit.UIColor
-public typealias ColorTypeAlias = UIColor
+public typealias PlatformColor = UIColor
 #endif
 
-public extension ColorTypeAlias {
+public extension PlatformColor {
 
     /// A random color.
-    static var random: ColorTypeAlias {
-        ColorTypeAlias(rgb: (
+    static var random: PlatformColor {
+        PlatformColor(rgb: (
             .random(in: 0...255),
             .random(in: 0...255),
             .random(in: 0...255)
@@ -26,7 +26,7 @@ public extension ColorTypeAlias {
     }
 }
 
-public extension ColorTypeAlias {
+public extension PlatformColor {
 
     /// An additional convenience initializer function that allows to init a color object using a hex color value.
     ///

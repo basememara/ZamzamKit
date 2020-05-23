@@ -72,7 +72,7 @@ public extension LocationRepository {
     func isAuthorized(for type: LocationAPI.AuthorizationType) -> Bool {
         guard CLLocationManager.locationServicesEnabled() else { return false }
         
-        #if os(OSX)
+        #if os(macOS)
             return type == .always && CLLocationManager.authorizationStatus() == .authorizedAlways
         #else
             return (type == .whenInUse && CLLocationManager.authorizationStatus() == .authorizedWhenInUse)
@@ -93,7 +93,7 @@ public extension LocationRepository {
         
         // Request appropiate authorization before exit
         defer {
-            #if os(OSX)
+            #if os(macOS)
                 if #available(OSX 10.15, *) {
                     manager.requestAlwaysAuthorization()
                 }
