@@ -1,5 +1,5 @@
 //
-//  ColorTypeAlias.swift
+//  PlatformColor.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2/20/16.
