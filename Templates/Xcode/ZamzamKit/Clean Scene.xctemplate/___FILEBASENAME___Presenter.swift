@@ -1,27 +1,27 @@
 //___FILEHEADER___
 
-import ZamzamKit
+import ZamzamUI
 
 struct ___VARIABLE_productName:identifier___Presenter: ___VARIABLE_productName:identifier___Presentable {
-    private weak var viewController: ___VARIABLE_productName:identifier___Displayable?
+    private let state: Reducer<___VARIABLE_productName:identifier___Action>
     
-    init(viewController: ___VARIABLE_productName:identifier___Displayable) {
-        self.viewController = viewController
+    init(state: @escaping Reducer<___VARIABLE_productName:identifier___Action>) {
+        self.state = state
     }
 }
 
 extension ___VARIABLE_productName:identifier___Presenter {
 
-    func presentFetched(for response: ___VARIABLE_productName:identifier___API.Response) {
-        
+    func displayFetched(for response: ___VARIABLE_productName:identifier___API.FetchResponse) {
+        state(.loadProfile(response.profile))
     }
     
-    func presentFetched(error: ZamzamError) {
+    func displayFetched(error: ZamzamError) {
         let viewModel = ViewError(
             title: .localized(.genericErrorTitle),
             message: error.localizedDescription
         )
         
-        viewController?.display(error: viewModel)
+        state(.loadError(viewModel))
     }
 }
