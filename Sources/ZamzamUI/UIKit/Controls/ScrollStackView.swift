@@ -8,6 +8,7 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
+#if os(iOS)
 import UIKit
 import ZamzamCore
 
@@ -323,3 +324,4 @@ extension ScrollStackView {
         }
     }
 }
+#endif

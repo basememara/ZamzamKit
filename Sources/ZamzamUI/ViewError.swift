@@ -16,26 +16,3 @@ public struct ViewError: Equatable {
         self.message = message
     }
 }
-
-#if canImport(SwiftUI)
-import Foundation.NSBundle
-import SwiftUI
-
-/// Model container for global view errors.
-@available(iOS 13, *)
-public struct ViewErrorKey: Equatable {
-    public let title: LocalizedStringKey
-    public let message: LocalizedStringKey?
-    public let bundle: Bundle?
-    
-    public init(
-        title: LocalizedStringKey,
-        message: LocalizedStringKey? = nil,
-        bundle: Bundle? = nil
-    ) {
-        self.title = title
-        self.message = message
-        self.bundle = bundle
-    }
-}
-#endif

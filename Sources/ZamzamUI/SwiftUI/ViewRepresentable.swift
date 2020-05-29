@@ -6,7 +6,7 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-#if canImport(SwiftUI)
+#if os(iOS) && canImport(SwiftUI)
 import UIKit.UIViewController
 import SwiftUI
 
