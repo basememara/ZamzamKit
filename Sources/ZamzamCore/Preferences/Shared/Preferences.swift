@@ -48,6 +48,9 @@ public extension Preferences {
     ///   - key: Key under which the value is stored in the user defaults.
     func set<T>(_ value: T?, forKey key: PreferencesAPI.Key<T?>) {
         service.set(value, forKey: key)
+        
+        guard #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) else { return }
+        Self.subject.send(key.name)
     }
 }
 
@@ -59,5 +62,22 @@ public extension Preferences {
     /// - Returns: True if the item was successfully deleted.
     func remove<T>(_ key: PreferencesAPI.Key<T?>) {
         service.remove(key)
+        
+        guard #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) else { return }
+        Self.subject.send(key.name)
     }
 }
+
+#if canImport(Combine)
+import Combine
+
+@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+extension Preferences {
+    private static let subject = PassthroughSubject<String, Never>()
+    
+    /// Returns a publisher that emits events when broadcasting preference changes.
+    public func publisher() -> AnyPublisher<String, Never> {
+        Self.subject.eraseToAnyPublisher()
+    }
+}
+#endif

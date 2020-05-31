@@ -50,7 +50,12 @@ public extension SecuredPreferences {
     ///   - key: Key under which the value is stored in the keychain.
     @discardableResult
     func set(_ value: String?, forKey key: SecuredPreferencesAPI.Key) -> Bool {
-        service.set(value, forKey: key)
+        let result = service.set(value, forKey: key)
+        
+        guard #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) else { return result }
+        Self.subject.send(key.name)
+        
+        return result
     }
 }
 
@@ -62,6 +67,26 @@ public extension SecuredPreferences {
     /// - Returns: True if the item was successfully deleted.
     @discardableResult
     func remove(_ key: SecuredPreferencesAPI.Key) -> Bool {
-        service.remove(key)
+        let result = service.remove(key)
+        
+        guard #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) else { return result }
+        Self.subject.send(key.name)
+        
+        return result
     }
 }
+
+#if canImport(Combine)
+import Combine
+
+@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+extension SecuredPreferences {
+    private static let subject = PassthroughSubject<String, Never>()
+    
+    /// Returns a publisher that emits events when broadcasting secured preference changes.
+    public func publisher() -> AnyPublisher<String, Never> {
+        Self.subject.eraseToAnyPublisher()
+    }
+}
+#endif
+
