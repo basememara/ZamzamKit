@@ -7,7 +7,7 @@
 //
 
 /// Model container for global view errors.
-public struct ViewError: Equatable {
+public struct ViewError: Equatable, Error {
     public let title: String?
     public let message: String?
     
