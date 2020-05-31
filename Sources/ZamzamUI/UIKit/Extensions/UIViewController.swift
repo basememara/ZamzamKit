@@ -52,6 +52,11 @@ public extension UIViewController {
             || tabBarController?.presentingViewController is UITabBarController
     }
     
+    /// A Boolean value indicating whether the view controller is being dismissed or removed.
+    var isBeingRemoved: Bool {
+        isBeingDismissed || isMovingFromParent
+    }
+    
     /// The root view controller for the container view controller, or returns itself if it is not embedded.
     ///
     /// This method crawls the following container view controller types:
