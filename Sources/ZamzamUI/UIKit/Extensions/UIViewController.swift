@@ -9,6 +9,7 @@
 #if os(iOS)
 import UIKit
 import SafariServices
+import StoreKit
 import ZamzamCore
 
 public extension UIViewController {
@@ -532,6 +533,27 @@ public extension UIViewController {
         
         present(controller, animated: animated, completion: completion)
         return controller
+    }
+}
+
+// MARK: - StoreKit
+
+public extension UIViewController {
+    
+    /// Loads a new product screen to display.
+    ///
+    /// - Parameters:
+    ///   - itunesID: The identifier representing the iTunes identifier for the item you want the store to display when the view controller is presented.
+    ///        To find a product’s iTunes identifier, go to [linkmaker.itunes.apple.com](https://linkmaker.itunes.apple.com) and search for the product, then locate the iTunes identifier in the link URL.
+    ///   - completion: A block to be called when the product information has been loaded from the App Store.
+    func present(itunesID: String, completion: (() -> Void)? = nil) {
+        let viewController = SKStoreProductViewController()
+        let parameters = [SKStoreProductParameterITunesItemIdentifier: itunesID]
+        
+        viewController.loadProduct(withParameters: parameters) { [weak self] loaded, error in
+            guard loaded else { return }
+            self?.present(viewController, completion: completion)
+        }
     }
 }
 
