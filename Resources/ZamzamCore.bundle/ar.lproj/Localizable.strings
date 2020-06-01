@@ -1,0 +1,21 @@
+/*
+ Localizable.strings
+ ZamzamKit
+ 
+ Created by Basem Emara on 2018-10-03.
+ Copyright © 2018 Zamzam Inc. All rights reserved.
+ */
+
+"pull.to.refresh" = "Pull to refresh";
+"open.in.safari" = "فتح في سفاري";
+"ok.dialog" = "إغلاق";
+"cancel.dialog" = "إلغاء";
+"next.dialog" = "Next";
+"clear.dialog" = "Clear";
+"camera.dialog" = "Camera";
+"photos.dialog" = "Photos";
+"search.title" = "Search";
+"more.title" = "المزيد";
+"settings.title" = "الإعدادت";
+"share.title" = "شارك";
+"generic.error.title" = "Error";
