@@ -516,7 +516,10 @@ public extension UIViewController {
         animated: Bool = true,
         completion: (() -> Void)? = nil
     ) -> SFSafariViewController? {
-        guard let url = URL(string: url) else { return nil }
+        guard let url = URL(string: url) else {
+            completion?()
+            return nil
+        }
         
         let controller = SFSafariViewController(url: url).apply {
             $0.delegate = self as? SFSafariViewControllerDelegate
@@ -551,7 +554,11 @@ public extension UIViewController {
         let parameters = [SKStoreProductParameterITunesItemIdentifier: itunesID]
         
         viewController.loadProduct(withParameters: parameters) { [weak self] loaded, error in
-            guard loaded else { return }
+            guard loaded else {
+                completion?()
+                return
+            }
+            
             self?.present(viewController, completion: completion)
         }
     }
