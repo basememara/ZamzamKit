@@ -11,7 +11,7 @@ import CoreLocation
 import ZamzamCore
 
 /// A `LocationManager` proxy with publisher.
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public class LocationProxy: NSObject {
     private let desiredAccuracy: CLLocationAccuracy?
     private let distanceFilter: Double?
@@ -59,7 +59,7 @@ public class LocationProxy: NSObject {
 
 // MARK: - Authorization
 
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension LocationProxy {
     
     var isAuthorized: Bool { CLLocationManager.isAuthorized }
@@ -118,7 +118,7 @@ public extension LocationProxy {
 
 // MARK: - Coordinates
 
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension LocationProxy {
     
     var location: CLLocation? { manager.location }
@@ -147,7 +147,7 @@ public extension LocationProxy {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13, *)
 public extension LocationProxy {
     
     func startMonitoringSignificantLocationChanges() {
@@ -159,7 +159,7 @@ public extension LocationProxy {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13, *)
 public extension LocationProxy {
     
     var heading: CLHeading? { manager.heading }
@@ -179,7 +179,7 @@ public extension LocationProxy {
 
 // MARK: - Delegates
 
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 extension LocationProxy: CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

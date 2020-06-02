@@ -52,7 +52,7 @@ public extension SecuredPreferences {
     func set(_ value: String?, forKey key: SecuredPreferencesAPI.Key) -> Bool {
         let result = service.set(value, forKey: key)
         
-        guard #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) else { return result }
+        guard #available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *) else { return result }
         Self.subject.send(key.name)
         
         return result
@@ -69,7 +69,7 @@ public extension SecuredPreferences {
     func remove(_ key: SecuredPreferencesAPI.Key) -> Bool {
         let result = service.remove(key)
         
-        guard #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) else { return result }
+        guard #available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *) else { return result }
         Self.subject.send(key.name)
         
         return result
@@ -79,7 +79,7 @@ public extension SecuredPreferences {
 #if canImport(Combine)
 import Combine
 
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 extension SecuredPreferences {
     private static let subject = PassthroughSubject<String, Never>()
     

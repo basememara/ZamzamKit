@@ -59,7 +59,7 @@ public extension StateRepresentable {
 #if canImport(SwiftUI)
 import Combine
 
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 extension StateRepresentable where Self: ObservableObject, Self.ObjectWillChangePublisher == ObservableObjectPublisher {
     
     /// Publishes the change when the state has changed. Call this during `willSet`.

@@ -36,7 +36,7 @@ import UIKit.UIWindowScene
 ///             log.info("Scene did enter background.")
 ///         }
 ///     }
-@available(iOS 13.0, *)
+@available(iOS 13, *)
 open class ScenePluggableDelegate: UIResponder, UIWindowSceneDelegate {
     public var window: UIWindow?
     
@@ -54,7 +54,7 @@ open class ScenePluggableDelegate: UIResponder, UIWindowSceneDelegate {
     open func plugins() -> [ScenePlugin] {[]} // Override
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13, *)
 extension ScenePluggableDelegate {
     
     open func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -105,11 +105,11 @@ public protocol ScenePlugin {
     func sceneDidDisconnect()
     
     /// Tells the delegate about the addition of a scene to the app.
-    @available(iOS 13.0, *)
+    @available(iOS 13, *)
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions)
     
     /// Tells the delegate to handle the specified Handoff-related activity.
-    @available(iOS 13.0, *)
+    @available(iOS 13, *)
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity)
 }
 
@@ -122,10 +122,10 @@ public extension ScenePlugin {
     func sceneWillResignActive() {}
     func sceneDidDisconnect() {}
     
-    @available(iOS 13.0, *)
+    @available(iOS 13, *)
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {}
     
-    @available(iOS 13.0, *)
+    @available(iOS 13, *)
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {}
 }
 #endif

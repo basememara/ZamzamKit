@@ -49,7 +49,7 @@ public extension Preferences {
     func set<T>(_ value: T?, forKey key: PreferencesAPI.Key<T?>) {
         service.set(value, forKey: key)
         
-        guard #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) else { return }
+        guard #available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *) else { return }
         Self.subject.send(key.name)
     }
 }
@@ -63,7 +63,7 @@ public extension Preferences {
     func remove<T>(_ key: PreferencesAPI.Key<T?>) {
         service.remove(key)
         
-        guard #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) else { return }
+        guard #available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *) else { return }
         Self.subject.send(key.name)
     }
 }
@@ -71,7 +71,7 @@ public extension Preferences {
 #if canImport(Combine)
 import Combine
 
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 extension Preferences {
     private static let subject = PassthroughSubject<String, Never>()
     
