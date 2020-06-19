@@ -7,53 +7,29 @@
 //
 
 import Combine
-import CoreLocation
-import ZamzamCore
+import CoreLocation.CLError
+import CoreLocation.CLHeading
+import CoreLocation.CLLocation
 
 /// A `LocationManager` proxy with publisher.
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
-public class LocationProxy: NSObject {
-    private let desiredAccuracy: CLLocationAccuracy?
-    private let distanceFilter: Double?
-    private let activityType: CLActivityType?
+public class LocationProxy {
+    private let service: LocationService
     
-    private static let authorizationSubject = PassthroughSubject<Bool, Error>()
-    public var authorizationPublisher: AnyPublisher<Bool, Error>
+    private static let authorizationSubject = CurrentValueSubject<Bool?, Never>(nil)
+    public let authorizationPublisher = LocationProxy.authorizationSubject.compactMap { $0 }.eraseToAnyPublisher()
     
-    private static let locationSubject = PassthroughSubject<CLLocation, Error>()
-    public var locationPublisher: AnyPublisher<CLLocation, Error>
+    private static let locationSubject = CurrentValueSubject<CLLocation?, CLError>(nil)
+    public var locationPublisher = LocationProxy.locationSubject.compactMap { $0 }.eraseToAnyPublisher()
     
     #if os(iOS)
-    private static let headingSubject = PassthroughSubject<CLHeading, Error>()
-    public var headingPublisher: AnyPublisher<CLHeading, Error>
+    private static let headingSubject = CurrentValueSubject<CLHeading?, CLError>(nil)
+    public var headingPublisher = LocationProxy.headingSubject.compactMap { $0 }.eraseToAnyPublisher()
     #endif
     
-    /// Internal Core Location manager
-    private lazy var manager = CLLocationManager().apply {
-        $0.desiredAccuracy ?= self.desiredAccuracy
-        $0.distanceFilter ?= self.distanceFilter
-        
-        #if os(iOS)
-        $0.activityType ?= self.activityType
-        #endif
-        
-        $0.delegate = self
-    }
-    
-    public required init(
-        desiredAccuracy: CLLocationAccuracy? = nil,
-        distanceFilter: Double? = nil,
-        activityType: CLActivityType? = nil
-    ) {
-        self.desiredAccuracy = desiredAccuracy
-        self.distanceFilter = distanceFilter
-        self.activityType = activityType
-        
-        self.authorizationPublisher = Self.authorizationSubject.eraseToAnyPublisher()
-        self.locationPublisher = Self.locationSubject.eraseToAnyPublisher()
-        self.headingPublisher = Self.headingSubject.eraseToAnyPublisher()
-        
-        super.init()
+    public init(service: LocationService) {
+        self.service = service
+        self.service.delegate = self
     }
 }
 
@@ -61,138 +37,115 @@ public class LocationProxy: NSObject {
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension LocationProxy {
-    
-    var isAuthorized: Bool { CLLocationManager.isAuthorized }
+    var isAuthorized: Bool { service.isAuthorized }
     
     func isAuthorized(for type: LocationAPI.AuthorizationType) -> Bool {
-        guard CLLocationManager.locationServicesEnabled() else { return false }
-        
-        #if os(macOS)
-        return type == .always && CLLocationManager.authorizationStatus() == .authorizedAlways
-        #else
-        return (type == .whenInUse && CLLocationManager.authorizationStatus() == .authorizedWhenInUse)
-            || (type == .always && CLLocationManager.authorizationStatus() == .authorizedAlways)
-        #endif
+        service.isAuthorized(for: type)
     }
     
-    func requestAuthorization(for type: LocationAPI.AuthorizationType = .whenInUse) {
+    @discardableResult
+    func requestAuthorization(for type: LocationAPI.AuthorizationType = .whenInUse) -> AnyPublisher<Bool, Never> {
         // Handle authorized and exit
         guard !isAuthorized(for: type) else {
             Self.authorizationSubject.send(true)
-            return
+            return authorizationPublisher
         }
         
         // Request appropiate authorization before exit
-        defer {
-            #if os(macOS)
-            if #available(OSX 10.15, *) {
-                manager.requestAlwaysAuthorization()
-            }
-            #elseif os(tvOS)
-            manager.requestWhenInUseAuthorization()
-            #else
-            switch type {
-            case .whenInUse:
-                manager.requestWhenInUseAuthorization()
-            case .always:
-                manager.requestAlwaysAuthorization()
-            }
-            #endif
-        }
+        defer { service.requestAuthorization(for: type) }
         
         // Handle mismatched allowed and exit
         guard !isAuthorized else {
-            // Process callback in case authorization dialog not launched by OS
+            // Notify in case authorization dialog not launched by OS
             // since user will be notified first time only and ignored subsequently
             Self.authorizationSubject.send(false)
-            return
+            return authorizationPublisher
         }
         
         // Handle denied and exit
-        guard CLLocationManager.authorizationStatus() == .notDetermined else {
+        guard service.canRequestAuthorization else {
             Self.authorizationSubject.send(false)
-            return
+            return authorizationPublisher
         }
+        
+        return authorizationPublisher
     }
 }
 
-// MARK: - Coordinates
+// MARK: - Coordinate
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension LocationProxy {
+    var location: CLLocation? { service.location }
     
-    var location: CLLocation? { manager.location }
-    
-    func requestLocation() {
-        manager.requestLocation()
-    }
-    
-    func startUpdatingLocation(enableBackground: Bool = false) {
-        #if os(iOS)
-        manager.allowsBackgroundLocationUpdates = enableBackground
-        #endif
-        
-        
-        #if !os(tvOS)
-        manager.startUpdatingLocation()
-        #endif
+    @discardableResult
+    func startUpdatingLocation(enableBackground: Bool = false) -> AnyPublisher<CLLocation, CLError> {
+        service.startUpdatingLocation(enableBackground: enableBackground)
+        return locationPublisher
     }
     
     func stopUpdatingLocation() {
-        #if os(iOS)
-        manager.allowsBackgroundLocationUpdates = false
-        #endif
-        
-        manager.stopUpdatingLocation()
+        service.stopUpdatingLocation()
     }
 }
 
+#if os(iOS)
 @available(iOS 13, *)
 public extension LocationProxy {
     
-    func startMonitoringSignificantLocationChanges() {
-        manager.startMonitoringSignificantLocationChanges()
+    @discardableResult
+    func startMonitoringSignificantLocationChanges() -> AnyPublisher<CLLocation, CLError> {
+        service.startMonitoringSignificantLocationChanges()
+        return locationPublisher
     }
     
     func stopMonitoringSignificantLocationChanges() {
-        manager.stopMonitoringSignificantLocationChanges()
+        service.stopMonitoringSignificantLocationChanges()
     }
 }
+#endif
 
+// MARK: - Heading
+
+#if os(iOS)
 @available(iOS 13, *)
 public extension LocationProxy {
+    var heading: CLHeading? { service.heading }
     
-    var heading: CLHeading? { manager.heading }
-    
-    func startUpdatingHeading() {
-        manager.startUpdatingHeading()
+    @discardableResult
+    func startUpdatingHeading() -> AnyPublisher<CLHeading, CLError> {
+        service.startUpdatingHeading()
+        return headingPublisher
     }
     
     func stopUpdatingHeading() {
-        manager.stopUpdatingHeading()
+        service.stopUpdatingHeading()
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+    func locationService(didUpdateHeading newHeading: CLHeading) {
         Self.headingSubject.send(newHeading)
     }
 }
+#endif
 
 // MARK: - Delegates
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
-extension LocationProxy: CLLocationManagerDelegate {
+extension LocationProxy: LocationServiceDelegate {
     
-    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        guard status != .notDetermined else { return }
-        Self.authorizationSubject.send(isAuthorized)
+    public func locationService(didChangeAuthorization authorization: Bool) {
+        Self.authorizationSubject.send(authorization)
     }
     
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
+    public func locationService(didUpdateLocation location: CLLocation) {
         Self.locationSubject.send(location)
     }
     
-    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    public func locationService(didFailWithError error: CLError) {
         Self.locationSubject.send(completion: .failure(error))
+        
+        #if os(iOS)
+        Self.headingSubject.send(completion: .failure(error))
+        #endif
     }
 }
