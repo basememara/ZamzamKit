@@ -7,7 +7,8 @@
 //
 
 #if os(iOS)
-import Foundation
+import Foundation.NSNotification
+import Foundation.NSURLRequest
 import UIKit.UIApplication
 import UIKit.UIDevice
 
@@ -24,9 +25,7 @@ final public class LogHTTPService {
     private let osVersion = UIDevice.current.systemVersion
     
     /// Stores the log entries in memory until it is ready to send.
-    private var buffer: [String] = [] {
-        didSet { buffer.count > maxEntriesInBuffer ? send() : nil }
-    }
+    private var buffer: [String] = []
     
     /// The initializer of the log destination.
     ///
@@ -117,12 +116,18 @@ public extension LogHTTPService {
         
         // Store in buffer for sending later
         buffer.append(log)
+        
+        // Flush buffer threshold reached
+        guard buffer.count > maxEntriesInBuffer else { return }
+        send()
     }
 }
 
 private extension LogHTTPService {
     
     @objc func send() {
+        guard !buffer.isEmpty else { return }
+        
         let logs = buffer
         buffer = []
         
@@ -136,8 +141,10 @@ private extension LogHTTPService {
         
         BackgroundTask.run(for: .shared) { task in
             self.networkRepository.send(with: request) {
+                // Add back to the buffer if could not send
                 if case .failure(let error) = $0 {
                     debugPrint("Error from log destination: \(error)")
+                    self.buffer += logs
                 }
                 
                 task.end()
