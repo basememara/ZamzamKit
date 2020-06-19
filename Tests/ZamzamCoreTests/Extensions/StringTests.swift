@@ -162,6 +162,41 @@ extension StringTests {
 
 extension StringTests {
     
+    func testReplacingLastOccurrence() {
+        XCTAssertEqual(
+            "fghijklmnopqrstuvwxyz_ABCDE".replacingLastOccurrence(of: "_ABCDE", with: "ZYX_"),
+            "fghijklmnopqrstuvwxyzZYX_"
+        )
+        
+        XCTAssertEqual(
+            "{1 22<3>2224@5#226`27~8".replacingLastOccurrence(of: "2", with: "_"),
+            "{1 22<3>2224@5#226`_7~8"
+        )
+        
+        XCTAssertEqual(
+            "aaabbbccc".replacingLastOccurrence(of: "c", with: "d"),
+            "aaabbbccd"
+        )
+        
+        XCTAssertEqual(
+            "aaabbbccc".replacingLastOccurrence(of: "b", with: "y"),
+            "aaabbyccc"
+        )
+        
+        XCTAssertEqual(
+            "aaabbbccc".replacingLastOccurrence(of: "a", with: "z"),
+            "aazbbbccc"
+        )
+        
+        XCTAssertEqual(
+            "aaabbbccc".replacingLastOccurrence(of: "bb", with: "123"),
+            "aaab123ccc"
+        )
+    }
+}
+
+extension StringTests {
+    
     func testMatchRegEx() {
         XCTAssertTrue("1234567890".match(regex: "^[0-9]+?$"))
         XCTAssertTrue("abc123xyz".match(regex: "^[A-Za-z0-9]+$"))

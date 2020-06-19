@@ -209,6 +209,12 @@ public extension String {
     func replacingCharacters(in set: CharacterSet, with string: String) -> String {
         components(separatedBy: set).joined(separator: string)
     }
+    
+    /// Returns a new string in which the last occurrence of a target string is replaced by another given string.
+    func replacingLastOccurrence(of target: String, with replacement: String) -> String {
+        guard let range = self.range(of: target, options: .backwards) else { return self }
+        return replacingOccurrences(of: target, with: replacement, range: range)
+    }
 }
 
 // MARK: - Regular Expression
