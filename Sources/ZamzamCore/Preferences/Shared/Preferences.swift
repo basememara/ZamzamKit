@@ -76,7 +76,7 @@ extension Preferences {
     private static let subject = PassthroughSubject<String, Never>()
     
     /// Returns a publisher that emits events when broadcasting preference changes.
-    public func publisher() -> AnyPublisher<String, Never> {
+    public var publisher: AnyPublisher<String, Never> {
         Self.subject.eraseToAnyPublisher()
     }
 }

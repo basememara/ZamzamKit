@@ -1,8 +1,11 @@
 //
-//  File.swift
-//  
+//  ScenePluggableDelegate.swift
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2019-10-28.
+//  https://github.com/fmo91/PluggableApplicationDelegate
+//
+//  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
 #if os(iOS)

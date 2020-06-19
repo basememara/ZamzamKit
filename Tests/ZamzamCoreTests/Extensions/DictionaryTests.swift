@@ -11,7 +11,7 @@ import ZamzamCore
 
 final class DictionaryTests: XCTestCase {
     
-    func testJSONString() {
+    func testJSONString() throw {
         // Given
         let dictionary: [String: Any] = [
             "id": 1,
@@ -39,18 +39,13 @@ final class DictionaryTests: XCTestCase {
             return
         }
         
-        do {
-            guard let data = json.data(using: .utf8),
-                let decoded = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                    XCTFail("String could not be converted to JSON")
-                    return
-            }
-            
-            expected = decoded
-        } catch {
-            XCTFail(error.localizedDescription)
-            return
+        guard let data = json.data(using: .utf8),
+            let decoded = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                XCTFail("String could not be converted to JSON")
+                return
         }
+        
+        expected = decoded
         
         // Then
         XCTAssert(json.contains("\"id\":1"))
