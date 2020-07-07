@@ -81,6 +81,7 @@ public extension LogHTTPService {
     func write(
         _ parameters: [String: Any],
         level: LogAPI.Level,
+        isDebug: Bool,
         path: String,
         function: String,
         line: Int
@@ -90,14 +91,15 @@ public extension LogHTTPService {
                 "name": appInfo.appDisplayName ?? "Unknown",
                 "version": appInfo.appVersion ?? "Unknown",
                 "build": appInfo.appBuild ?? "Unknown",
-                "bundle_id": appInfo.appBundleID ?? "Unknown"
+                "bundle_id": appInfo.appBundleID ?? "Unknown",
+                "is_testflight": appInfo.isInTestFlight,
+                "is_debug": isDebug
             ],
             "device": [
                 "device_id": deviceIdentifier,
                 "device_name": deviceName,
                 "device_model": deviceModel,
                 "os_version": osVersion,
-                "is_testflight": appInfo.isInTestFlight,
                 "is_simulator": appInfo.isRunningOnSimulator
             ],
             "code": [

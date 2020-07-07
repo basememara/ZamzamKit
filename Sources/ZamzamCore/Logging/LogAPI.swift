@@ -57,6 +57,10 @@ public extension LogService {
             output += " | Error: \(error)"
         }
         
+        if let context = context, !context.isEmpty {
+            output += " | Context: \(context)"
+        }
+
         return output
     }
 }
