@@ -11,7 +11,7 @@ import ZamzamCore
 
 final class DictionaryTests: XCTestCase {
     
-    func testJSONString() throw {
+    func testJSONString() throws {
         // Given
         let dictionary: [String: Any] = [
             "id": 1,
