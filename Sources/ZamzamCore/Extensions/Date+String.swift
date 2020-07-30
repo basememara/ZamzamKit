@@ -114,3 +114,79 @@ public extension Date {
         return .localizedStringWithFormat("%@%02i:%02i:%02i", prefix, hr, min, sec)
     }
 }
+
+public extension Date {
+    
+    /// Date name format.
+    ///
+    /// - threeLetters: 3 letter abbreviation of date name.
+    /// - oneLetter: 1 letter abbreviation of date name.
+    /// - full: Full date name.
+    enum NameStyle {
+        
+        /// 3 letter abbreviation of date name.
+        case threeLetters
+        
+        /// 1 letter abbreviation of date name.
+        case oneLetter
+        
+        /// Full date name.
+        case full
+    }
+    
+    /// Day name from date.
+    ///
+    ///     Date().name(ofDay: .oneLetter) -> "T"
+    ///     Date().name(ofDay: .threeLetters) -> "Thu"
+    ///     Date().name(ofDay: .full) -> "Thursday"
+    ///
+    /// The string returned is localized.
+    ///
+    /// - Parameter style: The style of day name.
+    /// - Returns: The day name string (example: W, Wed, Wednesday).
+    func name(ofDay style: NameStyle) -> String {
+        // http://www.codingexplorer.com/swiftly-getting-human-readable-date-nsdateformatter/
+        let dateFormatter = DateFormatter()
+        let format: String
+        
+        switch style {
+        case .oneLetter:
+            format = "EEEEE"
+        case .threeLetters:
+            format = "EEE"
+        case .full:
+            format = "EEEE"
+        }
+        
+        dateFormatter.setLocalizedDateFormatFromTemplate(format)
+        return dateFormatter.string(from: self)
+    }
+    
+    /// Month name from date.
+    ///
+    ///     Date().name(ofMonth: .oneLetter) -> "J"
+    ///     Date().name(ofMonth: .threeLetters) -> "Jan"
+    ///     Date().name(ofMonth: .full) -> "January"
+    ///
+    /// The string returned is localized.
+    ///
+    /// - Parameter style: The style of month name.
+    /// - Returns: The month name string (example: D, Dec, December).
+    func name(ofMonth style: NameStyle) -> String {
+        // http://www.codingexplorer.com/swiftly-getting-human-readable-date-nsdateformatter/
+        let dateFormatter = DateFormatter()
+        let format: String
+        
+        switch style {
+        case .oneLetter:
+            format = "MMMMM"
+        case .threeLetters:
+            format = "MMM"
+        case .full:
+            format = "MMMM"
+        }
+        
+        dateFormatter.setLocalizedDateFormatFromTemplate(format)
+        return dateFormatter.string(from: self)
+    }
+}
