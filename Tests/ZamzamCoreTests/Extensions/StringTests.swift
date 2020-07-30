@@ -29,17 +29,17 @@ extension StringTests {
     func testSubscript() {
         let test = "Abcdef123456"
         
-        XCTAssertEqual(test[3]!, "d")
+        XCTAssertEqual(test[3], "d")
         XCTAssertNil(test[99])
     }
     
     func testSubscriptRange() {
         let test = "Abcdef123456"
         
-        XCTAssertEqual(test[3..<6]!, "def")
-        XCTAssertEqual(test[3...6]!, "def1")
-        XCTAssertEqual(test[3...]!, "def123456")
+        XCTAssertEqual(test[3...6], "def1")
         XCTAssertEqual(test[3...99], nil)
+        XCTAssertEqual(test[3..<6], "def")
+        XCTAssertEqual(test[3...], "def123456")
     }
 }
 
@@ -337,15 +337,12 @@ extension StringTests {
     func testIsNilOrEmpty() {
         var test: String?
         
-        XCTAssertTrue(test.isNilOrEmpty)
-        XCTAssertFalse(!test.isNilOrEmpty)
+        XCTAssert(test.isNilOrEmpty)
         
         test = ""
-        XCTAssertTrue(test.isNilOrEmpty)
-        XCTAssertFalse(!test.isNilOrEmpty)
+        XCTAssert(test.isNilOrEmpty)
         
         test = "abc"
         XCTAssertFalse(test.isNilOrEmpty)
-        XCTAssertTrue(!test.isNilOrEmpty)
     }
 }

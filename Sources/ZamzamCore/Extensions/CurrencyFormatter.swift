@@ -56,19 +56,19 @@ public extension CurrencyFormatter {
     func string(fromAmount double: Double) -> String {
         let validValue = getAdjustedForDefinedInterval(value: double)
         
-        if autoTruncate && validValue.truncatingRemainder(dividingBy: 1) == 0 {
-            let truncatingFormatter = formatter.copy() as? NumberFormatter // TODO: Lazy load
-            truncatingFormatter?.minimumFractionDigits = 0
-            truncatingFormatter?.maximumFractionDigits = 0
-            return truncatingFormatter?.string(from: validValue as NSNumber) ?? "\(double)"
+        guard autoTruncate, validValue.truncatingRemainder(dividingBy: 1) == 0 else {
+            return formatter.string(from: validValue as NSNumber) ?? "\(double)"
         }
         
-        return formatter.string(from: validValue as NSNumber) ?? "\(double)"
+        let truncatingFormatter = formatter.copy() as? NumberFormatter // TODO: Lazy load
+        truncatingFormatter?.minimumFractionDigits = 0
+        truncatingFormatter?.maximumFractionDigits = 0
+        return truncatingFormatter?.string(from: validValue as NSNumber) ?? "\(double)"
     }
     
     /// Returns the given value adjusted to respect formatter's min and max values.
     ///
-    /// - Parameter value: value to be adjusted if needed
+    /// - Parameter value: Value to be adjusted if needed
     /// - Returns: Ajusted value
     private func getAdjustedForDefinedInterval(value: Double?) -> Double {
         if let minValue = formatter.minimum?.doubleValue, value ?? 0 < minValue {

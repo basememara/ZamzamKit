@@ -10,8 +10,8 @@ public extension Array {
     
     /// Inserts a new element into the collection at the beginning position.
     ///
-    ///        [2, 3, 4, 5].prepend(1) -> [1, 2, 3, 4, 5]
-    ///        ["e", "l", "l", "o"].prepend("h") -> ["h", "e", "l", "l", "o"]
+    ///        [2, 3, 4, 5].prepend(1) // [1, 2, 3, 4, 5]
+    ///        ["e", "l", "l", "o"].prepend("h") // ["h", "e", "l", "l", "o"]
     ///
     /// - Parameter newElement: The new element to insert into the collection.
     mutating func prepend(_ newElement: Element) {

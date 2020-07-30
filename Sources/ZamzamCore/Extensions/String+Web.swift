@@ -12,7 +12,7 @@ public extension String {
     
     /// Stripped out HTML to plain text.
     ///
-    ///     "<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>".htmlStripped -> "This is web content with a link."
+    ///     "<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>".htmlStripped // "This is web content with a link."
     ///
     var htmlStripped: String { replacing(regex: "<[^>]+>", with: "") }
 }

@@ -881,6 +881,29 @@ final class LoggerPlugin: ScenePlugin {
 </details>
 
 <details>
+<summary>Apply</summary>
+
+> Set properties with closures just after initializing:
+```swift
+let paragraph = NSMutableParagraphStyle().apply {
+    $0.alignment = .center
+    $0.lineSpacing = 8
+}
+
+let label = UILabel().apply {
+    $0.textAlignment = .center
+    $0.textColor = UIColor.black
+    $0.text = "Hello, World!"
+}
+
+UITabBar.appearance().apply {
+    $0.barStyle = .dark
+    $0.tintColor = .blue
+}
+```
+</details>
+
+<details>
 <summary>AppMigration</summary>
 
 > Manages blocks of code that only need to run once on version updates in apps:
@@ -1096,29 +1119,6 @@ sendToServer() // Fires after 5 seconds
 ```
 </details>
 
-<details>
-<summary>With</summary>
-
-> Set properties with closures just after initializing:
-```swift
-let paragraph = NSMutableParagraphStyle().with {
-    $0.alignment = .center
-    $0.lineSpacing = 8
-}
-
-let label = UILabel().with {
-    $0.textAlignment = .center
-    $0.textColor = UIColor.black
-    $0.text = "Hello, World!"
-}
-
-UITabBar.appearance().with {
-    $0.barStyle = .dark
-    $0.tintColor = .blue
-}
-```
-</details>
-
 ### Infixes
 
 <details>
@@ -1151,7 +1151,7 @@ test = value ??+ "Abc"
 
 value = ""
 test = value ??+ "Lmn"
-// test == "Abc"
+// test == "Lmn"
 
 value = "Xyz"
 test = value ??+ "Rst"
@@ -1383,7 +1383,7 @@ navigationItem.leftBarButtonItems = [
         badgeText: SCNetworkReachability.isOnline ? "On" : "Off",
         target: self,
         action: #selector(test)
-    ).with {
+    ).apply {
         $0.badgeFontColor = SCNetworkReachability.isOnline ? .black : .white
         $0.badgeBackgroundColor = SCNetworkReachability.isOnline ? .green : .red
     }

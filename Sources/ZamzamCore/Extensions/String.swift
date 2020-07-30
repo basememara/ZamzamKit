@@ -44,30 +44,10 @@ public extension String {
         return String(self[index(startIndex, offsetBy: i)])
     }
     
-    /// Safely subscript string within a half-open range.
-    ///
-    ///     let value = "Abcdef123456"
-    ///     value[3..<6] // "def"
-    ///     value[3...6] // "def1"
-    ///     value[3...] // "def123456"
-    ///     value[3...99] // nil
-    ///
-    /// - Parameter range: Half-open range.
-    subscript(range: CountableRange<Int>) -> String? {
-        guard let lowerIndex = index(startIndex, offsetBy: max(0, range.lowerBound), limitedBy: endIndex),
-            let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex) else {
-                return nil
-        }
-        
-        return String(self[lowerIndex..<upperIndex])
-    }
-    
     /// Safely subscript string within a closed range.
     ///
     ///     let value = "Abcdef123456"
-    ///     value[3..<6] // "def"
     ///     value[3...6] // "def1"
-    ///     value[3...] // "def123456"
     ///     value[3...99] // nil
     ///
     /// - Parameter range: Closed range.
@@ -80,15 +60,27 @@ public extension String {
         return String(self[lowerIndex..<upperIndex])
     }
     
-    /// Safely subscript string from the lower range to the end of the string.
+    /// Safely subscript string within a half-open range.
     ///
     ///     let value = "Abcdef123456"
     ///     value[3..<6] // "def"
-    ///     value[3...6] // "def1"
-    ///     value[3...] // "def123456"
-    ///     value[3...99] // nil
     ///
-    /// - Parameter range: A partial interval extending upward from a lower bound that forms a sequence of increasing values..
+    /// - Parameter range: Half-open range.
+    subscript(range: CountableRange<Int>) -> String? {
+        guard let lowerIndex = index(startIndex, offsetBy: max(0, range.lowerBound), limitedBy: endIndex),
+            let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex) else {
+                return nil
+        }
+        
+        return String(self[lowerIndex..<upperIndex])
+    }
+    
+    /// Safely subscript string from the lower range to the end of the string.
+    ///
+    ///     let value = "Abcdef123456"
+    ///     value[3...] // "def123456"
+    ///
+    /// - Parameter range: A partial interval extending upward from a lower bound that forms a sequence of increasing values.
     subscript(range: CountablePartialRangeFrom<Int>) -> String? {
         guard let lowerIndex = index(startIndex, offsetBy: max(0, range.lowerBound), limitedBy: endIndex) else {
             return nil

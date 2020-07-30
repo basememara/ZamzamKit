@@ -1,8 +1,9 @@
 //
-//  File.swift
-//  
+//  SynchronizedTests.swift
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2019-10-03.
+//  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
 import XCTest

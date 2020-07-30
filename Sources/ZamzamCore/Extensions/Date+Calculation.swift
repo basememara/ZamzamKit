@@ -9,33 +9,33 @@
 import Foundation.NSCalendar
 import Foundation.NSDate
 
-/// Represents a specified number of a calendar component unit.
-///
-/// You use `DateTimeInterval` values to do date calculations.
-public enum DateTimeInterval {
-    case seconds(Int)
-    case minutes(Int)
-    case hours(Int)
-    case days(Int)
-    case weeks(Int)
-    case months(Int)
-    case years(Int)
-}
-
-/// Represents a specified number of a calendar component unit for a calendar.
-///
-/// You use `DateTimeIntervalWithCalendar` values to do date calculations.
-public enum DateTimeIntervalWithCalendar {
-    case seconds(Int, Calendar)
-    case minutes(Int, Calendar)
-    case hours(Int, Calendar)
-    case days(Int, Calendar)
-    case weeks(Int, Calendar)
-    case months(Int, Calendar)
-    case years(Int, Calendar)
-}
-
 public extension Date {
+    
+    /// Represents a specified number of a calendar component unit.
+    ///
+    /// You use `TimeIntervalUnit` values to do date calculations.
+    enum TimeIntervalUnit {
+        case seconds(Int)
+        case minutes(Int)
+        case hours(Int)
+        case days(Int)
+        case weeks(Int)
+        case months(Int)
+        case years(Int)
+    }
+    
+    /// Represents a specified number of a calendar component unit for a calendar.
+    ///
+    /// You use `TimeIntervalUnitWithCalendar` values to do date calculations.
+    enum TimeIntervalUnitWithCalendar {
+        case seconds(Int, Calendar)
+        case minutes(Int, Calendar)
+        case hours(Int, Calendar)
+        case days(Int, Calendar)
+        case weeks(Int, Calendar)
+        case months(Int, Calendar)
+        case years(Int, Calendar)
+    }
     
     /// Adds time interval components to a date for the calendar.
     ///
@@ -44,7 +44,7 @@ public extension Date {
     /// - Parameters:
     ///   - left: The date to calculate from.
     ///   - right: The time interval component with calendar to add to the date.
-    static func + (left: Date, right: DateTimeIntervalWithCalendar) -> Date {
+    static func + (left: Date, right: TimeIntervalUnitWithCalendar) -> Date {
         let calendar: Calendar
         let component: Calendar.Component
         let value: Int
@@ -96,9 +96,9 @@ public extension Date {
     /// - Parameters:
     ///   - left: The date to calculate from.
     ///   - right: The time interval component to add to the date.
-    static func + (left: Date, right: DateTimeInterval) -> Date {
+    static func + (left: Date, right: TimeIntervalUnit) -> Date {
         let calendar: Calendar = .current
-        let newRight: DateTimeIntervalWithCalendar
+        let newRight: TimeIntervalUnitWithCalendar
         
         switch right {
         case .seconds(let value):
@@ -120,8 +120,8 @@ public extension Date {
         return left + newRight
     }
     
-    static func - (left: Date, right: DateTimeInterval) -> Date {
-        let minusRight: DateTimeInterval
+    static func - (left: Date, right: TimeIntervalUnit) -> Date {
+        let minusRight: TimeIntervalUnit
         
         switch right {
         case .seconds(let value):
@@ -143,8 +143,8 @@ public extension Date {
         return left + minusRight
     }
     
-    static func - (left: Date, right: DateTimeIntervalWithCalendar) -> Date {
-        let minusRight: DateTimeIntervalWithCalendar
+    static func - (left: Date, right: TimeIntervalUnitWithCalendar) -> Date {
+        let minusRight: TimeIntervalUnitWithCalendar
         
         switch right {
         case .seconds(let value, let calendar):

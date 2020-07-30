@@ -19,12 +19,12 @@ public extension DateFormatter {
     ///
     /// - Parameter dateFormat: The date format string used by the receiver.
     convenience init(iso8601Format dateFormat: String) {
-        self.init()
-        
-        self.calendar = Calendar(identifier: .iso8601)
-        self.locale = .posix
-        self.timeZone = .posix
-        self.dateFormat = dateFormat
+        self.init(
+            dateFormat: dateFormat,
+            timeZone: .posix,
+            calendar: Calendar(identifier: .iso8601),
+            locale: .posix
+        )
     }
 }
 

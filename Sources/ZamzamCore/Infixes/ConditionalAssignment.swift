@@ -33,7 +33,7 @@ public func ?= <T>(left: inout T, right: T?) {
 
 /// Assign value if not nil.
 ///
-///     var test: Int? = 123
+///     var test: Int = 123
 ///     var value: Int? = nil
 ///
 ///     test ?= value

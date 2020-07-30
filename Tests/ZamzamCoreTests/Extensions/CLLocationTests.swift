@@ -31,12 +31,8 @@ extension CLLocationTests {
             }
             
             // Then
-            XCTAssertEqual("\(locality), \(countryCode)", expected,
-                "The location should be \(expected)")
-            
-            XCTAssertEqual($0?.description, expected,
-                "The location should be \(expected)")
-            
+            XCTAssertEqual("\(locality), \(countryCode)", expected)
+            XCTAssertEqual($0?.description, expected)
             XCTAssertEqual($0?.timeZone?.identifier, "America/Toronto")
         }
         

@@ -9,28 +9,28 @@
 import XCTest
 import ZamzamCore
 
-final class DateTimeTests: XCTestCase {
+final class DateTests: XCTestCase {
     
     func testIsPast() {
-        XCTAssertTrue(Date(timeIntervalSinceNow: -100).isPast)
+        XCTAssert(Date(timeIntervalSinceNow: -100).isPast)
         XCTAssertFalse(Date(timeIntervalSinceNow: 100).isPast)
     }
     
     func testIsFuture() {
-        XCTAssertTrue(Date(timeIntervalSinceNow: 100).isFuture)
+        XCTAssert(Date(timeIntervalSinceNow: 100).isFuture)
         XCTAssertFalse(Date(timeIntervalSinceNow: -100).isFuture)
     }
     
     func testIsToday() {
-        XCTAssertTrue(Date().isToday)
+        XCTAssert(Date().isToday)
     }
     
     func testIsYesterday() {
-        XCTAssertTrue(Date(timeIntervalSinceNow: -90_000).isYesterday)
+        XCTAssert(Date(timeIntervalSinceNow: -84_599).isYesterday)
     }
     
     func testIsTomorrow() {
-        XCTAssertTrue(Date(timeIntervalSinceNow: 90_000).isTomorrow)
+        XCTAssert(Date(timeIntervalSinceNow: 84_601).isTomorrow)
     }
     
     func testIsWeekday() {
@@ -65,7 +65,7 @@ final class DateTimeTests: XCTestCase {
     }
 }
 
-extension DateTimeTests {
+extension DateTests {
     
     func testTomorrow() {
         let date = Date(fromString: "2016/03/22 09:30")!
@@ -80,7 +80,7 @@ extension DateTimeTests {
     }
 }
 
-extension DateTimeTests {
+extension DateTests {
     
     func testStartOfDay() {
         let date = Date(fromString: "2016/03/22 09:30")!
@@ -105,10 +105,10 @@ extension DateTimeTests {
 
 // MARK: - Comparisons
 
-extension DateTimeTests {
+extension DateTests {
     
     func testIsBetween() {
-        XCTAssertTrue(
+        XCTAssert(
             Date(fromString: "2018/06/15 09:30")!.isBetween(
                 Date(fromString: "2018/06/15 09:00")!,
                 Date(fromString: "2018/08/15 09:30")!
@@ -122,7 +122,7 @@ extension DateTimeTests {
             )
         )
         
-        XCTAssertTrue(
+        XCTAssert(
             Date(fromString: "2020/01/15 09:00")!.isBetween(
                 Date(fromString: "2020/01/15 10:00")!,
                 Date(fromString: "2018/01/15 13:00")!
@@ -132,14 +132,14 @@ extension DateTimeTests {
         let date = Date()
         let date1 = Date(timeIntervalSinceNow: 1000)
         let date2 = Date(timeIntervalSinceNow: -1000)
-        XCTAssertTrue(date.isBetween(date1, date2))
+        XCTAssert(date.isBetween(date1, date2))
     }
     
     func testIsBeyondSeconds() {
         let date = Date(fromString: "2016/03/22 09:40")!
         let fromDate = Date(fromString: "2016/03/22 09:30")!
         
-        XCTAssertTrue(date.isBeyond(fromDate, bySeconds: 300))
+        XCTAssert(date.isBeyond(fromDate, bySeconds: 300))
         XCTAssertFalse(date.isBeyond(fromDate, bySeconds: 600))
         XCTAssertFalse(date.isBeyond(fromDate, bySeconds: 1200))
     }
@@ -148,7 +148,7 @@ extension DateTimeTests {
         let date = Date(fromString: "2016/03/22 09:40")!
         let fromDate = Date(fromString: "2016/03/22 09:30")!
         
-        XCTAssertTrue(date.isBeyond(fromDate, byMinutes: 5))
+        XCTAssert(date.isBeyond(fromDate, byMinutes: 5))
         XCTAssertFalse(date.isBeyond(fromDate, byMinutes: 10))
         XCTAssertFalse(date.isBeyond(fromDate, byMinutes: 25))
     }
@@ -157,7 +157,7 @@ extension DateTimeTests {
         let date = Date(fromString: "2016/03/22 11:40")!
         let fromDate = Date(fromString: "2016/03/22 09:40")!
         
-        XCTAssertTrue(date.isBeyond(fromDate, byHours: 1))
+        XCTAssert(date.isBeyond(fromDate, byHours: 1))
         XCTAssertFalse(date.isBeyond(fromDate, byHours: 2))
         XCTAssertFalse(date.isBeyond(fromDate, byHours: 4))
     }
@@ -170,15 +170,15 @@ extension DateTimeTests {
         let date = formatter.date(from: "2016/03/24 11:40")!
         let fromDate = formatter.date(from: "2016/03/22 09:40")!
         
-        XCTAssertTrue(date.isBeyond(fromDate, byDays: 1))
-        XCTAssertTrue(date.isBeyond(fromDate, byDays: 2))
+        XCTAssert(date.isBeyond(fromDate, byDays: 1))
+        XCTAssert(date.isBeyond(fromDate, byDays: 2))
         XCTAssertFalse(date.isBeyond(fromDate, byDays: 3))
     }
 }
 
 // MARK: - String
 
-extension DateTimeTests {
+extension DateTests {
     
     func testStringFromFormatter() {
         let formatter = DateFormatter(iso8601Format: "MM-dd-yyyy HH:mm:ss")
@@ -236,11 +236,25 @@ extension DateTimeTests {
         let date = Date(fromString: "2017/05/14 13:32")!
         XCTAssertEqual("2017-05-14", date.shortString())
     }
+    
+    func testDayName() {
+        let date = Date(timeIntervalSince1970: 1486121165)
+        XCTAssertEqual(date.name(ofDay: .full), "Friday")
+        XCTAssertEqual(date.name(ofDay: .threeLetters), "Fri")
+        XCTAssertEqual(date.name(ofDay: .oneLetter), "F")
+    }
+    
+    func testMonthName() {
+        let date = Date(timeIntervalSince1970: 1486121165)
+        XCTAssertEqual(date.name(ofMonth: .full), "February")
+        XCTAssertEqual(date.name(ofMonth: .threeLetters), "Feb")
+        XCTAssertEqual(date.name(ofMonth: .oneLetter), "F")
+    }
 }
 
 // MARK: - Calculations
 
-extension DateTimeTests {
+extension DateTests {
     
     func testIncrementYears() {
         XCTAssertEqual(
@@ -467,7 +481,7 @@ extension DateTimeTests {
     }
 }
 
-extension DateTimeTests {
+extension DateTests {
     
     func testCurrentTimeInDecimal() {
         let time = Date(fromString: "2012/10/23 18:15")!.timeToDecimal
@@ -477,7 +491,7 @@ extension DateTimeTests {
     }
 }
 
-extension DateTimeTests {
+extension DateTests {
     
     func testHijriDate() {
         do {
@@ -498,12 +512,12 @@ extension DateTimeTests {
     }
     
     func testRamadan() {
-        XCTAssertTrue(Date(fromString: "2015/07/01 12:30")!.isRamadan())
+        XCTAssert(Date(fromString: "2015/07/01 12:30")!.isRamadan())
         XCTAssertFalse(Date(fromString: "2017/01/01 12:30")!.isRamadan())
     }
     
     func testJumuah() {
-        XCTAssertTrue(Date(fromString: "2017/04/21 12:30")!.isJumuah)
+        XCTAssert(Date(fromString: "2017/04/21 12:30")!.isJumuah)
         XCTAssertFalse(Date(fromString: "2017/01/01 12:30")!.isJumuah)
     }
 }

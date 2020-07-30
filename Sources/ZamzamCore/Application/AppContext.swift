@@ -1,5 +1,5 @@
 //
-//  AppInfo.swift
+//  AppContext.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 1/29/17.
@@ -9,9 +9,9 @@
 import Foundation.NSBundle
 
 /// Provides details of the current app.
-public protocol AppInfo {}
+public protocol AppContext {}
 
-public extension AppInfo {
+public extension AppContext {
 
 	/// App's name.
 	var appDisplayName: String? {
@@ -36,7 +36,12 @@ public extension AppInfo {
 
 // MARK: - Environment
 
-public extension AppInfo {
+public extension AppContext {
+    
+    /// Check if app is an extension target.
+    var isAppExtension: Bool {
+        Bundle.main.bundlePath.hasSuffix(".appex")
+    }
 	
 	/// Check if app is running in TestFlight mode.
 	var isInTestFlight: Bool {
