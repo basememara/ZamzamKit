@@ -42,12 +42,19 @@ public extension AppContext {
     var isAppExtension: Bool {
         Bundle.main.bundlePath.hasSuffix(".appex")
     }
-	
-	/// Check if app is running in TestFlight mode.
-	var isInTestFlight: Bool {
-		// http://stackoverflow.com/questions/12431994/detect-testflight
-		Bundle.main.appStoreReceiptURL?.path.contains("sandboxReceipt") == true
-	}
+    
+    /// Check if app is running in TestFlight mode.
+    var isInTestFlight: Bool {
+        // https://stackoverflow.com/questions/18282326/how-can-i-detect-if-the-currently-running-app-was-installed-from-the-app-store
+        Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+            && !isAdHocDistributed
+    }
+    
+    /// Check if app is ad-hoc distributed.
+    var isAdHocDistributed: Bool {
+        // https://stackoverflow.com/questions/18282326/how-can-i-detect-if-the-currently-running-app-was-installed-from-the-app-store
+        Bundle.main.path(forResource: "embedded", ofType: "mobileprovision") != nil
+    }
 
 	/// Check if application is running on simulator (read-only).
 	var isRunningOnSimulator: Bool {
@@ -63,7 +70,7 @@ public extension AppContext {
     var isDebuggerAttached: Bool {
         // https://stackoverflow.com/a/33177600
         var info = kinfo_proc()
-        var mib : [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, getpid()]
+        var mib: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, getpid()]
         var size = MemoryLayout<kinfo_proc>.stride
         let junk = sysctl(&mib, UInt32(mib.count), &info, &size, nil, 0)
         assert(junk == 0, "sysctl failed")

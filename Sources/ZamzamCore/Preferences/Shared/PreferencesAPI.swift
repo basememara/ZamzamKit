@@ -16,7 +16,9 @@ public protocol PreferencesService {
 
 // MARK: Namespace
 
-public enum PreferencesAPI {
+public enum PreferencesAPI {}
+
+extension PreferencesAPI {
     
     /// Keys for strongly-typed access for generic types.
     open class Keys {
@@ -28,7 +30,7 @@ public enum PreferencesAPI {
     ///     extension PreferencesAPI.Keys {
     ///         static let abc = PreferencesAPI.Key<String>("abc")
     ///     }
-    open class Key<ValueType>: Keys {
+    open class Key<Value>: Keys {
         public let name: String
         
         public init(_ key: String) {

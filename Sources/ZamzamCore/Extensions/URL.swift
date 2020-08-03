@@ -1,10 +1,8 @@
 //
-//  NSURLComponentsExtension.swift
+//  URL.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2/17/16.
-//  https://basememara.com/updating-query-string-parameters-in-swift/
-//
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
@@ -63,6 +61,7 @@ public extension URL {
     ///   - value: The value to replace the query string parameter, nil will remove item.
     /// - Returns: The URL with the appended query string.
     func appendingQueryItem(_ name: String, value: Any?) -> URL {
+        // https://basememara.com/updating-query-string-parameters-in-swift/
         guard var urlComponents = URLComponents(string: absoluteString) else {
             return self
         }

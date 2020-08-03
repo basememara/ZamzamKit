@@ -39,9 +39,9 @@ public extension String {
     ///     value[99] // nil
     ///
     /// - Parameter i: index.
-    subscript(i: Int) -> String? {
-        guard 0..<count ~= i else { return nil }
-        return String(self[index(startIndex, offsetBy: i)])
+    subscript(position: Int) -> String? {
+        guard 0..<count ~= position else { return nil }
+        return String(self[index(startIndex, offsetBy: position)])
     }
     
     /// Safely subscript string within a closed range.

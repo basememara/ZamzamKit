@@ -4,8 +4,7 @@ analyzer_rules:
 
 excluded:
 - Assets
-- ZamzamKit Tests
-- Packages/ZamzamCore/Tests
+- Tests
 
 opt_in_rules:
 - array_init

@@ -89,4 +89,3 @@ public extension SecuredPreferences {
     }
 }
 #endif
-

@@ -56,7 +56,8 @@ private extension SecuredPreferencesKeychainService {
     //  Copied from v19.0.0. Modified for private access controls and lint fixes.
     //
 
-    // swiftlint:disable file_length
+    // swiftlint:disable multiline_parameters_brackets
+    // swiftlint:disable multiline_parameters
 
     // ----------------------------
     //

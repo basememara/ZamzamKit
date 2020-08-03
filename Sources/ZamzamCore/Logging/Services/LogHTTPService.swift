@@ -93,6 +93,7 @@ public extension LogHTTPService {
                 "build": appInfo.appBuild ?? "Unknown",
                 "bundle_id": appInfo.appBundleID ?? "Unknown",
                 "is_testflight": appInfo.isInTestFlight,
+                "is_ad_hoc": appInfo.isAdHocDistributed,
                 "is_debug": isDebug
             ],
             "device": [
