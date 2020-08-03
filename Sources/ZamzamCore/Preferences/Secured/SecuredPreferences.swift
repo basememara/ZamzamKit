@@ -80,11 +80,11 @@ public extension SecuredPreferences {
 import Combine
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
-extension SecuredPreferences {
+public extension SecuredPreferences {
     private static let subject = PassthroughSubject<String, Never>()
     
     /// Returns a publisher that emits events when broadcasting secured preference changes.
-    public func publisher() -> AnyPublisher<String, Never> {
+    func publisher() -> AnyPublisher<String, Never> {
         Self.subject.eraseToAnyPublisher()
     }
 }

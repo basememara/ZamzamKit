@@ -72,11 +72,11 @@ public extension Preferences {
 import Combine
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
-extension Preferences {
+public extension Preferences {
     private static let subject = PassthroughSubject<String, Never>()
     
     /// Returns a publisher that emits events when broadcasting preference changes.
-    public var publisher: AnyPublisher<String, Never> {
+    var publisher: AnyPublisher<String, Never> {
         Self.subject.eraseToAnyPublisher()
     }
 }

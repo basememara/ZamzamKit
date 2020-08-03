@@ -16,6 +16,28 @@ final class SynchronizedTests: XCTestCase {
 
 extension SynchronizedTests {
     
+    func testSharedVariable() {
+        DispatchQueue.concurrentPerform(iterations: iterations) { _ in
+            Database.shared.set(key: "test", value: true)
+        }
+    }
+    
+    private class Database {
+        static let shared = Database()
+        private var data = Synchronized<[String: Any]>([:])
+        
+        func get(key: String) -> Any? {
+            data.value { $0[key] }
+        }
+        
+        func set(key: String, value: Any) {
+            data.value { $0[key] = value }
+        }
+    }
+}
+
+extension SynchronizedTests {
+    
     func testWritePerformance() {
         var temp = Synchronized<Int>(0)
      
