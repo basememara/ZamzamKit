@@ -25,7 +25,7 @@ public protocol LogService {
     ///   - line: Line of the caller.
     ///   - error: Error of the caller.
     ///   - context: Additional meta data.
-    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]?)
+    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible])
     
     /// Returns if the logger should process the entry for the specified log level.
     func canWrite(for level: LogAPI.Level) -> Bool
@@ -39,7 +39,7 @@ public protocol LogService {
     ///   - line: Line of the caller.
     ///   - error: Error of the caller.
     ///   - context: Additional meta data.
-    func format(_ message: String, _ path: String, _ function: String, _ line: Int, _ error: Error?, _ context: [String: CustomStringConvertible]?) -> String
+    func format(_ message: String, _ path: String, _ function: String, _ line: Int, _ error: Error?, _ context: [String: CustomStringConvertible]) -> String
 }
 
 public extension LogService {
@@ -50,17 +50,17 @@ public extension LogService {
     }
     
     /// The string output of the log.
-    func format(_ message: String, _ path: String, _ function: String, _ line: Int, _ error: Error?, _ context: [String: CustomStringConvertible]?) -> String {
+    func format(_ message: String, _ path: String, _ function: String, _ line: Int, _ error: Error?, _ context: [String: CustomStringConvertible]) -> String {
         var output = "\(URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent).\(function):\(line) - \(message)"
         
         if let error = error {
             output += " | Error: \(error)"
         }
         
-        if let context = context, !context.isEmpty {
+        if !context.isEmpty {
             output += " | Context: \(context)"
         }
-
+        
         return output
     }
 }

@@ -29,7 +29,16 @@ public extension LogRepository {
     ///   - error: Error of the caller.
     ///   - context: Additional meta data.
     ///   - completion: The block to call when log entries sent.
-    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]?, completion: (() -> Void)?) {
+    func write(
+        _ level: LogAPI.Level,
+        with message: String,
+        path: String,
+        function: String,
+        line: Int,
+        error: Error?,
+        context: [String: CustomStringConvertible],
+        completion: (() -> Void)?
+    ) {
         let destinations = services.filter { $0.canWrite(for: level) }
         
         // Skip if does not meet minimum log level
@@ -39,6 +48,8 @@ public extension LogRepository {
         }
         
         DispatchQueue.logger.async {
+            let context = Self.context.merging(context) { $1 }
+            
             destinations.forEach {
                 $0.write(level, with: message, path: path, function: function, line: line, error: error, context: context)
             }
@@ -60,7 +71,14 @@ public extension LogRepository {
     ///   - line: Line of the caller.
     ///   - context: Additional meta data.
     ///   - completion: The block to call when log entries sent.
-    func verbose(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: CustomStringConvertible]? = nil, completion: (() -> Void)? = nil) {
+    func verbose(
+        _ message: String,
+        path: String = #file,
+        function: String = #function,
+        line: Int = #line,
+        context: [String: CustomStringConvertible] = [:],
+        completion: (() -> Void)? = nil
+    ) {
         write(.verbose, with: message, path: path, function: function, line: line, error: nil, context: context, completion: completion)
     }
 }
@@ -77,7 +95,14 @@ public extension LogRepository {
     ///   - line: Line of the caller.
     ///   - context: Additional meta data.
     ///   - completion: The block to call when log entries sent.
-    func debug(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: CustomStringConvertible]? = nil, completion: (() -> Void)? = nil) {
+    func debug(
+        _ message: String,
+        path: String = #file,
+        function: String = #function,
+        line: Int = #line,
+        context: [String: CustomStringConvertible] = [:],
+        completion: (() -> Void)? = nil
+    ) {
         write(.debug, with: message, path: path, function: function, line: line, error: nil, context: context, completion: completion)
     }
 }
@@ -94,7 +119,14 @@ public extension LogRepository {
     ///   - line: Line of the caller.
     ///   - context: Additional meta data.
     ///   - completion: The block to call when log entries sent.
-    func info(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: CustomStringConvertible]? = nil, completion: (() -> Void)? = nil) {
+    func info(
+        _ message: String,
+        path: String = #file,
+        function: String = #function,
+        line: Int = #line,
+        context: [String: CustomStringConvertible] = [:],
+        completion: (() -> Void)? = nil
+    ) {
         write(.info, with: message, path: path, function: function, line: line, error: nil, context: context, completion: completion)
     }
 }
@@ -111,7 +143,14 @@ public extension LogRepository {
     ///   - line: Line of the caller.
     ///   - context: Additional meta data.
     ///   - completion: The block to call when log entries sent.
-    func warning(_ message: String, path: String = #file, function: String = #function, line: Int = #line, context: [String: CustomStringConvertible]? = nil, completion: (() -> Void)? = nil) {
+    func warning(
+        _ message: String,
+        path: String = #file,
+        function: String = #function,
+        line: Int = #line,
+        context: [String: CustomStringConvertible] = [:],
+        completion: (() -> Void)? = nil
+    ) {
         write(.warning, with: message, path: path, function: function, line: line, error: nil, context: context, completion: completion)
     }
 }
@@ -129,7 +168,75 @@ public extension LogRepository {
     ///   - error: Error of the caller.
     ///   - context: Additional meta data.
     ///   - completion: The block to call when log entries sent.
-    func error(_ message: String, path: String = #file, function: String = #function, line: Int = #line, error: Error? = nil, context: [String: CustomStringConvertible]? = nil, completion: (() -> Void)? = nil) {
+    func error(
+        _ message: String,
+        path: String = #file,
+        function: String = #function,
+        line: Int = #line,
+        error: Error? = nil,
+        context: [String: CustomStringConvertible] = [:],
+        completion: (() -> Void)? = nil
+    ) {
         write(.error, with: message, path: path, function: function, line: line, error: error, context: context, completion: completion)
     }
 }
+
+public extension LogRepository {
+    private static var context: [String: CustomStringConvertible] = [:]
+    
+    /// Adds a custom attribute to all future logs sent by this logger.
+    func set(_ value: CustomStringConvertible?, forKey key: String) {
+        DispatchQueue.logger.async {
+            Self.context[key] = value
+        }
+    }
+    
+    /// Adds custom attributes to all future logs sent by this logger.
+    func set(_ context: [String: CustomStringConvertible]) {
+        DispatchQueue.logger.async {
+            Self.context.merge(context) { $1 }
+        }
+    }
+    
+    /// Removes all the custom attribute from all future logs sent by this logger.
+    func reset() {
+        DispatchQueue.logger.async {
+            Self.context.removeAll()
+        }
+    }
+}
+
+#if os(iOS)
+import UIKit.UIApplication
+
+public extension LogRepository {
+    
+    /// Sets the application properties to the logger so it can be used outside the main thread.
+    func configure(with application: UIApplication) {
+        let applicationState = application.applicationState.rawString
+        let isProtectedDataAvailable = application.isProtectedDataAvailable
+        
+        set([
+            "app_state": applicationState,
+            "protected_data_available": isProtectedDataAvailable
+        ])
+    }
+}
+
+private extension UIApplication.State {
+    
+    /// The corresponding string of the raw type.
+    var rawString: String {
+        switch self {
+        case .active:
+            return "active"
+        case .background:
+            return "background"
+        case .inactive:
+            return "inactive"
+        @unknown default:
+            return "unknown"
+        }
+    }
+}
+#endif

@@ -46,7 +46,8 @@ public extension AppContext {
     /// Check if app is running in TestFlight mode.
     var isInTestFlight: Bool {
         // https://stackoverflow.com/questions/18282326/how-can-i-detect-if-the-currently-running-app-was-installed-from-the-app-store
-        Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+        !isRunningOnSimulator
+            && Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
             && !isAdHocDistributed
     }
     
@@ -55,25 +56,20 @@ public extension AppContext {
         // https://stackoverflow.com/questions/18282326/how-can-i-detect-if-the-currently-running-app-was-installed-from-the-app-store
         Bundle.main.path(forResource: "embedded", ofType: "mobileprovision") != nil
     }
-
-	/// Check if application is running on simulator (read-only).
-	var isRunningOnSimulator: Bool {
-		// http://stackoverflow.com/questions/24869481/detect-if-app-is-being-built-for-device-or-simulator-in-swift
+    
+    /// Check if application is running on simulator (read-only).
+    var isRunningOnSimulator: Bool {
+        // http://stackoverflow.com/questions/24869481/detect-if-app-is-being-built-for-device-or-simulator-in-swift
         #if targetEnvironment(simulator)
         return true
-		#else
+        #else
         return false
-		#endif
-	}
+        #endif
+    }
     
-    /// Check if application is attached to a debugger.
-    var isDebuggerAttached: Bool {
-        // https://stackoverflow.com/a/33177600
-        var info = kinfo_proc()
-        var mib: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, getpid()]
-        var size = MemoryLayout<kinfo_proc>.stride
-        let junk = sysctl(&mib, UInt32(mib.count), &info, &size, nil, 0)
-        assert(junk == 0, "sysctl failed")
-        return (info.kp_proc.p_flag & P_TRACED) != 0
+    /// Check if application is running in App Store environment.
+    var isRunningInAppStore: Bool {
+        // https://stackoverflow.com/questions/18282326/how-can-i-detect-if-the-currently-running-app-was-installed-from-the-app-store
+        !isRunningOnSimulator && !isInTestFlight && !isRunningOnSimulator
     }
 }

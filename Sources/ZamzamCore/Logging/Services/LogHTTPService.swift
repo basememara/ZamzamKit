@@ -7,6 +7,8 @@
 //
 
 #if os(iOS)
+import Foundation.NSData
+import Foundation.NSJSONSerialization
 import Foundation.NSNotification
 import Foundation.NSURLRequest
 import UIKit.UIApplication
@@ -15,8 +17,11 @@ import UIKit.UIDevice
 /// Log destination for sending over HTTP.
 final public class LogHTTPService {
     private let urlRequest: URLRequest
+    private let bulkEncode: ([String]) -> Data?
     private let maxEntriesInBuffer: Int
-    private let appInfo: AppContext
+    private let minFlushLevel: LogAPI.Level
+    private let isDebug: Bool
+    private let constants: AppContext
     private let networkRepository: NetworkRepository
     
     private let deviceName = UIDevice.current.name
@@ -25,38 +30,47 @@ final public class LogHTTPService {
     private let osVersion = UIDevice.current.systemVersion
     
     /// Stores the log entries in memory until it is ready to send.
-    private var buffer: [String] = []
+    private var buffer: [(LogAPI.Level, String)] = []
     
     /// The initializer of the log destination.
     ///
     /// - Parameters:
     ///   - urlRequest: A URL load request for the destination. Leave data `nil` as this will be added to the `httpBody` upon sending.
+    ///   - bulkEncode: The handler to combine multiple log entries together.
     ///   - maxEntriesInBuffer: The threshold of the buffer before sending to the destination.
-    ///   - appInfo: Provides details of the current app.
+    ///   - minFlushLevel: The threshold of the log level before sending to the destination.
+    ///   - isDebug: Determines if the current app is running in debug mode.
+    ///   - constants: Provides details of the current context.
     ///   - networkRepository: The object used to send the HTTP request.
     ///   - notificationCenter: A notification dispatch mechanism that registers observers for flushing the buffer at certain app lifecycle events.
     public init(
         urlRequest: URLRequest,
+        bulkEncode: @escaping ([String]) -> Data?,
         maxEntriesInBuffer: Int,
-        appInfo: AppContext,
+        minFlushLevel: LogAPI.Level = .none,
+        isDebug: Bool,
+        constants: AppContext,
         networkRepository: NetworkRepository,
         notificationCenter: NotificationCenter
     ) {
         self.urlRequest = urlRequest
+        self.bulkEncode = bulkEncode
         self.maxEntriesInBuffer = maxEntriesInBuffer
-        self.appInfo = appInfo
+        self.minFlushLevel = minFlushLevel
+        self.isDebug = isDebug
+        self.constants = constants
         self.networkRepository = networkRepository
         
         notificationCenter.addObserver(
             self,
-            selector: #selector(send),
+            selector: #selector(applicationWillExit),
             name: UIApplication.willResignActiveNotification,
             object: nil
         )
         
         notificationCenter.addObserver(
             self,
-            selector: #selector(send),
+            selector: #selector(applicationWillExit),
             name: UIApplication.willTerminateNotification,
             object: nil
         )
@@ -73,7 +87,7 @@ public extension LogHTTPService {
     /// `willTerminate` events.
     ///
     /// - Parameters:
-    ///   - parameters: The values that will be merged and sent to the detination.
+    ///   - parameters: The values that will be merged and sent to the destination.
     ///   - level: The current level of the log entry.
     ///   - path: Path of the caller.
     ///   - function: Function of the caller.
@@ -81,27 +95,31 @@ public extension LogHTTPService {
     func write(
         _ parameters: [String: Any],
         level: LogAPI.Level,
-        isDebug: Bool,
         path: String,
         function: String,
-        line: Int
+        line: Int,
+        context: [String: CustomStringConvertible]
     ) {
-        let session: [String: Any] = [
+        var payload: [String: Any] = [
             "app": [
-                "name": appInfo.appDisplayName ?? "Unknown",
-                "version": appInfo.appVersion ?? "Unknown",
-                "build": appInfo.appBuild ?? "Unknown",
-                "bundle_id": appInfo.appBundleID ?? "Unknown",
-                "is_testflight": appInfo.isInTestFlight,
-                "is_ad_hoc": appInfo.isAdHocDistributed,
-                "is_debug": isDebug
+                "name": constants.appDisplayName ?? "Unknown",
+                "version": constants.appVersion ?? "Unknown",
+                "build": constants.appBuild ?? "Unknown",
+                "bundle_id": constants.appBundleID ?? "Unknown",
+                "is_extension": constants.isAppExtension,
+                "is_debug": isDebug,
+                "distribution": constants.isRunningInAppStore ? "appstore"
+                    : constants.isInTestFlight ? "testflight"
+                    : constants.isAdHocDistributed ? "adhoc"
+                    : constants.isRunningOnSimulator ? "simulator"
+                    : "unknown"
             ],
             "device": [
                 "device_id": deviceIdentifier,
-                "device_name": deviceName,
+                "device_name": !constants.isRunningInAppStore ? deviceName : "",
                 "device_model": deviceModel,
                 "os_version": osVersion,
-                "is_simulator": appInfo.isRunningOnSimulator
+                "is_simulator": constants.isRunningOnSimulator
             ],
             "code": [
                 "path": path,
@@ -110,15 +128,19 @@ public extension LogHTTPService {
             ]
         ]
         
-        let merged = parameters.merging(session) { (parameter, _) in parameter }
+        if !context.isEmpty {
+            payload["context"] = context
+        }
         
-        guard let log = merged.jsonString() else {
-            print("ERROR: Logger unable to serialize parameters for destination.")
+        payload.merge(parameters) { $1 }
+        
+        guard let log = payload.jsonString() else {
+            print("🤍 \(timestamp: Date()) [PCO] ERROR Logger unable to encode parameters for destination.")
             return
         }
         
         // Store in buffer for sending later
-        buffer.append(log)
+        buffer.append((level, log))
         
         // Flush buffer threshold reached
         guard buffer.count > maxEntriesInBuffer else { return }
@@ -128,14 +150,14 @@ public extension LogHTTPService {
 
 private extension LogHTTPService {
     
-    @objc func send() {
-        guard !buffer.isEmpty else { return }
+    func send() {
+        guard !buffer.isEmpty, minFlushLevel == .none || buffer.contains(where: { $0.0 >= minFlushLevel }) else { return }
         
         let logs = buffer
         buffer = []
         
-        guard let data = logs.joined(separator: "\n").data(using: .utf8) else {
-            debugPrint("Could not begin log destination task")
+        guard let data = bulkEncode(logs.map { $0.1 }) else {
+            print("🤍 \(timestamp: Date()) [PCO] PRINT Could not begin log destination task")
             return
         }
         
@@ -146,12 +168,18 @@ private extension LogHTTPService {
             self.networkRepository.send(with: request) {
                 // Add back to the buffer if could not send
                 if case .failure(let error) = $0 {
-                    debugPrint("Error from log destination: \(error)")
-                    self.buffer += logs
+                    print("🤍 \(timestamp: Date()) [PCO] PRINT Error from log destination: \(error)")
+                    DispatchQueue.logger.async { self.buffer += logs }
                 }
                 
                 task.end()
             }
+        }
+    }
+    
+    @objc func applicationWillExit() {
+        DispatchQueue.logger.async {
+            self.send()
         }
     }
 }
