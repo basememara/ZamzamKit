@@ -89,13 +89,13 @@ public extension LogHTTPService {
     /// - Parameters:
     ///   - parameters: The values that will be merged and sent to the destination.
     ///   - level: The current level of the log entry.
-    ///   - path: Path of the caller.
+    ///   - file: File of the caller.
     ///   - function: Function of the caller.
     ///   - line: Line of the caller.
     func write(
         _ parameters: [String: Any],
         level: LogAPI.Level,
-        path: String,
+        file: String,
         function: String,
         line: Int,
         context: [String: CustomStringConvertible]
@@ -122,7 +122,7 @@ public extension LogHTTPService {
                 "is_simulator": constants.isRunningOnSimulator
             ],
             "code": [
-                "path": path,
+                "file": file,
                 "function": function,
                 "line": line
             ]

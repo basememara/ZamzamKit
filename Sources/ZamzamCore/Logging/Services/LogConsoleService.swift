@@ -19,7 +19,7 @@ public struct LogConsoleService: LogService {
 
 public extension LogConsoleService {
     
-    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]) {
+    func write(_ level: LogAPI.Level, with message: String, file: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]) {
         let prefix: String
         
         switch level {
@@ -37,6 +37,6 @@ public extension LogConsoleService {
             return
         }
         
-        print("\(prefix) \(format(message, path, function, line, error, context))")
+        print("\(prefix) \(format(message, file, function, line, error, context))")
     }
 }

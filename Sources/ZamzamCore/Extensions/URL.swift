@@ -25,8 +25,8 @@ public extension URL {
     
     /// Returns a URL constructed by swapping the given path extension to self.
     ///
-    ///         URL(fileURLWithPath: "/SomePath/SomeTests.swift")
-    ///             .replacingPathExtension("json") // "/SomePath/SomeTests.json"
+    ///     URL(fileURLWithPath: "/SomePath/SomeTests.swift")
+    ///         .replacingPathExtension("json") // "/SomePath/SomeTests.json"
     ///
     /// - Parameter pathExtension: The extension to append.
     func replacingPathExtension(_ pathExtension: String) -> URL {
@@ -35,8 +35,8 @@ public extension URL {
     
     /// Returns a URL constructed by appending the suffix to the path component to self.
     ///
-    ///         URL(fileURLWithPath: "/SomePath/SomeTests.json")
-    ///             .appendingToFileName("123") // "/SomePath/SomeTests123.json"
+    ///     URL(fileURLWithPath: "/SomePath/SomeTests.json")
+    ///         .appendingToFileName("123") // "/SomePath/SomeTests123.json"
     ///
     /// - Parameter string: Thesuffix to add.
     func appendingToFileName(_ string: String) -> URL {

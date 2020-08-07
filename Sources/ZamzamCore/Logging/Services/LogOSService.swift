@@ -25,7 +25,7 @@ public struct LogOSService: LogService {
 
 public extension LogOSService {
     
-    func write(_ level: LogAPI.Level, with message: String, path: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]) {
+    func write(_ level: LogAPI.Level, with message: String, file: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]) {
         let type: OSLogType
         
         switch level {
@@ -43,6 +43,6 @@ public extension LogOSService {
             return
         }
         
-        os_log("%@", log: log, type: type, format(message, path, function, line, error, context))
+        os_log("%@", log: log, type: type, format(message, file, function, line, error, context))
     }
 }

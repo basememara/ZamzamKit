@@ -23,7 +23,7 @@ public extension LogRepository {
     /// - Parameters:
     ///   - level: The current level of the log entry.
     ///   - message: Description of the log.
-    ///   - path: Path of the caller.
+    ///   - file: File of the caller.
     ///   - function: Function of the caller.
     ///   - line: Line of the caller.
     ///   - error: Error of the caller.
@@ -32,7 +32,7 @@ public extension LogRepository {
     func write(
         _ level: LogAPI.Level,
         with message: String,
-        path: String,
+        file: String,
         function: String,
         line: Int,
         error: Error?,
@@ -51,7 +51,7 @@ public extension LogRepository {
             let context = Self.context.merging(context) { $1 }
             
             destinations.forEach {
-                $0.write(level, with: message, path: path, function: function, line: line, error: error, context: context)
+                $0.write(level, with: message, file: file, function: function, line: line, error: error, context: context)
             }
             
             completion?()
@@ -66,20 +66,20 @@ public extension LogRepository {
     /// - Parameters:
     ///   - level: The current level of the log entry.
     ///   - message: Description of the log.
-    ///   - path: Path of the caller.
+    ///   - file: File of the caller.
     ///   - function: Function of the caller.
     ///   - line: Line of the caller.
     ///   - context: Additional meta data.
     ///   - completion: The block to call when log entries sent.
     func verbose(
         _ message: String,
-        path: String = #file,
+        file: String = #file,
         function: String = #function,
         line: Int = #line,
         context: [String: CustomStringConvertible] = [:],
         completion: (() -> Void)? = nil
     ) {
-        write(.verbose, with: message, path: path, function: function, line: line, error: nil, context: context, completion: completion)
+        write(.verbose, with: message, file: file, function: function, line: line, error: nil, context: context, completion: completion)
     }
 }
 
@@ -90,20 +90,20 @@ public extension LogRepository {
     /// - Parameters:
     ///   - level: The current level of the log entry.
     ///   - message: Description of the log.
-    ///   - path: Path of the caller.
+    ///   - file: File of the caller.
     ///   - function: Function of the caller.
     ///   - line: Line of the caller.
     ///   - context: Additional meta data.
     ///   - completion: The block to call when log entries sent.
     func debug(
         _ message: String,
-        path: String = #file,
+        file: String = #file,
         function: String = #function,
         line: Int = #line,
         context: [String: CustomStringConvertible] = [:],
         completion: (() -> Void)? = nil
     ) {
-        write(.debug, with: message, path: path, function: function, line: line, error: nil, context: context, completion: completion)
+        write(.debug, with: message, file: file, function: function, line: line, error: nil, context: context, completion: completion)
     }
 }
 
@@ -114,20 +114,20 @@ public extension LogRepository {
     /// - Parameters:
     ///   - level: The current level of the log entry.
     ///   - message: Description of the log.
-    ///   - path: Path of the caller.
+    ///   - file: File of the caller.
     ///   - function: Function of the caller.
     ///   - line: Line of the caller.
     ///   - context: Additional meta data.
     ///   - completion: The block to call when log entries sent.
     func info(
         _ message: String,
-        path: String = #file,
+        file: String = #file,
         function: String = #function,
         line: Int = #line,
         context: [String: CustomStringConvertible] = [:],
         completion: (() -> Void)? = nil
     ) {
-        write(.info, with: message, path: path, function: function, line: line, error: nil, context: context, completion: completion)
+        write(.info, with: message, file: file, function: function, line: line, error: nil, context: context, completion: completion)
     }
 }
 
@@ -138,20 +138,20 @@ public extension LogRepository {
     /// - Parameters:
     ///   - level: The current level of the log entry.
     ///   - message: Description of the log.
-    ///   - path: Path of the caller.
+    ///   - file: File of the caller.
     ///   - function: Function of the caller.
     ///   - line: Line of the caller.
     ///   - context: Additional meta data.
     ///   - completion: The block to call when log entries sent.
     func warning(
         _ message: String,
-        path: String = #file,
+        file: String = #file,
         function: String = #function,
         line: Int = #line,
         context: [String: CustomStringConvertible] = [:],
         completion: (() -> Void)? = nil
     ) {
-        write(.warning, with: message, path: path, function: function, line: line, error: nil, context: context, completion: completion)
+        write(.warning, with: message, file: file, function: function, line: line, error: nil, context: context, completion: completion)
     }
 }
 
@@ -162,7 +162,7 @@ public extension LogRepository {
     /// - Parameters:
     ///   - level: The current level of the log entry.
     ///   - message: Description of the log.
-    ///   - path: Path of the caller.
+    ///   - file: File of the caller.
     ///   - function: Function of the caller.
     ///   - line: Line of the caller.
     ///   - error: Error of the caller.
@@ -170,14 +170,14 @@ public extension LogRepository {
     ///   - completion: The block to call when log entries sent.
     func error(
         _ message: String,
-        path: String = #file,
+        file: String = #file,
         function: String = #function,
         line: Int = #line,
         error: Error? = nil,
         context: [String: CustomStringConvertible] = [:],
         completion: (() -> Void)? = nil
     ) {
-        write(.error, with: message, path: path, function: function, line: line, error: error, context: context, completion: completion)
+        write(.error, with: message, file: file, function: function, line: line, error: error, context: context, completion: completion)
     }
 }
 
