@@ -9,5 +9,5 @@
 /// The set of reducers used to mutate the state.
 public protocol Reducer {}
 
-/// A closure that dispatches the action to mutate the state.
-public typealias Reduce<T: Reducer> = (T) -> Void
+/// A closure that mutates the state with a reducer.
+public typealias StateReducer<T: Reducer> = (T) -> Void
