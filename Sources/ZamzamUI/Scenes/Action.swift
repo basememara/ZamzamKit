@@ -2,9 +2,9 @@
 //  Action.swift
 //  ZamzamUI
 //
-//  Created by Basem Emara on 2020-05-18.
+//  Created by Basem Emara on 2020-04-02.
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-/// The set of actions used to mutate the state.
+/// The action component of the scene.
 public protocol Action {}

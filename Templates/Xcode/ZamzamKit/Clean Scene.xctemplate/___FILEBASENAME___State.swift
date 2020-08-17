@@ -51,7 +51,7 @@ enum ___VARIABLE_productName:identifier___Action: Action {
 
 extension ___VARIABLE_productName:identifier___State {
     
-    func callAsFunction(_ action: ___VARIABLE_productName:identifier___Action) {
+    func callAsFunction(_ reducer: ___VARIABLE_productName:identifier___Action) {
         switch action {
         case .loadMenu(let menu):
             tabMenu = menu

@@ -11,10 +11,10 @@ import ZamzamCore
 
 /// The data of the component.
 public protocol StateRepresentable: AnyObject, Apply {
-    associatedtype ActionType: Action
+    associatedtype ReducerType: Reducer
     
-    /// Receives an action to mutate the state.
-    func callAsFunction(_ action: ActionType)
+    /// Receives a reducer to mutate the state.
+    func callAsFunction(_ reducer: ReducerType)
 }
 
 // MARK: - Observable (Pre-SwiftUI)
