@@ -13,6 +13,21 @@ final class ArrayTests: XCTestCase {}
 
 extension ArrayTests {
     
+    func testSafeOutOfBoundsIndex() {
+        // Given
+        let sample = [1, 3, 5, 7, 9]
+        
+        // When
+        let result = sample[safe: 4]
+        
+        // Then
+        XCTAssertEqual(result, 9)
+        XCTAssertNil(sample[safe: 99])
+    }
+}
+
+extension ArrayTests {
+    
     func testPrepend() {
         // Given
         var sample = [2, 3, 4, 5]
