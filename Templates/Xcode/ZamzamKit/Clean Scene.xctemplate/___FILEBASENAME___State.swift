@@ -43,7 +43,7 @@ extension ___VARIABLE_productName:identifier___State {
 
 // MARK: - Action
 
-enum ___VARIABLE_productName:identifier___Action: Action {
+enum ___VARIABLE_productName:identifier___Action: Interactor {
     case loadMenu([___VARIABLE_productName:identifier___API.TabItem])
 }
 
