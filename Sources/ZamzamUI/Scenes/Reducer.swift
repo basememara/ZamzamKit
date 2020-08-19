@@ -10,4 +10,4 @@
 public protocol Reducer {}
 
 /// A closure that mutates the state with a reducer.
-public typealias StateReducer<T: Reducer> = (T) -> Void
+public typealias StoreReducer<T: Reducer> = (T) -> Void

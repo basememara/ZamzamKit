@@ -10,12 +10,7 @@ import Foundation.NSNotification
 import ZamzamCore
 
 /// The data of the component.
-public protocol StateRepresentable: AnyObject, Apply {
-    associatedtype ReducerType: Reducer
-    
-    /// Receives a reducer to mutate the state.
-    func callAsFunction(_ reducer: ReducerType)
-}
+public protocol StateRepresentable: AnyObject, Apply {}
 
 // MARK: - Observable (Pre-SwiftUI)
 
