@@ -43,7 +43,8 @@ public extension LogRepository {
         
         // Skip if does not meet minimum log level
         guard !destinations.isEmpty else {
-            completion?()
+            guard let completion = completion else { return }
+            DispatchQueue.main.async { completion() }
             return
         }
         
@@ -54,7 +55,8 @@ public extension LogRepository {
                 $0.write(level, with: message, file: file, function: function, line: line, error: error, context: context)
             }
             
-            completion?()
+            guard let completion = completion else { return }
+            DispatchQueue.main.async { completion() }
         }
     }
 }

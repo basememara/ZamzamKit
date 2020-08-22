@@ -39,7 +39,7 @@ public extension ___VARIABLE_productName:identifier___NetworkService {
             }
             
             // Ensure available
-            guard case .success(let item) = $0, let data = item.data else {
+            guard case let .success(item) = $0, let data = item.data else {
                 completion(.failure(.nonExistent))
                 return
             }

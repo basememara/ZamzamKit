@@ -780,7 +780,7 @@ let networkRepository = NetworkRepository(
 )
 
 networkRepository.send(with: request) { result in
-    guard case .success(let response) else { return }
+    guard case let .success(response) else { return }
 
     request.value(forHTTPHeaderField: "X-Test-1") == nil // true
     request.value(forHTTPHeaderField: "X-Test-2") == nil // true
@@ -1334,7 +1334,7 @@ UNUserNotificationCenter.current().add(
 > Get a remote image from the web and convert to a user notification attachment:
 ```swift
 UNNotificationAttachment.download(from: urlString) {
-    guard case .success(let attachment) = $0 else {
+    guard case let .success(attachment) = $0 else {
         log.error("Could not download the remote resource (\(urlString)): \($0.error?.debugDescription).")
         return
     }

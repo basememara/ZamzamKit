@@ -15,7 +15,7 @@ public extension UNNotificationAttachment {
     /// Retrieves a remote image from the web and converts to a user notification attachment.
     ///
     ///     UNNotificationAttachment.download(from: urlString) {
-    ///         guard case .success(let attachment) = $0 else {
+    ///         guard case let .success(attachment) = $0 else {
     ///             log.error("Could not download the remote resource (\(urlString)): \($0.error?.debugDescription).")
     ///             return
     ///         }

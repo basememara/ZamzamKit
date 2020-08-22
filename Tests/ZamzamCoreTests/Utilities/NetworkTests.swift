@@ -36,7 +36,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -78,7 +78,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -141,7 +141,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -197,7 +197,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -239,7 +239,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -298,7 +298,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -354,7 +354,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -396,7 +396,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -455,7 +455,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -511,7 +511,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -553,7 +553,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -612,7 +612,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -668,7 +668,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -710,7 +710,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -774,7 +774,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -836,12 +836,12 @@ extension NetworkTests {
         networkRepository.send(requests: requests[0], requests[1]) { result in
             defer { promise.fulfill() }
             
-            guard case .success(let value0) = result.0 else {
+            guard case let .success(value0) = result.0 else {
                 XCTFail("The network request failed: \(String(describing: result.0.error))")
                 return
             }
             
-            guard case .success(let value1) = result.1 else {
+            guard case let .success(value1) = result.1 else {
                 XCTFail("The network request failed: \(String(describing: result.1.error))")
                 return
             }
@@ -891,17 +891,17 @@ extension NetworkTests {
         networkRepository.send(requests: requests[0], requests[1], requests[2]) { result in
             defer { promise.fulfill() }
             
-            guard case .success(let value0) = result.0 else {
+            guard case let .success(value0) = result.0 else {
                 XCTFail("The network request failed: \(String(describing: result.0.error))")
                 return
             }
             
-            guard case .success(let value1) = result.1 else {
+            guard case let .success(value1) = result.1 else {
                 XCTFail("The network request failed: \(String(describing: result.1.error))")
                 return
             }
             
-            guard case .success(let value2) = result.2 else {
+            guard case let .success(value2) = result.2 else {
                 XCTFail("The network request failed: \(String(describing: result.2.error))")
                 return
             }
@@ -962,22 +962,22 @@ extension NetworkTests {
         networkRepository.send(requests: requests[0], requests[1], requests[2], requests[3]) { result in
             defer { promise.fulfill() }
             
-            guard case .success(let value0) = result.0 else {
+            guard case let .success(value0) = result.0 else {
                 XCTFail("The network request failed: \(String(describing: result.0.error))")
                 return
             }
             
-            guard case .success(let value1) = result.1 else {
+            guard case let .success(value1) = result.1 else {
                 XCTFail("The network request failed: \(String(describing: result.1.error))")
                 return
             }
             
-            guard case .success(let value2) = result.2 else {
+            guard case let .success(value2) = result.2 else {
                 XCTFail("The network request failed: \(String(describing: result.2.error))")
                 return
             }
             
-            guard case .success(let value3) = result.3 else {
+            guard case let .success(value3) = result.3 else {
                 XCTFail("The network request failed: \(String(describing: result.3.error))")
                 return
             }
@@ -1046,7 +1046,7 @@ extension NetworkTests {
         networkRepository.send(with: request) {
             defer { promise.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The network request failed: \(String(describing: $0.error))")
                 return
             }
@@ -1100,22 +1100,22 @@ extension NetworkTests {
         networkRepository.send(requests: requests[0], requests[1], requests[2], requests[3]) { result in
             defer { promise.fulfill() }
             
-            guard case .success(let value0) = result.0 else {
+            guard case let .success(value0) = result.0 else {
                 XCTFail("The network request failed: \(String(describing: result.0.error))")
                 return
             }
             
-            guard case .success(let value1) = result.1 else {
+            guard case let .success(value1) = result.1 else {
                 XCTFail("The network request failed: \(String(describing: result.1.error))")
                 return
             }
             
-            guard case .success(let value2) = result.2 else {
+            guard case let .success(value2) = result.2 else {
                 XCTFail("The network request failed: \(String(describing: result.2.error))")
                 return
             }
             
-            guard case .success(let value3) = result.3 else {
+            guard case let .success(value3) = result.3 else {
                 XCTFail("The network request failed: \(String(describing: result.3.error))")
                 return
             }

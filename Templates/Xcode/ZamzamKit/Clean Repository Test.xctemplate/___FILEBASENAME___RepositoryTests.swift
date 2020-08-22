@@ -17,7 +17,7 @@ extension ___VARIABLE_productName:identifier___RepositoryTests {
         ___VARIABLE_productName:identifier___Repository.fetch(with: request) {
             defer { promise?.fulfill() }
             
-            guard case .success(let value) = $0 else {
+            guard case let .success(value) = $0 else {
                 XCTFail("The request failed: \(String(describing: $0.error))")
                 return
             }

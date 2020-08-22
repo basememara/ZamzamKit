@@ -135,7 +135,7 @@ public extension LogHTTPService {
         payload.merge(parameters) { $1 }
         
         guard let log = payload.jsonString() else {
-            print("🤍 \(timestamp: Date()) [PCO] ERROR Logger unable to encode parameters for destination.")
+            print("🤍 \(timestamp: Date()) ERROR Logger unable to encode parameters for destination.")
             return
         }
         
@@ -151,13 +151,16 @@ public extension LogHTTPService {
 private extension LogHTTPService {
     
     func send() {
-        guard !buffer.isEmpty, minFlushLevel == .none || buffer.contains(where: { $0.0 >= minFlushLevel }) else { return }
+        guard !buffer.isEmpty,
+            minFlushLevel == .none || buffer.contains(where: { $0.0 >= minFlushLevel }) else {
+                return
+        }
         
         let logs = buffer
         buffer = []
         
         guard let data = bulkEncode(logs.map { $0.1 }) else {
-            print("🤍 \(timestamp: Date()) [PCO] PRINT Could not begin log destination task")
+            print("🤍 \(timestamp: Date()) PRINT Could not begin log destination task")
             return
         }
         
@@ -167,8 +170,8 @@ private extension LogHTTPService {
         BackgroundTask.run(for: .shared) { task in
             self.networkRepository.send(with: request) {
                 // Add back to the buffer if could not send
-                if case .failure(let error) = $0 {
-                    print("🤍 \(timestamp: Date()) [PCO] PRINT Error from log destination: \(error)")
+                if case let .failure(error) = $0 {
+                    print("🤍 \(timestamp: Date()) PRINT Error from log destination: \(error)")
                     DispatchQueue.logger.async { self.buffer += logs }
                 }
                 
