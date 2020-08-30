@@ -141,6 +141,8 @@ extension LoggingTests {
     }
 }
 
+// MARK: - Mocks
+
 private extension LoggingTests {
     
     class LogTestService: LogService {

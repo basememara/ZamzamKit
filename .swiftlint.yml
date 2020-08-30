@@ -43,6 +43,7 @@ opt_in_rules:
 disabled_rules:
 - function_body_length
 - function_default_parameter_at_end
+- function_parameter_count
 - identifier_name
 - line_length
 - todo

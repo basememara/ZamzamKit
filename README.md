@@ -707,11 +707,11 @@ let networkRepository = NetworkRepository(
 
 networkRepository.send(with: request) { result in
     switch result {
-    case .success(let response):
+    case let .success(response):
         response.data
         response.headers
         response.statusCode
-    case .failure(let error):
+    case let .failure(error):
         error.statusCode
     }
 }
@@ -735,23 +735,23 @@ let request3 = URLRequest(
 
 networkRepository.send(requests: request1, request2, request3) { firstResult, anotherResult, otherResult in
     switch firstResult {
-    case .success(let response):
+    case let .success(response):
         response.data
-    case .failure(let error):
+    case let .failure(error):
         error.statusCode
     }
 
     switch anotherResult {
-    case .success(let response):
+    case let .success(response):
         response.data
-    case .failure(let error):
+    case let .failure(error):
         error.statusCode
     }
     
     switch otherResult {
-    case .success(let response):
+    case let .success(response):
         response.data
-    case .failure(let error):
+    case let .failure(error):
         error.statusCode
     }
 }

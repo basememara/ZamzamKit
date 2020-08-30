@@ -81,7 +81,7 @@ private extension ___VARIABLE_productName:identifier___ViewController {
         switch result {
         case .updated(\___VARIABLE_productName:identifier___State.posts), .initial:
             tableView.reloadData()
-        case .failure(let error):
+        case let .failure(error):
             present(alert: error.title, message: error.message)
         default:
             break

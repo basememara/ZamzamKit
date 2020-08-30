@@ -11,6 +11,10 @@ import Foundation.NSURL
 public extension URL {
     
     /// Non-optional initializer with documented fail output.
+    ///
+    ///     // Instead of: URL(string: "https://apple.com")!
+    ///     let url: URL = URL(safeString: "https://apple.com")
+    ///
     init(safeString string: String) {
         // https://ericasadun.com/2017/01/06/holy-war-forced-unwrapping-urls/
         guard let instance = URL(string: string) else {

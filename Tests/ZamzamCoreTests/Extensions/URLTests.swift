@@ -30,7 +30,7 @@ extension URLTests {
     func testAppendingQueryItem() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = URL(string: value)!.appendingQueryItem("aBc", value: "555").absoluteString
+        let newValue = URL(safeString: value).appendingQueryItem("aBc", value: "555").absoluteString
         let expectedValue = "https://example.com?lmn=tuv&xyz=987&aBc=555"
         
         XCTAssertEqual(newValue, expectedValue)
@@ -39,7 +39,7 @@ extension URLTests {
     func testRemoveQueryStringParameter() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = URL(string: value)!.removeQueryItem("xyz").absoluteString
+        let newValue = URL(safeString: value).removeQueryItem("xyz").absoluteString
         let expectedValue = "https://example.com?abc=123&lmn=tuv"
         
         XCTAssertEqual(newValue, expectedValue)
@@ -49,12 +49,12 @@ extension URLTests {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
         XCTAssertEqual(
-            URL(string: value)!.appendingQueryItem("def", value: "456").absoluteString,
+            URL(safeString: value).appendingQueryItem("def", value: "456").absoluteString,
             "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
         )
         
         XCTAssertEqual(
-            URL(string: value)!.appendingQueryItem("xyz", value: "999").absoluteString,
+            URL(safeString: value).appendingQueryItem("xyz", value: "999").absoluteString,
             "https://example.com?abc=123&lmn=tuv&xyz=999"
         )
     }
@@ -62,7 +62,7 @@ extension URLTests {
     func testAppendingQueryItemForList() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        let newValue = URL(string: value)!.appendingQueryItems([
+        let newValue = URL(safeString: value).appendingQueryItems([
             "def": "456",
             "jkl": "777",
             "abc": "333",
@@ -79,7 +79,7 @@ extension URLTests {
     func testAppendingQueryItemForNoInitialParameters() {
         // Subfolder
         XCTAssertEqual(
-            URL(string: "https://example.com/abc/xyz")!
+            URL(safeString: "https://example.com/abc/xyz")
                 .appendingQueryItem("abc", value: "123")
                 .absoluteString,
             "https://example.com/abc/xyz?abc=123"
@@ -87,7 +87,7 @@ extension URLTests {
         
         // Hash in URL
         XCTAssertEqual(
-            URL(string: "https://example.com/abc/xyz#test")!
+            URL(safeString: "https://example.com/abc/xyz#test")
                 .appendingQueryItem("xyz", value: "987")
                 .absoluteString,
             "https://example.com/abc/xyz?xyz=987#test"
@@ -95,7 +95,7 @@ extension URLTests {
         
         // Subfolder with trailing slash
         XCTAssertEqual(
-            URL(string: "https://example.com/abc/xyz/")!
+            URL(safeString: "https://example.com/abc/xyz/")
                 .appendingQueryItem("abc", value: "123")
                 .absoluteString,
             "https://example.com/abc/xyz/?abc=123"
@@ -103,7 +103,7 @@ extension URLTests {
         
         // Hash in URL with trailing slash
         XCTAssertEqual(
-            URL(string: "https://example.com/abc/xyz/#test")!
+            URL(safeString: "https://example.com/abc/xyz/#test")
                 .appendingQueryItem("xyz", value: "987")
                 .absoluteString,
             "https://example.com/abc/xyz/?xyz=987#test"
@@ -113,7 +113,7 @@ extension URLTests {
     func testAppendingQueryItemForDomain() {
         // Pure domain
         XCTAssertEqual(
-            URL(string: "https://example.com")!
+            URL(safeString: "https://example.com")
                 .appendingQueryItem("abc", value: "123")
                 .absoluteString,
             "https://example.com?abc=123"
@@ -121,7 +121,7 @@ extension URLTests {
         
         // With trailing slash
         XCTAssertEqual(
-            URL(string: "https://example.com/")!
+            URL(safeString: "https://example.com/")
                 .appendingQueryItem("xyz", value: "987")
                 .absoluteString,
             "https://example.com/?xyz=987"
@@ -130,14 +130,14 @@ extension URLTests {
     
     func testAppendingQueryItemForStrongTypes() {
         XCTAssertEqual(
-            URL(string: "https://example.com")!
+            URL(safeString: "https://example.com")
                 .appendingQueryItem("abc", value: 1)
                 .absoluteString,
             "https://example.com?abc=1"
         )
         
         XCTAssertEqual(
-            URL(string: "https://example.com/")!
+            URL(safeString: "https://example.com/")
                 .appendingQueryItem("xyz", value: true)
                 .absoluteString,
             "https://example.com/?xyz=true"
@@ -150,8 +150,8 @@ extension URLTests {
     func testGetQueryItem() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
         
-        XCTAssertEqual(URL(string: value)!.queryItem("aBc"), "123")
-        XCTAssertEqual(URL(string: value)!.queryItem("lmn"), "tuv")
-        XCTAssertNil(URL(string: value)!.queryItem("yyy"))
+        XCTAssertEqual(URL(safeString: value).queryItem("aBc"), "123")
+        XCTAssertEqual(URL(safeString: value).queryItem("lmn"), "tuv")
+        XCTAssertNil(URL(safeString: value).queryItem("yyy"))
     }
 }

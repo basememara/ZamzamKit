@@ -1,5 +1,5 @@
 //
-//  FailableCodableArray.swift
+//  Decodable.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2018-06-12.

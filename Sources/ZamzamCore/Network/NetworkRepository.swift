@@ -48,11 +48,11 @@ public extension NetworkRepository {
     ///
     ///     networkRepository.send(with: request) { result in
     ///         switch result {
-    ///         case .success(let response):
+    ///         case let .success(response):
     ///             response.data
     ///             response.headers
     ///             response.statusCode
-    ///         case .failure(let error):
+    ///         case let .failure(error):
     ///             error.statusCode
     ///         }
     ///     }
@@ -60,7 +60,7 @@ public extension NetworkRepository {
     /// - Parameters:
     ///   - request: A network request object that provides the URL, parameters, headers, and so on.
     ///   - completion: The completion handler to call when the load request is complete.
-    func send(with request: URLRequest, completion: @escaping (Result<NetworkAPI.Response, NetworkAPI.Error>) -> Void) {
+    func send(with request: URLRequest, completion: @escaping (NetworkAPI.URLResult) -> Void) {
         let request = adapter?.adapt(request) ?? request
         service.send(with: request, completion: completion)
     }
@@ -80,30 +80,25 @@ public extension NetworkRepository {
     ///         method: .post
     ///     )
     ///
-    ///     let request3 = URLRequest(
-    ///         url: URL(string: "https://httpbin.org/delete")!,
-    ///         method: .delete
-    ///     )
-    ///
-    ///     networkRepository.send(requests: request1, request2, request3) { result in
+    ///     networkRepository.send(requests: request1, request2) { first, second in
     ///         switch result.0 {
-    ///         case .success(let response):
+    ///         case let .success(response):
     ///             response.data
-    ///         case .failure(let error):
+    ///         case let .failure(error):
     ///             error.statusCode
     ///         }
     ///
-    ///         switch result.1 {
-    ///         case .success(let response):
+    ///         switch first {
+    ///         case let .success(response):
     ///             response.data
-    ///         case .failure(let error):
+    ///         case let .failure(error):
     ///             error.statusCode
     ///         }
     ///
-    ///         switch result.2 {
-    ///         case .success(let response):
+    ///         switch second {
+    ///         case let .success(response):
     ///             response.data
-    ///         case .failure(let error):
+    ///         case let .failure(error):
     ///             error.statusCode
     ///         }
     ///     }
@@ -139,25 +134,25 @@ public extension NetworkRepository {
     ///         method: .delete
     ///     )
     ///
-    ///     networkRepository.send(requests: request1, request2, request3) { result in
-    ///         switch result.0 {
-    ///         case .success(let response):
+    ///     networkRepository.send(requests: request1, request2, request3) { first, second, third in
+    ///         switch first {
+    ///         case let .success(response):
     ///             response.data
-    ///         case .failure(let error):
+    ///         case let .failure(error):
     ///             error.statusCode
     ///         }
     ///
-    ///         switch result.1 {
-    ///         case .success(let response):
+    ///         switch second {
+    ///         case let .success(response):
     ///             response.data
-    ///         case .failure(let error):
+    ///         case let .failure(error):
     ///             error.statusCode
     ///         }
     ///
-    ///         switch result.2 {
-    ///         case .success(let response):
+    ///         switch third {
+    ///         case let .success(response):
     ///             response.data
-    ///         case .failure(let error):
+    ///         case let .failure(error):
     ///             error.statusCode
     ///         }
     ///     }
@@ -195,25 +190,37 @@ public extension NetworkRepository {
     ///         method: .delete
     ///     )
     ///
-    ///     networkRepository.send(requests: request1, request2, request3) { result in
-    ///         switch result.0 {
-    ///         case .success(let response):
+    ///     let request4 = URLRequest(
+    ///         url: URL(string: "https://httpbin.org/patch")!,
+    ///         method: .patch
+    ///     )
+    ///
+    ///     networkRepository.send(requests: request1, request2, request3, request4) { first, second, third, fourth in
+    ///         switch first {
+    ///         case let .success(response):
     ///             response.data
-    ///         case .failure(let error):
+    ///         case let .failure(error):
     ///             error.statusCode
     ///         }
     ///
-    ///         switch result.1 {
-    ///         case .success(let response):
+    ///         switch second {
+    ///         case let .success(response):
     ///             response.data
-    ///         case .failure(let error):
+    ///         case let .failure(error):
     ///             error.statusCode
     ///         }
     ///
-    ///         switch result.2 {
-    ///         case .success(let response):
+    ///         switch third {
+    ///         case let .success(response):
     ///             response.data
-    ///         case .failure(let error):
+    ///         case let .failure(error):
+    ///             error.statusCode
+    ///         }
+    ///
+    ///         switch fourth {
+    ///         case let .success(response):
+    ///             response.data
+    ///         case let .failure(error):
     ///             error.statusCode
     ///         }
     ///     }
@@ -239,11 +246,11 @@ public extension NetworkRepository {
 
 private extension NetworkRepository {
     
-    func send(requests: URLRequest..., completion: @escaping ([Result<NetworkAPI.Response, NetworkAPI.Error>]) -> Void) {
+    func send(requests: URLRequest..., completion: @escaping ([NetworkAPI.URLResult]) -> Void) {
         let dispatchGroup = DispatchGroup()
         
         // Preallocate array size to retain order of requests
-        var results: [Result<NetworkAPI.Response, NetworkAPI.Error>] = requests.map {
+        var results: [NetworkAPI.URLResult] = requests.map {
             .failure(NetworkAPI.Error(request: $0))
         }
         

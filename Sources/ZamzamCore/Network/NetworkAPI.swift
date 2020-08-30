@@ -12,7 +12,7 @@ import Foundation.NSURLRequest
 // MARK: - Service
 
 public protocol NetworkService {
-    func send(with request: URLRequest, completion: @escaping (Result<NetworkAPI.Response, NetworkAPI.Error>) -> Void)
+    func send(with request: URLRequest, completion: @escaping (NetworkAPI.URLResult) -> Void)
 }
 
 // MARK: - Types

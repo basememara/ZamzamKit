@@ -52,7 +52,15 @@ public extension LogRepository {
             let context = Self.context.merging(context) { $1 }
             
             destinations.forEach {
-                $0.write(level, with: message, file: file, function: function, line: line, error: error, context: context)
+                $0.write(
+                    level,
+                    with: message,
+                    file: file,
+                    function: function,
+                    line: line,
+                    error: error,
+                    context: context
+                )
             }
             
             guard let completion = completion else { return }
@@ -81,7 +89,16 @@ public extension LogRepository {
         context: [String: CustomStringConvertible] = [:],
         completion: (() -> Void)? = nil
     ) {
-        write(.verbose, with: message, file: file, function: function, line: line, error: nil, context: context, completion: completion)
+        write(
+            .verbose,
+            with: message,
+            file: file,
+            function: function,
+            line: line,
+            error: nil,
+            context: context,
+            completion: completion
+        )
     }
 }
 
@@ -105,7 +122,16 @@ public extension LogRepository {
         context: [String: CustomStringConvertible] = [:],
         completion: (() -> Void)? = nil
     ) {
-        write(.debug, with: message, file: file, function: function, line: line, error: nil, context: context, completion: completion)
+        write(
+            .debug,
+            with: message,
+            file: file,
+            function: function,
+            line: line,
+            error: nil,
+            context: context,
+            completion: completion
+        )
     }
 }
 
@@ -129,7 +155,16 @@ public extension LogRepository {
         context: [String: CustomStringConvertible] = [:],
         completion: (() -> Void)? = nil
     ) {
-        write(.info, with: message, file: file, function: function, line: line, error: nil, context: context, completion: completion)
+        write(
+            .info,
+            with: message,
+            file: file,
+            function: function,
+            line: line,
+            error: nil,
+            context: context,
+            completion: completion
+        )
     }
 }
 
@@ -153,7 +188,16 @@ public extension LogRepository {
         context: [String: CustomStringConvertible] = [:],
         completion: (() -> Void)? = nil
     ) {
-        write(.warning, with: message, file: file, function: function, line: line, error: nil, context: context, completion: completion)
+        write(
+            .warning,
+            with: message,
+            file: file,
+            function: function,
+            line: line,
+            error: nil,
+            context: context,
+            completion: completion
+        )
     }
 }
 
@@ -179,7 +223,16 @@ public extension LogRepository {
         context: [String: CustomStringConvertible] = [:],
         completion: (() -> Void)? = nil
     ) {
-        write(.error, with: message, file: file, function: function, line: line, error: error, context: context, completion: completion)
+        write(
+            .error,
+            with: message,
+            file: file,
+            function: function,
+            line: line,
+            error: error,
+            context: context,
+            completion: completion
+        )
     }
 }
 

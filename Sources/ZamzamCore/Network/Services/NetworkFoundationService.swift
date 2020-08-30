@@ -24,7 +24,7 @@ public struct NetworkFoundationService: NetworkService {
 
 public extension NetworkFoundationService {
     
-    func send(with request: URLRequest, completion: @escaping (Result<NetworkAPI.Response, NetworkAPI.Error>) -> Void) {
+    func send(with request: URLRequest, completion: @escaping (NetworkAPI.URLResult) -> Void) {
         session.dataTask(
             with: request,
             completionHandler: completion

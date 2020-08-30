@@ -6,7 +6,7 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-#if canImport(ClockKit)
+#if os(watchOS)
 import Foundation
 import ClockKit
 
