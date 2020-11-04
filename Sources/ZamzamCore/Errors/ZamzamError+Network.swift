@@ -27,7 +27,7 @@ public extension ZamzamError {
         // Handle by status code
         switch error?.statusCode {
         case 400:
-            self = .invalidData
+            self = .requestFailure(error)
         case 401, 403:
             self = .unauthorized
         default:
