@@ -17,7 +17,6 @@ import UIKit.UIDevice
 /// Log destination for sending over HTTP.
 final public class LogHTTPService {
     private let urlRequest: URLRequest
-    private let bulkEncode: ([String]) -> Data?
     private let maxEntriesInBuffer: Int
     private let minFlushLevel: LogAPI.Level
     private let isDebug: Bool
@@ -28,6 +27,9 @@ final public class LogHTTPService {
     private let deviceModel = UIDevice.current.model
     private var deviceIdentifier = UIDevice.current.identifierForVendor?.uuidString ?? ""
     private let osVersion = UIDevice.current.systemVersion
+    
+    /// Closure that converts the buffer to data.
+    private let bufferEncode: ([(LogAPI.Level, String)]) -> Data?
     
     /// Stores the log entries in memory until it is ready to send.
     private var buffer: [(LogAPI.Level, String)] = []
@@ -45,7 +47,7 @@ final public class LogHTTPService {
     ///   - notificationCenter: A notification dispatch mechanism that registers observers for flushing the buffer at certain app lifecycle events.
     public init(
         urlRequest: URLRequest,
-        bulkEncode: @escaping ([String]) -> Data?,
+        bufferEncode: @escaping ([(LogAPI.Level, String)]) -> Data?,
         maxEntriesInBuffer: Int,
         minFlushLevel: LogAPI.Level = .none,
         isDebug: Bool,
@@ -54,7 +56,7 @@ final public class LogHTTPService {
         notificationCenter: NotificationCenter
     ) {
         self.urlRequest = urlRequest
-        self.bulkEncode = bulkEncode
+        self.bufferEncode = bufferEncode
         self.maxEntriesInBuffer = maxEntriesInBuffer
         self.minFlushLevel = minFlushLevel
         self.isDebug = isDebug
@@ -122,7 +124,7 @@ public extension LogHTTPService {
                 "is_simulator": constants.isRunningOnSimulator
             ],
             "code": [
-                "file": file,
+                "file": "\(file.split(separator: "/").last ?? "")",
                 "function": function,
                 "line": line
             ]
@@ -159,7 +161,7 @@ private extension LogHTTPService {
         let logs = buffer
         buffer = []
         
-        guard let data = bulkEncode(logs.map { $0.1 }) else {
+        guard let data = bufferEncode(logs) else {
             print("🤍 \(timestamp: Date()) PRINT Could not begin log destination task")
             return
         }
