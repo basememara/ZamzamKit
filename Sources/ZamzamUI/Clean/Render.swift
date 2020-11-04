@@ -6,5 +6,5 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-/// The render component of the scene.
+/// The render component of the view render flow.
 public protocol Render {}

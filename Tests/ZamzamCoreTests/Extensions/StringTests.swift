@@ -1,5 +1,5 @@
 //
-//  StringHelper.swift
+//  StringTests.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 1/20/16.
@@ -9,9 +9,7 @@
 import XCTest
 import ZamzamCore
 
-final class StringTests: XCTestCase {
-    
-}
+final class StringTests: XCTestCase {}
 
 extension StringTests {
     

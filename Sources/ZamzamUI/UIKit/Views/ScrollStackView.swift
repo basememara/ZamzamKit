@@ -48,9 +48,8 @@ open class ScrollStackView: UIScrollView {
             : (stackView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true)
     }
     
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    @available(*, unavailable)
+    required public init?(coder: NSCoder) { nil }
 }
 
 // MARK: - Access Rows

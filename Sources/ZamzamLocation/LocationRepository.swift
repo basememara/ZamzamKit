@@ -16,14 +16,14 @@ public class LocationRepository {
     private let service: LocationService
     
     /// Subscribes to receive new data when available
-    private var didChangeAuthorizationHandlers = Synchronized<[Observer<AuthorizationHandler>]>([])
-    private var didChangeAuthorizationSingleUseHandlers = Synchronized<[AuthorizationHandler]>([])
-    private var didUpdateLocationsHandlers = Synchronized<[Observer<LocationHandler>]>([])
-    private var didUpdateLocationsSingleUseHandlers = Synchronized<[LocationHandler]>([])
+    private var didChangeAuthorizationHandlers = Atomic<[Observer<AuthorizationHandler>]>([])
+    private var didChangeAuthorizationSingleUseHandlers = Atomic<[AuthorizationHandler]>([])
+    private var didUpdateLocationsHandlers = Atomic<[Observer<LocationHandler>]>([])
+    private var didUpdateLocationsSingleUseHandlers = Atomic<[LocationHandler]>([])
     
     #if os(iOS)
     public typealias HeadingHandler = (CLHeading) -> Void
-    private var didUpdateHeading = Synchronized<[Observer<HeadingHandler>]>([])
+    private var didUpdateHeading = Atomic<[Observer<HeadingHandler>]>([])
     #endif
     
     public init(service: LocationService) {

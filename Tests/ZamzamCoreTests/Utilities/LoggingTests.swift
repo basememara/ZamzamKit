@@ -10,9 +10,7 @@
 import XCTest
 import ZamzamCore
 
-final class LoggingTests: XCTestCase {
-    
-}
+final class LoggingTests: XCTestCase {}
 
 extension LoggingTests {
     

@@ -24,14 +24,14 @@ public class WatchSession: NSObject, WCSessionDelegate {
     }
     
     /// Subscription queues for firing within delegates
-    private var activationDidCompleteSingle = Synchronized<[ActivationHandler]>([])
-    private var didBecomeInactive = Synchronized<[Observer<() -> Void>]>([])
-    private var didDeactivate = Synchronized<[Observer<() -> Void>]>([])
-    private var stateDidChange = Synchronized<[Observer<() -> Void>]>([])
-    private var reachabilityDidChange = Synchronized<[ReachabilityChangeObserver]>([])
-    private var didReceiveApplicationContext = Synchronized<[ReceiveApplicationContextObserver]>([])
-    private var didReceiveUserInfo = Synchronized<[ReceiveUserInfoObserver]>([])
-    private var didReceiveMessage = Synchronized<[ReceiveMessageObserver]>([])
+    private var activationDidCompleteSingle = Atomic<[ActivationHandler]>([])
+    private var didBecomeInactive = Atomic<[Observer<() -> Void>]>([])
+    private var didDeactivate = Atomic<[Observer<() -> Void>]>([])
+    private var stateDidChange = Atomic<[Observer<() -> Void>]>([])
+    private var reachabilityDidChange = Atomic<[ReachabilityChangeObserver]>([])
+    private var didReceiveApplicationContext = Atomic<[ReceiveApplicationContextObserver]>([])
+    private var didReceiveUserInfo = Atomic<[ReceiveUserInfoObserver]>([])
+    private var didReceiveMessage = Atomic<[ReceiveMessageObserver]>([])
     
     deinit {
         // Empty task queues of references

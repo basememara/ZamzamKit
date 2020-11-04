@@ -1,8 +1,9 @@
 //
 //  URLTests.swift
-//  ZamzamCore
+//  ZamzamCoreTests
 //
 //  Created by Basem Emara on 2020-03-26.
+//  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
 import XCTest
