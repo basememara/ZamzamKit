@@ -10,6 +10,11 @@ import Foundation.NSURL
 
 public extension URL {
     
+    /// An invalid URL value.
+    ///
+    /// Use this constant when you want to indicate that a URL is invalid.
+    static let invalidURL = URL(safeString: "https://")
+    
     /// Non-optional initializer with documented fail output.
     ///
     ///     // Instead of: URL(string: "https://apple.com")!
