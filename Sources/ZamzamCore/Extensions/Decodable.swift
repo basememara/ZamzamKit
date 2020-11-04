@@ -18,11 +18,17 @@ public struct FailableCodableArray<Element: Decodable>: Decodable {
         
         init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
-            self.base = try? container.decode(Base.self)
+            
+            do {
+                self.base = try container.decode(Base.self)
+            } catch {
+                self.base = nil
+                print("🤍 \(timestamp: Date()) ERROR Failed to decode \(Base.self): \(error)")
+            }
         }
     }
     
-    private(set) public var elements: [Element]
+    public private(set) var elements: [Element]
     
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
