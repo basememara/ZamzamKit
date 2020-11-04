@@ -86,6 +86,18 @@ extension CurrencyFormatterTests {
 
 extension CurrencyFormatterTests {
     
+    func testZeroSymbol() {
+        let formatter = CurrencyFormatter(for: defaultLocale, zeroSymbol: "---")
+        
+        let amount: Double = 123456789.987
+        XCTAssertEqual(formatter.string(fromAmount: amount), "$123,456,789.99")
+        
+        XCTAssertEqual(formatter.string(fromAmount: 0), "---")
+    }
+}
+
+extension CurrencyFormatterTests {
+    
     func testPositivePrefix() {
         let formatter = CurrencyFormatter(for: defaultLocale, usePrefix: true)
         

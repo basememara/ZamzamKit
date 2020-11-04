@@ -20,14 +20,22 @@ public struct CurrencyFormatter {
     ///   - locale: The locale to retrieve the currency from.
     ///   - autoTruncate: Truncate decimal if `.00`.
     ///   - decimalDigits: The minimum number of digits after the decimal separator. Default is 2.
+    ///   - zeroSymbol: The string used to represent a zero value.
     ///   - usePrefix: Adds a prefix for positive and negative values.
-    public init(for locale: Locale = .current, autoTruncate: Bool = false, decimalDigits: Int = 2, usePrefix: Bool = false) {
+    public init(
+        for locale: Locale = .current,
+        autoTruncate: Bool = false,
+        decimalDigits: Int = 2,
+        zeroSymbol: String? = nil,
+        usePrefix: Bool = false
+    ) {
         self.formatter = NumberFormatter().apply {
             $0.numberStyle = .currency
             $0.locale = locale
             $0.currencyCode = locale.currencyCode
             $0.minimumFractionDigits = decimalDigits
             $0.maximumFractionDigits = decimalDigits
+            $0.zeroSymbol ?= zeroSymbol
             
             if usePrefix {
                 $0.positivePrefix = $0.plusSign + $0.currencySymbol
@@ -53,17 +61,17 @@ public extension CurrencyFormatter {
     ///
     /// - Parameter double: A monetary number that is parsed to create the returned string object.
     /// - Returns: A string containing the formatted value of number using the receiver’s current settings.
-    func string(fromAmount double: Double) -> String {
+    func string(fromAmount double: Double?) -> String {
         let validValue = getAdjustedForDefinedInterval(value: double)
         
         guard autoTruncate, validValue.truncatingRemainder(dividingBy: 1) == 0 else {
-            return formatter.string(from: validValue as NSNumber) ?? "\(double)"
+            return formatter.string(from: validValue as NSNumber) ?? "\(validValue)"
         }
         
         let truncatingFormatter = formatter.copy() as? NumberFormatter // TODO: Lazy load
         truncatingFormatter?.minimumFractionDigits = 0
         truncatingFormatter?.maximumFractionDigits = 0
-        return truncatingFormatter?.string(from: validValue as NSNumber) ?? "\(double)"
+        return truncatingFormatter?.string(from: validValue as NSNumber) ?? "\(validValue)"
     }
     
     /// Returns the given value adjusted to respect formatter's min and max values.
