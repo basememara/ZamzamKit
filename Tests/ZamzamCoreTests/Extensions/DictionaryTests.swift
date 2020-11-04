@@ -9,7 +9,31 @@
 import XCTest
 import ZamzamCore
 
-final class DictionaryTests: XCTestCase {
+final class DictionaryTests: XCTestCase {}
+
+extension DictionaryTests {
+    
+    func testIntialValue() throws {
+        // Given
+        var dictionary = [
+            "abc": 123,
+            "def": 456,
+            "xyz": 789
+        ]
+        
+        // When
+        let value = dictionary["abc", initial: 999]
+        
+        XCTAssertNil(dictionary["lmn"])
+        let value2 = dictionary["lmn", initial: 555]
+        
+        // Then
+        XCTAssertAllEqual(dictionary["abc"], value, 123)
+        XCTAssertAllEqual(dictionary["lmn"], value2, 555)
+    }
+}
+
+extension DictionaryTests {
     
     func testJSONString() throws {
         // Given
