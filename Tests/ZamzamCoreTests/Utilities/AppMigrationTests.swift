@@ -248,12 +248,11 @@ private extension AppMigrationTests {
 }
 
 private extension AppMigration {
-    private class TempClassForBundle {}
     
     static func makeMigration(forVersion version: String) -> AppMigration {
         let migration = AppMigration(
             userDefaults: UserDefaults(suiteName: "AppMigrationTests")!,
-            bundle: Bundle(for: TempClassForBundle.self)
+            bundle: .module
         )
         
         // Simulate build version
