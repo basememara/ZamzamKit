@@ -91,7 +91,7 @@ public extension LogService {
 
 public enum LogAPI {
     
-    public enum Level: Int, Comparable, CaseIterable {
+    public enum Level: Comparable, CaseIterable {
         case verbose
         case debug
         case info
@@ -99,10 +99,6 @@ public enum LogAPI {
         case error
         
         /// Disables a log service when used as minimum level
-        case none = 99
-        
-        public static func < (lhs: Level, rhs: Level) -> Bool {
-            lhs.rawValue < rhs.rawValue
-        }
+        case none
     }
 }
