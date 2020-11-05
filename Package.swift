@@ -1,9 +1,10 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.3
 
 import PackageDescription
 
 let package = Package(
     name: "ZamzamKit",
+    defaultLocalization: "en",
     platforms: [
         .macOS(.v10_14),
         .iOS(.v11),
@@ -34,7 +35,8 @@ let package = Package(
         ),
         .testTarget(
             name: "ZamzamCoreTests",
-            dependencies: ["ZamzamCore"]
+            dependencies: ["ZamzamCore"],
+            resources: [.process("Resources")]
         ),
         .target(
             name: "ZamzamLocation",

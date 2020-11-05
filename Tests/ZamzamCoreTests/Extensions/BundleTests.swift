@@ -10,7 +10,7 @@ import XCTest
 import ZamzamCore
 
 class BundleTests: XCTestCase {
-    lazy var bundle = Bundle(for: type(of: self))
+    private let bundle: Bundle = .module
 }
 
 extension BundleTests {

@@ -11,17 +11,7 @@ import Foundation.NSBundle
 public extension Bundle {
     
     /// A representation of the code and resources stored in ZamzamCore bundle directory on disk.
-    static let zamzamCore: Bundle = {
-        // Bundle should be explicitly added to main project until SPM supports resources
-        // https://bugs.swift.org/browse/SR-2866
-        guard let url = Bundle.main.url(forResource: "ZamzamCore", withExtension: "bundle"),
-            let bundle = Bundle(url: url) else {
-                class TempClassForBundle {}
-                return Bundle(for: TempClassForBundle.self)
-        }
-        
-        return bundle
-    }()
+    static let zamzamCore: Bundle = .module
 }
 
 public extension Bundle {

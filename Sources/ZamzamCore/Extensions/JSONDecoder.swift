@@ -35,9 +35,18 @@ public extension JSONDecoder {
     /// - Parameters:
     ///   - type: The type to decode.
     ///   - name: The name of the embedded resource.
+    ///   - ext: The extension of the resource file.
     ///   - bundle: The bundle of the embedded resource.
-    func decode<T>(_ type: T.Type, forResource name: String?, inBundle bundle: Bundle) throws -> T where T: Decodable {
-        guard let url = bundle.url(forResource: name, withExtension: nil) else {
+    func decode<T>(
+        _ type: T.Type,
+        forResource name: String,
+        inBundle bundle: Bundle
+    ) throws -> T where T: Decodable {
+        let path = URL(fileURLWithPath: name)
+        let file = path.deletingPathExtension().lastPathComponent
+        let ext = path.pathExtension
+        
+        guard let url = bundle.url(forResource: file, withExtension: ext) else {
             throw DecodingError.dataCorrupted(DecodingError.Context(
                 codingPath: [],
                 debugDescription: "Could not find the resource."

@@ -48,17 +48,6 @@ extension FileTests {
             "The file location path for \(fileName) seems incorrect (file doesn't exist)")
     }
     
-    func testGetDocumentPaths() {
-        let value = FileManager.default.paths(from: .downloadsDirectory)
-        let expectedValue = [
-            fileInDirectory(fileName),
-            fileInDirectory(fileName2)
-        ]
-        
-        XCTAssert(value.contains(expectedValue[0]) && value.contains(expectedValue[1]),
-            "The file paths for the document directory seems incorrect")
-    }
-    
     func testDownloadFile() {
         let expectation = self.expectation(description: "Download remote file")
         let url = "http://basememara.com/wp-content/uploads/2017/01/CapturFiles_125-150x150.png"
@@ -71,6 +60,22 @@ extension FileTests {
         waitForExpectations(timeout: 5.0, handler: nil)
     }
 }
+
+#if os(iOS)
+extension FileTests {
+    
+    func testGetDocumentPaths() {
+        let value = FileManager.default.paths(from: .downloadsDirectory)
+        let expectedValue = [
+            fileInDirectory(fileName),
+            fileInDirectory(fileName2)
+        ]
+        
+        XCTAssert(value.contains(expectedValue[0]) && value.contains(expectedValue[1]),
+                  "The file paths for the document directory seems incorrect")
+    }
+}
+#endif
 
 private extension FileTests {
     

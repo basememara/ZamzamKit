@@ -42,8 +42,6 @@ extension DecodableTests {
         
     func testInBundle() throws {
         // Given
-        let bundle = Bundle(for: type(of: self))
-        
         struct TestModel: Decodable {
             let string: String
             let integer: Int
@@ -53,7 +51,7 @@ extension DecodableTests {
         let model = try jsonDecoder.decode(
             TestModel.self,
             forResource: "TestModel.json",
-            inBundle: bundle
+            inBundle: .module
         )
         
         // Then
