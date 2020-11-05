@@ -124,7 +124,7 @@ public extension LogHTTPService {
                 "is_simulator": constants.isRunningOnSimulator
             ],
             "code": [
-                "file": "\(file.split(separator: "/").last ?? "")",
+                "file": "\(file)",
                 "function": function,
                 "line": line
             ]
@@ -154,8 +154,9 @@ private extension LogHTTPService {
     
     func send() {
         guard !buffer.isEmpty,
-            minFlushLevel == .none || buffer.contains(where: { $0.0 >= minFlushLevel }) else {
-                return
+              minFlushLevel == .none || buffer.contains(where: { $0.0 >= minFlushLevel })
+        else {
+            return
         }
         
         let logs = buffer
@@ -170,7 +171,7 @@ private extension LogHTTPService {
         request.httpBody = data
         
         BackgroundTask.run(for: .shared) { task in
-            self.networkRepository.send(with: request) {
+            networkRepository.send(with: request) {
                 // Add back to the buffer if could not send
                 if case let .failure(error) = $0 {
                     print("🤍 \(timestamp: Date()) PRINT Error from log destination: \(error)")
