@@ -83,7 +83,7 @@ public extension LogRepository {
     ///   - completion: The block to call when log entries sent.
     func verbose(
         _ message: String,
-        file: String = #file,
+        file: String = #fileID,
         function: String = #function,
         line: Int = #line,
         context: [String: CustomStringConvertible] = [:],
@@ -116,7 +116,7 @@ public extension LogRepository {
     ///   - completion: The block to call when log entries sent.
     func debug(
         _ message: String,
-        file: String = #file,
+        file: String = #fileID,
         function: String = #function,
         line: Int = #line,
         context: [String: CustomStringConvertible] = [:],
@@ -149,7 +149,7 @@ public extension LogRepository {
     ///   - completion: The block to call when log entries sent.
     func info(
         _ message: String,
-        file: String = #file,
+        file: String = #fileID,
         function: String = #function,
         line: Int = #line,
         context: [String: CustomStringConvertible] = [:],
@@ -182,7 +182,7 @@ public extension LogRepository {
     ///   - completion: The block to call when log entries sent.
     func warning(
         _ message: String,
-        file: String = #file,
+        file: String = #fileID,
         function: String = #function,
         line: Int = #line,
         context: [String: CustomStringConvertible] = [:],
@@ -216,7 +216,7 @@ public extension LogRepository {
     ///   - completion: The block to call when log entries sent.
     func error(
         _ message: String,
-        file: String = #file,
+        file: String = #fileID,
         function: String = #function,
         line: Int = #line,
         error: Error? = nil,

@@ -218,7 +218,7 @@ public extension LocationRepository {
     }
     #endif
     
-    func removeObservers(with prefix: String = #file) {
+    func removeObservers(with prefix: String = #filePath) {
         let prefix = prefix + "."
         
         didChangeAuthorizationHandlers.value { $0.removeAll { $0.id.hasPrefix(prefix) } }

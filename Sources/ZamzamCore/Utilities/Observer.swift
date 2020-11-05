@@ -16,8 +16,8 @@ public struct Observer<T> {
         self.handler = handler
     }
     
-    public init(file: String = #file, line: Int = #line, handler: T) {
-        self.init(id: "\(file).\(line)", handler: handler)
+    public init(filePath: String = #filePath, line: Int = #line, handler: T) {
+        self.init(id: "\(filePath).\(line)", handler: handler)
     }
 }
 

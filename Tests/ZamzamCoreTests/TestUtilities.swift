@@ -20,7 +20,7 @@ extension XCTestCase {
     func XCTAssertAllEqual<T: Equatable>(
         _ values: T?...,
         message: @autoclosure () -> String = "",
-        file: StaticString = #file,
+        file: StaticString = #filePath,
         line: UInt = #line
     ) {
         _ = values.reduce(values.first) { current, next in
@@ -41,7 +41,7 @@ extension XCTestCase {
         _ expression1: @autoclosure () -> T?,
         _ expression2: @autoclosure () -> T?,
         message: @autoclosure () -> String = "",
-        file: StaticString = #file,
+        file: StaticString = #filePath,
         line: UInt = #line
     ) {
         XCTAssertNotNil(expression1(), message(), file: file, line: line)

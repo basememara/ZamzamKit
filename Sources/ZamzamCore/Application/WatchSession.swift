@@ -118,8 +118,8 @@ public extension WatchSession {
         didReceiveMessage.value { $0.removeAll { $0.id.hasPrefix(prefix) } }
     }
 
-    func removeObservers(from file: String = #file) {
-        removeObservers(with: file)
+    func removeObservers(from filePath: String = #filePath) {
+        removeObservers(with: filePath)
     }
 }
 

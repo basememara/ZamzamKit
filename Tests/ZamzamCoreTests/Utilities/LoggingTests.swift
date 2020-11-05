@@ -25,7 +25,7 @@ extension LoggingTests {
         LogAPI.Level.allCases.forEach {
             group.enter()
             
-            log.write($0, with: "\($0) test", file: #file, function: #function, line: #line, error: nil, context: [:]) {
+            log.write($0, with: "\($0) test", file: #fileID, function: #function, line: #line, error: nil, context: [:]) {
                 group.leave()
             }
         }
@@ -117,7 +117,7 @@ extension LoggingTests {
             LogAPI.Level.allCases.forEach {
                 group.enter()
                 
-                log.write($0, with: "\($0) test \(iteration)", file: #file, function: #function, line: #line, error: nil, context: [:]) {
+                log.write($0, with: "\($0) test \(iteration)", file: #fileID, function: #function, line: #line, error: nil, context: [:]) {
                     group.leave()
                 }
             }
