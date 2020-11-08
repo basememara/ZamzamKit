@@ -6,5 +6,7 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
+import ZamzamCore
+
 /// The presenter component of the view render flow.
-public protocol Presenter {}
+public protocol Presenter: Apply {}
