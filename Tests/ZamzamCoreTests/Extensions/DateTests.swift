@@ -73,6 +73,18 @@ extension DateTests {
         XCTAssertEqual(date.tomorrow, expected)
     }
     
+    func testTomorrowLeapYear() {
+        let date = Date(fromString: "2020/02/28 09:30")!
+        let expected = Date(fromString: "2020/02/29 09:30")!
+        XCTAssertEqual(date.tomorrow, expected)
+    }
+    
+    func testTomorrowNonLeapYear() {
+        let date = Date(fromString: "2021/02/28 09:30")!
+        let expected = Date(fromString: "2021/03/01 09:30")!
+        XCTAssertEqual(date.tomorrow, expected)
+    }
+    
     func testYesterday() {
         let date = Date(fromString: "2016/03/22 09:30")!
         let expected = Date(fromString: "2016/03/21 09:30")!
