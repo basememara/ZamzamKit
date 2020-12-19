@@ -37,12 +37,21 @@ public class LocationProxy {
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension LocationProxy {
+    
+    /// Determines if location services is enabled and authorized for always or when in use.
     var isAuthorized: Bool { service.isAuthorized }
     
+    /// Determines if location services is enabled and authorized for the specified authorization type.
     func isAuthorized(for type: LocationAPI.AuthorizationType) -> Bool {
         service.isAuthorized(for: type)
     }
     
+    /// Requests permission to use location services.
+    ///
+    /// - Parameters:
+    ///   - type: Type of permission required, whether in the foreground (.whenInUse) or while running (.always).
+    ///   - startUpdatingLocation: Starts the generation of updates that report the user’s current location.
+    ///   - completion: True if the authorization succeeded for the authorization type, false otherwise.
     @discardableResult
     func requestAuthorization(for type: LocationAPI.AuthorizationType = .whenInUse) -> AnyPublisher<Bool, Never> {
         // Handle authorized and exit
@@ -76,14 +85,18 @@ public extension LocationProxy {
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension LocationProxy {
+    
+    /// The most recently retrieved user location.
     var location: CLLocation? { service.location }
     
+    /// Starts the generation of updates that report the user’s current location.
     @discardableResult
     func startUpdatingLocation(enableBackground: Bool = false) -> AnyPublisher<CLLocation, CLError> {
         service.startUpdatingLocation(enableBackground: enableBackground)
         return locationPublisher
     }
     
+    /// Stops the generation of location updates.
     func stopUpdatingLocation() {
         service.stopUpdatingLocation()
     }
@@ -93,12 +106,14 @@ public extension LocationProxy {
 @available(iOS 13, *)
 public extension LocationProxy {
     
+    /// Starts the generation of updates based on significant location changes.
     @discardableResult
     func startMonitoringSignificantLocationChanges() -> AnyPublisher<CLLocation, CLError> {
         service.startMonitoringSignificantLocationChanges()
         return locationPublisher
     }
     
+    /// Stops the delivery of location events based on significant location changes.
     func stopMonitoringSignificantLocationChanges() {
         service.stopMonitoringSignificantLocationChanges()
     }
@@ -110,14 +125,18 @@ public extension LocationProxy {
 #if os(iOS)
 @available(iOS 13, *)
 public extension LocationProxy {
+    
+    /// The most recently reported heading.
     var heading: CLHeading? { service.heading }
     
+    /// Starts the generation of updates that report the user’s current heading.
     @discardableResult
     func startUpdatingHeading() -> AnyPublisher<CLHeading, CLError> {
         service.startUpdatingHeading()
         return headingPublisher
     }
     
+    /// Stops the generation of heading updates.
     func stopUpdatingHeading() {
         service.stopUpdatingHeading()
     }
