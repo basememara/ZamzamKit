@@ -118,7 +118,7 @@ public extension LogHTTPService {
             ],
             "device": [
                 "device_id": deviceIdentifier,
-                "device_name": !constants.isRunningInAppStore ? deviceName : "",
+                "device_name": !constants.isRunningInAppStore ? deviceName : "***",
                 "device_model": deviceModel,
                 "os_version": osVersion,
                 "is_simulator": constants.isRunningOnSimulator

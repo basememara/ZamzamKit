@@ -22,6 +22,11 @@ public extension URLRequest {
         case patch = "PATCH"
         case delete = "DELETE"
     }
+    
+    enum Authentication {
+        case basic(username: String, password: String)
+        case bearer(String)
+    }
 }
 
 public extension URLRequest {
@@ -39,6 +44,7 @@ public extension URLRequest {
         method: HTTPMethod,
         parameters: [String: Any]? = nil,
         headers: [String: String]? = nil,
+        authentication: Authentication? = nil,
         timeoutInterval: TimeInterval = 10
     ) {
         // Not all HTTP methods support body
@@ -53,9 +59,20 @@ public extension URLRequest {
         
         self.httpMethod = method.rawValue
         
-        self.allHTTPHeaderFields = headers
-        self.setValue("application/json", forHTTPHeaderField: "Accept")
-        self.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        self.allHTTPHeaderFields = [
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        ].merging(headers ?? [:]) { $1 }
+        
+        switch authentication {
+        case let .basic(username, password):
+            let encoded = "\(username):\(password)".base64Encoded()
+            self.setValue("Basic \(encoded)", forHTTPHeaderField: "Authorization")
+        case let .bearer(token):
+            self.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        case nil:
+            break
+        }
         
         // Parameters become serialized into body for all other HTTP methods
         if let parameters = parameters, !parameters.isEmpty, doesSupportBody {
@@ -81,15 +98,27 @@ public extension URLRequest {
         method: HTTPMethod,
         data: Data?,
         headers: [String: String]? = nil,
+        authentication: Authentication? = nil,
         timeoutInterval: TimeInterval = 10
     ) {
         self.init(url: url)
         
         self.httpMethod = method.rawValue
         
-        self.allHTTPHeaderFields = headers
-        self.setValue("application/json", forHTTPHeaderField: "Accept")
-        self.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        self.allHTTPHeaderFields = [
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        ].merging(headers ?? [:]) { $1 }
+        
+        switch authentication {
+        case let .basic(username, password):
+            let encoded = "\(username):\(password)".base64Encoded()
+            self.setValue("Basic \(encoded)", forHTTPHeaderField: "Authorization")
+        case let .bearer(token):
+            self.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        case nil:
+            break
+        }
         
         if let data = data, method != .get {
             self.httpBody = data

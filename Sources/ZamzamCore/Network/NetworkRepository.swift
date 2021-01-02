@@ -270,3 +270,22 @@ private extension NetworkRepository {
         }
     }
 }
+
+#if canImport(Combine)
+import Combine
+
+@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
+public extension NetworkRepository {
+    
+    /// Creates a task that retrieves the contents of a URL based on the specified request object, and calls a handler upon completion.
+    ///
+    /// - Parameters:
+    ///   - request: A network request object that provides the URL, parameters, headers, and so on.
+    /// - Returns: A publisher that provides a single response from the request.
+    func send(with request: URLRequest) -> Future<NetworkAPI.Response, NetworkAPI.Error> {
+        Future<NetworkAPI.Response, NetworkAPI.Error> {
+            send(with:request, completion: $0)
+        }
+    }
+}
+#endif

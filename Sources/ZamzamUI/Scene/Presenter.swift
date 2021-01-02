@@ -1,5 +1,5 @@
 //
-//  PresenterType.swift
+//  Presenter.swift
 //  ZamzamUI
 //
 //  Created by Basem Emara on 2020-04-02.
