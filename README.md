@@ -596,15 +596,6 @@ CLLocationManager.isAuthorized // bool
 ```
 </details>
 
-> Add attributed strings together:
-```swift
-label.attributedText = "Abc".attributed + " def " +
-    "ghi".mutableAttributed([
-        .underlineStyle: NSUnderlineStyle.single.rawValue
-    ])
-```
-</details>
-
 <details>
 <summary>URL</summary>
 
@@ -975,9 +966,9 @@ test = value ??+ "Rst"
 ## ZamzamLocation
 
 <details>
-<summary>LocationsManager</summary>
+<summary>LocationManager</summary>
 
-> Location worker that offers easy authorization and observable closures ([read more](https://basememara.com/swifty-locations-observables/)):
+> Location manager that offers `Combine` wrappers:
 ```swift
 
 func fetchLocation() {
