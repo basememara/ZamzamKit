@@ -742,7 +742,7 @@ networkManager.send(with: request) { result in
 ```
 </details>
 
-### Application
+### Utilities
 
 <details>
 <summary>AppInfo</summary>
@@ -845,8 +845,6 @@ BackgroundTask.run(for: application) { task in
 }
 ```
 </details>
-
-### Utilities
 
 <details>
 <summary>Keychain</summary>
