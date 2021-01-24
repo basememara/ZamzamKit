@@ -27,7 +27,7 @@ The `ZamzamKit` package contains four different products you can import. Add any
     ]
 )
 ```
-*A limitation with Swift Package Manager requires resources to be embedded manually. Drag `/Resources/ZamzamCore.bundle` to your Xcode project's `Build Phases > Copy Bundle` section.*
+*Note: This library is highly volitile and changes often to stay ahead of cutting-edge technologies. It is recommended to copy over code that you want into your own libraries or fork it.*
 
 ## ZamzamCore
 
