@@ -301,6 +301,9 @@ public extension Optional where Wrapped == String {
     
     /// A Boolean value indicating whether a string is `nil` or has no characters.
     var isNilOrEmpty: Bool { self?.isEmpty ?? true }
+    
+    /// A Boolean value indicating whether a string is `nil` or has no characters or blanks.
+    var isNilOrBlank: Bool { isNilOrEmpty || self?.allSatisfy { $0.isWhitespace } ?? true }
 }
 
 public extension Substring {

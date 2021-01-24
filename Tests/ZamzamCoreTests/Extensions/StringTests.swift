@@ -343,4 +343,19 @@ extension StringTests {
         test = "abc"
         XCTAssertFalse(test.isNilOrEmpty)
     }
+    
+    func testIsNilOrBlank() {
+        var test: String?
+        
+        XCTAssert(test.isNilOrBlank)
+        
+        test = ""
+        XCTAssert(test.isNilOrBlank)
+        
+        test = "     "
+        XCTAssert(test.isNilOrBlank)
+        
+        test = "abc"
+        XCTAssertFalse(test.isNilOrBlank)
+    }
 }

@@ -21,7 +21,7 @@ final public class LogHTTPService {
     private let minFlushLevel: LogAPI.Level
     private let isDebug: Bool
     private let constants: AppContext
-    private let networkRepository: NetworkRepository
+    private let networkManager: NetworkManager
     
     private let deviceName = UIDevice.current.name
     private let deviceModel = UIDevice.current.model
@@ -43,7 +43,7 @@ final public class LogHTTPService {
     ///   - minFlushLevel: The threshold of the log level before sending to the destination.
     ///   - isDebug: Determines if the current app is running in debug mode.
     ///   - constants: Provides details of the current context.
-    ///   - networkRepository: The object used to send the HTTP request.
+    ///   - networkManager: The object used to send the HTTP request.
     ///   - notificationCenter: A notification dispatch mechanism that registers observers for flushing the buffer at certain app lifecycle events.
     public init(
         urlRequest: URLRequest,
@@ -52,7 +52,7 @@ final public class LogHTTPService {
         minFlushLevel: LogAPI.Level = .none,
         isDebug: Bool,
         constants: AppContext,
-        networkRepository: NetworkRepository,
+        networkManager: NetworkManager,
         notificationCenter: NotificationCenter
     ) {
         self.urlRequest = urlRequest
@@ -61,7 +61,7 @@ final public class LogHTTPService {
         self.minFlushLevel = minFlushLevel
         self.isDebug = isDebug
         self.constants = constants
-        self.networkRepository = networkRepository
+        self.networkManager = networkManager
         
         notificationCenter.addObserver(
             self,
@@ -171,7 +171,7 @@ private extension LogHTTPService {
         request.httpBody = data
         
         BackgroundTask.run(for: .shared) { task in
-            networkRepository.send(with: request) {
+            networkManager.send(with: request) {
                 // Add back to the buffer if could not send
                 if case let .failure(error) = $0 {
                     print("🤍 \(timestamp: Date()) PRINT Error from log destination: \(error)")

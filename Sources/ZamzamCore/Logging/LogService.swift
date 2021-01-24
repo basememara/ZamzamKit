@@ -8,8 +8,6 @@
 
 import Foundation.NSURL
 
-// MARK: - Service
-
 public protocol LogService {
     
     /// The minimum level required to create log entries.

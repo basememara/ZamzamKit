@@ -4,9 +4,9 @@ import Foundation
 import ZamzamCore
 
 public struct ___VARIABLE_productName:identifier___RealmCache: ___VARIABLE_productName:identifier___Cache {
-    private let log: LogRepository
+    private let log: LogManager
     
-    public init(log: LogRepository) {
+    public init(log: LogManager) {
         self.log = log
     }
 }

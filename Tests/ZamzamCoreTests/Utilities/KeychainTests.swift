@@ -1,5 +1,5 @@
 //
-//  SecuredPreferencesTests.swift
+//  KeychainTests.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2020-03-07.
@@ -9,14 +9,14 @@
 import XCTest
 import ZamzamCore
 
-final class SecuredPreferencesTests: XCTestCase {
+final class KeychainTests: XCTestCase {
     
-    private lazy var keychain = SecuredPreferences(
-        service: SecuredPreferencesTestService()
+    private lazy var keychain = KeychainManager(
+        service: KeychainTestService()
     )
 }
 
-extension SecuredPreferencesTests {
+extension KeychainTests {
     
     func testString() {
         // Given
@@ -33,7 +33,7 @@ extension SecuredPreferencesTests {
     }
 }
 
-extension SecuredPreferencesTests {
+extension KeychainTests {
     
     func testRemove() {
         // Given
@@ -52,9 +52,9 @@ extension SecuredPreferencesTests {
     }
 }
 
-private extension SecuredPreferencesAPI.Key {
-    static let testString1 = SecuredPreferencesAPI.Key("testString1")
-    static let testString2 = SecuredPreferencesAPI.Key("testString2")
+private extension KeychainAPI.Key {
+    static let testString1 = KeychainAPI.Key("testString1")
+    static let testString2 = KeychainAPI.Key("testString2")
 }
 
 // MARK: - Helpers
@@ -62,19 +62,19 @@ private extension SecuredPreferencesAPI.Key {
 // Unit test mocked since Keychain needs application host, see app for Keychain testing
 // https://github.com/onmyway133/blog/issues/92
 // https://forums.swift.org/t/host-application-for-spm-tests/24363
-private class SecuredPreferencesTestService: SecuredPreferencesService {
+private class KeychainTestService: KeychainService {
     var values = [String: String?]()
     
-    func get(_ key: SecuredPreferencesAPI.Key) -> String? {
+    func get(_ key: KeychainAPI.Key) -> String? {
         values[key.name] ?? nil
     }
     
-    func set(_ value: String?, forKey key: SecuredPreferencesAPI.Key) -> Bool {
+    func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool {
         values[key.name] = value
         return true
     }
     
-    func remove(_ key: SecuredPreferencesAPI.Key) -> Bool {
+    func remove(_ key: KeychainAPI.Key) -> Bool {
         values.removeValue(forKey: key.name)
         return true
     }

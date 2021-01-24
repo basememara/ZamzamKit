@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct NetworkRepository {
+public struct NetworkManager {
     private let service: NetworkService
     private let adapter: URLRequestAdapter?
     
@@ -23,7 +23,7 @@ public struct NetworkRepository {
     }
 }
 
-public extension NetworkRepository {
+public extension NetworkManager {
     
     /// Creates a task that retrieves the contents of a URL based on the specified request object, and calls a handler upon completion.
     ///
@@ -42,11 +42,11 @@ public extension NetworkRepository {
     ///         ]
     ///     )
     ///
-    ///     let networkRepository = NetworkRepository(
+    ///     let networkManager = NetworkManager(
     ///         service: NetworkURLSessionService()
     ///     )
     ///
-    ///     networkRepository.send(with: request) { result in
+    ///     networkManager.send(with: request) { result in
     ///         switch result {
     ///         case let .success(response):
     ///             response.data
@@ -66,7 +66,7 @@ public extension NetworkRepository {
     }
 }
 
-public extension NetworkRepository {
+public extension NetworkManager {
     
     /// Create tasks that retrieves the contents of a URL based on the specified request objects, and calls a handler upon completion with the result matching the index of the request.
     ///
@@ -80,7 +80,7 @@ public extension NetworkRepository {
     ///         method: .post
     ///     )
     ///
-    ///     networkRepository.send(requests: request1, request2) { first, second in
+    ///     networkManager.send(requests: request1, request2) { first, second in
     ///         switch result.0 {
     ///         case let .success(response):
     ///             response.data
@@ -134,7 +134,7 @@ public extension NetworkRepository {
     ///         method: .delete
     ///     )
     ///
-    ///     networkRepository.send(requests: request1, request2, request3) { first, second, third in
+    ///     networkManager.send(requests: request1, request2, request3) { first, second, third in
     ///         switch first {
     ///         case let .success(response):
     ///             response.data
@@ -195,7 +195,7 @@ public extension NetworkRepository {
     ///         method: .patch
     ///     )
     ///
-    ///     networkRepository.send(requests: request1, request2, request3, request4) { first, second, third, fourth in
+    ///     networkManager.send(requests: request1, request2, request3, request4) { first, second, third, fourth in
     ///         switch first {
     ///         case let .success(response):
     ///             response.data
@@ -244,7 +244,7 @@ public extension NetworkRepository {
     }
 }
 
-private extension NetworkRepository {
+private extension NetworkManager {
     
     func send(requests: URLRequest..., completion: @escaping ([NetworkAPI.URLResult]) -> Void) {
         let dispatchGroup = DispatchGroup()
@@ -275,7 +275,7 @@ private extension NetworkRepository {
 import Combine
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
-public extension NetworkRepository {
+public extension NetworkManager {
     
     /// Creates a task that retrieves the contents of a URL based on the specified request object, and calls a handler upon completion.
     ///

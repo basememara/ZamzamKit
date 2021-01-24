@@ -9,8 +9,6 @@
 import Foundation.NSData
 import Foundation.NSURLRequest
 
-// MARK: - Service
-
 public protocol NetworkService {
     func send(with request: URLRequest, completion: @escaping (NetworkAPI.URLResult) -> Void)
 }

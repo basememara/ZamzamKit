@@ -99,15 +99,3 @@ extension CLLocationTests {
         XCTAssertEqual(Int(vancouver.distance(from: beijing)), 8_538_317)
     }
 }
-
-extension CLLocationTests {
-    
-    func testApproximateComparison() {
-        let coordinate1 = CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832)
-        let coordinate2 = CLLocationCoordinate2D(latitude: 43.6531, longitude: -79.3834)
-        let coordinate3 = CLLocationCoordinate2D(latitude: 43.6522, longitude: -79.3822)
-        
-        XCTAssertTrue(coordinate1 ~~ coordinate2)
-        XCTAssertFalse(coordinate1 ~~ coordinate3)
-    }
-}

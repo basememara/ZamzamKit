@@ -18,7 +18,7 @@ extension LoggingTests {
         // Given
         let promise = expectation(description: #function)
         let logService = LogTestService(minLevel: .verbose)
-        let log = LogRepository(services: [logService])
+        let log = LogManager(services: [logService])
         let group = DispatchGroup()
         
         // When
@@ -108,7 +108,7 @@ extension LoggingTests {
         // Given
         let promise = expectation(description: #function)
         let logService = LogTestService(minLevel: .verbose)
-        let log = LogRepository(services: [logService])
+        let log = LogManager(services: [logService])
         let group = DispatchGroup()
         let iterations = 1_000 // 10_000
         

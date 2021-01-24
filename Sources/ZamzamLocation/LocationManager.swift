@@ -1,5 +1,5 @@
 //
-//  LocationProxy.swift
+//  LocationManager.swift
 //  ZamzamLocation
 //
 //  Created by Basem Emara on 2020-05-30.
@@ -13,18 +13,18 @@ import CoreLocation.CLLocation
 
 /// A `LocationManager` proxy with publisher.
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
-public class LocationProxy {
+public class LocationManager {
     private let service: LocationService
     
     private static let authorizationSubject = CurrentValueSubject<Bool?, Never>(nil)
-    public let authorizationPublisher = LocationProxy.authorizationSubject.compactMap { $0 }.eraseToAnyPublisher()
+    public let authorizationPublisher = LocationManager.authorizationSubject.compactMap { $0 }.eraseToAnyPublisher()
     
     private static let locationSubject = CurrentValueSubject<CLLocation?, CLError>(nil)
-    public var locationPublisher = LocationProxy.locationSubject.compactMap { $0 }.eraseToAnyPublisher()
+    public var locationPublisher = LocationManager.locationSubject.compactMap { $0 }.eraseToAnyPublisher()
     
     #if os(iOS)
     private static let headingSubject = CurrentValueSubject<CLHeading?, CLError>(nil)
-    public var headingPublisher = LocationProxy.headingSubject.compactMap { $0 }.eraseToAnyPublisher()
+    public var headingPublisher = LocationManager.headingSubject.compactMap { $0 }.eraseToAnyPublisher()
     #endif
     
     public init(service: LocationService) {
@@ -36,7 +36,7 @@ public class LocationProxy {
 // MARK: - Authorization
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
-public extension LocationProxy {
+public extension LocationManager {
     
     /// Determines if location services is enabled and authorized for always or when in use.
     var isAuthorized: Bool { service.isAuthorized }
@@ -84,7 +84,7 @@ public extension LocationProxy {
 // MARK: - Coordinate
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
-public extension LocationProxy {
+public extension LocationManager {
     
     /// The most recently retrieved user location.
     var location: CLLocation? { service.location }
@@ -104,7 +104,7 @@ public extension LocationProxy {
 
 #if os(iOS)
 @available(iOS 13, *)
-public extension LocationProxy {
+public extension LocationManager {
     
     /// Starts the generation of updates based on significant location changes.
     @discardableResult
@@ -124,7 +124,7 @@ public extension LocationProxy {
 
 #if os(iOS)
 @available(iOS 13, *)
-public extension LocationProxy {
+public extension LocationManager {
     
     /// The most recently reported heading.
     var heading: CLHeading? { service.heading }
@@ -150,7 +150,7 @@ public extension LocationProxy {
 // MARK: - Delegates
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
-extension LocationProxy: LocationServiceDelegate {
+extension LocationManager: LocationServiceDelegate {
     
     public func locationService(didChangeAuthorization authorization: Bool) {
         Self.authorizationSubject.send(authorization)

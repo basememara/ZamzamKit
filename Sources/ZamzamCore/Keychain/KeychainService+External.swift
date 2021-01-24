@@ -1,5 +1,5 @@
 //
-//  SecuredPreferencesKeychainService.swift
+//  KeychainExternalService.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2020-03-07.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct SecuredPreferencesKeychainService: SecuredPreferencesService {
+public struct KeychainExternalService: KeychainService {
     private static let accessOption: KeychainSwiftAccessOptions = .accessibleAfterFirstUnlock
     private let keychain: KeychainSwift
     
@@ -23,31 +23,31 @@ public struct SecuredPreferencesKeychainService: SecuredPreferencesService {
     }
 }
 
-public extension SecuredPreferencesKeychainService {
+public extension KeychainExternalService {
     
-    func get(_ key: SecuredPreferencesAPI.Key) -> String? {
+    func get(_ key: KeychainAPI.Key) -> String? {
         keychain.get(key.name)
     }
 }
 
-public extension SecuredPreferencesKeychainService {
+public extension KeychainExternalService {
     
-    func set(_ value: String?, forKey key: SecuredPreferencesAPI.Key) -> Bool {
+    func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool {
         guard let value = value else { return remove(key) }
         return keychain.set(value, forKey: key.name)
     }
 }
 
-public extension SecuredPreferencesKeychainService {
+public extension KeychainExternalService {
     
-    func remove(_ key: SecuredPreferencesAPI.Key) -> Bool {
+    func remove(_ key: KeychainAPI.Key) -> Bool {
         keychain.delete(key.name)
     }
 }
 
 // MARK: - External Library
 
-private extension SecuredPreferencesKeychainService {
+private extension KeychainExternalService {
     
     //
     //  KeychainSwiftDistrib.swift

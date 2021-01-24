@@ -11,7 +11,7 @@ import ZamzamCore
 final class NetworkTests: XCTestCase {
     private let jsonDecoder = JSONDecoder()
     
-    private let networkRepository: NetworkRepository = NetworkRepository(
+    private let networkManager = NetworkManager(
         service: NetworkFoundationService()
     )
 }
@@ -33,7 +33,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -75,7 +75,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -138,7 +138,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -194,7 +194,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -236,7 +236,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -295,7 +295,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -351,7 +351,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -393,7 +393,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -452,7 +452,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -508,7 +508,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -550,7 +550,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -609,7 +609,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -665,7 +665,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -707,7 +707,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -771,7 +771,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -833,7 +833,7 @@ extension NetworkTests {
         var response1: NetworkAPI.Response?
         
         // When
-        networkRepository.send(requests: requests[0], requests[1]) { first, second in
+        networkManager.send(requests: requests[0], requests[1]) { first, second in
             defer { promise.fulfill() }
             
             guard case let .success(value0) = first else {
@@ -888,7 +888,7 @@ extension NetworkTests {
         var response2: NetworkAPI.Response?
         
         // When
-        networkRepository.send(requests: requests[0], requests[1], requests[2]) { first, second, third in
+        networkManager.send(requests: requests[0], requests[1], requests[2]) { first, second, third in
             defer { promise.fulfill() }
             
             guard case let .success(value0) = first else {
@@ -959,7 +959,7 @@ extension NetworkTests {
         var response3: NetworkAPI.Response?
         
         // When
-        networkRepository.send(requests: requests[0], requests[1], requests[2], requests[3]) { first, second, third, fourth in
+        networkManager.send(requests: requests[0], requests[1], requests[2], requests[3]) { first, second, third, fourth in
             defer { promise.fulfill() }
             
             guard case let .success(value0) = first else {
@@ -1030,7 +1030,7 @@ extension NetworkTests {
     func testWithURLRequestAdapter() {
         // Given
         let promise = expectation(description: #function)
-        let networkRepository = NetworkRepository(
+        let networkManager = NetworkManager(
             service: NetworkFoundationService(),
             adapter: TestURLRequestAdapter()
         )
@@ -1043,7 +1043,7 @@ extension NetworkTests {
         var response: NetworkAPI.Response?
         
         // When
-        networkRepository.send(with: request) {
+        networkManager.send(with: request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -1067,7 +1067,7 @@ extension NetworkTests {
     func testWithURLRequestAdapterWithMultipleRequests() {
         // Given
         let promise = expectation(description: #function)
-        let networkRepository = NetworkRepository(
+        let networkManager = NetworkManager(
             service: NetworkFoundationService(),
             adapter: TestURLRequestAdapter()
         )
@@ -1097,7 +1097,7 @@ extension NetworkTests {
         var response3: NetworkAPI.Response?
         
         // When
-        networkRepository.send(requests: requests[0], requests[1], requests[2], requests[3]) { result in
+        networkManager.send(requests: requests[0], requests[1], requests[2], requests[3]) { result in
             defer { promise.fulfill() }
             
             guard case let .success(value0) = result.0 else {

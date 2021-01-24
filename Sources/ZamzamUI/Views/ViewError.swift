@@ -6,13 +6,23 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
+import Foundation.NSUUID
+import ZamzamCore
+
 /// Model container for global view errors.
-public struct ViewError: Equatable, Error {
-    public let title: String?
+public struct ViewError: Error, Equatable, Identifiable {
+    public let id = UUID()
+    public let title: String
     public let message: String?
+    public let action: Action?
     
-    public init(title: String?, message: String? = nil) {
+    public init(
+        title: String,
+        message: String? = nil,
+        action: Action? = nil
+    ) {
         self.title = title
         self.message = message
+        self.action = action
     }
 }

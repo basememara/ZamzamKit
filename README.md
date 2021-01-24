@@ -3,7 +3,7 @@
 [![Build Status](https://api.travis-ci.org/ZamzamInc/ZamzamKit.svg?branch=master)](https://travis-ci.org/ZamzamInc/ZamzamKit)
 [![Platform](https://img.shields.io/badge/platform-macos%20%7C%20ios%20%7C%20watchos%20%7C%20ipados%20%7C%20tvos-lightgrey)](https://github.com/ZamzamInc/ZamzamKit)
 [![Swift](https://img.shields.io/badge/Swift-5-orange.svg)](https://swift.org)
-[![Xcode](https://img.shields.io/badge/Xcode-11-blue.svg)](https://developer.apple.com/xcode)
+[![Xcode](https://img.shields.io/badge/Xcode-12-blue.svg)](https://developer.apple.com/xcode)
 [![SPM](https://img.shields.io/badge/SPM-Compatible-blue)](https://swift.org/package-manager)
 [![MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
@@ -590,51 +590,11 @@ coordinates.closest(to: homeCoordinate)
 coordinates.farthest(from: homeCoordinate)
 ```
 
-> Approximate comparison of coordinates rounded to 3 decimal places (about 100 meters):
-```swift
-let coordinate1 = CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832)
-let coordinate2 = CLLocationCoordinate2D(latitude: 43.6531, longitude: -79.3834)
-let coordinate3 = CLLocationCoordinate2D(latitude: 43.6522, longitude: -79.3822)
-
-coordinate1 ~~ coordinate2 // true
-coordinate1 ~~ coordinate3 // false
-```
-
 > Determine if location services is enabled and authorized for always or when in use:
 ```swift
 CLLocationManager.isAuthorized // bool
 ```
 </details>
-
-<details>
-<summary>NotificationCenter</summary>
-
-> Auto released block-based notifications using a token property:
-```swift
-class MyObserver: NSObject {
-    var token: NotificationCenter.Token? // Auto-released in deinit
-
-    func setup() {
-        NotificationCenter.default.addObserver(forName: .SomeName, in: &token) {
-            print("test")
-        }
-    }
-}
-```
-</details>
-
-<details>
-<summary>NSAttributedString</summary>
-
-> Easily get the attributed string version of a string:
-```swift
-"Abc".attributed
-"Lmn".mutableAttributed
-"Xyz".mutableAttributed([
-    .font: UIFont.italicSystemFont(ofSize: .systemFontSize),
-    .foregroundColor: UIColor.green
-])
-```
 
 > Add attributed strings together:
 ```swift
@@ -701,11 +661,11 @@ let request = URLRequest(
     ]
 )
  
-let networkRepository = NetworkRepository(
+let networkManager = NetworkManager(
     service: NetworkFoundationService()
 )
 
-networkRepository.send(with: request) { result in
+networkManager.send(with: request) { result in
     switch result {
     case let .success(response):
         response.data
@@ -733,7 +693,7 @@ let request3 = URLRequest(
     method: .delete
 )
 
-networkRepository.send(requests: request1, request2, request3) { firstResult, anotherResult, otherResult in
+networkManager.send(requests: request1, request2, request3) { firstResult, anotherResult, otherResult in
     switch firstResult {
     case let .success(response):
         response.data
@@ -774,12 +734,12 @@ let request = URLRequest(
     method: .get
 )
  
-let networkRepository = NetworkRepository(
+let networkManager = NetworkManager(
     service: NetworkFoundationService(),
     adapter: CustomURLRequestAdapter()
 )
 
-networkRepository.send(with: request) { result in
+networkManager.send(with: request) { result in
     guard case let .success(response) else { return }
 
     request.value(forHTTPHeaderField: "X-Test-1") == nil // true
@@ -814,73 +774,6 @@ someStruct.isRunningOnSimulator // false
 </details>
 
 <details>
-<summary>ApplicationPlugin</summary>
-
-> Split up `AppDelegate` into [plugins](https://basememara.com/pluggable-appdelegate-services/) (also available for `WKExtensionDelegate`):
-```swift
-// Subclass and install to pass lifecycle events to loaded plugins
-@UIApplicationMain
-class AppDelegate: ApplicationPluggableDelegate {
-
-    override func plugins() -> [ApplicationPlugin] {[
-        LoggerPlugin(),
-        NotificationPlugin()
-    ]}
-}
-```
-```swift
-// Each application plugin has access to the `AppDelegate` lifecycle events
-final class LoggerPlugin: ApplicationPlugin {
-    private let log = Logger()
- 
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        log.config(for: application)
-        return true
-    }
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
-        log.info("App did finish launching.")
-        return true
-    }
-    
-    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        log.warning("App did receive memory warning.")
-    }
-    
-    func applicationWillTerminate(_ application: UIApplication) {
-        log.warning("App will terminate.")
-    }
-}
-```
-
-> Split up `SceneDelegate` into plugins:
-```swift
-// Subclass and install to pass lifecycle events to loaded plugins
-class SceneDelegate: ScenePluggableDelegate {
-
-    override func plugins() -> [ScenePlugin] {[
-        LoggerPlugin(),
-        NotificationPlugin()
-    ]}
-}
-```
-```swift
-// Each application plugin has access to the `SceneDelegate` lifecycle events
-final class LoggerPlugin: ScenePlugin {
-    private let log = Logger()
-
-    func sceneWillEnterForeground() {
-        log.info("Scene will enter foreground.")
-    }
-    
-    func sceneDidEnterBackground() {
-        log.info("Scene did enter background.")
-    }
-}
-```
-</details>
-
-<details>
 <summary>Apply</summary>
 
 > Set properties with closures just after initializing:
@@ -900,6 +793,21 @@ UITabBar.appearance().apply {
     $0.barStyle = .dark
     $0.tintColor = .blue
 }
+```
+</details>
+
+<details>
+<summary>Atomic</summary>
+
+> A thread-safe value that handles concurrent reads and writes ([read more](https://basememara.com/creating-thread-safe-generic-values-in-swift/)):
+```swift
+var temp = Atomic<Int>(0)
+
+DispatchQueue.concurrentPerform(iterations: 1_000_000) { index in
+temp.value { $0 += 1 }
+}
+
+XCTAssertEqual(temp.value, 1_000_000) // true
 ```
 </details>
 
@@ -954,8 +862,8 @@ BackgroundTask.run(for: application) { task in
 
 > A thin wrapper to manage Keychain, or other services that conform to `SecuredPreferencesService`:
 ```swift
-let keychain = SecuredPreferences(
-    service: SecuredPreferencesKeychainService()
+let keychain = KeychainManager(
+    service: KeychainExternalService()
 )
 
 keychain.set("kjn989hi", forKey: .token)
@@ -965,29 +873,8 @@ keychain.get(.token) {
 }
 
 // Define strongly-typed keys
-extension SecuredPreferencesAPI.Key {
-    static let token = SecuredPreferencesAPI.Key("token")
-}
-```
-</details>
-
-<details>
-<summary>UserDefaults</summary>
-
-> A thin wrapper to manage `UserDefaults`, or other services that conform to `PreferencesService`:
-```swift
-let preferences = Preferences(
-    service: PreferencesDefaultsService(
-        defaults: UserDefaults.standard
-    )
-)
-
-preferences.set(123, forKey: .abc)
-preferences.get(.token) // 123
-
-// Define strongly-typed keys
-extension PreferencesAPI.Keys {
-    static let abc = PreferencesAPI.Key<String>("abc")
+extension KeychainAPI.Key {
+    static let token = KeychainAPI.Key("token")
 }
 ```
 </details>
@@ -1016,9 +903,9 @@ myLabel3.text = .localized(.next)
 <details>
 <summary>Logger</summary>
 
-> Create loggers that conform to `LogService` and add to `LogRepository` (console and `os_log` are included):
+> Create loggers that conform to `LogService` and add to `LogManager` (console and `os_log` are included):
 ```swift
-let log = LogRepository(
+let log = LogManager(
     services: [
         LogConsoleService(minLevel: .debug),
         LogOSService(
@@ -1042,80 +929,6 @@ log.error("There was an error.")
 import SystemConfiguration
 
 SCNetworkReachability.isOnline
-```
-</details>
-
-<details>
-<summary>Synchronized</summary>
-
-> A thread-safe value that handles concurrent reads and writes ([read more](https://basememara.com/creating-thread-safe-generic-values-in-swift/)):
-```swift
-var temp = Synchronized<Int>(0)
-
-DispatchQueue.concurrentPerform(iterations: 1_000_000) { index in
-    temp.value { $0 += 1 }
-}
-
-XCTAssertEqual(temp.value, 1_000_000) // true
-```
-</details>
-
-<details>
-<summary>Throttle & Debounce</summary>
-
-> A throttler that will ignore work items until the time limit for the preceding call is over:
-```swift
-let limiter = Throttler(limit: 5)
-var value = 0
-
-limiter.execute {
-    value += 1
-}
-
-limiter.execute {
-    value += 1
-}
-
-limiter.execute {
-    value += 1
-}
-
-sleep(5)
-
-limiter.execute {
-    value += 1
-}
-
-// value == 2
-```
-
-> A debouncer that will delay work items until time limit for the preceding call is over:
-```swift
-let limiter = Debouncer(limit: 5)
-var value = ""
-
-func sendToServer() {
-    limiter.execute {
-        // Sends to server after no typing for 5 seconds
-        // instead of once per character, so:
-        value == "hello" // true
-    }
-}
-
-value.append("h")
-sendToServer() // Waits until 5 seconds
-
-value.append("e")
-sendToServer() // Waits until 5 seconds
-
-value.append("l")
-sendToServer() // Waits until 5 seconds
-
-value.append("l")
-sendToServer() // Waits until 5 seconds
-
-value.append("o")
-sendToServer() // Fires after 5 seconds
 ```
 </details>
 
@@ -1162,58 +975,47 @@ test = value ??+ "Rst"
 ## ZamzamLocation
 
 <details>
-<summary>LocationsRepository</summary>
+<summary>LocationsManager</summary>
 
 > Location worker that offers easy authorization and observable closures ([read more](https://basememara.com/swifty-locations-observables/)):
 ```swift
-class LocationViewController: UIViewController {
 
-    @IBOutlet weak var outputLabel: UILabel!
-    
-    var locationsRepository: LocationsRepositoryType = LocationsRepository(
-        desiredAccuracy: kCLLocationAccuracyThreeKilometers,
-        distanceFilter: 1000
-    )
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        locationsRepository.addObserver(locationObserver)
-        locationsRepository.addObserver(headingObserver)
-        
-        locationsRepository.requestAuthorization(
-            for: .whenInUse,
-            startUpdatingLocation: true,
-            completion: { granted in
-                guard granted else { return }
-                self.locationsProvider.startUpdatingHeading()
-            }
-        )
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        locationsRepository.removeObservers()
-    }
-    
-    deinit {
-        locationsRepository.removeObservers()
-    }
-}
+func fetchLocation() {
+    log.debug("Begin location authorization...")
 
-extension LocationViewController {
-    
-    var locationObserver: Observer<LocationsRepository.LocationHandler> {
-        Observer { [weak self] in
-            self?.outputLabel.text = $0.description
-        }
+    guard locationManager.isAuthorized else {
+        locationManager.requestAuthorization()
+            .handleEvents(receiveOutput: { [weak self] granted in
+                guard granted else {
+                    self?.log.error("Location authorization denied")
+                    return
+                }
+
+                self?.log.debug("Location authorization granted")
+            })
+            .first { $0 }
+            .sink { [weak self] _ in self?.fetchLocation() }
+            .store(in: &cancellable)
+
+        return
     }
-    
-    var headingObserver: Observer<LocationsRepository.HeadingHandler> {
-        Observer {
-            print($0.description)
+
+    log.debug("Begin fetching location...")
+
+    locationManager
+        .startUpdatingLocation()
+        .retry(3)
+        .catch { [weak self] error -> AnyPublisher<CLLocation, Never> in
+            self?.log.error("GPS location coordinate failed", error: error)
+            return Empty(completeImmediately: true).eraseToAnyPublisher()
         }
-    }
+        .first()
+        .sink { [weak self] in
+            self?.log.debug("Location coordinate: \($0)")
+            self?.locationManager.stopUpdatingLocation()
+            self?.log.debug("Location turned off GPS")
+        }
+        .store(in: &cancellable)
 }
 ```
 </details>

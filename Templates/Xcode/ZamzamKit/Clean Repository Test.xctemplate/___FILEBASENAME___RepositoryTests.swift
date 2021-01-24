@@ -2,9 +2,9 @@
 
 import XCTest
 
-final class ___VARIABLE_productName:identifier___RepositoryTests: TestCase {}
+final class ___VARIABLE_productName:identifier___ManagerTests: TestCase {}
 
-extension ___VARIABLE_productName:identifier___RepositoryTests {
+extension ___VARIABLE_productName:identifier___ManagerTests {
     
     func testFetch() {
         // Given
@@ -14,7 +14,7 @@ extension ___VARIABLE_productName:identifier___RepositoryTests {
         var response: [___VARIABLE_productName:identifier___]?
         
         // When
-        ___VARIABLE_productName:identifier___Repository.fetch(with: request) {
+        ___VARIABLE_productName:identifier___Manager.fetch(with: request) {
             defer { promise?.fulfill() }
             
             guard case let .success(value) = $0 else {

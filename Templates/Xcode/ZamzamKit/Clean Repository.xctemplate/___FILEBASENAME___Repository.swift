@@ -1,6 +1,6 @@
 //___FILEHEADER___
 
-public struct ___VARIABLE_productName:identifier___Repository {
+public struct ___VARIABLE_productName:identifier___Manager {
     private let service: ___VARIABLE_productName:identifier___Service
     
     public init(service: ___VARIABLE_productName:identifier___Service) {
@@ -8,7 +8,7 @@ public struct ___VARIABLE_productName:identifier___Repository {
     }
 }
 
-public extension ___VARIABLE_productName:identifier___Repository {
+public extension ___VARIABLE_productName:identifier___Manager {
     
     func fetch(with request: ___VARIABLE_productName:identifier___API.FetchRequest, completion: @escaping (Result<[___VARIABLE_productName:identifier___], ZamzamError>) -> Void) {
         service.fetch(with: request, completion: completion)

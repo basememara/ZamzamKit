@@ -1,5 +1,5 @@
 //
-//  LogRepository.swift
+//  LogManager.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2019-06-11.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LogRepository {
+public struct LogManager {
     private let services: [LogService]
     
     public init(services: [LogService]) {
@@ -16,7 +16,7 @@ public struct LogRepository {
     }
 }
 
-public extension LogRepository {
+public extension LogManager {
     
     /// Log an entry to the destination.
     ///
@@ -69,7 +69,7 @@ public extension LogRepository {
     }
 }
 
-public extension LogRepository {
+public extension LogManager {
     
     /// Log something generally unimportant (lowest priority; not written to file).
     ///
@@ -102,7 +102,7 @@ public extension LogRepository {
     }
 }
 
-public extension LogRepository {
+public extension LogManager {
     
     /// Log something which help during debugging (low priority; not written to file).
     ///
@@ -135,7 +135,7 @@ public extension LogRepository {
     }
 }
 
-public extension LogRepository {
+public extension LogManager {
     
     /// Log something which you are really interested but which is not an issue or error (normal priority).
     ///
@@ -168,7 +168,7 @@ public extension LogRepository {
     }
 }
 
-public extension LogRepository {
+public extension LogManager {
     
     /// Log something which may cause big trouble soon (high priority).
     ///
@@ -201,7 +201,7 @@ public extension LogRepository {
     }
 }
 
-public extension LogRepository {
+public extension LogManager {
     
     /// Log something which will keep you awake at night (highest priority).
     ///
@@ -236,7 +236,7 @@ public extension LogRepository {
     }
 }
 
-public extension LogRepository {
+public extension LogManager {
     private static var context: [String: CustomStringConvertible] = [:]
     
     /// Adds a custom attribute to all future logs sent by this logger.
@@ -264,7 +264,7 @@ public extension LogRepository {
 #if os(iOS)
 import UIKit.UIApplication
 
-public extension LogRepository {
+public extension LogManager {
     
     /// Sets the application properties to the logger so it can be used outside the main thread.
     func configure(with application: UIApplication) {
@@ -300,7 +300,7 @@ private extension UIApplication.State {
 import SwiftUI
 
 @available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
-public extension LogRepository {
+public extension LogManager {
     
     /// Sets the application properties to the logger so it can be used outside the main thread.
     func set(context newPhase: ScenePhase) {

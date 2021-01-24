@@ -4,16 +4,16 @@ import Foundation
 import ZamzamCore
 
 public struct ___VARIABLE_productName:identifier___NetworkService: ___VARIABLE_productName:identifier___Service {
-    private let networkRepository: NetworkRepository
+    private let networkManager: NetworkManager
     private let constants: Constants
-    private let log: LogRepository
+    private let log: LogManager
     
     public init(
-        networkRepository: NetworkRepository,
+        networkManager: NetworkManager,
         constants: Constants,
-        log: LogRepository
+        log: LogManager
     ) {
-        self.networkRepository = networkRepository
+        self.networkManager = networkManager
         self.constants = constants
         self.log = log
     }
@@ -24,7 +24,7 @@ public extension ___VARIABLE_productName:identifier___NetworkService {
     func fetch(with request: ___VARIABLE_productName:identifier___API.FetchRequest, completion: @escaping (Result<[___VARIABLE_productName:identifier___], ZamzamError>) -> Void) {
         let urlRequest: URLRequest = .read___VARIABLE_productName:identifier___(id: request.id, constants: constants)
         
-        networkRepository.send(with: urlRequest) {
+        networkManager.send(with: urlRequest) {
             // Handle errors
             guard case .success = $0 else {
                 // Handle no existing data

@@ -26,11 +26,11 @@ final class DateTests: XCTestCase {
     }
     
     func testIsYesterday() {
-        XCTAssert(Date(timeIntervalSinceNow: -84_599).isYesterday)
+        XCTAssert(Date(timeIntervalSinceNow: -86_400).isYesterday)
     }
     
     func testIsTomorrow() {
-        XCTAssert(Date(timeIntervalSinceNow: 84_601).isTomorrow)
+        XCTAssert(Date(timeIntervalSinceNow: 86_400).isTomorrow)
     }
     
     func testIsWeekday() {
