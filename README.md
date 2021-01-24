@@ -846,12 +846,12 @@ BackgroundTask.run(for: application) { task in
 ```
 </details>
 
-### Preferences
+### Utilities
 
 <details>
 <summary>Keychain</summary>
 
-> A thin wrapper to manage Keychain, or other services that conform to `SecuredPreferencesService`:
+> A thin wrapper to manage Keychain, or other services that conform to `KeychainService`:
 ```swift
 let keychain = KeychainManager(
     service: KeychainExternalService()
@@ -869,8 +869,6 @@ extension KeychainAPI.Key {
 }
 ```
 </details>
-
-### Utilities
 
 <details>
 <summary>Localization</summary>
