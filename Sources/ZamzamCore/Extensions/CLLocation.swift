@@ -99,7 +99,7 @@ public extension CLLocation {
                 completion(
                     LocationMeta(
                         coordinates: (self.coordinate.latitude, self.coordinate.longitude),
-                        locality: mark.locality,
+                        locality: mark.locality ?? mark.subAdministrativeArea,
                         country: mark.country,
                         countryCode: mark.isoCountryCode,
                         timeZone: mark.timeZone,
