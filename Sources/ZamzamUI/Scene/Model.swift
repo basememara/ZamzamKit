@@ -36,16 +36,3 @@ public extension Model {
         self[keyPath: writableKeyPath] = value
     }
 }
-
-// MARK: - Helpers
-
-public protocol ErrorClearable: AnyObject {
-    var error: ViewError? { get set }
-}
-
-public extension Model where Self: ErrorClearable {
-    
-    func clearError() {
-        self(\.error, nil)
-    }
-}

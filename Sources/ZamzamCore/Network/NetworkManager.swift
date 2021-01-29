@@ -284,7 +284,7 @@ public extension NetworkManager {
     /// - Returns: A publisher that provides a single response from the request.
     func send(with request: URLRequest) -> Future<NetworkAPI.Response, NetworkAPI.Error> {
         Future<NetworkAPI.Response, NetworkAPI.Error> {
-            send(with:request, completion: $0)
+            send(with: request, completion: $0)
         }
     }
 }

@@ -109,7 +109,7 @@ public extension URL {
             .filter { !keys.contains($0.name.lowercased()) } ?? []
         
         urlComponents.queryItems?.append(contentsOf: contentsOf.compactMap {
-            guard let value = $0.value else { return nil } //Skip if nil
+            guard let value = $0.value else { return nil } // Skip if nil
             return URLQueryItem(name: $0.key, value: "\(value)")
         })
         
