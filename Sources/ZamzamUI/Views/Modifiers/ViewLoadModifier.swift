@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-@available(iOS 13, *)
+@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 private struct ViewLoadModifier: ViewModifier {
     let action: (() -> Void)
     @State private var loaded = false
@@ -22,7 +22,7 @@ private struct ViewLoadModifier: ViewModifier {
     }
 }
 
-@available(iOS 13, *)
+@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension View {
     
     /// Adds an action to perform when this view has loaded.
