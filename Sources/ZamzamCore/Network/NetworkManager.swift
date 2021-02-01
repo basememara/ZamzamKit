@@ -110,8 +110,8 @@ public extension NetworkManager {
     func send(
         requests request1: URLRequest,
         _ request2: URLRequest,
-        completion: @escaping ((NetworkAPI.URLResult, NetworkAPI.URLResult)
-    ) -> Void) {
+        completion: @escaping ((NetworkAPI.URLResult, NetworkAPI.URLResult)) -> Void
+    ) {
         send(requests: request1, request2) { result in
             completion((result[0], result[1]))
         }
