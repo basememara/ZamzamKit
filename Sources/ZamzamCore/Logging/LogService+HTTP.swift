@@ -20,7 +20,7 @@ final public class LogHTTPService {
     private let maxEntriesInBuffer: Int
     private let minFlushLevel: LogAPI.Level
     private let isDebug: Bool
-    private let constants: AppContext
+    private let distribution: Distribution
     private let networkManager: NetworkManager
     
     private let deviceName = UIDevice.current.name
@@ -42,7 +42,7 @@ final public class LogHTTPService {
     ///   - maxEntriesInBuffer: The threshold of the buffer before sending to the destination.
     ///   - minFlushLevel: The threshold of the log level before sending to the destination.
     ///   - isDebug: Determines if the current app is running in debug mode.
-    ///   - constants: Provides details of the current context.
+    ///   - distribution: Provides details of the current distribution.
     ///   - networkManager: The object used to send the HTTP request.
     ///   - notificationCenter: A notification dispatch mechanism that registers observers for flushing the buffer at certain app lifecycle events.
     public init(
@@ -51,7 +51,7 @@ final public class LogHTTPService {
         maxEntriesInBuffer: Int,
         minFlushLevel: LogAPI.Level = .none,
         isDebug: Bool,
-        constants: AppContext,
+        distribution: Distribution,
         networkManager: NetworkManager,
         notificationCenter: NotificationCenter
     ) {
@@ -60,7 +60,7 @@ final public class LogHTTPService {
         self.maxEntriesInBuffer = maxEntriesInBuffer
         self.minFlushLevel = minFlushLevel
         self.isDebug = isDebug
-        self.constants = constants
+        self.distribution = distribution
         self.networkManager = networkManager
         
         notificationCenter.addObserver(
@@ -104,24 +104,24 @@ public extension LogHTTPService {
     ) {
         var payload: [String: Any] = [
             "app": [
-                "name": constants.appDisplayName ?? "Unknown",
-                "version": constants.appVersion ?? "Unknown",
-                "build": constants.appBuild ?? "Unknown",
-                "bundle_id": constants.appBundleID ?? "Unknown",
-                "is_extension": constants.isAppExtension,
+                "name": distribution.appDisplayName ?? "Unknown",
+                "version": distribution.appVersion ?? "Unknown",
+                "build": distribution.appBuild ?? "Unknown",
+                "bundle_id": distribution.appBundleID ?? "Unknown",
+                "is_extension": distribution.isAppExtension,
                 "is_debug": isDebug,
-                "distribution": constants.isRunningInAppStore ? "appstore"
-                    : constants.isInTestFlight ? "testflight"
-                    : constants.isAdHocDistributed ? "adhoc"
-                    : constants.isRunningOnSimulator ? "simulator"
+                "distribution": distribution.isRunningInAppStore ? "appstore"
+                    : distribution.isInTestFlight ? "testflight"
+                    : distribution.isAdHocDistributed ? "adhoc"
+                    : distribution.isRunningOnSimulator ? "simulator"
                     : "unknown"
             ],
             "device": [
                 "device_id": deviceIdentifier,
-                "device_name": !constants.isRunningInAppStore ? deviceName : "***",
+                "device_name": !distribution.isRunningInAppStore ? deviceName : "***",
                 "device_model": deviceModel,
                 "os_version": osVersion,
-                "is_simulator": constants.isRunningOnSimulator
+                "is_simulator": distribution.isRunningOnSimulator
             ],
             "code": [
                 "file": "\(file)",

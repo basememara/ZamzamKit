@@ -1,5 +1,5 @@
 //
-//  AppContext.swift
+//  Distribution.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 1/29/17.
@@ -9,9 +9,9 @@
 import Foundation.NSBundle
 
 /// Provides details of the current app.
-public protocol AppContext {}
+public protocol Distribution {}
 
-public extension AppContext {
+public extension Distribution {
 
 	/// App's name.
 	var appDisplayName: String? {
@@ -36,7 +36,7 @@ public extension AppContext {
 
 // MARK: - Environment
 
-public extension AppContext {
+public extension Distribution {
     
     /// Check if app is an extension target.
     var isAppExtension: Bool {
