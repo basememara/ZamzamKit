@@ -17,16 +17,16 @@ let package = Package(
             targets: ["ZamzamCore"]
         ),
         .library(
-            name: "ZamzamLocation",
-            targets: ["ZamzamLocation"]
+            name: "ZamzamUI",
+            targets: ["ZamzamUI"]
         ),
         .library(
             name: "ZamzamNotification",
             targets: ["ZamzamNotification"]
         ),
         .library(
-            name: "ZamzamUI",
-            targets: ["ZamzamUI"]
+            name: "ZamzamLocation",
+            targets: ["ZamzamLocation"]
         )
     ],
     targets: [
@@ -39,12 +39,12 @@ let package = Package(
             resources: [.process("Resources")]
         ),
         .target(
-            name: "ZamzamLocation",
+            name: "ZamzamUI",
             dependencies: ["ZamzamCore"]
         ),
         .testTarget(
-            name: "ZamzamLocationTests",
-            dependencies: ["ZamzamLocation"]
+            name: "ZamzamUITests",
+            dependencies: ["ZamzamUI"]
         ),
         .target(
             name: "ZamzamNotification",
@@ -55,12 +55,12 @@ let package = Package(
             dependencies: ["ZamzamNotification"]
         ),
         .target(
-            name: "ZamzamUI",
+            name: "ZamzamLocation",
             dependencies: ["ZamzamCore"]
         ),
         .testTarget(
-            name: "ZamzamUITests",
-            dependencies: ["ZamzamUI"]
+            name: "ZamzamLocationTests",
+            dependencies: ["ZamzamLocation"]
         )
     ]
 )
