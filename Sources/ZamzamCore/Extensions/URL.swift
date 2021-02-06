@@ -98,17 +98,17 @@ public extension URL {
     ///
     /// - Parameter contentsOf: A dictionary of query string parameters to modify.
     /// - Returns: The URL with the appended query string.
-    func appendingQueryItems(_ contentsOf: [String: Any?]) -> URL {
-        guard var urlComponents = URLComponents(string: absoluteString), !contentsOf.isEmpty else {
+    func appendingQueryItems(_ newElements: [String: Any?]) -> URL {
+        guard var urlComponents = URLComponents(string: absoluteString), !newElements.isEmpty else {
             return self
         }
         
-        let keys = contentsOf.keys.map { $0.lowercased() }
+        let keys = newElements.keys.map { $0.lowercased() }
         
         urlComponents.queryItems = urlComponents.queryItems?
             .filter { !keys.contains($0.name.lowercased()) } ?? []
         
-        urlComponents.queryItems?.append(contentsOf: contentsOf.compactMap {
+        urlComponents.queryItems?.append(contentsOf: newElements.compactMap {
             guard let value = $0.value else { return nil } // Skip if nil
             return URLQueryItem(name: $0.key, value: "\(value)")
         })

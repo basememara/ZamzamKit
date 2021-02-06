@@ -14,12 +14,12 @@ public struct ViewError: Error, Equatable, Identifiable {
     public let id = UUID()
     public let title: String
     public let message: String?
-    public let action: Action?
+    public let action: ViewAction?
     
     public init(
         title: String,
         message: String? = nil,
-        action: Action? = nil
+        action: ViewAction? = nil
     ) {
         self.title = title
         self.message = message

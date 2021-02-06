@@ -24,7 +24,7 @@ final class ApplyTests: XCTestCase {
     }
 }
 
-class SomeModel {
+private class SomeModel {
     var propertyA: String?
     var propertyB: Int?
     var propertyC: Bool?
