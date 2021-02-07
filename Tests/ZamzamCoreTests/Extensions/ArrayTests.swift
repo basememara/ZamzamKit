@@ -67,3 +67,18 @@ extension ArrayTests {
         XCTAssertEqual(sample, ["b", "c", "d", "e", "a"])
     }
 }
+
+extension ArrayTests {
+
+    func testIsNilOrEmpty() {
+        var test: [String]?
+
+        XCTAssert(test.isNilOrEmpty)
+
+        test = []
+        XCTAssert(test.isNilOrEmpty)
+
+        test = ["abc"]
+        XCTAssertFalse(test.isNilOrEmpty)
+    }
+}
