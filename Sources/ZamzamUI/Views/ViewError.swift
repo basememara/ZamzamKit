@@ -87,10 +87,7 @@ private struct AlertModifier: ViewModifier {
     @Binding var error: ViewError?
 
     func body(content: Content) -> some View {
-        content
-            .alert(item: $error) { error in
-                Alert(from: error)
-            }
+        content.alert(item: $error, content: Alert.init)
     }
 }
 
