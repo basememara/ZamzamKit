@@ -1,5 +1,5 @@
 //
-//  LogHTTPService.swift
+//  LogServiceHTTP.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2020-03-04.
@@ -15,18 +15,13 @@ import UIKit.UIApplication
 import UIKit.UIDevice
 
 /// Log destination for sending over HTTP.
-final public class LogHTTPService {
+final public class LogServiceHTTP {
     private let urlRequest: URLRequest
     private let maxEntriesInBuffer: Int
     private let minFlushLevel: LogAPI.Level
     private let isDebug: Bool
     private let distribution: Distribution
     private let networkManager: NetworkManager
-    
-    private let deviceName = UIDevice.current.name
-    private let deviceModel = UIDevice.current.model
-    private var deviceIdentifier = UIDevice.current.identifierForVendor?.uuidString ?? ""
-    private let osVersion = UIDevice.current.systemVersion
     
     /// Closure that converts the buffer to data.
     private let bufferEncode: ([(LogAPI.Level, String)]) -> Data?
@@ -79,7 +74,7 @@ final public class LogHTTPService {
     }
 }
 
-public extension LogHTTPService {
+public extension LogServiceHTTP {
     
     /// Appends the log to the buffer that will be queued for later sending.
     ///
@@ -117,10 +112,10 @@ public extension LogHTTPService {
                     : "unknown"
             ],
             "device": [
-                "device_id": deviceIdentifier,
-                "device_name": !distribution.isRunningInAppStore ? deviceName : "***",
-                "device_model": deviceModel,
-                "os_version": osVersion,
+                "device_id": distribution.deviceIdentifier,
+                "device_name": !distribution.isRunningInAppStore ? distribution.deviceName : "***",
+                "device_model": distribution.deviceModel,
+                "os_version": distribution.osVersion,
                 "is_simulator": distribution.isRunningOnSimulator
             ],
             "code": [
@@ -150,7 +145,7 @@ public extension LogHTTPService {
     }
 }
 
-private extension LogHTTPService {
+private extension LogServiceHTTP {
     
     func send() {
         guard !buffer.isEmpty,
@@ -171,7 +166,7 @@ private extension LogHTTPService {
         request.httpBody = data
         
         BackgroundTask.run(for: .shared) { task in
-            networkManager.send(with: request) {
+            networkManager.send(request) {
                 // Add back to the buffer if could not send
                 if case let .failure(error) = $0 {
                     print("🤍 \(timestamp: Date()) PRINT Error from log destination: \(error)")

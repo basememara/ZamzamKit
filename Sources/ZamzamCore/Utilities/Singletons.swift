@@ -1,5 +1,5 @@
 //
-//  Dependencies.swift
+//  Singletons.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2021-02-06.
@@ -7,9 +7,9 @@
 //
 
 /// Represents a dependency container and provides helpers for managing instances.
-public protocol Dependencies {}
+public protocol Singletons {}
 
-public extension Dependencies {
+public extension Singletons {
 
     /// Provides a single, thread-safe instance of the closure even if called multiple times.
     ///
@@ -22,7 +22,7 @@ public extension Dependencies {
     ///
     ///         func networkService() -> NetworkService {
     ///             single {
-    ///                 NetworkFoundationService()
+    ///                 NetworkServiceFoundation()
     ///             }
     ///         }
     ///     }
@@ -55,6 +55,8 @@ public extension Dependencies {
         Single.storage.value { $0.removeAll() }
     }
 }
+
+// MARK: - Helpers
 
 private struct Single {
     static var storage = Atomic<[String: Any]>([:])

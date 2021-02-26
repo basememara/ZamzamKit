@@ -19,5 +19,6 @@ public enum ZamzamError: Error {
     case cacheFailure(Error?)
     case requestFailure(Error?)
     case serverFailure(Error?)
+    case secureFailure(Error?)
     case other(Error?)
 }

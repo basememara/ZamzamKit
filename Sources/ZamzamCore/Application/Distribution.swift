@@ -11,6 +11,8 @@ import Foundation.NSBundle
 /// Provides details of the current app.
 public protocol Distribution {}
 
+// MARK: - App
+
 public extension Distribution {
 
 	/// App's name.
@@ -73,3 +75,33 @@ public extension Distribution {
         !isRunningOnSimulator && !isInTestFlight && !isRunningOnSimulator
     }
 }
+
+// MARK: - Device
+
+public extension Distribution {
+    var manufacturer: String { "Apple" }
+
+    var platform: String {
+        #if os(iOS)
+        return "iOS"
+        #elseif os(watchOS)
+        return "watchOS"
+        #elseif os(tvOS)
+        return "tvOS"
+        #elseif os(macOS)
+        return "macOS"
+        #endif
+    }
+}
+
+#if !os(macOS)
+import UIKit.UIDevice
+
+public extension Distribution {
+    var deviceName: String { UIDevice.current.name }
+    var deviceModel: String { UIDevice.current.model }
+    var deviceIdentifier: String { UIDevice.current.identifierForVendor?.uuidString ?? "" }
+    var osName: String { UIDevice.current.systemName }
+    var osVersion: String { UIDevice.current.systemVersion }
+}
+#endif

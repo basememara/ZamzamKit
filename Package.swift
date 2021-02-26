@@ -7,9 +7,9 @@ let package = Package(
     defaultLocalization: "en",
     platforms: [
         .macOS(.v10_14),
-        .iOS(.v11),
-        .tvOS(.v11),
-        .watchOS(.v4)
+        .iOS(.v12),
+        .tvOS(.v12),
+        .watchOS(.v6)
     ],
     products: [
         .library(
@@ -36,6 +36,7 @@ let package = Package(
         .testTarget(
             name: "ZamzamCoreTests",
             dependencies: ["ZamzamCore"],
+            exclude: ["Network/Certificates"],
             resources: [.process("Resources")]
         ),
         .target(

@@ -6,6 +6,8 @@
 //  Copyright © 2021 Zamzam Inc. All rights reserved.
 //
 
+#warning("Update function builder with Swift 5.4")
+
 /// Passes an array of generic elements using function builder syntax.
 ///
 ///     struct MyType {

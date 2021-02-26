@@ -1,5 +1,5 @@
 //
-//  LogConsoleService.swift
+//  LogServiceConsole.swift
 //  ZamzamCore
 //  
 //  Created by Basem Emara on 2019-10-28.
@@ -9,7 +9,7 @@
 import Foundation.NSDate
 
 /// Sends a message to the IDE console.
-public struct LogConsoleService: LogService {
+public struct LogServiceConsole: LogService {
     public let minLevel: LogAPI.Level
     
     public init(minLevel: LogAPI.Level) {
@@ -17,7 +17,7 @@ public struct LogConsoleService: LogService {
     }
 }
 
-public extension LogConsoleService {
+public extension LogServiceConsole {
     
     func write(
         _ level: LogAPI.Level,

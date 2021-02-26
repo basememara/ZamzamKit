@@ -1,5 +1,5 @@
 //
-//  LogOService.swift
+//  LogServiceOS.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2019-11-01.
@@ -9,7 +9,7 @@
 import os
 
 /// Sends a message to the logging system, optionally specifying a custom log object, log level, and any message format arguments.
-public struct LogOSService: LogService {
+public struct LogServiceOS: LogService {
     public let minLevel: LogAPI.Level
     private let subsystem: String
     private let category: String
@@ -23,7 +23,7 @@ public struct LogOSService: LogService {
     }
 }
 
-public extension LogOSService {
+public extension LogServiceOS {
     
     func write(
         _ level: LogAPI.Level,

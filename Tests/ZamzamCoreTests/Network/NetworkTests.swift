@@ -1,8 +1,9 @@
 //
 //  NetworkTests.swift
-//  ZamzamCore
+//  ZamzamCoreTests
 //
 //  Created by Basem Emara on 2020-03-01.
+//  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
 import XCTest
@@ -12,7 +13,7 @@ final class NetworkTests: XCTestCase {
     private let jsonDecoder = JSONDecoder()
     
     private let networkManager = NetworkManager(
-        service: NetworkFoundationService()
+        service: NetworkServiceFoundation()
     )
 }
 
@@ -24,16 +25,15 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
-        guard let url = URL(string: "https://httpbin.org/get") else {
-            XCTFail("URL was not valid")
-            return
-        }
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/get"),
+            method: .get
+        )
         
-        let request = URLRequest(url: url, method: .get)
-        var response: NetworkAPI.Response?
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -60,22 +60,22 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         
-        guard let url = URL(string: "https://httpbin.org/get") else {
-            XCTFail("URL was not valid")
-            return
-        }
-        
         let parameters: [String: Any] = [
             "abc": 123,
             "def": "test456",
             "xyz": true
         ]
         
-        let request = URLRequest(url: url, method: .get, parameters: parameters)
-        var response: NetworkAPI.Response?
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/get"),
+            method: .get,
+            parameters: parameters
+        )
+        
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -111,6 +111,7 @@ extension NetworkTests {
             parameters.forEach {
                 XCTAssertEqual(model.args[$0.key], "\($0.value)")
             }
+
         } catch {
             XCTFail("The resonse data could not be parse: \(error)")
         }
@@ -118,15 +119,9 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-    
     func testGETWithHeaders() {
         // Given
         let promise = expectation(description: #function)
-        
-        guard let url = URL(string: "https://httpbin.org/get") else {
-            XCTFail("URL was not valid")
-            return
-        }
         
         let headers: [String: String] = [
             "Abc": "test123",
@@ -134,11 +129,16 @@ extension NetworkTests {
             "Xyz": "test789"
         ]
         
-        let request = URLRequest(url: url, method: .get, headers: headers)
-        var response: NetworkAPI.Response?
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/get"),
+            method: .get,
+            headers: headers
+        )
+        
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -180,21 +180,19 @@ extension NetworkTests {
 // MARK: - POST
 
 extension NetworkTests {
-    
     func testPOST() {
         // Given
         let promise = expectation(description: #function)
         
-        guard let url = URL(string: "https://httpbin.org/post") else {
-            XCTFail("URL was not valid")
-            return
-        }
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/post"),
+            method: .post
+        )
         
-        let request = URLRequest(url: url, method: .post)
-        var response: NetworkAPI.Response?
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -216,15 +214,9 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-    
     func testPOSTWithParameters() {
         // Given
         let promise = expectation(description: #function)
-        
-        guard let url = URL(string: "https://httpbin.org/post") else {
-            XCTFail("URL was not valid")
-            return
-        }
         
         let parameters: [String: Any] = [
             "abc": 123,
@@ -232,11 +224,16 @@ extension NetworkTests {
             "xyz": true
         ]
         
-        let request = URLRequest(url: url, method: .post, parameters: parameters)
-        var response: NetworkAPI.Response?
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/post"),
+            method: .post,
+            parameters: parameters
+        )
+        
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -275,15 +272,9 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-    
     func testPOSTWithHeaders() {
         // Given
         let promise = expectation(description: #function)
-        
-        guard let url = URL(string: "https://httpbin.org/post") else {
-            XCTFail("URL was not valid")
-            return
-        }
         
         let headers: [String: String] = [
             "Abc": "test123",
@@ -291,11 +282,16 @@ extension NetworkTests {
             "Xyz": "test789"
         ]
         
-        let request = URLRequest(url: url, method: .post, headers: headers)
-        var response: NetworkAPI.Response?
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/post"),
+            method: .post,
+            headers: headers
+        )
+        
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -337,21 +333,19 @@ extension NetworkTests {
 // MARK: - PATCH
 
 extension NetworkTests {
-    
     func testPATCH() {
         // Given
         let promise = expectation(description: #function)
         
-        guard let url = URL(string: "https://httpbin.org/patch") else {
-            XCTFail("URL was not valid")
-            return
-        }
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/patch"),
+            method: .patch
+        )
         
-        let request = URLRequest(url: url, method: .patch)
-        var response: NetworkAPI.Response?
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -373,15 +367,9 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-    
     func testPATCHWithParameters() {
         // Given
         let promise = expectation(description: #function)
-        
-        guard let url = URL(string: "https://httpbin.org/patch") else {
-            XCTFail("URL was not valid")
-            return
-        }
         
         let parameters: [String: Any] = [
             "abc": 123,
@@ -389,11 +377,16 @@ extension NetworkTests {
             "xyz": true
         ]
         
-        let request = URLRequest(url: url, method: .patch, parameters: parameters)
-        var response: NetworkAPI.Response?
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/patch"),
+            method: .patch,
+            parameters: parameters
+        )
+        
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -432,15 +425,9 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-    
     func testPATCHWithHeaders() {
         // Given
         let promise = expectation(description: #function)
-        
-        guard let url = URL(string: "https://httpbin.org/patch") else {
-            XCTFail("URL was not valid")
-            return
-        }
         
         let headers: [String: String] = [
             "Abc": "test123",
@@ -448,11 +435,16 @@ extension NetworkTests {
             "Xyz": "test789"
         ]
         
-        let request = URLRequest(url: url, method: .patch, headers: headers)
-        var response: NetworkAPI.Response?
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/patch"),
+            method: .patch,
+            headers: headers
+        )
+        
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -494,21 +486,19 @@ extension NetworkTests {
 // MARK: - PUT
 
 extension NetworkTests {
-    
     func testPUT() {
         // Given
         let promise = expectation(description: #function)
         
-        guard let url = URL(string: "https://httpbin.org/put") else {
-            XCTFail("URL was not valid")
-            return
-        }
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/put"),
+            method: .put
+        )
         
-        let request = URLRequest(url: url, method: .put)
-        var response: NetworkAPI.Response?
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -530,15 +520,9 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-    
     func testPUTWithParameters() {
         // Given
         let promise = expectation(description: #function)
-        
-        guard let url = URL(string: "https://httpbin.org/put") else {
-            XCTFail("URL was not valid")
-            return
-        }
         
         let parameters: [String: Any] = [
             "abc": 123,
@@ -546,11 +530,16 @@ extension NetworkTests {
             "xyz": true
         ]
         
-        let request = URLRequest(url: url, method: .put, parameters: parameters)
-        var response: NetworkAPI.Response?
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/put"),
+            method: .put,
+            parameters: parameters
+        )
+        
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -589,15 +578,9 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-    
     func testPUTWithHeaders() {
         // Given
         let promise = expectation(description: #function)
-        
-        guard let url = URL(string: "https://httpbin.org/put") else {
-            XCTFail("URL was not valid")
-            return
-        }
         
         let headers: [String: String] = [
             "Abc": "test123",
@@ -605,11 +588,16 @@ extension NetworkTests {
             "Xyz": "test789"
         ]
         
-        let request = URLRequest(url: url, method: .put, headers: headers)
-        var response: NetworkAPI.Response?
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/put"),
+            method: .put,
+            headers: headers
+        )
+        
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -651,21 +639,19 @@ extension NetworkTests {
 // MARK: - DELETE
 
 extension NetworkTests {
-    
     func testDELETE() {
         // Given
         let promise = expectation(description: #function)
         
-        guard let url = URL(string: "https://httpbin.org/delete") else {
-            XCTFail("URL was not valid")
-            return
-        }
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/delete"),
+            method: .delete
+        )
         
-        let request = URLRequest(url: url, method: .delete)
-        var response: NetworkAPI.Response?
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -687,15 +673,9 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-    
     func testDELETEWithParameters() {
         // Given
         let promise = expectation(description: #function)
-        
-        guard let url = URL(string: "https://httpbin.org/delete") else {
-            XCTFail("URL was not valid")
-            return
-        }
         
         let parameters: [String: Any] = [
             "abc": 123,
@@ -703,11 +683,16 @@ extension NetworkTests {
             "xyz": true
         ]
         
-        let request = URLRequest(url: url, method: .delete, parameters: parameters)
-        var response: NetworkAPI.Response?
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/delete"),
+            method: .delete,
+            parameters: parameters
+        )
+        
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -751,15 +736,9 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-    
     func testDELETEWithHeaders() {
         // Given
         let promise = expectation(description: #function)
-        
-        guard let url = URL(string: "https://httpbin.org/delete") else {
-            XCTFail("URL was not valid")
-            return
-        }
         
         let headers: [String: String] = [
             "Abc": "test123",
@@ -767,11 +746,16 @@ extension NetworkTests {
             "Xyz": "test789"
         ]
         
-        let request = URLRequest(url: url, method: .delete, headers: headers)
-        var response: NetworkAPI.Response?
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/delete"),
+            method: .delete,
+            headers: headers
+        )
+        
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -810,213 +794,9 @@ extension NetworkTests {
     }
 }
 
-// MARK: - Multiple
-
-extension NetworkTests {
-    
-    func testTwoRequestsToTuple() {
-        // Given
-        let promise = expectation(description: #function)
-        
-        let requests = [
-            URLRequest(
-                url: URL(string: "https://httpbin.org/get")!,
-                method: .get
-            ),
-            URLRequest(
-                url: URL(string: "https://httpbin.org/post")!,
-                method: .post
-            )
-        ]
-        
-        var response0: NetworkAPI.Response?
-        var response1: NetworkAPI.Response?
-        
-        // When
-        networkManager.send(requests: requests[0], requests[1]) { first, second in
-            defer { promise.fulfill() }
-            
-            guard case let .success(value0) = first else {
-                XCTFail("The network request failed: \(String(describing: first.error))")
-                return
-            }
-            
-            guard case let .success(value1) = second else {
-                XCTFail("The network request failed: \(String(describing: second.error))")
-                return
-            }
-            
-            response0 = value0
-            response1 = value1
-        }
-        
-        wait(for: [promise], timeout: 10)
-        
-        // Then
-        XCTAssertEqual(requests[0].url?.absoluteString, "https://httpbin.org/get")
-        XCTAssertNotNil(response0?.data)
-        XCTAssertEqual(response0?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response0?.statusCode, 200)
-        
-        XCTAssertEqual(requests[1].url?.absoluteString, "https://httpbin.org/post")
-        XCTAssertNotNil(response1?.data)
-        XCTAssertEqual(response1?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response1?.statusCode, 200)
-    }
-    
-    func testThreeRequestsToTuple() {
-        // Given
-        let promise = expectation(description: #function)
-        
-        let requests = [
-            URLRequest(
-                url: URL(string: "https://httpbin.org/get")!,
-                method: .get
-            ),
-            URLRequest(
-                url: URL(string: "https://httpbin.org/post")!,
-                method: .post
-            ),
-            URLRequest(
-                url: URL(string: "https://httpbin.org/patch")!,
-                method: .patch
-            )
-        ]
-        
-        var response0: NetworkAPI.Response?
-        var response1: NetworkAPI.Response?
-        var response2: NetworkAPI.Response?
-        
-        // When
-        networkManager.send(requests: requests[0], requests[1], requests[2]) { first, second, third in
-            defer { promise.fulfill() }
-            
-            guard case let .success(value0) = first else {
-                XCTFail("The network request failed: \(String(describing: first.error))")
-                return
-            }
-            
-            guard case let .success(value1) = second else {
-                XCTFail("The network request failed: \(String(describing: second.error))")
-                return
-            }
-            
-            guard case let .success(value2) = third else {
-                XCTFail("The network request failed: \(String(describing: third.error))")
-                return
-            }
-            
-            response0 = value0
-            response1 = value1
-            response2 = value2
-        }
-        
-        wait(for: [promise], timeout: 10)
-        
-        // Then
-        XCTAssertEqual(requests[0].url?.absoluteString, "https://httpbin.org/get")
-        XCTAssertNotNil(response0?.data)
-        XCTAssertEqual(response0?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response0?.statusCode, 200)
-        
-        XCTAssertEqual(requests[1].url?.absoluteString, "https://httpbin.org/post")
-        XCTAssertNotNil(response1?.data)
-        XCTAssertEqual(response1?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response1?.statusCode, 200)
-        
-        XCTAssertEqual(requests[2].url?.absoluteString, "https://httpbin.org/patch")
-        XCTAssertNotNil(response2?.data)
-        XCTAssertEqual(response2?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response2?.statusCode, 200)
-    }
-    
-    func testFourRequestsToTuple() {
-        // Given
-        let promise = expectation(description: #function)
-        
-        let requests = [
-            URLRequest(
-                url: URL(string: "https://httpbin.org/get")!,
-                method: .get
-            ),
-            URLRequest(
-                url: URL(string: "https://httpbin.org/post")!,
-                method: .post
-            ),
-            URLRequest(
-                url: URL(string: "https://httpbin.org/patch")!,
-                method: .patch
-            ),
-            URLRequest(
-                url: URL(string: "https://httpbin.org/delete")!,
-                method: .delete
-            )
-        ]
-        
-        var response0: NetworkAPI.Response?
-        var response1: NetworkAPI.Response?
-        var response2: NetworkAPI.Response?
-        var response3: NetworkAPI.Response?
-        
-        // When
-        networkManager.send(requests: requests[0], requests[1], requests[2], requests[3]) { first, second, third, fourth in
-            defer { promise.fulfill() }
-            
-            guard case let .success(value0) = first else {
-                XCTFail("The network request failed: \(String(describing: first.error))")
-                return
-            }
-            
-            guard case let .success(value1) = second else {
-                XCTFail("The network request failed: \(String(describing: second.error))")
-                return
-            }
-            
-            guard case let .success(value2) = third else {
-                XCTFail("The network request failed: \(String(describing: third.error))")
-                return
-            }
-            
-            guard case let .success(value3) = fourth else {
-                XCTFail("The network request failed: \(String(describing: fourth.error))")
-                return
-            }
-            
-            response0 = value0
-            response1 = value1
-            response2 = value2
-            response3 = value3
-        }
-        
-        wait(for: [promise], timeout: 10)
-        
-        // Then
-        XCTAssertEqual(requests[0].url?.absoluteString, "https://httpbin.org/get")
-        XCTAssertNotNil(response0?.data)
-        XCTAssertEqual(response0?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response0?.statusCode, 200)
-        
-        XCTAssertEqual(requests[1].url?.absoluteString, "https://httpbin.org/post")
-        XCTAssertNotNil(response1?.data)
-        XCTAssertEqual(response1?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response1?.statusCode, 200)
-        
-        XCTAssertEqual(requests[2].url?.absoluteString, "https://httpbin.org/patch")
-        XCTAssertNotNil(response2?.data)
-        XCTAssertEqual(response2?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response2?.statusCode, 200)
-        
-        XCTAssertEqual(requests[3].url?.absoluteString, "https://httpbin.org/delete")
-        XCTAssertNotNil(response3?.data)
-        XCTAssertEqual(response3?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response3?.statusCode, 200)
-    }
-}
-
 // MARK: - Adapter
 
 extension NetworkTests {
-    
     struct TestURLRequestAdapter: URLRequestAdapter {
         
         func adapt(_ request: URLRequest) -> URLRequest {
@@ -1031,19 +811,19 @@ extension NetworkTests {
         // Given
         let promise = expectation(description: #function)
         let networkManager = NetworkManager(
-            service: NetworkFoundationService(),
+            service: NetworkServiceFoundation(),
             adapter: TestURLRequestAdapter()
         )
         
         let request = URLRequest(
-            url: URL(string: "https://httpbin.org/get")!,
+            url: URL(safeString: "https://httpbin.org/get"),
             method: .get
         )
         
-        var response: NetworkAPI.Response?
+        var response: NetworkResponse?
         
         // When
-        networkManager.send(with: request) {
+        networkManager.send(request) {
             defer { promise.fulfill() }
             
             guard case let .success(value) = $0 else {
@@ -1063,102 +843,11 @@ extension NetworkTests {
         XCTAssertEqual(response?.request.value(forHTTPHeaderField: "X-Test-1"), "1")
         XCTAssertEqual(response?.request.value(forHTTPHeaderField: "X-Test-2"), "2")
     }
-    
-    func testWithURLRequestAdapterWithMultipleRequests() {
-        // Given
-        let promise = expectation(description: #function)
-        let networkManager = NetworkManager(
-            service: NetworkFoundationService(),
-            adapter: TestURLRequestAdapter()
-        )
-        
-        let requests = [
-            URLRequest(
-                url: URL(string: "https://httpbin.org/get")!,
-                method: .get
-            ),
-            URLRequest(
-                url: URL(string: "https://httpbin.org/post")!,
-                method: .post
-            ),
-            URLRequest(
-                url: URL(string: "https://httpbin.org/patch")!,
-                method: .patch
-            ),
-            URLRequest(
-                url: URL(string: "https://httpbin.org/delete")!,
-                method: .delete
-            )
-        ]
-        
-        var response0: NetworkAPI.Response?
-        var response1: NetworkAPI.Response?
-        var response2: NetworkAPI.Response?
-        var response3: NetworkAPI.Response?
-        
-        // When
-        networkManager.send(requests: requests[0], requests[1], requests[2], requests[3]) { result in
-            defer { promise.fulfill() }
-            
-            guard case let .success(value0) = result.0 else {
-                XCTFail("The network request failed: \(String(describing: result.0.error))")
-                return
-            }
-            
-            guard case let .success(value1) = result.1 else {
-                XCTFail("The network request failed: \(String(describing: result.1.error))")
-                return
-            }
-            
-            guard case let .success(value2) = result.2 else {
-                XCTFail("The network request failed: \(String(describing: result.2.error))")
-                return
-            }
-            
-            guard case let .success(value3) = result.3 else {
-                XCTFail("The network request failed: \(String(describing: result.3.error))")
-                return
-            }
-            
-            response0 = value0
-            response1 = value1
-            response2 = value2
-            response3 = value3
-        }
-        
-        wait(for: [promise], timeout: 10)
-        
-        // Then
-        XCTAssertEqual(response0?.statusCode, 200)
-        XCTAssertNil(requests[0].value(forHTTPHeaderField: "X-Test-1"))
-        XCTAssertNil(requests[0].value(forHTTPHeaderField: "X-Test-2"))
-        XCTAssertEqual(response0?.request.value(forHTTPHeaderField: "X-Test-1"), "1")
-        XCTAssertEqual(response0?.request.value(forHTTPHeaderField: "X-Test-2"), "2")
-        
-        XCTAssertEqual(response1?.statusCode, 200)
-        XCTAssertNil(requests[1].value(forHTTPHeaderField: "X-Test-1"))
-        XCTAssertNil(requests[1].value(forHTTPHeaderField: "X-Test-2"))
-        XCTAssertEqual(response1?.request.value(forHTTPHeaderField: "X-Test-1"), "1")
-        XCTAssertEqual(response1?.request.value(forHTTPHeaderField: "X-Test-2"), "2")
-        
-        XCTAssertEqual(response2?.statusCode, 200)
-        XCTAssertNil(requests[2].value(forHTTPHeaderField: "X-Test-1"))
-        XCTAssertNil(requests[2].value(forHTTPHeaderField: "X-Test-2"))
-        XCTAssertEqual(response2?.request.value(forHTTPHeaderField: "X-Test-1"), "1")
-        XCTAssertEqual(response2?.request.value(forHTTPHeaderField: "X-Test-2"), "2")
-        
-        XCTAssertEqual(response3?.statusCode, 200)
-        XCTAssertNil(requests[3].value(forHTTPHeaderField: "X-Test-1"))
-        XCTAssertNil(requests[3].value(forHTTPHeaderField: "X-Test-2"))
-        XCTAssertEqual(response3?.request.value(forHTTPHeaderField: "X-Test-1"), "1")
-        XCTAssertEqual(response3?.request.value(forHTTPHeaderField: "X-Test-2"), "2")
-    }
 }
 
 // MARK: - Helpers
 
 private extension NetworkTests {
-    
     struct ResponseModel: Decodable {
         let url: String
         let args: [String: String]

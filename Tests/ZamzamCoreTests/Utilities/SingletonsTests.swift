@@ -1,5 +1,5 @@
 //
-//  DependenciesTests.swift
+//  SingletonsTests.swift
 //  ZamzamCoreTests
 //
 //  Created by Basem Emara on 2021-02-06.
@@ -9,11 +9,11 @@
 import XCTest
 import ZamzamCore
 
-final class DependenciesTests: XCTestCase {}
+final class SingletonsTests: XCTestCase {}
 
-extension DependenciesTests {
+extension SingletonsTests {
 
-    func testSingle() {
+    func testSingleContext() {
         // Given
         let context = MyContext()
 
@@ -34,7 +34,7 @@ extension DependenciesTests {
     }
 }
 
-extension DependenciesTests {
+extension SingletonsTests {
 
     func testMultipleContexts() {
         // Given
@@ -58,7 +58,7 @@ extension DependenciesTests {
     }
 }
 
-extension DependenciesTests {
+extension SingletonsTests {
 
     func testReset() {
         // Given
@@ -81,7 +81,7 @@ extension DependenciesTests {
 
 // MARK: - Types
 
-private extension DependenciesTests {
+private extension SingletonsTests {
 
     struct MyContext: SomeContext {
 
@@ -104,7 +104,7 @@ private extension DependenciesTests {
     }
 }
 
-private extension DependenciesTests {
+private extension SingletonsTests {
 
     struct NetworkDefaultService: NetworkService {
         let id = UUID().uuidString
@@ -123,7 +123,7 @@ private extension DependenciesTests {
     }
 }
 
-private protocol SomeContext: Dependencies {
+private protocol SomeContext: Singletons {
     func networkService() -> NetworkService
     func locationService() -> LocationService
     func nonSingleService() -> NonSingleService
@@ -133,13 +133,13 @@ private extension SomeContext {
 
     func networkService() -> NetworkService {
         single {
-            DependenciesTests.NetworkDefaultService()
+            SingletonsTests.NetworkDefaultService()
         }
     }
 
     func locationService() -> LocationService {
         single {
-            DependenciesTests.LocationDefaultService()
+            SingletonsTests.LocationDefaultService()
         }
     }
 }
