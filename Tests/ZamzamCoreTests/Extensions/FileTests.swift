@@ -44,8 +44,10 @@ extension FileTests {
     func testGetDocumentPath() {
         let value = FileManager.default.path(of: fileName, from: .downloadsDirectory)
 
-        XCTAssert(FileManager.default.fileExists(atPath: value),
-            "The file location path for \(fileName) seems incorrect (file doesn't exist)")
+        XCTAssert(
+            FileManager.default.fileExists(atPath: value),
+            "The file location path for \(fileName) seems incorrect (file doesn't exist)"
+        )
     }
 
     func testDownloadFile() {
@@ -71,8 +73,10 @@ extension FileTests {
             fileInDirectory(fileName2)
         ]
 
-        XCTAssert(value.contains(expectedValue[0]) && value.contains(expectedValue[1]),
-                  "The file paths for the document directory seems incorrect")
+        XCTAssert(
+            value.contains(expectedValue[0]) && value.contains(expectedValue[1]),
+            "The file paths for the document directory seems incorrect"
+        )
     }
 }
 #endif

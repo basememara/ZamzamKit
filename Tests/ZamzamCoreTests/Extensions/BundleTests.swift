@@ -21,18 +21,19 @@ extension BundleTests {
         XCTAssert(values == "This is a test. Abc 123.\n")
     }
 
-    func testValuesFromPlist() {
+    func testValuesFromPlist() throws {
         let values = bundle.contents(plist: "Settings.plist")
 
         XCTAssertEqual(values["MyString1"] as? String, "My string value 1.")
         XCTAssertEqual(values["MyNumber1"] as? Int, 123)
         XCTAssertEqual(values["MyBool1"] as? Bool, false)
-        XCTAssertEqual(XCTUnwrap(
-            values["MyDate1"] as? Date, Date(
+        XCTAssertEqual(
+            values["MyDate1"] as? Date,
+            Date(
                 fromString: "2016/03/03 9:50",
                 timeZone: TimeZone(identifier: "America/Toronto")
             )
-        ))
+        )
     }
 }
 

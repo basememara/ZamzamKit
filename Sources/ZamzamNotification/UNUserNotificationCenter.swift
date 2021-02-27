@@ -111,14 +111,16 @@ public extension UNUserNotificationCenter {
         self.delegate ?= delegate
 
         getNotificationSettings { settings in
-            let categorySet = Set(categories.map {
-                UNNotificationCategory(
-                    identifier: $0.key,
-                    actions: $0.value ?? [],
-                    intentIdentifiers: [],
-                    options: .customDismissAction
-                )
-            })
+            let categorySet = Set(
+                categories.map {
+                    UNNotificationCategory(
+                        identifier: $0.key,
+                        actions: $0.value ?? [],
+                        intentIdentifiers: [],
+                        options: .customDismissAction
+                    )
+                }
+            )
 
             guard let authorizations = authorizations, settings.authorizationStatus == .notDetermined else {
                 // Register category if applicable

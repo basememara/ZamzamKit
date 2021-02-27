@@ -34,12 +34,24 @@ open class MailComposer: NSObject {
 public extension MailComposer {
 
     /// A standard interface for managing, editing, and sending an email message.
-    func makeViewController(email: String, subject: String? = nil, body: String? = nil, isHTML: Bool = true, attachment: Attachment? = nil) -> MFMailComposeViewController? {
+    func makeViewController(
+        email: String,
+        subject: String? = nil,
+        body: String? = nil,
+        isHTML: Bool = true,
+        attachment: Attachment? = nil
+    ) -> MFMailComposeViewController? {
         makeViewController(emails: [email], subject: subject, body: body, isHTML: isHTML, attachment: attachment)
     }
 
     /// A standard interface for managing, editing, and sending an email message.
-    func makeViewController(emails: [String], subject: String?, body: String?, isHTML: Bool = true, attachment: Attachment? = nil) -> MFMailComposeViewController? {
+    func makeViewController(
+        emails: [String],
+        subject: String?,
+        body: String?,
+        isHTML: Bool = true,
+        attachment: Attachment? = nil
+    ) -> MFMailComposeViewController? {
         guard canSendMail() else { return nil }
 
         return MFMailComposeViewController().apply {

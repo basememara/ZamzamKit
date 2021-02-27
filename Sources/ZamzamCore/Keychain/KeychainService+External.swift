@@ -48,8 +48,6 @@ public extension KeychainExternalService {
 // MARK: - External Library
 
 private extension KeychainExternalService {
-    // swiftlint:disable line_length
-
     //
     //  KeychainSwiftDistrib.swift
     //

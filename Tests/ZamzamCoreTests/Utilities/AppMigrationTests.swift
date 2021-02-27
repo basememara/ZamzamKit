@@ -14,8 +14,8 @@ final class AppMigrationTests: XCTestCase {
 
 extension AppMigrationTests {
 
-    func testMigrationReset() {
-        let migration: AppMigration = .makeMigration(forVersion: "1.0")
+    func testMigrationReset() throws {
+        let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
         let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
         migration.perform(forVersion: "0.9") {
@@ -45,8 +45,8 @@ extension AppMigrationTests {
 
 extension AppMigrationTests {
 
-    func testMigrationChained() {
-        let migration: AppMigration = .makeMigration(forVersion: "1.0")
+    func testMigrationChained() throws {
+        let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
         let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
         let expectation2 = self.expectation(description: "Expecting block to be run for version 1.0")
@@ -74,8 +74,8 @@ extension AppMigrationTests {
 
 extension AppMigrationTests {
 
-    func testMigrationBuild() {
-        let migration: AppMigration = .makeMigration(forVersion: "1.0")
+    func testMigrationBuild() throws {
+        let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
         let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
         migration.perform(forVersion: "0.9") {
@@ -101,8 +101,8 @@ extension AppMigrationTests {
 
 extension AppMigrationTests {
 
-    func testMigratesOnFirstRun() {
-        let migration: AppMigration = .makeMigration(forVersion: "1.1")
+    func testMigratesOnFirstRun() throws {
+        let migration: AppMigration = try .makeMigration(forVersion: "1.1")
         let expectation = self.expectation(description: "Should execute migration after reset")
 
         migration.perform(forVersion: "1.0") {
@@ -115,8 +115,8 @@ extension AppMigrationTests {
 
 extension AppMigrationTests {
 
-    func testMigratesOnce() {
-        let migration: AppMigration = .makeMigration(forVersion: "1.0")
+    func testMigratesOnce() throws {
+        let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
         let expectation = self.expectation(description: "Expecting block to be run")
         migration.perform(forVersion: "0.9") {
@@ -142,8 +142,8 @@ extension AppMigrationTests {
 
 extension AppMigrationTests {
 
-    func testMigratesPreviousVersionBlocks() {
-        let migration: AppMigration = .makeMigration(forVersion: "1.0")
+    func testMigratesPreviousVersionBlocks() throws {
+        let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
         let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
         migration.perform(forVersion: "0.9") {
@@ -161,8 +161,8 @@ extension AppMigrationTests {
 
 extension AppMigrationTests {
 
-    func testMigratesVersionInNaturalSortOrder() {
-        let migration: AppMigration = .makeMigration(forVersion: "1.0")
+    func testMigratesVersionInNaturalSortOrder() throws {
+        let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
         let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
         migration.perform(forVersion: "0.9") {
@@ -189,8 +189,8 @@ extension AppMigrationTests {
 
 extension AppMigrationTests {
 
-    func testRunsApplicationUpdateBlockOnce() {
-        let migration: AppMigration = .makeMigration(forVersion: "1.0")
+    func testRunsApplicationUpdateBlockOnce() throws {
+        let migration: AppMigration = try .makeMigration(forVersion: "1.0")
         let expectation = self.expectation(description: "Should only call block once")
 
         migration.performUpdate {
@@ -207,8 +207,8 @@ extension AppMigrationTests {
 
 extension AppMigrationTests {
 
-    func testRunsApplicationUpdateBlockOnlyOnceWithMultipleMigrations() {
-        let migration: AppMigration = .makeMigration(forVersion: "1.0")
+    func testRunsApplicationUpdateBlockOnlyOnceWithMultipleMigrations() throws {
+        let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
         let expectation1 = self.expectation(description: "Expecting block to be run for version 0.8")
         migration.perform(forVersion: "0.8") {
@@ -248,9 +248,9 @@ private extension AppMigrationTests {
 
 private extension AppMigration {
 
-    static func makeMigration(forVersion version: String) -> AppMigration {
+    static func makeMigration(forVersion version: String) throws -> AppMigration {
         let migration = AppMigration(
-            userDefaults: XCTUnwrap(UserDefaults(suiteName: "AppMigrationTests")),
+            userDefaults: try XCTUnwrap(UserDefaults(suiteName: "AppMigrationTests")),
             bundle: .module
         )
 

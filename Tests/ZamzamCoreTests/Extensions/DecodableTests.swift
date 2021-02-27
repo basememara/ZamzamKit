@@ -103,14 +103,14 @@ extension DecodableTests {
         let payload = try decoder.decode(ServerResponse.self, from: data)
 
         // Then
-        XCTAssertEqual(XCTUnwrap((payload.data?["boolean"])?.value as? Bool), true)
-        XCTAssertEqual(XCTUnwrap((payload.data?["integer"])?.value as? Int), 1)
-        XCTAssertEqual(XCTUnwrap((payload.data?["double"])?.value as? Double), 3.14159265358979323846, accuracy: 0.001)
-        XCTAssertEqual(XCTUnwrap((payload.data?["string"])?.value as? String), "string")
-        XCTAssertEqual(XCTUnwrap((payload.data?["date"])?.value as? Date), Date(timeIntervalSince1970: 1559392318))
-        XCTAssertEqual(XCTUnwrap((payload.data?["array"])?.value as? [Int]), [1, 2, 3])
+        XCTAssertEqual(try XCTUnwrap((payload.data?["boolean"])?.value as? Bool), true)
+        XCTAssertEqual(try XCTUnwrap((payload.data?["integer"])?.value as? Int), 1)
+        XCTAssertEqual(try XCTUnwrap((payload.data?["double"])?.value as? Double), 3.14159265358979323846, accuracy: 0.001)
+        XCTAssertEqual(try XCTUnwrap((payload.data?["string"])?.value as? String), "string")
+        XCTAssertEqual(try XCTUnwrap((payload.data?["date"])?.value as? Date), Date(timeIntervalSince1970: 1559392318))
+        XCTAssertEqual(try XCTUnwrap((payload.data?["array"])?.value as? [Int]), [1, 2, 3])
         XCTAssertEqual(
-            XCTUnwrap((payload.data?["nested"])?.value as? [String: String]),
+            try XCTUnwrap((payload.data?["nested"])?.value as? [String: String]),
             ["a": "alpha", "b": "bravo", "c": "charlie"]
         )
     }

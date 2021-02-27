@@ -10,12 +10,6 @@ import Foundation.NSBundle
 
 public extension Bundle {
 
-    /// A representation of the code and resources stored in ZamzamCore bundle directory on disk.
-    static let zamzamCore: Bundle = .module
-}
-
-public extension Bundle {
-
     /// Gets the contents of the specified file.
     ///
     ///     Bundle.main.string(file: "Test.txt") // "This is a test. Abc 123.\n"

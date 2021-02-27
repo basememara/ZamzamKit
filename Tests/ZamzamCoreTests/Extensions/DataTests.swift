@@ -34,7 +34,9 @@ extension DataTests {
 
     func testBase64URLEncodedString() {
         XCTAssertEqual(
-            "dsva-kjKH IU_H78yds8/7fyt78O TD+SY*O&*&T*A&(A*SF Y d8=q933827 z*&T*(ui sda dssd2&^%adjkh alkdjfl".data(using: .utf8)?.base64URLEncodedString(),
+            "dsva-kjKH IU_H78yds8/7fyt78O TD+SY*O&*&T*A&(A*SF Y d8=q933827 z*&T*(ui sda dssd2&^%adjkh alkdjfl"
+                .data(using: .utf8)?
+                .base64URLEncodedString(),
             "ZHN2YS1raktIIElVX0g3OHlkczgvN2Z5dDc4TyBURCtTWSpPJiomVCpBJihBKlNGIFkgZDg9cTkzMzgyNyB6KiZUKih1aSBzZGEgZHNzZDImXiVhZGpraCBhbGtkamZs"
         )
     }

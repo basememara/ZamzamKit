@@ -18,10 +18,12 @@ public extension JSONDecoder {
     ///   - string: The string representation of the JSON object.
     func decode<T: Decodable>(_ type: T.Type, from string: String) throws -> T {
         guard let data = string.data(using: .utf8) else {
-            throw DecodingError.dataCorrupted(DecodingError.Context(
-                codingPath: [],
-                debugDescription: "Could not encode data from string."
-            ))
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(
+                    codingPath: [],
+                    debugDescription: "Could not encode data from string."
+                )
+            )
         }
 
         return try decode(type, from: data)
@@ -47,10 +49,12 @@ public extension JSONDecoder {
         let ext = path.pathExtension
 
         guard let url = bundle.url(forResource: file, withExtension: ext) else {
-            throw DecodingError.dataCorrupted(DecodingError.Context(
-                codingPath: [],
-                debugDescription: "Could not find the resource."
-            ))
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(
+                    codingPath: [],
+                    debugDescription: "Could not find the resource."
+                )
+            )
         }
 
         return try decode(type, from: Data(contentsOf: url, options: .mappedIfSafe))

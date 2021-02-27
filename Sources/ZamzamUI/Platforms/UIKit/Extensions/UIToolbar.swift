@@ -46,7 +46,7 @@ public extension UIToolbar {
 
             if let clearAction = clearAction {
                 let clearButton = UIBarButtonItem(
-                    title: .localized(.clear),
+                    title: .clear,
                     style: .plain,
                     target: target,
                     action: clearAction
@@ -101,7 +101,7 @@ public extension UIToolbar {
 
             if let clearAction = clearAction {
                 let clearButton = UIBarButtonItem(
-                    title: .localized(.clear),
+                    title: .clear,
                     style: .plain,
                     target: target,
                     action: clearAction
@@ -130,7 +130,7 @@ public extension UIToolbar {
             }
 
             let nextButton = UIBarButtonItem(
-                title: .localized(.next),
+                title: .next,
                 style: .plain,
                 target: target,
                 action: action
@@ -148,5 +148,12 @@ public extension UIToolbar {
             $0.setItems(items, animated: false)
         }
     }
+}
+
+// MARK: - Localization
+
+private extension String {
+    static let next = NSLocalizedString("next.dialog", bundle: .module, comment: "")
+    static let clear = NSLocalizedString("clear.dialog", bundle: .module, comment: "")
 }
 #endif

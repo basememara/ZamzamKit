@@ -14,7 +14,7 @@ final class CLLocationTests: XCTestCase {}
 
 extension CLLocationTests {
 
-    func testMetaData() {
+    func testMetaData() throws {
         // Given
         let promise = expectation(description: "fetch location")
         let value = CLLocation(latitude: 43.7, longitude: -79.4)
@@ -42,7 +42,7 @@ extension CLLocationTests {
 
 extension CLLocationTests {
 
-    func testClosestFarthestLocation() {
+    func testClosestFarthestLocation() throws {
         let toronto = CLLocationCoordinate2D(latitude: 43.6529, longitude: -79.3849)
         let newYork = CLLocationCoordinate2D(latitude: 40.7648, longitude: -73.9808)
         let miami = CLLocationCoordinate2D(latitude: 25.7743, longitude: -80.1937)
@@ -56,32 +56,32 @@ extension CLLocationTests {
         let cairo = CLLocationCoordinate2D(latitude: 30.05611, longitude: 31.23944)
 
         XCTAssertEqual(
-            XCTUnwrap([newYork, miami, atlanta].closest(to: toronto)).latitude,
+            try XCTUnwrap([newYork, miami, atlanta].closest(to: toronto)).latitude,
             newYork.latitude
         )
 
         XCTAssertEqual(
-            XCTUnwrap([newYork, miami, atlanta].farthest(from: toronto)).latitude,
+            try XCTUnwrap([newYork, miami, atlanta].farthest(from: toronto)).latitude,
             miami.latitude
         )
 
         XCTAssertEqual(
-            XCTUnwrap([paris, london, cairo].closest(to: beijing)).latitude,
+            try XCTUnwrap([paris, london, cairo].closest(to: beijing)).latitude,
             cairo.latitude
         )
 
         XCTAssertEqual(
-            XCTUnwrap([paris, london, cairo].farthest(from: beijing)).latitude,
+            try XCTUnwrap([paris, london, cairo].farthest(from: beijing)).latitude,
             paris.latitude
         )
 
         XCTAssertEqual(
-            XCTUnwrap([vancouver, losAngles, miami].closest(to: tokyo)).latitude,
+            try XCTUnwrap([vancouver, losAngles, miami].closest(to: tokyo)).latitude,
             vancouver.latitude
         )
 
         XCTAssertEqual(
-            XCTUnwrap([vancouver, losAngles, miami].farthest(from: tokyo)).latitude,
+            try XCTUnwrap([vancouver, losAngles, miami].farthest(from: tokyo)).latitude,
             miami.latitude
         )
     }

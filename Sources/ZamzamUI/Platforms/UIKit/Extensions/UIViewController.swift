@@ -240,11 +240,11 @@ public extension UIViewController {
     func present(
         alert title: String?,
         message: String? = nil,
-        buttonText: String = .localized(.ok),
+        buttonText: String? = nil,
         buttonStyle: UIAlertAction.Style = .default,
         additionalActions: [UIAlertAction]? = nil,
         includeCancelAction: Bool = false,
-        cancelText: String = .localized(.cancel),
+        cancelText: String? = nil,
         cancelHandler: (() -> Void)? = nil,
         animated: Bool = true,
         configure: ((UIAlertController) -> Void)? = nil,
@@ -258,7 +258,7 @@ public extension UIViewController {
 
         if includeCancelAction {
             alertController.addAction(
-                UIAlertAction(title: cancelText, style: .cancel) { _ in cancelHandler?() }
+                UIAlertAction(title: cancelText ?? .cancel, style: .cancel) { _ in cancelHandler?() }
             )
         }
 
@@ -269,7 +269,7 @@ public extension UIViewController {
         }
 
         alertController.addAction(
-            UIAlertAction(title: buttonText, style: buttonStyle) { _ in handler?() }
+            UIAlertAction(title: buttonText ?? .ok, style: buttonStyle) { _ in handler?() }
         )
 
         // Handle any last configurations before presenting alert
@@ -312,7 +312,7 @@ public extension UIViewController {
         popoverFrom sourceView: UIView,
         additionalActions: [UIAlertAction],
         includeCancelAction: Bool = false,
-        cancelText: String = .localized(.cancel),
+        cancelText: String? = nil,
         cancelHandler: (() -> Void)? = nil,
         animated: Bool = true,
         configure: ((UIAlertController) -> Void)? = nil,
@@ -330,7 +330,7 @@ public extension UIViewController {
 
         if includeCancelAction {
             alertController.addAction(
-                .init(title: cancelText, style: .cancel) { _ in cancelHandler?() }
+                .init(title: cancelText ?? .cancel, style: .cancel) { _ in cancelHandler?() }
             )
         }
 
@@ -381,7 +381,7 @@ public extension UIViewController {
         barButtonItem: UIBarButtonItem,
         additionalActions: [UIAlertAction],
         includeCancelAction: Bool = false,
-        cancelText: String = .localized(.cancel),
+        cancelText: String? = nil,
         cancelHandler: (() -> Void)? = nil,
         animated: Bool = true,
         configure: ((UIAlertController) -> Void)? = nil,
@@ -399,7 +399,7 @@ public extension UIViewController {
 
         if includeCancelAction {
             alertController.addAction(
-                UIAlertAction(title: cancelText, style: .cancel) { _ in cancelHandler?() }
+                UIAlertAction(title: cancelText ?? .cancel, style: .cancel) { _ in cancelHandler?() }
             )
         }
 
@@ -449,10 +449,10 @@ public extension UIViewController {
         prompt title: String,
         message: String? = nil,
         placeholder: String? = nil,
-        buttonText: String = .localized(.ok),
+        buttonText: String? = nil,
         buttonStyle: UIAlertAction.Style = .default,
         includeCancelAction: Bool = true,
-        cancelText: String = .localized(.cancel),
+        cancelText: String? = nil,
         cancelHandler: (() -> Void)? = nil,
         animated: Bool = true,
         configure: ((UITextField) -> Void)? = nil,
@@ -466,7 +466,7 @@ public extension UIViewController {
 
         if includeCancelAction {
             alertController.addAction(
-                UIAlertAction(title: cancelText, style: .cancel) { _ in cancelHandler?() }
+                UIAlertAction(title: cancelText ?? .cancel, style: .cancel) { _ in cancelHandler?() }
             )
         }
 
@@ -478,7 +478,7 @@ public extension UIViewController {
         }
 
         alertController.addAction(
-            UIAlertAction(title: buttonText, style: buttonStyle) { _ in
+            UIAlertAction(title: buttonText ?? .ok, style: buttonStyle) { _ in
                 guard let text = alertController.textFields?.first?.text else {
                     response(nil)
                     return
@@ -573,7 +573,7 @@ public extension UIViewController {
     /// Presents an activity view controller modally that you can use to offer various services from your application.
     ///
     ///     let safariActivity = UIActivity.make(
-    ///         title: .localized(.openInSafari),
+    ///         title: .openInSafari),
     ///         imageName: "safari-share",
     ///         imageBundle: .zamzamKit,
     ///         handler: {
@@ -592,7 +592,8 @@ public extension UIViewController {
     ///     )
     ///
     /// - Parameters:
-    ///   - activities: The array of data objects on which to perform the activity. The type of objects in the array is variable and dependent on the data your application manages.
+    ///   - activities: The array of data objects on which to perform the activity.
+    ///                 The type of objects in the array is variable and dependent on the data your application manages.
     ///   - sourceView: The view containing the anchor rectangle for the popover for supporting iPad device.
     ///   - applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
     /// - Returns: Returns the activity view controller instance that was presented.
@@ -613,7 +614,7 @@ public extension UIViewController {
     /// Presents an activity view controller modally that you can use to offer various services from your application.
     ///
     ///     let safariActivity = UIActivity.make(
-    ///         title: .localized(.openInSafari),
+    ///         title: .openInSafari),
     ///         imageName: "safari-share",
     ///         imageBundle: .zamzamKit,
     ///         handler: {
@@ -632,7 +633,8 @@ public extension UIViewController {
     ///     )
     ///
     /// - Parameters:
-    ///   - activities: The array of data objects on which to perform the activity. The type of objects in the array is variable and dependent on the data your application manages.
+    ///   - activities: The array of data objects on which to perform the activity.
+    ///                 The type of objects in the array is variable and dependent on the data your application manages.
     ///   - barButtonItem: The bar button item containing the anchor rectangle for the popover for supporting iPad device.
     ///   - applicationActivities: An array of UIActivity objects representing the custom services that your application supports.
     /// - Returns: Returns the activity view controller instance that was presented.
@@ -648,5 +650,12 @@ public extension UIViewController {
         present(activity, animated: true, completion: nil)
         return activity
     }
+}
+
+// MARK: - Localization
+
+private extension String {
+    static let ok = NSLocalizedString("ok.dialog", bundle: .module, comment: "")
+    static let cancel = NSLocalizedString("cancel.dialog", bundle: .module, comment: "")
 }
 #endif

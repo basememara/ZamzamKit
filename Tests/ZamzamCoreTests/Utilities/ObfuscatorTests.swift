@@ -26,9 +26,10 @@ extension ObfuscatorTests {
 extension ObfuscatorTests {
 
     func testReveal() {
-        let value = obfuscator.reveal(secret: [7, 55, 94, 66, 10, 34, 40, 48, 58, 61, 33, 4, 29, 21, 25, 35, 9, 2, 95, 85, 70, 71, 42, 74, 72])
-        let expected = "HU87yAIDUOuanajlkd*&%&^%:"
+        let value = obfuscator.reveal(
+            secret: [7, 55, 94, 66, 10, 34, 40, 48, 58, 61, 33, 4, 29, 21, 25, 35, 9, 2, 95, 85, 70, 71, 42, 74, 72]
+        )
 
-        XCTAssertEqual(value, expected)
+        XCTAssertEqual(value, "HU87yAIDUOuanajlkd*&%&^%:")
     }
 }

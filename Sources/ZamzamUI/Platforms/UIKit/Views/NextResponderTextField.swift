@@ -29,7 +29,7 @@ import UIKit
     /// If it is UIButton and enabled then the button will be tapped.
     /// If it is UIButton and disabled then the keyboard will be dismissed.
     /// If it is another implementation, it becomes first responder.
-    @IBOutlet open weak var nextResponderField: UIResponder?
+    @IBOutlet open weak var nextResponderField: UIResponder? // swiftlint:disable:this prohibited_interface_builder
 
     /**
      Creates a new view with the passed coder.

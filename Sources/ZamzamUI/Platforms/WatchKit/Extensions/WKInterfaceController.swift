@@ -43,15 +43,15 @@ public extension WKInterfaceController {
     func present(
         alert title: String?,
         message: String? = nil,
-        buttonText: String = .localized(.ok),
+        buttonText: String? = nil,
         additionalActions: [WKAlertAction]? = nil,
         includeCancelAction: Bool = false,
-        cancelText: String = .localized(.cancel),
+        cancelText: String? = nil,
         cancelHandler: (() -> Void)? = nil,
         handler: (() -> Void)? = nil
     ) {
         var actions = [
-            WKAlertAction(title: buttonText, style: .default) {
+            WKAlertAction(title: buttonText ?? .ok, style: .default) {
                 handler?()
             }
         ]
@@ -62,7 +62,7 @@ public extension WKInterfaceController {
 
         if includeCancelAction {
             actions.append(
-                WKAlertAction(title: cancelText, style: .cancel) {
+                WKAlertAction(title: cancelText ?? .cancel, style: .cancel) {
                     cancelHandler?()
                 }
             )
@@ -101,14 +101,14 @@ public extension WKInterfaceController {
         message: String? = nil,
         additionalActions: [WKAlertAction],
         includeCancelAction: Bool = false,
-        cancelText: String = .localized(.cancel),
+        cancelText: String? = nil,
         cancelHandler: (() -> Void)? = nil
     ) {
         var actions = additionalActions
 
         if includeCancelAction {
             actions.append(
-                WKAlertAction(title: cancelText, style: .cancel) {
+                WKAlertAction(title: cancelText ?? .cancel, style: .cancel) {
                     cancelHandler?()
                 }
             )
@@ -139,8 +139,8 @@ public extension WKInterfaceController {
     func present(
         sideBySideAlert title: String,
         message: String? = nil,
-        buttonText: String = .localized(.ok),
-        cancelText: String = .localized(.cancel),
+        buttonText: String? = nil,
+        cancelText: String? = nil,
         cancelHandler: (() -> Void)? = nil,
         handler: (() -> Void)? = nil
     ) {
@@ -149,14 +149,21 @@ public extension WKInterfaceController {
             message: message,
             preferredStyle: .sideBySideButtonsAlert,
             actions: [
-                WKAlertAction(title: cancelText, style: .cancel) {
+                WKAlertAction(title: cancelText ?? .cancel, style: .cancel) {
                     cancelHandler?()
                 },
-                WKAlertAction(title: buttonText, style: .default) {
+                WKAlertAction(title: buttonText ?? .ok, style: .default) {
                     handler?()
                 }
             ]
         )
     }
+}
+
+// MARK: - Localization
+
+private extension String {
+    static let ok = NSLocalizedString("ok.dialog", bundle: .module, comment: "")
+    static let cancel = NSLocalizedString("cancel.dialog", bundle: .module, comment: "")
 }
 #endif

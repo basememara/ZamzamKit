@@ -48,6 +48,7 @@ extension LoggingTests {
 
 extension LoggingTests {
 
+    // swiftlint:disable:next function_body_length
     func testMinLevelsObeyed() {
         // Given
         let verboseService = LogTestService(minLevel: .verbose)
@@ -155,7 +156,15 @@ private extension LoggingTests {
             uniqueKeysWithValues: LogAPI.Level.allCases.map { ($0, [String]()) }
         )
 
-        func write(_ level: LogAPI.Level, with message: String, file: String, function: String, line: Int, error: Error?, context: [String: CustomStringConvertible]) {
+        func write(
+            _ level: LogAPI.Level,
+            with message: String,
+            file: String,
+            function: String,
+            line: Int,
+            error: Error?,
+            context: [String: CustomStringConvertible]
+        ) {
             entries.updateValue(entries[level, default: []] + [message], forKey: level)
         }
     }

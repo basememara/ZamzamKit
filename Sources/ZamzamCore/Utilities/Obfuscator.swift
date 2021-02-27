@@ -52,7 +52,8 @@ public extension Obfuscator {
     }
     #endif
 
-    /// This method reveals the original string from the obfuscated byte array passed in. The salt must be the same as the one used to encrypt it in the first place.
+    /// This method reveals the original string from the obfuscated byte array passed in.
+    /// The salt must be the same as the one used to encrypt it in the first place.
     ///
     /// - Parameter bytes: The byte array to reveal.
     /// - Returns: The original string.

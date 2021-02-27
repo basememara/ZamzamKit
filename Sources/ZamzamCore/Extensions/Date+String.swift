@@ -24,7 +24,13 @@ public extension Date {
     ///   - timeZone: The time zone for the receiver.
     ///   - calendar: The calendar for the receiver.
     ///   - locale: The locale for the receiver.
-    init?(fromString string: String, dateFormat: String = "yyyy/MM/dd HH:mm", timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) {
+    init?(
+        fromString string: String,
+        dateFormat: String = "yyyy/MM/dd HH:mm",
+        timeZone: TimeZone? = nil,
+        calendar: Calendar? = nil,
+        locale: Locale? = nil
+    ) {
         guard !string.isEmpty,
             let date = DateFormatter(dateFormat: dateFormat, timeZone: timeZone, calendar: calendar, locale: locale).date(from: string) else {
                 return nil
@@ -65,7 +71,13 @@ public extension Date {
     ///   - calendar: The calendar for the receiver.
     ///   - locale: The locale for the receiver.
     /// - Returns: The string representation of the given date.
-    func string(style dateStyle: DateFormatter.Style, withTime timeStyle: DateFormatter.Style = .none, timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
+    func string(
+        style dateStyle: DateFormatter.Style,
+        withTime timeStyle: DateFormatter.Style = .none,
+        timeZone: TimeZone? = nil,
+        calendar: Calendar? = nil,
+        locale: Locale? = nil
+    ) -> String {
         DateFormatter(dateStyle: dateStyle, timeStyle: timeStyle, timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
     }
 
