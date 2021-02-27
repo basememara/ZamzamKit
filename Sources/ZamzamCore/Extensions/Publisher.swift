@@ -11,7 +11,6 @@ import Combine
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension Optional where Wrapped: Combine.Publisher {
-
     /// Returns the wrapped value of a publisher or defaults to an empty publisher.
     func orEmpty() -> AnyPublisher<Wrapped.Output, Wrapped.Failure> {
         self?.eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher()

@@ -10,7 +10,6 @@
 import UIKit
 
 public extension UIActivity {
-
     /// Creates an instance of an activity.
     ///
     /// - Parameters:
@@ -36,7 +35,6 @@ public extension UIActivity {
 
 @available(iOS 13, *)
 public extension UIActivity {
-
     /// Creates an instance of an activity.
     ///
     /// - Parameters:
@@ -58,7 +56,6 @@ public extension UIActivity {
 }
 
 private extension UIActivity {
-
     class CustomActivity: UIActivity {
         let title: String
         let image: UIImage?

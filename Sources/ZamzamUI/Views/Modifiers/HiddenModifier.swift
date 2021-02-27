@@ -24,7 +24,6 @@ private struct HiddenModifier: ViewModifier {
 
 @available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 public extension View {
-
     /// Hides this view conditionally.
     ///
     /// - Parameter condition: The condition to determine if the content should be applied.

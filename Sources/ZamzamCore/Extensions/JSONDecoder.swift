@@ -10,7 +10,6 @@ import Foundation.NSData
 import Foundation.NSJSONSerialization
 
 public extension JSONDecoder {
-
     /// Decodes an instance of the indicated type.
     ///
     /// - Parameters:
@@ -31,7 +30,6 @@ public extension JSONDecoder {
 }
 
 public extension JSONDecoder {
-
     /// Decodes an instance of the indicated type.
     /// 
     /// - Parameters:

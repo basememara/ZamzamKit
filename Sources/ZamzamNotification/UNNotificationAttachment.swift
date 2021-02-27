@@ -11,7 +11,6 @@ import UserNotifications
 import ZamzamCore
 
 public extension UNNotificationAttachment {
-
     /// Retrieves a remote image from the web and converts to a user notification attachment.
     ///
     ///     UNNotificationAttachment.download(from: urlString) {

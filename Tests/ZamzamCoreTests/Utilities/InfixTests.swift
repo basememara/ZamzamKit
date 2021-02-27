@@ -10,7 +10,6 @@ import XCTest
 import ZamzamCore
 
 final class InfixTests: XCTestCase {
-
     func testConditionalAssign() {
         var someProperty = "abc"
         var someValue: String?
@@ -35,7 +34,6 @@ final class InfixTests: XCTestCase {
 }
 
 extension InfixTests {
-
     func testIsNilOrEmptyInfix() {
         var result: String
         var test: String?

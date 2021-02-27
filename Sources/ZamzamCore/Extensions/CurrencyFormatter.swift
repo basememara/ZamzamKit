@@ -48,7 +48,6 @@ public struct CurrencyFormatter {
 }
 
 public extension CurrencyFormatter {
-
     /// Returns a string containing the formatted value of the provided number object.
     ///
     ///     let amount: Double = 123456789.987
@@ -89,7 +88,6 @@ public extension CurrencyFormatter {
 }
 
 public extension CurrencyFormatter {
-
     /// Returns a string containing the currency formatted value of the provided number object.
     ///
     ///     let cents = 123456789

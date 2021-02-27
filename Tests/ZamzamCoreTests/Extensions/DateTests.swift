@@ -10,7 +10,6 @@ import XCTest
 import ZamzamCore
 
 final class DateTests: XCTestCase {
-
     func testIsPast() throws {
         XCTAssert(Date(timeIntervalSinceNow: -100).isPast)
         XCTAssertFalse(Date(timeIntervalSinceNow: 100).isPast)
@@ -66,7 +65,6 @@ final class DateTests: XCTestCase {
 }
 
 extension DateTests {
-
     func testTomorrow() throws {
         let date = try XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
         let expected = try XCTUnwrap(Date(fromString: "2016/03/23 09:30"))
@@ -93,7 +91,6 @@ extension DateTests {
 }
 
 extension DateTests {
-
     func testStartOfDay() throws {
         let date = try XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
         XCTAssertEqual(date.startOfDay.string(format: "yyyy/MM/dd HH:mm:ss"), "2016/03/22 00:00:00")
@@ -118,7 +115,6 @@ extension DateTests {
 // MARK: - Comparisons
 
 extension DateTests {
-
     func testIsBetween() throws {
         XCTAssert(
             try XCTUnwrap(Date(fromString: "2018/06/15 09:30")).isBetween(
@@ -191,7 +187,6 @@ extension DateTests {
 // MARK: - String
 
 extension DateTests {
-
     func testStringFromFormatter() throws {
         let formatter = DateFormatter(iso8601Format: "MM-dd-yyyy HH:mm:ss")
         let date = Date(timeIntervalSince1970: 1583697427)
@@ -282,7 +277,6 @@ extension DateTests {
 // MARK: - Calculations
 
 extension DateTests {
-
     func testIncrementYears() throws {
         XCTAssertEqual(
             try XCTUnwrap(Date(fromString: "2018/11/01 00:00")) + .years(1),
@@ -509,7 +503,6 @@ extension DateTests {
 }
 
 extension DateTests {
-
     func testCurrentTimeInDecimal() throws {
         let time = try XCTUnwrap(Date(fromString: "2012/10/23 18:15")).timeToDecimal
         let expectedTime = 18.25
@@ -519,7 +512,6 @@ extension DateTests {
 }
 
 extension DateTests {
-
     func testHijriDate() throws {
         do {
             let gregorianDate = try XCTUnwrap(Date(fromString: "2015/09/23 12:30"))

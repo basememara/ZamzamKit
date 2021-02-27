@@ -10,7 +10,6 @@
 import UIKit
 
 public extension UINavigationController {
-
     /// The previous view controller of the navigation stack.
     var previousViewController: UIViewController? {
         viewControllers[safe: viewControllers.count - 2]

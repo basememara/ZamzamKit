@@ -10,7 +10,6 @@
 import WatchKit
 
 public extension WKAlertAction {
-
     convenience init(title: String, handler: @escaping (() -> Void)) {
         self.init(title: title, style: .default) {
             handler()

@@ -13,7 +13,6 @@ import ZamzamCore
 final class LoggingTests: XCTestCase {}
 
 extension LoggingTests {
-
     func testEntriesAreWritten() {
         // Given
         let promise = expectation(description: #function)
@@ -47,7 +46,6 @@ extension LoggingTests {
 }
 
 extension LoggingTests {
-
     // swiftlint:disable:next function_body_length
     func testMinLevelsObeyed() {
         // Given
@@ -104,7 +102,6 @@ extension LoggingTests {
 }
 
 extension LoggingTests {
-
     func testThreadSafety() {
         // Given
         let promise = expectation(description: #function)
@@ -143,7 +140,6 @@ extension LoggingTests {
 // MARK: - Mocks
 
 private extension LoggingTests {
-
     class LogTestService: LogService {
         let minLevel: LogAPI.Level
 

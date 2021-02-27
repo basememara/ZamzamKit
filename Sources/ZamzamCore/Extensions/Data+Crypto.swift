@@ -10,7 +10,6 @@ import CommonCrypto
 import Foundation.NSData
 
 public extension Data {
-
     /// Returns an encrypted version of the data.
     func sha256() -> Data {
         // Creates an array of unsigned 8 bit integers that contains 32 zeros

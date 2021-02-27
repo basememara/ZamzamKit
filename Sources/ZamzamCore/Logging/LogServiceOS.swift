@@ -24,7 +24,6 @@ public struct LogServiceOS: LogService {
 }
 
 public extension LogServiceOS {
-
     func write(
         _ level: LogAPI.Level,
         with message: String,

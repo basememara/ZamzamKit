@@ -14,7 +14,6 @@ final class DecodableTests: XCTestCase {
 }
 
 extension DecodableTests {
-
     func testFromString() throws {
         // Given
         struct TestModel: Decodable {
@@ -39,7 +38,6 @@ extension DecodableTests {
 }
 
 extension DecodableTests {
-
     func testInBundle() throws {
         // Given
         struct TestModel: Decodable {
@@ -61,7 +59,6 @@ extension DecodableTests {
 }
 
 extension DecodableTests {
-
     func testAnyDecodable() throws {
         // Given
         let jsonString = """

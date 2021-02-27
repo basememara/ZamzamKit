@@ -10,7 +10,6 @@ import Foundation.NSCalendar
 import Foundation.NSDate
 
 public extension Date {
-
     /// Represents a specified number of a calendar component unit.
     ///
     /// You use `TimeIntervalUnit` values to do date calculations.

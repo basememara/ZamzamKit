@@ -12,14 +12,12 @@ import ZamzamCore
 final class ColorTests: XCTestCase {}
 
 extension ColorTests {
-
     func testRGBVsHex() {
         XCTAssertEqual(PlatformColor(rgb: (77, 116, 107)), PlatformColor(hex: 0x4D746B))
     }
 }
 
 extension ColorTests {
-
     func testRandom() {
         XCTAssertNotEqual(PlatformColor.random, .random)
     }

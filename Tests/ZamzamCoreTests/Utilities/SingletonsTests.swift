@@ -12,7 +12,6 @@ import ZamzamCore
 final class SingletonsTests: XCTestCase {}
 
 extension SingletonsTests {
-
     func testSingleContext() {
         // Given
         let context = MyContext()
@@ -35,7 +34,6 @@ extension SingletonsTests {
 }
 
 extension SingletonsTests {
-
     func testMultipleContexts() {
         // Given
         let context1 = MyContext()
@@ -59,7 +57,6 @@ extension SingletonsTests {
 }
 
 extension SingletonsTests {
-
     func testReset() {
         // Given
         let context = MyContext()
@@ -82,9 +79,7 @@ extension SingletonsTests {
 // MARK: - Types
 
 private extension SingletonsTests {
-
     struct MyContext: SomeContext {
-
         func networkService() -> NetworkService {
             single {
                 NetworkMockService()
@@ -97,7 +92,6 @@ private extension SingletonsTests {
     }
 
     struct AnotherContext: SomeContext {
-
         func nonSingleService() -> NonSingleService {
             NonSingleDefaultService()
         }
@@ -105,7 +99,6 @@ private extension SingletonsTests {
 }
 
 private extension SingletonsTests {
-
     struct NetworkDefaultService: NetworkService {
         let id = UUID().uuidString
     }
@@ -130,7 +123,6 @@ private protocol SomeContext: Singletons {
 }
 
 private extension SomeContext {
-
     func networkService() -> NetworkService {
         single {
             SingletonsTests.NetworkDefaultService()

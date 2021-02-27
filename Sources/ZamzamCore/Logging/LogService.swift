@@ -9,7 +9,6 @@
 import Foundation.NSURL
 
 public protocol LogService {
-
     /// The minimum level required to create log entries.
     var minLevel: LogAPI.Level { get }
 
@@ -56,7 +55,6 @@ public protocol LogService {
 }
 
 public extension LogService {
-
     /// Determines if the service has the minimum level to log.
     func canWrite(for level: LogAPI.Level) -> Bool {
         minLevel <= level && level != .none
@@ -88,7 +86,6 @@ public extension LogService {
 // MARK: - Namespace
 
 public enum LogAPI {
-
     public enum Level: Comparable, CaseIterable {
         case verbose
         case debug

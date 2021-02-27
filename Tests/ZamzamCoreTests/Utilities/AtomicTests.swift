@@ -15,7 +15,6 @@ final class AtomicTests: XCTestCase {
 }
 
 extension AtomicTests {
-
     func testSharedVariable() {
         DispatchQueue.concurrentPerform(iterations: 10) { _ in
             (0..<iterations).forEach { _ in
@@ -40,7 +39,6 @@ extension AtomicTests {
 }
 
 extension AtomicTests {
-
     func testWritePerformance() {
         var temp = Atomic<Int>(0)
 
@@ -59,7 +57,6 @@ extension AtomicTests {
 }
 
 extension AtomicTests {
-
     func testReadPerformance() {
         var temp = Atomic<Int>(0)
 

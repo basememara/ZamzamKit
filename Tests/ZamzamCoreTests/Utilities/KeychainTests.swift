@@ -10,14 +10,12 @@ import XCTest
 import ZamzamCore
 
 final class KeychainTests: XCTestCase {
-
     private lazy var keychain = KeychainManager(
         service: KeychainTestService()
     )
 }
 
 extension KeychainTests {
-
     func testString() {
         // Given
         let value1 = "abc"
@@ -34,7 +32,6 @@ extension KeychainTests {
 }
 
 extension KeychainTests {
-
     func testRemove() {
         // Given
         let value1 = "abc"

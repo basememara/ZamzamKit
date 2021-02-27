@@ -17,7 +17,6 @@ public struct LogManager {
 }
 
 public extension LogManager {
-
     /// Log an entry to the destination.
     ///
     /// - Parameters:
@@ -70,7 +69,6 @@ public extension LogManager {
 }
 
 public extension LogManager {
-
     /// Log something generally unimportant (lowest priority; not written to file).
     ///
     /// - Parameters:
@@ -103,7 +101,6 @@ public extension LogManager {
 }
 
 public extension LogManager {
-
     /// Log something which help during debugging (low priority; not written to file).
     ///
     /// - Parameters:
@@ -136,7 +133,6 @@ public extension LogManager {
 }
 
 public extension LogManager {
-
     /// Log something which you are really interested but which is not an issue or error (normal priority).
     ///
     /// - Parameters:
@@ -169,7 +165,6 @@ public extension LogManager {
 }
 
 public extension LogManager {
-
     /// Log something which may cause big trouble soon (high priority).
     ///
     /// - Parameters:
@@ -202,7 +197,6 @@ public extension LogManager {
 }
 
 public extension LogManager {
-
     /// Log something which will keep you awake at night (highest priority).
     ///
     /// - Parameters:
@@ -265,7 +259,6 @@ public extension LogManager {
 import UIKit.UIApplication
 
 public extension LogManager {
-
     /// Sets the application properties to the logger so it can be used outside the main thread.
     func configure(with application: UIApplication) {
         let applicationState = application.applicationState.rawString
@@ -279,7 +272,6 @@ public extension LogManager {
 }
 
 private extension UIApplication.State {
-
     /// The corresponding string of the raw type.
     var rawString: String {
         switch self {
@@ -301,7 +293,6 @@ import SwiftUI
 
 @available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 public extension LogManager {
-
     /// Sets the application properties to the logger so it can be used outside the main thread.
     func set(context newPhase: ScenePhase) {
         set(newPhase.rawString, forKey: "app_state")
@@ -310,7 +301,6 @@ public extension LogManager {
 
 @available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 private extension ScenePhase {
-
     /// The corresponding string of the raw type.
     var rawString: String {
         switch self {

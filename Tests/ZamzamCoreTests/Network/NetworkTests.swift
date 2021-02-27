@@ -20,7 +20,6 @@ final class NetworkTests: XCTestCase {
 // MARK: - GET
 
 extension NetworkTests {
-
     func testGET() {
         // Given
         let promise = expectation(description: #function)
@@ -55,7 +54,6 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-
     func testGETWithParameters() {
         // Given
         let promise = expectation(description: #function)
@@ -791,7 +789,6 @@ extension NetworkTests {
 
 extension NetworkTests {
     struct TestURLRequestAdapter: URLRequestAdapter {
-
         func adapt(_ request: URLRequest) -> URLRequest {
             var request = request
             request.setValue("1", forHTTPHeaderField: "X-Test-1")

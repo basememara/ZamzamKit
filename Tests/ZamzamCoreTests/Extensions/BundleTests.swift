@@ -14,7 +14,6 @@ class BundleTests: XCTestCase {
 }
 
 extension BundleTests {
-
     func testValuesFromText() {
         let values = bundle.string(file: "Test.txt")
 
@@ -38,7 +37,6 @@ extension BundleTests {
 }
 
 extension BundleTests {
-
     func testArrayFromPlist() {
         let values: [String] = bundle.array(plist: "Array.plist")
 
@@ -65,7 +63,6 @@ extension BundleTests {
 }
 
 extension BundleTests {
-
     func testArrayInDictionaryFromPlist() {
         let values = bundle.contents(plist: "Settings.plist")
         let array = values["MyArray1"] as? [Any]

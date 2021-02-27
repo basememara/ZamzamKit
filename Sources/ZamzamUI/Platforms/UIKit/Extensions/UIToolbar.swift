@@ -11,7 +11,6 @@ import UIKit
 import ZamzamCore
 
 public extension UIToolbar {
-
     /// Create an instance of a `UIToolbar` with a `Done` button that performs the action.
     ///
     ///     class ViewController: UIViewController {

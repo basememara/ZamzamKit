@@ -95,7 +95,6 @@ private protocol _AnyDecodable {
 extension AnyDecodable: _AnyDecodable {}
 
 extension _AnyDecodable {
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
 

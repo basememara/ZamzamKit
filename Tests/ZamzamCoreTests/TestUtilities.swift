@@ -9,7 +9,6 @@
 import XCTest
 
 extension XCTestCase {
-
     /// Asserts that all values are equal.
     ///
     /// - Parameters:
@@ -53,7 +52,6 @@ extension XCTestCase {
 // MARK: - Utility Testing
 
 final class UtilitiesTests: XCTestCase {
-
     func testAssertAllEqual() throws {
         XCTAssertAllEqual(1, 1, 1, 1, 1, 1, 1)
         XCTAssertAllEqual("a", "a", "a", "a", "a")

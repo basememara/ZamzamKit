@@ -12,7 +12,6 @@ import Foundation.NSLocale
 import Foundation.NSTimeZone
 
 public extension DateFormatter {
-
     /// A formatter that converts between dates and their ISO 8601 string representations.
     ///
     /// When `JSONEncoder` accepts a custom `ISO8601DateFormatter`, this convenience initializer will no longer be needed.
@@ -29,7 +28,6 @@ public extension DateFormatter {
 }
 
 public extension DateFormatter {
-
     /// Create a date formatter.
     ///
     /// - Parameters:

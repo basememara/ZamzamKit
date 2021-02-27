@@ -10,7 +10,6 @@
 public protocol Singletons {}
 
 public extension Singletons {
-
     /// Provides a single, thread-safe instance of the closure even if called multiple times.
     ///
     /// The file, function, and line number parameters are used to generate a unique identifier

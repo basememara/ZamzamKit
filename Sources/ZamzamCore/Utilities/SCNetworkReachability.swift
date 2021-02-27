@@ -10,7 +10,6 @@
 import SystemConfiguration
 
 public extension SCNetworkReachability {
-
     /// Determines if the device is connected to the network.
     ///
     /// A remote host is considered reachable when a data packet, sent by

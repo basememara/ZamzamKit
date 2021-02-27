@@ -7,7 +7,6 @@
 //
 
 public extension Equatable {
-
     /// Determines if the value is contained within the sequence of values.
     ///
     ///     "b".within(["a", "b", "c"]) // true
@@ -24,7 +23,6 @@ public extension Equatable {
 }
 
 public extension CaseIterable where Self: Equatable {
-
     /// Returns the first index where the specified case appears in the enum.
     ///
     ///     enum Direction: CaseIterable {

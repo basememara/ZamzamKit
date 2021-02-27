@@ -18,7 +18,6 @@ public struct LogServiceConsole: LogService {
 }
 
 public extension LogServiceConsole {
-
     func write(
         _ level: LogAPI.Level,
         with message: String,

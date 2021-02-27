@@ -40,7 +40,6 @@ class FileTests: XCTestCase {
 }
 
 extension FileTests {
-
     func testGetDocumentPath() {
         let value = FileManager.default.path(of: fileName, from: .downloadsDirectory)
 
@@ -65,7 +64,6 @@ extension FileTests {
 
 #if os(iOS)
 extension FileTests {
-
     func testGetDocumentPaths() {
         let value = FileManager.default.paths(from: .downloadsDirectory)
         let expectedValue = [
@@ -82,7 +80,6 @@ extension FileTests {
 #endif
 
 private extension FileTests {
-
     func fileInDirectory(_ filename: String) -> String {
         return FileManager.default
             .urls(for: .downloadsDirectory, in: .userDomainMask)[0]

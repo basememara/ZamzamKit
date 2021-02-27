@@ -14,7 +14,6 @@ import UIKit
 /// A `UIView` with gradient effects.
 @IBDesignable
 open class GradientView: UIView {
-
     @IBInspectable open var firstColor: UIColor = .clear {
         didSet { configure() }
     }
@@ -31,7 +30,6 @@ open class GradientView: UIView {
 }
 
 private extension GradientView {
-
     func configure() {
         guard let layer = self.layer as? CAGradientLayer else { return }
 

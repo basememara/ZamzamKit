@@ -35,7 +35,6 @@ public struct RemoteImage: View {
 
 @available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 private extension RemoteImage {
-
     func makeImage() -> Image {
         switch service.status {
         case .loading:
@@ -54,7 +53,6 @@ private extension RemoteImage {
 
 @available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 private extension RemoteImage {
-
     enum Status {
         case loading
         case success(Data)

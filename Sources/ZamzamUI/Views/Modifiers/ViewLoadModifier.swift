@@ -24,7 +24,6 @@ private struct ViewLoadModifier: ViewModifier {
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension View {
-
     /// Adds an action to perform when this view has loaded.
     ///
     /// - Parameter action: The action to perform. If action is nil, the call has no effect.

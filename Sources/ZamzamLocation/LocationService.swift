@@ -49,7 +49,6 @@ public protocol LocationServiceDelegate: AnyObject {
 // MARK: - Namespace
 
 public enum LocationAPI {
-
     /// Permission types to use location services.
     ///
     /// - whenInUse: While the app is in the foreground.

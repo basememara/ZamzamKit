@@ -11,7 +11,6 @@ import UIKit
 
 /// The `UIView` class with a `.xib` file by the same name added as a subview as file owner.
 open class XIBView: UIView {
-
     public override init(frame: CGRect) {
         super.init(frame: frame)
         loadFromNib()
@@ -24,7 +23,6 @@ open class XIBView: UIView {
 }
 
 private extension XIBView {
-
     func loadFromNib() {
         guard let subView = UINib(nibName: "\(type(of: self))", bundle: nil)
             .instantiate(withOwner: self, options: nil).first as? UIView else {

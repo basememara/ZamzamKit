@@ -10,7 +10,6 @@ import XCTest
 import ZamzamCore
 
 final class ApplyTests: XCTestCase {
-
     func testApply() {
         let model = SomeModel().apply {
             $0.propertyA = "abc"

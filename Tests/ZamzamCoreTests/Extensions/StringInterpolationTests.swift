@@ -10,7 +10,6 @@ import XCTest
 import ZamzamCore
 
 final class StringInterpolationTests: XCTestCase {
-
     func testTimestamp() {
         // Given
         let date = Date(timeIntervalSinceReferenceDate: 123456789.123)

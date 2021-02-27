@@ -10,7 +10,6 @@ import Foundation.NSData
 import Foundation.NSJSONSerialization
 
 public extension Dictionary {
-
     /// Accesses the value with the given key. If the dictionary doesn’t contain the given key,
     /// assign the provided initial value as if the key and initial value existed in the dictionary.
     ///
@@ -45,7 +44,6 @@ public extension Dictionary {
 }
 
 public extension Dictionary {
-
     /// Returns JSON data encoded in UTF-8.
     /// - Parameter options: Options for creating the JSON data.
     func jsonData(options: JSONSerialization.WritingOptions = []) -> Data? {

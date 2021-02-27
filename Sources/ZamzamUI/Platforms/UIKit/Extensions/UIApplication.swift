@@ -10,7 +10,6 @@
 import UIKit
 
 public extension UIApplication {
-
     /// The app's key window that is also backwards compatiable.
     var currentWindow: UIWindow? {
         guard #available(iOS 13, *) else {
@@ -22,7 +21,6 @@ public extension UIApplication {
 }
 
 public extension UIApplication {
-
     /// Update existing home short cut.
     ///
     /// - Parameters:
@@ -39,7 +37,6 @@ public extension UIApplication {
 }
 
 public extension UIApplication {
-
     /// The physical orientation of the device.
     struct Orientation {
         private let device: UIDevice

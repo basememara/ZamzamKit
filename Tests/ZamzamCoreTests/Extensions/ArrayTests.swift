@@ -12,7 +12,6 @@ import ZamzamCore
 final class ArrayTests: XCTestCase {}
 
 extension ArrayTests {
-
     func testSafeOutOfBoundsIndex() {
         // Given
         let sample = [1, 3, 5, 7, 9]
@@ -27,7 +26,6 @@ extension ArrayTests {
 }
 
 extension ArrayTests {
-
     func testPrepend() {
         // Given
         var sample = [2, 3, 4, 5]
@@ -41,7 +39,6 @@ extension ArrayTests {
 }
 
 extension ArrayTests {
-
     func testDistinct() {
         // Given
         let sample = [1, 1, 3, 3, 5, 5, 7, 7, 9, 9]
@@ -55,7 +52,6 @@ extension ArrayTests {
 }
 
 extension ArrayTests {
-
     func testRemoveElement() {
         // Given
         var sample = ["a", "b", "c", "d", "e", "a"]
@@ -69,7 +65,6 @@ extension ArrayTests {
 }
 
 extension ArrayTests {
-
     func testIsNilOrEmpty() {
         var test: [String]?
 

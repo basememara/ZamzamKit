@@ -75,7 +75,6 @@ final public class LogServiceHTTP {
 }
 
 public extension LogServiceHTTP {
-
     /// Appends the log to the buffer that will be queued for later sending.
     ///
     /// The buffer size is determined in the initializer. Once the threshold is met,
@@ -146,7 +145,6 @@ public extension LogServiceHTTP {
 }
 
 private extension LogServiceHTTP {
-
     func send() {
         guard !buffer.isEmpty,
               minFlushLevel == .none || buffer.contains(where: { $0.0 >= minFlushLevel })

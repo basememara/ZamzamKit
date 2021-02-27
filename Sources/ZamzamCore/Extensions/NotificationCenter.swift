@@ -9,7 +9,6 @@
 import Foundation
 
 public extension NotificationCenter {
-
     /// Creates a notification with a given name, sender, and information and posts it to the receiver.
     ///
     /// - Parameters:

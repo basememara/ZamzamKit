@@ -30,7 +30,6 @@ public struct Obfuscator {
 }
 
 public extension Obfuscator {
-
     #if DEBUG
     /// This method obfuscates the string passed in using the salt that was used when the Obfuscator was initialized.
     /// Scoped within the debug macro and commented out so this code does not get compiled in production binaries.

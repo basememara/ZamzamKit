@@ -11,7 +11,6 @@ import Foundation.NSDate
 import Foundation.NSDateFormatter
 
 public extension Date {
-
     /// Determines if the date if Friday / Jumuah.
     var isJumuah: Bool { isJumuah(for: .current) }
 
@@ -40,7 +39,6 @@ public extension Date {
 }
 
 public extension Date {
-
     // Cache Islamic calendar for reuse
     // https://www.staff.science.uu.nl/~gent0113/islam/ummalqura.htm
     // http://tabsir.net/?p=621#more-621

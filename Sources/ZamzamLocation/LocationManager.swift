@@ -37,7 +37,6 @@ public class LocationManager {
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension LocationManager {
-
     /// Determines if location services is enabled and authorized for always or when in use.
     var isAuthorized: Bool { service.isAuthorized }
 
@@ -85,7 +84,6 @@ public extension LocationManager {
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension LocationManager {
-
     /// The most recently retrieved user location.
     var location: CLLocation? { service.location }
 
@@ -105,7 +103,6 @@ public extension LocationManager {
 #if os(iOS)
 @available(iOS 13, *)
 public extension LocationManager {
-
     /// Starts the generation of updates based on significant location changes.
     @discardableResult
     func startMonitoringSignificantLocationChanges() -> AnyPublisher<CLLocation, CLError> {
@@ -125,7 +122,6 @@ public extension LocationManager {
 #if os(iOS)
 @available(iOS 13, *)
 public extension LocationManager {
-
     /// The most recently reported heading.
     var heading: CLHeading? { service.heading }
 
@@ -151,7 +147,6 @@ public extension LocationManager {
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 extension LocationManager: LocationServiceDelegate {
-
     public func locationService(didChangeAuthorization authorization: Bool) {
         Self.authorizationSubject.send(authorization)
     }

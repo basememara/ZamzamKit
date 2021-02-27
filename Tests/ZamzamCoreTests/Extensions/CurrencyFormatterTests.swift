@@ -15,7 +15,6 @@ final class CurrencyFormatterTests: XCTestCase {
 }
 
 extension CurrencyFormatterTests {
-
     func testUS() {
         let formatter = CurrencyFormatter(for: defaultLocale)
 
@@ -65,7 +64,6 @@ extension CurrencyFormatterTests {
 }
 
 extension CurrencyFormatterTests {
-
     func testTruncate() {
         let formatter = CurrencyFormatter(for: defaultLocale, autoTruncate: true)
 
@@ -85,7 +83,6 @@ extension CurrencyFormatterTests {
 }
 
 extension CurrencyFormatterTests {
-
     func testZeroSymbol() {
         let formatter = CurrencyFormatter(for: defaultLocale, zeroSymbol: "---")
 
@@ -97,7 +94,6 @@ extension CurrencyFormatterTests {
 }
 
 extension CurrencyFormatterTests {
-
     func testPositivePrefix() {
         let formatter = CurrencyFormatter(for: defaultLocale, usePrefix: true)
 

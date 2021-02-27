@@ -9,7 +9,6 @@
 import Foundation.NSBundle
 
 public extension Bundle {
-
     /// Gets the contents of the specified file.
     ///
     ///     Bundle.main.string(file: "Test.txt") // "This is a test. Abc 123.\n"

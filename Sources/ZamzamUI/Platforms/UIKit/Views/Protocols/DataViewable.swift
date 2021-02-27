@@ -16,7 +16,6 @@ public protocol DataViewable: AnyObject {
 }
 
 public extension DataViewable {
-
     /// Returns the table cell at the specified index path.
     /// - Parameter indexPath: The index path locating the row in the table view.
     func cellForRow(at indexPath: IndexPath) -> UIView? {

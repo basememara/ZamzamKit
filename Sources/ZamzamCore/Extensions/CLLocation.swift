@@ -11,7 +11,6 @@ import CoreLocation.CLLocation
 import Foundation
 
 public extension CLLocationCoordinate2D {
-
     /// Returns a location object.
     var location: CLLocation {
         CLLocation(latitude: latitude, longitude: longitude)
@@ -24,7 +23,6 @@ public extension CLLocationCoordinate2D {
 }
 
 public extension Array where Element == CLLocationCoordinate2D {
-
     /// Returns the closest coordinate to the specified location.
     ///
     /// If the sequence has no elements, returns nil.
@@ -41,7 +39,6 @@ public extension Array where Element == CLLocationCoordinate2D {
 }
 
 public extension CLLocation {
-
     struct LocationMeta: CustomStringConvertible {
         public var coordinates: (latitude: Double, longitude: Double)?
         public var locality: String?
@@ -115,7 +112,6 @@ public extension CLLocation {
 }
 
 extension CLLocationCoordinate2D: Equatable {
-
     /// Determine if coordinates match using latitude and longitude values.
     public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
         lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
@@ -128,7 +124,6 @@ extension CLLocationCoordinate2D: Equatable {
 }
 
 extension CLLocationCoordinate2D: CustomStringConvertible {
-
     public var description: String {
         .localizedStringWithFormat("%.2f°, %.2f°", latitude, longitude)
     }

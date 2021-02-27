@@ -9,7 +9,6 @@
 import Foundation.NSData
 
 public extension String {
-
     /// Create a new random string of given length.
     ///
     ///     String(random: 10) // "zXWG4hSgL9"
@@ -31,7 +30,6 @@ public extension String {
 // https://github.com/SwifterSwift/SwifterSwift
 
 public extension String {
-
     /// Safely subscript string with index.
     ///
     ///     let value = "Abcdef123456"
@@ -110,7 +108,6 @@ public extension String {
 }
 
 public extension String {
-
     /// Returns a new string made by removing spaces or new lines from both ends.
     ///
     ///     " Abcdef123456 \n\r  ".trimmed // "Abcdef123456"
@@ -212,7 +209,6 @@ public extension String {
 // MARK: - Regular Expression
 
 public extension String {
-
     /// Matches a string using a regular expression pattern.
     ///
     ///     "1234567890".match(regex: "^[0-9]+?$") // true
@@ -267,7 +263,6 @@ public extension String {
 }
 
 public extension String {
-
     /// Encode a string to Base64. Default encoding is UTF8.
     func base64Encoded() -> String {
         Data(utf8).base64EncodedString()
@@ -288,7 +283,6 @@ public extension String {
 // MARK: - Crypto
 
 public extension String {
-
     /// Returns an encrypted data of the string
     func sha256() -> Data {
         Data(utf8).sha256()
@@ -298,7 +292,6 @@ public extension String {
 // MARK: - Types
 
 public extension Optional where Wrapped == String {
-
     /// A Boolean value indicating whether a string is `nil` or has no characters.
     var isNilOrEmpty: Bool { self?.isEmpty ?? true }
 
@@ -307,7 +300,6 @@ public extension Optional where Wrapped == String {
 }
 
 public extension Substring {
-
     /// A string value representation of the string slice.
     var string: String { String(self) }
 }

@@ -16,7 +16,6 @@ public protocol Audible: AnyObject {
 }
 
 public extension Audible {
-
     func setupAudioPlayer(_ application: UIApplication, forResource fileName: String, bundle: Bundle = .main) {
         guard let sound = bundle.url(forResource: fileName, withExtension: nil),
             (audioPlayer == nil || audioPlayer?.url != sound) else {

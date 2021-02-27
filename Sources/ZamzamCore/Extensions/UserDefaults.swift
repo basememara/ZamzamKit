@@ -10,7 +10,6 @@ import Foundation.NSNotification
 import Foundation.NSUserDefaults
 
 public extension UserDefaults {
-
     /// Returns a boolean value indicating whether the defaults contains the given key.
     func contains(_ key: String) -> Bool {
         object(forKey: key) != nil
@@ -27,7 +26,6 @@ import Combine
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension UserDefaults {
-
     var publisher: AnyPublisher<Void, Never> {
         NotificationCenter.default
             .publisher(for: UserDefaults.didChangeNotification, object: self)

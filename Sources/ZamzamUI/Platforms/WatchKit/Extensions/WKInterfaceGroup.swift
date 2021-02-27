@@ -11,7 +11,6 @@ import Foundation
 import WatchKit
 
 public extension WKInterfaceGroup {
-
     /// Animates the specified images with the given duration and repeat information in the background image.
     ///
     /// - Parameters:

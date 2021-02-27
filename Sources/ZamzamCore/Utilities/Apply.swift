@@ -12,7 +12,6 @@ import Foundation.NSObject
 public protocol Apply {}
 
 public extension Apply where Self: Any {
-
     /// Makes it available to set properties with closures just after initializing.
     ///
     ///     let label = UILabel().apply {

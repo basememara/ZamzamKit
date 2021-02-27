@@ -29,7 +29,6 @@ public struct KeychainManager {
 }
 
 public extension KeychainManager {
-
     /// Retrieves the value from keychain that corresponds to the given key.
     ///
     /// Accessing the underlying Keychain storage is an expensive operation.
@@ -42,7 +41,6 @@ public extension KeychainManager {
 }
 
 public extension KeychainManager {
-
     /// Stores the value in the keychain item under the given key.
     ///
     /// - Parameters:
@@ -60,7 +58,6 @@ public extension KeychainManager {
 }
 
 public extension KeychainManager {
-
     /// Deletes the single keychain item specified by the key.
     ///
     /// - Parameter key: The key that is used to delete the keychain item.

@@ -11,7 +11,6 @@ import UIKit
 
 /// UITextView that mimics UILabel for leveraging data detectors and other features
 open class UILabelView: UITextView {
-
     public init(dataDetectorTypes: UIDataDetectorTypes) {
         self.init()
         self.dataDetectorTypes = dataDetectorTypes
@@ -30,7 +29,6 @@ open class UILabelView: UITextView {
 }
 
 private extension UILabelView {
-
     func configure() {
         isEditable = false
         isScrollEnabled = false

@@ -11,7 +11,6 @@ import UIKit
 import ZamzamCore
 
 public extension UIView {
-
     /// Unarchives the contents of a XIB file associated with the receiver.
     ///
     /// - Parameters:
@@ -31,7 +30,6 @@ public extension UIView {
 }
 
 public extension UIView {
-
     /// A Boolean value that determines whether the view is visible.
     var isVisible: Bool {
         get { !isHidden }
@@ -52,7 +50,6 @@ public extension UIView {
 }
 
 public extension UIView {
-
     /// Border color of view; also inspectable from Storyboard.
     @IBInspectable var borderColor: UIColor? {
         get {
@@ -88,7 +85,6 @@ public extension UIView {
 }
 
 public extension UIView {
-
 	/// Add shadow to view.
 	///
 	/// - Parameters:
@@ -111,7 +107,6 @@ public extension UIView {
 }
 
 public extension UIView {
-
     /// Fade in view.
     ///
     /// - Parameters:
@@ -188,7 +183,6 @@ public extension UIView {
 }
 
 public extension UIView {
-
     /// Returns the user interface direction.
     var userInterfaceLayoutDirection: UIUserInterfaceLayoutDirection {
         UIView.userInterfaceLayoutDirection(for: semanticContentAttribute)
@@ -196,7 +190,6 @@ public extension UIView {
 }
 
 public extension UIView {
-
     /// Adds activity indicator to the center of the view.
     ///
     /// - Parameters:
@@ -225,7 +218,6 @@ public extension UIView {
 // MARK: - Auto Layout
 
 public extension UIView {
-
     /// Anchor all sides of the view using auto layout constraints.
     ///
     /// - Parameters:

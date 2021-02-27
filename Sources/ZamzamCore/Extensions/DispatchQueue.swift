@@ -13,7 +13,6 @@ extension DispatchQueue {
 }
 
 public extension DispatchQueue {
-
     /// A configured queue for executing database related work items.
     static let database = DispatchQueue(label: "\(DispatchQueue.labelPrefix).database", qos: .utility)
 

@@ -11,7 +11,6 @@ import Foundation.NSData
 import Foundation.NSURLRequest
 
 public extension URLRequest {
-
     /// Type representing HTTP methods.
     ///
     /// See https://tools.ietf.org/html/rfc7231#section-4.3
@@ -30,7 +29,6 @@ public extension URLRequest {
 }
 
 public extension URLRequest {
-
     /// Creates an instance with JSON specific configurations.
     ///
     /// - Parameters:
@@ -84,7 +82,6 @@ public extension URLRequest {
 }
 
 public extension URLRequest {
-
     /// Creates an instance with JSON specific configurations.
     ///
     /// - Parameters:

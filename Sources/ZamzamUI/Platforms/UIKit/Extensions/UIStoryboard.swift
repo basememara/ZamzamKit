@@ -10,7 +10,6 @@
 import UIKit
 
 public extension UIStoryboard {
-
     /// Creates and returns a storyboard object for the specified storyboard resource file in the main bundle of the current application.
     ///
     /// - Parameter name: The name of the storyboard resource file without the filename extension.

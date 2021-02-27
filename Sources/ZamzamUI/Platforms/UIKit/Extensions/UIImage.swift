@@ -10,7 +10,6 @@
 import UIKit
 
 public extension UIImage {
-
     /// Convenience initializer to handle default parameter value.
     ///
     /// - Parameters:
@@ -22,7 +21,6 @@ public extension UIImage {
 }
 
 public extension UIImage {
-
     /// Convenience initializer to convert a color to image.
     ///
     ///     let image = UIImage(from: .lightGray)
@@ -45,7 +43,6 @@ public extension UIImage {
 }
 
 public extension UIImage {
-
     /// Save image to disk as PNG.
     func pngToDisk() -> URL? {
         let data = pngData()

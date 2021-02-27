@@ -56,7 +56,6 @@ public protocol CellIdentifiable {
 }
 
 public extension CellIdentifiable where Self: UITableViewController, CellIdentifier.RawValue == String {
-
     /// Gets the visible cell with the specified identifier name.
     ///
     /// - Parameter identifier: Enum value of the cell identifier.
@@ -67,7 +66,6 @@ public extension CellIdentifiable where Self: UITableViewController, CellIdentif
 }
 
 public extension RawRepresentable where Self.RawValue == String {
-
     init?(from cell: UITableViewCell) {
         guard let identifier = cell.reuseIdentifier else { return nil }
         self.init(rawValue: identifier)

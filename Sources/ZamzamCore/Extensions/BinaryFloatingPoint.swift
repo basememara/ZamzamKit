@@ -7,7 +7,6 @@
 //
 
 public extension BinaryFloatingPoint {
-
     /// Returns this value rounded to an integral value.
     ///
     ///     123.12312421.rounded(toPlaces: 3) // 123.123

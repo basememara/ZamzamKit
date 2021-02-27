@@ -42,7 +42,6 @@ public protocol StatusBarable: AnyObject {
 }
 
 public extension StatusBarable where Self: UIViewController {
-
     /// Determine dynamic status bar size
     var statusBarSize: CGSize {
         let size: CGSize
@@ -94,7 +93,6 @@ public extension StatusBarable where Self: UIViewController {
 }
 
 public extension StatusBarable where Self: UIViewController {
-
     /// Add visible status bar since transparent by default with scrolling
     func showStatusBar(style: UIBlurEffect.Style = .regular) {
         guard let statusBar = statusBar else {

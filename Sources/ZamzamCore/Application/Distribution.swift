@@ -14,7 +14,6 @@ public protocol Distribution {}
 // MARK: - App
 
 public extension Distribution {
-
 	/// App's name.
 	var appDisplayName: String? {
 		// http://stackoverflow.com/questions/28254377/get-app-name-in-swift
@@ -39,7 +38,6 @@ public extension Distribution {
 // MARK: - Environment
 
 public extension Distribution {
-
     /// Check if app is an extension target.
     var isAppExtension: Bool {
         Bundle.main.bundlePath.hasSuffix(".appex")

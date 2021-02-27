@@ -26,7 +26,6 @@
 ///
 @_functionBuilder
 public struct ArrayBuilder<T> {
-
     public static func buildBlock(_ elements: T...) -> [T] {
         elements
     }

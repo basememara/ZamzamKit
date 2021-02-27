@@ -15,7 +15,6 @@ public protocol KeychainService {
 // MARK: Namespace
 
 public enum KeychainAPI {
-
     /// Security key for compile-safe access.
     ///
     ///     extension KeychainAPI.Key {

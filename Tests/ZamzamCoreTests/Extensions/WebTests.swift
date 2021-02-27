@@ -13,7 +13,6 @@ final class WebTests: XCTestCase {
 }
 
 extension WebTests {
-
     func testStrippedHTML() {
         let value = "<html><head><title>Test</title></head><body></body></html>"
         let expectedValue = "Test"
@@ -29,7 +28,6 @@ extension WebTests {
 }
 
 extension WebTests {
-
     func testDecodeHTML() {
         let value = "<strong> 4 &lt; 5 &amp; 3 &gt; 2 .</strong> Price: 12 &#x20ac;.  &#64;"
 

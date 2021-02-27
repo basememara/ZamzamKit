@@ -105,7 +105,6 @@ public extension CoreLocationService {
 
 #if os(iOS)
 public extension CoreLocationService {
-
     func startMonitoringSignificantLocationChanges() {
         manager.startMonitoringSignificantLocationChanges()
     }
@@ -137,7 +136,6 @@ public extension CoreLocationService {
 // MARK: - Delegates
 
 extension CoreLocationService: CLLocationManagerDelegate {
-
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status != .notDetermined else { return }
         delegate?.locationService(didChangeAuthorization: isAuthorized)

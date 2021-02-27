@@ -11,7 +11,6 @@ import Foundation.NSDate
 import Foundation.NSDateFormatter
 
 public extension Date {
-
     /// Determines if date is in the past.
     ///
     ///     Date(timeIntervalSinceNow: -100).isPast // true
@@ -30,7 +29,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Determines if date is in today's date.
     ///
     ///     Date().isToday // true
@@ -50,7 +48,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Determines if date is in yesterday's date.
     ///
     ///     Date(timeIntervalSinceNow: -90_000).isYesterday // true
@@ -70,7 +67,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Determines if date is in tomorrow's date.
     ///
     ///     Date(timeIntervalSinceNow: 90_000).isTomorrow // true
@@ -90,7 +86,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Determines if date is within a weekday period.
     ///
     /// Uses the user's current calendar.
@@ -106,7 +101,6 @@ public extension Date {
 }
 
 public extension Date {
-
 	/// Determines if date is within a weekend period.
     ///
     /// Uses the user's current calendar.
@@ -122,7 +116,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Check if date is within the current week.
     ///
     /// Uses the user's current calendar.
@@ -138,7 +131,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Check if date is within the current month.
     ///
     /// Uses the user's current calendar.
@@ -154,7 +146,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Check if date is within the current year.
     ///
     /// Uses the user's current calendar.
@@ -170,7 +161,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Return yesterday's date.
     ///
     ///     let date = Date() // "Oct 3, 2018, 10:57:11"
@@ -193,7 +183,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Return tomorrow's date.
     ///
     ///     let date = Date() // "Oct 3, 2018, 10:57:11"
@@ -216,7 +205,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Returns the beginning of the day.
     ///
     ///     Date().startOfDay // "2018/11/21 00:00:00"
@@ -236,7 +224,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Returns the end of the day.
     ///
     ///     Date().endOfDay // "2018/11/21 23:59:59"
@@ -263,7 +250,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Returns the beginning of the month.
     ///
     ///     Date().startOfMonth // "2018/11/01 00:00:00"
@@ -285,7 +271,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Returns the end of the month.
     ///
     ///     Date().endOfMonth // "2018/11/30 23:59:59"
@@ -312,7 +297,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Determine if a date is between two other dates.
     ///
     /// Dates do not have to be in sequential order.
@@ -333,7 +317,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Specifies if the date is beyond the time window.
     ///
     ///     let date = Date(fromString: "2016/03/22 09:40")
@@ -404,7 +387,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Gets the decimal representation of the time.
     ///
     ///     Date(fromString: "2012/10/23 18:15").timeToDecimal // 18.25

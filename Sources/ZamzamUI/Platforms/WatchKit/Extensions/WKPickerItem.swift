@@ -11,7 +11,6 @@ import WatchKit
 import ZamzamCore
 
 public extension WKPickerItem {
-
     /// An initializer for a single item in a picker interface.
     ///
     /// - Parameters:

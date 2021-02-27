@@ -115,7 +115,6 @@ public extension UICollectionView {
 }
 
 public extension UICollectionView {
-
     /// Gets the reusable cell with default identifier name.
     ///
     /// - Parameter indexPath: The index path of the cell from the collection.

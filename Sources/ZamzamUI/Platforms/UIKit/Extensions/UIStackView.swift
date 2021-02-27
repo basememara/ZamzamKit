@@ -10,7 +10,6 @@
 import UIKit
 
 public extension UIStackView {
-
     /// Adds a views to the end of the arrangedSubviews array.
     ///
     /// - Parameter views: List of views.
@@ -45,7 +44,6 @@ public extension UIStackView {
 }
 
 public extension UIStackView {
-
     /// Adds a view to the end of the arrangedSubviews array with animation.
     func addArrangedSubview(_ view: UIView, animated: Bool, withDuration duration: TimeInterval = 0.35) {
         guard animated else { return addArrangedSubview(view) }

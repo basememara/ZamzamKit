@@ -13,7 +13,6 @@ import UIKit
 
 /// TableView that auto-sizes in StackView.
 open class IntrinsicHeightTableView: UITableView {
-
     open override var contentSize: CGSize {
         didSet { invalidateIntrinsicContentSize() }
     }

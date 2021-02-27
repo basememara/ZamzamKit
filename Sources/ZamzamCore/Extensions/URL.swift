@@ -9,7 +9,6 @@
 import Foundation.NSURL
 
 public extension URL {
-
     /// An invalid URL value.
     ///
     /// Use this constant when you want to indicate that a URL is invalid.
@@ -31,7 +30,6 @@ public extension URL {
 }
 
 public extension URL {
-
     /// Returns a URL constructed by swapping the given path extension to self.
     ///
     ///     URL(fileURLWithPath: "/SomePath/SomeTests.swift")
@@ -58,7 +56,6 @@ public extension URL {
 }
 
 public extension URL {
-
     /// Returns a URL constructed by appending the given query string parameter to self.
     ///
     ///     let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
@@ -129,7 +126,6 @@ public extension URL {
 }
 
 public extension URL {
-
     /// Query a URL from a parameter name.
     ///
     ///     let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")

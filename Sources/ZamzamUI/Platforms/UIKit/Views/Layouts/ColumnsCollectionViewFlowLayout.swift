@@ -11,7 +11,6 @@ import UIKit
 
 /// A flow layout organizes items into a grid dynamically obeying different trait size.
 open class ColumnsCollectionViewFlowLayout: UICollectionViewFlowLayout {
-
     /// Number of columns in portrait orientation.
     @IBInspectable open var portraitColumns: Int = 2
 

@@ -10,7 +10,6 @@
 import WatchKit
 
 public extension WKInterfaceController {
-
     /// Presents a single interface controller modally.
     ///
     /// - Parameters:
@@ -22,7 +21,6 @@ public extension WKInterfaceController {
 }
 
 public extension WKInterfaceController {
-
     /// Presents an alert over the current interface controller.
     ///
     ///     present(

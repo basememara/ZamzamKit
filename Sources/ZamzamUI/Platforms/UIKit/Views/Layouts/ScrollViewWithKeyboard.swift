@@ -38,7 +38,6 @@ open class ScrollViewWithKeyboard: UIScrollView {
 }
 
 public extension ScrollViewWithKeyboard {
-
     @objc private func adjustsInsetsForKeyboard(_ notification: NSNotification) {
         guard let info = notification.userInfo,
             let keyboardFrame = info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {

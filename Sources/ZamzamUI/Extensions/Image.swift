@@ -19,7 +19,6 @@ import SwiftUI
 
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension Image {
-
     init(platformImage image: PlatformImage) {
         #if os(macOS)
         self.init(nsImage: image)

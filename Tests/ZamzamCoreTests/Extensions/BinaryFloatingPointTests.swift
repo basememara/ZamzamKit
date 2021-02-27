@@ -10,7 +10,6 @@ import XCTest
 import ZamzamCore
 
 final class BinaryFloatingPointTests: XCTestCase {
-
     func testRounded() {
         let test1: Float = 123.12312421
         XCTAssertEqual(test1.rounded(toPlaces: 2), 123.12)

@@ -32,7 +32,6 @@ open class MailComposer: NSObject {
 }
 
 public extension MailComposer {
-
     /// A standard interface for managing, editing, and sending an email message.
     func makeViewController(
         email: String,
@@ -89,7 +88,6 @@ public extension MailComposer {
 // MARK: Delegates
 
 extension MailComposer: MFMailComposeViewControllerDelegate {
-
     public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss {
             self.delegate?.mailComposer(didFinishWith: result)

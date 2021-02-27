@@ -12,7 +12,6 @@ import ZamzamCore
 final class StringTests: XCTestCase {}
 
 extension StringTests {
-
     func testRandom() {
         XCTAssertEqual(String(random: 10).count, 10)
 
@@ -23,7 +22,6 @@ extension StringTests {
 }
 
 extension StringTests {
-
     func testSubscript() {
         let test = "Abcdef123456"
 
@@ -42,7 +40,6 @@ extension StringTests {
 }
 
 extension StringTests {
-
     func testEmailRegEx() {
         let value = "test@example.com"
         let wrong = "zamzam"
@@ -77,7 +74,6 @@ extension StringTests {
 }
 
 extension StringTests {
-
     func testTrimmed() {
         let test = " Abcdef123456 \n\r  "
         let expected = "Abcdef123456"
@@ -159,7 +155,6 @@ extension StringTests {
 }
 
 extension StringTests {
-
     func testReplacingLastOccurrence() {
         XCTAssertEqual(
             "fghijklmnopqrstuvwxyz_ABCDE".replacingLastOccurrence(of: "_ABCDE", with: "ZYX_"),
@@ -194,7 +189,6 @@ extension StringTests {
 }
 
 extension StringTests {
-
     func testMatchRegEx() {
         XCTAssertTrue("1234567890".match(regex: "^[0-9]+?$"))
         XCTAssertTrue("abc123xyz".match(regex: "^[A-Za-z0-9]+$"))
@@ -219,7 +213,6 @@ extension StringTests {
 }
 
 extension StringTests {
-
     func testDecodeDictionaryString() {
         let expected: [String: String] = [
             "test1": "abc",
@@ -293,7 +286,6 @@ extension StringTests {
 }
 
 extension StringTests {
-
     func testBase64Encoded() {
         let test = "Abcdef123456"
         let expected = "QWJjZGVmMTIzNDU2"
@@ -314,7 +306,6 @@ extension StringTests {
 }
 
 extension StringTests {
-
     func testSHA256ToHex() {
         XCTAssertEqual(
             "JYGK Udsf6ITR^%$#UTY6GI7UGdsf gdsfgSDKHkjb768stb&(&T* &".sha256().hexString(),
@@ -331,7 +322,6 @@ extension StringTests {
 }
 
 extension StringTests {
-
     func testIsNilOrEmpty() {
         var test: String?
 

@@ -280,7 +280,6 @@ private extension SecCertificate {
 }
 
 private extension SecTrust {
-
     // MARK: Leaf Trusts - Signed by CA1
 
     static let leafWildcard = make(from: [

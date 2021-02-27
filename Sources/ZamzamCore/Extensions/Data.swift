@@ -9,7 +9,6 @@
 import Foundation.NSData
 
 public extension Data {
-
     /// String by encoding Data using UTF8 encoding.
     var string: String? { string(encoding: .utf8) }
 
@@ -25,7 +24,6 @@ public extension Data {
 // MARK: - Encoding
 
 public extension Data {
-
     /// Returns a URL safe Base-64 encoded string.
     func base64URLEncodedString() -> String {
         base64EncodedString()

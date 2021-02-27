@@ -14,7 +14,6 @@ import SwiftUI
 
 @available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 public extension View {
-
     /// Applies a modifier to a view conditionally.
     ///
     ///     someView

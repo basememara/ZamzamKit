@@ -55,7 +55,6 @@ open class ScrollStackView: UIScrollView {
 // MARK: - Access Rows
 
 extension ScrollStackView {
-
     /// The first row in the stack view.
     ///
     /// This property is nil if there are no rows in the stack view.
@@ -87,7 +86,6 @@ extension ScrollStackView {
 // MARK: - Add / Remove Rows
 
 extension ScrollStackView {
-
     /// Adds a row to the end of the stack view.
     ///
     /// If `animated` is `true`, the insertion is animated.
@@ -184,7 +182,6 @@ extension ScrollStackView {
 }
 
 private extension ScrollStackView {
-
     func insertCell(withContentView contentView: UIView, atIndex index: Int, rowInsets: UIEdgeInsets, animated: Bool) {
         let cellToRemove = contains(row: contentView) ? contentView.superview : nil
 
@@ -224,7 +221,6 @@ private extension ScrollStackView {
 // MARK: - Show / Hide Rows
 
 extension ScrollStackView {
-
     /// Shows the given row, making it visible.
     ///
     /// If `animated` is `true`, the change is animated.
@@ -286,7 +282,6 @@ extension ScrollStackView {
 // MARK: - Scrollview
 
 extension ScrollStackView {
-
     /// Scrolls the given row onto screen so that it is fully visible.
     ///
     /// If `animated` is `true`, the scroll is animated. If the row is already fully visible, this method does nothing.
@@ -299,7 +294,6 @@ extension ScrollStackView {
 // MARK: - Types
 
 extension ScrollStackView {
-
     /// A view that wraps every row in a stack view.
     open class CellView: UIView {
         public let contentView: UIView

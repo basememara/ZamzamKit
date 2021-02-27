@@ -10,7 +10,6 @@
 import UIKit
 
 public extension UIBarButtonItem {
-
     /// Initializes a `UIBarButtonItem` with an image more conveniently.
     ///
     /// - Parameters:
@@ -32,7 +31,6 @@ public extension UIBarButtonItem {
 }
 
 public extension UIBarButtonItem {
-
     /// Initializes a blank back `UIBarButtonItem` conveniently.
     static func makeBackBarButtonItem() -> UIBarButtonItem {
         UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)

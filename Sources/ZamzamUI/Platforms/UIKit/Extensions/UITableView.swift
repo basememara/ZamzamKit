@@ -64,7 +64,6 @@ public extension UITableView {
 }
 
 public extension UITableView {
-
     /// Gets the reusable cell with default identifier name.
     ///
     /// - Parameter indexPath: The index path of the cell from the table.
@@ -99,7 +98,6 @@ public extension UITableView {
 }
 
 public extension Scrollable where Self: UITableView {
-
     /// Scrolls to the top of table view.
     ///
     /// - Parameter animated: `true` if you want to animate the change in position; `false` if it should be immediate.

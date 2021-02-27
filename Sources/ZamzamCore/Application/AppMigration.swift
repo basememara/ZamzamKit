@@ -52,7 +52,6 @@ public class AppMigration {
 }
 
 public extension AppMigration {
-
     /// Checks the current version of the app against the previous saved version.
     ///
     /// - Parameter completion: Will be called when the app is updated. Will always be called once.
@@ -108,7 +107,6 @@ private extension AppMigration {
 // MARK: - Only used for XCTest
 
 extension AppMigration {
-
     func set(version: String) {
         appVersion = version
     }

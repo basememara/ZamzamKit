@@ -13,7 +13,6 @@ import StoreKit
 import ZamzamCore
 
 public extension UIViewController {
-
     /// Constructs an instance of the UIViewController type.
     ///
     /// - Parameters:
@@ -44,7 +43,6 @@ public extension UIViewController {
 }
 
 public extension UIViewController {
-
     /// Determines if a view controller is being presented modally
     var isModal: Bool {
         // https://stackoverflow.com/a/27301207
@@ -89,7 +87,6 @@ public extension UIViewController {
 // MARK: - Default parameters
 
 public extension UIViewController {
-
     /// Presents a view controller modally.
     ///
     /// - Parameters:
@@ -116,7 +113,6 @@ public extension UIViewController {
 }
 
 public extension UIViewController {
-
     /// Presents or pushes a view controller in a primary context.
     ///
     /// Dismisses any presenting view controller before taking this action.
@@ -140,7 +136,6 @@ public extension UIViewController {
 // MARK: - Exit
 
 public extension UIViewController {
-
     /// Dismisses the view controller that was presented.
     ///
     /// - Parameters:
@@ -184,7 +179,6 @@ public extension UIViewController {
 }
 
 public extension UIViewController {
-
     /// Adds the specified view controller as a child of the current view controller.
     ///
     ///     add(child: viewController1)
@@ -220,7 +214,6 @@ public extension UIViewController {
 // MARK: - Alerts
 
 public extension UIViewController {
-
     /// Display an alert message to the user.
     ///
     /// - Parameters:
@@ -496,7 +489,6 @@ public extension UIViewController {
 // MARK: - Safari
 
 public extension UIViewController {
-
     /// Present a Safari view controller.
     ///
     /// - Parameters:
@@ -542,7 +534,6 @@ public extension UIViewController {
 // MARK: - StoreKit
 
 public extension UIViewController {
-
     /// Loads a new product screen to display.
     ///
     /// - Parameters:
@@ -569,7 +560,6 @@ public extension UIViewController {
 // MARK: - Activities
 
 public extension UIViewController {
-
     /// Presents an activity view controller modally that you can use to offer various services from your application.
     ///
     ///     let safariActivity = UIActivity.make(

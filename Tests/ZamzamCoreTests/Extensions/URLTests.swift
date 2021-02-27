@@ -12,7 +12,6 @@ import ZamzamCore
 final class URLTests: XCTestCase {}
 
 extension URLTests {
-
     func testReplacingPathExtension() throws {
         let url = URL(fileURLWithPath: "/SomePath/SomeTests.swift")
         let expected = "/SomePath/SomeTests.json"
@@ -27,7 +26,6 @@ extension URLTests {
 }
 
 extension URLTests {
-
     func testAppendingQueryItem() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
 
@@ -147,7 +145,6 @@ extension URLTests {
 }
 
 extension URLTests {
-
     func testGetQueryItem() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
 

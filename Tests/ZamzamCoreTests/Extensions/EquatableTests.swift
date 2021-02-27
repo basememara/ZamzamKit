@@ -12,7 +12,6 @@ import ZamzamCore
 final class EquatableTests: XCTestCase {}
 
 extension EquatableTests {
-
     func testWithinSequence() {
         XCTAssert("def".within(["abc", "def", "ghi"]))
         XCTAssert(!"xyz".within(["abc", "def", "ghi"]))
@@ -20,7 +19,6 @@ extension EquatableTests {
 }
 
 extension EquatableTests {
-
     func testCaseIterableIndex() {
         enum Direction: CaseIterable {
             case north

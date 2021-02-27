@@ -12,7 +12,6 @@ import ZamzamCore
 final class DictionaryTests: XCTestCase {}
 
 extension DictionaryTests {
-
     func testIntialValue() throws {
         // Given
         var dictionary = [
@@ -34,7 +33,6 @@ extension DictionaryTests {
 }
 
 extension DictionaryTests {
-
     func testJSONString() throws {
         // Given
         let dictionary: [String: Any] = [

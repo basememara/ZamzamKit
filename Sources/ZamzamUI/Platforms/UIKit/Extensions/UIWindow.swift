@@ -10,7 +10,6 @@
 import UIKit
 
 public extension UIWindow {
-
     /// The view controller associated with the currently visible view in the window interface.
     ///
     /// The currently visible view can belong to:
@@ -38,7 +37,6 @@ public extension UIWindow {
 }
 
 public extension UIWindow {
-
     /// The view controller at the top of the window interface.
     ///
     /// The currently top view can belong to:
@@ -65,7 +63,6 @@ public extension UIWindow {
 }
 
 public extension UIWindow {
-
     /// Assign a view controller to root view controller for the window.
     ///
     /// Using this method provides more safety than assigning the root
@@ -89,7 +86,6 @@ public extension UIWindow {
 }
 
 public extension UIWindow {
-
     /// Unload all views and add back.
     ///
     /// Useful for applying `UIAppearance` changes to existing views.
@@ -102,7 +98,6 @@ public extension UIWindow {
 }
 
 public extension Array where Element == UIWindow {
-
     /// Unload all views for each `UIWindow` and add back.
     ///
     /// Useful for applying `UIAppearance` changes to existing views.

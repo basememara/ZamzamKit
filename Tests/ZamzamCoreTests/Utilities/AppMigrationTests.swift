@@ -13,7 +13,6 @@ final class AppMigrationTests: XCTestCase {
 }
 
 extension AppMigrationTests {
-
     func testMigrationReset() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
@@ -44,7 +43,6 @@ extension AppMigrationTests {
 }
 
 extension AppMigrationTests {
-
     func testMigrationChained() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
@@ -73,7 +71,6 @@ extension AppMigrationTests {
 }
 
 extension AppMigrationTests {
-
     func testMigrationBuild() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
@@ -100,7 +97,6 @@ extension AppMigrationTests {
 }
 
 extension AppMigrationTests {
-
     func testMigratesOnFirstRun() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.1")
         let expectation = self.expectation(description: "Should execute migration after reset")
@@ -114,7 +110,6 @@ extension AppMigrationTests {
 }
 
 extension AppMigrationTests {
-
     func testMigratesOnce() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
@@ -141,7 +136,6 @@ extension AppMigrationTests {
 }
 
 extension AppMigrationTests {
-
     func testMigratesPreviousVersionBlocks() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
@@ -160,7 +154,6 @@ extension AppMigrationTests {
 }
 
 extension AppMigrationTests {
-
     func testMigratesVersionInNaturalSortOrder() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
@@ -188,7 +181,6 @@ extension AppMigrationTests {
 }
 
 extension AppMigrationTests {
-
     func testRunsApplicationUpdateBlockOnce() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
         let expectation = self.expectation(description: "Should only call block once")
@@ -206,7 +198,6 @@ extension AppMigrationTests {
 }
 
 extension AppMigrationTests {
-
     func testRunsApplicationUpdateBlockOnlyOnceWithMultipleMigrations() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
@@ -237,7 +228,6 @@ extension AppMigrationTests {
 // MARK: - Helpers
 
 private extension AppMigrationTests {
-
     func waitForAllExpectations() {
         waitForExpectations(timeout: 5) {
             guard let error = $0 else { return }
@@ -247,7 +237,6 @@ private extension AppMigrationTests {
 }
 
 private extension AppMigration {
-
     static func makeMigration(forVersion version: String) throws -> AppMigration {
         let migration = AppMigration(
             userDefaults: try XCTUnwrap(UserDefaults(suiteName: "AppMigrationTests")),

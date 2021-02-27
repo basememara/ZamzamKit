@@ -11,7 +11,6 @@ import UIKit
 import ZamzamCore
 
 public extension UITabBarController {
-
     /// Setting this property changes the selected view controller to the one at the designated index in the viewControllers array.
     ///
     /// Using this method provides more safety than assigning the selected view controller directly,

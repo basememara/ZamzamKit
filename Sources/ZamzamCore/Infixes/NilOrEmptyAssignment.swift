@@ -9,7 +9,6 @@
 infix operator ??+: NilCoalescingPrecedence
 
 public extension Optional where Wrapped == String {
-
     /// Assign value if not nil or empty, otherwise use default value.
     ///
     ///     var test: String

@@ -30,7 +30,6 @@ public struct ViewError: Error, Equatable, Identifiable {
 // MARK: - Types
 
 public extension ViewError {
-
     struct Action: Equatable {
         public let title: String
         public let completion: () -> Void
@@ -53,7 +52,6 @@ import SwiftUI
 
 @available(iOS 13, macOS 10.15, tvOS 13, watchOS 6, *)
 public extension Alert {
-
     /// Creates an alert from the view error.
     init(from error: ViewError) {
         let titleText: Text = Text(error.title)
@@ -93,7 +91,6 @@ private struct AlertModifier: ViewModifier {
 
 @available(iOS 13, macOS 10.15, tvOS 13, watchOS 6, *)
 public extension View {
-
     func alert(error: Binding<ViewError?>) -> some View {
         modifier(AlertModifier(error: error))
     }

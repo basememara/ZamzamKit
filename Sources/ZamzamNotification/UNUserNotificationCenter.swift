@@ -12,7 +12,6 @@ import CoreLocation
 import ZamzamCore
 
 public extension UNUserNotificationCenter {
-
     /// The app's ability to schedule and receive local and remote notifications.
     ///
     /// - Parameter completion: Handler indicating whether the app is allowed to schedule notifications.
@@ -146,7 +145,6 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
-
     /// Returns a list of all pending or delivered user notifications.
     func getNotificationRequests(completion: @escaping ([UNNotificationRequest]) -> Void) {
         var notificationRequests: [UNNotificationRequest] = []
@@ -204,7 +202,6 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
-
     /// Schedules a local notification for delivery.
     ///
     /// - Parameters:
@@ -246,7 +243,6 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
-
     enum ScheduleInterval {
         case once
         case minute
@@ -320,7 +316,6 @@ public extension UNUserNotificationCenter {
 
 #if os(iOS)
 public extension UNUserNotificationCenter {
-
     /// Schedules a local notification for delivery.
     ///
     /// - Parameters:
@@ -363,7 +358,6 @@ public extension UNUserNotificationCenter {
 #endif
 
 public extension UNUserNotificationCenter {
-
     /// Remove pending or delivered user notifications.
     ///
     /// - Parameter withIdentifier: The identifier of the user notification to remove.
@@ -414,7 +408,6 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
-
     /// Remove pending user notifications.
     ///
     /// - Parameter withCategory: The category of the user notification to remove.
@@ -443,7 +436,6 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
-
     /// Remove delivered user notifications.
     ///
     /// - Parameter withCategory: The category of the user notification to remove.

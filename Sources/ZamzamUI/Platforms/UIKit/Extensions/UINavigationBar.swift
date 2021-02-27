@@ -10,7 +10,6 @@
 import UIKit
 
 public extension UINavigationBar {
-
     /// Set transparent navigation bar
     var transparent: Bool {
         // http://stackoverflow.com/questions/2315862/make-uinavigationbar-transparent
@@ -42,7 +41,6 @@ public extension UINavigationBar {
 }
 
 public extension UINavigationBar {
-
     /// Sets whether the navigation bar shadow is hidden.
     ///
     /// - Parameter hidden: Specify true to hide the navigation bar shadow or false to show it.

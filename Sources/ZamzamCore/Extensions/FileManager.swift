@@ -11,7 +11,6 @@ import Foundation.NSURL
 
 #if !os(tvOS)
 public extension FileManager {
-
     /// Get URL for the file.
     ///
     /// - Parameters:
@@ -45,7 +44,6 @@ public extension FileManager {
 }
 
 public extension FileManager {
-
     /// Get file system path for the file.
     ///
     /// - Parameters:
@@ -68,7 +66,6 @@ public extension FileManager {
 }
 
 public extension FileManager {
-
     /// Retrieve a file remotely and persist to local disk.
     ///
     ///     FileManager.default.download(from: "http://example.com/test.pdf") { url, response, error in

@@ -15,7 +15,6 @@ public typealias PlatformColor = UIColor
 #endif
 
 public extension PlatformColor {
-
     /// A random color.
     static var random: PlatformColor {
         PlatformColor(rgb: (
@@ -27,7 +26,6 @@ public extension PlatformColor {
 }
 
 public extension PlatformColor {
-
     /// An additional convenience initializer function that allows to init a color object using a hex color value.
     ///
     /// For hex code `#990000`, initialize using `0x990000`.

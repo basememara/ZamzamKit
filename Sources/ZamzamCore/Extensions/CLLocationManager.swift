@@ -9,7 +9,6 @@
 import CoreLocation.CLLocationManager
 
 public extension CLLocationManager {
-
     /// Determines if location services is enabled and authorized for always or when in use.
     static var isAuthorized: Bool {
         var statuses: [CLAuthorizationStatus] = [.authorizedAlways]

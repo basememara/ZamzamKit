@@ -9,7 +9,6 @@
 import Foundation.NSDate
 
 public extension TimeInterval {
-
     /// Number of seconds to integer.
     var seconds: Int { Int(self) }
 

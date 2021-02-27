@@ -13,7 +13,6 @@ import Foundation.NSLocale
 import Foundation.NSTimeZone
 
 public extension Date {
-
     /// Creates a date value initialized from a string.
     ///
     ///     Date(fromString: "2018/11/01 18:15")
@@ -41,7 +40,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Returns a string representation of a given date formatted using the receiver’s current settings.
     ///
     ///     Date().string(format: "MMM d, h:mm a") // "Jan 3, 8:43 PM"
@@ -94,7 +92,6 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Fixed-format for the date without time.
     ///
     /// An example use case for this function is creating a dictionary of days that group respective values by days.
@@ -128,14 +125,12 @@ public extension Date {
 }
 
 public extension Date {
-
     /// Date name format.
     ///
     /// - threeLetters: 3 letter abbreviation of date name.
     /// - oneLetter: 1 letter abbreviation of date name.
     /// - full: Full date name.
     enum NameStyle {
-
         /// 3 letter abbreviation of date name.
         case threeLetters
 

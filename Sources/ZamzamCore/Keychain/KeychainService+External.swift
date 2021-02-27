@@ -24,14 +24,12 @@ public struct KeychainExternalService: KeychainService {
 }
 
 public extension KeychainExternalService {
-
     func get(_ key: KeychainAPI.Key) -> String? {
         keychain.get(key.name)
     }
 }
 
 public extension KeychainExternalService {
-
     func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool {
         guard let value = value else { return remove(key) }
         return keychain.set(value, forKey: key.name)
@@ -39,7 +37,6 @@ public extension KeychainExternalService {
 }
 
 public extension KeychainExternalService {
-
     func remove(_ key: KeychainAPI.Key) -> Bool {
         keychain.delete(key.name)
     }
@@ -70,7 +67,6 @@ private extension KeychainExternalService {
      
      */
     class KeychainSwift {
-
         var lastQueryParameters: [String: Any]? // Used by the unit tests
 
         /// Contains result code from the last operation. Value is noErr (0) for a successful result.
@@ -123,7 +119,6 @@ private extension KeychainExternalService {
         @discardableResult
         func set(_ value: String, forKey key: String,
                  withAccess access: KeychainSwiftAccessOptions? = nil) -> Bool {
-
             if let value = value.data(using: String.Encoding.utf8) {
                 return set(value, forKey: key, withAccess: access)
             }
@@ -145,7 +140,6 @@ private extension KeychainExternalService {
         @discardableResult
         func set(_ value: Data, forKey key: String,
                  withAccess access: KeychainSwiftAccessOptions? = nil) -> Bool {
-
             // The lock prevents the code to be run simultaneously
             // from multiple threads which may result in crashing
             lock.lock()
@@ -187,7 +181,6 @@ private extension KeychainExternalService {
         @discardableResult
         func set(_ value: Bool, forKey key: String,
                  withAccess access: KeychainSwiftAccessOptions? = nil) -> Bool {
-
             let bytes: [UInt8] = value ? [1] : [0]
             let data = Data(bytes)
 
@@ -204,7 +197,6 @@ private extension KeychainExternalService {
          */
         func get(_ key: String) -> String? {
             if let data = getData(key) {
-
                 if let currentString = String(data: data, encoding: .utf8) {
                     return currentString
                 }
@@ -469,7 +461,6 @@ private extension KeychainExternalService {
      
      */
     enum KeychainSwiftAccessOptions {
-
         /**
          
          The data in the keychain item can be accessed only while the device is unlocked by the user.

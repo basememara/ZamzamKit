@@ -13,7 +13,6 @@ import UIKit.UIImage
 import UIKit.UIImageView
 
 public extension UIImageView {
-
     /// Returns an image view initialized with the specified image.
     ///
     /// - Parameters:
@@ -25,7 +24,6 @@ public extension UIImageView {
 }
 
 public extension UIImageView {
-
     /// Starts animating the sequential images in the receiver.
     ///
     /// - Parameters:
