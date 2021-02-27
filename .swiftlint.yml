@@ -1,10 +1,8 @@
 analyzer_rules:
   - unused_import
-​
-excluded:
-  - Archive
-  - Assets
-  - Templates
+
+included:
+  - Sources
   - Tests
 
 opt_in_rules:

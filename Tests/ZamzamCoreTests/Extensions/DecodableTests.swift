@@ -103,12 +103,15 @@ extension DecodableTests {
         let payload = try decoder.decode(ServerResponse.self, from: data)
         
         // Then
-        XCTAssertEqual((payload.data?["boolean"])?.value as! Bool, true)
-        XCTAssertEqual((payload.data?["integer"])?.value as! Int, 1)
-        XCTAssertEqual((payload.data?["double"])?.value as! Double, 3.14159265358979323846, accuracy: 0.001)
-        XCTAssertEqual((payload.data?["string"])?.value as! String, "string")
-        XCTAssertEqual((payload.data?["date"])?.value as! Date, Date(timeIntervalSince1970: 1559392318))
-        XCTAssertEqual((payload.data?["array"])?.value as! [Int], [1, 2, 3])
-        XCTAssertEqual((payload.data?["nested"])?.value as! [String: String], ["a": "alpha", "b": "bravo", "c": "charlie"])
+        XCTAssertEqual(XCTUnwrap((payload.data?["boolean"])?.value as? Bool), true)
+        XCTAssertEqual(XCTUnwrap((payload.data?["integer"])?.value as? Int), 1)
+        XCTAssertEqual(XCTUnwrap((payload.data?["double"])?.value as? Double), 3.14159265358979323846, accuracy: 0.001)
+        XCTAssertEqual(XCTUnwrap((payload.data?["string"])?.value as? String), "string")
+        XCTAssertEqual(XCTUnwrap((payload.data?["date"])?.value as? Date), Date(timeIntervalSince1970: 1559392318))
+        XCTAssertEqual(XCTUnwrap((payload.data?["array"])?.value as? [Int]), [1, 2, 3])
+        XCTAssertEqual(
+            XCTUnwrap((payload.data?["nested"])?.value as? [String: String]),
+            ["a": "alpha", "b": "bravo", "c": "charlie"]
+        )
     }
 }

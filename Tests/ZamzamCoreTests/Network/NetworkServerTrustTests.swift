@@ -274,8 +274,8 @@ private extension SecCertificate {
             .appendingPathComponent("Certificates")
             .appendingPathComponent(path)
         
-        let data = try! Data(contentsOf: url) as CFData
-        return SecCertificateCreateWithData(nil, data)!
+        let data = try! Data(contentsOf: url) as CFData // swiftlint:disable:this force_try
+        return SecCertificateCreateWithData(nil, data)! // swiftlint:disable:this force_unwrapping
     }
 }
     
@@ -358,7 +358,7 @@ private extension SecTrust {
         let policy = SecPolicyCreateBasicX509()
         var trust: SecTrust?
         SecTrustCreateWithCertificates(certificates as CFTypeRef, policy, &trust)
-        return trust!
+        return trust! // swiftlint:disable:this force_unwrapping
     }
     
     func assignRootCertificateAsLoneAnchor() -> Self {

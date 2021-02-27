@@ -56,32 +56,32 @@ extension CLLocationTests {
         let cairo = CLLocationCoordinate2D(latitude: 30.05611, longitude: 31.23944)
         
         XCTAssertEqual(
-            [newYork, miami, atlanta].closest(to: toronto)!.latitude,
+            XCTUnwrap([newYork, miami, atlanta].closest(to: toronto)).latitude,
             newYork.latitude
         )
         
         XCTAssertEqual(
-            [newYork, miami, atlanta].farthest(from: toronto)!.latitude,
+            XCTUnwrap([newYork, miami, atlanta].farthest(from: toronto)).latitude,
             miami.latitude
         )
         
         XCTAssertEqual(
-            [paris, london, cairo].closest(to: beijing)!.latitude,
+            XCTUnwrap([paris, london, cairo].closest(to: beijing)).latitude,
             cairo.latitude
         )
         
         XCTAssertEqual(
-            [paris, london, cairo].farthest(from: beijing)!.latitude,
+            XCTUnwrap([paris, london, cairo].farthest(from: beijing)).latitude,
             paris.latitude
         )
         
         XCTAssertEqual(
-            [vancouver, losAngles, miami].closest(to: tokyo)!.latitude,
+            XCTUnwrap([vancouver, losAngles, miami].closest(to: tokyo)).latitude,
             vancouver.latitude
         )
         
         XCTAssertEqual(
-            [vancouver, losAngles, miami].farthest(from: tokyo)!.latitude,
+            XCTUnwrap([vancouver, losAngles, miami].farthest(from: tokyo)).latitude,
             miami.latitude
         )
     }

@@ -251,7 +251,7 @@ private extension AppMigration {
     
     static func makeMigration(forVersion version: String) -> AppMigration {
         let migration = AppMigration(
-            userDefaults: UserDefaults(suiteName: "AppMigrationTests")!,
+            userDefaults: XCTUnwrap(UserDefaults(suiteName: "AppMigrationTests")),
             bundle: .module
         )
         
