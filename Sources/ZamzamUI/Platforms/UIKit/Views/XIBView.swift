@@ -16,7 +16,7 @@ open class XIBView: UIView {
         super.init(frame: frame)
         loadFromNib()
     }
-    
+
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadFromNib()
@@ -24,16 +24,16 @@ open class XIBView: UIView {
 }
 
 private extension XIBView {
-    
+
     func loadFromNib() {
         guard let subView = UINib(nibName: "\(type(of: self))", bundle: nil)
             .instantiate(withOwner: self, options: nil).first as? UIView else {
                 return
         }
-        
+
         subView.frame = bounds
         subView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+
         addSubview(subView)
     }
 }

@@ -11,10 +11,10 @@ import Foundation.NSDate
 import Foundation.NSDateFormatter
 
 public extension Date {
-    
+
     /// Determines if the date if Friday / Jumuah.
     var isJumuah: Bool { isJumuah(for: .current) }
-    
+
     /// Determines if the date if Friday / Jumuah.
     ///
     /// - Parameter calendar: Calendar used for calculation.
@@ -22,7 +22,7 @@ public extension Date {
     func isJumuah(for calendar: Calendar) -> Bool {
         calendar.dateComponents([.weekday], from: self).weekday == 6
     }
-    
+
     /// Determines if the date falls within Ramadan.
     ///
     /// - Parameters:
@@ -40,12 +40,12 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     // Cache Islamic calendar for reuse
     // https://www.staff.science.uu.nl/~gent0113/islam/ummalqura.htm
     // http://tabsir.net/?p=621#more-621
     static let islamicCalendar = Calendar(identifier: .islamicUmmAlQura)
-    
+
     /// Returns a string representation of a given date formatted to hijri date.
     ///
     /// - Parameters:
@@ -63,22 +63,22 @@ public extension Date {
         calendar: Calendar = Self.islamicCalendar
     ) -> String {
         var calendar = calendar
-        
+
         if let timeZone = timeZone {
             calendar.timeZone = timeZone
         }
-        
+
         let formatter = DateFormatter().apply {
             $0.calendar = calendar
             $0.timeZone = calendar.timeZone
-            
+
             if let f = format {
                 $0.dateFormat = f
             } else {
                 $0.dateStyle = .long
             }
         }
-        
+
         let date = calendar.date(
             from: hijri(
                 components: components,
@@ -87,10 +87,10 @@ public extension Date {
                 calendar: calendar
             )
         ) ?? self
-        
+
         return formatter.string(from: date)
     }
-    
+
     /// Returns the date components of the hijri date.
     ///
     /// - Parameters:
@@ -106,11 +106,11 @@ public extension Date {
         calendar: Calendar = Self.islamicCalendar
     ) -> DateComponents {
         var calendar = calendar
-        
+
         if let timeZone = timeZone {
             calendar.timeZone = timeZone
         }
-        
+
         let date = self + .days(offSet, calendar)
         return calendar.dateComponents(components, from: date)
     }

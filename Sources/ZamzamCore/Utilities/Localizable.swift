@@ -27,7 +27,7 @@ public extension Localizable {
 }
 
 public extension Localizable {
-        
+
     // Retrive localization from main bundle if overriden, or use current bundle
     static func bundle(forKey key: String, fallback bundle: Bundle = .zamzamCore) -> Bundle {
         Bundle.main.localizedString(forKey: key, value: nil, table: nil) == key ? bundle : .main
@@ -44,14 +44,14 @@ public extension Localizable {
 ///     someLabel.text = .localized(.ok)
 public struct Localizable {
     fileprivate let rawValue: String
-    
+
     public init(_ rawValue: String) {
         self.rawValue = rawValue
     }
 }
 
 public extension String {
-    
+
     /// A string initialized by using format as a template into which values in argList are substituted according the current locale information.
     private static var vaListHandler: (_ key: String, _ arguments: CVaListPointer, _ locale: Locale?) -> String {
         // https://stackoverflow.com/questions/42428504/swift-3-issue-with-cvararg-being-passed-multiple-times

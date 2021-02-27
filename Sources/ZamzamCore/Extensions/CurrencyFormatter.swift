@@ -13,7 +13,7 @@ import Foundation.NSNumberFormatter
 public struct CurrencyFormatter {
     private let formatter: NumberFormatter
     private let autoTruncate: Bool
-    
+
     /// Initialize a new currency formatter.
     ///
     /// - Parameters:
@@ -36,19 +36,19 @@ public struct CurrencyFormatter {
             $0.minimumFractionDigits = decimalDigits
             $0.maximumFractionDigits = decimalDigits
             $0.zeroSymbol ?= zeroSymbol
-            
+
             if usePrefix {
                 $0.positivePrefix = $0.plusSign + $0.currencySymbol
                 $0.negativePrefix = $0.negativePrefix + ""
             }
         }
-        
+
         self.autoTruncate = autoTruncate
     }
 }
 
 public extension CurrencyFormatter {
-    
+
     /// Returns a string containing the formatted value of the provided number object.
     ///
     ///     let amount: Double = 123456789.987
@@ -63,17 +63,17 @@ public extension CurrencyFormatter {
     /// - Returns: A string containing the formatted value of number using the receiver’s current settings.
     func string(fromAmount double: Double?) -> String {
         let validValue = getAdjustedForDefinedInterval(value: double)
-        
+
         guard autoTruncate, validValue.truncatingRemainder(dividingBy: 1) == 0 else {
             return formatter.string(from: validValue as NSNumber) ?? "\(validValue)"
         }
-        
+
         let truncatingFormatter = formatter.copy() as? NumberFormatter // TODO: Lazy load
         truncatingFormatter?.minimumFractionDigits = 0
         truncatingFormatter?.maximumFractionDigits = 0
         return truncatingFormatter?.string(from: validValue as NSNumber) ?? "\(validValue)"
     }
-    
+
     /// Returns the given value adjusted to respect formatter's min and max values.
     ///
     /// - Parameter value: Value to be adjusted if needed
@@ -89,7 +89,7 @@ public extension CurrencyFormatter {
 }
 
 public extension CurrencyFormatter {
-    
+
     /// Returns a string containing the currency formatted value of the provided number object.
     ///
     ///     let cents = 123456789

@@ -15,7 +15,7 @@ public protocol KeychainService {
 // MARK: Namespace
 
 public enum KeychainAPI {
-    
+
     /// Security key for compile-safe access.
     ///
     ///     extension KeychainAPI.Key {
@@ -23,7 +23,7 @@ public enum KeychainAPI {
     ///     }
     public struct Key {
         public let name: String
-        
+
         public init(_ key: String) {
             self.name = key
         }

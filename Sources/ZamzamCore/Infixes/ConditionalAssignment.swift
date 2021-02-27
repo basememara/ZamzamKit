@@ -12,7 +12,7 @@ precedencegroup Comparison {
 }
 
 infix operator ?= : Comparison
-//swiftlint:disable static_operator
+// swiftlint:disable static_operator
 
 /// Assign value if not nil.
 ///

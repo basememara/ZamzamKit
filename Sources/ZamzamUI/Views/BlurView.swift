@@ -15,15 +15,15 @@ import SwiftUI
 @available(iOS 13, *)
 public struct BlurView: UIViewRepresentable {
     private let style: UIBlurEffect.Style
-    
+
     public init(style: UIBlurEffect.Style = .systemUltraThinMaterial) {
         self.style = style
     }
-    
+
     public func makeUIView(context: Context) -> UIVisualEffectView {
         UIVisualEffectView(effect: UIBlurEffect(style: style))
     }
-    
+
     public func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
         uiView.effect = UIBlurEffect(style: style)
     }

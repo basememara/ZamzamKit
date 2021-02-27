@@ -9,10 +9,10 @@
 import Foundation.NSURL
 
 public protocol LogService {
-    
+
     /// The minimum level required to create log entries.
     var minLevel: LogAPI.Level { get }
-    
+
     /// Log an entry to the destination.
     ///
     /// - Parameters:
@@ -32,10 +32,10 @@ public protocol LogService {
         error: Error?,
         context: [String: CustomStringConvertible]
     )
-    
+
     /// Returns if the logger should process the entry for the specified log level.
     func canWrite(for level: LogAPI.Level) -> Bool
-    
+
     /// The output of the message and supporting information.
     ///
     /// - Parameters:
@@ -56,12 +56,12 @@ public protocol LogService {
 }
 
 public extension LogService {
-    
+
     /// Determines if the service has the minimum level to log.
     func canWrite(for level: LogAPI.Level) -> Bool {
         minLevel <= level && level != .none
     }
-    
+
     /// The string output of the log.
     func format(
         _ message: String,
@@ -72,15 +72,15 @@ public extension LogService {
         _ context: [String: CustomStringConvertible]
     ) -> String {
         var output = "\(URL(fileURLWithPath: file).deletingPathExtension().lastPathComponent).\(function):\(line) - \(message)"
-        
+
         if let error = error {
             output += " | Error: \(error)"
         }
-        
+
         if !context.isEmpty {
             output += " | Context: \(context)"
         }
-        
+
         return output
     }
 }
@@ -88,14 +88,14 @@ public extension LogService {
 // MARK: - Namespace
 
 public enum LogAPI {
-    
+
     public enum Level: Comparable, CaseIterable {
         case verbose
         case debug
         case info
         case warning
         case error
-        
+
         /// Disables a log service when used as minimum level
         case none
     }

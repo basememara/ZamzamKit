@@ -7,7 +7,7 @@
 //
 
 public extension Result {
-    
+
     /// Returns the associated error value if the result is a failure, `nil` otherwise.
     var error: Failure? {
         switch self {

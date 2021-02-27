@@ -45,7 +45,7 @@ public extension PlatformColor {
             alpha: CGFloat(alpha)
         )
     }
-    
+
     /// An additional convenience initializer function that allows to init a color object using integers.
     ///
     ///     UIColor(rgb: (66, 134, 244))

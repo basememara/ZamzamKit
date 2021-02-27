@@ -11,14 +11,14 @@ import Foundation.NSDate
 /// Sends a message to the IDE console.
 public struct LogServiceConsole: LogService {
     public let minLevel: LogAPI.Level
-    
+
     public init(minLevel: LogAPI.Level) {
         self.minLevel = minLevel
     }
 }
 
 public extension LogServiceConsole {
-    
+
     func write(
         _ level: LogAPI.Level,
         with message: String,
@@ -29,7 +29,7 @@ public extension LogServiceConsole {
         context: [String: CustomStringConvertible]
     ) {
         let prefix: String
-        
+
         switch level {
         case .verbose:
             prefix = "💜 \(timestamp: Date()) VERBOSE"
@@ -44,7 +44,7 @@ public extension LogServiceConsole {
         case .none:
             return
         }
-        
+
         print("\(prefix) \(format(message, file, function, line, error, context))")
     }
 }

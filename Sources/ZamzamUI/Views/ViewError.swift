@@ -15,7 +15,7 @@ public struct ViewError: Error, Equatable, Identifiable {
     public let title: String
     public let message: String?
     public let action: Action?
-    
+
     public init(
         title: String,
         message: String? = nil,

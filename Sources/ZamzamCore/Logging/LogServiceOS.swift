@@ -14,7 +14,7 @@ public struct LogServiceOS: LogService {
     private let subsystem: String
     private let category: String
     private let log: OSLog
-    
+
     public init(minLevel: LogAPI.Level, subsystem: String, category: String) {
         self.minLevel = minLevel
         self.subsystem = subsystem
@@ -24,7 +24,7 @@ public struct LogServiceOS: LogService {
 }
 
 public extension LogServiceOS {
-    
+
     func write(
         _ level: LogAPI.Level,
         with message: String,
@@ -35,7 +35,7 @@ public extension LogServiceOS {
         context: [String: CustomStringConvertible]
     ) {
         let type: OSLogType
-        
+
         switch level {
         case .verbose:
             type = .debug
@@ -50,7 +50,7 @@ public extension LogServiceOS {
         case .none:
             return
         }
-        
+
         os_log("%@", log: log, type: type, format(message, file, function, line, error, context))
     }
 }

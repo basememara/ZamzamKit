@@ -14,46 +14,24 @@ final class DecodableTests: XCTestCase {
 }
 
 extension DecodableTests {
-    
+
     func testFromString() throws {
         // Given
         struct TestModel: Decodable {
             let string: String
             let integer: Int
         }
-        
+
         let jsonString = """
         {
             "string": "Abc",
             "integer": 123,
         }
         """
-        
+
         // When
         let model = try jsonDecoder.decode(TestModel.self, from: jsonString)
-        
-        // Then
-        XCTAssertEqual(model.string, "Abc")
-        XCTAssertEqual(model.integer, 123)
-    }
-}
-    
-extension DecodableTests {
-        
-    func testInBundle() throws {
-        // Given
-        struct TestModel: Decodable {
-            let string: String
-            let integer: Int
-        }
-        
-        // When
-        let model = try jsonDecoder.decode(
-            TestModel.self,
-            forResource: "TestModel.json",
-            inBundle: .module
-        )
-        
+
         // Then
         XCTAssertEqual(model.string, "Abc")
         XCTAssertEqual(model.integer, 123)
@@ -61,7 +39,29 @@ extension DecodableTests {
 }
 
 extension DecodableTests {
-        
+
+    func testInBundle() throws {
+        // Given
+        struct TestModel: Decodable {
+            let string: String
+            let integer: Int
+        }
+
+        // When
+        let model = try jsonDecoder.decode(
+            TestModel.self,
+            forResource: "TestModel.json",
+            inBundle: .module
+        )
+
+        // Then
+        XCTAssertEqual(model.string, "Abc")
+        XCTAssertEqual(model.integer, 123)
+    }
+}
+
+extension DecodableTests {
+
     func testAnyDecodable() throws {
         // Given
         let jsonString = """
@@ -83,25 +83,25 @@ extension DecodableTests {
             }
         }
         """
-        
+
         guard let data = jsonString.data(using: .utf8) else {
             return XCTFail("Bad JSON format")
         }
-        
+
         // Type used for decoding the server payload
         struct ServerResponse: Decodable {
             let code: String
             let message: String
             let data: [String: AnyDecodable]?
         }
-        
+
         let decoder = JSONDecoder().apply {
             $0.dateDecodingStrategy = .formatted(.init(iso8601Format: "yyyy-MM-dd'T'HH:mm:ssZ"))
         }
-        
+
         // When
         let payload = try decoder.decode(ServerResponse.self, from: data)
-        
+
         // Then
         XCTAssertEqual(XCTUnwrap((payload.data?["boolean"])?.value as? Bool), true)
         XCTAssertEqual(XCTUnwrap((payload.data?["integer"])?.value as? Int), 1)

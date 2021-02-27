@@ -11,7 +11,7 @@ import WatchKit
 import ZamzamCore
 
 public extension WKPickerItem {
-    
+
     /// An initializer for a single item in a picker interface.
     ///
     /// - Parameters:
@@ -19,7 +19,7 @@ public extension WKPickerItem {
     ///   - caption: A caption for the item’s content.
     convenience init(title: String, caption: String? = nil) {
         self.init()
-        
+
         self.title = title
         self.caption ?= caption
     }

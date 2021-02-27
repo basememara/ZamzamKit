@@ -22,14 +22,14 @@
 ///
 public struct KeychainManager {
     private let service: KeychainService
-    
+
     public init(service: KeychainService) {
         self.service = service
     }
 }
 
 public extension KeychainManager {
-    
+
     /// Retrieves the value from keychain that corresponds to the given key.
     ///
     /// Accessing the underlying Keychain storage is an expensive operation.
@@ -42,7 +42,7 @@ public extension KeychainManager {
 }
 
 public extension KeychainManager {
-    
+
     /// Stores the value in the keychain item under the given key.
     ///
     /// - Parameters:
@@ -51,16 +51,16 @@ public extension KeychainManager {
     @discardableResult
     func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool {
         let result = service.set(value, forKey: key)
-        
+
         guard #available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *) else { return result }
         Self.subject.send(key.name)
-        
+
         return result
     }
 }
 
 public extension KeychainManager {
-    
+
     /// Deletes the single keychain item specified by the key.
     ///
     /// - Parameter key: The key that is used to delete the keychain item.
@@ -68,10 +68,10 @@ public extension KeychainManager {
     @discardableResult
     func remove(_ key: KeychainAPI.Key) -> Bool {
         let result = service.remove(key)
-        
+
         guard #available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *) else { return result }
         Self.subject.send(key.name)
-        
+
         return result
     }
 }
@@ -82,7 +82,7 @@ import Combine
 @available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension KeychainManager {
     private static let subject = PassthroughSubject<String, Never>()
-    
+
     /// Returns a publisher that emits events when broadcasting secured preference changes.
     func publisher() -> AnyPublisher<String, Never> {
         Self.subject.eraseToAnyPublisher()

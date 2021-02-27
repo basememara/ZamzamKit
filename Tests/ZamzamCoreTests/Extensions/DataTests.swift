@@ -10,9 +10,9 @@ import XCTest
 import ZamzamCore
 
 final class DataTests: XCTestCase {}
-    
+
 extension DataTests {
-    
+
     func testString() {
         let dataFromString = "hello".data(using: .utf8)
         XCTAssertNotNil(dataFromString)
@@ -21,7 +21,7 @@ extension DataTests {
 }
 
 extension DataTests {
-    
+
     func testHexString() {
         XCTAssertEqual(
             "hbjJBJjhbjhad f7s7dtf7 sugyo87T^IT*iyug".data(using: .utf8)?.hexString(),
@@ -31,7 +31,7 @@ extension DataTests {
 }
 
 extension DataTests {
-    
+
     func testBase64URLEncodedString() {
         XCTAssertEqual(
             "dsva-kjKH IU_H78yds8/7fyt78O TD+SY*O&*&T*A&(A*SF Y d8=q933827 z*&T*(ui sda dssd2&^%adjkh alkdjfl".data(using: .utf8)?.base64URLEncodedString(),

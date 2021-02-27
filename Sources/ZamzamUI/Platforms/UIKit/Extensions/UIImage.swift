@@ -22,7 +22,7 @@ public extension UIImage {
 }
 
 public extension UIImage {
-    
+
     /// Convenience initializer to convert a color to image.
     ///
     ///     let image = UIImage(from: .lightGray)
@@ -45,12 +45,12 @@ public extension UIImage {
 }
 
 public extension UIImage {
-    
+
     /// Save image to disk as PNG.
     func pngToDisk() -> URL? {
         let data = pngData()
         let folder = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-        
+
         do {
             let name = String(random: 12, prefix: "img_")
             let url = folder.appendingPathComponent("\(name).png")

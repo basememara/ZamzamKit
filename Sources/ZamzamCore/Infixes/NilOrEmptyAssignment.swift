@@ -9,7 +9,7 @@
 infix operator ??+: NilCoalescingPrecedence
 
 public extension Optional where Wrapped == String {
-    
+
     /// Assign value if not nil or empty, otherwise use default value.
     ///
     ///     var test: String
@@ -30,7 +30,7 @@ public extension Optional where Wrapped == String {
         guard let left = left, !left.isEmpty else { return right }
         return left
     }
-    
+
     /// Assign value if not nil or empty, otherwise use default value.
     ///
     ///     var test: String

@@ -11,7 +11,7 @@ import UIKit
 import ZamzamCore
 
 public extension UIView {
-    
+
     /// Unarchives the contents of a XIB file associated with the receiver.
     ///
     /// - Parameters:
@@ -25,19 +25,19 @@ public extension UIView {
             let name = name ?? String(describing: T.self)
             return bundle.loadNibNamed(name, owner: nil, options: nil)?.first as? T ?? T()
         }
-        
+
         return loadNIBHelper(named: name)
     }
 }
 
 public extension UIView {
-    
+
     /// A Boolean value that determines whether the view is visible.
     var isVisible: Bool {
         get { !isHidden }
         set { isHidden = !newValue }
     }
-    
+
     /// Returns the width of the frame.
     var width: CGFloat {
         get { frame.width }
@@ -52,34 +52,34 @@ public extension UIView {
 }
 
 public extension UIView {
-    
+
     /// Border color of view; also inspectable from Storyboard.
     @IBInspectable var borderColor: UIColor? {
         get {
             guard let color = layer.borderColor else { return nil }
             return UIColor(cgColor: color)
         }
-        
+
         set {
             guard let color = newValue else {
                 layer.borderColor = nil
                 return
             }
-            
+
             layer.borderColor = color.cgColor
         }
     }
-    
+
     /// Border width of view; also inspectable from Storyboard.
     @IBInspectable var borderWidth: CGFloat {
         get { layer.borderWidth }
         set { layer.borderWidth = newValue }
     }
-    
+
     /// Corner radius of view; also inspectable from Storyboard.
     @IBInspectable var cornerRadius: CGFloat {
         get { layer.cornerRadius }
-        
+
         set {
             layer.masksToBounds = true
             layer.cornerRadius = newValue
@@ -88,7 +88,7 @@ public extension UIView {
 }
 
 public extension UIView {
-	
+
 	/// Add shadow to view.
 	///
 	/// - Parameters:
@@ -111,7 +111,7 @@ public extension UIView {
 }
 
 public extension UIView {
-    
+
     /// Fade in view.
     ///
     /// - Parameters:
@@ -122,13 +122,13 @@ public extension UIView {
             completion?(true)
             return
         }
-        
+
         let originalAlpha = alpha
-        
+
         if isHidden {
             alpha = 0
         }
-        
+
         UIView.animate(
             withDuration: duration,
             animations: {
@@ -138,7 +138,7 @@ public extension UIView {
             completion: completion
         )
     }
-    
+
     /// Fade out view.
     ///
     /// - Parameters:
@@ -149,9 +149,9 @@ public extension UIView {
             completion?(true)
             return
         }
-        
+
         let originalAlpha = alpha
-        
+
         UIView.animate(
             withDuration: duration,
             animations: {
@@ -164,7 +164,7 @@ public extension UIView {
             }
         )
     }
-    
+
     /// Fade out or in view based on current state.
     ///
     /// - Parameters:
@@ -174,7 +174,7 @@ public extension UIView {
         guard isHidden else { return fadeOut(duration: duration, completion: completion) }
         fadeIn(duration: duration, completion: completion)
     }
-    
+
     /// Fade out or in view based on current state.
     ///
     /// - Parameters:
@@ -196,7 +196,7 @@ public extension UIView {
 }
 
 public extension UIView {
-    
+
     /// Adds activity indicator to the center of the view.
     ///
     /// - Parameters:
@@ -214,10 +214,10 @@ public extension UIView {
             $0.color = color
             $0.hidesWhenStopped = true
         }
-        
+
         addSubview(activityIndicator)
         activityIndicator.center()
-        
+
         return activityIndicator
     }
 }
@@ -225,7 +225,7 @@ public extension UIView {
 // MARK: - Auto Layout
 
 public extension UIView {
-    
+
     /// Anchor all sides of the view using auto layout constraints.
     ///
     /// - Parameters:
@@ -237,9 +237,9 @@ public extension UIView {
             assertionFailure("Missing superview for constraint")
             return
         }
-        
+
         translatesAutoresizingMaskIntoConstraints = false
-        
+
         if safeArea {
             topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: insets.top).isActive = true
             bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -insets.bottom).isActive = true
@@ -252,7 +252,7 @@ public extension UIView {
             trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -insets.right).isActive = true
         }
     }
-    
+
     /// Anchor all sides of the view using auto layout constraints.
     ///
     /// - Parameters:
@@ -262,19 +262,19 @@ public extension UIView {
     func edges(to view: UIView?, padding: CGFloat, safeArea: Bool = false) {
         edges(to: view, insets: UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding), safeArea: safeArea)
     }
-    
+
     /// Center the view using auto layout constraints.
     func center() {
         guard let superview = superview else {
             assertionFailure("Missing superview for constraint")
             return
         }
-        
+
         translatesAutoresizingMaskIntoConstraints = false
         centerXAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.centerXAnchor).isActive = true
         centerYAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.centerYAnchor).isActive = true
     }
-    
+
     /// Set the aspect ratio for the height and width of the view using auto layout constraints.
     ///
     /// - Parameters:

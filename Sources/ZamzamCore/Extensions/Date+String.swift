@@ -13,7 +13,7 @@ import Foundation.NSLocale
 import Foundation.NSTimeZone
 
 public extension Date {
-    
+
     /// Creates a date value initialized from a string.
     ///
     ///     Date(fromString: "2018/11/01 18:15")
@@ -29,13 +29,13 @@ public extension Date {
             let date = DateFormatter(dateFormat: dateFormat, timeZone: timeZone, calendar: calendar, locale: locale).date(from: string) else {
                 return nil
         }
-        
+
         self.init(timeInterval: 0, since: date)
     }
 }
 
 public extension Date {
-    
+
     /// Returns a string representation of a given date formatted using the receiver’s current settings.
     ///
     ///     Date().string(format: "MMM d, h:mm a") // "Jan 3, 8:43 PM"
@@ -49,7 +49,7 @@ public extension Date {
     func string(format: String, timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
         DateFormatter(dateFormat: format, timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
     }
-    
+
     /// Returns a string representation of a given date formatted using the receiver’s current settings.
     ///
     ///     Date().string(style: .short) // "1/12/17"
@@ -68,7 +68,7 @@ public extension Date {
     func string(style dateStyle: DateFormatter.Style, withTime timeStyle: DateFormatter.Style = .none, timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
         DateFormatter(dateStyle: dateStyle, timeStyle: timeStyle, timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
     }
-    
+
     /// Returns a string representation of a given date formatted using the receiver’s formatter.
     ///
     ///     Date().string(formatter: .MM_dd_yyyy_HH_mm) // "03-15-2020 22:46"
@@ -82,7 +82,7 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Fixed-format for the date without time.
     ///
     /// An example use case for this function is creating a dictionary of days that group respective values by days.
@@ -94,7 +94,7 @@ public extension Date {
     func shortString(timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
         DateFormatter(dateFormat: "yyyy-MM-dd", timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
     }
-    
+
     /// Formats time interval for display timer.
     ///
     ///     Date(fromString: "2016/03/22 09:45").timerString(
@@ -116,24 +116,24 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Date name format.
     ///
     /// - threeLetters: 3 letter abbreviation of date name.
     /// - oneLetter: 1 letter abbreviation of date name.
     /// - full: Full date name.
     enum NameStyle {
-        
+
         /// 3 letter abbreviation of date name.
         case threeLetters
-        
+
         /// 1 letter abbreviation of date name.
         case oneLetter
-        
+
         /// Full date name.
         case full
     }
-    
+
     /// Day name from date.
     ///
     ///     Date().name(ofDay: .oneLetter) -> "T"
@@ -148,7 +148,7 @@ public extension Date {
         // http://www.codingexplorer.com/swiftly-getting-human-readable-date-nsdateformatter/
         let dateFormatter = DateFormatter()
         let format: String
-        
+
         switch style {
         case .oneLetter:
             format = "EEEEE"
@@ -157,11 +157,11 @@ public extension Date {
         case .full:
             format = "EEEE"
         }
-        
+
         dateFormatter.setLocalizedDateFormatFromTemplate(format)
         return dateFormatter.string(from: self)
     }
-    
+
     /// Month name from date.
     ///
     ///     Date().name(ofMonth: .oneLetter) -> "J"
@@ -176,7 +176,7 @@ public extension Date {
         // http://www.codingexplorer.com/swiftly-getting-human-readable-date-nsdateformatter/
         let dateFormatter = DateFormatter()
         let format: String
-        
+
         switch style {
         case .oneLetter:
             format = "MMMMM"
@@ -185,7 +185,7 @@ public extension Date {
         case .full:
             format = "MMMM"
         }
-        
+
         dateFormatter.setLocalizedDateFormatFromTemplate(format)
         return dateFormatter.string(from: self)
     }

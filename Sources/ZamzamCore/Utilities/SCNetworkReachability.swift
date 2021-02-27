@@ -33,7 +33,7 @@ public extension SCNetworkReachability {
         }
 
         var flags: SCNetworkReachabilityFlags = []
-        
+
         guard SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) else {
             return false
         }

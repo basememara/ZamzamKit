@@ -13,7 +13,7 @@ import UIKit.UIImage
 import UIKit.UIImageView
 
 public extension UIImageView {
-    
+
     /// Returns an image view initialized with the specified image.
     ///
     /// - Parameters:
@@ -25,7 +25,7 @@ public extension UIImageView {
 }
 
 public extension UIImageView {
-    
+
     /// Starts animating the sequential images in the receiver.
     ///
     /// - Parameters:
@@ -41,16 +41,16 @@ public extension UIImageView {
         duration: TimeInterval = 1.0
     ) {
         let imageCount = Int(Double(totalImages) * percent)
-        
+
         guard imageCount > 0 else {
             image = UIImage(named: imageName + "\(beginningSuffixNumber)")
             return
         }
-        
+
         let imagesList = (beginningSuffixNumber...imageCount).compactMap {
             UIImage(named: "\(imageName)\($0)")
         }
-        
+
         image = imagesList.last
         animationImages = imagesList
         animationDuration = duration

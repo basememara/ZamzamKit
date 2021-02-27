@@ -12,7 +12,7 @@ import CoreLocation
 import ZamzamCore
 
 public extension UNUserNotificationCenter {
-    
+
     /// The app's ability to schedule and receive local and remote notifications.
     ///
     /// - Parameter completion: Handler indicating whether the app is allowed to schedule notifications.
@@ -27,7 +27,7 @@ public extension UNUserNotificationCenter {
 
 public extension UNUserNotificationCenter {
     static let mainCategoryIdentifier = "mainCategory"
-    
+
     /// Registers the local and remote notifications with the category and actions it supports.
     ///
     ///     UNUserNotificationCenter.current().register(
@@ -65,7 +65,7 @@ public extension UNUserNotificationCenter {
     ) {
         register(delegate: delegate, categories: [category: actions], authorizations: authorizations, completion: completion)
     }
-    
+
     /// Registers the local and remote notifications with the categories and actions it supports.
     ///
     ///     UNUserNotificationCenter.current().register(
@@ -109,7 +109,7 @@ public extension UNUserNotificationCenter {
         completion: ((Bool) -> Void)? = nil
     ) {
         self.delegate ?= delegate
-    
+
         getNotificationSettings { settings in
             let categorySet = Set(categories.map {
                 UNNotificationCategory(
@@ -119,7 +119,7 @@ public extension UNUserNotificationCenter {
                     options: .customDismissAction
                 )
             })
-            
+
             guard let authorizations = authorizations, settings.authorizationStatus == .notDetermined else {
                 // Register category if applicable
                 return self.getNotificationCategories {
@@ -127,12 +127,12 @@ public extension UNUserNotificationCenter {
                         let granted = settings.authorizationStatus == .authorized
                         DispatchQueue.main.async { completion?(granted) }
                     }
-                    
+
                     guard categorySet != $0 else { return }
                     self.setNotificationCategories(categorySet)
                 }
             }
-            
+
             // Request permission before registering if applicable
             self.requestAuthorization(options: authorizations) { granted, _ in
                 defer { DispatchQueue.main.async { completion?(granted) } }
@@ -144,29 +144,29 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
-    
+
     /// Returns a list of all pending or delivered user notifications.
     func getNotificationRequests(completion: @escaping ([UNNotificationRequest]) -> Void) {
         var notificationRequests: [UNNotificationRequest] = []
         let taskGroup = DispatchGroup()
-        
+
         taskGroup.enter()
         getPendingNotificationRequests {
             notificationRequests.append(contentsOf: $0)
             taskGroup.leave()
         }
-        
+
         taskGroup.enter()
         getDeliveredNotifications {
             notificationRequests.append(contentsOf: $0.map { $0.request })
             taskGroup.leave()
         }
-        
+
         taskGroup.notify(queue: .main) {
             completion(notificationRequests)
         }
     }
-    
+
     /// Retrieve the pending or delivered notification request.
     ///
     /// - Parameters:
@@ -178,7 +178,7 @@ public extension UNUserNotificationCenter {
             completion(requests)
         }
     }
-    
+
     /// Retrieve the pending or delivered notification requests.
     ///
     /// - Parameters:
@@ -190,7 +190,7 @@ public extension UNUserNotificationCenter {
             completion(requests)
         }
     }
-    
+
     /// Determines if the pending notification request exists.
     ///
     /// - Parameters:
@@ -225,7 +225,7 @@ public extension UNUserNotificationCenter {
         let content = UNMutableNotificationContent().apply {
             $0.body = body
             $0.categoryIdentifier = category
-        
+
             // Assign optional values to content
             $0.title ?= title
             $0.subtitle ?= subtitle
@@ -234,17 +234,17 @@ public extension UNUserNotificationCenter {
             if let userInfo = userInfo { $0.userInfo = userInfo }
             if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
         }
-    
+
         // Construct request with trigger
         let trigger = timeInterval > 0 ? UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: repeats) : nil
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-    
+
         add(request, withCompletionHandler: completion)
     }
 }
 
 public extension UNUserNotificationCenter {
-    
+
     enum ScheduleInterval {
         case once
         case minute
@@ -254,7 +254,7 @@ public extension UNUserNotificationCenter {
         case month
         case year
     }
-    
+
     /// Schedules a local notification for delivery.
     ///
     /// - Parameters:
@@ -278,7 +278,7 @@ public extension UNUserNotificationCenter {
         let content = UNMutableNotificationContent().apply {
             $0.body = body
             $0.categoryIdentifier = category
-        
+
             // Assign optional values to content
             $0.title ?= title
             $0.subtitle ?= subtitle
@@ -287,7 +287,7 @@ public extension UNUserNotificationCenter {
             if let userInfo = userInfo { $0.userInfo = userInfo }
             if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
         }
-    
+
         // Constuct date components for trigger
         // https://github.com/d7laungani/DLLocalNotifications/blob/master/DLLocalNotifications/DLLocalNotifications.swift#L31
         let components: DateComponents
@@ -307,18 +307,18 @@ public extension UNUserNotificationCenter {
         case .year:
             components = calendar.dateComponents([.hour, .minute, .day, .month], from: date)
         }
-    
+
         // Construct request with trigger
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeats != .once)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-    
+
         add(request, withCompletionHandler: completion)
     }
 }
 
 #if os(iOS)
 public extension UNUserNotificationCenter {
-    
+
     /// Schedules a local notification for delivery.
     ///
     /// - Parameters:
@@ -341,7 +341,7 @@ public extension UNUserNotificationCenter {
         let content = UNMutableNotificationContent().apply {
             $0.body = body
             $0.categoryIdentifier = category
-        
+
             // Assign optional values to content
             $0.title ?= title
             $0.subtitle ?= subtitle
@@ -350,25 +350,25 @@ public extension UNUserNotificationCenter {
             if let userInfo = userInfo { $0.userInfo = userInfo }
             if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
         }
-    
+
         // Construct request with trigger
         let trigger = UNLocationNotificationTrigger(region: region, repeats: repeats)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-    
+
         add(request, withCompletionHandler: completion)
     }
 }
 #endif
 
 public extension UNUserNotificationCenter {
-    
+
     /// Remove pending or delivered user notifications.
     ///
     /// - Parameter withIdentifier: The identifier of the user notification to remove.
     func remove(withIdentifier id: String) {
         remove(withIdentifiers: [id])
     }
-    
+
     /// Remove pending and delivered user notifications.
     ///
     /// - Parameter withIdentifiers: The identifiers of the user notifications to remove.
@@ -377,14 +377,14 @@ public extension UNUserNotificationCenter {
         removePendingNotificationRequests(withIdentifiers: ids)
         removeDeliveredNotifications(withIdentifiers: ids)
     }
-    
+
     /// Remove pending and delivered user notifications.
     ///
     /// - Parameter withCategory: The category of the user notification to remove.
     func remove(withCategory category: String, completion: (() -> Void)? = nil) {
         remove(withCategories: [category], completion: completion)
     }
-    
+
     /// Remove pending and delivered user notifications.
     ///
     /// - Parameter withCategory: The categories of the user notification to remove.
@@ -395,7 +395,7 @@ public extension UNUserNotificationCenter {
                     categories.contains($0.content.categoryIdentifier) ? $0.identifier : nil
                 }
             )
-            
+
             // Get back in queue since native remove has no completion block
             // https://stackoverflow.com/a/46434645
             self.getNotificationRequests { _ in
@@ -403,7 +403,7 @@ public extension UNUserNotificationCenter {
             }
         }
     }
-    
+
     /// Remove all pending and delivered user notifications.
     func removeAll() {
         removeAllPendingNotificationRequests()
@@ -412,14 +412,14 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
-    
+
     /// Remove pending user notifications.
     ///
     /// - Parameter withCategory: The category of the user notification to remove.
     func removePending(withCategory category: String, completion: (() -> Void)? = nil) {
         removePending(withCategories: [category], completion: completion)
     }
-    
+
     /// Remove pending user notifications.
     ///
     /// - Parameter withCategory: The categories of the user notification to remove.
@@ -430,7 +430,7 @@ public extension UNUserNotificationCenter {
                     categories.contains($0.content.categoryIdentifier) ? $0.identifier : nil
                 }
             )
-            
+
             // Get back in queue since native remove has no completion block
             // https://stackoverflow.com/a/46434645
             self.getPendingNotificationRequests { _ in
@@ -441,14 +441,14 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
-    
+
     /// Remove delivered user notifications.
     ///
     /// - Parameter withCategory: The category of the user notification to remove.
     func removeDelivered(withCategory category: String, completion: (() -> Void)? = nil) {
         removeDelivered(withCategories: [category], completion: completion)
     }
-    
+
     /// Remove delivered user notifications.
     ///
     /// - Parameter withCategory: The categories of the user notification to remove.
@@ -459,7 +459,7 @@ public extension UNUserNotificationCenter {
                     categories.contains($0.request.content.categoryIdentifier) ? $0.request.identifier : nil
                 }
             )
-            
+
             // Get back in queue since native remove has no completion block
             // https://stackoverflow.com/a/46434645
             self.getDeliveredNotifications { _ in

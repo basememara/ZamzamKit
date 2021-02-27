@@ -10,7 +10,7 @@
 import UIKit
 
 public extension UIButton {
-    
+
     /// The color of the title font with UIAppearance support.
     @objc dynamic var titleLabelFont: UIFont? {
         // UIAppearance: https://stackoverflow.com/a/42410383

@@ -15,7 +15,7 @@ final class AtomicTests: XCTestCase {
 }
 
 extension AtomicTests {
-    
+
     func testSharedVariable() {
         DispatchQueue.concurrentPerform(iterations: 10) { _ in
             (0..<iterations).forEach { _ in
@@ -24,15 +24,15 @@ extension AtomicTests {
             }
         }
     }
-    
+
     private class Database {
         static let shared = Database()
         private var data = Atomic<[String: Any]>([:])
-        
+
         func get(key: String) -> Any? {
             data.value { $0[key] }
         }
-        
+
         func set(key: String, value: Any) {
             data.value { $0[key] = value }
         }
@@ -40,32 +40,32 @@ extension AtomicTests {
 }
 
 extension AtomicTests {
-    
+
     func testWritePerformance() {
         var temp = Atomic<Int>(0)
-     
+
         measure {
             temp.value { $0 = 0 } // Reset
-     
+
             DispatchQueue.concurrentPerform(iterations: 10) { _ in
                 (0..<iterations).forEach { _ in
                     temp.value { $0 += 1 }
                 }
             }
-            
+
             XCTAssertEqual(temp.value, iterations * 10)
         }
     }
 }
 
 extension AtomicTests {
-    
+
     func testReadPerformance() {
         var temp = Atomic<Int>(0)
-     
+
         measure {
             temp.value { $0 = 0 } // Reset
-     
+
             DispatchQueue.concurrentPerform(iterations: 10) { _ in
                 (0..<iterations).forEach {
                     _ = temp
@@ -73,7 +73,7 @@ extension AtomicTests {
                     temp.value { $0 += 1 }
                 }
             }
-            
+
             XCTAssertGreaterThanOrEqual(temp.value, iterations / writeMultipleOf)
         }
     }

@@ -2,11 +2,11 @@ import XCTest
 import ZamzamLocation
 
 final class ZamzamLocationTests: XCTestCase {
-    
+
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        //XCTAssertEqual(ZamzamLocation().text, "Hello, World!")
+        // XCTAssertEqual(ZamzamLocation().text, "Hello, World!")
     }
 }

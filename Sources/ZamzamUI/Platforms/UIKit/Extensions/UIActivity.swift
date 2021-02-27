@@ -36,7 +36,7 @@ public extension UIActivity {
 
 @available(iOS 13, *)
 public extension UIActivity {
-    
+
     /// Creates an instance of an activity.
     ///
     /// - Parameters:
@@ -58,7 +58,7 @@ public extension UIActivity {
 }
 
 private extension UIActivity {
-    
+
     class CustomActivity: UIActivity {
         let title: String
         let image: UIImage?
@@ -71,15 +71,15 @@ private extension UIActivity {
             self.canPerform = canPerform
             self.handler = handler
         }
-        
+
         override var activityTitle: String? { title }
         override var activityImage: UIImage? { image }
         override var activityViewController: UIViewController? { nil }
-        
+
         override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
             return canPerform?(activityItems as [Any]) ?? true
         }
-        
+
         override func perform() {
             handler()
             activityDidFinish(true)

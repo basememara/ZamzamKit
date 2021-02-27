@@ -10,7 +10,7 @@ import Foundation.NSCalendar
 import Foundation.NSDate
 
 public extension Date {
-    
+
     /// Represents a specified number of a calendar component unit.
     ///
     /// You use `TimeIntervalUnit` values to do date calculations.
@@ -23,7 +23,7 @@ public extension Date {
         case months(Int)
         case years(Int)
     }
-    
+
     /// Represents a specified number of a calendar component unit for a calendar.
     ///
     /// You use `TimeIntervalUnitWithCalendar` values to do date calculations.
@@ -36,7 +36,7 @@ public extension Date {
         case months(Int, Calendar)
         case years(Int, Calendar)
     }
-    
+
     /// Adds time interval components to a date for the calendar.
     ///
     ///     Date(fromString: "1440/02/30 18:31", calendar) + .days(1, calendar)
@@ -48,7 +48,7 @@ public extension Date {
         let calendar: Calendar
         let component: Calendar.Component
         let value: Int
-        
+
         switch right {
         case .seconds(let addValue, let toCalendar):
             calendar = toCalendar
@@ -79,16 +79,16 @@ public extension Date {
             component = .year
             value = addValue
         }
-        
+
         guard value != 0 else { return left }
-        
+
         return calendar.date(
             byAdding: component,
             value: value,
             to: left
         ) ?? left
     }
-    
+
     /// Adds time interval components to a date.
     ///
     ///     Date(fromString: "2015/09/18 18:31") + .days(1)
@@ -99,7 +99,7 @@ public extension Date {
     static func + (left: Date, right: TimeIntervalUnit) -> Date {
         let calendar: Calendar = .current
         let newRight: TimeIntervalUnitWithCalendar
-        
+
         switch right {
         case .seconds(let value):
             newRight = .seconds(value, calendar)
@@ -116,13 +116,13 @@ public extension Date {
         case .years(let value):
             newRight = .years(value, calendar)
         }
-        
+
         return left + newRight
     }
-    
+
     static func - (left: Date, right: TimeIntervalUnit) -> Date {
         let minusRight: TimeIntervalUnit
-        
+
         switch right {
         case .seconds(let value):
             minusRight = .seconds(-value)
@@ -139,13 +139,13 @@ public extension Date {
         case .years(let value):
             minusRight = .years(-value)
         }
-        
+
         return left + minusRight
     }
-    
+
     static func - (left: Date, right: TimeIntervalUnitWithCalendar) -> Date {
         let minusRight: TimeIntervalUnitWithCalendar
-        
+
         switch right {
         case .seconds(let value, let calendar):
             minusRight = .seconds(-value, calendar)
@@ -162,7 +162,7 @@ public extension Date {
         case .years(let value, let calendar):
             minusRight = .years(-value, calendar)
         }
-        
+
         return left + minusRight
     }
 }

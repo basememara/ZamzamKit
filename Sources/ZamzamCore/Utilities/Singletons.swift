@@ -40,7 +40,7 @@ public extension Singletons {
         instance: () -> T
     ) -> T {
         let key = "\(Self.self)/\(file)/\(function)/\(line)/\(T.self)"
-        
+
         guard let value = Single.storage.value[key] as? T else {
             let resolved = instance()
             Single.storage.value { $0[key] = resolved }

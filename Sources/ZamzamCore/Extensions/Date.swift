@@ -11,7 +11,7 @@ import Foundation.NSDate
 import Foundation.NSDateFormatter
 
 public extension Date {
-    
+
     /// Determines if date is in the past.
     ///
     ///     Date(timeIntervalSinceNow: -100).isPast // true
@@ -19,7 +19,7 @@ public extension Date {
     ///
     /// Uses the user's current calendar.
     var isPast: Bool { self < Date() }
-    
+
     /// Determines if date is in the future.
     ///
     ///     Date(timeIntervalSinceNow: 100).isFuture // true
@@ -30,14 +30,14 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Determines if date is in today's date.
     ///
     ///     Date().isToday // true
     ///
     /// Uses the user's current calendar.
     var isToday: Bool { isToday(for: .current) }
-    
+
     /// Determines if date is in today's date.
     ///
     ///     Date().isToday(for: Calendar(identifier: .islamic)) // true
@@ -50,14 +50,14 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Determines if date is in yesterday's date.
     ///
     ///     Date(timeIntervalSinceNow: -90_000).isYesterday // true
     ///
     /// Uses the user's current calendar.
     var isYesterday: Bool { isYesterday(for: .current) }
-    
+
     /// Determines if date is in yesterday's date.
     ///
     ///     Date(timeIntervalSinceNow: -90_000).isYesterday(for: Calendar(identifier: .islamic)) // true
@@ -70,14 +70,14 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Determines if date is in tomorrow's date.
     ///
     ///     Date(timeIntervalSinceNow: 90_000).isTomorrow // true
     ///
     /// Uses the user's current calendar.
     var isTomorrow: Bool { isTomorrow(for: .current) }
-    
+
     /// Determines if date is in tomorrow's date.
     ///
     ///     Date(timeIntervalSinceNow: 90_000).isTomorrow(for: Calendar(identifier: .islamic)) // true
@@ -90,12 +90,12 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Determines if date is within a weekday period.
     ///
     /// Uses the user's current calendar.
     var isWeekday: Bool { isWeekday(for: .current) }
-    
+
     /// Determines if date is within a weekday period.
     ///
     /// - Parameter calendar: Calendar used for calculation.
@@ -106,12 +106,12 @@ public extension Date {
 }
 
 public extension Date {
-	
+
 	/// Determines if date is within a weekend period.
     ///
     /// Uses the user's current calendar.
 	var isWeekend: Bool { isWeekend(for: .current) }
-    
+
     /// Determines if date is within a weekend period.
     ///
     /// - Parameter calendar: Calendar used for calculation.
@@ -122,12 +122,12 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Check if date is within the current week.
     ///
     /// Uses the user's current calendar.
     var isCurrentWeek: Bool { isCurrentWeek(for: .current) }
-    
+
     /// Check if date is within the current week.
     ///
     /// - Parameter calendar: Calendar used for calculation.
@@ -138,12 +138,12 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Check if date is within the current month.
     ///
     /// Uses the user's current calendar.
     var isCurrentMonth: Bool { isCurrentMonth(for: .current) }
-    
+
     /// Check if date is within the current month.
     ///
     /// - Parameter calendar: Calendar used for calculation.
@@ -154,12 +154,12 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Check if date is within the current year.
     ///
     /// Uses the user's current calendar.
     var isCurrentYear: Bool { isCurrentYear(for: .current) }
-    
+
     /// Check if date is within the current year.
     ///
     /// - Parameter calendar: Calendar used for calculation.
@@ -170,7 +170,7 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Return yesterday's date.
     ///
     ///     let date = Date() // "Oct 3, 2018, 10:57:11"
@@ -178,7 +178,7 @@ public extension Date {
     ///
     /// Uses the user's current calendar.
     var yesterday: Date { yesterday(for: .current) }
-    
+
     /// Return yesterday's date.
     ///
     ///     let date = Date() // "Oct 3, 2018, 10:57:11"
@@ -193,7 +193,7 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Return tomorrow's date.
     ///
     ///     let date = Date() // "Oct 3, 2018, 10:57:11"
@@ -201,7 +201,7 @@ public extension Date {
     ///
     /// Uses the user's current calendar.
     var tomorrow: Date { tomorrow(for: .current) }
-    
+
     /// Return tomorrow's date.
     ///
     ///     let date = Date() // "Oct 3, 2018, 10:57:11"
@@ -216,14 +216,14 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Returns the beginning of the day.
     ///
     ///     Date().startOfDay // "2018/11/21 00:00:00"
     ///
     /// Uses the user's current calendar.
     var startOfDay: Date { startOfDay(for: .current) }
-    
+
     /// Returns the beginning of the day.
     ///
     ///     Date().startOfDay // "2018/11/21 00:00:00"
@@ -236,14 +236,14 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Returns the end of the day.
     ///
     ///     Date().endOfDay // "2018/11/21 23:59:59"
     ///
     /// Uses the user's current calendar.
     var endOfDay: Date { endOfDay(for: .current) }
-    
+
     /// Returns the end of the day.
     ///
     ///     Date().endOfDay // "2018/11/21 23:59:59"
@@ -254,7 +254,7 @@ public extension Date {
         var components = DateComponents()
         components.day = 1
         components.second = -1
-        
+
         return calendar.date(
             byAdding: components,
             to: startOfDay(for: calendar)
@@ -263,14 +263,14 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Returns the beginning of the month.
     ///
     ///     Date().startOfMonth // "2018/11/01 00:00:00"
     ///
     /// Uses the user's current calendar.
     var startOfMonth: Date { startOfMonth(for: .current) }
-    
+
     /// Returns the beginning of the month.
     ///
     ///     Date().startOfMonth // "2018/11/01 00:00:00"
@@ -285,14 +285,14 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Returns the end of the month.
     ///
     ///     Date().endOfMonth // "2018/11/30 23:59:59"
     ///
     /// Uses the user's current calendar.
     var endOfMonth: Date { endOfMonth(for: .current) }
-    
+
     /// Returns the end of the month.
     ///
     ///     Date().endOfMonth // "2018/11/30 23:59:59"
@@ -303,7 +303,7 @@ public extension Date {
         var components = DateComponents()
         components.month = 1
         components.second = -1
-        
+
         return calendar.date(
             byAdding: components,
             to: startOfMonth(for: calendar)
@@ -312,7 +312,7 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Determine if a date is between two other dates.
     ///
     /// Dates do not have to be in sequential order.
@@ -333,7 +333,7 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Specifies if the date is beyond the time window.
     ///
     ///     let date = Date(fromString: "2016/03/22 09:40")
@@ -350,7 +350,7 @@ public extension Date {
     func isBeyond(_ date: Date, bySeconds seconds: Int) -> Bool {
         timeIntervalSince(date).seconds > seconds
     }
-    
+
     /// Specifies if the date is beyond the time window.
     ///
     ///     let date = Date(fromString: "2016/03/22 09:40")
@@ -367,7 +367,7 @@ public extension Date {
     func isBeyond(_ date: Date, byMinutes minutes: Double) -> Bool {
         timeIntervalSince(date).minutes > minutes
     }
-    
+
     /// Specifies if the date is beyond the time window.
     ///
     ///     let date = Date(fromString: "2016/03/22 11:40")
@@ -384,7 +384,7 @@ public extension Date {
     func isBeyond(_ date: Date, byHours hours: Double) -> Bool {
         timeIntervalSince(date).hours > hours
     }
-    
+
     /// Specifies if the date is beyond the time window.
     ///
     ///     let date = Date(fromString: "2016/03/24 11:40")
@@ -404,12 +404,12 @@ public extension Date {
 }
 
 public extension Date {
-    
+
     /// Gets the decimal representation of the time.
     ///
     ///     Date(fromString: "2012/10/23 18:15").timeToDecimal // 18.25
     var timeToDecimal: Double { timeToDecimal(for: .current) }
-    
+
     /// Gets the decimal representation of the time.
     ///
     ///     Date(fromString: "2012/10/23 18:15").timeToDecimal // 18.25

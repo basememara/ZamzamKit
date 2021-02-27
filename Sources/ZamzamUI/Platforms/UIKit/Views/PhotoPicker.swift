@@ -23,7 +23,7 @@ public protocol PhotoPickerDelegate: AnyObject {
 open class PhotoPicker: NSObject, PhotoPickerProtocol {
     private weak var delegate: (PhotoPickerDelegate & UIViewController)?
     private let allowsEditing: Bool
-    
+
     public init(delegate: PhotoPickerDelegate & UIViewController, allowsEditing: Bool) {
         self.delegate = delegate
         self.allowsEditing = allowsEditing
@@ -31,10 +31,10 @@ open class PhotoPicker: NSObject, PhotoPickerProtocol {
 }
 
 extension PhotoPicker {
-    
+
     open func makeViewController() -> UIViewController? {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
+
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             actionSheet.addAction(
                 UIAlertAction(title: .localized(.camera)) { [weak self] in
@@ -42,12 +42,12 @@ extension PhotoPicker {
                         self?.delegate?.photoPickerDidFailPermission()
                         return
                     }
-                    
+
                     self?.openCamera()
                 }
             )
         }
-        
+
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             actionSheet.addAction(
                 UIAlertAction(title: .localized(.photos)) { [weak self] in
@@ -55,11 +55,11 @@ extension PhotoPicker {
                 }
             )
         }
-        
+
         actionSheet.addAction(
             UIAlertAction(title: .localized(.cancel), style: .cancel, handler: nil)
         )
-        
+
         return actionSheet
     }
 }
@@ -67,17 +67,17 @@ extension PhotoPicker {
 // MARK: - Delegates
 
 extension PhotoPicker: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         guard let image = info[allowsEditing ? .editedImage : .originalImage] as? UIImage else {
             return
         }
-        
+
         picker.dismiss {
             self.delegate?.photoPicker(didFinishPicking: image)
         }
     }
-    
+
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss()
     }
@@ -86,7 +86,7 @@ extension PhotoPicker: UIImagePickerControllerDelegate, UINavigationControllerDe
 // MARK: - Helpers
 
 private extension PhotoPicker {
-    
+
     func openCamera() {
         delegate?.present(
             UIImagePickerController().apply {
@@ -97,7 +97,7 @@ private extension PhotoPicker {
             animated: true
         )
     }
-    
+
     func openPhotoLibrary() {
         delegate?.present(
             UIImagePickerController().apply {

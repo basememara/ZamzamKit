@@ -10,7 +10,7 @@
 import UIKit
 
 public extension UIWindow {
-    
+
     /// The view controller associated with the currently visible view in the window interface.
     ///
     /// The currently visible view can belong to:
@@ -21,7 +21,7 @@ public extension UIWindow {
     var visibleViewController: UIViewController? {
         getVisibleViewController(from: rootViewController)
     }
-    
+
     /// Recursively retrieve the most visible view controller
     private func getVisibleViewController(from controller: UIViewController?) -> UIViewController? {
         /// https://stackoverflow.com/a/39857342
@@ -32,13 +32,13 @@ public extension UIWindow {
         } else if let presented = controller?.presentedViewController {
             return getVisibleViewController(from: presented)
         }
-        
+
         return controller
     }
 }
 
 public extension UIWindow {
-    
+
     /// The view controller at the top of the window interface.
     ///
     /// The currently top view can belong to:
@@ -49,7 +49,7 @@ public extension UIWindow {
     var topViewController: UIViewController? {
         getTopViewController(from: rootViewController)
     }
-    
+
     /// Recursively retrieve the most top view controller
     private func getTopViewController(from controller: UIViewController?) -> UIViewController? {
         if let nav = controller as? UINavigationController {
@@ -59,13 +59,13 @@ public extension UIWindow {
         } else if let split = controller as? UISplitViewController, let detail = split.viewControllers.last {
             return getTopViewController(from: detail)
         }
-        
+
         return controller
     }
 }
 
 public extension UIWindow {
-    
+
     /// Assign a view controller to root view controller for the window.
     ///
     /// Using this method provides more safety than assigning the root
@@ -80,16 +80,16 @@ public extension UIWindow {
             rootViewController?.dismiss(animated: false) {
                 self.rootViewController = viewController
             }
-            
+
             return
         }
-        
+
         rootViewController = viewController
     }
 }
 
 public extension UIWindow {
-    
+
     /// Unload all views and add back.
     ///
     /// Useful for applying `UIAppearance` changes to existing views.
@@ -102,7 +102,7 @@ public extension UIWindow {
 }
 
 public extension Array where Element == UIWindow {
-    
+
     /// Unload all views for each `UIWindow` and add back.
     ///
     /// Useful for applying `UIAppearance` changes to existing views.

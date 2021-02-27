@@ -11,7 +11,7 @@ import Foundation
 import WatchKit
 
 public extension WKInterfaceGroup {
-    
+
     /// Animates the specified images with the given duration and repeat information in the background image.
     ///
     /// - Parameters:
@@ -21,14 +21,14 @@ public extension WKInterfaceGroup {
     ///   - duration: The duration of the animation.
     func setBackgroundAnimation(imageName: String, totalImages: Int, percent: Double, duration: Double = 1.0) {
         let imageCount = Int(Double(totalImages) * percent)
-        
+
         guard imageCount > 0 else {
             return setBackgroundImageNamed(imageName + "0")
         }
-        
+
         setBackgroundImageNamed(imageName)
-        
-        //swiftlint:disable legacy_constructor
+
+        // swiftlint:disable legacy_constructor
         startAnimatingWithImages(
             in: NSMakeRange(0, imageCount),
             duration: duration,

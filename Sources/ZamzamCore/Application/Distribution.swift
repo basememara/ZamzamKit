@@ -21,10 +21,10 @@ public extension Distribution {
 		Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
             ?? Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String
 	}
-	
+
 	/// App's bundle ID.
 	var appBundleID: String? { Bundle.main.bundleIdentifier }
-	
+
 	/// App's current version.
 	var appVersion: String? {
 		Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -39,12 +39,12 @@ public extension Distribution {
 // MARK: - Environment
 
 public extension Distribution {
-    
+
     /// Check if app is an extension target.
     var isAppExtension: Bool {
         Bundle.main.bundlePath.hasSuffix(".appex")
     }
-    
+
     /// Check if app is running in TestFlight mode.
     var isInTestFlight: Bool {
         // https://stackoverflow.com/questions/18282326/how-can-i-detect-if-the-currently-running-app-was-installed-from-the-app-store
@@ -52,13 +52,13 @@ public extension Distribution {
             && Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
             && !isAdHocDistributed
     }
-    
+
     /// Check if app is ad-hoc distributed.
     var isAdHocDistributed: Bool {
         // https://stackoverflow.com/questions/18282326/how-can-i-detect-if-the-currently-running-app-was-installed-from-the-app-store
         Bundle.main.path(forResource: "embedded", ofType: "mobileprovision") != nil
     }
-    
+
     /// Check if application is running on simulator (read-only).
     var isRunningOnSimulator: Bool {
         // http://stackoverflow.com/questions/24869481/detect-if-app-is-being-built-for-device-or-simulator-in-swift
@@ -68,7 +68,7 @@ public extension Distribution {
         return false
         #endif
     }
-    
+
     /// Check if application is running in App Store environment.
     var isRunningInAppStore: Bool {
         // https://stackoverflow.com/questions/18282326/how-can-i-detect-if-the-currently-running-app-was-installed-from-the-app-store

@@ -11,7 +11,7 @@ import UIKit
 
 public extension UITableView {
     static let defaultCellIdentifier = "Cell"
-    
+
     /// Register XIB to table view.
     ///
     /// - Parameters:
@@ -28,7 +28,7 @@ public extension UITableView {
             forCellReuseIdentifier: identifier
         )
     }
-    
+
     /// Register a class for use in creating new table view cells.
     ///
     /// - Parameter cellClass: The class of a cell that you want to use in the table view.
@@ -39,7 +39,7 @@ public extension UITableView {
 
 public extension UITableView {
     static let defaultHeaderFooterIdentifier = "Section"
-    
+
     /// Register XIB to table view.
     ///
     /// - Parameters:
@@ -56,7 +56,7 @@ public extension UITableView {
             forHeaderFooterViewReuseIdentifier: identifier
         )
     }
-    
+
     /// Gets the reusable header with default identifier name.
     func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>() -> T? {
         dequeueReusableHeaderFooterView(withIdentifier: UITableView.defaultHeaderFooterIdentifier) as? T
@@ -64,7 +64,7 @@ public extension UITableView {
 }
 
 public extension UITableView {
-    
+
     /// Gets the reusable cell with default identifier name.
     ///
     /// - Parameter indexPath: The index path of the cell from the table.
@@ -87,7 +87,7 @@ public extension UITableView {
     subscript(indexPath: IndexPath, withIdentifier identifier: String) -> UITableViewCell {
         dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
-    
+
     /// Gets the reusable cell with default identifier name.
     ///
     /// - Parameters:
@@ -99,32 +99,32 @@ public extension UITableView {
 }
 
 public extension Scrollable where Self: UITableView {
-    
+
     /// Scrolls to the top of table view.
     ///
     /// - Parameter animated: `true` if you want to animate the change in position; `false` if it should be immediate.
     func scrollToTop(animated: Bool = true) {
         let indexPath = IndexPath(row: 0, section: 0)
-        
+
         // Ensure row exists before scrolling
         guard indexPath.section < numberOfSections
             && indexPath.row < numberOfRows(inSection: indexPath.section) else {
                 return
         }
-        
+
         scrollToRow(at: indexPath, at: .top, animated: animated)
     }
-    
+
     /// Scrolls to the bottom of table view.
     ///
     /// - Parameter animated: `true` if you want to animate the change in position; `false` if it should be immediate.
     func scrollToBottom(animated: Bool = true) {
         guard numberOfSections > 0 else { return }
         let lastSection = numberOfSections - 1
-        
+
         let lastRow = numberOfRows(inSection: lastSection) - 1
         guard lastRow > 0 else { return }
-        
+
         scrollToRow(
             at: IndexPath(row: lastRow, section: lastSection),
             at: .bottom,

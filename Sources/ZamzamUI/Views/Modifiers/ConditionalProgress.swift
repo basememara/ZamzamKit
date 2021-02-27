@@ -14,7 +14,7 @@ import SwiftUI
 private struct ConditionalProgress: ViewModifier {
     let condition: Bool
     let tint: Color?
-    
+
     func body(content: Content) -> some View {
         content.modifier(if: condition) { content in
             ZStack {
@@ -34,7 +34,7 @@ private struct ConditionalProgress: ViewModifier {
 
 @available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 public extension View {
-    
+
     /// Adds a progress view over this view if the condition is met, otherwise it no progress view is shown.
     ///
     /// - Parameter condition: The condition to determine if the content should be applied.

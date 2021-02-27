@@ -11,12 +11,12 @@ import Foundation
 public struct KeychainExternalService: KeychainService {
     private static let accessOption: KeychainSwiftAccessOptions = .accessibleAfterFirstUnlock
     private let keychain: KeychainSwift
-    
+
     public init() {
         self.keychain = KeychainSwift() // 3rd Party
         self.keychain.synchronizable = false
     }
-    
+
     public init(teamID: String, accessGroup: String) {
         self.init()
         self.keychain.accessGroup = "\(teamID).\(accessGroup)"
@@ -24,14 +24,14 @@ public struct KeychainExternalService: KeychainService {
 }
 
 public extension KeychainExternalService {
-    
+
     func get(_ key: KeychainAPI.Key) -> String? {
         keychain.get(key.name)
     }
 }
 
 public extension KeychainExternalService {
-    
+
     func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool {
         guard let value = value else { return remove(key) }
         return keychain.set(value, forKey: key.name)
@@ -39,7 +39,7 @@ public extension KeychainExternalService {
 }
 
 public extension KeychainExternalService {
-    
+
     func remove(_ key: KeychainAPI.Key) -> Bool {
         keychain.delete(key.name)
     }
@@ -49,7 +49,7 @@ public extension KeychainExternalService {
 
 private extension KeychainExternalService {
     // swiftlint:disable line_length
-    
+
     //
     //  KeychainSwiftDistrib.swift
     //
@@ -72,21 +72,21 @@ private extension KeychainExternalService {
      
      */
     class KeychainSwift {
-        
+
         var lastQueryParameters: [String: Any]? // Used by the unit tests
-        
+
         /// Contains result code from the last operation. Value is noErr (0) for a successful result.
         var lastResultCode: OSStatus = noErr
-        
+
         var keyPrefix = "" // Can be useful in test.
-        
+
         /**
          
          Specify an access group that will be used to access keychain items. Access groups can be used to share keychain items between applications. When access group value is nil all application access groups are being accessed. Access group name is used by all functions: set, get, delete and clear.
          
          */
         var accessGroup: String?
-        
+
         /**
          
          Specifies whether the items can be synchronized with other devices through iCloud. Setting this property to true will
@@ -96,12 +96,12 @@ private extension KeychainExternalService {
          
          */
         var synchronizable: Bool = false
-        
+
         private let lock = NSLock()
-        
+
         /// Instantiate a KeychainSwift object
         init() { }
-        
+
         /**
          
          - parameter keyPrefix: a prefix that is added before the key in get/set methods. Note that `clear` method still clears everything from the Keychain.
@@ -110,7 +110,7 @@ private extension KeychainExternalService {
         init(keyPrefix: String) {
             self.keyPrefix = keyPrefix
         }
-        
+
         /**
          
          Stores the text value in the keychain item under the given key.
@@ -125,14 +125,14 @@ private extension KeychainExternalService {
         @discardableResult
         func set(_ value: String, forKey key: String,
                  withAccess access: KeychainSwiftAccessOptions? = nil) -> Bool {
-            
+
             if let value = value.data(using: String.Encoding.utf8) {
                 return set(value, forKey: key, withAccess: access)
             }
-            
+
             return false
         }
-        
+
         /**
          
          Stores the data in the keychain item under the given key.
@@ -147,34 +147,34 @@ private extension KeychainExternalService {
         @discardableResult
         func set(_ value: Data, forKey key: String,
                  withAccess access: KeychainSwiftAccessOptions? = nil) -> Bool {
-            
+
             // The lock prevents the code to be run simultaneously
             // from multiple threads which may result in crashing
             lock.lock()
             defer { lock.unlock() }
-            
+
             deleteNoLock(key) // Delete any existing key before saving it
-            
+
             let accessible = access?.value ?? KeychainSwiftAccessOptions.defaultOption.value
-            
+
             let prefixedKey = keyWithPrefix(key)
-            
+
             var query: [String: Any] = [
                 KeychainSwiftConstants.klass: kSecClassGenericPassword,
                 KeychainSwiftConstants.attrAccount: prefixedKey,
                 KeychainSwiftConstants.valueData: value,
                 KeychainSwiftConstants.accessible: accessible
             ]
-            
+
             query = addAccessGroupWhenPresent(query)
             query = addSynchronizableIfRequired(query, addingItems: true)
             lastQueryParameters = query
-            
+
             lastResultCode = SecItemAdd(query as CFDictionary, nil)
-            
+
             return lastResultCode == noErr
         }
-        
+
         /**
          
          Stores the boolean value in the keychain item under the given key.
@@ -189,13 +189,13 @@ private extension KeychainExternalService {
         @discardableResult
         func set(_ value: Bool, forKey key: String,
                  withAccess access: KeychainSwiftAccessOptions? = nil) -> Bool {
-            
+
             let bytes: [UInt8] = value ? [1] : [0]
             let data = Data(bytes)
-            
+
             return set(data, forKey: key, withAccess: access)
         }
-        
+
         /**
          
          Retrieves the text value from the keychain that corresponds to the given key.
@@ -206,17 +206,17 @@ private extension KeychainExternalService {
          */
         func get(_ key: String) -> String? {
             if let data = getData(key) {
-                
+
                 if let currentString = String(data: data, encoding: .utf8) {
                     return currentString
                 }
-                
+
                 lastResultCode = -67853 // errSecInvalidEncoding
             }
-            
+
             return nil
         }
-        
+
         /**
          
          Retrieves the data from the keychain that corresponds to the given key.
@@ -231,38 +231,38 @@ private extension KeychainExternalService {
             // from multiple threads which may result in crashing
             lock.lock()
             defer { lock.unlock() }
-            
+
             let prefixedKey = keyWithPrefix(key)
-            
+
             var query: [String: Any] = [
                 KeychainSwiftConstants.klass: kSecClassGenericPassword,
                 KeychainSwiftConstants.attrAccount: prefixedKey,
                 KeychainSwiftConstants.matchLimit: kSecMatchLimitOne
             ]
-            
+
             if asReference {
                 query[KeychainSwiftConstants.returnReference] = kCFBooleanTrue
             } else {
-                query[KeychainSwiftConstants.returnData] =  kCFBooleanTrue
+                query[KeychainSwiftConstants.returnData] = kCFBooleanTrue
             }
-            
+
             query = addAccessGroupWhenPresent(query)
             query = addSynchronizableIfRequired(query, addingItems: false)
             lastQueryParameters = query
-            
+
             var result: AnyObject?
-            
+
             lastResultCode = withUnsafeMutablePointer(to: &result) {
                 SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0))
             }
-            
+
             if lastResultCode == noErr {
                 return result as? Data
             }
-            
+
             return nil
         }
-        
+
         /**
          
          Retrieves the boolean value from the keychain that corresponds to the given key.
@@ -276,7 +276,7 @@ private extension KeychainExternalService {
             guard let firstBit = data.first else { return nil }
             return firstBit == 1
         }
-        
+
         /**
          
          Deletes the single keychain item specified by the key.
@@ -291,10 +291,10 @@ private extension KeychainExternalService {
             // from multiple threads which may result in crashing
             lock.lock()
             defer { lock.unlock() }
-            
+
             return deleteNoLock(key)
         }
-        
+
         /**
          Return all keys from keychain
          
@@ -309,24 +309,25 @@ private extension KeychainExternalService {
                 KeychainSwiftConstants.returnReference: true,
                 KeychainSwiftConstants.matchLimit: KeychainSwiftConstants.secMatchLimitAll
             ]
-            
+
             query = addAccessGroupWhenPresent(query)
             query = addSynchronizableIfRequired(query, addingItems: false)
-            
+
             var result: AnyObject?
-            
+
             let lastResultCode = withUnsafeMutablePointer(to: &result) {
                 SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0))
             }
-            
+
             if lastResultCode == noErr {
                 return (result as? [[String: Any]])?.compactMap {
-                    $0[KeychainSwiftConstants.attrAccount] as? String } ?? []
+                    $0[KeychainSwiftConstants.attrAccount] as? String
+                } ?? []
             }
-            
+
             return []
         }
-        
+
         /**
          
          Same as `delete` but is only accessed internally, since it is not thread safe.
@@ -338,21 +339,21 @@ private extension KeychainExternalService {
         @discardableResult
         func deleteNoLock(_ key: String) -> Bool {
             let prefixedKey = keyWithPrefix(key)
-            
+
             var query: [String: Any] = [
                 KeychainSwiftConstants.klass: kSecClassGenericPassword,
                 KeychainSwiftConstants.attrAccount: prefixedKey
             ]
-            
+
             query = addAccessGroupWhenPresent(query)
             query = addSynchronizableIfRequired(query, addingItems: false)
             lastQueryParameters = query
-            
+
             lastResultCode = SecItemDelete(query as CFDictionary)
-            
+
             return lastResultCode == noErr
         }
-        
+
         /**
          
          Deletes all Keychain items used by the app. Note that this method deletes all items regardless of the prefix settings used for initializing the class.
@@ -366,30 +367,30 @@ private extension KeychainExternalService {
             // from multiple threads which may result in crashing
             lock.lock()
             defer { lock.unlock() }
-            
+
             var query: [String: Any] = [kSecClass as String: kSecClassGenericPassword]
             query = addAccessGroupWhenPresent(query)
             query = addSynchronizableIfRequired(query, addingItems: false)
             lastQueryParameters = query
-            
+
             lastResultCode = SecItemDelete(query as CFDictionary)
-            
+
             return lastResultCode == noErr
         }
-        
+
         /// Returns the key with currently set prefix.
         func keyWithPrefix(_ key: String) -> String {
             return "\(keyPrefix)\(key)"
         }
-        
+
         func addAccessGroupWhenPresent(_ items: [String: Any]) -> [String: Any] {
             guard let accessGroup = accessGroup else { return items }
-            
+
             var result: [String: Any] = items
             result[KeychainSwiftConstants.accessGroup] = accessGroup
             return result
         }
-        
+
         /**
          
          Adds kSecAttrSynchronizable: kSecAttrSynchronizableAny` item to the dictionary when the `synchronizable` property is true.
@@ -418,41 +419,41 @@ private extension KeychainExternalService {
     struct KeychainSwiftConstants {
         /// Specifies a Keychain access group. Used for sharing Keychain items between apps.
         static var accessGroup: String { return toString(kSecAttrAccessGroup) }
-        
+
         /**
          
          A value that indicates when your app needs access to the data in a keychain item. The default value is AccessibleWhenUnlocked. For a list of possible values, see KeychainSwiftAccessOptions.
          
          */
         static var accessible: String { return toString(kSecAttrAccessible) }
-        
+
         /// Used for specifying a String key when setting/getting a Keychain value.
         static var attrAccount: String { return toString(kSecAttrAccount) }
-        
+
         /// Used for specifying synchronization of keychain items between devices.
         static var attrSynchronizable: String { return toString(kSecAttrSynchronizable) }
-        
+
         /// An item class key used to construct a Keychain search dictionary.
         static var klass: String { return toString(kSecClass) }
-        
+
         /// Specifies the number of values returned from the keychain. The library only supports single values.
         static var matchLimit: String { return toString(kSecMatchLimit) }
-        
+
         /// A return data type used to get the data from the Keychain.
         static var returnData: String { return toString(kSecReturnData) }
-        
+
         /// Used for specifying a value when setting a Keychain value.
         static var valueData: String { return toString(kSecValueData) }
-        
+
         /// Used for returning a reference to the data from the keychain
         static var returnReference: String { return toString(kSecReturnPersistentRef) }
-        
+
         /// A key whose value is a Boolean indicating whether or not to return item attributes
         static var returnAttributes: String { return toString(kSecReturnAttributes) }
-        
+
         /// A value that corresponds to matching an unlimited number of items
         static var secMatchLimitAll: String { return toString(kSecMatchLimitAll) }
-        
+
         static func toString(_ value: CFString) -> String {
             return value as String
         }
@@ -470,7 +471,7 @@ private extension KeychainExternalService {
      
      */
     enum KeychainSwiftAccessOptions {
-        
+
         /**
          
          The data in the keychain item can be accessed only while the device is unlocked by the user.
@@ -481,7 +482,7 @@ private extension KeychainExternalService {
          
          */
         case accessibleWhenUnlocked
-        
+
         /**
          
          The data in the keychain item can be accessed only while the device is unlocked by the user.
@@ -490,7 +491,7 @@ private extension KeychainExternalService {
          
          */
         case accessibleWhenUnlockedThisDeviceOnly
-        
+
         /**
          
          The data in the keychain item cannot be accessed after a restart until the device has been unlocked once by the user.
@@ -499,7 +500,7 @@ private extension KeychainExternalService {
          
          */
         case accessibleAfterFirstUnlock
-        
+
         /**
          
          The data in the keychain item cannot be accessed after a restart until the device has been unlocked once by the user.
@@ -508,7 +509,7 @@ private extension KeychainExternalService {
          
          */
         case accessibleAfterFirstUnlockThisDeviceOnly
-        
+
         /**
          
          The data in the keychain can only be accessed when the device is unlocked. Only available if a passcode is set on the device.
@@ -517,30 +518,30 @@ private extension KeychainExternalService {
          
          */
         case accessibleWhenPasscodeSetThisDeviceOnly
-        
+
         static var defaultOption: KeychainSwiftAccessOptions {
             return .accessibleWhenUnlocked
         }
-        
+
         var value: String {
             switch self {
             case .accessibleWhenUnlocked:
                 return toString(kSecAttrAccessibleWhenUnlocked)
-                
+
             case .accessibleWhenUnlockedThisDeviceOnly:
                 return toString(kSecAttrAccessibleWhenUnlockedThisDeviceOnly)
-                
+
             case .accessibleAfterFirstUnlock:
                 return toString(kSecAttrAccessibleAfterFirstUnlock)
-                
+
             case .accessibleAfterFirstUnlockThisDeviceOnly:
                 return toString(kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly)
-                
+
             case .accessibleWhenPasscodeSetThisDeviceOnly:
                 return toString(kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly)
             }
         }
-        
+
         func toString(_ value: CFString) -> String {
             return KeychainSwiftConstants.toString(value)
         }

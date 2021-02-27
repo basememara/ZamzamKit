@@ -7,7 +7,7 @@
 //
 
 public extension Array {
-    
+
     /// Element at the given index if it exists.
     ///
     /// - Parameter index: index of element.
@@ -18,7 +18,7 @@ public extension Array {
 }
 
 public extension Array {
-    
+
     /// Inserts a new element into the collection at the beginning position.
     ///
     ///        [2, 3, 4, 5].prepend(1) // [1, 2, 3, 4, 5]
@@ -32,7 +32,7 @@ public extension Array {
 }
 
 public extension Array where Element: Equatable {
-	
+
     /// Array with all duplicates removed from it.
     ///
     ///     [1, 3, 3, 5, 7, 9].distinct // [1, 3, 5, 7, 9]
@@ -58,13 +58,13 @@ public extension Array where Element: Equatable {
 }
 
 public extension ArraySlice {
-    
+
     /// Returns the array of the slice
     var array: [Element] { Array(self) }
 }
 
 public extension Zip2Sequence {
-    
+
     /// Returns the array of the zipped sequence
     var array: [(Sequence1.Element, Sequence2.Element)] { Array(self) }
 }

@@ -10,53 +10,53 @@ import XCTest
 import ZamzamCore
 
 final class DateTests: XCTestCase {
-    
+
     func testIsPast() {
         XCTAssert(Date(timeIntervalSinceNow: -100).isPast)
         XCTAssertFalse(Date(timeIntervalSinceNow: 100).isPast)
     }
-    
+
     func testIsFuture() {
         XCTAssert(Date(timeIntervalSinceNow: 100).isFuture)
         XCTAssertFalse(Date(timeIntervalSinceNow: -100).isFuture)
     }
-    
+
     func testIsToday() {
         XCTAssert(Date().isToday)
     }
-    
+
     func testIsYesterday() {
         XCTAssert(Date(timeIntervalSinceNow: -86_400).isYesterday)
     }
-    
+
     func testIsTomorrow() {
         XCTAssert(Date(timeIntervalSinceNow: 86_400).isTomorrow)
     }
-    
+
     func testIsWeekday() {
         let date = Date()
         XCTAssertEqual(date.isWeekday, !Calendar.current.isDateInWeekend(date))
     }
-	
+
 	func testIsWeekend() {
 		let date = Date()
 		XCTAssertEqual(date.isWeekend, Calendar.current.isDateInWeekend(date))
 	}
-    
+
     func testIsInCurrentWeek() {
         let date = Date()
         XCTAssert(date.isCurrentWeek)
         let dateOneYearFromNow = date + .weeks(1)
         XCTAssertFalse(dateOneYearFromNow.isCurrentWeek)
     }
-    
+
     func testIsInCurrentMonth() {
         let date = Date()
         XCTAssert(date.isCurrentMonth)
         let dateOneYearFromNow = date + .months(1)
         XCTAssertFalse(dateOneYearFromNow.isCurrentMonth)
     }
-    
+
     func testIsInCurrentYear() {
         let date = Date()
         XCTAssert(date.isCurrentYear)
@@ -66,25 +66,25 @@ final class DateTests: XCTestCase {
 }
 
 extension DateTests {
-    
+
     func testTomorrow() {
         let date = XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
         let expected = XCTUnwrap(Date(fromString: "2016/03/23 09:30"))
         XCTAssertEqual(date.tomorrow, expected)
     }
-    
+
     func testTomorrowLeapYear() {
         let date = XCTUnwrap(Date(fromString: "2020/02/28 09:30"))
         let expected = XCTUnwrap(Date(fromString: "2020/02/29 09:30"))
         XCTAssertEqual(date.tomorrow, expected)
     }
-    
+
     func testTomorrowNonLeapYear() {
         let date = XCTUnwrap(Date(fromString: "2021/02/28 09:30"))
         let expected = XCTUnwrap(Date(fromString: "2021/03/01 09:30"))
         XCTAssertEqual(date.tomorrow, expected)
     }
-    
+
     func testYesterday() {
         let date = XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
         let expected = XCTUnwrap(Date(fromString: "2016/03/21 09:30"))
@@ -93,22 +93,22 @@ extension DateTests {
 }
 
 extension DateTests {
-    
+
     func testStartOfDay() {
         let date = XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
         XCTAssertEqual(date.startOfDay.string(format: "yyyy/MM/dd HH:mm:ss"), "2016/03/22 00:00:00")
     }
-    
+
     func testEndOfDay() {
         let date = XCTUnwrap(Date(fromString: "2018/01/31 19:30"))
         XCTAssertEqual(date.endOfDay.string(format: "yyyy/MM/dd HH:mm:ss"), "2018/01/31 23:59:59")
     }
-    
+
     func testStartOfMonth() {
         let date = XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
         XCTAssertEqual(date.startOfMonth.string(format: "yyyy/MM/dd"), "2016/03/01")
     }
-    
+
     func testEndOfMonth() {
         let date = XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
         XCTAssertEqual(date.endOfMonth.string(format: "yyyy/MM/dd"), "2016/03/31")
@@ -118,7 +118,7 @@ extension DateTests {
 // MARK: - Comparisons
 
 extension DateTests {
-    
+
     func testIsBetween() {
         XCTAssert(
             XCTUnwrap(Date(fromString: "2018/06/15 09:30")).isBetween(
@@ -126,27 +126,27 @@ extension DateTests {
                 XCTUnwrap(Date(fromString: "2018/08/15 09:30"))
             )
         )
-        
+
         XCTAssertFalse(
             XCTUnwrap(Date(fromString: "2020/01/15 09:00")).isBetween(
                 XCTUnwrap(Date(fromString: "2020/01/15 10:00")),
                 XCTUnwrap(Date(fromString: "2020/01/15 13:00"))
             )
         )
-        
+
         XCTAssert(
             XCTUnwrap(Date(fromString: "2020/01/15 09:00")).isBetween(
                 XCTUnwrap(Date(fromString: "2020/01/15 10:00")),
                 XCTUnwrap(Date(fromString: "2018/01/15 13:00"))
             )
         )
-        
+
         let date = Date()
         let date1 = Date(timeIntervalSinceNow: 1000)
         let date2 = Date(timeIntervalSinceNow: -1000)
         XCTAssert(date.isBetween(date1, date2))
     }
-    
+
     func testIsBeyondSeconds() {
         let date = XCTUnwrap(Date(fromString: "2016/03/22 09:40"))
         let fromDate = XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
@@ -155,7 +155,7 @@ extension DateTests {
         XCTAssertFalse(date.isBeyond(fromDate, bySeconds: 600))
         XCTAssertFalse(date.isBeyond(fromDate, bySeconds: 1200))
     }
-    
+
     func testIsBeyondMinutes() {
         let date = XCTUnwrap(Date(fromString: "2016/03/22 09:40"))
         let fromDate = XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
@@ -164,7 +164,7 @@ extension DateTests {
         XCTAssertFalse(date.isBeyond(fromDate, byMinutes: 10))
         XCTAssertFalse(date.isBeyond(fromDate, byMinutes: 25))
     }
-    
+
     func testIsBeyondHours() {
         let date = XCTUnwrap(Date(fromString: "2016/03/22 11:40"))
         let fromDate = XCTUnwrap(Date(fromString: "2016/03/22 09:40"))
@@ -173,15 +173,15 @@ extension DateTests {
         XCTAssertFalse(date.isBeyond(fromDate, byHours: 2))
         XCTAssertFalse(date.isBeyond(fromDate, byHours: 4))
     }
-    
+
     func testIsBeyondDays() {
         let formatter = DateFormatter().apply {
             $0.dateFormat = "yyyy/MM/dd HH:mm"
         }
-        
+
         let date = XCTUnwrap(formatter.date(from: "2016/03/24 11:40"))
         let fromDate = XCTUnwrap(formatter.date(from: "2016/03/22 09:40"))
-        
+
         XCTAssert(date.isBeyond(fromDate, byDays: 1))
         XCTAssert(date.isBeyond(fromDate, byDays: 2))
         XCTAssertFalse(date.isBeyond(fromDate, byDays: 3))
@@ -191,71 +191,71 @@ extension DateTests {
 // MARK: - String
 
 extension DateTests {
-    
+
     func testStringFromFormatter() {
         let formatter = DateFormatter(iso8601Format: "MM-dd-yyyy HH:mm:ss")
         let date = Date(timeIntervalSince1970: 1583697427)
-        
+
         XCTAssertEqual(date.string(formatter: formatter), "03-08-2020 19:57:07")
     }
-    
+
     func testStringToDate() {
         let date = XCTUnwrap(Date(fromString: "1970/01/03 00:00"))
         let expected = Date(timeIntervalSince1970: TimeInterval(172800)
             - TimeInterval(TimeZone.current.secondsFromGMT())
             + TimeZone.current.daylightSavingTimeOffset())
-        
+
         XCTAssertEqual(date, expected, "Date should be \(expected)")
     }
-    
+
     func testDateToString() {
         let date = XCTUnwrap(Date(fromString: "1970/01/03 20:43"))
         let expected = date.string(format: "MMM d, h:mm a")
-        
+
         XCTAssertEqual("Jan 3, 8:43 PM", expected)
     }
-    
+
     func testDateToStringForCalendar() {
         let calendar = Calendar(identifier: .islamic)
         let date = XCTUnwrap(Date(fromString: "1440/03/01 18:31", calendar: calendar))
         XCTAssertEqual(date.string(format: "MMM d, h:mm a", calendar: calendar), "Rab. I 1, 6:31 PM")
     }
-    
+
     func testDateToStringForCalendar2() {
         let calendar = Calendar(identifier: .hebrew)
         let date = XCTUnwrap(Date(fromString: "5779/03/01 18:31", calendar: calendar))
         XCTAssertEqual(date.string(format: "E, d MMMM yyyy", calendar: calendar), "Fri, 1 Kislev 5779")
     }
-    
+
     func testDateToTimer() {
         XCTAssertEqual(XCTUnwrap(Date(fromString: "2016/03/22 09:45")).timerString(
             from: XCTUnwrap(Date(fromString: "2016/03/22 09:40"))), "00:05:00")
-            
+
         XCTAssertEqual(XCTUnwrap(Date(fromString: "2017/04/15 15:32")).timerString(
             from: XCTUnwrap(Date(fromString: "2017/04/15 15:39"))), "+00:07:00")
-            
+
         XCTAssertEqual(XCTUnwrap(Date(fromString: "2013/09/01 12:00:05", dateFormat: "yyyy/MM/dd HH:mm:ss")).timerString(
             from: XCTUnwrap(Date(fromString: "2013/09/01 12:00:00", dateFormat: "yyyy/MM/dd HH:mm:ss"))), "00:00:05")
-            
+
         XCTAssertEqual(XCTUnwrap(Date(fromString: "2017/04/15 15:30")).timerString(
             from: XCTUnwrap(Date(fromString: "2017/04/15 15:30"))), "00:00:00")
-            
+
         XCTAssertEqual(XCTUnwrap(Date(fromString: "2017/04/15 12:32:46", dateFormat: "yyyy/MM/dd HH:mm:ss")).timerString(
             from: XCTUnwrap(Date(fromString: "2016/09/29 20:12:03", dateFormat: "yyyy/MM/dd HH:mm:ss"))), "4,744:20:43")
     }
-    
+
     func testShortString() {
         let date = XCTUnwrap(Date(fromString: "2017/05/14 13:32"))
         XCTAssertEqual("2017-05-14", date.shortString())
     }
-    
+
     func testDayName() {
         let date = Date(timeIntervalSince1970: 1486121165)
         XCTAssertEqual(date.name(ofDay: .full), "Friday")
         XCTAssertEqual(date.name(ofDay: .threeLetters), "Fri")
         XCTAssertEqual(date.name(ofDay: .oneLetter), "F")
     }
-    
+
     func testMonthName() {
         let date = Date(timeIntervalSince1970: 1486121165)
         XCTAssertEqual(date.name(ofMonth: .full), "February")
@@ -494,40 +494,40 @@ extension DateTests {
 }
 
 extension DateTests {
-    
+
     func testCurrentTimeInDecimal() {
         let time = XCTUnwrap(Date(fromString: "2012/10/23 18:15")).timeToDecimal
         let expectedTime = 18.25
-        
+
         XCTAssertEqual(time, expectedTime)
     }
 }
 
 extension DateTests {
-    
+
     func testHijriDate() {
         do {
             let gregorianDate = XCTUnwrap(Date(fromString: "2015/09/23 12:30"))
             let hijriDate = gregorianDate.hijriString()
             let expectedDate = "Dhuʻl-Hijjah 10, 1436 AH"
-            
+
             XCTAssertEqual("\(hijriDate)", expectedDate)
         }
-        
+
         do {
             let gregorianDate = XCTUnwrap(Date(fromString: "2017/06/26 00:00"))
             let hijriDate = gregorianDate.hijriString()
             let expectedDate = "Shawwal 2, 1438 AH"
-            
+
             XCTAssertEqual("\(hijriDate)", expectedDate)
         }
     }
-    
+
     func testRamadan() {
         XCTAssert(XCTUnwrap(Date(fromString: "2015/07/01 12:30")).isRamadan())
         XCTAssertFalse(XCTUnwrap(Date(fromString: "2017/01/01 12:30")).isRamadan())
     }
-    
+
     func testJumuah() {
         XCTAssert(XCTUnwrap(Date(fromString: "2017/04/21 12:30")).isJumuah)
         XCTAssertFalse(XCTUnwrap(Date(fromString: "2017/01/01 12:30")).isJumuah)

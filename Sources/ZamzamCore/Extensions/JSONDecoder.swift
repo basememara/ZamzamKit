@@ -10,7 +10,7 @@ import Foundation.NSData
 import Foundation.NSJSONSerialization
 
 public extension JSONDecoder {
-    
+
     /// Decodes an instance of the indicated type.
     ///
     /// - Parameters:
@@ -23,13 +23,13 @@ public extension JSONDecoder {
                 debugDescription: "Could not encode data from string."
             ))
         }
-        
+
         return try decode(type, from: data)
     }
 }
 
 public extension JSONDecoder {
-    
+
     /// Decodes an instance of the indicated type.
     /// 
     /// - Parameters:
@@ -45,14 +45,14 @@ public extension JSONDecoder {
         let path = URL(fileURLWithPath: name)
         let file = path.deletingPathExtension().lastPathComponent
         let ext = path.pathExtension
-        
+
         guard let url = bundle.url(forResource: file, withExtension: ext) else {
             throw DecodingError.dataCorrupted(DecodingError.Context(
                 codingPath: [],
                 debugDescription: "Could not find the resource."
             ))
         }
-        
+
         return try decode(type, from: Data(contentsOf: url, options: .mappedIfSafe))
     }
 }

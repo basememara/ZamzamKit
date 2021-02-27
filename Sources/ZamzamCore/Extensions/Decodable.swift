@@ -12,13 +12,13 @@ import Foundation.NSDate
 public struct FailableCodableArray<Element: Decodable>: Decodable {
     // https://github.com/phynet/Lossy-array-decode-swift4
     private struct DummyCodable: Codable {}
-    
+
     private struct FailableDecodable<Base: Decodable>: Decodable {
         let base: Base?
-        
+
         init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
-            
+
             do {
                 self.base = try container.decode(Base.self)
             } catch {
@@ -27,26 +27,26 @@ public struct FailableCodableArray<Element: Decodable>: Decodable {
             }
         }
     }
-    
+
     public private(set) var elements: [Element]
-    
+
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         var elements: [Element] = []
-        
+
         if let count = container.count {
             elements.reserveCapacity(count)
         }
-        
+
         while !container.isAtEnd {
             guard let element = try container.decode(FailableDecodable<Element>.self).base else {
                 _ = try? container.decode(DummyCodable.self)
                 continue
             }
-            
+
             elements.append(element)
         }
-        
+
         self.elements = elements
     }
 }
@@ -81,7 +81,7 @@ public struct FailableCodableArray<Element: Decodable>: Decodable {
 public struct AnyDecodable: Decodable {
     // https://github.com/Flight-School/AnyCodable
     public let value: Any
-    
+
     public init<T>(_ value: T?) {
         self.value = value ?? ()
     }
@@ -95,10 +95,10 @@ private protocol _AnyDecodable {
 extension AnyDecodable: _AnyDecodable {}
 
 extension _AnyDecodable {
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        
+
         if container.decodeNil() {
             self.init(())
         } else if let bool = try? container.decode(Bool.self) {

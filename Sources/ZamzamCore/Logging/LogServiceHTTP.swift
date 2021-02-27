@@ -22,13 +22,13 @@ final public class LogServiceHTTP {
     private let isDebug: Bool
     private let distribution: Distribution
     private let networkManager: NetworkManager
-    
+
     /// Closure that converts the buffer to data.
     private let bufferEncode: ([(LogAPI.Level, String)]) -> Data?
-    
+
     /// Stores the log entries in memory until it is ready to send.
     private var buffer: [(LogAPI.Level, String)] = []
-    
+
     /// The initializer of the log destination.
     ///
     /// - Parameters:
@@ -57,14 +57,14 @@ final public class LogServiceHTTP {
         self.isDebug = isDebug
         self.distribution = distribution
         self.networkManager = networkManager
-        
+
         notificationCenter.addObserver(
             self,
             selector: #selector(applicationWillExit),
             name: UIApplication.willResignActiveNotification,
             object: nil
         )
-        
+
         notificationCenter.addObserver(
             self,
             selector: #selector(applicationWillExit),
@@ -75,7 +75,7 @@ final public class LogServiceHTTP {
 }
 
 public extension LogServiceHTTP {
-    
+
     /// Appends the log to the buffer that will be queued for later sending.
     ///
     /// The buffer size is determined in the initializer. Once the threshold is met,
@@ -124,21 +124,21 @@ public extension LogServiceHTTP {
                 "line": line
             ]
         ]
-        
+
         if !context.isEmpty {
             payload["context"] = context
         }
-        
+
         payload.merge(parameters) { $1 }
-        
+
         guard let log = payload.jsonString() else {
             print("🤍 \(timestamp: Date()) ERROR Logger unable to encode parameters for destination.")
             return
         }
-        
+
         // Store in buffer for sending later
         buffer.append((level, log))
-        
+
         // Flush buffer threshold reached
         guard buffer.count > maxEntriesInBuffer else { return }
         send()
@@ -146,25 +146,25 @@ public extension LogServiceHTTP {
 }
 
 private extension LogServiceHTTP {
-    
+
     func send() {
         guard !buffer.isEmpty,
               minFlushLevel == .none || buffer.contains(where: { $0.0 >= minFlushLevel })
         else {
             return
         }
-        
+
         let logs = buffer
         buffer = []
-        
+
         guard let data = bufferEncode(logs) else {
             print("🤍 \(timestamp: Date()) PRINT Could not begin log destination task")
             return
         }
-        
+
         var request = urlRequest
         request.httpBody = data
-        
+
         BackgroundTask.run(for: .shared) { task in
             networkManager.send(request) {
                 // Add back to the buffer if could not send
@@ -172,12 +172,12 @@ private extension LogServiceHTTP {
                     print("🤍 \(timestamp: Date()) PRINT Error from log destination: \(error)")
                     DispatchQueue.logger.async { self.buffer += logs }
                 }
-                
+
                 task.end()
             }
         }
     }
-    
+
     @objc func applicationWillExit() {
         DispatchQueue.logger.async {
             self.send()

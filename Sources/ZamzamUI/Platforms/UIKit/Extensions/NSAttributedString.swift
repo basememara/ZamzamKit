@@ -11,10 +11,10 @@ import Foundation.NSRange
 import ZamzamCore
 
 public extension NSAttributedString {
-    
+
     /// The full series of characters.
     var range: NSRange { NSRange(location: 0, length: length) }
-    
+
     /// Dictionary of the attributes applied across the whole string.
     var attributes: [NSAttributedString.Key: Any] {
         guard length > 0 else { return [:] }
@@ -25,7 +25,7 @@ public extension NSAttributedString {
 // MARK: - Mutable attributed string
 
 public extension NSMutableAttributedString {
-    
+
     /// Adds an attribute with the given name and value to the characters in the specified range.
     ///
     /// - Parameters:
@@ -34,7 +34,7 @@ public extension NSMutableAttributedString {
     func addAttribute(_ name: NSAttributedString.Key, value: Any) {
         addAttribute(name, value: value, range: range)
     }
-    
+
     /// Adds the given collection of attributes to the attributed string.
     ///
     /// - Parameter attrs: A dictionary containing the attributes to add.
@@ -46,16 +46,16 @@ public extension NSMutableAttributedString {
 // MARK: - String
 
 public extension String {
-    
+
     /// The full series of characters.
     var range: NSRange { NSRange(location: 0, length: count) }
-    
+
     /// A string that has associated attributes (such as visual style, hyperlinks, or accessibility data) for portions of its text.
     var attributed: NSAttributedString { NSAttributedString(string: self) }
-    
+
     /// A mutable string object that also contains attributes (such as visual style, hyperlinks, or accessibility data) associated with various portions of its text content.
     var mutableAttributed: NSMutableAttributedString { NSMutableAttributedString(string: self) }
-    
+
     /// Adds the given collection of attributes to the characters in the specified range.
     ///
     ///     "Hello world".mutableAttributed([
@@ -73,13 +73,13 @@ public extension String {
         return mutable
     }
 }
- 
+
 public extension String {
-    
+
     /// Returns an attributed string created by using a given format string as a template into which the remaining argument value is substituted.
     static func localizedFormat(_ key: Localizable, _ argument: NSAttributedString) -> NSMutableAttributedString {
         let string: String = .localizedFormat(key, argument.string)
-        
+
         return string.mutableAttributed(
             argument.attributes,
             range: (string as NSString).range(of: argument.string)
@@ -90,7 +90,7 @@ public extension String {
 // MARK: - Operators
 
 public extension NSAttributedString {
-    
+
     /// Add attributed strings together and return a new instance.
     ///
     /// - Parameters:
@@ -102,7 +102,7 @@ public extension NSAttributedString {
         mutable.append(rhs)
         return mutable
     }
-    
+
     /// Add attributed string to string and return a new instance.
     ///
     /// - Parameters:

@@ -12,7 +12,7 @@ import ZamzamCore
 public protocol Model: AnyObject, Apply {}
 
 public extension Model {
-    
+
     /// Mutates the model using key path.
     ///
     ///     struct Model {
@@ -32,7 +32,7 @@ public extension Model {
             assertionFailure("Key path '\(keyPath)' is not writable.")
             return
         }
-        
+
         self[keyPath: writableKeyPath] = value
     }
 }

@@ -10,7 +10,7 @@
 import UIKit
 
 public extension UIRefreshControl {
-    
+
     /// Tells the control that a refresh operation was started programmatically
     /// and displays the offset at the top of scroll view if available.
     func beginRefreshing(setOffset: Bool) {

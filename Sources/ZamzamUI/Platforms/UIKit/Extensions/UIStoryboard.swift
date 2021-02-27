@@ -17,7 +17,7 @@ public extension UIStoryboard {
     convenience init(name: String) {
         self.init(name: name, bundle: nil)
     }
-    
+
     /// Instantiate view controller using convention of storyboard identifier matching class name.
     ///
     ///     let storyboard = UIStoryboard("Main")

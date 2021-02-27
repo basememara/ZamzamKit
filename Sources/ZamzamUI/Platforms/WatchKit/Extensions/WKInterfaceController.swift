@@ -10,7 +10,7 @@
 import WatchKit
 
 public extension WKInterfaceController {
-    
+
     /// Presents a single interface controller modally.
     ///
     /// - Parameters:
@@ -22,7 +22,7 @@ public extension WKInterfaceController {
 }
 
 public extension WKInterfaceController {
-    
+
     /// Presents an alert over the current interface controller.
     ///
     ///     present(
@@ -55,11 +55,11 @@ public extension WKInterfaceController {
                 handler?()
             }
         ]
-        
+
         if let additionalActions = additionalActions {
             actions.append(contentsOf: additionalActions)
         }
-        
+
         if includeCancelAction {
             actions.append(
                 WKAlertAction(title: cancelText, style: .cancel) {
@@ -67,7 +67,7 @@ public extension WKInterfaceController {
                 }
             )
         }
-    
+
         presentAlert(
             withTitle: title,
             message: message,
@@ -75,7 +75,7 @@ public extension WKInterfaceController {
             actions: actions
         )
     }
-    
+
     /// Presents an action sheet over the current interface controller.
     ///
     ///     present(
@@ -105,7 +105,7 @@ public extension WKInterfaceController {
         cancelHandler: (() -> Void)? = nil
     ) {
         var actions = additionalActions
-        
+
         if includeCancelAction {
             actions.append(
                 WKAlertAction(title: cancelText, style: .cancel) {
@@ -113,7 +113,7 @@ public extension WKInterfaceController {
                 }
             )
         }
-        
+
         presentAlert(
             withTitle: title,
             message: message,
@@ -121,7 +121,7 @@ public extension WKInterfaceController {
             actions: actions
         )
     }
-    
+
     /// Presents an side-by-side alert over the current interface controller.
     ///
     ///     present(

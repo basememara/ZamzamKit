@@ -11,7 +11,7 @@ import Foundation.NSLocale
 import Foundation.NSTimeZone
 
 public extension Calendar {
-    
+
     /// Returns a new Calendar.
     ///
     /// - parameter identifier: The kind of calendar to use.
@@ -19,16 +19,16 @@ public extension Calendar {
     /// - parameter locale: The locale of the calendar.
     init(identifier: Identifier, timeZone: TimeZone?, locale: Locale?) {
         self.init(identifier: identifier)
-        
+
         if let timeZone = timeZone {
             self.timeZone = timeZone
         }
-        
+
         if let locale = locale {
             self.locale = locale
         }
     }
-    
+
     /// Returns a new Calendar.
     ///
     /// - parameter identifier: The kind of calendar to use.
@@ -36,7 +36,7 @@ public extension Calendar {
     init(identifier: Identifier, timeZone: TimeZone?) {
         self.init(identifier: identifier, timeZone: timeZone, locale: nil)
     }
-    
+
     /// Returns a new Calendar.
     ///
     /// - parameter identifier: The kind of calendar to use.
@@ -47,7 +47,7 @@ public extension Calendar {
 }
 
 public extension Calendar.Component {
-    
+
     /// The set component units of date that includes year, month, day, hour, minute, and second
     static let full: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
 }

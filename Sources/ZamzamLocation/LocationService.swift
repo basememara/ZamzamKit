@@ -11,22 +11,22 @@ import CoreLocation
 
 public protocol LocationService: AnyObject {
     var delegate: LocationServiceDelegate? { get set }
-    
+
     var isAuthorized: Bool { get }
     func isAuthorized(for type: LocationAPI.AuthorizationType) -> Bool
-    
+
     var canRequestAuthorization: Bool { get }
     func requestAuthorization(for type: LocationAPI.AuthorizationType)
-    
+
     var location: CLLocation? { get }
     func startUpdatingLocation(enableBackground: Bool)
     func stopUpdatingLocation()
-    
+
     #if os(iOS)
     func startMonitoringSignificantLocationChanges()
     func stopMonitoringSignificantLocationChanges()
     #endif
-    
+
     #if os(iOS)
     var heading: CLHeading? { get }
     func startUpdatingHeading()
@@ -40,7 +40,7 @@ public protocol LocationServiceDelegate: AnyObject {
     func locationService(didChangeAuthorization authorization: Bool)
     func locationService(didUpdateLocation location: CLLocation)
     func locationService(didFailWithError error: CLError)
-    
+
     #if os(iOS)
     func locationService(didUpdateHeading newHeading: CLHeading)
     #endif
@@ -49,7 +49,7 @@ public protocol LocationServiceDelegate: AnyObject {
 // MARK: - Namespace
 
 public enum LocationAPI {
-    
+
     /// Permission types to use location services.
     ///
     /// - whenInUse: While the app is in the foreground.

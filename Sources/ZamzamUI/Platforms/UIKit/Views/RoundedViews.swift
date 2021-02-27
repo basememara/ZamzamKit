@@ -11,7 +11,7 @@ import UIKit
 
 /// A circular `UIView`.
 open class RoundedView: UIView {
-    
+
     open override func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = frame.height / 2
@@ -20,7 +20,7 @@ open class RoundedView: UIView {
 
 /// A circular `UIButton`.
 open class RoundedButton: UIButton {
-    
+
     open override func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = frame.height / 2
@@ -29,7 +29,7 @@ open class RoundedButton: UIButton {
 
 /// A circular `UIImageView`.
 open class RoundedImageView: UIImageView {
-    
+
     open override func layoutSubviews() {
         super.layoutSubviews()
         layer.masksToBounds = true

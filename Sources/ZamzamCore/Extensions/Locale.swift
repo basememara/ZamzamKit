@@ -15,13 +15,13 @@ public extension Locale {
 }
 
 public extension Locale {
-    
+
     /// Returns the language name of the locale, or nil if has none.
     var languageName: String? {
         guard let code = languageCode else { return nil }
         return localizedString(forLanguageCode: code)
     }
-    
+
     /// Returns the character direction for the current language code.
     var characterDirection: LanguageDirection {
         guard let code = languageCode else { return .unknown }

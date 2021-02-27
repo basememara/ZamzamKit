@@ -10,19 +10,19 @@
 import UIKit
 
 public extension UIApplication {
-    
+
     /// The app's key window that is also backwards compatiable.
     var currentWindow: UIWindow? {
         guard #available(iOS 13, *) else {
             return keyWindow
         }
-        
+
         return windows.first { $0.isKeyWindow }
     }
 }
 
 public extension UIApplication {
-    
+
     /// Update existing home short cut.
     ///
     /// - Parameters:
@@ -33,30 +33,30 @@ public extension UIApplication {
             let item = shortcutItems?[index].mutableCopy() as? UIMutableApplicationShortcutItem else {
                 return
         }
-        
+
         shortcutItems?[index] = handler(item)
     }
 }
 
 public extension UIApplication {
-    
+
     /// The physical orientation of the device.
     struct Orientation {
         private let device: UIDevice
         private let application: UIApplication
-        
+
         init(for application: UIApplication) {
             self.device = .current
             self.application = application
         }
-        
+
         /// Returns a Boolean value indicating whether the device is in a portrait orientation.
         var isPortrait: Bool {
             return device.orientation.isValidInterfaceOrientation
                 ? device.orientation.isPortrait
                 : application.statusBarOrientation.isPortrait
         }
-        
+
         /// Returns a Boolean value indicating whether the device is in a landscape orientation.
         var isLandscape: Bool {
             return device.orientation.isValidInterfaceOrientation
@@ -64,7 +64,7 @@ public extension UIApplication {
                 : application.statusBarOrientation.isLandscape
         }
     }
-    
+
     /// Returns the physical orientation of the device.
     ///
     /// This property is safer than `UIDevice.current.orientation` since it falls back

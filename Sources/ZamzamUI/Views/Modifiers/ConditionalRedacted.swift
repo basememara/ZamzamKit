@@ -13,7 +13,7 @@ import SwiftUI
 @available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 private struct ConditionalRedacted: ViewModifier {
     let condition: Bool
-    
+
     func body(content: Content) -> some View {
         content.modifier(if: condition) {
             $0.redacted(reason: .placeholder)
@@ -25,7 +25,7 @@ private struct ConditionalRedacted: ViewModifier {
 
 @available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 public extension View {
-    
+
     /// Adds a redaction to this view hierarchy if the condition is met, otherwise it is `unredacted`.
     ///
     /// - Parameter condition: The condition to determine if the content should be applied.

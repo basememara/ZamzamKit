@@ -11,7 +11,7 @@ import Foundation.NSURL
 
 #if !os(tvOS)
 public extension FileManager {
-    
+
     /// Get URL for the file.
     ///
     /// - Parameters:
@@ -22,7 +22,7 @@ public extension FileManager {
         let root = NSSearchPathForDirectoriesInDomains(directory, .userDomainMask, true)[0]
         return URL(fileURLWithPath: root).appendingPathComponent(fileName)
     }
-    
+
     /// Get URL's for files.
     ///
     /// - Parameters:
@@ -31,21 +31,21 @@ public extension FileManager {
     /// - Returns: List of file URL's from document directory.
     func urls(from directory: FileManager.SearchPathDirectory = .documentDirectory, filter: ((URL) -> Bool)? = nil) -> [URL] {
         let root = urls(for: directory, in: .userDomainMask)[0]
-        
+
         // Get the directory contents including folders
         guard var directoryUrls = try? contentsOfDirectory(at: root, includingPropertiesForKeys: nil) else { return [] }
-        
+
         // Filter the directory contents if applicable
         if let filter = filter {
             directoryUrls = directoryUrls.filter(filter)
         }
-        
+
         return directoryUrls
     }
 }
 
 public extension FileManager {
-    
+
     /// Get file system path for the file.
     ///
     /// - Parameters:
@@ -55,7 +55,7 @@ public extension FileManager {
     func path(of fileName: String, from directory: FileManager.SearchPathDirectory = .documentDirectory) -> String {
         url(of: fileName, from: directory).path
     }
-    
+
     /// Get file system paths for files.
     ///
     /// - Parameters:
@@ -83,20 +83,20 @@ public extension FileManager {
             completion(nil, nil, ZamzamError.invalidData)
             return
         }
-        
+
         URLSession.shared
             .downloadTask(with: nsURL) { location, response, error in
                 guard let location = location, error == nil else {
                     completion(nil, nil, error)
                     return
                 }
-                
+
                 // Construct file destination
                 let destination = self.url(of: nsURL.lastPathComponent, from: .cachesDirectory)
-                
+
                 // Delete local file if it exists to overwrite
                 try? self.removeItem(at: destination)
-                
+
                 // Store remote file locally
                 do {
                     try self.moveItem(at: location, to: destination)
@@ -104,7 +104,7 @@ public extension FileManager {
                     completion(nil, nil, error)
                     return
                 }
-                
+
                 completion(destination, response, error)
             }
             .resume()

@@ -11,12 +11,12 @@ import CoreLocation.CLLocation
 import Foundation
 
 public extension CLLocationCoordinate2D {
-    
+
     /// Returns a location object.
     var location: CLLocation {
         CLLocation(latitude: latitude, longitude: longitude)
     }
-    
+
     /// Returns the distance (measured in meters) from the receiver’s location to the specified location.
     func distance(from coordinate: CLLocationCoordinate2D) -> CLLocationDistance {
         location.distance(from: coordinate.location)
@@ -24,14 +24,14 @@ public extension CLLocationCoordinate2D {
 }
 
 public extension Array where Element == CLLocationCoordinate2D {
-    
+
     /// Returns the closest coordinate to the specified location.
     ///
     /// If the sequence has no elements, returns nil.
     func closest(to coordinate: CLLocationCoordinate2D) -> CLLocationCoordinate2D? {
         self.min { $0.distance(from: coordinate) < $1.distance(from: coordinate) }
     }
-    
+
     /// Returns the farthest coordinate from the specified location.
     ///
     /// If the sequence has no elements, returns nil.
@@ -41,7 +41,7 @@ public extension Array where Element == CLLocationCoordinate2D {
 }
 
 public extension CLLocation {
-    
+
     struct LocationMeta: CustomStringConvertible {
         public var coordinates: (latitude: Double, longitude: Double)?
         public var locality: String?
@@ -49,7 +49,7 @@ public extension CLLocation {
         public var countryCode: String?
         public var timeZone: TimeZone?
         public var administrativeArea: String?
-        
+
         public var description: String {
             if let l = locality, let c = (Locale.current.languageCode == "en" ? countryCode : country) {
                 return "\(l), \(c)"
@@ -58,11 +58,11 @@ public extension CLLocation {
             } else if let c = country {
                 return "\(c)"
             }
-            
+
             return ""
         }
     }
-    
+
     /// Retrieves location details for coordinates.
     ///
     /// - Parameters:
@@ -70,20 +70,20 @@ public extension CLLocation {
     ///   - completion: Async callback with retrived location details.
     func geocoder(timeout: TimeInterval = 10, completion: @escaping (LocationMeta?) -> Void) {
         var hasCompleted = false
-        
+
         // Fallback on timeout since could take too long
         // https://stackoverflow.com/a/34389742
         let timer = Timer(timeInterval: timeout, repeats: false) { timer in
             defer { timer.invalidate() }
-            
+
             guard !hasCompleted else { return }
             hasCompleted = true
-            
+
             DispatchQueue.main.async {
                 completion(nil)
             }
         }
-        
+
         // Reverse geocode stored coordinates
         CLGeocoder().reverseGeocodeLocation(self) { placemarks, error in
             DispatchQueue.main.async {
@@ -91,11 +91,11 @@ public extension CLLocation {
                 guard !hasCompleted else { return }
                 hasCompleted = true
                 timer.invalidate()
-                
+
                 guard let mark = placemarks?.first, error == nil else {
                     return completion(nil)
                 }
-                
+
                 completion(
                     LocationMeta(
                         coordinates: (self.coordinate.latitude, self.coordinate.longitude),
@@ -108,19 +108,19 @@ public extension CLLocation {
                 )
             }
         }
-        
+
         // Start timer
         RunLoop.current.add(timer, forMode: .default)
     }
 }
 
 extension CLLocationCoordinate2D: Equatable {
-    
+
     /// Determine if coordinates match using latitude and longitude values.
     public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
         lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
     }
-    
+
     /// Determine if coordinates do not match using latitude and longitude values.
     public static func != (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
         !(lhs == rhs)
@@ -128,7 +128,7 @@ extension CLLocationCoordinate2D: Equatable {
 }
 
 extension CLLocationCoordinate2D: CustomStringConvertible {
-    
+
     public var description: String {
         .localizedStringWithFormat("%.2f°, %.2f°", latitude, longitude)
     }

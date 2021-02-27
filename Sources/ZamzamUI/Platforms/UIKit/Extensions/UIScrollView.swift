@@ -12,7 +12,7 @@ import UIKit
 extension UIScrollView: Scrollable {}
 
 public extension Scrollable where Self: UIScrollView {
-    
+
     /// Sets the offset from the content view’s origin to the top.
     ///
     /// - Parameter animated: `true` to animate the transition at a constant
@@ -26,7 +26,7 @@ public extension Scrollable where Self: UIScrollView {
             animated: animated
         )
     }
-    
+
     /// Sets the offset from the content view’s origin to the bottom.
     ///
     /// - Parameter animated: `true` to animate the transition at a constant

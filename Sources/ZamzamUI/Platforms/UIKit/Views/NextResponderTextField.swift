@@ -23,14 +23,14 @@ import UIKit
  4. If `nextResponderField` is another implementation of `UIResponder` (e.g. other text field), then it becomes the first responder (e.g. receives keyboard input).
  */
 @objc open class NextResponderTextField: UITextField {
-    //swiftlint:disable private_outlet
-    
+    // swiftlint:disable private_outlet
+
     /// Represents the next field. It can be any responder.
     /// If it is UIButton and enabled then the button will be tapped.
     /// If it is UIButton and disabled then the keyboard will be dismissed.
     /// If it is another implementation, it becomes first responder.
     @IBOutlet open weak var nextResponderField: UIResponder?
-    
+
     /**
      Creates a new view with the passed coder.
      
@@ -42,7 +42,7 @@ import UIKit
         super.init(coder: aDecoder)
         configure()
     }
-    
+
     /**
      Creates a new view with the passed frame.
      
@@ -54,14 +54,14 @@ import UIKit
         super.init(frame: frame)
         configure()
     }
-    
+
     /**
      Sets up the view.
      */
     private func configure() {
         addTarget(self, action: #selector(actionKeyboardButtonTapped(sender:)), for: .editingDidEndOnExit)
     }
-    
+
     /**
      Action keyboard button tapped.
      

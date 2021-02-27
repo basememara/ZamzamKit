@@ -67,7 +67,7 @@ public extension CellIdentifiable where Self: UITableViewController, CellIdentif
 }
 
 public extension RawRepresentable where Self.RawValue == String {
-    
+
     init?(from cell: UITableViewCell) {
         guard let identifier = cell.reuseIdentifier else { return nil }
         self.init(rawValue: identifier)

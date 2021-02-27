@@ -10,7 +10,7 @@ import XCTest
 import ZamzamCore
 
 final class LocaleTests: XCTestCase {
-    
+
     func testPosix() {
         let test: Locale = .posix
         XCTAssertEqual(test.identifier, "en_US_POSIX")

@@ -9,13 +9,13 @@
 import Foundation.NSBundle
 
 public extension Bundle {
-    
+
     /// A representation of the code and resources stored in ZamzamCore bundle directory on disk.
     static let zamzamCore: Bundle = .module
 }
 
 public extension Bundle {
-    
+
     /// Gets the contents of the specified file.
     ///
     ///     Bundle.main.string(file: "Test.txt") // "This is a test. Abc 123.\n"
@@ -29,7 +29,7 @@ public extension Bundle {
         guard let resourcePath = path(forResource: file, ofType: nil, inDirectory: directory) else { return nil }
         return try? String(contentsOfFile: resourcePath, encoding: encoding)
     }
-    
+
     /// Gets the contents of the specified plist file.
     ///
     ///     let values: [String] = Bundle.main.array(plist: "Array.plist")
@@ -52,10 +52,10 @@ public extension Bundle {
             let contents = NSArray(contentsOfFile: resourcePath) as? [T] else {
                 return []
         }
-        
+
         return contents
     }
-    
+
     /// Gets the contents of the specified plist file.
     ///
     ///     let values = Bundle.main.contents(plist: "Settings.plist")
@@ -73,7 +73,7 @@ public extension Bundle {
             let contents = NSDictionary(contentsOfFile: resourcePath) as? [String: Any] else {
                 return [:]
         }
-        
+
         return contents
     }
 }

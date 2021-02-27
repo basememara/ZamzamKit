@@ -12,13 +12,13 @@ import ZamzamCore
 final class URLTests: XCTestCase {}
 
 extension URLTests {
-    
+
     func testReplacingPathExtension() throws {
         let url = URL(fileURLWithPath: "/SomePath/SomeTests.swift")
         let expected = "/SomePath/SomeTests.json"
         XCTAssertEqual(url.replacingPathExtension("json").path, expected)
     }
-    
+
     func testURLAppendingToFileName() throws {
         let url = URL(fileURLWithPath: "/SomePath/SomeTests.json")
         let expected = "/SomePath/SomeTests123.json"
@@ -27,56 +27,56 @@ extension URLTests {
 }
 
 extension URLTests {
-    
+
     func testAppendingQueryItem() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
-        
+
         let newValue = URL(safeString: value).appendingQueryItem("aBc", value: "555").absoluteString
         let expectedValue = "https://example.com?lmn=tuv&xyz=987&aBc=555"
-        
+
         XCTAssertEqual(newValue, expectedValue)
     }
-    
+
     func testRemoveQueryStringParameter() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
-        
+
         let newValue = URL(safeString: value).removeQueryItem("xyz").absoluteString
         let expectedValue = "https://example.com?abc=123&lmn=tuv"
-        
+
         XCTAssertEqual(newValue, expectedValue)
     }
-    
+
     func testAppendingQueryItemForAdd() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
-        
+
         XCTAssertEqual(
             URL(safeString: value).appendingQueryItem("def", value: "456").absoluteString,
             "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
         )
-        
+
         XCTAssertEqual(
             URL(safeString: value).appendingQueryItem("xyz", value: "999").absoluteString,
             "https://example.com?abc=123&lmn=tuv&xyz=999"
         )
     }
-    
+
     func testAppendingQueryItemForList() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
-        
+
         let newValue = URL(safeString: value).appendingQueryItems([
             "def": "456",
             "jkl": "777",
             "abc": "333",
             "lmn": nil
         ]).absoluteString
-        
+
         XCTAssertTrue(newValue.contains("abc=333"))
         XCTAssertTrue(newValue.contains("def=456"))
         XCTAssertTrue(newValue.contains("jkl=777"))
         XCTAssertTrue(newValue.contains("xyz=987"))
         XCTAssertFalse(newValue.contains("lmn="))
     }
-    
+
     func testAppendingQueryItemForNoInitialParameters() {
         // Subfolder
         XCTAssertEqual(
@@ -85,7 +85,7 @@ extension URLTests {
                 .absoluteString,
             "https://example.com/abc/xyz?abc=123"
         )
-        
+
         // Hash in URL
         XCTAssertEqual(
             URL(safeString: "https://example.com/abc/xyz#test")
@@ -93,7 +93,7 @@ extension URLTests {
                 .absoluteString,
             "https://example.com/abc/xyz?xyz=987#test"
         )
-        
+
         // Subfolder with trailing slash
         XCTAssertEqual(
             URL(safeString: "https://example.com/abc/xyz/")
@@ -101,7 +101,7 @@ extension URLTests {
                 .absoluteString,
             "https://example.com/abc/xyz/?abc=123"
         )
-        
+
         // Hash in URL with trailing slash
         XCTAssertEqual(
             URL(safeString: "https://example.com/abc/xyz/#test")
@@ -110,7 +110,7 @@ extension URLTests {
             "https://example.com/abc/xyz/?xyz=987#test"
         )
     }
-    
+
     func testAppendingQueryItemForDomain() {
         // Pure domain
         XCTAssertEqual(
@@ -119,7 +119,7 @@ extension URLTests {
                 .absoluteString,
             "https://example.com?abc=123"
         )
-        
+
         // With trailing slash
         XCTAssertEqual(
             URL(safeString: "https://example.com/")
@@ -128,7 +128,7 @@ extension URLTests {
             "https://example.com/?xyz=987"
         )
     }
-    
+
     func testAppendingQueryItemForStrongTypes() {
         XCTAssertEqual(
             URL(safeString: "https://example.com")
@@ -136,7 +136,7 @@ extension URLTests {
                 .absoluteString,
             "https://example.com?abc=1"
         )
-        
+
         XCTAssertEqual(
             URL(safeString: "https://example.com/")
                 .appendingQueryItem("xyz", value: true)
@@ -147,10 +147,10 @@ extension URLTests {
 }
 
 extension URLTests {
-    
+
     func testGetQueryItem() {
         let value = "https://example.com?abc=123&lmn=tuv&xyz=987"
-        
+
         XCTAssertEqual(URL(safeString: value).queryItem("aBc"), "123")
         XCTAssertEqual(URL(safeString: value).queryItem("lmn"), "tuv")
         XCTAssertNil(URL(safeString: value).queryItem("yyy"))

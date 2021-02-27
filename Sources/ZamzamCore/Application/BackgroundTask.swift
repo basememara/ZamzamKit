@@ -15,11 +15,11 @@ import UIKit.UIApplication
 public class BackgroundTask {
     private let application: UIApplication
     private var identifier: UIBackgroundTaskIdentifier = .invalid
-    
+
     private init(application: UIApplication) {
         self.application = application
     }
-    
+
     /// Execute a process with an indefinite background task. The handler must call `end()` when it is done.
     ///
     /// This method lets your app continue to run for a period of time after it transitions to the background.
@@ -35,21 +35,21 @@ public class BackgroundTask {
     ///   - handler: The long-running background task to execute.
     public static func run(for application: UIApplication, handler: (BackgroundTask) -> Void) {
         let backgroundTask = BackgroundTask(application: application)
-        
+
         // Mark the beginning of a new long-running background task
         backgroundTask.identifier = application.beginBackgroundTask {
             backgroundTask.end()
         }
-        
+
         handler(backgroundTask)
     }
-    
+
     /// Marks the end of a specific long-running background task.
     public func end() {
         if identifier != .invalid {
             application.endBackgroundTask(identifier)
         }
-        
+
         identifier = .invalid
     }
 }

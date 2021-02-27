@@ -42,11 +42,11 @@ public protocol StatusBarable: AnyObject {
 }
 
 public extension StatusBarable where Self: UIViewController {
-    
+
     /// Determine dynamic status bar size
     var statusBarSize: CGSize {
         let size: CGSize
-        
+
         if #available(iOS 13, *),
             let statusBarSize = application.currentWindow?
                 .windowScene?.statusBarManager?.statusBarFrame.size {
@@ -54,7 +54,7 @@ public extension StatusBarable where Self: UIViewController {
         } else {
             size = application.statusBarFrame.size
         }
-        
+
         // Consider landscape and portrait mode
         // https://stackoverflow.com/a/16598350
         return CGSize(
@@ -76,7 +76,7 @@ public extension StatusBarable where Self: UIViewController {
         } else if application.isStatusBarHidden {
             return nil
         }
-        
+
         let statusBar = UIVisualEffectView().apply {
             $0.effect = UIBlurEffect(style: style)
             $0.frame = CGRect(
@@ -86,36 +86,36 @@ public extension StatusBarable where Self: UIViewController {
                 height: statusBarSize.height
             )
         }
-        
+
         view.addSubview(statusBar)
-        
+
         return statusBar
     }
 }
 
 public extension StatusBarable where Self: UIViewController {
-    
+
     /// Add visible status bar since transparent by default with scrolling
     func showStatusBar(style: UIBlurEffect.Style = .regular) {
         guard let statusBar = statusBar else {
             self.statusBar = addStatusBar(style: style)
             return
         }
-        
+
         statusBar.isHidden = false
     }
-    
+
     /// Hides status bar
     func hideStatusBar() {
         statusBar?.isHidden = true
     }
-    
+
     /// Unlinks the status bar from its superview and its window, and removes it from the responder chain.
     func removeStatusBar() {
         statusBar?.removeFromSuperview()
         statusBar = nil
     }
-    
+
     /// Updates the status bar based on the current view.
     func resetStatusBar() {
         removeStatusBar()

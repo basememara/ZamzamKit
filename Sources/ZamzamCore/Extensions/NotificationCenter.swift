@@ -18,7 +18,7 @@ public extension NotificationCenter {
     func post(name: NSNotification.Name, userInfo: [AnyHashable: Any]? = nil) {
         post(name: name, object: nil, userInfo: userInfo)
     }
-    
+
     /// Adds an entry to the receiver’s dispatch table with an observer, a notification selector and optional criteria: notification name and sender.
     ///
     /// - Parameters:
@@ -28,7 +28,7 @@ public extension NotificationCenter {
     func addObserver(_ observer: Any, selector aSelector: Selector, name aName: NSNotification.Name) {
         addObserver(observer, selector: aSelector, name: aName, object: nil)
     }
-    
+
     /// Removes matching entries from the notification center's dispatch table.
     ///
     /// - Parameters:

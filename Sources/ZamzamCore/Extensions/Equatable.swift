@@ -24,7 +24,7 @@ public extension Equatable {
 }
 
 public extension CaseIterable where Self: Equatable {
-    
+
     /// Returns the first index where the specified case appears in the enum.
     ///
     ///     enum Direction: CaseIterable {

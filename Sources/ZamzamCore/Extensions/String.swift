@@ -9,7 +9,7 @@
 import Foundation.NSData
 
 public extension String {
-    
+
     /// Create a new random string of given length.
     ///
     ///     String(random: 10) // "zXWG4hSgL9"
@@ -20,7 +20,7 @@ public extension String {
 	init(random: Int, prefix: String = "") {
         // https://github.com/SwifterSwift/SwifterSwift
 		let base = Array("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
-        
+
         self = random > 0
             ? (0..<random).reduce(prefix) { result, _ in result + "\(base.randomElement() ?? base[0])" }
             : prefix
@@ -31,7 +31,7 @@ public extension String {
 // https://github.com/SwifterSwift/SwifterSwift
 
 public extension String {
-    
+
     /// Safely subscript string with index.
     ///
     ///     let value = "Abcdef123456"
@@ -43,7 +43,7 @@ public extension String {
         guard 0..<count ~= position else { return nil }
         return String(self[index(startIndex, offsetBy: position)])
     }
-    
+
     /// Safely subscript string within a closed range.
     ///
     ///     let value = "Abcdef123456"
@@ -56,10 +56,10 @@ public extension String {
             let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound + 1, limitedBy: endIndex) else {
                 return nil
         }
-        
+
         return String(self[lowerIndex..<upperIndex])
     }
-    
+
     /// Safely subscript string within a half-open range.
     ///
     ///     let value = "Abcdef123456"
@@ -71,10 +71,10 @@ public extension String {
             let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex) else {
                 return nil
         }
-        
+
         return String(self[lowerIndex..<upperIndex])
     }
-    
+
     /// Safely subscript string from the lower range to the end of the string.
     ///
     ///     let value = "Abcdef123456"
@@ -85,7 +85,7 @@ public extension String {
         guard let lowerIndex = index(startIndex, offsetBy: max(0, range.lowerBound), limitedBy: endIndex) else {
             return nil
         }
-        
+
         return String(self[lowerIndex..<endIndex])
     }
 }
@@ -95,27 +95,27 @@ public extension String {
     private static let numberRegEx = "^[0-9]+?$"
     private static let alphaRegEx = "^[A-Za-z]+$"
     private static let alphaNumericRegEx = "^[A-Za-z0-9]+$"
-    
+
     /// Determine if the string is valid email format.
     var isEmail: Bool { match(regex: .emailRegEx) }
-    
+
     /// Determine if the string contains only numbers.
     var isNumber: Bool { match(regex: .numberRegEx) }
-    
+
     /// Determine if the string contains only letters.
     var isAlpha: Bool { match(regex: .alphaRegEx) }
-    
+
     /// Determine if the string contains at least one letter and one number.
     var isAlphaNumeric: Bool { match(regex: .alphaNumericRegEx) }
 }
 
 public extension String {
-    
+
     /// Returns a new string made by removing spaces or new lines from both ends.
     ///
     ///     " Abcdef123456 \n\r  ".trimmed // "Abcdef123456"
     var trimmed: String { trimmingCharacters(in: .whitespacesAndNewlines) }
-    
+
     /// Truncated string limited to a given number of characters.
     ///
     ///     "Abcdef123456".truncated(3) // "Abc..."
@@ -129,7 +129,7 @@ public extension String {
         guard 1..<count ~= length else { return self }
         return prefix(length) + trailing
     }
-    
+
     /// Returns true if any character in the range is contained within.
     ///
     ///     "def".contains(CharacterSet(charactersIn: "Abcdef123456")) // true
@@ -137,7 +137,7 @@ public extension String {
     func contains(_ elements: CharacterSet) -> Bool {
         rangeOfCharacter(from: elements) != nil
     }
-    
+
     /// Injects a separator every nth characters.
     ///
     ///     "1234567890".separated(every: 2, with: "-") // "12-34-56-78-90"
@@ -148,7 +148,7 @@ public extension String {
     /// - Returns: The string with the injected separator.
     func separated(every nth: Int, with separator: String) -> String {
         guard !isEmpty, 1...count ~= nth else { return self }
-        
+
         // https://stackoverflow.com/a/47566321
         return String(
             stride(from: 0, to: count, by: nth)
@@ -156,7 +156,7 @@ public extension String {
                 .joined(separator: separator)
         )
     }
-    
+
     /// Returns a new string made by removing the characters contained in a given set.
     ///
     ///     let string = """
@@ -176,7 +176,7 @@ public extension String {
     func strippingCharacters(in set: CharacterSet) -> String {
         replacingCharacters(in: set, with: "")
     }
-    
+
     /// Returns a new string made by replacing the characters contained in a given set with another string.
     ///
     ///     let set = CharacterSet.alphanumerics
@@ -201,7 +201,7 @@ public extension String {
     func replacingCharacters(in set: CharacterSet, with string: String) -> String {
         components(separatedBy: set).joined(separator: string)
     }
-    
+
     /// Returns a new string in which the last occurrence of a target string is replaced by another given string.
     func replacingLastOccurrence(of target: String, with replacement: String) -> String {
         guard let range = self.range(of: target, options: .backwards) else { return self }
@@ -212,7 +212,7 @@ public extension String {
 // MARK: - Regular Expression
 
 public extension String {
-    
+
     /// Matches a string using a regular expression pattern.
     ///
     ///     "1234567890".match(regex: "^[0-9]+?$") // true
@@ -224,7 +224,7 @@ public extension String {
     func match(regex pattern: String) -> Bool {
         range(of: pattern, options: [.regularExpression]) != nil
     }
-    
+
     /// Returns a new string in which all occurrences of a
     /// regular expression pattern in a specified range of
     /// the string are replaced by another given string.
@@ -238,14 +238,14 @@ public extension String {
     /// - Returns: the value with the replaced string
     func replacing(regex pattern: String, with replacement: String, caseSensitive: Bool = false) -> String {
         guard !isEmpty else { return self }
-        
+
         // Determine options
         var options: CompareOptions = [.regularExpression]
-        
+
         if !caseSensitive {
             options.insert(.caseInsensitive)
         }
-        
+
         return replacingOccurrences(of: pattern, with: replacement, options: options)
     }
 }
@@ -254,7 +254,7 @@ public extension String {
 
 public extension String {
     private static let defaultDecoder = JSONDecoder()
-    
+
     /// Returns a value of the type you specify, decoded from a JSON string.
     func decode<T: Decodable>(
         using encoding: Self.Encoding = .utf8,
@@ -267,17 +267,17 @@ public extension String {
 }
 
 public extension String {
-    
+
     /// Encode a string to Base64. Default encoding is UTF8.
     func base64Encoded() -> String {
         Data(utf8).base64EncodedString()
     }
-    
+
     /// URL safe encode a string to Base64. Default encoding is UTF8.
     func base64URLEncoded() -> String {
         Data(utf8).base64URLEncodedString()
     }
-    
+
     /// Decode a string from Base64. Default decoding is UTF8.
     func base64Decoded() -> String? {
         guard let data = Data(base64Encoded: self) else { return nil }
@@ -288,7 +288,7 @@ public extension String {
 // MARK: - Crypto
 
 public extension String {
-    
+
     /// Returns an encrypted data of the string
     func sha256() -> Data {
         Data(utf8).sha256()
@@ -298,16 +298,16 @@ public extension String {
 // MARK: - Types
 
 public extension Optional where Wrapped == String {
-    
+
     /// A Boolean value indicating whether a string is `nil` or has no characters.
     var isNilOrEmpty: Bool { self?.isEmpty ?? true }
-    
+
     /// A Boolean value indicating whether a string is `nil` or has no characters or blanks.
     var isNilOrBlank: Bool { isNilOrEmpty || self?.allSatisfy { $0.isWhitespace } ?? true }
 }
 
 public extension Substring {
-    
+
     /// A string value representation of the string slice.
     var string: String { String(self) }
 }

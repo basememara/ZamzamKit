@@ -11,7 +11,7 @@ import UIKit
 
 public extension UICollectionView {
     static let defaultCellIdentifier = "Cell"
-    
+
     /// Register XIB to collection view.
     ///
     /// - Parameters:
@@ -28,7 +28,7 @@ public extension UICollectionView {
             forCellWithReuseIdentifier: identifier
         )
     }
-    
+
     /// Register a class for use in creating new collection view cells.
     ///
     /// - Parameter cellClass: The class of a cell that you want to use in the collection view.
@@ -39,7 +39,7 @@ public extension UICollectionView {
 
 public extension UICollectionView {
     static let defaultSectionIdentifier = "Section"
-    
+
     /// Register supplementary XIB to collection view.
     ///
     /// - Parameters:
@@ -59,7 +59,7 @@ public extension UICollectionView {
             withReuseIdentifier: identifier
         )
     }
-    
+
     /// Gets the reusable supplementary view with default identifier name.
     func dequeueReusableSupplementaryView<T: UICollectionReusableView>(ofKind elementKind: String, for indexPath: IndexPath) -> T {
         dequeueReusableSupplementaryView(
@@ -68,7 +68,7 @@ public extension UICollectionView {
             for: indexPath
         ) as? T ?? T()
     }
-    
+
     /// Register header XIB to collection view.
     ///
     /// - Parameters:
@@ -82,7 +82,7 @@ public extension UICollectionView {
     ) {
         register(supplementary: xibType, ofKind: UICollectionView.elementKindSectionHeader, withIdentifier: identifier, inBundle: bundle)
     }
-    
+
     /// Gets the reusable header with default identifier name.
     func dequeueReusableHeaderView<T: UICollectionReusableView>(for indexPath: IndexPath) -> T {
         dequeueReusableSupplementaryView(
@@ -90,7 +90,7 @@ public extension UICollectionView {
             for: indexPath
         )
     }
-    
+
     /// Register footer XIB to collection view.
     ///
     /// - Parameters:
@@ -104,7 +104,7 @@ public extension UICollectionView {
     ) {
         register(supplementary: xibType, ofKind: UICollectionView.elementKindSectionFooter, withIdentifier: identifier, inBundle: bundle)
     }
-    
+
     /// Gets the reusable footer with default identifier name.
     func dequeueReusableFooterView<T: UICollectionReusableView>(for indexPath: IndexPath) -> T {
         dequeueReusableSupplementaryView(
@@ -115,14 +115,14 @@ public extension UICollectionView {
 }
 
 public extension UICollectionView {
-    
+
     /// Gets the reusable cell with default identifier name.
     ///
     /// - Parameter indexPath: The index path of the cell from the collection.
     subscript(indexPath: IndexPath) -> UICollectionViewCell {
         dequeueReusableCell(withReuseIdentifier: UICollectionView.defaultCellIdentifier, for: indexPath)
     }
-    
+
     /// Gets the reusable cell with default identifier name.
     ///
     /// - Parameter indexPath: The index path of the cell from the collection.
@@ -138,7 +138,7 @@ public extension UICollectionView {
     subscript(indexPath: IndexPath, withReuseIdentifier identifier: String) -> UICollectionViewCell {
         dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
-    
+
     /// Gets the reusable cell with default identifier name.
     ///
     /// - Parameters:

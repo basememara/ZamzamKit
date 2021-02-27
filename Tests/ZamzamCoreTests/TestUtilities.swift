@@ -9,7 +9,7 @@
 import XCTest
 
 extension XCTestCase {
-    
+
     /// Asserts that all values are equal.
     ///
     /// - Parameters:
@@ -28,7 +28,7 @@ extension XCTestCase {
             return next
         }
     }
-    
+
     /// Asserts that two values are equal and not nil.
     ///
     /// - Parameters:
@@ -53,18 +53,18 @@ extension XCTestCase {
 // MARK: - Utility Testing
 
 final class UtilitiesTests: XCTestCase {
-    
+
     func testAssertAllEqual() throws {
         XCTAssertAllEqual(1, 1, 1, 1, 1, 1, 1)
         XCTAssertAllEqual("a", "a", "a", "a", "a")
-        
+
         // Tested below but must exclude from live test runs
         // XCTAssertAllEqual(1, 1, 1, 2, 1, 1, 1)
     }
-    
+
     func testAssertEqualAndNotNil() throws {
         XCTAssertEqualAndNotNil(1, 1)
-        
+
         // Tested below but must exclude from live test runs
         // let value: String? = nil
         // XCTAssertEqualAndNotNil(value, value)

@@ -11,7 +11,7 @@ import UIKit
 import ZamzamCore
 
 public extension UIToolbar {
-    
+
     /// Create an instance of a `UIToolbar` with a `Done` button that performs the action.
     ///
     ///     class ViewController: UIViewController {
@@ -41,9 +41,9 @@ public extension UIToolbar {
             $0.isTranslucent = true
             $0.isUserInteractionEnabled = true
             $0.sizeToFit()
-            
+
             var items: [UIBarButtonItem] = []
-            
+
             if let clearAction = clearAction {
                 let clearButton = UIBarButtonItem(
                     title: .localized(.clear),
@@ -51,14 +51,14 @@ public extension UIToolbar {
                     target: target,
                     action: clearAction
                 )
-                
+
                 clearButton.setTitleTextAttributes([
                     .font: UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
                 ], for: .normal)
-                
+
                 items.append(clearButton)
             }
-            
+
             if let title = title {
                 items += [
                     .init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
@@ -73,16 +73,16 @@ public extension UIToolbar {
                     )
                 ]
             }
-            
+
             items += [
                 .init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
                 .init(barButtonSystemItem: .done, target: target, action: action)
             ]
-            
+
             $0.setItems(items, animated: false)
         }
     }
-    
+
     /// Create an instance of a `UIToolbar` with a `Next` button that performs the action.
     ///
     /// - Parameters:
@@ -96,9 +96,9 @@ public extension UIToolbar {
             $0.isTranslucent = true
             $0.isUserInteractionEnabled = true
             $0.sizeToFit()
-            
+
             var items: [UIBarButtonItem] = []
-            
+
             if let clearAction = clearAction {
                 let clearButton = UIBarButtonItem(
                     title: .localized(.clear),
@@ -106,14 +106,14 @@ public extension UIToolbar {
                     target: target,
                     action: clearAction
                 )
-                
+
                 clearButton.setTitleTextAttributes([
                     .font: UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
                 ], for: .normal)
-                
+
                 items.append(clearButton)
             }
-            
+
             if let title = title {
                 items += [
                     .init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
@@ -128,23 +128,23 @@ public extension UIToolbar {
                     )
                 ]
             }
-            
+
             let nextButton = UIBarButtonItem(
                 title: .localized(.next),
                 style: .plain,
                 target: target,
                 action: action
             )
-            
+
             nextButton.setTitleTextAttributes([
                 .font: UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
             ], for: .normal)
-            
+
             items += [
                 .init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
                 nextButton
             ]
-            
+
             $0.setItems(items, animated: false)
         }
     }

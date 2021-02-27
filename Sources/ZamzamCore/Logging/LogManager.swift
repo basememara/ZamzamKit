@@ -10,14 +10,14 @@ import Foundation
 
 public struct LogManager {
     private let services: [LogService]
-    
+
     public init(services: [LogService]) {
         self.services = services
     }
 }
 
 public extension LogManager {
-    
+
     /// Log an entry to the destination.
     ///
     /// - Parameters:
@@ -40,17 +40,17 @@ public extension LogManager {
         completion: (() -> Void)?
     ) {
         let destinations = services.filter { $0.canWrite(for: level) }
-        
+
         // Skip if does not meet minimum log level
         guard !destinations.isEmpty else {
             guard let completion = completion else { return }
             DispatchQueue.main.async { completion() }
             return
         }
-        
+
         DispatchQueue.logger.async {
             let context = Self.context.merging(context) { $1 }
-            
+
             destinations.forEach {
                 $0.write(
                     level,
@@ -62,7 +62,7 @@ public extension LogManager {
                     context: context
                 )
             }
-            
+
             guard let completion = completion else { return }
             DispatchQueue.main.async { completion() }
         }
@@ -70,7 +70,7 @@ public extension LogManager {
 }
 
 public extension LogManager {
-    
+
     /// Log something generally unimportant (lowest priority; not written to file).
     ///
     /// - Parameters:
@@ -103,7 +103,7 @@ public extension LogManager {
 }
 
 public extension LogManager {
-    
+
     /// Log something which help during debugging (low priority; not written to file).
     ///
     /// - Parameters:
@@ -136,7 +136,7 @@ public extension LogManager {
 }
 
 public extension LogManager {
-    
+
     /// Log something which you are really interested but which is not an issue or error (normal priority).
     ///
     /// - Parameters:
@@ -169,7 +169,7 @@ public extension LogManager {
 }
 
 public extension LogManager {
-    
+
     /// Log something which may cause big trouble soon (high priority).
     ///
     /// - Parameters:
@@ -202,7 +202,7 @@ public extension LogManager {
 }
 
 public extension LogManager {
-    
+
     /// Log something which will keep you awake at night (highest priority).
     ///
     /// - Parameters:
@@ -238,21 +238,21 @@ public extension LogManager {
 
 public extension LogManager {
     private static var context: [String: CustomStringConvertible] = [:]
-    
+
     /// Adds a custom attribute to all future logs sent by this logger.
     func set(_ value: CustomStringConvertible?, forKey key: String) {
         DispatchQueue.logger.async {
             Self.context[key] = value
         }
     }
-    
+
     /// Adds custom attributes to all future logs sent by this logger.
     func set(_ context: [String: CustomStringConvertible]) {
         DispatchQueue.logger.async {
             Self.context.merge(context) { $1 }
         }
     }
-    
+
     /// Removes all the custom attribute from all future logs sent by this logger.
     func reset() {
         DispatchQueue.logger.async {
@@ -265,12 +265,12 @@ public extension LogManager {
 import UIKit.UIApplication
 
 public extension LogManager {
-    
+
     /// Sets the application properties to the logger so it can be used outside the main thread.
     func configure(with application: UIApplication) {
         let applicationState = application.applicationState.rawString
         let isProtectedDataAvailable = application.isProtectedDataAvailable
-        
+
         set([
             "app_state": applicationState,
             "protected_data_available": isProtectedDataAvailable
@@ -279,7 +279,7 @@ public extension LogManager {
 }
 
 private extension UIApplication.State {
-    
+
     /// The corresponding string of the raw type.
     var rawString: String {
         switch self {
@@ -301,7 +301,7 @@ import SwiftUI
 
 @available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 public extension LogManager {
-    
+
     /// Sets the application properties to the logger so it can be used outside the main thread.
     func set(context newPhase: ScenePhase) {
         set(newPhase.rawString, forKey: "app_state")
@@ -310,7 +310,7 @@ public extension LogManager {
 
 @available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 private extension ScenePhase {
-    
+
     /// The corresponding string of the raw type.
     var rawString: String {
         switch self {

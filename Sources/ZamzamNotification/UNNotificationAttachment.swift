@@ -35,17 +35,17 @@ public extension UNNotificationAttachment {
         identifier: String? = nil,
         completion: @escaping (Result<UNNotificationAttachment, ZamzamError>) -> Void
     ) {
-        FileManager.default.download(from: urlString) { url, response, error in
+        FileManager.default.download(from: urlString) { url, _, error in
             if let error = error {
                 completion(.failure(.other(error)))
                 return
             }
-            
+
             guard let url = url, let attachment = try? UNNotificationAttachment(identifier: identifier ?? urlString, url: url) else {
                 completion(.failure(.invalidData))
                 return
             }
-            
+
             completion(.success(attachment))
         }
     }
