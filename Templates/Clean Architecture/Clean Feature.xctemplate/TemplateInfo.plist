@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Kind</key>
+	<string>Xcode.IDEFoundation.TextSubstitutionFileTemplateKind</string>
+	<key>Options</key>
+	<array>
+		<dict>
+		<key>Identifier</key>
+		<string>productName</string>
+		<key>Required</key>
+		<true/>
+		<key>Name</key>
+		<string>Feature:</string>
+		<key>Description</key>
+		<string>An empty Clean SwiftUI Feature</string>
+		<key>Type</key>
+		<string>text</string>
+		<key>Default</key>
+		<string>MyFeature</string>
+		<key>MainTemplateFile</key>
+		<string>___FILEBASENAME___View.swift</string>
+		</dict>
+		<dict>
+		<key>Identifier</key>
+		<string>moduleName</string>
+		<key>Required</key>
+		<true/>
+		<key>Name</key>
+		<string>Module:</string>
+		<key>Description</key>
+		<string>The root name for the module used for importing</string>
+		<key>Type</key>
+		<string>text</string>
+		<key>Default</key>
+		<string>Zamzam</string>
+		</dict>
+	</array>
+</dict>
+</plist>
