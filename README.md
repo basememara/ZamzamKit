@@ -27,7 +27,7 @@ The `ZamzamKit` package contains four different products you can import. Add any
     ]
 )
 ```
-*Note: This library is highly volitile and changes often to stay ahead of cutting-edge technologies. It is recommended to copy over code that you want into your own libraries or fork it.*
+*Note: This library is highly volatile and changes often to stay ahead of cutting-edge technologies. It is recommended to copy over code that you want into your own libraries or fork it.*
 
 ## ZamzamCore
 
@@ -168,7 +168,7 @@ let string = """
 string.strippingCharacters(in: .whitespacesAndNewlines) // {0123456789}
 ```
 
-> Replace the characters contained in a givenharacter set with another string:
+> Replace the characters contained in a given character set with another string:
 ```swift
 let set = CharacterSet.alphanumerics
     .insert(charactersIn: "_")
