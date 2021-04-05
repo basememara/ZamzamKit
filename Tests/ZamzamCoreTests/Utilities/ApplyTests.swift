@@ -23,10 +23,10 @@ final class ApplyTests: XCTestCase {
     }
 }
 
-private class SomeModel {
-    var propertyA: String?
-    var propertyB: Int?
-    var propertyC: Bool?
+private extension ApplyTests {
+    class SomeModel: Apply {
+        var propertyA: String?
+        var propertyB: Int?
+        var propertyC: Bool?
+    }
 }
-
-extension SomeModel: Apply {}
