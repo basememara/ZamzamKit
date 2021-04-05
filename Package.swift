@@ -6,10 +6,10 @@ let package = Package(
     name: "ZamzamKit",
     defaultLocalization: "en",
     platforms: [
-        .macOS(.v10_14),
-        .iOS(.v12),
-        .tvOS(.v12),
-        .watchOS(.v6)
+        .macOS(.v11),
+        .iOS(.v14),
+        .tvOS(.v14),
+        .watchOS(.v7)
     ],
     products: [
         .library(
