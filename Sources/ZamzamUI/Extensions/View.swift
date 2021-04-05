@@ -35,3 +35,15 @@ public extension View {
         clipShape(RoundedRect(radius: radius, corners: corners))
     }
 }
+
+public extension View {
+    /// Binds the height of the view to a property.
+    func assign(heightTo height: Binding<CGFloat>) -> some View {
+        background(
+            GeometryReader { geometry in
+                Color.clear
+                    .onAppear { height.wrappedValue = geometry.size.height }
+            }
+        )
+    }
+}
