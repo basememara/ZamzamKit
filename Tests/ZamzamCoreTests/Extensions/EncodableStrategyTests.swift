@@ -1,5 +1,5 @@
 //
-//  NetworkTests.swift
+//  EncodableStrategyTests.swift
 //  ZamzamCoreTests
 //
 //  Created by Basem Emara on 2020-03-02.
@@ -7,11 +7,11 @@
 //
 
 import XCTest
-@testable import ZamzamCore
+import ZamzamCore
 
-final class EncodingStrategyTests: XCTestCase {}
+final class EncodableStrategyTests: XCTestCase {}
 
-extension EncodingStrategyTests {
+extension EncodableStrategyTests {
     func testSnakeCase() throws {
         // Given
         struct Example: SnakeCaseKeyEncodable {
@@ -40,7 +40,7 @@ extension EncodingStrategyTests {
     }
 }
 
-extension EncodingStrategyTests {
+extension EncodableStrategyTests {
     func testISO8601Date() throws {
         // Given
         struct Example: ISO8601DateEncodable {
@@ -48,7 +48,7 @@ extension EncodingStrategyTests {
         }
 
         let object = Example(
-            date: Date(timeIntervalSince1970: 1614231287.4747)
+            date: Date(timeIntervalSince1970: 1614231287)
         )
 
         // When
@@ -57,12 +57,12 @@ extension EncodingStrategyTests {
         // Then
         XCTAssertEqual(
             String(data: try encoder.encode(object), encoding: .utf8),
-            "{\"date\":\"2021-02-25T05:34:47.4750Z\"}"
+            "{\"date\":\"2021-02-25T05:34:47+0000\"}"
         )
     }
 }
 
-extension EncodingStrategyTests {
+extension EncodableStrategyTests {
     func testZuluDate() throws {
         // Given
         struct Example: ZuluDateEncodable {
@@ -79,12 +79,12 @@ extension EncodingStrategyTests {
         // Then
         XCTAssertEqual(
             String(data: try encoder.encode(object), encoding: .utf8),
-            "{\"date\":\"2021-02-03T20:19:55.317+0000\"}"
+            "{\"date\":\"2021-02-03T20:19:55.317Z\"}"
         )
     }
 }
 
-extension EncodingStrategyTests {
+extension EncodableStrategyTests {
     func testSnakeCaseAndISO8601Date() throws {
         // Given
         struct Example: ISO8601DateEncodable {
@@ -94,7 +94,7 @@ extension EncodingStrategyTests {
 
         let object = Example(
             abcDef: "hij",
-            date: Date(timeIntervalSince1970: 1614231287.4747)
+            date: Date(timeIntervalSince1970: 1614231287)
         )
 
         // When
@@ -104,7 +104,7 @@ extension EncodingStrategyTests {
         // Then
         XCTAssertEqual(
             String(data: try encoder.encode(object), encoding: .utf8),
-            "{\"abcDef\":\"hij\",\"date\":\"2021-02-25T05:34:47.4750Z\"}"
+            "{\"abcDef\":\"hij\",\"date\":\"2021-02-25T05:34:47+0000\"}"
         )
     }
 }

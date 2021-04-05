@@ -12,6 +12,14 @@ import Foundation.NSLocale
 import Foundation.NSTimeZone
 
 public extension DateFormatter {
+    /// The date format string used for parsing ISO8601 dates, i.e. "2021-02-25T05:34:47+00:00".
+    static let dateFormat8601 = "yyyy-MM-dd'T'HH:mm:ssZ"
+
+    /// The date format string used for parsing Zulu dates, i.e. "2021-02-03T20:19:55.317Z".
+    static let dateFormatZ = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+}
+
+public extension DateFormatter {
     /// A formatter that converts between dates and their ISO 8601 string representations.
     ///
     /// When `JSONEncoder` accepts a custom `ISO8601DateFormatter`, this convenience initializer will no longer be needed.

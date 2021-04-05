@@ -1,5 +1,5 @@
 //
-//  NetworkTests.swift
+//  DecodableStrategyTests.swift
 //  ZamzamCoreTests
 //
 //  Created by Basem Emara on 2020-03-02.
@@ -7,11 +7,11 @@
 //
 
 import XCTest
-@testable import ZamzamCore
+import ZamzamCore
 
-final class DecodingStrategyTests: XCTestCase {}
+final class DecodableStrategyTests: XCTestCase {}
 
-extension DecodingStrategyTests {
+extension DecodableStrategyTests {
     func testSnakeCase() throws {
         // Given
         struct Example: SnakeCaseKeyDecodable {
@@ -44,7 +44,7 @@ extension DecodingStrategyTests {
     }
 }
 
-extension DecodingStrategyTests {
+extension DecodableStrategyTests {
     func testISO8601Date() throws {
         // Given
         struct Example: ISO8601DateDecodable {
@@ -52,7 +52,7 @@ extension DecodingStrategyTests {
         }
 
         let json = try XCTUnwrap(
-            #"{"date": "2021-02-25T05:34:47.4747+00:00"}"#.data(using: .utf8)
+            #"{"date": "2021-02-25T05:34:47+00:00"}"#.data(using: .utf8)
         )
 
         // When
@@ -60,11 +60,11 @@ extension DecodingStrategyTests {
         let object = try decoder.decode(Example.self, from: json)
 
         // Then
-        XCTAssertEqual(object.date.timeIntervalSince1970, 1614231287.474)
+        XCTAssertEqual(object.date.timeIntervalSince1970, 1614231287)
     }
 }
 
-extension DecodingStrategyTests {
+extension DecodableStrategyTests {
     func testZuluDate() throws {
         // Given
         struct Example: ZuluDateDecodable {
@@ -84,7 +84,7 @@ extension DecodingStrategyTests {
     }
 }
 
-extension DecodingStrategyTests {
+extension DecodableStrategyTests {
     func testSnakeCaseAndISO8601Date() throws {
         // Given
         struct Example: SnakeCaseKeyDecodable, ISO8601DateDecodable {
@@ -96,7 +96,7 @@ extension DecodingStrategyTests {
             """
              {
                 "abc_def": "hij",
-                "date": "2021-02-25T05:34:47.4747+00:00"
+                "date": "2021-02-25T05:34:47+00:00"
              }
              """.data(using: .utf8)
         )
@@ -107,6 +107,46 @@ extension DecodingStrategyTests {
 
         // Then
         XCTAssertEqual(object.abcDef, "hij")
-        XCTAssertEqual(object.date.timeIntervalSince1970, 1614231287.474)
+        XCTAssertEqual(object.date.timeIntervalSince1970, 1614231287)
+    }
+}
+
+extension DecodableStrategyTests {
+    func testCaseIterableDefaultsLast() throws {
+        // Given
+        struct Example: Decodable {
+            let status: Status
+        }
+
+        enum Status: String, CaseIterableDefaultsLastDecodable {
+            case one
+            case two
+            case three
+            case unknown
+        }
+
+        let json = try XCTUnwrap(
+            """
+             [
+                 {
+                    "status": "one"
+                 },
+                 {
+                    "status": "two"
+                 },
+                 {
+                    "status": "something"
+                 }
+             ]
+             """.data(using: .utf8)
+        )
+
+        // When
+        let object = try JSONDecoder().decode([Example].self, from: json)
+
+        // Then
+        XCTAssertEqual(object[0].status, .one)
+        XCTAssertEqual(object[1].status, .two)
+        XCTAssertEqual(object[2].status, .unknown)
     }
 }
