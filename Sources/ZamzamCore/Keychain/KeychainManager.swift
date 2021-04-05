@@ -49,10 +49,7 @@ public extension KeychainManager {
     @discardableResult
     func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool {
         let result = service.set(value, forKey: key)
-
-        guard #available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *) else { return result }
         Self.subject.send(key.name)
-
         return result
     }
 }
@@ -65,10 +62,7 @@ public extension KeychainManager {
     @discardableResult
     func remove(_ key: KeychainAPI.Key) -> Bool {
         let result = service.remove(key)
-
-        guard #available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *) else { return result }
         Self.subject.send(key.name)
-
         return result
     }
 }
@@ -76,7 +70,6 @@ public extension KeychainManager {
 #if canImport(Combine)
 import Combine
 
-@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension KeychainManager {
     private static let subject = PassthroughSubject<String, Never>()
 

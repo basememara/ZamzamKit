@@ -75,7 +75,6 @@ public extension NetworkManager {
 #if canImport(Combine)
 import Combine
 
-@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension NetworkManager {
     /// Creates a task that retrieves the contents of a URL based on the specified request object, and calls a handler upon completion.
     ///

@@ -218,7 +218,7 @@ public extension String {
     ///   - regex: the regular expression pattern
     /// - Returns: whether the regex matches in the string
     func match(regex pattern: String) -> Bool {
-        range(of: pattern, options: [.regularExpression]) != nil
+        range(of: pattern, options: .regularExpression) != nil
     }
 
     /// Returns a new string in which all occurrences of a

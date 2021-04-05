@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 private struct NavigateModifier<Destination: View>: ViewModifier {
     @Binding private(set) var isActive: Bool
     let destination: Destination?
@@ -26,7 +25,6 @@ private struct NavigateModifier<Destination: View>: ViewModifier {
     }
 }
 
-@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension View {
     /// Navigates the user to the given destination using the provided binding value.
     ///

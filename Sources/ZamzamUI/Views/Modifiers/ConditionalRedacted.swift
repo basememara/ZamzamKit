@@ -6,11 +6,9 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-#if canImport(SwiftUI)
 import SwiftUI
 
 /// A modifier that adds a redaction to this view hierarchy if the condition is met, otherwise it is `unredacted`.
-@available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 private struct ConditionalRedacted: ViewModifier {
     let condition: Bool
 
@@ -23,7 +21,6 @@ private struct ConditionalRedacted: ViewModifier {
     }
 }
 
-@available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 public extension View {
     /// Adds a redaction to this view hierarchy if the condition is met, otherwise it is `unredacted`.
     ///
@@ -33,4 +30,3 @@ public extension View {
         modifier(ConditionalRedacted(condition: condition))
     }
 }
-#endif

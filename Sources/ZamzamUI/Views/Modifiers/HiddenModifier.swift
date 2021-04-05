@@ -9,7 +9,6 @@
 import SwiftUI
 
 /// A modifier that hides a view if the condition is met, otherwise it the view is shown.
-@available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 private struct HiddenModifier: ViewModifier {
     let condition: Bool
 
@@ -22,7 +21,6 @@ private struct HiddenModifier: ViewModifier {
     }
 }
 
-@available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 public extension View {
     /// Hides this view conditionally.
     ///

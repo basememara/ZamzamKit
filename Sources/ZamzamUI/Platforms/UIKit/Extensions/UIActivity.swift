@@ -33,7 +33,6 @@ public extension UIActivity {
     }
 }
 
-@available(iOS 13, *)
 public extension UIActivity {
     /// Creates an instance of an activity.
     ///

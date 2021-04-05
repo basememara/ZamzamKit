@@ -24,7 +24,6 @@ public extension UserDefaults {
 #if canImport(Combine)
 import Combine
 
-@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension UserDefaults {
     var publisher: AnyPublisher<Void, Never> {
         NotificationCenter.default

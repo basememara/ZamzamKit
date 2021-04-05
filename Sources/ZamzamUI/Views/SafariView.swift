@@ -6,7 +6,7 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-#if os(iOS) && canImport(SwiftUI) && canImport(SafariServices)
+#if os(iOS) && canImport(SafariServices)
 import SafariServices
 import SwiftUI
 

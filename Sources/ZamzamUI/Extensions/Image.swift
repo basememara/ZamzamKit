@@ -6,6 +6,7 @@
 //  Copyright © 2021 Zamzam Inc. All rights reserved.
 //
 
+import SwiftUI
 #if os(macOS)
 import AppKit.NSImage
 public typealias PlatformImage = NSImage
@@ -14,10 +15,6 @@ import UIKit.UIImage
 public typealias PlatformImage = UIImage
 #endif
 
-#if canImport(SwiftUI)
-import SwiftUI
-
-@available(OSX 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension Image {
     init(platformImage image: PlatformImage) {
         #if os(macOS)
@@ -27,4 +24,3 @@ public extension Image {
         #endif
     }
 }
-#endif

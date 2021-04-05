@@ -12,7 +12,6 @@ public enum ZamzamError: Error {
     case nonExistent
     case duplicate
     case unauthorized
-    case notReachable
     case noInternet
     case timeout
     case parseFailure(Error?)

@@ -291,7 +291,6 @@ private extension UIApplication.State {
 #if canImport(SwiftUI)
 import SwiftUI
 
-@available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 public extension LogManager {
     /// Sets the application properties to the logger so it can be used outside the main thread.
     func set(context newPhase: ScenePhase) {
@@ -299,7 +298,6 @@ public extension LogManager {
     }
 }
 
-@available(OSX 11, iOS 14, tvOS 14, watchOS 7, *)
 private extension ScenePhase {
     /// The corresponding string of the raw type.
     var rawString: String {

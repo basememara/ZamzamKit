@@ -6,13 +6,12 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-#if os(iOS) && canImport(SwiftUI)
+#if os(iOS)
 import SwiftUI
 
 /// A view that applies a blurring effect to the content layered behind a visual effect view.
 ///
 /// This is currently a workaround until native SwiftUI support released.
-@available(iOS 13, *)
 public struct BlurView: UIViewRepresentable {
     private let style: UIBlurEffect.Style
 

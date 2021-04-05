@@ -7,6 +7,7 @@
 //
 
 import Foundation.NSUUID
+import SwiftUI
 import ZamzamCore
 
 /// Model container for global view errors.
@@ -47,10 +48,6 @@ public extension ViewError {
 
 // MARK: - Conversions
 
-#if canImport(SwiftUI)
-import SwiftUI
-
-@available(iOS 13, macOS 10.15, tvOS 13, watchOS 6, *)
 public extension Alert {
     /// Creates an alert from the view error.
     init(from error: ViewError) {
@@ -80,7 +77,6 @@ public extension Alert {
     }
 }
 
-@available(iOS 13, macOS 10.15, tvOS 13, watchOS 6, *)
 private struct AlertModifier: ViewModifier {
     @Binding var error: ViewError?
 
@@ -89,10 +85,8 @@ private struct AlertModifier: ViewModifier {
     }
 }
 
-@available(iOS 13, macOS 10.15, tvOS 13, watchOS 6, *)
 public extension View {
     func alert(error: Binding<ViewError?>) -> some View {
         modifier(AlertModifier(error: error))
     }
 }
-#endif
