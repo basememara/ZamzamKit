@@ -112,7 +112,7 @@ public extension LogServiceHTTP {
             ],
             "device": [
                 "device_id": distribution.deviceIdentifier,
-                "device_name": !distribution.isRunningInAppStore ? distribution.deviceName : "***",
+                "device_name": distribution.isRunningInAppStore ? "***" : distribution.deviceName,
                 "device_model": distribution.deviceModel,
                 "os_version": distribution.osVersion,
                 "is_simulator": distribution.isRunningOnSimulator

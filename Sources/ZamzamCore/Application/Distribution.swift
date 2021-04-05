@@ -70,7 +70,7 @@ public extension Distribution {
     /// Check if application is running in App Store environment.
     var isRunningInAppStore: Bool {
         // https://stackoverflow.com/questions/18282326/how-can-i-detect-if-the-currently-running-app-was-installed-from-the-app-store
-        !isRunningOnSimulator && !isInTestFlight && !isRunningOnSimulator
+        !isRunningOnSimulator && !isInTestFlight && !isAdHocDistributed
     }
 }
 
