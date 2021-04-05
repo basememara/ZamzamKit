@@ -62,6 +62,9 @@ line_length:
   warning: 150
   ignores_comments: true
 
+cyclomatic_complexity:
+  ignores_case_statements: true
+
 file_length: 750
 large_tuple: 3
 function_parameter_count: 10
