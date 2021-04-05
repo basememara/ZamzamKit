@@ -35,3 +35,15 @@ public extension Model {
         self[keyPath: writableKeyPath] = value
     }
 }
+
+// MARK: - Helpers
+
+public protocol ModelError: AnyObject {
+    var error: ViewError? { get set }
+}
+
+public extension Model where Self: ModelError {
+    func clearError() {
+        self(\.error, nil)
+    }
+}
