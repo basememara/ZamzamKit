@@ -60,3 +60,53 @@ public extension View {
         }
     }
 }
+
+public extension View {
+    /// Applies a modifier to a view if an optional item can be unwrapped.
+    ///
+    ///     someView
+    ///         .modifier(let: model) {
+    ///             $0.background(BackgroundView(model.bg))
+    ///         }
+    ///
+    /// - Parameters:
+    ///   - condition: The optional item to determine if the content should be applied.
+    ///   - content: The modifier and unwrapped item to apply to the view.
+    /// - Returns: The modified view.
+    @ViewBuilder func modifier<T: View, Item>(
+        `let` item: Item?,
+        then content: (Self, Item) -> T
+    ) -> some View {
+        if let item = item {
+            content(self, item)
+        } else {
+            self
+        }
+    }
+
+    /// Applies a modifier to a view if an optional item can be unwrapped.
+    ///
+    ///     someView
+    ///         .modifier(let: model) {
+    ///             $0.background(BackgroundView(model.bg))
+    ///         } else: {
+    ///             $0.background(Color.black)
+    ///         }
+    ///
+    /// - Parameters:
+    ///   - condition: The optional item to determine if the content should be applied.
+    ///   - trueContent: The modifier and unwrapped item to apply to the view.
+    ///   - falseContent: The modifier to apply to the view if the condition fails.
+    /// - Returns: The modified view.
+    @ViewBuilder func modifier<Item, TrueContent: View, FalseContent: View>(
+        `let` item: Item?,
+        then trueContent: (Self, Item) -> TrueContent,
+        else falseContent: (Self) -> FalseContent
+    ) -> some View {
+        if let item = item {
+            trueContent(self, item)
+        } else {
+            falseContent(self)
+        }
+    }
+}
