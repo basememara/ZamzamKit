@@ -17,7 +17,8 @@ private struct ClearButtonWhileEditingModifier: ViewModifier {
                 HStack {
                     Spacer()
                     Button(action: { text = "" }) {
-                        Image(systemName: "multiply.circle.fill")
+                        Label(LocalizedStringKey("Clear"), systemImage: "multiply.circle.fill")
+                            .labelStyle(IconOnlyLabelStyle())
                             .foregroundColor(.secondary)
                             .padding(8)
                     }
