@@ -97,18 +97,18 @@ extension DateTests {
     }
 
     func testEndOfDay() throws {
-        let date = try XCTUnwrap(Date(fromString: "2018/01/31 19:30"))
-        XCTAssertEqual(date.endOfDay.string(format: "yyyy/MM/dd HH:mm:ss"), "2018/01/31 23:59:59")
+        let date = try XCTUnwrap(Date(fromString: "2018/01/21 19:30"))
+        XCTAssertEqual(date.endOfDay.string(format: "yyyy/MM/dd HH:mm:ss"), "2018/01/21 23:59:59")
     }
 
     func testStartOfMonth() throws {
         let date = try XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
-        XCTAssertEqual(date.startOfMonth.string(format: "yyyy/MM/dd"), "2016/03/01")
+        XCTAssertEqual(date.startOfMonth.string(format: "yyyy/MM/dd HH:mm:ss"), "2016/03/01 00:00:00")
     }
 
     func testEndOfMonth() throws {
         let date = try XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
-        XCTAssertEqual(date.endOfMonth.string(format: "yyyy/MM/dd"), "2016/03/31")
+        XCTAssertEqual(date.endOfMonth.string(format: "yyyy/MM/dd HH:mm:ss"), "2016/03/31 23:59:59")
     }
 }
 

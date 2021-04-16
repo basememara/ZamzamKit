@@ -265,7 +265,7 @@ public extension Date {
     /// - Returns: Returns the date.
     func startOfMonth(for calendar: Calendar) -> Date {
         calendar.date(
-            from: calendar.dateComponents([.year, .month], from: startOfDay(for: calendar))
+            from: calendar.dateComponents([.year, .month], from: self)
         ) ?? self
     }
 }
