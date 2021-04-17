@@ -1,5 +1,5 @@
 //
-//  CoreLocationService.swift
+//  LocationServiceCore.swift
 //  ZamzamLocation
 //
 //  Created by Basem Emara on 2019-08-25.
@@ -9,7 +9,7 @@
 import CoreLocation
 import ZamzamCore
 
-public class CoreLocationService: NSObject, LocationService {
+public class LocationServiceCore: NSObject, LocationService {
     private let desiredAccuracy: CLLocationAccuracy?
     private let distanceFilter: Double?
     private let activityType: CLActivityType?
@@ -43,7 +43,7 @@ public class CoreLocationService: NSObject, LocationService {
 
 // MARK: - Authorization
 
-public extension CoreLocationService {
+public extension LocationServiceCore {
     var isAuthorized: Bool { CLLocationManager.isAuthorized }
 
     func isAuthorized(for type: LocationAPI.AuthorizationType) -> Bool {
@@ -81,7 +81,7 @@ public extension CoreLocationService {
 
 // MARK: - Coordinate
 
-public extension CoreLocationService {
+public extension LocationServiceCore {
     var location: CLLocation? { manager.location }
 
     func startUpdatingLocation(enableBackground: Bool) {
@@ -104,7 +104,7 @@ public extension CoreLocationService {
 }
 
 #if os(iOS)
-public extension CoreLocationService {
+public extension LocationServiceCore {
     func startMonitoringSignificantLocationChanges() {
         manager.startMonitoringSignificantLocationChanges()
     }
@@ -116,7 +116,7 @@ public extension CoreLocationService {
 
 // MARK: - Heading
 
-public extension CoreLocationService {
+public extension LocationServiceCore {
     var heading: CLHeading? { manager.heading }
 
     func startUpdatingHeading() {
@@ -135,7 +135,7 @@ public extension CoreLocationService {
 
 // MARK: - Delegates
 
-extension CoreLocationService: CLLocationManagerDelegate {
+extension LocationServiceCore: CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status != .notDetermined else { return }
         delegate?.locationService(didChangeAuthorization: isAuthorized)

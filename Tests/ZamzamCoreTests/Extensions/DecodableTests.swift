@@ -38,27 +38,6 @@ extension DecodableTests {
 }
 
 extension DecodableTests {
-    func testInBundle() throws {
-        // Given
-        struct TestModel: Decodable {
-            let string: String
-            let integer: Int
-        }
-
-        // When
-        let model = try jsonDecoder.decode(
-            TestModel.self,
-            forResource: "TestModel.json",
-            inBundle: .module
-        )
-
-        // Then
-        XCTAssertEqual(model.string, "Abc")
-        XCTAssertEqual(model.integer, 123)
-    }
-}
-
-extension DecodableTests {
     func testAnyDecodable() throws {
         // Given
         let jsonString = """

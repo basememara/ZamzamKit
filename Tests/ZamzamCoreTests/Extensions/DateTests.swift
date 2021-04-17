@@ -3,13 +3,15 @@
 //  ZamzamCore
 //
 //  Created by Basem Emara on 1/20/16.
-//  Copyright © 2016 CocoaPods. All rights reserved.
+//  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
 import XCTest
 import ZamzamCore
 
-final class DateTests: XCTestCase {
+final class DateTests: XCTestCase {}
+
+extension DateTests {
     func testIsPast() throws {
         XCTAssert(Date(timeIntervalSinceNow: -100).isPast)
         XCTAssertFalse(Date(timeIntervalSinceNow: 100).isPast)

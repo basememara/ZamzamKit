@@ -1,5 +1,5 @@
 //
-//  KeychainExternalService.swift
+//  KeychainServiceExternal.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2020-03-07.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct KeychainExternalService: KeychainService {
+public struct KeychainServiceExternal: KeychainService {
     private static let accessOption: KeychainSwiftAccessOptions = .accessibleAfterFirstUnlock
     private let keychain: KeychainSwift
 
@@ -23,20 +23,20 @@ public struct KeychainExternalService: KeychainService {
     }
 }
 
-public extension KeychainExternalService {
+public extension KeychainServiceExternal {
     func get(_ key: KeychainAPI.Key) -> String? {
         keychain.get(key.name)
     }
 }
 
-public extension KeychainExternalService {
+public extension KeychainServiceExternal {
     func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool {
         guard let value = value else { return remove(key) }
         return keychain.set(value, forKey: key.name)
     }
 }
 
-public extension KeychainExternalService {
+public extension KeychainServiceExternal {
     func remove(_ key: KeychainAPI.Key) -> Bool {
         keychain.delete(key.name)
     }
@@ -44,7 +44,7 @@ public extension KeychainExternalService {
 
 // MARK: - External Library
 
-private extension KeychainExternalService {
+private extension KeychainServiceExternal {
     //
     //  KeychainSwiftDistrib.swift
     //

@@ -1,5 +1,5 @@
 //
-//  NSFileManagerExtension.swift
+//  FileManager.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2/17/16.

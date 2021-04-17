@@ -18,6 +18,6 @@ final class StringInterpolationTests: XCTestCase {
         let output = "\(timestamp: date)"
 
         // Then
-        XCTAssertEqual(output, "2004-11-29 21:33:09.123")
+        XCTAssertEqual(output, "2004-11-29T21:33:09.123Z")
     }
 }

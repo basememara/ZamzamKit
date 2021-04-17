@@ -213,7 +213,7 @@ extension StringTests {
 }
 
 extension StringTests {
-    func testDecodeDictionaryString() {
+    func testDecodeDictionaryString() throws {
         let expected: [String: String] = [
             "test1": "abc",
             "test2": "def",
@@ -223,16 +223,17 @@ extension StringTests {
             "test6": "prs"
         ]
 
-        guard let data = try? JSONEncoder().encode(expected),
-            let json = String(data: data, encoding: .utf8) else {
-                XCTFail("Could not encode value for testing")
-                return
+        let data = try JSONEncoder().encode(expected)
+
+        guard let json = String(data: data, encoding: .utf8) else {
+            XCTFail("Could not encode value for testing")
+            return
         }
 
-        XCTAssertEqual(json.decode(), expected)
+        XCTAssertEqual(try json.decode(), expected)
     }
 
-    func testDecodeDictionaryDouble() {
+    func testDecodeDictionaryDouble() throws {
         let expected: [String: Double] = [
             "abc": 1.4,
             "def": 0.23,
@@ -242,16 +243,17 @@ extension StringTests {
             "prs": 325.235
         ]
 
-        guard let data = try? JSONEncoder().encode(expected),
-            let json = String(data: data, encoding: .utf8) else {
-                XCTFail("Could not encode value for testing")
-                return
+        let data = try JSONEncoder().encode(expected)
+
+        guard let json = String(data: data, encoding: .utf8) else {
+            XCTFail("Could not encode value for testing")
+            return
         }
 
-        XCTAssertEqual(json.decode(), expected)
+        XCTAssertEqual(try json.decode(), expected)
     }
 
-    func testDecodeDictionaryBool() {
+    func testDecodeDictionaryBool() throws {
         let expected: [Int: Bool] = [
             1: true,
             3: false,
@@ -261,16 +263,17 @@ extension StringTests {
             9: true
         ]
 
-        guard let data = try? JSONEncoder().encode(expected),
-            let json = String(data: data, encoding: .utf8) else {
-                XCTFail("Could not encode value for testing")
-                return
+        let data = try JSONEncoder().encode(expected)
+
+        guard let json = String(data: data, encoding: .utf8) else {
+            XCTFail("Could not encode value for testing")
+            return
         }
 
-        XCTAssertEqual(json.decode(), expected)
+        XCTAssertEqual(try json.decode(), expected)
     }
 
-    func testDecodeDictionaryInt() {
+    func testDecodeDictionaryInt() throws {
         let test = "{\"test1\":29,\"test2\":62,\"test3\":33,\"test4\":24,\"test5\":14,\"test6\":72}"
         let expected: [String: Int] = [
             "test1": 29,
@@ -281,7 +284,7 @@ extension StringTests {
             "test6": 72
         ]
 
-        XCTAssertEqual(test.decode(), expected)
+        XCTAssertEqual(try test.decode(), expected)
     }
 }
 
