@@ -31,10 +31,9 @@ public extension Date {
     /// - Returns: True if the date is within Ramadan; false otherwise.
     func isRamadan(
         offSet: Int = 0,
-        timeZone: TimeZone? = nil,
-        calendar: Calendar = Self.islamicCalendar
+        timeZone: TimeZone? = nil
     ) -> Bool {
-        hijri(offSet: offSet, timeZone: timeZone, calendar: calendar).month == 9
+        hijri(offSet: offSet, timeZone: timeZone, calendar: Self.islamicCalendar).month == 9
     }
 }
 
