@@ -11,7 +11,7 @@ import SwiftUI
 import ZamzamCore
 
 /// Model container for global view errors.
-public struct ViewError: Error, Equatable, Identifiable {
+public struct ViewError: Error, Identifiable, Equatable {
     public let id = UUID()
     public let title: String
     public let message: String?
