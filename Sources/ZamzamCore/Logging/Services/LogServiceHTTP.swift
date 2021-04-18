@@ -7,6 +7,7 @@
 //
 
 #if os(iOS)
+import Foundation.NSDate
 import Foundation.NSData
 import Foundation.NSJSONSerialization
 import Foundation.NSNotification
@@ -24,10 +25,10 @@ final public class LogServiceHTTP {
     private let networkManager: NetworkManager
 
     /// Closure that converts the buffer to data.
-    private let bufferEncode: ([(LogAPI.Level, String)]) -> Data?
+    private let bufferEncode: ([Entry]) -> Data?
 
     /// Stores the log entries in memory until it is ready to send.
-    private var buffer: [(LogAPI.Level, String)] = []
+    private var buffer: [Entry] = []
 
     /// The initializer of the log destination.
     ///
@@ -42,7 +43,7 @@ final public class LogServiceHTTP {
     ///   - notificationCenter: A notification dispatch mechanism that registers observers for flushing the buffer at certain app lifecycle events.
     public init(
         urlRequest: URLRequest,
-        bufferEncode: @escaping ([(LogAPI.Level, String)]) -> Data?,
+        bufferEncode: @escaping ([Entry]) -> Data?,
         maxEntriesInBuffer: Int,
         minFlushLevel: LogAPI.Level = .none,
         isDebug: Bool,
@@ -75,6 +76,15 @@ final public class LogServiceHTTP {
 }
 
 public extension LogServiceHTTP {
+    /// A log entry that contains details of the event.
+    struct Entry {
+        public let level: LogAPI.Level
+        public let date: Date
+        public let payload: String
+    }
+}
+
+public extension LogServiceHTTP {
     /// Appends the log to the buffer that will be queued for later sending.
     ///
     /// The buffer size is determined in the initializer. Once the threshold is met,
@@ -91,6 +101,7 @@ public extension LogServiceHTTP {
     func write(
         _ parameters: [String: Any],
         level: LogAPI.Level,
+        date: Date,
         file: String,
         function: String,
         line: Int,
@@ -136,7 +147,7 @@ public extension LogServiceHTTP {
         }
 
         // Store in buffer for sending later
-        buffer.append((level, log))
+        buffer.append(Entry(level: level, date: date, payload: log))
 
         // Flush buffer threshold reached
         guard buffer.count > maxEntriesInBuffer else { return }
@@ -147,15 +158,15 @@ public extension LogServiceHTTP {
 private extension LogServiceHTTP {
     func send() {
         guard !buffer.isEmpty,
-              minFlushLevel == .none || buffer.contains(where: { $0.0 >= minFlushLevel })
+              minFlushLevel == .none || buffer.contains(where: { $0.level >= minFlushLevel })
         else {
             return
         }
 
-        let logs = buffer
+        let entries = buffer
         buffer = []
 
-        guard let data = bufferEncode(logs) else {
+        guard let data = bufferEncode(entries) else {
             print("🤍 \(timestamp: Date()) PRINT Could not begin log destination task")
             return
         }
@@ -168,7 +179,7 @@ private extension LogServiceHTTP {
                 // Add back to the buffer if could not send
                 if case let .failure(error) = $0 {
                     print("🤍 \(timestamp: Date()) PRINT Error from log destination: \(error)")
-                    DispatchQueue.logger.async { self.buffer += logs }
+                    DispatchQueue.logger.async { self.buffer += entries }
                 }
 
                 task.end()
