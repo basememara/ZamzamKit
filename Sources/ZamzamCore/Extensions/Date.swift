@@ -311,8 +311,14 @@ public extension Date {
     ///   - date2: second date to compare to.
     /// - Returns: true if the date is between the two given dates.
     func isBetween(_ date1: Date, _ date2: Date) -> Bool {
-        // https://github.com/SwifterSwift/SwifterSwift/blob/055732cb699743f9b84864e36d466cf5c21627b2/Sources/SwifterSwift/Foundation/DateExtensions.swift#L885
-        date1.compare(self).rawValue * compare(date2).rawValue > 0
+        // https://stackoverflow.com/a/67179166
+        let minDate = min(date1, date2)
+        let maxDate = max(date1, date2)
+
+        guard self != minDate else { return true }
+        guard self != maxDate else { return false }
+
+        return DateInterval(start: minDate, end: maxDate).contains(self)
     }
 }
 

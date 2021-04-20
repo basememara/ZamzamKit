@@ -119,9 +119,44 @@ extension DateTests {
 extension DateTests {
     func testIsBetween() throws {
         XCTAssert(
-            try XCTUnwrap(Date(fromString: "2018/06/15 09:30")).isBetween(
-                try XCTUnwrap(Date(fromString: "2018/06/15 09:00")),
-                try XCTUnwrap(Date(fromString: "2018/08/15 09:30"))
+            try XCTUnwrap(Date(fromString: "2020/01/15 09:30")).isBetween(
+                try XCTUnwrap(Date(fromString: "2020/01/15 09:00")),
+                try XCTUnwrap(Date(fromString: "2020/01/15 10:00"))
+            )
+        )
+
+        XCTAssert(
+            try XCTUnwrap(Date(fromString: "2020/01/16 01:00")).isBetween(
+                try XCTUnwrap(Date(fromString: "2020/01/15 23:00")),
+                try XCTUnwrap(Date(fromString: "2020/01/16 04:00"))
+            )
+        )
+
+        XCTAssert(
+            try XCTUnwrap(Date(fromString: "2020/01/15 10:00")).isBetween(
+                try XCTUnwrap(Date(fromString: "2020/01/15 10:00")),
+                try XCTUnwrap(Date(fromString: "2020/01/15 10:30"))
+            )
+        )
+
+        XCTAssert(
+            try XCTUnwrap(Date(fromString: "2020/01/15 10:00")).isBetween(
+                try XCTUnwrap(Date(fromString: "2020/01/15 10:00")),
+                try XCTUnwrap(Date(fromString: "2020/01/15 10:00"))
+            )
+        )
+
+        XCTAssert(
+            try XCTUnwrap(Date(fromString: "2020/01/15 09:00")).isBetween(
+                try XCTUnwrap(Date(fromString: "2020/01/15 10:00")),
+                try XCTUnwrap(Date(fromString: "2020/01/15 08:00"))
+            )
+        )
+
+        XCTAssert(
+            try XCTUnwrap(Date(fromString: "2020/01/15 08:00")).isBetween(
+                try XCTUnwrap(Date(fromString: "2020/01/15 10:00")),
+                try XCTUnwrap(Date(fromString: "2020/01/15 08:00"))
             )
         )
 
@@ -132,10 +167,17 @@ extension DateTests {
             )
         )
 
-        XCTAssert(
-            try XCTUnwrap(Date(fromString: "2020/01/15 09:00")).isBetween(
+        XCTAssertFalse(
+            try XCTUnwrap(Date(fromString: "2020/01/15 10:30")).isBetween(
                 try XCTUnwrap(Date(fromString: "2020/01/15 10:00")),
-                try XCTUnwrap(Date(fromString: "2018/01/15 13:00"))
+                try XCTUnwrap(Date(fromString: "2020/01/15 10:30"))
+            )
+        )
+
+        XCTAssertFalse(
+            try XCTUnwrap(Date(fromString: "2020/01/15 10:00")).isBetween(
+                try XCTUnwrap(Date(fromString: "2020/01/15 10:00")),
+                try XCTUnwrap(Date(fromString: "2020/01/15 08:00"))
             )
         )
 
