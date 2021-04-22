@@ -60,3 +60,17 @@ public extension PlatformColor {
         )
     }
 }
+
+#if os(macOS)
+public extension NSColor {
+    /// The primary color to use for text labels.
+    ///
+    /// Unified with iOS color name.
+    static let label = NSColor.labelColor
+
+    /// The color to use for the window background.
+    ///
+    /// Unified with iOS color name.
+    static let systemBackground = NSColor.windowBackgroundColor
+}
+#endif

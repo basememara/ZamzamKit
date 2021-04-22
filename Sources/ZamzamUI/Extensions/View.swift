@@ -16,6 +16,34 @@ public extension View {
 }
 
 public extension View {
+    /// Binds the height of the view to a property.
+    func assign(heightTo height: Binding<CGFloat>) -> some View {
+        background(
+            GeometryReader { geometry in
+                Color.clear
+                    .onAppear { height.wrappedValue = geometry.size.height }
+            }
+        )
+    }
+}
+
+#if os(iOS)
+struct RoundedRect: Shape {
+    let radius: CGFloat
+    let corners: UIRectCorner
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(
+            roundedRect: rect,
+            byRoundingCorners: corners,
+            cornerRadii: CGSize(width: radius, height: radius)
+        )
+
+        return Path(path.cgPath)
+    }
+}
+
+public extension View {
     /// Clips this view to its bounding frame, with the specified corner radius.
     ///
     ///     Text("Rounded Corners")
@@ -35,15 +63,4 @@ public extension View {
         clipShape(RoundedRect(radius: radius, corners: corners))
     }
 }
-
-public extension View {
-    /// Binds the height of the view to a property.
-    func assign(heightTo height: Binding<CGFloat>) -> some View {
-        background(
-            GeometryReader { geometry in
-                Color.clear
-                    .onAppear { height.wrappedValue = geometry.size.height }
-            }
-        )
-    }
-}
+#endif
