@@ -584,3 +584,43 @@ extension DateTests {
         XCTAssertFalse(try XCTUnwrap(Date(fromString: "2017/01/01 12:30")).isJumuah)
     }
 }
+
+extension DateTests {
+    func testDateIntervalProgress() throws {
+        let startDate = try XCTUnwrap(Date(fromString: "2021/04/21 12:30"))
+        let interval1 = DateInterval(start: startDate, duration: 0)
+        let interval2 = DateInterval(start: startDate, duration: 500)
+
+        let progress1 = interval1.progress(at: startDate)
+        XCTAssertEqual(progress1.remaining, 0)
+        XCTAssertEqual(progress1.value, 1)
+
+        let progress2 = interval2.progress(at: startDate)
+        XCTAssertEqual(progress2.remaining, 500)
+        XCTAssertEqual(progress2.value, 1)
+
+        let progress3 = interval2.progress(at: startDate + .seconds(200))
+        XCTAssertEqual(progress3.remaining, 300)
+        XCTAssertEqual(progress3.value, 0.6)
+
+        let progress4 = interval2.progress(at: startDate + .seconds(250))
+        XCTAssertEqual(progress4.remaining, 250)
+        XCTAssertEqual(progress4.value, 0.5)
+
+        let progress5 = interval2.progress(at: startDate + .seconds(600))
+        XCTAssertEqual(progress5.remaining, 0)
+        XCTAssertEqual(progress5.value, 1)
+
+        let progress6 = interval2.progress(at: startDate - .seconds(1000))
+        XCTAssertEqual(progress6.remaining, 1500)
+        XCTAssertEqual(progress6.value, 0)
+
+        let progress7 = interval1.progress(at: startDate - .seconds(100))
+        XCTAssertEqual(progress7.remaining, 100)
+        XCTAssertEqual(progress7.value, 0)
+
+        let progress8 = interval1.progress(at: startDate + .seconds(100))
+        XCTAssertEqual(progress8.remaining, 0)
+        XCTAssertEqual(progress8.value, 1)
+    }
+}
