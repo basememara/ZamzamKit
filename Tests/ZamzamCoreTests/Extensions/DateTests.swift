@@ -188,30 +188,30 @@ extension DateTests {
     }
 
     func testIsBeyondSeconds() throws {
-        let date = try XCTUnwrap(Date(fromString: "2016/03/22 09:40"))
-        let fromDate = try XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
+        let date1 = try XCTUnwrap(Date(fromString: "2016/03/22 09:40"))
+        let date2 = try XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
 
-        XCTAssert(date.isBeyond(fromDate, bySeconds: 300))
-        XCTAssertFalse(date.isBeyond(fromDate, bySeconds: 600))
-        XCTAssertFalse(date.isBeyond(fromDate, bySeconds: 1200))
+        XCTAssert(date1.greaterThan(date2, bySeconds: 300))
+        XCTAssertFalse(date1.greaterThan(date2, bySeconds: 600))
+        XCTAssertFalse(date1.greaterThan(date2, bySeconds: 1200))
     }
 
     func testIsBeyondMinutes() throws {
-        let date = try XCTUnwrap(Date(fromString: "2016/03/22 09:40"))
-        let fromDate = try XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
+        let date1 = try XCTUnwrap(Date(fromString: "2016/03/22 09:40"))
+        let date2 = try XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
 
-        XCTAssert(date.isBeyond(fromDate, byMinutes: 5))
-        XCTAssertFalse(date.isBeyond(fromDate, byMinutes: 10))
-        XCTAssertFalse(date.isBeyond(fromDate, byMinutes: 25))
+        XCTAssert(date1.greaterThan(date2, byMinutes: 5))
+        XCTAssertFalse(date1.greaterThan(date2, byMinutes: 10))
+        XCTAssertFalse(date1.greaterThan(date2, byMinutes: 25))
     }
 
     func testIsBeyondHours() throws {
-        let date = try XCTUnwrap(Date(fromString: "2016/03/22 11:40"))
-        let fromDate = try XCTUnwrap(Date(fromString: "2016/03/22 09:40"))
+        let date1 = try XCTUnwrap(Date(fromString: "2016/03/22 11:40"))
+        let date2 = try XCTUnwrap(Date(fromString: "2016/03/22 09:40"))
 
-        XCTAssert(date.isBeyond(fromDate, byHours: 1))
-        XCTAssertFalse(date.isBeyond(fromDate, byHours: 2))
-        XCTAssertFalse(date.isBeyond(fromDate, byHours: 4))
+        XCTAssert(date1.greaterThan(date2, byHours: 1))
+        XCTAssertFalse(date1.greaterThan(date2, byHours: 2))
+        XCTAssertFalse(date1.greaterThan(date2, byHours: 4))
     }
 
     func testIsBeyondDays() throws {
@@ -219,12 +219,12 @@ extension DateTests {
             $0.dateFormat = "yyyy/MM/dd HH:mm"
         }
 
-        let date = try XCTUnwrap(formatter.date(from: "2016/03/24 11:40"))
-        let fromDate = try XCTUnwrap(formatter.date(from: "2016/03/22 09:40"))
+        let date1 = try XCTUnwrap(formatter.date(from: "2016/03/24 11:40"))
+        let date2 = try XCTUnwrap(formatter.date(from: "2016/03/22 09:40"))
 
-        XCTAssert(date.isBeyond(fromDate, byDays: 1))
-        XCTAssert(date.isBeyond(fromDate, byDays: 2))
-        XCTAssertFalse(date.isBeyond(fromDate, byDays: 3))
+        XCTAssert(date1.greaterThan(date2, byDays: 1))
+        XCTAssert(date1.greaterThan(date2, byDays: 2))
+        XCTAssertFalse(date1.greaterThan(date2, byDays: 3))
     }
 }
 

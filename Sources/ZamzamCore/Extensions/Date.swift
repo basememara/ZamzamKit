@@ -325,70 +325,70 @@ public extension Date {
 public extension Date {
     /// Specifies if the date is beyond the time window.
     ///
-    ///     let date = Date(fromString: "2016/03/22 09:40")
-    ///     let fromDate = Date(fromString: "2016/03/22 09:30")
+    ///     let date1 = Date(fromString: "2016/03/22 09:40")
+    ///     let date2 = Date(fromString: "2016/03/22 09:30")
     ///
-    ///     date.isBeyond(fromDate, bySeconds: 300) // true
-    ///     date.isBeyond(fromDate, bySeconds: 600) // false
-    ///     date.isBeyond(fromDate, bySeconds: 1200) // false
+    ///     date1.greaterThan(date2, bySeconds: 300) // true
+    ///     date1.greaterThan(date2, bySeconds: 600) // false
+    ///     date1.greaterThan(date2, bySeconds: 1200) // false
     ///
     /// - Parameters:
     ///   - date: Date to use as a reference.
     ///   - seconds: Time window the date is considered valid.
     /// - Returns: Has the time elapsed the time window.
-    func isBeyond(_ date: Date, bySeconds seconds: Int) -> Bool {
-        timeIntervalSince(date).seconds > seconds
+    func greaterThan(_ date: Date, bySeconds seconds: Double) -> Bool {
+        timeIntervalSince(date) > seconds
     }
 
     /// Specifies if the date is beyond the time window.
     ///
-    ///     let date = Date(fromString: "2016/03/22 09:40")
-    ///     let fromDate = Date(fromString: "2016/03/22 09:30")
+    ///     let date1 = Date(fromString: "2016/03/22 09:40")
+    ///     let date2 = Date(fromString: "2016/03/22 09:30")
     ///
-    ///     date.isBeyond(fromDate, byMinutes: 5) // true
-    ///     date.isBeyond(fromDate, byMinutes: 10) // false
-    ///     date.isBeyond(fromDate, byMinutes: 25) // false
+    ///     date1.greaterThan(date2, byMinutes: 5) // true
+    ///     date1.greaterThan(date2, byMinutes: 10) // false
+    ///     date1.greaterThan(date2, byMinutes: 25) // false
     ///
     /// - Parameters:
     ///   - date: Date to use as a reference.
     ///   - minutes: Time window the date is considered valid.
     /// - Returns: Has the time elapsed the time window.
-    func isBeyond(_ date: Date, byMinutes minutes: Double) -> Bool {
-        timeIntervalSince(date).minutes > minutes
+    func greaterThan(_ date: Date, byMinutes minutes: Double) -> Bool {
+        greaterThan(date, bySeconds: minutes * 60)
     }
 
     /// Specifies if the date is beyond the time window.
     ///
-    ///     let date = Date(fromString: "2016/03/22 11:40")
-    ///     let fromDate = Date(fromString: "2016/03/22 09:40")
+    ///     let date1 = Date(fromString: "2016/03/22 11:40")
+    ///     let date2 = Date(fromString: "2016/03/22 09:40")
     ///
-    ///     date.isBeyond(fromDate, byHours: 1) // true
-    ///     date.isBeyond(fromDate, byHours: 2) // false
-    ///     date.isBeyond(fromDate, byHours: 4) // false
+    ///     date1.greaterThan(date2, byHours: 1) // true
+    ///     date1.greaterThan(date2, byHours: 2) // false
+    ///     date1.greaterThan(date2, byHours: 4) // false
     ///
     /// - Parameters:
     ///   - date: Date to use as a reference.
     ///   - hours: Time window the date is considered valid.
     /// - Returns: Has the time elapsed the time window.
-    func isBeyond(_ date: Date, byHours hours: Double) -> Bool {
-        timeIntervalSince(date).hours > hours
+    func greaterThan(_ date: Date, byHours hours: Double) -> Bool {
+        greaterThan(date, bySeconds: hours * 3600)
     }
 
     /// Specifies if the date is beyond the time window.
     ///
-    ///     let date = Date(fromString: "2016/03/24 11:40")
-    ///     let fromDate = Date(fromString: "2016/03/22 09:40")
+    ///     let date1 = Date(fromString: "2016/03/24 11:40")
+    ///     let date2 = Date(fromString: "2016/03/22 09:40")
     ///
-    ///     date.isBeyond(fromDate, byDays: 1) // true
-    ///     date.isBeyond(fromDate, byDays: 2) // true
-    ///     date.isBeyond(fromDate, byDays: 3) // false
+    ///     date1.greaterThan(date2, byDays: 1) // true
+    ///     date1.greaterThan(date2, byDays: 2) // true
+    ///     date1.greaterThan(date2, byDays: 3) // false
     ///
     /// - Parameters:
     ///   - date: Date to use as a reference.
     ///   - days: Time window the date is considered valid.
     /// - Returns: Has the time elapsed the time window.
-    func isBeyond(_ date: Date, byDays days: Double) -> Bool {
-        timeIntervalSince(date).days > days
+    func greaterThan(_ date: Date, byDays days: Double) -> Bool {
+        greaterThan(date, bySeconds: days * 86400)
     }
 }
 
