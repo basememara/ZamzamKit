@@ -186,46 +186,6 @@ extension DateTests {
         let date2 = Date(timeIntervalSinceNow: -1000)
         XCTAssert(date.isBetween(date1, date2))
     }
-
-    func testIsBeyondSeconds() throws {
-        let date1 = try XCTUnwrap(Date(fromString: "2016/03/22 09:40"))
-        let date2 = try XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
-
-        XCTAssert(date1.greaterThan(date2, bySeconds: 300))
-        XCTAssertFalse(date1.greaterThan(date2, bySeconds: 600))
-        XCTAssertFalse(date1.greaterThan(date2, bySeconds: 1200))
-    }
-
-    func testIsBeyondMinutes() throws {
-        let date1 = try XCTUnwrap(Date(fromString: "2016/03/22 09:40"))
-        let date2 = try XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
-
-        XCTAssert(date1.greaterThan(date2, byMinutes: 5))
-        XCTAssertFalse(date1.greaterThan(date2, byMinutes: 10))
-        XCTAssertFalse(date1.greaterThan(date2, byMinutes: 25))
-    }
-
-    func testIsBeyondHours() throws {
-        let date1 = try XCTUnwrap(Date(fromString: "2016/03/22 11:40"))
-        let date2 = try XCTUnwrap(Date(fromString: "2016/03/22 09:40"))
-
-        XCTAssert(date1.greaterThan(date2, byHours: 1))
-        XCTAssertFalse(date1.greaterThan(date2, byHours: 2))
-        XCTAssertFalse(date1.greaterThan(date2, byHours: 4))
-    }
-
-    func testIsBeyondDays() throws {
-        let formatter = DateFormatter().apply {
-            $0.dateFormat = "yyyy/MM/dd HH:mm"
-        }
-
-        let date1 = try XCTUnwrap(formatter.date(from: "2016/03/24 11:40"))
-        let date2 = try XCTUnwrap(formatter.date(from: "2016/03/22 09:40"))
-
-        XCTAssert(date1.greaterThan(date2, byDays: 1))
-        XCTAssert(date1.greaterThan(date2, byDays: 2))
-        XCTAssertFalse(date1.greaterThan(date2, byDays: 3))
-    }
 }
 
 // MARK: - String
