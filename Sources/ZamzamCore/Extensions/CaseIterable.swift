@@ -14,7 +14,7 @@ public extension CaseIterableDefaultsLastDecodable {
     init(from decoder: Decoder) throws {
         // https://stackoverflow.com/a/49697266
         self = try Self(
-            rawValue: decoder.singleValueContainer().decode(RawValue.self)
+            rawValue: decoder.singleValueContainer().decode()
         ) ?? Self.allCases.last!
         // swiftlint:disable:previous force_unwrapping
     }
