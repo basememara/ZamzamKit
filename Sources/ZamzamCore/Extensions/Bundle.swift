@@ -22,7 +22,25 @@ public extension Bundle {
         guard let resourcePath = path(forResource: file, ofType: nil, inDirectory: directory) else { return nil }
         return try? String(contentsOfFile: resourcePath, encoding: encoding)
     }
+}
 
+public extension Bundle {
+    /// Returns the file URL for the resource identified by the specified name and file extension.
+    /// - Parameters:
+    ///   - name: The name of the resource file. If you specify nil, the method returns the first resource file it finds with the specified extension.
+    ///   - ext: The extension of the resource file. If extension is an empty string or nil, the extension is assumed not to exist and the file URL is the first file encountered that exactly matches name.
+    ///   - options: Options to control the reading of data from the contents.
+    /// - Returns: The data read from the Bundle location.
+    func data(forResource name: String?, withExtension ext: String?, options: Data.ReadingOptions = []) throws -> Data {
+        guard let url = url(forResource: name, withExtension: ext) else {
+            throw NSError(domain: bundleIdentifier ?? "", code: NSFileReadNoSuchFileError)
+        }
+
+        return try Data(contentsOf: url)
+    }
+}
+
+public extension Bundle {
     /// Gets the contents of the specified plist file.
     ///
     ///     let values: [String] = Bundle.main.array(plist: "Array.plist")
@@ -48,7 +66,9 @@ public extension Bundle {
 
         return contents
     }
+}
 
+public extension Bundle {
     /// Gets the contents of the specified plist file.
     ///
     ///     let values = Bundle.main.contents(plist: "Settings.plist")
