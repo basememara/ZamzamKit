@@ -388,12 +388,12 @@ date.isBeyond(fromDate, bySeconds: 1200) // false
 let date = Date(fromString: "2018/03/22 09:40")
 let calendar = Calendar(identifier: .chinese)
 
-date.isToday(for: calendar)
-date.isWeekday(for: calendar)
-date.isCurrentMonth(for: calendar)
-date.isToday(for: calendar)
-date.startOfDay(for: calendar)
-date.startOfMonth(for: calendar)
+date.isToday(using: calendar)
+date.isWeekday(using: calendar)
+date.isCurrentMonth(using: calendar)
+date.isToday(using: calendar)
+date.startOfDay(using: calendar)
+date.startOfMonth(using: calendar)
 ```
 
 > Determine if a date is beyond a specified time window:

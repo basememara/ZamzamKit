@@ -12,13 +12,13 @@ import Foundation.NSDateFormatter
 
 public extension Date {
     /// Determines if the date if Friday / Jumuah.
-    var isJumuah: Bool { isJumuah(for: .current) }
+    var isJumuah: Bool { isJumuah(using: .current) }
 
     /// Determines if the date if Friday / Jumuah.
     ///
     /// - Parameter calendar: Calendar used for calculation.
     /// - Returns: Returns true if date passes the criteria.
-    func isJumuah(for calendar: Calendar) -> Bool {
+    func isJumuah(using calendar: Calendar) -> Bool {
         calendar.dateComponents([.weekday], from: self).weekday == 6
     }
 
