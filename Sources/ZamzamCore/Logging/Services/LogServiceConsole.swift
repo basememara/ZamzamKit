@@ -28,18 +28,19 @@ public extension LogServiceConsole {
         context: [String: CustomStringConvertible]
     ) {
         let prefix: String
+        let time = DateFormatter.timeFormatter.string(from: Date())
 
         switch level {
         case .verbose:
-            prefix = "💜 \(timestamp: Date()) VERBOSE"
+            prefix = "💜 \(time) VERBOSE"
         case .debug:
-            prefix = "💚 \(timestamp: Date()) DEBUG"
+            prefix = "💚 \(time) DEBUG"
         case .info:
-            prefix = "💙 \(timestamp: Date()) INFO"
+            prefix = "💙 \(time) INFO"
         case .warning:
-            prefix = "💛 \(timestamp: Date()) WARNING"
+            prefix = "💛 \(time) WARNING"
         case .error:
-            prefix = "❤️ \(timestamp: Date()) ERROR"
+            prefix = "❤️ \(time) ERROR"
         case .none:
             return
         }

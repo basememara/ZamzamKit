@@ -27,6 +27,11 @@ public extension DateFormatter {
     static let zuluFormatter = DateFormatter(iso8601Format: dateFormatZ)
 }
 
+extension DateFormatter {
+    /// The date formatter used for friendly precise time outputs.
+    static let timeFormatter = DateFormatter(dateFormat: "HH:mm:ss.SSS")
+}
+
 public extension DateFormatter {
     /// A formatter that converts between dates and their ISO 8601 string representations.
     ///

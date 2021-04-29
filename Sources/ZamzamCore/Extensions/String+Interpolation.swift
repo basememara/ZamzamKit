@@ -18,14 +18,3 @@ public extension String.StringInterpolation {
         appendLiteral(formatter.string(from: value))
     }
 }
-
-public extension String.StringInterpolation {
-    /// Appends a date formatted timestamp to the interpolation.
-    ///
-    ///     print("Console log at \(timestamp: Date())")
-    ///
-    /// - Parameter timestamp: The date to format.
-    mutating func appendInterpolation(timestamp: Date) {
-        appendLiteral(DateFormatter.zuluFormatter.string(from: timestamp))
-    }
-}

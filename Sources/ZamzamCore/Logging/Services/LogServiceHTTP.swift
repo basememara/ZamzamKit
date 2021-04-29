@@ -142,7 +142,7 @@ public extension LogServiceHTTP {
         payload.merge(parameters) { $1 }
 
         guard let log = payload.jsonString() else {
-            print("🤍 \(timestamp: Date()) ERROR Logger unable to encode parameters for destination.")
+            print("🤍 \(Date(), formatter: .timeFormatter) ERROR Logger unable to encode parameters for destination.")
             return
         }
 
@@ -167,7 +167,7 @@ private extension LogServiceHTTP {
         buffer = []
 
         guard let data = bufferEncode(entries) else {
-            print("🤍 \(timestamp: Date()) PRINT Could not begin log destination task")
+            print("🤍 \(Date(), formatter: .timeFormatter) PRINT Could not begin log destination task")
             return
         }
 
@@ -178,7 +178,7 @@ private extension LogServiceHTTP {
             networkManager.send(request) {
                 // Add back to the buffer if could not send
                 if case let .failure(error) = $0 {
-                    print("🤍 \(timestamp: Date()) PRINT Error from log destination: \(error)")
+                    print("🤍 \(Date(), formatter: .timeFormatter) PRINT Error from log destination: \(error)")
                     DispatchQueue.logger.async { self.buffer += entries }
                 }
 
