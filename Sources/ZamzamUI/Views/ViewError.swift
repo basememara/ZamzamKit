@@ -26,6 +26,18 @@ public struct ViewError: Error, Identifiable, Equatable {
         self.message = message
         self.action = action
     }
+
+    public init(
+        from error: Error,
+        message: String? = nil,
+        action: Action? = nil
+    ) {
+        self.init(
+            title: error.localizedDescription,
+            message: message,
+            action: action
+        )
+    }
 }
 
 // MARK: - Types

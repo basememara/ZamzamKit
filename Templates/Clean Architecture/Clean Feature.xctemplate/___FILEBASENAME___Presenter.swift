@@ -16,11 +16,7 @@ extension ___VARIABLE_productName:identifier___Presenter {
 
 extension ___VARIABLE_productName:identifier___Presenter {
     func display(error: ___VARIABLE_moduleName:identifier___Error) {
-        let viewError = ViewError(
-            title: error.localizedDescription
-        )
-
-        model(\.error, viewError)
+        model(\.error, ViewError(from: error))
     }
 }
 
