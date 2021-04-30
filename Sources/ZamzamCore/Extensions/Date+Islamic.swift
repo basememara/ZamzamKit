@@ -12,7 +12,7 @@ import Foundation.NSDateFormatter
 
 public extension Date {
     /// Determines if the date if Friday / Jumuah.
-    var isJumuah: Bool { isJumuah(using: .current) }
+    var isJumuah: Bool { isJumuah(using: .current)}
 
     /// Determines if the date if Friday / Jumuah.
     ///
