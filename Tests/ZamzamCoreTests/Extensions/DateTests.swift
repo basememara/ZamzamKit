@@ -188,6 +188,44 @@ extension DateTests {
     }
 }
 
+extension DateTests {
+    func testExpanding() throws {
+        let date = try XCTUnwrap(Date(fromString: "2020/02/27 09:30", calendar: .posix))
+
+        XCTAssertEqual(
+            date.expanding(to: .week, using: .posix),
+            DateInterval(start: Date(timeIntervalSince1970: 1582416000), end: Date(timeIntervalSince1970: 1583020800))
+        )
+
+        XCTAssertEqual(
+            date.expanding(to: .month, using: .posix),
+            DateInterval(start: Date(timeIntervalSince1970: 1580515200), end: Date(timeIntervalSince1970: 1583020800))
+        )
+
+        XCTAssertEqual(
+            date.expanding(to: .monthWithTrailingWeeks, using: .posix),
+            DateInterval(start: Date(timeIntervalSince1970: 1579996800), end: Date(timeIntervalSince1970: 1583020800))
+        )
+
+        let date2 = try XCTUnwrap(Date(fromString: "2020/04/01 09:30", calendar: .posix))
+
+        XCTAssertEqual(
+            date2.expanding(to: .week, using: .posix),
+            DateInterval(start: Date(timeIntervalSince1970: 1585440000), end: Date(timeIntervalSince1970: 1586044800))
+        )
+
+        XCTAssertEqual(
+            date2.expanding(to: .month, using: .posix),
+            DateInterval(start: Date(timeIntervalSince1970: 1585699200), end: Date(timeIntervalSince1970: 1588291200))
+        )
+
+        XCTAssertEqual(
+            date2.expanding(to: .monthWithTrailingWeeks, using: .posix),
+            DateInterval(start: Date(timeIntervalSince1970: 1585440000), end: Date(timeIntervalSince1970: 1588464000))
+        )
+    }
+}
+
 // MARK: - String
 
 extension DateTests {

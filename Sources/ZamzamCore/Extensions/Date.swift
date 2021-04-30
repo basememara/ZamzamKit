@@ -341,3 +341,40 @@ public extension Date {
         return Double(hour) + (Double(minutes) / 60.0)
     }
 }
+
+public extension Date {
+    enum ExpandingComponent {
+        case week
+        case month
+        case monthWithTrailingWeeks
+    }
+
+    /// Returns the starting time and duration of a given calendar component that contains a given date.
+    ///
+    ///     let date = Date(fromString: "2020/04/01 09:30")
+    ///     date.expanding(to: .week) // Mar 29 - Apr 4
+    ///     date.expanding(to: .month) // Apr 1 - Apr 30
+    ///     date.expanding(to: .monthWithTrailingWeeks) // Mar 29 - May 2
+    ///
+    /// - Parameters:
+    ///   - component: A date component that specifies the date interval that contains the date.
+    ///   - calendar: A calendar component.
+    /// - Returns: A new `DateInterval` if the starting time and duration of a component could be calculated; otherwise, nil.
+    func expanding(to component: ExpandingComponent, using calendar: Calendar = .current) -> DateInterval? {
+        switch component {
+        case .week:
+            return calendar.dateInterval(of: .weekOfMonth, for: self)
+        case .month:
+            return calendar.dateInterval(of: .month, for: self)
+        case .monthWithTrailingWeeks:
+            guard let monthInterval = calendar.dateInterval(of: .month, for: self),
+                  let monthFirstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),
+                  let monthLastWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.end - 1)
+            else {
+                return nil
+            }
+
+            return DateInterval(start: monthFirstWeek.start, end: monthLastWeek.end)
+        }
+    }
+}
