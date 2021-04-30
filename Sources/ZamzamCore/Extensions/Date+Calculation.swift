@@ -14,7 +14,6 @@ public extension Date {
     ///
     /// You use `TimeIntervalUnit` values to do date calculations.
     enum TimeIntervalUnit {
-        case seconds(Int)
         case minutes(Int)
         case hours(Int)
         case days(Int)
@@ -27,9 +26,6 @@ public extension Date {
     ///
     /// You use `TimeIntervalUnitWithCalendar` values to do date calculations.
     enum TimeIntervalUnitWithCalendar {
-        case seconds(Int, Calendar)
-        case minutes(Int, Calendar)
-        case hours(Int, Calendar)
         case days(Int, Calendar)
         case weeks(Int, Calendar)
         case months(Int, Calendar)
@@ -49,31 +45,19 @@ public extension Date {
         let value: Int
 
         switch right {
-        case .seconds(let addValue, let toCalendar):
-            calendar = toCalendar
-            component = .second
-            value = addValue
-        case .minutes(let addValue, let toCalendar):
-            calendar = toCalendar
-            component = .minute
-            value = addValue
-        case .hours(let addValue, let toCalendar):
-            calendar = toCalendar
-            component = .hour
-            value = addValue
-        case .days(let addValue, let toCalendar):
+        case let .days(addValue, toCalendar):
             calendar = toCalendar
             component = .day
             value = addValue
-        case .weeks(let addValue, let toCalendar):
+        case let .weeks(addValue, toCalendar):
             calendar = toCalendar
             component = .day
             value = addValue * 7 // All calendars have 7 days in a week
-        case .months(let addValue, let toCalendar):
+        case let .months(addValue, toCalendar):
             calendar = toCalendar
             component = .month
             value = addValue
-        case .years(let addValue, let toCalendar):
+        case let .years(addValue, toCalendar):
             calendar = toCalendar
             component = .year
             value = addValue
@@ -88,6 +72,26 @@ public extension Date {
         ) ?? left
     }
 
+    /// Subtracts time interval components from a date for the calendar.
+    ///
+    ///     Date(fromString: "1440/02/30 18:31", calendar) - .days(1, calendar)
+    ///
+    /// - Parameters:
+    ///   - left: The date to calculate from.
+    ///   - right: The time interval component with calendar to subtracts from the date.
+    static func - (left: Date, right: TimeIntervalUnitWithCalendar) -> Date {
+        switch right {
+        case let .days(value, calendar):
+            return left + .days(-value, calendar)
+        case let .weeks(value, calendar):
+            return left + .weeks(-value, calendar)
+        case let .months(value, calendar):
+            return left + .months(-value, calendar)
+        case let .years(value, calendar):
+            return left + .years(-value, calendar)
+        }
+    }
+
     /// Adds time interval components to a date.
     ///
     ///     Date(fromString: "2015/09/18 18:31") + .days(1)
@@ -96,72 +100,43 @@ public extension Date {
     ///   - left: The date to calculate from.
     ///   - right: The time interval component to add to the date.
     static func + (left: Date, right: TimeIntervalUnit) -> Date {
-        let calendar: Calendar = .current
-        let newRight: TimeIntervalUnitWithCalendar
-
         switch right {
-        case .seconds(let value):
-            newRight = .seconds(value, calendar)
-        case .minutes(let value):
-            newRight = .minutes(value, calendar)
-        case .hours(let value):
-            newRight = .hours(value, calendar)
-        case .days(let value):
-            newRight = .days(value, calendar)
-        case .weeks(let value):
-            newRight = .weeks(value, calendar)
-        case .months(let value):
-            newRight = .months(value, calendar)
-        case .years(let value):
-            newRight = .years(value, calendar)
+        case let .minutes(value):
+            return left + TimeInterval(value * 60)
+        case let .hours(value):
+            return left + TimeInterval(value * 3600)
+        case let .days(value):
+            return left + .days(value, .current)
+        case let .weeks(value):
+            return left + .weeks(value, .current)
+        case let .months(value):
+            return left + .months(value, .current)
+        case let .years(value):
+            return left + .years(value, .current)
         }
-
-        return left + newRight
     }
 
+    /// Subtracts time interval components from a date.
+    ///
+    ///     Date(fromString: "2015/09/18 18:31") - .days(1)
+    ///
+    /// - Parameters:
+    ///   - left: The date to calculate from.
+    ///   - right: The time interval component to subtract from the date.
     static func - (left: Date, right: TimeIntervalUnit) -> Date {
-        let minusRight: TimeIntervalUnit
-
         switch right {
-        case .seconds(let value):
-            minusRight = .seconds(-value)
-        case .minutes(let value):
-            minusRight = .minutes(-value)
-        case .hours(let value):
-            minusRight = .hours(-value)
-        case .days(let value):
-            minusRight = .days(-value)
-        case .weeks(let value):
-            minusRight = .weeks(-value)
-        case .months(let value):
-            minusRight = .months(-value)
-        case .years(let value):
-            minusRight = .years(-value)
+        case let .minutes(value):
+            return left + .minutes(-value)
+        case let .hours(value):
+            return left + .hours(-value)
+        case let .days(value):
+            return left + .days(-value)
+        case let .weeks(value):
+            return left + .weeks(-value)
+        case let .months(value):
+            return left + .months(-value)
+        case let .years(value):
+            return left + .years(-value)
         }
-
-        return left + minusRight
-    }
-
-    static func - (left: Date, right: TimeIntervalUnitWithCalendar) -> Date {
-        let minusRight: TimeIntervalUnitWithCalendar
-
-        switch right {
-        case .seconds(let value, let calendar):
-            minusRight = .seconds(-value, calendar)
-        case .minutes(let value, let calendar):
-            minusRight = .minutes(-value, calendar)
-        case .hours(let value, let calendar):
-            minusRight = .hours(-value, calendar)
-        case .days(let value, let calendar):
-            minusRight = .days(-value, calendar)
-        case .weeks(let value, let calendar):
-            minusRight = .weeks(-value, calendar)
-        case .months(let value, let calendar):
-            minusRight = .months(-value, calendar)
-        case .years(let value, let calendar):
-            minusRight = .years(-value, calendar)
-        }
-
-        return left + minusRight
     }
 }
