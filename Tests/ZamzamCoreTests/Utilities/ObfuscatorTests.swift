@@ -10,13 +10,13 @@ import XCTest
 import ZamzamCore
 
 final class ObfuscatorTests: XCTestCase {
-    private let obfuscator = Obfuscator(salt: "ObfuscatorTests")
+    private let obfuscator = Obfuscator(salt: "\(Bool.self)|\(Int.self)|\(String.self)")
 }
 
 extension ObfuscatorTests {
     func testConceal() {
         let value = obfuscator.conceal(secret: "Abc123XYZ!@#)*^][.sdf")
-        let expected: [UInt8] = [14, 0, 5, 68, 65, 80, 57, 45, 53, 83, 20, 70, 90, 94, 45, 18, 57, 72, 6, 23, 5]
+        let expected: [UInt8] = [3, 13, 12, 93, 78, 122, 54, 45, 38, 114, 52, 81, 64, 68, 57, 31, 52, 65, 31, 24, 47]
 
         XCTAssertEqual(value, expected)
     }
@@ -25,7 +25,7 @@ extension ObfuscatorTests {
 extension ObfuscatorTests {
     func testReveal() {
         let value = obfuscator.reveal(
-            secret: [7, 55, 94, 66, 10, 34, 40, 48, 58, 61, 33, 4, 29, 21, 25, 35, 9, 2, 95, 85, 70, 71, 42, 74, 72]
+            secret: [10, 58, 87, 91, 5, 8, 39, 48, 41, 28, 1, 19, 7, 15, 13, 46, 4, 11, 70, 90, 108, 72, 42, 89, 105]
         )
 
         XCTAssertEqual(value, "HU87yAIDUOuanajlkd*&%&^%:")
