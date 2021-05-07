@@ -6,6 +6,7 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
+import Combine
 import Foundation.NSNotification
 import Foundation.NSUserDefaults
 
@@ -14,15 +15,7 @@ public extension UserDefaults {
     func contains(_ key: String) -> Bool {
         object(forKey: key) != nil
     }
-
-    /// Removes all key-value pairs in the domains in the search list.
-    func removeAll() {
-        dictionaryRepresentation().keys.forEach(removeObject)
-    }
 }
-
-#if canImport(Combine)
-import Combine
 
 public extension UserDefaults {
     var publisher: AnyPublisher<Void, Never> {
@@ -32,4 +25,3 @@ public extension UserDefaults {
             .eraseToAnyPublisher()
     }
 }
-#endif
