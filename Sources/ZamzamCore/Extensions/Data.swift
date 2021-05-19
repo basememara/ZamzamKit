@@ -39,3 +39,22 @@ public extension Data {
         reduce(into: "", { $0 += String(format: "%02x", $1) })
     }
 }
+
+private extension Data {
+    static let defaultEncoder = JSONEncoder()
+    static let defaultDecoder = JSONDecoder()
+}
+
+public extension Data {
+    /// Returns a value of the type you specify, decoded from a data object.
+    func decode<T: Decodable>() throws -> T {
+        try Self.defaultDecoder.decode(T.self, from: self)
+    }
+}
+
+public extension Encodable {
+    /// Returns the encoded data of the type you specify.
+    func encode() throws -> Data {
+        try Data.defaultEncoder.encode(self)
+    }
+}

@@ -246,19 +246,7 @@ public extension String {
     }
 }
 
-// MARK: - Decoding
-
-public extension String {
-    private static let defaultDecoder = JSONDecoder()
-
-    /// Returns a value of the type you specify, decoded from a JSON string.
-    func decode<T: Decodable>(using encoding: Self.Encoding = .utf8, with decoder: JSONDecoder? = nil) throws -> T? {
-        let decoder = decoder ?? Self.defaultDecoder
-        return try decoder.decode(T.self, from: self, using: encoding)
-    }
-}
-
-// MARK: - Encoding
+// MARK: - Decoding / Encoding
 
 public extension String {
     /// Encode a string to Base64. Default encoding is UTF8.
@@ -275,6 +263,16 @@ public extension String {
     func base64Decoded() -> String? {
         guard let data = Data(base64Encoded: self) else { return nil }
         return String(data: data, encoding: .utf8)
+    }
+}
+
+public extension String {
+    private static let defaultDecoder = JSONDecoder()
+
+    /// Returns a value of the type you specify, decoded from a JSON string.
+    func decode<T: Decodable>(using encoding: Self.Encoding = .utf8, with decoder: JSONDecoder? = nil) throws -> T {
+        let decoder = decoder ?? Self.defaultDecoder
+        return try decoder.decode(T.self, from: self, using: encoding)
     }
 }
 
