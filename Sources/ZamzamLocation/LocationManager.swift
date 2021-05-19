@@ -75,8 +75,15 @@ public extension LocationManager {
 
     /// Starts the generation of updates that report the user’s current location.
     @discardableResult
-    func startUpdatingLocation(enableBackground: Bool = false) -> AnyPublisher<CLLocation, CLError> {
-        service.startUpdatingLocation(enableBackground: enableBackground)
+    func startUpdatingLocation(
+        enableBackground: Bool = false,
+        pauseAutomatically: Bool? = nil
+    ) -> AnyPublisher<CLLocation, CLError> {
+        service.startUpdatingLocation(
+            enableBackground: enableBackground,
+            pauseAutomatically: pauseAutomatically
+        )
+
         return publisher()
     }
 

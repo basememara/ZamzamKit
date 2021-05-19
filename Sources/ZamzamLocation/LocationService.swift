@@ -19,7 +19,7 @@ public protocol LocationService: AnyObject {
     func requestAuthorization(for type: LocationAPI.AuthorizationType)
 
     var location: CLLocation? { get }
-    func startUpdatingLocation(enableBackground: Bool)
+    func startUpdatingLocation(enableBackground: Bool, pauseAutomatically: Bool?)
     func stopUpdatingLocation()
 
     #if os(iOS)

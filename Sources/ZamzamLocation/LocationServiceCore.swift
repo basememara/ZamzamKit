@@ -44,21 +44,21 @@ public class LocationServiceCore: NSObject, LocationService {
 // MARK: - Authorization
 
 public extension LocationServiceCore {
-    var isAuthorized: Bool { CLLocationManager.isAuthorized }
+    var isAuthorized: Bool { manager.isAuthorized }
 
     func isAuthorized(for type: LocationAPI.AuthorizationType) -> Bool {
         guard CLLocationManager.locationServicesEnabled() else { return false }
 
         #if os(macOS)
-        return type == .always && CLLocationManager.authorizationStatus() == .authorizedAlways
+        return type == .always && manager.authorizationStatus == .authorizedAlways
         #else
-        return (type == .whenInUse && CLLocationManager.authorizationStatus() == .authorizedWhenInUse)
-            || (type == .always && CLLocationManager.authorizationStatus() == .authorizedAlways)
+        return (type == .whenInUse && manager.authorizationStatus == .authorizedWhenInUse)
+            || (type == .always && manager.authorizationStatus == .authorizedAlways)
         #endif
     }
 
     var canRequestAuthorization: Bool {
-        CLLocationManager.authorizationStatus() == .notDetermined
+        manager.authorizationStatus == .notDetermined
     }
 
     func requestAuthorization(for type: LocationAPI.AuthorizationType) {
@@ -84,9 +84,10 @@ public extension LocationServiceCore {
 public extension LocationServiceCore {
     var location: CLLocation? { manager.location }
 
-    func startUpdatingLocation(enableBackground: Bool) {
+    func startUpdatingLocation(enableBackground: Bool, pauseAutomatically: Bool?) {
         #if os(iOS)
         manager.allowsBackgroundLocationUpdates = enableBackground
+        manager.pausesLocationUpdatesAutomatically ?= pauseAutomatically
         #endif
 
         #if !os(tvOS)
@@ -97,6 +98,7 @@ public extension LocationServiceCore {
     func stopUpdatingLocation() {
         #if os(iOS)
         manager.allowsBackgroundLocationUpdates = false
+        manager.pausesLocationUpdatesAutomatically = true
         #endif
 
         manager.stopUpdatingLocation()
