@@ -50,15 +50,21 @@ extension FileTests {
     }
 
     func testDownloadFile() {
-        let expectation = self.expectation(description: "Download remote file")
-        let url = "http://basememara.com/wp-content/uploads/2017/01/CapturFiles_125-150x150.png"
+        let promise = expectation(description: #function)
+        let url = "https://zamzam.io/wp-content/uploads/2021/02/logo-1.png"
 
         FileManager.default.download(from: url) { url, _, _ in
-            XCTAssert(url != nil)
-            expectation.fulfill()
+            guard let url = url else {
+                XCTFail("URL should not be nil")
+                return
+            }
+
+            XCTAssert(FileManager.default.fileExists(atPath: url.path))
+            XCTAssertNotNil(UIImage(contentsOfFile: url.path))
+            promise.fulfill()
         }
 
-        waitForExpectations(timeout: 5.0, handler: nil)
+        wait(for: [promise], timeout: 5)
     }
 }
 
