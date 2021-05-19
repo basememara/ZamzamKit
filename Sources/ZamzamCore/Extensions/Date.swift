@@ -205,6 +205,20 @@ public extension Date {
 }
 
 public extension Date {
+    /// Determines whether a date is within the same day as another date.
+    ///
+    ///     date1.inSameDay(as: date2, using: Calendar(identifier: .islamic)) // true
+    ///
+    /// - Parameters:
+    ///   - date: A date to check for containment.
+    ///   - calendar: Calendar used for calculation.
+    /// - Returns: Returns true if date1 and date2 are in the same day, as defined by the calendar and calendar’s locale; otherwise, false.
+    func inSameDay(as date: Date, using calendar: Calendar = .current) -> Bool {
+        calendar.isDate(self, inSameDayAs: date)
+    }
+}
+
+public extension Date {
     /// Returns the beginning of the day.
     ///
     ///     Date().startOfDay // "2018/11/21 00:00:00"
