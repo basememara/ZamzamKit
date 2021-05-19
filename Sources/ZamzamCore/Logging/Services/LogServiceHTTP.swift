@@ -149,8 +149,13 @@ public extension LogServiceHTTP {
         // Store in buffer for sending later
         buffer.append(Entry(level: level, date: date, payload: log))
 
-        // Flush buffer threshold reached
-        guard buffer.count > maxEntriesInBuffer else { return }
+        // Flush buffer threshold reached or in background
+        guard buffer.count > maxEntriesInBuffer
+                || context["app_state"]?.description == "background"
+        else {
+            return
+        }
+
         send()
     }
 }
