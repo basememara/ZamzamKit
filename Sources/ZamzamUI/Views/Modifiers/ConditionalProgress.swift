@@ -14,19 +14,19 @@ private struct ConditionalProgress: ViewModifier {
     let tint: Color?
 
     func body(content: Content) -> some View {
-        content.modifier(if: condition) { content in
-            ZStack {
-                content
-                if let tint = tint {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: tint))
-                } else {
-                    ProgressView()
+        content
+            .overlay(
+                Group {
+                    if condition {
+                        if let tint = tint {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: tint))
+                        } else {
+                            ProgressView()
+                        }
+                    }
                 }
-            }
-        } else: { content in
-            content
-        }
+            )
     }
 }
 
