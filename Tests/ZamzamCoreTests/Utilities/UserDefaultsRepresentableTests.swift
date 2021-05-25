@@ -1,5 +1,5 @@
 //
-//  UserDefaultsWrapperTests.swift
+//  UserDefaultsRepresentableTests.swift
 //  ZamzamCoreTests
 //
 //  Created by Basem Emara on 2021-05-24.
@@ -10,7 +10,7 @@ import XCTest
 import Combine
 @testable import ZamzamCore
 
-final class UserDefaultsWrapperTests: XCTestCase {
+final class UserDefaultsRepresentableTests: XCTestCase {
     private let settings = TestSettings()
     private var cancellable = Set<AnyCancellable>()
 
@@ -22,7 +22,7 @@ final class UserDefaultsWrapperTests: XCTestCase {
 
 // MARK: - Integration
 
-extension UserDefaultsWrapperTests {
+extension UserDefaultsRepresentableTests {
     func testIntegrationBool() {
         let defaultValue = settings.flag
         XCTAssertTrue(defaultValue)
@@ -136,7 +136,7 @@ extension UserDefaultsWrapperTests {
 
         let newValue = Set([6, 77, 888])
         settings.set = newValue
-        XCTAssertEqual(UserDefaults.test.object(forKey: "set") as? Set<Int>.WrappedValue, newValue.wrappedValue())
+        XCTAssertEqual(UserDefaults.test.object(forKey: "set") as? Set<Int>.RawDefaultsValue, newValue.rawDefaultsValue)
     }
 
     func testIntegrationDictionary() {
@@ -152,11 +152,11 @@ extension UserDefaultsWrapperTests {
     func testIntegrationRawRepresentable() {
         let defaultValue = settings.fruit
         XCTAssertEqual(defaultValue, .apple)
-        XCTAssertEqual(UserDefaults.test.object(forKey: "fruit") as? TestFruit.WrappedValue, TestFruit.apple.rawValue)
+        XCTAssertEqual(UserDefaults.test.object(forKey: "fruit") as? TestFruit.RawDefaultsValue, TestFruit.apple.rawValue)
 
         let newValue = TestFruit.orange
         settings.fruit = newValue
-        XCTAssertEqual(UserDefaults.test.object(forKey: "fruit") as? TestFruit.WrappedValue, newValue.wrappedValue())
+        XCTAssertEqual(UserDefaults.test.object(forKey: "fruit") as? TestFruit.RawDefaultsValue, newValue.rawDefaultsValue)
     }
 
     func testIntegrationCustomType() {
@@ -167,7 +167,7 @@ extension UserDefaultsWrapperTests {
         settings.custom = newValue
         XCTAssertEqual(settings.custom?.abc, "test")
         XCTAssertEqual(settings.custom?.xyz, 123)
-        XCTAssertEqual(UserDefaults.test.object(forKey: "custom") as? CustomType.WrappedValue, "test|123")
+        XCTAssertEqual(UserDefaults.test.object(forKey: "custom") as? CustomType.RawDefaultsValue, "test|123")
 
         settings.custom = nil
         XCTAssertNil(UserDefaults.test.object(forKey: "custom"))
@@ -194,7 +194,7 @@ extension UserDefaultsWrapperTests {
 
 // MARK: - Wrapped
 
-extension UserDefaultsWrapperTests {
+extension UserDefaultsRepresentableTests {
     func testWrappedValueBool() {
         let key = "key_\(#function)"
         let defaultValue = true
@@ -467,7 +467,7 @@ extension UserDefaultsWrapperTests {
 
 // MARK: - Reset
 
-extension UserDefaultsWrapperTests {
+extension UserDefaultsRepresentableTests {
     func testReset() {
         let key = "key_\(#function)"
         let defaultValue = Double(42.0)
@@ -563,7 +563,7 @@ private final class TestSettings: NSObject {
 
 // MARK: - Types
 
-enum TestFruit: String, UserDefaultsWrapper {
+enum TestFruit: String, UserDefaultsRepresentable {
     case apple
     case orange
     case banana
@@ -574,15 +574,13 @@ struct CustomType {
     let xyz: Int
 }
 
-extension CustomType: UserDefaultsWrapper {
-    init(wrappedValue: String) {
-        let split = wrappedValue.split(separator: "|")
+extension CustomType: UserDefaultsRepresentable {
+    var rawDefaultsValue: String { "\(abc)|\(xyz)" }
+
+    init(rawDefaultsValue: String) {
+        let split = rawDefaultsValue.split(separator: "|")
         self.abc = String(split[0])
         self.xyz = Int(split[1]) ?? 0
-    }
-
-    func wrappedValue() -> String {
-        "\(abc)|\(xyz)"
     }
 }
 

@@ -10,7 +10,7 @@
 
 import Foundation.NSUserDefaults
 
-/// A property wrapper that uses `UserDefaults` as a backing store,  whose `wrappedValue` is non-optional and registers a **non-optional default value**.
+/// A property wrapper that uses `UserDefaults` as a backing store,  whose `rawDefaultsValue` is non-optional and registers a **non-optional default value**.
 ///
 ///     final class AppSettings {
 ///         @Defaults("flagEnabled", defaultValue: true)
@@ -23,7 +23,7 @@ import Foundation.NSUserDefaults
 ///         var timestamp: Date?
 ///     }
 @propertyWrapper
-public struct Defaults<T: UserDefaultsWrapper> {
+public struct Defaults<T: UserDefaultsRepresentable> {
     private let userDefaults: UserDefaults
     private let defaultValue: T
 
@@ -45,7 +45,7 @@ public struct Defaults<T: UserDefaultsWrapper> {
         self.key = key
         self.defaultValue = defaultValue
         self.userDefaults = userDefaults
-        userDefaults.register(defaults: [key: defaultValue.wrappedValue()])
+        userDefaults.register(defaults: [key: defaultValue.rawDefaultsValue])
     }
 
     /// Removes the value of the specified default key.
@@ -54,7 +54,7 @@ public struct Defaults<T: UserDefaultsWrapper> {
     }
 }
 
-/// A property wrapper that uses `UserDefaults` as a backing store, whose `wrappedValue` is optional and **does not provide default value**.
+/// A property wrapper that uses `UserDefaults` as a backing store, whose `rawDefaultsValue` is optional and **does not provide default value**.
 ///
 ///     final class AppSettings {
 ///         @Defaults("flagEnabled", defaultValue: true)
@@ -67,7 +67,7 @@ public struct Defaults<T: UserDefaultsWrapper> {
 ///         var timestamp: Date?
 ///     }
 @propertyWrapper
-public struct DefaultsOptional<T: UserDefaultsWrapper> {
+public struct DefaultsOptional<T: UserDefaultsRepresentable> {
     private let userDefaults: UserDefaults
 
     /// The key for the value in `UserDefaults`.
@@ -106,18 +106,18 @@ public struct DefaultsOptional<T: UserDefaultsWrapper> {
 /// Describes a value that can be stored and fetched from `UserDefaults`.
 ///
 /// Default conformances are provided for: `Bool`, `Int`, `Float`, `Double`, `String`, `URL`,
-/// `Date`, `Data`, `Array`, `Set`, `Dictionary`, and `RawRepresentable` types.
-public protocol UserDefaultsWrapper {
+/// `Date`, `Data`, `Array`, `Set`, `Dictionary`, `RawRepresentable`, and `TimeZone` types.
+public protocol UserDefaultsRepresentable {
     /// The type of the value that is stored in `UserDefaults`.
-    associatedtype WrappedValue
+    associatedtype RawDefaultsValue
+
+    /// The value to store in `UserDefaults`.
+    var rawDefaultsValue: RawDefaultsValue { get }
 
     /// Initializes the object using the provided value.
     ///
-    /// - Parameter wrappedValue: The previously store value fetched from `UserDefaults`.
-    init(wrappedValue: WrappedValue)
-
-    /// The value to store in `UserDefaults`.
-    func wrappedValue() -> WrappedValue
+    /// - Parameter rawDefaultsValue: The previously store value fetched from `UserDefaults`.
+    init(rawDefaultsValue: RawDefaultsValue)
 
     /// Returns the object associated with the specified key in the user‘s defaults database.
     /// - Parameters:
@@ -133,36 +133,34 @@ public protocol UserDefaultsWrapper {
     static func set(_ value: Self, forKey defaultName: String, from userDefaults: UserDefaults)
 }
 
-extension UserDefaultsWrapper {
-    public init(wrappedValue: Self) {
-        self = wrappedValue
-    }
+extension UserDefaultsRepresentable {
+    public var rawDefaultsValue: Self { self }
 
-    public func wrappedValue() -> Self {
-        self
+    public init(rawDefaultsValue: Self) {
+        self = rawDefaultsValue
     }
 
     public static func object(forKey defaultName: String, from userDefaults: UserDefaults) -> Self? {
-        guard let object = userDefaults.object(forKey: defaultName) as? WrappedValue else { return nil }
-        return Self(wrappedValue: object)
+        guard let object = userDefaults.object(forKey: defaultName) as? RawDefaultsValue else { return nil }
+        return Self(rawDefaultsValue: object)
     }
 
     public static func set(_ value: Self, forKey defaultName: String, from userDefaults: UserDefaults) {
-        userDefaults.set(value.wrappedValue(), forKey: defaultName)
+        userDefaults.set(value.rawDefaultsValue, forKey: defaultName)
     }
 }
 
 // MARK: - Conformances
 
-extension Bool: UserDefaultsWrapper {}
-extension Int: UserDefaultsWrapper {}
-extension Float: UserDefaultsWrapper {}
-extension Double: UserDefaultsWrapper {}
-extension String: UserDefaultsWrapper {}
-extension Date: UserDefaultsWrapper {}
-extension Data: UserDefaultsWrapper {}
+extension Bool: UserDefaultsRepresentable {}
+extension Int: UserDefaultsRepresentable {}
+extension Float: UserDefaultsRepresentable {}
+extension Double: UserDefaultsRepresentable {}
+extension String: UserDefaultsRepresentable {}
+extension Date: UserDefaultsRepresentable {}
+extension Data: UserDefaultsRepresentable {}
 
-extension URL: UserDefaultsWrapper {
+extension URL: UserDefaultsRepresentable {
     public static func object(forKey defaultName: String, from userDefaults: UserDefaults) -> Self? {
         userDefaults.url(forKey: defaultName)
     }
@@ -172,43 +170,49 @@ extension URL: UserDefaultsWrapper {
     }
 }
 
-extension Array: UserDefaultsWrapper where Element: UserDefaultsWrapper {
-    public init(wrappedValue: [Element.WrappedValue]) {
-        self = wrappedValue.map { Element(wrappedValue: $0) }
+extension Array: UserDefaultsRepresentable where Element: UserDefaultsRepresentable {
+    public var rawDefaultsValue: [Element.RawDefaultsValue] {
+        map { $0.rawDefaultsValue }
     }
 
-    public func wrappedValue() -> [Element.WrappedValue] {
-        map { $0.wrappedValue() }
-    }
-}
-
-extension Set: UserDefaultsWrapper where Element: UserDefaultsWrapper {
-    public init(wrappedValue: [Element.WrappedValue]) {
-        self = Set(wrappedValue.map { Element(wrappedValue: $0) })
-    }
-
-    public func wrappedValue() -> [Element.WrappedValue] {
-        map { $0.wrappedValue() }
+    public init(rawDefaultsValue: [Element.RawDefaultsValue]) {
+        self = rawDefaultsValue.map { Element(rawDefaultsValue: $0) }
     }
 }
 
-extension Dictionary: UserDefaultsWrapper where Key == String, Value: UserDefaultsWrapper {
-    public init(wrappedValue: [String: Value.WrappedValue]) {
-        self = wrappedValue.mapValues { Value(wrappedValue: $0) }
+extension Set: UserDefaultsRepresentable where Element: UserDefaultsRepresentable {
+    public var rawDefaultsValue: [Element.RawDefaultsValue] {
+        map { $0.rawDefaultsValue }
     }
 
-    public func wrappedValue() -> [String: Value.WrappedValue] {
-        mapValues { $0.wrappedValue() }
+    public init(rawDefaultsValue: [Element.RawDefaultsValue]) {
+        self = Set(rawDefaultsValue.map { Element(rawDefaultsValue: $0) })
     }
 }
 
-extension UserDefaultsWrapper where Self: RawRepresentable {
-    public init(wrappedValue: RawValue) {
+extension Dictionary: UserDefaultsRepresentable where Key == String, Value: UserDefaultsRepresentable {
+    public var rawDefaultsValue: [String: Value.RawDefaultsValue] {
+        mapValues { $0.rawDefaultsValue }
+    }
+
+    public init(rawDefaultsValue: [String: Value.RawDefaultsValue]) {
+        self = rawDefaultsValue.mapValues { Value(rawDefaultsValue: $0) }
+    }
+}
+
+extension UserDefaultsRepresentable where Self: RawRepresentable {
+    public var rawDefaultsValue: RawValue { rawValue }
+
+    public init(rawDefaultsValue: RawValue) {
         // swiftlint:disable:next force_unwrapping
-        self = Self(rawValue: wrappedValue)!
+        self = Self(rawValue: rawDefaultsValue)!
     }
+}
 
-    public func wrappedValue() -> RawValue {
-        rawValue
+extension TimeZone: UserDefaultsRepresentable {
+    public var rawDefaultsValue: String { identifier }
+
+    public init(rawDefaultsValue: String) {
+        self = TimeZone(identifier: rawDefaultsValue) ?? .current
     }
 }
