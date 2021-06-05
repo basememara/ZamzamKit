@@ -136,7 +136,7 @@ extension UserDefaultsRepresentableTests {
 
         let newValue = Set([6, 77, 888])
         settings.set = newValue
-        XCTAssertEqual(UserDefaults.test.object(forKey: "set") as? Set<Int>.RawDefaultsValue, newValue.rawDefaultsValue)
+        XCTAssertEqual((UserDefaults.test.object(forKey: "set") as? [Int])?.sorted(), [6, 77, 888])
     }
 
     func testIntegrationDictionary() {
@@ -149,14 +149,36 @@ extension UserDefaultsRepresentableTests {
         XCTAssertEqual(UserDefaults.test.dictionary(forKey: "pairs") as? [String: Int], newValue)
     }
 
-    func testIntegrationRawRepresentable() {
+    func testIntegrationRawRepresentableString() {
         let defaultValue = settings.fruit
         XCTAssertEqual(defaultValue, .apple)
-        XCTAssertEqual(UserDefaults.test.object(forKey: "fruit") as? TestFruit.RawDefaultsValue, TestFruit.apple.rawValue)
+        XCTAssertEqual(UserDefaults.test.object(forKey: "fruit") as? String, "apple")
 
         let newValue = TestFruit.orange
         settings.fruit = newValue
-        XCTAssertEqual(UserDefaults.test.object(forKey: "fruit") as? TestFruit.RawDefaultsValue, newValue.rawDefaultsValue)
+        XCTAssertEqual(UserDefaults.test.object(forKey: "fruit") as? String, "orange")
+    }
+
+    func testIntegrationRawRepresentableInt() {
+        let defaultValue = settings.vegetable
+        XCTAssertEqual(defaultValue, .carrot)
+        XCTAssertEqual(UserDefaults.test.object(forKey: "vegetable") as? Int, 0)
+
+        let newValue = TestVegetable.broccoli
+        settings.vegetable = newValue
+        XCTAssertEqual(UserDefaults.test.object(forKey: "vegetable") as? Int, 2)
+    }
+
+    func testIntegrationRawRepresentableCustom() {
+        let defaultValue = settings.customRawRepresented
+        XCTAssertEqual(defaultValue.rawValue, ["abc": .apple])
+        XCTAssertEqual(UserDefaults.test.object(forKey: "customRawRepresented") as? [String: String], ["abc": "apple"])
+
+        let newValue = TestFruit.orange
+        settings.customRawRepresented.rawValue["xyz"] = newValue
+        XCTAssertEqual(settings.customRawRepresented.rawValue["xyz"], newValue)
+        XCTAssertEqual(settings.customRawRepresented.rawValue, ["abc": .apple, "xyz": .orange])
+        XCTAssertEqual(UserDefaults.test.object(forKey: "customRawRepresented") as? [String: String], ["abc": "apple", "xyz": "orange"])
     }
 
     func testIntegrationCustomType() {
@@ -167,7 +189,7 @@ extension UserDefaultsRepresentableTests {
         settings.custom = newValue
         XCTAssertEqual(settings.custom?.abc, "test")
         XCTAssertEqual(settings.custom?.xyz, 123)
-        XCTAssertEqual(UserDefaults.test.object(forKey: "custom") as? CustomType.RawDefaultsValue, "test|123")
+        XCTAssertEqual(UserDefaults.test.object(forKey: "custom") as? String, "test|123")
 
         settings.custom = nil
         XCTAssertNil(UserDefaults.test.object(forKey: "custom"))
@@ -554,6 +576,12 @@ private final class TestSettings: NSObject {
     @Defaults("fruit", defaultValue: .apple, from: .test)
     var fruit: TestFruit
 
+    @Defaults("vegetable", defaultValue: .carrot, from: .test)
+    var vegetable: TestVegetable
+
+    @Defaults("customRawRepresented", defaultValue: TestCustomRepresented(rawValue: ["abc": .apple]), from: .test)
+    var customRawRepresented: TestCustomRepresented
+
     @DefaultsOptional("nickname", from: .test)
     @objc dynamic var nickname: String?
 
@@ -567,6 +595,20 @@ enum TestFruit: String, UserDefaultsRepresentable {
     case apple
     case orange
     case banana
+}
+
+enum TestVegetable: Int, UserDefaultsRepresentable {
+    case carrot
+    case spinach
+    case broccoli
+}
+
+struct TestCustomRepresented: RawRepresentable, UserDefaultsRepresentable {
+    var rawValue: [String: TestFruit]
+
+    init(rawValue: [String: TestFruit]) {
+        self.rawValue = rawValue
+    }
 }
 
 struct CustomType {

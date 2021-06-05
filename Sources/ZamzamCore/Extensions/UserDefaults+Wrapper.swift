@@ -200,19 +200,13 @@ extension Dictionary: UserDefaultsRepresentable where Key == String, Value: User
     }
 }
 
-extension UserDefaultsRepresentable where Self: RawRepresentable {
-    public var rawDefaultsValue: RawValue { rawValue }
-
-    public init(rawDefaultsValue: RawValue) {
-        // swiftlint:disable:next force_unwrapping
-        self = Self(rawValue: rawDefaultsValue)!
+extension UserDefaultsRepresentable where Self: RawRepresentable, Self.RawValue: UserDefaultsRepresentable {
+    public var rawDefaultsValue: RawValue.RawDefaultsValue {
+        rawValue.rawDefaultsValue
     }
-}
 
-extension TimeZone: UserDefaultsRepresentable {
-    public var rawDefaultsValue: String { identifier }
-
-    public init(rawDefaultsValue: String) {
-        self = TimeZone(identifier: rawDefaultsValue) ?? .current
+    public init(rawDefaultsValue: RawValue.RawDefaultsValue) {
+        // swiftlint:disable:next force_unwrapping
+        self = Self(rawValue: Self.RawValue(rawDefaultsValue: rawDefaultsValue))!
     }
 }
