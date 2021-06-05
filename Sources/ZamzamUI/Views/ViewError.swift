@@ -11,31 +11,36 @@ import SwiftUI
 import ZamzamCore
 
 /// Model container for global view errors.
-public struct ViewError: Error, Identifiable, Equatable {
+public struct ViewError: Error, Equatable, Identifiable {
     public let id = UUID()
     public let title: String
     public let message: String?
     public let action: Action?
+    public let secondaryAction: Action?
 
     public init(
         title: String,
         message: String? = nil,
-        action: Action? = nil
+        action: Action? = nil,
+        secondaryAction: Action? = nil
     ) {
         self.title = title
         self.message = message
         self.action = action
+        self.secondaryAction = secondaryAction
     }
 
     public init(
         from error: Error,
         message: String? = nil,
-        action: Action? = nil
+        action: Action? = nil,
+        secondaryAction: Action? = nil
     ) {
         self.init(
             title: error.localizedDescription,
             message: message,
-            action: action
+            action: action,
+            secondaryAction: secondaryAction
         )
     }
 }
@@ -80,11 +85,22 @@ public extension Alert {
             action: action.completion
         )
 
+        let secondaryButton: Alert.Button = {
+            guard let action = error.secondaryAction else {
+                return .cancel()
+            }
+
+            return .cancel(
+                Text(action.title),
+                action: action.completion
+            )
+        }()
+
         self.init(
             title: titleText,
             message: messageText,
             primaryButton: primaryButton,
-            secondaryButton: .cancel()
+            secondaryButton: secondaryButton
         )
     }
 }
