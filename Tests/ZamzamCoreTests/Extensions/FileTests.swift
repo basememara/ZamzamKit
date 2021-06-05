@@ -60,7 +60,11 @@ extension FileTests {
             }
 
             XCTAssert(FileManager.default.fileExists(atPath: url.path))
+            #if os(macOS)
+            XCTAssertNotNil(NSImage(contentsOfFile: url.path))
+            #elseif canImport(UIKit)
             XCTAssertNotNil(UIImage(contentsOfFile: url.path))
+            #endif
             promise.fulfill()
         }
 
