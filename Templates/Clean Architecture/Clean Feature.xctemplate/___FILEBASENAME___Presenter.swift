@@ -24,12 +24,12 @@ extension ___VARIABLE_productName:identifier___Presenter {
 
 extension L10n {
     enum ___VARIABLE_productName:identifier___ {
-        //static let title = LocalizedStringKey("___VARIABLE_productName:identifier____title")
+        // static let title = LocalizedStringKey("___VARIABLE_productName:identifier____title")
     }
 }
 
 // MARK: Images
 
 extension Image.Name {
-    //static let myImage = Self(value: "my-image")
+    // static let myImage = Self(value: "my-image")
 }
