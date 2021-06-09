@@ -12,15 +12,9 @@ import CoreLocation
 import ZamzamCore
 
 public extension UNUserNotificationCenter {
-    /// The app's ability to schedule and receive local and remote notifications.
-    ///
-    /// - Parameter completion: Handler indicating whether the app is allowed to schedule notifications.
-    func authorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
-        getNotificationSettings { settings in
-            DispatchQueue.main.async {
-                completion(settings.authorizationStatus)
-            }
-        }
+    /// Returns the app's ability to schedule and receive local and remote notifications.
+    func authorizationStatus() async -> UNAuthorizationStatus {
+        await notificationSettings().authorizationStatus
     }
 }
 
@@ -29,7 +23,7 @@ public extension UNUserNotificationCenter {
 
     /// Registers the local and remote notifications with the category and actions it supports.
     ///
-    ///     UNUserNotificationCenter.current().register(
+    ///     let granted = await UNUserNotificationCenter.current().register(
     ///         delegate: self,
     ///         category: "chat",
     ///         actions: [
@@ -41,33 +35,32 @@ public extension UNUserNotificationCenter {
     ///                 textInputPlaceholder: "Type your message"
     ///             )
     ///         ],
-    ///         authorizations: [.alert, .badge, .sound],
-    ///         completion: { granted in
-    ///             granted
-    ///                 ? log.debug("Authorization for notification succeeded.")
-    ///                 : log.warn("Authorization for notification not given.")
-    ///         }
+    ///         authorizations: [.alert, .badge, .sound]
     ///     )
+    ///
+    ///     if granted {
+    ///         log.debug("Authorization for notification succeeded.")
+    ///     } else {
+    ///         log.warn("Authorization for notification not given.")
+    ///     }
     ///
     /// - Parameters:
     ///   - delegate: The object that processes incoming notifications and notification-related actions.
     ///   - category: The category identifier. Default is `UNUserNotificationCenter.mainCategoryIdentifier`.
     ///   - actions: The actions for the category.
     ///   - authorizations: Constants for requesting authorization to interact with the user. Default is `[.alert, .badge, .sound]`.
-    ///   - completion: The block to execute asynchronously with the granted flag provided.
     func register(
         delegate: UNUserNotificationCenterDelegate? = nil,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
         actions: [UNNotificationAction]? = nil,
-        authorizations: UNAuthorizationOptions? = [.alert, .badge, .sound],
-        completion: ((Bool) -> Void)? = nil
-    ) {
-        register(delegate: delegate, categories: [category: actions], authorizations: authorizations, completion: completion)
+        authorizations: UNAuthorizationOptions = [.alert, .badge, .sound]
+    ) async -> Bool {
+        await register(delegate: delegate, categories: [category: actions], authorizations: authorizations)
     }
 
     /// Registers the local and remote notifications with the categories and actions it supports.
     ///
-    ///     UNUserNotificationCenter.current().register(
+    ///     let granted = await UNUserNotificationCenter.current().register(
     ///         delegate: self,
     ///         categories: [
     ///             "order": [
@@ -88,116 +81,84 @@ public extension UNUserNotificationCenter {
     ///             ],
     ///             "offer": nil
     ///         ],
-    ///         authorizations: [.alert, .badge, .sound],
-    ///         completion: { granted in
-    ///             granted
-    ///                 ? log.debug("Authorization for notification succeeded.")
-    ///                 : log.warn("Authorization for notification not given.")
-    ///         }
+    ///         authorizations: [.alert, .badge, .sound]
     ///     )
+    ///
+    ///     if granted {
+    ///         log.debug("Authorization for notification succeeded.")
+    ///     } else {
+    ///         log.warn("Authorization for notification not given.")
+    ///     }
     ///
     /// - Parameters:
     ///   - delegate: The object that processes incoming notifications and notification-related actions.
     ///   - categories: The category identifiers and associated actions.
     ///   - authorizations: Constants for requesting authorization to interact with the user. Default is `[.alert, .badge, .sound]`.
-    ///   - completion: The block to execute asynchronously with the granted flag provided.
     func register(
         delegate: UNUserNotificationCenterDelegate? = nil,
         categories: [String: [UNNotificationAction]?],
-        authorizations: UNAuthorizationOptions? = [.alert, .badge, .sound],
-        completion: ((Bool) -> Void)? = nil
-    ) {
+        authorizations: UNAuthorizationOptions = [.alert, .badge, .sound]
+    ) async -> Bool {
         self.delegate ?= delegate
 
-        getNotificationSettings { settings in
-            let categorySet = Set(
-                categories.map {
-                    UNNotificationCategory(
-                        identifier: $0.key,
-                        actions: $0.value ?? [],
-                        intentIdentifiers: [],
-                        options: .customDismissAction
-                    )
-                }
-            )
-
-            guard let authorizations = authorizations, settings.authorizationStatus == .notDetermined else {
-                // Register category if applicable
-                return self.getNotificationCategories {
-                    defer {
-                        let granted = settings.authorizationStatus == .authorized
-                        DispatchQueue.main.async { completion?(granted) }
-                    }
-
-                    guard categorySet != $0 else { return }
-                    self.setNotificationCategories(categorySet)
-                }
+        let status = await authorizationStatus()
+        let oldCategories = await notificationCategories()
+        let newCategories = Set(
+            categories.map {
+                UNNotificationCategory(
+                    identifier: $0.key,
+                    actions: $0.value ?? [],
+                    intentIdentifiers: [],
+                    options: .customDismissAction
+                )
             }
+        )
 
-            // Request permission before registering if applicable
-            self.requestAuthorization(options: authorizations) { granted, _ in
-                defer { DispatchQueue.main.async { completion?(granted) } }
-                guard granted else { return }
-                self.setNotificationCategories(categorySet)
+        defer {
+            if newCategories != oldCategories {
+                setNotificationCategories(newCategories)
             }
+        }
+
+        do {
+            guard status == .notDetermined else { throw ZamzamError.unauthorized }
+            return try await requestAuthorization(options: authorizations)
+        } catch {
+            return status != .denied
         }
     }
 }
 
 public extension UNUserNotificationCenter {
     /// Returns a list of all pending or delivered user notifications.
-    func getNotificationRequests(completion: @escaping ([UNNotificationRequest]) -> Void) {
-        var notificationRequests: [UNNotificationRequest] = []
-        let taskGroup = DispatchGroup()
-
-        taskGroup.enter()
-        getPendingNotificationRequests {
-            notificationRequests.append(contentsOf: $0)
-            taskGroup.leave()
-        }
-
-        taskGroup.enter()
-        getDeliveredNotifications {
-            notificationRequests.append(contentsOf: $0.map { $0.request })
-            taskGroup.leave()
-        }
-
-        taskGroup.notify(queue: .main) {
-            completion(notificationRequests)
-        }
+    func notificationRequests() async -> [UNNotificationRequest] {
+        await (pendingNotificationRequests() + deliveredNotifications().map(\.request))
     }
 
     /// Retrieve the pending or delivered notification request.
     ///
     /// - Parameters:
     ///   - withIdentifier: The identifier for the requests.
-    ///   - completion: The completion block that will return the request with the identifier.
-    func get(withIdentifier: String, completion: @escaping (UNNotificationRequest?) -> Void) {
-        getNotificationRequests {
-            let requests = $0.first { $0.identifier == withIdentifier }
-            completion(requests)
-        }
+    func get(withIdentifier: String) async -> UNNotificationRequest? {
+        await notificationRequests()
+            .first { $0.identifier == withIdentifier }
     }
 
     /// Retrieve the pending or delivered notification requests.
     ///
     /// - Parameters:
     ///   - withIdentifiers: The identifiers for the requests.
-    ///   - completion: The completion block that will return the requests with the identifiers.
-    func get(withIdentifiers: [String], completion: @escaping ([UNNotificationRequest]) -> Void) {
-        getNotificationRequests {
-            let requests = $0.filter { withIdentifiers.contains($0.identifier) }
-            completion(requests)
-        }
+    func get(withIdentifiers: [String]) async -> [UNNotificationRequest] {
+        await notificationRequests()
+            .filter { withIdentifiers.contains($0.identifier) }
     }
 
     /// Determines if the pending notification request exists.
     ///
     /// - Parameters:
     ///   - withIdentifier: The identifier for the requests.
-    ///   - completion: The completion block that will return the request with the identifier.
-    func exists(withIdentifier: String, completion: @escaping (Bool) -> Void) {
-        get(withIdentifier: withIdentifier) { completion($0 != nil) }
+    func exists(withIdentifier: String) async -> Bool {
+        await get(withIdentifier: withIdentifier) != nil
     }
 }
 
@@ -377,27 +338,22 @@ public extension UNUserNotificationCenter {
     /// Remove pending and delivered user notifications.
     ///
     /// - Parameter withCategory: The category of the user notification to remove.
-    func remove(withCategory category: String, completion: (() -> Void)? = nil) {
-        remove(withCategories: [category], completion: completion)
+    func remove(withCategory category: String) async {
+        await remove(withCategories: [category])
     }
 
     /// Remove pending and delivered user notifications.
     ///
     /// - Parameter withCategory: The categories of the user notification to remove.
-    func remove(withCategories categories: [String], completion: (() -> Void)? = nil) {
-        getNotificationRequests {
-            self.remove(
-                withIdentifiers: $0.compactMap {
-                    categories.contains($0.content.categoryIdentifier) ? $0.identifier : nil
-                }
-            )
+    func remove(withCategories categories: [String]) async {
+        remove(withIdentifiers: await notificationRequests().compactMap {
+            categories.contains($0.content.categoryIdentifier) ? $0.identifier : nil
+        })
 
-            // Get back in queue since native remove has no completion block
-            // https://stackoverflow.com/a/46434645
-            self.getNotificationRequests { _ in
-                completion?()
-            }
-        }
+        // Get back in queue since native remove has no completion block
+        // https://stackoverflow.com/a/46434645
+        let remaining = await notificationRequests()
+        assert(remaining.isEmpty, "Notifications should be removed")
     }
 
     /// Remove all pending and delivered user notifications.
@@ -411,27 +367,24 @@ public extension UNUserNotificationCenter {
     /// Remove pending user notifications.
     ///
     /// - Parameter withCategory: The category of the user notification to remove.
-    func removePending(withCategory category: String, completion: (() -> Void)? = nil) {
-        removePending(withCategories: [category], completion: completion)
+    func removePending(withCategory category: String) async {
+        await removePending(withCategories: [category])
     }
 
     /// Remove pending user notifications.
     ///
     /// - Parameter withCategory: The categories of the user notification to remove.
-    func removePending(withCategories categories: [String], completion: (() -> Void)? = nil) {
-        getPendingNotificationRequests {
-            self.removePendingNotificationRequests(
-                withIdentifiers: $0.compactMap {
-                    categories.contains($0.content.categoryIdentifier) ? $0.identifier : nil
-                }
-            )
-
-            // Get back in queue since native remove has no completion block
-            // https://stackoverflow.com/a/46434645
-            self.getPendingNotificationRequests { _ in
-                DispatchQueue.main.async { completion?() }
+    func removePending(withCategories categories: [String]) async {
+        removePendingNotificationRequests(
+            withIdentifiers: await pendingNotificationRequests().compactMap {
+                categories.contains($0.content.categoryIdentifier) ? $0.identifier : nil
             }
-        }
+        )
+
+        // Get back in queue since native remove has no completion block
+        // https://stackoverflow.com/a/46434645
+        let remaining = await pendingNotificationRequests()
+        assert(remaining.isEmpty, "Notifications should be removed")
     }
 }
 
@@ -439,27 +392,24 @@ public extension UNUserNotificationCenter {
     /// Remove delivered user notifications.
     ///
     /// - Parameter withCategory: The category of the user notification to remove.
-    func removeDelivered(withCategory category: String, completion: (() -> Void)? = nil) {
-        removeDelivered(withCategories: [category], completion: completion)
+    func removeDelivered(withCategory category: String) async {
+        await removeDelivered(withCategories: [category])
     }
 
     /// Remove delivered user notifications.
     ///
     /// - Parameter withCategory: The categories of the user notification to remove.
-    func removeDelivered(withCategories categories: [String], completion: (() -> Void)? = nil) {
-        getDeliveredNotifications {
-            self.removeDeliveredNotifications(
-                withIdentifiers: $0.compactMap {
-                    categories.contains($0.request.content.categoryIdentifier) ? $0.request.identifier : nil
-                }
-            )
-
-            // Get back in queue since native remove has no completion block
-            // https://stackoverflow.com/a/46434645
-            self.getDeliveredNotifications { _ in
-                DispatchQueue.main.async { completion?() }
+    func removeDelivered(withCategories categories: [String]) async {
+        removeDeliveredNotifications(
+            withIdentifiers: await deliveredNotifications().compactMap {
+                categories.contains($0.request.content.categoryIdentifier) ? $0.request.identifier : nil
             }
-        }
+        )
+
+        // Get back in queue since native remove has no completion block
+        // https://stackoverflow.com/a/46434645
+        let remaining = await deliveredNotifications()
+        assert(remaining.isEmpty, "Notifications should be removed")
     }
 }
 #endif
