@@ -101,7 +101,6 @@ public extension UNUserNotificationCenter {
     ) async -> Bool {
         self.delegate ?= delegate
 
-        let status = await authorizationStatus()
         let oldCategories = await notificationCategories()
         let newCategories = Set(
             categories.map {
@@ -121,10 +120,9 @@ public extension UNUserNotificationCenter {
         }
 
         do {
-            guard status == .notDetermined else { throw ZamzamError.unauthorized }
             return try await requestAuthorization(options: authorizations)
         } catch {
-            return status != .denied
+            return await authorizationStatus() != .denied
         }
     }
 }
@@ -138,31 +136,38 @@ public extension UNUserNotificationCenter {
     /// Retrieve the pending or delivered notification request.
     ///
     /// - Parameters:
-    ///   - withIdentifier: The identifier for the requests.
-    func get(withIdentifier: String) async -> UNNotificationRequest? {
-        await notificationRequests()
-            .first { $0.identifier == withIdentifier }
+    ///   - id: The identifier for the requests.
+    func get(withIdentifier id: String) async -> UNNotificationRequest? {
+        await notificationRequests().first { $0.identifier == id }
     }
 
     /// Retrieve the pending or delivered notification requests.
     ///
     /// - Parameters:
-    ///   - withIdentifiers: The identifiers for the requests.
-    func get(withIdentifiers: [String]) async -> [UNNotificationRequest] {
-        await notificationRequests()
-            .filter { withIdentifiers.contains($0.identifier) }
+    ///   - ids: The identifiers for the requests.
+    func get(withIdentifiers ids: [String]) async -> [UNNotificationRequest] {
+        await notificationRequests().filter { ids.contains($0.identifier) }
     }
 
     /// Determines if the pending notification request exists.
     ///
     /// - Parameters:
-    ///   - withIdentifier: The identifier for the requests.
-    func exists(withIdentifier: String) async -> Bool {
-        await get(withIdentifier: withIdentifier) != nil
+    ///   - id: The identifier for the requests.
+    func exists(withIdentifier id: String) async -> Bool {
+        await get(withIdentifier: id) != nil
     }
 }
 
 public extension UNUserNotificationCenter {
+    /// Constants that indicate the importance and delivery timing of a notification.
+    enum InterruptionLevel {
+        /// The system adds the notification to the notification list without lighting up the screen or playing a sound.
+        case passive
+
+        /// The system presents the notification immediately, lights up the screen, and can play a sound, but won’t break through system notification controls.
+        case timeSensitive
+    }
+
     /// Schedules a local notification for delivery.
     ///
     /// - Parameters:
@@ -175,6 +180,7 @@ public extension UNUserNotificationCenter {
         sound: UNNotificationSound? = .default,
         attachments: [UNNotificationAttachment]? = nil,
         timeInterval: TimeInterval = 0,
+        interruptionLevel: InterruptionLevel? = nil,
         repeats: Bool = false,
         identifier: String = UUID().uuidString,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
@@ -191,8 +197,24 @@ public extension UNUserNotificationCenter {
             $0.subtitle ?= subtitle
             $0.badge ?= badge
             $0.sound = sound
-            if let userInfo = userInfo { $0.userInfo = userInfo }
-            if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
+
+            if #available(macOS 12, iOS 15, watchOS 8, tvOS 15, *),
+               let interruptionLevel = interruptionLevel {
+                switch interruptionLevel {
+                case .passive:
+                    $0.interruptionLevel = .passive
+                case .timeSensitive:
+                    $0.interruptionLevel = .timeSensitive
+                }
+            }
+
+            if let userInfo = userInfo {
+                $0.userInfo = userInfo
+            }
+
+            if let attachments = attachments, !attachments.isEmpty {
+                $0.attachments = attachments
+            }
         }
 
         // Construct request with trigger
@@ -226,6 +248,7 @@ public extension UNUserNotificationCenter {
         badge: NSNumber? = nil,
         sound: UNNotificationSound? = .default,
         attachments: [UNNotificationAttachment]? = nil,
+        interruptionLevel: InterruptionLevel? = nil,
         repeats: ScheduleInterval = .once,
         calendar: Calendar = .current,
         identifier: String = UUID().uuidString,
@@ -243,8 +266,24 @@ public extension UNUserNotificationCenter {
             $0.subtitle ?= subtitle
             $0.badge ?= badge
             $0.sound = sound
-            if let userInfo = userInfo { $0.userInfo = userInfo }
-            if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
+
+            if #available(macOS 12, iOS 15, watchOS 8, tvOS 15, *),
+               let interruptionLevel = interruptionLevel {
+                switch interruptionLevel {
+                case .passive:
+                    $0.interruptionLevel = .passive
+                case .timeSensitive:
+                    $0.interruptionLevel = .timeSensitive
+                }
+            }
+
+            if let userInfo = userInfo {
+                $0.userInfo = userInfo
+            }
+
+            if let attachments = attachments, !attachments.isEmpty {
+                $0.attachments = attachments
+            }
         }
 
         // Constuct date components for trigger
@@ -289,6 +328,7 @@ public extension UNUserNotificationCenter {
         badge: NSNumber? = nil,
         sound: UNNotificationSound? = .default,
         attachments: [UNNotificationAttachment]? = nil,
+        interruptionLevel: InterruptionLevel? = nil,
         repeats: Bool = false,
         identifier: String = UUID().uuidString,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
@@ -305,8 +345,24 @@ public extension UNUserNotificationCenter {
             $0.subtitle ?= subtitle
             $0.badge ?= badge
             $0.sound = sound
-            if let userInfo = userInfo { $0.userInfo = userInfo }
-            if let attachments = attachments, !attachments.isEmpty { $0.attachments = attachments }
+
+            if #available(macOS 12, iOS 15, watchOS 8, tvOS 15, *),
+               let interruptionLevel = interruptionLevel {
+                switch interruptionLevel {
+                case .passive:
+                    $0.interruptionLevel = .passive
+                case .timeSensitive:
+                    $0.interruptionLevel = .timeSensitive
+                }
+            }
+
+            if let userInfo = userInfo {
+                $0.userInfo = userInfo
+            }
+
+            if let attachments = attachments, !attachments.isEmpty {
+                $0.attachments = attachments
+            }
         }
 
         // Construct request with trigger
@@ -321,14 +377,14 @@ public extension UNUserNotificationCenter {
 public extension UNUserNotificationCenter {
     /// Remove pending or delivered user notifications.
     ///
-    /// - Parameter withIdentifier: The identifier of the user notification to remove.
+    /// - Parameter id: The identifier of the user notification to remove.
     func remove(withIdentifier id: String) {
         remove(withIdentifiers: [id])
     }
 
     /// Remove pending and delivered user notifications.
     ///
-    /// - Parameter withIdentifiers: The identifiers of the user notifications to remove.
+    /// - Parameter ids: The identifiers of the user notifications to remove.
     func remove(withIdentifiers ids: [String]) {
         guard !ids.isEmpty else { return }
         removePendingNotificationRequests(withIdentifiers: ids)
