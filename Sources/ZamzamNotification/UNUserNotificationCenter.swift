@@ -173,13 +173,13 @@ public extension UNUserNotificationCenter {
     /// - Parameters:
     ///   - timeInterval: The time interval of when to fire the notification.
     func add(
+        timeInterval: TimeInterval,
         body: String,
         title: String? = nil,
         subtitle: String? = nil,
         badge: NSNumber? = nil,
         sound: UNNotificationSound? = .default,
         attachments: [UNNotificationAttachment]? = nil,
-        timeInterval: TimeInterval = 0,
         interruptionLevel: InterruptionLevel? = nil,
         repeats: Bool = false,
         identifier: String = UUID().uuidString,
