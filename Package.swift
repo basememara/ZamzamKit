@@ -4,7 +4,6 @@ import PackageDescription
 
 let package = Package(
     name: "ZamzamKit",
-    defaultLocalization: "en",
     platforms: [
         .macOS(.v11),
         .iOS(.v14),
