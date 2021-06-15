@@ -13,6 +13,16 @@ struct ___VARIABLE_productName:identifier___View: View {
     }
 }
 
+// MARK: - Localization
+
+/*private extension Text {
+    static let navigationTitle = Text(
+        "navigation_title",
+        tableName: "___VARIABLE_productName:identifier___",
+        comment: "The navigation bar title for the screen"
+    )
+}*/
+
 // MARK: - Previews
 
 #if DEBUG
