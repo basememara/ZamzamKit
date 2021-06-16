@@ -61,6 +61,24 @@ public extension View {
             async { await action(notification) }
         }
     }
+
+    /// Adds an action to perform when this view detects a notification emitted by the `NotificationCenter` publisher.
+    ///
+    /// - Parameters:
+    ///   - name: The name of the notification to publish.
+    ///   - object: The object posting the named notification.
+    ///   - action: The action to perform when the notification is emitted by publisher.
+    /// - Returns: View
+    @available(macOS 12, iOS 15, watchOS 8, tvOS 15, *)
+    func onNotification(
+        for name: Notification.Name,
+        object: AnyObject? = nil,
+        perform action: @escaping () async -> Void
+    ) -> some View {
+        onReceive(NotificationCenter.default.publisher(for: name, object: object)) { _ in
+            async { await action() }
+        }
+    }
 }
 
 #if os(iOS)
