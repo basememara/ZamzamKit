@@ -5,12 +5,14 @@ struct ___VARIABLE_productName:identifier___Presenter: ___VARIABLE_productName:i
 }
 
 extension ___VARIABLE_productName:identifier___Presenter {
-    func display(for response: ___VARIABLE_productName:identifier___API.FetchResponse) {
+    @MainActor
+    func display(for response: ___VARIABLE_productName:identifier___API.FetchResponse) async {
         
     }
 }
 
 extension ___VARIABLE_productName:identifier___Presenter {
+    @MainActor
     func display(error: ___VARIABLE_moduleName:identifier___Error) {
         model(\.error, ViewError(from: error))
     }
