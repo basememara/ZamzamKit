@@ -6,6 +6,7 @@
 //  Copyright © 2021 Zamzam Inc. All rights reserved.
 //
 
+import Combine
 import SwiftUI
 
 public extension View {
@@ -15,17 +16,43 @@ public extension View {
     }
 }
 
+// MARK: - Receive
+
 public extension View {
-    /// Binds the height of the view to a property.
-    func assign(heightTo height: Binding<CGFloat>) -> some View {
-        background(
-            GeometryReader { geometry in
-                Color.clear
-                    .onAppear { height.wrappedValue = geometry.size.height }
-            }
-        )
+    /// Adds an action to perform when this view detects data emitted by the given publisher.
+    ///
+    /// - Parameters:
+    ///   - publisher: The publisher to subscribe to.
+    ///   - action: The action to perform when an event is emitted by `publisher`.
+    /// - Returns: A view that triggers an async action when publisher emits an event.
+    @available(macOS 12, iOS 15, watchOS 8, tvOS 15, *)
+    func onReceive<P>(
+        _ publisher: P?,
+        perform action: @escaping () async -> Void
+    ) -> some View where P: Publisher, P.Failure == Never {
+        // Deprecate in favour of `.task` after converting publishers to `AsyncStream`
+        modifier(let: publisher) { content, publisher in
+            content.onReceive(publisher) { _ in async { await action() } }
+        }
+    }
+
+    /// Adds an action to perform when this view detects data emitted by the given `ObservableObject`.
+    ///
+    /// - Parameters:
+    ///   - observableObject: The `ObservableObject` to subscribe to.
+    ///   - action: The action to perform when an event is emitted by the `objectWillChange` publisher of the `ObservableObject`.
+    /// - Returns: A view that triggers an action when publisher emits an event.
+    func onReceive<O>(
+        _ observableObject: O,
+        perform action: @escaping () -> Void
+    ) -> some View where O: ObservableObject {
+        onReceive(observableObject.objectWillChange) { _ in
+            action()
+        }
     }
 }
+
+// MARK: - Notification
 
 public extension View {
     /// Adds an action to perform when this view detects a notification emitted by the `NotificationCenter` publisher.
@@ -78,6 +105,20 @@ public extension View {
         onReceive(NotificationCenter.default.publisher(for: name, object: object)) { _ in
             async { await action() }
         }
+    }
+}
+
+// MARK: - UI
+
+public extension View {
+    /// Binds the height of the view to a property.
+    func assign(heightTo height: Binding<CGFloat>) -> some View {
+        background(
+            GeometryReader { geometry in
+                Color.clear
+                    .onAppear { height.wrappedValue = geometry.size.height }
+            }
+        )
     }
 }
 
