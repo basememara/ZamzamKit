@@ -82,19 +82,17 @@ public extension NetworkPinnedCertificateTrustEvaluator {
 
         // Perform default and host validations
         guard valid(trust, for: [SecPolicyCreateSSL(true, nil)]),
-            valid(trust, for: [SecPolicyCreateSSL(true, host as CFString)]) else {
-                return false
+            valid(trust, for: [SecPolicyCreateSSL(true, host as CFString)])
+        else {
+            return false
         }
 
         let serverCertificatesData = Set(
-            (0..<SecTrustGetCertificateCount(trust))
-                .compactMap { SecTrustGetCertificateAtIndex(trust, $0) }
-                .map { SecCertificateCopyData($0) as Data }
+            (SecTrustCopyCertificateChain(trust) as? [SecCertificate])?
+                .map { SecCertificateCopyData($0) as Data } ?? []
         )
 
-        let pinnedCertificatesData = Set(
-            certificates.map { SecCertificateCopyData($0) as Data }
-        )
+        let pinnedCertificatesData = Set(certificates.map { SecCertificateCopyData($0) as Data })
 
         // Ensure pinned certificates in server data
         return !serverCertificatesData.isDisjoint(with: pinnedCertificatesData)
