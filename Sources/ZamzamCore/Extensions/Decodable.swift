@@ -23,7 +23,7 @@ public struct FailableDecodableArray<Element: Decodable>: Decodable {
                 self.base = try container.decode(Base.self)
             } catch {
                 self.base = nil
-                print("🤍 \(Date(), formatter: .timeFormatter) ERROR Failed to decode \(Base.self): \(error)")
+                print("🤍 \(Date.now.formatted(date: .omitted, time: .standard)) ERROR Failed to decode \(Base.self): \(error)")
             }
         }
     }

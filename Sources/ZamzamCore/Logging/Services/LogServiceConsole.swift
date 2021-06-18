@@ -28,7 +28,9 @@ public extension LogServiceConsole {
         context: [String: CustomStringConvertible]
     ) {
         let prefix: String
-        let time = DateFormatter.timeFormatter.string(from: Date())
+        let time = Date.now.formatted(
+            .dateTime.hour(.twoDigitsNoAMPM).minute().second().secondFraction(.fractional(3))
+        )
 
         switch level {
         case .verbose:
