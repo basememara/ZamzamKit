@@ -33,6 +33,7 @@ public class BackgroundTask {
     /// - Parameters:
     ///   - application: The application instance.
     ///   - handler: The long-running background task to execute.
+    @MainActor
     public static func run(for application: UIApplication, handler: (BackgroundTask) -> Void) {
         let backgroundTask = BackgroundTask(application: application)
 
