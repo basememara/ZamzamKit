@@ -16,6 +16,20 @@ public extension View {
     }
 }
 
+public extension View {
+    /// Hides this view conditionally.
+    ///
+    /// - Parameter condition: The condition to determine if the content should be applied.
+    /// - Returns: The modified view.
+    func hidden(_ condition: Bool) -> some View {
+        modifier(if: condition) { content in
+            content.hidden()
+        } else: { content in
+            content
+        }
+    }
+}
+
 // MARK: - Receive
 
 public extension View {
@@ -25,7 +39,6 @@ public extension View {
     ///   - publisher: The publisher to subscribe to.
     ///   - action: The action to perform when an event is emitted by `publisher`.
     /// - Returns: A view that triggers an async action when publisher emits an event.
-    @available(macOS 12, iOS 15, watchOS 8, tvOS 15, *)
     func onReceive<P>(
         _ publisher: P?,
         perform action: @escaping () async -> Void
@@ -78,7 +91,6 @@ public extension View {
     ///   - object: The object posting the named notification.
     ///   - action: The action to perform when the notification is emitted by publisher.
     /// - Returns: View
-    @available(macOS 12, iOS 15, watchOS 8, tvOS 15, *)
     func onNotification(
         for name: Notification.Name,
         object: AnyObject? = nil,
@@ -96,7 +108,6 @@ public extension View {
     ///   - object: The object posting the named notification.
     ///   - action: The action to perform when the notification is emitted by publisher.
     /// - Returns: View
-    @available(macOS 12, iOS 15, watchOS 8, tvOS 15, *)
     func onNotification(
         for name: Notification.Name,
         object: AnyObject? = nil,

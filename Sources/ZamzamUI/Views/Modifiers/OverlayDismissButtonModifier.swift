@@ -9,13 +9,14 @@
 import SwiftUI
 
 private struct OverlayDismissButtonModifier: ViewModifier {
-    @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.isPresented) private var isPresented
 
     func body(content: Content) -> some View {
-        content.modifier(if: presentationMode.wrappedValue.isPresented) { content in
+        content.modifier(if: isPresented) { content in
             content
                 .overlay(
-                    Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                    Button(action: { dismiss() }) {
                         Label(LocalizedStringKey("Close"), systemImage: "xmark")
                             .labelStyle(IconOnlyLabelStyle())
                             .foregroundColor(Color(.label))

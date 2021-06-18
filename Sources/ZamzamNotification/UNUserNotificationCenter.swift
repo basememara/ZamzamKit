@@ -198,8 +198,7 @@ public extension UNUserNotificationCenter {
             $0.badge ?= badge
             $0.sound = sound
 
-            if #available(macOS 12, iOS 15, watchOS 8, tvOS 15, *),
-               let interruptionLevel = interruptionLevel {
+            if let interruptionLevel = interruptionLevel {
                 switch interruptionLevel {
                 case .passive:
                     $0.interruptionLevel = .passive
@@ -267,8 +266,7 @@ public extension UNUserNotificationCenter {
             $0.badge ?= badge
             $0.sound = sound
 
-            if #available(macOS 12, iOS 15, watchOS 8, tvOS 15, *),
-               let interruptionLevel = interruptionLevel {
+            if let interruptionLevel = interruptionLevel {
                 switch interruptionLevel {
                 case .passive:
                     $0.interruptionLevel = .passive
@@ -346,8 +344,7 @@ public extension UNUserNotificationCenter {
             $0.badge ?= badge
             $0.sound = sound
 
-            if #available(macOS 12, iOS 15, watchOS 8, tvOS 15, *),
-               let interruptionLevel = interruptionLevel {
+            if let interruptionLevel = interruptionLevel {
                 switch interruptionLevel {
                 case .passive:
                     $0.interruptionLevel = .passive
