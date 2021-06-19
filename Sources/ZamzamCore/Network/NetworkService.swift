@@ -6,7 +6,6 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-import Foundation.NSData
 import Foundation.NSURLRequest
 
 public protocol NetworkService {
@@ -15,5 +14,5 @@ public protocol NetworkService {
     /// - Parameters:
     ///   - request: A network request object that provides the URL, parameters, headers, and so on.
     ///   - completion: The completion handler to call when the load request is complete.
-    func send(_ request: URLRequest, completion: @escaping (Result<NetworkResponse, NetworkError>) -> Void)
+    func send(_ request: URLRequest) async throws -> NetworkResponse
 }

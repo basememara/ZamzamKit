@@ -27,11 +27,11 @@ public extension LogServiceConsole {
         error: Error?,
         context: [String: CustomStringConvertible]
     ) {
-        let prefix: String
         let time = Date.now.formatted(
             .dateTime.hour(.twoDigitsNoAMPM).minute().second().secondFraction(.fractional(3))
         )
 
+        let prefix: String
         switch level {
         case .verbose:
             prefix = "💜 \(time) VERBOSE"

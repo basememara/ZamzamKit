@@ -10,13 +10,13 @@ import Foundation.NSURLRequest
 
 /// The server response with included details from the network request.
 public struct NetworkResponse {
-    public let data: Data?
+    public let data: Data
     public let headers: [String: String]
     public let statusCode: Int
     public let request: URLRequest
 
     public init(
-        data: Data?,
+        data: Data,
         headers: [String: String],
         statusCode: Int,
         request: URLRequest

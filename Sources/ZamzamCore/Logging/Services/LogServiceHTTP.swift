@@ -6,14 +6,16 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-#if os(iOS)
+import Combine
 import Foundation.NSDate
 import Foundation.NSData
 import Foundation.NSJSONSerialization
 import Foundation.NSNotification
 import Foundation.NSURLRequest
+#if os(iOS)
 import UIKit.UIApplication
 import UIKit.UIDevice
+#endif
 
 /// Log destination for sending over HTTP.
 final public class LogServiceHTTP {
@@ -28,7 +30,9 @@ final public class LogServiceHTTP {
     private let bufferEncode: ([Entry]) -> Data?
 
     /// Stores the log entries in memory until it is ready to send.
-    private var buffer: [Entry] = []
+    private var buffer = Atomic<[Entry]>([])
+
+    private var cancellable = Set<AnyCancellable>()
 
     /// The initializer of the log destination.
     ///
@@ -59,19 +63,12 @@ final public class LogServiceHTTP {
         self.distribution = distribution
         self.networkManager = networkManager
 
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(applicationWillExit),
-            name: UIApplication.willResignActiveNotification,
-            object: nil
-        )
-
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(applicationWillExit),
-            name: UIApplication.willTerminateNotification,
-            object: nil
-        )
+        #if os(iOS)
+        notificationCenter.publisher(for: UIApplication.willResignActiveNotification, object: nil)
+            .merge(with: notificationCenter.publisher(for: UIApplication.willTerminateNotification, object: nil))
+            .sink { [weak self] _ in self?.send() }
+            .store(in: &cancellable)
+        #endif
     }
 }
 
@@ -107,6 +104,19 @@ public extension LogServiceHTTP {
         line: Int,
         context: [String: CustomStringConvertible]
     ) {
+        var device: [String: Any] = [
+            "is_simulator": distribution.isRunningOnSimulator
+        ]
+
+        #if os(iOS)
+        device.merge([
+            "device_id": distribution.deviceIdentifier,
+            "device_name": distribution.isRunningInAppStore ? "***" : distribution.deviceName,
+            "device_model": distribution.deviceModel,
+            "os_version": distribution.osVersion
+        ]) { $1 }
+        #endif
+
         var payload: [String: Any] = [
             "app": [
                 "name": distribution.appDisplayName ?? "Unknown",
@@ -121,13 +131,7 @@ public extension LogServiceHTTP {
                     : distribution.isRunningOnSimulator ? "simulator"
                     : "unknown"
             ],
-            "device": [
-                "device_id": distribution.deviceIdentifier,
-                "device_name": distribution.isRunningInAppStore ? "***" : distribution.deviceName,
-                "device_model": distribution.deviceModel,
-                "os_version": distribution.osVersion,
-                "is_simulator": distribution.isRunningOnSimulator
-            ],
+            "device": device,
             "code": [
                 "file": "\(file)",
                 "function": function,
@@ -142,15 +146,15 @@ public extension LogServiceHTTP {
         payload.merge(parameters) { $1 }
 
         guard let log = payload.jsonString() else {
-            print("🤍 \(Date(), formatter: .timeFormatter) ERROR Logger unable to encode parameters for destination.")
+            print("🤍 \(Date.now.formatted(date: .omitted, time: .standard)) ERROR Logger unable to encode parameters for destination.")
             return
         }
 
         // Store in buffer for sending later
-        buffer.append(Entry(level: level, date: date, payload: log))
+        buffer.value { $0.append(Entry(level: level, date: date, payload: log)) }
 
         // Flush buffer threshold reached or in background
-        guard buffer.count > maxEntriesInBuffer
+        guard buffer.value.count > maxEntriesInBuffer
                 || context["app_state"]?.description == "background"
         else {
             return
@@ -162,40 +166,30 @@ public extension LogServiceHTTP {
 
 private extension LogServiceHTTP {
     func send() {
-        guard !buffer.isEmpty,
-              minFlushLevel == .none || buffer.contains(where: { $0.level >= minFlushLevel })
+        guard !buffer.value.isEmpty,
+              minFlushLevel == .none || buffer.value.contains(where: { $0.level >= minFlushLevel })
         else {
             return
         }
 
-        let entries = buffer
-        buffer = []
+        let entries = buffer.value
+        buffer.value { $0 = [] }
 
         guard let data = bufferEncode(entries) else {
-            print("🤍 \(Date(), formatter: .timeFormatter) PRINT Could not begin log destination task")
+            print("🤍 \(Date.now.formatted(date: .omitted, time: .standard)) PRINT Could not begin log destination task")
             return
         }
 
-        var request = urlRequest
-        request.httpBody = data
-
-        BackgroundTask.run(for: .shared) { task in
-            networkManager.send(request) {
+        async {
+            do {
+                var request = urlRequest
+                request.httpBody = data
+                _ = try await networkManager.send(request)
+            } catch {
                 // Add back to the buffer if could not send
-                if case let .failure(error) = $0 {
-                    print("🤍 \(Date(), formatter: .timeFormatter) PRINT Error from log destination: \(error)")
-                    DispatchQueue.logger.async { self.buffer += entries }
-                }
-
-                task.end()
+                print("🤍 \(Date.now.formatted(date: .omitted, time: .standard)) PRINT Error from log destination: \(error)")
+                buffer.value { $0 += entries }
             }
         }
     }
-
-    @objc func applicationWillExit() {
-        DispatchQueue.logger.async {
-            self.send()
-        }
-    }
 }
-#endif

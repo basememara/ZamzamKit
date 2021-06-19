@@ -20,44 +20,26 @@ final class NetworkTests: XCTestCase {
 // MARK: - GET
 
 extension NetworkTests {
-    func testGET() {
+    func testGET() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let request = URLRequest(
             url: URL(safeString: "https://httpbin.org/get"),
             method: .get
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/get")
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
     }
 }
 
 extension NetworkTests {
-    func testGETWithParameters() {
+    func testGETWithParameters() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let parameters: [String: Any] = [
             "abc": 123,
             "def": "test456",
@@ -70,21 +52,8 @@ extension NetworkTests {
             parameters: parameters
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssert(request.url?.absoluteString.contains("https://httpbin.org/get?") == true)
@@ -92,17 +61,11 @@ extension NetworkTests {
         XCTAssert(request.url?.absoluteString.contains("def=test456") == true)
         XCTAssert(request.url?.absoluteString.contains("xyz=true") == true)
 
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
-
-        guard let data = response?.data else {
-            XCTFail("No response data was found")
-            return
-        }
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
 
         do {
-            let model = try jsonDecoder.decode(ResponseModel.self, from: data)
+            let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
             XCTAssertEqual(model.url, request.url?.absoluteString)
 
@@ -116,10 +79,8 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-    func testGETWithHeaders() {
+    func testGETWithHeaders() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let headers: [String: String] = [
             "Abc": "test123",
             "Def": "test456",
@@ -132,35 +93,16 @@ extension NetworkTests {
             headers: headers
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/get")
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
-
-        guard let data = response?.data else {
-            XCTFail("No response data was found")
-            return
-        }
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
 
         do {
-            let model = try jsonDecoder.decode(ResponseModel.self, from: data)
+            let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
             XCTAssertEqual(model.url, request.url?.absoluteString)
 
@@ -176,44 +118,26 @@ extension NetworkTests {
 // MARK: - POST
 
 extension NetworkTests {
-    func testPOST() {
+    func testPOST() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let request = URLRequest(
             url: URL(safeString: "https://httpbin.org/post"),
             method: .post
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/post")
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
     }
 }
 
 extension NetworkTests {
-    func testPOSTWithParameters() {
+    func testPOSTWithParameters() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let parameters: [String: Any] = [
             "abc": 123,
             "def": "test456",
@@ -226,35 +150,16 @@ extension NetworkTests {
             parameters: parameters
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/post")
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
-
-        guard let data = response?.data else {
-            XCTFail("No response data was found")
-            return
-        }
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
 
         do {
-            let model = try jsonDecoder.decode(ResponseModel.self, from: data)
+            let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
             XCTAssertEqual(model.url, request.url?.absoluteString)
 
@@ -268,10 +173,8 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-    func testPOSTWithHeaders() {
+    func testPOSTWithHeaders() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let headers: [String: String] = [
             "Abc": "test123",
             "Def": "test456",
@@ -284,35 +187,16 @@ extension NetworkTests {
             headers: headers
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/post")
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
-
-        guard let data = response?.data else {
-            XCTFail("No response data was found")
-            return
-        }
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
 
         do {
-            let model = try jsonDecoder.decode(ResponseModel.self, from: data)
+            let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
             XCTAssertEqual(model.url, request.url?.absoluteString)
 
@@ -328,44 +212,26 @@ extension NetworkTests {
 // MARK: - PATCH
 
 extension NetworkTests {
-    func testPATCH() {
+    func testPATCH() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let request = URLRequest(
             url: URL(safeString: "https://httpbin.org/patch"),
             method: .patch
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/patch")
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
     }
 }
 
 extension NetworkTests {
-    func testPATCHWithParameters() {
+    func testPATCHWithParameters() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let parameters: [String: Any] = [
             "abc": 123,
             "def": "test456",
@@ -378,35 +244,16 @@ extension NetworkTests {
             parameters: parameters
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/patch")
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
-
-        guard let data = response?.data else {
-            XCTFail("No response data was found")
-            return
-        }
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
 
         do {
-            let model = try jsonDecoder.decode(ResponseModel.self, from: data)
+            let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
             XCTAssertEqual(model.url, request.url?.absoluteString)
 
@@ -420,10 +267,8 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-    func testPATCHWithHeaders() {
+    func testPATCHWithHeaders() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let headers: [String: String] = [
             "Abc": "test123",
             "Def": "test456",
@@ -436,35 +281,16 @@ extension NetworkTests {
             headers: headers
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/patch")
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
-
-        guard let data = response?.data else {
-            XCTFail("No response data was found")
-            return
-        }
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
 
         do {
-            let model = try jsonDecoder.decode(ResponseModel.self, from: data)
+            let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
             XCTAssertEqual(model.url, request.url?.absoluteString)
 
@@ -480,44 +306,26 @@ extension NetworkTests {
 // MARK: - PUT
 
 extension NetworkTests {
-    func testPUT() {
+    func testPUT() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let request = URLRequest(
             url: URL(safeString: "https://httpbin.org/put"),
             method: .put
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/put")
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
     }
 }
 
 extension NetworkTests {
-    func testPUTWithParameters() {
+    func testPUTWithParameters() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let parameters: [String: Any] = [
             "abc": 123,
             "def": "test456",
@@ -530,35 +338,16 @@ extension NetworkTests {
             parameters: parameters
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/put")
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
-
-        guard let data = response?.data else {
-            XCTFail("No response data was found")
-            return
-        }
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
 
         do {
-            let model = try jsonDecoder.decode(ResponseModel.self, from: data)
+            let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
             XCTAssertEqual(model.url, request.url?.absoluteString)
 
@@ -572,10 +361,8 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-    func testPUTWithHeaders() {
+    func testPUTWithHeaders() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let headers: [String: String] = [
             "Abc": "test123",
             "Def": "test456",
@@ -588,35 +375,16 @@ extension NetworkTests {
             headers: headers
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/put")
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
-
-        guard let data = response?.data else {
-            XCTFail("No response data was found")
-            return
-        }
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
 
         do {
-            let model = try jsonDecoder.decode(ResponseModel.self, from: data)
+            let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
             XCTAssertEqual(model.url, request.url?.absoluteString)
 
@@ -632,44 +400,26 @@ extension NetworkTests {
 // MARK: - DELETE
 
 extension NetworkTests {
-    func testDELETE() {
+    func testDELETE() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let request = URLRequest(
             url: URL(safeString: "https://httpbin.org/delete"),
             method: .delete
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/delete")
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
     }
 }
 
 extension NetworkTests {
-    func testDELETEWithParameters() {
+    func testDELETEWithParameters() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let parameters: [String: Any] = [
             "abc": 123,
             "def": "test456",
@@ -682,21 +432,8 @@ extension NetworkTests {
             parameters: parameters
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssert(request.url?.absoluteString.contains("https://httpbin.org/delete?") == true)
@@ -704,17 +441,11 @@ extension NetworkTests {
         XCTAssert(request.url?.absoluteString.contains("def=test456") == true)
         XCTAssert(request.url?.absoluteString.contains("xyz=true") == true)
 
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
-
-        guard let data = response?.data else {
-            XCTFail("No response data was found")
-            return
-        }
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
 
         do {
-            let model = try jsonDecoder.decode(ResponseModel.self, from: data)
+            let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
             XCTAssertEqual(model.url, request.url?.absoluteString)
 
@@ -728,10 +459,8 @@ extension NetworkTests {
 }
 
 extension NetworkTests {
-    func testDELETEWithHeaders() {
+    func testDELETEWithHeaders() async throws {
         // Given
-        let promise = expectation(description: #function)
-
         let headers: [String: String] = [
             "Abc": "test123",
             "Def": "test456",
@@ -744,35 +473,16 @@ extension NetworkTests {
             headers: headers
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
         XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/delete")
-        XCTAssertNotNil(response?.data)
-        XCTAssertEqual(response?.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response?.statusCode, 200)
-
-        guard let data = response?.data else {
-            XCTFail("No response data was found")
-            return
-        }
+        XCTAssertEqual(response.headers["Content-Type"], "application/json")
+        XCTAssertEqual(response.statusCode, 200)
 
         do {
-            let model = try jsonDecoder.decode(ResponseModel.self, from: data)
+            let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
             XCTAssertEqual(model.url, request.url?.absoluteString)
 
@@ -797,9 +507,8 @@ extension NetworkTests {
         }
     }
 
-    func testWithURLRequestAdapter() {
+    func testWithURLRequestAdapter() async throws {
         // Given
-        let promise = expectation(description: #function)
         let networkManager = NetworkManager(
             service: NetworkServiceFoundation(),
             adapter: TestURLRequestAdapter()
@@ -810,28 +519,15 @@ extension NetworkTests {
             method: .get
         )
 
-        var response: NetworkResponse?
-
         // When
-        networkManager.send(request) {
-            defer { promise.fulfill() }
-
-            guard case let .success(value) = $0 else {
-                XCTFail("The network request failed: \(String(describing: $0.error))")
-                return
-            }
-
-            response = value
-        }
-
-        wait(for: [promise], timeout: 10)
+        let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(response?.statusCode, 200)
+        XCTAssertEqual(response.statusCode, 200)
         XCTAssertNil(request.value(forHTTPHeaderField: "X-Test-1"))
         XCTAssertNil(request.value(forHTTPHeaderField: "X-Test-2"))
-        XCTAssertEqual(response?.request.value(forHTTPHeaderField: "X-Test-1"), "1")
-        XCTAssertEqual(response?.request.value(forHTTPHeaderField: "X-Test-2"), "2")
+        XCTAssertEqual(response.request.value(forHTTPHeaderField: "X-Test-1"), "1")
+        XCTAssertEqual(response.request.value(forHTTPHeaderField: "X-Test-2"), "2")
     }
 }
 
