@@ -33,6 +33,19 @@ public extension View {
 // MARK: - Receive
 
 public extension View {
+    /// Adds an action to perform when this view detects data emitted by the optional publisher.
+    ///
+    /// - Parameters:
+    ///   - publisher: The publisher to subscribe to.
+    ///   - action: The action to perform when an event is emitted by `publisher`.
+    /// - Returns: A view that triggers action when publisher emits an event.
+    func onReceive<P>(
+        _ publisher: P?,
+        perform action: @escaping (P.Output) -> Void
+    ) -> some View where P: Publisher, P.Failure == Never {
+        modifier(let: publisher) { $0.onReceive($1, perform: action) }
+    }
+
     /// Adds an action to perform when this view detects data emitted by the given publisher.
     ///
     /// - Parameters:
@@ -44,9 +57,7 @@ public extension View {
         perform action: @escaping () async -> Void
     ) -> some View where P: Publisher, P.Failure == Never {
         // Deprecate in favour of `.task` after converting publishers to `AsyncStream`
-        modifier(let: publisher) { content, publisher in
-            content.onReceive(publisher) { _ in async { await action() } }
-        }
+        onReceive(publisher) { _ in async { await action() } }
     }
 
     /// Adds an action to perform when this view detects data emitted by the given `ObservableObject`.
