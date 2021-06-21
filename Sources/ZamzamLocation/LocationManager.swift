@@ -166,6 +166,7 @@ public extension LocationManager {
     func publisher() -> AnyPublisher<Bool, Never> {
         Self.authorizationSubject
             .compactMap { $0 }
+            .debounce(for: 0.2, scheduler: RunLoop.main)
             .eraseToAnyPublisher()
     }
 
