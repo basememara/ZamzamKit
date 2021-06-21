@@ -15,7 +15,7 @@ protocol ___VARIABLE_productName:identifier___Interactable: Interactor {
 
 protocol ___VARIABLE_productName:identifier___Presentable: Presenter {
     func display(for response: ___VARIABLE_productName:identifier___API.FetchResponse) async
-    func display(error: ___VARIABLE_moduleName:identifier___Error)
+    func display(error: ___VARIABLE_moduleName:identifier___Error) async
 }
 
 protocol ___VARIABLE_productName:identifier___Renderable: Render {}

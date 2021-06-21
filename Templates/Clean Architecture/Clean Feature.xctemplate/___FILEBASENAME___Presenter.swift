@@ -13,7 +13,7 @@ extension ___VARIABLE_productName:identifier___Presenter {
 
 extension ___VARIABLE_productName:identifier___Presenter {
     @MainActor
-    func display(error: ___VARIABLE_moduleName:identifier___Error) {
+    func display(error: ___VARIABLE_moduleName:identifier___Error) async {
         model(\.error, ViewError(from: error))
     }
 }
