@@ -122,6 +122,7 @@ public extension LocationServiceCore {
     var heading: CLHeading? { manager.heading }
 
     func startUpdatingHeading() {
+        guard CLLocationManager.headingAvailable() else { return }
         manager.startUpdatingHeading()
     }
 

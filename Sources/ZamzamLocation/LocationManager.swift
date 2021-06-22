@@ -40,10 +40,15 @@ public extension LocationManager {
     ///   - completion: True if the authorization succeeded for the authorization type, false otherwise.
     @discardableResult
     func requestAuthorization(for type: LocationAPI.AuthorizationType = .whenInUse) -> AnyPublisher<Bool, Never> {
+        let publisher = Self.authorizationSubject
+            .compactMap { $0 }
+            .debounce(for: 0.2, scheduler: RunLoop.main)
+            .eraseToAnyPublisher()
+
         // Handle authorized and exit
         guard !isAuthorized(for: type) else {
             Self.authorizationSubject.send(true)
-            return publisher()
+            return publisher
         }
 
         // Request appropiate authorization before exit
@@ -54,16 +59,16 @@ public extension LocationManager {
             // Notify in case authorization dialog not launched by OS
             // since user will be notified first time only and ignored subsequently
             Self.authorizationSubject.send(false)
-            return publisher()
+            return publisher
         }
 
         // Handle denied and exit
         guard service.canRequestAuthorization else {
             Self.authorizationSubject.send(false)
-            return publisher()
+            return publisher
         }
 
-        return publisher()
+        return publisher
     }
 }
 
@@ -78,13 +83,15 @@ public extension LocationManager {
     func startUpdatingLocation(
         enableBackground: Bool = false,
         pauseAutomatically: Bool? = nil
-    ) -> AnyPublisher<CLLocation, CLError> {
+    ) -> AnyPublisher<Result<CLLocation, CLError>, Never> {
         service.startUpdatingLocation(
             enableBackground: enableBackground,
             pauseAutomatically: pauseAutomatically
         )
 
-        return publisher()
+        return Self.locationSubject
+            .compactMap { $0 }
+            .eraseToAnyPublisher()
     }
 
     /// Stops the generation of location updates.
@@ -97,9 +104,12 @@ public extension LocationManager {
 public extension LocationManager {
     /// Starts the generation of updates based on significant location changes.
     @discardableResult
-    func startMonitoringSignificantLocationChanges() -> AnyPublisher<CLLocation, CLError> {
+    func startMonitoringSignificantLocationChanges() -> AnyPublisher<Result<CLLocation, CLError>, Never> {
         service.startMonitoringSignificantLocationChanges()
-        return publisher()
+
+        return Self.locationSubject
+            .compactMap { $0 }
+            .eraseToAnyPublisher()
     }
 
     /// Stops the delivery of location events based on significant location changes.
@@ -118,9 +128,12 @@ public extension LocationManager {
 
     /// Starts the generation of updates that report the user’s current heading.
     @discardableResult
-    func startUpdatingHeading() -> AnyPublisher<CLHeading, CLError> {
+    func startUpdatingHeading() -> AnyPublisher<Result<CLHeading, CLError>, Never> {
         service.startUpdatingHeading()
-        return publisher()
+
+        return Self.headingSubject
+            .compactMap { $0 }
+            .eraseToAnyPublisher()
     }
 
     /// Stops the generation of heading updates.
@@ -129,7 +142,7 @@ public extension LocationManager {
     }
 
     func locationService(didUpdateHeading newHeading: CLHeading) {
-        Self.headingSubject.send(newHeading)
+        Self.headingSubject.send(.success(newHeading))
     }
 }
 #endif
@@ -142,45 +155,24 @@ extension LocationManager: LocationServiceDelegate {
     }
 
     public func locationService(didUpdateLocation location: CLLocation) {
-        Self.locationSubject.send(location)
+        Self.locationSubject.send(.success(location))
     }
 
     public func locationService(didFailWithError error: CLError) {
-        Self.locationSubject.send(completion: .failure(error))
+        Self.locationSubject.send(.failure(error))
 
         #if os(iOS)
-        Self.headingSubject.send(completion: .failure(error))
+        Self.headingSubject.send(.failure(error))
         #endif
     }
 }
 
 // MARK: - Observables
 
-public extension LocationManager {
-    private static let authorizationSubject = CurrentValueSubject<Bool?, Never>(nil)
-    private static let locationSubject = CurrentValueSubject<CLLocation?, CLError>(nil)
+private extension LocationManager {
+    static let authorizationSubject = CurrentValueSubject<Bool?, Never>(nil)
+    static let locationSubject = CurrentValueSubject<Result<CLLocation, CLError>?, Never>(nil)
     #if os(iOS)
-    private static let headingSubject = CurrentValueSubject<CLHeading?, CLError>(nil)
-    #endif
-
-    func publisher() -> AnyPublisher<Bool, Never> {
-        Self.authorizationSubject
-            .compactMap { $0 }
-            .debounce(for: 0.2, scheduler: RunLoop.main)
-            .eraseToAnyPublisher()
-    }
-
-    func publisher() -> AnyPublisher<CLLocation, CLError> {
-        Self.locationSubject
-            .compactMap { $0 }
-            .eraseToAnyPublisher()
-    }
-
-    #if os(iOS)
-    func publisher() -> AnyPublisher<CLHeading, CLError> {
-        Self.headingSubject
-            .compactMap { $0 }
-            .eraseToAnyPublisher()
-    }
+    static let headingSubject = CurrentValueSubject<Result<CLHeading, CLError>?, Never>(nil)
     #endif
 }
