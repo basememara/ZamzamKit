@@ -38,7 +38,6 @@ public extension LocationManager {
     ///   - type: Type of permission required, whether in the foreground (.whenInUse) or while running (.always).
     ///   - startUpdatingLocation: Starts the generation of updates that report the user’s current location.
     ///   - completion: True if the authorization succeeded for the authorization type, false otherwise.
-    @discardableResult
     func requestAuthorization(for type: LocationAPI.AuthorizationType = .whenInUse) -> AnyPublisher<Bool, Never> {
         let publisher = Self.authorizationSubject
             .compactMap { $0 }
@@ -79,7 +78,6 @@ public extension LocationManager {
     var location: CLLocation? { service.location }
 
     /// Starts the generation of updates that report the user’s current location.
-    @discardableResult
     func startUpdatingLocation(
         enableBackground: Bool = false,
         pauseAutomatically: Bool? = nil
@@ -103,7 +101,6 @@ public extension LocationManager {
 #if os(iOS)
 public extension LocationManager {
     /// Starts the generation of updates based on significant location changes.
-    @discardableResult
     func startMonitoringSignificantLocationChanges() -> AnyPublisher<Result<CLLocation, CLError>, Never> {
         service.startMonitoringSignificantLocationChanges()
 
@@ -127,9 +124,10 @@ public extension LocationManager {
     var heading: CLHeading? { service.heading }
 
     /// Starts the generation of updates that report the user’s current heading.
-    @discardableResult
     func startUpdatingHeading() -> AnyPublisher<Result<CLHeading, CLError>, Never> {
-        service.startUpdatingHeading()
+        if !service.startUpdatingHeading() {
+            Self.headingSubject.send(.failure(CLError(.headingFailure)))
+        }
 
         return Self.headingSubject
             .compactMap { $0 }
