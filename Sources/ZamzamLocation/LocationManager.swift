@@ -124,7 +124,9 @@ public extension LocationManager {
     var heading: CLHeading? { service.heading }
 
     /// Starts the generation of updates that report the user’s current heading.
-    func startUpdatingHeading() -> AnyPublisher<Result<CLHeading, CLError>, Never> {
+    func startUpdatingHeading(allowCalibration: Bool = false) -> AnyPublisher<Result<CLHeading, CLError>, Never> {
+        service.shouldDisplayHeadingCalibration = allowCalibration
+
         if !service.startUpdatingHeading() {
             Self.headingSubject.send(.failure(CLError(.headingFailure)))
         }
@@ -136,6 +138,7 @@ public extension LocationManager {
 
     /// Stops the generation of heading updates.
     func stopUpdatingHeading() {
+        service.shouldDisplayHeadingCalibration = false
         service.stopUpdatingHeading()
     }
 

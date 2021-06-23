@@ -29,6 +29,7 @@ public protocol LocationService: AnyObject {
 
     #if os(iOS)
     var heading: CLHeading? { get }
+    var shouldDisplayHeadingCalibration: Bool { get set }
     func startUpdatingHeading() -> Bool
     func stopUpdatingHeading()
     #endif
