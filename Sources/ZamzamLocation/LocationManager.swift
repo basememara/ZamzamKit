@@ -32,6 +32,9 @@ public extension LocationManager {
         service.isAuthorized(for: type)
     }
 
+    /// Determines if the user has not chosen whether the app can use location services.
+    var canRequestAuthorization: Bool { service.canRequestAuthorization }
+
     /// Requests permission to use location services.
     ///
     /// - Parameters:
