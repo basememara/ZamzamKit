@@ -44,7 +44,7 @@ public extension LocationManager {
     func requestAuthorization(for type: LocationAPI.AuthorizationType = .whenInUse) -> AnyPublisher<Bool, Never> {
         let publisher = Self.authorizationSubject
             .compactMap { $0 }
-            .debounce(for: 0.2, scheduler: RunLoop.main)
+            .debounce(for: 0.2, scheduler: DispatchQueue.main)
             .eraseToAnyPublisher()
 
         // Handle authorized and exit
