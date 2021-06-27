@@ -33,6 +33,22 @@ public extension View {
 // MARK: - Receive
 
 public extension View {
+    /// Adds a modifier for this view that fires an action when a specific value changes.
+    ///
+    /// - Parameters:
+    ///   - value: The value to check against when determining whether to run the closure.
+    ///   - action: A concurrent closure to run when the value changes.
+    ///   - newValue: The new value that failed the comparison check.
+    /// - Returns: A view that fires an action when the specified value changes.
+    func onChange<V>(
+        of value: V,
+        perform action: @escaping (_ newValue: V) async -> Void
+    ) -> some View where V: Equatable {
+        onChange(of: value) { newValue in async { await action(newValue) } }
+    }
+}
+
+public extension View {
     /// Adds an action to perform when this view detects data emitted by the optional publisher.
     ///
     /// - Parameters:
