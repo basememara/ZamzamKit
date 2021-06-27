@@ -87,7 +87,7 @@ public extension View {
         perform action: @escaping () -> Void
     ) -> some View where O: ObservableObject {
         onReceive(observableObject.objectWillChange) { _ in
-            action()
+            DispatchQueue.main.async(execute: action)
         }
     }
 }
