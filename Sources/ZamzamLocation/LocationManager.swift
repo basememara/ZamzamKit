@@ -171,7 +171,7 @@ extension LocationManager: LocationServiceDelegate {
     }
 }
 
-// MARK: - Observables
+// MARK: - Observers
 
 private extension LocationManager {
     static let authorizationSubject = CurrentValueSubject<Bool?, Never>(nil)
