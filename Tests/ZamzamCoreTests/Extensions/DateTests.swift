@@ -560,7 +560,7 @@ extension DateTests {
     func testHijriDate() throws {
         do {
             let gregorianDate = try XCTUnwrap(Date(fromString: "2015/09/23 12:30"))
-            let hijriDate = gregorianDate.hijriString()
+            let hijriDate = gregorianDate.hijriString(template: "yyyyGMMMMd")
             let expectedDate = "Dhuʻl-Hijjah 10, 1436 AH"
 
             XCTAssertEqual("\(hijriDate)", expectedDate)
@@ -569,7 +569,7 @@ extension DateTests {
         do {
             let gregorianDate = try XCTUnwrap(Date(fromString: "2017/06/26 00:00"))
             let hijriDate = gregorianDate.hijriString()
-            let expectedDate = "Shawwal 2, 1438 AH"
+            let expectedDate = "Shawwal 2, 1438"
 
             XCTAssertEqual("\(hijriDate)", expectedDate)
         }
