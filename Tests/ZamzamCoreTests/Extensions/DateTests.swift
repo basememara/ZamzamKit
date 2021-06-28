@@ -255,7 +255,7 @@ extension DateTests {
     func testDateToStringForCalendar() throws {
         let calendar = Calendar(identifier: .islamic)
         let date = try XCTUnwrap(Date(fromString: "1440/03/01 18:31", calendar: calendar))
-        XCTAssertEqual(date.string(format: "MMM d, h:mm a", calendar: calendar), "Rab. I 1, 6:31 PM")
+        XCTAssertEqual(date.string(format: "MMM d, h:mm a", calendar: calendar), "Rab. I 1, 6:31 PM")
     }
 
     func testDateToStringForCalendar2() throws {
@@ -392,6 +392,7 @@ extension DateTests {
             try XCTUnwrap(Date(fromString: "2015/09/18 18:31")) - .weeks(1),
             Date(fromString: "2015/09/11 18:31")
         )
+
         XCTAssertEqual(
             try XCTUnwrap(Date(fromString: "2015/09/18 18:31")) + .weeks(4),
             Date(fromString: "2015/10/16 18:31")
@@ -505,6 +506,44 @@ extension DateTests {
             try XCTUnwrap(Date(fromString: "1440/02/30 18:31", calendar: calendar)) + .days(1, calendar),
             Date(fromString: "1440/03/01 18:31", calendar: calendar)
         )
+    }
+
+    func testIncrementDecrementShorthand() throws {
+        var date1 = try XCTUnwrap(Date(fromString: "2018/12/31 23:00"))
+        date1 += .minutes(120)
+        XCTAssertEqual(date1, Date(fromString: "2019/01/01 01:00"))
+
+        var date2 = try XCTUnwrap(Date(fromString: "2015/04/02 13:15"))
+        date2 += .minutes(1445)
+        XCTAssertEqual(date2, Date(fromString: "2015/04/03 13:20"))
+
+        var date3 = try XCTUnwrap(Date(fromString: "2016/02/20 13:12"))
+        date3 += .weeks(10)
+        XCTAssertEqual(date3, Date(fromString: "2016/04/30 13:12"))
+
+        var date4 = try XCTUnwrap(Date(fromString: "2015/10/26 18:31"))
+        date4 += .days(0)
+        XCTAssertEqual(date4, try XCTUnwrap(Date(fromString: "2015/10/26 18:31")))
+
+        var date5 = try XCTUnwrap(Date(fromString: "1990/01/31 22:12"))
+        date5 += .days(2)
+        XCTAssertEqual(date5, Date(fromString: "1990/02/02 22:12"))
+
+        var date6 = try XCTUnwrap(Date(fromString: "2015/09/18 18:31"))
+        date6 -= .days(1)
+        XCTAssertEqual(date6, Date(fromString: "2015/09/17 18:31"))
+
+        var date7 = try XCTUnwrap(Date(fromString: "2018/11/01 00:00"))
+        date7 -= .months(3)
+        XCTAssertEqual(date7, Date(fromString: "2018/08/01 00:00"))
+
+        var date8 = try XCTUnwrap(Date(fromString: "2018/11/01 00:00"))
+        date8 -= .years(3)
+        XCTAssertEqual(date8, Date(fromString: "2015/11/01 00:00"))
+
+        var date9 = try XCTUnwrap(Date(fromString: "2015/10/26 18:31"))
+        date9 += .years(0)
+        XCTAssertEqual(date9, try XCTUnwrap(Date(fromString: "2015/10/26 18:31")))
     }
 }
 

@@ -31,7 +31,9 @@ public extension Date {
         case months(Int, Calendar)
         case years(Int, Calendar)
     }
+}
 
+public extension Date {
     /// Adds time interval components to a date for the calendar.
     ///
     ///     Date(fromString: "1440/02/30 18:31", calendar) + .days(1, calendar)
@@ -91,7 +93,9 @@ public extension Date {
             return left + .years(-value, calendar)
         }
     }
+}
 
+public extension Date {
     /// Adds time interval components to a date.
     ///
     ///     Date(fromString: "2015/09/18 18:31") + .days(1)
@@ -138,5 +142,55 @@ public extension Date {
         case let .years(value):
             return left + .years(-value)
         }
+    }
+}
+
+public extension Date {
+    /// Adds time interval components to a date for the calendar.
+    ///
+    ///     var date = Date(fromString: "1440/02/30 18:31", calendar)
+    ///     date += .days(1, calendar)
+    ///
+    /// - Parameters:
+    ///   - left: The date to calculate from.
+    ///   - right: The time interval component with calendar to add to the date.
+    static func += (left: inout Date, right: TimeIntervalUnitWithCalendar) {
+        left = left + right
+    }
+
+    /// Subtracts time interval components from a date for the calendar.
+    ///
+    ///     var date = Date(fromString: "1440/02/30 18:31", calendar)
+    ///     date -= .days(1, calendar)
+    ///
+    /// - Parameters:
+    ///   - left: The date to calculate from.
+    ///   - right: The time interval component with calendar to subtracts from the date.
+    static func -= (left: inout Date, right: TimeIntervalUnitWithCalendar) {
+        left = left - right
+    }
+
+    /// Adds time interval components to a date.
+    ///
+    ///     var date = Date(fromString: "2015/09/18 18:31")
+    ///     date += .days(1)
+    ///
+    /// - Parameters:
+    ///   - left: The date to calculate from.
+    ///   - right: The time interval component to add to the date.
+    static func += (left: inout Date, right: TimeIntervalUnit) {
+        left = left + right
+    }
+
+    /// Subtracts time interval components from a date.
+    ///
+    ///     var date = Date(fromString: "2015/09/18 18:31")
+    ///     date -= .days(1)
+    ///
+    /// - Parameters:
+    ///   - left: The date to calculate from.
+    ///   - right: The time interval component to subtract from the date.
+    static func -= (left: inout Date, right: TimeIntervalUnit) {
+        left = left - right
     }
 }
