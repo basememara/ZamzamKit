@@ -625,3 +625,41 @@ extension DateTests {
         XCTAssertEqual(progress8.value, 1)
     }
 }
+
+extension DateTests {
+    func testDateIntervalStride() throws {
+        let startDate = Date(timeIntervalSince1970: 1626386307)
+
+        let interval1 = DateInterval(start: startDate, duration: 125)
+        let dates1 = interval1.stride(by: 15)
+        XCTAssertEqual(dates1.count, 9)
+        XCTAssertEqual(dates1[0].timeIntervalSince1970, 1626386307)
+        XCTAssertEqual(dates1[1].timeIntervalSince1970, 1626386307 + 15)
+        XCTAssertEqual(dates1[2].timeIntervalSince1970, 1626386307 + 15 * 2)
+        XCTAssertEqual(dates1[3].timeIntervalSince1970, 1626386307 + 15 * 3)
+        XCTAssertEqual(dates1[4].timeIntervalSince1970, 1626386307 + 15 * 4)
+        XCTAssertEqual(dates1[5].timeIntervalSince1970, 1626386307 + 15 * 5)
+        XCTAssertEqual(dates1[6].timeIntervalSince1970, 1626386307 + 15 * 6)
+        XCTAssertEqual(dates1[7].timeIntervalSince1970, 1626386307 + 15 * 7)
+        XCTAssertEqual(dates1[8].timeIntervalSince1970, 1626386307 + 15 * 8)
+
+        let interval2 = DateInterval(start: startDate, duration: 0)
+        let dates2 = interval2.stride(by: 15)
+        XCTAssertEqual(dates2.count, 1)
+        XCTAssertEqual(dates2[0].timeIntervalSince1970, 1626386307)
+
+        let interval3 = DateInterval(start: startDate, duration: 600)
+        let dates3 = interval3.stride(by: 60)
+        XCTAssertEqual(dates3.count, 11)
+        XCTAssertEqual(dates3[0].timeIntervalSince1970, 1626386307)
+        XCTAssertEqual(dates3[1].timeIntervalSince1970, 1626386307 + 60)
+        XCTAssertEqual(dates3[2].timeIntervalSince1970, 1626386307 + 60 * 2)
+        XCTAssertEqual(dates3[3].timeIntervalSince1970, 1626386307 + 60 * 3)
+        XCTAssertEqual(dates3[4].timeIntervalSince1970, 1626386307 + 60 * 4)
+        XCTAssertEqual(dates3[5].timeIntervalSince1970, 1626386307 + 60 * 5)
+        XCTAssertEqual(dates3[6].timeIntervalSince1970, 1626386307 + 60 * 6)
+        XCTAssertEqual(dates3[7].timeIntervalSince1970, 1626386307 + 60 * 7)
+        XCTAssertEqual(dates3[8].timeIntervalSince1970, 1626386307 + 60 * 8)
+        XCTAssertEqual(dates3[9].timeIntervalSince1970, 1626386307 + 60 * 9)
+    }
+}
