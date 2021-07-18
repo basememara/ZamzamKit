@@ -32,8 +32,8 @@ public extension Array {
 public extension Array where Element: Equatable {
     /// Array with all duplicates removed from it.
     ///
-    ///     [1, 3, 3, 5, 7, 9].distinct // [1, 3, 5, 7, 9]
-    var distinct: [Element] {
+    ///     [1, 3, 3, 5, 7, 9].removeDuplicates() // [1, 3, 5, 7, 9]
+    func removeDuplicates() -> [Element] {
         // https://github.com/SwifterSwift/SwifterSwift
         reduce(into: [Element]()) {
             guard !$0.contains($1) else { return }

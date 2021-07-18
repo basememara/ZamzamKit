@@ -44,7 +44,7 @@ extension ArrayTests {
         let sample = [1, 1, 3, 3, 5, 5, 7, 7, 9, 9]
 
         // When
-        let result = sample.distinct
+        let result = sample.removeDuplicates()
 
         // Then
         XCTAssertEqual(result, [1, 3, 5, 7, 9])
