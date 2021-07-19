@@ -180,7 +180,7 @@ private extension LogServiceHTTP {
             return
         }
 
-        async {
+        Task {
             do {
                 var request = urlRequest
                 request.httpBody = data

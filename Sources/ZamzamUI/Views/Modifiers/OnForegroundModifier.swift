@@ -22,7 +22,7 @@ private struct OnForegroundModifier: ViewModifier {
                 case .active:
                     guard isBackground else { return }
                     isBackground = false
-                    async { await action() }
+                    Task { await action() }
                 case .inactive:
                     break
                 @unknown default:

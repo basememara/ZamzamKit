@@ -44,7 +44,7 @@ public extension View {
         of value: V,
         perform action: @escaping (_ newValue: V) async -> Void
     ) -> some View where V: Equatable {
-        onChange(of: value) { newValue in async { await action(newValue) } }
+        onChange(of: value) { newValue in Task { await action(newValue) } }
     }
 }
 
@@ -73,7 +73,7 @@ public extension View {
         perform action: @escaping () async -> Void
     ) -> some View where P: Publisher, P.Failure == Never {
         // Deprecate in favour of `.task` after converting publishers to `AsyncStream`
-        onReceive(publisher) { _ in async { await action() } }
+        onReceive(publisher) { _ in Task { await action() } }
     }
 
     /// Adds an action to perform when this view detects data emitted by the given `ObservableObject`.
@@ -124,7 +124,7 @@ public extension View {
         perform action: @escaping (Notification) async -> Void
     ) -> some View {
         onReceive(NotificationCenter.default.publisher(for: name, object: object)) { notification in
-            async { await action(notification) }
+            Task { await action(notification) }
         }
     }
 
@@ -141,7 +141,7 @@ public extension View {
         perform action: @escaping () async -> Void
     ) -> some View {
         onReceive(NotificationCenter.default.publisher(for: name, object: object)) { _ in
-            async { await action() }
+            Task { await action() }
         }
     }
 }
