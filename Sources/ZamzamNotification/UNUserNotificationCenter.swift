@@ -149,12 +149,33 @@ public extension UNUserNotificationCenter {
         await notificationRequests().filter { ids.contains($0.identifier) }
     }
 
-    /// Determines if the pending notification request exists.
+    /// Retrieve the pending or delivered notification request.
+    ///
+    /// - Parameters:
+    ///   - id: The category for the requests.
+    ///   - pendingOnly: Specify to select pending or all requests including delivered.
+    func get(withCategory categoryIdentifier: String, pendingOnly: Bool = false) async -> [UNNotificationRequest] {
+        await (pendingOnly ? pendingNotificationRequests() : notificationRequests())
+            .filter { $0.content.categoryIdentifier == categoryIdentifier }
+    }
+}
+
+public extension UNUserNotificationCenter {
+    /// Determines if the notification request exists.
     ///
     /// - Parameters:
     ///   - id: The identifier for the requests.
     func exists(withIdentifier id: String) async -> Bool {
         await get(withIdentifier: id) != nil
+    }
+
+    /// Determines if the notification request exists.
+    ///
+    /// - Parameters:
+    ///   - categoryIdentifier: The category identifier for the requests.
+    ///   - pendingOnly: Specify to select pending or all requests including delivered.
+    func exists(withCategory categoryIdentifier: String, pendingOnly: Bool = false) async -> Bool {
+        await !get(withCategory: categoryIdentifier, pendingOnly: pendingOnly).isEmpty
     }
 }
 
@@ -405,8 +426,7 @@ public extension UNUserNotificationCenter {
 
         // Get back in queue since native remove has no completion block
         // https://stackoverflow.com/a/46434645
-        let remaining = await notificationRequests()
-        assert(remaining.isEmpty, "Notifications should be removed")
+        _ = await notificationRequests()
     }
 
     /// Remove all pending and delivered user notifications.
@@ -436,8 +456,7 @@ public extension UNUserNotificationCenter {
 
         // Get back in queue since native remove has no completion block
         // https://stackoverflow.com/a/46434645
-        let remaining = await pendingNotificationRequests()
-        assert(remaining.isEmpty, "Notifications should be removed")
+        _ = await pendingNotificationRequests()
     }
 }
 
@@ -461,8 +480,7 @@ public extension UNUserNotificationCenter {
 
         // Get back in queue since native remove has no completion block
         // https://stackoverflow.com/a/46434645
-        let remaining = await deliveredNotifications()
-        assert(remaining.isEmpty, "Notifications should be removed")
+        _ = await deliveredNotifications()
     }
 }
 #endif
