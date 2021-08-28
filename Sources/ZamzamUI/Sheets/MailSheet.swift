@@ -57,15 +57,14 @@ private extension MailView {
     }
 }
 
-public struct MailItem: Identifiable {
-    public typealias Attachment = (data: Data, mimeType: String, fileName: String)
-
-    public var id: String {
-        emails.joined(separator: ",")
-        + (subject ?? "")
-        + (body ?? "")
+public struct MailItem: Identifiable, Equatable {
+    public struct Attachment: Equatable {
+        let data: Data
+        let mimeType: String
+        let fileName: String
     }
 
+    public let id: UUID = UUID()
     let emails: [String]
     let subject: String?
     let body: String?

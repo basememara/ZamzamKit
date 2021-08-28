@@ -20,7 +20,7 @@ public struct LogServiceDataDog: LogService {
         apiKey: String,
         minLevel: @autoclosure @escaping () -> LogAPI.Level, // Allows runtime changes
         minFlushLevel: LogAPI.Level,
-        maxLogEntriesInBuffer: Int,
+        maxEntriesInBuffer: Int,
         isDebug: Bool,
         distribution: Distribution,
         networkManager: NetworkManager,
@@ -39,7 +39,7 @@ public struct LogServiceDataDog: LogService {
                 headers: ["DD-API-KEY": apiKey]
             ),
             bufferEncode: { "[\($0.map(\.payload).joined(separator: ","))]".data(using: .utf8) },
-            maxEntriesInBuffer: maxLogEntriesInBuffer,
+            maxEntriesInBuffer: maxEntriesInBuffer,
             minFlushLevel: minFlushLevel,
             isDebug: isDebug,
             distribution: distribution,
