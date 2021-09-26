@@ -52,7 +52,8 @@ public extension NetworkServiceFoundation {
             data: data,
             headers: headers,
             statusCode: httpResponse.statusCode,
-            request: request
+            request: request,
+            response: response
         )
 
         return networkResponse

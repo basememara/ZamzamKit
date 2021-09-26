@@ -14,16 +14,19 @@ public struct NetworkResponse {
     public let headers: [String: String]
     public let statusCode: Int
     public let request: URLRequest
+    public let response: URLResponse
 
     public init(
         data: Data,
         headers: [String: String],
         statusCode: Int,
-        request: URLRequest
+        request: URLRequest,
+        response: URLResponse
     ) {
         self.data = data
         self.headers = headers
         self.statusCode = statusCode
         self.request = request
+        self.response = response
     }
 }

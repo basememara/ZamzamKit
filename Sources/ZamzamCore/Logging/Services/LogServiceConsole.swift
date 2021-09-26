@@ -28,7 +28,7 @@ public extension LogServiceConsole {
         context: [String: CustomStringConvertible]
     ) {
         let time = Date.now.formatted(
-            .dateTime.hour(.twoDigitsNoAMPM).minute().second().secondFraction(.fractional(3))
+            .dateTime.hour(.twoDigits(amPM: .omitted)).minute().second().secondFraction(.fractional(3))
         )
 
         let prefix: String
