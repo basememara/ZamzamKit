@@ -46,7 +46,7 @@ public extension URLRequest {
         timeoutInterval: TimeInterval = 10
     ) {
         // Not all HTTP methods support body
-        let doesSupportBody = !method.within([.get, .delete])
+        let doesSupportBody = ![.get, .delete].contains(method)
 
         self.init(
             url: !doesSupportBody
