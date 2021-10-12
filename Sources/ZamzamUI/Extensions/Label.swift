@@ -15,10 +15,7 @@ public extension Label where Title == Text, Icon == Image {
     ///    - text: A text view.
     ///    - image: The name of the image resource to lookup.
     init(_ title: Text, image name: String) {
-        self = Label(
-            title: { title },
-            icon: { Image(name) }
-        )
+        self.init(title, icon: Image(name))
     }
 
     /// Creates a label with a system icon image and a text view.
@@ -27,9 +24,18 @@ public extension Label where Title == Text, Icon == Image {
     ///    - text: A text view.
     ///    - systemImage: The name of the image resource to lookup.
     init(_ title: Text, systemImage name: String) {
+        self.init(title, icon: Image(systemName: name))
+    }
+
+    /// Creates a label with an icon image and a text view.
+    ///
+    /// - Parameters:
+    ///    - text: A text view.
+    ///    - icon: The image resource.
+    init(_ title: Text, icon: Image) {
         self = Label(
             title: { title },
-            icon: { Image(systemName: name) }
+            icon: { icon }
         )
     }
 }

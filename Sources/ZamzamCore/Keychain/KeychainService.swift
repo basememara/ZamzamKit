@@ -8,7 +8,9 @@
 
 public protocol KeychainService {
     func get(_ key: KeychainAPI.Key) -> String?
+    @discardableResult
     func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool
+    @discardableResult
     func remove(_ key: KeychainAPI.Key) -> Bool
 }
 
