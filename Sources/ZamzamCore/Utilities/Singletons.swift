@@ -18,7 +18,6 @@ public extension Singletons {
     ///     protocol SomeContext: Singletons {}
     ///
     ///     extension SomeContext {
-    ///
     ///         func networkService() -> NetworkService {
     ///             single {
     ///                 NetworkServiceFoundation()

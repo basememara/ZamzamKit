@@ -59,6 +59,7 @@ public extension NetworkManager {
     ///
     /// - Parameter request: A network request object that provides the URL, parameters, headers, and so on.
     /// - Returns: The server response with included details from the network request.
+    @discardableResult
     func send(_ request: URLRequest) async throws -> NetworkResponse {
         let request = adapter?.adapt(request) ?? request
         return try await service.send(request)
