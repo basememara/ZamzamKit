@@ -1,5 +1,5 @@
 //
-//  NavigateModifier.swift
+//  NavigationLink.swift
 //  ZamzamUI
 //
 //  Created by Basem Emara on 2021-02-08.

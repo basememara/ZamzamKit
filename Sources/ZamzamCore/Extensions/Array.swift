@@ -7,16 +7,6 @@
 //
 
 public extension Array {
-    /// Element at the given index if it exists.
-    ///
-    /// - Parameter index: index of element.
-    subscript(safe index: Index) -> Element? {
-        // http://www.vadimbulavin.com/handling-out-of-bounds-exception/
-        indices ~= index ? self[index] : nil
-    }
-}
-
-public extension Array {
     /// Inserts a new element into the collection at the beginning position.
     ///
     ///        [2, 3, 4, 5].prepend(1) // [1, 2, 3, 4, 5]

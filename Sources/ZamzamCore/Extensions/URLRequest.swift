@@ -39,7 +39,7 @@ public extension URLRequest {
     ///   - timeoutInterval: The timeout interval of the request. If `nil`, the defaults is 10 seconds.
     init(
         url: URL,
-        method: HTTPMethod,
+        method: HTTPMethod = .get,
         parameters: [String: Any]? = nil,
         headers: [String: String]? = nil,
         authentication: Authentication? = nil,

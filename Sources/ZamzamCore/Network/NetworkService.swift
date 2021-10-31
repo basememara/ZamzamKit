@@ -14,5 +14,6 @@ public protocol NetworkService {
     /// - Parameters:
     ///   - request: A network request object that provides the URL, parameters, headers, and so on.
     ///   - completion: The completion handler to call when the load request is complete.
+    @discardableResult
     func send(_ request: URLRequest) async throws -> NetworkResponse
 }
