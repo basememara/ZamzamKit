@@ -184,7 +184,7 @@ private extension LogServiceHTTP {
             do {
                 var request = urlRequest
                 request.httpBody = data
-                _ = try await networkManager.send(request)
+                try await networkManager.send(request)
             } catch {
                 // Add back to the buffer if could not send
                 print("🤍 \(Date.now.formatted(date: .omitted, time: .standard)) PRINT Error from log destination: \(error)")

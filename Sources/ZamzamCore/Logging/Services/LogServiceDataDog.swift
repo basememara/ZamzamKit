@@ -18,6 +18,7 @@ public struct LogServiceDataDog: LogService {
 
     public init(
         apiKey: String,
+        serviceName: String,
         minLevel: @autoclosure @escaping () -> LogAPI.Level, // Allows runtime changes
         minFlushLevel: LogAPI.Level,
         maxEntriesInBuffer: Int,
@@ -33,7 +34,7 @@ public struct LogServiceDataDog: LogService {
 
         self.service = LogServiceHTTP(
             urlRequest: URLRequest(
-                url: URL(safeString: "https://http-intake.logs.datadoghq.com/v1/input/?ddsource=ios&service=praywatch"),
+                url: URL(safeString: "https://http-intake.logs.datadoghq.com/v1/input/?ddsource=ios&service=\(serviceName)"),
                 method: .post,
                 data: nil,
                 headers: ["DD-API-KEY": apiKey]
