@@ -13,37 +13,29 @@ import SwiftUI
 private struct SafariView: UIViewControllerRepresentable {
     let url: URL
 
-    func makeUIViewController(context: Context) -> SFSafariViewController {
+    func makeUIViewController(context: Context) -> UIViewController {
         SFSafariViewController(url: url)
     }
 
-    func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {}
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
 
-private extension SafariView {
-    struct URLItem: Identifiable {
-        var id: String { url.absoluteString }
-        let url: URL
-    }
-}
-
-public extension View {
+extension View {
     /// Presents a Safari sheet using the given URL for browsing the web.
     func sheet(safari url: Binding<URL?>) -> some View {
         sheet(
-            item: Binding<SafariView.URLItem?>(
-                get: {
-                    guard let url = url.wrappedValue else { return nil }
-                    return SafariView.URLItem(url: url)
-                },
+            isPresented: Binding<Bool>(
+                get: { url.wrappedValue != nil },
                 set: {
-                    guard $0 == nil else { return }
+                    guard !$0 else { return }
                     url.wrappedValue = nil
                 }
             )
-        ) { item in
-            SafariView(url: item.url)
-                .ignoresSafeArea()
+        ) {
+            if let url = url.wrappedValue {
+                SafariView(url: url)
+                    .ignoresSafeArea()
+            }
         }
     }
 }
