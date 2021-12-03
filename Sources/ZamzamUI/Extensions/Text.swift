@@ -9,24 +9,6 @@
 import SwiftUI
 
 public extension Text {
-    /// Creates a text view from another text view for isolating localization entries.
-    ///
-    ///     extension Text {
-    ///         static let notificationTitle = Text(
-    ///             "Notifications",
-    ///             tableName: "NotificationSettings",
-    ///             comment: "The section title for notifications group on the settings screen"
-    ///         )
-    ///     }
-    ///
-    ///     // Somewhere else in a view...
-    ///     Text(.notificationTitle)
-    init(_ text: Text) {
-        self = text
-    }
-}
-
-public extension Text {
     /// Creates a text view that displays an optional string with a fallback to a redactable string if `nil`.
     init(redactable content: String?) {
         self.init(content ?? "Loading...")
