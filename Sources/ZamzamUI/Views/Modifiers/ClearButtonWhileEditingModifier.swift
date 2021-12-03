@@ -18,7 +18,7 @@ private struct ClearButtonWhileEditingModifier: ViewModifier {
                     Spacer()
                     Button(action: { text = "" }) {
                         Label(LocalizedStringKey("Clear"), systemImage: "multiply.circle.fill")
-                            .labelStyle(IconOnlyLabelStyle())
+                            .labelStyle(.iconOnly)
                             .foregroundColor(.secondary)
                             .padding(8)
                     }

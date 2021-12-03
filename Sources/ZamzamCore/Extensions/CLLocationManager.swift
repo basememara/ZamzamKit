@@ -20,6 +20,6 @@ public extension CLLocationManager {
         #endif
 
         return Self.locationServicesEnabled()
-            && authorizationStatus.within(statuses)
+            && statuses.contains(authorizationStatus)
     }
 }

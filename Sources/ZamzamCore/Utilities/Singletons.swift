@@ -15,10 +15,9 @@ public extension Singletons {
     /// The file, function, and line number parameters are used to generate a unique identifier
     /// for storing the instance into an in-memory dictionary for subsequent retrievals.
     ///
-    ///     protocol SomeContext: Dependencies {}
+    ///     protocol SomeContext: Singletons {}
     ///
     ///     extension SomeContext {
-    ///
     ///         func networkService() -> NetworkService {
     ///             single {
     ///                 NetworkServiceFoundation()

@@ -255,7 +255,7 @@ extension DateTests {
     func testDateToStringForCalendar() throws {
         let calendar = Calendar(identifier: .islamic)
         let date = try XCTUnwrap(Date(fromString: "1440/03/01 18:31", calendar: calendar))
-        XCTAssertEqual(date.string(format: "MMM d, h:mm a", calendar: calendar), "Rab. I 1, 6:31 PM")
+        XCTAssertEqual(date.string(format: "MMM d, h:mm a", calendar: calendar), "Rab. I 1, 6:31 PM")
     }
 
     func testDateToStringForCalendar2() throws {
@@ -392,6 +392,7 @@ extension DateTests {
             try XCTUnwrap(Date(fromString: "2015/09/18 18:31")) - .weeks(1),
             Date(fromString: "2015/09/11 18:31")
         )
+
         XCTAssertEqual(
             try XCTUnwrap(Date(fromString: "2015/09/18 18:31")) + .weeks(4),
             Date(fromString: "2015/10/16 18:31")
@@ -506,6 +507,44 @@ extension DateTests {
             Date(fromString: "1440/03/01 18:31", calendar: calendar)
         )
     }
+
+    func testIncrementDecrementShorthand() throws {
+        var date1 = try XCTUnwrap(Date(fromString: "2018/12/31 23:00"))
+        date1 += .minutes(120)
+        XCTAssertEqual(date1, Date(fromString: "2019/01/01 01:00"))
+
+        var date2 = try XCTUnwrap(Date(fromString: "2015/04/02 13:15"))
+        date2 += .minutes(1445)
+        XCTAssertEqual(date2, Date(fromString: "2015/04/03 13:20"))
+
+        var date3 = try XCTUnwrap(Date(fromString: "2016/02/20 13:12"))
+        date3 += .weeks(10)
+        XCTAssertEqual(date3, Date(fromString: "2016/04/30 13:12"))
+
+        var date4 = try XCTUnwrap(Date(fromString: "2015/10/26 18:31"))
+        date4 += .days(0)
+        XCTAssertEqual(date4, try XCTUnwrap(Date(fromString: "2015/10/26 18:31")))
+
+        var date5 = try XCTUnwrap(Date(fromString: "1990/01/31 22:12"))
+        date5 += .days(2)
+        XCTAssertEqual(date5, Date(fromString: "1990/02/02 22:12"))
+
+        var date6 = try XCTUnwrap(Date(fromString: "2015/09/18 18:31"))
+        date6 -= .days(1)
+        XCTAssertEqual(date6, Date(fromString: "2015/09/17 18:31"))
+
+        var date7 = try XCTUnwrap(Date(fromString: "2018/11/01 00:00"))
+        date7 -= .months(3)
+        XCTAssertEqual(date7, Date(fromString: "2018/08/01 00:00"))
+
+        var date8 = try XCTUnwrap(Date(fromString: "2018/11/01 00:00"))
+        date8 -= .years(3)
+        XCTAssertEqual(date8, Date(fromString: "2015/11/01 00:00"))
+
+        var date9 = try XCTUnwrap(Date(fromString: "2015/10/26 18:31"))
+        date9 += .years(0)
+        XCTAssertEqual(date9, try XCTUnwrap(Date(fromString: "2015/10/26 18:31")))
+    }
 }
 
 extension DateTests {
@@ -521,7 +560,7 @@ extension DateTests {
     func testHijriDate() throws {
         do {
             let gregorianDate = try XCTUnwrap(Date(fromString: "2015/09/23 12:30"))
-            let hijriDate = gregorianDate.hijriString()
+            let hijriDate = gregorianDate.hijriString(template: "yyyyGMMMMd")
             let expectedDate = "Dhuʻl-Hijjah 10, 1436 AH"
 
             XCTAssertEqual("\(hijriDate)", expectedDate)
@@ -530,7 +569,7 @@ extension DateTests {
         do {
             let gregorianDate = try XCTUnwrap(Date(fromString: "2017/06/26 00:00"))
             let hijriDate = gregorianDate.hijriString()
-            let expectedDate = "Shawwal 2, 1438 AH"
+            let expectedDate = "Shawwal 2, 1438"
 
             XCTAssertEqual("\(hijriDate)", expectedDate)
         }
@@ -584,5 +623,43 @@ extension DateTests {
         let progress8 = interval1.progress(at: startDate + 100)
         XCTAssertEqual(progress8.remaining, 0)
         XCTAssertEqual(progress8.value, 1)
+    }
+}
+
+extension DateTests {
+    func testDateIntervalStride() throws {
+        let startDate = Date(timeIntervalSince1970: 1626386307)
+
+        let interval1 = DateInterval(start: startDate, duration: 125)
+        let dates1 = interval1.stride(by: 15)
+        XCTAssertEqual(dates1.count, 9)
+        XCTAssertEqual(dates1[0].timeIntervalSince1970, 1626386307)
+        XCTAssertEqual(dates1[1].timeIntervalSince1970, 1626386307 + 15)
+        XCTAssertEqual(dates1[2].timeIntervalSince1970, 1626386307 + 15 * 2)
+        XCTAssertEqual(dates1[3].timeIntervalSince1970, 1626386307 + 15 * 3)
+        XCTAssertEqual(dates1[4].timeIntervalSince1970, 1626386307 + 15 * 4)
+        XCTAssertEqual(dates1[5].timeIntervalSince1970, 1626386307 + 15 * 5)
+        XCTAssertEqual(dates1[6].timeIntervalSince1970, 1626386307 + 15 * 6)
+        XCTAssertEqual(dates1[7].timeIntervalSince1970, 1626386307 + 15 * 7)
+        XCTAssertEqual(dates1[8].timeIntervalSince1970, 1626386307 + 15 * 8)
+
+        let interval2 = DateInterval(start: startDate, duration: 0)
+        let dates2 = interval2.stride(by: 15)
+        XCTAssertEqual(dates2.count, 1)
+        XCTAssertEqual(dates2[0].timeIntervalSince1970, 1626386307)
+
+        let interval3 = DateInterval(start: startDate, duration: 600)
+        let dates3 = interval3.stride(by: 60)
+        XCTAssertEqual(dates3.count, 11)
+        XCTAssertEqual(dates3[0].timeIntervalSince1970, 1626386307)
+        XCTAssertEqual(dates3[1].timeIntervalSince1970, 1626386307 + 60)
+        XCTAssertEqual(dates3[2].timeIntervalSince1970, 1626386307 + 60 * 2)
+        XCTAssertEqual(dates3[3].timeIntervalSince1970, 1626386307 + 60 * 3)
+        XCTAssertEqual(dates3[4].timeIntervalSince1970, 1626386307 + 60 * 4)
+        XCTAssertEqual(dates3[5].timeIntervalSince1970, 1626386307 + 60 * 5)
+        XCTAssertEqual(dates3[6].timeIntervalSince1970, 1626386307 + 60 * 6)
+        XCTAssertEqual(dates3[7].timeIntervalSince1970, 1626386307 + 60 * 7)
+        XCTAssertEqual(dates3[8].timeIntervalSince1970, 1626386307 + 60 * 8)
+        XCTAssertEqual(dates3[9].timeIntervalSince1970, 1626386307 + 60 * 9)
     }
 }

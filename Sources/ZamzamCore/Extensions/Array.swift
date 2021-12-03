@@ -7,16 +7,6 @@
 //
 
 public extension Array {
-    /// Element at the given index if it exists.
-    ///
-    /// - Parameter index: index of element.
-    subscript(safe index: Index) -> Element? {
-        // http://www.vadimbulavin.com/handling-out-of-bounds-exception/
-        indices ~= index ? self[index] : nil
-    }
-}
-
-public extension Array {
     /// Inserts a new element into the collection at the beginning position.
     ///
     ///        [2, 3, 4, 5].prepend(1) // [1, 2, 3, 4, 5]
@@ -29,11 +19,29 @@ public extension Array {
     }
 }
 
+public extension Array {
+    /// Separates the elements into nth groups of elements.
+    ///
+    ///     [1, 2, 3, 4, 5, 6].chunked(into: 2) // [[1, 2], [3, 4], [5, 6]]
+    ///
+    /// - Parameters:
+    ///   - size: Number of elements to separate by.
+    /// - Returns: The array of grouped elements.
+    func chunked(into size: Int) -> [[Element]] {
+        guard !isEmpty, 1...count ~= size else { return [self] }
+
+        // https://www.hackingwithswift.com/example-code/language/how-to-split-an-array-into-chunks
+        return stride(from: 0, to: count, by: size)
+            .map { Array(self[$0..<Swift.min($0 + size, count)]) }
+    }
+}
+
 public extension Array where Element: Equatable {
     /// Array with all duplicates removed from it.
     ///
-    ///     [1, 3, 3, 5, 7, 9].distinct // [1, 3, 5, 7, 9]
-    var distinct: [Element] {
+    ///     [1, 3, 3, 5, 7, 9].removeDuplicates() // [1, 3, 5, 7, 9]
+    ///     
+    func removeDuplicates() -> [Element] {
         // https://github.com/SwifterSwift/SwifterSwift
         reduce(into: [Element]()) {
             guard !$0.contains($1) else { return }

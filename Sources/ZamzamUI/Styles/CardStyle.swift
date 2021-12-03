@@ -11,6 +11,14 @@ import SwiftUI
 public protocol CardStyle: ViewModifier {}
 
 public extension View {
+    /// Sets the style for cards within this view.
+    ///
+    ///     VStack {
+    ///         Text("Fire")
+    ///         Text("Lightning")
+    ///     }
+    ///     .cardStyle(MyCustomCardStyle())
+    ///
     func cardStyle<T: CardStyle>(_ modifier: T) -> some View {
         self.modifier(modifier)
     }

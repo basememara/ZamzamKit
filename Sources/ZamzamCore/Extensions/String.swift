@@ -144,14 +144,10 @@ public extension String {
     ///   - separator: The separator to inject.
     /// - Returns: The string with the injected separator.
     func separated(every nth: Int, with separator: String) -> String {
-        guard !isEmpty, 1...count ~= nth else { return self }
-
-        // https://stackoverflow.com/a/47566321
-        return String(
-            stride(from: 0, to: count, by: nth)
-                .map { Array(Array(self)[$0..<min($0 + nth, count)]) }
-                .joined(separator: separator)
-        )
+        Array(self)
+            .chunked(into: nth)
+            .map { String($0) }
+            .joined(separator: separator)
     }
 
     /// Returns a new string made by removing the characters contained in a given set.

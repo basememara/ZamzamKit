@@ -24,6 +24,9 @@ private struct ConditionalRedacted: ViewModifier {
 public extension View {
     /// Adds a redaction to this view hierarchy if the condition is met, otherwise it is `unredacted`.
     ///
+    ///     someView
+    ///         .redacted(if: model == nil)
+    ///
     /// - Parameter condition: The condition to determine if the content should be applied.
     /// - Returns: The modified view.
     func redacted(if condition: Bool) -> some View {

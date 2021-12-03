@@ -11,6 +11,16 @@ import SwiftUI
 public protocol ImageStyle: ViewModifier {}
 
 public extension View {
+    /// Sets the style for images within this view.
+    ///
+    /// Use this modifier to set a specific style for all images within a view:
+    ///
+    ///     VStack {
+    ///         Image(systemName: "alarm")
+    ///         Image(systemName: "calendar")
+    ///     }
+    ///     .imageStyle(MyCustomImageStyle())
+    ///
     func imageStyle<T: ImageStyle>(_ modifier: T) -> some View {
         self.modifier(modifier)
     }

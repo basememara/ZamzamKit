@@ -65,8 +65,8 @@ public extension View {
     /// Applies a modifier to a view if an optional item can be unwrapped.
     ///
     ///     someView
-    ///         .modifier(let: model) {
-    ///             $0.background(BackgroundView(model.bg))
+    ///         .modifier(let: model) { (content, model) in
+    ///             content.background(BackgroundView(model.bg))
     ///         }
     ///
     /// - Parameters:
@@ -87,8 +87,8 @@ public extension View {
     /// Applies a modifier to a view if an optional item can be unwrapped.
     ///
     ///     someView
-    ///         .modifier(let: model) {
-    ///             $0.background(BackgroundView(model.bg))
+    ///         .modifier(let: model) { (content, model) in
+    ///             content.background(BackgroundView(model.bg))
     ///         } else: {
     ///             $0.background(Color.black)
     ///         }

@@ -27,7 +27,6 @@ public extension Model {
         _ value: Value
     ) {
         guard let writableKeyPath = keyPath as? ReferenceWritableKeyPath<Self, Value> else {
-            #warning("Replace assertion with compile-safe guard")
             assertionFailure("Key path '\(keyPath)' is not writable.")
             return
         }

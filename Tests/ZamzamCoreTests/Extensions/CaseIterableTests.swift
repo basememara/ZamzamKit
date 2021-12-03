@@ -12,6 +12,27 @@ import ZamzamCore
 final class CaseIterableTests: XCTestCase {}
 
 extension CaseIterableTests {
+    func testCaseIterablePreviousNext() throws {
+        // Given
+        enum Direction: CaseIterable {
+            case north
+            case east
+            case south
+            case west
+        }
+
+        // Then
+        XCTAssertNil(Direction.north.previous())
+        XCTAssertEqual(Direction.east.previous(), .north)
+        XCTAssertEqual(Direction.west.previous(), .south)
+
+        XCTAssertNil(Direction.west.next())
+        XCTAssertEqual(Direction.east.next(), .south)
+        XCTAssertEqual(Direction.south.next(), .west)
+    }
+}
+
+extension CaseIterableTests {
     func testCaseIterableDefaultsLastDecode() throws {
         // Given
         struct Example: Decodable {
@@ -28,15 +49,9 @@ extension CaseIterableTests {
         let json = try XCTUnwrap(
             """
              [
-                 {
-                    "status": "one"
-                 },
-                 {
-                    "status": "two"
-                 },
-                 {
-                    "status": "something"
-                 }
+                 { "status": "one" },
+                 { "status": "two" },
+                 { "status": "something" }
              ]
              """.data(using: .utf8)
         )

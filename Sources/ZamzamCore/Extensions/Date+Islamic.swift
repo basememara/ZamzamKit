@@ -43,18 +43,22 @@ public extension Date {
     // http://tabsir.net/?p=621#more-621
     static let islamicCalendar = Calendar(identifier: .islamicUmmAlQura)
 
+    static let islamicCalendarIdentifiers: [Calendar.Identifier] = [
+        .islamicUmmAlQura,
+        .islamicCivil,
+        .islamicTabular
+    ]
+
     /// Returns a string representation of a given date formatted to hijri date.
     ///
     /// - Parameters:
-    ///   - components: The components of the date to format.
-    ///   - format: The date format string used by the receiver.
+    ///   - template: The date format template used by the receiver.
     ///   - offSet: The number of days to offset the hijri date.
     ///   - timeZone: The time zone for the receiver.
     ///   - calendar: The calendar of the receiver.
     /// - Returns: A string representation of a given date formatted to hijri date.
     func hijriString(
-        components: Set<Calendar.Component> = Calendar.Component.full,
-        format: String? = nil,
+        template: String = "yyyyMMMMd",
         offSet: Int = 0,
         timeZone: TimeZone? = nil,
         calendar: Calendar = Self.islamicCalendar
@@ -69,22 +73,18 @@ public extension Date {
             $0.calendar = calendar
             $0.timeZone = calendar.timeZone
 
-            if let f = format {
-                $0.dateFormat = f
+            if let dateFormat = DateFormatter.dateFormat(
+                fromTemplate: template,
+                options: 0,
+                locale: .current
+            ) {
+                $0.dateFormat = dateFormat
             } else {
                 $0.dateStyle = .long
             }
         }
 
-        let date = calendar.date(
-            from: hijri(
-                components: components,
-                offSet: offSet,
-                timeZone: timeZone,
-                calendar: calendar
-            )
-        ) ?? self
-
+        let date = offSet != 0 ? self + .days(offSet, calendar) : self
         return formatter.string(from: date)
     }
 

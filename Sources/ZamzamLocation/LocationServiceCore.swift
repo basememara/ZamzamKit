@@ -15,6 +15,7 @@ public class LocationServiceCore: NSObject, LocationService {
     private let activityType: CLActivityType?
 
     public weak var delegate: LocationServiceDelegate?
+    public var shouldDisplayHeadingCalibration = false
 
     /// Internal Core Location manager
     private lazy var manager = CLLocationManager().apply {
@@ -121,8 +122,10 @@ public extension LocationServiceCore {
 public extension LocationServiceCore {
     var heading: CLHeading? { manager.heading }
 
-    func startUpdatingHeading() {
+    func startUpdatingHeading() -> Bool {
+        guard CLLocationManager.headingAvailable() else { return false }
         manager.startUpdatingHeading()
+        return true
     }
 
     func stopUpdatingHeading() {
@@ -131,6 +134,10 @@ public extension LocationServiceCore {
 
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         delegate?.locationService(didUpdateHeading: newHeading)
+    }
+
+    func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
+        shouldDisplayHeadingCalibration
     }
 }
 #endif

@@ -6,34 +6,47 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-#if os(iOS)
 import AVFoundation
 import Foundation.NSBundle
-import UIKit.UIApplication
+import Foundation.NSURL
 
 public protocol Audible: AnyObject {
     var audioPlayer: AVAudioPlayer? { get set }
 }
 
 public extension Audible {
-    func setupAudioPlayer(_ application: UIApplication, forResource fileName: String, bundle: Bundle = .main) {
-        guard let sound = bundle.url(forResource: fileName, withExtension: nil),
-            (audioPlayer == nil || audioPlayer?.url != sound) else {
-                return
+    /// Configures and plays audio from a file.
+    ///
+    /// - Parameters:
+    ///   - url: A `URL` that identifies the local audio file to play.
+    ///   - application: The application used to control the audio events.
+    func play(contentsOf url: URL, application: AudibleApplication? = nil) throws {
+        if audioPlayer == nil || audioPlayer?.url != url {
+            if audioPlayer?.isPlaying == true {
+                audioPlayer?.stop()
+            }
+
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
         }
 
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-
-            application.beginReceivingRemoteControlEvents()
-
-            audioPlayer = try AVAudioPlayer(contentsOf: sound)
-            audioPlayer?.prepareToPlay()
-        } catch {
-            // TODO: Call injectable logger
-            debugPrint(error)
+        if audioPlayer?.currentTime != 0 {
+            audioPlayer?.currentTime = 0
         }
+
+        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+        try AVAudioSession.sharedInstance().setActive(true)
+        application?.beginReceivingRemoteControlEvents()
+
+        audioPlayer?.play()
     }
 }
+
+#if os(iOS)
+import UIKit.UIApplication
+
+public protocol AudibleApplication {
+    func beginReceivingRemoteControlEvents()
+}
+
+extension UIApplication: AudibleApplication {}
 #endif

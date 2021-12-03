@@ -6,7 +6,34 @@
 //  Copyright © 2021 Zamzam Inc. All rights reserved.
 //
 
+import Combine
 import SwiftUI
+
+public extension View {
+    /// Adds a border to this view with the specified color, width, and radius.
+    func border(_ color: Color, width: CGFloat = 1, cornerRadius: CGFloat) -> some View {
+        // https://github.com/ZamzamInc/ZamzamKit
+        let shape = RoundedRectangle(cornerRadius: cornerRadius)
+
+        return self
+            .clipShape(shape)
+            .overlay(shape.stroke(color, lineWidth: width))
+    }
+}
+
+public extension View {
+    /// Hides this view conditionally.
+    ///
+    /// - Parameter condition: The condition to determine if the content should be applied.
+    /// - Returns: The modified view.
+    func hidden(_ condition: Bool) -> some View {
+        modifier(if: condition) { content in
+            content.hidden()
+        } else: { content in
+            content
+        }
+    }
+}
 
 public extension View {
     /// Returns a type-erased view.
@@ -15,20 +42,73 @@ public extension View {
     }
 }
 
+// MARK: - Receive
+
 public extension View {
-    /// Binds the height of the view to a property.
-    func assign(heightTo height: Binding<CGFloat>) -> some View {
-        background(
-            GeometryReader { geometry in
-                Color.clear
-                    .onAppear { height.wrappedValue = geometry.size.height }
-            }
-        )
+    /// Adds a modifier for this view that fires an action when a specific value changes.
+    ///
+    /// - Parameters:
+    ///   - value: The value to check against when determining whether to run the closure.
+    ///   - action: A concurrent closure to run when the value changes.
+    ///   - newValue: The new value that failed the comparison check.
+    /// - Returns: A view that fires an action when the specified value changes.
+    func onChange<V>(
+        of value: V,
+        perform action: @escaping (_ newValue: V) async -> Void
+    ) -> some View where V: Equatable {
+        onChange(of: value) { newValue in Task { await action(newValue) } }
     }
 }
 
 public extension View {
+    /// Adds an action to perform when this view detects data emitted by the optional publisher.
+    ///
+    /// - Parameters:
+    ///   - publisher: The publisher to subscribe to.
+    ///   - action: The action to perform when an event is emitted by `publisher`.
+    /// - Returns: A view that triggers action when publisher emits an event.
+    func onReceive<P>(
+        _ publisher: P?,
+        perform action: @escaping (P.Output) -> Void
+    ) -> some View where P: Publisher, P.Failure == Never {
+        modifier(let: publisher) { $0.onReceive($1, perform: action) }
+    }
+
+    /// Adds an action to perform when this view detects data emitted by the given publisher.
+    ///
+    /// - Parameters:
+    ///   - publisher: The publisher to subscribe to.
+    ///   - action: The action to perform when an event is emitted by `publisher`.
+    /// - Returns: A view that triggers an async action when publisher emits an event.
+    func onReceive<P>(
+        _ publisher: P?,
+        perform action: @escaping () async -> Void
+    ) -> some View where P: Publisher, P.Failure == Never {
+        // Deprecate in favour of `.task` after converting publishers to `AsyncStream`
+        onReceive(publisher) { _ in Task { await action() } }
+    }
+
+    /// Adds an action to perform when this view detects data emitted by the given `ObservableObject`.
+    ///
+    /// - Parameters:
+    ///   - observableObject: The `ObservableObject` to subscribe to.
+    ///   - action: The action to perform when an event is emitted by the `objectWillChange` publisher of the `ObservableObject`.
+    /// - Returns: A view that triggers an action when publisher emits an event.
+    func onReceive<O>(
+        _ observableObject: O,
+        perform action: @escaping () -> Void
+    ) -> some View where O: ObservableObject {
+        onReceive(observableObject.objectWillChange) { _ in
+            DispatchQueue.main.async(execute: action)
+        }
+    }
+}
+
+// MARK: - Notification
+
+public extension View {
     /// Adds an action to perform when this view detects a notification emitted by the `NotificationCenter` publisher.
+    /// 
     /// - Parameters:
     ///   - name: The name of the notification to publish.
     ///   - object: The object posting the named notification.
@@ -41,6 +121,54 @@ public extension View {
     ) -> some View {
         // https://github.com/gtokman/ExtensionKit
         onReceive(NotificationCenter.default.publisher(for: name, object: object), perform: action)
+    }
+
+    /// Adds an action to perform when this view detects a notification emitted by the `NotificationCenter` publisher.
+    ///
+    /// - Parameters:
+    ///   - name: The name of the notification to publish.
+    ///   - object: The object posting the named notification.
+    ///   - action: The action to perform when the notification is emitted by publisher.
+    /// - Returns: View
+    func onNotification(
+        for name: Notification.Name,
+        object: AnyObject? = nil,
+        perform action: @escaping (Notification) async -> Void
+    ) -> some View {
+        onReceive(NotificationCenter.default.publisher(for: name, object: object)) { notification in
+            Task { await action(notification) }
+        }
+    }
+
+    /// Adds an action to perform when this view detects a notification emitted by the `NotificationCenter` publisher.
+    ///
+    /// - Parameters:
+    ///   - name: The name of the notification to publish.
+    ///   - object: The object posting the named notification.
+    ///   - action: The action to perform when the notification is emitted by publisher.
+    /// - Returns: View
+    func onNotification(
+        for name: Notification.Name,
+        object: AnyObject? = nil,
+        perform action: @escaping () async -> Void
+    ) -> some View {
+        onReceive(NotificationCenter.default.publisher(for: name, object: object)) { _ in
+            Task { await action() }
+        }
+    }
+}
+
+// MARK: - UI
+
+public extension View {
+    /// Binds the height of the view to a property.
+    func assign(heightTo height: Binding<CGFloat>) -> some View {
+        background(
+            GeometryReader { geometry in
+                Color.clear
+                    .onAppear { height.wrappedValue = geometry.size.height }
+            }
+        )
     }
 }
 

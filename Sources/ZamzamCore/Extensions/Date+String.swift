@@ -31,8 +31,9 @@ public extension Date {
         locale: Locale? = nil
     ) {
         guard !string.isEmpty,
-            let date = DateFormatter(dateFormat: dateFormat, timeZone: timeZone, calendar: calendar, locale: locale).date(from: string) else {
-                return nil
+            let date = DateFormatter(dateFormat: dateFormat, timeZone: timeZone, calendar: calendar, locale: locale).date(from: string)
+        else {
+            return nil
         }
 
         self.init(timeInterval: 0, since: date)

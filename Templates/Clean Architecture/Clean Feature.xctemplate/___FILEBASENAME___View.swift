@@ -10,8 +10,28 @@ struct ___VARIABLE_productName:identifier___View: View {
 
     var body: some View {
         Text("___VARIABLE_productName:identifier___")
+            .task(fetch)
     }
 }
+
+// MARK: - Actions
+
+private extension ___VARIABLE_productName:identifier___View {
+    func fetch() async {
+        let request = ___VARIABLE_productName:identifier___API.FetchRequest()
+        await interactor?.fetch(with: request)
+    }
+}
+
+// MARK: - Localization
+
+/*private extension Text {
+    static let navigationTitle = Text(
+        "navigation_title",
+        tableName: "___VARIABLE_productName:identifier___",
+        comment: "The navigation bar title for the screen"
+    )
+}*/
 
 // MARK: - Previews
 

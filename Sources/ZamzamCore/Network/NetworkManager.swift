@@ -32,16 +32,14 @@ import Foundation.NSURLRequest
 ///         service: NetworkServiceFoundation()
 ///     )
 ///
-///     networkManager.send(request) { result in
-///         switch result {
-///         case let .success(response):
-///             response.data
-///             response.headers
-///             response.statusCode
-///         case let .failure(error):
-///             error.statusCode
-///         }
+///     do {
+///         let response = try await networkManager.send(request)
+///     } catch let error as NetworkError {
+///         print(error.statusCode)
+///     } catch {
+///         print("Unknown error")
 ///     }
+///     
 public struct NetworkManager {
     private let service: NetworkService
     private let adapter: URLRequestAdapter?
@@ -58,33 +56,13 @@ public struct NetworkManager {
 }
 
 public extension NetworkManager {
-    /// Creates a task that retrieves the contents of a URL based on the specified request object, and calls a handler upon completion.
+    /// Creates a task that retrieves the contents of a URL based on the specified request object and returns the response.
     ///
-    /// - Parameters:
-    ///   - request: A network request object that provides the URL, parameters, headers, and so on.
-    ///   - completion: The completion handler to call when the load request is complete.
-    func send(
-        _ request: URLRequest,
-        completion: @escaping (Result<NetworkResponse, NetworkError>) -> Void
-    ) {
+    /// - Parameter request: A network request object that provides the URL, parameters, headers, and so on.
+    /// - Returns: The server response with included details from the network request.
+    @discardableResult
+    func send(_ request: URLRequest) async throws -> NetworkResponse {
         let request = adapter?.adapt(request) ?? request
-        service.send(request, completion: completion)
+        return try await service.send(request)
     }
 }
-
-#if canImport(Combine)
-import Combine
-
-public extension NetworkManager {
-    /// Creates a task that retrieves the contents of a URL based on the specified request object, and calls a handler upon completion.
-    ///
-    /// - Parameters:
-    ///   - request: A network request object that provides the URL, parameters, headers, and so on.
-    /// - Returns: A publisher that provides a single response from the request.
-    func send(request: URLRequest) -> Future<NetworkResponse, NetworkError> {
-        Future<NetworkResponse, NetworkError> {
-            send(request, completion: $0)
-        }
-    }
-}
-#endif

@@ -15,16 +15,12 @@ public extension Date {
     ///
     ///     Date(timeIntervalSinceNow: -100).isPast // true
     ///     Date(timeIntervalSinceNow: 100).isPast // false
-    ///
-    /// Uses the user's current calendar.
     var isPast: Bool { self < Date() }
 
     /// Determines if date is in the future.
     ///
     ///     Date(timeIntervalSinceNow: 100).isFuture // true
     ///     Date(timeIntervalSinceNow: -100).isFuture // false
-    ///
-    /// Uses the user's current calendar.
     var isFuture: Bool { self > Date() }
 }
 

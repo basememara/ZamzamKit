@@ -52,7 +52,7 @@ extension CurrencyFormatterTests {
         let formatter = CurrencyFormatter(for: Locale(identifier: "ar-SA"))
 
         let amount: Double = 123456789.987
-        XCTAssertEqual(formatter.string(fromAmount: amount), "١٢٣٬٤٥٦٬٧٨٩٫٩٩ ر.س.‏")
+        XCTAssertEqual(formatter.string(fromAmount: amount), "‏١٢٣٬٤٥٦٬٧٨٩٫٩٩ ‏ر.س.‏")
     }
 
     func testZH() {
