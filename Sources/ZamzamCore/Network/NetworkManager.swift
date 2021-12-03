@@ -39,6 +39,7 @@ import Foundation.NSURLRequest
 ///     } catch {
 ///         print("Unknown error")
 ///     }
+///     
 public struct NetworkManager {
     private let service: NetworkService
     private let adapter: URLRequestAdapter?
@@ -55,7 +56,7 @@ public struct NetworkManager {
 }
 
 public extension NetworkManager {
-    /// Creates a task that retrieves the contents of a URL based on the specified request object, and calls a handler upon completion.
+    /// Creates a task that retrieves the contents of a URL based on the specified request object and returns the response.
     ///
     /// - Parameter request: A network request object that provides the URL, parameters, headers, and so on.
     /// - Returns: The server response with included details from the network request.

@@ -16,7 +16,7 @@ public extension View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius)
 
         return self
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+            .clipShape(shape)
             .overlay(shape.stroke(color, lineWidth: width))
     }
 }

@@ -39,7 +39,40 @@ extension ArrayTests {
 }
 
 extension ArrayTests {
-    func testDistinct() {
+    func testChunked() {
+        XCTAssertEqual([1, 2, 3, 4, 5, 6].chunked(into: 2), [[1, 2], [3, 4], [5, 6]])
+        XCTAssertEqual([1, 2, 3, 4].chunked(into: 6), [[1, 2, 3, 4]])
+        XCTAssertEqual([String]().chunked(into: 6), [[]])
+
+        XCTAssertEqual(
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].chunked(into: 3),
+            [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]
+        )
+
+        XCTAssertEqual(
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].chunked(into: 0),
+            [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]]
+        )
+
+        XCTAssertEqual(
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].chunked(into: 1),
+            [[1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12]]
+        )
+
+        XCTAssertEqual(
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].chunked(into: 12),
+            [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]]
+        )
+
+        XCTAssertEqual(
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].chunked(into: 11),
+            [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], [12]]
+        )
+    }
+}
+
+extension ArrayTests {
+    func testRemoveDuplicates() {
         // Given
         let sample = [1, 1, 3, 3, 5, 5, 7, 7, 9, 9]
 

@@ -11,6 +11,19 @@ import SwiftUI
 public protocol ThemeStyle: ViewModifier {}
 
 public extension View {
+    /// Sets the theme for views within an app.
+    ///
+    /// Use this modifier to set a global them used within an app:
+    ///
+    ///     struct MyScene: Scene {
+    ///         var body: some Scene {
+    ///             WindowGroup {
+    ///                 ContentView()
+    ///                     .themeStyle(MyDefaultTheme())
+    ///             }
+    ///         }
+    ///     }
+    ///
     func themeStyle<T: ThemeStyle>(_ modifier: T) -> some View {
         self.modifier(modifier)
     }

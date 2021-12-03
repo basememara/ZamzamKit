@@ -10,17 +10,24 @@ import Foundation.NSURLSession
 
 public struct NetworkServiceFoundation: NetworkService {
     private let session: URLSession
-    private let delegate: URLSessionTaskDelegate
+    private let delegate: URLSessionTaskDelegate?
+
+    public init(session: URLSession, delegate: URLSessionTaskDelegate? = nil) {
+        self.session = session
+        self.delegate = delegate
+    }
 
     public init(
         configuration: URLSessionConfiguration = .default,
         serverTrustEvaluators: [String: ServerTrustEvaluator]? = nil,
         allServerTrustEvaluatorsMustSatisfy: Bool = true
     ) {
-        self.session = URLSession(configuration: configuration)
-        self.delegate = SessionTaskDelegate(
-            serverTrustEvaluators: serverTrustEvaluators,
-            allServerTrustEvaluatorsMustSatisfy: allServerTrustEvaluatorsMustSatisfy
+        self.init(
+            session: URLSession(configuration: configuration),
+            delegate: ServerTrustDelegate(
+                evaluators: serverTrustEvaluators,
+                allEvaluatorsMustSatisfy: allServerTrustEvaluatorsMustSatisfy
+            )
         )
     }
 }
@@ -57,53 +64,5 @@ public extension NetworkServiceFoundation {
         )
 
         return networkResponse
-    }
-}
-
-// MARK: - Delegates
-
-private extension NetworkServiceFoundation {
-    /// The object that defines methods that URL session instances call on their delegates to handle session-level events, like session life cycle changes.
-    class SessionTaskDelegate: NSObject, URLSessionTaskDelegate {
-        private let serverTrustEvaluators: [String: ServerTrustEvaluator]?
-        private let allServerTrustEvaluatorsMustSatisfy: Bool
-
-        init(
-            serverTrustEvaluators: [String: ServerTrustEvaluator]?,
-            allServerTrustEvaluatorsMustSatisfy: Bool
-        ) {
-            self.serverTrustEvaluators = serverTrustEvaluators
-            self.allServerTrustEvaluatorsMustSatisfy = allServerTrustEvaluatorsMustSatisfy
-        }
-
-        func urlSession(
-            _ session: URLSession,
-            didReceive challenge: URLAuthenticationChallenge
-        ) async -> (URLSession.AuthChallengeDisposition, URLCredential?) {
-            let host = challenge.protectionSpace.host
-
-            guard let serverTrustEvaluators = serverTrustEvaluators else {
-                return (.performDefaultHandling, nil)
-            }
-
-            guard let serverTrust = challenge.protectionSpace.serverTrust,
-                  challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust else {
-                      return (.performDefaultHandling, nil)
-                  }
-
-            guard let serverTrustEvaluator = serverTrustEvaluators[host] else {
-                guard allServerTrustEvaluatorsMustSatisfy else {
-                    return (.performDefaultHandling, nil)
-                }
-
-                return(.cancelAuthenticationChallenge, nil)
-            }
-
-            guard serverTrustEvaluator.valid(serverTrust, forHost: host) else {
-                return (.cancelAuthenticationChallenge, nil)
-            }
-
-            return (.useCredential, URLCredential(trust: serverTrust))
-        }
     }
 }

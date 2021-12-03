@@ -20,7 +20,7 @@ private struct SafariView: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
 
-extension View {
+public extension View {
     /// Presents a Safari sheet using the given URL for browsing the web.
     func sheet(safari url: Binding<URL?>) -> some View {
         sheet(

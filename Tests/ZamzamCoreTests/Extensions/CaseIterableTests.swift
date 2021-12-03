@@ -49,15 +49,9 @@ extension CaseIterableTests {
         let json = try XCTUnwrap(
             """
              [
-                 {
-                    "status": "one"
-                 },
-                 {
-                    "status": "two"
-                 },
-                 {
-                    "status": "something"
-                 }
+                 { "status": "one" },
+                 { "status": "two" },
+                 { "status": "something" }
              ]
              """.data(using: .utf8)
         )
