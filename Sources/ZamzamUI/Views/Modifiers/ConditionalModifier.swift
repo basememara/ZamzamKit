@@ -19,6 +19,8 @@ public extension View {
     ///             $0.redacted(reason: .placeholder )
     ///         }
     ///
+    /// - Warning: The view will re-render when the condition is changed.
+    ///
     /// - Parameters:
     ///   - condition: The condition to determine if the content should be applied.
     ///   - content: The modifier to apply to the view.
@@ -42,6 +44,8 @@ public extension View {
     ///         } else: {
     ///             $0.unredacted()
     ///         }
+    ///
+    /// - Warning: The view will re-render when the condition is changed.
     ///
     /// - Parameters:
     ///   - condition: The condition to determine the content to be applied.

@@ -41,7 +41,7 @@ public struct NetworkError: Error {
     }
 }
 
-extension NetworkError: CustomStringConvertible, CustomDebugStringConvertible {
+extension NetworkError: CustomStringConvertible {
     public var description: String {
         """
         Error: \(internalError ?? ZamzamError.other(nil)),
@@ -54,7 +54,10 @@ extension NetworkError: CustomStringConvertible, CustomDebugStringConvertible {
         }
         """
     }
+}
 
+#if DEBUG
+extension NetworkError: CustomDebugStringConvertible {
     public var debugDescription: String {
         """
         Error: \(internalError ?? ZamzamError.other(nil)),
@@ -73,6 +76,7 @@ extension NetworkError: CustomStringConvertible, CustomDebugStringConvertible {
         """
     }
 }
+#endif
 
 // MARK: - Conversions
 

@@ -64,7 +64,7 @@ public struct MailItem: Identifiable, Equatable {
         let fileName: String
     }
 
-    public let id: UUID = UUID()
+    public let id = UUID()
     let emails: [String]
     let subject: String?
     let body: String?

@@ -41,58 +41,6 @@ public extension Date {
 }
 
 public extension Date {
-    /// Returns a string representation of a given date formatted using the receiver’s current settings.
-    ///
-    ///     Date().string(format: "MMM d, h:mm a") // "Jan 3, 8:43 PM"
-    ///
-    /// - Parameters:
-    ///   - format: The date format string used by the receiver.
-    ///   - timeZone: The time zone for the receiver.
-    ///   - calendar: The calendar for the receiver.
-    ///   - locale: The locale for the receiver.
-    /// - Returns: The string representation of the given date.
-    func string(format: String, timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
-        DateFormatter(dateFormat: format, timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
-    }
-
-    /// Returns a string representation of a given date formatted using the receiver’s current settings.
-    ///
-    ///     Date().string(style: .short) // "1/12/17"
-    ///     Date().string(style: .medium) // "Jan 12, 2017"
-    ///     Date().string(style: .long) // "January 12, 2017"
-    ///     Date().string(style: .full) // "Thursday, January 12, 2017"
-    ///     Date().string(style: .full, withTime: .medium) // "Thursday, January 12, 2017 at 4:45:23 PM"
-    ///
-    /// - Parameters:
-    ///   - dateStyle: The date style string used by the receiver.
-    ///   - timeStyle: The time style string used by the receiver.
-    ///   - timeZone: The time zone for the receiver.
-    ///   - calendar: The calendar for the receiver.
-    ///   - locale: The locale for the receiver.
-    /// - Returns: The string representation of the given date.
-    func string(
-        style dateStyle: DateFormatter.Style,
-        withTime timeStyle: DateFormatter.Style = .none,
-        timeZone: TimeZone? = nil,
-        calendar: Calendar? = nil,
-        locale: Locale? = nil
-    ) -> String {
-        DateFormatter(dateStyle: dateStyle, timeStyle: timeStyle, timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
-    }
-
-    /// Returns a string representation of a given date formatted using the receiver’s formatter.
-    ///
-    ///     Date().string(formatter: .MM_dd_yyyy_HH_mm) // "03-15-2020 22:46"
-    ///
-    /// - Parameters:
-    ///   - formatter: The date formatter to use.
-    /// - Returns: The string representation of the given date.
-    func string(formatter: DateFormatter) -> String {
-        formatter.string(from: self)
-    }
-}
-
-public extension Date {
     /// Fixed-format for the date without time.
     ///
     /// An example use case for this function is creating a dictionary of days that group respective values by days.

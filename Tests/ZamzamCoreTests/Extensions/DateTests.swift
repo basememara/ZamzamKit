@@ -229,13 +229,6 @@ extension DateTests {
 // MARK: - String
 
 extension DateTests {
-    func testStringFromFormatter() throws {
-        let formatter = DateFormatter(iso8601Format: "MM-dd-yyyy HH:mm:ss")
-        let date = Date(timeIntervalSince1970: 1583697427)
-
-        XCTAssertEqual(date.string(formatter: formatter), "03-08-2020 19:57:07")
-    }
-
     func testStringToDate() throws {
         let date = try XCTUnwrap(Date(fromString: "1970/01/03 00:00"))
         let expected = Date(timeIntervalSince1970: TimeInterval(172800)
@@ -661,5 +654,13 @@ extension DateTests {
         XCTAssertEqual(dates3[7].timeIntervalSince1970, 1626386307 + 60 * 7)
         XCTAssertEqual(dates3[8].timeIntervalSince1970, 1626386307 + 60 * 8)
         XCTAssertEqual(dates3[9].timeIntervalSince1970, 1626386307 + 60 * 9)
+    }
+}
+
+// MARK: - Helpers
+
+private extension Date {
+    func string(format: String, timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
+        DateFormatter(dateFormat: format, timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
     }
 }
