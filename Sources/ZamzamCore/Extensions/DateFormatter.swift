@@ -77,6 +77,36 @@ public extension DateFormatter {
     /// Create a date formatter.
     ///
     /// - Parameters:
+    ///   - dateFormatTemplate: The date format template used by the receiver.
+    ///   - timeZone: The time zone for the receiver.
+    ///   - calendar: The calendar for the receiver.
+    ///   - locale: The locale for the receiver.
+    convenience init(
+        dateFormatTemplate: String,
+        timeZone: TimeZone? = nil,
+        calendar: Calendar? = nil,
+        locale: Locale? = nil
+    ) {
+        self.init()
+
+        self.setLocalizedDateFormatFromTemplate(dateFormatTemplate)
+
+        if let timeZone = timeZone ?? calendar?.timeZone {
+            self.timeZone = timeZone
+        }
+
+        if let calendar = calendar {
+            self.calendar = calendar
+        }
+
+        if let locale = locale ?? calendar?.locale {
+            self.locale = locale
+        }
+    }
+
+    /// Create a date formatter.
+    ///
+    /// - Parameters:
     ///   - dateStyle: The date style of the receiver.
     ///   - timeStyle: The time style of the receiver. The default is `.none`.
     ///   - timeZone: The time zone for the receiver.
