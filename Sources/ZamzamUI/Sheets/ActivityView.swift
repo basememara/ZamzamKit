@@ -1,8 +1,9 @@
 //
-//  SwiftUIView.swift
-//  SwiftUIView
+//  ActivityView.swift
+//  ZamzamUI
 //
 //  Created by Basem Emara on 2021-08-29.
+//  Copyright © 2021 Zamzam Inc. All rights reserved.
 //
 
 #if os(iOS)
