@@ -1,7 +1,6 @@
 //___FILEHEADER___
 
 import ___VARIABLE_moduleName:identifier___Core
-import ___VARIABLE_moduleName:identifier___UI
 
 struct ___VARIABLE_productName:identifier___Presenter: ___VARIABLE_productName:identifier___Presentable {
     private(set) var model: ___VARIABLE_productName:identifier___Model
