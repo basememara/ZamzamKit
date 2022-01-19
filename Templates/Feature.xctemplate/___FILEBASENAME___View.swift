@@ -10,7 +10,7 @@ struct ___VARIABLE_productName:identifier___View: View {
 
     var body: some View {
         Text("___VARIABLE_productName:identifier___")
-            .task(fetch)
+            .task { await fetch() }
     }
 }
 
