@@ -6,9 +6,11 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
+#if os(iOS)
 import AVFoundation
 import Foundation.NSBundle
 import Foundation.NSURL
+import UIKit.UIApplication
 
 public protocol Audible: AnyObject {
     var audioPlayer: AVAudioPlayer? { get set }
@@ -41,8 +43,7 @@ public extension Audible {
     }
 }
 
-#if os(iOS)
-import UIKit.UIApplication
+// MARK: - Types
 
 public protocol AudibleApplication {
     func beginReceivingRemoteControlEvents()

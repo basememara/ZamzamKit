@@ -5,6 +5,7 @@
 //  Created by Basem Emara on 2021-08-29.
 //
 
+#if os(iOS)
 import SwiftUI
 
 /// A view that you use to offer standard services from your app.
@@ -47,3 +48,4 @@ public struct ActivityView: UIViewControllerRepresentable {
 
     public func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
+#endif

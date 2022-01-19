@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import ZamzamCore
+@testable import ZamzamCore
 
 final class AtomicTests: XCTestCase {
     private let iterations = 10_000 // 1_000_000

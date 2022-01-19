@@ -74,7 +74,7 @@ public extension View {
     ///         }
     ///
     /// - Parameters:
-    ///   - condition: The optional item to determine if the content should be applied.
+    ///   - item: The optional item to determine if the content should be applied.
     ///   - content: The modifier and unwrapped item to apply to the view.
     /// - Returns: The modified view.
     @ViewBuilder func modifier<T: View, Item>(
@@ -98,7 +98,7 @@ public extension View {
     ///         }
     ///
     /// - Parameters:
-    ///   - condition: The optional item to determine if the content should be applied.
+    ///   - item: The optional item to determine if the content should be applied.
     ///   - trueContent: The modifier and unwrapped item to apply to the view.
     ///   - falseContent: The modifier to apply to the view if the condition fails.
     /// - Returns: The modified view.

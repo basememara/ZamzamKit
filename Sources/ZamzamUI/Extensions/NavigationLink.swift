@@ -65,9 +65,9 @@ public extension View {
     /// - Parameters:
     ///   - item: A binding to an optional source of truth for the navigation.
     ///   - destination: A closure returning the content to navigate to.
-    func navigate<Item, Destination: View>(
+    func navigate<Item: Identifiable, Destination: View>(
         item: Binding<Item?>,
-        destination: (Item) -> Destination
+        @ViewBuilder destination: @escaping (Item) -> Destination
     ) -> some View {
         // https://swiftwithmajid.com/2021/01/27/lazy-navigation-in-swiftui/
         navigate(
