@@ -293,20 +293,6 @@ extension DateTests {
         let date = try XCTUnwrap(Date(fromString: "2017/05/14 13:32"))
         XCTAssertEqual("2017-05-14", date.shortString())
     }
-
-    func testDayName() throws {
-        let date = Date(timeIntervalSince1970: 1486121165)
-        XCTAssertEqual(date.name(ofDay: .full), "Friday")
-        XCTAssertEqual(date.name(ofDay: .threeLetters), "Fri")
-        XCTAssertEqual(date.name(ofDay: .oneLetter), "F")
-    }
-
-    func testMonthName() throws {
-        let date = Date(timeIntervalSince1970: 1486121165)
-        XCTAssertEqual(date.name(ofMonth: .full), "February")
-        XCTAssertEqual(date.name(ofMonth: .threeLetters), "Feb")
-        XCTAssertEqual(date.name(ofMonth: .oneLetter), "F")
-    }
 }
 
 // MARK: - Calculations
