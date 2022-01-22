@@ -18,3 +18,15 @@ public extension Button where Label: View {
         self.init(action: { Task { await action() } }, label: label)
     }
 }
+
+public extension Button {
+    /// Creates a button with a specified role that displays a custom label.
+    ///
+    /// - Parameters:
+    ///   - role: An optional semantic role that describes the button. A value of `nil` means that the button doesn't have an assigned role.
+    ///   - action: The async action to perform when the user interacts with the button.
+    ///   - label: A view that describes the purpose of the button's `action`.
+    init(role: ButtonRole?, action: @escaping () async -> Void, @ViewBuilder label: () -> Label) {
+        self.init(role: role, action: { Task { await action() } }, label: label)
+    }
+}
