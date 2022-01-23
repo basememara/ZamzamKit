@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+#if os(iOS)
 private struct BottomSheet<Content: View>: UIViewControllerRepresentable {
     @Binding var isPresented: Bool
     let detents: [UISheetPresentationController.Detent]
@@ -285,4 +286,5 @@ struct BottomSheet_Previews: PreviewProvider {
         }
     }
 }
+#endif
 #endif

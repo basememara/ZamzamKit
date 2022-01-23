@@ -4,7 +4,7 @@ import SwiftUI
 
 struct ___VARIABLE_productName:identifier___View: View {
     // Injected dependencies
-    @ObservedObject private(set) var model: ___VARIABLE_productName:identifier___Model
+    @StateObject var model: ___VARIABLE_productName:identifier___Model
     let interactor: ___VARIABLE_productName:identifier___Interactable?
     let scene: ___VARIABLE_productName:identifier___Renderable?
 

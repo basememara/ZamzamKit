@@ -92,7 +92,7 @@ public extension Distribution {
     }
 }
 
-#if !os(macOS)
+#if os(iOS)
 import UIKit.UIDevice
 
 public extension Distribution {
