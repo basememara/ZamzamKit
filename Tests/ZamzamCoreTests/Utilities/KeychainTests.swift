@@ -44,8 +44,8 @@ extension KeychainTests {
         keychain.remove(.testString2)
 
         // Then
-        XCTAssertNil(keychain.get(.testString1))
-        XCTAssertNil(keychain.get(.testString2))
+        XCTAssertNil(keychain.get(.testString1) as String?)
+        XCTAssertNil(keychain.get(.testString2) as String?)
     }
 }
 
@@ -60,13 +60,22 @@ private extension KeychainAPI.Key {
 // https://github.com/onmyway133/blog/issues/92
 // https://forums.swift.org/t/host-application-for-spm-tests/24363
 private class KeychainTestService: KeychainService {
-    var values = [String: String?]()
+    var values = [String: Any?]()
 
     func get(_ key: KeychainAPI.Key) -> String? {
-        values[key.name] ?? nil
+        values[key.name] as? String ?? nil
     }
 
     func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool {
+        values[key.name] = value
+        return true
+    }
+
+    func get(_ key: KeychainAPI.Key) -> Bool? {
+        values[key.name] as? Bool ?? nil
+    }
+
+    func set(_ value: Bool?, forKey key: KeychainAPI.Key) -> Bool {
         values[key.name] = value
         return true
     }

@@ -20,6 +20,7 @@ public struct KeychainServiceExternal: KeychainService {
     public init(teamID: String, accessGroup: String) {
         self.init()
         self.keychain.accessGroup = "\(teamID).\(accessGroup)"
+        self.keychain.synchronizable = true
     }
 }
 
@@ -27,10 +28,19 @@ public extension KeychainServiceExternal {
     func get(_ key: KeychainAPI.Key) -> String? {
         keychain.get(key.name)
     }
+
+    func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool {
+        guard let value = value else { return remove(key) }
+        return keychain.set(value, forKey: key.name)
+    }
 }
 
 public extension KeychainServiceExternal {
-    func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool {
+    func get(_ key: KeychainAPI.Key) -> Bool? {
+        keychain.getBool(key.name)
+    }
+
+    func set(_ value: Bool?, forKey key: KeychainAPI.Key) -> Bool {
         guard let value = value else { return remove(key) }
         return keychain.set(value, forKey: key.name)
     }
