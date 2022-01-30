@@ -11,9 +11,11 @@ import Foundation.NSDate
 /// Sends a message to the IDE console.
 public struct LogServiceConsole: LogService {
     public let minLevel: LogAPI.Level
+    private let subsystem: String
 
-    public init(minLevel: LogAPI.Level) {
+    public init(minLevel: LogAPI.Level, subsystem: String) {
         self.minLevel = minLevel
+        self.subsystem = subsystem
     }
 }
 
@@ -34,15 +36,15 @@ public extension LogServiceConsole {
         let prefix: String
         switch level {
         case .verbose:
-            prefix = "💜 \(time) VERBOSE"
+            prefix = "💜 \(time) VERBOSE [\(subsystem)]"
         case .debug:
-            prefix = "💚 \(time) DEBUG"
+            prefix = "💚 \(time) DEBUG [\(subsystem)]"
         case .info:
-            prefix = "💙 \(time) INFO"
+            prefix = "💙 \(time) INFO [\(subsystem)]"
         case .warning:
-            prefix = "💛 \(time) WARNING"
+            prefix = "💛 \(time) WARNING [\(subsystem)]"
         case .error:
-            prefix = "❤️ \(time) ERROR"
+            prefix = "❤️ \(time) ERROR [\(subsystem)]"
         case .none:
             return
         }

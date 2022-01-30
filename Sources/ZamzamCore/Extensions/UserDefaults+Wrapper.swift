@@ -22,6 +22,7 @@ import Foundation.NSUserDefaults
 ///         @DefaultsOptional("timestamp")
 ///         var timestamp: Date?
 ///     }
+///
 @propertyWrapper
 public struct Defaults<T: UserDefaultsRepresentable> {
     private let userDefaults: UserDefaults
@@ -66,6 +67,7 @@ public struct Defaults<T: UserDefaultsRepresentable> {
 ///         @DefaultsOptional("timestamp")
 ///         var timestamp: Date?
 ///     }
+///     
 @propertyWrapper
 public struct DefaultsOptional<T: UserDefaultsRepresentable> {
     private let userDefaults: UserDefaults
