@@ -92,7 +92,17 @@ public extension Distribution {
     }
 }
 
-#if os(iOS)
+#if os(watchOS)
+import WatchKit
+
+public extension Distribution {
+    var deviceName: String { WKInterfaceDevice.current().name }
+    var deviceModel: String { WKInterfaceDevice.current().model }
+    var deviceIdentifier: String { WKInterfaceDevice.current().identifierForVendor?.uuidString ?? "" }
+    var osName: String { WKInterfaceDevice.current().systemName }
+    var osVersion: String { WKInterfaceDevice.current().systemVersion }
+}
+#elseif canImport(UIKit)
 import UIKit.UIDevice
 
 public extension Distribution {
