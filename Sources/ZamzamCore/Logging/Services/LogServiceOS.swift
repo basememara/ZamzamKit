@@ -14,12 +14,14 @@ public struct LogServiceOS: LogService {
     private let subsystem: String
     private let category: String
     private let log: OSLog
+    private let isDebug: Bool
 
-    public init(minLevel: LogAPI.Level, subsystem: String, category: String) {
+    public init(minLevel: LogAPI.Level, subsystem: String, category: String, isDebug: Bool) {
         self.minLevel = minLevel
         self.subsystem = subsystem
         self.category = category
         self.log = OSLog(subsystem: subsystem, category: category)
+        self.isDebug = isDebug
     }
 }
 
@@ -47,6 +49,12 @@ public extension LogServiceOS {
         case .error:
             type = .error
         case .none:
+            return
+        }
+
+        // Expose message in Console app if debug mode
+        if isDebug {
+            os_log("%{public}s", log: log, type: type, format(message, file, function, line, error, context))
             return
         }
 
