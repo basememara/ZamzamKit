@@ -7,7 +7,6 @@
 //
 
 #if os(watchOS)
-import Foundation
 import ClockKit
 
 public extension CLKComplicationServer {
