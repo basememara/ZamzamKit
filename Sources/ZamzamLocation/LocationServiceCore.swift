@@ -116,9 +116,11 @@ public extension LocationServiceCore {
         manager.stopMonitoringSignificantLocationChanges()
     }
 }
+#endif
 
 // MARK: - Heading
 
+#if !os(tvOS)
 public extension LocationServiceCore {
     var heading: CLHeading? { manager.heading }
 

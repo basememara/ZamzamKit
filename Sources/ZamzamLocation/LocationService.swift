@@ -27,7 +27,7 @@ public protocol LocationService: AnyObject {
     func stopMonitoringSignificantLocationChanges()
     #endif
 
-    #if os(iOS)
+    #if !os(tvOS)
     var heading: CLHeading? { get }
     var shouldDisplayHeadingCalibration: Bool { get set }
     func startUpdatingHeading() -> Bool
@@ -42,7 +42,7 @@ public protocol LocationServiceDelegate: AnyObject {
     func locationService(didUpdateLocation location: CLLocation)
     func locationService(didFailWithError error: CLError)
 
-    #if os(iOS)
+    #if !os(tvOS)
     func locationService(didUpdateHeading newHeading: CLHeading)
     #endif
 }
