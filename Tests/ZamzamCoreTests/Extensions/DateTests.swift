@@ -112,6 +112,16 @@ extension DateTests {
         let date = try XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
         XCTAssertEqual(date.endOfMonth.string(format: "yyyy/MM/dd HH:mm:ss"), "2016/03/31 23:59:59")
     }
+
+    func testStartOfYear() throws {
+        let date = try XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
+        XCTAssertEqual(date.startOfYear.string(format: "yyyy/MM/dd HH:mm:ss"), "2016/01/01 00:00:00")
+    }
+
+    func testEndOfYear() throws {
+        let date = try XCTUnwrap(Date(fromString: "2016/03/22 09:30"))
+        XCTAssertEqual(date.endOfYear.string(format: "yyyy/MM/dd HH:mm:ss"), "2016/12/31 23:59:59")
+    }
 }
 
 // MARK: - Comparisons

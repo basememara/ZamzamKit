@@ -307,6 +307,53 @@ public extension Date {
 }
 
 public extension Date {
+    /// Returns the beginning of the year.
+    ///
+    ///     Date().startOfYear // "2018/01/01 00:00:00"
+    ///
+    /// Uses the user's current calendar.
+    var startOfYear: Date { startOfYear(using: .current) }
+
+    /// Returns the beginning of the year.
+    ///
+    ///     Date().startOfYear // "2018/01/01 00:00:00"
+    ///
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns the date.
+    func startOfYear(using calendar: Calendar) -> Date {
+        calendar.date(
+            from: calendar.dateComponents([.year], from: self)
+        ) ?? self
+    }
+}
+
+public extension Date {
+    /// Returns the end of the year.
+    ///
+    ///     Date().endOfMonth // "2018/12/31 23:59:59"
+    ///
+    /// Uses the user's current calendar.
+    var endOfYear: Date { endOfYear(using: .current) }
+
+    /// Returns the end of the year.
+    ///
+    ///     Date().endOfMonth // "2018/12/31 23:59:59"
+    ///
+    /// - Parameter calendar: Calendar used for calculation.
+    /// - Returns: Returns the date.
+    func endOfYear(using calendar: Calendar) -> Date {
+        var components = DateComponents()
+        components.year = 1
+        components.second = -1
+
+        return calendar.date(
+            byAdding: components,
+            to: startOfYear(using: calendar)
+        ) ?? self
+    }
+}
+
+public extension Date {
     /// Determine if a date is between two other dates.
     ///
     /// Dates do not have to be in sequential order.
