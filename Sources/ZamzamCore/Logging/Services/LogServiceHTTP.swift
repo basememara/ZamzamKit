@@ -145,7 +145,10 @@ public extension LogServiceHTTP {
 
         payload.merge(parameters) { $1 }
 
-        guard let log = payload.jsonString() else {
+        guard let log = payload.jsonString() ?? {
+            payload["context"] = "ERROR Logger unable to encode context for destination"
+            return payload.jsonString()
+        }() else {
             print("🤍 \(Date.now.formatted(date: .omitted, time: .standard)) ERROR Logger unable to encode parameters for destination.")
             return
         }
