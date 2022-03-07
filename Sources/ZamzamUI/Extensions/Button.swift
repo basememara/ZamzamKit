@@ -19,6 +19,17 @@ public extension Button where Label: View {
     }
 }
 
+public extension Button where Label == Text {
+    /// Creates a button that generates its label from a text view.
+    ///
+    /// - Parameters:
+    ///   - text: A text view.
+    ///   - action: The action to perform when the user triggers the button.
+    init(_ title: Text, action: @escaping () async -> Void) {
+        self.init(action: action, label: { title })
+    }
+}
+
 public extension Button {
     /// Creates a button with a specified role that displays a custom label.
     ///
