@@ -30,7 +30,7 @@ public struct AdaptiveStack<Content: View>: View {
     }
 
     public var body: some View {
-        if sizeCategory.isAccessibilityCategory {
+        if sizeCategory > .extraLarge {
             VStack(alignment: horizontalAlignment, spacing: spacing, content: content)
         } else {
             HStack(alignment: verticalAlignment, spacing: spacing, content: content)
