@@ -45,6 +45,10 @@ public struct ViewError: Error, Equatable, Identifiable {
     }
 }
 
+extension ViewError: LocalizedError {
+    public var errorDescription: String? { title }
+}
+
 // MARK: - Types
 
 public extension ViewError {
