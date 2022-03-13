@@ -111,7 +111,7 @@ public extension LogServiceHTTP {
         #if os(iOS)
         device.merge([
             "device_id": distribution.deviceIdentifier,
-            "device_name": distribution.isRunningInAppStore ? "***" : distribution.deviceName,
+            "device_name": isDebug ? distribution.deviceName : "***",
             "device_model": distribution.deviceModel,
             "os_version": distribution.osVersion
         ]) { $1 }
