@@ -119,7 +119,7 @@ public protocol UserDefaultsRepresentable {
     /// Initializes the object using the provided value.
     ///
     /// - Parameter rawDefaultsValue: The previously store value fetched from `UserDefaults`.
-    init(rawDefaultsValue: RawDefaultsValue)
+    init?(rawDefaultsValue: RawDefaultsValue)
 
     /// Returns the object associated with the specified key in the user‘s defaults database.
     /// - Parameters:
@@ -138,7 +138,7 @@ public protocol UserDefaultsRepresentable {
 extension UserDefaultsRepresentable {
     public var rawDefaultsValue: Self { self }
 
-    public init(rawDefaultsValue: Self) {
+    public init?(rawDefaultsValue: Self) {
         self = rawDefaultsValue
     }
 
@@ -177,8 +177,8 @@ extension Array: UserDefaultsRepresentable where Element: UserDefaultsRepresenta
         map { $0.rawDefaultsValue }
     }
 
-    public init(rawDefaultsValue: [Element.RawDefaultsValue]) {
-        self = rawDefaultsValue.map { Element(rawDefaultsValue: $0) }
+    public init?(rawDefaultsValue: [Element.RawDefaultsValue]) {
+        self = rawDefaultsValue.compactMap { Element(rawDefaultsValue: $0) }
     }
 }
 
@@ -187,8 +187,8 @@ extension Set: UserDefaultsRepresentable where Element: UserDefaultsRepresentabl
         map { $0.rawDefaultsValue }
     }
 
-    public init(rawDefaultsValue: [Element.RawDefaultsValue]) {
-        self = Set(rawDefaultsValue.map { Element(rawDefaultsValue: $0) })
+    public init?(rawDefaultsValue: [Element.RawDefaultsValue]) {
+        self = Set(rawDefaultsValue.compactMap { Element(rawDefaultsValue: $0) })
     }
 }
 
@@ -197,8 +197,8 @@ extension Dictionary: UserDefaultsRepresentable where Key == String, Value: User
         mapValues { $0.rawDefaultsValue }
     }
 
-    public init(rawDefaultsValue: [String: Value.RawDefaultsValue]) {
-        self = rawDefaultsValue.mapValues { Value(rawDefaultsValue: $0) }
+    public init?(rawDefaultsValue: [String: Value.RawDefaultsValue]) {
+        self = rawDefaultsValue.compactMapValues { Value(rawDefaultsValue: $0) }
     }
 }
 
@@ -207,8 +207,11 @@ extension UserDefaultsRepresentable where Self: RawRepresentable, Self.RawValue:
         rawValue.rawDefaultsValue
     }
 
-    public init(rawDefaultsValue: RawValue.RawDefaultsValue) {
-        // swiftlint:disable:next force_unwrapping
-        self = Self(rawValue: Self.RawValue(rawDefaultsValue: rawDefaultsValue))!
+    public init?(rawDefaultsValue: RawValue.RawDefaultsValue) {
+        guard let value = Self.RawValue(rawDefaultsValue: rawDefaultsValue), let restored = Self(rawValue: value) else {
+            return nil
+        }
+
+        self = restored
     }
 }
