@@ -120,7 +120,7 @@ public extension LocationServiceCore {
 
 // MARK: - Heading
 
-#if !os(tvOS)
+#if os(iOS) || os(watchOS)
 public extension LocationServiceCore {
     var heading: CLHeading? { manager.heading }
 

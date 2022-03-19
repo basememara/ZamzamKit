@@ -121,7 +121,7 @@ public extension LocationManager {
 
 // MARK: - Heading
 
-#if !os(tvOS)
+#if os(iOS) || os(watchOS)
 public extension LocationManager {
     /// The most recently reported heading.
     var heading: CLHeading? { service.heading }
@@ -165,7 +165,7 @@ extension LocationManager: LocationServiceDelegate {
     public func locationService(didFailWithError error: CLError) {
         Self.locationSubject.send(.failure(error))
 
-        #if !os(tvOS)
+        #if os(iOS) || os(watchOS)
         Self.headingSubject.send(.failure(error))
         #endif
     }
@@ -176,7 +176,7 @@ extension LocationManager: LocationServiceDelegate {
 private extension LocationManager {
     static let authorizationSubject = CurrentValueSubject<Bool?, Never>(nil)
     static let locationSubject = CurrentValueSubject<Result<CLLocation, CLError>?, Never>(nil)
-    #if !os(tvOS)
+    #if os(iOS) || os(watchOS)
     static let headingSubject = CurrentValueSubject<Result<CLHeading, CLError>?, Never>(nil)
     #endif
 }
