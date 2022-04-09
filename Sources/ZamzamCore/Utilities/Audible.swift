@@ -43,6 +43,15 @@ public extension Audible {
     }
 }
 
+public extension Audible {
+    /// Deactivates the audio session, stops playback and undoes resource allocation for playback.
+    func stopAudioPlayer() {
+        try? AVAudioSession.sharedInstance().setActive(false)
+        audioPlayer?.stop()
+        audioPlayer = nil
+    }
+}
+
 // MARK: - Types
 
 public protocol AudibleApplication {
