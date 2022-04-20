@@ -194,6 +194,7 @@ public extension LogManager {
     ///   - file: File of the caller.
     ///   - function: Function of the caller.
     ///   - line: Line of the caller.
+    ///   - error: Error of the caller.
     ///   - context: Additional meta data.
     ///   - completion: The block to call when log entries sent.
     func warning(
@@ -201,6 +202,7 @@ public extension LogManager {
         file: String = #fileID,
         function: String = #function,
         line: Int = #line,
+        error: Error? = nil,
         context: [String: CustomStringConvertible] = [:],
         completion: (() -> Void)? = nil
     ) {
@@ -210,7 +212,7 @@ public extension LogManager {
             file: file,
             function: function,
             line: line,
-            error: nil,
+            error: error,
             context: context,
             completion: completion
         )
