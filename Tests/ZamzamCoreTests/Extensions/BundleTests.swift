@@ -29,7 +29,7 @@ extension BundleTests {
         XCTAssertEqual(
             values["MyDate1"] as? Date,
             Date(
-                fromString: "2016/03/03 9:50",
+                year: 2016, month: 03, day: 3, hour: 9, minute: 50,
                 timeZone: TimeZone(identifier: "America/Toronto")
             )
         )

@@ -36,7 +36,7 @@ public extension Date {
 public extension Date {
     /// Adds time interval components to a date for the calendar.
     ///
-    ///     Date(fromString: "1440/02/30 18:31", calendar) + .days(1, calendar)
+    ///     Date(year: 1440, month: 2, day: 30, hour: 18, minute: 31, calendar: calendar) + .days(1, calendar)
     ///
     /// - Parameters:
     ///   - left: The date to calculate from.
@@ -76,7 +76,7 @@ public extension Date {
 
     /// Subtracts time interval components from a date for the calendar.
     ///
-    ///     Date(fromString: "1440/02/30 18:31", calendar) - .days(1, calendar)
+    ///     Date(year: 1440, month: 2, day: 30, hour: 18, minute: 31, calendar: calendar) - .days(1, calendar)
     ///
     /// - Parameters:
     ///   - left: The date to calculate from.
@@ -98,7 +98,7 @@ public extension Date {
 public extension Date {
     /// Adds time interval components to a date.
     ///
-    ///     Date(fromString: "2015/09/18 18:31") + .days(1)
+    ///     Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31) + .days(1)
     ///
     /// - Parameters:
     ///   - left: The date to calculate from.
@@ -122,7 +122,7 @@ public extension Date {
 
     /// Subtracts time interval components from a date.
     ///
-    ///     Date(fromString: "2015/09/18 18:31") - .days(1)
+    ///     Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31) - .days(1)
     ///
     /// - Parameters:
     ///   - left: The date to calculate from.
@@ -148,7 +148,7 @@ public extension Date {
 public extension Date {
     /// Adds time interval components to a date for the calendar.
     ///
-    ///     var date = Date(fromString: "1440/02/30 18:31", calendar)
+    ///     var date = Date(year: 1440, month: 2, day: 30, hour: 18, minute: 31, calendar: calendar)
     ///     date += .days(1, calendar)
     ///
     /// - Parameters:
@@ -160,7 +160,7 @@ public extension Date {
 
     /// Subtracts time interval components from a date for the calendar.
     ///
-    ///     var date = Date(fromString: "1440/02/30 18:31", calendar)
+    ///     var date = Date(year: 1440, month: 2, day: 30, hour: 18, minute: 31, calendar: calendar)
     ///     date -= .days(1, calendar)
     ///
     /// - Parameters:
@@ -172,7 +172,7 @@ public extension Date {
 
     /// Adds time interval components to a date.
     ///
-    ///     var date = Date(fromString: "2015/09/18 18:31")
+    ///     var date = Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31)
     ///     date += .days(1)
     ///
     /// - Parameters:
@@ -184,7 +184,7 @@ public extension Date {
 
     /// Subtracts time interval components from a date.
     ///
-    ///     var date = Date(fromString: "2015/09/18 18:31")
+    ///     var date = Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31)
     ///     date -= .days(1)
     ///
     /// - Parameters:

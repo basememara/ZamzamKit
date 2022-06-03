@@ -15,28 +15,45 @@ import Foundation.NSTimeZone
 public extension Date {
     /// Creates a date value initialized from a string.
     ///
-    ///     Date(fromString: "2018/11/01 18:15")
+    ///     Date(year: 2018, month: 11, day: 1, hour: 18, minute: 15)
     ///
     /// - Parameters:
-    ///   - string: The string to parse the date from. The default is `"yyyy/MM/dd HH:mm"`.
-    ///   - dateFormat: The date format string used by the receiver.
+    ///   - year: The year of the date.
+    ///   - month: The year of the date.
+    ///   - day: The year of the date.
+    ///   - hour: The year of the date.
+    ///   - minute: The year of the date.
+    ///   - second: The year of the date.
     ///   - timeZone: The time zone for the receiver.
     ///   - calendar: The calendar for the receiver.
-    ///   - locale: The locale for the receiver.
     init?(
-        fromString string: String,
-        dateFormat: String = "yyyy/MM/dd HH:mm",
+        era: Int? = nil,
+        year: Int,
+        month: Int,
+        day: Int,
+        hour: Int? = nil,
+        minute: Int? = nil,
+        second: Int? = nil,
         timeZone: TimeZone? = nil,
-        calendar: Calendar? = nil,
-        locale: Locale? = nil
+        calendar: Calendar = .current
     ) {
-        guard !string.isEmpty,
-            let date = DateFormatter(dateFormat: dateFormat, timeZone: timeZone, calendar: calendar, locale: locale).date(from: string)
-        else {
-            return nil
+        var calendar = calendar
+        let components = DateComponents(
+            era: era,
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second
+        )
+
+        if let timeZone = timeZone {
+            calendar.timeZone = timeZone
         }
 
-        self.init(timeInterval: 0, since: date)
+        guard let date = calendar.date(from: components) else { return nil }
+        self = date
     }
 }
 
@@ -51,24 +68,5 @@ public extension Date {
     /// - Returns: The formatted date string.
     func shortString(timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
         DateFormatter(dateFormat: "yyyy-MM-dd", timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
-    }
-
-    /// Formats time interval for display timer.
-    ///
-    ///     Date(fromString: "2016/03/22 09:45").timerString(
-    ///         from: Date(fromString: "2016/03/22 09:40")
-    ///     ) // "00:05:00"
-    ///
-    /// - Parameters:
-    ///   - date: The date to countdown from.
-    ///   - positivePrefix: The prefix string to prepend to the timer.
-    /// - Returns: The formatted timer as hh:mm:ss.
-    func timerString(from date: Date = Date(), positivePrefix: String = "+") -> String {
-        let seconds = Int(timeIntervalSince(date))
-        let prefix = seconds < 0 ? positivePrefix : ""
-        let hr = abs(seconds / 3600)
-        let min = abs(seconds / 60 % 60)
-        let sec = abs(seconds % 60)
-        return .localizedStringWithFormat("%@%02i:%02i:%02i", prefix, hr, min, sec)
     }
 }

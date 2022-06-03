@@ -382,12 +382,12 @@ public extension Date {
 public extension Date {
     /// Gets the decimal representation of the time.
     ///
-    ///     Date(fromString: "2012/10/23 18:15").timeToDecimal // 18.25
+    ///     Date(year: 2012, month: 10, day: 23, hour: 18, minute: 15).timeToDecimal // 18.25
     var timeToDecimal: Double { timeToDecimal(using: .current) }
 
     /// Gets the decimal representation of the time.
     ///
-    ///     Date(fromString: "2012/10/23 18:15").timeToDecimal // 18.25
+    ///     Date(year: 2012, month: 10, day: 23, hour: 18, minute: 15).timeToDecimal // 18.25
     ///
     /// - Parameter calendar: Calendar used for calculation.
     /// - Returns: Returns the date.
@@ -408,7 +408,7 @@ public extension Date {
 
     /// Returns the starting time and duration of a given calendar component that contains a given date.
     ///
-    ///     let date = Date(fromString: "2020/04/01 09:30")
+    ///     let date = Date(year: 2020, month: 4, day: 1, hour: 9, minute: 30)
     ///     date.expanding(to: .week) // Mar 29 - Apr 4
     ///     date.expanding(to: .month) // Apr 1 - Apr 30
     ///     date.expanding(to: .monthWithTrailingWeeks) // Mar 29 - May 2
