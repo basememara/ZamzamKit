@@ -1,4 +1,5 @@
 analyzer_rules:
+  - sorted_imports
   - unused_import
 
 included:
