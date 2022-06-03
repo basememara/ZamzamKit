@@ -40,21 +40,18 @@ public extension Data {
     }
 }
 
-private extension Data {
-    static let defaultEncoder = JSONEncoder()
-    static let defaultDecoder = JSONDecoder()
-}
+// MARK: - Codable
 
 public extension Data {
     /// Returns a value of the type you specify, decoded from a data object.
-    func decode<T: Decodable>() throws -> T {
-        try Self.defaultDecoder.decode(T.self, from: self)
+    func decode<T: Decodable>(decoder: JSONDecoder = JSONDecoder()) throws -> T {
+        try decoder.decode(T.self, from: self)
     }
 }
 
 public extension Encodable {
     /// Returns the encoded data of the type you specify.
-    func encode() throws -> Data {
-        try Data.defaultEncoder.encode(self)
+    func encode(encoder: JSONEncoder = JSONEncoder()) throws -> Data {
+        try encoder.encode(self)
     }
 }

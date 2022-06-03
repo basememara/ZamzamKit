@@ -38,3 +38,22 @@ extension DataTests {
         )
     }
 }
+
+extension DataTests {
+    func testCodable() throws {
+        // Given
+        struct TestModel: Codable, Equatable {
+            let string: String
+            let integer: Int
+        }
+
+        let expectedModel = TestModel(string: "abc", integer: 99)
+
+        // When
+        let data = try expectedModel.encode()
+        let model: TestModel = try data.decode()
+
+        // Then
+        XCTAssertEqual(model, expectedModel)
+    }
+}
