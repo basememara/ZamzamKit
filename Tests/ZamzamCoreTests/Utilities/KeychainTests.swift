@@ -11,7 +11,7 @@ import ZamzamCore
 
 final class KeychainTests: XCTestCase {
     private lazy var keychain = KeychainManager(
-        service: KeychainTestService()
+        service: KeychainServiceTest()
     )
 }
 
@@ -59,7 +59,7 @@ private extension KeychainAPI.Key {
 // Unit test mocked since Keychain needs application host, see app for Keychain testing
 // https://github.com/onmyway133/blog/issues/92
 // https://forums.swift.org/t/host-application-for-spm-tests/24363
-private class KeychainTestService: KeychainService {
+private class KeychainServiceTest: KeychainService {
     var values = [String: Any?]()
 
     func get(_ key: KeychainAPI.Key) -> String? {
