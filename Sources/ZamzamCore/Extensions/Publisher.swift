@@ -6,7 +6,6 @@
 //  Copyright © 2021 Zamzam Inc. All rights reserved.
 //
 
-#if canImport(Combine)
 import Combine
 
 public extension Optional where Wrapped: Combine.Publisher {
@@ -15,4 +14,3 @@ public extension Optional where Wrapped: Combine.Publisher {
         self?.eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher()
     }
 }
-#endif
