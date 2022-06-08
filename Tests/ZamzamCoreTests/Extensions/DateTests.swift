@@ -12,6 +12,41 @@ import ZamzamCore
 final class DateTests: XCTestCase {}
 
 extension DateTests {
+    func testComponentsInitializer() {
+        XCTAssertEqual(
+            Date(year: 2022, month: 6, day: 2, hour: 14, minute: 54, second: 25, timeZone: .posix),
+            Date(timeIntervalSince1970: 1654181665)
+        )
+    }
+
+    func testComponentsInitializerTimeZone() {
+        XCTAssertEqual(
+            Date(year: 2022, month: 3, day: 6, hour: 2, minute: 1, second: 43, timeZone: TimeZone(abbreviation: "EST")),
+            Date(timeIntervalSince1970: 1646550103)
+        )
+    }
+
+    func testComponentsInitializerCalendar() {
+        // Islamic calendar
+        XCTAssertEqual(
+            Date(year: 1443, month: 11, day: 3, hour: 17, minute: 42, second: 15, timeZone: .posix, calendar: Calendar(identifier: .islamicUmmAlQura)),
+            Date(timeIntervalSince1970: 1654191735)
+        )
+
+        // Chinese calendar
+        let gregorianYear = 2022
+        let gregorianAdjustedToChinese = gregorianYear + 2697
+        let chineseEra = Int(gregorianAdjustedToChinese / 60)
+        let chineseYear = gregorianAdjustedToChinese - chineseEra * 60
+
+        XCTAssertEqual(
+            Date(era: chineseEra, year: chineseYear, month: 5, day: 5, hour: 0, minute: 18, second: 59, timeZone: TimeZone(abbreviation: "EST"), calendar: Calendar(identifier: .chinese)),
+            Date(timeIntervalSince1970: 1654229939)
+        )
+    }
+}
+
+extension DateTests {
     func testIsPast() throws {
         XCTAssert(Date(timeIntervalSinceNow: -100).isPast)
         XCTAssertFalse(Date(timeIntervalSinceNow: 100).isPast)
