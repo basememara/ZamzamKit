@@ -6,14 +6,16 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
+import Foundation.NSData
+
 public protocol KeychainService {
     func get(_ key: KeychainAPI.Key) -> String?
     @discardableResult
     func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool
 
-    func get(_ key: KeychainAPI.Key) -> Bool?
+    func get(_ key: KeychainAPI.Key) -> Data?
     @discardableResult
-    func set(_ value: Bool?, forKey key: KeychainAPI.Key) -> Bool
+    func set(_ value: Data?, forKey key: KeychainAPI.Key) -> Bool
 
     @discardableResult
     func remove(_ key: KeychainAPI.Key) -> Bool

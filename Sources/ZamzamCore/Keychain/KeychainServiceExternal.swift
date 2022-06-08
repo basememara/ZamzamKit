@@ -36,11 +36,11 @@ public extension KeychainServiceExternal {
 }
 
 public extension KeychainServiceExternal {
-    func get(_ key: KeychainAPI.Key) -> Bool? {
-        keychain.getBool(key.name)
+    func get(_ key: KeychainAPI.Key) -> Data? {
+        keychain.getData(key.name)
     }
 
-    func set(_ value: Bool?, forKey key: KeychainAPI.Key) -> Bool {
+    func set(_ value: Data?, forKey key: KeychainAPI.Key) -> Bool {
         guard let value = value else { return remove(key) }
         return keychain.set(value, forKey: key.name)
     }

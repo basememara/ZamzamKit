@@ -10,9 +10,7 @@ import XCTest
 import ZamzamCore
 
 final class KeychainTests: XCTestCase {
-    private lazy var keychain = KeychainManager(
-        service: KeychainServiceTest()
-    )
+    private let keychain: KeychainService = KeychainServiceTest()
 }
 
 extension KeychainTests {
@@ -28,6 +26,22 @@ extension KeychainTests {
         // Then
         XCTAssertEqual(keychain.get(.testString1), value1)
         XCTAssertEqual(keychain.get(.testString2), value2)
+    }
+}
+
+extension KeychainTests {
+    func testData() throws {
+        // Given
+        let value1 = "abc"
+        let value2 = "xyz"
+
+        // When
+        keychain.set(try value1.encode(), forKey: .testString1)
+        keychain.set(try value2.encode(), forKey: .testString2)
+
+        // Then
+        XCTAssertEqual(keychain.get(.testString1), try value1.encode())
+        XCTAssertEqual(keychain.get(.testString2), try value2.encode())
     }
 }
 
@@ -71,11 +85,11 @@ private class KeychainServiceTest: KeychainService {
         return true
     }
 
-    func get(_ key: KeychainAPI.Key) -> Bool? {
-        values[key.name] as? Bool ?? nil
+    func get(_ key: KeychainAPI.Key) -> Data? {
+        values[key.name] as? Data ?? nil
     }
 
-    func set(_ value: Bool?, forKey key: KeychainAPI.Key) -> Bool {
+    func set(_ value: Data?, forKey key: KeychainAPI.Key) -> Bool {
         values[key.name] = value
         return true
     }
