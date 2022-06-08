@@ -44,7 +44,7 @@ public struct NetworkError: Error {
 extension NetworkError: CustomStringConvertible {
     public var description: String {
         """
-        Error: \(internalError ?? ZamzamError.other(nil)),
+        \(internalError.map { "\($0)," } ?? "")
         Request: {
             url: \(request.url?.absoluteString ?? ""),
             method: \(request.httpMethod ?? "")
@@ -60,13 +60,12 @@ extension NetworkError: CustomStringConvertible {
 extension NetworkError: CustomDebugStringConvertible {
     public var debugDescription: String {
         """
-        Error: \(internalError ?? ZamzamError.other(nil)),
+        \(internalError.map { "\($0)," } ?? "")
         Request: {
             url: \(request.url?.absoluteString ?? ""),
             method: \(request.httpMethod ?? ""),
             body: \(request.httpBody?.string ?? ""),
             headers: \(request.allHTTPHeaderFields ?? [:])
-
         },
         Response: {
             status: \(statusCode ?? 0),

@@ -531,6 +531,32 @@ extension NetworkTests {
     }
 }
 
+// MARK: - Decoded
+
+extension NetworkTests {
+    func testDecoded() async throws {
+        // Given
+        let parameters: [String: Any] = [
+            "abc": 123,
+            "def": "test456",
+            "xyz": true
+        ]
+
+        let request = URLRequest(
+            url: URL(safeString: "https://httpbin.org/get"),
+            method: .get,
+            parameters: parameters
+        )
+
+        // When
+        let model: ResponseModel = try await networkManager.send(request)
+
+        // Then
+        XCTAssertEqual(model.url, request.url?.absoluteString)
+        parameters.forEach { XCTAssertEqual(model.args[$0.key], "\($0.value)") }
+    }
+}
+
 // MARK: - Helpers
 
 private extension NetworkTests {

@@ -65,4 +65,36 @@ public extension NetworkManager {
         let request = adapter?.adapt(request) ?? request
         return try await service.send(request)
     }
+
+    /// Creates a task that retrieves the contents of a URL based on the specified request object and returns the response.
+    ///
+    /// - Parameter request: A convertible network request object that provides the URL, parameters, headers, and so on.
+    /// - Returns: The server response with included details from the network request.
+    @discardableResult
+    func send(_ request: URLRequestConvertible) async throws -> NetworkResponse {
+        try await send(request.asURLRequest())
+    }
+}
+
+public extension NetworkManager {
+    /// Creates a task that retrieves the contents of a URL based on the specified request object and returns the decoded response.
+    ///
+    /// - Parameters:
+    ///   - request: A network request object that provides the URL, parameters, headers, and so on.
+    ///   - decoder: An object that decodes instances of a data type from the JSON response.
+    /// - Returns: The decoded response from the network request.
+    func send<T>(_ request: URLRequest, decoder: JSONDecoder = JSONDecoder()) async throws -> T where T: Decodable {
+        let response = try await send(request)
+        return try response.data.decode(decoder: decoder)
+    }
+
+    /// Creates a task that retrieves the contents of a URL based on the specified request object and returns the response.
+    ///
+    /// - Parameters:
+    ///   - request: A convertible network request object that provides the URL, parameters, headers, and so on.
+    ///   - decoder: An object that decodes instances of a data type from the JSON response.
+    /// - Returns: The server response with included details from the network request.
+    func send<T>(_ request: URLRequestConvertible, decoder: JSONDecoder = JSONDecoder()) async throws -> T where T: Decodable {
+        try await send(request.asURLRequest(), decoder: decoder)
+    }
 }
