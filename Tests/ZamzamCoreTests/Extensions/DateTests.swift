@@ -548,6 +548,16 @@ extension DateTests {
         XCTAssert(try XCTUnwrap(Date(year: 2017, month: 4, day: 21, hour: 12, minute: 30)).isJumuah)
         XCTAssertFalse(try XCTUnwrap(Date(year: 2017, month: 1, day: 1, hour: 12, minute: 30)).isJumuah)
     }
+
+    func testEid() throws {
+        XCTAssert(try XCTUnwrap(Date(year: 2022, month: 7, day: 9, hour: 12, minute: 30)).isEid())
+        XCTAssert(try XCTUnwrap(Date(year: 2022, month: 7, day: 12, hour: 12, minute: 30)).isEid())
+        XCTAssert(try XCTUnwrap(Date(year: 2022, month: 5, day: 2, hour: 12, minute: 30)).isEid())
+        XCTAssert(try XCTUnwrap(Date(year: 2022, month: 5, day: 4, hour: 12, minute: 30)).isEid())
+        XCTAssertFalse(try XCTUnwrap(Date(year: 2022, month: 7, day: 13, hour: 12, minute: 30)).isEid())
+        XCTAssertFalse(try XCTUnwrap(Date(year: 2022, month: 5, day: 5, hour: 12, minute: 30)).isEid())
+        XCTAssertFalse(try XCTUnwrap(Date(year: 2017, month: 1, day: 1, hour: 12, minute: 30)).isEid())
+    }
 }
 
 extension DateTests {

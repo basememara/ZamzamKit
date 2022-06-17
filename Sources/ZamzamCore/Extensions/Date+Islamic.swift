@@ -35,6 +35,22 @@ public extension Date {
     ) -> Bool {
         hijri(offSet: offSet, timeZone: timeZone, calendar: Self.islamicCalendar).month == 9
     }
+
+    /// Determines if the date falls within Eid ul-Fitr or Eid al-Adha.
+    ///
+    /// - Parameters:
+    ///   - offSet: The number of days to offset the hijri date.
+    ///   - timeZone: The time zone for the receiver.
+    ///   - calendar: The calendar of the receiver.
+    /// - Returns: True if the date is within Eid; false otherwise.
+    func isEid(
+        offSet: Int = 0,
+        timeZone: TimeZone? = nil
+    ) -> Bool {
+        let dateComponents = hijri(offSet: offSet, timeZone: timeZone, calendar: Self.islamicCalendar)
+        return (dateComponents.month == 10 && [1, 2, 3].contains(dateComponents.day)) // Eid ul-Fitr
+            || (dateComponents.month == 12 && [10, 11, 12, 13].contains(dateComponents.day)) // Eid al-Adha
+    }
 }
 
 public extension Date {
