@@ -29,6 +29,7 @@ public extension Audible {
             }
 
             audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.delegate = self as? AVAudioPlayerDelegate
         }
 
         if audioPlayer?.currentTime != 0 {
