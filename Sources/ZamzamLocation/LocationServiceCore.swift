@@ -147,8 +147,8 @@ public extension LocationServiceCore {
 // MARK: - Delegates
 
 extension LocationServiceCore: CLLocationManagerDelegate {
-    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        guard status != .notDetermined else { return }
+    public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        guard manager.authorizationStatus != .notDetermined else { return }
         delegate?.locationService(didChangeAuthorization: isAuthorized)
     }
 
