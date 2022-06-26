@@ -22,6 +22,22 @@ private struct SafariView: UIViewControllerRepresentable {
 
 public extension View {
     /// Presents a Safari sheet using the given URL for browsing the web.
+    ///
+    ///     struct ContentView: View {
+    ///         @State private var linkURL: URL?
+    ///
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Button(action: { linkURL = "https://apple.com" })
+    ///                     Text("Open link")
+    ///                 }
+    ///                 .sheet(safari: $linkURL)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// - Parameters:
+    ///   - url: A binding to whether the Safari browser should be presented. 
     func sheet(safari url: Binding<URL?>) -> some View {
         sheet(
             isPresented: Binding<Bool>(
