@@ -1,6 +1,6 @@
 //
 //  TestUtilities.swift
-//  ZamzamCoreTests
+//  ZamzamKitTests
 //
 //  Created by Basem Emara on 2020-10-04.
 //  Copyright © 2020 Zamzam Inc. All rights reserved.

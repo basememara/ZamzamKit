@@ -1,6 +1,6 @@
 //
 //  CalendarTests.swift
-//  ZamzamCoreTests
+//  ZamzamKitTests
 //
 //  Created by Basem Emara on 2021-04-16.
 //  Copyright © 2021 Zamzam Inc. All rights reserved.

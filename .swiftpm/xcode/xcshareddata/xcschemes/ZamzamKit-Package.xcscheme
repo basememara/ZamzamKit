@@ -65,70 +65,28 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ZamzamCoreTests"
-               BuildableName = "ZamzamCoreTests"
-               BlueprintName = "ZamzamCoreTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ZamzamUITests"
-               BuildableName = "ZamzamUITests"
-               BlueprintName = "ZamzamUITests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ZamzamNotificationTests"
-               BuildableName = "ZamzamNotificationTests"
-               BlueprintName = "ZamzamNotificationTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ZamzamLocationTests"
-               BuildableName = "ZamzamLocationTests"
-               BlueprintName = "ZamzamLocationTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
             buildForProfiling = "YES"
             buildForArchiving = "YES"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ZamzamKit_ZamzamCoreTests"
-               BuildableName = "ZamzamKit_ZamzamCoreTests"
-               BlueprintName = "ZamzamKit_ZamzamCoreTests"
+               BlueprintIdentifier = "ZamzamKit"
+               BuildableName = "ZamzamKit"
+               BlueprintName = "ZamzamKit"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ZamzamKitTests"
+               BuildableName = "ZamzamKitTests"
+               BlueprintName = "ZamzamKitTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -175,39 +133,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ZamzamCoreTests"
-               BuildableName = "ZamzamCoreTests"
-               BlueprintName = "ZamzamCoreTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ZamzamUITests"
-               BuildableName = "ZamzamUITests"
-               BlueprintName = "ZamzamUITests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ZamzamNotificationTests"
-               BuildableName = "ZamzamNotificationTests"
-               BlueprintName = "ZamzamNotificationTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ZamzamLocationTests"
-               BuildableName = "ZamzamLocationTests"
-               BlueprintName = "ZamzamLocationTests"
+               BlueprintIdentifier = "ZamzamKitTests"
+               BuildableName = "ZamzamKitTests"
+               BlueprintName = "ZamzamKitTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>

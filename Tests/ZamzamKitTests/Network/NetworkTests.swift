@@ -1,6 +1,6 @@
 //
 //  NetworkTests.swift
-//  ZamzamCoreTests
+//  ZamzamKitTests
 //
 //  Created by Basem Emara on 2020-03-01.
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
