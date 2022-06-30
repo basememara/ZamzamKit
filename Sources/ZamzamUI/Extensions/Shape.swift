@@ -13,17 +13,14 @@ public extension Shape {
     ///
     /// The following example draws a circle filled with a red color with a purple stroke:
     ///
-    ///     Circle().fill(.red, stroke: .purple, lineWidth: 5)
+    ///     Circle().fill(Color.red, stroke: Color.purple, lineWidth: 5)
     ///
     /// - Parameters:
-    ///   - fillColor: The color with which to fill this shape.
-    ///   - strokeColor: The color with which to stroke this shape.
+    ///   - fill: The color or gradient to use when filling this shape.
+    ///   - stroke: The color or gradient with which to stroke this shape.
     ///   - lineWidth: The width of the stroke that outlines this shape.
-    func fill(_ fillColor: Color, stroke strokeColor: Color, lineWidth: CGFloat = 1) -> some View {
-        // https://stackoverflow.com/a/60425421
-        ZStack {
-            fill(fillColor)
-            stroke(strokeColor, lineWidth: lineWidth)
-        }
+    func fill<Fill: ShapeStyle, Stroke: ShapeStyle>(_ fill: Fill, stroke: Stroke, lineWidth: Double = 1) -> some View {
+        // https://www.hackingwithswift.com/quick-start/swiftui/how-to-fill-and-stroke-shapes-at-the-same-time
+        self.stroke(stroke, lineWidth: lineWidth).background(self.fill(fill))
     }
 }
