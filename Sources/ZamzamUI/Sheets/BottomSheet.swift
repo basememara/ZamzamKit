@@ -9,6 +9,7 @@
 import SwiftUI
 
 #if os(iOS)
+@available(iOS, obsoleted: 16.0)
 private struct BottomSheet<Content: View>: UIViewControllerRepresentable {
     @Binding var isPresented: Bool
     let detents: [UISheetPresentationController.Detent]

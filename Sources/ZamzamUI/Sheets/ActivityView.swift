@@ -31,6 +31,7 @@ import SwiftUI
 ///         }
 ///     }
 ///
+@available(iOS, obsoleted: 16.0)
 public struct ActivityView: UIViewControllerRepresentable {
     let activityItems: [Any]
     let applicationActivities: [UIActivity]?

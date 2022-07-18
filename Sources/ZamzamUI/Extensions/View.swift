@@ -12,7 +12,6 @@ import SwiftUI
 public extension View {
     /// Adds a border to this view with the specified color, width, and radius.
     func border(_ color: Color, width: CGFloat = 1, cornerRadius: CGFloat) -> some View {
-        // https://github.com/ZamzamInc/ZamzamKit
         let shape = RoundedRectangle(cornerRadius: cornerRadius)
 
         return self
