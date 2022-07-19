@@ -34,7 +34,7 @@ public struct LogServiceDataDog: LogService {
 
         self.service = LogServiceHTTP(
             urlRequest: URLRequest(
-                url: URL(safeString: "https://http-intake.logs.datadoghq.com/v1/input/?ddsource=ios&service=\(serviceName)"),
+                url: URL(safeString: "https://http-intake.logs.datadoghq.com/v1/input/?ddsource=\(distribution.platform.lowercased())&service=\(serviceName)"),
                 method: .post,
                 data: nil,
                 headers: ["DD-API-KEY": apiKey]

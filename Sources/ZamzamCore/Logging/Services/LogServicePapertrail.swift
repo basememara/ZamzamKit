@@ -108,7 +108,7 @@ private extension LogServicePapertrail {
                 [
                     "<\(levelNumber(entry.level))>",
                     "\(DateFormatter.zuluFormatter.string(from: entry.date))",
-                    "ios \(Bundle.main.bundleIdentifier ?? "") \(entry.payload)"
+                    "\(entry.platform.lowercased()) \(Bundle.main.bundleIdentifier ?? "") \(entry.payload)"
                 ].joined(separator: " ")
             }
             .joined(separator: "\n")

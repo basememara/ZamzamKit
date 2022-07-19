@@ -77,6 +77,7 @@ public extension LogServiceHTTP {
     struct Entry {
         public let level: LogAPI.Level
         public let date: Date
+        public let platform: String
         public let payload: String
     }
 }
@@ -108,11 +109,12 @@ public extension LogServiceHTTP {
             "is_simulator": distribution.isRunningOnSimulator
         ]
 
-        #if os(iOS)
+        #if os(iOS) || os(watchOS)
         device.merge([
             "device_id": distribution.deviceIdentifier,
             "device_name": isDebug ? distribution.deviceName : "***",
             "device_model": distribution.deviceModel,
+            "platform": distribution.platform,
             "os_version": distribution.osVersion
         ]) { $1 }
         #endif
@@ -154,7 +156,7 @@ public extension LogServiceHTTP {
         }
 
         // Store in buffer for sending later
-        buffer.value { $0.append(Entry(level: level, date: date, payload: log)) }
+        buffer.value { $0.append(Entry(level: level, date: date, platform: distribution.platform, payload: log)) }
 
         // Flush buffer threshold reached or in background
         guard buffer.value.count > maxEntriesInBuffer
