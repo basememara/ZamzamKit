@@ -15,3 +15,10 @@ public extension Collection {
         indices.contains(index) ? self[index] : nil
     }
 }
+
+// MARK: - Types
+
+public extension Optional where Wrapped: Collection {
+    /// A Boolean value indicating whether a collection is `nil` or has no elements.
+    var isNilOrEmpty: Bool { self?.isEmpty ?? true }
+}

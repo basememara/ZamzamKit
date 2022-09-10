@@ -19,6 +19,16 @@ public extension View {
     ///     }
     ///     .cardStyle(MyCustomCardStyle())
     ///
+    ///     struct MyCustomCardStyle: CardStyle {
+    ///         func body(content: Content) -> some View {
+    ///             content
+    ///                 .frame(maxWidth: .infinity)
+    ///                 .padding()
+    ///                 .background(Color(.systemBackground))
+    ///                 .cornerRadius(6)
+    ///         }
+    ///     }
+    ///
     func cardStyle<T: CardStyle>(_ modifier: T) -> some View {
         self.modifier(modifier)
     }

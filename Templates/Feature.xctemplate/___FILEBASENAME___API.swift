@@ -1,7 +1,7 @@
 //___FILEHEADER___
 
 import ___VARIABLE_moduleName:identifier___Core
-import ZamzamUI
+import ___VARIABLE_moduleName:identifier___UI
 
 // MARK: - Namespace
 

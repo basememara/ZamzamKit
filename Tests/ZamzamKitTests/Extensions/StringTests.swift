@@ -32,10 +32,13 @@ extension StringTests {
     func testSubscriptRange() {
         let test = "Abcdef123456"
 
+        XCTAssertEqual(test[11], "6")
         XCTAssertEqual(test[3...6], "def1")
-        XCTAssertEqual(test[3...99], nil)
+        XCTAssertEqual(test[3...99], "def123456")
+        XCTAssertEqual(test[11...199], "6")
+        XCTAssertNil(test[12...199])
         XCTAssertEqual(test[3..<6], "def")
-        XCTAssertEqual(test[3...], "def123456")
+        XCTAssertEqual(test.dropFirst(3), "def123456")
     }
 }
 

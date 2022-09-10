@@ -24,6 +24,14 @@ public extension View {
     ///         }
     ///     }
     ///
+    ///     struct MyDefaultTheme: ThemeStyle {
+    ///         func body(content: Content) -> some View {
+    ///             content
+    ///                 .navigationViewStyle(.stack)
+    ///                 .accentColor(.indigo)
+    ///         }
+    ///     }
+    ///
     func themeStyle<T: ThemeStyle>(_ modifier: T) -> some View {
         self.modifier(modifier)
     }

@@ -25,12 +25,7 @@ public extension JSONDecoder {
     ///   - string: The string representation of the JSON object.
     func decode<T: Decodable>(_ type: T.Type, from string: String, using encoding: String.Encoding = .utf8) throws -> T {
         guard let data = string.data(using: encoding) else {
-            throw DecodingError.dataCorrupted(
-                DecodingError.Context(
-                    codingPath: [],
-                    debugDescription: "Could not encode data from string."
-                )
-            )
+            throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "Could not encode data from string."))
         }
 
         return try decode(type, from: data)
@@ -50,14 +45,6 @@ public extension KeyedDecodingContainerProtocol {
     /// - Parameter key: The key that the decoded value is associated with.
     func decodeIfPresent<T: Decodable>(forKey key: Key) throws -> T? {
         try decodeIfPresent(T.self, forKey: key)
-    }
-
-    /// Decodes a value of the given type for the given key, if present.
-    /// - Parameters:
-    ///   - key: The key that the decoded value is associated with.
-    ///   - defaultExpression: The default value if no key is present or the value is `Nil`.
-    func decode<T: Decodable>(forKey key: Key, default defaultExpression: @autoclosure () -> T) throws -> T {
-        try decodeIfPresent(T.self, forKey: key) ?? defaultExpression()
     }
 }
 

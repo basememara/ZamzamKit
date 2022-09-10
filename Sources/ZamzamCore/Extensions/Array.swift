@@ -71,8 +71,3 @@ public extension Zip2Sequence {
     /// Returns the array of the zipped sequence
     var array: [(Sequence1.Element, Sequence2.Element)] { Array(self) }
 }
-
-public extension Optional where Wrapped: Collection {
-    /// A Boolean value indicating whether the collection is empty or `nil`.
-    var isNilOrEmpty: Bool { self?.isEmpty ?? true }
-}

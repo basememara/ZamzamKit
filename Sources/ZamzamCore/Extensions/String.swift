@@ -28,6 +28,7 @@ public extension String {
 
 // MARK: - Subscript for ranges
 // https://github.com/SwifterSwift/SwifterSwift
+// https://stackoverflow.com/a/38215613/
 
 public extension String {
     /// Safely subscript string with index.
@@ -37,7 +38,7 @@ public extension String {
     ///     value[99] // nil
     ///
     /// - Parameter i: index.
-    subscript(position: Int) -> String? {
+    subscript(_ position: Int) -> String? {
         guard 0..<count ~= position else { return nil }
         return String(self[index(startIndex, offsetBy: position)])
     }
@@ -46,13 +47,16 @@ public extension String {
     ///
     ///     let value = "Abcdef123456"
     ///     value[3...6] // "def1"
-    ///     value[3...99] // nil
+    ///     value[3...99] // "def123456"
+    ///     value[99...199] // nil
     ///
     /// - Parameter range: Closed range.
-    subscript(range: ClosedRange<Int>) -> String? {
+    subscript(_ range: ClosedRange<Int>) -> String? {
         guard let lowerIndex = index(startIndex, offsetBy: max(0, range.lowerBound), limitedBy: endIndex),
-            let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound + 1, limitedBy: endIndex) else {
-                return nil
+              let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound + 1, limitedBy: endIndex)
+        else {
+            guard range.lowerBound < count else { return nil }
+            return dropFirst(range.lowerBound).string
         }
 
         return String(self[lowerIndex..<upperIndex])
@@ -62,29 +66,19 @@ public extension String {
     ///
     ///     let value = "Abcdef123456"
     ///     value[3..<6] // "def"
+    ///     value[3..<99] // "def123456"
+    ///     value[99..<199] // nil
     ///
     /// - Parameter range: Half-open range.
-    subscript(range: CountableRange<Int>) -> String? {
+    subscript(_ range: CountableRange<Int>) -> String? {
         guard let lowerIndex = index(startIndex, offsetBy: max(0, range.lowerBound), limitedBy: endIndex),
-            let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex) else {
-                return nil
+              let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex)
+        else {
+            guard range.lowerBound < count else { return nil }
+            return dropFirst(range.lowerBound).string
         }
 
         return String(self[lowerIndex..<upperIndex])
-    }
-
-    /// Safely subscript string from the lower range to the end of the string.
-    ///
-    ///     let value = "Abcdef123456"
-    ///     value[3...] // "def123456"
-    ///
-    /// - Parameter range: A partial interval extending upward from a lower bound that forms a sequence of increasing values.
-    subscript(range: CountablePartialRangeFrom<Int>) -> String? {
-        guard let lowerIndex = index(startIndex, offsetBy: max(0, range.lowerBound), limitedBy: endIndex) else {
-            return nil
-        }
-
-        return String(self[lowerIndex..<endIndex])
     }
 }
 
@@ -291,7 +285,7 @@ public extension Optional where Wrapped == String {
     var isNilOrBlank: Bool { isNilOrEmpty || self?.allSatisfy { $0.isWhitespace } ?? true }
 }
 
-public extension Substring {
+public extension LosslessStringConvertible {
     /// A string value representation of the string slice.
     var string: String { String(self) }
 }

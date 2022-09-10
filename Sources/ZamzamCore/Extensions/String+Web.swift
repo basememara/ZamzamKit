@@ -75,9 +75,9 @@ public extension String {
         //     decode("&foo;")    --> nil
         func decode(_ entity: String) -> Character? {
             return entity.hasPrefix("&#x") || entity.hasPrefix("&#X")
-                ? decodeNumeric(entity[3...] ?? "", base: 16)
+            ? decodeNumeric(entity.dropFirst(3).string, base: 16)
                 : entity.hasPrefix("&#")
-                ? decodeNumeric(entity[2...] ?? "", base: 10)
+            ? decodeNumeric(entity.dropFirst(2).string, base: 10)
                 : characterEntities[entity]
         }
 

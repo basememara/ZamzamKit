@@ -38,13 +38,11 @@ private extension ___VARIABLE_productName:identifier___View {
 #if DEBUG
 struct ___VARIABLE_productName:identifier___View_Previews: PreviewProvider {
     static var previews: some View {
-        AppPreviews {
-            ___VARIABLE_productName:identifier___View(
-                model: ___VARIABLE_productName:identifier___Model(),
-                interactor: nil,
-                scene: nil
-            )
-        }
+        ___VARIABLE_productName:identifier___View(
+            model: ___VARIABLE_productName:identifier___Model(),
+            interactor: nil,
+            scene: nil
+        )
     }
 }
 #endif
