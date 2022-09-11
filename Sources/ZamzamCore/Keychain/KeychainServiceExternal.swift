@@ -30,7 +30,7 @@ public extension KeychainServiceExternal {
     }
 
     func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool {
-        guard let value = value else { return remove(key) }
+        guard let value else { return remove(key) }
         return keychain.set(value, forKey: key.name)
     }
 }
@@ -41,7 +41,7 @@ public extension KeychainServiceExternal {
     }
 
     func set(_ value: Data?, forKey key: KeychainAPI.Key) -> Bool {
-        guard let value = value else { return remove(key) }
+        guard let value else { return remove(key) }
         return keychain.set(value, forKey: key.name)
     }
 }
@@ -384,7 +384,7 @@ private extension KeychainServiceExternal {
         }
 
         func addAccessGroupWhenPresent(_ items: [String: Any]) -> [String: Any] {
-            guard let accessGroup = accessGroup else { return items }
+            guard let accessGroup else { return items }
 
             var result: [String: Any] = items
             result[KeychainSwiftConstants.accessGroup] = accessGroup

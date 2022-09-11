@@ -40,7 +40,7 @@ public extension UNNotificationAttachment {
                 return
             }
 
-            guard let url = url, let attachment = try? UNNotificationAttachment(identifier: identifier ?? urlString, url: url) else {
+            guard let url, let attachment = try? UNNotificationAttachment(identifier: identifier ?? urlString, url: url) else {
                 completion(.failure(.invalidData))
                 return
             }

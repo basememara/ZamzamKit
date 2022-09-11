@@ -83,7 +83,7 @@ public extension FileManager {
 
         URLSession.shared
             .downloadTask(with: nsURL) { location, response, error in
-                guard let location = location, error == nil else {
+                guard let location, error == nil else {
                     completion(nil, nil, error)
                     return
                 }

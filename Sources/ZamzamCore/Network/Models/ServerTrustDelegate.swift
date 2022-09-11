@@ -27,7 +27,7 @@ public class ServerTrustDelegate: NSObject, URLSessionTaskDelegate {
     ) async -> (URLSession.AuthChallengeDisposition, URLCredential?) {
         let host = challenge.protectionSpace.host
 
-        guard let evaluators = evaluators else {
+        guard let evaluators else {
             return (.performDefaultHandling, nil)
         }
 

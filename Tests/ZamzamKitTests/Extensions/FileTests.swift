@@ -54,7 +54,7 @@ extension FileTests {
         let url = "https://zamzam.io/wp-content/uploads/2021/02/logo-1.png"
 
         FileManager.default.download(from: url) { url, _, _ in
-            guard let url = url else {
+            guard let url else {
                 XCTFail("URL should not be nil")
                 return
             }

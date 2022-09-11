@@ -79,7 +79,7 @@ public struct DefaultsOptional<T: UserDefaultsRepresentable> {
     public var wrappedValue: T? {
         get { T.object(forKey: key, from: userDefaults) }
         set {
-            guard let newValue = newValue else {
+            guard let newValue else {
                 userDefaults.removeObject(forKey: key)
                 return
             }
