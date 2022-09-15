@@ -6,7 +6,7 @@ struct ___VARIABLE_productName:identifier___View: View {
     // Injected dependencies
     @StateObject var model: ___VARIABLE_productName:identifier___Model
     let interactor: ___VARIABLE_productName:identifier___Interactable?
-    let scene: ___VARIABLE_productName:identifier___Renderable?
+    let destination: ___VARIABLE_productName:identifier___Destination?
 
     var body: some View {
         Text("___VARIABLE_productName:identifier___")
@@ -41,7 +41,7 @@ struct ___VARIABLE_productName:identifier___View_Previews: PreviewProvider {
         ___VARIABLE_productName:identifier___View(
             model: ___VARIABLE_productName:identifier___Model(),
             interactor: nil,
-            scene: nil
+            destination: nil
         )
     }
 }

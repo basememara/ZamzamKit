@@ -9,16 +9,16 @@ enum ___VARIABLE_productName:identifier___API {}
 
 // MARK: - Protocols
 
-protocol ___VARIABLE_productName:identifier___Interactable: Interactor {
+protocol ___VARIABLE_productName:identifier___Interactable {
     func fetch(with request: ___VARIABLE_productName:identifier___API.FetchRequest) async
 }
 
-protocol ___VARIABLE_productName:identifier___Presentable: Presenter {
-    func display(for response: ___VARIABLE_productName:identifier___API.FetchResponse) async
-    func display(error: ___VARIABLE_moduleName:identifier___Error) async
+protocol ___VARIABLE_productName:identifier___Mutable: AnyObject {
+    func update(for response: ___VARIABLE_productName:identifier___API.FetchResponse) async
+    func update(error: ___VARIABLE_moduleName:identifier___Error) async
 }
 
-protocol ___VARIABLE_productName:identifier___Renderable: Render {}
+protocol ___VARIABLE_productName:identifier___Destination {}
 
 // MARK: - Request / Response
 
