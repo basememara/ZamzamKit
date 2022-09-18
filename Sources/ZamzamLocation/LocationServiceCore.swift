@@ -47,6 +47,10 @@ public class LocationServiceCore: NSObject, LocationService {
 public extension LocationServiceCore {
     var isAuthorized: Bool { manager.isAuthorized }
 
+    #if !os(watchOS) && !os(tvOS)
+    var isAuthorizedForWidgetUpdates: Bool { manager.isAuthorizedForWidgetUpdates }
+    #endif
+
     func isAuthorized(for type: LocationAPI.AuthorizationType) -> Bool {
         guard CLLocationManager.locationServicesEnabled() else { return false }
 

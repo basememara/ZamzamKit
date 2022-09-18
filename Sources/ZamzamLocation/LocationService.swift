@@ -15,6 +15,10 @@ public protocol LocationService: AnyObject {
     var isAuthorized: Bool { get }
     func isAuthorized(for type: LocationAPI.AuthorizationType) -> Bool
 
+    #if !os(watchOS) && !os(tvOS)
+    var isAuthorizedForWidgetUpdates: Bool { get }
+    #endif
+
     var canRequestAuthorization: Bool { get }
     func requestAuthorization(for type: LocationAPI.AuthorizationType)
 

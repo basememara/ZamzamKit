@@ -27,6 +27,11 @@ public extension LocationManager {
     /// Determines if location services is enabled and authorized for always or when in use.
     var isAuthorized: Bool { service.isAuthorized }
 
+    #if !os(watchOS) && !os(tvOS)
+    /// Indicates whether a widget is eligible to receive location updates.
+    var isAuthorizedForWidgetUpdates: Bool { service.isAuthorizedForWidgetUpdates }
+    #endif
+
     /// Determines if location services is enabled and authorized for the specified authorization type.
     func isAuthorized(for type: LocationAPI.AuthorizationType) -> Bool {
         service.isAuthorized(for: type)
