@@ -1,5 +1,5 @@
 //
-//  LogPapertrailService.swift
+//  LogServicePapertrail.swift
 //  ZamzamCore
 //
 //  Created by Basem Emara on 2021-03-31.
