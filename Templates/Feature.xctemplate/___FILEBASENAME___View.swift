@@ -3,14 +3,17 @@
 import SwiftUI
 
 struct ___VARIABLE_productName:identifier___View: View {
-    // Injected dependencies
-    @StateObject var model: ___VARIABLE_productName:identifier___Model
-    let interactor: ___VARIABLE_productName:identifier___Interactable?
-    let destination: ___VARIABLE_productName:identifier___Destination?
+    @StateObject var model = ___VARIABLE_productName:identifier___Model()
 
     var body: some View {
-        Text("___VARIABLE_productName:identifier___")
-            .task { await fetch() }
+        VStack {
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundColor(.accentColor)
+            Text(model.message ?? "Loading...")
+        }
+        .padding()
+        .task { await fetch() }
     }
 }
 
@@ -18,8 +21,7 @@ struct ___VARIABLE_productName:identifier___View: View {
 
 private extension ___VARIABLE_productName:identifier___View {
     func fetch() async {
-        let request = ___VARIABLE_productName:identifier___API.FetchRequest()
-        await interactor?.fetch(with: request)
+        await model.effect?.fetch()
     }
 }
 
@@ -38,11 +40,7 @@ private extension ___VARIABLE_productName:identifier___View {
 #if DEBUG
 struct ___VARIABLE_productName:identifier___View_Previews: PreviewProvider {
     static var previews: some View {
-        ___VARIABLE_productName:identifier___View(
-            model: ___VARIABLE_productName:identifier___Model(),
-            interactor: nil,
-            destination: nil
-        )
+        ___VARIABLE_productName:identifier___View()
     }
 }
 #endif
