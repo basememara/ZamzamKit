@@ -34,8 +34,10 @@ public extension Compatibility where Content: View {
     /// Sets the visibility of the status bar.
     func tabBarHidden(_ hidden: Bool = true) -> some View {
         content.modifier {
-            if #available(iOS 16, macOS 13, tvOS 16, watchOS 9, *) {
+            if #available(iOS 16, tvOS 16, *) {
+                #if !os(watchOS)
                 $0.toolbar(hidden ? .hidden : .automatic, for: .tabBar)
+                #endif
             } else {
                 $0
             }
