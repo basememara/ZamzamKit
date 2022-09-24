@@ -35,6 +35,26 @@ public extension View {
 }
 
 public extension View {
+    /// Applies a modifier to a view.
+    ///
+    ///     someView
+    ///         .modifier {
+    ///             if #available(iOS 16, macOS 13, tvOS 16, watchOS 9, *) {
+    ///                 $0.scrollDismissesKeyboard(.interactively)
+    ///             } else {
+    ///                 $0
+    ///             }
+    ///         }
+    ///
+    /// - Parameters:
+    ///   - transform: The modifier to apply to the view.
+    /// - Returns: The modified view.
+    func modifier<Content>(@ViewBuilder _ transform: (Self) -> Content) -> Content {
+        transform(self)
+    }
+}
+
+public extension View {
     /// Returns a type-erased view.
     func eraseToAnyView() -> AnyView {
         AnyView(self)
