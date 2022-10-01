@@ -1,9 +1,9 @@
 //
 //  URLRequestConvertible.swift
-//  FCSECore
+//  ZamzamCore
 //
 //  Created by Basem Emara on 2022-06-08.
-//  Copyright © 2022 Fan Controlled Sports & Entertainment, Inc. All rights reserved.
+//  Copyright © 2022 Zamzam Inc. All rights reserved.
 //
 
 import Foundation.NSURLRequest

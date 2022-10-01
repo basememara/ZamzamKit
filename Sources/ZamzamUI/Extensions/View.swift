@@ -139,7 +139,7 @@ public extension View {
         perform action: @escaping (Notification) -> Void
     ) -> some View {
         // https://github.com/gtokman/ExtensionKit
-        onReceive(NotificationCenter.default.publisher(for: name, object: object), perform: action)
+        onReceive(NotificationCenter.default.publisher(for: name, object: object).receive(on: DispatchQueue.main), perform: action)
     }
 
     /// Adds an action to perform when this view detects a notification emitted by the `NotificationCenter` publisher.
@@ -154,7 +154,7 @@ public extension View {
         object: AnyObject? = nil,
         perform action: @escaping (Notification) async -> Void
     ) -> some View {
-        onReceive(NotificationCenter.default.publisher(for: name, object: object)) { notification in
+        onReceive(NotificationCenter.default.publisher(for: name, object: object).receive(on: DispatchQueue.main)) { notification in
             Task { await action(notification) }
         }
     }
@@ -171,7 +171,7 @@ public extension View {
         object: AnyObject? = nil,
         perform action: @escaping () async -> Void
     ) -> some View {
-        onReceive(NotificationCenter.default.publisher(for: name, object: object)) { _ in
+        onReceive(NotificationCenter.default.publisher(for: name, object: object).receive(on: DispatchQueue.main)) { _ in
             Task { await action() }
         }
     }
