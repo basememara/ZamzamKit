@@ -19,8 +19,6 @@ public class LocationServiceCore: NSObject, LocationService {
 
     /// Internal Core Location manager
     private lazy var manager = CLLocationManager().apply {
-        $0.delegate = self
-
         $0.desiredAccuracy ?= self.desiredAccuracy
         $0.distanceFilter ?= self.distanceFilter
 
@@ -39,6 +37,7 @@ public class LocationServiceCore: NSObject, LocationService {
         self.activityType = activityType
 
         super.init()
+        manager.delegate = self
     }
 }
 
