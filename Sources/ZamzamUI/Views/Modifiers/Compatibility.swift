@@ -30,21 +30,22 @@ public extension View {
 
 // MARK: - Extensions
 
+#if !os(macOS) && !os(watchOS)
 public extension Compatibility where Content: View {
     /// Sets the visibility of the status bar.
     func tabBarHidden(_ hidden: Bool = true) -> some View {
         content.modifier {
             if #available(iOS 16, tvOS 16, *) {
-                #if !os(watchOS)
                 $0.toolbar(hidden ? .hidden : .automatic, for: .tabBar)
-                #endif
             } else {
                 $0
             }
         }
     }
 }
+#endif
 
+#if !os(macOS)
 public extension Compatibility where Content: View {
     /// Configures the behavior in which scrollable content interacts with the software keyboard.
     ///
@@ -59,6 +60,7 @@ public extension Compatibility where Content: View {
         }
     }
 }
+#endif
 
 // MARK: - Navigation
 
