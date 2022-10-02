@@ -152,7 +152,12 @@ public extension LocationServiceCore {
 extension LocationServiceCore: CLLocationManagerDelegate {
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         guard manager.authorizationStatus != .notDetermined else { return }
-        delegate?.locationService(didChangeAuthorization: isAuthorized)
+
+        DispatchQueue.transform.async {
+            // The `locationServicesEnabled` request cannot be called on main thread
+            let isAuthorized = self.isAuthorized
+            DispatchQueue.main.async { self.delegate?.locationService(didChangeAuthorization: isAuthorized) }
+        }
     }
 
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
