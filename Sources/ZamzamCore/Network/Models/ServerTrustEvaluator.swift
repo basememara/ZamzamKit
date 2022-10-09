@@ -21,7 +21,7 @@ public protocol ServerTrustEvaluator {
     func valid(_ trust: SecTrust, forHost host: String) -> Bool
 }
 
-// MARK: Pinned Certificate
+// MARK: - Pinned Certificate
 
 /// Uses the pinned certificates to validate the server trust. The server trust is considered valid if one of the pinned
 /// certificates match one of the server certificates. By validating both the certificate chain and host, certificate
@@ -119,7 +119,7 @@ extension NetworkPinnedCertificateTrustEvaluator {
     }
 }
 
-// MARK: Disabled
+// MARK: - Disabled
 
 /// Disables all evaluation which in turn will always consider any server trust as valid.
 ///

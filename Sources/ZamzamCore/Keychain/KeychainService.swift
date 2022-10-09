@@ -21,7 +21,7 @@ public protocol KeychainService {
     func remove(_ key: KeychainAPI.Key) -> Bool
 }
 
-// MARK: Namespace
+// MARK: - Namespace
 
 public enum KeychainAPI {
     /// Security key for compile-safe access.
