@@ -59,11 +59,7 @@ public extension LocationManager {
         }
 
         // Request appropiate authorization before exit
-        defer {
-            DispatchQueue.global(qos: .userInteractive).async {
-                self.service.requestAuthorization(for: type)
-            }
-        }
+        defer { service.requestAuthorization(for: type) }
 
         // Handle mismatched allowed and exit
         guard !isAuthorized else {
