@@ -60,13 +60,13 @@ public extension Date {
     ///
     ///     Date(timeIntervalSinceNow: -100).isPast // true
     ///     Date(timeIntervalSinceNow: 100).isPast // false
-    var isPast: Bool { self < Date() }
+    var isPast: Bool { self < .now }
 
     /// Determines if date is in the future.
     ///
     ///     Date(timeIntervalSinceNow: 100).isFuture // true
     ///     Date(timeIntervalSinceNow: -100).isFuture // false
-    var isFuture: Bool { self > Date() }
+    var isFuture: Bool { self > .now }
 }
 
 public extension Date {
