@@ -29,9 +29,7 @@ public extension LogServiceConsole {
         error: Error?,
         context: [String: CustomStringConvertible]
     ) {
-        let time = Date.now.formatted(
-            .dateTime.hour(.twoDigits(amPM: .omitted)).minute().second().secondFraction(.fractional(3))
-        )
+        let time = Date.now.formatted(.dateTime.hour(.twoDigits(amPM: .omitted)).minute().second().secondFraction(.fractional(3)))
 
         let prefix: String
         switch level {
