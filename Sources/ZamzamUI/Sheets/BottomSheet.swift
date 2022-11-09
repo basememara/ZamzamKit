@@ -14,7 +14,6 @@ private struct BottomSheet<Content: View>: UIViewControllerRepresentable {
     @Binding var isPresented: Bool
     let detents: [UISheetPresentationController.Detent]
     let prefersGrabberVisible: Bool
-    let preferredCornerRadius: CGFloat?
     let content: (() -> Content)?
     let onDismiss: (() -> Void)?
 
@@ -43,7 +42,6 @@ private struct BottomSheet<Content: View>: UIViewControllerRepresentable {
         if let presentationController = hostingController.presentationController as? UISheetPresentationController {
             presentationController.detents = detents
             presentationController.prefersGrabberVisible = prefersGrabberVisible
-            presentationController.preferredCornerRadius = preferredCornerRadius
         }
 
         // Store reference to compare later for dismissal in multi bottom sheet scenarios
@@ -51,9 +49,7 @@ private struct BottomSheet<Content: View>: UIViewControllerRepresentable {
 
         uiViewController.present(hostingController, animated: true)
     }
-}
 
-private extension BottomSheet {
     class Coordinator: NSObject, UISheetPresentationControllerDelegate {
         private let parent: BottomSheet
         var controller: UIViewController?
@@ -66,6 +62,31 @@ private extension BottomSheet {
             guard parent.isPresented else { return }
             parent.isPresented = false
             parent.onDismiss?()
+        }
+    }
+}
+
+/// A type that represents a height where a sheet naturally rests.
+public enum BottomSheetDetents {
+    case medium
+    case large
+
+    var iOS15: UISheetPresentationController.Detent {
+        switch self {
+        case .medium:
+            return .medium()
+        case .large:
+            return .large()
+        }
+    }
+
+    @available(iOS 16, *)
+    var iOS16: PresentationDetent {
+        switch self {
+        case .medium:
+            return .medium
+        case .large:
+            return .large
         }
     }
 }
@@ -107,29 +128,38 @@ public extension View {
     ///   - isPresented: A binding to a `Boolean` value that determines whether to present
     ///                  the sheet that you create in the modifier's `content` closure.
     ///   - detents: An object that represents a height where a sheet naturally rests.
-    ///   - prefersGrabberVisible: A Boolean value that determines whether the sheet shows a grabber at the top.
-    ///   - preferredCornerRadius: The corner radius that the sheet attempts to present with.
+    ///   - prefersDragIndicator: A Boolean value that determines whether the sheet shows a grabber at the top.
     ///   - onDismiss: The closure to execute when dismissing the sheet.
     ///   - content: A closure that returns the content of the sheet.
     @ViewBuilder
     func bottomSheet<Content: View>(
         isPresented: Binding<Bool>,
-        detents: [UISheetPresentationController.Detent] = [.medium(), .large()],
-        prefersGrabberVisible: Bool = true,
-        preferredCornerRadius: CGFloat? = nil,
+        detents: Set<BottomSheetDetents> = [.medium, .large],
+        prefersDragIndicator: Bool? = nil,
         onDismiss: (() -> Void)? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) -> some View {
-        background(
-            BottomSheet(
-                isPresented: isPresented,
-                detents: detents,
-                prefersGrabberVisible: prefersGrabberVisible,
-                preferredCornerRadius: preferredCornerRadius,
-                content: content,
-                onDismiss: onDismiss
-            )
-        )
+        modifier {
+            if #available(iOS 16, *) {
+                $0.sheet(isPresented: isPresented, onDismiss: onDismiss) {
+                    content()
+                        .presentationDetents(Set(detents.map(\.iOS16)))
+                        .modifier(let: prefersDragIndicator) { content, value in
+                            content.presentationDragIndicator(value ? .visible : .hidden)
+                        }
+                }
+            } else {
+                $0.background(
+                    BottomSheet(
+                        isPresented: isPresented,
+                        detents: detents.map(\.iOS15),
+                        prefersGrabberVisible: prefersDragIndicator ?? true,
+                        content: content,
+                        onDismiss: onDismiss
+                    )
+                )
+            }
+        }
     }
 }
 
@@ -188,16 +218,14 @@ public extension View {
     ///     the system dismisses the sheet and replaces it with a new one
     ///     using the same process.
     ///   - detents: An object that represents a height where a sheet naturally rests.
-    ///   - prefersGrabberVisible: A Boolean value that determines whether the sheet shows a grabber at the top.
-    ///   - preferredCornerRadius: The corner radius that the sheet attempts to present with.
+    ///   - prefersDragIndicator: A Boolean value that determines whether the sheet shows a grabber at the top.
     ///   - onDismiss: The closure to execute when dismissing the sheet.
     ///   - content: A closure returning the content of the sheet.
     @ViewBuilder
     func bottomSheet<Item, Content>(
         item: Binding<Item?>,
-        detents: [UISheetPresentationController.Detent] = [.medium(), .large()],
-        prefersGrabberVisible: Bool = true,
-        preferredCornerRadius: CGFloat? = nil,
+        detents: Set<BottomSheetDetents> = [.medium, .large],
+        prefersDragIndicator: Bool? = nil,
         onDismiss: (() -> Void)? = nil,
         @ViewBuilder content: @escaping (Item) -> Content
     ) -> some View where Item: Identifiable, Content: View {
@@ -210,8 +238,7 @@ public extension View {
                 }
             ),
             detents: detents,
-            prefersGrabberVisible: prefersGrabberVisible,
-            preferredCornerRadius: preferredCornerRadius,
+            prefersDragIndicator: prefersDragIndicator,
             onDismiss: onDismiss,
             content: { item.wrappedValue.map(content) }
         )
