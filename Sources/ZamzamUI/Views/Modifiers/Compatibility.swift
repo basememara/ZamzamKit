@@ -32,7 +32,7 @@ public extension View {
 
 public extension Compatibility where Content: View {
     /// Determines if the platform supports SwiftUI 4 and above.
-    var isSwiftUI4: Bool {
+    var supportsSwiftUI4: Bool {
         guard #available(iOS 16, macOS 13, tvOS 16, watchOS 9, *) else { return false }
         return true
     }
