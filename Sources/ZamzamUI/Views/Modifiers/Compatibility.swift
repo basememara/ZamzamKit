@@ -30,6 +30,14 @@ public extension View {
 
 // MARK: - Extensions
 
+public extension Compatibility where Content: View {
+    /// Determines if the platform supports SwiftUI 4 and above.
+    var isSwiftUI4: Bool {
+        guard #available(iOS 16, macOS 13, tvOS 16, watchOS 9, *) else { return false }
+        return true
+    }
+}
+
 #if !os(macOS) && !os(watchOS)
 public extension Compatibility where Content: View {
     /// Sets the visibility of the status bar.
