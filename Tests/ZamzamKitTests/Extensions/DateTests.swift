@@ -562,41 +562,32 @@ extension DateTests {
 
 extension DateTests {
     func testDateIntervalProgress() throws {
-        let startDate = try XCTUnwrap(Date(year: 2021, month: 4, day: 21, hour: 12, minute: 30))
-        let interval1 = DateInterval(start: startDate, duration: 0)
-        let interval2 = DateInterval(start: startDate, duration: 500)
+        let date = Date.now
+        let interval = DateInterval(start: date, duration: 100)
 
-        let progress1 = interval1.progress(at: startDate)
-        XCTAssertEqual(progress1.remaining, 0)
-        XCTAssertEqual(progress1.value, 1)
+        let result1 = interval.progress(at: date + 20)
+        XCTAssertEqual(result1.value, 0.2)
+        XCTAssertEqual(result1.remaining, 80)
 
-        let progress2 = interval2.progress(at: startDate)
-        XCTAssertEqual(progress2.remaining, 500)
-        XCTAssertEqual(progress2.value, 1)
+        let result2 = interval.progress(at: date + 50)
+        XCTAssertEqual(result2.value, 0.5)
+        XCTAssertEqual(result2.remaining, 50)
 
-        let progress3 = interval2.progress(at: startDate + 200)
-        XCTAssertEqual(progress3.remaining, 300)
-        XCTAssertEqual(progress3.value, 0.6)
+        let result3 = interval.progress(at: date + 75)
+        XCTAssertEqual(result3.value, 0.75)
+        XCTAssertEqual(result3.remaining, 25)
 
-        let progress4 = interval2.progress(at: startDate + 250)
-        XCTAssertEqual(progress4.remaining, 250)
-        XCTAssertEqual(progress4.value, 0.5)
+        let result4 = interval.progress(at: date + 99)
+        XCTAssertEqual(result4.value, 0.99)
+        XCTAssertEqual(result4.remaining, 1)
 
-        let progress5 = interval2.progress(at: startDate + 600)
-        XCTAssertEqual(progress5.remaining, 0)
-        XCTAssertEqual(progress5.value, 1)
+        let result5 = interval.progress(at: date + 350)
+        XCTAssertEqual(result5.value, 1)
+        XCTAssertEqual(result5.remaining, 0)
 
-        let progress6 = interval2.progress(at: startDate - 1000)
-        XCTAssertEqual(progress6.remaining, 1500)
-        XCTAssertEqual(progress6.value, 0)
-
-        let progress7 = interval1.progress(at: startDate - 100)
-        XCTAssertEqual(progress7.remaining, 100)
-        XCTAssertEqual(progress7.value, 0)
-
-        let progress8 = interval1.progress(at: startDate + 100)
-        XCTAssertEqual(progress8.remaining, 0)
-        XCTAssertEqual(progress8.value, 1)
+        let result6 = interval.progress(at: date - 350)
+        XCTAssertEqual(result6.value, 0)
+        XCTAssertEqual(result6.remaining, 450)
     }
 }
 
