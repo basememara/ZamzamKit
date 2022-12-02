@@ -32,11 +32,6 @@ public extension LocationManager {
     var isAuthorizedForWidgetUpdates: Bool { service.isAuthorizedForWidgetUpdates }
     #endif
 
-    /// Determines if location services is enabled and authorized for the specified authorization type.
-    func isAuthorized(for type: LocationAPI.AuthorizationType) -> Bool {
-        service.isAuthorized(for: type)
-    }
-
     /// Determines if the user has not chosen whether the app can use location services.
     var canRequestAuthorization: Bool { service.canRequestAuthorization }
 
@@ -46,20 +41,20 @@ public extension LocationManager {
     ///   - type: Type of permission required, whether in the foreground (.whenInUse) or while running (.always).
     ///   - startUpdatingLocation: Starts the generation of updates that report the user’s current location.
     ///   - completion: True if the authorization succeeded for the authorization type, false otherwise.
-    func requestAuthorization(for type: LocationAPI.AuthorizationType = .whenInUse) -> AnyPublisher<Bool, Never> {
+    func requestAuthorization() -> AnyPublisher<Bool, Never> {
         let publisher = Self.authorizationSubject
             .compactMap { $0 }
             .debounce(for: 0.2, scheduler: DispatchQueue.main)
             .eraseToAnyPublisher()
 
         // Handle authorized and exit
-        guard !isAuthorized(for: type) else {
+        guard !isAuthorized else {
             Self.authorizationSubject.send(true)
             return publisher
         }
 
         // Request appropiate authorization before exit
-        defer { service.requestAuthorization(for: type) }
+        defer { service.requestAuthorization() }
 
         // Handle mismatched allowed and exit
         guard !isAuthorized else {

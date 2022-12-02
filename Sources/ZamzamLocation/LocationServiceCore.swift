@@ -50,36 +50,10 @@ public extension LocationServiceCore {
     var isAuthorizedForWidgetUpdates: Bool { manager.isAuthorizedForWidgetUpdates }
     #endif
 
-    func isAuthorized(for type: LocationAPI.AuthorizationType) -> Bool {
-        guard CLLocationManager.locationServicesEnabled() else { return false }
+    var canRequestAuthorization: Bool { manager.authorizationStatus == .notDetermined }
 
-        #if os(macOS)
-        return type == .always && manager.authorizationStatus == .authorizedAlways
-        #else
-        return (type == .whenInUse && manager.authorizationStatus == .authorizedWhenInUse)
-            || (type == .always && manager.authorizationStatus == .authorizedAlways)
-        #endif
-    }
-
-    var canRequestAuthorization: Bool {
-        manager.authorizationStatus == .notDetermined
-    }
-
-    func requestAuthorization(for type: LocationAPI.AuthorizationType) {
-        #if os(macOS)
-        if #available(OSX 10.15, *) {
-            manager.requestAlwaysAuthorization()
-        }
-        #elseif os(tvOS)
+    func requestAuthorization() {
         manager.requestWhenInUseAuthorization()
-        #else
-        switch type {
-        case .whenInUse:
-            manager.requestWhenInUseAuthorization()
-        case .always:
-            manager.requestAlwaysAuthorization()
-        }
-        #endif
     }
 }
 

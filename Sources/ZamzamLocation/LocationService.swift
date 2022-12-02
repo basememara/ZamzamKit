@@ -11,16 +11,13 @@ import CoreLocation
 
 public protocol LocationService: AnyObject {
     var delegate: LocationServiceDelegate? { get set }
-
     var isAuthorized: Bool { get }
-    func isAuthorized(for type: LocationAPI.AuthorizationType) -> Bool
-
     #if !os(watchOS) && !os(tvOS)
     var isAuthorizedForWidgetUpdates: Bool { get }
     #endif
 
     var canRequestAuthorization: Bool { get }
-    func requestAuthorization(for type: LocationAPI.AuthorizationType)
+    func requestAuthorization()
 
     var location: CLLocation? { get }
     func startUpdatingLocation(enableBackground: Bool, pauseAutomatically: Bool?)
@@ -49,16 +46,4 @@ public protocol LocationServiceDelegate: AnyObject {
     #if os(iOS) || os(watchOS)
     func locationService(didUpdateHeading newHeading: CLHeading)
     #endif
-}
-
-// MARK: - Namespace
-
-public enum LocationAPI {
-    /// Permission types to use location services.
-    ///
-    /// - whenInUse: While the app is in the foreground.
-    /// - always: Whenever the app is running.
-    public enum AuthorizationType {
-        case whenInUse, always
-    }
 }
