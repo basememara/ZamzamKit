@@ -29,7 +29,7 @@ public extension View {
     ///         }
     ///     }
     ///
-    func cardStyle<T: CardStyle>(_ modifier: T) -> some View {
+    func cardStyle(_ modifier: some CardStyle) -> some View {
         self.modifier(modifier)
     }
 }

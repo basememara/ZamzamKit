@@ -21,7 +21,7 @@ public extension View {
     ///     }
     ///     .textStyle(MyCustomTextStyle())
     ///
-    func textStyle<T: TextStyle>(_ modifier: T) -> some View {
+    func textStyle(_ modifier: some TextStyle) -> some View {
         self.modifier(modifier)
     }
 }

@@ -13,7 +13,7 @@ public extension Sequence {
     }
 
     /// Returns the elements of the sequence, sorted using the keypath and given predicate as the comparison between elements.
-    func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>) -> [Element] {
+    func sorted(by keyPath: KeyPath<Element, some Comparable>) -> [Element] {
         sorted(by: keyPath, <)
     }
 }

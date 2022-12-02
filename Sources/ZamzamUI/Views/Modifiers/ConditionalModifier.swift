@@ -25,9 +25,9 @@ public extension View {
     ///   - condition: The condition to determine if the content should be applied.
     ///   - content: The modifier to apply to the view.
     /// - Returns: The modified view.
-    @ViewBuilder func modifier<T: View>(
+    @ViewBuilder func modifier(
         if condition: Bool,
-        then content: (Self) -> T
+        then content: (Self) -> some View
     ) -> some View {
         if condition {
             content(self)
@@ -52,10 +52,10 @@ public extension View {
     ///   - trueContent: The modifier to apply to the view if the condition passes.
     ///   - falseContent: The modifier to apply to the view if the condition fails.
     /// - Returns: The modified view.
-    @ViewBuilder func modifier<TrueContent: View, FalseContent: View>(
+    @ViewBuilder func modifier(
         if condition: Bool,
-        then trueContent: (Self) -> TrueContent,
-        else falseContent: (Self) -> FalseContent
+        then trueContent: (Self) -> some View,
+        else falseContent: (Self) -> some View
     ) -> some View {
         if condition {
             trueContent(self)
@@ -77,9 +77,9 @@ public extension View {
     ///   - item: The optional item to determine if the content should be applied.
     ///   - content: The modifier and unwrapped item to apply to the view.
     /// - Returns: The modified view.
-    @ViewBuilder func modifier<T: View, Item>(
+    @ViewBuilder func modifier<Item>(
         `let` item: Item?,
-        then content: (Self, Item) -> T
+        then content: (Self, Item) -> some View
     ) -> some View {
         if let item = item {
             content(self, item)
@@ -102,10 +102,10 @@ public extension View {
     ///   - trueContent: The modifier and unwrapped item to apply to the view.
     ///   - falseContent: The modifier to apply to the view if the condition fails.
     /// - Returns: The modified view.
-    @ViewBuilder func modifier<Item, TrueContent: View, FalseContent: View>(
+    @ViewBuilder func modifier<Item>(
         `let` item: Item?,
-        then trueContent: (Self, Item) -> TrueContent,
-        else falseContent: (Self) -> FalseContent
+        then trueContent: (Self, Item) -> some View,
+        else falseContent: (Self) -> some View
     ) -> some View {
         if let item = item {
             trueContent(self, item)

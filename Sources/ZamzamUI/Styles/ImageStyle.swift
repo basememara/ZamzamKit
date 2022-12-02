@@ -21,7 +21,7 @@ public extension View {
     ///     }
     ///     .imageStyle(MyCustomImageStyle())
     ///
-    func imageStyle<T: ImageStyle>(_ modifier: T) -> some View {
+    func imageStyle(_ modifier: some ImageStyle) -> some View {
         self.modifier(modifier)
     }
 }

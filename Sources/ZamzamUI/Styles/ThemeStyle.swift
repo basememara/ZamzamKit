@@ -31,7 +31,7 @@ public extension View {
     ///         }
     ///     }
     ///
-    func themeStyle<T: ThemeStyle>(_ modifier: T) -> some View {
+    func themeStyle(_ modifier: some ThemeStyle) -> some View {
         self.modifier(modifier)
     }
 }
