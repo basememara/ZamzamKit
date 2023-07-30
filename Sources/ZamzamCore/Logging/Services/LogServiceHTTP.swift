@@ -132,13 +132,13 @@ public extension LogServiceHTTP {
                     : distribution.isAdHocDistributed ? "adhoc"
                     : distribution.isRunningOnSimulator ? "simulator"
                     : "unknown"
-            ],
+            ] as [String: Any],
             "device": device,
             "code": [
                 "file": "\(file)",
                 "function": function,
                 "line": line
-            ]
+            ] as [String: Any]
         ]
 
         if !context.isEmpty {

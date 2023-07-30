@@ -43,14 +43,14 @@ extension DictionaryTests {
                     "id": 2,
                     "name": "Pat",
                     "pets": ["dog"]
-                ],
+                ] as [String: Any],
                 [
                     "id": 3,
                     "name": "Sue",
                     "pets": ["bird", "fish"]
-                ]
+                ] as [String: Any]
             ],
-            "pets": []
+            "pets": [] as [Any]
         ]
 
         let expected: [String: Any]

@@ -52,7 +52,7 @@ extension LimiterTests {
         await sendToServer("wor")
         await sendToServer("ld")
 
-        wait(for: [promise], timeout: 10)
+        await fulfillment(of: [promise], timeout: 10)
     }
 }
 
@@ -97,7 +97,7 @@ extension LimiterTests {
         await sendToServer("wor")
         await sendToServer("ld")
 
-        wait(for: [promise], timeout: 10)
+        await fulfillment(of: [promise], timeout: 10)
     }
 }
 
@@ -132,7 +132,7 @@ extension LimiterTests {
 
         try await Task.sleep(seconds: 2)
 
-        wait(for: [promise], timeout: 10)
+        await fulfillment(of: [promise], timeout: 10)
     }
 }
 
@@ -167,6 +167,6 @@ extension LimiterTests {
 
         try await Task.sleep(seconds: 2)
 
-        wait(for: [promise], timeout: 10)
+        await fulfillment(of: [promise], timeout: 10)
     }
 }
