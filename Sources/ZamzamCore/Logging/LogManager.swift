@@ -6,6 +6,7 @@
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
+import Combine
 import Foundation
 import SwiftUI
 
@@ -21,12 +22,18 @@ public class LogManager {
 public extension LogManager {
     /// Adds a custom attribute to all future logs sent by this logger.
     func set(_ value: CustomStringConvertible?, forKey key: String) {
-        DispatchQueue.logger.sync { context[key] = value }
+        DispatchQueue.logger.sync {
+            context[key] = value
+            Self.subject.send(context)
+        }
     }
 
     /// Adds custom attributes to all future logs sent by this logger.
     func set(_ context: [String: CustomStringConvertible]) {
-        DispatchQueue.logger.sync { self.context.merge(context) { $1 } }
+        DispatchQueue.logger.sync {
+            self.context.merge(context) { $1 }
+            Self.subject.send(self.context)
+        }
     }
 
     /// Sets the application properties to the logger so it can be used outside the main thread.
@@ -36,7 +43,10 @@ public extension LogManager {
 
     /// Removes all the custom attribute from all future logs sent by this logger.
     func reset() {
-        DispatchQueue.logger.sync { context.removeAll() }
+        DispatchQueue.logger.sync {
+            context.removeAll()
+            Self.subject.send(context)
+        }
     }
 }
 
@@ -251,6 +261,20 @@ public extension LogManager {
         )
     }
 }
+
+// MARK: - Observers
+
+private extension LogManager {
+    private static let subject = PassthroughSubject<[String: CustomStringConvertible], Never>()
+
+    func publisher() -> AnyPublisher<[String: CustomStringConvertible], Never> {
+        Self.subject
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+}
+
+// MARK: - Helpers
 
 private extension ScenePhase {
     /// The corresponding string of the raw type.
