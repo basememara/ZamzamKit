@@ -264,7 +264,7 @@ public extension LogManager {
 
 // MARK: - Observers
 
-private extension LogManager {
+public extension LogManager {
     private static let subject = PassthroughSubject<[String: CustomStringConvertible], Never>()
 
     func publisher() -> AnyPublisher<[String: CustomStringConvertible], Never> {
