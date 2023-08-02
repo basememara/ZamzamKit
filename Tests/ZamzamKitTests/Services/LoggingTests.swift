@@ -159,7 +159,8 @@ private extension LoggingTests {
             function: String,
             line: Int,
             error: Error?,
-            context: [String: CustomStringConvertible]
+            context: [String: CustomStringConvertible],
+            sessionContext: [String: CustomStringConvertible]
         ) {
             entries.updateValue(entries[level, default: []] + [message], forKey: level)
         }

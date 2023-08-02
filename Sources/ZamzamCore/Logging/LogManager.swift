@@ -72,8 +72,6 @@ public extension LogManager {
         guard !destinations.isEmpty else { return }
 
         DispatchQueue.logger.sync {
-            let context = self.context.merging(context) { $1 }
-            
             destinations.forEach {
                 $0.write(
                     level,
@@ -82,7 +80,8 @@ public extension LogManager {
                     function: function,
                     line: line,
                     error: error,
-                    context: context
+                    context: context,
+                    sessionContext: self.context
                 )
             }
         }

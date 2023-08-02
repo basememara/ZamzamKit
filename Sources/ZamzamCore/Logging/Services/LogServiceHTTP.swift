@@ -103,7 +103,8 @@ public extension LogServiceHTTP {
         file: String,
         function: String,
         line: Int,
-        context: [String: CustomStringConvertible]
+        context: [String: CustomStringConvertible],
+        sessionContext: [String: CustomStringConvertible]
     ) {
         var device: [String: Any] = [
             "is_simulator": distribution.isRunningOnSimulator
@@ -143,6 +144,10 @@ public extension LogServiceHTTP {
 
         if !context.isEmpty {
             payload["context"] = context
+        }
+
+        if !sessionContext.isEmpty {
+            payload["session"] = sessionContext
         }
 
         payload.merge(parameters) { $1 }

@@ -29,7 +29,8 @@ public protocol LogService {
         function: String,
         line: Int,
         error: Error?,
-        context: [String: CustomStringConvertible]
+        context: [String: CustomStringConvertible],
+        sessionContext: [String: CustomStringConvertible]
     )
 
     /// Returns if the logger should process the entry for the specified log level.

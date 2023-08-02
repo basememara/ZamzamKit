@@ -33,7 +33,8 @@ public extension LogServiceOS {
         function: String,
         line: Int,
         error: Error?,
-        context: [String: CustomStringConvertible]
+        context: [String: CustomStringConvertible],
+        sessionContext: [String: CustomStringConvertible]
     ) {
         let type: OSLogType
 
@@ -58,6 +59,6 @@ public extension LogServiceOS {
             return
         }
 
-        os_log("%@", log: log, type: type, format(message, file, function, line, error, context))
+        os_log("%@", log: log, type: type, format(message, file, function, line, error, sessionContext.merging(context) { $1 }))
     }
 }

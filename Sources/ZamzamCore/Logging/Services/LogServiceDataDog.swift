@@ -58,7 +58,8 @@ public extension LogServiceDataDog {
         function: String,
         line: Int,
         error: Error?,
-        context: [String: CustomStringConvertible]
+        context: [String: CustomStringConvertible],
+        sessionContext: [String: CustomStringConvertible]
     ) {
         var parameters: [String: Any] = [
             "date": DateFormatter.zuluFormatter.string(from: .now),
@@ -86,6 +87,6 @@ public extension LogServiceDataDog {
             parameters["error_description"] = String(describing: error)
         }
 
-        service.write(parameters, level: level, date: .now, file: file, function: function, line: line, context: context)
+        service.write(parameters, level: level, date: .now, file: file, function: function, line: line, context: context, sessionContext: sessionContext)
     }
 }
