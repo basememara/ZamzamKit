@@ -80,6 +80,24 @@ public extension View {
 }
 
 public extension View {
+    /// Adds a modifier for this view that fires an action when a specific value changes.
+    ///
+    /// - Parameters:
+    ///   - value: The value to check against when determining whether to run the closure.
+    ///   - initial: Whether the action should be run when this view initially appears.
+    ///   - action: A concurrent closure to run when the value changes.
+    /// - Returns: A view that fires an action when the specified value changes.
+    @available(iOS 17, macOS 14, tvOS 17, watchOS 10, *)
+    func onChange<V>(
+        of value: V,
+        initial: Bool = false,
+        perform action: @escaping () async -> Void
+    ) -> some View where V: Equatable {
+        onChange(of: value, initial: initial) { Task { await action() } }
+    }
+}
+
+public extension View {
     /// Adds an action to perform when this view detects data emitted by the optional publisher.
     ///
     /// - Parameters:
