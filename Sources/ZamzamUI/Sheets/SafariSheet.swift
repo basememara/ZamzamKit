@@ -38,7 +38,7 @@ public extension View {
     ///
     /// - Parameters:
     ///   - url: A binding to whether the Safari browser should be presented. 
-    func sheet(safari url: Binding<URL?>) -> some View {
+    func sheet(safari url: Binding<URL?>, onDismiss: (() -> Void)? = nil) -> some View {
         sheet(
             isPresented: Binding<Bool>(
                 get: { url.wrappedValue != nil },
@@ -46,7 +46,8 @@ public extension View {
                     guard !$0 else { return }
                     url.wrappedValue = nil
                 }
-            )
+            ),
+            onDismiss: onDismiss
         ) {
             if let url = url.wrappedValue {
                 SafariView(url: url)

@@ -98,9 +98,9 @@ public extension View {
     /// If the current device is not able to send email, determined via `MFMailComposeViewController.canSendMail()`,
     /// an alert will notify the user of the failure.
     @ViewBuilder
-    func sheet(mail item: Binding<MailItem?>) -> some View {
+    func sheet(mail item: Binding<MailItem?>, onDismiss: (() -> Void)? = nil) -> some View {
         if MFMailComposeViewController.canSendMail() {
-            sheet(item: item) { item in
+            sheet(item: item, onDismiss: onDismiss) { item in
                 MailView(item: item)
                     .ignoresSafeArea()
             }
