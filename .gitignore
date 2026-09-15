@@ -17,3 +17,6 @@ DerivedData/
 
 ## Other
 /Archive
+## Agent harness scratch
+.claude/.cc-writes/
+.claude/settings.local.json
