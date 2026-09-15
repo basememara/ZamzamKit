@@ -34,3 +34,16 @@ Consumers may depend on this package by version or by tracking `main`, so treat 
 - Public API is documented with a short doc comment and, where behavior is not obvious, an example in the README section for its product.
 - Extensions are grouped by the type they extend, one file per type, under the product that owns the dependency (Foundation-only code in `ZamzamCore`, SwiftUI in `ZamzamUI`, and so on).
 - No third-party dependencies: the package's value is being a thin, dependency-free layer.
+
+## Skills
+
+Vetted third-party agent skills live in `.claude/skills/` (MIT; each folder is a copy of its upstream skill's `SKILL.md`, `references/`, and Codex `agents/` metadata, without the marketplace scaffolding). Harnesses with native skill support trigger them automatically; any other agent should read the relevant `SKILL.md` (and only the reference files it points to) before touching that area:
+
+| Before working on… | Read | Upstream |
+|---|---|---|
+| Any public API: names, argument labels, doc comments, overloads | `.claude/skills/swift-api-design-guidelines-skill/SKILL.md` | [Erik Sebastián de Erice](https://github.com/Erikote04/Swift-API-Design-Guidelines-Agent-Skill), the Swift API Design Guidelines distilled |
+| Concurrency: async/await, actors, `Sendable`, Swift 6 diagnostics | `.claude/skills/swift-concurrency-pro/SKILL.md` | [Paul Hudson](https://github.com/twostraws/Swift-Concurrency-Agent-Skill) |
+| Formatting values for display: numbers, currency, dates, durations, measurements | `.claude/skills/swift-format-style/SKILL.md` | [Anton Novoselov](https://github.com/n0an/Swift-FormatStyle-Agent-Skill) |
+| `ZamzamUI` views, styles, sheets, platform shims | `.claude/skills/swiftui-pro/SKILL.md` | [Paul Hudson](https://github.com/twostraws/SwiftUI-Agent-Skill) |
+
+The platform floor and the compatibility contract outrank a skill's defaults. `swiftui-pro` assumes a current-OS app and `swift-format-style` rejects every `Formatter` subclass; here an API newer than the floor goes behind `#available` (or a shim in `Platforms/`), and an existing public formatter is deprecated, never deleted. No testing skill is carried while the suite is XCTest; add Swift Testing Pro when the tools version moves.
