@@ -96,50 +96,13 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
-      <CodeCoverageTargets>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ZamzamCore"
-            BuildableName = "ZamzamCore"
-            BlueprintName = "ZamzamCore"
-            ReferencedContainer = "container:">
-         </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ZamzamLocation"
-            BuildableName = "ZamzamLocation"
-            BlueprintName = "ZamzamLocation"
-            ReferencedContainer = "container:">
-         </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ZamzamNotification"
-            BuildableName = "ZamzamNotification"
-            BlueprintName = "ZamzamNotification"
-            ReferencedContainer = "container:">
-         </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ZamzamUI"
-            BuildableName = "ZamzamUI"
-            BlueprintName = "ZamzamUI"
-            ReferencedContainer = "container:">
-         </BuildableReference>
-      </CodeCoverageTargets>
-      <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ZamzamKitTests"
-               BuildableName = "ZamzamKitTests"
-               BlueprintName = "ZamzamKitTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:Package.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+      </TestPlans>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"

@@ -30,6 +30,7 @@ let package = Package(
         .testTarget(
             name: "ZamzamKitTests",
             dependencies: ["ZamzamKit"],
+            path: "Tests",
             exclude: ["Network/Certificates"],
             resources: [.process("Resources")]
         ),
