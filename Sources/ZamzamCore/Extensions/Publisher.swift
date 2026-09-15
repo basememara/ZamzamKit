@@ -11,7 +11,7 @@ import Combine
 public extension Publisher where Failure == Never {
     /// Attaches a subscriber with closure-based behavior to a publisher that never fails.
     func sink(receiveValue: @escaping ((Self.Output) async throws -> Void)) -> AnyCancellable {
-        sink { value in Task { try await receiveValue(value) } }
+        sink { value in _ = Task { try await receiveValue(value) } }
     }
 }
 

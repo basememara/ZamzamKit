@@ -111,7 +111,7 @@ public extension CLLocation {
     }
 }
 
-extension CLLocationCoordinate2D: Equatable {
+extension CLLocationCoordinate2D: @retroactive Equatable {
     /// Determine if coordinates match using latitude and longitude values.
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
@@ -123,7 +123,7 @@ extension CLLocationCoordinate2D: Equatable {
     }
 }
 
-extension CLLocationCoordinate2D: CustomStringConvertible {
+extension CLLocationCoordinate2D: @retroactive CustomStringConvertible {
     public var description: String {
         .localizedStringWithFormat("%.2f°, %.2f°", latitude, longitude)
     }
