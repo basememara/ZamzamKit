@@ -1,6 +1,6 @@
 # ZamzamKit — Agent Guide
 
-Open-source Swift package (github.com/ZamzamInc/ZamzamKit) of micro utilities and extensions over the standard library, Foundation, and native frameworks. It is the foundation under every Apple app Basem builds: PrayKit and PrayWatch consume it, and both track its `main` branch. Default branch: `main`.
+Open-source Swift package (github.com/ZamzamInc/ZamzamKit, MIT) of micro utilities and extensions over the standard library, Foundation, and native Apple frameworks, meant to be consumed by any Apple app or package. Default branch: `main`.
 
 ## Layout
 
@@ -19,14 +19,18 @@ swift build
 swift test
 ```
 
-Sandboxed Bash cannot run these (SwiftPM needs `/var/folders` caches the seatbelt blocks) — use Apple's Xcode MCP (`xcode` server): `XcodeOpenWorkspace` on this package directory, then `RunAllTests` (scheme `ZamzamKit-Package`, plan `Package.xctestplan` at the root, code coverage on for the four library targets).
+In Xcode, the shared `ZamzamKit-Package` scheme runs `Package.xctestplan` at the package root, with code coverage on for the four library targets. Agents driving Xcode through its MCP server open this package directory as a workspace and run the plan; sandboxed shells cannot run SwiftPM directly (it needs caches outside the sandbox).
 
 Tests live flat in `Tests/` (the `ZamzamKitTests` target has `path: "Tests"`; XCTest; `TestUtilities.swift` is the shared helper; `Resources/` is a processed resource bundle; `Network/Certificates` is excluded from compilation). Match the existing XCTest style — the 5.7 tools version predates Swift Testing. Bug fixes land with a failing test first.
 
-## Consumers
+Known environmental failures (not regressions): `NetworkServerTrustTests` uses certificate fixtures that have expired, `FileTests.testDownloadFile` performs a live download, and `CurrencyFormatterTests.testSA` asserts an Arabic format whose right-to-left mark placement changed with ICU.
 
-PrayKit and PrayWatch depend on this package as a **remote branch dep** (`branch: main`), so pushing to `main` here is effectively publishing to both. Keep `main` green: the suite must pass before any push. A breaking API change needs matching PrayKit/PrayWatch changes in the same sitting; check both before renaming or removing anything public.
+## Compatibility contract
 
-## Skills
+Consumers may depend on this package by version or by tracking `main`, so treat every push to `main` as a release: the suite must pass first, and a change to public API is a breaking change until every product that exposes it is considered. Prefer additive changes; when something public must change, deprecate first where practical and call the break out in the commit message.
 
-When working ZamzamKit alongside the PrayWatch checkout, load the relevant vetted skill from `PrayWatch/.claude/skills/` before starting: `swift-testing-pro` (tests), `swift-concurrency-pro` (async/actors/Sendable), `swiftui-performance-audit` (ZamzamUI).
+## Conventions
+
+- Public API is documented with a short doc comment and, where behavior is not obvious, an example in the README section for its product.
+- Extensions are grouped by the type they extend, one file per type, under the product that owns the dependency (Foundation-only code in `ZamzamCore`, SwiftUI in `ZamzamUI`, and so on).
+- No third-party dependencies: the package's value is being a thin, dependency-free layer.
