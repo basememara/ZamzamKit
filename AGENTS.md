@@ -4,7 +4,7 @@ Open-source Swift package (github.com/ZamzamInc/ZamzamKit, MIT) of micro utiliti
 
 ## Layout
 
-Pure SPM, `swift-tools-version: 5.7`, platforms macOS 12 / iOS 15 / tvOS 15 / watchOS 8. No external dependencies. Five library products:
+Pure SPM, `swift-tools-version: 6.0`, platforms macOS 12 / iOS 15 / tvOS 15 / watchOS 8. Every library target builds in the **Swift 6 language mode** under strict concurrency; the test target is pinned to `.v5` until it moves to Swift Testing. Keep new code Sendable-correct rather than reaching for `@unchecked`: the existing unchecked conformances each carry a comment naming the invariant that makes them safe. No external dependencies. Five library products:
 
 - `ZamzamCore` — application helpers, errors, extensions, infix operators, keychain, logging, network, utilities
 - `ZamzamLocation` — location services (depends on ZamzamCore)
@@ -21,7 +21,7 @@ swift test
 
 In Xcode, the shared `ZamzamKit-Package` scheme runs `Package.xctestplan` at the package root, with code coverage on for the four library targets. Agents driving Xcode through its MCP server open this package directory as a workspace and run the plan; sandboxed shells cannot run SwiftPM directly (it needs caches outside the sandbox).
 
-Tests live flat in `Tests/` (the `ZamzamKitTests` target has `path: "Tests"`; XCTest; `TestUtilities.swift` is the shared helper; `Resources/` is a processed resource bundle; `Network/Certificates` is excluded from compilation). Match the existing XCTest style — the 5.7 tools version predates Swift Testing. Bug fixes land with a failing test first.
+Tests live flat in `Tests/` (the `ZamzamKitTests` target has `path: "Tests"`; XCTest; `TestUtilities.swift` is the shared helper; `Resources/` is a processed resource bundle; `Network/Certificates` is excluded from compilation). Match the existing XCTest style until the suite is converted. Bug fixes land with a failing test first.
 
 Known environmental failures (not regressions): `NetworkServerTrustTests` uses certificate fixtures that have expired, `FileTests.testDownloadFile` performs a live download, and `CurrencyFormatterTests.testSA` asserts an Arabic format whose right-to-left mark placement changed with ICU.
 
@@ -46,4 +46,4 @@ Vetted third-party agent skills live in `.claude/skills/` (MIT; each folder is a
 | Formatting values for display: numbers, currency, dates, durations, measurements | `.claude/skills/swift-format-style/SKILL.md` | [Anton Novoselov](https://github.com/n0an/Swift-FormatStyle-Agent-Skill) |
 | `ZamzamUI` views, styles, sheets, platform shims | `.claude/skills/swiftui-pro/SKILL.md` | [Paul Hudson](https://github.com/twostraws/SwiftUI-Agent-Skill) |
 
-The platform floor and the compatibility contract outrank a skill's defaults. `swiftui-pro` assumes a current-OS app and `swift-format-style` rejects every `Formatter` subclass; here an API newer than the floor goes behind `#available` (or a shim in `Platforms/`), and an existing public formatter is deprecated, never deleted. No testing skill is carried while the suite is XCTest; add Swift Testing Pro when the tools version moves.
+The platform floor and the compatibility contract outrank a skill's defaults. `swiftui-pro` assumes a current-OS app and `swift-format-style` rejects every `Formatter` subclass; here an API newer than the floor goes behind `#available` (or a shim in `Platforms/`), and an existing public formatter is deprecated, never deleted. No testing skill is carried while the suite is XCTest; add Swift Testing Pro when it converts.
