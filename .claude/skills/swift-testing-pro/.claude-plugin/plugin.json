@@ -1,0 +1,10 @@
+{
+  "name": "swift-testing-pro",
+  "version": "1.0.0",
+  "description": "Writes, reviews, and improves Swift Testing code using modern APIs and best practices.",
+  "author": { "name": "Paul Hudson" },
+  "homepage": "https://github.com/twostraws/Swift-Testing-Agent-Skill",
+  "repository": "https://github.com/twostraws/Swift-Testing-Agent-Skill",
+  "license": "MIT",
+  "skills": "./skills/"
+}

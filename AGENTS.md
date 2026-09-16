@@ -4,7 +4,7 @@ Open-source Swift package (github.com/ZamzamInc/ZamzamKit, MIT) of micro utiliti
 
 ## Layout
 
-Pure SPM, `swift-tools-version: 6.0`, platforms macOS 12 / iOS 15 / tvOS 15 / watchOS 8. Every library target builds in the **Swift 6 language mode** under strict concurrency; the test target is pinned to `.v5` until it moves to Swift Testing. Keep new code Sendable-correct rather than reaching for `@unchecked`: the existing unchecked conformances each carry a comment naming the invariant that makes them safe. No external dependencies. Five library products:
+Pure SPM, `swift-tools-version: 6.0`, platforms macOS 12 / iOS 15 / tvOS 15 / watchOS 8. Every library target builds in the **Swift 6 language mode** under strict concurrency; the test target stays in `.v5` because `AtomicTests` and `LimiterTests` deliberately exercise shared mutable state that the Swift 6 checker rejects. Keep new code Sendable-correct rather than reaching for `@unchecked`: the existing unchecked conformances each carry a comment naming the invariant that makes them safe. No external dependencies. Five library products:
 
 - `ZamzamCore` — application helpers, errors, extensions, infix operators, keychain, logging, network, utilities
 - `ZamzamLocation` — location services (depends on ZamzamCore)
@@ -47,5 +47,6 @@ Vetted third-party agent skills live in `.claude/skills/` (MIT; each folder is a
 | Concurrency: async/await, actors, `Sendable`, Swift 6 diagnostics | `.claude/skills/swift-concurrency-pro/SKILL.md` | [Paul Hudson](https://github.com/twostraws/Swift-Concurrency-Agent-Skill) |
 | Formatting values for display: numbers, currency, dates, durations, measurements | `.claude/skills/swift-format-style/SKILL.md` | [Anton Novoselov](https://github.com/n0an/Swift-FormatStyle-Agent-Skill) |
 | `ZamzamUI` views, styles, sheets, platform shims | `.claude/skills/swiftui-pro/SKILL.md` | [Paul Hudson](https://github.com/twostraws/SwiftUI-Agent-Skill) |
+| Tests: suites, `#expect`, `withKnownIssue`, parallel-safety | `.claude/skills/swift-testing-pro/SKILL.md` | [Paul Hudson](https://github.com/twostraws/Swift-Testing-Agent-Skill) |
 
-The platform floor and the compatibility contract outrank a skill's defaults. `swiftui-pro` assumes a current-OS app and `swift-format-style` rejects every `Formatter` subclass; here an API newer than the floor goes behind `#available` (or a shim in `Platforms/`), and an existing public formatter is deprecated, never deleted. No testing skill is carried while the suite is XCTest; add Swift Testing Pro when it converts.
+The platform floor and the compatibility contract outrank a skill's defaults. `swiftui-pro` assumes a current-OS app and `swift-format-style` rejects every `Formatter` subclass; here an API newer than the floor goes behind `#available` (or a shim in `Platforms/`), and an existing public formatter is deprecated, never deleted.
