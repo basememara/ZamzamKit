@@ -151,7 +151,8 @@ extension NetworkServerTrustTests {
     func thatPinningLeafCertificateNotInCertificateChainFailsEvaluationWithHostValidation() {
         // Given
         let host = "test.alamofire.org"
-        let serverTrust = SecTrust.leafValidDNSName
+        // Anchor the root so the rejection comes from the pin mismatch, not from an untrusted chain
+        let serverTrust = SecTrust.leafValidDNSName.assignRootCertificateAsLoneAnchor()
         let certificates = [SecCertificate.leafSignedByCA2]
         let evaluator = NetworkPinnedCertificateTrustEvaluator(certificates: certificates)
 
@@ -166,7 +167,8 @@ extension NetworkServerTrustTests {
     func thatPinningIntermediateCertificateNotInCertificateChainFailsEvaluationWithHostValidation() {
         // Given
         let host = "test.alamofire.org"
-        let serverTrust = SecTrust.leafValidDNSName
+        // Anchor the root so the rejection comes from the pin mismatch, not from an untrusted chain
+        let serverTrust = SecTrust.leafValidDNSName.assignRootCertificateAsLoneAnchor()
         let certificates = [SecCertificate.intermediateCA1]
         let evaluator = NetworkPinnedCertificateTrustEvaluator(certificates: certificates)
 

@@ -9,11 +9,6 @@
 import Foundation
 import Testing
 import ZamzamCore
-#if os(macOS)
-import AppKit
-#elseif canImport(UIKit)
-import UIKit
-#endif
 
 #if !os(tvOS)
 // A class so the fixture files can be removed in `deinit`. Names are unique per
@@ -46,28 +41,20 @@ extension FileTests {
     }
 
     @Test(.timeLimit(.minutes(1)))
-    func downloadFile() async {
-        let source = "https://zamzam.io/wp-content/uploads/2021/02/logo-1.png"
+    func downloadFile() async throws {
+        // A bundled fixture keeps this off the network; the remote image it used to fetch became a 404
+        // that the downloader saved as a file, and a known-issue wrapper hid it
+        let source = try #require(Bundle.module.url(forResource: "Test", withExtension: "txt"))
 
         let downloaded: URL? = await withCheckedContinuation { continuation in
-            FileManager.default.download(from: source) { url, _, _ in
+            FileManager.default.download(from: source.absoluteString) { url, _, _ in
                 continuation.resume(returning: url)
             }
         }
 
-        await withKnownIssue("Downloads over the network; fails without connectivity", isIntermittent: true) {
-            guard let downloaded else {
-                Issue.record("Download returned no file")
-                return
-            }
-
-            #expect(FileManager.default.fileExists(atPath: downloaded.path))
-            #if os(macOS)
-            #expect(NSImage(contentsOfFile: downloaded.path) != nil)
-            #elseif canImport(UIKit)
-            #expect(UIImage(contentsOfFile: downloaded.path) != nil)
-            #endif
-        }
+        let url = try #require(downloaded)
+        #expect(FileManager.default.fileExists(atPath: url.path))
+        #expect(try String(contentsOf: url, encoding: .utf8) == String(contentsOf: source, encoding: .utf8))
     }
 }
 

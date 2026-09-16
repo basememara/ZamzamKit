@@ -53,13 +53,17 @@ extension CurrencyFormatterTests {
     }
 
     @Test
-    func sA() {
-        withKnownIssue("ICU moved the right-to-left mark in the Arabic currency format") {
-            let formatter = CurrencyFormatter(for: Locale(identifier: "ar-SA"))
+    func sA() throws {
+        let formatter = CurrencyFormatter(for: Locale(identifier: "ar-SA"))
 
-            let amount: Double = 123456789.987
-            #expect(formatter.string(fromAmount: amount) == "‏١٢٣٬٤٥٦٬٧٨٩٫٩٩ ‏ر.س.‏")
-        }
+        let amount: Double = 123456789.987
+        let value = formatter.string(fromAmount: amount)
+
+        // ICU moves the directional marks between releases; the digits, separators and symbol may not
+        let directionalMarks = CharacterSet(charactersIn: "\u{200E}\u{200F}\u{061C}")
+        let visible = String(String.UnicodeScalarView(value.unicodeScalars.filter { !directionalMarks.contains($0) }))
+        #expect(visible.contains("١٢٣٬٤٥٦٬٧٨٩٫٩٩"))
+        #expect(visible.contains("ر.س."))
     }
 
     @Test
