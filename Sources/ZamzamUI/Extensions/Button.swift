@@ -14,7 +14,7 @@ public extension Button where Label: View {
     /// - Parameters:
     ///   - action: The async action to perform when the user triggers the button.
     ///   - label: A view that describes the purpose of the button's `action`.
-    init(action: @escaping () async -> Void, @ViewBuilder label: () -> Label) {
+    init(action: @escaping @MainActor () async -> Void, @ViewBuilder label: () -> Label) {
         self.init(action: { Task { await action() } }, label: label)
     }
 }
@@ -25,7 +25,7 @@ public extension Button where Label == Text {
     /// - Parameters:
     ///   - text: A text view.
     ///   - action: The action to perform when the user triggers the button.
-    init(_ title: Text, action: @escaping () async -> Void) {
+    init(_ title: Text, action: @escaping @MainActor () async -> Void) {
         self.init(action: action, label: { title })
     }
 }
@@ -37,7 +37,7 @@ public extension Button {
     ///   - role: An optional semantic role that describes the button. A value of `nil` means that the button doesn't have an assigned role.
     ///   - action: The async action to perform when the user interacts with the button.
     ///   - label: A view that describes the purpose of the button's `action`.
-    init(role: ButtonRole?, action: @escaping () async -> Void, @ViewBuilder label: () -> Label) {
+    init(role: ButtonRole?, action: @escaping @MainActor () async -> Void, @ViewBuilder label: () -> Label) {
         self.init(role: role, action: { Task { await action() } }, label: label)
     }
 }

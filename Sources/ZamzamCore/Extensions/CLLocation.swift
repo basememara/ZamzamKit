@@ -39,7 +39,7 @@ public extension Array where Element == CLLocationCoordinate2D {
 }
 
 public extension CLLocation {
-    struct LocationMeta: CustomStringConvertible {
+    struct LocationMeta: CustomStringConvertible, Sendable {
         public var coordinates: (latitude: Double, longitude: Double)?
         public var locality: String?
         public var country: String?
@@ -62,52 +62,32 @@ public extension CLLocation {
 
     /// Retrieves location details for coordinates.
     ///
-    /// - Parameters:
-    ///   - timeout: A timeout to exit and call completion handler. Default is 10 seconds.
-    ///   - completion: Async callback with retrived location details.
-    func geocoder(timeout: TimeInterval = 10, completion: @escaping (LocationMeta?) -> Void) {
-        var hasCompleted = false
+    /// - Parameter timeout: A timeout after which `nil` is returned, since reverse
+    ///   geocoding is network-bound and can take arbitrarily long. Default is 10 seconds.
+    /// - Returns: The location details, or `nil` on failure or timeout.
+    func geocoder(timeout: TimeInterval = 10) async -> LocationMeta? {
+        await withTaskGroup(of: LocationMeta?.self) { group in
+            group.addTask {
+                guard let mark = try? await CLGeocoder().reverseGeocodeLocation(self).first else { return nil }
 
-        // Fallback on timeout since could take too long
-        // https://stackoverflow.com/a/34389742
-        let timer = Timer(timeInterval: timeout, repeats: false) { timer in
-            defer { timer.invalidate() }
-
-            guard !hasCompleted else { return }
-            hasCompleted = true
-
-            DispatchQueue.main.async {
-                completion(nil)
-            }
-        }
-
-        // Reverse geocode stored coordinates
-        CLGeocoder().reverseGeocodeLocation(self) { placemarks, error in
-            DispatchQueue.main.async {
-                // Destroy timeout mechanism
-                guard !hasCompleted else { return }
-                hasCompleted = true
-                timer.invalidate()
-
-                guard let mark = placemarks?.first, error == nil else {
-                    return completion(nil)
-                }
-
-                completion(
-                    LocationMeta(
-                        coordinates: (self.coordinate.latitude, self.coordinate.longitude),
-                        locality: mark.locality ?? mark.subAdministrativeArea,
-                        country: mark.country,
-                        countryCode: mark.isoCountryCode,
-                        timeZone: mark.timeZone,
-                        administrativeArea: mark.administrativeArea
-                    )
+                return LocationMeta(
+                    coordinates: (self.coordinate.latitude, self.coordinate.longitude),
+                    locality: mark.locality ?? mark.subAdministrativeArea,
+                    country: mark.country,
+                    countryCode: mark.isoCountryCode,
+                    timeZone: mark.timeZone,
+                    administrativeArea: mark.administrativeArea
                 )
             }
-        }
 
-        // Start timer
-        RunLoop.current.add(timer, forMode: .default)
+            group.addTask {
+                try? await Task.sleep(seconds: timeout)
+                return nil
+            }
+
+            defer { group.cancelAll() }
+            return await group.next() ?? nil
+        }
     }
 }
 

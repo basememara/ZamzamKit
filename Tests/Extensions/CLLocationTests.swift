@@ -13,29 +13,23 @@ import ZamzamCore
 final class CLLocationTests: XCTestCase {}
 
 extension CLLocationTests {
-    func testMetaData() throws {
+    func testMetaData() async throws {
         // Given
-        let promise = expectation(description: "fetch location")
         let value = CLLocation(latitude: 43.7, longitude: -79.4)
         let expected = "Toronto, CA"
 
         // When
-        value.geocoder {
-            defer { promise.fulfill() }
+        let meta = await value.geocoder(timeout: 5)
 
-            guard let locality = $0?.locality,
-                let countryCode = $0?.countryCode else {
-                    XCTFail("Could not retrieve address meta data.")
-                    return
-            }
-
-            // Then
-            XCTAssertEqual("\(locality), \(countryCode)", expected)
-            XCTAssertEqual($0?.description, expected)
-            XCTAssertEqual($0?.timeZone?.identifier, "America/Toronto")
+        // Then
+        guard let locality = meta?.locality, let countryCode = meta?.countryCode else {
+            XCTFail("Could not retrieve address meta data.")
+            return
         }
 
-        waitForExpectations(timeout: 5.0)
+        XCTAssertEqual("\(locality), \(countryCode)", expected)
+        XCTAssertEqual(meta?.description, expected)
+        XCTAssertEqual(meta?.timeZone?.identifier, "America/Toronto")
     }
 }
 

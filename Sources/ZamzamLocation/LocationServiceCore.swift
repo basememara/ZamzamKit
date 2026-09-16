@@ -9,6 +9,7 @@
 import CoreLocation
 import ZamzamCore
 
+@MainActor
 public class LocationServiceCore: NSObject, LocationService {
     private let desiredAccuracy: CLLocationAccuracy?
     private let distanceFilter: Double?
@@ -123,14 +124,16 @@ public extension LocationServiceCore {
 
 // MARK: - Delegates
 
-extension LocationServiceCore: CLLocationManagerDelegate {
+// Core Location delivers these on the thread that created the manager, which is the main actor here.
+extension LocationServiceCore: @preconcurrency CLLocationManagerDelegate {
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        guard manager.authorizationStatus != .notDetermined else { return }
+        let status = manager.authorizationStatus
+        guard status != .notDetermined else { return }
 
-        DispatchQueue.transform.async {
-            // The `locationServicesEnabled` request cannot be called on main thread
-            let isAuthorized = self.isAuthorized
-            DispatchQueue.main.async { self.delegate?.locationService(didChangeAuthorization: isAuthorized) }
+        Task { [weak self] in
+            // `locationServicesEnabled()` blocks its caller, so it cannot run on the main actor.
+            let isEnabled = await Task.detached { CLLocationManager.locationServicesEnabled() }.value
+            self?.delegate?.locationService(didChangeAuthorization: isEnabled && status.isAuthorized)
         }
     }
 

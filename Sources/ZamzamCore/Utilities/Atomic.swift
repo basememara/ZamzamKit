@@ -13,7 +13,7 @@ import Foundation
 /// An object that manages the execution of tasks atomically for thread-safety.
 ///
 /// This will be deprecated in favour of a concurrency version.
-struct Atomic<Value> {
+final class Atomic<Value>: @unchecked Sendable {
     private let mutex = DispatchQueue(label: "\(DispatchQueue.labelPrefix).Atomic", attributes: .concurrent)
     private var _value: Value
 
@@ -25,7 +25,7 @@ struct Atomic<Value> {
     var value: Value { mutex.sync { _value } }
 
     /// Submits a block for synchronous, thread-safe execution.
-    mutating func value<T>(execute task: (inout Value) -> T) -> T {
+    func value<T>(execute task: (inout Value) -> T) -> T {
         mutex.sync(flags: .barrier) { task(&_value) }
     }
 }

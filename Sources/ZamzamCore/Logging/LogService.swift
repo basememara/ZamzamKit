@@ -8,7 +8,7 @@
 
 import Foundation.NSURL
 
-public protocol LogService {
+public protocol LogService: Sendable {
     /// The minimum level required to create log entries.
     var minLevel: LogAPI.Level { get }
 
@@ -29,8 +29,8 @@ public protocol LogService {
         function: String,
         line: Int,
         error: Error?,
-        context: [String: CustomStringConvertible],
-        sessionContext: [String: CustomStringConvertible]
+        context: [String: any CustomStringConvertible & Sendable],
+        sessionContext: [String: any CustomStringConvertible & Sendable]
     )
 
     /// Returns if the logger should process the entry for the specified log level.
@@ -51,7 +51,7 @@ public protocol LogService {
         _ function: String,
         _ line: Int,
         _ error: Error?,
-        _ context: [String: CustomStringConvertible]
+        _ context: [String: any CustomStringConvertible & Sendable]
     ) -> String
 }
 
@@ -68,7 +68,7 @@ public extension LogService {
         _ function: String,
         _ line: Int,
         _ error: Error?,
-        _ context: [String: CustomStringConvertible]
+        _ context: [String: any CustomStringConvertible & Sendable]
     ) -> String {
         var output = "\(URL(fileURLWithPath: file).deletingPathExtension().lastPathComponent).\(function):\(line) - \(message)"
 
@@ -87,7 +87,7 @@ public extension LogService {
 // MARK: - Namespace
 
 public enum LogAPI {
-    public enum Level: Comparable, CaseIterable {
+    public enum Level: Comparable, CaseIterable, Sendable {
         case verbose
         case debug
         case info

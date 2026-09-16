@@ -10,9 +10,12 @@ import Combine
 import Foundation
 import SwiftUI
 
-public class LogManager {
+public final class LogManager: @unchecked Sendable {
     private let services: [LogService]
-    private var context: [String: CustomStringConvertible] = [:]
+    private let subject = PassthroughSubject<[String: any CustomStringConvertible & Sendable], Never>()
+
+    /// Guarded by `DispatchQueue.logger`, which is why the `Sendable` conformance is unchecked.
+    private var context: [String: any CustomStringConvertible & Sendable] = [:]
 
     public init(services: [LogService]) {
         self.services = services
@@ -21,18 +24,18 @@ public class LogManager {
 
 public extension LogManager {
     /// Adds a custom attribute to all future logs sent by this logger.
-    func set(_ value: CustomStringConvertible?, forKey key: String) {
+    func set(_ value: (any CustomStringConvertible & Sendable)?, forKey key: String) {
         DispatchQueue.logger.sync {
             context[key] = value
-            Self.subject.send(context)
+            subject.send(context)
         }
     }
 
     /// Adds custom attributes to all future logs sent by this logger.
-    func set(_ context: [String: CustomStringConvertible]) {
+    func set(_ context: [String: any CustomStringConvertible & Sendable]) {
         DispatchQueue.logger.sync {
             self.context.merge(context) { $1 }
-            Self.subject.send(self.context)
+            subject.send(self.context)
         }
     }
 
@@ -45,7 +48,7 @@ public extension LogManager {
     func reset() {
         DispatchQueue.logger.sync {
             context.removeAll()
-            Self.subject.send(context)
+            subject.send(context)
         }
     }
 }
@@ -69,8 +72,8 @@ public extension LogManager {
         function: String,
         line: Int,
         error: Error?,
-        context: [String: CustomStringConvertible],
-        completion: (() -> Void)?
+        context: [String: any CustomStringConvertible & Sendable],
+        completion: (@Sendable () -> Void)?
     ) {
         defer {
             if let completion = completion {
@@ -114,8 +117,8 @@ public extension LogManager {
         file: String = #fileID,
         function: String = #function,
         line: Int = #line,
-        context: [String: CustomStringConvertible] = [:],
-        completion: (() -> Void)? = nil
+        context: [String: any CustomStringConvertible & Sendable] = [:],
+        completion: (@Sendable () -> Void)? = nil
     ) {
         write(
             .verbose,
@@ -146,8 +149,8 @@ public extension LogManager {
         file: String = #fileID,
         function: String = #function,
         line: Int = #line,
-        context: [String: CustomStringConvertible] = [:],
-        completion: (() -> Void)? = nil
+        context: [String: any CustomStringConvertible & Sendable] = [:],
+        completion: (@Sendable () -> Void)? = nil
     ) {
         write(
             .debug,
@@ -178,8 +181,8 @@ public extension LogManager {
         file: String = #fileID,
         function: String = #function,
         line: Int = #line,
-        context: [String: CustomStringConvertible] = [:],
-        completion: (() -> Void)? = nil
+        context: [String: any CustomStringConvertible & Sendable] = [:],
+        completion: (@Sendable () -> Void)? = nil
     ) {
         write(
             .info,
@@ -212,8 +215,8 @@ public extension LogManager {
         function: String = #function,
         line: Int = #line,
         error: Error? = nil,
-        context: [String: CustomStringConvertible] = [:],
-        completion: (() -> Void)? = nil
+        context: [String: any CustomStringConvertible & Sendable] = [:],
+        completion: (@Sendable () -> Void)? = nil
     ) {
         write(
             .warning,
@@ -246,8 +249,8 @@ public extension LogManager {
         function: String = #function,
         line: Int = #line,
         error: Error? = nil,
-        context: [String: CustomStringConvertible] = [:],
-        completion: (() -> Void)? = nil
+        context: [String: any CustomStringConvertible & Sendable] = [:],
+        completion: (@Sendable () -> Void)? = nil
     ) {
         write(
             .error,
@@ -265,10 +268,8 @@ public extension LogManager {
 // MARK: - Observers
 
 public extension LogManager {
-    private static let subject = PassthroughSubject<[String: CustomStringConvertible], Never>()
-
-    func publisher() -> AnyPublisher<[String: CustomStringConvertible], Never> {
-        Self.subject
+    func publisher() -> AnyPublisher<[String: any CustomStringConvertible & Sendable], Never> {
+        subject
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }

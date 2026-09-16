@@ -27,8 +27,8 @@ public extension LogServiceConsole {
         function: String,
         line: Int,
         error: Error?,
-        context: [String: CustomStringConvertible],
-        sessionContext: [String: CustomStringConvertible]
+        context: [String: any CustomStringConvertible & Sendable],
+        sessionContext: [String: any CustomStringConvertible & Sendable]
     ) {
         let time = Date.now.formatted(.dateTime.hour(.twoDigits(amPM: .omitted)).minute().second().secondFraction(.fractional(3)))
 

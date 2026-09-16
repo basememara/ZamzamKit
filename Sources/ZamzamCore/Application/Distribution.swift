@@ -9,7 +9,7 @@
 import Foundation.NSBundle
 
 /// Provides details of the current app.
-public protocol Distribution {}
+public protocol Distribution: Sendable {}
 
 // MARK: - App
 

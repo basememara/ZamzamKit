@@ -11,6 +11,7 @@
 import SwiftUI
 
 /// Namespace for deprecated SwiftUI modifiers for backwards-compatibility purposes.
+@MainActor
 public struct Compatibility<Content> {
     public let content: Content
 
@@ -25,7 +26,7 @@ public extension View {
     @available(tvOS, deprecated: 16)
     @available(watchOS, deprecated: 9)
     /// Namespace for new and deprecated SwiftUI modifiers for backwards-compatibility purposes.
-    var compatibility: Compatibility<Self> { Compatibility(self) }
+    @MainActor var compatibility: Compatibility<Self> { Compatibility(self) }
 }
 
 // MARK: - Extensions

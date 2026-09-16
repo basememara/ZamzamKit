@@ -33,8 +33,8 @@ public extension LogServiceOS {
         function: String,
         line: Int,
         error: Error?,
-        context: [String: CustomStringConvertible],
-        sessionContext: [String: CustomStringConvertible]
+        context: [String: any CustomStringConvertible & Sendable],
+        sessionContext: [String: any CustomStringConvertible & Sendable]
     ) {
         let type: OSLogType
 

@@ -140,7 +140,8 @@ extension LoggingTests {
 // MARK: - Mocks
 
 private extension LoggingTests {
-    class LogTestService: LogService {
+    /// Writes are serialized by `LogManager`'s logger queue, hence the unchecked conformance.
+    final class LogTestService: LogService, @unchecked Sendable {
         let minLevel: LogAPI.Level
 
         init(minLevel: LogAPI.Level) {
@@ -159,8 +160,8 @@ private extension LoggingTests {
             function: String,
             line: Int,
             error: Error?,
-            context: [String: CustomStringConvertible],
-            sessionContext: [String: CustomStringConvertible]
+            context: [String: any CustomStringConvertible & Sendable],
+            sessionContext: [String: any CustomStringConvertible & Sendable]
         ) {
             entries.updateValue(entries[level, default: []] + [message], forKey: level)
         }

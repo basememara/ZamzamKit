@@ -11,7 +11,7 @@ import Foundation
 /// Sends a message to DataDog error logs.
 public struct LogServiceDataDog: LogService {
     public var minLevel: LogAPI.Level { minLevelSetting() }
-    private let minLevelSetting: () -> LogAPI.Level
+    private let minLevelSetting: @Sendable () -> LogAPI.Level
     private let distribution: Distribution
     private let environment: String
     private let service: LogServiceHTTP
@@ -19,7 +19,7 @@ public struct LogServiceDataDog: LogService {
     public init(
         apiKey: String,
         serviceName: String,
-        minLevel: @autoclosure @escaping () -> LogAPI.Level, // Allows runtime changes
+        minLevel: @autoclosure @escaping @Sendable () -> LogAPI.Level, // Allows runtime changes
         minFlushLevel: LogAPI.Level,
         maxEntriesInBuffer: Int,
         isDebug: Bool,
@@ -58,8 +58,8 @@ public extension LogServiceDataDog {
         function: String,
         line: Int,
         error: Error?,
-        context: [String: CustomStringConvertible],
-        sessionContext: [String: CustomStringConvertible]
+        context: [String: any CustomStringConvertible & Sendable],
+        sessionContext: [String: any CustomStringConvertible & Sendable]
     ) {
         var parameters: [String: Any] = [
             "date": DateFormatter.zuluFormatter.string(from: .now),

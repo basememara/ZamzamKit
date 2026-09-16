@@ -12,6 +12,7 @@ import Foundation.NSBundle
 import Foundation.NSURL
 import UIKit.UIApplication
 
+@MainActor
 public protocol Audible: AnyObject {
     var audioPlayer: AVAudioPlayer? { get set }
 }
@@ -55,6 +56,7 @@ public extension Audible {
 
 // MARK: - Types
 
+@MainActor
 public protocol AudibleApplication {
     func beginReceivingRemoteControlEvents()
 }

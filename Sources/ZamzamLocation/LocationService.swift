@@ -9,6 +9,7 @@ import CoreLocation
 
 // MARK: - Service
 
+@MainActor
 public protocol LocationService: AnyObject {
     var delegate: LocationServiceDelegate? { get set }
     var isAuthorized: Bool { get }
@@ -38,6 +39,7 @@ public protocol LocationService: AnyObject {
 
 // MARK: - Delegates
 
+@MainActor
 public protocol LocationServiceDelegate: AnyObject {
     func locationService(didChangeAuthorization authorization: Bool)
     func locationService(didUpdateLocation location: CLLocation)

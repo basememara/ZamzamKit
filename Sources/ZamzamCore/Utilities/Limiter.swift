@@ -41,7 +41,7 @@ import Foundation.NSDate
 ///     sendToServer() // Fires after 5 seconds
 ///
 public final actor Limiter {
-    public enum Policy {
+    public enum Policy: Sendable {
         case throttle
         case debounce
     }
@@ -63,7 +63,7 @@ public final actor Limiter {
     /// Execute a work item and ensures it is not called until the delay is completed.
     ///
     /// - Parameter block: The work item to be invoked on the limiter with the policy.
-    public func run(_ operation: @escaping () async -> Void) {
+    public func run(_ operation: @escaping @Sendable () async -> Void) {
         switch policy {
         case .throttle:
             throttle(operation)
@@ -76,7 +76,7 @@ public final actor Limiter {
 // MARK: - Helpers
 
 private extension Limiter {
-    func throttle(_ operation: @escaping () async -> Void) {
+    func throttle(_ operation: @escaping @Sendable () async -> Void) {
         guard task == nil else { return }
 
         task = Task {
@@ -91,7 +91,7 @@ private extension Limiter {
 }
 
 private extension Limiter {
-    func debounce(_ operation: @escaping () async -> Void) {
+    func debounce(_ operation: @escaping @Sendable () async -> Void) {
         task?.cancel()
 
         task = Task {

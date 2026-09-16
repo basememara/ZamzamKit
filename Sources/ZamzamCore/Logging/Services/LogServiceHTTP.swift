@@ -18,7 +18,7 @@ import UIKit.UIDevice
 #endif
 
 /// Log destination for sending over HTTP.
-final public class LogServiceHTTP {
+final public class LogServiceHTTP: @unchecked Sendable {
     private let urlRequest: URLRequest
     private let maxEntriesInBuffer: Int
     private let minFlushLevel: LogAPI.Level
@@ -27,10 +27,10 @@ final public class LogServiceHTTP {
     private let networkManager: NetworkManager
 
     /// Closure that converts the buffer to data.
-    private let bufferEncode: ([Entry]) -> Data?
+    private let bufferEncode: @Sendable ([Entry]) -> Data?
 
     /// Stores the log entries in memory until it is ready to send.
-    private var buffer = Atomic<[Entry]>([])
+    private let buffer = Atomic<[Entry]>([])
 
     private var cancellable = Set<AnyCancellable>()
 
@@ -47,7 +47,7 @@ final public class LogServiceHTTP {
     ///   - notificationCenter: A notification dispatch mechanism that registers observers for flushing the buffer at certain app lifecycle events.
     public init(
         urlRequest: URLRequest,
-        bufferEncode: @escaping ([Entry]) -> Data?,
+        bufferEncode: @escaping @Sendable ([Entry]) -> Data?,
         maxEntriesInBuffer: Int,
         minFlushLevel: LogAPI.Level = .none,
         isDebug: Bool,
@@ -74,7 +74,7 @@ final public class LogServiceHTTP {
 
 public extension LogServiceHTTP {
     /// A log entry that contains details of the event.
-    struct Entry {
+    struct Entry: Sendable {
         public let level: LogAPI.Level
         public let date: Date
         public let platform: String
@@ -103,8 +103,8 @@ public extension LogServiceHTTP {
         file: String,
         function: String,
         line: Int,
-        context: [String: CustomStringConvertible],
-        sessionContext: [String: CustomStringConvertible]
+        context: [String: any CustomStringConvertible & Sendable],
+        sessionContext: [String: any CustomStringConvertible & Sendable]
     ) {
         var device: [String: Any] = [
             "is_simulator": distribution.isRunningOnSimulator
