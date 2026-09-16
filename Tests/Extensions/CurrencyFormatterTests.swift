@@ -62,8 +62,7 @@ extension CurrencyFormatterTests {
         // ICU moves the directional marks between releases; the digits, separators and symbol may not
         let directionalMarks = CharacterSet(charactersIn: "\u{200E}\u{200F}\u{061C}")
         let visible = String(String.UnicodeScalarView(value.unicodeScalars.filter { !directionalMarks.contains($0) }))
-        #expect(visible.contains("١٢٣٬٤٥٦٬٧٨٩٫٩٩"))
-        #expect(visible.contains("ر.س."))
+        #expect(visible == "١٢٣٬٤٥٦٬٧٨٩٫٩٩\u{00A0}ر.س.")
     }
 
     @Test
