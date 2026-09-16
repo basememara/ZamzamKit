@@ -127,14 +127,8 @@ public extension LocationServiceCore {
 // Core Location delivers these on the thread that created the manager, which is the main actor here.
 extension LocationServiceCore: @preconcurrency CLLocationManagerDelegate {
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        let status = manager.authorizationStatus
-        guard status != .notDetermined else { return }
-
-        Task { [weak self] in
-            // `locationServicesEnabled()` blocks its caller, so it cannot run on the main actor.
-            let isEnabled = await Task.detached { CLLocationManager.locationServicesEnabled() }.value
-            self?.delegate?.locationService(didChangeAuthorization: isEnabled && status.isAuthorized)
-        }
+        guard manager.authorizationStatus != .notDetermined else { return }
+        delegate?.locationService(didChangeAuthorization: manager.isAuthorized)
     }
 
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
