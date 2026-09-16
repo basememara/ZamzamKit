@@ -62,32 +62,39 @@ public extension CLLocation {
 
     /// Retrieves location details for coordinates.
     ///
-    /// - Parameter timeout: A timeout after which `nil` is returned, since reverse
-    ///   geocoding is network-bound and can take arbitrarily long. Default is 10 seconds.
-    /// - Returns: The location details, or `nil` on failure or timeout.
+    /// - Parameter timeout: A deadline after which the lookup is cancelled and `nil` returned,
+    ///   since reverse geocoding is network-bound and can otherwise hang for minutes.
+    /// - Returns: The location details, or `nil` on failure, cancellation or timeout.
     func geocoder(timeout: TimeInterval = 10) async -> LocationMeta? {
-        await withTaskGroup(of: LocationMeta?.self) { group in
-            group.addTask {
-                guard let mark = try? await CLGeocoder().reverseGeocodeLocation(self).first else { return nil }
+        // `CLGeocoder` is not `Sendable`, but `cancelGeocode()` is the documented way to abandon
+        // an in-flight request from elsewhere, which is all the other references do.
+        nonisolated(unsafe) let geocoder = CLGeocoder()
 
-                return LocationMeta(
-                    coordinates: (self.coordinate.latitude, self.coordinate.longitude),
-                    locality: mark.locality ?? mark.subAdministrativeArea,
-                    country: mark.country,
-                    countryCode: mark.isoCountryCode,
-                    timeZone: mark.timeZone,
-                    administrativeArea: mark.administrativeArea
-                )
-            }
-
-            group.addTask {
-                try? await Task.sleep(seconds: timeout)
-                return nil
-            }
-
-            defer { group.cancelAll() }
-            return await group.next() ?? nil
+        // A task group would leave the losing child suspended until Core Location replied, so the
+        // deadline is enforced by cancelling the geocode itself rather than by racing it.
+        let timeoutTask = Task {
+            try await Task.sleep(seconds: timeout)
+            geocoder.cancelGeocode()
         }
+
+        defer { timeoutTask.cancel() }
+
+        let placemark = await withTaskCancellationHandler {
+            try? await geocoder.reverseGeocodeLocation(self).first
+        } onCancel: {
+            geocoder.cancelGeocode()
+        }
+
+        guard let placemark else { return nil }
+
+        return LocationMeta(
+            coordinates: (coordinate.latitude, coordinate.longitude),
+            locality: placemark.locality ?? placemark.subAdministrativeArea,
+            country: placemark.country,
+            countryCode: placemark.isoCountryCode,
+            timeZone: placemark.timeZone,
+            administrativeArea: placemark.administrativeArea
+        )
     }
 }
 
