@@ -10,44 +10,37 @@ import Foundation
 import Testing
 @testable import ZamzamCore
 
-// The pinned alamofire.org fixtures expired, so every evaluation against them fails.
-// Tracked rather than deleted: the code under test is unchanged.
+// The SecTrust fixtures are shared statics that the tests mutate through their anchors.
 @Suite(.serialized)
-struct NetworkServerTrustTests {
-    static let expiredFixtures: Comment = "Certificate fixtures under Tests/Network/Certificates have expired"
-}
+struct NetworkServerTrustTests {}
 
 extension NetworkServerTrustTests {
     @Test
     func thatAnchoredRootCertificatePassesSSLValidationWithRootInTrust() {
-        withKnownIssue(Self.expiredFixtures) {
-            // Given
-            let certificates = [SecCertificate.leafDNSNameAndURI, .intermediateCA1, .alamofireRootCA]
-            let trust = SecTrust.make(from: certificates).assignRootCertificateAsLoneAnchor()
-            let evaluator = NetworkPinnedCertificateTrustEvaluator(certificates: certificates)
+        // Given
+        let certificates = [SecCertificate.leafDNSNameAndURI, .intermediateCA1, .alamofireRootCA]
+        let trust = SecTrust.make(from: certificates).assignRootCertificateAsLoneAnchor()
+        let evaluator = NetworkPinnedCertificateTrustEvaluator(certificates: certificates)
 
-            // When
-            let result = evaluator.valid(trust, forHost: "test.alamofire.org")
+        // When
+        let result = evaluator.valid(trust, forHost: "test.alamofire.org")
 
-            // Then
-            #expect(result)
-        }
+        // Then
+        #expect(result)
     }
 
     @Test
     func thatAnchoredRootCertificatePassesSSLValidationWithoutRootInTrust() {
-        withKnownIssue(Self.expiredFixtures) {
-            // Given
-            let trust = SecTrust.leafDNSNameAndURI.assignRootCertificateAsLoneAnchor()
-            let policies = [SecPolicyCreateSSL(true, "test.alamofire.org" as CFString)]
-            let evaluator = NetworkPinnedCertificateTrustEvaluator(certificates: [])
+        // Given
+        let trust = SecTrust.leafDNSNameAndURI.assignRootCertificateAsLoneAnchor()
+        let policies = [SecPolicyCreateSSL(true, "test.alamofire.org" as CFString)]
+        let evaluator = NetworkPinnedCertificateTrustEvaluator(certificates: [])
 
-            // When
-            let result = evaluator.valid(trust, for: policies)
+        // When
+        let result = evaluator.valid(trust, for: policies)
 
-            // Then
-            #expect(result)
-        }
+        // Then
+        #expect(result)
     }
 
     @Test
@@ -66,34 +59,30 @@ extension NetworkServerTrustTests {
 
     @Test
     func thatWildcardCertificatePassesSSLValidation() {
-        withKnownIssue(Self.expiredFixtures) {
-            // Given
-            let trust = SecTrust.leafWildcard.assignRootCertificateAsLoneAnchor() // *.alamofire.org
-            let policies = [SecPolicyCreateSSL(true, "test.alamofire.org" as CFString)]
-            let evaluator = NetworkPinnedCertificateTrustEvaluator(certificates: [])
+        // Given
+        let trust = SecTrust.leafWildcard.assignRootCertificateAsLoneAnchor() // *.alamofire.org
+        let policies = [SecPolicyCreateSSL(true, "test.alamofire.org" as CFString)]
+        let evaluator = NetworkPinnedCertificateTrustEvaluator(certificates: [])
 
-            // When
-            let result = evaluator.valid(trust, for: policies)
+        // When
+        let result = evaluator.valid(trust, for: policies)
 
-            // Then
-            #expect(result)
-        }
+        // Then
+        #expect(result)
     }
 
     @Test
     func thatDNSNameCertificatePassesSSLValidation() {
-        withKnownIssue(Self.expiredFixtures) {
-            // Given
-            let trust = SecTrust.leafValidDNSName.assignRootCertificateAsLoneAnchor()
-            let policies = [SecPolicyCreateSSL(true, "test.alamofire.org" as CFString)]
-            let evaluator = NetworkPinnedCertificateTrustEvaluator(certificates: [])
+        // Given
+        let trust = SecTrust.leafValidDNSName.assignRootCertificateAsLoneAnchor()
+        let policies = [SecPolicyCreateSSL(true, "test.alamofire.org" as CFString)]
+        let evaluator = NetworkPinnedCertificateTrustEvaluator(certificates: [])
 
-            // When
-            let result = evaluator.valid(trust, for: policies)
+        // When
+        let result = evaluator.valid(trust, for: policies)
 
-            // Then
-            #expect(result)
-        }
+        // Then
+        #expect(result)
     }
 
     @Test
@@ -112,38 +101,34 @@ extension NetworkServerTrustTests {
 
     @Test
     func thatMultipleDNSNamesCertificatePassesSSLValidationForAllEntries() {
-        withKnownIssue(Self.expiredFixtures) {
-            // Given
-            let trust = SecTrust.leafMultipleDNSNames.assignRootCertificateAsLoneAnchor()
-            let policies = [
-                SecPolicyCreateSSL(true, "test.alamofire.org" as CFString),
-                SecPolicyCreateSSL(true, "blog.alamofire.org" as CFString),
-                SecPolicyCreateSSL(true, "www.alamofire.org" as CFString)
-            ]
-            let evaluator = NetworkPinnedCertificateTrustEvaluator(certificates: [])
+        // Given
+        let trust = SecTrust.leafMultipleDNSNames.assignRootCertificateAsLoneAnchor()
+        let policies = [
+            SecPolicyCreateSSL(true, "test.alamofire.org" as CFString),
+            SecPolicyCreateSSL(true, "blog.alamofire.org" as CFString),
+            SecPolicyCreateSSL(true, "www.alamofire.org" as CFString)
+        ]
+        let evaluator = NetworkPinnedCertificateTrustEvaluator(certificates: [])
 
-            // When
-            let result = evaluator.valid(trust, for: policies)
+        // When
+        let result = evaluator.valid(trust, for: policies)
 
-            // Then
-            #expect(result)
-        }
+        // Then
+        #expect(result)
     }
 
     @Test
     func thatPassingNilForHostParameterAllowsCertificateMissingDNSNameToPassSSLValidation() {
-        withKnownIssue(Self.expiredFixtures) {
-            // Given
-            let trust = SecTrust.leafMissingDNSNameAndURI.assignRootCertificateAsLoneAnchor()
-            let policies = [SecPolicyCreateSSL(true, nil)]
-            let evaluator = NetworkPinnedCertificateTrustEvaluator(certificates: [])
+        // Given
+        let trust = SecTrust.leafMissingDNSNameAndURI.assignRootCertificateAsLoneAnchor()
+        let policies = [SecPolicyCreateSSL(true, nil)]
+        let evaluator = NetworkPinnedCertificateTrustEvaluator(certificates: [])
 
-            // When
-            let result = evaluator.valid(trust, for: policies)
+        // When
+        let result = evaluator.valid(trust, for: policies)
 
-            // Then
-            #expect(result)
-        }
+        // Then
+        #expect(result)
     }
 
     @Test
@@ -226,62 +211,56 @@ extension NetworkServerTrustTests {
 extension NetworkServerTrustTests {
     @Test
     func thatPinnedLeafCertificatePassesEvaluationWithSelfSignedSupportAndHostValidation() {
-        withKnownIssue(Self.expiredFixtures) {
-            // Given
-            let host = "test.alamofire.org"
-            let serverTrust = SecTrust.leafValidDNSName
-            let certificates = [SecCertificate.leafValidDNSName]
-            let evaluator = NetworkPinnedCertificateTrustEvaluator(
-                certificates: certificates,
-                acceptSelfSigned: true
-            )
+        // Given
+        let host = "test.alamofire.org"
+        let serverTrust = SecTrust.leafValidDNSName
+        let certificates = [SecCertificate.leafValidDNSName]
+        let evaluator = NetworkPinnedCertificateTrustEvaluator(
+            certificates: certificates,
+            acceptSelfSigned: true
+        )
 
-            // When
-            let result = evaluator.valid(serverTrust, forHost: host)
+        // When
+        let result = evaluator.valid(serverTrust, forHost: host)
 
-            // Then
-            #expect(result)
-        }
+        // Then
+        #expect(result)
     }
 
     @Test
     func thatPinnedIntermediateCertificatePassesEvaluationWithSelfSignedSupportAndHostValidation() {
-        withKnownIssue(Self.expiredFixtures) {
-            // Given
-            let host = "test.alamofire.org"
-            let serverTrust = SecTrust.leafValidDNSName
-            let certificates = [SecCertificate.intermediateCA2]
-            let evaluator = NetworkPinnedCertificateTrustEvaluator(
-                certificates: certificates,
-                acceptSelfSigned: true
-            )
+        // Given
+        let host = "test.alamofire.org"
+        let serverTrust = SecTrust.leafValidDNSName
+        let certificates = [SecCertificate.intermediateCA2]
+        let evaluator = NetworkPinnedCertificateTrustEvaluator(
+            certificates: certificates,
+            acceptSelfSigned: true
+        )
 
-            // When
-            let result = evaluator.valid(serverTrust, forHost: host)
+        // When
+        let result = evaluator.valid(serverTrust, forHost: host)
 
-            // Then
-            #expect(result)
-        }
+        // Then
+        #expect(result)
     }
 
     @Test
     func thatPinnedRootCertificatePassesEvaluationWithSelfSignedSupportAndHostValidation() {
-        withKnownIssue(Self.expiredFixtures) {
-            // Given
-            let host = "test.alamofire.org"
-            let serverTrust = SecTrust.leafValidDNSName
-            let certificates = [SecCertificate.alamofireRootCA]
-            let evaluator = NetworkPinnedCertificateTrustEvaluator(
-                certificates: certificates,
-                acceptSelfSigned: true
-            )
+        // Given
+        let host = "test.alamofire.org"
+        let serverTrust = SecTrust.leafValidDNSName
+        let certificates = [SecCertificate.alamofireRootCA]
+        let evaluator = NetworkPinnedCertificateTrustEvaluator(
+            certificates: certificates,
+            acceptSelfSigned: true
+        )
 
-            // When
-            let result = evaluator.valid(serverTrust, forHost: host)
+        // When
+        let result = evaluator.valid(serverTrust, forHost: host)
 
-            // Then
-            #expect(result)
-        }
+        // Then
+        #expect(result)
     }
 }
 
