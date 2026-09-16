@@ -8,7 +8,7 @@
 
 import Foundation.NSURLRequest
 
-public protocol NetworkService {
+public protocol NetworkService: Sendable {
     /// Creates a task that retrieves the contents of a URL based on the specified request object, and calls a handler upon completion.
     ///
     /// - Parameters:

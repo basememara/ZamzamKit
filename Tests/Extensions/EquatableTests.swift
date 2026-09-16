@@ -6,13 +6,15 @@
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import ZamzamCore
 
-final class EquatableTests: XCTestCase {}
+struct EquatableTests {}
 
 extension EquatableTests {
-    func testCaseIterableIndex() {
+    @Test
+    func caseIterableIndex() {
         enum Direction: CaseIterable {
             case north
             case east
@@ -20,9 +22,9 @@ extension EquatableTests {
             case west
         }
 
-        XCTAssertEqual(Direction.north.index(), 0)
-        XCTAssertEqual(Direction.east.index(), 1)
-        XCTAssertEqual(Direction.south.index(), 2)
-        XCTAssertEqual(Direction.west.index(), 3)
+        #expect(Direction.north.index() == 0)
+        #expect(Direction.east.index() == 1)
+        #expect(Direction.south.index() == 2)
+        #expect(Direction.west.index() == 3)
     }
 }

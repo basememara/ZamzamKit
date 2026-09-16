@@ -19,7 +19,7 @@ import Foundation
 ///     // service.apiKey == "your_secret_string_here"
 ///
 /// Note this does not encrypt the value but simply makes it harder to extract from decompiled code.
-public struct Obfuscator {
+public struct Obfuscator: Sendable {
     private let salt: String
 
     /// An instance used to conceal and reveal strings.

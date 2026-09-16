@@ -6,10 +6,11 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import ZamzamCore
 
-final class NetworkTests: XCTestCase {
+struct NetworkTests {
     private let jsonDecoder = JSONDecoder()
 
     private let networkManager = NetworkManager(
@@ -20,7 +21,8 @@ final class NetworkTests: XCTestCase {
 // MARK: - GET
 
 extension NetworkTests {
-    func testGET() async throws {
+    @Test
+    func gET() async throws {
         // Given
         let request = URLRequest(
             url: URL(safeString: "https://httpbin.org/get"),
@@ -31,14 +33,15 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/get")
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(request.url?.absoluteString == "https://httpbin.org/get")
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
     }
 }
 
 extension NetworkTests {
-    func testGETWithParameters() async throws {
+    @Test
+    func gETWithParameters() async throws {
         // Given
         let parameters: [String: Any] = [
             "abc": 123,
@@ -56,30 +59,31 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssert(request.url?.absoluteString.contains("https://httpbin.org/get?") == true)
-        XCTAssert(request.url?.absoluteString.contains("abc=123") == true)
-        XCTAssert(request.url?.absoluteString.contains("def=test456") == true)
-        XCTAssert(request.url?.absoluteString.contains("xyz=true") == true)
+        #expect(request.url?.absoluteString.contains("https://httpbin.org/get?") == true)
+        #expect(request.url?.absoluteString.contains("abc=123") == true)
+        #expect(request.url?.absoluteString.contains("def=test456") == true)
+        #expect(request.url?.absoluteString.contains("xyz=true") == true)
 
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
 
         do {
             let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
-            XCTAssertEqual(model.url, request.url?.absoluteString)
+            #expect(model.url == request.url?.absoluteString)
 
             parameters.forEach {
-                XCTAssertEqual(model.args[$0.key], "\($0.value)")
+                #expect(model.args[$0.key] == "\($0.value)")
             }
         } catch {
-            XCTFail("The resonse data could not be parse: \(error)")
+            Issue.record("The resonse data could not be parse: \(error)")
         }
     }
 }
 
 extension NetworkTests {
-    func testGETWithHeaders() async throws {
+    @Test
+    func gETWithHeaders() async throws {
         // Given
         let headers: [String: String] = [
             "Abc": "test123",
@@ -97,20 +101,20 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/get")
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(request.url?.absoluteString == "https://httpbin.org/get")
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
 
         do {
             let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
-            XCTAssertEqual(model.url, request.url?.absoluteString)
+            #expect(model.url == request.url?.absoluteString)
 
             headers.forEach {
-                XCTAssertEqual(model.headers[$0.key], $0.value)
+                #expect(model.headers[$0.key] == $0.value)
             }
         } catch {
-            XCTFail("The resonse data could not be parse: \(error)")
+            Issue.record("The resonse data could not be parse: \(error)")
         }
     }
 }
@@ -118,7 +122,8 @@ extension NetworkTests {
 // MARK: - POST
 
 extension NetworkTests {
-    func testPOST() async throws {
+    @Test
+    func pOST() async throws {
         // Given
         let request = URLRequest(
             url: URL(safeString: "https://httpbin.org/post"),
@@ -129,14 +134,15 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/post")
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(request.url?.absoluteString == "https://httpbin.org/post")
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
     }
 }
 
 extension NetworkTests {
-    func testPOSTWithParameters() async throws {
+    @Test
+    func pOSTWithParameters() async throws {
         // Given
         let parameters: [String: Any] = [
             "abc": 123,
@@ -154,26 +160,27 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/post")
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(request.url?.absoluteString == "https://httpbin.org/post")
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
 
         do {
             let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
-            XCTAssertEqual(model.url, request.url?.absoluteString)
+            #expect(model.url == request.url?.absoluteString)
 
-            XCTAssertEqual(model.json?["abc"]?.value as? Int, 123)
-            XCTAssertEqual(model.json?["def"]?.value as? String, "test456")
-            XCTAssertEqual(model.json?["xyz"]?.value as? Bool, true)
+            #expect(model.json?["abc"]?.value as? Int == 123)
+            #expect(model.json?["def"]?.value as? String == "test456")
+            #expect(model.json?["xyz"]?.value as? Bool == true)
         } catch {
-            XCTFail("The resonse data could not be parse: \(error)")
+            Issue.record("The resonse data could not be parse: \(error)")
         }
     }
 }
 
 extension NetworkTests {
-    func testPOSTWithHeaders() async throws {
+    @Test
+    func pOSTWithHeaders() async throws {
         // Given
         let headers: [String: String] = [
             "Abc": "test123",
@@ -191,20 +198,20 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/post")
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(request.url?.absoluteString == "https://httpbin.org/post")
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
 
         do {
             let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
-            XCTAssertEqual(model.url, request.url?.absoluteString)
+            #expect(model.url == request.url?.absoluteString)
 
             headers.forEach {
-                XCTAssertEqual(model.headers[$0.key], $0.value)
+                #expect(model.headers[$0.key] == $0.value)
             }
         } catch {
-            XCTFail("The resonse data could not be parse: \(error)")
+            Issue.record("The resonse data could not be parse: \(error)")
         }
     }
 }
@@ -212,7 +219,8 @@ extension NetworkTests {
 // MARK: - PATCH
 
 extension NetworkTests {
-    func testPATCH() async throws {
+    @Test
+    func pATCH() async throws {
         // Given
         let request = URLRequest(
             url: URL(safeString: "https://httpbin.org/patch"),
@@ -223,14 +231,15 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/patch")
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(request.url?.absoluteString == "https://httpbin.org/patch")
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
     }
 }
 
 extension NetworkTests {
-    func testPATCHWithParameters() async throws {
+    @Test
+    func pATCHWithParameters() async throws {
         // Given
         let parameters: [String: Any] = [
             "abc": 123,
@@ -248,26 +257,27 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/patch")
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(request.url?.absoluteString == "https://httpbin.org/patch")
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
 
         do {
             let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
-            XCTAssertEqual(model.url, request.url?.absoluteString)
+            #expect(model.url == request.url?.absoluteString)
 
-            XCTAssertEqual(model.json?["abc"]?.value as? Int, 123)
-            XCTAssertEqual(model.json?["def"]?.value as? String, "test456")
-            XCTAssertEqual(model.json?["xyz"]?.value as? Bool, true)
+            #expect(model.json?["abc"]?.value as? Int == 123)
+            #expect(model.json?["def"]?.value as? String == "test456")
+            #expect(model.json?["xyz"]?.value as? Bool == true)
         } catch {
-            XCTFail("The resonse data could not be parse: \(error)")
+            Issue.record("The resonse data could not be parse: \(error)")
         }
     }
 }
 
 extension NetworkTests {
-    func testPATCHWithHeaders() async throws {
+    @Test
+    func pATCHWithHeaders() async throws {
         // Given
         let headers: [String: String] = [
             "Abc": "test123",
@@ -285,20 +295,20 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/patch")
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(request.url?.absoluteString == "https://httpbin.org/patch")
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
 
         do {
             let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
-            XCTAssertEqual(model.url, request.url?.absoluteString)
+            #expect(model.url == request.url?.absoluteString)
 
             headers.forEach {
-                XCTAssertEqual(model.headers[$0.key], $0.value)
+                #expect(model.headers[$0.key] == $0.value)
             }
         } catch {
-            XCTFail("The resonse data could not be parse: \(error)")
+            Issue.record("The resonse data could not be parse: \(error)")
         }
     }
 }
@@ -306,7 +316,8 @@ extension NetworkTests {
 // MARK: - PUT
 
 extension NetworkTests {
-    func testPUT() async throws {
+    @Test
+    func pUT() async throws {
         // Given
         let request = URLRequest(
             url: URL(safeString: "https://httpbin.org/put"),
@@ -317,14 +328,15 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/put")
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(request.url?.absoluteString == "https://httpbin.org/put")
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
     }
 }
 
 extension NetworkTests {
-    func testPUTWithParameters() async throws {
+    @Test
+    func pUTWithParameters() async throws {
         // Given
         let parameters: [String: Any] = [
             "abc": 123,
@@ -342,26 +354,27 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/put")
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(request.url?.absoluteString == "https://httpbin.org/put")
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
 
         do {
             let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
-            XCTAssertEqual(model.url, request.url?.absoluteString)
+            #expect(model.url == request.url?.absoluteString)
 
-            XCTAssertEqual(model.json?["abc"]?.value as? Int, 123)
-            XCTAssertEqual(model.json?["def"]?.value as? String, "test456")
-            XCTAssertEqual(model.json?["xyz"]?.value as? Bool, true)
+            #expect(model.json?["abc"]?.value as? Int == 123)
+            #expect(model.json?["def"]?.value as? String == "test456")
+            #expect(model.json?["xyz"]?.value as? Bool == true)
         } catch {
-            XCTFail("The resonse data could not be parse: \(error)")
+            Issue.record("The resonse data could not be parse: \(error)")
         }
     }
 }
 
 extension NetworkTests {
-    func testPUTWithHeaders() async throws {
+    @Test
+    func pUTWithHeaders() async throws {
         // Given
         let headers: [String: String] = [
             "Abc": "test123",
@@ -379,20 +392,20 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/put")
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(request.url?.absoluteString == "https://httpbin.org/put")
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
 
         do {
             let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
-            XCTAssertEqual(model.url, request.url?.absoluteString)
+            #expect(model.url == request.url?.absoluteString)
 
             headers.forEach {
-                XCTAssertEqual(model.headers[$0.key], $0.value)
+                #expect(model.headers[$0.key] == $0.value)
             }
         } catch {
-            XCTFail("The resonse data could not be parse: \(error)")
+            Issue.record("The resonse data could not be parse: \(error)")
         }
     }
 }
@@ -400,7 +413,8 @@ extension NetworkTests {
 // MARK: - DELETE
 
 extension NetworkTests {
-    func testDELETE() async throws {
+    @Test
+    func dELETE() async throws {
         // Given
         let request = URLRequest(
             url: URL(safeString: "https://httpbin.org/delete"),
@@ -411,14 +425,15 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/delete")
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(request.url?.absoluteString == "https://httpbin.org/delete")
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
     }
 }
 
 extension NetworkTests {
-    func testDELETEWithParameters() async throws {
+    @Test
+    func dELETEWithParameters() async throws {
         // Given
         let parameters: [String: Any] = [
             "abc": 123,
@@ -436,30 +451,31 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssert(request.url?.absoluteString.contains("https://httpbin.org/delete?") == true)
-        XCTAssert(request.url?.absoluteString.contains("abc=123") == true)
-        XCTAssert(request.url?.absoluteString.contains("def=test456") == true)
-        XCTAssert(request.url?.absoluteString.contains("xyz=true") == true)
+        #expect(request.url?.absoluteString.contains("https://httpbin.org/delete?") == true)
+        #expect(request.url?.absoluteString.contains("abc=123") == true)
+        #expect(request.url?.absoluteString.contains("def=test456") == true)
+        #expect(request.url?.absoluteString.contains("xyz=true") == true)
 
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
 
         do {
             let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
-            XCTAssertEqual(model.url, request.url?.absoluteString)
+            #expect(model.url == request.url?.absoluteString)
 
             parameters.forEach {
-                XCTAssertEqual(model.args[$0.key], "\($0.value)")
+                #expect(model.args[$0.key] == "\($0.value)")
             }
         } catch {
-            XCTFail("The resonse data could not be parse: \(error)")
+            Issue.record("The resonse data could not be parse: \(error)")
         }
     }
 }
 
 extension NetworkTests {
-    func testDELETEWithHeaders() async throws {
+    @Test
+    func dELETEWithHeaders() async throws {
         // Given
         let headers: [String: String] = [
             "Abc": "test123",
@@ -477,20 +493,20 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(request.url?.absoluteString, "https://httpbin.org/delete")
-        XCTAssertEqual(response.headers["Content-Type"], "application/json")
-        XCTAssertEqual(response.statusCode, 200)
+        #expect(request.url?.absoluteString == "https://httpbin.org/delete")
+        #expect(response.headers["Content-Type"] == "application/json")
+        #expect(response.statusCode == 200)
 
         do {
             let model = try jsonDecoder.decode(ResponseModel.self, from: response.data)
 
-            XCTAssertEqual(model.url, request.url?.absoluteString)
+            #expect(model.url == request.url?.absoluteString)
 
             headers.forEach {
-                XCTAssertEqual(model.headers[$0.key], $0.value)
+                #expect(model.headers[$0.key] == $0.value)
             }
         } catch {
-            XCTFail("The resonse data could not be parse: \(error)")
+            Issue.record("The resonse data could not be parse: \(error)")
         }
     }
 }
@@ -507,7 +523,8 @@ extension NetworkTests {
         }
     }
 
-    func testWithURLRequestAdapter() async throws {
+    @Test
+    func withURLRequestAdapter() async throws {
         // Given
         let networkManager = NetworkManager(
             service: NetworkServiceFoundation(),
@@ -523,18 +540,19 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(response.statusCode, 200)
-        XCTAssertNil(request.value(forHTTPHeaderField: "X-Test-1"))
-        XCTAssertNil(request.value(forHTTPHeaderField: "X-Test-2"))
-        XCTAssertEqual(response.request.value(forHTTPHeaderField: "X-Test-1"), "1")
-        XCTAssertEqual(response.request.value(forHTTPHeaderField: "X-Test-2"), "2")
+        #expect(response.statusCode == 200)
+        #expect(request.value(forHTTPHeaderField: "X-Test-1") == nil)
+        #expect(request.value(forHTTPHeaderField: "X-Test-2") == nil)
+        #expect(response.request.value(forHTTPHeaderField: "X-Test-1") == "1")
+        #expect(response.request.value(forHTTPHeaderField: "X-Test-2") == "2")
     }
 }
 
 // MARK: - Decoded
 
 extension NetworkTests {
-    func testDecoded() async throws {
+    @Test
+    func decoded() async throws {
         // Given
         let parameters: [String: Any] = [
             "abc": 123,
@@ -552,8 +570,8 @@ extension NetworkTests {
         let model: ResponseModel = try await networkManager.send(request)
 
         // Then
-        XCTAssertEqual(model.url, request.url?.absoluteString)
-        parameters.forEach { XCTAssertEqual(model.args[$0.key], "\($0.value)") }
+        #expect(model.url == request.url?.absoluteString)
+        parameters.forEach { #expect(model.args[$0.key] == "\($0.value)") }
     }
 }
 

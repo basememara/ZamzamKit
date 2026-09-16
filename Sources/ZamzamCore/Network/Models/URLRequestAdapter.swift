@@ -9,7 +9,7 @@
 import Foundation.NSURLRequest
 
 /// A type that can inspect and optionally adapt a `URLRequest` in some manner if necessary.
-public protocol URLRequestAdapter {
+public protocol URLRequestAdapter: Sendable {
     /// Inspects and adapts the specified `URLRequest` in some manner and returns the new request.
     ///
     /// - Parameters:

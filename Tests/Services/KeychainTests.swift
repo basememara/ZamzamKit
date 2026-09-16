@@ -6,15 +6,17 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import ZamzamCore
 
-final class KeychainTests: XCTestCase {
+struct KeychainTests {
     private let keychain: KeychainService = KeychainServiceTest()
 }
 
 extension KeychainTests {
-    func testString() {
+    @Test
+    func string() {
         // Given
         let value1 = "abc"
         let value2 = "xyz"
@@ -24,13 +26,14 @@ extension KeychainTests {
         keychain.set(value2, forKey: .testString2)
 
         // Then
-        XCTAssertEqual(keychain.get(.testString1), value1)
-        XCTAssertEqual(keychain.get(.testString2), value2)
+        #expect(keychain.get(.testString1) == value1)
+        #expect(keychain.get(.testString2) == value2)
     }
 }
 
 extension KeychainTests {
-    func testData() throws {
+    @Test
+    func data() throws {
         // Given
         let value1 = "abc"
         let value2 = "xyz"
@@ -40,13 +43,17 @@ extension KeychainTests {
         keychain.set(try value2.encode(), forKey: .testString2)
 
         // Then
-        XCTAssertEqual(keychain.get(.testString1), try value1.encode())
-        XCTAssertEqual(keychain.get(.testString2), try value2.encode())
+        let encoded1 = try value1.encode()
+        let encoded2 = try value2.encode()
+
+        #expect(keychain.get(.testString1) == encoded1)
+        #expect(keychain.get(.testString2) == encoded2)
     }
 }
 
 extension KeychainTests {
-    func testRemove() {
+    @Test
+    func remove() {
         // Given
         let value1 = "abc"
         let value2 = "xyz"
@@ -58,8 +65,8 @@ extension KeychainTests {
         keychain.remove(.testString2)
 
         // Then
-        XCTAssertNil(keychain.get(.testString1) as String?)
-        XCTAssertNil(keychain.get(.testString2) as String?)
+        #expect(keychain.get(.testString1) as String? == nil)
+        #expect(keychain.get(.testString2) as String? == nil)
     }
 }
 

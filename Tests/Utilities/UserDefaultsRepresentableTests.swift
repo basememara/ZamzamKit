@@ -6,16 +6,18 @@
 //  Copyright © 2021 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import Combine
 @testable import ZamzamCore
 
-final class UserDefaultsRepresentableTests: XCTestCase {
+// Serialized because `TestSettings` binds its property wrappers to one shared defaults
+// suite at declaration, so tests cannot be given a suite of their own.
+@Suite(.serialized)
+struct UserDefaultsRepresentableTests {
     private let settings = TestSettings()
-    private var cancellable = Set<AnyCancellable>()
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    init() {
         UserDefaults.testReset()
     }
 }
@@ -23,514 +25,546 @@ final class UserDefaultsRepresentableTests: XCTestCase {
 // MARK: - Integration
 
 extension UserDefaultsRepresentableTests {
-    func testIntegrationBool() {
+    @Test
+    func integrationBool() {
         let defaultValue = settings.flag
-        XCTAssertTrue(defaultValue)
-        XCTAssertTrue(UserDefaults.test.bool(forKey: "flag"))
+        #expect(defaultValue)
+        #expect(UserDefaults.test.bool(forKey: "flag"))
 
         settings.flag = false
-        XCTAssertFalse(UserDefaults.test.bool(forKey: "flag"))
+        #expect(!(UserDefaults.test.bool(forKey: "flag")))
     }
 
-    func testIntegrationInt() {
+    @Test
+    func integrationInt() {
         let defaultValue = settings.count
-        XCTAssertEqual(defaultValue, 42)
-        XCTAssertEqual(UserDefaults.test.integer(forKey: "count"), defaultValue)
+        #expect(defaultValue == 42)
+        #expect(UserDefaults.test.integer(forKey: "count") == defaultValue)
 
         let newValue = 666
         settings.count = newValue
-        XCTAssertEqual(UserDefaults.test.integer(forKey: "count"), newValue)
+        #expect(UserDefaults.test.integer(forKey: "count") == newValue)
     }
 
-    func testIntegrationIntOptional() {
+    @Test
+    func integrationIntOptional() {
         let defaultValue = settings.countOptional
-        XCTAssertNil(defaultValue)
+        #expect(defaultValue == nil)
 
         let newValue = 5
         settings.countOptional = newValue
-        XCTAssertEqual(UserDefaults.test.object(forKey: "countOptional") as? Int, newValue)
+        #expect(UserDefaults.test.object(forKey: "countOptional") as? Int == newValue)
 
         settings.countOptional = nil
-        XCTAssertNil(UserDefaults.test.object(forKey: "countOptional"))
+        #expect(UserDefaults.test.object(forKey: "countOptional") == nil)
     }
 
-    func testIntegrationFloat() {
+    @Test
+    func integrationFloat() {
         let defaultValue = settings.mean
-        XCTAssertEqual(defaultValue, 4.2)
-        XCTAssertEqual(UserDefaults.test.float(forKey: "mean"), defaultValue)
+        #expect(defaultValue == 4.2)
+        #expect(UserDefaults.test.float(forKey: "mean") == defaultValue)
 
         let newValue = Float(66.6)
         settings.mean = newValue
-        XCTAssertEqual(UserDefaults.test.float(forKey: "mean"), newValue)
+        #expect(UserDefaults.test.float(forKey: "mean") == newValue)
     }
 
-    func testIntegrationDouble() {
+    @Test
+    func integrationDouble() {
         let defaultValue = settings.average
-        XCTAssertEqual(defaultValue, 42.0)
-        XCTAssertEqual(UserDefaults.test.double(forKey: "average"), defaultValue)
+        #expect(defaultValue == 42.0)
+        #expect(UserDefaults.test.double(forKey: "average") == defaultValue)
 
         let newValue = 6.66
         settings.average = newValue
-        XCTAssertEqual(UserDefaults.test.double(forKey: "average"), newValue)
+        #expect(UserDefaults.test.double(forKey: "average") == newValue)
     }
 
-    func testIntegrationStringOptional() {
+    @Test
+    func integrationStringOptional() {
         let defaultValue = settings.username
-        XCTAssertNil(defaultValue)
+        #expect(defaultValue == nil)
 
         let newValue = "@jessesquires"
         settings.username = newValue
-        XCTAssertEqual(UserDefaults.test.string(forKey: "username"), newValue)
+        #expect(UserDefaults.test.string(forKey: "username") == newValue)
 
         settings.username = nil
-        XCTAssertNil(UserDefaults.test.string(forKey: "username") as String?)
+        #expect(UserDefaults.test.string(forKey: "username") as String? == nil)
     }
 
-    func testIntegrationURLOptional() {
+    @Test
+    func integrationURLOptional() {
         let defaultValue = settings.website
-        XCTAssertNil(defaultValue)
+        #expect(defaultValue == nil)
 
         let newValue = URL(string: "www.jessesquires.com")
         settings.website = newValue
-        XCTAssertEqual(UserDefaults.test.url(forKey: "website"), newValue)
+        #expect(UserDefaults.test.url(forKey: "website") == newValue)
 
         settings.website = nil
-        XCTAssertNil(UserDefaults.test.url(forKey: "website") as URL?)
+        #expect(UserDefaults.test.url(forKey: "website") as URL? == nil)
     }
 
-    func testIntegrationDate() {
+    @Test
+    func integrationDate() {
         let defaultValue = settings.timestamp
-        XCTAssertEqual(defaultValue, .distantPast)
-        XCTAssertEqual(UserDefaults.test.object(forKey: "timestamp") as? Date, defaultValue)
+        #expect(defaultValue == .distantPast)
+        #expect(UserDefaults.test.object(forKey: "timestamp") as? Date == defaultValue)
 
         let newValue = Date()
         settings.timestamp = newValue
-        XCTAssertEqual(UserDefaults.test.object(forKey: "timestamp") as? Date, newValue)
+        #expect(UserDefaults.test.object(forKey: "timestamp") as? Date == newValue)
     }
 
-    func testIntegrationDataOptional() {
+    @Test
+    func integrationDataOptional() {
         let defaultValue = settings.data
-        XCTAssertNil(defaultValue)
+        #expect(defaultValue == nil)
 
         let newValue = "text data".data(using: .utf8)
         settings.data = newValue
-        XCTAssertEqual(UserDefaults.test.data(forKey: "data"), newValue)
+        #expect(UserDefaults.test.data(forKey: "data") == newValue)
 
         settings.data = nil
-        XCTAssertNil(UserDefaults.test.data(forKey: "data"))
+        #expect(UserDefaults.test.data(forKey: "data") == nil)
     }
 
-    func testIntegrationArray() {
+    @Test
+    func integrationArray() {
         let defaultValue = settings.list
-        XCTAssertEqual(defaultValue, [])
-        XCTAssertEqual(UserDefaults.test.array(forKey: "list") as? [Double], defaultValue)
+        #expect(defaultValue == [])
+        #expect(UserDefaults.test.array(forKey: "list") as? [Double] == defaultValue)
 
         let newValue = [6.66, 7.77, 8.88]
         settings.list = newValue
-        XCTAssertEqual(UserDefaults.test.array(forKey: "list") as? [Double], newValue)
+        #expect(UserDefaults.test.array(forKey: "list") as? [Double] == newValue)
     }
 
-    func testIntegrationSet() {
+    @Test
+    func integrationSet() {
         let defaultValue = settings.set
-        XCTAssertEqual(defaultValue, [1, 2, 3])
+        #expect(defaultValue == [1, 2, 3])
 
         let newValue = Set([6, 77, 888])
         settings.set = newValue
-        XCTAssertEqual((UserDefaults.test.object(forKey: "set") as? [Int])?.sorted(), [6, 77, 888])
+        #expect((UserDefaults.test.object(forKey: "set") as? [Int])?.sorted() == [6, 77, 888])
     }
 
-    func testIntegrationDictionary() {
+    @Test
+    func integrationDictionary() {
         let defaultValue = settings.pairs
-        XCTAssertEqual(defaultValue, [:])
-        XCTAssertEqual(UserDefaults.test.dictionary(forKey: "pairs") as? [String: Int], defaultValue)
+        #expect(defaultValue == [:])
+        #expect(UserDefaults.test.dictionary(forKey: "pairs") as? [String: Int] == defaultValue)
 
         let newValue = ["six": 6, "seventy-seven": 77, "eight-hundred eighty eight": 888]
         settings.pairs = newValue
-        XCTAssertEqual(UserDefaults.test.dictionary(forKey: "pairs") as? [String: Int], newValue)
+        #expect(UserDefaults.test.dictionary(forKey: "pairs") as? [String: Int] == newValue)
     }
 
-    func testIntegrationRawRepresentableString() {
+    @Test
+    func integrationRawRepresentableString() {
         let defaultValue = settings.fruit
-        XCTAssertEqual(defaultValue, .apple)
-        XCTAssertEqual(UserDefaults.test.object(forKey: "fruit") as? String, "apple")
+        #expect(defaultValue == .apple)
+        #expect(UserDefaults.test.object(forKey: "fruit") as? String == "apple")
 
         let newValue = TestFruit.orange
         settings.fruit = newValue
-        XCTAssertEqual(UserDefaults.test.object(forKey: "fruit") as? String, "orange")
+        #expect(UserDefaults.test.object(forKey: "fruit") as? String == "orange")
     }
 
-    func testIntegrationRawRepresentableInt() {
+    @Test
+    func integrationRawRepresentableInt() {
         let defaultValue = settings.vegetable
-        XCTAssertEqual(defaultValue, .carrot)
-        XCTAssertEqual(UserDefaults.test.object(forKey: "vegetable") as? Int, 0)
+        #expect(defaultValue == .carrot)
+        #expect(UserDefaults.test.object(forKey: "vegetable") as? Int == 0)
 
         let newValue = TestVegetable.broccoli
         settings.vegetable = newValue
-        XCTAssertEqual(UserDefaults.test.object(forKey: "vegetable") as? Int, 2)
+        #expect(UserDefaults.test.object(forKey: "vegetable") as? Int == 2)
     }
 
-    func testIntegrationRawRepresentableCustom() {
+    @Test
+    func integrationRawRepresentableCustom() {
         let defaultValue = settings.customRawRepresented
-        XCTAssertEqual(defaultValue.rawValue, ["abc": .apple])
-        XCTAssertEqual(UserDefaults.test.object(forKey: "customRawRepresented") as? [String: String], ["abc": "apple"])
+        #expect(defaultValue.rawValue == ["abc": .apple])
+        #expect(UserDefaults.test.object(forKey: "customRawRepresented") as? [String: String] == ["abc": "apple"])
 
         let newValue = TestFruit.orange
         settings.customRawRepresented.rawValue["xyz"] = newValue
-        XCTAssertEqual(settings.customRawRepresented.rawValue["xyz"], newValue)
-        XCTAssertEqual(settings.customRawRepresented.rawValue, ["abc": .apple, "xyz": .orange])
-        XCTAssertEqual(UserDefaults.test.object(forKey: "customRawRepresented") as? [String: String], ["abc": "apple", "xyz": "orange"])
+        #expect(settings.customRawRepresented.rawValue["xyz"] == newValue)
+        #expect(settings.customRawRepresented.rawValue == ["abc": .apple, "xyz": .orange])
+        #expect(UserDefaults.test.object(forKey: "customRawRepresented") as? [String: String] == ["abc": "apple", "xyz": "orange"])
     }
 
-    func testIntegrationCustomType() {
+    @Test
+    func integrationCustomType() {
         let defaultValue = settings.custom
-        XCTAssertNil(defaultValue)
+        #expect(defaultValue == nil)
 
         let newValue = CustomType(abc: "test", xyz: 123)
         settings.custom = newValue
-        XCTAssertEqual(settings.custom?.abc, "test")
-        XCTAssertEqual(settings.custom?.xyz, 123)
-        XCTAssertEqual(UserDefaults.test.object(forKey: "custom") as? String, "test|123")
+        #expect(settings.custom?.abc == "test")
+        #expect(settings.custom?.xyz == 123)
+        #expect(UserDefaults.test.object(forKey: "custom") as? String == "test|123")
 
         settings.custom = nil
-        XCTAssertNil(UserDefaults.test.object(forKey: "custom"))
+        #expect(UserDefaults.test.object(forKey: "custom") == nil)
     }
 
-    func testIntegrationPublisher() {
-        let promise = expectation(description: #function)
-        var publishedValue: String?
-
-        settings
+    @Test(.timeLimit(.minutes(1)))
+    func integrationPublisher() async {
+        let (values, continuation) = AsyncStream<String?>.makeStream()
+        let cancellable = settings
             .publisher(for: \.nickname, options: [.new])
-            .sink {
-                publishedValue = $0
-                promise.fulfill()
-            }
-            .store(in: &cancellable)
+            .sink { continuation.yield($0) }
+
+        defer { cancellable.cancel() }
 
         settings.nickname = "abc123"
-        wait(for: [promise], timeout: 5)
 
-        XCTAssertEqual(settings.nickname, publishedValue)
+        let publishedValue = await values.first { _ in true }
+        #expect(settings.nickname == publishedValue)
     }
 }
 
 // MARK: - Wrapped
 
 extension UserDefaultsRepresentableTests {
-    func testWrappedValueBool() {
+    @Test
+    func wrappedValueBool() {
         let key = "key_\(#function)"
         let defaultValue = true
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
-        XCTAssertEqual(Bool.object(forKey: key, from: .test), defaultValue)
-        XCTAssertEqual(model.wrappedValue, defaultValue)
+        #expect(Bool.object(forKey: key, from: .test) == defaultValue)
+        #expect(model.wrappedValue == defaultValue)
 
         let newValue = false
         model.wrappedValue = newValue
-        XCTAssertEqual(Bool.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(Bool.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
     }
 
-    func testWrappedValueInt() {
+    @Test
+    func wrappedValueInt() {
         let key = "key_\(#function)"
         let defaultValue = 42
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
-        XCTAssertEqual(Int.object(forKey: key, from: .test), defaultValue)
-        XCTAssertEqual(model.wrappedValue, defaultValue)
+        #expect(Int.object(forKey: key, from: .test) == defaultValue)
+        #expect(model.wrappedValue == defaultValue)
 
         let newValue = 666
         model.wrappedValue = newValue
-        XCTAssertEqual(Int.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(Int.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
     }
 
-    func testWrappedValueFloat() {
+    @Test
+    func wrappedValueFloat() {
         let key = "key_\(#function)"
         let defaultValue = Float(42.0)
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
-        XCTAssertEqual(Float.object(forKey: key, from: .test), defaultValue)
-        XCTAssertEqual(model.wrappedValue, defaultValue)
+        #expect(Float.object(forKey: key, from: .test) == defaultValue)
+        #expect(model.wrappedValue == defaultValue)
 
         let newValue = Float(66.6)
         model.wrappedValue = newValue
-        XCTAssertEqual(Float.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(Float.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
     }
 
-    func testWrappedValueDouble() {
+    @Test
+    func wrappedValueDouble() {
         let key = "key_\(#function)"
         let defaultValue = Double(42.0)
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
-        XCTAssertEqual(Double.object(forKey: key, from: .test), defaultValue)
-        XCTAssertEqual(model.wrappedValue, defaultValue)
+        #expect(Double.object(forKey: key, from: .test) == defaultValue)
+        #expect(model.wrappedValue == defaultValue)
 
         let newValue = Double(66.6)
         model.wrappedValue = newValue
-        XCTAssertEqual(Double.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(Double.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
     }
 
-    func testWrappedValueString() {
+    @Test
+    func wrappedValueString() {
         let key = "key_\(#function)"
         let defaultValue = "default-value"
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
-        XCTAssertEqual(String.object(forKey: key, from: .test), defaultValue)
-        XCTAssertEqual(model.wrappedValue, defaultValue)
+        #expect(String.object(forKey: key, from: .test) == defaultValue)
+        #expect(model.wrappedValue == defaultValue)
 
         let newValue = "new-value"
         model.wrappedValue = newValue
-        XCTAssertEqual(String.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(String.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
     }
 
-    func testWrappedValueURL() throws {
+    @Test
+    func wrappedValueURL() throws {
         let key = "key_\(#function)"
-        let defaultValue = try XCTUnwrap(URL(string: "https://hexedbits.com"))
+        let defaultValue = try #require(URL(string: "https://hexedbits.com"))
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
-        XCTAssertEqual(URL.object(forKey: key, from: .test), defaultValue)
-        XCTAssertEqual(model.wrappedValue, defaultValue)
+        #expect(URL.object(forKey: key, from: .test) == defaultValue)
+        #expect(model.wrappedValue == defaultValue)
 
         let newValue = URL(string: "https://jessesquires.com")!
         model.wrappedValue = newValue
-        XCTAssertEqual(URL.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(URL.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
     }
 
-    func testWrappedValueDate() {
+    @Test
+    func wrappedValueDate() {
         let key = "key_\(#function)"
         let defaultValue = Date.distantPast
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
-        XCTAssertEqual(Date.object(forKey: key, from: .test), defaultValue)
-        XCTAssertEqual(model.wrappedValue, defaultValue)
+        #expect(Date.object(forKey: key, from: .test) == defaultValue)
+        #expect(model.wrappedValue == defaultValue)
 
         let newValue = Date()
         model.wrappedValue = newValue
-        XCTAssertEqual(Date.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(Date.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
     }
 
-    func testWrappedValueData() throws {
+    @Test
+    func wrappedValueData() throws {
         let key = "key_\(#function)"
-        let defaultValue = try XCTUnwrap("default-data".data(using: .utf8))
+        let defaultValue = try #require("default-data".data(using: .utf8))
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
-        XCTAssertEqual(Data.object(forKey: key, from: .test), defaultValue)
-        XCTAssertEqual(model.wrappedValue, defaultValue)
+        #expect(Data.object(forKey: key, from: .test) == defaultValue)
+        #expect(model.wrappedValue == defaultValue)
 
-        let newValue = try XCTUnwrap("new-data".data(using: .utf8))
+        let newValue = try #require("new-data".data(using: .utf8))
         model.wrappedValue = newValue
-        XCTAssertEqual(Data.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(Data.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
     }
 
-    func testWrappedValueArray() {
+    @Test
+    func wrappedValueArray() {
         let key = "key_\(#function)"
         let defaultValue = [1, 2, 3]
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
-        XCTAssertEqual(Array.object(forKey: key, from: .test), defaultValue)
-        XCTAssertEqual(model.wrappedValue, defaultValue)
+        #expect(Array.object(forKey: key, from: .test) == defaultValue)
+        #expect(model.wrappedValue == defaultValue)
 
         let newValue = [4, 5, 6]
         model.wrappedValue = newValue
-        XCTAssertEqual(Array.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(Array.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
     }
 
-    func testWrappedValueSet() {
+    @Test
+    func wrappedValueSet() {
         let key = "key_\(#function)"
         let defaultValue = Set(["one", "two", "three"])
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
-        XCTAssertEqual(Set.object(forKey: key, from: .test), defaultValue)
-        XCTAssertEqual(model.wrappedValue, defaultValue)
+        #expect(Set.object(forKey: key, from: .test) == defaultValue)
+        #expect(model.wrappedValue == defaultValue)
 
         let newValue = Set(["four", "five", "size"])
         model.wrappedValue = newValue
-        XCTAssertEqual(Set.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(Set.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
     }
 
-    func testWrappedValueDictionary() {
+    @Test
+    func wrappedValueDictionary() {
         let key = "key_\(#function)"
         let defaultValue = ["key1": 42.0,
                             "key2": 4.2]
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
-        XCTAssertEqual(Dictionary.object(forKey: key, from: .test), defaultValue)
-        XCTAssertEqual(model.wrappedValue, defaultValue)
+        #expect(Dictionary.object(forKey: key, from: .test) == defaultValue)
+        #expect(model.wrappedValue == defaultValue)
 
         let newValue = ["key3": 0.42]
         model.wrappedValue = newValue
-        XCTAssertEqual(Dictionary.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(Dictionary.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
     }
 
-    func testWrappedValueRawRepresentable() {
+    @Test
+    func wrappedValueRawRepresentable() {
         let key = "key_\(#function)"
         let defaultValue = TestFruit.apple
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
-        XCTAssertEqual(TestFruit.object(forKey: key, from: .test), defaultValue)
-        XCTAssertEqual(model.wrappedValue, defaultValue)
+        #expect(TestFruit.object(forKey: key, from: .test) == defaultValue)
+        #expect(model.wrappedValue == defaultValue)
 
         let newValue = TestFruit.banana
         model.wrappedValue = newValue
-        XCTAssertEqual(TestFruit.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(TestFruit.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
     }
 
-    func testWrappedValueIntOptional() {
+    @Test
+    func wrappedValueIntOptional() {
         let key = "key_\(#function)"
         var model = DefaultsOptional<Int>(key, from: .test)
 
         let defaultValue: Int? = Int.object(forKey: key, from: .test)
-        XCTAssertNil(defaultValue)
-        XCTAssertNil(model.wrappedValue)
+        #expect(defaultValue == nil)
+        #expect(model.wrappedValue == nil)
 
         let newValue = 666
         model.wrappedValue = newValue
-        XCTAssertEqual(Int.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(Int.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
 
         model.wrappedValue = nil
-        XCTAssertNil(model.wrappedValue)
+        #expect(model.wrappedValue == nil)
 
         let fetchedValue: Int? = Int.object(forKey: key, from: .test)
-        XCTAssertNil(fetchedValue)
+        #expect(fetchedValue == nil)
     }
 
-    func testWrappedValueStringOptional() {
+    @Test
+    func wrappedValueStringOptional() {
         let key = "key_\(#function)"
         var model = DefaultsOptional<String>(key, from: .test)
 
         let defaultValue: String? = String.object(forKey: key, from: .test)
-        XCTAssertNil(defaultValue)
-        XCTAssertNil(model.wrappedValue)
+        #expect(defaultValue == nil)
+        #expect(model.wrappedValue == nil)
 
         let newValue = "some text"
         model.wrappedValue = newValue
-        XCTAssertEqual(String.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(String.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
 
         model.wrappedValue = nil
-        XCTAssertNil(model.wrappedValue)
+        #expect(model.wrappedValue == nil)
 
         let fetchedValue: String? = String.object(forKey: key, from: .test)
-        XCTAssertNil(fetchedValue)
+        #expect(fetchedValue == nil)
     }
 
-    func testWrappedValueURLOptional() {
+    @Test
+    func wrappedValueURLOptional() {
         let key = "key_\(#function)"
         var model = DefaultsOptional<URL>(key, from: .test)
 
         let defaultValue: URL? = URL.object(forKey: key, from: .test)
-        XCTAssertNil(defaultValue)
-        XCTAssertNil(model.wrappedValue)
+        #expect(defaultValue == nil)
+        #expect(model.wrappedValue == nil)
 
         let newValue = URL(string: "www.jessesquires.com")
         model.wrappedValue = newValue
-        XCTAssertEqual(URL.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(URL.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
 
         model.wrappedValue = nil
-        XCTAssertNil(model.wrappedValue)
+        #expect(model.wrappedValue == nil)
 
         let fetchedValue: URL? = URL.object(forKey: key, from: .test)
-        XCTAssertNil(fetchedValue)
+        #expect(fetchedValue == nil)
     }
 
-    func testWrappedValueDateOptional() {
+    @Test
+    func wrappedValueDateOptional() {
         let key = "key_\(#function)"
         var model = DefaultsOptional<Date>(key, from: .test)
 
         let defaultValue: Date? = Date.object(forKey: key, from: .test)
-        XCTAssertNil(defaultValue)
-        XCTAssertNil(model.wrappedValue)
+        #expect(defaultValue == nil)
+        #expect(model.wrappedValue == nil)
 
         let newValue = Date()
         model.wrappedValue = newValue
-        XCTAssertEqual(Date.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(Date.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
 
         model.wrappedValue = nil
-        XCTAssertNil(model.wrappedValue)
+        #expect(model.wrappedValue == nil)
 
         let fetchedValue: Date? = Date.object(forKey: key, from: .test)
-        XCTAssertNil(fetchedValue)
+        #expect(fetchedValue == nil)
     }
 
-    func testWrappedValueDictionaryOptional() {
+    @Test
+    func wrappedValueDictionaryOptional() {
         let key = "key_\(#function)"
         var model = DefaultsOptional<[String: TestFruit]>(key, from: .test)
 
         let defaultValue: [String: TestFruit]? = Dictionary.object(forKey: key, from: .test)
-        XCTAssertNil(defaultValue)
-        XCTAssertNil(model.wrappedValue)
+        #expect(defaultValue == nil)
+        #expect(model.wrappedValue == nil)
 
         let newValue = ["key1": TestFruit.apple, "key2": .orange]
         model.wrappedValue = newValue
-        XCTAssertEqual(Dictionary.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(Dictionary.object(forKey: key, from: .test) == newValue)
+        #expect(model.wrappedValue == newValue)
 
         model.wrappedValue = nil
-        XCTAssertNil(model.wrappedValue)
+        #expect(model.wrappedValue == nil)
 
         let fetchedValue: [String: TestFruit]? = Dictionary.object(forKey: key, from: .test)
-        XCTAssertNil(fetchedValue)
+        #expect(fetchedValue == nil)
     }
 }
 
 // MARK: - Reset
 
 extension UserDefaultsRepresentableTests {
-    func testReset() {
+    @Test
+    func reset() {
         let key = "key_\(#function)"
         let defaultValue = Double(42.0)
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
-        XCTAssertEqual(Double.object(forKey: key, from: .test), defaultValue)
-        XCTAssertEqual(UserDefaults.test.double(forKey: key), defaultValue)
-        XCTAssertEqual(model.wrappedValue, defaultValue)
+        #expect(Double.object(forKey: key, from: .test) == defaultValue)
+        #expect(UserDefaults.test.double(forKey: key) == defaultValue)
+        #expect(model.wrappedValue == defaultValue)
 
         let newValue = Double(66.6)
         model.wrappedValue = newValue
-        XCTAssertEqual(Double.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(UserDefaults.test.double(forKey: key), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(Double.object(forKey: key, from: .test) == newValue)
+        #expect(UserDefaults.test.double(forKey: key) == newValue)
+        #expect(model.wrappedValue == newValue)
 
         model.reset()
 
-        XCTAssertEqual(Double.object(forKey: key, from: .test), defaultValue)
-        XCTAssertEqual(UserDefaults.test.double(forKey: key), defaultValue)
-        XCTAssertEqual(model.wrappedValue, defaultValue)
+        #expect(Double.object(forKey: key, from: .test) == defaultValue)
+        #expect(UserDefaults.test.double(forKey: key) == defaultValue)
+        #expect(model.wrappedValue == defaultValue)
     }
 
-    func testResetOptional() {
+    @Test
+    func resetOptional() {
         let key = "key_\(#function)"
         var model = DefaultsOptional<Double>(key, from: .test)
 
-        XCTAssertNil(Double.object(forKey: key, from: .test))
-        XCTAssertNil(UserDefaults.test.object(forKey: key))
-        XCTAssertNil(model.wrappedValue)
+        #expect(Double.object(forKey: key, from: .test) == nil)
+        #expect(UserDefaults.test.object(forKey: key) == nil)
+        #expect(model.wrappedValue == nil)
 
         let newValue = Double(66.6)
         model.wrappedValue = newValue
-        XCTAssertEqual(Double.object(forKey: key, from: .test), newValue)
-        XCTAssertEqual(UserDefaults.test.double(forKey: key), newValue)
-        XCTAssertEqual(model.wrappedValue, newValue)
+        #expect(Double.object(forKey: key, from: .test) == newValue)
+        #expect(UserDefaults.test.double(forKey: key) == newValue)
+        #expect(model.wrappedValue == newValue)
 
         model.reset()
 
-        XCTAssertNil(Double.object(forKey: key, from: .test))
-        XCTAssertNil(UserDefaults.test.object(forKey: key))
-        XCTAssertNil(model.wrappedValue)
+        #expect(Double.object(forKey: key, from: .test) == nil)
+        #expect(UserDefaults.test.object(forKey: key) == nil)
+        #expect(model.wrappedValue == nil)
     }
 }
 

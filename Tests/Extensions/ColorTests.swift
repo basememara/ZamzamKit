@@ -6,19 +6,22 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import ZamzamCore
 
-final class ColorTests: XCTestCase {}
+struct ColorTests {}
 
 extension ColorTests {
-    func testRGBVsHex() {
-        XCTAssertEqual(PlatformColor(rgb: (77, 116, 107)), PlatformColor(hex: 0x4D746B))
+    @Test
+    func rGBVsHex() {
+        #expect(PlatformColor(rgb: (77, 116, 107)) == PlatformColor(hex: 0x4D746B))
     }
 }
 
 extension ColorTests {
-    func testRandom() {
-        XCTAssertNotEqual(PlatformColor.random, .random)
+    @Test
+    func random() {
+        #expect(PlatformColor.random != .random)
     }
 }

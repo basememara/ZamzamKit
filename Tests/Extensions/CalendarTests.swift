@@ -6,13 +6,15 @@
 //  Copyright © 2021 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import ZamzamCore
 
-final class CalendarTests: XCTestCase {}
+struct CalendarTests {}
 
 extension CalendarTests {
-    func testGenerateDays() throws {
+    @Test
+    func generateDays() throws {
         // Given
         let dateInterval = DateInterval(
             start: Date(timeIntervalSince1970: 1617235200), // April 1, 2021 12:00:00 AM UTC
@@ -25,10 +27,11 @@ extension CalendarTests {
         let utcDays = utcCalendar.generateDays(for: dateInterval)
 
         // Then
-        XCTAssertEqual(utcDays.count, 30)
+        #expect(utcDays.count == 30)
     }
 
-    func testGenerateDaysWithLeapYear() throws {
+    @Test
+    func generateDaysWithLeapYear() throws {
         // Given
         let dateInterval = DateInterval(
             start: Date(timeIntervalSince1970: 1582761600), // February 27, 2020 12:00:00 AM
@@ -41,10 +44,11 @@ extension CalendarTests {
         let utcDays = utcCalendar.generateDays(for: dateInterval)
 
         // Then
-        XCTAssertEqual(utcDays.count, 4)
+        #expect(utcDays.count == 4)
     }
 
-    func testGenerateDaysWithoutLeapYear() throws {
+    @Test
+    func generateDaysWithoutLeapYear() throws {
         // Given
         let dateInterval = DateInterval(
             start: Date(timeIntervalSince1970: 1614384000), // February 27, 2021 12:00:00 AM UTC
@@ -57,12 +61,13 @@ extension CalendarTests {
         let utcDays = utcCalendar.generateDays(for: dateInterval)
 
         // Then
-        XCTAssertEqual(utcDays.count, 3)
+        #expect(utcDays.count == 3)
     }
 }
 
 extension CalendarTests {
-    func testGenerateWeek() throws {
+    @Test
+    func generateWeek() throws {
         // Given
         let date = Date(timeIntervalSince1970: 1617285600) // April 1, 2021 2:00:00 PM UTC
         let utcCalendar: Calendar = .posix
@@ -71,12 +76,13 @@ extension CalendarTests {
         let week = utcCalendar.generateWeek(for: date)
 
         // Then
-        XCTAssertEqual(week.count, 7)
-        XCTAssertEqual(week.first, Date(timeIntervalSince1970: 1616889600))
-        XCTAssertEqual(week.last, Date(timeIntervalSince1970: 1617408000))
+        #expect(week.count == 7)
+        #expect(week.first == Date(timeIntervalSince1970: 1616889600))
+        #expect(week.last == Date(timeIntervalSince1970: 1617408000))
     }
 
-    func testGenerateWeekWithCustomFirstWeekday() throws {
+    @Test
+    func generateWeekWithCustomFirstWeekday() throws {
         // Given
         let date = Date(timeIntervalSince1970: 1617285600) // April 1, 2021 2:00:00 PM UTC
         var utcCalendar: Calendar = .posix
@@ -86,8 +92,8 @@ extension CalendarTests {
         let week = utcCalendar.generateWeek(for: date)
 
         // Then
-        XCTAssertEqual(week.count, 7)
-        XCTAssertEqual(week.first, Date(timeIntervalSince1970: 1617062400))
-        XCTAssertEqual(week.last, Date(timeIntervalSince1970: 1617580800))
+        #expect(week.count == 7)
+        #expect(week.first == Date(timeIntervalSince1970: 1617062400))
+        #expect(week.last == Date(timeIntervalSince1970: 1617580800))
     }
 }

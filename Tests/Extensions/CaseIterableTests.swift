@@ -6,13 +6,15 @@
 //  Copyright © 2021 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import ZamzamCore
 
-final class CaseIterableTests: XCTestCase {}
+struct CaseIterableTests {}
 
 extension CaseIterableTests {
-    func testCaseIterablePreviousNext() throws {
+    @Test
+    func caseIterablePreviousNext() throws {
         // Given
         enum Direction: CaseIterable {
             case north
@@ -22,12 +24,12 @@ extension CaseIterableTests {
         }
 
         // Then
-        XCTAssertNil(Direction.north.previous())
-        XCTAssertEqual(Direction.east.previous(), .north)
-        XCTAssertEqual(Direction.west.previous(), .south)
+        #expect(Direction.north.previous() == nil)
+        #expect(Direction.east.previous() == .north)
+        #expect(Direction.west.previous() == .south)
 
-        XCTAssertNil(Direction.west.next())
-        XCTAssertEqual(Direction.east.next(), .south)
-        XCTAssertEqual(Direction.south.next(), .west)
+        #expect(Direction.west.next() == nil)
+        #expect(Direction.east.next() == .south)
+        #expect(Direction.south.next() == .west)
     }
 }

@@ -6,13 +6,15 @@
 //  Copyright © 2018 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import ZamzamCore
 
-final class DictionaryTests: XCTestCase {}
+struct DictionaryTests {}
 
 extension DictionaryTests {
-    func testIntialValue() throws {
+    @Test
+    func intialValue() throws {
         // Given
         var dictionary = [
             "abc": 123,
@@ -23,17 +25,18 @@ extension DictionaryTests {
         // When
         let value = dictionary["abc", initial: 999]
 
-        XCTAssertNil(dictionary["lmn"])
+        #expect(dictionary["lmn"] == nil)
         let value2 = dictionary["lmn", initial: 555]
 
         // Then
-        XCTAssertAllEqual(dictionary["abc"], value, 123)
-        XCTAssertAllEqual(dictionary["lmn"], value2, 555)
+        expectAllEqual(dictionary["abc"], value, 123)
+        expectAllEqual(dictionary["lmn"], value2, 555)
     }
 }
 
 extension DictionaryTests {
-    func testJSONString() throws {
+    @Test
+    func jSONString() throws {
         // Given
         let dictionary: [String: Any] = [
             "id": 1,
@@ -57,39 +60,36 @@ extension DictionaryTests {
 
         // When
         guard let json = dictionary.jsonString() else {
-            XCTFail("String could not be converted to JSON")
+            Issue.record("String could not be converted to JSON")
             return
         }
 
         guard let data = json.data(using: .utf8),
             let decoded = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                XCTFail("String could not be converted to JSON")
+                Issue.record("String could not be converted to JSON")
                 return
         }
 
         expected = decoded
 
         // Then
-        XCTAssert(json.contains("\"id\":1"))
-        XCTAssert(json.contains("\"name\":\"Joe\""))
-        XCTAssert(json.contains("\"friends\":[{"))
-        XCTAssert(json.contains("\"pets\":[\"dog\"]"))
-        XCTAssert(json.contains("\"name\":\"Sue\""))
-        XCTAssert(json.contains("\"pets\":[\""))
+        #expect(json.contains("\"id\":1"))
+        #expect(json.contains("\"name\":\"Joe\""))
+        #expect(json.contains("\"friends\":[{"))
+        #expect(json.contains("\"pets\":[\"dog\"]"))
+        #expect(json.contains("\"name\":\"Sue\""))
+        #expect(json.contains("\"pets\":[\""))
 
-        XCTAssertNotNil(dictionary["id"] as? Int)
-        XCTAssertEqual(dictionary["id"] as? Int, expected["id"] as? Int)
+        #expect(dictionary["id"] as? Int != nil)
+        #expect(dictionary["id"] as? Int == expected["id"] as? Int)
 
-        XCTAssertNotNil(dictionary["name"] as? String)
-        XCTAssertEqual(dictionary["name"] as? String, expected["name"] as? String)
+        #expect(dictionary["name"] as? String != nil)
+        #expect(dictionary["name"] as? String == expected["name"] as? String)
 
-        XCTAssertNotNil(dictionary["pets"] as? [String])
-        XCTAssertEqual(dictionary["pets"] as? [String], expected["pets"] as? [String])
+        #expect(dictionary["pets"] as? [String] != nil)
+        #expect(dictionary["pets"] as? [String] == expected["pets"] as? [String])
 
-        XCTAssertNotNil(((dictionary["friends"] as? [[String: Any]])?.first)?["name"] as? String)
-        XCTAssertEqual(
-            ((dictionary["friends"] as? [[String: Any]])?.first)?["name"] as? String,
-            ((expected["friends"] as? [[String: Any]])?.first)?["name"] as? String
-        )
+        #expect(((dictionary["friends"] as? [[String: Any]])?.first)?["name"] as? String != nil)
+        #expect(((dictionary["friends"] as? [[String: Any]])?.first)?["name"] as? String == ((expected["friends"] as? [[String: Any]])?.first)?["name"] as? String)
     }
 }

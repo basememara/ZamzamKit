@@ -21,9 +21,11 @@ swift test
 
 In Xcode, the shared `ZamzamKit-Package` scheme runs `Package.xctestplan` at the package root, with code coverage on for the four library targets. Agents driving Xcode through its MCP server open this package directory as a workspace and run the plan; sandboxed shells cannot run SwiftPM directly (it needs caches outside the sandbox).
 
-Tests live flat in `Tests/` (the `ZamzamKitTests` target has `path: "Tests"`; XCTest; `TestUtilities.swift` is the shared helper; `Resources/` is a processed resource bundle; `Network/Certificates` is excluded from compilation). Match the existing XCTest style until the suite is converted. Bug fixes land with a failing test first.
+Tests live flat in `Tests/` (the `ZamzamKitTests` target has `path: "Tests"`; **Swift Testing**; `TestUtilities.swift` is the shared helper; `Resources/` is a processed resource bundle; `Network/Certificates` is excluded from compilation). Suites are structs and tests are `@Test` functions; Swift Testing builds a fresh instance per test and runs them in parallel, so a suite must not share mutable state. Two files stay on XCTest for stated reasons: `AtomicTests` uses `measure`, which has no Swift Testing equivalent, and `LimiterTests` asserts real elapsed time while mutating values captured by the limiter's closures. Both live happily in the same target. The test target stays in Swift 5 mode for the same reason, which is why `Package.swift` says so.
 
-Known environmental failures (not regressions): `NetworkServerTrustTests` uses certificate fixtures that have expired, `FileTests.testDownloadFile` performs a live download, and `CurrencyFormatterTests.testSA` asserts an Arabic format whose right-to-left mark placement changed with ICU.
+Use `try #require` before comparing an optional, and hoist a `try` out of a comparison: `#expect(a == try #require(b))` does not parse. `#expect` has no tolerance form, so write `#expect(abs(a - (b)) <= tolerance)`. Bug fixes land with a failing test first.
+
+Known environmental failures are wrapped in `withKnownIssue`, so the suite reports them as expected failures and a real regression still turns the run red: nine `NetworkServerTrustTests` evaluations against expired certificate fixtures, `FileTests.downloadFile` (a live download), and `CurrencyFormatterTests.sA` (an Arabic format whose right-to-left mark placement changed with ICU). Re-cutting the fixtures would retire the first group.
 
 ## Compatibility contract
 

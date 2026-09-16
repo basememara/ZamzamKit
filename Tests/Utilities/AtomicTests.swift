@@ -9,6 +9,7 @@
 import XCTest
 @testable import ZamzamCore
 
+// Stays on XCTest: `measure` has no Swift Testing equivalent.
 final class AtomicTests: XCTestCase {
     private let iterations = 10_000 // 1_000_000
     private let writeMultipleOf = 1000

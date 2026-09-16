@@ -8,7 +8,7 @@
 
 import Foundation.NSURLSession
 
-public struct NetworkServiceFoundation: NetworkService {
+public struct NetworkServiceFoundation: NetworkService, Sendable {
     private let session: URLSession
     private let delegate: URLSessionTaskDelegate?
 

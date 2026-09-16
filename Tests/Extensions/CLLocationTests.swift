@@ -6,14 +6,16 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import CoreLocation
 import ZamzamCore
 
-final class CLLocationTests: XCTestCase {}
+struct CLLocationTests {}
 
 extension CLLocationTests {
-    func testMetaData() async throws {
+    @Test
+    func metaData() async throws {
         // Given
         let value = CLLocation(latitude: 43.7, longitude: -79.4)
         let expected = "Toronto, CA"
@@ -23,18 +25,19 @@ extension CLLocationTests {
 
         // Then
         guard let locality = meta?.locality, let countryCode = meta?.countryCode else {
-            XCTFail("Could not retrieve address meta data.")
+            Issue.record("Could not retrieve address meta data.")
             return
         }
 
-        XCTAssertEqual("\(locality), \(countryCode)", expected)
-        XCTAssertEqual(meta?.description, expected)
-        XCTAssertEqual(meta?.timeZone?.identifier, "America/Toronto")
+        #expect("\(locality), \(countryCode)" == expected)
+        #expect(meta?.description == expected)
+        #expect(meta?.timeZone?.identifier == "America/Toronto")
     }
 }
 
 extension CLLocationTests {
-    func testClosestFarthestLocation() throws {
+    @Test
+    func closestFarthestLocation() throws {
         let toronto = CLLocationCoordinate2D(latitude: 43.6529, longitude: -79.3849)
         let newYork = CLLocationCoordinate2D(latitude: 40.7648, longitude: -73.9808)
         let miami = CLLocationCoordinate2D(latitude: 25.7743, longitude: -80.1937)
@@ -47,46 +50,29 @@ extension CLLocationTests {
         let tokyo = CLLocationCoordinate2D(latitude: 35.54843, longitude: 139.78041)
         let cairo = CLLocationCoordinate2D(latitude: 30.05611, longitude: 31.23944)
 
-        XCTAssertEqual(
-            try XCTUnwrap([newYork, miami, atlanta].closest(to: toronto)).latitude,
-            newYork.latitude
-        )
+        #expect(try #require([newYork, miami, atlanta].closest(to: toronto)).latitude == newYork.latitude)
 
-        XCTAssertEqual(
-            try XCTUnwrap([newYork, miami, atlanta].farthest(from: toronto)).latitude,
-            miami.latitude
-        )
+        #expect(try #require([newYork, miami, atlanta].farthest(from: toronto)).latitude == miami.latitude)
 
-        XCTAssertEqual(
-            try XCTUnwrap([paris, london, cairo].closest(to: beijing)).latitude,
-            cairo.latitude
-        )
+        #expect(try #require([paris, london, cairo].closest(to: beijing)).latitude == cairo.latitude)
 
-        XCTAssertEqual(
-            try XCTUnwrap([paris, london, cairo].farthest(from: beijing)).latitude,
-            paris.latitude
-        )
+        #expect(try #require([paris, london, cairo].farthest(from: beijing)).latitude == paris.latitude)
 
-        XCTAssertEqual(
-            try XCTUnwrap([vancouver, losAngles, miami].closest(to: tokyo)).latitude,
-            vancouver.latitude
-        )
+        #expect(try #require([vancouver, losAngles, miami].closest(to: tokyo)).latitude == vancouver.latitude)
 
-        XCTAssertEqual(
-            try XCTUnwrap([vancouver, losAngles, miami].farthest(from: tokyo)).latitude,
-            miami.latitude
-        )
+        #expect(try #require([vancouver, losAngles, miami].farthest(from: tokyo)).latitude == miami.latitude)
     }
 }
 
 extension CLLocationTests {
-    func testDistanceLocation() {
+    @Test
+    func distanceLocation() {
         let toronto = CLLocationCoordinate2D(latitude: 43.6529, longitude: -79.3849)
         let newYork = CLLocationCoordinate2D(latitude: 40.7648, longitude: -73.9808)
         let vancouver = CLLocationCoordinate2D(latitude: 49.2609, longitude: -123.1139)
         let beijing = CLLocationCoordinate2D(latitude: 39.905, longitude: 116.39139)
 
-        XCTAssertEqual(Int(toronto.distance(from: newYork)), 549_413)
-        XCTAssertEqual(Int(vancouver.distance(from: beijing)), 8_538_317)
+        #expect(Int(toronto.distance(from: newYork)) == 549_413)
+        #expect(Int(vancouver.distance(from: beijing)) == 8_538_317)
     }
 }

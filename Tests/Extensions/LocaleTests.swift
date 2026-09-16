@@ -6,12 +6,14 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import ZamzamCore
 
-final class LocaleTests: XCTestCase {
-    func testPosix() {
+struct LocaleTests {
+    @Test
+    func posix() {
         let test: Locale = .posix
-        XCTAssertEqual(test.identifier, "en_US_POSIX")
+        #expect(test.identifier == "en_US_POSIX")
     }
 }

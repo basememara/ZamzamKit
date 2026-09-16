@@ -7,15 +7,16 @@
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import ZamzamCore
 
-final class LoggingTests: XCTestCase {}
+struct LoggingTests {}
 
 extension LoggingTests {
-    func testEntriesAreWritten() {
+    @Test(.timeLimit(.minutes(1)))
+    func entriesAreWritten() async {
         // Given
-        let promise = expectation(description: #function)
         let logService = LogTestService(minLevel: .verbose)
         let log = LogManager(services: [logService])
         let group = DispatchGroup()
@@ -29,25 +30,24 @@ extension LoggingTests {
             }
         }
 
-        group.notify(queue: .global()) {
-            promise.fulfill()
+        await withCheckedContinuation { continuation in
+            group.notify(queue: .global()) { continuation.resume() }
         }
 
-        wait(for: [promise], timeout: 10)
-
         // Then
-        XCTAssertEqual(logService.entries[.verbose], ["\(LogAPI.Level.verbose) test"])
-        XCTAssertEqual(logService.entries[.debug], ["\(LogAPI.Level.debug) test"])
-        XCTAssertEqual(logService.entries[.info], ["\(LogAPI.Level.info) test"])
-        XCTAssertEqual(logService.entries[.warning], ["\(LogAPI.Level.warning) test"])
-        XCTAssertEqual(logService.entries[.error], ["\(LogAPI.Level.error) test"])
-        XCTAssertEqual(logService.entries[.none], [])
+        #expect(logService.entries[.verbose] == ["\(LogAPI.Level.verbose) test"])
+        #expect(logService.entries[.debug] == ["\(LogAPI.Level.debug) test"])
+        #expect(logService.entries[.info] == ["\(LogAPI.Level.info) test"])
+        #expect(logService.entries[.warning] == ["\(LogAPI.Level.warning) test"])
+        #expect(logService.entries[.error] == ["\(LogAPI.Level.error) test"])
+        #expect(logService.entries[.none] == [])
     }
 }
 
 extension LoggingTests {
     // swiftlint:disable:next function_body_length
-    func testMinLevelsObeyed() {
+    @Test
+    func minLevelsObeyed() {
         // Given
         let verboseService = LogTestService(minLevel: .verbose)
         let debugService = LogTestService(minLevel: .debug)
@@ -57,54 +57,55 @@ extension LoggingTests {
         let noneService = LogTestService(minLevel: .none)
 
         // Then
-        XCTAssert(verboseService.canWrite(for: .verbose))
-        XCTAssert(verboseService.canWrite(for: .debug))
-        XCTAssert(verboseService.canWrite(for: .info))
-        XCTAssert(verboseService.canWrite(for: .warning))
-        XCTAssert(verboseService.canWrite(for: .error))
-        XCTAssertFalse(verboseService.canWrite(for: .none))
+        #expect(verboseService.canWrite(for: .verbose))
+        #expect(verboseService.canWrite(for: .debug))
+        #expect(verboseService.canWrite(for: .info))
+        #expect(verboseService.canWrite(for: .warning))
+        #expect(verboseService.canWrite(for: .error))
+        #expect(!(verboseService.canWrite(for: .none)))
 
-        XCTAssertFalse(debugService.canWrite(for: .verbose))
-        XCTAssert(debugService.canWrite(for: .debug))
-        XCTAssert(debugService.canWrite(for: .info))
-        XCTAssert(debugService.canWrite(for: .warning))
-        XCTAssert(debugService.canWrite(for: .error))
-        XCTAssertFalse(debugService.canWrite(for: .none))
+        #expect(!(debugService.canWrite(for: .verbose)))
+        #expect(debugService.canWrite(for: .debug))
+        #expect(debugService.canWrite(for: .info))
+        #expect(debugService.canWrite(for: .warning))
+        #expect(debugService.canWrite(for: .error))
+        #expect(!(debugService.canWrite(for: .none)))
 
-        XCTAssertFalse(infoService.canWrite(for: .verbose))
-        XCTAssertFalse(infoService.canWrite(for: .debug))
-        XCTAssert(infoService.canWrite(for: .info))
-        XCTAssert(infoService.canWrite(for: .warning))
-        XCTAssert(infoService.canWrite(for: .error))
-        XCTAssertFalse(infoService.canWrite(for: .none))
+        #expect(!(infoService.canWrite(for: .verbose)))
+        #expect(!(infoService.canWrite(for: .debug)))
+        #expect(infoService.canWrite(for: .info))
+        #expect(infoService.canWrite(for: .warning))
+        #expect(infoService.canWrite(for: .error))
+        #expect(!(infoService.canWrite(for: .none)))
 
-        XCTAssertFalse(warningService.canWrite(for: .verbose))
-        XCTAssertFalse(warningService.canWrite(for: .debug))
-        XCTAssertFalse(warningService.canWrite(for: .info))
-        XCTAssert(warningService.canWrite(for: .warning))
-        XCTAssert(warningService.canWrite(for: .error))
-        XCTAssertFalse(warningService.canWrite(for: .none))
+        #expect(!(warningService.canWrite(for: .verbose)))
+        #expect(!(warningService.canWrite(for: .debug)))
+        #expect(!(warningService.canWrite(for: .info)))
+        #expect(warningService.canWrite(for: .warning))
+        #expect(warningService.canWrite(for: .error))
+        #expect(!(warningService.canWrite(for: .none)))
 
-        XCTAssertFalse(errorService.canWrite(for: .verbose))
-        XCTAssertFalse(errorService.canWrite(for: .debug))
-        XCTAssertFalse(errorService.canWrite(for: .info))
-        XCTAssertFalse(errorService.canWrite(for: .warning))
-        XCTAssert(errorService.canWrite(for: .error))
-        XCTAssertFalse(errorService.canWrite(for: .none))
+        #expect(!(errorService.canWrite(for: .verbose)))
+        #expect(!(errorService.canWrite(for: .debug)))
+        #expect(!(errorService.canWrite(for: .info)))
+        #expect(!(errorService.canWrite(for: .warning)))
+        #expect(errorService.canWrite(for: .error))
+        #expect(!(errorService.canWrite(for: .none)))
 
-        XCTAssertFalse(noneService.canWrite(for: .verbose))
-        XCTAssertFalse(noneService.canWrite(for: .debug))
-        XCTAssertFalse(noneService.canWrite(for: .info))
-        XCTAssertFalse(noneService.canWrite(for: .warning))
-        XCTAssertFalse(noneService.canWrite(for: .error))
-        XCTAssertFalse(noneService.canWrite(for: .none))
+        #expect(!(noneService.canWrite(for: .verbose)))
+        #expect(!(noneService.canWrite(for: .debug)))
+        #expect(!(noneService.canWrite(for: .info)))
+        #expect(!(noneService.canWrite(for: .warning)))
+        #expect(!(noneService.canWrite(for: .error)))
+        #expect(!(noneService.canWrite(for: .none)))
     }
 }
 
 extension LoggingTests {
-    func testThreadSafety() {
+    // Serialized: saturates the CPU, which skews anything running beside it.
+    @Test(.timeLimit(.minutes(1)))
+    func threadSafety() async {
         // Given
-        let promise = expectation(description: #function)
         let logService = LogTestService(minLevel: .verbose)
         let log = LogManager(services: [logService])
         let group = DispatchGroup()
@@ -121,19 +122,17 @@ extension LoggingTests {
             }
         }
 
-        group.notify(queue: .global()) {
-            promise.fulfill()
+        await withCheckedContinuation { continuation in
+            group.notify(queue: .global()) { continuation.resume() }
         }
 
-        wait(for: [promise], timeout: 30)
-
         // Then
-        XCTAssertEqual(logService.entries[.verbose]?.count, iterations)
-        XCTAssertEqual(logService.entries[.debug]?.count, iterations)
-        XCTAssertEqual(logService.entries[.info]?.count, iterations)
-        XCTAssertEqual(logService.entries[.warning]?.count, iterations)
-        XCTAssertEqual(logService.entries[.error]?.count, iterations)
-        XCTAssert(logService.entries[.none]?.isEmpty == true)
+        #expect(logService.entries[.verbose]?.count == iterations)
+        #expect(logService.entries[.debug]?.count == iterations)
+        #expect(logService.entries[.info]?.count == iterations)
+        #expect(logService.entries[.warning]?.count == iterations)
+        #expect(logService.entries[.error]?.count == iterations)
+        #expect(logService.entries[.none]?.isEmpty == true)
     }
 }
 

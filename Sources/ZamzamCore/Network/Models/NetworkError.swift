@@ -10,7 +10,7 @@ import Foundation.NSURLRequest
 import Foundation.NSError
 
 /// The server error with included details from the network request.
-public struct NetworkError: Error {
+public struct NetworkError: Error, Sendable {
     /// The original request that initiated the task.
     public let request: URLRequest
 

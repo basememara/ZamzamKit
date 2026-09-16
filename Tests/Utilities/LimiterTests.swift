@@ -9,6 +9,8 @@
 import XCTest
 import ZamzamCore
 
+// Stays on XCTest: these assert real elapsed time while mutating values captured by
+// the limiter's closures, which Swift Testing's parallel model does not suit.
 final class LimiterTests: XCTestCase {}
 
 extension LimiterTests {

@@ -9,7 +9,7 @@
 import Foundation.NSURLSession
 
 /// The object that defines methods that URL session instances call on their delegates to handle session-level events, like session life cycle changes.
-public class ServerTrustDelegate: NSObject, URLSessionTaskDelegate {
+public final class ServerTrustDelegate: NSObject, URLSessionTaskDelegate, @unchecked Sendable {
     private let evaluators: [String: ServerTrustEvaluator]?
     private let allEvaluatorsMustSatisfy: Bool
 

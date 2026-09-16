@@ -6,240 +6,217 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 @testable import ZamzamCore
 
-final class AppMigrationTests: XCTestCase {
+struct AppMigrationTests {
 }
 
 extension AppMigrationTests {
-    func testMigrationReset() throws {
+    @Test
+    func migrationReset() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
-        let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
-        migration.perform(forVersion: "0.9") {
-            expectation1.fulfill()
-        }
+        var ran1 = false
+        migration.perform(forVersion: "0.9") { ran1 = true }
+        #expect(ran1, "Expecting block to be run for version 0.9")
 
-        let expectation3 = self.expectation(description: "Expecting block to be run for version 1.0")
-        migration.perform(forVersion: "1.0") {
-            expectation3.fulfill()
-        }
+        var ran3 = false
+        migration.perform(forVersion: "1.0") { ran3 = true }
+        #expect(ran3, "Expecting block to be run for version 1.0")
 
         migration.reset()
 
-        let expectation4 = self.expectation(description: "Expecting block to be run again for version 0.9")
-        migration.perform(forVersion: "0.9") {
-            expectation4.fulfill()
-        }
+        var ran4 = false
+        migration.perform(forVersion: "0.9") { ran4 = true }
+        #expect(ran4, "Expecting block to be run again for version 0.9")
 
-        let expectation6 = self.expectation(description: "Expecting block to be run again for version 1.0")
-        migration.perform(forVersion: "1.0") {
-            expectation6.fulfill()
-        }
-
-        waitForAllExpectations()
+        var ran6 = false
+        migration.perform(forVersion: "1.0") { ran6 = true }
+        #expect(ran6, "Expecting block to be run again for version 1.0")
     }
 }
 
 extension AppMigrationTests {
-    func testMigrationChained() throws {
+    @Test
+    func migrationChained() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
-        let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
-        let expectation2 = self.expectation(description: "Expecting block to be run for version 1.0")
+        var ran1 = false
+        var ran2 = false
 
         migration
             .perform(forVersion: "0.9") {
-                expectation1.fulfill()
+                ran1 = true
             }
             .perform(forVersion: "0.9") {
-                XCTFail("Should not execute a block for the same version twice")
+                Issue.record("Should not execute a block for the same version twice")
             }
             .perform(forVersion: "1.0") {
-                expectation2.fulfill()
+                ran2 = true
             }
             .perform(forVersion: "1.0") {
-                XCTFail("Should not execute a block for the same version twice")
+                Issue.record("Should not execute a block for the same version twice")
             }
             .perform(forVersion: "2.0") {
-                XCTFail("Should not execute a block for a future version")
+                Issue.record("Should not execute a block for a future version")
             }
 
-        waitForAllExpectations()
+        #expect(ran1)
+        #expect(ran2)
     }
 }
 
 extension AppMigrationTests {
-    func testMigrationBuild() throws {
+    @Test
+    func migrationBuild() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
-        let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
-        migration.perform(forVersion: "0.9") {
-            expectation1.fulfill()
-        }
+        var ran1 = false
+        migration.perform(forVersion: "0.9") { ran1 = true }
+        #expect(ran1, "Expecting block to be run for version 0.9")
 
         migration.perform(forVersion: "0.9") {
-            XCTFail("Should not execute a block for the same version twice")
+            Issue.record("Should not execute a block for the same version twice")
         }
 
-        let expectation2 = self.expectation(description: "Expecting block to be run for version 1.0")
+        var ran2 = false
+        migration.perform(forVersion: "1.0") { ran2 = true }
+        #expect(ran2, "Expecting block to be run for version 1.0")
+
         migration.perform(forVersion: "1.0") {
-            expectation2.fulfill()
+            Issue.record("Should not execute a block for the same version twice")
         }
-
-        migration.perform(forVersion: "1.0") {
-            XCTFail("Should not execute a block for the same version twice")
-        }
-
-        waitForAllExpectations()
     }
 }
 
 extension AppMigrationTests {
-    func testMigratesOnFirstRun() throws {
+    @Test
+    func migratesOnFirstRun() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.1")
-        let expectation = self.expectation(description: "Should execute migration after reset")
+        var ran = false
 
         migration.perform(forVersion: "1.0") {
-            expectation.fulfill()
+            ran = true
         }
 
-        waitForAllExpectations()
+        #expect(ran)
     }
 }
 
 extension AppMigrationTests {
-    func testMigratesOnce() throws {
+    @Test
+    func migratesOnce() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
-        let expectation = self.expectation(description: "Expecting block to be run")
+        var ran = false
         migration.perform(forVersion: "0.9") {
-            expectation.fulfill()
+            ran = true
         }
 
         migration.perform(forVersion: "0.9") {
-            XCTFail("Should not execute a block for the same version twice")
+            Issue.record("Should not execute a block for the same version twice")
         }
 
-        let expectation2 = self.expectation(description: "Expecting block to be run")
+        var ran2 = false
+        migration.perform(forVersion: "1.0") { ran2 = true }
+        #expect(ran2, "Expecting block to be run")
+
         migration.perform(forVersion: "1.0") {
-            expectation2.fulfill()
+            Issue.record("Should not execute a block for the same version twice")
         }
 
-        migration.perform(forVersion: "1.0") {
-            XCTFail("Should not execute a block for the same version twice")
-        }
-
-        waitForAllExpectations()
+        #expect(ran)
     }
 }
 
 extension AppMigrationTests {
-    func testMigratesPreviousVersionBlocks() throws {
+    @Test
+    func migratesPreviousVersionBlocks() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
-        let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
-        migration.perform(forVersion: "0.9") {
-            expectation1.fulfill()
-        }
+        var ran1 = false
+        migration.perform(forVersion: "0.9") { ran1 = true }
+        #expect(ran1, "Expecting block to be run for version 0.9")
 
-        let expectation2 = self.expectation(description: "Expecting block to be run for version 1.0")
-        migration.perform(forVersion: "1.0") {
-            expectation2.fulfill()
-        }
-
-        waitForAllExpectations()
+        var ran2 = false
+        migration.perform(forVersion: "1.0") { ran2 = true }
+        #expect(ran2, "Expecting block to be run for version 1.0")
     }
 }
 
 extension AppMigrationTests {
-    func testMigratesVersionInNaturalSortOrder() throws {
+    @Test
+    func migratesVersionInNaturalSortOrder() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
-        let expectation1 = self.expectation(description: "Expecting block to be run for version 0.9")
-        migration.perform(forVersion: "0.9") {
-            expectation1.fulfill()
-        }
+        var ran1 = false
+        migration.perform(forVersion: "0.9") { ran1 = true }
+        #expect(ran1, "Expecting block to be run for version 0.9")
 
         migration.perform(forVersion: "0.1") {
-            XCTFail("Should use natural sort order, e.g. treat 0.10 as a follower of 0.9")
+            Issue.record("Should use natural sort order, e.g. treat 0.10 as a follower of 0.9")
         }
 
-        let expectation2 = self.expectation(description: "Expecting block to be run for version 0.10")
-        migration.perform(forVersion: "0.10") {
-            expectation2.fulfill()
-        }
+        var ran2 = false
+        migration.perform(forVersion: "0.10") { ran2 = true }
+        #expect(ran2, "Expecting block to be run for version 0.10")
 
-        let expectation3 = self.expectation(description: "Expecting block to be run for version 1")
-        migration.perform(forVersion: "1") {
-            expectation3.fulfill()
-        }
-
-        waitForAllExpectations()
+        var ran3 = false
+        migration.perform(forVersion: "1") { ran3 = true }
+        #expect(ran3, "Expecting block to be run for version 1")
     }
 }
 
 extension AppMigrationTests {
-    func testRunsApplicationUpdateBlockOnce() throws {
+    @Test
+    func runsApplicationUpdateBlockOnce() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
-        let expectation = self.expectation(description: "Should only call block once")
+        var ran = false
 
         migration.performUpdate {
-            expectation.fulfill()
+            ran = true
         }
 
         migration.performUpdate {
-            XCTFail("Expected applicationUpdate to be called only once")
+            Issue.record("Expected applicationUpdate to be called only once")
         }
 
-        waitForAllExpectations()
+        #expect(ran)
     }
 }
 
 extension AppMigrationTests {
-    func testRunsApplicationUpdateBlockOnlyOnceWithMultipleMigrations() throws {
+    @Test
+    func runsApplicationUpdateBlockOnlyOnceWithMultipleMigrations() throws {
         let migration: AppMigration = try .makeMigration(forVersion: "1.0")
 
-        let expectation1 = self.expectation(description: "Expecting block to be run for version 0.8")
-        migration.perform(forVersion: "0.8") {
-            expectation1.fulfill()
-        }
+        var ran1 = false
+        migration.perform(forVersion: "0.8") { ran1 = true }
+        #expect(ran1, "Expecting block to be run for version 0.8")
 
-        let expectation2 = self.expectation(description: "Expecting block to be run for version 0.9")
-        migration.perform(forVersion: "0.9") {
-            expectation2.fulfill()
-        }
+        var ran2 = false
+        migration.perform(forVersion: "0.9") { ran2 = true }
+        #expect(ran2, "Expecting block to be run for version 0.9")
 
-        let expectation3 = self.expectation(description: "Expecting block to be run for version 0.10")
-        migration.perform(forVersion: "0.10") {
-            expectation3.fulfill()
-        }
+        var ran3 = false
+        migration.perform(forVersion: "0.10") { ran3 = true }
+        #expect(ran3, "Expecting block to be run for version 0.10")
 
-        let expectation4 = self.expectation(description: "Should call the applicationUpdate only once no matter how many migrations have to be done")
-        migration.performUpdate {
-            expectation4.fulfill()
-        }
-
-        waitForAllExpectations()
+        var ran4 = false
+        migration.performUpdate { ran4 = true }
+        #expect(ran4, "Should call the applicationUpdate only once no matter how many migrations have to be done")
     }
 }
 
 // MARK: - Helpers
 
-private extension AppMigrationTests {
-    func waitForAllExpectations() {
-        waitForExpectations(timeout: 5) {
-            guard let error = $0 else { return }
-            print("waitForAllExpectations timeout: \(error)")
-        }
-    }
-}
 
 private extension AppMigration {
     static func makeMigration(forVersion version: String) throws -> AppMigration {
         let migration = AppMigration(
-            userDefaults: try XCTUnwrap(UserDefaults(suiteName: "AppMigrationTests")),
+            userDefaults: try #require(UserDefaults(suiteName: UUID().uuidString)),
             bundle: .module
         )
 

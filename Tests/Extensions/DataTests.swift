@@ -6,41 +6,40 @@
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import ZamzamCore
 
-final class DataTests: XCTestCase {}
+struct DataTests {}
 
 extension DataTests {
-    func testString() {
+    @Test
+    func string() {
         let dataFromString = "hello".data(using: .utf8)
-        XCTAssertNotNil(dataFromString)
-        XCTAssertEqual(dataFromString?.string(encoding: .utf8), "hello")
+        #expect(dataFromString != nil)
+        #expect(dataFromString?.string(encoding: .utf8) == "hello")
     }
 }
 
 extension DataTests {
-    func testHexString() {
-        XCTAssertEqual(
-            "hbjJBJjhbjhad f7s7dtf7 sugyo87T^IT*iyug".data(using: .utf8)?.hexString(),
-            "68626a4a424a6a68626a68616420663773376474663720737567796f3837545e49542a69797567"
-        )
+    @Test
+    func hexString() {
+        #expect("hbjJBJjhbjhad f7s7dtf7 sugyo87T^IT*iyug".data(using: .utf8)?.hexString() == "68626a4a424a6a68626a68616420663773376474663720737567796f3837545e49542a69797567")
     }
 }
 
 extension DataTests {
-    func testBase64URLEncodedString() {
-        XCTAssertEqual(
-            "dsva-kjKH IU_H78yds8/7fyt78O TD+SY*O&*&T*A&(A*SF Y d8=q933827 z*&T*(ui sda dssd2&^%adjkh alkdjfl"
+    @Test
+    func base64URLEncodedString() {
+        #expect("dsva-kjKH IU_H78yds8/7fyt78O TD+SY*O&*&T*A&(A*SF Y d8=q933827 z*&T*(ui sda dssd2&^%adjkh alkdjfl"
                 .data(using: .utf8)?
-                .base64URLEncodedString(),
-            "ZHN2YS1raktIIElVX0g3OHlkczgvN2Z5dDc4TyBURCtTWSpPJiomVCpBJihBKlNGIFkgZDg9cTkzMzgyNyB6KiZUKih1aSBzZGEgZHNzZDImXiVhZGpraCBhbGtkamZs"
-        )
+                .base64URLEncodedString() == "ZHN2YS1raktIIElVX0g3OHlkczgvN2Z5dDc4TyBURCtTWSpPJiomVCpBJihBKlNGIFkgZDg9cTkzMzgyNyB6KiZUKih1aSBzZGEgZHNzZDImXiVhZGpraCBhbGtkamZs")
     }
 }
 
 extension DataTests {
-    func testCodable() throws {
+    @Test
+    func codable() throws {
         // Given
         struct TestModel: Codable, Equatable {
             let string: String
@@ -54,6 +53,6 @@ extension DataTests {
         let model: TestModel = try data.decode()
 
         // Then
-        XCTAssertEqual(model, expectedModel)
+        #expect(model == expectedModel)
     }
 }

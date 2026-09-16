@@ -6,29 +6,31 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import ZamzamCore
 
-final class InfixTests: XCTestCase {
-    func testConditionalAssign() {
+struct InfixTests {
+    @Test
+    func conditionalAssign() {
         var someProperty = "abc"
         var someValue: String?
 
         someProperty ?= someValue
-        XCTAssertEqual(someProperty, "abc")
+        #expect(someProperty == "abc")
 
         someValue = "xyz"
         someProperty ?= someValue
-        XCTAssertEqual(someProperty, "xyz")
+        #expect(someProperty == "xyz")
 
         var test: Int? = 123
         var value: Int?
 
         test ?= value
-        XCTAssertEqual(test, 123)
+        #expect(test == 123)
 
         value = 456
         test ?= value
-        XCTAssertEqual(test, 456)
+        #expect(test == 456)
     }
 }

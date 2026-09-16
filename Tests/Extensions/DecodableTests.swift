@@ -6,15 +6,17 @@
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import ZamzamCore
 
-final class DecodableTests: XCTestCase {
+struct DecodableTests {
     private let jsonDecoder = JSONDecoder()
 }
 
 extension DecodableTests {
-    func testFromString() throws {
+    @Test
+    func fromString() throws {
         // Given
         struct TestModel: Decodable {
             let string: String
@@ -32,13 +34,14 @@ extension DecodableTests {
         let model = try jsonDecoder.decode(TestModel.self, from: jsonString)
 
         // Then
-        XCTAssertEqual(model.string, "Abc")
-        XCTAssertEqual(model.integer, 123)
+        #expect(model.string == "Abc")
+        #expect(model.integer == 123)
     }
 }
 
 extension DecodableTests {
-    func testAnyDecodable() throws {
+    @Test
+    func anyDecodable() throws {
         // Given
         let jsonString = """
         {
@@ -61,7 +64,8 @@ extension DecodableTests {
         """
 
         guard let data = jsonString.data(using: .utf8) else {
-            return XCTFail("Bad JSON format")
+            Issue.record("Bad JSON format")
+            return
         }
 
         // Type used for decoding the server payload
@@ -79,15 +83,12 @@ extension DecodableTests {
         let payload = try decoder.decode(ServerResponse.self, from: data)
 
         // Then
-        XCTAssertEqual(try XCTUnwrap((payload.data?["boolean"])?.value as? Bool), true)
-        XCTAssertEqual(try XCTUnwrap((payload.data?["integer"])?.value as? Int), 1)
-        XCTAssertEqual(try XCTUnwrap((payload.data?["double"])?.value as? Double), 3.14159265358979323846, accuracy: 0.001)
-        XCTAssertEqual(try XCTUnwrap((payload.data?["string"])?.value as? String), "string")
-        XCTAssertEqual(try XCTUnwrap((payload.data?["date"])?.value as? Date), Date(timeIntervalSince1970: 1559392318))
-        XCTAssertEqual(try XCTUnwrap((payload.data?["array"])?.value as? [Int]), [1, 2, 3])
-        XCTAssertEqual(
-            try XCTUnwrap((payload.data?["nested"])?.value as? [String: String]),
-            ["a": "alpha", "b": "bravo", "c": "charlie"]
-        )
+        #expect(try #require((payload.data?["boolean"])?.value as? Bool) == true)
+        #expect(try #require((payload.data?["integer"])?.value as? Int) == 1)
+        #expect(abs((try #require((payload.data?["double"])?.value as? Double)) - (3.14159265358979323846)) <= 0.001)
+        #expect(try #require((payload.data?["string"])?.value as? String) == "string")
+        #expect(try #require((payload.data?["date"])?.value as? Date) == Date(timeIntervalSince1970: 1559392318))
+        #expect(try #require((payload.data?["array"])?.value as? [Int]) == [1, 2, 3])
+        #expect(try #require((payload.data?["nested"])?.value as? [String: String]) == ["a": "alpha", "b": "bravo", "c": "charlie"])
     }
 }
