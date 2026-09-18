@@ -9,7 +9,7 @@
 import Foundation.NSURLRequest
 
 /// Types adopting the `URLRequestConvertible` protocol can be used to construct a `URLRequest` object.
-public protocol URLRequestConvertible {
+public protocol URLRequestConvertible: Sendable {
     /// Returns a `URLRequest`.
     func asURLRequest() -> URLRequest
 }

@@ -1,4 +1,4 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 6.0
 
 import PackageDescription
 
@@ -25,28 +25,37 @@ let package = Package(
                 "ZamzamLocation",
                 "ZamzamNotification",
                 "ZamzamUI"
-            ]
+            ],
+            swiftSettings: [.swiftLanguageMode(.v6)]
         ),
         .testTarget(
             name: "ZamzamKitTests",
             dependencies: ["ZamzamKit"],
+            path: "Tests",
             exclude: ["Network/Certificates"],
-            resources: [.process("Resources")]
+            resources: [.process("Resources")],
+            // Swift 5 mode: the suite deliberately exercises shared mutable state, from the
+            // atomic wrapper's concurrency tests to certificate fixtures mutated in place.
+            swiftSettings: [.swiftLanguageMode(.v5)]
         ),
         .target(
-            name: "ZamzamCore"
+            name: "ZamzamCore",
+            swiftSettings: [.swiftLanguageMode(.v6)]
         ),
         .target(
             name: "ZamzamLocation",
-            dependencies: ["ZamzamCore"]
+            dependencies: ["ZamzamCore"],
+            swiftSettings: [.swiftLanguageMode(.v6)]
         ),
         .target(
             name: "ZamzamNotification",
-            dependencies: ["ZamzamCore"]
+            dependencies: ["ZamzamCore"],
+            swiftSettings: [.swiftLanguageMode(.v6)]
         ),
         .target(
             name: "ZamzamUI",
-            dependencies: ["ZamzamCore"]
+            dependencies: ["ZamzamCore"],
+            swiftSettings: [.swiftLanguageMode(.v6)]
         )
     ]
 )

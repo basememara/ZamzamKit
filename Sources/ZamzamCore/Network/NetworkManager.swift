@@ -40,7 +40,7 @@ import Foundation.NSURLRequest
 ///         print("Unknown error")
 ///     }
 ///     
-public struct NetworkManager {
+public struct NetworkManager: Sendable {
     private let service: NetworkService
     private let adapter: URLRequestAdapter?
 

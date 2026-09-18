@@ -1,9 +1,8 @@
 # ZamzamKit
 
-[![Build Status](https://api.travis-ci.org/ZamzamInc/ZamzamKit.svg?branch=master)](https://travis-ci.org/ZamzamInc/ZamzamKit)
 [![Platform](https://img.shields.io/badge/platform-macos%20%7C%20ios%20%7C%20watchos%20%7C%20ipados%20%7C%20tvos-lightgrey)](https://github.com/ZamzamInc/ZamzamKit)
 [![Swift](https://img.shields.io/badge/Swift-5-orange.svg)](https://swift.org)
-[![Xcode](https://img.shields.io/badge/Xcode-14-blue.svg)](https://developer.apple.com/xcode)
+[![Xcode](https://img.shields.io/badge/Xcode-27-blue.svg)](https://developer.apple.com/xcode)
 [![SPM](https://img.shields.io/badge/SPM-Compatible-blue)](https://swift.org/package-manager)
 [![MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
@@ -28,6 +27,8 @@ The `ZamzamKit` package contains four different products you can import. Add any
 )
 ```
 *Note: This library is highly volatile and changes often to stay ahead of cutting-edge technologies. It is recommended to copy over code that you want into your own libraries or fork it.*
+
+Agent-driven maintenance (build and test loop, conventions, consumer contract) is documented in [AGENTS.md](AGENTS.md).
 
 ## ZamzamCore
 
@@ -1167,6 +1168,10 @@ complications.forEach { extendTimeline(for: $0) }
 CLKComplicationServer.sharedInstance().extendTimelineForComplications()
 ```
 </details>
+
+## Testing
+
+Tests live flat in `Tests/` and run with `swift test`. In Xcode, the shared `ZamzamKit-Package` scheme runs `Package.xctestplan` at the package root, with code coverage for the four library targets.
 
 ## Author
 

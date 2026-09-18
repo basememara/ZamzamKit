@@ -9,7 +9,7 @@
 import Foundation.NSURLRequest
 
 /// The server response with included details from the network request.
-public struct NetworkResponse {
+public struct NetworkResponse: Sendable {
     public let data: Data
     public let headers: [String: String]
     public let statusCode: Int

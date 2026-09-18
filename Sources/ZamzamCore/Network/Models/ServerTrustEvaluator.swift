@@ -10,7 +10,7 @@ import Foundation
 import Security
 
 /// A protocol describing the API used to evaluate server trusts.
-public protocol ServerTrustEvaluator {
+public protocol ServerTrustEvaluator: Sendable {
     /// Evaluates the given `SecTrust` value for the given `host`.
     ///
     /// - Parameters:
@@ -27,7 +27,8 @@ public protocol ServerTrustEvaluator {
 /// certificates match one of the server certificates. By validating both the certificate chain and host, certificate
 /// pinning provides a very secure form of server trust validation mitigating most, if not all, MITM attacks.
 /// Applications are encouraged to always validate the host and require a valid certificate chain in production.
-public struct NetworkPinnedCertificateTrustEvaluator: ServerTrustEvaluator {
+/// `SecCertificate` is an immutable Core Foundation type, hence the unchecked conformance.
+public struct NetworkPinnedCertificateTrustEvaluator: ServerTrustEvaluator, @unchecked Sendable {
     private let certificates: [SecCertificate]
     private let acceptSelfSigned: Bool
     private let log: LogManager?
@@ -124,7 +125,7 @@ extension NetworkPinnedCertificateTrustEvaluator {
 /// Disables all evaluation which in turn will always consider any server trust as valid.
 ///
 /// **THIS EVALUATOR SHOULD NEVER BE USED IN PRODUCTION!**
-public struct NetworkDisabledTrustEvaluator: ServerTrustEvaluator {
+public struct NetworkDisabledTrustEvaluator: ServerTrustEvaluator, Sendable {
     public init() {}
     public func valid(_ trust: SecTrust, forHost host: String) -> Bool { true }
 }

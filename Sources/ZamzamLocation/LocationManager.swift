@@ -12,8 +12,15 @@ import CoreLocation.CLHeading
 import CoreLocation.CLLocation
 
 /// A `LocationManager` proxy with publisher.
+@MainActor
 public class LocationManager {
     private let service: LocationService
+
+    private let authorizationSubject = CurrentValueSubject<Bool?, Never>(nil)
+    private let locationSubject = CurrentValueSubject<Result<CLLocation, CLError>?, Never>(nil)
+    #if os(iOS) || os(watchOS)
+    private let headingSubject = CurrentValueSubject<Result<CLHeading, CLError>?, Never>(nil)
+    #endif
 
     public init(service: LocationService) {
         self.service = service
@@ -42,14 +49,14 @@ public extension LocationManager {
     ///   - startUpdatingLocation: Starts the generation of updates that report the user’s current location.
     ///   - completion: True if the authorization succeeded for the authorization type, false otherwise.
     func requestAuthorization() -> AnyPublisher<Bool, Never> {
-        let publisher = Self.authorizationSubject
+        let publisher = authorizationSubject
             .compactMap { $0 }
             .debounce(for: 0.2, scheduler: DispatchQueue.main)
             .eraseToAnyPublisher()
 
         // Handle authorized and exit
         guard !isAuthorized else {
-            Self.authorizationSubject.send(true)
+            authorizationSubject.send(true)
             return publisher
         }
 
@@ -60,13 +67,13 @@ public extension LocationManager {
         guard !isAuthorized else {
             // Notify in case authorization dialog not launched by OS
             // since user will be notified first time only and ignored subsequently
-            Self.authorizationSubject.send(false)
+            authorizationSubject.send(false)
             return publisher
         }
 
         // Handle denied and exit
         guard service.canRequestAuthorization else {
-            Self.authorizationSubject.send(false)
+            authorizationSubject.send(false)
             return publisher
         }
 
@@ -90,7 +97,7 @@ public extension LocationManager {
             pauseAutomatically: pauseAutomatically
         )
 
-        return Self.locationSubject
+        return locationSubject
             .compactMap { $0 }
             .eraseToAnyPublisher()
     }
@@ -107,7 +114,7 @@ public extension LocationManager {
     func startMonitoringSignificantLocationChanges() -> AnyPublisher<Result<CLLocation, CLError>, Never> {
         service.startMonitoringSignificantLocationChanges()
 
-        return Self.locationSubject
+        return locationSubject
             .compactMap { $0 }
             .eraseToAnyPublisher()
     }
@@ -131,10 +138,10 @@ public extension LocationManager {
         service.shouldDisplayHeadingCalibration = allowCalibration
 
         if !service.startUpdatingHeading() {
-            Self.headingSubject.send(.failure(CLError(.headingFailure)))
+            headingSubject.send(.failure(CLError(.headingFailure)))
         }
 
-        return Self.headingSubject
+        return headingSubject
             .compactMap { $0 }
             .eraseToAnyPublisher()
     }
@@ -146,7 +153,7 @@ public extension LocationManager {
     }
 
     func locationService(didUpdateHeading newHeading: CLHeading) {
-        Self.headingSubject.send(.success(newHeading))
+        headingSubject.send(.success(newHeading))
     }
 }
 #endif
@@ -155,28 +162,18 @@ public extension LocationManager {
 
 extension LocationManager: LocationServiceDelegate {
     public func locationService(didChangeAuthorization authorization: Bool) {
-        Self.authorizationSubject.send(authorization)
+        authorizationSubject.send(authorization)
     }
 
     public func locationService(didUpdateLocation location: CLLocation) {
-        Self.locationSubject.send(.success(location))
+        locationSubject.send(.success(location))
     }
 
     public func locationService(didFailWithError error: CLError) {
-        Self.locationSubject.send(.failure(error))
+        locationSubject.send(.failure(error))
 
         #if os(iOS) || os(watchOS)
-        Self.headingSubject.send(.failure(error))
+        headingSubject.send(.failure(error))
         #endif
     }
-}
-
-// MARK: - Observers
-
-private extension LocationManager {
-    static let authorizationSubject = CurrentValueSubject<Bool?, Never>(nil)
-    static let locationSubject = CurrentValueSubject<Result<CLLocation, CLError>?, Never>(nil)
-    #if os(iOS) || os(watchOS)
-    static let headingSubject = CurrentValueSubject<Result<CLHeading, CLError>?, Never>(nil)
-    #endif
 }

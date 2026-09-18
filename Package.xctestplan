@@ -1,0 +1,47 @@
+{
+  "configurations" : [
+    {
+      "id" : "3A7D91C5-6E2B-4F08-B4A1-9D5C7E2F8B60",
+      "name" : "Default",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:",
+          "identifier" : "ZamzamCore",
+          "name" : "ZamzamCore"
+        },
+        {
+          "containerPath" : "container:",
+          "identifier" : "ZamzamLocation",
+          "name" : "ZamzamLocation"
+        },
+        {
+          "containerPath" : "container:",
+          "identifier" : "ZamzamNotification",
+          "name" : "ZamzamNotification"
+        },
+        {
+          "containerPath" : "container:",
+          "identifier" : "ZamzamUI",
+          "name" : "ZamzamUI"
+        }
+      ]
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ZamzamKitTests",
+        "name" : "ZamzamKitTests"
+      }
+    }
+  ],
+  "version" : 1
+}

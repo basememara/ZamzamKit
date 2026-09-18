@@ -73,7 +73,7 @@ public extension View {
     /// - Returns: A view that fires an action when the specified value changes.
     func onChange<V>(
         of value: V,
-        perform action: @escaping (_ newValue: V) async -> Void
+        perform action: @escaping @MainActor (_ newValue: V) async -> Void
     ) -> some View where V: Equatable {
         onChange(of: value) { newValue in Task { await action(newValue) } }
     }
@@ -91,7 +91,7 @@ public extension View {
     func onChange<V>(
         of value: V,
         initial: Bool = false,
-        perform action: @escaping () async -> Void
+        perform action: @escaping @MainActor () async -> Void
     ) -> some View where V: Equatable {
         onChange(of: value, initial: initial) { Task { await action() } }
     }
@@ -119,7 +119,7 @@ public extension View {
     /// - Returns: A view that triggers an async action when publisher emits an event.
     func onReceive<P>(
         _ publisher: P?,
-        perform action: @escaping () async -> Void
+        perform action: @escaping @MainActor () async -> Void
     ) -> some View where P: Publisher, P.Failure == Never {
         // Deprecate in favour of `.task` after converting publishers to `AsyncStream`
         onReceive(publisher) { _ in Task { await action() } }
@@ -133,10 +133,11 @@ public extension View {
     /// - Returns: A view that triggers an action when publisher emits an event.
     func onReceive<O>(
         _ observableObject: O,
-        perform action: @escaping () -> Void
+        perform action: @escaping @MainActor () -> Void
     ) -> some View where O: ObservableObject {
         onReceive(observableObject.objectWillChange) { _ in
-            DispatchQueue.main.async(execute: action)
+            // Deferred a turn so the observed object reflects the change `objectWillChange` announces.
+            Task { action() }
         }
     }
 }
@@ -170,7 +171,7 @@ public extension View {
     func onNotification(
         for name: Notification.Name,
         object: AnyObject? = nil,
-        perform action: @escaping (Notification) async -> Void
+        perform action: @escaping @MainActor (Notification) async -> Void
     ) -> some View {
         onReceive(NotificationCenter.default.publisher(for: name, object: object).receive(on: DispatchQueue.main)) { notification in
             Task { await action(notification) }
@@ -187,7 +188,7 @@ public extension View {
     func onNotification(
         for name: Notification.Name,
         object: AnyObject? = nil,
-        perform action: @escaping () async -> Void
+        perform action: @escaping @MainActor () async -> Void
     ) -> some View {
         onReceive(NotificationCenter.default.publisher(for: name, object: object).receive(on: DispatchQueue.main)) { _ in
             Task { await action() }

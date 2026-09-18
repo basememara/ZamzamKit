@@ -8,8 +8,12 @@
 
 import CoreLocation.CLLocationManager
 
-public extension CLLocationManager {
-    /// Determines if location services is enabled and authorized for always or when in use.
+public extension CLAuthorizationStatus {
+    /// Determines if the status is authorized for always or when in use.
+    ///
+    /// Core Location reports `denied` when location services are switched off for the whole
+    /// device, so this also covers the system-wide switch without `locationServicesEnabled()`,
+    /// which blocks its caller and must not run on the main thread.
     var isAuthorized: Bool {
         var statuses: [CLAuthorizationStatus] = [.authorizedAlways]
 
@@ -19,7 +23,11 @@ public extension CLLocationManager {
             statuses.append(.authorized)
         #endif
 
-        return Self.locationServicesEnabled()
-            && statuses.contains(authorizationStatus)
+        return statuses.contains(self)
     }
+}
+
+public extension CLLocationManager {
+    /// Determines if location services is authorized for always or when in use.
+    var isAuthorized: Bool { authorizationStatus.isAuthorized }
 }

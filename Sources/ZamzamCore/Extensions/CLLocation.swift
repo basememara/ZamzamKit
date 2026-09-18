@@ -39,7 +39,7 @@ public extension Array where Element == CLLocationCoordinate2D {
 }
 
 public extension CLLocation {
-    struct LocationMeta: CustomStringConvertible {
+    struct LocationMeta: CustomStringConvertible, Sendable {
         public var coordinates: (latitude: Double, longitude: Double)?
         public var locality: String?
         public var country: String?
@@ -62,56 +62,43 @@ public extension CLLocation {
 
     /// Retrieves location details for coordinates.
     ///
-    /// - Parameters:
-    ///   - timeout: A timeout to exit and call completion handler. Default is 10 seconds.
-    ///   - completion: Async callback with retrived location details.
-    func geocoder(timeout: TimeInterval = 10, completion: @escaping (LocationMeta?) -> Void) {
-        var hasCompleted = false
+    /// - Parameter timeout: A deadline after which the lookup is cancelled and `nil` returned,
+    ///   since reverse geocoding is network-bound and can otherwise hang for minutes.
+    /// - Returns: The location details, or `nil` on failure, cancellation or timeout.
+    func geocoder(timeout: TimeInterval = 10) async -> LocationMeta? {
+        // `CLGeocoder` is not `Sendable`, but `cancelGeocode()` is the documented way to abandon
+        // an in-flight request from elsewhere, which is all the other references do.
+        nonisolated(unsafe) let geocoder = CLGeocoder()
 
-        // Fallback on timeout since could take too long
-        // https://stackoverflow.com/a/34389742
-        let timer = Timer(timeInterval: timeout, repeats: false) { timer in
-            defer { timer.invalidate() }
-
-            guard !hasCompleted else { return }
-            hasCompleted = true
-
-            DispatchQueue.main.async {
-                completion(nil)
-            }
+        // A task group would leave the losing child suspended until Core Location replied, so the
+        // deadline is enforced by cancelling the geocode itself rather than by racing it.
+        let timeoutTask = Task {
+            try await Task.sleep(seconds: timeout)
+            geocoder.cancelGeocode()
         }
 
-        // Reverse geocode stored coordinates
-        CLGeocoder().reverseGeocodeLocation(self) { placemarks, error in
-            DispatchQueue.main.async {
-                // Destroy timeout mechanism
-                guard !hasCompleted else { return }
-                hasCompleted = true
-                timer.invalidate()
+        defer { timeoutTask.cancel() }
 
-                guard let mark = placemarks?.first, error == nil else {
-                    return completion(nil)
-                }
-
-                completion(
-                    LocationMeta(
-                        coordinates: (self.coordinate.latitude, self.coordinate.longitude),
-                        locality: mark.locality ?? mark.subAdministrativeArea,
-                        country: mark.country,
-                        countryCode: mark.isoCountryCode,
-                        timeZone: mark.timeZone,
-                        administrativeArea: mark.administrativeArea
-                    )
-                )
-            }
+        let placemark = await withTaskCancellationHandler {
+            try? await geocoder.reverseGeocodeLocation(self).first
+        } onCancel: {
+            geocoder.cancelGeocode()
         }
 
-        // Start timer
-        RunLoop.current.add(timer, forMode: .default)
+        guard let placemark else { return nil }
+
+        return LocationMeta(
+            coordinates: (coordinate.latitude, coordinate.longitude),
+            locality: placemark.locality ?? placemark.subAdministrativeArea,
+            country: placemark.country,
+            countryCode: placemark.isoCountryCode,
+            timeZone: placemark.timeZone,
+            administrativeArea: placemark.administrativeArea
+        )
     }
 }
 
-extension CLLocationCoordinate2D: Equatable {
+extension CLLocationCoordinate2D: @retroactive Equatable {
     /// Determine if coordinates match using latitude and longitude values.
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
@@ -123,7 +110,7 @@ extension CLLocationCoordinate2D: Equatable {
     }
 }
 
-extension CLLocationCoordinate2D: CustomStringConvertible {
+extension CLLocationCoordinate2D: @retroactive CustomStringConvertible {
     public var description: String {
         .localizedStringWithFormat("%.2f°, %.2f°", latitude, longitude)
     }
