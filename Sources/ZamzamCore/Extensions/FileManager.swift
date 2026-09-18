@@ -75,7 +75,7 @@ public extension FileManager {
     /// - Parameters:
     ///   - url: The HTTP URL to retrieve the file.
     ///   - completion: The completion handler to call when the load request is complete.
-    func download(from url: String, completion: @escaping (URL?, URLResponse?, Error?) -> Void) {
+    func download(from url: String, completion: @escaping @Sendable (URL?, URLResponse?, Error?) -> Void) {
         guard let nsURL = URL(string: url) else {
             completion(nil, nil, ZamzamError.invalidData)
             return

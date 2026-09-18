@@ -32,7 +32,7 @@ public extension UNNotificationAttachment {
     static func download(
         from urlString: String,
         identifier: String? = nil,
-        completion: @escaping (Result<UNNotificationAttachment, ZamzamError>) -> Void
+        completion: @escaping @Sendable (Result<UNNotificationAttachment, ZamzamError>) -> Void
     ) {
         FileManager.default.download(from: urlString) { url, _, error in
             if let error = error {

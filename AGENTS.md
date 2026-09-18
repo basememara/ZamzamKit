@@ -4,7 +4,7 @@ Open-source Swift package (github.com/ZamzamInc/ZamzamKit, MIT) of micro utiliti
 
 ## Layout
 
-Pure SPM, `swift-tools-version: 6.0`, platforms macOS 12 / iOS 15 / tvOS 15 / watchOS 8. Every library target builds in the **Swift 6 language mode** under strict concurrency; the test target stays in `.v5` because `AtomicTests` and `LimiterTests` deliberately exercise shared mutable state that the Swift 6 checker rejects. Keep new code Sendable-correct rather than reaching for `@unchecked`: the existing unchecked conformances each carry a comment naming the invariant that makes them safe. No external dependencies. Five library products:
+Pure SPM, `swift-tools-version: 6.0`, platforms macOS 12 / iOS 15 / tvOS 15 / watchOS 8. Every library target builds in the **Swift 6 language mode** under strict concurrency; the test target stays in `.v5` because `AtomicTests` and `LimiterTests` deliberately exercise shared mutable state that the Swift 6 checker rejects. Keep new code Sendable-correct rather than reaching for `@unchecked`: the existing unchecked conformances each carry a comment naming the invariant that makes them safe. Any completion parameter that a system framework invokes on its own queue (`UNUserNotificationCenter`, `URLSession`) is declared `@Sendable`: a plain `(Error?) -> Void` parameter turns a `@MainActor` caller's closure into a runtime trap when the callback lands off main. No external dependencies. Five library products:
 
 - `ZamzamCore` — application helpers, errors, extensions, infix operators, keychain, logging, network, utilities
 - `ZamzamLocation` — location services (depends on ZamzamCore)

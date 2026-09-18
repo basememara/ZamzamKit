@@ -206,7 +206,7 @@ public extension UNUserNotificationCenter {
         identifier: String = UUID().uuidString,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
         userInfo: [String: Any]? = nil,
-        completion: ((Error?) -> Void)? = nil
+        completion: (@Sendable (Error?) -> Void)? = nil
     ) {
         // Constuct content
         let content = UNMutableNotificationContent().apply {
@@ -274,7 +274,7 @@ public extension UNUserNotificationCenter {
         identifier: String = UUID().uuidString,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
         userInfo: [String: Any]? = nil,
-        completion: ((Error?) -> Void)? = nil
+        completion: (@Sendable (Error?) -> Void)? = nil
     ) {
         // Constuct content
         let content = UNMutableNotificationContent().apply {
@@ -352,7 +352,7 @@ public extension UNUserNotificationCenter {
         identifier: String = UUID().uuidString,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
         userInfo: [String: Any]? = nil,
-        completion: ((Error?) -> Void)? = nil
+        completion: (@Sendable (Error?) -> Void)? = nil
     ) {
         // Constuct content
         let content = UNMutableNotificationContent().apply {
