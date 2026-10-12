@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-/// A view that arranges its children in a horizontal line, or a vertical line at accessibility text sizes.
+/// A view that arranges its children in a horizontal line, or a vertical line at text sizes above extra large.
 public struct AdaptiveStack<Content: View>: View {
     let horizontalAlignment: HorizontalAlignment
     let verticalAlignment: VerticalAlignment
