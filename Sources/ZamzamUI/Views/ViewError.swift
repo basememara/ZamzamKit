@@ -52,11 +52,11 @@ extension ViewError: LocalizedError {
 // MARK: - Types
 
 public extension ViewError {
-    struct Action: Equatable {
+    struct Action: Equatable, Sendable {
         public let title: String
-        public let completion: () -> Void
+        public let completion: @MainActor @Sendable () -> Void
 
-        public init(_ title: String, completion: @escaping () -> Void) {
+        public init(_ title: String, completion: @escaping @MainActor @Sendable () -> Void) {
             self.title = title
             self.completion = completion
         }
@@ -84,9 +84,10 @@ public extension Alert {
             return
         }
 
+        // Alert buttons take plain closures but are always called on the main thread
         let primaryButton: Alert.Button = .default(
             Text(action.title),
-            action: action.completion
+            action: { MainActor.assumeIsolated(action.completion) }
         )
 
         let secondaryButton: Alert.Button = {
@@ -96,7 +97,7 @@ public extension Alert {
 
             return .cancel(
                 Text(action.title),
-                action: action.completion
+                action: { MainActor.assumeIsolated(action.completion) }
             )
         }()
 

@@ -48,7 +48,7 @@ public extension CLLocation {
         public var administrativeArea: String?
 
         public var description: String {
-            if let l = locality, let c = (Locale.current.languageCode == "en" ? countryCode : country) {
+            if let l = locality, let c = (Locale.current.language.languageCode?.identifier == "en" ? countryCode : country) {
                 return "\(l), \(c)"
             } else if let l = locality {
                 return "\(l)"

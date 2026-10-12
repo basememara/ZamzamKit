@@ -46,13 +46,7 @@ extension FileTests {
         // that the downloader saved as a file, and a known-issue wrapper hid it
         let source = try #require(Bundle.module.url(forResource: "Test", withExtension: "txt"))
 
-        let downloaded: URL? = await withCheckedContinuation { continuation in
-            FileManager.default.download(from: source.absoluteString) { url, _, _ in
-                continuation.resume(returning: url)
-            }
-        }
-
-        let url = try #require(downloaded)
+        let url = try await FileManager.default.download(from: source)
         #expect(FileManager.default.fileExists(atPath: url.path))
         #expect(try String(contentsOf: url, encoding: .utf8) == String(contentsOf: source, encoding: .utf8))
     }

@@ -32,7 +32,7 @@ public struct CurrencyFormatter {
         self.formatter = NumberFormatter().apply {
             $0.numberStyle = .currency
             $0.locale = locale
-            $0.currencyCode = locale.currencyCode
+            $0.currencyCode = locale.currency?.identifier
             $0.minimumFractionDigits = decimalDigits
             $0.maximumFractionDigits = decimalDigits
             $0.zeroSymbol ?= zeroSymbol

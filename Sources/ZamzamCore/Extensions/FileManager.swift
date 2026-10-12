@@ -66,45 +66,25 @@ public extension FileManager {
 }
 
 public extension FileManager {
-    /// Retrieve a file remotely and persist to local disk.
+    /// Retrieves a file and stores it in the caches directory under its own name, replacing any copy there.
     ///
-    ///     FileManager.default.download(from: "http://example.com/test.pdf") { url, response, error in
-    ///         // The `url` parameter represents location on local disk where remote file was downloaded.
-    ///     }
+    ///     let file = try await FileManager.default.download(from: url)
     ///
-    /// - Parameters:
-    ///   - url: The HTTP URL to retrieve the file.
-    ///   - completion: The completion handler to call when the load request is complete.
-    func download(from url: String, completion: @escaping @Sendable (URL?, URLResponse?, Error?) -> Void) {
-        guard let nsURL = URL(string: url) else {
-            completion(nil, nil, ZamzamError.invalidData)
-            return
+    /// - Parameter url: The HTTP URL to retrieve the file from.
+    /// - Returns: Where the file was stored on disk.
+    /// - Throws: A URL loading error, `URLError(.badServerResponse)` for a status outside 200–299, or a file error.
+    func download(from url: URL) async throws -> URL {
+        let (location, response) = try await URLSession.shared.download(from: url)
+
+        if let response = response as? HTTPURLResponse, !(200..<300).contains(response.statusCode) {
+            try? removeItem(at: location)
+            throw URLError(.badServerResponse)
         }
 
-        URLSession.shared
-            .downloadTask(with: nsURL) { location, response, error in
-                guard let location, error == nil else {
-                    completion(nil, nil, error)
-                    return
-                }
-
-                // Construct file destination
-                let destination = self.url(of: nsURL.lastPathComponent, from: .cachesDirectory)
-
-                // Delete local file if it exists to overwrite
-                try? self.removeItem(at: destination)
-
-                // Store remote file locally
-                do {
-                    try self.moveItem(at: location, to: destination)
-                } catch {
-                    completion(nil, nil, error)
-                    return
-                }
-
-                completion(destination, response, error)
-            }
-            .resume()
+        let destination = self.url(of: url.lastPathComponent, from: .cachesDirectory)
+        try? removeItem(at: destination)
+        try moveItem(at: location, to: destination)
+        return destination
     }
 }
 #endif
