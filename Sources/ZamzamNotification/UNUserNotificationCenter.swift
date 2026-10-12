@@ -1,12 +1,11 @@
 //
 //  UNUserNotificationCenter.swift
-//  ZamzamLocation
+//  ZamzamNotification
 //
 //  Created by Basem Emara on 2/3/17.
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
-#if !os(tvOS)
 import UserNotifications
 import CoreLocation
 import ZamzamCore
@@ -251,24 +250,25 @@ public extension UNUserNotificationCenter {
             userInfo: userInfo
         )
 
-        // https://github.com/d7laungani/DLLocalNotifications/blob/master/DLLocalNotifications/DLLocalNotifications.swift#L31
-        let components: DateComponents = switch repeats {
+        let units: Set<Calendar.Component> = switch repeats {
         case .once:
-            calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+            [.year, .month, .day, .hour, .minute, .second]
         case .minute:
-            calendar.dateComponents([.second], from: date)
+            [.second]
         case .hour:
-            calendar.dateComponents([.minute], from: date)
+            [.minute]
         case .day:
-            calendar.dateComponents([.hour, .minute], from: date)
+            [.hour, .minute]
         case .week:
-            calendar.dateComponents([.hour, .minute, .weekday], from: date)
+            [.hour, .minute, .weekday]
         case .month:
-            calendar.dateComponents([.hour, .minute, .day], from: date)
+            [.hour, .minute, .day]
         case .year:
-            calendar.dateComponents([.hour, .minute, .day, .month], from: date)
+            [.hour, .minute, .day, .month]
         }
 
+        // Without its calendar and time zone, the trigger reads the components in the device's, which can differ
+        let components = calendar.dateComponents(units.union([.calendar, .timeZone]), from: date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeats != .once)
         try await add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger))
     }
@@ -427,4 +427,3 @@ public extension UNUserNotificationCenter {
         _ = await deliveredNotifications()
     }
 }
-#endif
