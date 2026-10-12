@@ -14,16 +14,18 @@ import ZamzamCore
 public final class LocationManager: NSObject {
     private let manager: CLLocationManager
     private var authorizationWaiters: [CheckedContinuation<Void, Never>] = []
+    private var authorizationTimeout: Task<Void, Never>?
 
     #if os(iOS) || os(watchOS)
     private var headingContinuation: AsyncStream<Result<Heading, CLError>>.Continuation?
+    private var headingStream = 0
     private var shouldDisplayHeadingCalibration = false
     #endif
 
     /// - Parameters:
-    ///   - desiredAccuracy: The accuracy for heading and delegate-based updates; one-off fixes come
-    ///     from `CLLocationUpdate`, which sets its own.
-    ///   - distanceFilter: The distance before a delegate-based update is reported.
+    ///   - desiredAccuracy: The accuracy of the location updates that run beside headings so they resolve
+    ///     true north; one-off fixes come from `CLLocationUpdate`, which sets its own.
+    ///   - distanceFilter: The distance before one of those location updates is taken.
     public init(desiredAccuracy: CLLocationAccuracy? = nil, distanceFilter: CLLocationDistance? = nil) {
         manager = CLLocationManager().apply {
             $0.desiredAccuracy ?= desiredAccuracy
@@ -65,17 +67,17 @@ public extension LocationManager {
     func requestAuthorization(timeout: Duration = .seconds(60)) async -> Bool {
         guard canRequestAuthorization else { return isAuthorized }
 
-        manager.requestWhenInUseAuthorization()
+        // The first caller asks and starts the clock; later callers wait on the same prompt
+        if authorizationWaiters.isEmpty {
+            manager.requestWhenInUseAuthorization()
 
-        await withCheckedContinuation { continuation in
-            authorizationWaiters.append(continuation)
-
-            Task { [weak self] in
-                try? await Task.sleep(for: timeout)
+            authorizationTimeout = Task { [weak self] in
+                guard (try? await Task.sleep(for: timeout)) != nil else { return }
                 self?.resumeAuthorizationWaiters()
             }
         }
 
+        await withCheckedContinuation { authorizationWaiters.append($0) }
         return isAuthorized
     }
 }
@@ -132,26 +134,19 @@ public extension LocationManager {
         /// The most the magnetic heading may be off, in degrees; negative when it's unreliable.
         public let headingAccuracy: CLLocationDirectionAccuracy
 
-        public let timestamp: Date
-
-        public init(
-            magneticHeading: CLLocationDirection,
-            trueHeading: CLLocationDirection,
-            headingAccuracy: CLLocationDirectionAccuracy,
-            timestamp: Date
-        ) {
+        public init(magneticHeading: CLLocationDirection, trueHeading: CLLocationDirection, headingAccuracy: CLLocationDirectionAccuracy) {
             self.magneticHeading = magneticHeading
             self.trueHeading = trueHeading
             self.headingAccuracy = headingAccuracy
-            self.timestamp = timestamp
         }
     }
 
-    /// Headings until the stream is cancelled, with each failure in between, such as magnetic interference.
+    /// Headings until the stream is cancelled, the latest one first when the consumer falls behind, with each
+    /// compass failure in between, such as magnetic interference.
     ///
     /// Ends at once on a device with no compass. Starting a new stream ends the previous one.
     func headings(allowCalibration: Bool = false) -> AsyncStream<Result<Heading, CLError>> {
-        AsyncStream { continuation in
+        AsyncStream(bufferingPolicy: .bufferingNewest(1)) { continuation in
             headingContinuation?.finish()
 
             guard CLLocationManager.headingAvailable() else {
@@ -160,28 +155,42 @@ public extension LocationManager {
                 return
             }
 
+            headingStream += 1
+            let stream = headingStream
             headingContinuation = continuation
             shouldDisplayHeadingCalibration = allowCalibration
             manager.startUpdatingHeading()
 
+            // True north is valid only while this manager also has location updates running
+            if isAuthorized {
+                manager.startUpdatingLocation()
+            }
+
             continuation.onTermination = { [weak self] _ in
-                Task { @MainActor in self?.stopUpdatingHeading() }
+                Task { @MainActor in self?.stopUpdatingHeading(stream) }
             }
         }
     }
 }
 
 private extension LocationManager {
-    func stopUpdatingHeading() {
+    /// Stops the stream's updates, unless a newer stream has taken over since it ended.
+    func stopUpdatingHeading(_ stream: Int) {
+        guard stream == headingStream else { return }
+
         headingContinuation = nil
         shouldDisplayHeadingCalibration = false
         manager.stopUpdatingHeading()
+        manager.stopUpdatingLocation()
     }
 }
 #endif
 
 private extension LocationManager {
     func resumeAuthorizationWaiters() {
+        authorizationTimeout?.cancel()
+        authorizationTimeout = nil
+
         let waiters = authorizationWaiters
         authorizationWaiters = []
         waiters.forEach { $0.resume() }
@@ -199,7 +208,8 @@ extension LocationManager: @preconcurrency CLLocationManagerDelegate {
 
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         #if os(iOS) || os(watchOS)
-        guard let error = error as? CLError else { return }
+        // The location updates that run beside headings fail on their own; only a compass failure is the stream's
+        guard let error = error as? CLError, error.code == .headingFailure else { return }
         headingContinuation?.yield(.failure(error))
         #endif
     }
@@ -211,8 +221,7 @@ extension LocationManager: @preconcurrency CLLocationManagerDelegate {
                 Heading(
                     magneticHeading: newHeading.magneticHeading,
                     trueHeading: newHeading.trueHeading,
-                    headingAccuracy: newHeading.headingAccuracy,
-                    timestamp: newHeading.timestamp
+                    headingAccuracy: newHeading.headingAccuracy
                 )
             )
         )
