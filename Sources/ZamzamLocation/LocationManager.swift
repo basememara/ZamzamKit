@@ -16,7 +16,7 @@ public final class LocationManager: NSObject {
     private var authorizationWaiters: [CheckedContinuation<Void, Never>] = []
 
     #if os(iOS) || os(watchOS)
-    private var headingContinuation: AsyncStream<Result<CLHeading, CLError>>.Continuation?
+    private var headingContinuation: AsyncStream<Result<Heading, CLError>>.Continuation?
     private var shouldDisplayHeadingCalibration = false
     #endif
 
@@ -121,10 +121,36 @@ public extension LocationManager {
 
 #if os(iOS) || os(watchOS)
 public extension LocationManager {
+    /// A compass reading, copied out of Core Location's `CLHeading` so it can cross actors.
+    struct Heading: Equatable, Sendable {
+        /// Degrees from magnetic north.
+        public let magneticHeading: CLLocationDirection
+
+        /// Degrees from true north; negative when it can't be determined.
+        public let trueHeading: CLLocationDirection
+
+        /// The most the magnetic heading may be off, in degrees; negative when it's unreliable.
+        public let headingAccuracy: CLLocationDirectionAccuracy
+
+        public let timestamp: Date
+
+        public init(
+            magneticHeading: CLLocationDirection,
+            trueHeading: CLLocationDirection,
+            headingAccuracy: CLLocationDirectionAccuracy,
+            timestamp: Date
+        ) {
+            self.magneticHeading = magneticHeading
+            self.trueHeading = trueHeading
+            self.headingAccuracy = headingAccuracy
+            self.timestamp = timestamp
+        }
+    }
+
     /// Headings until the stream is cancelled, with each failure in between, such as magnetic interference.
     ///
     /// Ends at once on a device with no compass. Starting a new stream ends the previous one.
-    func headings(allowCalibration: Bool = false) -> AsyncStream<Result<CLHeading, CLError>> {
+    func headings(allowCalibration: Bool = false) -> AsyncStream<Result<Heading, CLError>> {
         AsyncStream { continuation in
             headingContinuation?.finish()
 
@@ -180,7 +206,16 @@ extension LocationManager: @preconcurrency CLLocationManagerDelegate {
 
     #if os(iOS) || os(watchOS)
     public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        headingContinuation?.yield(.success(newHeading))
+        headingContinuation?.yield(
+            .success(
+                Heading(
+                    magneticHeading: newHeading.magneticHeading,
+                    trueHeading: newHeading.trueHeading,
+                    headingAccuracy: newHeading.headingAccuracy,
+                    timestamp: newHeading.timestamp
+                )
+            )
+        )
     }
 
     public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
