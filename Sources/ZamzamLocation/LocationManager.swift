@@ -6,174 +6,185 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-import Combine
-import CoreLocation.CLError
-import CoreLocation.CLHeading
-import CoreLocation.CLLocation
+import CoreLocation
+import ZamzamCore
 
-/// A `LocationManager` proxy with publisher.
+/// Location services as async calls: permission, one fix, and headings.
 @MainActor
-public class LocationManager {
-    private let service: LocationService
+public final class LocationManager: NSObject {
+    private let manager: CLLocationManager
+    private var authorizationWaiters: [CheckedContinuation<Void, Never>] = []
 
-    private let authorizationSubject = CurrentValueSubject<Bool?, Never>(nil)
-    private let locationSubject = CurrentValueSubject<Result<CLLocation, CLError>?, Never>(nil)
     #if os(iOS) || os(watchOS)
-    private let headingSubject = CurrentValueSubject<Result<CLHeading, CLError>?, Never>(nil)
+    private var headingContinuation: AsyncStream<Result<CLHeading, CLError>>.Continuation?
+    private var shouldDisplayHeadingCalibration = false
     #endif
 
-    public init(service: LocationService) {
-        self.service = service
-        self.service.delegate = self
+    /// - Parameters:
+    ///   - desiredAccuracy: The accuracy for heading and delegate-based updates; one-off fixes come
+    ///     from `CLLocationUpdate`, which sets its own.
+    ///   - distanceFilter: The distance before a delegate-based update is reported.
+    public init(desiredAccuracy: CLLocationAccuracy? = nil, distanceFilter: CLLocationDistance? = nil) {
+        manager = CLLocationManager().apply {
+            $0.desiredAccuracy ?= desiredAccuracy
+            $0.distanceFilter ?= distanceFilter
+        }
+
+        super.init()
+        manager.delegate = self
     }
+}
+
+/// Why a location could not be found.
+public enum LocationError: Error, Equatable, Sendable {
+    /// The user denied location access, or location services are off for the device.
+    case denied
+    /// No fix arrived and the device holds no last known location.
+    case unavailable
 }
 
 // MARK: - Authorization
 
 public extension LocationManager {
-    /// Determines if location services is enabled and authorized for always or when in use.
-    var isAuthorized: Bool { service.isAuthorized }
+    /// Whether location services are authorized always or when in use.
+    var isAuthorized: Bool { manager.isAuthorized }
 
-    #if !os(watchOS) && !os(tvOS)
-    /// Indicates whether a widget is eligible to receive location updates.
-    var isAuthorizedForWidgetUpdates: Bool { service.isAuthorizedForWidgetUpdates }
+    /// Whether the user hasn't decided yet whether the app may use location services.
+    var canRequestAuthorization: Bool { manager.authorizationStatus == .notDetermined }
+
+    #if !os(watchOS)
+    /// Whether a widget is eligible to receive location updates.
+    var isAuthorizedForWidgetUpdates: Bool { manager.isAuthorizedForWidgetUpdates }
     #endif
 
-    /// Determines if the user has not chosen whether the app can use location services.
-    var canRequestAuthorization: Bool { service.canRequestAuthorization }
-
-    /// Requests permission to use location services.
+    /// Asks for when-in-use permission if the user hasn't decided, and returns once they answer.
     ///
-    /// - Parameters:
-    ///   - type: Type of permission required, whether in the foreground (.whenInUse) or while running (.always).
-    ///   - startUpdatingLocation: Starts the generation of updates that report the user’s current location.
-    ///   - completion: True if the authorization succeeded for the authorization type, false otherwise.
-    func requestAuthorization() -> AnyPublisher<Bool, Never> {
-        let publisher = authorizationSubject
-            .compactMap { $0 }
-            .debounce(for: 0.2, scheduler: DispatchQueue.main)
-            .eraseToAnyPublisher()
+    /// A prompt asked for while the app is in the background never appears, so the wait gives up after `timeout`.
+    ///
+    /// - Returns: Whether location services are authorized.
+    func requestAuthorization(timeout: Duration = .seconds(60)) async -> Bool {
+        guard canRequestAuthorization else { return isAuthorized }
 
-        // Handle authorized and exit
-        guard !isAuthorized else {
-            authorizationSubject.send(true)
-            return publisher
+        manager.requestWhenInUseAuthorization()
+
+        await withCheckedContinuation { continuation in
+            authorizationWaiters.append(continuation)
+
+            Task { [weak self] in
+                try? await Task.sleep(for: timeout)
+                self?.resumeAuthorizationWaiters()
+            }
         }
 
-        // Request appropiate authorization before exit
-        defer { service.requestAuthorization() }
-
-        // Handle mismatched allowed and exit
-        guard !isAuthorized else {
-            // Notify in case authorization dialog not launched by OS
-            // since user will be notified first time only and ignored subsequently
-            authorizationSubject.send(false)
-            return publisher
-        }
-
-        // Handle denied and exit
-        guard service.canRequestAuthorization else {
-            authorizationSubject.send(false)
-            return publisher
-        }
-
-        return publisher
+        return isAuthorized
     }
 }
 
-// MARK: - Coordinate
+// MARK: - Location
 
 public extension LocationManager {
-    /// The most recently retrieved user location.
-    var location: CLLocation? { service.location }
+    /// The most recently retrieved location.
+    var location: CLLocation? { manager.location }
 
-    /// Starts the generation of updates that report the user’s current location.
-    func startUpdatingLocation(
-        enableBackground: Bool = false,
-        pauseAutomatically: Bool? = nil
-    ) -> AnyPublisher<Result<CLLocation, CLError>, Never> {
-        service.startUpdatingLocation(
-            enableBackground: enableBackground,
-            pauseAutomatically: pauseAutomatically
-        )
+    /// One location, asking for permission first if the user hasn't decided.
+    ///
+    /// Waits for a fix no older than `maximumAge`; Core Location may replay an older one first. After `timeout`
+    /// without one, the last known location stands in, so no signal never holds the call open.
+    func currentLocation(maximumAge: TimeInterval = 5, timeout: Duration = .seconds(30)) async -> Result<CLLocation, LocationError> {
+        guard await requestAuthorization() else { return .failure(.denied) }
 
-        return locationSubject
-            .compactMap { $0 }
-            .eraseToAnyPublisher()
-    }
+        let oldest = Date.now - maximumAge
 
-    /// Stops the generation of location updates.
-    func stopUpdatingLocation() {
-        service.stopUpdatingLocation()
-    }
-}
+        let fresh = await withTaskGroup(of: CLLocation?.self) { group in
+            group.addTask {
+                try? await CLLocationUpdate.liveUpdates()
+                    .first { ($0.location?.timestamp ?? .distantPast) >= oldest }?
+                    .location
+            }
 
-#if os(iOS)
-public extension LocationManager {
-    /// Starts the generation of updates based on significant location changes.
-    func startMonitoringSignificantLocationChanges() -> AnyPublisher<Result<CLLocation, CLError>, Never> {
-        service.startMonitoringSignificantLocationChanges()
+            group.addTask {
+                try? await Task.sleep(for: timeout)
+                return nil
+            }
 
-        return locationSubject
-            .compactMap { $0 }
-            .eraseToAnyPublisher()
-    }
+            let first = await group.next() ?? nil
+            group.cancelAll()
+            return first
+        }
 
-    /// Stops the delivery of location events based on significant location changes.
-    func stopMonitoringSignificantLocationChanges() {
-        service.stopMonitoringSignificantLocationChanges()
+        guard let location = fresh ?? location else { return .failure(isAuthorized ? .unavailable : .denied) }
+        return .success(location)
     }
 }
-#endif
 
 // MARK: - Heading
 
 #if os(iOS) || os(watchOS)
 public extension LocationManager {
-    /// The most recently reported heading.
-    var heading: CLHeading? { service.heading }
+    /// Headings until the stream is cancelled, with each failure in between, such as magnetic interference.
+    ///
+    /// Ends at once on a device with no compass. Starting a new stream ends the previous one.
+    func headings(allowCalibration: Bool = false) -> AsyncStream<Result<CLHeading, CLError>> {
+        AsyncStream { continuation in
+            headingContinuation?.finish()
 
-    /// Starts the generation of updates that report the user’s current heading.
-    func startUpdatingHeading(allowCalibration: Bool = false) -> AnyPublisher<Result<CLHeading, CLError>, Never> {
-        service.shouldDisplayHeadingCalibration = allowCalibration
+            guard CLLocationManager.headingAvailable() else {
+                continuation.yield(.failure(CLError(.headingFailure)))
+                continuation.finish()
+                return
+            }
 
-        if !service.startUpdatingHeading() {
-            headingSubject.send(.failure(CLError(.headingFailure)))
+            headingContinuation = continuation
+            shouldDisplayHeadingCalibration = allowCalibration
+            manager.startUpdatingHeading()
+
+            continuation.onTermination = { [weak self] _ in
+                Task { @MainActor in self?.stopUpdatingHeading() }
+            }
         }
-
-        return headingSubject
-            .compactMap { $0 }
-            .eraseToAnyPublisher()
     }
+}
 
-    /// Stops the generation of heading updates.
+private extension LocationManager {
     func stopUpdatingHeading() {
-        service.shouldDisplayHeadingCalibration = false
-        service.stopUpdatingHeading()
-    }
-
-    func locationService(didUpdateHeading newHeading: CLHeading) {
-        headingSubject.send(.success(newHeading))
+        headingContinuation = nil
+        shouldDisplayHeadingCalibration = false
+        manager.stopUpdatingHeading()
     }
 }
 #endif
 
+private extension LocationManager {
+    func resumeAuthorizationWaiters() {
+        let waiters = authorizationWaiters
+        authorizationWaiters = []
+        waiters.forEach { $0.resume() }
+    }
+}
+
 // MARK: - Delegates
 
-extension LocationManager: LocationServiceDelegate {
-    public func locationService(didChangeAuthorization authorization: Bool) {
-        authorizationSubject.send(authorization)
+// Core Location calls the delegate on the thread that created the manager, which is the main actor here
+extension LocationManager: @preconcurrency CLLocationManagerDelegate {
+    public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        guard manager.authorizationStatus != .notDetermined else { return }
+        resumeAuthorizationWaiters()
     }
 
-    public func locationService(didUpdateLocation location: CLLocation) {
-        locationSubject.send(.success(location))
-    }
-
-    public func locationService(didFailWithError error: CLError) {
-        locationSubject.send(.failure(error))
-
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         #if os(iOS) || os(watchOS)
-        headingSubject.send(.failure(error))
+        guard let error = error as? CLError else { return }
+        headingContinuation?.yield(.failure(error))
         #endif
     }
+
+    #if os(iOS) || os(watchOS)
+    public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        headingContinuation?.yield(.success(newHeading))
+    }
+
+    public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
+        shouldDisplayHeadingCalibration
+    }
+    #endif
 }
