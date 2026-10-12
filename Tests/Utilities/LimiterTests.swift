@@ -6,169 +6,66 @@
 //  Copyright © 2022 Zamzam Inc. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 import ZamzamCore
 
-// Stays on XCTest: these assert real elapsed time while mutating values captured by
-// the limiter's closures, which Swift Testing's parallel model does not suit.
-final class LimiterTests: XCTestCase {}
-
-extension LimiterTests {
-    func testThrottler() async throws {
-        // Given
-        let promise = expectation(description: "Ensure first task fired")
+struct LimiterTests {
+    @Test
+    func throttleRunsTheFirstCallOfEachWindowAtOnce() async throws {
         let throttler = Limiter(policy: .throttle, duration: 1)
-        var value = ""
+        let recorder = Recorder()
+        let start = Date.now
 
-        var fulfillmentCount = 0
-        promise.expectedFulfillmentCount = 2
-
-        func sendToServer(_ input: String) async {
-            await throttler.run {
-                value += input
-
-                // Then
-                switch fulfillmentCount {
-                case 0:
-                    XCTAssertEqual(value, "h")
-                case 1:
-                    XCTAssertEqual(value, "hwor")
-                default:
-                    XCTFail()
-                }
-
-                promise.fulfill()
-                fulfillmentCount += 1
-            }
+        for input in ["h", "e", "l", "l", "o"] {
+            await throttler.run { await recorder.append(input) }
         }
 
-        // When
-        await sendToServer("h")
-        await sendToServer("e")
-        await sendToServer("l")
-        await sendToServer("l")
-        await sendToServer("o")
+        try await Task.sleep(for: .seconds(2))
+        let secondWindow = Date.now
 
-        try await Task.sleep(seconds: 2)
+        for input in ["wor", "ld"] {
+            await throttler.run { await recorder.append(input) }
+        }
 
-        await sendToServer("wor")
-        await sendToServer("ld")
+        try await Task.sleep(for: .milliseconds(500))
 
-        await fulfillment(of: [promise], timeout: 10)
+        let fired = await recorder.entries
+        #expect(fired.map(\.value) == ["h", "wor"])
+        #expect(fired.first.map { $0.date.timeIntervalSince(start) < 1 } == true)
+        #expect(fired.last.map { $0.date.timeIntervalSince(secondWindow) < 1 } == true)
     }
-}
 
-extension LimiterTests {
-    func testDebouncer() async throws {
-        // Given
-        let promise = expectation(description: "Ensure last task fired")
+    @Test
+    func debounceRunsOnlyTheLastCallOnceTheCallsPause() async throws {
         let debouncer = Limiter(policy: .debounce, duration: 1)
-        var value = ""
+        let recorder = Recorder()
 
-        var fulfillmentCount = 0
-        promise.expectedFulfillmentCount = 2
-
-        func sendToServer(_ input: String) async {
-            await debouncer.run {
-                value += input
-
-                // Then
-                switch fulfillmentCount {
-                case 0:
-                    XCTAssertEqual(value, "o")
-                case 1:
-                    XCTAssertEqual(value, "old")
-                default:
-                    XCTFail()
-                }
-
-                promise.fulfill()
-                fulfillmentCount += 1
-            }
+        for input in ["h", "e", "l", "l", "o"] {
+            await debouncer.run { await recorder.append(input) }
         }
 
-        // When
-        await sendToServer("h")
-        await sendToServer("e")
-        await sendToServer("l")
-        await sendToServer("l")
-        await sendToServer("o")
+        let firstPause = Date.now
+        try await Task.sleep(for: .seconds(2))
 
-        try await Task.sleep(seconds: 2)
+        for input in ["wor", "ld"] {
+            await debouncer.run { await recorder.append(input) }
+        }
 
-        await sendToServer("wor")
-        await sendToServer("ld")
+        let secondPause = Date.now
+        try await Task.sleep(for: .seconds(2))
 
-        await fulfillment(of: [promise], timeout: 10)
+        let fired = await recorder.entries
+        #expect(fired.map(\.value) == ["o", "ld"])
+        #expect(fired.first.map { $0.date.timeIntervalSince(firstPause) >= 1 } == true)
+        #expect(fired.last.map { $0.date.timeIntervalSince(secondPause) >= 1 } == true)
     }
 }
 
-extension LimiterTests {
-    func testThrottler2() async throws {
-        // Given
-        let promise = expectation(description: "Ensure throttle before duration")
-        let throttler = Limiter(policy: .throttle, duration: 1)
+private actor Recorder {
+    private(set) var entries: [(value: String, date: Date)] = []
 
-        var end = Date.now + 1
-        promise.expectedFulfillmentCount = 2
-
-        func test() {
-            // Then
-            XCTAssertLessThanOrEqual(.now, end)
-            promise.fulfill()
-        }
-
-        // When
-        await throttler.run(test)
-        await throttler.run(test)
-        await throttler.run(test)
-        await throttler.run(test)
-        await throttler.run(test)
-
-        try await Task.sleep(seconds: 2)
-        end = .now + 1
-
-        await throttler.run(test)
-        await throttler.run(test)
-        await throttler.run(test)
-
-        try await Task.sleep(seconds: 2)
-
-        await fulfillment(of: [promise], timeout: 10)
-    }
-}
-
-extension LimiterTests {
-    func testDebouncer2() async throws {
-        // Given
-        let promise = expectation(description: "Ensure debounce after duration")
-        let debouncer = Limiter(policy: .debounce, duration: 1)
-
-        var end = Date.now + 1
-        promise.expectedFulfillmentCount = 2
-
-        func test() {
-            // Then
-            XCTAssertGreaterThanOrEqual(.now, end)
-            promise.fulfill()
-        }
-
-        // When
-        await debouncer.run(test)
-        await debouncer.run(test)
-        await debouncer.run(test)
-        await debouncer.run(test)
-        await debouncer.run(test)
-
-        try await Task.sleep(seconds: 2)
-        end = .now + 1
-
-        await debouncer.run(test)
-        await debouncer.run(test)
-        await debouncer.run(test)
-
-        try await Task.sleep(seconds: 2)
-
-        await fulfillment(of: [promise], timeout: 10)
+    func append(_ value: String) {
+        entries.append((value, .now))
     }
 }

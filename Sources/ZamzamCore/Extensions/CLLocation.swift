@@ -73,7 +73,7 @@ public extension CLLocation {
         // A task group would leave the losing child suspended until Core Location replied, so the
         // deadline is enforced by cancelling the geocode itself rather than by racing it.
         let timeoutTask = Task {
-            try await Task.sleep(seconds: timeout)
+            try await Task.sleep(for: .seconds(timeout))
             geocoder.cancelGeocode()
         }
 

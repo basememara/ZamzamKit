@@ -16,6 +16,7 @@ public struct LogServiceDataDog: LogService {
     private let environment: String
     private let service: LogServiceHTTP
 
+    @MainActor
     public init(
         apiKey: String,
         serviceName: String,

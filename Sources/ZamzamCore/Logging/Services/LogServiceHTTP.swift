@@ -6,18 +6,20 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-import Combine
 import Foundation.NSData
 import Foundation.NSDate
 import Foundation.NSJSONSerialization
 import Foundation.NSNotification
 import Foundation.NSURLRequest
+import os
 #if os(iOS)
 import UIKit.UIApplication
 import UIKit.UIDevice
 #endif
 
 /// Log destination for sending over HTTP.
+///
+/// `@unchecked Sendable`: the lifecycle observers are written once in `init` and only removed in `deinit`.
 final public class LogServiceHTTP: @unchecked Sendable {
     private let urlRequest: URLRequest
     private let maxEntriesInBuffer: Int
@@ -26,13 +28,17 @@ final public class LogServiceHTTP: @unchecked Sendable {
     private let distribution: Distribution
     private let networkManager: NetworkManager
 
+    /// The device details sent with every entry, read once on the main actor that owns them.
+    private let device: [String: any Sendable]
+
     /// Closure that converts the buffer to data.
     private let bufferEncode: @Sendable ([Entry]) -> Data?
 
     /// Stores the log entries in memory until it is ready to send.
-    private let buffer = Atomic<[Entry]>([])
+    private let buffer = OSAllocatedUnfairLock<[Entry]>(initialState: [])
 
-    private var cancellable = Set<AnyCancellable>()
+    private var observers: [any NSObjectProtocol] = []
+    private let notificationCenter: NotificationCenter
 
     /// The initializer of the log destination.
     ///
@@ -45,6 +51,7 @@ final public class LogServiceHTTP: @unchecked Sendable {
     ///   - distribution: Provides details of the current distribution.
     ///   - networkManager: The object used to send the HTTP request.
     ///   - notificationCenter: A notification dispatch mechanism that registers observers for flushing the buffer at certain app lifecycle events.
+    @MainActor
     public init(
         urlRequest: URLRequest,
         bufferEncode: @escaping @Sendable ([Entry]) -> Data?,
@@ -62,13 +69,31 @@ final public class LogServiceHTTP: @unchecked Sendable {
         self.isDebug = isDebug
         self.distribution = distribution
         self.networkManager = networkManager
+        self.notificationCenter = notificationCenter
+
+        var device: [String: any Sendable] = ["is_simulator": distribution.isRunningOnSimulator]
+
+        #if os(iOS) || os(watchOS)
+        device.merge([
+            "device_id": distribution.deviceIdentifier,
+            "device_name": isDebug ? distribution.deviceName : "***",
+            "device_model": distribution.deviceModel,
+            "platform": distribution.platform,
+            "os_version": distribution.osVersion
+        ]) { $1 }
+        #endif
+
+        self.device = device
 
         #if os(iOS)
-        notificationCenter.publisher(for: UIApplication.willResignActiveNotification, object: nil)
-            .merge(with: notificationCenter.publisher(for: UIApplication.willTerminateNotification, object: nil))
-            .sink { [weak self] _ in self?.send() }
-            .store(in: &cancellable)
+        observers = [UIApplication.willResignActiveNotification, UIApplication.willTerminateNotification].map {
+            notificationCenter.addObserver(forName: $0, object: nil, queue: nil) { [weak self] _ in self?.send() }
+        }
         #endif
+    }
+
+    deinit {
+        observers.forEach(notificationCenter.removeObserver)
     }
 }
 
@@ -106,20 +131,6 @@ public extension LogServiceHTTP {
         context: [String: any CustomStringConvertible & Sendable],
         sessionContext: [String: any CustomStringConvertible & Sendable]
     ) {
-        var device: [String: Any] = [
-            "is_simulator": distribution.isRunningOnSimulator
-        ]
-
-        #if os(iOS) || os(watchOS)
-        device.merge([
-            "device_id": distribution.deviceIdentifier,
-            "device_name": isDebug ? distribution.deviceName : "***",
-            "device_model": distribution.deviceModel,
-            "platform": distribution.platform,
-            "os_version": distribution.osVersion
-        ]) { $1 }
-        #endif
-
         var payload: [String: Any] = [
             "app": [
                 "name": distribution.appDisplayName ?? "Unknown",
@@ -161,14 +172,13 @@ public extension LogServiceHTTP {
         }
 
         // Store in buffer for sending later
-        buffer.value { $0.append(Entry(level: level, date: date, platform: distribution.platform, payload: log)) }
+        let count = buffer.withLock { buffer in
+            buffer.append(Entry(level: level, date: date, platform: distribution.platform, payload: log))
+            return buffer.count
+        }
 
         // Flush buffer threshold reached or in background
-        guard buffer.value.count > maxEntriesInBuffer
-                || context["app_state"]?.description == "background"
-        else {
-            return
-        }
+        guard count > maxEntriesInBuffer || context["app_state"]?.description == "background" else { return }
 
         send()
     }
@@ -176,14 +186,14 @@ public extension LogServiceHTTP {
 
 private extension LogServiceHTTP {
     func send() {
-        guard !buffer.value.isEmpty,
-              minFlushLevel == .none || buffer.value.contains(where: { $0.level >= minFlushLevel })
-        else {
-            return
+        // Taken in one step, so two flushes never send the same entries
+        let entries = buffer.withLock { buffer -> [Entry] in
+            guard !buffer.isEmpty, minFlushLevel == .none || buffer.contains(where: { $0.level >= minFlushLevel }) else { return [] }
+            defer { buffer = [] }
+            return buffer
         }
 
-        let entries = buffer.value
-        buffer.value { $0 = [] }
+        guard !entries.isEmpty else { return }
 
         guard let data = bufferEncode(entries) else {
             print("🤍 \(Date.now.formatted(date: .omitted, time: .standard)) PRINT Could not begin log destination task")
@@ -198,7 +208,7 @@ private extension LogServiceHTTP {
             } catch {
                 // Add back to the buffer if could not send
                 print("🤍 \(Date.now.formatted(date: .omitted, time: .standard)) PRINT Error from log destination: \(error)")
-                buffer.value { $0 += entries }
+                buffer.withLock { $0 += entries }
             }
         }
     }

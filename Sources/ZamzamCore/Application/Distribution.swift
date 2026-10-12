@@ -95,6 +95,7 @@ public extension Distribution {
 #if os(watchOS)
 import WatchKit
 
+@MainActor
 public extension Distribution {
     var deviceName: String { WKInterfaceDevice.current().name }
     var deviceModel: String { WKInterfaceDevice.current().model }
@@ -105,6 +106,7 @@ public extension Distribution {
 #elseif canImport(UIKit)
 import UIKit.UIDevice
 
+@MainActor
 public extension Distribution {
     var deviceName: String { UIDevice.current.name }
     var deviceModel: String { UIDevice.current.model }

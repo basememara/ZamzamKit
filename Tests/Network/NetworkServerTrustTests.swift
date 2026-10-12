@@ -290,7 +290,7 @@ private extension SecCertificate {
     static let leafValidURI = make(from: "alamofire.org/valid-uri.cer")
 
     static func make(from path: String) -> SecCertificate {
-        let url = URL(fileURLWithPath: #file)
+        let url = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
             .appendingPathComponent("Certificates")
             .appendingPathComponent(path)
@@ -300,77 +300,100 @@ private extension SecCertificate {
     }
 }
 
+// Computed, so every test evaluates its own trust instead of mutating one it shares
 private extension SecTrust {
     // MARK: Leaf Trusts - Signed by CA1
 
-    static let leafWildcard = make(from: [
-        .leafWildcard,
-        .intermediateCA1,
-        .alamofireRootCA
-    ])
+    static var leafWildcard: SecTrust {
+        make(from: [
+            .leafWildcard,
+            .intermediateCA1,
+            .alamofireRootCA
+        ])
+    }
 
-    static let leafMultipleDNSNames = make(from: [
-        .leafMultipleDNSNames,
-        .intermediateCA1,
-        .alamofireRootCA
-    ])
+    static var leafMultipleDNSNames: SecTrust {
+        make(from: [
+            .leafMultipleDNSNames,
+            .intermediateCA1,
+            .alamofireRootCA
+        ])
+    }
 
-    static let leafSignedByCA1 = make(from: [
-        .leafSignedByCA1,
-        .intermediateCA1,
-        .alamofireRootCA
-    ])
+    static var leafSignedByCA1: SecTrust {
+        make(from: [
+            .leafSignedByCA1,
+            .intermediateCA1,
+            .alamofireRootCA
+        ])
+    }
 
-    static let leafDNSNameAndURI = make(from: [
-        .leafDNSNameAndURI,
-        .intermediateCA1,
-        .alamofireRootCA
-    ])
+    static var leafDNSNameAndURI: SecTrust {
+        make(from: [
+            .leafDNSNameAndURI,
+            .intermediateCA1,
+            .alamofireRootCA
+        ])
+    }
 
     // MARK: Leaf Trusts - Signed by CA2
 
-    static let leafExpired = make(from: [
-        .leafExpired,
-        .intermediateCA2,
-        .alamofireRootCA
-    ])
+    static var leafExpired: SecTrust {
+        make(from: [
+            .leafExpired,
+            .intermediateCA2,
+            .alamofireRootCA
+        ])
+    }
 
-    static let leafMissingDNSNameAndURI = make(from: [
-        .leafMissingDNSNameAndURI,
-        .intermediateCA2,
-        .alamofireRootCA
-    ])
+    static var leafMissingDNSNameAndURI: SecTrust {
+        make(from: [
+            .leafMissingDNSNameAndURI,
+            .intermediateCA2,
+            .alamofireRootCA
+        ])
+    }
 
-    static let leafSignedByCA2 = make(from: [
-        .leafSignedByCA2,
-        .intermediateCA2,
-        .alamofireRootCA
-    ])
+    static var leafSignedByCA2: SecTrust {
+        make(from: [
+            .leafSignedByCA2,
+            .intermediateCA2,
+            .alamofireRootCA
+        ])
+    }
 
-    static let leafValidDNSName = make(from: [
-        .leafValidDNSName,
-        .intermediateCA2,
-        .alamofireRootCA
-    ])
+    static var leafValidDNSName: SecTrust {
+        make(from: [
+            .leafValidDNSName,
+            .intermediateCA2,
+            .alamofireRootCA
+        ])
+    }
 
-    static let leafValidURI = make(from: [
-        .leafValidURI,
-        .intermediateCA2,
-        .alamofireRootCA
-    ])
+    static var leafValidURI: SecTrust {
+        make(from: [
+            .leafValidURI,
+            .intermediateCA2,
+            .alamofireRootCA
+        ])
+    }
 
     // MARK: Invalid Trusts
 
-    static let leafValidDNSNameMissingIntermediate = make(from: [
-        .leafValidDNSName,
-        .alamofireRootCA
-    ])
+    static var leafValidDNSNameMissingIntermediate: SecTrust {
+        make(from: [
+            .leafValidDNSName,
+            .alamofireRootCA
+        ])
+    }
 
-    static let leafValidDNSNameWithIncorrectIntermediate = make(from: [
-        .leafValidDNSName,
-        .intermediateCA1,
-        .alamofireRootCA
-    ])
+    static var leafValidDNSNameWithIncorrectIntermediate: SecTrust {
+        make(from: [
+            .leafValidDNSName,
+            .intermediateCA1,
+            .alamofireRootCA
+        ])
+    }
 
     // MARK: Helpers
 

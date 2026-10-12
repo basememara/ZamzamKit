@@ -16,6 +16,7 @@ public struct LogServicePapertrail: LogService {
     private let environment: String
     private let service: LogServiceHTTP
 
+    @MainActor
     public init(
         apiKey: String,
         minLevel: @autoclosure @escaping @Sendable () -> LogAPI.Level, // Allows runtime changes

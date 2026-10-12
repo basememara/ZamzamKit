@@ -30,7 +30,7 @@ public enum KeychainAPI {
     ///         static let token = KeychainAPI.Key("token")
     ///     }
     ///
-    public struct Key: ExpressibleByStringLiteral {
+    public struct Key: ExpressibleByStringLiteral, Sendable {
         public let name: String
 
         public init(_ key: String) {

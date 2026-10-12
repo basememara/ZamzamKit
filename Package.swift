@@ -33,9 +33,7 @@ let package = Package(
             path: "Tests",
             exclude: ["Network/Certificates"],
             resources: [.process("Resources")],
-            // Swift 5 mode: the suite deliberately exercises shared mutable state, from the
-            // atomic wrapper's concurrency tests to certificate fixtures mutated in place.
-            swiftSettings: [.swiftLanguageMode(.v5)]
+            swiftSettings: [.swiftLanguageMode(.v6)]
         ),
         .target(
             name: "ZamzamCore",

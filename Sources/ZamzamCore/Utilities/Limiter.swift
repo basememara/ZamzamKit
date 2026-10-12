@@ -80,7 +80,7 @@ private extension Limiter {
         guard task == nil else { return }
 
         task = Task {
-            try? await Task.sleep(seconds: duration)
+            try? await Task.sleep(for: .seconds(duration))
             task = nil
         }
 
@@ -95,7 +95,7 @@ private extension Limiter {
         task?.cancel()
 
         task = Task {
-            try await Task.sleep(seconds: duration)
+            try await Task.sleep(for: .seconds(duration))
             await operation()
             task = nil
         }
