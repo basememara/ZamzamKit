@@ -10,7 +10,6 @@ import Foundation
 import Testing
 import ZamzamCore
 
-#if !os(tvOS)
 // A class so the fixture files can be removed in `deinit`. Names are unique per
 // instance because Swift Testing runs tests in parallel against one file system.
 final class FileTests {
@@ -64,4 +63,3 @@ private extension FileTests {
             .path
     }
 }
-#endif
