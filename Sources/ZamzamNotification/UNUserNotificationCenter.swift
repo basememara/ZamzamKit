@@ -180,19 +180,7 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
-    /// Constants that indicate the importance and delivery timing of a notification.
-    enum InterruptionLevel {
-        /// The system adds the notification to the notification list without lighting up the screen or playing a sound.
-        case passive
-
-        /// The system presents the notification immediately, lights up the screen, and can play a sound, but won’t break through system notification controls.
-        case timeSensitive
-    }
-
-    /// Schedules a local notification for delivery.
-    ///
-    /// - Parameters:
-    ///   - timeInterval: The time interval of when to fire the notification.
+    /// Schedules a local notification after a time interval, or at once for an interval of zero.
     func add(
         timeInterval: TimeInterval,
         body: String,
@@ -200,53 +188,32 @@ public extension UNUserNotificationCenter {
         subtitle: String? = nil,
         badge: NSNumber? = nil,
         sound: UNNotificationSound? = .default,
-        attachments: [UNNotificationAttachment]? = nil,
-        interruptionLevel: InterruptionLevel? = nil,
+        attachments: [UNNotificationAttachment] = [],
+        interruptionLevel: UNNotificationInterruptionLevel? = nil,
         repeats: Bool = false,
         identifier: String = UUID().uuidString,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
-        userInfo: [String: Any]? = nil,
-        completion: (@Sendable (Error?) -> Void)? = nil
-    ) {
-        // Constuct content
-        let content = UNMutableNotificationContent().apply {
-            $0.body = body
-            $0.categoryIdentifier = category
+        userInfo: [String: Any] = [:]
+    ) async throws {
+        let content = Self.content(
+            body: body,
+            title: title,
+            subtitle: subtitle,
+            badge: badge,
+            sound: sound,
+            attachments: attachments,
+            interruptionLevel: interruptionLevel,
+            category: category,
+            userInfo: userInfo
+        )
 
-            // Assign optional values to content
-            $0.title ?= title
-            $0.subtitle ?= subtitle
-            $0.badge ?= badge
-            $0.sound = sound
-
-            if let interruptionLevel = interruptionLevel {
-                switch interruptionLevel {
-                case .passive:
-                    $0.interruptionLevel = .passive
-                case .timeSensitive:
-                    $0.interruptionLevel = .timeSensitive
-                }
-            }
-
-            if let userInfo = userInfo {
-                $0.userInfo = userInfo
-            }
-
-            if let attachments = attachments, !attachments.isEmpty {
-                $0.attachments = attachments
-            }
-        }
-
-        // Construct request with trigger
         let trigger = timeInterval > 0 ? UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: repeats) : nil
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-
-        add(request, withCompletionHandler: completion)
+        try await add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger))
     }
 }
 
 public extension UNUserNotificationCenter {
-    enum ScheduleInterval {
+    enum ScheduleInterval: Sendable {
         case once
         case minute
         case hour
@@ -256,10 +223,7 @@ public extension UNUserNotificationCenter {
         case year
     }
 
-    /// Schedules a local notification for delivery.
-    ///
-    /// - Parameters:
-    ///   - date: The date of when to fire the notification.
+    /// Schedules a local notification at a date, once or repeating.
     func add(
         date: Date,
         body: String,
@@ -267,78 +231,52 @@ public extension UNUserNotificationCenter {
         subtitle: String? = nil,
         badge: NSNumber? = nil,
         sound: UNNotificationSound? = .default,
-        attachments: [UNNotificationAttachment]? = nil,
-        interruptionLevel: InterruptionLevel? = nil,
+        attachments: [UNNotificationAttachment] = [],
+        interruptionLevel: UNNotificationInterruptionLevel? = nil,
         repeats: ScheduleInterval = .once,
         calendar: Calendar = .current,
         identifier: String = UUID().uuidString,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
-        userInfo: [String: Any]? = nil,
-        completion: (@Sendable (Error?) -> Void)? = nil
-    ) {
-        // Constuct content
-        let content = UNMutableNotificationContent().apply {
-            $0.body = body
-            $0.categoryIdentifier = category
+        userInfo: [String: Any] = [:]
+    ) async throws {
+        let content = Self.content(
+            body: body,
+            title: title,
+            subtitle: subtitle,
+            badge: badge,
+            sound: sound,
+            attachments: attachments,
+            interruptionLevel: interruptionLevel,
+            category: category,
+            userInfo: userInfo
+        )
 
-            // Assign optional values to content
-            $0.title ?= title
-            $0.subtitle ?= subtitle
-            $0.badge ?= badge
-            $0.sound = sound
-
-            if let interruptionLevel = interruptionLevel {
-                switch interruptionLevel {
-                case .passive:
-                    $0.interruptionLevel = .passive
-                case .timeSensitive:
-                    $0.interruptionLevel = .timeSensitive
-                }
-            }
-
-            if let userInfo = userInfo {
-                $0.userInfo = userInfo
-            }
-
-            if let attachments = attachments, !attachments.isEmpty {
-                $0.attachments = attachments
-            }
-        }
-
-        // Constuct date components for trigger
         // https://github.com/d7laungani/DLLocalNotifications/blob/master/DLLocalNotifications/DLLocalNotifications.swift#L31
-        let components: DateComponents
-        switch repeats {
+        let components: DateComponents = switch repeats {
         case .once:
-            components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+            calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         case .minute:
-            components = calendar.dateComponents([.second], from: date)
+            calendar.dateComponents([.second], from: date)
         case .hour:
-            components = calendar.dateComponents([.minute], from: date)
+            calendar.dateComponents([.minute], from: date)
         case .day:
-            components = calendar.dateComponents([.hour, .minute], from: date)
+            calendar.dateComponents([.hour, .minute], from: date)
         case .week:
-            components = calendar.dateComponents([.hour, .minute, .weekday], from: date)
+            calendar.dateComponents([.hour, .minute, .weekday], from: date)
         case .month:
-            components = calendar.dateComponents([.hour, .minute, .day], from: date)
+            calendar.dateComponents([.hour, .minute, .day], from: date)
         case .year:
-            components = calendar.dateComponents([.hour, .minute, .day, .month], from: date)
+            calendar.dateComponents([.hour, .minute, .day, .month], from: date)
         }
 
-        // Construct request with trigger
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeats != .once)
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-
-        add(request, withCompletionHandler: completion)
+        try await add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger))
     }
 }
 
 #if os(iOS)
 public extension UNUserNotificationCenter {
-    /// Schedules a local notification for delivery.
-    ///
-    /// - Parameters:
-    ///   - region: The region of when to fire the notification.
+    /// Schedules a local notification for entering or leaving a region.
     func add(
         region: CLRegion,
         body: String,
@@ -346,51 +284,57 @@ public extension UNUserNotificationCenter {
         subtitle: String? = nil,
         badge: NSNumber? = nil,
         sound: UNNotificationSound? = .default,
-        attachments: [UNNotificationAttachment]? = nil,
-        interruptionLevel: InterruptionLevel? = nil,
+        attachments: [UNNotificationAttachment] = [],
+        interruptionLevel: UNNotificationInterruptionLevel? = nil,
         repeats: Bool = false,
         identifier: String = UUID().uuidString,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
-        userInfo: [String: Any]? = nil,
-        completion: (@Sendable (Error?) -> Void)? = nil
-    ) {
-        // Constuct content
-        let content = UNMutableNotificationContent().apply {
+        userInfo: [String: Any] = [:]
+    ) async throws {
+        let content = Self.content(
+            body: body,
+            title: title,
+            subtitle: subtitle,
+            badge: badge,
+            sound: sound,
+            attachments: attachments,
+            interruptionLevel: interruptionLevel,
+            category: category,
+            userInfo: userInfo
+        )
+
+        let trigger = UNLocationNotificationTrigger(region: region, repeats: repeats)
+        try await add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger))
+    }
+}
+#endif
+
+private extension UNUserNotificationCenter {
+    // swiftlint:disable:next function_parameter_count
+    static func content(
+        body: String,
+        title: String?,
+        subtitle: String?,
+        badge: NSNumber?,
+        sound: UNNotificationSound?,
+        attachments: [UNNotificationAttachment],
+        interruptionLevel: UNNotificationInterruptionLevel?,
+        category: String,
+        userInfo: [String: Any]
+    ) -> UNMutableNotificationContent {
+        UNMutableNotificationContent().apply {
             $0.body = body
             $0.categoryIdentifier = category
-
-            // Assign optional values to content
             $0.title ?= title
             $0.subtitle ?= subtitle
             $0.badge ?= badge
             $0.sound = sound
-
-            if let interruptionLevel = interruptionLevel {
-                switch interruptionLevel {
-                case .passive:
-                    $0.interruptionLevel = .passive
-                case .timeSensitive:
-                    $0.interruptionLevel = .timeSensitive
-                }
-            }
-
-            if let userInfo = userInfo {
-                $0.userInfo = userInfo
-            }
-
-            if let attachments = attachments, !attachments.isEmpty {
-                $0.attachments = attachments
-            }
+            $0.interruptionLevel ?= interruptionLevel
+            $0.userInfo = userInfo
+            $0.attachments = attachments
         }
-
-        // Construct request with trigger
-        let trigger = UNLocationNotificationTrigger(region: region, repeats: repeats)
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-
-        add(request, withCompletionHandler: completion)
     }
 }
-#endif
 
 public extension UNUserNotificationCenter {
     /// Remove pending or delivered user notifications.
