@@ -4,7 +4,7 @@ Open-source Swift package (github.com/ZamzamInc/ZamzamKit, MIT) of micro utiliti
 
 ## Layout
 
-Pure SPM, `swift-tools-version: 6.0`, platforms macOS 12 / iOS 15 / tvOS 15 / watchOS 8. Every library target builds in the **Swift 6 language mode** under strict concurrency; the test target stays in `.v5` because `AtomicTests` and `LimiterTests` deliberately exercise shared mutable state that the Swift 6 checker rejects. Keep new code Sendable-correct rather than reaching for `@unchecked`: the existing unchecked conformances each carry a comment naming the invariant that makes them safe. Any completion parameter that a system framework invokes on its own queue (`UNUserNotificationCenter`, `URLSession`) is declared `@Sendable`: a plain `(Error?) -> Void` parameter turns a `@MainActor` caller's closure into a runtime trap when the callback lands off main. No external dependencies. Five library products:
+Pure SPM, `swift-tools-version: 6.0`, platforms macOS 14 / iOS 17 / watchOS 10 (7.0 dropped tvOS and the older shims). Every target, tests included, builds in the **Swift 6 language mode** under strict concurrency. Keep new code Sendable-correct rather than reaching for `@unchecked`: the existing unchecked conformances each carry a comment naming the invariant that makes them safe. Framework callbacks are exposed as `async` calls (notifications, downloads, location authorization) or `AsyncStream`s (headings), and a value that crosses actors is a Sendable copy (`LocationManager.Heading`, not `CLHeading`). No external dependencies. Five library products:
 
 - `ZamzamCore` — application helpers, errors, extensions, infix operators, keychain, logging, network, utilities
 - `ZamzamLocation` — location services (depends on ZamzamCore)
@@ -21,11 +21,11 @@ swift test
 
 In Xcode, the shared `ZamzamKit-Package` scheme runs `Package.xctestplan` at the package root, with code coverage on for the four library targets. Agents driving Xcode through its MCP server open this package directory as a workspace and run the plan; sandboxed shells cannot run SwiftPM directly (it needs caches outside the sandbox).
 
-Tests live flat in `Tests/` (the `ZamzamKitTests` target has `path: "Tests"`; **Swift Testing**; `TestUtilities.swift` is the shared helper; `Resources/` is a processed resource bundle; `Network/Certificates` is excluded from compilation). Suites are structs and tests are `@Test` functions; Swift Testing builds a fresh instance per test and runs them in parallel, so a suite must not share mutable state. Two files stay on XCTest for stated reasons: `AtomicTests` uses `measure`, which has no Swift Testing equivalent, and `LimiterTests` asserts real elapsed time while mutating values captured by the limiter's closures. Both live happily in the same target. The test target stays in Swift 5 mode for the same reason, which is why `Package.swift` says so.
+Tests live flat in `Tests/` (the `ZamzamKitTests` target has `path: "Tests"`; **Swift Testing**; `TestUtilities.swift` is the shared helper; `Resources/` is a processed resource bundle; `Network/Certificates` is excluded from compilation). Suites are structs and tests are `@Test` functions; Swift Testing builds a fresh instance per test and runs them in parallel, so a suite must not share mutable state. Code inside `#if os(iOS) || os(watchOS)` (headings, `UIDevice` details) doesn't compile in a My Mac run, so a change there also gets an iOS build, through the scheme's iPhone simulator destination or a consumer app.
 
 Use `try #require` before comparing an optional, and hoist a `try` out of a comparison: `#expect(a == try #require(b))` does not parse. `#expect` has no tolerance form, so write `#expect(abs(a - (b)) <= tolerance)`. Bug fixes land with a failing test first.
 
-Known environmental failures are wrapped in `withKnownIssue`, so the suite reports them as expected failures and a real regression still turns the run red: nine `NetworkServerTrustTests` evaluations against expired certificate fixtures, `FileTests.downloadFile` (a live download), and `CurrencyFormatterTests.sA` (an Arabic format whose right-to-left mark placement changed with ICU). Re-cutting the fixtures would retire the first group.
+Wrap a known environmental failure in `withKnownIssue`, so a real regression still turns the run red; none is wrapped today. `FileTests.downloadFile` needs the network. `CurrencyFormatterTests.sA` pins macOS's Saudi riyal symbol: an iOS 27 simulator renders the new riyal sign (U+20C1) and fails it, so the suite's gate is My Mac.
 
 ## Compatibility contract
 
