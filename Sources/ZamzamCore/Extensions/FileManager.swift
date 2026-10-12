@@ -9,7 +9,6 @@
 import Foundation.NSFileManager
 import Foundation.NSURL
 
-#if !os(tvOS)
 public extension FileManager {
     /// Get URL for the file.
     ///
@@ -64,27 +63,3 @@ public extension FileManager {
         urls(from: directory, filter: filter).map { $0.path }
     }
 }
-
-public extension FileManager {
-    /// Retrieves a file and stores it in the caches directory under its own name, replacing any copy there.
-    ///
-    ///     let file = try await FileManager.default.download(from: url)
-    ///
-    /// - Parameter url: The HTTP URL to retrieve the file from.
-    /// - Returns: Where the file was stored on disk.
-    /// - Throws: A URL loading error, `URLError(.badServerResponse)` for a status outside 200–299, or a file error.
-    func download(from url: URL) async throws -> URL {
-        let (location, response) = try await URLSession.shared.download(from: url)
-
-        if let response = response as? HTTPURLResponse, !(200..<300).contains(response.statusCode) {
-            try? removeItem(at: location)
-            throw URLError(.badServerResponse)
-        }
-
-        let destination = self.url(of: url.lastPathComponent, from: .cachesDirectory)
-        try? removeItem(at: destination)
-        try moveItem(at: location, to: destination)
-        return destination
-    }
-}
-#endif

@@ -84,8 +84,6 @@ public extension Distribution {
         return "iOS"
         #elseif os(watchOS)
         return "watchOS"
-        #elseif os(tvOS)
-        return "tvOS"
         #elseif os(macOS)
         return "macOS"
         #endif

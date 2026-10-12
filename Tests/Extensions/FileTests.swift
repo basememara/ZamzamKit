@@ -39,17 +39,6 @@ extension FileTests {
 
         #expect(FileManager.default.fileExists(atPath: value))
     }
-
-    @Test(.timeLimit(.minutes(1)))
-    func downloadFile() async throws {
-        // A bundled fixture keeps this off the network; the remote image it used to fetch became a 404
-        // that the downloader saved as a file, and a known-issue wrapper hid it
-        let source = try #require(Bundle.module.url(forResource: "Test", withExtension: "txt"))
-
-        let url = try await FileManager.default.download(from: source)
-        #expect(FileManager.default.fileExists(atPath: url.path))
-        #expect(try String(contentsOf: url, encoding: .utf8) == String(contentsOf: source, encoding: .utf8))
-    }
 }
 
 #if os(iOS)
