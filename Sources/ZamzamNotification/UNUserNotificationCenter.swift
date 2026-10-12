@@ -250,6 +250,14 @@ public extension UNUserNotificationCenter {
             userInfo: userInfo
         )
 
+        let trigger = UNCalendarNotificationTrigger(date: date, repeats: repeats, calendar: calendar)
+        try await add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger))
+    }
+}
+
+extension UNCalendarNotificationTrigger {
+    /// A trigger for `date`; a repeating one matches its wall-clock time in `calendar`.
+    convenience init(date: Date, repeats: UNUserNotificationCenter.ScheduleInterval, calendar: Calendar) {
         let units: Set<Calendar.Component> = switch repeats {
         case .once:
             [.year, .month, .day, .hour, .minute, .second]
@@ -267,10 +275,11 @@ public extension UNUserNotificationCenter {
             [.hour, .minute, .day, .month]
         }
 
-        // Without its calendar and time zone, the trigger reads the components in the device's, which can differ
+        // A single instant is named in UTC, where no hour repeats when clocks go back. Without its calendar and
+        // time zone, the trigger reads the components in the device's, which can differ.
+        let calendar = repeats == .once ? Calendar(identifier: .gregorian, timeZone: .gmt) : calendar
         let components = calendar.dateComponents(units.union([.calendar, .timeZone]), from: date)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeats != .once)
-        try await add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger))
+        self.init(dateMatching: components, repeats: repeats != .once)
     }
 }
 
