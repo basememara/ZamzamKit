@@ -6,7 +6,6 @@
 //  Copyright © 2021 Zamzam Inc. All rights reserved.
 //
 
-import Combine
 import SwiftUI
 
 public extension View {
@@ -39,8 +38,8 @@ public extension View {
     ///
     ///     someView
     ///         .modifier {
-    ///             if #available(iOS 16, macOS 13, tvOS 16, watchOS 9, *) {
-    ///                 $0.scrollDismissesKeyboard(.interactively)
+    ///             if #available(iOS 18, macOS 15, *) {
+    ///                 $0.presentationSizing(.form)
     ///             } else {
     ///                 $0
     ///             }
@@ -54,196 +53,34 @@ public extension View {
     }
 }
 
-public extension View {
-    /// Returns a type-erased view.
-    func eraseToAnyView() -> AnyView {
-        AnyView(self)
-    }
-}
-
-// MARK: - Receive
-
-public extension View {
-    /// Adds a modifier for this view that fires an action when a specific value changes.
-    ///
-    /// - Parameters:
-    ///   - value: The value to check against when determining whether to run the closure.
-    ///   - action: A concurrent closure to run when the value changes.
-    ///   - newValue: The new value that failed the comparison check.
-    /// - Returns: A view that fires an action when the specified value changes.
-    func onChange<V>(
-        of value: V,
-        perform action: @escaping @MainActor (_ newValue: V) async -> Void
-    ) -> some View where V: Equatable {
-        onChange(of: value) { newValue in Task { await action(newValue) } }
-    }
-}
-
-public extension View {
-    /// Adds a modifier for this view that fires an action when a specific value changes.
-    ///
-    /// - Parameters:
-    ///   - value: The value to check against when determining whether to run the closure.
-    ///   - initial: Whether the action should be run when this view initially appears.
-    ///   - action: A concurrent closure to run when the value changes.
-    /// - Returns: A view that fires an action when the specified value changes.
-    @available(iOS 17, macOS 14, tvOS 17, watchOS 10, *)
-    func onChange<V>(
-        of value: V,
-        initial: Bool = false,
-        perform action: @escaping @MainActor () async -> Void
-    ) -> some View where V: Equatable {
-        onChange(of: value, initial: initial) { Task { await action() } }
-    }
-}
-
-public extension View {
-    /// Adds an action to perform when this view detects data emitted by the optional publisher.
-    ///
-    /// - Parameters:
-    ///   - publisher: The publisher to subscribe to.
-    ///   - action: The action to perform when an event is emitted by `publisher`.
-    /// - Returns: A view that triggers action when publisher emits an event.
-    func onReceive<P>(
-        _ publisher: P?,
-        perform action: @escaping (P.Output) -> Void
-    ) -> some View where P: Publisher, P.Failure == Never {
-        modifier(let: publisher) { $0.onReceive($1, perform: action) }
-    }
-
-    /// Adds an action to perform when this view detects data emitted by the given publisher.
-    ///
-    /// - Parameters:
-    ///   - publisher: The publisher to subscribe to.
-    ///   - action: The action to perform when an event is emitted by `publisher`.
-    /// - Returns: A view that triggers an async action when publisher emits an event.
-    func onReceive<P>(
-        _ publisher: P?,
-        perform action: @escaping @MainActor () async -> Void
-    ) -> some View where P: Publisher, P.Failure == Never {
-        // Deprecate in favour of `.task` after converting publishers to `AsyncStream`
-        onReceive(publisher) { _ in Task { await action() } }
-    }
-
-    /// Adds an action to perform when this view detects data emitted by the given `ObservableObject`.
-    ///
-    /// - Parameters:
-    ///   - observableObject: The `ObservableObject` to subscribe to.
-    ///   - action: The action to perform when an event is emitted by the `objectWillChange` publisher of the `ObservableObject`.
-    /// - Returns: A view that triggers an action when publisher emits an event.
-    func onReceive<O>(
-        _ observableObject: O,
-        perform action: @escaping @MainActor () -> Void
-    ) -> some View where O: ObservableObject {
-        onReceive(observableObject.objectWillChange) { _ in
-            // Deferred a turn so the observed object reflects the change `objectWillChange` announces.
-            Task { action() }
-        }
-    }
-}
-
 // MARK: - Notification
 
 public extension View {
-    /// Adds an action to perform when this view detects a notification emitted by the `NotificationCenter` publisher.
-    /// 
-    /// - Parameters:
-    ///   - name: The name of the notification to publish.
-    ///   - object: The object posting the named notification.
-    ///   - action: The action to perform when the notification is emitted by publisher.
-    /// - Returns: View
-    func onNotification(
-        for name: Notification.Name,
-        object: AnyObject? = nil,
-        perform action: @escaping (Notification) -> Void
-    ) -> some View {
-        // https://github.com/gtokman/ExtensionKit
-        onReceive(NotificationCenter.default.publisher(for: name, object: object).receive(on: DispatchQueue.main), perform: action)
-    }
-
-    /// Adds an action to perform when this view detects a notification emitted by the `NotificationCenter` publisher.
+    /// Adds an action to perform each time the notification is posted while this view is on screen.
     ///
     /// - Parameters:
-    ///   - name: The name of the notification to publish.
-    ///   - object: The object posting the named notification.
-    ///   - action: The action to perform when the notification is emitted by publisher.
-    /// - Returns: View
-    func onNotification(
-        for name: Notification.Name,
-        object: AnyObject? = nil,
-        perform action: @escaping @MainActor (Notification) async -> Void
-    ) -> some View {
-        onReceive(NotificationCenter.default.publisher(for: name, object: object).receive(on: DispatchQueue.main)) { notification in
-            Task { await action(notification) }
-        }
-    }
-
-    /// Adds an action to perform when this view detects a notification emitted by the `NotificationCenter` publisher.
-    ///
-    /// - Parameters:
-    ///   - name: The name of the notification to publish.
-    ///   - object: The object posting the named notification.
-    ///   - action: The action to perform when the notification is emitted by publisher.
-    /// - Returns: View
-    func onNotification(
-        for name: Notification.Name,
-        object: AnyObject? = nil,
-        perform action: @escaping @MainActor () async -> Void
-    ) -> some View {
-        onReceive(NotificationCenter.default.publisher(for: name, object: object).receive(on: DispatchQueue.main)) { _ in
-            Task { await action() }
-        }
-    }
-}
-
-// MARK: - UI
-
-public extension View {
-    /// Binds the height of the view to a property.
-    func assign(heightTo height: Binding<CGFloat>) -> some View {
-        background(
-            GeometryReader { geometry in
-                Color.clear
-                    .onAppear { height.wrappedValue = geometry.size.height }
+    ///   - name: The name of the notification.
+    ///   - action: The action to perform with the notification.
+    /// - Returns: A view that runs the action for each notification.
+    func onNotification(for name: Notification.Name, perform action: @escaping @MainActor (Notification) -> Void) -> some View {
+        task(id: name) {
+            for await notification in NotificationCenter.default.notifications(named: name) {
+                action(notification)
             }
-        )
+        }
     }
-}
 
-#if os(iOS)
-struct RoundedRect: Shape {
-    let radius: CGFloat
-    let corners: UIRectCorner
-
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(
-            roundedRect: rect,
-            byRoundingCorners: corners,
-            cornerRadii: CGSize(width: radius, height: radius)
-        )
-
-        return Path(path.cgPath)
-    }
-}
-
-public extension View {
-    /// Clips this view to its bounding frame, with the specified corner radius.
-    ///
-    ///     Text("Rounded Corners")
-    ///         .frame(width: 175, height: 75)
-    ///         .foregroundColor(Color.white)
-    ///         .background(Color.black)
-    ///         .cornerRadius(25, corners: [.topLeft, .topRight])
-    ///
-    /// Creates and returns a new Bézier path object with a rectangular path rounded at the specified corners.
-    /// For rounding all corners, use the native `.cornerRadius(_ radius:)` function.
+    /// Adds an action to perform each time the notification is posted while this view is on screen.
     ///
     /// - Parameters:
-    ///   - radius: The corner radius.
-    ///   - corners: A bitmask value that identifies the corners that you want rounded.
-    ///     You can use this parameter to round only a subset of the corners of the rectangle.
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape(RoundedRect(radius: radius, corners: corners))
+    ///   - name: The name of the notification.
+    ///   - action: The action to perform.
+    /// - Returns: A view that runs the action for each notification.
+    func onNotification(for name: Notification.Name, perform action: @escaping @MainActor () async -> Void) -> some View {
+        task(id: name) {
+            for await _ in NotificationCenter.default.notifications(named: name) {
+                await action()
+            }
+        }
     }
 }
-#endif

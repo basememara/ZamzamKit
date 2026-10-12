@@ -15,7 +15,7 @@ private struct OnForegroundModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .onChange(of: scenePhase) { scenePhase in
+            .onChange(of: scenePhase) { _, scenePhase in
                 switch scenePhase {
                 case .background:
                     isBackground = true

@@ -8,28 +8,18 @@
 
 import SwiftUI
 
-/// A modifier that adds a redaction to this view hierarchy if the condition is met, otherwise it is `unredacted`.
-private struct ConditionalRedacted: ViewModifier {
-    let condition: Bool
-
-    func body(content: Content) -> some View {
-        content.modifier(if: condition) {
-            $0.redacted(reason: .placeholder)
-        } else: {
-            $0.unredacted()
-        }
-    }
-}
-
 public extension View {
-    /// Adds a redaction to this view hierarchy if the condition is met, otherwise it is `unredacted`.
+    /// Redacts this view hierarchy as a placeholder while the condition holds.
     ///
     ///     someView
     ///         .redacted(if: model == nil)
     ///
-    /// - Parameter condition: The condition to determine if the content should be applied.
+    /// An empty reason when the condition is false leaves any redaction the system applies in place,
+    /// such as a widget's privacy redaction on the Lock Screen.
+    ///
+    /// - Parameter condition: Whether to redact the content.
     /// - Returns: The modified view.
     func redacted(if condition: Bool) -> some View {
-        modifier(ConditionalRedacted(condition: condition))
+        redacted(reason: condition ? .placeholder : [])
     }
 }
