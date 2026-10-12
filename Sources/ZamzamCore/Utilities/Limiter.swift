@@ -94,10 +94,11 @@ private extension Limiter {
     func debounce(_ operation: @escaping @Sendable () async -> Void) {
         task?.cancel()
 
+        // Cleared before the operation runs, so one still running can't clear a newer call's task
         task = Task {
             try await Task.sleep(for: .seconds(duration))
-            await operation()
             task = nil
+            await operation()
         }
     }
 }
