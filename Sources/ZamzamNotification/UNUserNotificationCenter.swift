@@ -222,7 +222,8 @@ public extension UNUserNotificationCenter {
         case year
     }
 
-    /// Schedules a local notification at a date, once or repeating.
+    /// Schedules a local notification at a date, once or repeating. A repeating one fires at the date's wall-clock time
+    /// in `calendar`; a one-time one fires at the date itself, whatever the calendar.
     func add(
         date: Date,
         body: String,
