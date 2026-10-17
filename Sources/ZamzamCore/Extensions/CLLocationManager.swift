@@ -17,7 +17,7 @@ public extension CLAuthorizationStatus {
     var isAuthorized: Bool {
         var statuses: [CLAuthorizationStatus] = [.authorizedAlways]
 
-        #if os(iOS) || os(watchOS) || os(tvOS)
+        #if os(iOS) || os(watchOS)
             statuses.append(.authorizedWhenInUse)
         #elseif os(macOS)
             statuses.append(.authorized)

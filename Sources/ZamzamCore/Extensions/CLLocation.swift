@@ -48,7 +48,7 @@ public extension CLLocation {
         public var administrativeArea: String?
 
         public var description: String {
-            if let l = locality, let c = (Locale.current.languageCode == "en" ? countryCode : country) {
+            if let l = locality, let c = (Locale.current.language.languageCode?.identifier == "en" ? countryCode : country) {
                 return "\(l), \(c)"
             } else if let l = locality {
                 return "\(l)"
@@ -73,7 +73,7 @@ public extension CLLocation {
         // A task group would leave the losing child suspended until Core Location replied, so the
         // deadline is enforced by cancelling the geocode itself rather than by racing it.
         let timeoutTask = Task {
-            try await Task.sleep(seconds: timeout)
+            try await Task.sleep(for: .seconds(timeout))
             geocoder.cancelGeocode()
         }
 

@@ -9,7 +9,6 @@
 import Foundation.NSFileManager
 import Foundation.NSURL
 
-#if !os(tvOS)
 public extension FileManager {
     /// Get URL for the file.
     ///
@@ -64,47 +63,3 @@ public extension FileManager {
         urls(from: directory, filter: filter).map { $0.path }
     }
 }
-
-public extension FileManager {
-    /// Retrieve a file remotely and persist to local disk.
-    ///
-    ///     FileManager.default.download(from: "http://example.com/test.pdf") { url, response, error in
-    ///         // The `url` parameter represents location on local disk where remote file was downloaded.
-    ///     }
-    ///
-    /// - Parameters:
-    ///   - url: The HTTP URL to retrieve the file.
-    ///   - completion: The completion handler to call when the load request is complete.
-    func download(from url: String, completion: @escaping @Sendable (URL?, URLResponse?, Error?) -> Void) {
-        guard let nsURL = URL(string: url) else {
-            completion(nil, nil, ZamzamError.invalidData)
-            return
-        }
-
-        URLSession.shared
-            .downloadTask(with: nsURL) { location, response, error in
-                guard let location, error == nil else {
-                    completion(nil, nil, error)
-                    return
-                }
-
-                // Construct file destination
-                let destination = self.url(of: nsURL.lastPathComponent, from: .cachesDirectory)
-
-                // Delete local file if it exists to overwrite
-                try? self.removeItem(at: destination)
-
-                // Store remote file locally
-                do {
-                    try self.moveItem(at: location, to: destination)
-                } catch {
-                    completion(nil, nil, error)
-                    return
-                }
-
-                completion(destination, response, error)
-            }
-            .resume()
-    }
-}
-#endif

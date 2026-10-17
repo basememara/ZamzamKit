@@ -6,16 +6,14 @@
 //  Copyright © 2019 Zamzam Inc. All rights reserved.
 //
 
-import Combine
 import Foundation
-import SwiftUI
+import os
 
-public final class LogManager: @unchecked Sendable {
+public final class LogManager: Sendable {
     private let services: [LogService]
-    private let subject = PassthroughSubject<[String: any CustomStringConvertible & Sendable], Never>()
 
-    /// Guarded by `DispatchQueue.logger`, which is why the `Sendable` conformance is unchecked.
-    private var context: [String: any CustomStringConvertible & Sendable] = [:]
+    /// Attributes added to every entry. Writes hold the same lock, so destinations receive one entry at a time.
+    private let context = OSAllocatedUnfairLock<[String: any CustomStringConvertible & Sendable]>(initialState: [:])
 
     public init(services: [LogService]) {
         self.services = services
@@ -25,31 +23,17 @@ public final class LogManager: @unchecked Sendable {
 public extension LogManager {
     /// Adds a custom attribute to all future logs sent by this logger.
     func set(_ value: (any CustomStringConvertible & Sendable)?, forKey key: String) {
-        DispatchQueue.logger.sync {
-            context[key] = value
-            subject.send(context)
-        }
+        context.withLock { $0[key] = value }
     }
 
     /// Adds custom attributes to all future logs sent by this logger.
     func set(_ context: [String: any CustomStringConvertible & Sendable]) {
-        DispatchQueue.logger.sync {
-            self.context.merge(context) { $1 }
-            subject.send(self.context)
-        }
-    }
-
-    /// Sets the application properties to the logger so it can be used outside the main thread.
-    func set(context newPhase: ScenePhase) {
-        set(newPhase.rawString, forKey: "app_state")
+        self.context.withLock { $0.merge(context) { $1 } }
     }
 
     /// Removes all the custom attribute from all future logs sent by this logger.
     func reset() {
-        DispatchQueue.logger.sync {
-            context.removeAll()
-            subject.send(context)
-        }
+        context.withLock { $0.removeAll() }
     }
 }
 
@@ -84,7 +68,7 @@ public extension LogManager {
         let destinations = services.filter { $0.canWrite(for: level) }
         guard !destinations.isEmpty else { return }
 
-        DispatchQueue.logger.sync {
+        self.context.withLock { sessionContext in
             destinations.forEach {
                 $0.write(
                     level,
@@ -94,7 +78,7 @@ public extension LogManager {
                     line: line,
                     error: error,
                     context: context,
-                    sessionContext: self.context
+                    sessionContext: sessionContext
                 )
             }
         }
@@ -262,33 +246,5 @@ public extension LogManager {
             context: context,
             completion: completion
         )
-    }
-}
-
-// MARK: - Observers
-
-public extension LogManager {
-    func publisher() -> AnyPublisher<[String: any CustomStringConvertible & Sendable], Never> {
-        subject
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
-    }
-}
-
-// MARK: - Helpers
-
-private extension ScenePhase {
-    /// The corresponding string of the raw type.
-    var rawString: String {
-        switch self {
-        case .active:
-            return "active"
-        case .background:
-            return "background"
-        case .inactive:
-            return "inactive"
-        @unknown default:
-            return "unknown"
-        }
     }
 }

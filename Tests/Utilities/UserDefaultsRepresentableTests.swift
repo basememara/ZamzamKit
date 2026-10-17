@@ -664,7 +664,8 @@ extension CustomType: UserDefaultsRepresentable {
 
 private extension UserDefaults {
     static let suiteName = UUID().uuidString
-    static let test = UserDefaults(suiteName: suiteName) ?? .standard
+    // UserDefaults is documented as thread-safe
+    nonisolated(unsafe) static let test = UserDefaults(suiteName: suiteName) ?? .standard
 
     static func testReset() {
         UserDefaults.test.removePersistentDomain(forName: suiteName)

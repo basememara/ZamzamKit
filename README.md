@@ -1,7 +1,7 @@
 # ZamzamKit
 
-[![Platform](https://img.shields.io/badge/platform-macos%20%7C%20ios%20%7C%20watchos%20%7C%20ipados%20%7C%20tvos-lightgrey)](https://github.com/ZamzamInc/ZamzamKit)
-[![Swift](https://img.shields.io/badge/Swift-5-orange.svg)](https://swift.org)
+[![Platform](https://img.shields.io/badge/platform-macos%20%7C%20ios%20%7C%20watchos%20%7C%20ipados-lightgrey)](https://github.com/ZamzamInc/ZamzamKit)
+[![Swift](https://img.shields.io/badge/Swift-6-orange.svg)](https://swift.org)
 [![Xcode](https://img.shields.io/badge/Xcode-27-blue.svg)](https://developer.apple.com/xcode)
 [![SPM](https://img.shields.io/badge/SPM-Compatible-blue)](https://swift.org/package-manager)
 [![MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
@@ -12,7 +12,7 @@ ZamzamKit is a Swift package for rapid development using a collection of micro u
 
 ### Swift Package Manager
 
-`.package(url: "git@github.com:ZamzamInc/ZamzamKit.git", .upToNextMajor(from: "5.1.0"))`
+`.package(url: "git@github.com:ZamzamInc/ZamzamKit.git", .upToNextMajor(from: "7.0.0"))`
 
 The `ZamzamKit` package contains four different products you can import. Add any combination of these to your target's dependencies within your `Package.swift` manifest:
 ```
@@ -523,25 +523,6 @@ init(from decoder: Decoder) throws {
 </details>
 
 <details>
-<summary>DispatchQueue</summary>
-
-> Provides configured queues for executing commonly related work items:
-```swift
-DispatchQueue.database.async {
-    // Database work here
-}
-
-DispatchQueue.transform.async {
-    // Parse or decode work here
-}
-
-DispatchQueue.logger.async {
-    // Logging work here
-}
-```
-</details>
-
-<details>
 <summary>FileManager</summary>
 
 > Get URL or file system path for a file:
@@ -555,13 +536,6 @@ FileManager.default.path(of: fileName, from: .cachesDirectory)
 FileManager.default.urls(from: .documentDirectory)
 FileManager.default.paths(from: .downloadsDirectory)
 ```
-
-> Retrieve a file remotely and persist to local disk:
-```swift
-FileManager.default.download(from: "http://example.com/test.pdf") { url, response, error in
-    // The `url` parameter represents location on local disk where remote file was downloaded.
-}
-```
 </details>
 
 <details>
@@ -569,7 +543,7 @@ FileManager.default.download(from: "http://example.com/test.pdf") { url, respons
 
 > Get the location details for coordinates:
 ```swift
-CLLocation(latitude: 43.6532, longitude: -79.3832).geocoder { meta in
+if let meta = await CLLocation(latitude: 43.6532, longitude: -79.3832).geocoder() {
     print(meta.locality)
     print(meta.country)
     print(meta.countryCode)
@@ -593,7 +567,7 @@ coordinates.farthest(from: homeCoordinate)
 
 > Determine if location services is enabled and authorized for always or when in use:
 ```swift
-CLLocationManager.isAuthorized // bool
+CLLocationManager().isAuthorized // bool
 ```
 </details>
 
@@ -789,21 +763,6 @@ UITabBar.appearance().apply {
 </details>
 
 <details>
-<summary>Atomic</summary>
-
-> A thread-safe value that handles concurrent reads and writes ([read more](https://basememara.com/creating-thread-safe-generic-values-in-swift/)):
-```swift
-var temp = Atomic<Int>(0)
-
-DispatchQueue.concurrentPerform(iterations: 1_000_000) { index in
-temp.value { $0 += 1 }
-}
-
-XCTAssertEqual(temp.value, 1_000_000) // true
-```
-</details>
-
-<details>
 <summary>AppMigration</summary>
 
 > Manages blocks of code that only need to run once on version updates in apps:
@@ -852,15 +811,11 @@ BackgroundTask.run(for: application) { task in
 
 > A thin wrapper to manage Keychain, or other services that conform to `KeychainService`:
 ```swift
-let keychain = KeychainManager(
-    service: KeychainExternalService()
-)
+let keychain: KeychainService = KeychainServiceExternal()
 
 keychain.set("kjn989hi", forKey: .token)
 
-keychain.get(.token) {
-    print($0) // "kjn989hi"
-}
+let token: String? = keychain.get(.token) // "kjn989hi"
 
 // Define strongly-typed keys
 extension KeychainAPI.Key {
@@ -946,45 +901,33 @@ test = value ??+ "Rst"
 <details>
 <summary>LocationManager</summary>
 
-> Location manager that offers `Combine` wrappers:
+> Ask for permission, waiting for the user's answer (a prompt that can't appear gives up after a timeout):
 ```swift
+let locationManager = LocationManager()
+let isAuthorized = await locationManager.requestAuthorization()
+```
 
-func fetchLocation() {
-    log.debug("Begin location authorization...")
+> Get one location: a fix no older than `maximumAge`, or the last known location once `timeout` passes:
+```swift
+switch await locationManager.currentLocation(maximumAge: 5, timeout: .seconds(30)) {
+case let .success(location):
+    print(location.coordinate)
+case .failure(.denied):
+    print("Location access denied")
+case .failure(.unavailable):
+    print("No location yet")
+}
+```
 
-    guard locationManager.isAuthorized else {
-        locationManager.requestAuthorization()
-            .handleEvents(receiveOutput: { [weak self] granted in
-                guard granted else {
-                    self?.log.error("Location authorization denied")
-                    return
-                }
-
-                self?.log.debug("Location authorization granted")
-            })
-            .first { $0 }
-            .sink { [weak self] _ in self?.fetchLocation() }
-            .store(in: &cancellable)
-
-        return
+> Stream compass headings while a screen is open (iOS and watchOS); cancelling the task stops them:
+```swift
+for await result in locationManager.headings(allowCalibration: true) {
+    switch result {
+    case let .success(heading):
+        print(heading.trueHeading >= 0 ? heading.trueHeading : heading.magneticHeading)
+    case let .failure(error):
+        print("Compass failed: \(error)")
     }
-
-    log.debug("Begin fetching location...")
-
-    locationManager
-        .startUpdatingLocation()
-        .retry(3)
-        .catch { [weak self] error -> AnyPublisher<CLLocation, Never> in
-            self?.log.error("GPS location coordinate failed", error: error)
-            return Empty(completeImmediately: true).eraseToAnyPublisher()
-        }
-        .first()
-        .sink { [weak self] in
-            self?.log.debug("Location coordinate: \($0)")
-            self?.locationManager.stopUpdatingLocation()
-            self?.log.debug("Location turned off GPS")
-        }
-        .store(in: &cancellable)
 }
 ```
 </details>
@@ -994,9 +937,9 @@ func fetchLocation() {
 <details>
 <summary>UserNotification</summary>
 
-> Registers the local and remote notifications with the categories and actions it supports:
+> Registers the local and remote notifications with the categories and actions it supports, returning whether the user allowed them:
 ```swift
-UNUserNotificationCenter.current().register(
+let granted = await UNUserNotificationCenter.current().register(
     delegate: self,
     categories: [
         "order": [
@@ -1017,112 +960,44 @@ UNUserNotificationCenter.current().register(
         ],
         "offer": nil
     ],
-    authorizations: [.alert, .badge, .sound],
-    completion: { granted in
-        granted
-            ? log.debug("Authorization for notification succeeded.")
-            : log.warn("Authorization for notification not given.")
-    }
+    authorizations: [.alert, .badge, .sound]
 )
 ```
 
-> Get a list of all pending or delivered user notifications:
+> Get all pending and delivered notifications, or find them by identifier or category:
 ```swift
-UNUserNotificationCenter.current().getNotificationRequests { notifications in
-    notifications.forEach {
-        print($0.identifier)
-    }
-}
+let requests = await UNUserNotificationCenter.current().notificationRequests()
+let request = await UNUserNotificationCenter.current().get(withIdentifier: "abc123")
+let requests = await UNUserNotificationCenter.current().get(withIdentifiers: ["abc123", "xyz789"])
+let isScheduled = await UNUserNotificationCenter.current().exists(withIdentifier: "abc123")
 ```
 
-> Find the pending or delivered notification request by identifier:
+> Schedules local notifications for delivery after an interval or at a date, once or repeating:
 ```swift
-UNUserNotificationCenter.current().get(withIdentifier: "abc123") {
-    print($0?.identifier)
-}
-
-UNUserNotificationCenter.current().get(withIdentifiers: ["abc123", "xyz789"]) {
-    $0.forEach {
-        print($0.identifier)
-    }
-}
-```
-
-> Determine if the pending or delivered notification request exists:
-```swift
-UNUserNotificationCenter.current().exists(withIdentifier: "abc123") {
-    print("Does notification exist: \($0)")
-}
-```
-
-> Schedules local notifications for delivery:
-```swift
-UNUserNotificationCenter.current().add(
-    body: "This is the body for time interval",
-    timeInterval: 5
-)
-
-UNUserNotificationCenter.current().add(
-    body: "This is the body for time interval",
-    title: "This is the snooze title",
+try await UNUserNotificationCenter.current().add(
     timeInterval: 60,
-    identifier: "abc123-main"
+    body: "This is the body",
+    title: "This is the title",
+    identifier: "abc123-main",
+    category: "chat",
+    userInfo: ["id": post.id]
 )
 
-UNUserNotificationCenter.current().add(
-    body: "This is the body for time interval",
-    title: "This is the misc1 title",
-    timeInterval: 60,
-    identifier: "abc123-misc1",
-    category: "misc1Category"
-)
-
-UNUserNotificationCenter.current().add(
-    body: "This is the body for time interval",
-    title: "This is the misc2 title",
-    timeInterval: 60,
-    identifier: "abc123-misc2",
-    category: "misc2Category",
-    userInfo: [
-        "id": post.id,
-        "link": post.link,
-        "mediaURL": mediaURL
-    ],
-    completion: { error in
-        guard error == nil else { return }
-        // Added successfully
-    }
-)
-
-UNUserNotificationCenter.current().add(
+try await UNUserNotificationCenter.current().add(
     date: Date(timeIntervalSinceNow: 5),
     body: "This is the body for date",
+    interruptionLevel: .timeSensitive,
     repeats: .minute,
     identifier: "abc123-repeat"
 )
-```
-
-> Get a remote image from the web and convert to a user notification attachment:
-```swift
-UNNotificationAttachment.download(from: urlString) {
-    guard case let .success(attachment) = $0 else {
-        log.error("Could not download the remote resource (\(urlString)): \($0.error?.debugDescription).")
-        return
-    }
-
-    UNUserNotificationCenter.current().add(
-        body: "This is the body",
-        attachments: [attachment]
-    )
-}
 ```
 
 > Remove pending or delivered notification requests by identifiers, categories, or all:
 ```swift
 UNUserNotificationCenter.current().remove(withIdentifier: "abc123")
 UNUserNotificationCenter.current().remove(withIdentifiers: ["abc123", "xyz789"])
-UNUserNotificationCenter.current().remove(withCategory: "chat") { /* Done */ }
-UNUserNotificationCenter.current().remove(withCategories: ["order", "chat"]) { /* Done */ }
+await UNUserNotificationCenter.current().remove(withCategory: "chat")
+await UNUserNotificationCenter.current().remove(withCategories: ["order", "chat"])
 UNUserNotificationCenter.current().removeAll()
 ```
 </details>
@@ -1140,34 +1015,6 @@ UNUserNotificationCenter.current().removeAll()
 >Views
 </details>
 
-
-### WatchKit
-
-<details>
-<summary>CLKComplicationServer</summary>
-
-> Invalidates and reloads all timeline data for all complications:
-```swift
-// Before
-guard let complications = activeComplications, !complications.isEmpty else { return }
-complications.forEach { reloadTimeline(for: $0) }
-```
-```swift
-// After
-CLKComplicationServer.sharedInstance().reloadTimelineForComplications()
-```
-
-> Extends all timeline data for all complications:
-```swift
-// Before
-guard let complications = activeComplications, !complications.isEmpty else { return }
-complications.forEach { extendTimeline(for: $0) }
-```
-```swift
-// After
-CLKComplicationServer.sharedInstance().extendTimelineForComplications()
-```
-</details>
 
 ## Testing
 

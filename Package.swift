@@ -5,10 +5,9 @@ import PackageDescription
 let package = Package(
     name: "ZamzamKit",
     platforms: [
-        .macOS(.v12),
-        .iOS(.v15),
-        .tvOS(.v15),
-        .watchOS(.v8)
+        .macOS(.v14),
+        .iOS(.v17),
+        .watchOS(.v10)
     ],
     products: [
         .library(name: "ZamzamKit", targets: ["ZamzamKit"]),
@@ -34,9 +33,7 @@ let package = Package(
             path: "Tests",
             exclude: ["Network/Certificates"],
             resources: [.process("Resources")],
-            // Swift 5 mode: the suite deliberately exercises shared mutable state, from the
-            // atomic wrapper's concurrency tests to certificate fixtures mutated in place.
-            swiftSettings: [.swiftLanguageMode(.v5)]
+            swiftSettings: [.swiftLanguageMode(.v6)]
         ),
         .target(
             name: "ZamzamCore",

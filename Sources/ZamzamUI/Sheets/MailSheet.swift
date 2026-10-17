@@ -25,7 +25,9 @@ private struct MailView: UIViewControllerRepresentable {
 }
 
 private extension MailView {
-    class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
+    // Mail delivers its delegate callback on the main thread
+    @MainActor
+    final class Coordinator: NSObject, @preconcurrency MFMailComposeViewControllerDelegate {
         /// A standard interface for managing, editing, and sending an email message.
         func makeViewController(with request: MailItem) -> UIViewController {
             MFMailComposeViewController().apply {

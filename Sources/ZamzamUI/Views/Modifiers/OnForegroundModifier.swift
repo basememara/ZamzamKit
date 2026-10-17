@@ -15,7 +15,7 @@ private struct OnForegroundModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .onChange(of: scenePhase) { scenePhase in
+            .onChange(of: scenePhase) { _, scenePhase in
                 switch scenePhase {
                 case .background:
                     isBackground = true
@@ -35,8 +35,8 @@ private struct OnForegroundModifier: ViewModifier {
 public extension View {
     /// Adds an action to perform when the current phase of the scene comes to the foreground.
     ///
-    /// - Parameter action: The action to perform. If action is nil, the call has no effect.
-    /// - Returns: A view that triggers action when this view has loaded.
+    /// - Parameter action: The action to perform.
+    /// - Returns: A view that runs the action each time the scene returns to the foreground.
     func onForeground(perform action: @escaping () async -> Void) -> some View {
         modifier(OnForegroundModifier(action: action))
     }

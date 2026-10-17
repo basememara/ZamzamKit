@@ -80,7 +80,7 @@ private extension Limiter {
         guard task == nil else { return }
 
         task = Task {
-            try? await Task.sleep(seconds: duration)
+            try? await Task.sleep(for: .seconds(duration))
             task = nil
         }
 
@@ -94,10 +94,11 @@ private extension Limiter {
     func debounce(_ operation: @escaping @Sendable () async -> Void) {
         task?.cancel()
 
+        // Cleared before the operation runs, so one still running can't clear a newer call's task
         task = Task {
-            try await Task.sleep(seconds: duration)
-            await operation()
+            try await Task.sleep(for: .seconds(duration))
             task = nil
+            await operation()
         }
     }
 }
