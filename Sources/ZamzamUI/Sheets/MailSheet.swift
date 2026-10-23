@@ -43,7 +43,7 @@ private extension MailView {
                     $0.setMessageBody(body, isHTML: request.isHTML)
                 }
 
-                if let attachment = request.attachment {
+                for attachment in request.attachments {
                     $0.addAttachmentData(
                         attachment.data,
                         mimeType: attachment.mimeType,
@@ -77,20 +77,35 @@ public struct MailItem: Identifiable, Equatable {
     let subject: String?
     let body: String?
     let isHTML: Bool
-    let attachment: Attachment?
+    let attachments: [Attachment]
 
     public init(
         emails: String...,
         subject: String? = nil,
         body: String? = nil,
         isHTML: Bool = true,
-        attachment: Attachment? = nil
+        attachments: [Attachment] = []
     ) {
         self.emails = emails
         self.subject = subject
         self.body = body
         self.isHTML = isHTML
-        self.attachment = attachment
+        self.attachments = attachments
+    }
+
+    @available(*, deprecated, renamed: "init(emails:subject:body:isHTML:attachments:)")
+    public init(
+        emails: String...,
+        subject: String? = nil,
+        body: String? = nil,
+        isHTML: Bool = true,
+        attachment: Attachment?
+    ) {
+        self.emails = emails
+        self.subject = subject
+        self.body = body
+        self.isHTML = isHTML
+        self.attachments = attachment.map { [$0] } ?? []
     }
 }
 
