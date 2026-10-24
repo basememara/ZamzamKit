@@ -68,9 +68,19 @@ public extension NSColor {
     /// Unified with iOS color name.
     static let label = NSColor.labelColor
 
+    /// The color to use for secondary text labels.
+    ///
+    /// Unified with iOS color name.
+    static let secondaryLabel = NSColor.secondaryLabelColor
+
     /// The color to use for the window background.
     ///
     /// Unified with iOS color name.
     static let systemBackground = NSColor.windowBackgroundColor
+
+    /// The color to use for content layered on a grouped background, such as a row in a grouped form.
+    ///
+    /// Unified with iOS color name.
+    static let tertiarySystemBackground = NSColor.controlBackgroundColor
 }
 #endif
