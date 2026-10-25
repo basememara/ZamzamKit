@@ -27,6 +27,8 @@ Use `try #require` before comparing an optional, and hoist a `try` out of a comp
 
 Wrap a known environmental failure in `withKnownIssue`, so a real regression still turns the run red; none is wrapped today. `CurrencyFormatterTests.sA` pins macOS's Saudi riyal symbol: an iOS 27 simulator renders the new riyal sign (U+20C1) and fails it, so the suite's gate is My Mac.
 
+SwiftLint (`.swiftlint.yml`, the rules PrayWatch and PrayKit share) has no build phase in a package, so run `swiftlint` from the package root before a push. `swiftlint --fix` rewrites from the source text alone, so a fix can compile and still change behavior (a protocol's `@escaping` stripped, a double optional's `?? nil` removed): run it one rule at a time with `--only-rule`, read every hunk, and make declaration changes (access, `final`, attributes, initializers) by hand.
+
 ## Compatibility contract
 
 Consumers may depend on this package by version or by tracking `main`, so treat every push to `main` as a release: the suite must pass first, and a change to public API is a breaking change until every product that exposes it is considered. Prefer additive changes; when something public must change, deprecate first where practical and call the break out in the commit message.
