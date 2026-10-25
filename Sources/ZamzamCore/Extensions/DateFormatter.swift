@@ -6,8 +6,8 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
-import Foundation.NSDateFormatter
 import Foundation.NSCalendar
+import Foundation.NSDateFormatter
 import Foundation.NSLocale
 import Foundation.NSTimeZone
 
@@ -65,7 +65,7 @@ public extension DateFormatter {
             self.timeZone = timeZone
         }
 
-        if let calendar = calendar {
+        if let calendar {
             self.calendar = calendar
         }
 
@@ -95,7 +95,7 @@ public extension DateFormatter {
             self.timeZone = timeZone
         }
 
-        if let calendar = calendar {
+        if let calendar {
             self.calendar = calendar
         }
 
@@ -128,7 +128,7 @@ public extension DateFormatter {
             self.timeZone = timeZone
         }
 
-        if let calendar = calendar {
+        if let calendar {
             self.calendar = calendar
         }
 

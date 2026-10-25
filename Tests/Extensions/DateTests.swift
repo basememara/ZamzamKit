@@ -34,7 +34,18 @@ extension DateTests {
         let chineseEra = Int(gregorianAdjustedToChinese / 60)
         let chineseYear = gregorianAdjustedToChinese - chineseEra * 60
 
-        #expect(Date(era: chineseEra, year: chineseYear, month: 5, day: 5, hour: 0, minute: 18, second: 59, timeZone: TimeZone(abbreviation: "EST"), calendar: Calendar(identifier: .chinese)) == Date(timeIntervalSince1970: 1654229939))
+        let date = Date(
+            era: chineseEra,
+            year: chineseYear,
+            month: 5,
+            day: 5,
+            hour: 0,
+            minute: 18,
+            second: 59,
+            timeZone: TimeZone(abbreviation: "EST"),
+            calendar: Calendar(identifier: .chinese)
+        )
+        #expect(date == Date(timeIntervalSince1970: 1654229939))
     }
 }
 
@@ -364,7 +375,8 @@ extension DateTests {
     func incrementDaysWithCalendar() throws {
         let calendar = Calendar(identifier: .islamicUmmAlQura)
 
-        #expect(try #require(Date(year: 1440, month: 2, day: 30, hour: 18, minute: 31, calendar: calendar)) + .days(1, calendar) == Date(year: 1440, month: 3, day: 1, hour: 18, minute: 31, calendar: calendar))
+        let date = try #require(Date(year: 1440, month: 2, day: 30, hour: 18, minute: 31, calendar: calendar))
+        #expect(date + .days(1, calendar) == Date(year: 1440, month: 3, day: 1, hour: 18, minute: 31, calendar: calendar))
     }
 
     @Test

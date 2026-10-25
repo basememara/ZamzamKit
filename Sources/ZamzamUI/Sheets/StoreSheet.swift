@@ -31,11 +31,11 @@ public extension View {
         let viewController = SKStoreProductViewController()
         var parameters = [SKStoreProductParameterITunesItemIdentifier: itunesID]
 
-        if let affiliateToken = affiliateToken {
+        if let affiliateToken {
             parameters[SKStoreProductParameterAffiliateToken] = affiliateToken
         }
 
-        if let campaignToken = campaignToken {
+        if let campaignToken {
             parameters[SKStoreProductParameterCampaignToken] = campaignToken
         }
 
@@ -45,8 +45,7 @@ public extension View {
                     .compactMap({ $0 as? UIWindowScene })
                     .first?
                     .windows
-                    .filter(\.isKeyWindow)
-                    .first?
+                    .first(where: \.isKeyWindow)?
                     .rootViewController,
                   loaded
             else {

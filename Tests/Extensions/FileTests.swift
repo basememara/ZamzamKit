@@ -57,7 +57,7 @@ extension FileTests {
 
 private extension FileTests {
     func fileInDirectory(_ filename: String) -> String {
-        return FileManager.default
+        FileManager.default
             .urls(for: .downloadsDirectory, in: .userDomainMask)[0]
             .appendingPathComponent(filename)
             .path

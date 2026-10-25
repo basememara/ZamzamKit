@@ -81,7 +81,7 @@ public extension Date {
     ) -> String {
         var calendar = calendar
 
-        if let timeZone = timeZone {
+        if let timeZone {
             calendar.timeZone = timeZone
         }
 
@@ -120,7 +120,7 @@ public extension Date {
     ) -> DateComponents {
         var calendar = calendar
 
-        if let timeZone = timeZone {
+        if let timeZone {
             calendar.timeZone = timeZone
         }
 

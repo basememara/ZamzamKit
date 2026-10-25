@@ -20,7 +20,7 @@ extension DateFormatterTests {
             let date: Date
         }
 
-        let json = try #require(#"{"date": "2021-02-25T05:34:47+00:00"}"#.data(using: .utf8))
+        let json = Data(#"{"date": "2021-02-25T05:34:47+00:00"}"#.utf8)
 
         let decoder = JSONDecoder().apply {
             $0.dateDecodingStrategy = .formatted(DateFormatter.iso8601Formatter)
@@ -42,7 +42,7 @@ extension DateFormatterTests {
             let date: Date
         }
 
-        let json = try #require(#"{"date": "2021-02-03T20:19:55.317Z"}"#.data(using: .utf8))
+        let json = Data(#"{"date": "2021-02-03T20:19:55.317Z"}"#.utf8)
 
         let decoder = JSONDecoder().apply {
             $0.dateDecodingStrategy = .formatted(DateFormatter.zuluFormatter)

@@ -39,7 +39,7 @@ public struct CurrencyFormatter {
 
             if usePrefix {
                 $0.positivePrefix = $0.plusSign + $0.currencySymbol
-                $0.negativePrefix = $0.negativePrefix + ""
+                $0.negativePrefix += ""
             }
         }
 
@@ -80,7 +80,8 @@ public extension CurrencyFormatter {
     private func getAdjustedForDefinedInterval(value: Double?) -> Double {
         if let minValue = formatter.minimum?.doubleValue, value ?? 0 < minValue {
             return minValue
-        } else if let maxValue = formatter.maximum?.doubleValue, value ?? 0 > maxValue {
+        }
+        if let maxValue = formatter.maximum?.doubleValue, value ?? 0 > maxValue {
             return maxValue
         }
         return value ?? 0

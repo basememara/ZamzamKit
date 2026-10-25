@@ -40,7 +40,7 @@ import Foundation.NSDate
 ///     value.append("o")
 ///     sendToServer() // Fires after 5 seconds
 ///
-public final actor Limiter {
+public actor Limiter {
     public enum Policy: Sendable {
         case throttle
         case debounce

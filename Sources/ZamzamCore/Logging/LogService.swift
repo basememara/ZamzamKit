@@ -72,7 +72,7 @@ public extension LogService {
     ) -> String {
         var output = "\(URL(fileURLWithPath: file, isDirectory: false).deletingPathExtension().lastPathComponent).\(function):\(line) - \(message)"
 
-        if let error = error {
+        if let error {
             output += " | Error: \(error)"
         }
 
@@ -114,6 +114,6 @@ public enum LogAPI {
         case error
 
         /// Disables a log service when used as minimum level
-        case none
+        case none // swiftlint:disable:this discouraged_none_name
     }
 }

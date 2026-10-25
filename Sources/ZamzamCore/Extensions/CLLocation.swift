@@ -50,9 +50,11 @@ public extension CLLocation {
         public var description: String {
             if let l = locality, let c = (Locale.current.language.languageCode?.identifier == "en" ? countryCode : country) {
                 return "\(l), \(c)"
-            } else if let l = locality {
+            }
+            if let l = locality {
                 return "\(l)"
-            } else if let c = country {
+            }
+            if let c = country {
                 return "\(c)"
             }
 

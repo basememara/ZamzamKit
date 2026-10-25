@@ -60,7 +60,7 @@ public extension LogManager {
         completion: (@Sendable () -> Void)?
     ) {
         defer {
-            if let completion = completion {
+            if let completion {
                 DispatchQueue.main.async { completion() }
             }
         }

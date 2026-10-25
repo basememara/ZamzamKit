@@ -6,8 +6,8 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
-import UserNotifications
 import CoreLocation
+import UserNotifications
 import ZamzamCore
 
 public extension UNUserNotificationCenter {
@@ -320,7 +320,6 @@ public extension UNUserNotificationCenter {
 #endif
 
 private extension UNUserNotificationCenter {
-    // swiftlint:disable:next function_parameter_count
     static func content(
         body: String,
         title: String?,

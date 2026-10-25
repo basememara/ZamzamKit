@@ -47,3 +47,5 @@ public func ?= <T>(left: inout T?, right: T?) {
     guard let value = right else { return }
     left = value
 }
+
+// swiftlint:enable static_operator

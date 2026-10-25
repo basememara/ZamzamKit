@@ -6,8 +6,8 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-import Foundation.NSJSONSerialization
 import Foundation.NSData
+import Foundation.NSJSONSerialization
 import Foundation.NSURLRequest
 
 public extension URLRequest {
@@ -63,7 +63,7 @@ public extension URLRequest {
         self.httpMethod = method.rawValue
 
         // Parameters become serialized into body for all other HTTP methods
-        if let parameters = parameters, !parameters.isEmpty, doesSupportBody {
+        if let parameters, !parameters.isEmpty, doesSupportBody {
             self.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
         }
 
@@ -93,7 +93,7 @@ public extension URLRequest {
 
         self.httpMethod = method.rawValue
 
-        if let data = data, method != .get {
+        if let data, method != .get {
             self.httpBody = data
         }
 

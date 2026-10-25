@@ -34,7 +34,7 @@ public extension FileManager {
         guard var directoryUrls = try? contentsOfDirectory(at: root, includingPropertiesForKeys: nil) else { return [] }
 
         // Filter the directory contents if applicable
-        if let filter = filter {
+        if let filter {
             directoryUrls = directoryUrls.filter(filter)
         }
 
@@ -60,6 +60,6 @@ public extension FileManager {
     ///   - filter: Specify filter to apply.
     /// - Returns: List of file system paths from document directory.
     func paths(from directory: FileManager.SearchPathDirectory = .documentDirectory, filter: ((URL) -> Bool)? = nil) -> [String] {
-        urls(from: directory, filter: filter).map { $0.path }
+        urls(from: directory, filter: filter).map(\.path)
     }
 }

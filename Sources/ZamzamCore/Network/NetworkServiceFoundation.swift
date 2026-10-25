@@ -55,14 +55,12 @@ public extension NetworkServiceFoundation {
             throw NetworkError(request: request, data: data, headers: headers, statusCode: httpResponse.statusCode)
         }
 
-        let networkResponse = NetworkResponse(
+        return NetworkResponse(
             data: data,
             headers: headers,
             statusCode: httpResponse.statusCode,
             request: request,
             response: response
         )
-
-        return networkResponse
     }
 }

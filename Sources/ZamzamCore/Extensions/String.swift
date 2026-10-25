@@ -282,7 +282,7 @@ public extension Optional where Wrapped == String {
     var isNilOrEmpty: Bool { self?.isEmpty ?? true }
 
     /// A Boolean value indicating whether a string is `nil` or has no characters or blanks.
-    var isNilOrBlank: Bool { isNilOrEmpty || self?.allSatisfy { $0.isWhitespace } ?? true }
+    var isNilOrBlank: Bool { isNilOrEmpty || self?.allSatisfy(\.isWhitespace) ?? true }
 }
 
 public extension LosslessStringConvertible {

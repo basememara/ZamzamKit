@@ -80,16 +80,16 @@ extension DictionaryTests {
         #expect(json.contains("\"name\":\"Sue\""))
         #expect(json.contains("\"pets\":[\""))
 
-        #expect(dictionary["id"] as? Int != nil)
+        #expect(dictionary["id"] is Int)
         #expect(dictionary["id"] as? Int == expected["id"] as? Int)
 
-        #expect(dictionary["name"] as? String != nil)
+        #expect(dictionary["name"] is String)
         #expect(dictionary["name"] as? String == expected["name"] as? String)
 
-        #expect(dictionary["pets"] as? [String] != nil)
+        #expect(dictionary["pets"] is [String])
         #expect(dictionary["pets"] as? [String] == expected["pets"] as? [String])
 
-        #expect(((dictionary["friends"] as? [[String: Any]])?.first)?["name"] as? String != nil)
+        #expect(((dictionary["friends"] as? [[String: Any]])?.first)?["name"] is String)
         #expect(((dictionary["friends"] as? [[String: Any]])?.first)?["name"] as? String == ((expected["friends"] as? [[String: Any]])?.first)?["name"] as? String)
     }
 }

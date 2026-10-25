@@ -6,8 +6,8 @@
 //  Copyright © 2021 Zamzam Inc. All rights reserved.
 //
 
-import Foundation.NSURLRequest
 import Foundation.NSError
+import Foundation.NSURLRequest
 
 /// The server error with included details from the network request.
 public struct NetworkError: Error, Sendable {

@@ -20,7 +20,7 @@ import UIKit.UIDevice
 /// Log destination for sending over HTTP.
 ///
 /// `@unchecked Sendable`: the lifecycle observers are written once in `init` and only removed in `deinit`.
-final public class LogServiceHTTP: @unchecked Sendable {
+public final class LogServiceHTTP: @unchecked Sendable {
     private let urlRequest: URLRequest
     private let maxEntriesInBuffer: Int
     private let minFlushLevel: LogAPI.Level

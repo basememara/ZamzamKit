@@ -15,7 +15,7 @@ struct LoggingTests {}
 
 extension LoggingTests {
     @Test(.timeLimit(.minutes(1)))
-    func entriesAreWritten() async {
+    func entriesAreWritten() async throws {
         // Given
         let logService = LogTestService(minLevel: .verbose)
         let log = LogManager(services: [logService])
@@ -40,12 +40,11 @@ extension LoggingTests {
         #expect(logService.entries[.info] == ["\(LogAPI.Level.info) test"])
         #expect(logService.entries[.warning] == ["\(LogAPI.Level.warning) test"])
         #expect(logService.entries[.error] == ["\(LogAPI.Level.error) test"])
-        #expect(logService.entries[.none] == [])
+        #expect(try #require(logService.entries[.none]).isEmpty)
     }
 }
 
 extension LoggingTests {
-    // swiftlint:disable:next function_body_length
     @Test
     func minLevelsObeyed() {
         // Given

@@ -40,7 +40,7 @@ public struct LogServiceDataDog: LogService {
                 data: nil,
                 headers: ["DD-API-KEY": apiKey]
             ),
-            bufferEncode: { "[\($0.map(\.payload).joined(separator: ","))]".data(using: .utf8) },
+            bufferEncode: { Data("[\($0.map(\.payload).joined(separator: ","))]".utf8) },
             maxEntriesInBuffer: maxEntriesInBuffer,
             minFlushLevel: minFlushLevel,
             isDebug: isDebug,
@@ -84,7 +84,7 @@ public extension LogServiceDataDog {
             ]
         ]
 
-        if let error = error {
+        if let error {
             parameters["error_description"] = String(describing: error)
         }
 
