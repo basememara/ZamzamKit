@@ -78,7 +78,7 @@ public extension NSColor {
     /// Unified with iOS color name.
     static let systemBackground = NSColor.windowBackgroundColor
 
-    /// The color to use for content layered on a grouped background, such as a row in a grouped form.
+    /// The color to use for content layered on top of secondary backgrounds.
     ///
     /// Unified with iOS color name.
     static let tertiarySystemBackground = NSColor.controlBackgroundColor
