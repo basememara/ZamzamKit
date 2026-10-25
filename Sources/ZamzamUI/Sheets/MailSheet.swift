@@ -93,7 +93,7 @@ public struct MailItem: Identifiable, Equatable {
         self.attachments = attachments
     }
 
-    @available(*, deprecated, renamed: "init(emails:subject:body:isHTML:attachments:)")
+    @available(*, deprecated, message: "Pass attachments: [attachment] instead")
     public init(
         emails: String...,
         subject: String? = nil,
