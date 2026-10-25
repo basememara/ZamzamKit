@@ -48,7 +48,6 @@ opt_in_rules:
   - operator_usage_whitespace
   - optional_enum_case_matching
   - pattern_matching_keywords
-  - period_spacing
   - prefer_condition_list
   - prefer_key_path
   - prefer_self_type_over_type_of_self
