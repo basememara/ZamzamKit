@@ -76,7 +76,7 @@ public extension URL {
             .filter { $0.name.caseInsensitiveCompare(name) != .orderedSame } ?? []
 
         // Skip if nil value
-        if let value = value {
+        if let value {
             urlComponents.queryItems?.append(URLQueryItem(name: name, value: "\(value)"))
         }
 

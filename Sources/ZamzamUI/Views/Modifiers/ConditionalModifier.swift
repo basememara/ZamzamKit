@@ -81,7 +81,7 @@ public extension View {
         `let` item: Item?,
         then content: (Self, Item) -> some View
     ) -> some View {
-        if let item = item {
+        if let item {
             content(self, item)
         } else {
             self
@@ -107,7 +107,7 @@ public extension View {
         then trueContent: (Self, Item) -> some View,
         else falseContent: (Self) -> some View
     ) -> some View {
-        if let item = item {
+        if let item {
             trueContent(self, item)
         } else {
             falseContent(self)

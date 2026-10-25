@@ -46,7 +46,7 @@ public extension Date {
             second: second
         )
 
-        if let timeZone = timeZone {
+        if let timeZone {
             calendar.timeZone = timeZone
         }
 

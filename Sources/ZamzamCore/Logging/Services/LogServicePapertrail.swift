@@ -82,7 +82,7 @@ public extension LogServicePapertrail {
             ]
         ]
 
-        if let error = error {
+        if let error {
             parameters["error_description"] = String(describing: error)
         }
 

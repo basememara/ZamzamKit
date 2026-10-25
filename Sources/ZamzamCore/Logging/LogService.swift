@@ -72,7 +72,7 @@ public extension LogService {
     ) -> String {
         var output = "\(URL(fileURLWithPath: file, isDirectory: false).deletingPathExtension().lastPathComponent).\(function):\(line) - \(message)"
 
-        if let error = error {
+        if let error {
             output += " | Error: \(error)"
         }
 

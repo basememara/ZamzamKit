@@ -30,11 +30,11 @@ public extension Calendar {
     init(identifier: Identifier, timeZone: TimeZone?, locale: Locale?) {
         self.init(identifier: identifier)
 
-        if let timeZone = timeZone {
+        if let timeZone {
             self.timeZone = timeZone
         }
 
-        if let locale = locale {
+        if let locale {
             self.locale = locale
         }
     }

@@ -84,7 +84,7 @@ public extension LogServiceDataDog {
             ]
         ]
 
-        if let error = error {
+        if let error {
             parameters["error_description"] = String(describing: error)
         }
 

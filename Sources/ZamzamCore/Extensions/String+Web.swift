@@ -74,7 +74,7 @@ public extension String {
         //     decode("&lt;")     --> "<"
         //     decode("&foo;")    --> nil
         func decode(_ entity: String) -> Character? {
-            return entity.hasPrefix("&#x") || entity.hasPrefix("&#X")
+            entity.hasPrefix("&#x") || entity.hasPrefix("&#X")
             ? decodeNumeric(entity.dropFirst(3).string, base: 16)
                 : entity.hasPrefix("&#")
             ? decodeNumeric(entity.dropFirst(2).string, base: 10)

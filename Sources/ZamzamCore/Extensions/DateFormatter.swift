@@ -65,7 +65,7 @@ public extension DateFormatter {
             self.timeZone = timeZone
         }
 
-        if let calendar = calendar {
+        if let calendar {
             self.calendar = calendar
         }
 
@@ -95,7 +95,7 @@ public extension DateFormatter {
             self.timeZone = timeZone
         }
 
-        if let calendar = calendar {
+        if let calendar {
             self.calendar = calendar
         }
 
@@ -128,7 +128,7 @@ public extension DateFormatter {
             self.timeZone = timeZone
         }
 
-        if let calendar = calendar {
+        if let calendar {
             self.calendar = calendar
         }
 

@@ -174,7 +174,7 @@ extension URL: UserDefaultsRepresentable {
 
 extension Array: UserDefaultsRepresentable where Element: UserDefaultsRepresentable {
     public var rawDefaultsValue: [Element.RawDefaultsValue] {
-        map { $0.rawDefaultsValue }
+        map(\.rawDefaultsValue)
     }
 
     public init?(rawDefaultsValue: [Element.RawDefaultsValue]) {
@@ -184,7 +184,7 @@ extension Array: UserDefaultsRepresentable where Element: UserDefaultsRepresenta
 
 extension Set: UserDefaultsRepresentable where Element: UserDefaultsRepresentable {
     public var rawDefaultsValue: [Element.RawDefaultsValue] {
-        map { $0.rawDefaultsValue }
+        map(\.rawDefaultsValue)
     }
 
     public init?(rawDefaultsValue: [Element.RawDefaultsValue]) {

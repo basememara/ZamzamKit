@@ -72,7 +72,7 @@ public extension ViewError {
 public extension Alert {
     /// Creates an alert from the view error.
     init(from error: ViewError) {
-        let titleText: Text = Text(error.title)
+        let titleText = Text(error.title)
 
         let messageText: Text? = {
             guard let message = error.message else { return nil }

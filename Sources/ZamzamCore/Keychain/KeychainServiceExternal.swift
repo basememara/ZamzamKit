@@ -380,7 +380,7 @@ private extension KeychainServiceExternal {
 
         /// Returns the key with currently set prefix.
         func keyWithPrefix(_ key: String) -> String {
-            return "\(keyPrefix)\(key)"
+            "\(keyPrefix)\(key)"
         }
 
         func addAccessGroupWhenPresent(_ items: [String: Any]) -> [String: Any] {
@@ -418,44 +418,44 @@ private extension KeychainServiceExternal {
     /// Constants used by the library
     struct KeychainSwiftConstants {
         /// Specifies a Keychain access group. Used for sharing Keychain items between apps.
-        static var accessGroup: String { return toString(kSecAttrAccessGroup) }
+        static var accessGroup: String { toString(kSecAttrAccessGroup) }
 
         /**
          
          A value that indicates when your app needs access to the data in a keychain item. The default value is AccessibleWhenUnlocked. For a list of possible values, see KeychainSwiftAccessOptions.
          
          */
-        static var accessible: String { return toString(kSecAttrAccessible) }
+        static var accessible: String { toString(kSecAttrAccessible) }
 
         /// Used for specifying a String key when setting/getting a Keychain value.
-        static var attrAccount: String { return toString(kSecAttrAccount) }
+        static var attrAccount: String { toString(kSecAttrAccount) }
 
         /// Used for specifying synchronization of keychain items between devices.
-        static var attrSynchronizable: String { return toString(kSecAttrSynchronizable) }
+        static var attrSynchronizable: String { toString(kSecAttrSynchronizable) }
 
         /// An item class key used to construct a Keychain search dictionary.
-        static var klass: String { return toString(kSecClass) }
+        static var klass: String { toString(kSecClass) }
 
         /// Specifies the number of values returned from the keychain. The library only supports single values.
-        static var matchLimit: String { return toString(kSecMatchLimit) }
+        static var matchLimit: String { toString(kSecMatchLimit) }
 
         /// A return data type used to get the data from the Keychain.
-        static var returnData: String { return toString(kSecReturnData) }
+        static var returnData: String { toString(kSecReturnData) }
 
         /// Used for specifying a value when setting a Keychain value.
-        static var valueData: String { return toString(kSecValueData) }
+        static var valueData: String { toString(kSecValueData) }
 
         /// Used for returning a reference to the data from the keychain
-        static var returnReference: String { return toString(kSecReturnPersistentRef) }
+        static var returnReference: String { toString(kSecReturnPersistentRef) }
 
         /// A key whose value is a Boolean indicating whether or not to return item attributes
-        static var returnAttributes: String { return toString(kSecReturnAttributes) }
+        static var returnAttributes: String { toString(kSecReturnAttributes) }
 
         /// A value that corresponds to matching an unlimited number of items
-        static var secMatchLimitAll: String { return toString(kSecMatchLimitAll) }
+        static var secMatchLimitAll: String { toString(kSecMatchLimitAll) }
 
         static func toString(_ value: CFString) -> String {
-            return value as String
+            value as String
         }
     }
 
@@ -519,7 +519,7 @@ private extension KeychainServiceExternal {
         case accessibleWhenPasscodeSetThisDeviceOnly
 
         static var defaultOption: KeychainSwiftAccessOptions {
-            return .accessibleWhenUnlocked
+            .accessibleWhenUnlocked
         }
 
         var value: String {
@@ -542,7 +542,7 @@ private extension KeychainServiceExternal {
         }
 
         func toString(_ value: CFString) -> String {
-            return KeychainSwiftConstants.toString(value)
+            KeychainSwiftConstants.toString(value)
         }
     }
 }

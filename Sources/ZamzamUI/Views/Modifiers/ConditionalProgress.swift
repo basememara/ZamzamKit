@@ -18,7 +18,7 @@ private struct ConditionalProgress: ViewModifier {
             .overlay(
                 Group {
                     if condition {
-                        if let tint = tint {
+                        if let tint {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: tint))
                         } else {
