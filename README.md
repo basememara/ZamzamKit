@@ -827,8 +827,14 @@ extension KeychainAPI.Key {
 <details>
 <summary>Logger</summary>
 
-> Create loggers that conform to `LogService` and add to `LogManager` (console and `os_log` are included):
+> Create loggers that conform to `LogService` and add to `LogManager` (console, `os_log` and a file are included):
 ```swift
+let file = LogServiceFile(
+    minLevel: .info,
+    subsystem: "MyApp",
+    fileURL: URL.cachesDirectory.appending(path: "app.log")
+)
+
 let log = LogManager(
     services: [
         LogServiceConsole(minLevel: .debug),
@@ -837,12 +843,15 @@ let log = LogManager(
             subsystem: "io.zamzam.Basem-Emara",
             category: "Application"
         ),
+        file,
         MyCustomLogger()
     ]
 )
 
 log.error("There was an error.")
 ```
+
+> When the file reaches 2 MB on watchOS, or 5 MB elsewhere, it becomes `app.log.1` and a new file starts, keeping up to 10 archives. `file.contents()` returns the newest archive and the current file, oldest entry first, such as to attach to a support email.
 </details>
 
 <details>

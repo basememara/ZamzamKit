@@ -70,7 +70,7 @@ public extension LogService {
         _ error: Error?,
         _ context: [String: any CustomStringConvertible & Sendable]
     ) -> String {
-        var output = "\(URL(fileURLWithPath: file).deletingPathExtension().lastPathComponent).\(function):\(line) - \(message)"
+        var output = "\(URL(fileURLWithPath: file, isDirectory: false).deletingPathExtension().lastPathComponent).\(function):\(line) - \(message)"
 
         if let error = error {
             output += " | Error: \(error)"
@@ -81,6 +81,25 @@ public extension LogService {
         }
 
         return output
+    }
+}
+
+extension LogAPI.Level {
+    func prefix(time: String, subsystem: String) -> String? {
+        switch self {
+        case .verbose:
+            "💜 \(time) VERBOSE [\(subsystem)]"
+        case .debug:
+            "💚 \(time) DEBUG [\(subsystem)]"
+        case .info:
+            "💙 \(time) INFO [\(subsystem)]"
+        case .warning:
+            "💛 \(time) WARNING [\(subsystem)]"
+        case .error:
+            "❤️ \(time) ERROR [\(subsystem)]"
+        case .none:
+            nil
+        }
     }
 }
 
