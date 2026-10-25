@@ -212,7 +212,6 @@ extension AppMigrationTests {
 
 // MARK: - Helpers
 
-
 private extension AppMigration {
     static func makeMigration(forVersion version: String) throws -> AppMigration {
         let migration = AppMigration(

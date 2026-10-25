@@ -6,9 +6,9 @@
 //  Copyright © 2016 Zamzam Inc. All rights reserved.
 //
 
+import CoreLocation
 import Foundation
 import Testing
-import CoreLocation
 import ZamzamCore
 
 struct CLLocationTests {}

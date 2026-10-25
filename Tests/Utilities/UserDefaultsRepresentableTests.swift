@@ -6,9 +6,9 @@
 //  Copyright © 2021 Zamzam Inc. All rights reserved.
 //
 
+import Combine
 import Foundation
 import Testing
-import Combine
 @testable import ZamzamCore
 
 // Serialized because `TestSettings` binds its property wrappers to one shared defaults

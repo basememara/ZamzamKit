@@ -6,8 +6,8 @@
 //  Copyright © 2020 Zamzam Inc. All rights reserved.
 //
 
-import Foundation.NSJSONSerialization
 import Foundation.NSData
+import Foundation.NSJSONSerialization
 import Foundation.NSURLRequest
 
 public extension URLRequest {

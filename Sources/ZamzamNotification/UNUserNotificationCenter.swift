@@ -6,8 +6,8 @@
 //  Copyright © 2017 Zamzam Inc. All rights reserved.
 //
 
-import UserNotifications
 import CoreLocation
+import UserNotifications
 import ZamzamCore
 
 public extension UNUserNotificationCenter {
