@@ -79,6 +79,7 @@ force_unwrapping: error
 disabled_rules:
   - identifier_name
   - multiple_closures_with_trailing_closure
+  - optional_data_string_conversion
   - todo
   - type_name
 
