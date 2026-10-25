@@ -32,21 +32,7 @@ public extension LogServiceConsole {
     ) {
         let time = Date.now.formatted(.dateTime.hour(.twoDigits(amPM: .omitted)).minute().second().secondFraction(.fractional(3)))
 
-        let prefix: String
-        switch level {
-        case .verbose:
-            prefix = "💜 \(time) VERBOSE [\(subsystem)]"
-        case .debug:
-            prefix = "💚 \(time) DEBUG [\(subsystem)]"
-        case .info:
-            prefix = "💙 \(time) INFO [\(subsystem)]"
-        case .warning:
-            prefix = "💛 \(time) WARNING [\(subsystem)]"
-        case .error:
-            prefix = "❤️ \(time) ERROR [\(subsystem)]"
-        case .none:
-            return
-        }
+        guard let prefix = level.prefix(time: time, subsystem: subsystem) else { return }
 
         print("\(prefix) \(format(message, file, function, line, error, context))")
     }
