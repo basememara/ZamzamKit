@@ -547,5 +547,4 @@ private extension KeychainServiceExternal {
     }
 }
 
-// swiftlint:enable multiline_parameters_brackets
-// swiftlint:enable multiline_parameters
+// swiftlint:enable multiline_parameters_brackets multiline_parameters

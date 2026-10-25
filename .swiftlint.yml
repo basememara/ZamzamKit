@@ -1,6 +1,3 @@
-analyzer_rules:
-  - unused_import
-
 included:
   - Sources
   - Tests
@@ -63,7 +60,6 @@ opt_in_rules:
   - sorted_imports
   - static_operator
   - superfluous_else
-  - switch_case_on_newline
   - toggle_bool
   - unavailable_function
   - unhandled_throwing_task
