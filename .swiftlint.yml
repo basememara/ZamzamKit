@@ -53,7 +53,6 @@ opt_in_rules:
   - prefer_self_type_over_type_of_self
   - prefer_zero_over_explicit_init
   - redundant_final
-  - redundant_nil_coalescing
   - redundant_self
   - redundant_type_annotation
   - reduce_into
