@@ -129,7 +129,7 @@ extension StringTests {
         #expect("Abcdef123456".separated(every: 1, with: "-") == "A-b-c-d-e-f-1-2-3-4-5-6")
         #expect("Abcdef123456".separated(every: 12, with: "-") == "Abcdef123456")
         #expect("Abcdef123456".separated(every: 11, with: "-") == "Abcdef12345-6")
-        #expect("".separated(every: 6, with: ":") == "")
+        #expect("".separated(every: 6, with: ":").isEmpty)
         #expect("112312451".separated(every: 2, with: ":") == "11:23:12:45:1")
         #expect("112312451".separated(every: 3, with: ":") == "112:312:451")
         #expect("112312451".separated(every: 4, with: ":") == "1123:1245:1")

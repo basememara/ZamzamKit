@@ -114,6 +114,6 @@ public enum LogAPI {
         case error
 
         /// Disables a log service when used as minimum level
-        case none
+        case none // swiftlint:disable:this discouraged_none_name
     }
 }

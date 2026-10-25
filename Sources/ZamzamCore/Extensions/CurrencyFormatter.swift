@@ -39,7 +39,7 @@ public struct CurrencyFormatter {
 
             if usePrefix {
                 $0.positivePrefix = $0.plusSign + $0.currencySymbol
-                $0.negativePrefix = $0.negativePrefix + ""
+                $0.negativePrefix += ""
             }
         }
 

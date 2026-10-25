@@ -585,5 +585,3 @@ private extension NetworkTests {
         let json: [String: AnyDecodable]?
     }
 }
-
-// swiftlint:disable:this file_length

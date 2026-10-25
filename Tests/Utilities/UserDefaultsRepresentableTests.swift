@@ -123,7 +123,7 @@ extension UserDefaultsRepresentableTests {
         let defaultValue = settings.data
         #expect(defaultValue == nil)
 
-        let newValue = "text data".data(using: .utf8)
+        let newValue = Data("text data".utf8)
         settings.data = newValue
         #expect(UserDefaults.test.data(forKey: "data") == newValue)
 
@@ -134,7 +134,7 @@ extension UserDefaultsRepresentableTests {
     @Test
     func integrationArray() {
         let defaultValue = settings.list
-        #expect(defaultValue == [])
+        #expect(defaultValue.isEmpty)
         #expect(UserDefaults.test.array(forKey: "list") as? [Double] == defaultValue)
 
         let newValue = [6.66, 7.77, 8.88]
@@ -155,7 +155,7 @@ extension UserDefaultsRepresentableTests {
     @Test
     func integrationDictionary() {
         let defaultValue = settings.pairs
-        #expect(defaultValue == [:])
+        #expect(defaultValue.isEmpty)
         #expect(UserDefaults.test.dictionary(forKey: "pairs") as? [String: Int] == defaultValue)
 
         let newValue = ["six": 6, "seventy-seven": 77, "eight-hundred eighty eight": 888]
@@ -338,15 +338,15 @@ extension UserDefaultsRepresentableTests {
     }
 
     @Test
-    func wrappedValueData() throws {
+    func wrappedValueData() {
         let key = "key_\(#function)"
-        let defaultValue = try #require("default-data".data(using: .utf8))
+        let defaultValue = Data("default-data".utf8)
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
         #expect(Data.object(forKey: key, from: .test) == defaultValue)
         #expect(model.wrappedValue == defaultValue)
 
-        let newValue = try #require("new-data".data(using: .utf8))
+        let newValue = Data("new-data".utf8)
         model.wrappedValue = newValue
         #expect(Data.object(forKey: key, from: .test) == newValue)
         #expect(model.wrappedValue == newValue)
@@ -385,8 +385,10 @@ extension UserDefaultsRepresentableTests {
     @Test
     func wrappedValueDictionary() {
         let key = "key_\(#function)"
-        let defaultValue = ["key1": 42.0,
-                            "key2": 4.2]
+        let defaultValue = [
+            "key1": 42.0,
+            "key2": 4.2
+        ]
         var model = Defaults(key, defaultValue: defaultValue, from: .test)
 
         #expect(Dictionary.object(forKey: key, from: .test) == defaultValue)
@@ -639,10 +641,6 @@ enum TestVegetable: Int, UserDefaultsRepresentable {
 
 struct TestCustomRepresented: RawRepresentable, UserDefaultsRepresentable {
     var rawValue: [String: TestFruit]
-
-    init(rawValue: [String: TestFruit]) {
-        self.rawValue = rawValue
-    }
 }
 
 struct CustomType {

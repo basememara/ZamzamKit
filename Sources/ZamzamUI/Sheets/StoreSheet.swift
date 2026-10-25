@@ -45,8 +45,7 @@ public extension View {
                     .compactMap({ $0 as? UIWindowScene })
                     .first?
                     .windows
-                    .filter(\.isKeyWindow)
-                    .first?
+                    .first(where: \.isKeyWindow)?
                     .rootViewController,
                   loaded
             else {

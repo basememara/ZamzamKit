@@ -40,12 +40,11 @@ extension LoggingTests {
         #expect(logService.entries[.info] == ["\(LogAPI.Level.info) test"])
         #expect(logService.entries[.warning] == ["\(LogAPI.Level.warning) test"])
         #expect(logService.entries[.error] == ["\(LogAPI.Level.error) test"])
-        #expect(logService.entries[.none] == [])
+        #expect(logService.entries[.none]?.isEmpty == true)
     }
 }
 
 extension LoggingTests {
-    // swiftlint:disable:next function_body_length
     @Test
     func minLevelsObeyed() {
         // Given

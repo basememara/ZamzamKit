@@ -416,7 +416,7 @@ private extension KeychainServiceExternal {
     // ----------------------------
 
     /// Constants used by the library
-    struct KeychainSwiftConstants {
+    enum KeychainSwiftConstants {
         /// Specifies a Keychain access group. Used for sharing Keychain items between apps.
         static var accessGroup: String { toString(kSecAttrAccessGroup) }
 
@@ -546,3 +546,6 @@ private extension KeychainServiceExternal {
         }
     }
 }
+
+// swiftlint:enable multiline_parameters_brackets
+// swiftlint:enable multiline_parameters

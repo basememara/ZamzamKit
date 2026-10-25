@@ -320,7 +320,6 @@ public extension UNUserNotificationCenter {
 #endif
 
 private extension UNUserNotificationCenter {
-    // swiftlint:disable:next function_parameter_count
     static func content(
         body: String,
         title: String?,
