@@ -173,6 +173,25 @@ public extension LocationManager {
     }
 }
 
+#if os(iOS)
+public extension LocationManager {
+    /// The device edge headings are measured from, portrait by default; set it to the edge the interface is
+    /// upright on so a compass agrees with a rotated screen.
+    var headingOrientation: CLDeviceOrientation {
+        get { manager.headingOrientation }
+        set { manager.headingOrientation = newValue }
+    }
+
+    /// The view headings are measured from, such as a compass dial, so they follow its rotation and its display;
+    /// `nil` measures from the device. Takes over from `headingOrientation`.
+    @available(iOS 27, *)
+    var headingBody: (any CLBodyIdentifiable)? {
+        get { manager.headingBody }
+        set { manager.headingBody = newValue }
+    }
+}
+#endif
+
 private extension LocationManager {
     /// Stops the stream's updates, unless a newer stream has taken over since it ended.
     func stopUpdatingHeading(_ stream: Int) {
