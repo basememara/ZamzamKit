@@ -146,6 +146,30 @@ public extension LocationManager {
     ///
     /// Ends at once on a device with no compass. Starting a new stream ends the previous one.
     func headings(allowCalibration: Bool = false) -> AsyncStream<Result<Heading, CLError>> {
+        headings(allowCalibration: allowCalibration) {}
+    }
+}
+
+#if os(iOS)
+public extension LocationManager {
+    /// The device edge headings are measured from, portrait by default; set it to the edge the interface is
+    /// upright on so a compass agrees with a rotated screen.
+    var headingOrientation: CLDeviceOrientation {
+        get { manager.headingOrientation }
+        set { manager.headingOrientation = newValue }
+    }
+
+    /// Headings measured from `body`, such as a compass dial, so they follow its rotation and its display
+    /// rather than `headingOrientation`.
+    @available(iOS 27, *)
+    func headings(measuredFrom body: any CLBodyIdentifiable, allowCalibration: Bool = false) -> AsyncStream<Result<Heading, CLError>> {
+        headings(allowCalibration: allowCalibration) { manager.headingBody = body }
+    }
+}
+#endif
+
+private extension LocationManager {
+    func headings(allowCalibration: Bool, measure: () -> Void) -> AsyncStream<Result<Heading, CLError>> {
         AsyncStream(bufferingPolicy: .bufferingNewest(1)) { continuation in
             headingContinuation?.finish()
 
@@ -159,6 +183,8 @@ public extension LocationManager {
             let stream = headingStream
             headingContinuation = continuation
             shouldDisplayHeadingCalibration = allowCalibration
+            measureFromDevice()
+            measure()
             manager.startUpdatingHeading()
 
             // True north is valid only while this manager also has location updates running
@@ -171,28 +197,7 @@ public extension LocationManager {
             }
         }
     }
-}
 
-#if os(iOS)
-public extension LocationManager {
-    /// The device edge headings are measured from, portrait by default; set it to the edge the interface is
-    /// upright on so a compass agrees with a rotated screen.
-    var headingOrientation: CLDeviceOrientation {
-        get { manager.headingOrientation }
-        set { manager.headingOrientation = newValue }
-    }
-
-    /// The view headings are measured from, such as a compass dial, so they follow its rotation and its display;
-    /// `nil` measures from the device. Takes over from `headingOrientation`.
-    @available(iOS 27, *)
-    var headingBody: (any CLBodyIdentifiable)? {
-        get { manager.headingBody }
-        set { manager.headingBody = newValue }
-    }
-}
-#endif
-
-private extension LocationManager {
     /// Stops the stream's updates, unless a newer stream has taken over since it ended.
     func stopUpdatingHeading(_ stream: Int) {
         guard stream == headingStream else { return }
@@ -201,6 +206,15 @@ private extension LocationManager {
         shouldDisplayHeadingCalibration = false
         manager.stopUpdatingHeading()
         manager.stopUpdatingLocation()
+        measureFromDevice()
+    }
+
+    func measureFromDevice() {
+        #if os(iOS)
+        if #available(iOS 27, *) {
+            manager.headingBody = nil
+        }
+        #endif
     }
 }
 #endif
