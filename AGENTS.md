@@ -25,7 +25,7 @@ Tests live flat in `Tests/` (the `ZamzamKitTests` target has `path: "Tests"`; **
 
 Use `try #require` before comparing an optional, and hoist a `try` out of a comparison: `#expect(a == try #require(b))` does not parse. `#expect` has no tolerance form, so write `#expect(abs(a - (b)) <= tolerance)`. Bug fixes land with a failing test first.
 
-Wrap a known environmental failure in `withKnownIssue`, so a real regression still turns the run red; none is wrapped today. `CurrencyFormatterTests.sA` pins macOS's Saudi riyal symbol: an iOS 27 simulator renders the new riyal sign (U+20C1) and fails it, so the suite's gate is My Mac.
+Wrap a known environmental failure in `withKnownIssue`, so a real regression still turns the run red; none is wrapped today. `CurrencyFormatterTests.sA` pins the new Saudi riyal sign (U+20C1), which macOS renders since 27.2 and iOS since 27; a Mac on an earlier macOS still renders `ر.س.` and fails it. The suite's gate is My Mac on the pinned Xcode.
 
 SwiftLint (`.swiftlint.yml`, the rules PrayWatch and PrayKit share) has no build phase in a package, so run `swiftlint` from the package root before a push. `swiftlint --fix` rewrites from the source text alone, so a fix can compile and still change behavior (a protocol's `@escaping` stripped, a double optional's `?? nil` removed): run it one rule at a time with `--only-rule`, read every hunk, and make declaration changes (access, `final`, attributes, initializers) by hand.
 
