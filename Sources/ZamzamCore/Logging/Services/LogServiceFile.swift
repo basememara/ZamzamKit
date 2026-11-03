@@ -10,8 +10,8 @@ import Foundation
 
 /// Appends entries to a file on the device, such as a log to attach to a support request.
 ///
-/// Once the file passes 2 MB on watchOS, or 5 MB elsewhere, it becomes the newest of up to 10 numbered
-/// archives and a new file starts; the oldest archive is deleted. A write that fails drops its entry rather
+/// Once the file passes 2 MB on watchOS, or 5 MB elsewhere, it replaces the one archive (`.1`) and a new
+/// file starts, so the log never holds more than twice that. A write that fails drops its entry rather
 /// than the app. Use one service per file.
 public struct LogServiceFile: LogService {
     public let minLevel: LogAPI.Level
@@ -46,7 +46,7 @@ private extension LogServiceFile {
     static let maxFileSize: UInt64 = 5_000_000
     #endif
 
-    static let maxArchives = 10
+    static let maxArchives = 1
 }
 
 public extension LogServiceFile {

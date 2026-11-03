@@ -851,7 +851,7 @@ let log = LogManager(
 log.error("There was an error.")
 ```
 
-> When the file reaches 2 MB on watchOS, or 5 MB elsewhere, it becomes `app.log.1` and a new file starts, keeping up to 10 archives. `file.contents()` returns the newest archive and the current file, oldest entry first, such as to attach to a support email.
+> When the file reaches 2 MB on watchOS, or 5 MB elsewhere, it becomes `app.log.1`, replacing the archive before it, and a new file starts. `file.contents()` returns the archive and the current file, oldest entry first, such as to attach to a support email.
 </details>
 
 <details>
