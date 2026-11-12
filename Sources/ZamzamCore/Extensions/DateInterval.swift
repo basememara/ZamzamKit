@@ -20,10 +20,16 @@ public extension DateInterval {
 
 public extension DateInterval {
     /// Returns dates between the range that are offset.
-    /// - Parameter timeInterval: The time interval to offset the dates by.
+    /// - Parameter timeInterval: The time interval to offset the dates by. One that isn't positive, or is too
+    ///   small for its dates to be counted, gives no dates.
     func stride(by timeInterval: TimeInterval) -> [Date] {
         // https://stackoverflow.com/q/68398429
-        (0...Int(end.timeIntervalSince(start) / timeInterval))
-            .map { start.advanced(by: TimeInterval($0) * timeInterval) }
+        guard timeInterval > 0,
+              let steps = Int(exactly: (end.timeIntervalSince(start) / timeInterval).rounded(.towardZero))
+        else {
+            return []
+        }
+
+        return (0...steps).map { start.advanced(by: TimeInterval($0) * timeInterval) }
     }
 }

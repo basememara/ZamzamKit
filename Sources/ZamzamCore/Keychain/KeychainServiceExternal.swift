@@ -31,7 +31,7 @@ public extension KeychainServiceExternal {
 
     func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool {
         guard let value else { return remove(key) }
-        return keychain.set(value, forKey: key.name)
+        return keychain.set(value, forKey: key.name, withAccess: Self.accessOption)
     }
 }
 
@@ -42,7 +42,7 @@ public extension KeychainServiceExternal {
 
     func set(_ value: Data?, forKey key: KeychainAPI.Key) -> Bool {
         guard let value else { return remove(key) }
-        return keychain.set(value, forKey: key.name)
+        return keychain.set(value, forKey: key.name, withAccess: Self.accessOption)
     }
 }
 

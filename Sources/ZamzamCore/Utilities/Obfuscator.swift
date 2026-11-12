@@ -35,11 +35,12 @@ public extension Obfuscator {
     /// Scoped within the debug macro and commented out so this code does not get compiled in production binaries.
     ///
     /// - Parameter string: The string to obfuscate
-    /// - Returns: The obfuscated string in a byte array
+    /// - Returns: The obfuscated string in a byte array, or the string's own bytes when the salt is empty.
     func conceal(secret string: String) -> [UInt8] {
         let text = [UInt8](string.utf8)
         let cipher = [UInt8](salt.utf8)
         let length = cipher.count
+        guard length > 0 else { return text }
         var encrypted = [UInt8]()
 
         for t in text.enumerated() {
@@ -55,10 +56,11 @@ public extension Obfuscator {
     /// The salt must be the same as the one used to encrypt it in the first place.
     ///
     /// - Parameter bytes: The byte array to reveal.
-    /// - Returns: The original string.
+    /// - Returns: The original string, read from the bytes as they are when the salt is empty.
     func reveal(secret bytes: [UInt8]) -> String? {
         let cipher = [UInt8](salt.utf8)
         let length = cipher.count
+        guard length > 0 else { return String(bytes: bytes, encoding: .utf8) }
         var decrypted = [UInt8]()
 
         for value in bytes.enumerated() {

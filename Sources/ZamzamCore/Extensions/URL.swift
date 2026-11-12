@@ -14,14 +14,17 @@ public extension URL {
     /// Use this constant when you want to indicate that a URL is invalid.
     static let invalidURL = URL(safeString: "https://")
 
-    /// Non-optional initializer with documented fail output.
+    /// Creates a URL from a string literal, for an address that is written in the source.
     ///
     ///     // Instead of: URL(string: "https://apple.com")!
     ///     let url: URL = URL(safeString: "https://apple.com")
     ///
-    init(safeString string: String) {
+    /// Only a literal compiles, so a string that is not a URL is a mistake in the source, and it stops the program
+    /// the first time the line runs. A string made at run time goes through `URL(string:)` or `URLComponents`,
+    /// which return `nil` for one that is not a URL.
+    init(safeString string: StaticString) {
         // https://ericasadun.com/2017/01/06/holy-war-forced-unwrapping-urls/
-        guard let instance = URL(string: string) else {
+        guard let instance = URL(string: "\(string)") else {
             fatalError("Unconstructable URL: \(string)")
         }
 

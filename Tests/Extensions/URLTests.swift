@@ -14,6 +14,14 @@ struct URLTests {}
 
 extension URLTests {
     @Test
+    func safeStringKeepsTheLiteralItIsGiven() {
+        #expect(URL(safeString: "https://apple.com/iphone?ref=1#top").absoluteString == "https://apple.com/iphone?ref=1#top")
+        #expect(URL.invalidURL.absoluteString == "https://")
+    }
+}
+
+extension URLTests {
+    @Test
     func replacingPathExtension() throws {
         let url = URL(fileURLWithPath: "/SomePath/SomeTests.swift")
         let expected = "/SomePath/SomeTests.json"

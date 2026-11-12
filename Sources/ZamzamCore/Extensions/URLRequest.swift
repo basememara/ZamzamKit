@@ -7,7 +7,6 @@
 //
 
 import Foundation.NSData
-import Foundation.NSJSONSerialization
 import Foundation.NSURLRequest
 
 public extension URLRequest {
@@ -39,7 +38,8 @@ public extension URLRequest {
     /// - Parameters:
     ///   - url: The URL of the request.
     ///   - method: The HTTP request method.
-    ///   - parameters: The data sent as the message body of a request.
+    ///   - parameters: The data sent as the message body of a request. A body is JSON, so parameters JSON can't
+    ///     hold, such as a `Date` or a custom type, leave the request without one.
     ///   - headers: A dictionary containing all of the HTTP header fields for a request.
     ///   - timeoutInterval: The timeout interval of the request. If `nil`, the defaults is 10 seconds.
     init(
@@ -70,7 +70,7 @@ public extension URLRequest {
 
         // Parameters become serialized into body for all other HTTP methods
         if let parameters, !parameters.isEmpty, doesSupportBody {
-            self.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
+            self.httpBody = parameters.jsonData()
         }
 
         self.timeoutInterval = timeoutInterval

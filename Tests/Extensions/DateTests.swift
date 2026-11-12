@@ -546,6 +546,16 @@ extension DateTests {
         #expect(dates3[8].timeIntervalSince1970 == 1626386307 + 60 * 8)
         #expect(dates3[9].timeIntervalSince1970 == 1626386307 + 60 * 9)
     }
+
+    @Test
+    func dateIntervalStrideIsEmptyWithoutAStepItCanCount() {
+        let interval = DateInterval(start: Date(timeIntervalSince1970: 1_626_386_307), duration: 125)
+
+        #expect(interval.stride(by: 0).isEmpty)
+        #expect(interval.stride(by: -15).isEmpty)
+        #expect(interval.stride(by: .nan).isEmpty)
+        #expect(interval.stride(by: .leastNonzeroMagnitude).isEmpty)
+    }
 }
 
 // MARK: - Helpers

@@ -21,4 +21,10 @@ extension WebTests {
         let expectedValue = "<strong> 4 < 5 & 3 > 2 .</strong> Price: 12 €.  @"
         #expect(newValue == expectedValue)
     }
+
+    @Test
+    func decodeHTMLKeepsANumberNoCharacterHas() {
+        let value = "&#99999999999; &#xFFFFFFFFF; &#-1; &#64;"
+        #expect(value.htmlDecoded() == "&#99999999999; &#xFFFFFFFFF; &#-1; @")
+    }
 }

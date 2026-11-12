@@ -11,7 +11,7 @@ public extension CaseIterable where Self: Equatable, AllCases: BidirectionalColl
     func previous() -> Self? {
         // https://newbedev.com/how-to-get-next-case-of-enum-i-e-write-a-circulating-method-in-swift-4-2
         let array = Self.allCases
-        guard let currentIndex = array.firstIndex(of: self) else { return nil }
+        guard let currentIndex = array.firstIndex(of: self), currentIndex != array.startIndex else { return nil }
         return array[safe: array.index(before: currentIndex)]
     }
 

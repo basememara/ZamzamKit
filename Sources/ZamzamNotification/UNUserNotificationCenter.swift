@@ -180,6 +180,9 @@ public extension UNUserNotificationCenter {
 
 public extension UNUserNotificationCenter {
     /// Schedules a local notification after a time interval, or at once for an interval of zero.
+    ///
+    /// - Throws: `ZamzamError.invalidData` when `repeats` is set with an interval under a minute, the shortest
+    ///   the system repeats.
     func add(
         timeInterval: TimeInterval,
         body: String,
@@ -206,8 +209,20 @@ public extension UNUserNotificationCenter {
             userInfo: userInfo
         )
 
-        let trigger = timeInterval > 0 ? UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: repeats) : nil
+        let trigger = try Self.trigger(after: timeInterval, repeats: repeats)
         try await add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger))
+    }
+}
+
+extension UNUserNotificationCenter {
+    /// The trigger for a notification due after `timeInterval`, or `nil` for one due at once.
+    ///
+    /// - Throws: `ZamzamError.invalidData` for a repeating interval under a minute, which the system raises an
+    ///   exception for.
+    static func trigger(after timeInterval: TimeInterval, repeats: Bool) throws -> UNTimeIntervalNotificationTrigger? {
+        guard timeInterval > 0 else { return nil }
+        guard !repeats || timeInterval >= 60 else { throw ZamzamError.invalidData }
+        return UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: repeats)
     }
 }
 

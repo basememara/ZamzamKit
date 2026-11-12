@@ -34,3 +34,14 @@ extension ObfuscatorTests {
         #expect(value == "HU87yAIDUOuanajlkd*&%&^%:")
     }
 }
+
+extension ObfuscatorTests {
+    @Test
+    func anEmptySaltLeavesTheSecretAsItIs() {
+        let unsalted = Obfuscator(salt: "")
+        let bytes = unsalted.conceal(secret: "Abc123")
+
+        #expect(bytes == Array("Abc123".utf8))
+        #expect(unsalted.reveal(secret: bytes) == "Abc123")
+    }
+}

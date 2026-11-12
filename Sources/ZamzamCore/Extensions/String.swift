@@ -48,18 +48,13 @@ public extension String {
     ///     let value = "Abcdef123456"
     ///     value[3...6] // "def1"
     ///     value[3...99] // "def123456"
+    ///     value[-3...2] // "Abc"
     ///     value[99...199] // nil
     ///
     /// - Parameter range: Closed range.
     subscript(_ range: ClosedRange<Int>) -> String? {
-        guard let lowerIndex = index(startIndex, offsetBy: max(0, range.lowerBound), limitedBy: endIndex),
-              let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound + 1, limitedBy: endIndex)
-        else {
-            guard range.lowerBound < count else { return nil }
-            return dropFirst(range.lowerBound).string
-        }
-
-        return String(self[lowerIndex..<upperIndex])
+        guard range.upperBound >= 0 else { return nil }
+        return self[range.lowerBound..<(range.upperBound < .max ? range.upperBound + 1 : .max)]
     }
 
     /// Safely subscript string within a half-open range.
@@ -67,15 +62,19 @@ public extension String {
     ///     let value = "Abcdef123456"
     ///     value[3..<6] // "def"
     ///     value[3..<99] // "def123456"
+    ///     value[-3..<2] // "Ab"
     ///     value[99..<199] // nil
     ///
     /// - Parameter range: Half-open range.
     subscript(_ range: CountableRange<Int>) -> String? {
-        guard let lowerIndex = index(startIndex, offsetBy: max(0, range.lowerBound), limitedBy: endIndex),
-              let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex)
+        let lowerBound = max(0, range.lowerBound)
+        guard lowerBound <= range.upperBound else { return nil }
+
+        guard let lowerIndex = index(startIndex, offsetBy: lowerBound, limitedBy: endIndex),
+              let upperIndex = index(lowerIndex, offsetBy: range.upperBound - lowerBound, limitedBy: endIndex)
         else {
-            guard range.lowerBound < count else { return nil }
-            return dropFirst(range.lowerBound).string
+            guard lowerBound < count else { return nil }
+            return dropFirst(lowerBound).string
         }
 
         return String(self[lowerIndex..<upperIndex])
@@ -98,7 +97,7 @@ public extension String {
     ///   - trailing: string to add at the end of truncated string.
     /// - Returns: truncated string (this is an extr...).
     func truncated(_ length: Int, trailing: String = "...") -> String {
-        guard 1..<count ~= length else { return self }
+        guard length > 0, length < count else { return self }
         return prefix(length) + trailing
     }
 

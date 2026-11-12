@@ -76,7 +76,7 @@ public extension NetworkPinnedCertificateTrustEvaluator {
             let onlyStatus = SecTrustSetAnchorCertificatesOnly(trust, true)
 
             guard onlyStatus == errSecSuccess else {
-                log?.error("Setting the self-signed anchor certificate failed while validating certificate pinning: \(status)")
+                log?.error("Setting the self-signed anchor certificate failed while validating certificate pinning: \(onlyStatus)")
                 return false
             }
         }

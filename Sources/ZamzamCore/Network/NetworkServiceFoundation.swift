@@ -47,9 +47,7 @@ public extension NetworkServiceFoundation {
             throw NetworkError(request: request)
         }
 
-        let headers: [String: String] = Dictionary(
-            uniqueKeysWithValues: httpResponse.allHeaderFields.map { ("\($0)", "\($1)") }
-        )
+        let headers = Self.headers(from: httpResponse.allHeaderFields)
 
         guard 200..<300 ~= httpResponse.statusCode else {
             throw NetworkError(request: request, data: data, headers: headers, statusCode: httpResponse.statusCode)
@@ -62,5 +60,12 @@ public extension NetworkServiceFoundation {
             request: request,
             response: response
         )
+    }
+}
+
+extension NetworkServiceFoundation {
+    /// The header fields of a response as strings. When two names read the same as strings, the last one read stays.
+    static func headers(from fields: [AnyHashable: Any]) -> [String: String] {
+        Dictionary(fields.map { ("\($0)", "\($1)") }) { _, last in last }
     }
 }

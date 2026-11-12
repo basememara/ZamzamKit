@@ -44,6 +44,20 @@ extension StringTests {
         #expect(test[3..<6] == "def")
         #expect(test.dropFirst(3) == "def123456")
     }
+
+    @Test
+    func subscriptRangeReachingPastEitherEnd() {
+        let test = "Abcdef123456"
+
+        #expect(test[-2...2] == "Abc")
+        #expect(test[-2..<2] == "Ab")
+        #expect(test[-2...99] == test)
+        #expect(test[-2..<99] == test)
+        #expect(test[-5...(-2)] == nil)
+        #expect(test[-5..<(-2)] == nil)
+        #expect(test[0...Int.max] == test)
+        #expect(test[Int.min..<Int.max] == test)
+    }
 }
 
 extension StringTests {
@@ -65,6 +79,12 @@ extension StringTests {
     func truncatOutOfRange() {
         let test = "Abcdef123456"
         #expect(test.truncated(20) == test)
+    }
+
+    @Test
+    func truncatedLeavesAnEmptyStringEmpty() {
+        #expect("".truncated(3).isEmpty)
+        #expect("".truncated(0).isEmpty)
     }
 
     @Test

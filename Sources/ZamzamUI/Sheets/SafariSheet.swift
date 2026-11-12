@@ -37,11 +37,12 @@ public extension View {
     ///     }
     ///
     /// - Parameters:
-    ///   - url: A binding to whether the Safari browser should be presented. 
+    ///   - url: A binding to whether the Safari browser should be presented. A URL that isn't HTTP or HTTPS
+    ///     presents nothing, since the browser can't open it.
     func sheet(safari url: Binding<URL?>, onDismiss: (() -> Void)? = nil) -> some View {
         sheet(
             isPresented: Binding<Bool>(
-                get: { url.wrappedValue != nil },
+                get: { url.wrappedValue?.isWebPage == true },
                 set: {
                     guard !$0 else { return }
                     url.wrappedValue = nil
@@ -49,11 +50,18 @@ public extension View {
             ),
             onDismiss: onDismiss
         ) {
-            if let url = url.wrappedValue {
+            if let url = url.wrappedValue, url.isWebPage {
                 SafariView(url: url)
                     .ignoresSafeArea()
             }
         }
+    }
+}
+
+private extension URL {
+    /// Whether Safari's in-app browser can open the URL; it raises an exception for any scheme but HTTP and HTTPS.
+    var isWebPage: Bool {
+        ["http", "https"].contains(scheme?.lowercased())
     }
 }
 #endif

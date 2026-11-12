@@ -9,6 +9,7 @@
 import Foundation
 import Testing
 import UserNotifications
+import ZamzamCore
 @testable import ZamzamNotification
 
 struct NotificationTriggerTests {
@@ -36,5 +37,18 @@ extension NotificationTriggerTests {
         #expect(trigger.dateComponents.timeZone == newYork.timeZone)
         #expect(trigger.dateComponents.hour == 19)
         #expect(trigger.repeats)
+    }
+}
+
+extension NotificationTriggerTests {
+    @Test
+    func aRepeatingIntervalUnderAMinuteThrows() throws {
+        #expect(throws: ZamzamError.self) {
+            try UNUserNotificationCenter.trigger(after: 30, repeats: true)
+        }
+
+        #expect(try UNUserNotificationCenter.trigger(after: 60, repeats: true)?.repeats == true)
+        #expect(try UNUserNotificationCenter.trigger(after: 30, repeats: false)?.timeInterval == 30)
+        #expect(try UNUserNotificationCenter.trigger(after: 0, repeats: true) == nil)
     }
 }

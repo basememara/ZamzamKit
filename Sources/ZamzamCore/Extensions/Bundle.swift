@@ -36,6 +36,6 @@ public extension Bundle {
             throw NSError(domain: bundleIdentifier ?? "", code: NSFileReadNoSuchFileError)
         }
 
-        return try Data(contentsOf: url)
+        return try Data(contentsOf: url, options: options)
     }
 }

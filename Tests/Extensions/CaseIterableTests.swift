@@ -32,4 +32,22 @@ extension CaseIterableTests {
         #expect(Direction.east.next() == .south)
         #expect(Direction.south.next() == .west)
     }
+
+    @Test
+    func previousAndNextStopAtTheEndsOfAnyCollectionOfCases() {
+        // Given
+        struct Even: CaseIterable, Equatable {
+            static var allCases: LazyFilterCollection<[Even]> {
+                (0...6).map(Even.init).lazy.filter { $0.number.isMultiple(of: 2) }
+            }
+
+            let number: Int
+        }
+
+        // Then
+        #expect(Even(number: 0).previous() == nil)
+        #expect(Even(number: 2).previous() == Even(number: 0))
+        #expect(Even(number: 4).next() == Even(number: 6))
+        #expect(Even(number: 6).next() == nil)
+    }
 }

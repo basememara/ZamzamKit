@@ -8,7 +8,7 @@
 
 import Foundation
 import Testing
-import ZamzamCore
+@testable import ZamzamCore
 
 struct NetworkTests {
     private let jsonDecoder = JSONDecoder()
@@ -576,6 +576,33 @@ extension NetworkTests {
         // Then
         #expect(model.url == request.url?.absoluteString)
         parameters.forEach { #expect(model.args[$0.key] == "\($0.value)") }
+    }
+}
+
+// MARK: - Values that can't be sent or read as given
+
+extension NetworkTests {
+    @Test
+    func parametersJSONCannotHoldLeaveTheRequestWithoutABody() {
+        let request = URLRequest(
+            url: URL(safeString: "https://echo.test/post"),
+            method: .post,
+            parameters: ["date": Date(timeIntervalSince1970: 0)]
+        )
+
+        #expect(request.httpMethod == "POST")
+        #expect(request.httpBody == nil)
+    }
+
+    @Test
+    func headerFieldsThatShareANameKeepOneOfTheirValues() {
+        let headers = NetworkServiceFoundation.headers(
+            from: [AnyHashable(1): "a", AnyHashable("1"): "b", AnyHashable("Content-Type"): "application/json"]
+        )
+
+        #expect(headers.count == 2)
+        #expect(headers["Content-Type"] == "application/json")
+        #expect(["a", "b"].contains(headers["1"]))
     }
 }
 

@@ -21,4 +21,12 @@ extension BundleTests {
 
         #expect(values == "This is a test. Abc 123.\n")
     }
+
+    @Test
+    func dataFromAResource() throws {
+        let data = try bundle.data(forResource: "Test", withExtension: "txt", options: .uncached)
+
+        #expect(data.string == "This is a test. Abc 123.\n")
+        #expect(throws: (any Error).self) { try bundle.data(forResource: "Missing", withExtension: "txt") }
+    }
 }
