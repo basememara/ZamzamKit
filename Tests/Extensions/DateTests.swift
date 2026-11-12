@@ -17,7 +17,7 @@ struct DateTests {
 extension DateTests {
     @Test
     func componentsInitializer() {
-        #expect(Date(year: 2022, month: 6, day: 2, hour: 14, minute: 54, second: 25, timeZone: .posix, calendar: calendar) == Date(timeIntervalSince1970: 1654181665))
+        #expect(Date(year: 2022, month: 6, day: 2, hour: 14, minute: 54, second: 25, timeZone: .gmt, calendar: calendar) == Date(timeIntervalSince1970: 1654181665))
     }
 
     @Test
@@ -28,7 +28,7 @@ extension DateTests {
     @Test
     func componentsInitializerCalendar() {
         // Islamic calendar
-        #expect(Date(year: 1443, month: 11, day: 3, hour: 17, minute: 42, second: 15, timeZone: .posix, calendar: Calendar(identifier: .islamicUmmAlQura)) == Date(timeIntervalSince1970: 1654191735))
+        #expect(Date(year: 1443, month: 11, day: 3, hour: 17, minute: 42, second: 15, timeZone: .gmt, calendar: Calendar(identifier: .islamicUmmAlQura)) == Date(timeIntervalSince1970: 1654191735))
 
         // Chinese calendar
         let gregorianYear = 2022
@@ -400,7 +400,7 @@ extension DateTests {
 
     @Test
     func incrementDaysWithCalendar() throws {
-        let calendar = Calendar(identifier: .islamicUmmAlQura, timeZone: .posix)
+        let calendar = Calendar(identifier: .islamicUmmAlQura, timeZone: .gmt)
 
         let date = try #require(Date(year: 1440, month: 2, day: 30, hour: 18, minute: 31, calendar: calendar))
         #expect(date + .days(1, calendar) == Date(year: 1440, month: 3, day: 1, hour: 18, minute: 31, calendar: calendar))

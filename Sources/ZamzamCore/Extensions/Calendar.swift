@@ -16,7 +16,7 @@ public extension Calendar {
     /// This is a `Gregorian` calendar with `UTC` time zone and `en_US_POSIX` locale.
     static let posix = Calendar(
         identifier: .gregorian,
-        timeZone: .posix,
+        timeZone: .gmt,
         locale: .posix
     )
 }
