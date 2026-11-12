@@ -72,19 +72,47 @@ public extension CLLocation {
         // an in-flight request from elsewhere, which is all the other references do.
         nonisolated(unsafe) let geocoder = CLGeocoder()
 
+        return await locationMeta(timeout: timeout) {
+            try? await geocoder.reverseGeocodeLocation(self).first
+        } cancel: {
+            geocoder.cancelGeocode()
+        }
+    }
+}
+
+/// The parts of a `CLPlacemark` that `LocationMeta` reads.
+protocol GeocodedPlacemark {
+    var locality: String? { get }
+    var subAdministrativeArea: String? { get }
+    var country: String? { get }
+    var isoCountryCode: String? { get }
+    var timeZone: TimeZone? { get }
+    var administrativeArea: String? { get }
+}
+
+extension CLPlacemark: GeocodedPlacemark {}
+
+extension CLLocation {
+    /// The lookup behind `geocoder(timeout:)`, taking the reverse geocode and its cancellation
+    /// so the deadline and the mapping can run without Core Location's service.
+    func locationMeta<Placemark: GeocodedPlacemark>(
+        timeout: TimeInterval,
+        reverseGeocode: () async -> Placemark?,
+        cancel: @escaping @Sendable () -> Void
+    ) async -> LocationMeta? {
         // A task group would leave the losing child suspended until Core Location replied, so the
         // deadline is enforced by cancelling the geocode itself rather than by racing it.
         let timeoutTask = Task {
             try await Task.sleep(for: .seconds(timeout))
-            geocoder.cancelGeocode()
+            cancel()
         }
 
         defer { timeoutTask.cancel() }
 
         let placemark = await withTaskCancellationHandler {
-            try? await geocoder.reverseGeocodeLocation(self).first
+            await reverseGeocode()
         } onCancel: {
-            geocoder.cancelGeocode()
+            cancel()
         }
 
         guard let placemark else { return nil }

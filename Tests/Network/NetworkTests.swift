@@ -14,7 +14,7 @@ struct NetworkTests {
     private let jsonDecoder = JSONDecoder()
 
     private let networkManager = NetworkManager(
-        service: NetworkServiceFoundation()
+        service: NetworkServiceFoundation(configuration: .echo)
     )
 }
 
@@ -25,7 +25,7 @@ extension NetworkTests {
     func gET() async throws {
         // Given
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/get"),
+            url: URL(safeString: "https://echo.test/get"),
             method: .get
         )
 
@@ -33,7 +33,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString == "https://httpbin.org/get")
+        #expect(request.url?.absoluteString == "https://echo.test/get")
         #expect(response.headers["Content-Type"] == "application/json")
         #expect(response.statusCode == 200)
     }
@@ -50,7 +50,7 @@ extension NetworkTests {
         ]
 
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/get"),
+            url: URL(safeString: "https://echo.test/get"),
             method: .get,
             parameters: parameters
         )
@@ -59,7 +59,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString.contains("https://httpbin.org/get?") == true)
+        #expect(request.url?.absoluteString.contains("https://echo.test/get?") == true)
         #expect(request.url?.absoluteString.contains("abc=123") == true)
         #expect(request.url?.absoluteString.contains("def=test456") == true)
         #expect(request.url?.absoluteString.contains("xyz=true") == true)
@@ -92,7 +92,7 @@ extension NetworkTests {
         ]
 
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/get"),
+            url: URL(safeString: "https://echo.test/get"),
             method: .get,
             headers: headers
         )
@@ -101,7 +101,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString == "https://httpbin.org/get")
+        #expect(request.url?.absoluteString == "https://echo.test/get")
         #expect(response.headers["Content-Type"] == "application/json")
         #expect(response.statusCode == 200)
 
@@ -126,7 +126,7 @@ extension NetworkTests {
     func pOST() async throws {
         // Given
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/post"),
+            url: URL(safeString: "https://echo.test/post"),
             method: .post
         )
 
@@ -134,7 +134,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString == "https://httpbin.org/post")
+        #expect(request.url?.absoluteString == "https://echo.test/post")
         #expect(response.headers["Content-Type"] == "application/json")
         #expect(response.statusCode == 200)
     }
@@ -151,7 +151,7 @@ extension NetworkTests {
         ]
 
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/post"),
+            url: URL(safeString: "https://echo.test/post"),
             method: .post,
             parameters: parameters
         )
@@ -160,7 +160,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString == "https://httpbin.org/post")
+        #expect(request.url?.absoluteString == "https://echo.test/post")
         #expect(response.headers["Content-Type"] == "application/json")
         #expect(response.statusCode == 200)
 
@@ -189,7 +189,7 @@ extension NetworkTests {
         ]
 
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/post"),
+            url: URL(safeString: "https://echo.test/post"),
             method: .post,
             headers: headers
         )
@@ -198,7 +198,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString == "https://httpbin.org/post")
+        #expect(request.url?.absoluteString == "https://echo.test/post")
         #expect(response.headers["Content-Type"] == "application/json")
         #expect(response.statusCode == 200)
 
@@ -223,7 +223,7 @@ extension NetworkTests {
     func pATCH() async throws {
         // Given
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/patch"),
+            url: URL(safeString: "https://echo.test/patch"),
             method: .patch
         )
 
@@ -231,7 +231,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString == "https://httpbin.org/patch")
+        #expect(request.url?.absoluteString == "https://echo.test/patch")
         #expect(response.headers["Content-Type"] == "application/json")
         #expect(response.statusCode == 200)
     }
@@ -248,7 +248,7 @@ extension NetworkTests {
         ]
 
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/patch"),
+            url: URL(safeString: "https://echo.test/patch"),
             method: .patch,
             parameters: parameters
         )
@@ -257,7 +257,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString == "https://httpbin.org/patch")
+        #expect(request.url?.absoluteString == "https://echo.test/patch")
         #expect(response.headers["Content-Type"] == "application/json")
         #expect(response.statusCode == 200)
 
@@ -286,7 +286,7 @@ extension NetworkTests {
         ]
 
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/patch"),
+            url: URL(safeString: "https://echo.test/patch"),
             method: .patch,
             headers: headers
         )
@@ -295,7 +295,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString == "https://httpbin.org/patch")
+        #expect(request.url?.absoluteString == "https://echo.test/patch")
         #expect(response.headers["Content-Type"] == "application/json")
         #expect(response.statusCode == 200)
 
@@ -320,7 +320,7 @@ extension NetworkTests {
     func pUT() async throws {
         // Given
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/put"),
+            url: URL(safeString: "https://echo.test/put"),
             method: .put
         )
 
@@ -328,7 +328,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString == "https://httpbin.org/put")
+        #expect(request.url?.absoluteString == "https://echo.test/put")
         #expect(response.headers["Content-Type"] == "application/json")
         #expect(response.statusCode == 200)
     }
@@ -345,7 +345,7 @@ extension NetworkTests {
         ]
 
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/put"),
+            url: URL(safeString: "https://echo.test/put"),
             method: .put,
             parameters: parameters
         )
@@ -354,7 +354,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString == "https://httpbin.org/put")
+        #expect(request.url?.absoluteString == "https://echo.test/put")
         #expect(response.headers["Content-Type"] == "application/json")
         #expect(response.statusCode == 200)
 
@@ -383,7 +383,7 @@ extension NetworkTests {
         ]
 
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/put"),
+            url: URL(safeString: "https://echo.test/put"),
             method: .put,
             headers: headers
         )
@@ -392,7 +392,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString == "https://httpbin.org/put")
+        #expect(request.url?.absoluteString == "https://echo.test/put")
         #expect(response.headers["Content-Type"] == "application/json")
         #expect(response.statusCode == 200)
 
@@ -417,7 +417,7 @@ extension NetworkTests {
     func dELETE() async throws {
         // Given
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/delete"),
+            url: URL(safeString: "https://echo.test/delete"),
             method: .delete
         )
 
@@ -425,7 +425,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString == "https://httpbin.org/delete")
+        #expect(request.url?.absoluteString == "https://echo.test/delete")
         #expect(response.headers["Content-Type"] == "application/json")
         #expect(response.statusCode == 200)
     }
@@ -442,7 +442,7 @@ extension NetworkTests {
         ]
 
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/delete"),
+            url: URL(safeString: "https://echo.test/delete"),
             method: .delete,
             parameters: parameters
         )
@@ -451,7 +451,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString.contains("https://httpbin.org/delete?") == true)
+        #expect(request.url?.absoluteString.contains("https://echo.test/delete?") == true)
         #expect(request.url?.absoluteString.contains("abc=123") == true)
         #expect(request.url?.absoluteString.contains("def=test456") == true)
         #expect(request.url?.absoluteString.contains("xyz=true") == true)
@@ -484,7 +484,7 @@ extension NetworkTests {
         ]
 
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/delete"),
+            url: URL(safeString: "https://echo.test/delete"),
             method: .delete,
             headers: headers
         )
@@ -493,7 +493,7 @@ extension NetworkTests {
         let response = try await networkManager.send(request)
 
         // Then
-        #expect(request.url?.absoluteString == "https://httpbin.org/delete")
+        #expect(request.url?.absoluteString == "https://echo.test/delete")
         #expect(response.headers["Content-Type"] == "application/json")
         #expect(response.statusCode == 200)
 
@@ -527,12 +527,12 @@ extension NetworkTests {
     func withURLRequestAdapter() async throws {
         // Given
         let networkManager = NetworkManager(
-            service: NetworkServiceFoundation(),
+            service: NetworkServiceFoundation(configuration: .echo),
             adapter: TestURLRequestAdapter()
         )
 
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/get"),
+            url: URL(safeString: "https://echo.test/get"),
             method: .get
         )
 
@@ -545,6 +545,10 @@ extension NetworkTests {
         #expect(request.value(forHTTPHeaderField: "X-Test-2") == nil)
         #expect(response.request.value(forHTTPHeaderField: "X-Test-1") == "1")
         #expect(response.request.value(forHTTPHeaderField: "X-Test-2") == "2")
+
+        let sent = try jsonDecoder.decode(ResponseModel.self, from: response.data)
+        #expect(sent.headers["X-Test-1"] == "1")
+        #expect(sent.headers["X-Test-2"] == "2")
     }
 }
 
@@ -561,7 +565,7 @@ extension NetworkTests {
         ]
 
         let request = URLRequest(
-            url: URL(safeString: "https://httpbin.org/get"),
+            url: URL(safeString: "https://echo.test/get"),
             method: .get,
             parameters: parameters
         )
@@ -572,6 +576,57 @@ extension NetworkTests {
         // Then
         #expect(model.url == request.url?.absoluteString)
         parameters.forEach { #expect(model.args[$0.key] == "\($0.value)") }
+    }
+}
+
+// MARK: - Errors
+
+extension NetworkTests {
+    @Test
+    func aStatusOutsideTheSuccessRangeThrowsWithTheResponse() async throws {
+        // Given
+        let request = URLRequest(
+            url: URL(safeString: "https://echo.test/status/404"),
+            method: .get
+        )
+
+        // When
+        let error = try await #require(throws: NetworkError.self) {
+            try await networkManager.send(request)
+        }
+
+        // Then
+        #expect(error.statusCode == 404)
+        #expect(error.headers?["Content-Type"] == "application/json")
+        #expect(error.request.url == request.url)
+        #expect(error.internalError == nil)
+
+        let model = try jsonDecoder.decode(ResponseModel.self, from: try #require(error.data))
+        #expect(model.url == request.url?.absoluteString)
+    }
+
+    @Test
+    func aTransportFailureThrowsWithTheUnderlyingError() async throws {
+        // Given
+        let request = URLRequest(
+            url: URL(safeString: "https://offline.test/get"),
+            method: .get
+        )
+
+        // When
+        let error = try await #require(throws: NetworkError.self) {
+            try await networkManager.send(request)
+        }
+
+        // Then
+        #expect((error.internalError as? URLError)?.code == .notConnectedToInternet)
+        #expect(error.statusCode == nil)
+        #expect(error.data == nil)
+
+        guard case .noInternet = ZamzamError(from: error) else {
+            Issue.record("A lost connection should convert to `noInternet`.")
+            return
+        }
     }
 }
 

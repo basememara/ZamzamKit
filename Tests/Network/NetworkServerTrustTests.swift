@@ -401,7 +401,13 @@ private extension SecTrust {
         let policy = SecPolicyCreateBasicX509()
         var trust: SecTrust?
         SecTrustCreateWithCertificates(certificates as CFTypeRef, policy, &trust)
-        return trust! // swiftlint:disable:this force_unwrapping
+        let created = trust! // swiftlint:disable:this force_unwrapping
+
+        // Evaluated inside the fixtures' validity window (2026-09-16 to 2028-11-24) and from the
+        // certificates given, so the result doesn't change with the day of the run or the network
+        SecTrustSetVerifyDate(created, Date(timeIntervalSince1970: 1_800_000_000) as CFDate)
+        SecTrustSetNetworkFetchAllowed(created, false)
+        return created
     }
 
     func assignRootCertificateAsLoneAnchor() -> Self {

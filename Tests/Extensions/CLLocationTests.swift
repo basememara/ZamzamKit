@@ -9,7 +9,7 @@
 import CoreLocation
 import Foundation
 import Testing
-import ZamzamCore
+@testable import ZamzamCore
 
 struct CLLocationTests {}
 
@@ -18,20 +18,80 @@ extension CLLocationTests {
     func metaData() async throws {
         // Given
         let value = CLLocation(latitude: 43.7, longitude: -79.4)
-        let expected = "Toronto, CA"
+
+        let placemark = Placemark(
+            locality: "Toronto",
+            subAdministrativeArea: "Toronto Division",
+            country: "Canada",
+            isoCountryCode: "CA",
+            timeZone: TimeZone(identifier: "America/Toronto"),
+            administrativeArea: "ON"
+        )
 
         // When
-        let meta = await value.geocoder(timeout: 5)
+        let meta = try #require(await value.locationMeta(timeout: 5) { placemark } cancel: {})
 
         // Then
-        guard let locality = meta?.locality, let countryCode = meta?.countryCode else {
-            Issue.record("Could not retrieve address meta data.")
-            return
-        }
+        #expect(meta.coordinates?.latitude == 43.7)
+        #expect(meta.coordinates?.longitude == -79.4)
+        #expect(meta.locality == "Toronto")
+        #expect(meta.country == "Canada")
+        #expect(meta.countryCode == "CA")
+        #expect(meta.timeZone?.identifier == "America/Toronto")
+        #expect(meta.administrativeArea == "ON")
+    }
 
-        #expect("\(locality), \(countryCode)" == expected)
-        #expect(meta?.description == expected)
-        #expect(meta?.timeZone?.identifier == "America/Toronto")
+    @Test
+    func metaDataNamesTheSubAdministrativeAreaWithoutALocality() async throws {
+        // Given
+        let value = CLLocation(latitude: 43.7, longitude: -79.4)
+        let placemark = Placemark(subAdministrativeArea: "Toronto Division", country: "Canada", isoCountryCode: "CA")
+
+        // When
+        let meta = try #require(await value.locationMeta(timeout: 5) { placemark } cancel: {})
+
+        // Then
+        #expect(meta.locality == "Toronto Division")
+    }
+
+    @Test
+    func metaDataIsNilWithoutAPlacemark() async {
+        // Given
+        let value = CLLocation(latitude: 43.7, longitude: -79.4)
+
+        // When
+        let meta = await value.locationMeta(timeout: 5) { Placemark?.none } cancel: {}
+
+        // Then
+        #expect(meta == nil)
+    }
+
+    @Test(.timeLimit(.minutes(1)))
+    func metaDataIsNilOnceTheTimeoutCancelsTheLookup() async {
+        // Given
+        let value = CLLocation(latitude: 43.7, longitude: -79.4)
+        let (inFlight, lookup) = AsyncStream.makeStream(of: Void.self)
+
+        await confirmation { cancelled in
+            // When: like a geocode that never hears back, the lookup only ends once it is cancelled
+            let meta = await value.locationMeta(timeout: 0.05) {
+                for await _ in inFlight {}
+                return Placemark?.none
+            } cancel: {
+                cancelled()
+                lookup.finish()
+            }
+
+            // Then
+            #expect(meta == nil)
+        }
+    }
+
+    @Test
+    func metaDescription() {
+        let meta = CLLocation.LocationMeta(locality: "Toronto", country: "Canada", countryCode: "CA")
+
+        #expect(meta.description == "Toronto, CA")
     }
 }
 
@@ -75,4 +135,13 @@ extension CLLocationTests {
         #expect(Int(toronto.distance(from: newYork)) == 549_413)
         #expect(Int(vancouver.distance(from: beijing)) == 8_538_317)
     }
+}
+
+private struct Placemark: GeocodedPlacemark {
+    var locality: String?
+    var subAdministrativeArea: String?
+    var country: String?
+    var isoCountryCode: String?
+    var timeZone: TimeZone?
+    var administrativeArea: String?
 }

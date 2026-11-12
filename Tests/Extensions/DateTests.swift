@@ -10,17 +10,19 @@ import Foundation
 import Testing
 import ZamzamCore
 
-struct DateTests {}
+struct DateTests {
+    private let calendar: Calendar = .posix
+}
 
 extension DateTests {
     @Test
     func componentsInitializer() {
-        #expect(Date(year: 2022, month: 6, day: 2, hour: 14, minute: 54, second: 25, timeZone: .posix) == Date(timeIntervalSince1970: 1654181665))
+        #expect(Date(year: 2022, month: 6, day: 2, hour: 14, minute: 54, second: 25, timeZone: .posix, calendar: calendar) == Date(timeIntervalSince1970: 1654181665))
     }
 
     @Test
     func componentsInitializerTimeZone() {
-        #expect(Date(year: 2022, month: 3, day: 6, hour: 2, minute: 1, second: 43, timeZone: TimeZone(abbreviation: "EST")) == Date(timeIntervalSince1970: 1646550103))
+        #expect(Date(year: 2022, month: 3, day: 6, hour: 2, minute: 1, second: 43, timeZone: TimeZone(abbreviation: "EST"), calendar: calendar) == Date(timeIntervalSince1970: 1646550103))
     }
 
     @Test
@@ -64,121 +66,127 @@ extension DateTests {
 
     @Test
     func isToday() throws {
-        #expect(Date().isToday)
+        #expect(Date().isToday(using: calendar))
     }
 
     @Test
     func isYesterday() throws {
-        #expect(Date(timeIntervalSinceNow: -86_400).isYesterday)
+        #expect(Date(timeIntervalSinceNow: -86_400).isYesterday(using: calendar))
     }
 
     @Test
     func isTomorrow() throws {
-        #expect(Date(timeIntervalSinceNow: 86_400).isTomorrow)
+        #expect(Date(timeIntervalSinceNow: 86_400).isTomorrow(using: calendar))
     }
 
     @Test
     func isWeekday() throws {
-        let date = Date()
-        #expect(date.isWeekday == !Calendar.current.isDateInWeekend(date))
+        let wednesday = try #require(Date(year: 2020, month: 1, day: 15, calendar: calendar))
+        let saturday = try #require(Date(year: 2020, month: 1, day: 18, calendar: calendar))
+
+        #expect(wednesday.isWeekday(using: calendar))
+        #expect(!(saturday.isWeekday(using: calendar)))
     }
 
-	@Test
-	func isWeekend() throws {
-		let date = Date()
-		#expect(date.isWeekend == Calendar.current.isDateInWeekend(date))
-	}
+    @Test
+    func isWeekend() throws {
+        let wednesday = try #require(Date(year: 2020, month: 1, day: 15, calendar: calendar))
+        let saturday = try #require(Date(year: 2020, month: 1, day: 18, calendar: calendar))
+
+        #expect(saturday.isWeekend(using: calendar))
+        #expect(!(wednesday.isWeekend(using: calendar)))
+    }
 
     @Test
     func isInCurrentWeek() throws {
         let date = Date()
-        #expect(date.isCurrentWeek)
-        let dateOneYearFromNow = date + .weeks(1)
-        #expect(!(dateOneYearFromNow.isCurrentWeek))
+        #expect(date.isCurrentWeek(using: calendar))
+        let dateOneYearFromNow = date + .weeks(1, calendar)
+        #expect(!(dateOneYearFromNow.isCurrentWeek(using: calendar)))
     }
 
     @Test
     func isInCurrentMonth() throws {
         let date = Date()
-        #expect(date.isCurrentMonth)
-        let dateOneYearFromNow = date + .months(1)
-        #expect(!(dateOneYearFromNow.isCurrentMonth))
+        #expect(date.isCurrentMonth(using: calendar))
+        let dateOneYearFromNow = date + .months(1, calendar)
+        #expect(!(dateOneYearFromNow.isCurrentMonth(using: calendar)))
     }
 
     @Test
     func isInCurrentYear() throws {
         let date = Date()
-        #expect(date.isCurrentYear)
-        let dateOneYearFromNow = date + .years(1)
-        #expect(!(dateOneYearFromNow.isCurrentYear))
+        #expect(date.isCurrentYear(using: calendar))
+        let dateOneYearFromNow = date + .years(1, calendar)
+        #expect(!(dateOneYearFromNow.isCurrentYear(using: calendar)))
     }
 }
 
 extension DateTests {
     @Test
     func tomorrow() throws {
-        let date = try #require(Date(year: 2016, month: 3, day: 22, hour: 9, minute: 30))
-        let expected = try #require(Date(year: 2016, month: 3, day: 23, hour: 9, minute: 30))
-        #expect(date.tomorrow == expected)
+        let date = try #require(Date(year: 2016, month: 3, day: 22, hour: 9, minute: 30, calendar: calendar))
+        let expected = try #require(Date(year: 2016, month: 3, day: 23, hour: 9, minute: 30, calendar: calendar))
+        #expect(date.tomorrow(using: calendar) == expected)
     }
 
     @Test
     func tomorrowLeapYear() throws {
-        let date = try #require(Date(year: 2020, month: 2, day: 28, hour: 9, minute: 30))
-        let expected = try #require(Date(year: 2020, month: 2, day: 29, hour: 9, minute: 30))
-        #expect(date.tomorrow == expected)
+        let date = try #require(Date(year: 2020, month: 2, day: 28, hour: 9, minute: 30, calendar: calendar))
+        let expected = try #require(Date(year: 2020, month: 2, day: 29, hour: 9, minute: 30, calendar: calendar))
+        #expect(date.tomorrow(using: calendar) == expected)
     }
 
     @Test
     func tomorrowNonLeapYear() throws {
-        let date = try #require(Date(year: 2021, month: 2, day: 28, hour: 9, minute: 30))
-        let expected = try #require(Date(year: 2021, month: 3, day: 1, hour: 9, minute: 30))
-        #expect(date.tomorrow == expected)
+        let date = try #require(Date(year: 2021, month: 2, day: 28, hour: 9, minute: 30, calendar: calendar))
+        let expected = try #require(Date(year: 2021, month: 3, day: 1, hour: 9, minute: 30, calendar: calendar))
+        #expect(date.tomorrow(using: calendar) == expected)
     }
 
     @Test
     func yesterday() throws {
-        let date = try #require(Date(year: 2016, month: 3, day: 22, hour: 9, minute: 30))
-        let expected = try #require(Date(year: 2016, month: 3, day: 21, hour: 9, minute: 30))
-        #expect(date.yesterday == expected)
+        let date = try #require(Date(year: 2016, month: 3, day: 22, hour: 9, minute: 30, calendar: calendar))
+        let expected = try #require(Date(year: 2016, month: 3, day: 21, hour: 9, minute: 30, calendar: calendar))
+        #expect(date.yesterday(using: calendar) == expected)
     }
 }
 
 extension DateTests {
     @Test
     func startOfDay() throws {
-        let date = try #require(Date(year: 2016, month: 3, day: 22, hour: 9, minute: 30))
-        #expect(date.startOfDay.string(format: "yyyy/MM/dd HH:mm:ss") == "2016/03/22 00:00:00")
+        let date = try #require(Date(year: 2016, month: 3, day: 22, hour: 9, minute: 30, calendar: calendar))
+        #expect(date.startOfDay(using: calendar).string(format: "yyyy/MM/dd HH:mm:ss", calendar: calendar) == "2016/03/22 00:00:00")
     }
 
     @Test
     func endOfDay() throws {
-        let date = try #require(Date(year: 2018, month: 1, day: 21, hour: 19, minute: 30))
-        #expect(date.endOfDay.string(format: "yyyy/MM/dd HH:mm:ss") == "2018/01/21 23:59:59")
+        let date = try #require(Date(year: 2018, month: 1, day: 21, hour: 19, minute: 30, calendar: calendar))
+        #expect(date.endOfDay(using: calendar).string(format: "yyyy/MM/dd HH:mm:ss", calendar: calendar) == "2018/01/21 23:59:59")
     }
 
     @Test
     func startOfMonth() throws {
-        let date = try #require(Date(year: 2016, month: 3, day: 22, hour: 9, minute: 30))
-        #expect(date.startOfMonth.string(format: "yyyy/MM/dd HH:mm:ss") == "2016/03/01 00:00:00")
+        let date = try #require(Date(year: 2016, month: 3, day: 22, hour: 9, minute: 30, calendar: calendar))
+        #expect(date.startOfMonth(using: calendar).string(format: "yyyy/MM/dd HH:mm:ss", calendar: calendar) == "2016/03/01 00:00:00")
     }
 
     @Test
     func endOfMonth() throws {
-        let date = try #require(Date(year: 2016, month: 3, day: 22, hour: 9, minute: 30))
-        #expect(date.endOfMonth.string(format: "yyyy/MM/dd HH:mm:ss") == "2016/03/31 23:59:59")
+        let date = try #require(Date(year: 2016, month: 3, day: 22, hour: 9, minute: 30, calendar: calendar))
+        #expect(date.endOfMonth(using: calendar).string(format: "yyyy/MM/dd HH:mm:ss", calendar: calendar) == "2016/03/31 23:59:59")
     }
 
     @Test
     func startOfYear() throws {
-        let date = try #require(Date(year: 2016, month: 3, day: 22, hour: 9, minute: 30))
-        #expect(date.startOfYear.string(format: "yyyy/MM/dd HH:mm:ss") == "2016/01/01 00:00:00")
+        let date = try #require(Date(year: 2016, month: 3, day: 22, hour: 9, minute: 30, calendar: calendar))
+        #expect(date.startOfYear(using: calendar).string(format: "yyyy/MM/dd HH:mm:ss", calendar: calendar) == "2016/01/01 00:00:00")
     }
 
     @Test
     func endOfYear() throws {
-        let date = try #require(Date(year: 2016, month: 3, day: 22, hour: 9, minute: 30))
-        #expect(date.endOfYear.string(format: "yyyy/MM/dd HH:mm:ss") == "2016/12/31 23:59:59")
+        let date = try #require(Date(year: 2016, month: 3, day: 22, hour: 9, minute: 30, calendar: calendar))
+        #expect(date.endOfYear(using: calendar).string(format: "yyyy/MM/dd HH:mm:ss", calendar: calendar) == "2016/12/31 23:59:59")
     }
 }
 
@@ -187,55 +195,53 @@ extension DateTests {
 extension DateTests {
     @Test
     func isBetween() throws {
-        #expect(try #require(Date(year: 2020, month: 1, day: 15, hour: 9, minute: 30)).isBetween(
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 9)),
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 10))
+        #expect(try #require(Date(year: 2020, month: 1, day: 15, hour: 9, minute: 30, calendar: calendar)).isBetween(
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 9, calendar: calendar)),
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 10, calendar: calendar))
             ))
 
-        #expect(try #require(Date(year: 2020, month: 1, day: 16, hour: 1)).isBetween(
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 23)),
-                try #require(Date(year: 2020, month: 1, day: 16, hour: 4))
+        #expect(try #require(Date(year: 2020, month: 1, day: 16, hour: 1, calendar: calendar)).isBetween(
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 23, calendar: calendar)),
+                try #require(Date(year: 2020, month: 1, day: 16, hour: 4, calendar: calendar))
             ))
 
-        #expect(try #require(Date(year: 2020, month: 1, day: 15, hour: 10)).isBetween(
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 10)),
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 10, minute: 30))
+        #expect(try #require(Date(year: 2020, month: 1, day: 15, hour: 10, calendar: calendar)).isBetween(
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 10, calendar: calendar)),
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 10, minute: 30, calendar: calendar))
             ))
 
-        #expect(try #require(Date(year: 2020, month: 1, day: 15, hour: 10)).isBetween(
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 10)),
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 10))
+        #expect(try #require(Date(year: 2020, month: 1, day: 15, hour: 10, calendar: calendar)).isBetween(
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 10, calendar: calendar)),
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 10, calendar: calendar))
             ))
 
-        #expect(try #require(Date(year: 2020, month: 1, day: 15, hour: 9)).isBetween(
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 10)),
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 8))
+        #expect(try #require(Date(year: 2020, month: 1, day: 15, hour: 9, calendar: calendar)).isBetween(
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 10, calendar: calendar)),
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 8, calendar: calendar))
             ))
 
-        #expect(try #require(Date(year: 2020, month: 1, day: 15, minute: 8)).isBetween(
-                try #require(Date(year: 2020, month: 1, day: 15, minute: 10)),
-                try #require(Date(year: 2020, month: 1, day: 15, minute: 8))
+        #expect(try #require(Date(year: 2020, month: 1, day: 15, minute: 8, calendar: calendar)).isBetween(
+                try #require(Date(year: 2020, month: 1, day: 15, minute: 10, calendar: calendar)),
+                try #require(Date(year: 2020, month: 1, day: 15, minute: 8, calendar: calendar))
             ))
 
-        #expect(!(try #require(Date(year: 2020, month: 1, day: 15, hour: 9)).isBetween(
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 10)),
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 13))
+        #expect(!(try #require(Date(year: 2020, month: 1, day: 15, hour: 9, calendar: calendar)).isBetween(
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 10, calendar: calendar)),
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 13, calendar: calendar))
             )))
 
-        #expect(!(try #require(Date(year: 2020, month: 1, day: 15, hour: 10, minute: 30)).isBetween(
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 10)),
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 10, minute: 30))
+        #expect(!(try #require(Date(year: 2020, month: 1, day: 15, hour: 10, minute: 30, calendar: calendar)).isBetween(
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 10, calendar: calendar)),
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 10, minute: 30, calendar: calendar))
             )))
 
-        #expect(!(try #require(Date(year: 2020, month: 1, day: 15, hour: 10)).isBetween(
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 10)),
-                try #require(Date(year: 2020, month: 1, day: 15, hour: 8))
+        #expect(!(try #require(Date(year: 2020, month: 1, day: 15, hour: 10, calendar: calendar)).isBetween(
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 10, calendar: calendar)),
+                try #require(Date(year: 2020, month: 1, day: 15, hour: 8, calendar: calendar))
             )))
 
-        let date = Date()
-        let date1 = Date(timeIntervalSinceNow: 1000)
-        let date2 = Date(timeIntervalSinceNow: -1000)
-        #expect(date.isBetween(date1, date2))
+        let date = Date(timeIntervalSince1970: 1_579_080_600)
+        #expect(date.isBetween(date + 1000, date - 1000))
     }
 }
 
@@ -265,8 +271,8 @@ extension DateTests {
 extension DateTests {
     @Test
     func shortString() throws {
-        let date = try #require(Date(year: 2017, month: 5, day: 14, hour: 13, minute: 32))
-        #expect("2017-05-14" == date.shortString())
+        let date = try #require(Date(year: 2017, month: 5, day: 14, hour: 13, minute: 32, calendar: calendar))
+        #expect("2017-05-14" == date.shortString(calendar: calendar))
     }
 }
 
@@ -335,45 +341,66 @@ extension DateTests {
 
     @Test
     func incrementHours() throws {
-        #expect(try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31)) + .hours(1) == Date(year: 2015, month: 9, day: 18, hour: 19, minute: 31))
+        #expect(
+            try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31, calendar: calendar)) + .hours(1)
+                == Date(year: 2015, month: 9, day: 18, hour: 19, minute: 31, calendar: calendar)
+        )
 
-        #expect(try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31)) - .hours(1) == Date(year: 2015, month: 9, day: 18, hour: 17, minute: 31))
+        #expect(
+            try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31, calendar: calendar)) - .hours(1)
+                == Date(year: 2015, month: 9, day: 18, hour: 17, minute: 31, calendar: calendar)
+        )
 
         // Overnight
-        #expect(try #require(Date(year: 2015, month: 12, day: 14, hour: 23, minute: 4)) + .hours(1) == Date(year: 2015, month: 12, day: 15, minute: 4))
+        #expect(try #require(Date(year: 2015, month: 12, day: 14, hour: 23, minute: 4, calendar: calendar)) + .hours(1) == Date(year: 2015, month: 12, day: 15, minute: 4, calendar: calendar))
 
-        #expect(try #require(Date(year: 2018, month: 11, day: 1, hour: 1)) - .hours(3) == Date(year: 2018, month: 10, day: 31, hour: 22))
+        #expect(try #require(Date(year: 2018, month: 11, day: 1, hour: 1, calendar: calendar)) - .hours(3) == Date(year: 2018, month: 10, day: 31, hour: 22, calendar: calendar))
 
         // New year
-        #expect(try #require(Date(year: 2018, month: 12, day: 31, hour: 23)) + .hours(2) == Date(year: 2019, month: 1, day: 1, hour: 1))
+        #expect(try #require(Date(year: 2018, month: 12, day: 31, hour: 23, calendar: calendar)) + .hours(2) == Date(year: 2019, month: 1, day: 1, hour: 1, calendar: calendar))
 
-        #expect(try #require(Date(year: 2017, month: 1, day: 1, hour: 2)) - .hours(3) == Date(year: 2016, month: 12, day: 31, hour: 23))
+        #expect(try #require(Date(year: 2017, month: 1, day: 1, hour: 2, calendar: calendar)) - .hours(3) == Date(year: 2016, month: 12, day: 31, hour: 23, calendar: calendar))
     }
 
     @Test
     func incrementMinutes() throws {
-        #expect(try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31)) + .minutes(1) == Date(year: 2015, month: 9, day: 18, hour: 18, minute: 32))
+        #expect(
+            try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31, calendar: calendar)) + .minutes(1)
+                == Date(year: 2015, month: 9, day: 18, hour: 18, minute: 32, calendar: calendar)
+        )
 
-        #expect(try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31)) - .minutes(1) == Date(year: 2015, month: 9, day: 18, hour: 18, minute: 30))
+        #expect(
+            try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31, calendar: calendar)) - .minutes(1)
+                == Date(year: 2015, month: 9, day: 18, hour: 18, minute: 30, calendar: calendar)
+        )
 
-        #expect(try #require(Date(year: 2015, month: 12, day: 14, hour: 7, minute: 4)) + .minutes(95) == Date(year: 2015, month: 12, day: 14, hour: 8, minute: 39))
+        #expect(
+            try #require(Date(year: 2015, month: 12, day: 14, hour: 7, minute: 4, calendar: calendar)) + .minutes(95)
+                == Date(year: 2015, month: 12, day: 14, hour: 8, minute: 39, calendar: calendar)
+        )
 
         // Overnight
-        #expect(try #require(Date(year: 2015, month: 4, day: 2, hour: 13, minute: 15)) + .minutes(1445) == Date(year: 2015, month: 4, day: 3, hour: 13, minute: 20))
+        #expect(
+            try #require(Date(year: 2015, month: 4, day: 2, hour: 13, minute: 15, calendar: calendar)) + .minutes(1445)
+                == Date(year: 2015, month: 4, day: 3, hour: 13, minute: 20, calendar: calendar)
+        )
 
-        #expect(try #require(Date(year: 2015, month: 12, day: 14, hour: 23, minute: 4)) + .minutes(60) == Date(year: 2015, month: 12, day: 15, hour: 0, minute: 4))
+        #expect(
+            try #require(Date(year: 2015, month: 12, day: 14, hour: 23, minute: 4, calendar: calendar)) + .minutes(60)
+                == Date(year: 2015, month: 12, day: 15, hour: 0, minute: 4, calendar: calendar)
+        )
 
-        #expect(try #require(Date(year: 2018, month: 11, day: 1, hour: 1)) - .minutes(180) == Date(year: 2018, month: 10, day: 31, hour: 22))
+        #expect(try #require(Date(year: 2018, month: 11, day: 1, hour: 1, calendar: calendar)) - .minutes(180) == Date(year: 2018, month: 10, day: 31, hour: 22, calendar: calendar))
 
         // New year
-        #expect(try #require(Date(year: 2018, month: 12, day: 31, hour: 23)) + .minutes(120) == Date(year: 2019, month: 1, day: 1, hour: 1))
+        #expect(try #require(Date(year: 2018, month: 12, day: 31, hour: 23, calendar: calendar)) + .minutes(120) == Date(year: 2019, month: 1, day: 1, hour: 1, calendar: calendar))
 
-        #expect(try #require(Date(year: 2017, month: 1, day: 1, hour: 2)) - .minutes(180) == Date(year: 2016, month: 12, day: 31, hour: 23))
+        #expect(try #require(Date(year: 2017, month: 1, day: 1, hour: 2, calendar: calendar)) - .minutes(180) == Date(year: 2016, month: 12, day: 31, hour: 23, calendar: calendar))
     }
 
     @Test
     func incrementDaysWithCalendar() throws {
-        let calendar = Calendar(identifier: .islamicUmmAlQura)
+        let calendar = Calendar(identifier: .islamicUmmAlQura, timeZone: .posix)
 
         let date = try #require(Date(year: 1440, month: 2, day: 30, hour: 18, minute: 31, calendar: calendar))
         #expect(date + .days(1, calendar) == Date(year: 1440, month: 3, day: 1, hour: 18, minute: 31, calendar: calendar))
@@ -424,7 +451,7 @@ extension DateTests {
 extension DateTests {
     @Test
     func currentTimeInDecimal() throws {
-        let time = try #require(Date(year: 2012, month: 10, day: 23, hour: 18, minute: 15)).timeToDecimal
+        let time = try #require(Date(year: 2012, month: 10, day: 23, hour: 18, minute: 15, calendar: calendar)).timeToDecimal(using: calendar)
         let expectedTime = 18.25
 
         #expect(time == expectedTime)
@@ -453,32 +480,32 @@ extension DateTests {
 
     @Test
     func ramadan() throws {
-        #expect(try #require(Date(year: 2015, month: 7, day: 1, hour: 12, minute: 30)).isRamadan())
-        #expect(!(try #require(Date(year: 2017, month: 1, day: 1, hour: 12, minute: 30)).isRamadan()))
+        #expect(try #require(Date(year: 2015, month: 7, day: 1, hour: 12, minute: 30, calendar: calendar)).isRamadan(timeZone: calendar.timeZone))
+        #expect(!(try #require(Date(year: 2017, month: 1, day: 1, hour: 12, minute: 30, calendar: calendar)).isRamadan(timeZone: calendar.timeZone)))
     }
 
     @Test
     func jumuah() throws {
-        #expect(try #require(Date(year: 2017, month: 4, day: 21, hour: 12, minute: 30)).isJumuah)
-        #expect(!(try #require(Date(year: 2017, month: 1, day: 1, hour: 12, minute: 30)).isJumuah))
+        #expect(try #require(Date(year: 2017, month: 4, day: 21, hour: 12, minute: 30, calendar: calendar)).isJumuah(using: calendar))
+        #expect(!(try #require(Date(year: 2017, month: 1, day: 1, hour: 12, minute: 30, calendar: calendar)).isJumuah(using: calendar)))
     }
 
     @Test
     func eid() throws {
-        #expect(try #require(Date(year: 2022, month: 7, day: 9, hour: 12, minute: 30)).isEid())
-        #expect(try #require(Date(year: 2022, month: 7, day: 12, hour: 12, minute: 30)).isEid())
-        #expect(try #require(Date(year: 2022, month: 5, day: 2, hour: 12, minute: 30)).isEid())
-        #expect(try #require(Date(year: 2022, month: 5, day: 4, hour: 12, minute: 30)).isEid())
-        #expect(!(try #require(Date(year: 2022, month: 7, day: 13, hour: 12, minute: 30)).isEid()))
-        #expect(!(try #require(Date(year: 2022, month: 5, day: 5, hour: 12, minute: 30)).isEid()))
-        #expect(!(try #require(Date(year: 2017, month: 1, day: 1, hour: 12, minute: 30)).isEid()))
+        #expect(try #require(Date(year: 2022, month: 7, day: 9, hour: 12, minute: 30, calendar: calendar)).isEid(timeZone: calendar.timeZone))
+        #expect(try #require(Date(year: 2022, month: 7, day: 12, hour: 12, minute: 30, calendar: calendar)).isEid(timeZone: calendar.timeZone))
+        #expect(try #require(Date(year: 2022, month: 5, day: 2, hour: 12, minute: 30, calendar: calendar)).isEid(timeZone: calendar.timeZone))
+        #expect(try #require(Date(year: 2022, month: 5, day: 4, hour: 12, minute: 30, calendar: calendar)).isEid(timeZone: calendar.timeZone))
+        #expect(!(try #require(Date(year: 2022, month: 7, day: 13, hour: 12, minute: 30, calendar: calendar)).isEid(timeZone: calendar.timeZone)))
+        #expect(!(try #require(Date(year: 2022, month: 5, day: 5, hour: 12, minute: 30, calendar: calendar)).isEid(timeZone: calendar.timeZone)))
+        #expect(!(try #require(Date(year: 2017, month: 1, day: 1, hour: 12, minute: 30, calendar: calendar)).isEid(timeZone: calendar.timeZone)))
     }
 }
 
 extension DateTests {
     @Test
     func dateIntervalProgress() throws {
-        let date = Date.now
+        let date = Date(timeIntervalSince1970: 1_626_386_307)
         let interval = DateInterval(start: date, duration: 100)
 
         let result1 = interval.progress(at: date + 20)
