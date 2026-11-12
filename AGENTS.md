@@ -4,13 +4,12 @@ Open-source Swift package (github.com/ZamzamInc/ZamzamKit, MIT) of micro utiliti
 
 ## Layout
 
-Pure SPM, `swift-tools-version: 6.0`, platforms macOS 14 / iOS 17 / watchOS 10 (7.0 dropped tvOS and the older shims). Every target, tests included, builds in the **Swift 6 language mode** under strict concurrency. Keep new code Sendable-correct rather than reaching for `@unchecked`: the existing unchecked conformances each carry a comment naming the invariant that makes them safe. Framework callbacks are exposed as `async` calls (notifications, downloads, location authorization) or `AsyncStream`s (headings), and a value that crosses actors is a Sendable copy (`LocationManager.Heading`, not `CLHeading`). No external dependencies. Five library products:
+Pure SPM, `swift-tools-version: 6.0`, platforms macOS 14 / iOS 17 / watchOS 10 (7.0 dropped tvOS and the older shims). Every target, tests included, builds in the **Swift 6 language mode** under strict concurrency. Keep new code Sendable-correct rather than reaching for `@unchecked`: the existing unchecked conformances each carry a comment naming the invariant that makes them safe. Framework callbacks are exposed as `async` calls (notifications, downloads, location authorization) or `AsyncStream`s (headings), and a value that crosses actors is a Sendable copy (`LocationManager.Heading`, not `CLHeading`). No external dependencies. Four library products:
 
 - `ZamzamCore` — application helpers, errors, extensions, infix operators, keychain, logging, network, utilities
 - `ZamzamLocation` — location services (depends on ZamzamCore)
 - `ZamzamNotification` — user notifications (depends on ZamzamCore)
 - `ZamzamUI` — SwiftUI extensions, platform shims, sheets, styles, views (depends on ZamzamCore)
-- `ZamzamKit` — umbrella of the four
 
 ## Build & test
 
@@ -25,7 +24,7 @@ Tests live flat in `Tests/` (the `ZamzamKitTests` target has `path: "Tests"`; **
 
 Use `try #require` before comparing an optional, and hoist a `try` out of a comparison: `#expect(a == try #require(b))` does not parse. `#expect` has no tolerance form, so write `#expect(abs(a - (b)) <= tolerance)`. Bug fixes land with a failing test first.
 
-Wrap a known environmental failure in `withKnownIssue`, so a real regression still turns the run red; none is wrapped today. `CurrencyFormatterTests.sA` pins the new Saudi riyal sign (U+20C1), which macOS renders since 27.2 and iOS since 27; a Mac on an earlier macOS still renders `ر.س.` and fails it. The suite's gate is My Mac on the pinned Xcode.
+Wrap a known environmental failure in `withKnownIssue`, so a real regression still turns the run red; none is wrapped today. The suite calls no live service and its gate is My Mac on the pinned Xcode.
 
 SwiftLint (`.swiftlint.yml`, the rules PrayWatch and PrayKit share) has no build phase in a package, so run `swiftlint` from the package root before a push. `swiftlint --fix` rewrites from the source text alone, so a fix can compile and still change behavior (a protocol's `@escaping` stripped, a double optional's `?? nil` removed): run it one rule at a time with `--only-rule`, read every hunk, and make declaration changes (access, `final`, attributes, initializers) by hand.
 
@@ -51,4 +50,4 @@ Vetted third-party agent skills live in `.claude/skills/` (MIT; each folder is a
 | `ZamzamUI` views, styles, sheets, platform shims | `.claude/skills/swiftui-pro/SKILL.md` | [Paul Hudson](https://github.com/twostraws/SwiftUI-Agent-Skill) |
 | Tests: suites, `#expect`, `withKnownIssue`, parallel-safety | `.claude/skills/swift-testing-pro/SKILL.md` | [Paul Hudson](https://github.com/twostraws/Swift-Testing-Agent-Skill) |
 
-The platform floor and the compatibility contract outrank a skill's defaults. `swiftui-pro` assumes a current-OS app and `swift-format-style` rejects every `Formatter` subclass; here an API newer than the floor goes behind `#available` (or a shim in `Platforms/`), and an existing public formatter is deprecated, never deleted.
+The platform floor and the compatibility contract outrank a skill's defaults. `swiftui-pro` assumes a current-OS app and `swift-format-style` rejects every `Formatter` subclass; here an API newer than the floor goes behind `#available` (or a shim in `Platforms/`).

@@ -10,26 +10,20 @@ let package = Package(
         .watchOS(.v10)
     ],
     products: [
-        .library(name: "ZamzamKit", targets: ["ZamzamKit"]),
         .library(name: "ZamzamCore", targets: ["ZamzamCore"]),
         .library(name: "ZamzamLocation", targets: ["ZamzamLocation"]),
         .library(name: "ZamzamNotification", targets: ["ZamzamNotification"]),
         .library(name: "ZamzamUI", targets: ["ZamzamUI"]),
     ],
     targets: [
-        .target(
-            name: "ZamzamKit",
+        .testTarget(
+            name: "ZamzamKitTests",
             dependencies: [
                 "ZamzamCore",
                 "ZamzamLocation",
                 "ZamzamNotification",
                 "ZamzamUI"
             ],
-            swiftSettings: [.swiftLanguageMode(.v6)]
-        ),
-        .testTarget(
-            name: "ZamzamKitTests",
-            dependencies: ["ZamzamKit"],
             path: "Tests",
             exclude: ["Network/Certificates"],
             resources: [.process("Resources")],

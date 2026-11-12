@@ -77,8 +77,6 @@ public extension Distribution {
 // MARK: - Device
 
 public extension Distribution {
-    var manufacturer: String { "Apple" }
-
     var platform: String {
         #if os(iOS)
         return "iOS"
@@ -89,27 +87,3 @@ public extension Distribution {
         #endif
     }
 }
-
-#if os(watchOS)
-import WatchKit
-
-@MainActor
-public extension Distribution {
-    var deviceName: String { WKInterfaceDevice.current().name }
-    var deviceModel: String { WKInterfaceDevice.current().model }
-    var deviceIdentifier: String { WKInterfaceDevice.current().identifierForVendor?.uuidString ?? "" }
-    var osName: String { WKInterfaceDevice.current().systemName }
-    var osVersion: String { WKInterfaceDevice.current().systemVersion }
-}
-#elseif canImport(UIKit)
-import UIKit.UIDevice
-
-@MainActor
-public extension Distribution {
-    var deviceName: String { UIDevice.current.name }
-    var deviceModel: String { UIDevice.current.model }
-    var deviceIdentifier: String { UIDevice.current.identifierForVendor?.uuidString ?? "" }
-    var osName: String { UIDevice.current.systemName }
-    var osVersion: String { UIDevice.current.systemVersion }
-}
-#endif
