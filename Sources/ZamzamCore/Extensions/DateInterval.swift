@@ -9,11 +9,6 @@
 import Foundation.NSDateInterval
 
 public extension DateInterval {
-    /// Returns remaining progress between the date interval.
-    var progress: (value: Double, remaining: TimeInterval) {
-        progress(at: .now)
-    }
-
     /// Returns remaining progress between the date interval at a specified date.
     func progress(at date: Date) -> (value: Double, remaining: TimeInterval) {
         guard date > start else { return (0, end.timeIntervalSince(date)) }

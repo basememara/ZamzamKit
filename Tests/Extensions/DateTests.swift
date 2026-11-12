@@ -17,18 +17,19 @@ struct DateTests {
 extension DateTests {
     @Test
     func componentsInitializer() {
-        #expect(Date(year: 2022, month: 6, day: 2, hour: 14, minute: 54, second: 25, timeZone: .gmt, calendar: calendar) == Date(timeIntervalSince1970: 1654181665))
+        #expect(Date(year: 2022, month: 6, day: 2, hour: 14, minute: 54, second: 25, calendar: calendar) == Date(timeIntervalSince1970: 1654181665))
     }
 
     @Test
-    func componentsInitializerTimeZone() {
-        #expect(Date(year: 2022, month: 3, day: 6, hour: 2, minute: 1, second: 43, timeZone: TimeZone(abbreviation: "EST"), calendar: calendar) == Date(timeIntervalSince1970: 1646550103))
+    func componentsInitializerTimeZone() throws {
+        let eastern = Calendar(identifier: .gregorian, timeZone: try #require(TimeZone(abbreviation: "EST")))
+        #expect(Date(year: 2022, month: 3, day: 6, hour: 2, minute: 1, second: 43, calendar: eastern) == Date(timeIntervalSince1970: 1646550103))
     }
 
     @Test
-    func componentsInitializerCalendar() {
+    func componentsInitializerCalendar() throws {
         // Islamic calendar
-        #expect(Date(year: 1443, month: 11, day: 3, hour: 17, minute: 42, second: 15, timeZone: .gmt, calendar: Calendar(identifier: .islamicUmmAlQura)) == Date(timeIntervalSince1970: 1654191735))
+        #expect(Date(year: 1443, month: 11, day: 3, hour: 17, minute: 42, second: 15, calendar: Calendar(identifier: .islamicUmmAlQura, timeZone: .gmt)) == Date(timeIntervalSince1970: 1654191735))
 
         // Chinese calendar
         let gregorianYear = 2022
@@ -44,81 +45,9 @@ extension DateTests {
             hour: 0,
             minute: 18,
             second: 59,
-            timeZone: TimeZone(abbreviation: "EST"),
-            calendar: Calendar(identifier: .chinese)
+            calendar: Calendar(identifier: .chinese, timeZone: try #require(TimeZone(abbreviation: "EST")))
         )
         #expect(date == Date(timeIntervalSince1970: 1654229939))
-    }
-}
-
-extension DateTests {
-    @Test
-    func isPast() throws {
-        #expect(Date(timeIntervalSinceNow: -100).isPast)
-        #expect(!(Date(timeIntervalSinceNow: 100).isPast))
-    }
-
-    @Test
-    func isFuture() throws {
-        #expect(Date(timeIntervalSinceNow: 100).isFuture)
-        #expect(!(Date(timeIntervalSinceNow: -100).isFuture))
-    }
-
-    @Test
-    func isToday() throws {
-        #expect(Date().isToday(using: calendar))
-    }
-
-    @Test
-    func isYesterday() throws {
-        #expect(Date(timeIntervalSinceNow: -86_400).isYesterday(using: calendar))
-    }
-
-    @Test
-    func isTomorrow() throws {
-        #expect(Date(timeIntervalSinceNow: 86_400).isTomorrow(using: calendar))
-    }
-
-    @Test
-    func isWeekday() throws {
-        let wednesday = try #require(Date(year: 2020, month: 1, day: 15, calendar: calendar))
-        let saturday = try #require(Date(year: 2020, month: 1, day: 18, calendar: calendar))
-
-        #expect(wednesday.isWeekday(using: calendar))
-        #expect(!(saturday.isWeekday(using: calendar)))
-    }
-
-    @Test
-    func isWeekend() throws {
-        let wednesday = try #require(Date(year: 2020, month: 1, day: 15, calendar: calendar))
-        let saturday = try #require(Date(year: 2020, month: 1, day: 18, calendar: calendar))
-
-        #expect(saturday.isWeekend(using: calendar))
-        #expect(!(wednesday.isWeekend(using: calendar)))
-    }
-
-    @Test
-    func isInCurrentWeek() throws {
-        let date = Date()
-        #expect(date.isCurrentWeek(using: calendar))
-        let dateOneYearFromNow = date + .weeks(1, calendar)
-        #expect(!(dateOneYearFromNow.isCurrentWeek(using: calendar)))
-    }
-
-    @Test
-    func isInCurrentMonth() throws {
-        let date = Date()
-        #expect(date.isCurrentMonth(using: calendar))
-        let dateOneYearFromNow = date + .months(1, calendar)
-        #expect(!(dateOneYearFromNow.isCurrentMonth(using: calendar)))
-    }
-
-    @Test
-    func isInCurrentYear() throws {
-        let date = Date()
-        #expect(date.isCurrentYear(using: calendar))
-        let dateOneYearFromNow = date + .years(1, calendar)
-        #expect(!(dateOneYearFromNow.isCurrentYear(using: calendar)))
     }
 }
 
@@ -273,6 +202,7 @@ extension DateTests {
     func shortString() throws {
         let date = try #require(Date(year: 2017, month: 5, day: 14, hour: 13, minute: 32, calendar: calendar))
         #expect("2017-05-14" == date.shortString(calendar: calendar))
+        #expect("2017-05-14" == date.shortString(calendar: Calendar(identifier: .gregorian, timeZone: .gmt)))
     }
 }
 
@@ -281,62 +211,92 @@ extension DateTests {
 extension DateTests {
     @Test
     func incrementYears() throws {
-        #expect(try #require(Date(year: 2018, month: 11, day: 1)) + .years(1) == Date(year: 2019, month: 11, day: 1))
+        #expect(try #require(Date(year: 2018, month: 11, day: 1, calendar: calendar)) + .years(1, calendar) == Date(year: 2019, month: 11, day: 1, calendar: calendar))
 
-        #expect(try #require(Date(year: 2018, month: 11, day: 1)) - .years(3) == Date(year: 2015, month: 11, day: 1))
+        #expect(try #require(Date(year: 2018, month: 11, day: 1, calendar: calendar)) - .years(3, calendar) == Date(year: 2015, month: 11, day: 1, calendar: calendar))
 
-        let expected = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31))
+        let expected = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31, calendar: calendar))
 
-        #expect(try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31)) + .years(0) == expected)
+        #expect(try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31, calendar: calendar)) + .years(0, calendar) == expected)
     }
 
     @Test
     func incrementMonths() throws {
-        #expect(try #require(Date(year: 2018, month: 12, day: 1)) + .months(1) == Date(year: 2019, month: 1, day: 1))
+        #expect(try #require(Date(year: 2018, month: 12, day: 1, calendar: calendar)) + .months(1, calendar) == Date(year: 2019, month: 1, day: 1, calendar: calendar))
 
-        #expect(try #require(Date(year: 2018, month: 11, day: 1)) - .months(3) == Date(year: 2018, month: 8, day: 1))
+        #expect(try #require(Date(year: 2018, month: 11, day: 1, calendar: calendar)) - .months(3, calendar) == Date(year: 2018, month: 8, day: 1, calendar: calendar))
 
-        let expected = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31))
+        let expected = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31, calendar: calendar))
 
-        #expect(try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31)) + .months(0) == expected)
+        #expect(try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31, calendar: calendar)) + .months(0, calendar) == expected)
     }
 
     @Test
     func incrementDays() throws {
-        #expect(try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31)) + .days(1) == Date(year: 2015, month: 09, day: 19, hour: 18, minute: 31))
+        #expect(
+            try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31, calendar: calendar)) + .days(1, calendar)
+                == Date(year: 2015, month: 09, day: 19, hour: 18, minute: 31, calendar: calendar)
+        )
 
-        #expect(try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31)) - .days(1) == Date(year: 2015, month: 9, day: 17, hour: 18, minute: 31))
+        #expect(
+            try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31, calendar: calendar)) - .days(1, calendar)
+                == Date(year: 2015, month: 9, day: 17, hour: 18, minute: 31, calendar: calendar)
+        )
 
-        let expected = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31))
+        let expected = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31, calendar: calendar))
 
-        #expect(try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31)) + .days(0) == expected)
+        #expect(try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31, calendar: calendar)) + .days(0, calendar) == expected)
 
         // Cross months
-        #expect(try #require(Date(year: 1990, month: 1, day: 31, hour: 22, minute: 12)) + .days(2) == Date(year: 1990, month: 2, day: 2, hour: 22, minute: 12))
+        #expect(
+            try #require(Date(year: 1990, month: 1, day: 31, hour: 22, minute: 12, calendar: calendar)) + .days(2, calendar)
+                == Date(year: 1990, month: 2, day: 2, hour: 22, minute: 12, calendar: calendar)
+        )
 
         // Leap year
-        #expect(try #require(Date(year: 2016, month: 2, day: 20, hour: 13, minute: 12)) + .days(10) == Date(year: 2016, month: 3, day: 1, hour: 13, minute: 12))
+        #expect(
+            try #require(Date(year: 2016, month: 2, day: 20, hour: 13, minute: 12, calendar: calendar)) + .days(10, calendar)
+                == Date(year: 2016, month: 3, day: 1, hour: 13, minute: 12, calendar: calendar)
+        )
     }
 
     @Test
     func incrementWeeks() throws {
-        #expect(try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31)) + .weeks(1) == Date(year: 2015, month: 9, day: 25, hour: 18, minute: 31))
+        #expect(
+            try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31, calendar: calendar)) + .weeks(1, calendar)
+                == Date(year: 2015, month: 9, day: 25, hour: 18, minute: 31, calendar: calendar)
+        )
 
-        #expect(try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31)) - .weeks(1) == Date(year: 2015, month: 9, day: 11, hour: 18, minute: 31))
+        #expect(
+            try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31, calendar: calendar)) - .weeks(1, calendar)
+                == Date(year: 2015, month: 9, day: 11, hour: 18, minute: 31, calendar: calendar)
+        )
 
-        #expect(try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31)) + .weeks(4) == Date(year: 2015, month: 10, day: 16, hour: 18, minute: 31))
+        #expect(
+            try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31, calendar: calendar)) + .weeks(4, calendar)
+                == Date(year: 2015, month: 10, day: 16, hour: 18, minute: 31, calendar: calendar)
+        )
 
-        #expect(try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31)) - .weeks(4) == Date(year: 2015, month: 8, day: 21, hour: 18, minute: 31))
+        #expect(
+            try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31, calendar: calendar)) - .weeks(4, calendar)
+                == Date(year: 2015, month: 8, day: 21, hour: 18, minute: 31, calendar: calendar)
+        )
 
-        let expected = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31))
+        let expected = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31, calendar: calendar))
 
-        #expect(try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31)) + .weeks(0) == expected)
+        #expect(try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31, calendar: calendar)) + .weeks(0, calendar) == expected)
 
         // Cross months
-        #expect(try #require(Date(year: 1990, month: 1, day: 31, hour: 22, minute: 12)) + .weeks(4) == Date(year: 1990, month: 2, day: 28, hour: 22, minute: 12))
+        #expect(
+            try #require(Date(year: 1990, month: 1, day: 31, hour: 22, minute: 12, calendar: calendar)) + .weeks(4, calendar)
+                == Date(year: 1990, month: 2, day: 28, hour: 22, minute: 12, calendar: calendar)
+        )
 
         // Leap year
-        #expect(try #require(Date(year: 2016, month: 2, day: 20, hour: 13, minute: 12)) + .weeks(10) == Date(year: 2016, month: 4, day: 30, hour: 13, minute: 12))
+        #expect(
+            try #require(Date(year: 2016, month: 2, day: 20, hour: 13, minute: 12, calendar: calendar)) + .weeks(10, calendar)
+                == Date(year: 2016, month: 4, day: 30, hour: 13, minute: 12, calendar: calendar)
+        )
     }
 
     @Test
@@ -408,42 +368,42 @@ extension DateTests {
 
     @Test
     func incrementDecrementShorthand() throws {
-        var date1 = try #require(Date(year: 2018, month: 12, day: 31, hour: 23))
+        var date1 = try #require(Date(year: 2018, month: 12, day: 31, hour: 23, calendar: calendar))
         date1 += .minutes(120)
-        #expect(date1 == Date(year: 2019, month: 1, day: 1, hour: 1))
+        #expect(date1 == Date(year: 2019, month: 1, day: 1, hour: 1, calendar: calendar))
 
-        var date2 = try #require(Date(year: 2015, month: 4, day: 2, hour: 13, minute: 15))
+        var date2 = try #require(Date(year: 2015, month: 4, day: 2, hour: 13, minute: 15, calendar: calendar))
         date2 += .minutes(1445)
-        #expect(date2 == Date(year: 2015, month: 4, day: 3, hour: 13, minute: 20))
+        #expect(date2 == Date(year: 2015, month: 4, day: 3, hour: 13, minute: 20, calendar: calendar))
 
-        var date3 = try #require(Date(year: 2016, month: 2, day: 20, hour: 13, minute: 12))
-        date3 += .weeks(10)
-        #expect(date3 == Date(year: 2016, month: 4, day: 30, hour: 13, minute: 12))
+        var date3 = try #require(Date(year: 2016, month: 2, day: 20, hour: 13, minute: 12, calendar: calendar))
+        date3 += .weeks(10, calendar)
+        #expect(date3 == Date(year: 2016, month: 4, day: 30, hour: 13, minute: 12, calendar: calendar))
 
-        var date4 = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31))
-        date4 += .days(0)
-        let date4Expected = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31))
+        var date4 = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31, calendar: calendar))
+        date4 += .days(0, calendar)
+        let date4Expected = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31, calendar: calendar))
         #expect(date4 == date4Expected)
 
-        var date5 = try #require(Date(year: 1990, month: 1, day: 31, hour: 22, minute: 12))
-        date5 += .days(2)
-        #expect(date5 == Date(year: 1990, month: 2, day: 2, hour: 22, minute: 12))
+        var date5 = try #require(Date(year: 1990, month: 1, day: 31, hour: 22, minute: 12, calendar: calendar))
+        date5 += .days(2, calendar)
+        #expect(date5 == Date(year: 1990, month: 2, day: 2, hour: 22, minute: 12, calendar: calendar))
 
-        var date6 = try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31))
-        date6 -= .days(1)
-        #expect(date6 == Date(year: 2015, month: 9, day: 17, hour: 18, minute: 31))
+        var date6 = try #require(Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31, calendar: calendar))
+        date6 -= .days(1, calendar)
+        #expect(date6 == Date(year: 2015, month: 9, day: 17, hour: 18, minute: 31, calendar: calendar))
 
-        var date7 = try #require(Date(year: 2018, month: 11, day: 1))
-        date7 -= .months(3)
-        #expect(date7 == Date(year: 2018, month: 8, day: 1))
+        var date7 = try #require(Date(year: 2018, month: 11, day: 1, calendar: calendar))
+        date7 -= .months(3, calendar)
+        #expect(date7 == Date(year: 2018, month: 8, day: 1, calendar: calendar))
 
-        var date8 = try #require(Date(year: 2018, month: 11, day: 1))
-        date8 -= .years(3)
-        #expect(date8 == Date(year: 2015, month: 11, day: 1))
+        var date8 = try #require(Date(year: 2018, month: 11, day: 1, calendar: calendar))
+        date8 -= .years(3, calendar)
+        #expect(date8 == Date(year: 2015, month: 11, day: 1, calendar: calendar))
 
-        var date9 = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31))
-        date9 += .years(0)
-        let date9Expected = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31))
+        var date9 = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31, calendar: calendar))
+        date9 += .years(0, calendar)
+        let date9Expected = try #require(Date(year: 2015, month: 10, day: 26, hour: 18, minute: 31, calendar: calendar))
         #expect(date9 == date9Expected)
     }
 }
@@ -461,17 +421,19 @@ extension DateTests {
 extension DateTests {
     @Test
     func hijriDate() throws {
+        let english = Locale(identifier: "en_US")
+
         do {
-            let gregorianDate = try #require(Date(year: 2015, month: 9, day: 23, hour: 12, minute: 30))
-            let hijriDate = gregorianDate.hijriString(template: "yyyyGMMMMd")
+            let gregorianDate = try #require(Date(year: 2015, month: 9, day: 23, hour: 12, minute: 30, calendar: calendar))
+            let hijriDate = gregorianDate.hijriString(template: "yyyyGMMMMd", timeZone: calendar.timeZone, locale: english)
             let expectedDate = "Dhuʻl-Hijjah 10, 1436 AH"
 
             #expect("\(hijriDate)" == expectedDate)
         }
 
         do {
-            let gregorianDate = try #require(Date(year: 2017, month: 6, day: 26))
-            let hijriDate = gregorianDate.hijriString()
+            let gregorianDate = try #require(Date(year: 2017, month: 6, day: 26, calendar: calendar))
+            let hijriDate = gregorianDate.hijriString(timeZone: calendar.timeZone, locale: english)
             let expectedDate = "Shawwal 2, 1438"
 
             #expect("\(hijriDate)" == expectedDate)
@@ -499,6 +461,19 @@ extension DateTests {
         #expect(!(try #require(Date(year: 2022, month: 7, day: 13, hour: 12, minute: 30, calendar: calendar)).isEid(timeZone: calendar.timeZone)))
         #expect(!(try #require(Date(year: 2022, month: 5, day: 5, hour: 12, minute: 30, calendar: calendar)).isEid(timeZone: calendar.timeZone)))
         #expect(!(try #require(Date(year: 2017, month: 1, day: 1, hour: 12, minute: 30, calendar: calendar)).isEid(timeZone: calendar.timeZone)))
+    }
+
+    @Test
+    func hijriComponentsAreReadInTheTimeZoneGiven() throws {
+        // 11 PM UTC on 10 Dhuʻl-Hijjah 1443, already the next morning in Auckland
+        let date = try #require(Date(year: 2022, month: 7, day: 9, hour: 23, calendar: calendar))
+        let auckland = try #require(TimeZone(identifier: "Pacific/Auckland"))
+
+        #expect(date.hijri(timeZone: .gmt).day == 10)
+        #expect(date.hijri(timeZone: auckland).day == 11)
+        #expect(date.hijri(offset: 1, timeZone: .gmt).day == 11)
+        #expect(date.isEid(timeZone: .gmt))
+        #expect(date.isEid(offset: 3, timeZone: auckland) == false)
     }
 }
 

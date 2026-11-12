@@ -10,16 +10,12 @@ import Foundation.NSCalendar
 import Foundation.NSDate
 
 public extension Date {
-    /// Represents a specified number of a calendar component unit.
+    /// Represents a specified number of a unit whose length no calendar changes.
     ///
     /// You use `TimeIntervalUnit` values to do date calculations.
     enum TimeIntervalUnit {
         case minutes(Int)
         case hours(Int)
-        case days(Int)
-        case weeks(Int)
-        case months(Int)
-        case years(Int)
     }
 
     /// Represents a specified number of a calendar component unit for a calendar.
@@ -98,7 +94,7 @@ public extension Date {
 public extension Date {
     /// Adds time interval components to a date.
     ///
-    ///     Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31) + .days(1)
+    ///     date + .hours(1)
     ///
     /// - Parameters:
     ///   - left: The date to calculate from.
@@ -109,20 +105,12 @@ public extension Date {
             return left + TimeInterval(value * 60)
         case let .hours(value):
             return left + TimeInterval(value * 3600)
-        case let .days(value):
-            return left + .days(value, .current)
-        case let .weeks(value):
-            return left + .weeks(value, .current)
-        case let .months(value):
-            return left + .months(value, .current)
-        case let .years(value):
-            return left + .years(value, .current)
         }
     }
 
     /// Subtracts time interval components from a date.
     ///
-    ///     Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31) - .days(1)
+    ///     date - .hours(1)
     ///
     /// - Parameters:
     ///   - left: The date to calculate from.
@@ -133,14 +121,6 @@ public extension Date {
             return left + .minutes(-value)
         case let .hours(value):
             return left + .hours(-value)
-        case let .days(value):
-            return left + .days(-value)
-        case let .weeks(value):
-            return left + .weeks(-value)
-        case let .months(value):
-            return left + .months(-value)
-        case let .years(value):
-            return left + .years(-value)
         }
     }
 }
@@ -172,8 +152,7 @@ public extension Date {
 
     /// Adds time interval components to a date.
     ///
-    ///     var date = Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31)
-    ///     date += .days(1)
+    ///     date += .hours(1)
     ///
     /// - Parameters:
     ///   - left: The date to calculate from.
@@ -184,8 +163,7 @@ public extension Date {
 
     /// Subtracts time interval components from a date.
     ///
-    ///     var date = Date(year: 2015, month: 9, day: 18, hour: 18, minute: 31)
-    ///     date -= .days(1)
+    ///     date -= .hours(1)
     ///
     /// - Parameters:
     ///   - left: The date to calculate from.

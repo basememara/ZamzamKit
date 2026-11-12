@@ -6,6 +6,20 @@
       "options" : {
 
       }
+    },
+    {
+      "id" : "C1C7132D-A44A-449E-A41F-4DBF79FCA53D",
+      "name" : "Arabic (Saudi Arabia), Auckland time",
+      "options" : {
+        "environmentVariableEntries" : [
+          {
+            "key" : "TZ",
+            "value" : "Pacific\/Auckland"
+          }
+        ],
+        "language" : "ar",
+        "region" : "SA"
+      }
     }
   ],
   "defaultOptions" : {

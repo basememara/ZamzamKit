@@ -212,8 +212,8 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
+    /// How often a repeating notification fires.
     enum ScheduleInterval: Sendable {
-        case once
         case minute
         case hour
         case day
@@ -222,8 +222,7 @@ public extension UNUserNotificationCenter {
         case year
     }
 
-    /// Schedules a local notification at a date, once or repeating. A repeating one fires at the date's wall-clock time
-    /// in `calendar`; a one-time one fires at the date itself, whatever the calendar.
+    /// Schedules a local notification once, at the date itself.
     func add(
         date: Date,
         body: String,
@@ -233,8 +232,38 @@ public extension UNUserNotificationCenter {
         sound: UNNotificationSound? = .default,
         attachments: [UNNotificationAttachment] = [],
         interruptionLevel: UNNotificationInterruptionLevel? = nil,
-        repeats: ScheduleInterval = .once,
-        calendar: Calendar = .current,
+        identifier: String = UUID().uuidString,
+        category: String = UNUserNotificationCenter.mainCategoryIdentifier,
+        userInfo: [String: Any] = [:]
+    ) async throws {
+        let content = Self.content(
+            body: body,
+            title: title,
+            subtitle: subtitle,
+            badge: badge,
+            sound: sound,
+            attachments: attachments,
+            interruptionLevel: interruptionLevel,
+            category: category,
+            userInfo: userInfo
+        )
+
+        let trigger = UNCalendarNotificationTrigger(date: date)
+        try await add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger))
+    }
+
+    /// Schedules a local notification that repeats at the date's wall-clock time in `calendar`.
+    func add(
+        date: Date,
+        repeats: ScheduleInterval,
+        calendar: Calendar,
+        body: String,
+        title: String? = nil,
+        subtitle: String? = nil,
+        badge: NSNumber? = nil,
+        sound: UNNotificationSound? = .default,
+        attachments: [UNNotificationAttachment] = [],
+        interruptionLevel: UNNotificationInterruptionLevel? = nil,
         identifier: String = UUID().uuidString,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
         userInfo: [String: Any] = [:]
@@ -257,11 +286,18 @@ public extension UNUserNotificationCenter {
 }
 
 extension UNCalendarNotificationTrigger {
-    /// A trigger for `date`; a repeating one matches its wall-clock time in `calendar`.
+    /// A trigger that fires once, at `date`.
+    convenience init(date: Date) {
+        // A single instant is named in UTC, where no hour repeats when clocks go back. Without its calendar and
+        // time zone, the trigger reads the components in the device's, which can differ.
+        let calendar = Calendar(identifier: .gregorian, timeZone: .gmt)
+        let units: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second, .calendar, .timeZone]
+        self.init(dateMatching: calendar.dateComponents(units, from: date), repeats: false)
+    }
+
+    /// A trigger that repeats at the wall-clock time of `date` in `calendar`.
     convenience init(date: Date, repeats: UNUserNotificationCenter.ScheduleInterval, calendar: Calendar) {
         let units: Set<Calendar.Component> = switch repeats {
-        case .once:
-            [.year, .month, .day, .hour, .minute, .second]
         case .minute:
             [.second]
         case .hour:
@@ -276,11 +312,8 @@ extension UNCalendarNotificationTrigger {
             [.hour, .minute, .day, .month]
         }
 
-        // A single instant is named in UTC, where no hour repeats when clocks go back. Without its calendar and
-        // time zone, the trigger reads the components in the device's, which can differ.
-        let calendar = repeats == .once ? Calendar(identifier: .gregorian, timeZone: .gmt) : calendar
         let components = calendar.dateComponents(units.union([.calendar, .timeZone]), from: date)
-        self.init(dateMatching: components, repeats: repeats != .once)
+        self.init(dateMatching: components, repeats: true)
     }
 }
 

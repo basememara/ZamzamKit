@@ -24,7 +24,7 @@ extension NotificationTriggerTests {
         #expect(newYork.component(.hour, from: date) == 1)
         #expect(newYork.component(.hour, from: date - 3600) == 1)
 
-        let trigger = UNCalendarNotificationTrigger(date: date, repeats: .once, calendar: newYork)
+        let trigger = UNCalendarNotificationTrigger(date: date)
 
         #expect(trigger.nextTriggerDate() == date)
     }
