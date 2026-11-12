@@ -41,8 +41,8 @@ public extension DateFormatter {
 
     /// Creates a formatter whose format is the localized form of a template.
     ///
-    /// A `nil` time zone or locale takes the calendar's. The template is resolved when the formatter is created, in the
-    /// device's locale, and `locale` is set after it.
+    /// A `nil` time zone or locale takes the calendar's. The template is resolved once, when the formatter is created,
+    /// in the formatter's locale: the one passed, else the calendar's, else the device's.
     convenience init(
         dateFormatTemplate: String,
         timeZone: TimeZone? = nil,
@@ -50,8 +50,6 @@ public extension DateFormatter {
         locale: Locale? = nil
     ) {
         self.init()
-
-        self.setLocalizedDateFormatFromTemplate(dateFormatTemplate)
 
         if let timeZone = timeZone ?? calendar?.timeZone {
             self.timeZone = timeZone
@@ -64,5 +62,7 @@ public extension DateFormatter {
         if let locale = locale ?? calendar?.locale {
             self.locale = locale
         }
+
+        self.setLocalizedDateFormatFromTemplate(dateFormatTemplate)
     }
 }
