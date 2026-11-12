@@ -61,7 +61,6 @@ public extension URLRequest {
         // Not all HTTP methods support body
         let doesSupportBody = ![.get, .delete].contains(method)
 
-        // Parameters become query string parameters for some methods, replacing an item of the same name
         if !doesSupportBody, let parameters, !parameters.isEmpty, var components = URLComponents(string: url.absoluteString) {
             let names = parameters.keys.map { $0.lowercased() }
 

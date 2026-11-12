@@ -62,7 +62,7 @@ private extension EchoURLProtocol {
         let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems ?? []
 
         // A session hands a protocol the body as a stream, never as `httpBody`
-        let body = request.httpBody ?? request.httpBodyStream.map(Data.init(reading:))
+        let body = request.httpBodyStream.map(Data.init(reading:))
 
         return [
             "url": url.absoluteString,

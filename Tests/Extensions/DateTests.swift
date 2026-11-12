@@ -561,7 +561,7 @@ extension DateTests {
 // MARK: - Helpers
 
 private extension Date {
-    func string(format: String, timeZone: TimeZone? = nil, calendar: Calendar? = nil, locale: Locale? = nil) -> String {
-        DateFormatter(dateFormat: format, timeZone: timeZone, calendar: calendar, locale: locale).string(from: self)
+    func string(format: String, calendar: Calendar) -> String {
+        DateFormatter(dateFormat: format, calendar: calendar).string(from: self)
     }
 }
