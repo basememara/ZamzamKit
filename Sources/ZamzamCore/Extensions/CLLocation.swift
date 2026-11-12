@@ -39,12 +39,19 @@ public extension Array where Element == CLLocationCoordinate2D {
 }
 
 public extension CLLocation {
+    /// The place a reverse geocode finds for a location.
     struct LocationMeta: Sendable {
+        /// The latitude and longitude of the location.
         public var coordinates: (latitude: Double, longitude: Double)?
+        /// The city, or the county or district when the place has no city.
         public var locality: String?
+        /// The country's name.
         public var country: String?
+        /// The country's ISO code, such as `US`.
         public var countryCode: String?
+        /// The time zone at the place.
         public var timeZone: TimeZone?
+        /// The state or province.
         public var administrativeArea: String?
     }
 

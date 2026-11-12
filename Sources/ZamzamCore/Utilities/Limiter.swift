@@ -12,37 +12,22 @@
 
 import Foundation.NSDate
 
-/// A limiter that will delay work items until time limit for the preceding call is over.
+/// Limits how often work runs, by throttling or debouncing calls.
 ///
-///     let debouncer = Limiter(policy: .debounce, duration: 5)
-///     var value = ""
+///     let limiter = Limiter(policy: .debounce, duration: 0.5)
 ///
-///     func sendToServer() {
-///         debouncer.run {
-///             // Example: send to server after no typing
-///             // for 5 seconds instead of once per character
-///             print(value) // "hello"
+///     func textChanged(to text: String) async {
+///         await limiter.run {
+///             // Runs once typing has paused for half a second
+///             await search(for: text)
 ///         }
 ///     }
-///
-///     value.append("h")
-///     sendToServer() // Waits until 5 seconds
-///
-///     value.append("e")
-///     sendToServer() // Waits until 5 seconds
-///
-///     value.append("l")
-///     sendToServer() // Waits until 5 seconds
-///
-///     value.append("l")
-///     sendToServer() // Waits until 5 seconds
-///
-///     value.append("o")
-///     sendToServer() // Fires after 5 seconds
-///
 public actor Limiter {
+    /// How a limiter treats calls that come close together.
     public enum Policy: Sendable {
+        /// Runs a call at once, then drops every call until the duration has passed.
         case throttle
+        /// Waits for the duration after the latest call and runs that one. The calls before it are dropped.
         case debounce
     }
 
@@ -50,19 +35,15 @@ public actor Limiter {
     private let duration: TimeInterval
     private var task: Task<Void, Error>?
 
-    /// Initialize a new limiter with given delay for work items.
+    /// Creates a limiter.
     ///
-    /// - Parameters:
-    ///   - policy: The strategy for limiting a series of executions.
-    ///   - duration: The number of seconds until the execution block is called.
+    /// - Parameter duration: The seconds a throttle stays closed after a call, or a debounce waits after the latest one.
     public init(policy: Policy, duration: TimeInterval) {
         self.policy = policy
         self.duration = duration
     }
 
-    /// Execute a work item and ensures it is not called until the delay is completed.
-    ///
-    /// - Parameter block: The work item to be invoked on the limiter with the policy.
+    /// Runs the operation, delays it or drops it, as the policy decides. Returns without waiting for the operation.
     public func run(_ operation: @escaping @Sendable () async -> Void) {
         switch policy {
         case .throttle:

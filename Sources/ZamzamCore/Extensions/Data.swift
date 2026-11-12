@@ -9,13 +9,10 @@
 import Foundation.NSData
 
 public extension Data {
-    /// String by encoding Data using UTF8 encoding.
+    /// The data read as UTF-8 text, or `nil` when it isn't valid UTF-8.
     var string: String? { string(encoding: .utf8) }
 
-    /// String by encoding Data using the given encoding (if applicable).
-    ///
-    /// - Parameter encoding: encoding.
-    /// - Returns: String by encoding Data using the given encoding (if applicable).
+    /// Returns the data read as text in the encoding, or `nil` when it isn't valid in that encoding.
     func string(encoding: String.Encoding) -> String? {
         String(data: self, encoding: encoding)
     }
@@ -24,7 +21,7 @@ public extension Data {
 // MARK: - Encoding
 
 public extension Data {
-    /// Returns a URL safe Base-64 encoded string.
+    /// Returns the data as Base64 in the URL-safe alphabet (`-` and `_`), without padding.
     func base64URLEncodedString() -> String {
         base64EncodedString()
             .replacingOccurrences(of: "/", with: "_")
@@ -33,7 +30,7 @@ public extension Data {
             .trimmingCharacters(in: .whitespaces)
     }
 
-    /// Returns a hex string representation of the data.
+    /// Returns the bytes as lowercase hexadecimal, two characters each.
     func hexString() -> String {
         // https://stackoverflow.com/a/55523487/235334
         reduce(into: "", { $0 += String(format: "%02x", $1) })
@@ -43,14 +40,14 @@ public extension Data {
 // MARK: - Codable
 
 public extension Data {
-    /// Returns a value of the type you specify, decoded from a data object.
+    /// Returns a value of the type you specify, decoded from the data as JSON.
     func decode<T: Decodable>(decoder: JSONDecoder = JSONDecoder()) throws -> T {
         try decoder.decode(T.self, from: self)
     }
 }
 
 public extension Encodable {
-    /// Returns the encoded data of the type you specify.
+    /// Returns the value encoded as JSON data.
     func encode(encoder: JSONEncoder = JSONEncoder()) throws -> Data {
         try encoder.encode(self)
     }

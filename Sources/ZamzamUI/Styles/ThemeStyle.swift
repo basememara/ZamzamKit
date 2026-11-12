@@ -8,12 +8,11 @@
 
 import SwiftUI
 
+/// A view modifier that sets an app's shared look, applied with `themeStyle(_:)`.
 public protocol ThemeStyle: ViewModifier {}
 
 public extension View {
-    /// Sets the theme for views within an app.
-    ///
-    /// Use this modifier to set a global them used within an app:
+    /// Applies a theme to this view, such as the root view of a scene.
     ///
     ///     struct MyScene: Scene {
     ///         var body: some Scene {

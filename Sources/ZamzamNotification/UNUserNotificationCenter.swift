@@ -18,9 +18,10 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
+    /// The category a notification gets when none is named.
     static let mainCategoryIdentifier = "mainCategory"
 
-    /// Registers the local and remote notifications with the category and actions it supports.
+    /// Asks for notification permission and registers one category with its actions.
     ///
     ///     let granted = await UNUserNotificationCenter.current().register(
     ///         delegate: self,
@@ -33,21 +34,12 @@ public extension UNUserNotificationCenter {
     ///                 textInputButtonTitle: "Send",
     ///                 textInputPlaceholder: "Type your message"
     ///             )
-    ///         ],
-    ///         authorizations: [.alert, .badge, .sound]
+    ///         ]
     ///     )
     ///
-    ///     if granted {
-    ///         log.debug("Authorization for notification succeeded.")
-    ///     } else {
-    ///         log.warn("Authorization for notification not given.")
-    ///     }
+    /// The category replaces the center's whole set, as in `register(delegate:categories:authorizations:)`.
     ///
-    /// - Parameters:
-    ///   - delegate: The object that processes incoming notifications and notification-related actions.
-    ///   - category: The category identifier. Default is `UNUserNotificationCenter.mainCategoryIdentifier`.
-    ///   - actions: The actions for the category.
-    ///   - authorizations: Constants for requesting authorization to interact with the user. Default is `[.alert, .badge, .sound]`.
+    /// - Returns: Whether the user granted permission.
     func register(
         delegate: UNUserNotificationCenterDelegate? = nil,
         category: String = UNUserNotificationCenter.mainCategoryIdentifier,
@@ -57,42 +49,21 @@ public extension UNUserNotificationCenter {
         await register(delegate: delegate, categories: [category: actions], authorizations: authorizations)
     }
 
-    /// Registers the local and remote notifications with the categories and actions it supports.
+    /// Asks for notification permission and registers categories with their actions.
     ///
     ///     let granted = await UNUserNotificationCenter.current().register(
     ///         delegate: self,
     ///         categories: [
     ///             "order": [
-    ///                 UNNotificationAction(
-    ///                     identifier: "confirmAction",
-    ///                     title: "Confirm",
-    ///                     options: [.foreground]
-    ///                 )
-    ///             ],
-    ///             "chat": [
-    ///                 UNTextInputNotificationAction(
-    ///                     identifier: "replyAction",
-    ///                     title: "Reply",
-    ///                     options: [],
-    ///                     textInputButtonTitle: "Send",
-    ///                     textInputPlaceholder: "Type your message"
-    ///                 )
+    ///                 UNNotificationAction(identifier: "confirmAction", title: "Confirm", options: [.foreground])
     ///             ],
     ///             "offer": nil
-    ///         ],
-    ///         authorizations: [.alert, .badge, .sound]
+    ///         ]
     ///     )
     ///
-    ///     if granted {
-    ///         log.debug("Authorization for notification succeeded.")
-    ///     } else {
-    ///         log.warn("Authorization for notification not given.")
-    ///     }
+    /// The categories replace the center's whole set when they differ from it. A `nil` delegate leaves the current one.
     ///
-    /// - Parameters:
-    ///   - delegate: The object that processes incoming notifications and notification-related actions.
-    ///   - categories: The category identifiers and associated actions.
-    ///   - authorizations: Constants for requesting authorization to interact with the user. Default is `[.alert, .badge, .sound]`.
+    /// - Returns: Whether the user granted permission. When the request itself fails, `true` unless the status is denied.
     func register(
         delegate: UNUserNotificationCenterDelegate? = nil,
         categories: [String: [UNNotificationAction]?],
@@ -127,32 +98,22 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
-    /// Returns a list of all pending or delivered user notifications.
+    /// Returns the request of every pending notification, followed by that of every delivered one.
     func notificationRequests() async -> [UNNotificationRequest] {
         await (pendingNotificationRequests() + deliveredNotifications().map(\.request))
     }
 
-    /// Retrieve the pending or delivered notification request.
-    ///
-    /// - Parameters:
-    ///   - id: The identifier for the requests.
+    /// Returns the pending or delivered request with the identifier, or `nil` when there is none.
     func get(withIdentifier id: String) async -> UNNotificationRequest? {
         await notificationRequests().first { $0.identifier == id }
     }
 
-    /// Retrieve the pending or delivered notification requests.
-    ///
-    /// - Parameters:
-    ///   - ids: The identifiers for the requests.
+    /// Returns the pending and delivered requests with any of the identifiers.
     func get(withIdentifiers ids: [String]) async -> [UNNotificationRequest] {
         await notificationRequests().filter { ids.contains($0.identifier) }
     }
 
-    /// Retrieve the pending or delivered notification request.
-    ///
-    /// - Parameters:
-    ///   - id: The category for the requests.
-    ///   - pendingOnly: Specify to select pending or all requests including delivered.
+    /// Returns the requests in the category: pending and delivered, or pending alone with `pendingOnly`.
     func get(withCategory categoryIdentifier: String, pendingOnly: Bool = false) async -> [UNNotificationRequest] {
         await (pendingOnly ? pendingNotificationRequests() : notificationRequests())
             .filter { $0.content.categoryIdentifier == categoryIdentifier }
@@ -160,19 +121,12 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
-    /// Determines if the notification request exists.
-    ///
-    /// - Parameters:
-    ///   - id: The identifier for the requests.
+    /// Returns whether a pending or delivered request has the identifier.
     func exists(withIdentifier id: String) async -> Bool {
         await get(withIdentifier: id) != nil
     }
 
-    /// Determines if the notification request exists.
-    ///
-    /// - Parameters:
-    ///   - categoryIdentifier: The category identifier for the requests.
-    ///   - pendingOnly: Specify to select pending or all requests including delivered.
+    /// Returns whether a request is in the category: pending or delivered, or pending alone with `pendingOnly`.
     func exists(withCategory categoryIdentifier: String, pendingOnly: Bool = false) async -> Bool {
         await !get(withCategory: categoryIdentifier, pendingOnly: pendingOnly).isEmpty
     }
@@ -229,11 +183,17 @@ extension UNUserNotificationCenter {
 public extension UNUserNotificationCenter {
     /// How often a repeating notification fires.
     enum ScheduleInterval: Sendable {
+        /// Every minute, at the date's second.
         case minute
+        /// Every hour, at the date's minute.
         case hour
+        /// Every day, at the date's hour and minute.
         case day
+        /// Every week, on the date's weekday at its hour and minute.
         case week
+        /// Every month, on the date's day of the month at its hour and minute.
         case month
+        /// Every year, on the date's month and day at its hour and minute.
         case year
     }
 
@@ -394,32 +354,24 @@ private extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
-    /// Remove pending or delivered user notifications.
-    ///
-    /// - Parameter id: The identifier of the user notification to remove.
+    /// Removes the pending and delivered notifications with the identifier.
     func remove(withIdentifier id: String) {
         remove(withIdentifiers: [id])
     }
 
-    /// Remove pending and delivered user notifications.
-    ///
-    /// - Parameter ids: The identifiers of the user notifications to remove.
+    /// Removes the pending and delivered notifications with any of the identifiers.
     func remove(withIdentifiers ids: [String]) {
         guard !ids.isEmpty else { return }
         removePendingNotificationRequests(withIdentifiers: ids)
         removeDeliveredNotifications(withIdentifiers: ids)
     }
 
-    /// Remove pending and delivered user notifications.
-    ///
-    /// - Parameter withCategory: The category of the user notification to remove.
+    /// Removes the pending and delivered notifications in the category.
     func remove(withCategory category: String) async {
         await remove(withCategories: [category])
     }
 
-    /// Remove pending and delivered user notifications.
-    ///
-    /// - Parameter withCategory: The categories of the user notification to remove.
+    /// Removes the pending and delivered notifications in any of the categories.
     func remove(withCategories categories: [String]) async {
         remove(withIdentifiers: await notificationRequests().compactMap {
             categories.contains($0.content.categoryIdentifier) ? $0.identifier : nil
@@ -438,16 +390,12 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
-    /// Remove pending user notifications.
-    ///
-    /// - Parameter withCategory: The category of the user notification to remove.
+    /// Removes the pending notifications in the category.
     func removePending(withCategory category: String) async {
         await removePending(withCategories: [category])
     }
 
-    /// Remove pending user notifications.
-    ///
-    /// - Parameter withCategory: The categories of the user notification to remove.
+    /// Removes the pending notifications in any of the categories.
     func removePending(withCategories categories: [String]) async {
         removePendingNotificationRequests(
             withIdentifiers: await pendingNotificationRequests().compactMap {
@@ -462,16 +410,12 @@ public extension UNUserNotificationCenter {
 }
 
 public extension UNUserNotificationCenter {
-    /// Remove delivered user notifications.
-    ///
-    /// - Parameter withCategory: The category of the user notification to remove.
+    /// Removes the delivered notifications in the category.
     func removeDelivered(withCategory category: String) async {
         await removeDelivered(withCategories: [category])
     }
 
-    /// Remove delivered user notifications.
-    ///
-    /// - Parameter withCategory: The categories of the user notification to remove.
+    /// Removes the delivered notifications in any of the categories.
     func removeDelivered(withCategories categories: [String]) async {
         removeDeliveredNotifications(
             withIdentifiers: await deliveredNotifications().compactMap {

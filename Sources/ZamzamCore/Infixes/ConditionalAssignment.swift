@@ -14,10 +14,10 @@ precedencegroup Comparison {
 infix operator ?= : Comparison
 // swiftlint:disable static_operator
 
-/// Assign value if not nil.
+/// Assigns the right value to the left when the right isn't `nil`, and leaves the left alone otherwise.
 ///
-///     var test: Int? = 123
-///     var value: Int? = nil
+///     var test = 123
+///     var value: Int?
 ///
 ///     test ?= value
 ///     // test == 123
@@ -31,10 +31,10 @@ public func ?= <T>(left: inout T, right: T?) {
     left = value
 }
 
-/// Assign value if not nil.
+/// Assigns the right value to an optional left when the right isn't `nil`, and leaves the left alone otherwise.
 ///
-///     var test: Int = 123
-///     var value: Int? = nil
+///     var test: Int? = 123
+///     var value: Int?
 ///
 ///     test ?= value
 ///     // test == 123

@@ -33,7 +33,7 @@ public extension URL {
 }
 
 public extension URL {
-    /// Returns a URL constructed by swapping the given path extension to self.
+    /// Returns the URL with its path extension replaced.
     ///
     ///     URL(fileURLWithPath: "/SomePath/SomeTests.swift")
     ///         .replacingPathExtension("json") // "/SomePath/SomeTests.json"
@@ -43,12 +43,12 @@ public extension URL {
         deletingPathExtension().appendingPathExtension(pathExtension)
     }
 
-    /// Returns a URL constructed by appending the suffix to the path component to self.
+    /// Returns the URL with a suffix added to the file's name, before its extension.
     ///
     ///     URL(fileURLWithPath: "/SomePath/SomeTests.json")
     ///         .appendingToFileName("123") // "/SomePath/SomeTests123.json"
     ///
-    /// - Parameter string: Thesuffix to add.
+    /// - Parameter string: The suffix to add. An empty one returns the URL unchanged.
     func appendingToFileName(_ string: String) -> URL {
         guard !string.isEmpty else { return self }
 

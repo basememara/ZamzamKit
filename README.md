@@ -1,21 +1,22 @@
 # ZamzamKit
 
-[![Platform](https://img.shields.io/badge/platform-macos%20%7C%20ios%20%7C%20watchos%20%7C%20ipados-lightgrey)](https://github.com/ZamzamInc/ZamzamKit)
+[![Platform](https://img.shields.io/badge/platform-macos%20%7C%20ios%20%7C%20watchos%20%7C%20ipados-lightgrey)](https://github.com/basememara/ZamzamKit)
 [![Swift](https://img.shields.io/badge/Swift-6-orange.svg)](https://swift.org)
 [![Xcode](https://img.shields.io/badge/Xcode-27-blue.svg)](https://developer.apple.com/xcode)
 [![SPM](https://img.shields.io/badge/SPM-Compatible-blue)](https://swift.org/package-manager)
 [![MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
-ZamzamKit is a Swift package for rapid development using a collection of micro utility extensions for Standard Library, Foundation, and other native frameworks.
+ZamzamKit is a Swift package of small utilities and extensions over the standard library, Foundation, SwiftUI and other Apple frameworks. It has no dependencies.
 
 ## Installation
 
 ### Swift Package Manager
 
-`.package(url: "git@github.com:ZamzamInc/ZamzamKit.git", .upToNextMajor(from: "7.0.0"))`
+`.package(url: "https://github.com/basememara/ZamzamKit.git", .upToNextMajor(from: "8.0.0"))`
 
-The `ZamzamKit` package contains four different products you can import. Add any combination of these to your target's dependencies within your `Package.swift` manifest:
-```
+The package has four products. Add the ones you use to your target's dependencies, and import each module by its own name:
+
+```swift
 .target(
     name: "MyAppExample",
     dependencies: [
@@ -26,1008 +27,535 @@ The `ZamzamKit` package contains four different products you can import. Add any
     ]
 )
 ```
-*Note: This library is highly volatile and changes often to stay ahead of cutting-edge technologies. It is recommended to copy over code that you want into your own libraries or fork it.*
+
+| Product | Holds | Depends on |
+|---|---|---|
+| `ZamzamCore` | Extensions, networking, logging, keychain, utilities | No other product |
+| `ZamzamLocation` | `LocationManager` | ZamzamCore |
+| `ZamzamNotification` | `UNUserNotificationCenter` extensions | ZamzamCore |
+| `ZamzamUI` | SwiftUI modifiers, sheets, styles and views | ZamzamCore |
+
+Requirements: macOS 14, iOS 17 or watchOS 10, and the Swift 6 language mode (`swift-tools-version: 6.0`). Every target builds under strict concurrency.
+
+A breaking change to public API waits for the next major version. If you are on 7, read [Moving from 7 to 8](#moving-from-7-to-8).
 
 Agent-driven maintenance (build and test loop, conventions, consumer contract) is documented in [AGENTS.md](AGENTS.md).
 
 ## ZamzamCore
 
-### Standard+
+### Collections
 
-<details>
-<summary>Collection</summary>
-
-> Get distinct elements from an array:
 ```swift
-[1, 1, 3, 3, 5, 5, 7, 9, 9].distinct // [1, 3, 5, 7, 9]
+[1, 2, 3, 4, 5].chunked(into: 2) // [[1, 2], [3, 4], [5]]
+[1, 3, 3, 5, 7, 9].removeDuplicates() // [1, 3, 5, 7, 9]
+["a", "b", "c"][safe: 5] // nil
+["a", "b", "c"].prefix(2).array // ["a", "b"]
+
+var letters = ["a", "b", "c", "a"]
+letters.remove("a") // ["b", "c", "a"]
+
+let items: [String]? = nil
+items.isNilOrEmpty // true
 ```
 
-> Remove an element from an array by the value:
+Sort by a key path, read a dictionary with a stored default, and step through the cases of an enum:
+
 ```swift
-var array = ["a", "b", "c", "d", "e"]
-array.remove("c")
-array // ["a", "b", "d", "e"]
-```
+people.sorted(by: \.name)
+people.sorted(by: \.age, >)
 
-> Easily get the array version of an array slice:
-```swift
-["a", "b", "c", "d", "e"].prefix(3).array
-```
+var counts = ["abc": 123]
+counts["lmn", initial: 555] // 555, and stored under "lmn"
+counts.jsonString() // {"abc":123,"lmn":555}, keys in any order
 
-> Safely retrieve an element at the given index if it exists:
-```swift
-// Before
-if let items = tabBarController.tabBar.items, items.count > 4 {
-    items[3].selectedImage = UIImage("my-image")
-}
-```
-```swift
-// After
-tabBarController.tabBar.items?[safe: 3]?.selectedImage = UIImage("my-image")
-
-[1, 3, 5, 7, 9][safe: 1] // Optional(3)
-[1, 3, 5, 7, 9][safe: 12] // nil
-```
-
-> Determine if a value is contained within the array of equatable values:
-```swift
-"b".within(["a", "b", "c"]) // true
-
-let status: OrderStatus = .cancelled
-status.within([.requested, .accepted, .inProgress]) // false
-```
-</details>
-
-<details>
-<summary>Dictionary</summary>
-
-> Convert to JSON string or data:
-```swift
-// Before
-guard let data = try? JSONSerialization.data(withJSONObject: merged, options: []),
-    let log = String(data: data, encoding: .utf8) else {
-        return
+enum Direction: CaseIterable {
+    case north, east, south, west
 }
 
-// After
-guard let log = merged.jsonString else {
-    return
-}
-```
-</details>
-
-<details>
-<summary>Number</summary>
-
-> Round doubles, floats, or any floating-point type:
-```swift
-123.12312421.rounded(toPlaces: 3) // 123.123
-Double.pi.rounded(toPlaces: 2) // 3.14
-```
-</details>
-
-<details>
-<summary>String</summary>
-
-> Create a new random string of given length:
-```swift
-String(random: 10) // "zXWG4hSgL9"
-String(random: 4, prefix: "PIN-") // "PIN-uSjm"
+Direction.east.previous() // .north
+Direction.west.next() // nil
 ```
 
-> Safely use subscript indexes and ranges on strings:
+### Strings
+
+Integer subscripts count characters from the start and return `nil` out of bounds:
+
 ```swift
 let value = "Abcdef123456"
 value[3] // "d"
-value[3..<6] // "def"
 value[3...6] // "def1"
-value[3...] // "def123456"
-value[3...99] // nil
+value[3..<99] // "def123456"
 value[99] // nil
-```
 
-> Validate string against common formats:
-```swift
-"test@example.com".isEmail // true
-"123456789".isNumber // true
-"zamzam".isAlpha // true
-"zamzam123".isAlphaNumeric // true
-```
-
-> Remove spaces or new lines from both ends:
-```swift
-" Abcdef123456 \n\r  ".trimmed // "Abcdef123456"
-```
-
-> Truncate to a given number of characters:
-```swift
-"Abcdef123456".truncated(3) // "Abc..."
-"Abcdef123456".truncated(6, trailing: "***") // "Abcdef***"
-```
-
-> Determine if a given value is contained:
-```swift
-"1234567890".contains("567") // true
-"abc123xyz".contains("ghi") // false
-```
-
-> Injects a separator every nth characters:
-```swift
+value.truncated(3) // "Abc..."
 "1234567890".separated(every: 2, with: "-") // "12-34-56-78-90"
+" Abcdef123456 \n".trimmed // "Abcdef123456"
+"a-b-c".replacingLastOccurrence(of: "-", with: "+") // "a-b+c"
+"a b\nc".strippingCharacters(in: .whitespacesAndNewlines) // "abc"
+String(random: 4, prefix: "PIN-") // "PIN-uSjm"
 ```
 
-> Remove the characters contained in a given set:
-```swift
-let string = """
-    { 0         1
-    2                  34
-    56       7             8
-    9
-    }
-    """
+Encoding, decoding and optional checks:
 
-string.strippingCharacters(in: .whitespacesAndNewlines) // {0123456789}
+```swift
+"Abc".base64Encoded() // "QWJj"
+"QWJj".base64Decoded() // "Abc"
+"4 &lt; 5 &amp; 12 &#x20ac;".htmlDecoded() // "4 < 5 & 12 €"
+
+let name: String? = "  "
+name.isNilOrEmpty // false
+name.isNilOrBlank // true
 ```
 
-> Replace the characters contained in a given character set with another string:
+### Numbers
+
 ```swift
-let set = CharacterSet.alphanumerics
-    .insert(charactersIn: "_")
-    .inverted
-
-let string = """
-    _abcdefghijklmnopqrstuvwxyz
-    ABCDEFGHIJKLMNOPQRSTUVWXYZ
-    0{1 2<3>4@5#6`7~8?9,0
-
-    1
-    """
-
-string.replacingCharacters(in: set, with: "_") //_abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ_0_1_2_3_4_5_6_7_8_9_0__1
+Double.pi.rounded(toPlaces: 2) // 3.14
 ```
 
-> Match using a regular expression pattern:
+### Dates
+
+Nothing reads the device's calendar, time zone or clock on its own. Every calculation takes the calendar, which carries the time zone:
+
 ```swift
-"1234567890".match(regex: "^[0-9]+?$") // true
-"abc123xyz".match(regex: "^[A-Za-z]+$") // false
+let calendar = Calendar(identifier: .gregorian, timeZone: .gmt)
+
+guard let date = Date(year: 2018, month: 11, day: 1, hour: 18, minute: 15, calendar: calendar) else { return }
+
+date.startOfDay(using: calendar) // Nov 1, 2018, 00:00:00
+date.endOfMonth(using: calendar) // Nov 30, 2018, 23:59:59
+date.tomorrow(using: calendar) // Nov 2, 2018, 18:15:00
+date.timeToDecimal(using: calendar) // 18.25
+date.shortString(calendar: calendar) // "2018-11-01"
+date.isBetween(date - .hours(1), date + .hours(1)) // true
 ```
 
-> Replace occurrences of a regular expression pattern:
+Add calendar units with the calendar, and minutes or hours without one:
+
 ```swift
-"aa1bb22cc3d888d4ee5".replacing(regex: "\\d", with: "*") // "aa*bb**cc*d***d*ee*"
+date + .days(3, calendar)
+date - .months(1, calendar)
+date + .minutes(90)
+
+var reminder = date
+reminder += .weeks(1, calendar)
 ```
 
-> Remove HTML for plain text:
+Intervals, weeks and formatters:
+
 ```swift
-"<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>".htmlStripped // "This is web content with a link."
+let interval = DateInterval(start: date, duration: 3600)
+interval.progress(at: date + .minutes(15)) // (value: 0.25, remaining: 2700)
+interval.stride(by: 1200) // four dates, 20 minutes apart
+
+calendar.generateWeek(for: date) // seven dates, the first moment of each day in the date's week
+date.expanding(to: .monthWithTrailingWeeks, using: calendar) // November widened to whole weeks, as a month grid shows it
+
+DateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm", calendar: calendar, locale: .posix).string(from: date)
+// "2018-11-01T18:15"
 ```
 
-> Encoders and decoders:
+Hijri dates are read on the Umm al-Qura calendar, in the time zone you pass:
+
 ```swift
-value.urlEncoded()
-value.urlDecoded()
-value.htmlDecoded()
-value.base64Encoded()
-value.base64Decoded()
-value.base64URLEncoded()
+let timeZone = TimeZone.gmt
+
+guard let holiday = Date(year: 2017, month: 6, day: 26, calendar: calendar) else { return }
+
+holiday.hijriString(timeZone: timeZone, locale: Locale(identifier: "en_US")) // "Shawwal 2, 1438"
+holiday.hijri(timeZone: timeZone).month // 10
+holiday.isEid(timeZone: timeZone) // true
+holiday.isRamadan(offset: -3, timeZone: timeZone) // true, three days earlier
+holiday.isJumuah(using: calendar) // false, a Monday
 ```
 
-> Get an encrypted version of the string in hex format:
-```swift
-"test@example.com".sha256() // 973dfe463ec85785f5f95af5ba3906eedb2d931c24e69824a89ea65dba4e813b
-```
-
-> Easily get the string version of substring:
-```swift
-"hello world".prefix(5).string
-```
-
-> Determine if an optional string is `nil` or has no characters
-```swift
-var value: String? = "test 123"
-value.isNilOrEmpty
-```
-</details>
-
-### Foundation+
-
-<details>
-<summary>Bundle</summary>
-
-> Get the string from a file within any bundle:
-```swift
-Bundle.main.string(file: "Test.txt") // "This is a test. Abc 123.\n"
-```
-
-> Get a generic array from a property list file within any bundle:
+### Data and JSON
 
 ```swift
-let values: [String] = Bundle.main.array(plist: "Array.plist")
-
-values[0] // "Abc"
-values[1] // "Def"
-values[2] // "Ghi"
-```
-
-![Image of BundleArray](./Documentation/Images/BundleArray.png)
-
-```swift
-let values: [[String: Any]] = Bundle.main.array(plist: "Things.plist")
-
-values[0]["id"] as? Int // 1
-values[0]["name"] as? String // "Test 1"
-values[0]["description"] as? String // "This is a test for 1.")
-
-values[1]["id"] as? Int // 2)
-values[1]["name"] as? String // "Test 2")
-values[1]["description"] as? String // "This is a test for 2.")
-
-values[2]["id"] as? Int // 3)
-values[2]["name"] as? String // "Test 3")
-values[2]["description"] as? String // "This is a test for 3.")
-```
-
-![Image of BundleArray](./Documentation/Images/BundleArray2.png)
-
-> Get a dictionary from a property list file within any bundle:
-```swift
-let values: [String: Any] = Bundle.main.contents(plist: "Settings.plist")
-
-values["MyString1"] as? String // "My string value 1."
-values["MyNumber1"] as? Int // 123
-values["MyBool1"] as? Bool // false
-values["MyDate1"] as? Date // 2018-11-21 15:40:03 +0000
-```
-
-![Image of BundleDictionary](./Documentation/Images/BundleDictionary.png)
-</details>
-
-<details>
-<summary>Color</summary>
-
-> Additional color initializers:
-```swift
-UIColor(hex: 0x990000)
-UIColor(hex: 0x4286F4)
-UIColor(rgb: (66, 134, 244))
-UIColor.random
-```
-</details>
-
-<details>
-<summary>Currency</summary>
-
-> A formatter that converts between numeric values and their textual currency representations:
-```swift
-let formatter = CurrencyFormatter()
-formatter.string(fromAmount: 123456789.987) // "$123,456,789.99"
-
-let formatter2 = CurrencyFormatter(for: Locale(identifier: "fr-FR"))
-formatter2.string(fromCents: 123456789) // "1 234 567,89 €"
-```
-</details>
-
-<details>
-<summary>Data</summary>
-
-> Get a hex string representation of the data:
-```swift
-Data()?.hexString() // 68626a4a424a6a68626a68616420663773376474663720737567796f3837545e49542a69797567
-```
-
-> Get an encrypted version of the data:
-```swift
-Data()?.sha256()
-```
-</details>
-
-<details>
-<summary>Date</summary>
-
-> Determine if a date is in the past or future:
-```swift
-Date(timeIntervalSinceNow: -100).isPast // true
-Date(timeIntervalSinceNow: 100).isPast // false
-
-Date(timeIntervalSinceNow: 100).isFuture // true
-Date(timeIntervalSinceNow: -100).isFuture // false
-```
-
-> Determine if a date is today, yesterday, or tomorrow:
-```swift
-Date().isToday // true
-Date(timeIntervalSinceNow: -90_000).isYesterday // true
-Date(timeIntervalSinceNow: 90_000).isTomorrow // true
-```
-
-> Determine if a date is within a weekday or weekend period:
-```swift
-Date().isWeekday // false
-Date().isWeekend // true
-```
-
-> Get the beginning or end of the day:
-```swift
-Date().startOfDay // "2018/11/21 00:00:00"
-Date().endOfDay // "2018/11/21 23:59:59"
-```
-
-> Get the beginning or end of the month:
-```swift
-Date().startOfMonth // "2018/11/01 00:00:00"
-Date().endOfMonth // "2018/11/30 23:59:59"
-```
-
-> Determine if a date is current:
-```swift
-let date = Date(fromString: "2018/03/22 09:40")
-date.isCurrentWeek
-date.isCurrentMonth
-date.isCurrentYear
-```
-
-> Determine if a date is between two other dates:
-```swift
-let date = Date()
-let date1 = Date(timeIntervalSinceNow: 1000)
-let date2 = Date(timeIntervalSinceNow: -1000)
-
-date.isBetween(date1, date2) // true
-```
-
-> Determine if a date is beyond a specified time window:
-```swift
-let date = Date(fromString: "2018/03/22 09:40")
-let fromDate = Date(fromString: "2018/03/22 09:30")
-
-date.isBeyond(fromDate, bySeconds: 300) // true
-date.isBeyond(fromDate, bySeconds: 1200) // false
-```
-
-> Use specific calendar for data manipulations:
-```swift
-let date = Date(fromString: "2018/03/22 09:40")
-let calendar = Calendar(identifier: .chinese)
-
-date.isToday(using: calendar)
-date.isWeekday(using: calendar)
-date.isCurrentMonth(using: calendar)
-date.isToday(using: calendar)
-date.startOfDay(using: calendar)
-date.startOfMonth(using: calendar)
-```
-
-> Determine if a date is beyond a specified time window:
-```swift
-let date = Date(fromString: "2018/03/22 09:40")
-let fromDate = Date(fromString: "2018/03/22 09:30")
-
-date.isBeyond(fromDate, bySeconds: 300) // true
-date.isBeyond(fromDate, bySeconds: 1200) // false
-```
-
-> Create a date from a string:
-```swift
-Date(fromString: "2018/11/01 18:15")
-Date(fromString: "1440/03/01 18:31", calendar: Calendar(identifier: .islamic))
-```
-
-> Format a date to a string:
-```swift
-Date().string(format: "MMM d, h:mm a") // "Jan 3, 8:43 PM"
-Date().string(style: .full, calendar: Calendar(identifier: .hebrew)) // "Friday, 1 Kislev 5779"
-Date().string(formatter: .MM_dd_yyyy_HH_mm)
-```
-
-> Format a time interval to display as a timer.
-```swift
-let date = Date(fromString: "2016/03/22 09:45")
-let fromDate = Date(fromString: "2016/03/22 09:40")
-
-date.timerString(from: fromDate)
-
-// Prints "00:05:00"
-```
-
-> Get the decimal representation of the time:
-```swift
-Date(fromString: "2018/10/23 18:15").timeToDecimal // 18.25
-```
-
-> Increment years, months, days, hours, or minutes:
-```swift
-let date = Date()
-date + .years(1)
-date + .months(2)
-date - .days(4)
-date - .hours(6)
-date + .minutes(12)
-date + .days(5, Calendar(identifier: .chinese))
-```
-
-> Convert between time interval units:
-```swift
-let diff = date.timeIntervalSince(date2) // 172,800 seconds
-diff.minutes // 2,800 minutes
-diff.hours // 48 hours
-diff.days // 2 days
-```
-
-> Time zone context and offset:
-```swift
-let timeZone = TimeZone(identifier: "Europe/Paris")
-timeZone?.isCurrent // false
-timeZone?.offsetFromCurrent // -21600
-```
-
-> Normalize date calculations and data storage:
-```swift
-let timeZone: TimeZone = .posix // GMT
-let locale: Locale = .posix // en_US_POSIX
-```
-</details>
-
-<details>
-<summary>Decodable</summary>
-
-> Get a value of the type you specify, decoded from a JSON string.
-```swift
-let jsonString = "{\"test1\":29,\"test2\":62,\"test3\":33,\"test4\":24,\"test5\":14,\"test6\":72}"
-let jsonObject: [String: Int] = jsonString.decode()
-
-// Result
-[
-    "test1": 29,
-    "test2": 62,
-    "test3": 33,
-    "test4": 24,
-    "test5": 14,
-    "test6": 72
-]
-```
-
-> Get a type-erased `Decodable` value:
-```swift
-let json = """
-{
-    "boolean": true,
-    "integer": 1,
-    "double": 3.14159265358979323846,
-    "string": "Abc123",
-    "date": "2018-12-05T15:28:25+00:00",
-    "array": [1, 2, 3],
-    "nested": {
-        "a": "alpha",
-        "b": "bravo",
-        "c": "charlie"
-    }
+struct User: Codable {
+    let id: Int
+    let name: String
 }
-""".data(using: .utf8)
 
-let decoder = JSONDecoder()
-let dictionary = try decoder.decode([String: AnyDecodable].self, from: json)
+let data = try User(id: 1, name: "Sam").encode()
+let user: User = try data.decode()
+let other: User = try #"{"id": 2, "name": "Lee"}"#.decode()
 
-dictionary["boolean"].value // true
-dictionary["integer"].value // 1
-dictionary["string"].value // Abc123
+data.string // {"id":1,"name":"Sam"}, keys in any order
+data.hexString()
+data.base64URLEncodedString()
 ```
 
-> Skip failed elements during decoding instead exiting collection completely; lossy array decoding.
+`AnyDecodable` decodes JSON whose shape isn't known ahead of time:
+
 ```swift
-init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    
-    self.authors = try container.decode(FailableCodableArray<Author>.self, forKey: .author)
-}
+let json = #"{"count": 3, "tags": ["a", "b"], "active": true}"#
+let values = try JSONDecoder().decode([String: AnyDecodable].self, from: json)
+
+values["count"]?.value // 3
+values["tags"]?.value // ["a", "b"]
 ```
-</details>
 
-<details>
-<summary>FileManager</summary>
+### URLs and requests
 
-> Get URL or file system path for a file:
+`URL(safeString:)` takes a string literal only, for an address written in the source. A string made at run time goes through `URL(string:)`.
+
 ```swift
-FileManager.default.url(of: fileName, from: .documentDirectory)
-FileManager.default.path(of: fileName, from: .cachesDirectory)
+let url = URL(safeString: "https://example.com/files/report.json")
+url.replacingPathExtension("xml") // https://example.com/files/report.xml
+url.appendingToFileName("-2") // https://example.com/files/report-2.json
 ```
 
-> Get URL or file system paths of files within a directory:
-```swift
-FileManager.default.urls(from: .documentDirectory)
-FileManager.default.paths(from: .downloadsDirectory)
-```
-</details>
+`URLRequest` gains initializers for JSON APIs. GET and DELETE send the parameters in the query string, and every other method sends them as a JSON body:
 
-<details>
-<summary>Location</summary>
-
-> Get the location details for coordinates:
-```swift
-if let meta = await CLLocation(latitude: 43.6532, longitude: -79.3832).geocoder() {
-    print(meta.locality)
-    print(meta.country)
-    print(meta.countryCode)
-    print(meta.timezone)
-    print(meta.administrativeArea)
-}
-```
-
-> Get the closest or farthest location from a list of coordinates:
-```swift
-let coordinates = [
-    CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832),
-    CLLocationCoordinate2D(latitude: 59.9094, longitude: 10.7349),
-    CLLocationCoordinate2D(latitude: 35.7750, longitude: -78.6336),
-    CLLocationCoordinate2D(latitude: 33.720817, longitude: 73.090032)
-]
-
-coordinates.closest(to: homeCoordinate)
-coordinates.farthest(from: homeCoordinate)
-```
-
-> Determine if location services is enabled and authorized for always or when in use:
-```swift
-CLLocationManager().isAuthorized // bool
-```
-</details>
-
-<details>
-<summary>URL</summary>
-
-> Append a query string parameter to a URL:
-```swift
-let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
-url?.appendingQueryItem("def", value: "456") // "https://example.com?abc=123&lmn=tuv&xyz=987&def=456"
-url?.appendingQueryItem("xyz", value: "999") // "https://example.com?abc=123&lmn=tuv&xyz=999"
-```
-
-> Append a dictionary of query string parameters to a URL:
-```swift
-let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
-url?.appendingQueryItems([
-    "def": "456",
-    "jkl": "777",
-    "abc": "333",
-    "lmn": nil
-]) // "https://example.com?xyz=987&def=456&abc=333&jkl=777"
-```
-
-> Remove a query string parameter to a URL:
-```swift
-let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
-url?.removeQueryItem("xyz") // "https://example.com?abc=123&lmn=tuv"
-```
-
-> Query a URL from a parameter name:
-```swift
-let url = URL(string: "https://example.com?abc=123&lmn=tuv&xyz=987")
-url?.queryItem("aBc") // "123"
-url?.queryItem("lmn") // "tuv"
-url?.queryItem("yyy") // nil
-```
-</details>
-
-<details>
-<summary>URLSession</summary>
-
-> A thin wrapper around `URLSession` and `URLRequest` for simple network requests:
 ```swift
 let request = URLRequest(
-    url: URL(string: "https://httpbin.org/get")!,
-    method: .get,
-    parameters: [
-        "abc": 123,
-        "def": "test456",
-        "xyz": true
-    ],
-    headers: [
-        "Abc": "test123",
-        "Def": "test456",
-        "Xyz": "test789"
+    url: URL(safeString: "https://example.com/users"),
+    method: .post,
+    parameters: ["name": "Sam", "age": 30],
+    headers: ["X-Client": "ios"],
+    authentication: .bearer(token)
+)
+```
+
+### Networking
+
+`NetworkManager` sends a request through a `NetworkService` and returns the response, or the decoded body. `NetworkServiceFoundation` runs on `URLSession` and throws a `NetworkError` when the connection fails or the status is outside 200 to 299.
+
+```swift
+let network = NetworkManager(service: NetworkServiceFoundation())
+
+do {
+    let users: [User] = try await network.send(request)
+    print(users.count)
+} catch let error as NetworkError {
+    print(error.statusCode ?? 0, ZamzamError(from: error))
+} catch {
+    print(error)
+}
+```
+
+Pin a certificate for a host, or change every request on its way out with a `URLRequestAdapter`:
+
+```swift
+let service = NetworkServiceFoundation(
+    serverTrustEvaluators: [
+        "example.com": NetworkPinnedCertificateTrustEvaluator(certificateURLs: [certificateURL])
     ]
 )
- 
-let networkManager = NetworkManager(
-    service: NetworkFoundationService()
-)
 
-networkManager.send(with: request) { result in
-    switch result {
-    case let .success(response):
-        response.data
-        response.headers
-        response.statusCode
-    case let .failure(error):
-        error.statusCode
-    }
-}
-```
-Or call multiple URL requests simultaneously:
-```swift
-let request1 = URLRequest(
-    url: URL(string: "https://httpbin.org/get")!,
-    method: .get
-)
-
-let request2 = URLRequest(
-    url: URL(string: "https://httpbin.org/post")!,
-    method: .post
-)
-
-let request3 = URLRequest(
-    url: URL(string: "https://httpbin.org/delete")!,
-    method: .delete
-)
-
-networkManager.send(requests: request1, request2, request3) { firstResult, anotherResult, otherResult in
-    switch firstResult {
-    case let .success(response):
-        response.data
-    case let .failure(error):
-        error.statusCode
-    }
-
-    switch anotherResult {
-    case let .success(response):
-        response.data
-    case let .failure(error):
-        error.statusCode
-    }
-    
-    switch otherResult {
-    case let .success(response):
-        response.data
-    case let .failure(error):
-        error.statusCode
-    }
-}
-```
-
-> Use an adapter to intercept any `URLRequest` and modify for all network requests:
-```swift
-struct CustomURLRequestAdapter: URLRequestAdapter {
-        
+struct ClientHeader: URLRequestAdapter {
     func adapt(_ request: URLRequest) -> URLRequest {
         var request = request
-        request.setValue("1", forHTTPHeaderField: "X-Test-1")
-        request.setValue("2", forHTTPHeaderField: "X-Test-2")
+        request.setValue("ios", forHTTPHeaderField: "X-Client")
         return request
     }
 }
 
-let request = URLRequest(
-    url: URL(string: "https://httpbin.org/get")!,
-    method: .get
-)
- 
-let networkManager = NetworkManager(
-    service: NetworkFoundationService(),
-    adapter: CustomURLRequestAdapter()
-)
-
-networkManager.send(with: request) { result in
-    guard case let .success(response) else { return }
-
-    request.value(forHTTPHeaderField: "X-Test-1") == nil // true
-    request.value(forHTTPHeaderField: "X-Test-2") == nil // true
-
-    response.request.value(forHTTPHeaderField: "X-Test-1") == "1" // true
-    response.request.value(forHTTPHeaderField: "X-Test-2") == "2" // true
-}
+let pinned = NetworkManager(service: service, adapter: ClientHeader())
 ```
-</details>
 
-### Utilities
+### Logging
 
-<details>
-<summary>AppInfo</summary>
+`LogManager` sends each entry to every `LogService` whose minimum level allows it. Three services ship: the console, the system log, and a file that rotates at 5 MB (2 MB on watchOS).
 
-> Get details of the current app:
 ```swift
-struct SomeStruct: AppInfo {
-
-}
-
-let someStruct = SomeStruct()
-
-someStruct.appDisplayName // "Zamzam App"
-someStruct.appBundleID // "io.zamzam.app"
-someStruct.appVersion // "1.0.0"
-someStruct.appBuild // "23"
-someStruct.isInTestFlight // false
-someStruct.isRunningOnSimulator // false
-```
-</details>
-
-<details>
-<summary>Apply</summary>
-
-> Set properties with closures just after initializing:
-```swift
-let paragraph = NSMutableParagraphStyle().apply {
-    $0.alignment = .center
-    $0.lineSpacing = 8
-}
-
-let label = UILabel().apply {
-    $0.textAlignment = .center
-    $0.textColor = UIColor.black
-    $0.text = "Hello, World!"
-}
-
-UITabBar.appearance().apply {
-    $0.barStyle = .dark
-    $0.tintColor = .blue
-}
-```
-</details>
-
-<details>
-<summary>AppMigration</summary>
-
-> Manages blocks of code that only need to run once on version updates in apps:
-```swift
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var window: UIWindow?
-    let migration = AppMigration()
-
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        migration
-            .performUpdate {
-                print("Migrate update occurred.")
-            }
-            .perform(forVersion: "1.0") {
-                print("Migrate to 1.0 occurred.")
-            }
-            .perform(forVersion: "1.7") {
-                print("Migrate to 1.7 occurred.")
-            }
-            .perform(forVersion: "2.4") {
-                print("Migrate to 2.4 occurred.")
-            }
-            
-        return true
-    }
-}
-```
-</details>
-
-<details>
-<summary>BackgroundTask</summary>
-
-> Easily execute a [long-running background task](https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtask):
-```swift
-BackgroundTask.run(for: application) { task in
-    // Perform finite-length task...
-    task.end()
-}
-```
-</details>
-
-<details>
-<summary>Keychain</summary>
-
-> A thin wrapper to manage Keychain, or other services that conform to `KeychainService`:
-```swift
-let keychain: KeychainService = KeychainServiceExternal()
-
-keychain.set("kjn989hi", forKey: .token)
-
-let token: String? = keychain.get(.token) // "kjn989hi"
-
-// Define strongly-typed keys
-extension KeychainAPI.Key {
-    static let token = KeychainAPI.Key("token")
-}
-```
-</details>
-
-<details>
-<summary>Logger</summary>
-
-> Create loggers that conform to `LogService` and add to `LogManager` (console, `os_log` and a file are included):
-```swift
-let file = LogServiceFile(
-    minLevel: .info,
-    subsystem: "MyApp",
-    fileURL: URL.cachesDirectory.appending(path: "app.log")
-)
-
 let log = LogManager(
     services: [
-        LogServiceConsole(minLevel: .debug),
-        LogServiceOS(
-            minLevel: .warning,
-            subsystem: "io.zamzam.Basem-Emara",
-            category: "Application"
-        ),
-        file,
-        MyCustomLogger()
+        LogServiceConsole(minLevel: .debug, subsystem: "MyApp"),
+        LogServiceOS(minLevel: .info, subsystem: "com.example.MyApp", category: "App", isDebug: false),
+        LogServiceFile(minLevel: .info, subsystem: "MyApp", fileURL: logURL, sessionKeys: ["user_id"])
     ]
 )
 
-log.error("There was an error.")
+log.set("12345", forKey: "user_id")
+log.info("Signed in", context: ["plan": "free"])
+log.error("Sync failed", error: error)
 ```
 
-> When the file reaches 2 MB on watchOS, or 5 MB elsewhere, it becomes `app.log.1`, replacing the archive before it, and a new file starts. `file.contents()` returns the archive and the current file, oldest entry first, such as to attach to a support email.
-</details>
+For another destination, conform a type to `LogService` with a `minLevel` and a `write` method.
 
-<details>
-<summary>SystemConfiguration</summary>
+### Keychain
 
-> Determine if the device is connected to a network:
 ```swift
-import SystemConfiguration
+extension KeychainAPI.Key {
+    static let token = KeychainAPI.Key("token")
+}
 
-SCNetworkReachability.isOnline
+let keychain: KeychainService = KeychainServiceExternal()
+
+keychain.set("abc123", forKey: .token)
+let token: String? = keychain.get(.token)
+keychain.remove(.token)
 ```
-</details>
 
-### Infixes
+### Core Location helpers
 
-<details>
-<summary>ConditionalAssignment ?=</summary>
-
-> Assign a value if not nil:
 ```swift
-var test: Int? = 123
-var value: Int? = nil
+let toronto = CLLocationCoordinate2D(latitude: 43.7, longitude: -79.4)
+let ottawa = CLLocationCoordinate2D(latitude: 45.4, longitude: -75.7)
 
-test ?= value
-// test == 123
+toronto.distance(from: ottawa) // meters
+[toronto, ottawa].closest(to: ottawa) // ottawa
 
-value = 456
-test ?= value
-// test == 456
+let place = await toronto.location.geocoder(timeout: 5)
+place?.locality // the city's name
+
+CLLocationManager().isAuthorized
 ```
-</details>
 
-<details>
-<summary>NilOrEmptyAssignment ??+</summary>
+### Application
 
-> Assign a value if not nil or empty:
+`AppMigration` runs a block once per app version:
+
 ```swift
-var test: String
-var value: String?
-
-test = value ??+ "Abc"
-// test == "Abc"
-
-value = ""
-test = value ??+ "Lmn"
-// test == "Lmn"
-
-value = "Xyz"
-test = value ??+ "Rst"
-// test == "Xyz"
+AppMigration()
+    .performUpdate {
+        // Runs once after every update
+    }
+    .perform(forVersion: "1.7") {
+        // Runs once, the first time version 1.7 or later launches
+    }
 ```
-</details>
+
+`Distribution` reads the main bundle, and `BackgroundTask` (iOS) keeps the app running to finish work:
+
+```swift
+struct AppDetails: Distribution {}
+
+let details = AppDetails()
+details.appVersion // "1.7"
+details.isInTestFlight // false
+details.platform // "iOS"
+
+BackgroundTask.run(for: application) { task in
+    // Finish the work, then:
+    task.end()
+}
+```
+
+### Utilities
+
+```swift
+// Set up a new object in place
+let decoder = JSONDecoder().apply {
+    $0.keyDecodingStrategy = .convertFromSnakeCase
+}
+
+// Assign only when the right side isn't nil
+var title = "Untitled"
+title ?= response.title
+
+// Debounce or throttle work
+let limiter = Limiter(policy: .debounce, duration: 0.5)
+await limiter.run { await search(for: text) }
+
+// Keep a string out of plain sight in the binary. It is not encryption.
+let obfuscator = Obfuscator(salt: "a value that does not change")
+let bytes = obfuscator.conceal(secret: "your_secret") // debug builds only
+obfuscator.reveal(secret: bytes) // "your_secret"
+```
+
+Smaller pieces: `Bundle.main.string(file:)` and `Bundle.main.data(forResource:withExtension:)`, `Locale.posix` and `Calendar.posix` for fixed formats, `Locale.languageName`, `NotificationCenter.default.post(name:userInfo:)`, and on macOS the `NSColor` names that match iOS (`label`, `secondaryLabel`, `systemBackground`, `tertiarySystemBackground`).
 
 ## ZamzamLocation
 
-<details>
-<summary>LocationManager</summary>
+`LocationManager` wraps Core Location in async calls on the main actor: permission, one location, and a stream of headings (iOS and watchOS).
 
-> Ask for permission, waiting for the user's answer (a prompt that can't appear gives up after a timeout):
 ```swift
 let locationManager = LocationManager()
-let isAuthorized = await locationManager.requestAuthorization()
-```
 
-> Get one location: a fix no older than `maximumAge`, or the last known location once `timeout` passes:
-```swift
-switch await locationManager.currentLocation(maximumAge: 5, timeout: .seconds(30)) {
+switch await locationManager.currentLocation() {
 case let .success(location):
     print(location.coordinate)
 case .failure(.denied):
-    print("Location access denied")
+    print("Location access is off")
 case .failure(.unavailable):
     print("No location yet")
 }
-```
 
-> Stream compass headings while a screen is open (iOS and watchOS); cancelling the task stops them:
-```swift
-for await result in locationManager.headings(allowCalibration: true) {
-    switch result {
-    case let .success(heading):
-        print(heading.trueHeading >= 0 ? heading.trueHeading : heading.magneticHeading)
-    case let .failure(error):
-        print("Compass failed: \(error)")
+for await result in locationManager.headings() {
+    if case let .success(heading) = result {
+        print(heading.trueHeading)
     }
 }
 ```
-</details>
+
+`currentLocation()` asks for when-in-use permission first when the user hasn't decided, and falls back to the last known location after its timeout. `requestAuthorization()`, `isAuthorized` and `canRequestAuthorization` are there when you want the steps apart.
 
 ## ZamzamNotification
 
-<details>
-<summary>UserNotification</summary>
+Extensions on `UNUserNotificationCenter` to register, schedule, find and remove local notifications.
 
-> Registers the local and remote notifications with the categories and actions it supports, returning whether the user allowed them:
 ```swift
-let granted = await UNUserNotificationCenter.current().register(
-    delegate: self,
-    categories: [
-        "order": [
-            UNNotificationAction(
-                identifier: "confirmAction",
-                title: "Confirm",
-                options: [.foreground]
-            )
-        ],
-        "chat": [
-            UNTextInputNotificationAction(
-                identifier: "replyAction",
-                title: "Reply",
-                options: [],
-                textInputButtonTitle: "Send",
-                textInputPlaceholder: "Type your message"
-            )
-        ],
-        "offer": nil
-    ],
-    authorizations: [.alert, .badge, .sound]
-)
-```
+let center = UNUserNotificationCenter.current()
 
-> Get all pending and delivered notifications, or find them by identifier or category:
-```swift
-let requests = await UNUserNotificationCenter.current().notificationRequests()
-let request = await UNUserNotificationCenter.current().get(withIdentifier: "abc123")
-let requests = await UNUserNotificationCenter.current().get(withIdentifiers: ["abc123", "xyz789"])
-let isScheduled = await UNUserNotificationCenter.current().exists(withIdentifier: "abc123")
-```
-
-> Schedules local notifications for delivery after an interval or at a date, once or repeating:
-```swift
-try await UNUserNotificationCenter.current().add(
-    timeInterval: 60,
-    body: "This is the body",
-    title: "This is the title",
-    identifier: "abc123-main",
-    category: "chat",
-    userInfo: ["id": post.id]
+let granted = await center.register(
+    category: "reminders",
+    actions: [UNNotificationAction(identifier: "doneAction", title: "Done", options: [])]
 )
 
-try await UNUserNotificationCenter.current().add(
-    date: Date(timeIntervalSinceNow: 5),
-    body: "This is the body for date",
-    interruptionLevel: .timeSensitive,
-    repeats: .minute,
-    identifier: "abc123-repeat"
-)
+// After a delay, once at a date, and every day at the date's time on a calendar
+try await center.add(timeInterval: 300, body: "Tea is ready", identifier: "tea")
+try await center.add(date: date, body: "Meeting starts", category: "reminders")
+try await center.add(date: date, repeats: .day, calendar: calendar, body: "Daily review", category: "reminders")
 ```
 
-> Remove pending or delivered notification requests by identifiers, categories, or all:
 ```swift
-UNUserNotificationCenter.current().remove(withIdentifier: "abc123")
-UNUserNotificationCenter.current().remove(withIdentifiers: ["abc123", "xyz789"])
-await UNUserNotificationCenter.current().remove(withCategory: "chat")
-await UNUserNotificationCenter.current().remove(withCategories: ["order", "chat"])
-UNUserNotificationCenter.current().removeAll()
+await center.exists(withIdentifier: "tea") // true
+await center.get(withCategory: "reminders", pendingOnly: true) // two requests
+
+center.remove(withIdentifier: "tea")
+await center.removePending(withCategory: "reminders")
+center.removeAll()
 ```
-</details>
+
+`register` replaces the center's categories with the ones you pass. A repeating time interval under a minute throws `ZamzamError.invalidData`.
 
 ## ZamzamUI
 
-### SwiftUI
+### Modifiers
 
-<details>
-<summary>Documentation coming soon!</summary>
+```swift
+List(places) { place in
+    Text(redactable: place.name)
+        .rowActions {
+            Button("Refresh", systemImage: "location", action: refresh)
+        }
+}
+.redacted(if: isLoading)
+.progress(if: isLoading)
+.onLoad { await load() }
+.onForeground { await load() }
+.onNotification(for: .placesDidChange) { await load() }
+.alert(error: $error)
+```
 
->Extensions
->Modifiers
->Styles
->Views
-</details>
+- `onLoad(perform:)` runs once, the first time the view appears. `onForeground(perform:)` runs each time the scene returns from the background.
+- `rowActions` are swipe actions on iOS and watchOS, and a context menu on macOS.
+- `alert(error:)` shows a `ViewError`, which holds a title, a message and up to two actions.
+- `modifier(if:then:)`, `modifier(if:then:else:)` and `modifier(let:then:)` apply a modifier on a condition or an optional. `hidden(_:)` hides a view and keeps its place; `removed(if:)` takes it out of the hierarchy.
+- `border(_:width:cornerRadius:)` clips to a rounded rectangle and strokes it.
 
+```swift
+error = ViewError(
+    title: "Could not save",
+    message: "Check your connection and try again.",
+    action: ViewError.Action("Retry") { retry() }
+)
+```
+
+### Sheets (iOS)
+
+```swift
+Button("Open link") {
+    linkURL = URL(string: "https://apple.com")
+}
+.sheet(safari: $linkURL)
+
+Button("Send feedback") {
+    mail = MailItem(
+        emails: "support@example.com",
+        subject: "Feedback",
+        attachments: [MailItem.Attachment(data: logData, mimeType: "text/plain", fileName: "app.log")]
+    )
+}
+.sheet(mail: $mail)
+```
+
+`open(itunesID:application:)` presents an App Store page over the key window.
+
+### Styles and views
+
+`CardStyle`, `ImageStyle`, `TextStyle` and `ThemeStyle` are view modifier protocols, so a design system can name its styles and apply them with `cardStyle(_:)`, `imageStyle(_:)`, `textStyle(_:)` and `themeStyle(_:)`:
+
+```swift
+struct PrimaryCardStyle: CardStyle {
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .background(.background.secondary, in: .rect(cornerRadius: 12))
+    }
+}
+
+AdaptiveStack {
+    Text("Fajr")
+    Text("5:42 AM")
+}
+.cardStyle(PrimaryCardStyle())
+```
+
+`AdaptiveStack` is horizontal, and turns vertical at text sizes above extra large.
+
+Also in the module: `Button` initializers that take an async action, `Label`, `Button` and `TextField` initializers that take a `Text`, `TimelineSchedule.openEnded(_:)` for an explicit schedule that goes idle after its last date, and `LogManager.set(context:)` to record the scene phase on every log entry.
+
+## Moving from 7 to 8
+
+8.0.0 is a clean break: about a quarter of the code is gone, with no deprecation step. What is left reads no calendar, time zone or clock on its own, and no public function stops the program on a value met at run time.
+
+### The umbrella product
+
+The `ZamzamKit` product is gone. It re-exported nothing, so `import ZamzamKit` gave you no API. Depend on the products you use and import them by name: `ZamzamCore`, `ZamzamLocation`, `ZamzamNotification`, `ZamzamUI`.
+
+### Removed, with a platform replacement
+
+| Removed | Use |
+|---|---|
+| `Data.sha256()`, `String.sha256()`, `Digest.bytes`, `Digest.data` | CryptoKit: `SHA256.hash(data:)` |
+| `CaseIterable.index()` | `allCases.firstIndex(of:)` |
+| `Result.error` | `if case let .failure(error) = result` |
+| `Array.prepend(_:)` | `insert(_:at:)` with index 0 |
+| `Zip2Sequence.array` | `Array(zip(a, b))` |
+| `Locale.characterDirection` | `locale.language.characterDirection` |
+| `FileManager` helpers `url(of:from:)`, `path(of:from:)`, `urls(from:filter:)`, `paths(from:filter:)` | `URL.documentsDirectory` and its siblings, `FileManager.contentsOfDirectory(at:includingPropertiesForKeys:)` |
+| `Bundle.contents(plist:)`, `Bundle.array(plist:)` | `PropertyListDecoder` over `Bundle.data(forResource:withExtension:)` |
+| `JSONDecoder(dateFormatter:)` | Set `dateDecodingStrategy` to `.formatted(_:)` |
+| `decode()`, `decode(forKey:)` and `decodeIfPresent(forKey:)` without a type | The container's own methods, with the type: `decode(_:forKey:)` |
+| `NotificationCenter.addObserver(_:selector:name:)`, `removeObserver(_:name:)` | `notifications(named:)`, or Foundation's own methods with `object:` |
+| `String.isEmail`, `isNumber`, `isAlpha`, `isAlphaNumeric`, `contains(_: CharacterSet)`, `match(regex:)`, `replacing(regex:with:caseSensitive:)` | `Regex`: `wholeMatch(of:)`, `contains(_:)`, `replacing(_:with:)` |
+| `String.urlEncoded()`, `urlDecoded()` | `addingPercentEncoding(withAllowedCharacters:)`, `removingPercentEncoding` |
+| `URL.appendingQueryItem(_:value:)`, `appendingQueryItems(_:)`, `removeQueryItem(_:)`, `queryItem(_:)` | `URL.appending(queryItems:)`, `URLComponents.queryItems` |
+| `Shape.fill(_:stroke:lineWidth:)` | Chain `fill(_:)` and `stroke(_:lineWidth:)` on the shape |
+| `CurrencyFormatter` | `formatted(.currency(code:))` |
+| `@Defaults`, `@DefaultsOptional`, `UserDefaultsRepresentable`, `UserDefaults.contains(_:)` | `@AppStorage`, or `UserDefaults` directly |
+| `DateFormatter.iso8601Formatter`, `zuluFormatter`, `dateFormat8601`, `dateFormatZ`, `DateFormatter(iso8601Format:)` | `Date.ISO8601FormatStyle` |
+| `DateFormatter(dateStyle:timeStyle:)`, the `"\(date, formatter: formatter)"` interpolation | `date.formatted(date:time:)` |
+| `TimeZone.posix`, `isCurrent`, `offsetFromCurrent` | `TimeZone.gmt`; compare with `TimeZone.current` at the call site |
+| `SCNetworkReachability.isOnline` | `NWPathMonitor` |
+| `Date` checks `isToday`, `isYesterday`, `isTomorrow`, `isWeekday`, `isWeekend`, `isCurrentWeek`, `isCurrentMonth`, `isCurrentYear`, as properties and with `using:`, and `inSameDay(as:)` | `Calendar`: `isDateInToday(_:)`, `isDateInYesterday(_:)`, `isDateInTomorrow(_:)`, `isDateInWeekend(_:)`, `isDate(_:equalTo:toGranularity:)`, `isDate(_:inSameDayAs:)` |
+| `Date.isPast`, `isFuture` | Compare with `Date.now` |
+| `Date.islamicCalendar`, `islamicCalendarIdentifiers` | `Calendar(identifier: .islamicUmmAlQura, timeZone:)` |
+
+### Removed outright
+
+- `LogServiceHTTP`, `LogServiceDataDog` and `LogServicePapertrail`. For a vendor, write a `LogService`.
+- The `Distribution` device properties: `deviceIdentifier`, `deviceModel`, `deviceName`, `manufacturer`, `osName`, `osVersion`. `platform` stays.
+- `Audible` and `AudibleApplication`.
+- `PlatformColor` and the color initializers `init(hex:alpha:)`, `init(rgb:alpha:)` and `random`. The `NSColor` names that match iOS stay.
+- `String.htmlStripped`. `htmlDecoded()` stays.
+- `LocationMeta.description` and `CLLocationCoordinate2D.description`.
+
+### Changed signatures
+
+| 7 | 8 |
+|---|---|
+| `URL(safeString: someString)` | `URL(safeString:)` takes a `StaticString`, so only a literal compiles. Use `URL(string:)` for a string made at run time. |
+| `Date(year:month:day:…, timeZone:, calendar: = .current)` | `calendar:` is required and carries the time zone. `timeZone:` is gone. |
+| `date.yesterday`, `tomorrow`, `startOfDay`, `endOfDay`, `startOfMonth`, `endOfMonth`, `startOfYear`, `endOfYear`, `timeToDecimal`, `isJumuah` | The forms that take the calendar: `date.startOfDay(using: calendar)` |
+| `date + .days(1)`, `.weeks`, `.months`, `.years` | `date + .days(1, calendar)`. `.minutes` and `.hours` are unchanged. |
+| `hijri(offSet:timeZone:calendar:)`, `hijriString(…)`, `isRamadan(offSet:timeZone:)`, `isEid(offSet:timeZone:)` | The label is `offset:`, `timeZone:` is required, and `calendar:` is gone. `hijriString` takes a `locale:`, the device's by default. |
+| `shortString(timeZone:calendar:locale:)` | `shortString(calendar:)`, always in ASCII digits |
+| `expanding(to:using: = .current)` | `using:` is required |
+| `DateInterval.progress` | `progress(at:)` |
+| `add(date:…, repeats: = .once, calendar: = .current)` on `UNUserNotificationCenter` | `add(date:…)` schedules once and takes no calendar. A repeating one is `add(date:repeats:calendar:…)`, and `ScheduleInterval.once` is gone. |
+| `add(timeInterval:…, repeats: true)` under 60 seconds | Throws `ZamzamError.invalidData` |
+| `MailItem(…, attachment:)` | `MailItem(…, attachments:)`, an array |
+
+Three results changed with no change at the call site: `sheet(safari:)` presents nothing for a URL that isn't HTTP or HTTPS, a `URLRequest` whose parameters JSON can't hold has no body, and the keychain writes its items as readable after the first unlock (items already stored keep their setting until rewritten).
 
 ## Testing
 
-Tests live flat in `Tests/` and run with `swift test`. In Xcode, the shared `ZamzamKit-Package` scheme runs `Package.xctestplan` at the package root, with code coverage for the four library targets.
+Tests live flat in `Tests/` and run with `swift test`. In Xcode, the shared `ZamzamKit-Package` scheme runs `Package.xctestplan` at the package root, with code coverage for the four library targets. The plan runs every test twice, once with the defaults and once in Arabic (Saudi Arabia) on Auckland time, and the suite calls no live service.
 
 ## Author
 
@@ -1035,4 +563,4 @@ Tests live flat in `Tests/` and run with `swift test`. In Xcode, the shared `Zam
 
 ## License
 
-`ZamzamKit` is available under the MIT license. See the [LICENSE](https://github.com/ZamzamInc/ZamzamKit/blob/master/LICENSE) file for more info.
+`ZamzamKit` is available under the MIT license. See the [LICENSE](LICENSE) file for more info.

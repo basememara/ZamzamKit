@@ -12,13 +12,10 @@ import Foundation.NSLocale
 import Foundation.NSTimeZone
 
 public extension DateFormatter {
-    /// Create a date formatter.
+    /// Creates a formatter with a fixed format string.
     ///
-    /// - Parameters:
-    ///   - dateFormat: The date format string used by the receiver.
-    ///   - timeZone: The time zone for the receiver.
-    ///   - calendar: The calendar for the receiver.
-    ///   - locale: The locale for the receiver.
+    /// A `nil` time zone or locale takes the calendar's. With no calendar either, the formatter keeps its defaults, which
+    /// are the device's.
     convenience init(
         dateFormat: String,
         timeZone: TimeZone? = nil,
@@ -42,13 +39,10 @@ public extension DateFormatter {
         }
     }
 
-    /// Create a date formatter.
+    /// Creates a formatter whose format is the localized form of a template.
     ///
-    /// - Parameters:
-    ///   - dateFormatTemplate: The date format template used by the receiver.
-    ///   - timeZone: The time zone for the receiver.
-    ///   - calendar: The calendar for the receiver.
-    ///   - locale: The locale for the receiver.
+    /// A `nil` time zone or locale takes the calendar's. The template is resolved when the formatter is created, in the
+    /// device's locale, and `locale` is set after it.
     convenience init(
         dateFormatTemplate: String,
         timeZone: TimeZone? = nil,

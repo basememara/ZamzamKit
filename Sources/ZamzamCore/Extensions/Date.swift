@@ -11,18 +11,12 @@ import Foundation.NSDate
 import Foundation.NSDateFormatter
 
 public extension Date {
-    /// Creates a date from its components, read on a calendar.
+    /// Creates a date from its components, read on a calendar, or `nil` when the calendar can't form a date from them.
     ///
     ///     Date(year: 2018, month: 11, day: 1, hour: 18, minute: 15, calendar: calendar)
     ///
     /// - Parameters:
     ///   - era: The era of the date, for a calendar that counts its years in more than one.
-    ///   - year: The year of the date.
-    ///   - month: The month of the date.
-    ///   - day: The day of the date.
-    ///   - hour: The hour of the date.
-    ///   - minute: The minute of the date.
-    ///   - second: The second of the date.
     ///   - calendar: The calendar the components are read on, in its own time zone.
     init?(
         era: Int? = nil,
@@ -50,12 +44,9 @@ public extension Date {
 }
 
 public extension Date {
-    /// Return yesterday's date.
+    /// Returns the same time on the previous day of the calendar.
     ///
     ///     date.yesterday(using: calendar) // "Oct 2, 2018, 10:57:11" for "Oct 3, 2018, 10:57:11"
-    ///
-    /// - Parameter calendar: Calendar used for calculation.
-    /// - Returns: Returns the date.
     func yesterday(using calendar: Calendar) -> Date {
         calendar.date(byAdding: .day, value: -1, to: self)
             ?? addingTimeInterval(-86400)
@@ -63,12 +54,9 @@ public extension Date {
 }
 
 public extension Date {
-    /// Return tomorrow's date.
+    /// Returns the same time on the next day of the calendar.
     ///
     ///     date.tomorrow(using: calendar) // "Oct 4, 2018, 10:57:11" for "Oct 3, 2018, 10:57:11"
-    ///
-    /// - Parameter calendar: Calendar used for calculation.
-    /// - Returns: Returns the date.
     func tomorrow(using calendar: Calendar) -> Date {
         calendar.date(byAdding: .day, value: 1, to: self)
             ?? addingTimeInterval(86400)
@@ -76,24 +64,18 @@ public extension Date {
 }
 
 public extension Date {
-    /// Returns the beginning of the day.
+    /// Returns the first moment of the date's day on the calendar.
     ///
     ///     date.startOfDay(using: calendar) // "2018/11/21 00:00:00"
-    ///
-    /// - Parameter calendar: Calendar used for calculation.
-    /// - Returns: Returns the date.
     func startOfDay(using calendar: Calendar) -> Date {
         calendar.startOfDay(for: self)
     }
 }
 
 public extension Date {
-    /// Returns the end of the day.
+    /// Returns the last second of the date's day on the calendar.
     ///
     ///     date.endOfDay(using: calendar) // "2018/11/21 23:59:59"
-    ///
-    /// - Parameter calendar: Calendar used for calculation.
-    /// - Returns: Returns the date.
     func endOfDay(using calendar: Calendar) -> Date {
         var components = DateComponents()
         components.day = 1
@@ -107,12 +89,9 @@ public extension Date {
 }
 
 public extension Date {
-    /// Returns the beginning of the month.
+    /// Returns the first moment of the date's month on the calendar.
     ///
     ///     date.startOfMonth(using: calendar) // "2018/11/01 00:00:00"
-    ///
-    /// - Parameter calendar: Calendar used for calculation.
-    /// - Returns: Returns the date.
     func startOfMonth(using calendar: Calendar) -> Date {
         calendar.date(
             from: calendar.dateComponents([.year, .month], from: self)
@@ -121,12 +100,9 @@ public extension Date {
 }
 
 public extension Date {
-    /// Returns the end of the month.
+    /// Returns the last second of the date's month on the calendar.
     ///
     ///     date.endOfMonth(using: calendar) // "2018/11/30 23:59:59"
-    ///
-    /// - Parameter calendar: Calendar used for calculation.
-    /// - Returns: Returns the date.
     func endOfMonth(using calendar: Calendar) -> Date {
         var components = DateComponents()
         components.month = 1
@@ -140,12 +116,9 @@ public extension Date {
 }
 
 public extension Date {
-    /// Returns the beginning of the year.
+    /// Returns the first moment of the date's year on the calendar.
     ///
     ///     date.startOfYear(using: calendar) // "2018/01/01 00:00:00"
-    ///
-    /// - Parameter calendar: Calendar used for calculation.
-    /// - Returns: Returns the date.
     func startOfYear(using calendar: Calendar) -> Date {
         calendar.date(
             from: calendar.dateComponents([.year], from: self)
@@ -154,12 +127,9 @@ public extension Date {
 }
 
 public extension Date {
-    /// Returns the end of the year.
+    /// Returns the last second of the date's year on the calendar.
     ///
     ///     date.endOfYear(using: calendar) // "2018/12/31 23:59:59"
-    ///
-    /// - Parameter calendar: Calendar used for calculation.
-    /// - Returns: Returns the date.
     func endOfYear(using calendar: Calendar) -> Date {
         var components = DateComponents()
         components.year = 1
@@ -173,19 +143,16 @@ public extension Date {
 }
 
 public extension Date {
-    /// Determine if a date is between two other dates.
+    /// Returns whether the date falls between two others, given in either order.
     ///
-    /// Dates do not have to be in sequential order.
+    /// The earlier bound counts as between and the later one doesn't.
     ///
-    ///     let date = Date()
-    ///     let date1 = Date(timeIntervalSinceNow: 1000)
-    ///     let date2 = Date(timeIntervalSinceNow: -1000)
-    ///     date.isBetween(date1, date2) // true
+    ///     let start = Date(timeIntervalSinceReferenceDate: 0)
+    ///     let end = start + 60
     ///
-    /// - Parameters:
-    ///   - date1: first date to compare to.
-    ///   - date2: second date to compare to.
-    /// - Returns: true if the date is between the two given dates.
+    ///     (start + 30).isBetween(end, start) // true
+    ///     start.isBetween(start, end) // true
+    ///     end.isBetween(start, end) // false
     func isBetween(_ date1: Date, _ date2: Date) -> Bool {
         // https://stackoverflow.com/a/67179166
         let minDate = min(date1, date2)
@@ -199,12 +166,9 @@ public extension Date {
 }
 
 public extension Date {
-    /// Gets the decimal representation of the time.
+    /// Returns the hour of the day with the minutes as its fraction, read on the calendar. Seconds are left out.
     ///
     ///     date.timeToDecimal(using: calendar) // 18.25 at 18:15
-    ///
-    /// - Parameter calendar: Calendar used for calculation.
-    /// - Returns: The hour of the day, with the minutes as its fraction.
     func timeToDecimal(using calendar: Calendar) -> Double {
         let components = calendar.dateComponents([.hour, .minute], from: self)
         let hour = components.hour ?? 0
@@ -214,37 +178,35 @@ public extension Date {
 }
 
 public extension Date {
-    /// Fixed-format for the date without time, in ASCII digits whatever the device's locale.
-    ///
-    /// An example use case for this function is creating a dictionary of days that group respective values by days.
+    /// Returns the date's day as `yyyy-MM-dd` on the calendar, in ASCII digits whatever the calendar's locale.
     ///
     ///     date.shortString(calendar: calendar) // "2017-05-15"
     ///
-    /// - Parameter calendar: The calendar the day is read on, in its own time zone.
-    /// - Returns: The formatted date string.
+    /// The string suits a dictionary key that groups values by day.
     func shortString(calendar: Calendar) -> String {
         DateFormatter(dateFormat: "yyyy-MM-dd", calendar: calendar, locale: .posix).string(from: self)
     }
 }
 
 public extension Date {
+    /// The span that `expanding(to:using:)` widens a date to.
     enum ExpandingComponent {
+        /// The week that holds the date.
         case week
+        /// The month that holds the date.
         case month
+        /// The month that holds the date, widened to whole weeks at both ends, as a month grid shows it.
         case monthWithTrailingWeeks
     }
 
-    /// Returns the starting time and duration of a given calendar component that contains a given date.
+    /// Returns the week or month that holds the date, or `nil` when the calendar can't find it.
     ///
-    ///     let date = Date(year: 2020, month: 4, day: 1, hour: 9, minute: 30, calendar: calendar)
-    ///     date.expanding(to: .week, using: calendar) // Mar 29 - Apr 4
-    ///     date.expanding(to: .month, using: calendar) // Apr 1 - Apr 30
-    ///     date.expanding(to: .monthWithTrailingWeeks, using: calendar) // Mar 29 - May 2
+    ///     // For April 1, 2020 on a Gregorian calendar whose week starts on Sunday:
+    ///     date.expanding(to: .week, using: calendar) // Mar 29 through Apr 4
+    ///     date.expanding(to: .month, using: calendar) // Apr 1 through Apr 30
+    ///     date.expanding(to: .monthWithTrailingWeeks, using: calendar) // Mar 29 through May 2
     ///
-    /// - Parameters:
-    ///   - component: A date component that specifies the date interval that contains the date.
-    ///   - calendar: A calendar component.
-    /// - Returns: A new `DateInterval` if the starting time and duration of a component could be calculated; otherwise, nil.
+    /// The interval's end is the first moment after its last day.
     func expanding(to component: ExpandingComponent, using calendar: Calendar) -> DateInterval? {
         switch component {
         case .week:

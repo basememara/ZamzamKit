@@ -7,13 +7,11 @@
 //
 
 public extension Array {
-    /// Separates the elements into nth groups of elements.
+    /// Splits the array into consecutive groups of `size` elements. The last group holds what remains.
     ///
-    ///     [1, 2, 3, 4, 5, 6].chunked(into: 2) // [[1, 2], [3, 4], [5, 6]]
+    ///     [1, 2, 3, 4, 5].chunked(into: 2) // [[1, 2], [3, 4], [5]]
     ///
-    /// - Parameters:
-    ///   - size: Number of elements to separate by.
-    /// - Returns: The array of grouped elements.
+    /// A size below 1 or above `count` returns the whole array as one group. An empty array returns `[[]]`.
     func chunked(into size: Int) -> [[Element]] {
         guard !isEmpty, 1...count ~= size else { return [self] }
 
@@ -24,10 +22,11 @@ public extension Array {
 }
 
 public extension Array where Element: Equatable {
-    /// Array with all duplicates removed from it.
+    /// Returns the array without its repeated elements, keeping the first of each in its original order.
     ///
     ///     [1, 3, 3, 5, 7, 9].removeDuplicates() // [1, 3, 5, 7, 9]
-    ///     
+    ///
+    /// - Complexity: O(*n*²), where *n* is the length of the array.
     func removeDuplicates() -> [Element] {
         // https://github.com/SwifterSwift/SwifterSwift
         reduce(into: [Element]()) {
@@ -36,13 +35,11 @@ public extension Array where Element: Equatable {
         }
     }
 
-    /// Removes the first occurance of the matched element.
+    /// Removes the first element equal to `element`, if there is one.
     ///
-    ///     var array = ["a", "b", "c", "d", "e", "a"]
+    ///     var array = ["a", "b", "c", "a"]
     ///     array.remove("a")
-    ///     array // ["b", "c", "d", "e", "a"]
-    ///
-    /// - Parameter element: The element to remove from the array.
+    ///     array // ["b", "c", "a"]
     mutating func remove(_ element: Element) {
         guard let index = firstIndex(of: element) else { return }
         remove(at: index)

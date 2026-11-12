@@ -10,33 +10,21 @@
 
 import Foundation.NSUserDefaults
 
-/// Manages blocks of code that only need to run once on version updates in apps.
+/// Runs blocks of code once per app version, such as a data migration after an update.
 ///
-///     @UIApplicationMain
-///     class AppDelegate: UIResponder, UIApplicationDelegate {
+/// The last version handled is kept in user defaults. Versions compare numerically, so "1.10" is later than "1.9".
 ///
-///         var window: UIWindow?
-///         let migration = Migration()
+///     let migration = AppMigration()
 ///
-///         func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-///             migration
-///                 .performUpdate {
-///                     print("Migrate update occurred.")
-///                 }
-///                 .perform(forVersion: "1.0") {
-///                     print("Migrate to 1.0 occurred.")
-///                 }
-///                 .perform(forVersion: "1.7") {
-///                     print("Migrate to 1.7 occurred.")
-///                 }
-///                 .perform(forVersion: "2.4") {
-///                     print("Migrate to 2.4 occurred.")
-///                 }
-///
-///             return true
+///     migration
+///         .performUpdate {
+///             print("Runs once after every update.")
 ///         }
-///     }
+///         .perform(forVersion: "1.7") {
+///             print("Runs once, the first time version 1.7 or later launches.")
+///         }
 public class AppMigration {
+    /// The user defaults suite that holds the saved versions when no other store is given.
     public static let suiteName = "io.zamzam.ZamzamKit.Migration"
 
     private let defaults: UserDefaults
@@ -45,6 +33,7 @@ public class AppMigration {
     private lazy var appVersion: String = bundle
         .infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
 
+    /// Creates a migration that saves its versions in `userDefaults` and reads the app version from `bundle`.
     public init(userDefaults: UserDefaults = UserDefaults(suiteName: suiteName) ?? .standard, bundle: Bundle = .main) {
         self.defaults = userDefaults
         self.bundle = bundle
@@ -52,9 +41,9 @@ public class AppMigration {
 }
 
 public extension AppMigration {
-    /// Checks the current version of the app against the previous saved version.
+    /// Runs `completion` when the app version differs from the one saved by the last call, then saves it.
     ///
-    /// - Parameter completion: Will be called when the app is updated. Will always be called once.
+    /// The first launch counts as a difference.
     @discardableResult
     func performUpdate(completion: () -> Void) -> Self {
         guard lastAppVersion != appVersion else { return self }
@@ -63,13 +52,9 @@ public extension AppMigration {
         return self
     }
 
-    /// Checks the current version of the app against the previous saved version.
-    /// If it doesn't match the completion block gets called, and passed in the current app verson.
+    /// Runs `completion` once for `version`, when it is later than the last version run and no later than the app version.
     ///
-    /// - Parameters:
-    ///   - version: Version to update.
-    ///   - build: Build to update.
-    ///   - completion: Will be called when the app is updated. Will always be called once.
+    /// Call it for versions in ascending order: a version at or below the last one run is skipped.
     @discardableResult
     func perform(forVersion version: String, completion: () -> Void) -> Self {
         guard version.compare(lastMigrationVersion ?? "", options: .numeric) == .orderedDescending,
@@ -82,7 +67,7 @@ public extension AppMigration {
         return self
     }
 
-    /// Wipe saved values when last migrated so next update will occur.
+    /// Forgets the saved versions, so every block runs again on the next call.
     func reset() {
         lastAppVersion = nil
         lastMigrationVersion = nil

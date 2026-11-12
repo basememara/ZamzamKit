@@ -59,12 +59,15 @@ private extension MailView {
     }
 }
 
+/// A message for the mail composer to open with: recipients, subject, body and attachments.
 public struct MailItem: Identifiable, Equatable {
+    /// A file attached to the message.
     public struct Attachment: Equatable {
         let data: Data
         let mimeType: String
         let fileName: String
 
+        /// Creates an attachment from data, its MIME type such as `image/png`, and the file name the recipient sees.
         public init(data: Data, mimeType: String, fileName: String) {
             self.data = data
             self.mimeType = mimeType
@@ -72,6 +75,7 @@ public struct MailItem: Identifiable, Equatable {
         }
     }
 
+    /// Identifies the item for the sheet. Every item gets its own, so two items with the same content aren't equal.
     public let id = UUID()
     let emails: [String]
     let subject: String?
@@ -79,6 +83,7 @@ public struct MailItem: Identifiable, Equatable {
     let isHTML: Bool
     let attachments: [Attachment]
 
+    /// Creates a message. `isHTML` says whether `body` is HTML or plain text.
     public init(
         emails: String...,
         subject: String? = nil,

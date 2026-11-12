@@ -21,24 +21,20 @@ private struct SafariView: UIViewControllerRepresentable {
 }
 
 public extension View {
-    /// Presents a Safari sheet using the given URL for browsing the web.
+    /// Presents Safari's in-app browser for the URL, and sets the binding to `nil` when the sheet is dismissed.
     ///
     ///     struct ContentView: View {
     ///         @State private var linkURL: URL?
     ///
     ///         var body: some View {
-    ///             VStack {
-    ///                 Button(action: { linkURL = "https://apple.com" })
-    ///                     Text("Open link")
-    ///                 }
-    ///                 .sheet(safari: $linkURL)
+    ///             Button("Open link") {
+    ///                 linkURL = URL(string: "https://apple.com")
     ///             }
+    ///             .sheet(safari: $linkURL)
     ///         }
     ///     }
     ///
-    /// - Parameters:
-    ///   - url: A binding to whether the Safari browser should be presented. A URL that isn't HTTP or HTTPS
-    ///     presents nothing, since the browser can't open it.
+    /// A URL that isn't HTTP or HTTPS presents nothing, since the browser can't open it.
     func sheet(safari url: Binding<URL?>, onDismiss: (() -> Void)? = nil) -> some View {
         sheet(
             isPresented: Binding<Bool>(

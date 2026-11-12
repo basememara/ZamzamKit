@@ -77,6 +77,7 @@ public extension Distribution {
 // MARK: - Device
 
 public extension Distribution {
+    /// The operating system the code is compiled for: `"iOS"`, `"watchOS"` or `"macOS"`.
     var platform: String {
         #if os(iOS)
         return "iOS"

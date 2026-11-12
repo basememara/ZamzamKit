@@ -11,14 +11,14 @@ import StoreKit
 import SwiftUI
 
 public extension View {
-    /// Presents iTunes Store product information using the given App Store parameters.
+    /// Presents the App Store page of an item over the app's key window.
     ///
     /// - Parameters:
-    ///   - itunesID: The iTunes identifier for the item you want the store to display when the view controller is presented.
-    ///   - affiliateToken: The affiliate identifier you wish to use for any purchase made through the view controller.
-    ///   - campaignToken: An App Analytics campaign.
-    ///   - application: The application to present the store page from.
-    ///   - completion: The block to execute after the presentation finishes.
+    ///   - itunesID: The item's App Store identifier.
+    ///   - affiliateToken: An affiliate identifier credited with a purchase made from the page.
+    ///   - campaignToken: An App Analytics campaign name.
+    ///   - application: The application whose active scene presents the page.
+    ///   - completion: Called once the page is on screen, or when it can't load or the app has no key window.
     func open(
         itunesID: String,
         affiliateToken: String? = nil,

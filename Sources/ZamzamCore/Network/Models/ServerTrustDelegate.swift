@@ -8,11 +8,16 @@
 
 import Foundation.NSURLSession
 
-/// The object that defines methods that URL session instances call on their delegates to handle session-level events, like session life cycle changes.
+/// A URL session delegate that answers server trust challenges with an evaluator for each host.
 public final class ServerTrustDelegate: NSObject, URLSessionTaskDelegate, @unchecked Sendable {
     private let evaluators: [String: ServerTrustEvaluator]?
     private let allEvaluatorsMustSatisfy: Bool
 
+    /// Creates a delegate.
+    ///
+    /// - Parameters:
+    ///   - evaluators: An evaluator for each host name. `nil` leaves every challenge to the system.
+    ///   - allEvaluatorsMustSatisfy: Whether a host with no evaluator is refused. `false` leaves that host to the system.
     public init(
         evaluators: [String: ServerTrustEvaluator]?,
         allEvaluatorsMustSatisfy: Bool
@@ -21,6 +26,8 @@ public final class ServerTrustDelegate: NSObject, URLSessionTaskDelegate, @unche
         self.allEvaluatorsMustSatisfy = allEvaluatorsMustSatisfy
     }
 
+    /// Accepts the server's trust when the host's evaluator finds it valid and cancels the challenge when it doesn't.
+    /// Challenges of any other kind go to the system.
     public func urlSession(
         _ session: URLSession,
         didReceive challenge: URLAuthenticationChallenge

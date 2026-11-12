@@ -38,8 +38,8 @@ public extension View {
     ///         }
     ///     }
     ///
-    /// The `onLoad` modifier only executes the first time only, even on subsequent view redraws.
-    /// This modifier is alternative to the `onAppear` and `task` that execute on every appearance.
+    /// The action runs the first time the view appears and not when it appears again, where `onAppear` and `task`
+    /// run on every appearance.
     ///
     /// - Parameter action: The async action to perform.
     /// - Returns: A view that triggers action when this view has loaded.

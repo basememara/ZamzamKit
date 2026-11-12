@@ -16,6 +16,11 @@ public struct AdaptiveStack<Content: View>: View {
     let content: () -> Content
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
+    /// Creates a stack.
+    ///
+    /// - Parameters:
+    ///   - horizontalAlignment: How the children line up when the stack is vertical.
+    ///   - verticalAlignment: How the children line up when the stack is horizontal.
     public init(
         horizontalAlignment: HorizontalAlignment = .center,
         verticalAlignment: VerticalAlignment = .center,
@@ -28,6 +33,7 @@ public struct AdaptiveStack<Content: View>: View {
         self.content = content
     }
 
+    /// The children in a horizontal or vertical layout, chosen by the text size.
     public var body: some View {
         // One layout that changes axis, so the children keep their identity when the text size crosses over
         let layout = dynamicTypeSize > .xLarge

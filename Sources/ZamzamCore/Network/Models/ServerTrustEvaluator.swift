@@ -23,16 +23,22 @@ public protocol ServerTrustEvaluator: Sendable {
 
 // MARK: - Pinned Certificate
 
-/// Uses the pinned certificates to validate the server trust. The server trust is considered valid if one of the pinned
-/// certificates match one of the server certificates. By validating both the certificate chain and host, certificate
-/// pinning provides a very secure form of server trust validation mitigating most, if not all, MITM attacks.
-/// Applications are encouraged to always validate the host and require a valid certificate chain in production.
+/// Validates a server by its certificate chain, its host name and a pinned certificate.
+///
+/// The trust is valid when the chain passes the system's checks for the host and one of the server's certificates is
+/// identical to a pinned one. With no pinned certificate, no trust is valid.
 /// `SecCertificate` is an immutable Core Foundation type, hence the unchecked conformance.
 public struct NetworkPinnedCertificateTrustEvaluator: ServerTrustEvaluator, @unchecked Sendable {
     private let certificates: [SecCertificate]
     private let acceptSelfSigned: Bool
     private let log: LogManager?
 
+    /// Creates an evaluator from certificates.
+    ///
+    /// - Parameters:
+    ///   - acceptSelfSigned: Whether the pinned certificates are the only trusted roots, which lets a chain that ends in
+    ///     one of them pass without a system root.
+    ///   - log: A logger for the reason a trust is refused.
     public init(
         certificates: [SecCertificate],
         acceptSelfSigned: Bool = false,
@@ -43,6 +49,7 @@ public struct NetworkPinnedCertificateTrustEvaluator: ServerTrustEvaluator, @unc
         self.log = log
     }
 
+    /// Creates an evaluator from certificate files in DER form. A file that can't be read as a certificate is skipped.
     public init(
         certificateURLs: [URL],
         acceptSelfSigned: Bool = false,
@@ -60,6 +67,7 @@ public struct NetworkPinnedCertificateTrustEvaluator: ServerTrustEvaluator, @unc
 
 public extension NetworkPinnedCertificateTrustEvaluator {
     // Taken from: https://github.com/Alamofire/Alamofire
+    /// Returns whether the trust passes the system's checks for the host and holds one of the pinned certificates.
     func valid(_ trust: SecTrust, forHost host: String) -> Bool {
         guard !certificates.isEmpty else { return false }
 
@@ -126,6 +134,8 @@ extension NetworkPinnedCertificateTrustEvaluator {
 ///
 /// **THIS EVALUATOR SHOULD NEVER BE USED IN PRODUCTION!**
 public struct NetworkDisabledTrustEvaluator: ServerTrustEvaluator, Sendable {
+    /// Creates the evaluator.
     public init() {}
+    /// Returns `true` for every trust.
     public func valid(_ trust: SecTrust, forHost host: String) -> Bool { true }
 }

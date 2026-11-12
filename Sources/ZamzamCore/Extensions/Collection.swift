@@ -7,9 +7,7 @@
 //
 
 public extension Collection {
-    /// Element at the given index if it exists.
-    ///
-    /// - Parameter index: index of element.
+    /// Accesses the element at the index, or `nil` when the index is out of bounds.
     subscript(safe index: Index) -> Element? {
         // http://www.vadimbulavin.com/handling-out-of-bounds-exception/
         indices.contains(index) ? self[index] : nil

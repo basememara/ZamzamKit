@@ -8,10 +8,11 @@
 
 import SwiftUI
 
+/// A view modifier that styles a card, applied with `cardStyle(_:)`.
 public protocol CardStyle: ViewModifier {}
 
 public extension View {
-    /// Sets the style for cards within this view.
+    /// Applies a card style to this view.
     ///
     ///     VStack {
     ///         Text("Fire")

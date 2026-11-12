@@ -9,46 +9,51 @@
 import Foundation
 import os
 
+/// Sends each log entry to every service whose minimum level allows it.
+///
+///     let log = LogManager(
+///         services: [
+///             LogServiceConsole(minLevel: .debug, subsystem: "MyApp"),
+///             LogServiceOS(minLevel: .warning, subsystem: "com.example.MyApp", category: "Network", isDebug: false)
+///         ]
+///     )
+///
+///     log.info("Signed in", context: ["plan": "free"])
 public final class LogManager: Sendable {
     private let services: [LogService]
 
     /// Attributes added to every entry. Writes hold the same lock, so destinations receive one entry at a time.
     private let context = OSAllocatedUnfairLock<[String: any CustomStringConvertible & Sendable]>(initialState: [:])
 
+    /// Creates a logger that writes to the given services, in their order.
     public init(services: [LogService]) {
         self.services = services
     }
 }
 
 public extension LogManager {
-    /// Adds a custom attribute to all future logs sent by this logger.
+    /// Sets an attribute passed to the services with every later entry. A `nil` value removes it.
     func set(_ value: (any CustomStringConvertible & Sendable)?, forKey key: String) {
         context.withLock { $0[key] = value }
     }
 
-    /// Adds custom attributes to all future logs sent by this logger.
+    /// Adds attributes passed to the services with every later entry, replacing those of the same key.
     func set(_ context: [String: any CustomStringConvertible & Sendable]) {
         self.context.withLock { $0.merge(context) { $1 } }
     }
 
-    /// Removes all the custom attribute from all future logs sent by this logger.
+    /// Removes every attribute set on the logger.
     func reset() {
         context.withLock { $0.removeAll() }
     }
 }
 
 public extension LogManager {
-    /// Log an entry to the destination.
+    /// Writes an entry to every service that accepts its level, one entry at a time.
     ///
     /// - Parameters:
-    ///   - level: The current level of the log entry.
-    ///   - message: Description of the log.
-    ///   - file: File of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - error: Error of the caller.
-    ///   - context: Additional meta data.
-    ///   - completion: The block to call when log entries sent.
+    ///   - context: Attributes for this entry alone.
+    ///   - completion: Called on the main queue after the services return, including when none takes the entry.
     func write(
         _ level: LogAPI.Level,
         with message: String,
@@ -86,16 +91,7 @@ public extension LogManager {
 }
 
 public extension LogManager {
-    /// Log something generally unimportant (lowest priority; not written to file).
-    ///
-    /// - Parameters:
-    ///   - level: The current level of the log entry.
-    ///   - message: Description of the log.
-    ///   - file: File of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - context: Additional meta data.
-    ///   - completion: The block to call when log entries sent.
+    /// Logs detail of the lowest priority, at the `verbose` level.
     func verbose(
         _ message: String,
         file: String = #fileID,
@@ -118,16 +114,7 @@ public extension LogManager {
 }
 
 public extension LogManager {
-    /// Log something which help during debugging (low priority; not written to file).
-    ///
-    /// - Parameters:
-    ///   - level: The current level of the log entry.
-    ///   - message: Description of the log.
-    ///   - file: File of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - context: Additional meta data.
-    ///   - completion: The block to call when log entries sent.
+    /// Logs something that helps while debugging, at the `debug` level.
     func debug(
         _ message: String,
         file: String = #fileID,
@@ -150,16 +137,7 @@ public extension LogManager {
 }
 
 public extension LogManager {
-    /// Log something which you are really interested but which is not an issue or error (normal priority).
-    ///
-    /// - Parameters:
-    ///   - level: The current level of the log entry.
-    ///   - message: Description of the log.
-    ///   - file: File of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - context: Additional meta data.
-    ///   - completion: The block to call when log entries sent.
+    /// Logs something worth knowing that isn't a problem, at the `info` level.
     func info(
         _ message: String,
         file: String = #fileID,
@@ -182,17 +160,7 @@ public extension LogManager {
 }
 
 public extension LogManager {
-    /// Log something which may cause big trouble soon (high priority).
-    ///
-    /// - Parameters:
-    ///   - level: The current level of the log entry.
-    ///   - message: Description of the log.
-    ///   - file: File of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - error: Error of the caller.
-    ///   - context: Additional meta data.
-    ///   - completion: The block to call when log entries sent.
+    /// Logs something that may cause trouble soon, at the `warning` level, with the error behind it.
     func warning(
         _ message: String,
         file: String = #fileID,
@@ -216,17 +184,7 @@ public extension LogManager {
 }
 
 public extension LogManager {
-    /// Log something which will keep you awake at night (highest priority).
-    ///
-    /// - Parameters:
-    ///   - level: The current level of the log entry.
-    ///   - message: Description of the log.
-    ///   - file: File of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - error: Error of the caller.
-    ///   - context: Additional meta data.
-    ///   - completion: The block to call when log entries sent.
+    /// Logs a failure, at the `error` level, with the error behind it.
     func error(
         _ message: String,
         file: String = #fileID,

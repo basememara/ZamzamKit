@@ -11,30 +11,25 @@ import Foundation.NSDate
 import Foundation.NSDateFormatter
 
 public extension Date {
-    /// Determines if the date if Friday / Jumuah.
-    ///
-    /// - Parameter calendar: Calendar used for calculation.
-    /// - Returns: Returns true if date passes the criteria.
+    /// Returns whether the date is a Friday on the calendar, in its time zone.
     func isJumuah(using calendar: Calendar) -> Bool {
         calendar.dateComponents([.weekday], from: self).weekday == 6
     }
 
-    /// Determines if the date falls within Ramadan.
+    /// Returns whether the date falls in Ramadan on the Umm al-Qura calendar.
     ///
     /// - Parameters:
-    ///   - offset: The number of days to offset the hijri date.
+    ///   - offset: Days added to the date before it is read, for a community whose month starts on another day.
     ///   - timeZone: The time zone the date is read in.
-    /// - Returns: True if the date is within Ramadan; false otherwise.
     func isRamadan(offset: Int = 0, timeZone: TimeZone) -> Bool {
         hijri(offset: offset, timeZone: timeZone).month == 9
     }
 
-    /// Determines if the date falls within Eid ul-Fitr or Eid al-Adha.
+    /// Returns whether the date is a day of Eid on the Umm al-Qura calendar: 1 to 3 Shawwal, or 10 to 13 Dhul-Hijjah.
     ///
     /// - Parameters:
-    ///   - offset: The number of days to offset the hijri date.
+    ///   - offset: Days added to the date before it is read.
     ///   - timeZone: The time zone the date is read in.
-    /// - Returns: True if the date is within Eid; false otherwise.
     func isEid(offset: Int = 0, timeZone: TimeZone) -> Bool {
         let dateComponents = hijri(offset: offset, timeZone: timeZone)
         return (dateComponents.month == 10 && [1, 2, 3].contains(dateComponents.day)) // Eid ul-Fitr
@@ -43,14 +38,15 @@ public extension Date {
 }
 
 public extension Date {
-    /// Returns a string representation of a given date formatted to hijri date.
+    /// Returns the date written on the Umm al-Qura calendar, in the locale's format for the template.
+    ///
+    ///     // For June 26, 2017:
+    ///     date.hijriString(timeZone: timeZone, locale: Locale(identifier: "en_US")) // "Shawwal 2, 1438"
     ///
     /// - Parameters:
-    ///   - template: The date format template used by the receiver.
-    ///   - offset: The number of days to offset the hijri date.
+    ///   - template: The fields to show, as a date format template. One the locale can't resolve gives the long date style.
+    ///   - offset: Days added to the date before it is read.
     ///   - timeZone: The time zone the date is read in.
-    ///   - locale: The locale the date is written for. Default is the device's.
-    /// - Returns: A string representation of a given date formatted to hijri date.
     func hijriString(
         template: String = "yyyyMMMMd",
         offset: Int = 0,
@@ -78,13 +74,12 @@ public extension Date {
         return formatter.string(from: self + .days(offset, calendar))
     }
 
-    /// Returns the date components of the hijri date.
+    /// Returns the date's components on the Umm al-Qura calendar.
     ///
     /// - Parameters:
-    ///   - components: The components of the date to format.
-    ///   - offset: The number of days to offset the hijri date.
+    ///   - components: The components to read. The default is the year through the second.
+    ///   - offset: Days added to the date before it is read.
     ///   - timeZone: The time zone the date is read in.
-    /// - Returns: The date components of the hijri date.
     func hijri(
         components: Set<Calendar.Component> = Calendar.Component.full,
         offset: Int = 0,

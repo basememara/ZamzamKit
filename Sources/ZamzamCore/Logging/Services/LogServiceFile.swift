@@ -14,12 +14,18 @@ import Foundation
 /// file starts, so the log never holds more than twice that. A write that fails drops its entry rather
 /// than the app. Use one service per file.
 public struct LogServiceFile: LogService {
+    /// The lowest level this service writes.
     public let minLevel: LogAPI.Level
     private let subsystem: String
     private let sessionKeys: Set<String>
     private let writer: Writer
 
-    /// - Parameter sessionKeys: The session context attributes repeated on every entry.
+    /// Creates a file destination. The file and its folder are created on the first write.
+    ///
+    /// - Parameters:
+    ///   - subsystem: The name written in brackets on each entry.
+    ///   - fileURL: The file to append to. Its archive is the same path with `.1` added.
+    ///   - sessionKeys: The session context attributes repeated on every entry.
     public init(minLevel: LogAPI.Level, subsystem: String, fileURL: URL, sessionKeys: Set<String> = []) {
         self.init(
             minLevel: minLevel,
@@ -50,6 +56,8 @@ private extension LogServiceFile {
 }
 
 public extension LogServiceFile {
+    /// Appends the entry with the console's prefix, its time written as ISO 8601 in the device's time zone.
+    /// The file is written on a background queue, in the order of the calls.
     func write(
         _ level: LogAPI.Level,
         with message: String,

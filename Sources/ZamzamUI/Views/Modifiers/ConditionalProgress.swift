@@ -31,13 +31,12 @@ private struct ConditionalProgress: ViewModifier {
 }
 
 public extension View {
-    /// Adds a progress view over this view if the condition is met, otherwise it no progress view is shown.
+    /// Shows a progress view over this view while the condition holds.
     ///
     ///     someView
     ///         .progress(if: model == nil)
     ///
-    /// - Parameter condition: The condition to determine if the content should be applied.
-    /// - Returns: The modified view.
+    /// - Parameter tint: The progress view's color. `nil` keeps the default.
     func progress(if condition: Bool = true, tint: Color? = nil) -> some View {
         modifier(ConditionalProgress(condition: condition, tint: tint))
     }

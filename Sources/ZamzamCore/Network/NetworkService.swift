@@ -8,12 +8,9 @@
 
 import Foundation.NSURLRequest
 
+/// A service that performs an HTTP request, such as `NetworkServiceFoundation` over `URLSession`.
 public protocol NetworkService: Sendable {
-    /// Creates a task that retrieves the contents of a URL based on the specified request object, and calls a handler upon completion.
-    ///
-    /// - Parameters:
-    ///   - request: A network request object that provides the URL, parameters, headers, and so on.
-    ///   - completion: The completion handler to call when the load request is complete.
+    /// Sends the request and returns the response, or throws when it fails.
     @discardableResult
     func send(_ request: URLRequest) async throws -> NetworkResponse
 }

@@ -9,11 +9,9 @@
 import Foundation.NSJSONSerialization
 
 public extension JSONDecoder {
-    /// Decodes an instance of the indicated type.
+    /// Returns a value of the type you specify, decoded from a JSON string.
     ///
-    /// - Parameters:
-    ///   - type: The type to decode.
-    ///   - string: The string representation of the JSON object.
+    /// - Throws: `DecodingError.dataCorrupted` when the string can't be written in `encoding`, or the error from decoding.
     func decode<T: Decodable>(_ type: T.Type, from string: String, using encoding: String.Encoding = .utf8) throws -> T {
         guard let data = string.data(using: encoding) else {
             throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "Could not encode data from string."))

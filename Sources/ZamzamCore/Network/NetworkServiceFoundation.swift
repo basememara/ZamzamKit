@@ -8,15 +8,25 @@
 
 import Foundation.NSURLSession
 
+/// A network service over `URLSession`.
 public struct NetworkServiceFoundation: NetworkService, Sendable {
     private let session: URLSession
     private let delegate: URLSessionTaskDelegate?
 
+    /// Creates a service on a session of your own.
+    ///
+    /// - Parameter delegate: A delegate for each request's task, such as a `ServerTrustDelegate`.
     public init(session: URLSession, delegate: URLSessionTaskDelegate? = nil) {
         self.session = session
         self.delegate = delegate
     }
 
+    /// Creates a service on a new session, with server trust evaluation for the hosts given.
+    ///
+    /// - Parameters:
+    ///   - serverTrustEvaluators: An evaluator for each host name. `nil` leaves trust to the system.
+    ///   - allServerTrustEvaluatorsMustSatisfy: Whether a host with no evaluator is refused. `false` leaves that host
+    ///     to the system.
     public init(
         configuration: URLSessionConfiguration = .default,
         serverTrustEvaluators: [String: ServerTrustEvaluator]? = nil,
@@ -33,6 +43,10 @@ public struct NetworkServiceFoundation: NetworkService, Sendable {
 }
 
 public extension NetworkServiceFoundation {
+    /// Sends the request and returns the response for a status from 200 to 299.
+    ///
+    /// - Throws: A `NetworkError`. It holds the transport's error when the connection fails; the status, headers and
+    ///   body when the server answers with another status; and the request alone when the response isn't HTTP.
     func send(_ request: URLRequest) async throws -> NetworkResponse {
         let response: URLResponse
         let data: Data

@@ -22,6 +22,8 @@ public final class LocationManager: NSObject {
     private var shouldDisplayHeadingCalibration = false
     #endif
 
+    /// Creates a manager and makes it its own Core Location delegate.
+    ///
     /// - Parameters:
     ///   - desiredAccuracy: The accuracy of the location updates that run beside headings so they resolve
     ///     true north; one-off fixes come from `CLLocationUpdate`, which sets its own.
@@ -134,6 +136,7 @@ public extension LocationManager {
         /// The most the magnetic heading may be off, in degrees; negative when it's unreliable.
         public let headingAccuracy: CLLocationDirectionAccuracy
 
+        /// Creates a reading from its values.
         public init(magneticHeading: CLLocationDirection, trueHeading: CLLocationDirection, headingAccuracy: CLLocationDirectionAccuracy) {
             self.magneticHeading = magneticHeading
             self.trueHeading = trueHeading
@@ -234,11 +237,13 @@ private extension LocationManager {
 
 // Core Location calls the delegate on the thread that created the manager, which is the main actor here
 extension LocationManager: @preconcurrency CLLocationManagerDelegate {
+    /// Core Location's callback. Resumes the callers of `requestAuthorization(timeout:)` once the user has answered.
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         guard manager.authorizationStatus != .notDetermined else { return }
         resumeAuthorizationWaiters()
     }
 
+    /// Core Location's callback. Passes a compass failure to the heading stream and drops any other failure.
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         #if os(iOS) || os(watchOS)
         // The location updates that run beside headings fail on their own; only a compass failure is the stream's
@@ -248,6 +253,7 @@ extension LocationManager: @preconcurrency CLLocationManagerDelegate {
     }
 
     #if os(iOS) || os(watchOS)
+    /// Core Location's callback. Passes the heading to the heading stream.
     public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         headingContinuation?.yield(
             .success(
@@ -260,6 +266,7 @@ extension LocationManager: @preconcurrency CLLocationManagerDelegate {
         )
     }
 
+    /// Core Location's callback. Returns whether the heading stream allows the calibration prompt.
     public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
         shouldDisplayHeadingCalibration
     }

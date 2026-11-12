@@ -8,19 +8,17 @@
 
 import SwiftUI
 
+/// A view modifier that styles an image, applied with `imageStyle(_:)`.
 public protocol ImageStyle: ViewModifier {}
 
 public extension View {
-    /// Sets the style for images within this view.
+    /// Applies an image style to this view.
     ///
-    /// Use this modifier to set a specific style for all images within a view:
+    ///     Image(systemName: "alarm")
+    ///         .imageStyle(MyCustomImageStyle())
     ///
-    ///     VStack {
-    ///         Image(systemName: "alarm")
-    ///         Image(systemName: "calendar")
-    ///     }
-    ///     .imageStyle(MyCustomImageStyle())
-    ///
+    /// The style is a modifier on this view, not an environment value. Views inside change only as far as the style's
+    /// own modifiers reach them, as `font(_:)` does.
     func imageStyle(_ modifier: some ImageStyle) -> some View {
         self.modifier(modifier)
     }

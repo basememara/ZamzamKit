@@ -9,7 +9,10 @@
 import Foundation.NSDateInterval
 
 public extension DateInterval {
-    /// Returns remaining progress between the date interval at a specified date.
+    /// Returns how far the date is through the interval, from 0 to 1, and the seconds left until the end.
+    ///
+    /// Before the start the value is 0 and the remaining time runs from the date to the end. At or after the end the
+    /// result is `(1, 0)`.
     func progress(at date: Date) -> (value: Double, remaining: TimeInterval) {
         guard date > start else { return (0, end.timeIntervalSince(date)) }
         guard date < end else { return (1, 0) }
@@ -19,9 +22,11 @@ public extension DateInterval {
 }
 
 public extension DateInterval {
-    /// Returns dates between the range that are offset.
-    /// - Parameter timeInterval: The time interval to offset the dates by. One that isn't positive, or is too
-    ///   small for its dates to be counted, gives no dates.
+    /// Returns the dates from the start, one every `timeInterval` seconds, up to the end, which is included when a
+    /// step lands on it.
+    ///
+    /// - Parameter timeInterval: The seconds between dates. One that isn't positive, or is too small for its dates to be
+    ///   counted, gives no dates.
     func stride(by timeInterval: TimeInterval) -> [Date] {
         // https://stackoverflow.com/q/68398429
         guard timeInterval > 0,

@@ -8,20 +8,16 @@
 
 import Foundation.NSURL
 
+/// A destination for log entries, such as the console, the system log or a file.
 public protocol LogService: Sendable {
     /// The minimum level required to create log entries.
     var minLevel: LogAPI.Level { get }
 
-    /// Log an entry to the destination.
+    /// Writes an entry to the destination. `LogManager` calls it only for a level that `canWrite(for:)` accepts.
     ///
     /// - Parameters:
-    ///   - level: The current level of the log entry.
-    ///   - message: Description of the log.
-    ///   - file: File of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - error: Error of the caller.
-    ///   - context: Additional meta data.
+    ///   - context: Attributes for this entry alone.
+    ///   - sessionContext: The attributes set on the logger, for the destination to include or leave out.
     func write(
         _ level: LogAPI.Level,
         with message: String,
@@ -36,15 +32,7 @@ public protocol LogService: Sendable {
     /// Returns if the logger should process the entry for the specified log level.
     func canWrite(for level: LogAPI.Level) -> Bool
 
-    /// The output of the message and supporting information.
-    ///
-    /// - Parameters:
-    ///   - message: Description of the log.
-    ///   - file: File of the caller.
-    ///   - function: Function of the caller.
-    ///   - line: Line of the caller.
-    ///   - error: Error of the caller.
-    ///   - context: Additional meta data.
+    /// Returns the text the destination writes for an entry.
     func format(
         _ message: String,
         _ file: String,
@@ -56,12 +44,12 @@ public protocol LogService: Sendable {
 }
 
 public extension LogService {
-    /// Determines if the service has the minimum level to log.
+    /// Returns whether the level is at or above `minLevel`. The `none` level is never written.
     func canWrite(for level: LogAPI.Level) -> Bool {
         minLevel <= level && level != .none
     }
 
-    /// The string output of the log.
+    /// Returns `File.function:line - message`, followed by the error and the context when there are any.
     func format(
         _ message: String,
         _ file: String,
@@ -105,12 +93,19 @@ extension LogAPI.Level {
 
 // MARK: - Namespace
 
+/// The namespace for the logging types.
 public enum LogAPI {
+    /// How important an entry is, from `verbose` up to `error`.
     public enum Level: Comparable, CaseIterable, Sendable {
+        /// Detail that is rarely needed.
         case verbose
+        /// Detail that helps while debugging.
         case debug
+        /// Something worth knowing that isn't a problem.
         case info
+        /// Something that may cause trouble soon.
         case warning
+        /// A failure.
         case error
 
         /// Disables a log service when used as minimum level

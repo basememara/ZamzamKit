@@ -20,19 +20,14 @@ public class BackgroundTask {
         self.application = application
     }
 
-    /// Execute a process with an indefinite background task. The handler must call `end()` when it is done.
-    ///
-    /// This method lets your app continue to run for a period of time after it transitions to the background.
-    /// You should call this method at times where leaving a task unfinished might be detrimental to your app’s user experience.
+    /// Starts a background task and passes it to `handler`, which must call `end()` when its work is done.
     ///
     ///     BackgroundTask.run(for: application) { task in
-    ///         // Perform finite-length task...
-    ///         task.end() // Always end task when finished
+    ///         // Finish the work, then:
+    ///         task.end()
     ///     }
     ///
-    /// - Parameters:
-    ///   - application: The application instance.
-    ///   - handler: The long-running background task to execute.
+    /// The task also ends when the app's background time runs out.
     @MainActor
     public static func run(for application: UIApplication, handler: (BackgroundTask) -> Void) {
         let backgroundTask = BackgroundTask(application: application)

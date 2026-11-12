@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension View {
-    /// Adds a border to this view with the specified color, width, and radius.
+    /// Clips this view to a rounded rectangle and draws a border of the given color and width along it.
     func border(_ color: Color, width: CGFloat = 1, cornerRadius: CGFloat) -> some View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius)
 
@@ -20,10 +20,7 @@ public extension View {
 }
 
 public extension View {
-    /// Hides this view conditionally.
-    ///
-    /// - Parameter condition: The condition to determine if the content should be applied.
-    /// - Returns: The modified view.
+    /// Hides this view while the condition holds, keeping its place in the layout.
     func hidden(_ condition: Bool) -> some View {
         modifier(if: condition) { content in
             content.hidden()

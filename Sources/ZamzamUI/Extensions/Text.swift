@@ -9,12 +9,12 @@
 import SwiftUI
 
 public extension Text {
-    /// Creates a text view that displays an optional string with a fallback to a redactable string if `nil`.
+    /// Creates a text view for an optional string. `nil` shows "Loading..." as text to redact while the value loads.
     init(redactable content: String?) {
         self.init(content ?? "Loading...")
     }
 
-    /// Creates a text view that displays an optional localized string key with a fallback to a redactable string if `nil`.
+    /// Creates a text view for an optional localized key. `nil` shows "Loading..." as text to redact while the value loads.
     init(redactable content: LocalizedStringKey?) {
         self.init(content ?? "Loading...")
     }

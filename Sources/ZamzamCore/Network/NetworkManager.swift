@@ -8,38 +8,25 @@
 
 import Foundation.NSURLRequest
 
-/// A manager that creates and manages network requests.
-///
-/// Create requests using the extensions available for `URLRequest` that provides the URL, parameters, headers, and so on.
-/// The network service provided in the intializer handles cache policy, trust management, and other underlying details.
+/// Sends HTTP requests through a network service, after an optional adapter has changed them.
 ///
 ///     let request = URLRequest(
-///         url: URL(string: "https://httpbin.org/get")!,
+///         url: URL(safeString: "https://httpbin.org/get"),
 ///         method: .get,
-///         parameters: [
-///             "abc": 123,
-///             "def": "test456",
-///             "xyz": true
-///         ],
-///         headers: [
-///             "Abc": "test123",
-///             "Def": "test456",
-///             "Xyz": "test789"
-///         ]
+///         parameters: ["abc": 123, "def": "test456"],
+///         headers: ["Abc": "test123"]
 ///     )
 ///
-///     let networkManager = NetworkManager(
-///         service: NetworkServiceFoundation()
-///     )
+///     let networkManager = NetworkManager(service: NetworkServiceFoundation())
 ///
 ///     do {
 ///         let response = try await networkManager.send(request)
+///         print(response.statusCode)
 ///     } catch let error as NetworkError {
-///         print(error.statusCode)
+///         print(error.statusCode ?? 0)
 ///     } catch {
-///         print("Unknown error")
+///         print(error)
 ///     }
-///     
 public struct NetworkManager: Sendable {
     private let service: NetworkService
     private let adapter: URLRequestAdapter?
@@ -56,20 +43,17 @@ public struct NetworkManager: Sendable {
 }
 
 public extension NetworkManager {
-    /// Creates a task that retrieves the contents of a URL based on the specified request object and returns the response.
+    /// Sends the request and returns the response.
     ///
-    /// - Parameter request: A network request object that provides the URL, parameters, headers, and so on.
-    /// - Returns: The server response with included details from the network request.
+    /// - Throws: The service's error. `NetworkServiceFoundation` throws a `NetworkError` when the connection fails or the
+    ///   status is outside 200 to 299.
     @discardableResult
     func send(_ request: URLRequest) async throws -> NetworkResponse {
         let request = adapter?.adapt(request) ?? request
         return try await service.send(request)
     }
 
-    /// Creates a task that retrieves the contents of a URL based on the specified request object and returns the response.
-    ///
-    /// - Parameter request: A convertible network request object that provides the URL, parameters, headers, and so on.
-    /// - Returns: The server response with included details from the network request.
+    /// Sends the request that `request` makes and returns the response.
     @discardableResult
     func send(_ request: URLRequestConvertible) async throws -> NetworkResponse {
         try await send(request.asURLRequest())
@@ -77,23 +61,15 @@ public extension NetworkManager {
 }
 
 public extension NetworkManager {
-    /// Creates a task that retrieves the contents of a URL based on the specified request object and returns the decoded response.
+    /// Sends the request and returns the response body decoded from JSON.
     ///
-    /// - Parameters:
-    ///   - request: A network request object that provides the URL, parameters, headers, and so on.
-    ///   - decoder: An object that decodes instances of a data type from the JSON response.
-    /// - Returns: The decoded response from the network request.
+    /// - Throws: The service's error, or the decoder's when the body isn't the JSON expected.
     func send<T>(_ request: URLRequest, using decoder: JSONDecoder = JSONDecoder()) async throws -> T where T: Decodable {
         let response = try await send(request)
         return try response.data.decode(decoder: decoder)
     }
 
-    /// Creates a task that retrieves the contents of a URL based on the specified request object and returns the response.
-    ///
-    /// - Parameters:
-    ///   - request: A convertible network request object that provides the URL, parameters, headers, and so on.
-    ///   - decoder: An object that decodes instances of a data type from the JSON response.
-    /// - Returns: The server response with included details from the network request.
+    /// Sends the request that `request` makes and returns the response body decoded from JSON.
     func send<T>(_ request: URLRequestConvertible, using decoder: JSONDecoder = JSONDecoder()) async throws -> T where T: Decodable {
         try await send(request.asURLRequest(), using: decoder)
     }

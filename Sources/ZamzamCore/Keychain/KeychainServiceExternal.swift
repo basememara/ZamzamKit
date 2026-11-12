@@ -8,15 +8,20 @@
 
 import Foundation
 
+/// A keychain store of generic passwords, written so they can be read once the device has been unlocked after a restart.
 public struct KeychainServiceExternal: KeychainService {
     private static let accessOption: KeychainSwiftAccessOptions = .accessibleAfterFirstUnlock
     private let keychain: KeychainSwift
 
+    /// Creates a store for the app's own items, which stay out of iCloud Keychain.
     public init() {
         self.keychain = KeychainSwift() // 3rd Party
         self.keychain.synchronizable = false
     }
 
+    /// Creates a store for an access group shared between apps, whose items sync through iCloud Keychain.
+    ///
+    /// The group is `teamID`, a period, then `accessGroup`.
     public init(teamID: String, accessGroup: String) {
         self.init()
         self.keychain.accessGroup = "\(teamID).\(accessGroup)"
@@ -25,10 +30,12 @@ public struct KeychainServiceExternal: KeychainService {
 }
 
 public extension KeychainServiceExternal {
+    /// Returns the text stored under the key, or `nil` when there is none or it isn't UTF-8.
     func get(_ key: KeychainAPI.Key) -> String? {
         keychain.get(key.name)
     }
 
+    /// Stores text under the key, replacing any value there. A `nil` value removes the item.
     func set(_ value: String?, forKey key: KeychainAPI.Key) -> Bool {
         guard let value else { return remove(key) }
         return keychain.set(value, forKey: key.name, withAccess: Self.accessOption)
@@ -36,10 +43,12 @@ public extension KeychainServiceExternal {
 }
 
 public extension KeychainServiceExternal {
+    /// Returns the data stored under the key, or `nil` when there is none.
     func get(_ key: KeychainAPI.Key) -> Data? {
         keychain.getData(key.name)
     }
 
+    /// Stores data under the key, replacing any value there. A `nil` value removes the item.
     func set(_ value: Data?, forKey key: KeychainAPI.Key) -> Bool {
         guard let value else { return remove(key) }
         return keychain.set(value, forKey: key.name, withAccess: Self.accessOption)
@@ -47,6 +56,7 @@ public extension KeychainServiceExternal {
 }
 
 public extension KeychainServiceExternal {
+    /// Removes the item under the key. Returns `false` when the key holds none or the keychain refuses.
     func remove(_ key: KeychainAPI.Key) -> Bool {
         keychain.delete(key.name)
     }

@@ -10,33 +10,33 @@ import Foundation.NSCalendar
 import Foundation.NSDate
 
 public extension Date {
-    /// Represents a specified number of a unit whose length no calendar changes.
-    ///
-    /// You use `TimeIntervalUnit` values to do date calculations.
+    /// A number of minutes or hours to add to a date or subtract from it. Their length is the same on every calendar.
     enum TimeIntervalUnit {
+        /// A number of minutes, 60 seconds each.
         case minutes(Int)
+        /// A number of hours, 3,600 seconds each.
         case hours(Int)
     }
 
-    /// Represents a specified number of a calendar component unit for a calendar.
+    /// A number of days, weeks, months or years to add to a date or subtract from it, counted on the calendar given.
     ///
-    /// You use `TimeIntervalUnitWithCalendar` values to do date calculations.
+    /// A day keeps the time of day, so it lasts 23 or 25 hours across a clock change in the calendar's time zone.
     enum TimeIntervalUnitWithCalendar {
+        /// A number of days on the calendar.
         case days(Int, Calendar)
+        /// A number of weeks, seven days each on the calendar.
         case weeks(Int, Calendar)
+        /// A number of months on the calendar.
         case months(Int, Calendar)
+        /// A number of years on the calendar.
         case years(Int, Calendar)
     }
 }
 
 public extension Date {
-    /// Adds time interval components to a date for the calendar.
+    /// Returns the date moved forward by a number of calendar units, or the date itself when the calendar can't add them.
     ///
-    ///     Date(year: 1440, month: 2, day: 30, hour: 18, minute: 31, calendar: calendar) + .days(1, calendar)
-    ///
-    /// - Parameters:
-    ///   - left: The date to calculate from.
-    ///   - right: The time interval component with calendar to add to the date.
+    ///     date + .days(1, calendar)
     static func + (left: Date, right: TimeIntervalUnitWithCalendar) -> Date {
         let calendar: Calendar
         let component: Calendar.Component
@@ -70,13 +70,9 @@ public extension Date {
         ) ?? left
     }
 
-    /// Subtracts time interval components from a date for the calendar.
+    /// Returns the date moved back by a number of calendar units, or the date itself when the calendar can't subtract them.
     ///
-    ///     Date(year: 1440, month: 2, day: 30, hour: 18, minute: 31, calendar: calendar) - .days(1, calendar)
-    ///
-    /// - Parameters:
-    ///   - left: The date to calculate from.
-    ///   - right: The time interval component with calendar to subtracts from the date.
+    ///     date - .days(1, calendar)
     static func - (left: Date, right: TimeIntervalUnitWithCalendar) -> Date {
         switch right {
         case let .days(value, calendar):
@@ -92,13 +88,9 @@ public extension Date {
 }
 
 public extension Date {
-    /// Adds time interval components to a date.
+    /// Returns the date moved forward by a number of minutes or hours.
     ///
     ///     date + .hours(1)
-    ///
-    /// - Parameters:
-    ///   - left: The date to calculate from.
-    ///   - right: The time interval component to add to the date.
     static func + (left: Date, right: TimeIntervalUnit) -> Date {
         switch right {
         case let .minutes(value):
@@ -108,13 +100,9 @@ public extension Date {
         }
     }
 
-    /// Subtracts time interval components from a date.
+    /// Returns the date moved back by a number of minutes or hours.
     ///
     ///     date - .hours(1)
-    ///
-    /// - Parameters:
-    ///   - left: The date to calculate from.
-    ///   - right: The time interval component to subtract from the date.
     static func - (left: Date, right: TimeIntervalUnit) -> Date {
         switch right {
         case let .minutes(value):
@@ -126,48 +114,30 @@ public extension Date {
 }
 
 public extension Date {
-    /// Adds time interval components to a date for the calendar.
+    /// Moves the date forward by a number of calendar units.
     ///
-    ///     var date = Date(year: 1440, month: 2, day: 30, hour: 18, minute: 31, calendar: calendar)
     ///     date += .days(1, calendar)
-    ///
-    /// - Parameters:
-    ///   - left: The date to calculate from.
-    ///   - right: The time interval component with calendar to add to the date.
     static func += (left: inout Date, right: TimeIntervalUnitWithCalendar) {
         left = left + right
     }
 
-    /// Subtracts time interval components from a date for the calendar.
+    /// Moves the date back by a number of calendar units.
     ///
-    ///     var date = Date(year: 1440, month: 2, day: 30, hour: 18, minute: 31, calendar: calendar)
     ///     date -= .days(1, calendar)
-    ///
-    /// - Parameters:
-    ///   - left: The date to calculate from.
-    ///   - right: The time interval component with calendar to subtracts from the date.
     static func -= (left: inout Date, right: TimeIntervalUnitWithCalendar) {
         left = left - right
     }
 
-    /// Adds time interval components to a date.
+    /// Moves the date forward by a number of minutes or hours.
     ///
     ///     date += .hours(1)
-    ///
-    /// - Parameters:
-    ///   - left: The date to calculate from.
-    ///   - right: The time interval component to add to the date.
     static func += (left: inout Date, right: TimeIntervalUnit) {
         left = left + right
     }
 
-    /// Subtracts time interval components from a date.
+    /// Moves the date back by a number of minutes or hours.
     ///
     ///     date -= .hours(1)
-    ///
-    /// - Parameters:
-    ///   - left: The date to calculate from.
-    ///   - right: The time interval component to subtract from the date.
     static func -= (left: inout Date, right: TimeIntervalUnit) {
         left = left - right
     }

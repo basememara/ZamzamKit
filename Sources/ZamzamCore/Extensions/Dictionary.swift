@@ -10,26 +10,13 @@ import Foundation.NSData
 import Foundation.NSJSONSerialization
 
 public extension Dictionary {
-    /// Accesses the value with the given key. If the dictionary doesn’t contain the given key,
-    /// assign the provided initial value as if the key and initial value existed in the dictionary.
+    /// Accesses the value for the key, first storing `initialValue` under it when the dictionary has none.
     ///
-    /// Use this subscript when you want either the value for a particular key or, when that key
-    /// is not present in the dictionary, persist the initial value and return it.
+    ///     var counts = ["abc": 123]
     ///
-    ///     var dictionary = [
-    ///         "abc": 123,
-    ///         "def": 456,
-    ///         "xyz": 789
-    ///     ]
-    ///
-    ///     let value = dictionary["abc", initial: 999] // Prints: 123
-    ///     let value2 = dictionary["lmn", initial: 555] // Prints: 555
-    ///     print(dictionary["lmn"]) // Prints: 555
-    ///
-    /// - Parameters:
-    ///   - key: The key the look up in the dictionary.
-    ///   - initialValue: The default value to use if key doesn’t exist in the dictionary.
-    /// - Returns: The value associated with key in the dictionary; otherwise, initialValue after it has been written to the dictionary.
+    ///     counts["abc", initial: 999] // 123
+    ///     counts["lmn", initial: 555] // 555
+    ///     counts["lmn"] // 555
     subscript(key: Key, initial initialValue: @autoclosure () -> Value) -> Value {
         mutating get {
             guard let value = self[key] else {
@@ -44,16 +31,14 @@ public extension Dictionary {
 }
 
 public extension Dictionary {
-    /// Returns JSON data encoded in UTF-8.
-    /// - Parameter options: Options for creating the JSON data.
+    /// Returns the dictionary as JSON data, or `nil` when JSON can't hold it, as with a `Date` value or a key that isn't a string.
     func jsonData(options: JSONSerialization.WritingOptions = []) -> Data? {
         JSONSerialization.isValidJSONObject(self)
             ? try? JSONSerialization.data(withJSONObject: self, options: options)
             : nil
     }
 
-    /// Returns JSON string encoded in UTF-8.
-    /// - Parameter options: Options for creating the JSON data.
+    /// Returns the dictionary as a JSON string, or `nil` when JSON can't hold it, as with a `Date` value or a key that isn't a string.
     func jsonString(options: JSONSerialization.WritingOptions = []) -> String? {
         jsonData(options: options)?.string
     }

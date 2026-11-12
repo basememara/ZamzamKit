@@ -37,8 +37,11 @@ import Foundation.NSDate
 ///     let dictionary = try? decoder.decode([String: AnyDecodable].self, from: json)
 public struct AnyDecodable: Decodable {
     // https://github.com/Flight-School/AnyCodable
+    /// The decoded value: a `Bool`, `Int`, `UInt`, `Double`, `Date` or `String`, an array or dictionary of these, or `()`
+    /// for null.
     public let value: Any
 
+    /// Wraps a value, or `()` when it is `nil`.
     public init<T>(_ value: T?) {
         self.value = value ?? ()
     }
@@ -52,6 +55,10 @@ private protocol _AnyDecodable {
 extension AnyDecodable: _AnyDecodable {}
 
 extension _AnyDecodable {
+    /// Decodes the first type that fits, tried in the order `Bool`, `Int`, `UInt`, `Double`, `Date`, `String`, array,
+    /// dictionary. A number is never read as a date, since `Double` comes first.
+    ///
+    /// - Throws: `DecodingError.dataCorrupted` when none fits.
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
 

@@ -21,27 +21,35 @@ public extension URLRequest {
         case delete = "DELETE"
     }
 
+    /// What a request sends: parameters to encode, or data to send as it is.
     enum Body {
+        /// Values sent in the query string for GET and DELETE, and as a JSON body for every other method.
         case parameters([String: Any])
+        /// Data sent as the body as it is. A GET request sends none.
         case data(Data)
     }
 
+    /// The credentials written to the request's `Authorization` header.
     enum Authentication {
+        /// A user name and password, sent as HTTP Basic.
         case basic(username: String, password: String)
+        /// A token, sent as `Bearer` followed by the token.
         case bearer(String)
     }
 }
 
 public extension URLRequest {
-    /// Creates an instance with JSON specific configurations.
+    /// Creates a JSON request from a dictionary of parameters.
+    ///
+    /// GET and DELETE put the parameters in the query string, replacing an item of the same name whatever its case.
+    /// Every other method sends them as a JSON body.
     ///
     /// - Parameters:
-    ///   - url: The URL of the request.
-    ///   - method: The HTTP request method.
-    ///   - parameters: The data sent as the message body of a request. A body is JSON, so parameters JSON can't
-    ///     hold, such as a `Date` or a custom type, leave the request without one.
-    ///   - headers: A dictionary containing all of the HTTP header fields for a request.
-    ///   - timeoutInterval: The timeout interval of the request. If `nil`, the defaults is 10 seconds.
+    ///   - parameters: The values to send. A body is JSON, so parameters JSON can't hold, such as a `Date` or a
+    ///     custom type, leave the request without one.
+    ///   - headers: Header fields set over the defaults, which are `Accept` and `Content-Type` of `application/json`.
+    ///   - authentication: Credentials for the `Authorization` header, set over one in `headers`.
+    ///   - timeoutInterval: The seconds the request waits for data before it fails.
     init(
         url: URL,
         method: HTTPMethod = .get,
@@ -79,14 +87,11 @@ public extension URLRequest {
 }
 
 public extension URLRequest {
-    /// Creates an instance with JSON specific configurations.
+    /// Creates a JSON request with data as its body.
     ///
-    /// - Parameters:
-    ///   - url: The URL of the request.
-    ///   - method: The HTTP request method.
-    ///   - data: The data sent as the message body of a request.
-    ///   - headers: A dictionary containing all of the HTTP header fields for a request.
-    ///   - timeoutInterval: The timeout interval of the request. If `nil`, the defaults is 10 seconds.
+    /// The headers, authentication and timeout follow `init(url:method:parameters:headers:authentication:timeoutInterval:)`.
+    ///
+    /// - Parameter data: The body, sent as it is. A GET request sends none.
     init(
         url: URL,
         method: HTTPMethod,
@@ -109,14 +114,9 @@ public extension URLRequest {
 }
 
 public extension URLRequest {
-    /// Creates an instance with JSON specific configurations.
+    /// Creates a JSON request from a body that is either parameters or data.
     ///
-    /// - Parameters:
-    ///   - url: The URL of the request.
-    ///   - method: The HTTP request method.
-    ///   - body: The details sent as the message body of a request.
-    ///   - headers: A dictionary containing all of the HTTP header fields for a request.
-    ///   - timeoutInterval: The timeout interval of the request. If `nil`, the defaults is 10 seconds.
+    /// Each kind of body follows the initializer that takes it, and a `nil` body sends none.
     init(
         url: URL,
         method: HTTPMethod,

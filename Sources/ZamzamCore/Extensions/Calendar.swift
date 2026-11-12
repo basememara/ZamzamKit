@@ -22,11 +22,9 @@ public extension Calendar {
 }
 
 public extension Calendar {
-    /// Returns a new Calendar.
+    /// Creates a calendar with a time zone and a locale.
     ///
-    /// - parameter identifier: The kind of calendar to use.
-    /// - parameter timeZone: The time zone of the calendar.
-    /// - parameter locale: The locale of the calendar.
+    /// A `nil` time zone or locale leaves the one `Calendar(identifier:)` sets, which for the time zone is the device's.
     init(identifier: Identifier, timeZone: TimeZone?, locale: Locale?) {
         self.init(identifier: identifier)
 
@@ -39,29 +37,21 @@ public extension Calendar {
         }
     }
 
-    /// Returns a new Calendar.
-    ///
-    /// - parameter identifier: The kind of calendar to use.
-    /// - parameter timeZone: The time zone of the calendar.
+    /// Creates a calendar with a time zone. A `nil` time zone leaves the device's.
     init(identifier: Identifier, timeZone: TimeZone?) {
         self.init(identifier: identifier, timeZone: timeZone, locale: nil)
     }
 
-    /// Returns a new Calendar.
-    ///
-    /// - parameter identifier: The kind of calendar to use.
-    /// - parameter locale: The locale of the calendar.
+    /// Creates a calendar with a locale, in the device's time zone. A `nil` locale leaves the one `Calendar(identifier:)` sets.
     init(identifier: Identifier, locale: Locale?) {
         self.init(identifier: identifier, timeZone: nil, locale: locale)
     }
 }
 
 public extension Calendar {
-    /// Returns the dates which match a given set of components between the specified dates.
-    /// - Parameters:
-    ///   - dateInterval: The `DateInterval` between which to compute the search.
-    ///   - components: The `DateComponents` to use as input to the search algorithm.
-    /// - Returns: The dates between the date interval that match the specified date component.
+    /// Returns the interval's start, followed by each later date before its end that matches the components.
+    ///
+    /// The start is included whether or not it matches.
     func generateDates(
         for dateInterval: DateInterval,
         matching components: DateComponents
@@ -86,8 +76,7 @@ public extension Calendar {
         return dates
     }
 
-    /// Returns the days between the dates.
-    /// - Parameter dateInterval: The `DateInterval` between which to compute the search.
+    /// Returns the interval's start, followed by the same time of day on each later day before its end.
     func generateDays(for dateInterval: DateInterval) -> [Date] {
         generateDates(
             for: dateInterval,
@@ -95,8 +84,9 @@ public extension Calendar {
         )
     }
 
-    /// Returns the days of the week for the given date.
-    /// - Parameter date: The `Date` which to expand the search for the week it belongs to.
+    /// Returns the first moment of each day in the week that holds the date, or an empty array when the calendar finds no week.
+    ///
+    /// The week starts on the calendar's `firstWeekday`.
     func generateWeek(for date: Date) -> [Date] {
         guard let week = dateInterval(of: .weekOfMonth, for: date) else { return [] }
         return generateDays(for: week)

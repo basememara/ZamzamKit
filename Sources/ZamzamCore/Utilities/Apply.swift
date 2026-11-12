@@ -9,15 +9,15 @@
 import Foundation.NSJSONSerialization
 import Foundation.NSObject
 
+/// A type whose new instance can be set up in a closure. `NSObject`, `JSONDecoder` and `JSONEncoder` adopt it.
 public protocol Apply {}
 
 public extension Apply where Self: Any {
-    /// Makes it available to set properties with closures just after initializing.
+    /// Passes the instance to a closure that sets it up, then returns the instance.
     ///
-    ///     let label = UILabel().apply {
-    ///       $0.textAlignment = .center
-    ///       $0.textColor = .black
-    ///       $0.text = "Hello, World!"
+    ///     let formatter = DateFormatter().apply {
+    ///         $0.dateStyle = .medium
+    ///         $0.timeStyle = .none
     ///     }
     @discardableResult
     func apply(_ block: (Self) -> Void) -> Self {

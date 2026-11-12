@@ -8,14 +8,19 @@
 
 import os
 
-/// Sends a message to the logging system, optionally specifying a custom log object, log level, and any message format arguments.
+/// Writes each entry to the unified logging system, which the Console app reads.
 public struct LogServiceOS: LogService {
+    /// The lowest level this service writes.
     public let minLevel: LogAPI.Level
     private let subsystem: String
     private let category: String
     private let log: OSLog
     private let isDebug: Bool
 
+    /// Creates a system log destination.
+    ///
+    /// - Parameter isDebug: `true` logs the text as public, so Console shows it in full, and leaves out the session
+    ///   context. `false` logs the text with the system's default privacy and adds the session context.
     public init(minLevel: LogAPI.Level, subsystem: String, category: String, isDebug: Bool) {
         self.minLevel = minLevel
         self.subsystem = subsystem
@@ -26,6 +31,7 @@ public struct LogServiceOS: LogService {
 }
 
 public extension LogServiceOS {
+    /// Writes the entry as `debug` for verbose and debug, `info` for info, `default` for a warning and `error` for an error.
     func write(
         _ level: LogAPI.Level,
         with message: String,

@@ -9,13 +9,12 @@
 import Foundation.NSData
 
 public extension String {
-    /// Create a new random string of given length.
-    ///
-    ///     String(random: 10) // "zXWG4hSgL9"
-    ///     String(random: 4, prefix: "PIN-") // "PIN-uSjm"
+	/// Creates a string of random ASCII letters and digits after an optional prefix.
 	///
-	/// - Parameter random: Number of characters in string.
-	/// - Parameter prefix: Prepend to string.
+	///     String(random: 10) // "zXWG4hSgL9"
+	///     String(random: 4, prefix: "PIN-") // "PIN-uSjm"
+	///
+	/// A length of zero or less gives the prefix alone.
 	init(random: Int, prefix: String = "") {
         // https://github.com/SwifterSwift/SwifterSwift
 		let base = Array("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
@@ -31,41 +30,37 @@ public extension String {
 // https://stackoverflow.com/a/38215613/
 
 public extension String {
-    /// Safely subscript string with index.
+    /// Accesses the character at an offset from the start, or `nil` when the offset is out of bounds.
     ///
     ///     let value = "Abcdef123456"
     ///     value[3] // "d"
     ///     value[99] // nil
     ///
-    /// - Parameter i: index.
+    /// - Complexity: O(*n*), where *n* is the length of the string.
     subscript(_ position: Int) -> String? {
         guard 0..<count ~= position else { return nil }
         return String(self[index(startIndex, offsetBy: position)])
     }
 
-    /// Safely subscript string within a closed range.
+    /// Accesses the characters in a closed range of offsets, clamped to the string, or `nil` when the range misses it.
     ///
     ///     let value = "Abcdef123456"
     ///     value[3...6] // "def1"
     ///     value[3...99] // "def123456"
     ///     value[-3...2] // "Abc"
     ///     value[99...199] // nil
-    ///
-    /// - Parameter range: Closed range.
     subscript(_ range: ClosedRange<Int>) -> String? {
         guard range.upperBound >= 0 else { return nil }
         return self[range.lowerBound..<(range.upperBound < .max ? range.upperBound + 1 : .max)]
     }
 
-    /// Safely subscript string within a half-open range.
+    /// Accesses the characters in a half-open range of offsets, clamped to the string, or `nil` when the range misses it.
     ///
     ///     let value = "Abcdef123456"
     ///     value[3..<6] // "def"
     ///     value[3..<99] // "def123456"
     ///     value[-3..<2] // "Ab"
     ///     value[99..<199] // nil
-    ///
-    /// - Parameter range: Half-open range.
     subscript(_ range: CountableRange<Int>) -> String? {
         let lowerBound = max(0, range.lowerBound)
         guard lowerBound <= range.upperBound else { return nil }
@@ -87,28 +82,22 @@ public extension String {
     ///     " Abcdef123456 \n\r  ".trimmed // "Abcdef123456"
     var trimmed: String { trimmingCharacters(in: .whitespacesAndNewlines) }
 
-    /// Truncated string limited to a given number of characters.
+    /// Returns the first `length` characters followed by `trailing`, or the whole string when it has no more than `length`.
     ///
     ///     "Abcdef123456".truncated(3) // "Abc..."
     ///     "Abcdef123456".truncated(6, trailing: "***") // "Abcdef***"
     ///
-    /// - Parameters:
-    ///   - length: maximum number of characters before cutting.
-    ///   - trailing: string to add at the end of truncated string.
-    /// - Returns: truncated string (this is an extr...).
+    /// A length of zero or less also returns the whole string.
     func truncated(_ length: Int, trailing: String = "...") -> String {
         guard length > 0, length < count else { return self }
         return prefix(length) + trailing
     }
 
-    /// Injects a separator every nth characters.
+    /// Returns the string with a separator between every group of `nth` characters.
     ///
     ///     "1234567890".separated(every: 2, with: "-") // "12-34-56-78-90"
     ///
-    /// - Parameters:
-    ///   - every: Number of characters to separate by.
-    ///   - separator: The separator to inject.
-    /// - Returns: The string with the injected separator.
+    /// An `nth` below 1 or above the string's length returns the string unchanged.
     func separated(every nth: Int, with separator: String) -> String {
         Array(self)
             .chunked(into: nth)
@@ -139,7 +128,7 @@ public extension String {
     /// Returns a new string made by replacing the characters contained in a given set with another string.
     ///
     ///     let set = CharacterSet.alphanumerics
-    ///         .insert(charactersIn: "_")
+    ///         .union(CharacterSet(charactersIn: "_"))
     ///         .inverted
     ///
     ///     let string = """
@@ -171,17 +160,17 @@ public extension String {
 // MARK: - Decoding / Encoding
 
 public extension String {
-    /// Encode a string to Base64. Default encoding is UTF8.
+    /// Returns the Base64 encoding of the string's UTF-8 bytes.
     func base64Encoded() -> String {
         Data(utf8).base64EncodedString()
     }
 
-    /// URL safe encode a string to Base64. Default encoding is UTF8.
+    /// Returns the URL-safe Base64 encoding of the string's UTF-8 bytes, without padding.
     func base64URLEncoded() -> String {
         Data(utf8).base64URLEncodedString()
     }
 
-    /// Decode a string from Base64. Default decoding is UTF8.
+    /// Returns the text a padded Base64 string holds, or `nil` when the string isn't Base64 or its bytes aren't UTF-8.
     func base64Decoded() -> String? {
         guard let data = Data(base64Encoded: self) else { return nil }
         return String(data: data, encoding: .utf8)
@@ -192,6 +181,8 @@ public extension String {
     private static let defaultDecoder = JSONDecoder()
 
     /// Returns a value of the type you specify, decoded from a JSON string.
+    ///
+    /// A `nil` decoder uses one plain `JSONDecoder` that every such call shares.
     func decode<T: Decodable>(using encoding: Self.Encoding = .utf8, with decoder: JSONDecoder? = nil) throws -> T {
         let decoder = decoder ?? Self.defaultDecoder
         return try decoder.decode(T.self, from: self, using: encoding)
@@ -209,6 +200,6 @@ public extension Optional where Wrapped == String {
 }
 
 public extension LosslessStringConvertible {
-    /// A string value representation of the string slice.
+    /// The value as a `String`, for a `Substring`, a number or any other type a string can be made from.
     var string: String { String(self) }
 }

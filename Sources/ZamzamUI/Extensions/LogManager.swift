@@ -10,7 +10,7 @@ import SwiftUI
 import ZamzamCore
 
 public extension LogManager {
-    /// Records the scene phase on every future log entry, so it can be read outside the main thread.
+    /// Sets the scene phase as the `app_state` attribute of every later entry, so a service can read it off the main thread.
     func set(context newPhase: ScenePhase) {
         set(newPhase.rawString, forKey: "app_state")
     }

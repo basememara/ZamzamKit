@@ -8,11 +8,13 @@
 
 import Foundation.NSDate
 
-/// Sends a message to the IDE console.
+/// Prints each entry to standard output, which Xcode shows in its console.
 public struct LogServiceConsole: LogService {
+    /// The lowest level this service writes.
     public let minLevel: LogAPI.Level
     private let subsystem: String
 
+    /// Creates a console destination. `subsystem` is printed in brackets on each entry.
     public init(minLevel: LogAPI.Level, subsystem: String) {
         self.minLevel = minLevel
         self.subsystem = subsystem
@@ -20,6 +22,8 @@ public struct LogServiceConsole: LogService {
 }
 
 public extension LogServiceConsole {
+    /// Prints the entry after a heart colored for its level, the time, the level's name and the subsystem.
+    /// The session context is left out.
     func write(
         _ level: LogAPI.Level,
         with message: String,
