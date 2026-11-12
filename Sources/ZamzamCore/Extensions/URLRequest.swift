@@ -53,12 +53,18 @@ public extension URLRequest {
         // Not all HTTP methods support body
         let doesSupportBody = ![.get, .delete].contains(method)
 
-        self.init(
-            url: !doesSupportBody
-                // Parameters become query string parameters for some methods
-                ? url.appendingQueryItems(parameters ?? [:])
-                : url
-        )
+        // Parameters become query string parameters for some methods, replacing an item of the same name
+        if !doesSupportBody, let parameters, !parameters.isEmpty, var components = URLComponents(string: url.absoluteString) {
+            let names = parameters.keys.map { $0.lowercased() }
+
+            components.queryItems = (components.queryItems ?? [])
+                .filter { !names.contains($0.name.lowercased()) }
+                + parameters.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+
+            self.init(url: components.url ?? url)
+        } else {
+            self.init(url: url)
+        }
 
         self.httpMethod = method.rawValue
 

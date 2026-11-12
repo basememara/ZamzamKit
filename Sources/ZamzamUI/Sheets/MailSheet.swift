@@ -92,21 +92,6 @@ public struct MailItem: Identifiable, Equatable {
         self.isHTML = isHTML
         self.attachments = attachments
     }
-
-    @available(*, deprecated, message: "Pass attachments: [attachment] instead")
-    public init(
-        emails: String...,
-        subject: String? = nil,
-        body: String? = nil,
-        isHTML: Bool = true,
-        attachment: Attachment?
-    ) {
-        self.emails = emails
-        self.subject = subject
-        self.body = body
-        self.isHTML = isHTML
-        self.attachments = attachment.map { [$0] } ?? []
-    }
 }
 
 public extension View {

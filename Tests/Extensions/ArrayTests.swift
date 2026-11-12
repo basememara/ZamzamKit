@@ -29,20 +29,6 @@ extension ArrayTests {
 
 extension ArrayTests {
     @Test
-    func prepend() {
-        // Given
-        var sample = [2, 3, 4, 5]
-
-        // When
-        sample.prepend(1)
-
-        // Then
-        #expect(sample == [1, 2, 3, 4, 5])
-    }
-}
-
-extension ArrayTests {
-    @Test
     func chunked() {
         #expect([1, 2, 3, 4, 5, 6].chunked(into: 2) == [[1, 2], [3, 4], [5, 6]])
         #expect([1, 2, 3, 4].chunked(into: 6) == [[1, 2, 3, 4]])

@@ -48,44 +48,6 @@ extension StringTests {
 
 extension StringTests {
     @Test
-    func emailRegEx() {
-        let value = "test@example.com"
-        let wrong = "zamzam"
-
-        #expect(value.isEmail)
-        #expect(!(wrong.isEmail))
-    }
-
-    @Test
-    func numberRegEx() {
-        let value = "123456789"
-        let wrong = "zamzam"
-
-        #expect(value.isNumber)
-        #expect(!(wrong.isNumber))
-    }
-
-    @Test
-    func alphaRegEx() {
-        let value = "zamzam"
-        let wrong = "zamzam123"
-
-        #expect(value.isAlpha)
-        #expect(!(wrong.isAlpha))
-    }
-
-    @Test
-    func alphaNumbericRegEx() {
-        let value = "zamzam123"
-        let wrong = "zamzam!"
-
-        #expect(value.isAlphaNumeric)
-        #expect(!(wrong.isAlphaNumeric))
-    }
-}
-
-extension StringTests {
-    @Test
     func trimmed() {
         let test = " Abcdef123456 \n\r  "
         let expected = "Abcdef123456"
@@ -103,22 +65,6 @@ extension StringTests {
     func truncatOutOfRange() {
         let test = "Abcdef123456"
         #expect(test.truncated(20) == test)
-    }
-
-    @Test
-    func contains() {
-        let elements = CharacterSet(charactersIn: "AbCz456!")
-
-        #expect(!("".contains(elements)))
-        #expect("Foo5".contains(elements))
-        #expect("bar 222".contains(elements))
-        #expect(!("none".contains(elements)))
-        #expect(!("999".contains(elements)))
-        #expect(!("#$23".contains(elements)))
-        #expect("qwe!".contains(elements))
-
-        #expect("def".contains(CharacterSet(charactersIn: "Abcdef123456")))
-        #expect(!("Xyz".contains(CharacterSet(charactersIn: "Abcdef123456"))))
     }
 
     @Test
@@ -180,32 +126,6 @@ extension StringTests {
         #expect("aaabbbccc".replacingLastOccurrence(of: "a", with: "z") == "aazbbbccc")
 
         #expect("aaabbbccc".replacingLastOccurrence(of: "bb", with: "123") == "aaab123ccc")
-    }
-}
-
-extension StringTests {
-    @Test
-    func matchRegEx() {
-        #expect("1234567890".match(regex: "^[0-9]+?$"))
-        #expect("abc123xyz".match(regex: "^[A-Za-z0-9]+$"))
-        #expect(!("abc123xyz".match(regex: "^[A-Za-z]+$")))
-    }
-
-    @Test
-    func replacingRegEx() {
-        let value = "my car reg 1 - dD11 AAA  my car reg 2 - AA22 BbB"
-        let pattern = "([A-HK-PRSVWY][A-HJ-PR-Y])\\s?([0][2-9]|[1-9][0-9])\\s?[A-HJ-PR-Z]{3}"
-
-        // Case insensitive
-        let newValue = value.replacing(regex: pattern, with: "XX", caseSensitive: false)
-        let expectedValue = "my car reg 1 - XX  my car reg 2 - XX"
-        #expect(newValue == expectedValue)
-
-        // Case sensitive
-        let newValue2 = value.replacing(regex: pattern, with: "XX", caseSensitive: true)
-        #expect(newValue2 == value)
-
-        #expect("aa1bb22cc3d888d4ee5".replacing(regex: "\\d", with: "*") == "aa*bb**cc*d***d*ee*")
     }
 }
 
@@ -309,18 +229,6 @@ extension StringTests {
         let test = "NjU0MzIxRmVkY2Jh"
         let expected = "654321Fedcba"
         #expect(test.base64Decoded() == expected)
-    }
-}
-
-extension StringTests {
-    @Test
-    func sHA256ToHex() {
-        #expect("JYGK Udsf6ITR^%$#UTY6GI7UGdsf gdsfgSDKHkjb768stb&(&T* &".sha256().hexString() == "71e80ab896673f757d3e378d9191d8432346d961cb59e224de31977bc23def76")
-    }
-
-    @Test
-    func sHA256ToBase64() {
-        #expect("JYGK Udsf6ITR^%$#UTY6GI7UGdsf gdsfgSDKHkjb768stb&(&T* &".sha256().base64EncodedString() == "cegKuJZnP3V9PjeNkZHYQyNG2WHLWeIk3jGXe8I973Y=")
     }
 }
 

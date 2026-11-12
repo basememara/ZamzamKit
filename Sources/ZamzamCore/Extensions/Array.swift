@@ -7,19 +7,6 @@
 //
 
 public extension Array {
-    /// Inserts a new element into the collection at the beginning position.
-    ///
-    ///        [2, 3, 4, 5].prepend(1) // [1, 2, 3, 4, 5]
-    ///        ["e", "l", "l", "o"].prepend("h") // ["h", "e", "l", "l", "o"]
-    ///
-    /// - Parameter newElement: The new element to insert into the collection.
-    mutating func prepend(_ newElement: Element) {
-        // https://github.com/SwifterSwift/SwifterSwift
-        insert(newElement, at: 0)
-    }
-}
-
-public extension Array {
     /// Separates the elements into nth groups of elements.
     ///
     ///     [1, 2, 3, 4, 5, 6].chunked(into: 2) // [[1, 2], [3, 4], [5, 6]]
@@ -65,9 +52,4 @@ public extension Array where Element: Equatable {
 public extension ArraySlice {
     /// Returns the array of the slice
     var array: [Element] { Array(self) }
-}
-
-public extension Zip2Sequence {
-    /// Returns the array of the zipped sequence
-    var array: [(Sequence1.Element, Sequence2.Element)] { Array(self) }
 }

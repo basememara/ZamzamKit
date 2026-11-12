@@ -39,27 +39,13 @@ public extension Array where Element == CLLocationCoordinate2D {
 }
 
 public extension CLLocation {
-    struct LocationMeta: CustomStringConvertible, Sendable {
+    struct LocationMeta: Sendable {
         public var coordinates: (latitude: Double, longitude: Double)?
         public var locality: String?
         public var country: String?
         public var countryCode: String?
         public var timeZone: TimeZone?
         public var administrativeArea: String?
-
-        public var description: String {
-            if let l = locality, let c = (Locale.current.language.languageCode?.identifier == "en" ? countryCode : country) {
-                return "\(l), \(c)"
-            }
-            if let l = locality {
-                return "\(l)"
-            }
-            if let c = country {
-                return "\(c)"
-            }
-
-            return ""
-        }
     }
 
     /// Retrieves location details for coordinates.
@@ -137,11 +123,5 @@ extension CLLocationCoordinate2D: @retroactive Equatable {
     /// Determine if coordinates do not match using latitude and longitude values.
     public static func != (lhs: Self, rhs: Self) -> Bool {
         !(lhs == rhs)
-    }
-}
-
-extension CLLocationCoordinate2D: @retroactive CustomStringConvertible {
-    public var description: String {
-        .localizedStringWithFormat("%.2f°, %.2f°", latitude, longitude)
     }
 }

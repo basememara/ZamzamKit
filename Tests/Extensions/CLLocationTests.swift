@@ -86,13 +86,6 @@ extension CLLocationTests {
             #expect(meta == nil)
         }
     }
-
-    @Test
-    func metaDescription() {
-        let meta = CLLocation.LocationMeta(locality: "Toronto", country: "Canada", countryCode: "CA")
-
-        #expect(meta.description == "Toronto, CA")
-    }
 }
 
 extension CLLocationTests {

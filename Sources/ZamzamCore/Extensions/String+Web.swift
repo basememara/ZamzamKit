@@ -9,26 +9,6 @@
 import Darwin
 
 public extension String {
-    /// Stripped out HTML to plain text.
-    ///
-    ///     "<p>This is <em>web</em> content with a <a href=\"http://example.com\">link</a>.</p>".htmlStripped // "This is web content with a link."
-    ///
-    var htmlStripped: String { replacing(regex: "<[^>]+>", with: "") }
-}
-
-public extension String {
-    /// URL escaped string.
-    func urlEncoded() -> String {
-        addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? self
-    }
-
-    /// Readable string from a URL string.
-    func urlDecoded() -> String {
-        removingPercentEncoding ?? self
-    }
-}
-
-public extension String {
     /// Decode an HTML string
     ///
     ///     let value = "<strong> 4 &lt; 5 &amp; 3 &gt; 2 .</strong> Price: 12 &#x20ac;.  &#64;"
