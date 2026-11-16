@@ -61,7 +61,7 @@ public extension UNUserNotificationCenter {
     ///         ]
     ///     )
     ///
-    /// The categories replace the center's whole set when they differ from it. A `nil` delegate leaves the current one.
+    /// The categories replace the center's whole set. A `nil` delegate leaves the current one.
     ///
     /// - Returns: Whether the user granted permission. When the request itself fails, `true` unless the status is denied.
     func register(
@@ -71,23 +71,19 @@ public extension UNUserNotificationCenter {
     ) async -> Bool {
         self.delegate ?= delegate
 
-        let oldCategories = await notificationCategories()
-        let newCategories = Set(
-            categories.map {
-                UNNotificationCategory(
-                    identifier: $0.key,
-                    actions: $0.value ?? [],
-                    intentIdentifiers: [],
-                    options: .customDismissAction
-                )
-            }
+        // Never awaits the current set: on a fresh iOS 27.2 install its reply never came, which held the prompt back
+        setNotificationCategories(
+            Set(
+                categories.map {
+                    UNNotificationCategory(
+                        identifier: $0.key,
+                        actions: $0.value ?? [],
+                        intentIdentifiers: [],
+                        options: .customDismissAction
+                    )
+                }
+            )
         )
-
-        defer {
-            if newCategories != oldCategories {
-                setNotificationCategories(newCategories)
-            }
-        }
 
         do {
             return try await requestAuthorization(options: authorizations)
