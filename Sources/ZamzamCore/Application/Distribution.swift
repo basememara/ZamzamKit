@@ -45,10 +45,15 @@ public extension Distribution {
 
     /// Check if app is running in TestFlight mode.
     var isInTestFlight: Bool {
+        guard !isRunningOnSimulator, !isAdHocDistributed, let receiptURL = Bundle.main.appStoreReceiptURL else { return false }
+
+        #if os(macOS)
+        // A Mac receipt is named "receipt" in TestFlight too, so the environment is read from inside it
+        return (try? Data(contentsOf: receiptURL)).map(isSandboxReceipt) ?? false
+        #else
         // https://stackoverflow.com/questions/18282326/how-can-i-detect-if-the-currently-running-app-was-installed-from-the-app-store
-        !isRunningOnSimulator
-            && Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
-            && !isAdHocDistributed
+        return receiptURL.lastPathComponent == "sandboxReceipt"
+        #endif
     }
 
     /// Check if app is ad-hoc distributed.
@@ -72,6 +77,11 @@ public extension Distribution {
         // https://stackoverflow.com/questions/18282326/how-can-i-detect-if-the-currently-running-app-was-installed-from-the-app-store
         !isRunningOnSimulator && !isInTestFlight && !isAdHocDistributed
     }
+}
+
+// A receipt names the store environment that issued it: "Production", or "ProductionSandbox" for TestFlight's
+func isSandboxReceipt(_ receipt: Data) -> Bool {
+    receipt.contains(Data("ProductionSandbox".utf8))
 }
 
 // MARK: - Device
